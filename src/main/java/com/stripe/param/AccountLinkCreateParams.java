@@ -238,8 +238,10 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   public static class CollectionOptions {
     /**
      * Specifies whether the platform collects external account information from connected accounts
-     * during Connect Onboarding. When set to {@code false}, external account collection is skipped.
-     * Defaults to {@code true}.
+     * during Connect Onboarding. When set to {@code true}, the platform only collects external
+     * account information if the connected account has capabilities which require it. Some
+     * capabilities, such as {@code treasury}, don't require external account collection. When set
+     * to {@code false}, external account collection is skipped. Defaults to {@code true}.
      */
     @SerializedName("external_account_collection")
     Boolean externalAccountCollection;
@@ -301,8 +303,11 @@ public class AccountLinkCreateParams extends ApiRequestParams {
 
       /**
        * Specifies whether the platform collects external account information from connected
-       * accounts during Connect Onboarding. When set to {@code false}, external account collection
-       * is skipped. Defaults to {@code true}.
+       * accounts during Connect Onboarding. When set to {@code true}, the platform only collects
+       * external account information if the connected account has capabilities which require it.
+       * Some capabilities, such as {@code treasury}, don't require external account collection.
+       * When set to {@code false}, external account collection is skipped. Defaults to {@code
+       * true}.
        */
       public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
         this.externalAccountCollection = externalAccountCollection;

@@ -21,6 +21,7 @@ import com.stripe.param.PaymentIntentCreateParams;
 import com.stripe.param.PaymentIntentDecrementAuthorizationParams;
 import com.stripe.param.PaymentIntentIncrementAuthorizationParams;
 import com.stripe.param.PaymentIntentListParams;
+import com.stripe.param.PaymentIntentReauthorizeParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
 import com.stripe.param.PaymentIntentSearchParams;
 import com.stripe.param.PaymentIntentTriggerActionParams;
@@ -686,6 +687,78 @@ public final class PaymentIntentService extends ApiService {
     String path =
         String.format(
             "/v1/payment_intents/%s/increment_authorization", ApiResource.urlEncodeId(intent));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, PaymentIntent.class);
+  }
+  /**
+   * Reauthorize a PaymentIntent to obtain a new valid authorization after the initial authorization
+   * has expired.
+   *
+   * <p>When a PaymentIntent’s authorization expires and the capture window elapses, the
+   * PaymentIntent transitions to {@code requires_reauthorization} status with {@code
+   * amount_capturable} set to 0. This endpoint brings the PaymentIntent back to {@code
+   * requires_capture} status, allowing you to capture payment.
+   *
+   * <p>This is useful for retail and ecommerce scenarios with delayed shipments where authorization
+   * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
+   */
+  public PaymentIntent reauthorize(String intent, PaymentIntentReauthorizeParams params)
+      throws StripeException {
+    return reauthorize(intent, params, (RequestOptions) null);
+  }
+  /**
+   * Reauthorize a PaymentIntent to obtain a new valid authorization after the initial authorization
+   * has expired.
+   *
+   * <p>When a PaymentIntent’s authorization expires and the capture window elapses, the
+   * PaymentIntent transitions to {@code requires_reauthorization} status with {@code
+   * amount_capturable} set to 0. This endpoint brings the PaymentIntent back to {@code
+   * requires_capture} status, allowing you to capture payment.
+   *
+   * <p>This is useful for retail and ecommerce scenarios with delayed shipments where authorization
+   * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
+   */
+  public PaymentIntent reauthorize(String intent, RequestOptions options) throws StripeException {
+    return reauthorize(intent, (PaymentIntentReauthorizeParams) null, options);
+  }
+  /**
+   * Reauthorize a PaymentIntent to obtain a new valid authorization after the initial authorization
+   * has expired.
+   *
+   * <p>When a PaymentIntent’s authorization expires and the capture window elapses, the
+   * PaymentIntent transitions to {@code requires_reauthorization} status with {@code
+   * amount_capturable} set to 0. This endpoint brings the PaymentIntent back to {@code
+   * requires_capture} status, allowing you to capture payment.
+   *
+   * <p>This is useful for retail and ecommerce scenarios with delayed shipments where authorization
+   * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
+   */
+  public PaymentIntent reauthorize(String intent) throws StripeException {
+    return reauthorize(intent, (PaymentIntentReauthorizeParams) null, (RequestOptions) null);
+  }
+  /**
+   * Reauthorize a PaymentIntent to obtain a new valid authorization after the initial authorization
+   * has expired.
+   *
+   * <p>When a PaymentIntent’s authorization expires and the capture window elapses, the
+   * PaymentIntent transitions to {@code requires_reauthorization} status with {@code
+   * amount_capturable} set to 0. This endpoint brings the PaymentIntent back to {@code
+   * requires_capture} status, allowing you to capture payment.
+   *
+   * <p>This is useful for retail and ecommerce scenarios with delayed shipments where authorization
+   * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
+   */
+  public PaymentIntent reauthorize(
+      String intent, PaymentIntentReauthorizeParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/payment_intents/%s/reauthorize", ApiResource.urlEncodeId(intent));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -22,8 +22,8 @@ public final class V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpda
     /**
      * Open Enum. The capability which had its status updated.
      *
-     * <p>One of {@code financial_addressses.bank_accounts}, {@code
-     * financial_addressses.crypto_wallets}, {@code holds_currencies.eur}, {@code
+     * <p>One of {@code consumer.holds_currencies.usd}, {@code financial_addressses.bank_accounts},
+     * {@code financial_addressses.crypto_wallets}, {@code holds_currencies.eur}, {@code
      * holds_currencies.gbp}, {@code holds_currencies.usd}, {@code holds_currencies.usdc}, {@code
      * inbound_transfers.bank_accounts}, {@code outbound_payments.bank_accounts}, {@code
      * outbound_payments.cards}, {@code outbound_payments.crypto_wallets}, {@code

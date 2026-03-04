@@ -83,6 +83,7 @@ public final class EventDataClassLookup {
     classLookup.put("price", com.stripe.model.Price.class);
     classLookup.put("product", com.stripe.model.Product.class);
     classLookup.put("product_feature", com.stripe.model.ProductFeature.class);
+    classLookup.put("profile", com.stripe.model.Profile.class);
     classLookup.put("promotion_code", com.stripe.model.PromotionCode.class);
     classLookup.put("quote", com.stripe.model.Quote.class);
     classLookup.put("quote_line", com.stripe.model.QuoteLine.class);
@@ -117,6 +118,7 @@ public final class EventDataClassLookup {
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);
 
     classLookup.put("billing.alert", com.stripe.model.billing.Alert.class);
+    classLookup.put("billing.alert_recovered", com.stripe.model.billing.AlertRecovered.class);
     classLookup.put("billing.alert_triggered", com.stripe.model.billing.AlertTriggered.class);
     classLookup.put(
         "billing.credit_balance_summary", com.stripe.model.billing.CreditBalanceSummary.class);

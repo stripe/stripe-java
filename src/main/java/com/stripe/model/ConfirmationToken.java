@@ -1059,6 +1059,13 @@ public class ConfirmationToken extends ApiResource implements HasId {
             String last4;
 
             /**
+             * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that
+             * this transaction's reader is assigned to.
+             */
+            @SerializedName("location")
+            String location;
+
+            /**
              * Identifies which network this charge was processed on. Can be {@code amex}, {@code
              * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code
              * interac}, {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code
@@ -1103,6 +1110,24 @@ public class ConfirmationToken extends ApiResource implements HasId {
             String readMethod;
 
             /**
+             * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
+             * transaction was made on.
+             */
+            @SerializedName("reader")
+            String reader;
+
+            /** Whether the PaymentIntent can be reauthorized or not. */
+            @SerializedName("reauthorization")
+            Reauthorization reauthorization;
+
+            /**
+             * The time at which the associated PaymentIntent will transition to a terminal state if
+             * it is not reauthorized.
+             */
+            @SerializedName("reauthorize_before")
+            Long reauthorizeBefore;
+
+            /**
              * A collection of fields required to be displayed on receipts. Only required for EMV
              * transactions.
              */
@@ -1131,6 +1156,23 @@ public class ConfirmationToken extends ApiResource implements HasId {
                */
               @SerializedName("type")
               String type;
+            }
+
+            /**
+             * For more details about Reauthorization, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Reauthorization extends StripeObject {
+              /**
+               * Indicates whether or not the reauthorization feature is supported.
+               *
+               * <p>One of {@code available}, or {@code unavailable}.
+               */
+              @SerializedName("status")
+              String status;
             }
 
             /**

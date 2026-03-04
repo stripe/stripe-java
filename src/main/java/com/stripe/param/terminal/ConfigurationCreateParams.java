@@ -22,6 +22,10 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   @SerializedName("bbpos_wisepos_e")
   BbposWiseposE bbposWiseposE;
 
+  /** Configuration for cellular connectivity. */
+  @SerializedName("cellular")
+  Object cellular;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -55,6 +59,10 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   @SerializedName("stripe_s700")
   StripeS700 stripeS700;
 
+  /** An object containing device type specific settings for Stripe S710 readers. */
+  @SerializedName("stripe_s710")
+  StripeS710 stripeS710;
+
   /** Tipping configurations for readers that support on-reader tips. */
   @SerializedName("tipping")
   Object tipping;
@@ -70,6 +78,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   private ConfigurationCreateParams(
       BbposWisepad3 bbposWisepad3,
       BbposWiseposE bbposWiseposE,
+      Object cellular,
       List<String> expand,
       Map<String, Object> extraParams,
       String name,
@@ -77,11 +86,13 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       Object readerSecurity,
       RebootWindow rebootWindow,
       StripeS700 stripeS700,
+      StripeS710 stripeS710,
       Object tipping,
       VerifoneP400 verifoneP400,
       Object wifi) {
     this.bbposWisepad3 = bbposWisepad3;
     this.bbposWiseposE = bbposWiseposE;
+    this.cellular = cellular;
     this.expand = expand;
     this.extraParams = extraParams;
     this.name = name;
@@ -89,6 +100,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     this.readerSecurity = readerSecurity;
     this.rebootWindow = rebootWindow;
     this.stripeS700 = stripeS700;
+    this.stripeS710 = stripeS710;
     this.tipping = tipping;
     this.verifoneP400 = verifoneP400;
     this.wifi = wifi;
@@ -102,6 +114,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     private BbposWisepad3 bbposWisepad3;
 
     private BbposWiseposE bbposWiseposE;
+
+    private Object cellular;
 
     private List<String> expand;
 
@@ -117,6 +131,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     private StripeS700 stripeS700;
 
+    private StripeS710 stripeS710;
+
     private Object tipping;
 
     private VerifoneP400 verifoneP400;
@@ -128,6 +144,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       return new ConfigurationCreateParams(
           this.bbposWisepad3,
           this.bbposWiseposE,
+          this.cellular,
           this.expand,
           this.extraParams,
           this.name,
@@ -135,6 +152,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           this.readerSecurity,
           this.rebootWindow,
           this.stripeS700,
+          this.stripeS710,
           this.tipping,
           this.verifoneP400,
           this.wifi);
@@ -149,6 +167,18 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     /** An object containing device type specific settings for BBPOS WisePOS E readers. */
     public Builder setBbposWiseposE(ConfigurationCreateParams.BbposWiseposE bbposWiseposE) {
       this.bbposWiseposE = bbposWiseposE;
+      return this;
+    }
+
+    /** Configuration for cellular connectivity. */
+    public Builder setCellular(ConfigurationCreateParams.Cellular cellular) {
+      this.cellular = cellular;
+      return this;
+    }
+
+    /** Configuration for cellular connectivity. */
+    public Builder setCellular(EmptyParam cellular) {
+      this.cellular = cellular;
       return this;
     }
 
@@ -243,6 +273,12 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     /** An object containing device type specific settings for Stripe S700 readers. */
     public Builder setStripeS700(ConfigurationCreateParams.StripeS700 stripeS700) {
       this.stripeS700 = stripeS700;
+      return this;
+    }
+
+    /** An object containing device type specific settings for Stripe S710 readers. */
+    public Builder setStripeS710(ConfigurationCreateParams.StripeS710 stripeS710) {
+      this.stripeS710 = stripeS710;
       return this;
     }
 
@@ -424,6 +460,81 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       /** A File ID representing an image to display on the reader. */
       public Builder setSplashscreen(EmptyParam splashscreen) {
         this.splashscreen = splashscreen;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Cellular {
+    /**
+     * <strong>Required.</strong> Determines whether to allow the reader to connect to a cellular
+     * network. Defaults to false.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Cellular(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationCreateParams.Cellular build() {
+        return new ConfigurationCreateParams.Cellular(this.enabled, this.extraParams);
+      }
+
+      /**
+       * <strong>Required.</strong> Determines whether to allow the reader to connect to a cellular
+       * network. Defaults to false.
+       */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationCreateParams.Cellular#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationCreateParams.Cellular#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }
@@ -728,6 +839,81 @@ public class ConfigurationCreateParams extends ApiRequestParams {
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link ConfigurationCreateParams.StripeS700#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** A File ID representing an image you want to display on the reader. */
+      public Builder setSplashscreen(String splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+
+      /** A File ID representing an image you want to display on the reader. */
+      public Builder setSplashscreen(EmptyParam splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StripeS710 {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** A File ID representing an image you want to display on the reader. */
+    @SerializedName("splashscreen")
+    Object splashscreen;
+
+    private StripeS710(Map<String, Object> extraParams, Object splashscreen) {
+      this.extraParams = extraParams;
+      this.splashscreen = splashscreen;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object splashscreen;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationCreateParams.StripeS710 build() {
+        return new ConfigurationCreateParams.StripeS710(this.extraParams, this.splashscreen);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationCreateParams.StripeS710#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationCreateParams.StripeS710#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {

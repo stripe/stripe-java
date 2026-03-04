@@ -17,6 +17,7 @@ import com.stripe.param.PaymentIntentCreateParams;
 import com.stripe.param.PaymentIntentDecrementAuthorizationParams;
 import com.stripe.param.PaymentIntentIncrementAuthorizationParams;
 import com.stripe.param.PaymentIntentListParams;
+import com.stripe.param.PaymentIntentReauthorizeParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
 import com.stripe.param.PaymentIntentSearchParams;
 import com.stripe.param.PaymentIntentTriggerActionParams;
@@ -240,6 +241,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    */
   @SerializedName("livemode")
   Boolean livemode;
+
+  /** Settings for Managed Payments. */
+  @SerializedName("managed_payments")
+  ManagedPayments managedPayments;
 
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
@@ -1426,6 +1431,118 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
+   * Reauthorize a PaymentIntent to obtain a new valid authorization after the initial authorization
+   * has expired.
+   *
+   * <p>When a PaymentIntent’s authorization expires and the capture window elapses, the
+   * PaymentIntent transitions to {@code requires_reauthorization} status with {@code
+   * amount_capturable} set to 0. This endpoint brings the PaymentIntent back to {@code
+   * requires_capture} status, allowing you to capture payment.
+   *
+   * <p>This is useful for retail and ecommerce scenarios with delayed shipments where authorization
+   * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
+   */
+  public PaymentIntent reauthorize() throws StripeException {
+    return reauthorize((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Reauthorize a PaymentIntent to obtain a new valid authorization after the initial authorization
+   * has expired.
+   *
+   * <p>When a PaymentIntent’s authorization expires and the capture window elapses, the
+   * PaymentIntent transitions to {@code requires_reauthorization} status with {@code
+   * amount_capturable} set to 0. This endpoint brings the PaymentIntent back to {@code
+   * requires_capture} status, allowing you to capture payment.
+   *
+   * <p>This is useful for retail and ecommerce scenarios with delayed shipments where authorization
+   * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
+   */
+  public PaymentIntent reauthorize(RequestOptions options) throws StripeException {
+    return reauthorize((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Reauthorize a PaymentIntent to obtain a new valid authorization after the initial authorization
+   * has expired.
+   *
+   * <p>When a PaymentIntent’s authorization expires and the capture window elapses, the
+   * PaymentIntent transitions to {@code requires_reauthorization} status with {@code
+   * amount_capturable} set to 0. This endpoint brings the PaymentIntent back to {@code
+   * requires_capture} status, allowing you to capture payment.
+   *
+   * <p>This is useful for retail and ecommerce scenarios with delayed shipments where authorization
+   * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
+   */
+  public PaymentIntent reauthorize(Map<String, Object> params) throws StripeException {
+    return reauthorize(params, (RequestOptions) null);
+  }
+
+  /**
+   * Reauthorize a PaymentIntent to obtain a new valid authorization after the initial authorization
+   * has expired.
+   *
+   * <p>When a PaymentIntent’s authorization expires and the capture window elapses, the
+   * PaymentIntent transitions to {@code requires_reauthorization} status with {@code
+   * amount_capturable} set to 0. This endpoint brings the PaymentIntent back to {@code
+   * requires_capture} status, allowing you to capture payment.
+   *
+   * <p>This is useful for retail and ecommerce scenarios with delayed shipments where authorization
+   * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
+   */
+  public PaymentIntent reauthorize(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/payment_intents/%s/reauthorize", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, PaymentIntent.class);
+  }
+
+  /**
+   * Reauthorize a PaymentIntent to obtain a new valid authorization after the initial authorization
+   * has expired.
+   *
+   * <p>When a PaymentIntent’s authorization expires and the capture window elapses, the
+   * PaymentIntent transitions to {@code requires_reauthorization} status with {@code
+   * amount_capturable} set to 0. This endpoint brings the PaymentIntent back to {@code
+   * requires_capture} status, allowing you to capture payment.
+   *
+   * <p>This is useful for retail and ecommerce scenarios with delayed shipments where authorization
+   * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
+   */
+  public PaymentIntent reauthorize(PaymentIntentReauthorizeParams params) throws StripeException {
+    return reauthorize(params, (RequestOptions) null);
+  }
+
+  /**
+   * Reauthorize a PaymentIntent to obtain a new valid authorization after the initial authorization
+   * has expired.
+   *
+   * <p>When a PaymentIntent’s authorization expires and the capture window elapses, the
+   * PaymentIntent transitions to {@code requires_reauthorization} status with {@code
+   * amount_capturable} set to 0. This endpoint brings the PaymentIntent back to {@code
+   * requires_capture} status, allowing you to capture payment.
+   *
+   * <p>This is useful for retail and ecommerce scenarios with delayed shipments where authorization
+   * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
+   */
+  public PaymentIntent reauthorize(PaymentIntentReauthorizeParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/payment_intents/%s/reauthorize", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, PaymentIntent.class);
+  }
+
+  /**
    * Retrieves the details of a PaymentIntent that has previously been created.
    *
    * <p>You can retrieve a PaymentIntent client-side using a publishable key when the {@code
@@ -1957,6 +2074,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String calculation;
       }
     }
+  }
+
+  /**
+   * For more details about ManagedPayments, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManagedPayments extends StripeObject {
+    /**
+     * Set to {@code true} to enable <a
+     * href="https://docs.stripe.com/payments/managed-payments">Managed Payments</a>, Stripe's
+     * merchant of record solution, for this session.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
   }
 
   /**
@@ -5187,6 +5321,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String requestPartialAuthorization;
 
       /**
+       * Request ability to <a
+       * href="https://docs.stripe.com/payments/reauthorization">reauthorize</a> for this
+       * PaymentIntent.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_reauthorization")
+      String requestReauthorization;
+
+      /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
        * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
@@ -5494,6 +5638,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("request_incremental_authorization_support")
       Boolean requestIncrementalAuthorizationSupport;
 
+      /**
+       * Request ability to <a
+       * href="https://docs.stripe.com/payments/reauthorization">reauthorize</a> for this
+       * PaymentIntent.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_reauthorization")
+      String requestReauthorization;
+
       @SerializedName("routing")
       Routing routing;
 
@@ -5675,7 +5829,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         public static class EuBankTransfer extends StripeObject {
           /**
            * The desired country code of the bank account information. Permitted values include:
-           * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           * {@code DE}, {@code FR}, {@code IE}, or {@code NL}.
            *
            * <p>One of {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
            */
@@ -7304,6 +7458,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String targetDate;
 
       /**
+       * The purpose of the transaction.
+       *
+       * <p>One of {@code goods}, {@code other}, {@code services}, or {@code unspecified}.
+       */
+      @SerializedName("transaction_purpose")
+      String transactionPurpose;
+
+      /**
        * Bank account verification method.
        *
        * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
@@ -7621,6 +7783,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(hooks, responseGetter);
     trySetResponseGetter(lastPaymentError, responseGetter);
     trySetResponseGetter(latestCharge, responseGetter);
+    trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(nextAction, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(paymentDetails, responseGetter);

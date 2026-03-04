@@ -3,8 +3,10 @@ package com.stripe.model.delegatedcheckout;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.Profile;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -29,6 +31,10 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class RequestedSession extends ApiResource
     implements HasId, MetadataStore<RequestedSession> {
+  /** Affiliate attribution data associated with this requested session. */
+  @SerializedName("affiliate_attributions")
+  List<RequestedSession.AffiliateAttribution> affiliateAttributions;
+
   /** The subtotal amount of the requested session. */
   @SerializedName("amount_subtotal")
   Long amountSubtotal;
@@ -70,8 +76,8 @@ public class RequestedSession extends ApiResource
   List<RequestedSession.LineItemDetail> lineItemDetails;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -362,6 +368,88 @@ public class RequestedSession extends ApiResource
   }
 
   /**
+   * For more details about AffiliateAttribution, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AffiliateAttribution extends StripeObject {
+    /** Agent-scoped campaign identifier. */
+    @SerializedName("campaign_id")
+    String campaignId;
+
+    /** Agent-scoped creative identifier. */
+    @SerializedName("creative_id")
+    String creativeId;
+
+    /** Timestamp when the attribution token expires. */
+    @SerializedName("expires_at")
+    Long expiresAt;
+
+    /** Agent-issued secret to validate the legitimacy of the source of this data. */
+    @SerializedName("identification_token")
+    String identificationToken;
+
+    /** Timestamp for when the attribution token was issued. */
+    @SerializedName("issued_at")
+    Long issuedAt;
+
+    /** Identifier for the attribution agent / affiliate network namespace. */
+    @SerializedName("provider")
+    String provider;
+
+    /** Agent-scoped affiliate/publisher identifier. */
+    @SerializedName("publisher_id")
+    String publisherId;
+
+    /** Freeform key/value pairs for additional non-sensitive per-agent data. */
+    @SerializedName("shared_metadata")
+    Map<String, String> sharedMetadata;
+
+    /** Context about where the attribution originated. */
+    @SerializedName("source")
+    Source source;
+
+    /** Agent-scoped sub-tracking identifier. */
+    @SerializedName("sub_id")
+    String subId;
+
+    /**
+     * Whether this is the first or last touchpoint.
+     *
+     * <p>One of {@code first}, or {@code last}.
+     */
+    @SerializedName("touchpoint")
+    String touchpoint;
+
+    /**
+     * For more details about Source, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Source extends StripeObject {
+      /** The platform of the attribution source. */
+      @SerializedName("platform")
+      String platform;
+
+      /**
+       * The type of the attribution source.
+       *
+       * <p>One of {@code platform}, or {@code url}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** The URL of the attribution source. */
+      @SerializedName("url")
+      String url;
+    }
+  }
+
+  /**
    * For more details about FulfillmentDetails, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -440,6 +528,10 @@ public class RequestedSession extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class FulfillmentOption extends StripeObject {
+      /** The digital fulfillment option. */
+      @SerializedName("digital")
+      Digital digital;
+
       /** The shipping option. */
       @SerializedName("shipping")
       Shipping shipping;
@@ -447,6 +539,45 @@ public class RequestedSession extends ApiResource
       /** The type of the fulfillment option. */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Digital, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Digital extends StripeObject {
+        /** The digital options. */
+        @SerializedName("digital_options")
+        List<RequestedSession.FulfillmentDetails.FulfillmentOption.Digital.DigitalOption>
+            digitalOptions;
+
+        /**
+         * For more details about DigitalOption, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class DigitalOption extends StripeObject {
+          /** The description of the digital fulfillment option. */
+          @SerializedName("description")
+          String description;
+
+          /** The digital amount of the digital fulfillment option. */
+          @SerializedName("digital_amount")
+          Long digitalAmount;
+
+          /** The display name of the digital fulfillment option. */
+          @SerializedName("display_name")
+          String displayName;
+
+          /** The key of the digital fulfillment option. */
+          @SerializedName("key")
+          String key;
+        }
+      }
 
       /**
        * For more details about Shipping, please refer to the <a
@@ -504,6 +635,10 @@ public class RequestedSession extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SelectedFulfillmentOption extends StripeObject {
+      /** The digital fulfillment option. */
+      @SerializedName("digital")
+      Digital digital;
+
       /** The shipping option. */
       @SerializedName("shipping")
       Shipping shipping;
@@ -511,6 +646,19 @@ public class RequestedSession extends ApiResource
       /** The type of the selected fulfillment option. */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Digital, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Digital extends StripeObject {
+        /** The digital option. */
+        @SerializedName("digital_option")
+        String digitalOption;
+      }
 
       /**
        * For more details about Shipping, please refer to the <a
@@ -542,6 +690,10 @@ public class RequestedSession extends ApiResource
     /** The total before any discounts or taxes are applied. */
     @SerializedName("amount_subtotal")
     Long amountSubtotal;
+
+    /** The fulfillment type of the line item. */
+    @SerializedName("fulfillment_type")
+    String fulfillmentType;
 
     /** The key of the line item. */
     @SerializedName("key")
@@ -810,7 +962,61 @@ public class RequestedSession extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SellerDetails extends StripeObject {}
+  public static class SellerDetails extends StripeObject {
+    /** The marketplace seller details. */
+    @SerializedName("marketplace_seller_details")
+    MarketplaceSellerDetails marketplaceSellerDetails;
+
+    /** The network profile of the seller. */
+    @SerializedName("network_profile")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Profile> networkProfile;
+
+    /** The URL to the seller's privacy notice. */
+    @SerializedName("privacy_notice_url")
+    String privacyNoticeUrl;
+
+    /** The URL to the seller's return policy. */
+    @SerializedName("return_policy_url")
+    String returnPolicyUrl;
+
+    /** The URL to the seller's store policy. */
+    @SerializedName("store_policy_url")
+    String storePolicyUrl;
+
+    /** The URL to the seller's terms of service. */
+    @SerializedName("terms_of_service_url")
+    String termsOfServiceUrl;
+
+    /** Get ID of expandable {@code networkProfile} object. */
+    public String getNetworkProfile() {
+      return (this.networkProfile != null) ? this.networkProfile.getId() : null;
+    }
+
+    public void setNetworkProfile(String id) {
+      this.networkProfile = ApiResource.setExpandableFieldId(id, this.networkProfile);
+    }
+
+    /** Get expanded {@code networkProfile}. */
+    public Profile getNetworkProfileObject() {
+      return (this.networkProfile != null) ? this.networkProfile.getExpanded() : null;
+    }
+
+    public void setNetworkProfileObject(Profile expandableObject) {
+      this.networkProfile =
+          new ExpandableField<Profile>(expandableObject.getId(), expandableObject);
+    }
+
+    /**
+     * For more details about MarketplaceSellerDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MarketplaceSellerDetails extends StripeObject {}
+  }
 
   /**
    * For more details about TotalDetails, please refer to the <a

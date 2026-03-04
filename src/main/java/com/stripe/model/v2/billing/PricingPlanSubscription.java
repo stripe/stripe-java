@@ -10,6 +10,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Pricing Plan Subscription represents a customer's active subscription to a Pricing Plan. It
+ * tracks both the servicing status (whether the customer is receiving service) and collection
+ * status (whether payments are current). Subscriptions are created through Billing Intents and bill
+ * according to the associated Billing Cadence.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

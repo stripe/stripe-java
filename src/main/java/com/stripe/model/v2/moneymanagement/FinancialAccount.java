@@ -391,6 +391,13 @@ public class FinancialAccount extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Storage extends StripeObject {
+    /**
+     * The usage type for funds in this FinancialAccount. Can be used to specify that the funds are
+     * for Consumer activity.
+     */
+    @SerializedName("funds_usage_type")
+    String fundsUsageType;
+
     /** The currencies that this FinancialAccount can hold. */
     @SerializedName("holds_currencies")
     List<String> holdsCurrencies;

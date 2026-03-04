@@ -1362,7 +1362,10 @@ public class IntentCreateParams extends ApiRequestParams {
       @SerializedName("cancellation_details")
       CancellationDetails cancellationDetails;
 
-      /** Allows users to override the collect at behavior. */
+      /**
+       * When the invoice will be collected. If not specified, the default behavior is
+       * on_effective_at.
+       */
       @SerializedName("collect_at")
       CollectAt collectAt;
 
@@ -1440,7 +1443,10 @@ public class IntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Allows users to override the collect at behavior. */
+        /**
+         * When the invoice will be collected. If not specified, the default behavior is
+         * on_effective_at.
+         */
         public Builder setCollectAt(IntentCreateParams.Action.Deactivate.CollectAt collectAt) {
           this.collectAt = collectAt;
           return this;
@@ -1758,7 +1764,7 @@ public class IntentCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Allows users to override the partial period behavior. */
+        /** Configurations for overriding behaviors related to the subscription. */
         @SerializedName("overrides")
         Overrides overrides;
 
@@ -1820,7 +1826,7 @@ public class IntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Allows users to override the partial period behavior. */
+          /** Configurations for overriding behaviors related to the subscription. */
           public Builder setOverrides(
               IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
                   overrides) {
@@ -1848,7 +1854,10 @@ public class IntentCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** <strong>Required.</strong> Override for the partial period behavior. */
+          /**
+           * <strong>Required.</strong> Configurations for behaviors when the action takes effect
+           * during the service period.
+           */
           @SerializedName("partial_period_behaviors")
           List<
                   IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
@@ -1965,11 +1974,14 @@ public class IntentCreateParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
-            /** Override for the license fee. */
+            /**
+             * Overrides the behavior for license fee components when the action takes effect during
+             * the service period.
+             */
             @SerializedName("license_fee")
             LicenseFee licenseFee;
 
-            /** <strong>Required.</strong> Type of the partial period behavior override. */
+            /** <strong>Required.</strong> The type of behavior to override. */
             @SerializedName("type")
             Type type;
 
@@ -2029,7 +2041,10 @@ public class IntentCreateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** Override for the license fee. */
+              /**
+               * Overrides the behavior for license fee components when the action takes effect
+               * during the service period.
+               */
               public Builder setLicenseFee(
                   IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
                           .PartialPeriodBehavior.LicenseFee
@@ -2038,7 +2053,7 @@ public class IntentCreateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** <strong>Required.</strong> Type of the partial period behavior override. */
+              /** <strong>Required.</strong> The type of behavior to override. */
               public Builder setType(
                   IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
                           .PartialPeriodBehavior.Type
@@ -2053,7 +2068,8 @@ public class IntentCreateParams extends ApiRequestParams {
             public static class LicenseFee {
               /**
                * <strong>Required.</strong> The proration behavior for the partial servicing period.
-               * Defines how we prorate the license fee when the user is deactivating.
+               * Defines how we prorate the license fee when the user is deactivating. If not
+               * specified, defaults to none.
                */
               @SerializedName("credit_proration_behavior")
               CreditProrationBehavior creditProrationBehavior;
@@ -2095,7 +2111,8 @@ public class IntentCreateParams extends ApiRequestParams {
 
                 /**
                  * <strong>Required.</strong> The proration behavior for the partial servicing
-                 * period. Defines how we prorate the license fee when the user is deactivating.
+                 * period. Defines how we prorate the license fee when the user is deactivating. If
+                 * not specified, defaults to none.
                  */
                 public Builder setCreditProrationBehavior(
                     IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
@@ -2201,7 +2218,10 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Modify {
-      /** Allows users to override the collect at behavior. */
+      /**
+       * When the invoice will be collected. If not specified, the default behavior is
+       * next_billing_date.
+       */
       @SerializedName("collect_at")
       CollectAt collectAt;
 
@@ -2267,7 +2287,10 @@ public class IntentCreateParams extends ApiRequestParams {
               this.type);
         }
 
-        /** Allows users to override the collect at behavior. */
+        /**
+         * When the invoice will be collected. If not specified, the default behavior is
+         * next_billing_date.
+         */
         public Builder setCollectAt(IntentCreateParams.Action.Modify.CollectAt collectAt) {
           this.collectAt = collectAt;
           return this;
@@ -2461,7 +2484,7 @@ public class IntentCreateParams extends ApiRequestParams {
         @SerializedName("new_pricing_plan_version")
         String newPricingPlanVersion;
 
-        /** Allows users to override the partial period behavior. */
+        /** Configurations for overriding behaviors related to the subscription. */
         @SerializedName("overrides")
         Overrides overrides;
 
@@ -2596,7 +2619,7 @@ public class IntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Allows users to override the partial period behavior. */
+          /** Configurations for overriding behaviors related to the subscription. */
           public Builder setOverrides(
               IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides overrides) {
             this.overrides = overrides;
@@ -2731,7 +2754,10 @@ public class IntentCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** <strong>Required.</strong> Override for the partial period behavior. */
+          /**
+           * <strong>Required.</strong> Configurations for behaviors when the action takes effect
+           * during the service period.
+           */
           @SerializedName("partial_period_behaviors")
           List<
                   IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
@@ -2848,11 +2874,14 @@ public class IntentCreateParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
-            /** Override for the license fee. */
+            /**
+             * Overrides the behavior for license fee components when the action takes effect during
+             * the service period.
+             */
             @SerializedName("license_fee")
             LicenseFee licenseFee;
 
-            /** <strong>Required.</strong> Type of the partial period behavior override. */
+            /** <strong>Required.</strong> The type of behavior to override. */
             @SerializedName("type")
             Type type;
 
@@ -2912,7 +2941,10 @@ public class IntentCreateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** Override for the license fee. */
+              /**
+               * Overrides the behavior for license fee components when the action takes effect
+               * during the service period.
+               */
               public Builder setLicenseFee(
                   IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
                           .PartialPeriodBehavior.LicenseFee
@@ -2921,7 +2953,7 @@ public class IntentCreateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** <strong>Required.</strong> Type of the partial period behavior override. */
+              /** <strong>Required.</strong> The type of behavior to override. */
               public Builder setType(
                   IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
                           .PartialPeriodBehavior.Type
@@ -2936,14 +2968,16 @@ public class IntentCreateParams extends ApiRequestParams {
             public static class LicenseFee {
               /**
                * <strong>Required.</strong> The proration behavior for the partial servicing period.
-               * Defines how we prorate the license fee when the user is upgrading.
+               * Defines how we prorate the license fee when the user modifies the subscription. If
+               * not specified, defaults to prorated.
                */
               @SerializedName("credit_proration_behavior")
               CreditProrationBehavior creditProrationBehavior;
 
               /**
                * <strong>Required.</strong> The proration behavior for the partial servicing period.
-               * Defines how we prorate the license fee when the user is downgrading.
+               * Defines how we prorate the license fee when the user modifies the subscription. If
+               * not specified, defaults to prorated.
                */
               @SerializedName("debit_proration_behavior")
               DebitProrationBehavior debitProrationBehavior;
@@ -2989,7 +3023,8 @@ public class IntentCreateParams extends ApiRequestParams {
 
                 /**
                  * <strong>Required.</strong> The proration behavior for the partial servicing
-                 * period. Defines how we prorate the license fee when the user is upgrading.
+                 * period. Defines how we prorate the license fee when the user modifies the
+                 * subscription. If not specified, defaults to prorated.
                  */
                 public Builder setCreditProrationBehavior(
                     IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
@@ -3001,7 +3036,8 @@ public class IntentCreateParams extends ApiRequestParams {
 
                 /**
                  * <strong>Required.</strong> The proration behavior for the partial servicing
-                 * period. Defines how we prorate the license fee when the user is downgrading.
+                 * period. Defines how we prorate the license fee when the user modifies the
+                 * subscription. If not specified, defaults to prorated.
                  */
                 public Builder setDebitProrationBehavior(
                     IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
@@ -3344,7 +3380,7 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Subscribe {
-      /** Allows users to override the collect at behavior. */
+      /** When the invoice will be collected. If not specified, defaults to on_effective_at. */
       @SerializedName("collect_at")
       CollectAt collectAt;
 
@@ -3419,7 +3455,7 @@ public class IntentCreateParams extends ApiRequestParams {
               this.v1SubscriptionDetails);
         }
 
-        /** Allows users to override the collect at behavior. */
+        /** When the invoice will be collected. If not specified, defaults to on_effective_at. */
         public Builder setCollectAt(IntentCreateParams.Action.Subscribe.CollectAt collectAt) {
           this.collectAt = collectAt;
           return this;
@@ -3622,7 +3658,7 @@ public class IntentCreateParams extends ApiRequestParams {
         @SerializedName("metadata")
         Map<String, String> metadata;
 
-        /** Allows users to override the partial period behavior. */
+        /** Configurations for overriding behaviors related to the subscription. */
         @SerializedName("overrides")
         Overrides overrides;
 
@@ -3779,7 +3815,7 @@ public class IntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Allows users to override the partial period behavior. */
+          /** Configurations for overriding behaviors related to the subscription. */
           public Builder setOverrides(
               IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
                   overrides) {
@@ -3921,7 +3957,10 @@ public class IntentCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** <strong>Required.</strong> Override for the partial period behavior. */
+          /**
+           * <strong>Required.</strong> Configurations for behaviors when the action takes effect
+           * during the service period.
+           */
           @SerializedName("partial_period_behaviors")
           List<
                   IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
@@ -4038,11 +4077,14 @@ public class IntentCreateParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
-            /** Override for the license fee. */
+            /**
+             * Overrides the behavior for license fee components when the action takes effect during
+             * the service period.
+             */
             @SerializedName("license_fee")
             LicenseFee licenseFee;
 
-            /** <strong>Required.</strong> Type of the partial period behavior override. */
+            /** <strong>Required.</strong> The type of behavior to override. */
             @SerializedName("type")
             Type type;
 
@@ -4102,7 +4144,10 @@ public class IntentCreateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** Override for the license fee. */
+              /**
+               * Overrides the behavior for license fee components when the action takes effect
+               * during the service period.
+               */
               public Builder setLicenseFee(
                   IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
                           .PartialPeriodBehavior.LicenseFee
@@ -4111,7 +4156,7 @@ public class IntentCreateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** <strong>Required.</strong> Type of the partial period behavior override. */
+              /** <strong>Required.</strong> The type of behavior to override. */
               public Builder setType(
                   IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
                           .PartialPeriodBehavior.Type
@@ -4126,7 +4171,8 @@ public class IntentCreateParams extends ApiRequestParams {
             public static class LicenseFee {
               /**
                * <strong>Required.</strong> The proration behavior for the partial servicing period.
-               * Defines how we prorate the license fee when the user is subscribing.
+               * Defines how we prorate the license fee when the user is subscribing. If not
+               * specified, defaults to prorated.
                */
               @SerializedName("debit_proration_behavior")
               DebitProrationBehavior debitProrationBehavior;
@@ -4167,7 +4213,8 @@ public class IntentCreateParams extends ApiRequestParams {
 
                 /**
                  * <strong>Required.</strong> The proration behavior for the partial servicing
-                 * period. Defines how we prorate the license fee when the user is subscribing.
+                 * period. Defines how we prorate the license fee when the user is subscribing. If
+                 * not specified, defaults to prorated.
                  */
                 public Builder setDebitProrationBehavior(
                     IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides

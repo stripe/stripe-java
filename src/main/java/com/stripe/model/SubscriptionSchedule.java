@@ -1853,6 +1853,9 @@ public class SubscriptionSchedule extends ApiResource
       @Setter(lombok.AccessLevel.NONE)
       ExpandableField<PromotionCode> promotionCode;
 
+      @SerializedName("settings")
+      Settings settings;
+
       /** Get ID of expandable {@code coupon} object. */
       public String getCoupon() {
         return (this.coupon != null) ? this.coupon.getId() : null;
@@ -1929,6 +1932,77 @@ public class SubscriptionSchedule extends ApiResource
          */
         @SerializedName("type")
         String type;
+      }
+
+      /**
+       * For more details about Settings, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Settings extends StripeObject {
+        @SerializedName("service_period_anchor_config")
+        ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+        /**
+         * The start date of the discount's service period when applying a coupon or promotion code
+         * with a service period duration.
+         *
+         * <p>One of {@code current_period_end}, {@code current_period_start}, or {@code
+         * phase_start}.
+         */
+        @SerializedName("start_date")
+        String startDate;
+
+        /**
+         * For more details about ServicePeriodAnchorConfig, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ServicePeriodAnchorConfig extends StripeObject {
+          @SerializedName("custom")
+          Custom custom;
+
+          /**
+           * The type of service period anchor config.
+           *
+           * <p>One of {@code custom}, or {@code inherit}.
+           */
+          @SerializedName("type")
+          String type;
+
+          /**
+           * For more details about Custom, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Custom extends StripeObject {
+            /** The day of the month the anchor should be. Ranges from 1 to 31. */
+            @SerializedName("day_of_month")
+            Long dayOfMonth;
+
+            /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+            @SerializedName("hour")
+            Long hour;
+
+            /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+            @SerializedName("minute")
+            Long minute;
+
+            /** The month to start full cycle periods. Ranges from 1 to 12. */
+            @SerializedName("month")
+            Long month;
+
+            /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+            @SerializedName("second")
+            Long second;
+          }
+        }
       }
     }
 
@@ -2185,6 +2259,9 @@ public class SubscriptionSchedule extends ApiResource
         @Setter(lombok.AccessLevel.NONE)
         ExpandableField<PromotionCode> promotionCode;
 
+        @SerializedName("settings")
+        Settings settings;
+
         /** Get ID of expandable {@code coupon} object. */
         public String getCoupon() {
           return (this.coupon != null) ? this.coupon.getId() : null;
@@ -2261,6 +2338,77 @@ public class SubscriptionSchedule extends ApiResource
            */
           @SerializedName("type")
           String type;
+        }
+
+        /**
+         * For more details about Settings, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Settings extends StripeObject {
+          @SerializedName("service_period_anchor_config")
+          ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+          /**
+           * The start date of the discount's service period when applying a coupon or promotion
+           * code with a service period duration.
+           *
+           * <p>One of {@code current_period_end}, {@code current_period_start}, or {@code
+           * phase_start}.
+           */
+          @SerializedName("start_date")
+          String startDate;
+
+          /**
+           * For more details about ServicePeriodAnchorConfig, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class ServicePeriodAnchorConfig extends StripeObject {
+            @SerializedName("custom")
+            Custom custom;
+
+            /**
+             * The type of service period anchor config.
+             *
+             * <p>One of {@code custom}, or {@code inherit}.
+             */
+            @SerializedName("type")
+            String type;
+
+            /**
+             * For more details about Custom, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Custom extends StripeObject {
+              /** The day of the month the anchor should be. Ranges from 1 to 31. */
+              @SerializedName("day_of_month")
+              Long dayOfMonth;
+
+              /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+              @SerializedName("hour")
+              Long hour;
+
+              /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+              @SerializedName("minute")
+              Long minute;
+
+              /** The month to start full cycle periods. Ranges from 1 to 12. */
+              @SerializedName("month")
+              Long month;
+
+              /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+              @SerializedName("second")
+              Long second;
+            }
+          }
         }
       }
 

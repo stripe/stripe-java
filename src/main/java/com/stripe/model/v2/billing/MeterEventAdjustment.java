@@ -9,6 +9,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Meter Event Adjustment is used to cancel or modify previously recorded meter events. Meter
+ * Event Adjustments allow you to correct billing data by canceling individual events or event
+ * ranges, with tracking of adjustment status and creation time.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

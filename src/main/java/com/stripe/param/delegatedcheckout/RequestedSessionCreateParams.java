@@ -13,6 +13,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class RequestedSessionCreateParams extends ApiRequestParams {
+  /** Affiliate attribution data associated with this requested session. */
+  @SerializedName("affiliate_attributions")
+  List<RequestedSessionCreateParams.AffiliateAttribution> affiliateAttributions;
+
   /** <strong>Required.</strong> The currency for this requested session. */
   @SerializedName("currency")
   String currency;
@@ -67,6 +71,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
   Map<String, String> sharedMetadata;
 
   private RequestedSessionCreateParams(
+      List<RequestedSessionCreateParams.AffiliateAttribution> affiliateAttributions,
       String currency,
       String customer,
       List<String> expand,
@@ -79,6 +84,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
       SellerDetails sellerDetails,
       SetupFutureUsage setupFutureUsage,
       Map<String, String> sharedMetadata) {
+    this.affiliateAttributions = affiliateAttributions;
     this.currency = currency;
     this.customer = customer;
     this.expand = expand;
@@ -98,6 +104,8 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private List<RequestedSessionCreateParams.AffiliateAttribution> affiliateAttributions;
+
     private String currency;
 
     private String customer;
@@ -125,6 +133,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public RequestedSessionCreateParams build() {
       return new RequestedSessionCreateParams(
+          this.affiliateAttributions,
           this.currency,
           this.customer,
           this.expand,
@@ -137,6 +146,34 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
           this.sellerDetails,
           this.setupFutureUsage,
           this.sharedMetadata);
+    }
+
+    /**
+     * Add an element to `affiliateAttributions` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link RequestedSessionCreateParams#affiliateAttributions} for the field documentation.
+     */
+    public Builder addAffiliateAttribution(
+        RequestedSessionCreateParams.AffiliateAttribution element) {
+      if (this.affiliateAttributions == null) {
+        this.affiliateAttributions = new ArrayList<>();
+      }
+      this.affiliateAttributions.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `affiliateAttributions` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link RequestedSessionCreateParams#affiliateAttributions} for the field documentation.
+     */
+    public Builder addAllAffiliateAttribution(
+        List<RequestedSessionCreateParams.AffiliateAttribution> elements) {
+      if (this.affiliateAttributions == null) {
+        this.affiliateAttributions = new ArrayList<>();
+      }
+      this.affiliateAttributions.addAll(elements);
+      return this;
     }
 
     /** <strong>Required.</strong> The currency for this requested session. */
@@ -313,6 +350,393 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
       }
       this.sharedMetadata.putAll(map);
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AffiliateAttribution {
+    /** Agent-scoped campaign identifier. */
+    @SerializedName("campaign_id")
+    String campaignId;
+
+    /** Agent-scoped creative identifier. */
+    @SerializedName("creative_id")
+    String creativeId;
+
+    /** <strong>Required.</strong> Timestamp when the attribution token expires. */
+    @SerializedName("expires_at")
+    Long expiresAt;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> Agent-issued secret to validate the legitimacy of the source of
+     * this data.
+     */
+    @SerializedName("identification_token")
+    String identificationToken;
+
+    /** <strong>Required.</strong> Timestamp for when the attribution token was issued. */
+    @SerializedName("issued_at")
+    Long issuedAt;
+
+    /**
+     * <strong>Required.</strong> Identifier for the attribution agent / affiliate network
+     * namespace.
+     */
+    @SerializedName("provider")
+    String provider;
+
+    /** Agent-scoped affiliate/publisher identifier. */
+    @SerializedName("publisher_id")
+    String publisherId;
+
+    /** Freeform key/value pairs for additional non-sensitive per-agent data. */
+    @SerializedName("shared_metadata")
+    Map<String, String> sharedMetadata;
+
+    /** Context about where the attribution originated. */
+    @SerializedName("source")
+    Source source;
+
+    /** Agent-scoped sub-tracking identifier. */
+    @SerializedName("sub_id")
+    String subId;
+
+    /** <strong>Required.</strong> Whether this is the first or last touchpoint. */
+    @SerializedName("touchpoint")
+    Touchpoint touchpoint;
+
+    private AffiliateAttribution(
+        String campaignId,
+        String creativeId,
+        Long expiresAt,
+        Map<String, Object> extraParams,
+        String identificationToken,
+        Long issuedAt,
+        String provider,
+        String publisherId,
+        Map<String, String> sharedMetadata,
+        Source source,
+        String subId,
+        Touchpoint touchpoint) {
+      this.campaignId = campaignId;
+      this.creativeId = creativeId;
+      this.expiresAt = expiresAt;
+      this.extraParams = extraParams;
+      this.identificationToken = identificationToken;
+      this.issuedAt = issuedAt;
+      this.provider = provider;
+      this.publisherId = publisherId;
+      this.sharedMetadata = sharedMetadata;
+      this.source = source;
+      this.subId = subId;
+      this.touchpoint = touchpoint;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String campaignId;
+
+      private String creativeId;
+
+      private Long expiresAt;
+
+      private Map<String, Object> extraParams;
+
+      private String identificationToken;
+
+      private Long issuedAt;
+
+      private String provider;
+
+      private String publisherId;
+
+      private Map<String, String> sharedMetadata;
+
+      private Source source;
+
+      private String subId;
+
+      private Touchpoint touchpoint;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public RequestedSessionCreateParams.AffiliateAttribution build() {
+        return new RequestedSessionCreateParams.AffiliateAttribution(
+            this.campaignId,
+            this.creativeId,
+            this.expiresAt,
+            this.extraParams,
+            this.identificationToken,
+            this.issuedAt,
+            this.provider,
+            this.publisherId,
+            this.sharedMetadata,
+            this.source,
+            this.subId,
+            this.touchpoint);
+      }
+
+      /** Agent-scoped campaign identifier. */
+      public Builder setCampaignId(String campaignId) {
+        this.campaignId = campaignId;
+        return this;
+      }
+
+      /** Agent-scoped creative identifier. */
+      public Builder setCreativeId(String creativeId) {
+        this.creativeId = creativeId;
+        return this;
+      }
+
+      /** <strong>Required.</strong> Timestamp when the attribution token expires. */
+      public Builder setExpiresAt(Long expiresAt) {
+        this.expiresAt = expiresAt;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * RequestedSessionCreateParams.AffiliateAttribution#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link RequestedSessionCreateParams.AffiliateAttribution#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Agent-issued secret to validate the legitimacy of the source of
+       * this data.
+       */
+      public Builder setIdentificationToken(String identificationToken) {
+        this.identificationToken = identificationToken;
+        return this;
+      }
+
+      /** <strong>Required.</strong> Timestamp for when the attribution token was issued. */
+      public Builder setIssuedAt(Long issuedAt) {
+        this.issuedAt = issuedAt;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Identifier for the attribution agent / affiliate network
+       * namespace.
+       */
+      public Builder setProvider(String provider) {
+        this.provider = provider;
+        return this;
+      }
+
+      /** Agent-scoped affiliate/publisher identifier. */
+      public Builder setPublisherId(String publisherId) {
+        this.publisherId = publisherId;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `sharedMetadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link RequestedSessionCreateParams.AffiliateAttribution#sharedMetadata} for the field
+       * documentation.
+       */
+      public Builder putSharedMetadata(String key, String value) {
+        if (this.sharedMetadata == null) {
+          this.sharedMetadata = new HashMap<>();
+        }
+        this.sharedMetadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `sharedMetadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link RequestedSessionCreateParams.AffiliateAttribution#sharedMetadata} for the field
+       * documentation.
+       */
+      public Builder putAllSharedMetadata(Map<String, String> map) {
+        if (this.sharedMetadata == null) {
+          this.sharedMetadata = new HashMap<>();
+        }
+        this.sharedMetadata.putAll(map);
+        return this;
+      }
+
+      /** Context about where the attribution originated. */
+      public Builder setSource(RequestedSessionCreateParams.AffiliateAttribution.Source source) {
+        this.source = source;
+        return this;
+      }
+
+      /** Agent-scoped sub-tracking identifier. */
+      public Builder setSubId(String subId) {
+        this.subId = subId;
+        return this;
+      }
+
+      /** <strong>Required.</strong> Whether this is the first or last touchpoint. */
+      public Builder setTouchpoint(
+          RequestedSessionCreateParams.AffiliateAttribution.Touchpoint touchpoint) {
+        this.touchpoint = touchpoint;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Source {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The platform where the attribution originated. */
+      @SerializedName("platform")
+      String platform;
+
+      /** <strong>Required.</strong> The type of the attribution source. */
+      @SerializedName("type")
+      Type type;
+
+      /** The URL where the attribution originated. */
+      @SerializedName("url")
+      String url;
+
+      private Source(Map<String, Object> extraParams, String platform, Type type, String url) {
+        this.extraParams = extraParams;
+        this.platform = platform;
+        this.type = type;
+        this.url = url;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String platform;
+
+        private Type type;
+
+        private String url;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public RequestedSessionCreateParams.AffiliateAttribution.Source build() {
+          return new RequestedSessionCreateParams.AffiliateAttribution.Source(
+              this.extraParams, this.platform, this.type, this.url);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link RequestedSessionCreateParams.AffiliateAttribution.Source#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link RequestedSessionCreateParams.AffiliateAttribution.Source#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The platform where the attribution originated. */
+        public Builder setPlatform(String platform) {
+          this.platform = platform;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The type of the attribution source. */
+        public Builder setType(RequestedSessionCreateParams.AffiliateAttribution.Source.Type type) {
+          this.type = type;
+          return this;
+        }
+
+        /** The URL where the attribution originated. */
+        public Builder setUrl(String url) {
+          this.url = url;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("platform")
+        PLATFORM("platform"),
+
+        @SerializedName("url")
+        URL("url");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    public enum Touchpoint implements ApiRequestParams.EnumParam {
+      @SerializedName("first")
+      FIRST("first"),
+
+      @SerializedName("last")
+      LAST("last");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Touchpoint(String value) {
+        this.value = value;
+      }
     }
   }
 

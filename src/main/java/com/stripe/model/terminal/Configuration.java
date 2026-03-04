@@ -39,6 +39,9 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("bbpos_wisepos_e")
   BbposWiseposE bbposWiseposE;
 
+  @SerializedName("cellular")
+  Cellular cellular;
+
   /** Always true for a deleted object. */
   @SerializedName("deleted")
   Boolean deleted;
@@ -82,6 +85,9 @@ public class Configuration extends ApiResource implements HasId {
 
   @SerializedName("stripe_s700")
   StripeS700 stripeS700;
+
+  @SerializedName("stripe_s710")
+  StripeS710 stripeS710;
 
   @SerializedName("tipping")
   Tipping tipping;
@@ -328,6 +334,19 @@ public class Configuration extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about Cellular, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Cellular extends StripeObject {
+    /** Whether a cellular-capable reader can connect to the internet over cellular. */
+    @SerializedName("enabled")
+    Boolean enabled;
+  }
+
+  /**
    * For more details about Offline, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -384,6 +403,39 @@ public class Configuration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StripeS700 extends StripeObject {
+    /** A File ID representing an image to display on the reader. */
+    @SerializedName("splashscreen")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<File> splashscreen;
+
+    /** Get ID of expandable {@code splashscreen} object. */
+    public String getSplashscreen() {
+      return (this.splashscreen != null) ? this.splashscreen.getId() : null;
+    }
+
+    public void setSplashscreen(String id) {
+      this.splashscreen = ApiResource.setExpandableFieldId(id, this.splashscreen);
+    }
+
+    /** Get expanded {@code splashscreen}. */
+    public File getSplashscreenObject() {
+      return (this.splashscreen != null) ? this.splashscreen.getExpanded() : null;
+    }
+
+    public void setSplashscreenObject(File expandableObject) {
+      this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  /**
+   * For more details about StripeS710, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StripeS710 extends StripeObject {
     /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
@@ -1121,10 +1173,12 @@ public class Configuration extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(bbposWisepad3, responseGetter);
     trySetResponseGetter(bbposWiseposE, responseGetter);
+    trySetResponseGetter(cellular, responseGetter);
     trySetResponseGetter(offline, responseGetter);
     trySetResponseGetter(readerSecurity, responseGetter);
     trySetResponseGetter(rebootWindow, responseGetter);
     trySetResponseGetter(stripeS700, responseGetter);
+    trySetResponseGetter(stripeS710, responseGetter);
     trySetResponseGetter(tipping, responseGetter);
     trySetResponseGetter(verifoneP400, responseGetter);
     trySetResponseGetter(wifi, responseGetter);

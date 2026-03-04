@@ -11,6 +11,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Billing Intent Action represents a specific operation within a Billing Intent, such as
+ * subscribing to a Pricing Plan, modifying a subscription's quantity, or deactivating service. Each
+ * action has a specific type and associated details that define what change will be made when the
+ * Intent is committed.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -353,7 +359,7 @@ public class IntentAction extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class PricingPlanSubscriptionDetails extends StripeObject {
-      /** Allows users to override the partial period behavior. */
+      /** Configurations for overriding behaviors related to the subscription. */
       @SerializedName("overrides")
       Overrides overrides;
 
@@ -361,12 +367,12 @@ public class IntentAction extends StripeObject implements HasId {
       @SerializedName("pricing_plan_subscription")
       String pricingPlanSubscription;
 
-      /** Allows users to override the partial period behavior. */
+      /** Configurations for overriding behaviors related to the subscription. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Overrides extends StripeObject {
-        /** Override for the partial period behavior. */
+        /** Configurations for behaviors when the action takes effect during the service period. */
         @SerializedName("partial_period_behaviors")
         List<IntentAction.Deactivate.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior>
             partialPeriodBehaviors;
@@ -379,26 +385,32 @@ public class IntentAction extends StripeObject implements HasId {
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class PartialPeriodBehavior extends StripeObject {
-          /** Override for the license fee. */
+          /**
+           * Overrides the behavior for license fee components when the action takes effect during
+           * the service period.
+           */
           @SerializedName("license_fee")
           LicenseFee licenseFee;
 
           /**
-           * Type of the partial period behavior override.
+           * The type of behavior to override.
            *
            * <p>Equal to {@code license_fee}.
            */
           @SerializedName("type")
           String type;
 
-          /** Override for the license fee. */
+          /**
+           * Overrides the behavior for license fee components when the action takes effect during
+           * the service period.
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
           public static class LicenseFee extends StripeObject {
             /**
              * The proration behavior for the partial servicing period. Defines how we prorate the
-             * license fee when the user is deactivating.
+             * license fee when the user is deactivating. If not specified, defaults to none.
              *
              * <p>One of {@code none}, or {@code prorated}.
              */
@@ -484,7 +496,7 @@ public class IntentAction extends StripeObject implements HasId {
       @SerializedName("new_pricing_plan_version")
       String newPricingPlanVersion;
 
-      /** Allows users to override the partial period behavior. */
+      /** Configurations for overriding behaviors related to the subscription. */
       @SerializedName("overrides")
       Overrides overrides;
 
@@ -513,12 +525,12 @@ public class IntentAction extends StripeObject implements HasId {
         Long quantity;
       }
 
-      /** Allows users to override the partial period behavior. */
+      /** Configurations for overriding behaviors related to the subscription. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Overrides extends StripeObject {
-        /** Override for the partial period behavior. */
+        /** Configurations for behaviors when the action takes effect during the service period. */
         @SerializedName("partial_period_behaviors")
         List<IntentAction.Modify.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior>
             partialPeriodBehaviors;
@@ -531,26 +543,33 @@ public class IntentAction extends StripeObject implements HasId {
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class PartialPeriodBehavior extends StripeObject {
-          /** Override for the license fee. */
+          /**
+           * Overrides the behavior for license fee components when the action takes effect during
+           * the service period.
+           */
           @SerializedName("license_fee")
           LicenseFee licenseFee;
 
           /**
-           * Type of the partial period behavior override.
+           * The type of behavior to override.
            *
            * <p>Equal to {@code license_fee}.
            */
           @SerializedName("type")
           String type;
 
-          /** Override for the license fee. */
+          /**
+           * Overrides the behavior for license fee components when the action takes effect during
+           * the service period.
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
           public static class LicenseFee extends StripeObject {
             /**
              * The proration behavior for the partial servicing period. Defines how we prorate the
-             * license fee when the user is upgrading.
+             * license fee when the user modifies the subscription. If not specified, defaults to
+             * prorated.
              *
              * <p>One of {@code none}, or {@code prorated}.
              */
@@ -559,7 +578,8 @@ public class IntentAction extends StripeObject implements HasId {
 
             /**
              * The proration behavior for the partial servicing period. Defines how we prorate the
-             * license fee when the user is downgrading.
+             * license fee when the user modifies the subscription. If not specified, defaults to
+             * prorated.
              *
              * <p>One of {@code none}, or {@code prorated}.
              */
@@ -689,7 +709,7 @@ public class IntentAction extends StripeObject implements HasId {
       @SerializedName("metadata")
       Map<String, String> metadata;
 
-      /** Allows users to override the partial period behavior. */
+      /** Configurations for overriding behaviors related to the subscription. */
       @SerializedName("overrides")
       Overrides overrides;
 
@@ -729,12 +749,12 @@ public class IntentAction extends StripeObject implements HasId {
         Long quantity;
       }
 
-      /** Allows users to override the partial period behavior. */
+      /** Configurations for overriding behaviors related to the subscription. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Overrides extends StripeObject {
-        /** Override for the partial period behavior. */
+        /** Configurations for behaviors when the action takes effect during the service period. */
         @SerializedName("partial_period_behaviors")
         List<IntentAction.Subscribe.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior>
             partialPeriodBehaviors;
@@ -747,26 +767,32 @@ public class IntentAction extends StripeObject implements HasId {
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class PartialPeriodBehavior extends StripeObject {
-          /** Override for the license fee. */
+          /**
+           * Overrides the behavior for license fee components when the action takes effect during
+           * the service period.
+           */
           @SerializedName("license_fee")
           LicenseFee licenseFee;
 
           /**
-           * Type of the partial period behavior override.
+           * The type of behavior to override.
            *
            * <p>Equal to {@code license_fee}.
            */
           @SerializedName("type")
           String type;
 
-          /** Override for the license fee. */
+          /**
+           * Overrides the behavior for license fee components when the action takes effect during
+           * the service period.
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
           public static class LicenseFee extends StripeObject {
             /**
              * The proration behavior for the partial servicing period. Defines how we prorate the
-             * license fee when the user is subscribing.
+             * license fee when the user is subscribing. If not specified, defaults to prorated.
              *
              * <p>One of {@code none}, or {@code prorated}.
              */

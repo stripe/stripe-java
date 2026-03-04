@@ -2933,6 +2933,10 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName("script_statement_descriptor")
       ScriptStatementDescriptor scriptStatementDescriptor;
 
+      /** Settings used for Smart Disputes. */
+      @SerializedName("smart_disputes")
+      SmartDisputes smartDisputes;
+
       /** Statement descriptor. */
       @SerializedName("statement_descriptor")
       StatementDescriptor statementDescriptor;
@@ -2950,6 +2954,7 @@ public class AccountCreateParams extends ApiRequestParams {
           KonbiniPayments konbiniPayments,
           String mcc,
           ScriptStatementDescriptor scriptStatementDescriptor,
+          SmartDisputes smartDisputes,
           StatementDescriptor statementDescriptor,
           Support support) {
         this.bacsDebitPayments = bacsDebitPayments;
@@ -2960,6 +2965,7 @@ public class AccountCreateParams extends ApiRequestParams {
         this.konbiniPayments = konbiniPayments;
         this.mcc = mcc;
         this.scriptStatementDescriptor = scriptStatementDescriptor;
+        this.smartDisputes = smartDisputes;
         this.statementDescriptor = statementDescriptor;
         this.support = support;
       }
@@ -2985,6 +2991,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
         private ScriptStatementDescriptor scriptStatementDescriptor;
 
+        private SmartDisputes smartDisputes;
+
         private StatementDescriptor statementDescriptor;
 
         private Support support;
@@ -3000,6 +3008,7 @@ public class AccountCreateParams extends ApiRequestParams {
               this.konbiniPayments,
               this.mcc,
               this.scriptStatementDescriptor,
+              this.smartDisputes,
               this.statementDescriptor,
               this.support);
         }
@@ -3083,6 +3092,13 @@ public class AccountCreateParams extends ApiRequestParams {
             AccountCreateParams.Configuration.Merchant.ScriptStatementDescriptor
                 scriptStatementDescriptor) {
           this.scriptStatementDescriptor = scriptStatementDescriptor;
+          return this;
+        }
+
+        /** Settings used for Smart Disputes. */
+        public Builder setSmartDisputes(
+            AccountCreateParams.Configuration.Merchant.SmartDisputes smartDisputes) {
+          this.smartDisputes = smartDisputes;
           return this;
         }
 
@@ -8486,6 +8502,175 @@ public class AccountCreateParams extends ApiRequestParams {
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
+      public static class SmartDisputes {
+        /** Settings for Smart Disputes auto_respond. */
+        @SerializedName("auto_respond")
+        AutoRespond autoRespond;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private SmartDisputes(AutoRespond autoRespond, Map<String, Object> extraParams) {
+          this.autoRespond = autoRespond;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private AutoRespond autoRespond;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountCreateParams.Configuration.Merchant.SmartDisputes build() {
+            return new AccountCreateParams.Configuration.Merchant.SmartDisputes(
+                this.autoRespond, this.extraParams);
+          }
+
+          /** Settings for Smart Disputes auto_respond. */
+          public Builder setAutoRespond(
+              AccountCreateParams.Configuration.Merchant.SmartDisputes.AutoRespond autoRespond) {
+            this.autoRespond = autoRespond;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountCreateParams.Configuration.Merchant.SmartDisputes#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountCreateParams.Configuration.Merchant.SmartDisputes#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AutoRespond {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** The preference for Smart Disputes auto-respond. */
+          @SerializedName("preference")
+          Preference preference;
+
+          private AutoRespond(Map<String, Object> extraParams, Preference preference) {
+            this.extraParams = extraParams;
+            this.preference = preference;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Preference preference;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Configuration.Merchant.SmartDisputes.AutoRespond build() {
+              return new AccountCreateParams.Configuration.Merchant.SmartDisputes.AutoRespond(
+                  this.extraParams, this.preference);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Merchant.SmartDisputes.AutoRespond#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Merchant.SmartDisputes.AutoRespond#extraParams} for
+             * the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** The preference for Smart Disputes auto-respond. */
+            public Builder setPreference(
+                AccountCreateParams.Configuration.Merchant.SmartDisputes.AutoRespond.Preference
+                    preference) {
+              this.preference = preference;
+              return this;
+            }
+          }
+
+          public enum Preference implements ApiRequestParams.EnumParam {
+            @SerializedName("inherit")
+            INHERIT("inherit"),
+
+            @SerializedName("off")
+            OFF("off"),
+
+            @SerializedName("on")
+            ON("on");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Preference(String value) {
+              this.value = value;
+            }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class StatementDescriptor {
         /**
          * The default text that appears on statements for non-card charges outside of Japan. For
@@ -10058,6 +10243,10 @@ public class AccountCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Capabilities {
+        /** Can provision a consumer financial account on Stripe. */
+        @SerializedName("consumer")
+        Consumer consumer;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -10089,12 +10278,14 @@ public class AccountCreateParams extends ApiRequestParams {
         OutboundTransfers outboundTransfers;
 
         private Capabilities(
+            Consumer consumer,
             Map<String, Object> extraParams,
             FinancialAddresses financialAddresses,
             HoldsCurrencies holdsCurrencies,
             InboundTransfers inboundTransfers,
             OutboundPayments outboundPayments,
             OutboundTransfers outboundTransfers) {
+          this.consumer = consumer;
           this.extraParams = extraParams;
           this.financialAddresses = financialAddresses;
           this.holdsCurrencies = holdsCurrencies;
@@ -10108,6 +10299,8 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Consumer consumer;
+
           private Map<String, Object> extraParams;
 
           private FinancialAddresses financialAddresses;
@@ -10123,12 +10316,20 @@ public class AccountCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public AccountCreateParams.Configuration.Storer.Capabilities build() {
             return new AccountCreateParams.Configuration.Storer.Capabilities(
+                this.consumer,
                 this.extraParams,
                 this.financialAddresses,
                 this.holdsCurrencies,
                 this.inboundTransfers,
                 this.outboundPayments,
                 this.outboundTransfers);
+          }
+
+          /** Can provision a consumer financial account on Stripe. */
+          public Builder setConsumer(
+              AccountCreateParams.Configuration.Storer.Capabilities.Consumer consumer) {
+            this.consumer = consumer;
+            return this;
           }
 
           /**
@@ -10197,6 +10398,244 @@ public class AccountCreateParams extends ApiRequestParams {
                   outboundTransfers) {
             this.outboundTransfers = outboundTransfers;
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Consumer {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Can hold storage-type funds on Stripe in a consumer financial account. */
+          @SerializedName("holds_currencies")
+          HoldsCurrencies holdsCurrencies;
+
+          private Consumer(Map<String, Object> extraParams, HoldsCurrencies holdsCurrencies) {
+            this.extraParams = extraParams;
+            this.holdsCurrencies = holdsCurrencies;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private HoldsCurrencies holdsCurrencies;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Configuration.Storer.Capabilities.Consumer build() {
+              return new AccountCreateParams.Configuration.Storer.Capabilities.Consumer(
+                  this.extraParams, this.holdsCurrencies);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Storer.Capabilities.Consumer#extraParams} for the
+             * field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Storer.Capabilities.Consumer#extraParams} for the
+             * field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Can hold storage-type funds on Stripe in a consumer financial account. */
+            public Builder setHoldsCurrencies(
+                AccountCreateParams.Configuration.Storer.Capabilities.Consumer.HoldsCurrencies
+                    holdsCurrencies) {
+              this.holdsCurrencies = holdsCurrencies;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class HoldsCurrencies {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Can hold storage-type funds on Stripe in USD in a consumer financial account. */
+            @SerializedName("usd")
+            Usd usd;
+
+            private HoldsCurrencies(Map<String, Object> extraParams, Usd usd) {
+              this.extraParams = extraParams;
+              this.usd = usd;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Usd usd;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Storer.Capabilities.Consumer.HoldsCurrencies
+                  build() {
+                return new AccountCreateParams.Configuration.Storer.Capabilities.Consumer
+                    .HoldsCurrencies(this.extraParams, this.usd);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Storer.Capabilities.Consumer.HoldsCurrencies#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Storer.Capabilities.Consumer.HoldsCurrencies#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Can hold storage-type funds on Stripe in USD in a consumer financial account. */
+              public Builder setUsd(
+                  AccountCreateParams.Configuration.Storer.Capabilities.Consumer.HoldsCurrencies.Usd
+                      usd) {
+                this.usd = usd;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Usd {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private Usd(Map<String, Object> extraParams, Boolean requested) {
+                this.extraParams = extraParams;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Configuration.Storer.Capabilities.Consumer
+                        .HoldsCurrencies.Usd
+                    build() {
+                  return new AccountCreateParams.Configuration.Storer.Capabilities.Consumer
+                      .HoldsCurrencies.Usd(this.extraParams, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Configuration.Storer.Capabilities.Consumer.HoldsCurrencies.Usd#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Configuration.Storer.Capabilities.Consumer.HoldsCurrencies.Usd#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * <strong>Required.</strong> To request a new Capability for an account, pass true.
+                 * There can be a delay before the requested Capability becomes active.
+                 */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+            }
           }
         }
 

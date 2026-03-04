@@ -27597,7 +27597,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.AccountLink.class,
-        "{\"account\":\"account\",\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"object\":\"v2.core.account_link\",\"url\":\"url\",\"use_case\":{\"type\":\"account_onboarding\"},\"livemode\":true}");
+        "{\"account\":\"account\",\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"object\":\"v2.core.account_link\",\"url\":\"url\",\"use_case\":{\"type\":\"recipient_onboarding\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.AccountLinkCreateParams params =
@@ -27607,7 +27607,7 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.builder()
                     .setType(
                         com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.Type
-                            .ACCOUNT_ONBOARDING)
+                            .RECIPIENT_ONBOARDING)
                     .setAccountOnboarding(
                         com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.AccountOnboarding
                             .builder()
@@ -27646,6 +27646,48 @@ class GeneratedExamples extends BaseStripeTest {
                             .addConfiguration(
                                 com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
                                     .AccountUpdate.Configuration.STORER)
+                            .setRefreshUrl("refresh_url")
+                            .setReturnUrl("return_url")
+                            .build())
+                    .setRecipientOnboarding(
+                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.RecipientOnboarding
+                            .builder()
+                            .setCollectionOptions(
+                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                    .RecipientOnboarding.CollectionOptions.builder()
+                                    .setFields(
+                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                            .RecipientOnboarding.CollectionOptions.Fields
+                                            .EVENTUALLY_DUE)
+                                    .setFutureRequirements(
+                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                            .RecipientOnboarding.CollectionOptions
+                                            .FutureRequirements.INCLUDE)
+                                    .build())
+                            .addConfiguration(
+                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                    .RecipientOnboarding.Configuration.RECIPIENT)
+                            .setRefreshUrl("refresh_url")
+                            .setReturnUrl("return_url")
+                            .build())
+                    .setRecipientUpdate(
+                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.RecipientUpdate
+                            .builder()
+                            .setCollectionOptions(
+                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                    .RecipientUpdate.CollectionOptions.builder()
+                                    .setFields(
+                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                            .RecipientUpdate.CollectionOptions.Fields
+                                            .EVENTUALLY_DUE)
+                                    .setFutureRequirements(
+                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                            .RecipientUpdate.CollectionOptions.FutureRequirements
+                                            .INCLUDE)
+                                    .build())
+                            .addConfiguration(
+                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                    .RecipientUpdate.Configuration.RECIPIENT)
                             .setRefreshUrl("refresh_url")
                             .setReturnUrl("return_url")
                             .build())
@@ -29734,7 +29776,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.Transaction>>() {}.getType(),
-        "{\"data\":[{\"amount\":{\"value\":111972721,\"currency\":\"usd\"},\"balance_impact\":{\"available\":{\"value\":111972721,\"currency\":\"usd\"},\"inbound_pending\":{\"value\":111972721,\"currency\":\"usd\"},\"outbound_pending\":{\"value\":111972721,\"currency\":\"usd\"}},\"category\":\"issuing_dispute_provisional_credit_reversal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"adjustment\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction\",\"status\":\"pending\",\"status_transitions\":{},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"amount\":{\"value\":111972721,\"currency\":\"usd\"},\"balance_impact\":{\"available\":{\"value\":111972721,\"currency\":\"usd\"},\"inbound_pending\":{\"value\":111972721,\"currency\":\"usd\"},\"outbound_pending\":{\"value\":111972721,\"currency\":\"usd\"}},\"category\":\"received_debit_reversal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction\",\"status\":\"pending\",\"status_transitions\":{},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.TransactionListParams params =
@@ -29760,7 +29802,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.Transaction.class,
-        "{\"amount\":{\"value\":111972721,\"currency\":\"usd\"},\"balance_impact\":{\"available\":{\"value\":111972721,\"currency\":\"usd\"},\"inbound_pending\":{\"value\":111972721,\"currency\":\"usd\"},\"outbound_pending\":{\"value\":111972721,\"currency\":\"usd\"}},\"category\":\"issuing_dispute_provisional_credit_reversal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"adjustment\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction\",\"status\":\"pending\",\"status_transitions\":{},\"livemode\":true}");
+        "{\"amount\":{\"value\":111972721,\"currency\":\"usd\"},\"balance_impact\":{\"available\":{\"value\":111972721,\"currency\":\"usd\"},\"inbound_pending\":{\"value\":111972721,\"currency\":\"usd\"},\"outbound_pending\":{\"value\":111972721,\"currency\":\"usd\"}},\"category\":\"received_debit_reversal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction\",\"status\":\"pending\",\"status_transitions\":{},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.Transaction transaction =
@@ -29785,7 +29827,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.TransactionEntry>>() {}.getType(),
-        "{\"data\":[{\"balance_impact\":{\"available\":{\"value\":111972721,\"currency\":\"usd\"},\"inbound_pending\":{\"value\":111972721,\"currency\":\"usd\"},\"outbound_pending\":{\"value\":111972721,\"currency\":\"usd\"}},\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction_entry\",\"transaction\":\"transaction\",\"transaction_details\":{\"category\":\"issuing_dispute_provisional_credit_reversal\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"adjustment\"}},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"balance_impact\":{\"available\":{\"value\":111972721,\"currency\":\"usd\"},\"inbound_pending\":{\"value\":111972721,\"currency\":\"usd\"},\"outbound_pending\":{\"value\":111972721,\"currency\":\"usd\"}},\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction_entry\",\"transaction\":\"transaction\",\"transaction_details\":{\"category\":\"received_debit_reversal\",\"financial_account\":\"financial_account\"},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.TransactionEntryListParams params =
@@ -29811,7 +29853,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.TransactionEntry.class,
-        "{\"balance_impact\":{\"available\":{\"value\":111972721,\"currency\":\"usd\"},\"inbound_pending\":{\"value\":111972721,\"currency\":\"usd\"},\"outbound_pending\":{\"value\":111972721,\"currency\":\"usd\"}},\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction_entry\",\"transaction\":\"transaction\",\"transaction_details\":{\"category\":\"issuing_dispute_provisional_credit_reversal\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"adjustment\"}},\"livemode\":true}");
+        "{\"balance_impact\":{\"available\":{\"value\":111972721,\"currency\":\"usd\"},\"inbound_pending\":{\"value\":111972721,\"currency\":\"usd\"},\"outbound_pending\":{\"value\":111972721,\"currency\":\"usd\"}},\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction_entry\",\"transaction\":\"transaction\",\"transaction_details\":{\"category\":\"received_debit_reversal\",\"financial_account\":\"financial_account\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.TransactionEntry transactionEntry =

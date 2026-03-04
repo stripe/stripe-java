@@ -10,6 +10,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Service Actions represent actions applied during service assessment periods, such as granting
+ * credits to a customer.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

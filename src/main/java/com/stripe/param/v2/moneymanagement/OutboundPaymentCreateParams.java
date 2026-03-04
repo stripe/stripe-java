@@ -50,6 +50,10 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   @SerializedName("outbound_payment_quote")
   String outboundPaymentQuote;
 
+  /** The purpose of the OutboundPayment. */
+  @SerializedName("purpose")
+  Purpose purpose;
+
   /** Details about the notification settings for the OutboundPayment recipient. */
   @SerializedName("recipient_notification")
   RecipientNotification recipientNotification;
@@ -73,6 +77,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       From from,
       Map<String, String> metadata,
       String outboundPaymentQuote,
+      Purpose purpose,
       RecipientNotification recipientNotification,
       String recipientVerification,
       To to) {
@@ -83,6 +88,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     this.from = from;
     this.metadata = metadata;
     this.outboundPaymentQuote = outboundPaymentQuote;
+    this.purpose = purpose;
     this.recipientNotification = recipientNotification;
     this.recipientVerification = recipientVerification;
     this.to = to;
@@ -107,6 +113,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
     private String outboundPaymentQuote;
 
+    private Purpose purpose;
+
     private RecipientNotification recipientNotification;
 
     private String recipientVerification;
@@ -123,6 +131,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
           this.from,
           this.metadata,
           this.outboundPaymentQuote,
+          this.purpose,
           this.recipientNotification,
           this.recipientVerification,
           this.to);
@@ -216,6 +225,12 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
      */
     public Builder setOutboundPaymentQuote(String outboundPaymentQuote) {
       this.outboundPaymentQuote = outboundPaymentQuote;
+      return this;
+    }
+
+    /** The purpose of the OutboundPayment. */
+    public Builder setPurpose(OutboundPaymentCreateParams.Purpose purpose) {
+      this.purpose = purpose;
       return this;
     }
 
@@ -880,6 +895,18 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
         this.recipient = recipient;
         return this;
       }
+    }
+  }
+
+  public enum Purpose implements ApiRequestParams.EnumParam {
+    @SerializedName("payroll")
+    PAYROLL("payroll");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Purpose(String value) {
+      this.value = value;
     }
   }
 }

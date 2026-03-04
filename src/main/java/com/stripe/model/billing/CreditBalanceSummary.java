@@ -121,6 +121,9 @@ public class CreditBalanceSummary extends ApiResource {
     @SerializedName("available_balance")
     AvailableBalance availableBalance;
 
+    @SerializedName("balance_update_details")
+    BalanceUpdateDetails balanceUpdateDetails;
+
     @SerializedName("ledger_balance")
     LedgerBalance ledgerBalance;
 
@@ -227,6 +230,39 @@ public class CreditBalanceSummary extends ApiResource {
         /** A positive integer representing the amount. */
         @SerializedName("value")
         Long value;
+      }
+    }
+
+    /**
+     * For more details about BalanceUpdateDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BalanceUpdateDetails extends StripeObject {
+      /** The details of the most recent meter event included in the balance update. */
+      @SerializedName("latest_meter_event")
+      LatestMeterEvent latestMeterEvent;
+
+      /**
+       * For more details about LatestMeterEvent, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class LatestMeterEvent extends StripeObject {
+        /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+        @SerializedName("created")
+        Long created;
+
+        /**
+         * Maximum event time across all meter events that were processed and included in the
+         * balance update. Measured in seconds since the Unix epoch.
+         */
+        @SerializedName("timestamp")
+        Long timestamp;
       }
     }
 

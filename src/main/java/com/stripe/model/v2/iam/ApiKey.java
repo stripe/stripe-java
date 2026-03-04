@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** An API key. */
+/** An API key is used to authenticate API requests. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

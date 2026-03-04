@@ -15,6 +15,13 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class DisputeUpdateParams extends ApiRequestParams {
   /**
+   * If not countering the full disputed amount, specify an alternate amount, less than or equal to
+   * the disputed amount.
+   */
+  @SerializedName("amount_to_counter")
+  Long amountToCounter;
+
+  /**
    * Evidence to upload, to respond to a dispute. Updating any field in the hash will submit all
    * fields in the hash for review. The combined character count of all fields is limited to
    * 150,000.
@@ -57,12 +64,14 @@ public class DisputeUpdateParams extends ApiRequestParams {
   Boolean submit;
 
   private DisputeUpdateParams(
+      Long amountToCounter,
       Evidence evidence,
       List<String> expand,
       Map<String, Object> extraParams,
       IntendedSubmissionMethod intendedSubmissionMethod,
       Object metadata,
       Boolean submit) {
+    this.amountToCounter = amountToCounter;
     this.evidence = evidence;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -76,6 +85,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Long amountToCounter;
+
     private Evidence evidence;
 
     private List<String> expand;
@@ -91,12 +102,22 @@ public class DisputeUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public DisputeUpdateParams build() {
       return new DisputeUpdateParams(
+          this.amountToCounter,
           this.evidence,
           this.expand,
           this.extraParams,
           this.intendedSubmissionMethod,
           this.metadata,
           this.submit);
+    }
+
+    /**
+     * If not countering the full disputed amount, specify an alternate amount, less than or equal
+     * to the disputed amount.
+     */
+    public Builder setAmountToCounter(Long amountToCounter) {
+      this.amountToCounter = amountToCounter;
+      return this;
     }
 
     /**

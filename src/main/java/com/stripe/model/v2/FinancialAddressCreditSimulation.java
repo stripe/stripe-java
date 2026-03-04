@@ -7,6 +7,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Credit Simulations represent simulated credit transactions applied to financial addresses for
+ * testing purposes.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

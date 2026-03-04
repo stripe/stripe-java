@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A FinancialAddress contains information needed to transfer money to a Financial Account. A
+ * A Financial Address contains information needed to transfer money to a Financial Account. A
  * Financial Account can have more than one Financial Address.
  */
 @Getter

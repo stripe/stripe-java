@@ -9,6 +9,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Rate Card Version represents a specific configuration of a Rate Card at a point in time.
+ * Versions are created automatically when you add or modify rates on a Rate Card, allowing you to
+ * track changes and manage which version is active for new subscriptions. Each version maintains a
+ * record of when it was created.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

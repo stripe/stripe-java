@@ -9,6 +9,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Bill Setting Version is a specific configuration of a BillSetting at a point in time. Bill
+ * Setting Versions enable you to track changes to bill generation and invoice settings over time
+ * and manage which version is active for new billing operations.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
