@@ -49,6 +49,23 @@ public class InvoiceTest extends BaseStripeTest {
   }
 
   @Test
+  public void testRoundTripWithExpandedCustomer() throws Exception {
+    final String[] expansions = {"charge", "customer"};
+    final String data = getFixture("/v1/invoices/in_123", expansions);
+    final Invoice original = ApiResource.GSON.fromJson(data, Invoice.class);
+
+    assertNotNull(original.getCustomerObject());
+
+    String serialized = ApiResource.GSON.toJson(original);
+    Invoice roundTripped = ApiResource.GSON.fromJson(serialized, Invoice.class);
+
+    assertEquals(original.getId(), roundTripped.getId());
+    assertEquals(original.getCustomer(), roundTripped.getCustomer());
+    assertNotNull(roundTripped.getCustomerObject());
+    assertEquals(original.getCustomerObject().getId(), roundTripped.getCustomerObject().getId());
+  }
+
+  @Test
   public void testDeserializeWithArrayExpansions() throws Exception {
     final Invoice invoice =
         ApiResource.GSON.fromJson(
