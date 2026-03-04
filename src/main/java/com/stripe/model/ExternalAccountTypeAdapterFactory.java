@@ -28,8 +28,6 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
     }
     final String discriminator = "object";
     final TypeAdapter<JsonElement> jsonElementAdapter = gson.getAdapter(JsonElement.class);
-    final TypeAdapter<com.stripe.model.ExternalAccount> externalAccountAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.ExternalAccount.class));
     final TypeAdapter<com.stripe.model.BankAccount> bankAccountAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.BankAccount.class));
     final TypeAdapter<com.stripe.model.Card> cardAdapter =
@@ -39,7 +37,12 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
         new TypeAdapter<ExternalAccount>() {
           @Override
           public void write(JsonWriter out, ExternalAccount value) throws IOException {
-            externalAccountAdapter.write(out, value);
+            @SuppressWarnings("unchecked")
+            TypeAdapter<ExternalAccount> adapter =
+                (TypeAdapter<ExternalAccount>)
+                    gson.getDelegateAdapter(
+                        ExternalAccountTypeAdapterFactory.this, TypeToken.get(value.getClass()));
+            adapter.write(out, value);
           }
 
           @Override
