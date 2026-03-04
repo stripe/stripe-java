@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Function;
 
 /** Base abstract class for HTTP clients used to send requests to Stripe's API. */
 public abstract class HttpClient {
@@ -137,18 +138,49 @@ public abstract class HttpClient {
     return sendWithRetries(request, (r) -> this.requestStream(r));
   }
 
+  static String detectAIAgent() {
+    return detectAIAgent(System::getenv);
+  }
+
+  static String detectAIAgent(Function<String, String> getEnv) {
+    String[][] agents = {
+      {"ANTIGRAVITY_CLI_ALIAS", "antigravity"},
+      {"CLAUDECODE", "claude_code"},
+      {"CLINE_ACTIVE", "cline"},
+      {"CODEX_SANDBOX", "codex_cli"},
+      {"CURSOR_AGENT", "cursor"},
+      {"GEMINI_CLI", "gemini_cli"},
+      {"OPENCODE", "open_code"},
+    };
+    for (String[] agent : agents) {
+      String val = getEnv.apply(agent[0]);
+      if (val != null && !val.isEmpty()) {
+        return agent[1];
+      }
+    }
+    return "";
+  }
+
   /**
    * Builds the value of the {@code User-Agent} header.
    *
    * @return a string containing the value of the {@code User-Agent} header
    */
   protected static String buildUserAgentString(StripeRequest request) {
+    return buildUserAgentString(request, detectAIAgent());
+  }
+
+  static String buildUserAgentString(StripeRequest request, String aiAgent) {
     String apiMode = request.apiMode() == ApiMode.V2 ? "v2" : "v1";
 
     String userAgent = String.format("Stripe/%s JavaBindings/%s", apiMode, Stripe.VERSION);
 
     if (Stripe.getAppInfo() != null) {
       userAgent += " " + formatAppInfo(Stripe.getAppInfo());
+    }
+
+    if (!aiAgent.isEmpty()) {
+      userAgent += " AIAgent/" + aiAgent;
     }
 
     return userAgent;
@@ -160,6 +192,10 @@ public abstract class HttpClient {
    * @return a string containing the value of the {@code X-Stripe-Client-User-Agent} header
    */
   protected static String buildXStripeClientUserAgentString() {
+    return buildXStripeClientUserAgentString(detectAIAgent());
+  }
+
+  static String buildXStripeClientUserAgentString(String aiAgent) {
     String[] propertyNames = {
       "os.name",
       "os.version",
@@ -181,6 +217,10 @@ public abstract class HttpClient {
       propertyMap.put("application", ApiResource.INTERNAL_GSON.toJson(Stripe.getAppInfo()));
     }
     getGsonVersion().ifPresent(ver -> propertyMap.put("gson.version", ver));
+
+    if (!aiAgent.isEmpty()) {
+      propertyMap.put("ai_agent", aiAgent);
+    }
 
     return ApiResource.INTERNAL_GSON.toJson(propertyMap);
   }
