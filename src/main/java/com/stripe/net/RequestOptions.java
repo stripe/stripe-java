@@ -32,8 +32,7 @@ public class RequestOptions {
   private final PasswordAuthentication proxyCredential;
 
   public static RequestOptions getDefault() {
-    return new RequestOptions(
-        null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return new RequestOptionsBuilder().build();
   }
 
   protected RequestOptions(
@@ -487,21 +486,17 @@ public class RequestOptions {
 
   static RequestOptions merge(StripeResponseGetterOptions clientOptions, RequestOptions options) {
     if (options == null) {
-      return new RequestOptions(
-          clientOptions.getAuthenticator(), // authenticator
-          clientOptions.getClientId(), // clientId
-          null, // idempotencyKey
-          clientOptions.getStripeContext(), // stripeContext
-          null, // stripeRequestTrigger
-          clientOptions.getStripeAccount(), // stripeAccount
-          null, // stripeVersionOverride
-          null, // baseUrl
-          clientOptions.getConnectTimeout(), // connectTimeout
-          clientOptions.getReadTimeout(), // readTimeout
-          clientOptions.getMaxNetworkRetries(), // maxNetworkRetries
-          clientOptions.getConnectionProxy(), // connectionProxy
-          clientOptions.getProxyCredential() // proxyCredential
-          );
+      return new RequestOptionsBuilder()
+          .setAuthenticator(clientOptions.getAuthenticator())
+          .setClientId(clientOptions.getClientId())
+          .setStripeContext(clientOptions.getStripeContext())
+          .setStripeAccount(clientOptions.getStripeAccount())
+          .setConnectTimeout(clientOptions.getConnectTimeout())
+          .setReadTimeout(clientOptions.getReadTimeout())
+          .setMaxNetworkRetries(clientOptions.getMaxNetworkRetries())
+          .setConnectionProxy(clientOptions.getConnectionProxy())
+          .setProxyCredential(clientOptions.getProxyCredential())
+          .build();
     }
 
     // callers need to be able to explicitly unset context per-request

@@ -8,7 +8,7 @@ import java.util.Map;
 public class RawRequestOptions extends RequestOptions {
   private Map<String, String> additionalHeaders;
 
-  public RawRequestOptions(
+  private RawRequestOptions(
       Authenticator authenticator,
       String clientId,
       String idempotencyKey,
