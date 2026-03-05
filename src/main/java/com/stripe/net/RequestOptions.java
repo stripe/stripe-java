@@ -13,6 +13,7 @@ public class RequestOptions {
   private final Authenticator authenticator;
   private final String clientId;
   private final String stripeContext;
+  private final String stripeRequestTrigger;
   private final String idempotencyKey;
   private final String stripeAccount;
   private final String baseUrl;
@@ -32,7 +33,7 @@ public class RequestOptions {
 
   public static RequestOptions getDefault() {
     return new RequestOptions(
-        null, null, null, null, null, null, null, null, null, null, null, null);
+        null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   protected RequestOptions(
@@ -40,6 +41,7 @@ public class RequestOptions {
       String clientId,
       String idempotencyKey,
       String stripeContext,
+      String stripeRequestTrigger,
       String stripeAccount,
       String stripeVersionOverride,
       String baseUrl,
@@ -52,6 +54,7 @@ public class RequestOptions {
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
     this.stripeContext = stripeContext;
+    this.stripeRequestTrigger = stripeRequestTrigger;
     this.stripeAccount = stripeAccount;
     this.stripeVersionOverride = stripeVersionOverride;
     this.baseUrl = baseUrl;
@@ -80,6 +83,10 @@ public class RequestOptions {
 
   public String getStripeContext() {
     return stripeContext;
+  }
+
+  public String getStripeRequestTrigger() {
+    return stripeRequestTrigger;
   }
 
   public String getIdempotencyKey() {
@@ -153,6 +160,7 @@ public class RequestOptions {
             .setClientId(this.clientId)
             .setIdempotencyKey(this.idempotencyKey)
             .setStripeAccount(this.stripeAccount)
+            .setStripeRequestTrigger(this.stripeRequestTrigger)
             .setConnectTimeout(this.connectTimeout)
             .setReadTimeout(this.readTimeout)
             .setMaxNetworkRetries(this.maxNetworkRetries)
@@ -166,6 +174,7 @@ public class RequestOptions {
     protected String clientId;
     protected String idempotencyKey;
     protected String stripeContext;
+    protected String stripeRequestTrigger;
     protected String stripeAccount;
     protected String stripeVersionOverride;
     protected Integer connectTimeout;
@@ -248,6 +257,15 @@ public class RequestOptions {
      */
     public RequestOptionsBuilder clearStripeContext() {
       this.stripeContext = null;
+      return this;
+    }
+
+    public String getStripeRequestTrigger() {
+      return stripeRequestTrigger;
+    }
+
+    public RequestOptionsBuilder setStripeRequestTrigger(String stripeRequestTrigger) {
+      this.stripeRequestTrigger = stripeRequestTrigger;
       return this;
     }
 
@@ -371,6 +389,7 @@ public class RequestOptions {
           normalizeClientId(this.clientId),
           normalizeIdempotencyKey(this.idempotencyKey),
           stripeContext,
+          stripeRequestTrigger,
           normalizeStripeAccount(this.stripeAccount),
           normalizeStripeVersion(this.stripeVersionOverride),
           normalizeBaseUrl(this.baseUrl),
@@ -473,6 +492,7 @@ public class RequestOptions {
           clientOptions.getClientId(), // clientId
           null, // idempotencyKey
           clientOptions.getStripeContext(), // stripeContext
+          null, // stripeRequestTrigger
           clientOptions.getStripeAccount(), // stripeAccount
           null, // stripeVersionOverride
           null, // baseUrl
@@ -505,6 +525,7 @@ public class RequestOptions {
         options.getClientId() != null ? options.getClientId() : clientOptions.getClientId(),
         options.getIdempotencyKey(),
         stripeContext,
+        options.getStripeRequestTrigger(),
         options.getStripeAccount() != null
             ? options.getStripeAccount()
             : clientOptions.getStripeAccount(),

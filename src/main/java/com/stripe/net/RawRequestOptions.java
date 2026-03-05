@@ -13,6 +13,7 @@ public class RawRequestOptions extends RequestOptions {
       String clientId,
       String idempotencyKey,
       String stripeContext,
+      String stripeRequestTrigger,
       String stripeAccount,
       String stripeVersionOverride,
       String baseUrl,
@@ -27,6 +28,7 @@ public class RawRequestOptions extends RequestOptions {
         clientId,
         idempotencyKey,
         stripeContext,
+        stripeRequestTrigger,
         stripeAccount,
         stripeVersionOverride,
         baseUrl,
@@ -89,6 +91,12 @@ public class RawRequestOptions extends RequestOptions {
     }
 
     @Override
+    public RawRequestOptionsBuilder setStripeRequestTrigger(String stripeRequestTrigger) {
+      super.setStripeRequestTrigger(stripeRequestTrigger);
+      return this;
+    }
+
+    @Override
     public RawRequestOptionsBuilder setStripeAccount(String stripeAccount) {
       super.setStripeAccount(stripeAccount);
       return this;
@@ -137,6 +145,7 @@ public class RawRequestOptions extends RequestOptions {
           normalizeClientId(this.clientId),
           normalizeIdempotencyKey(this.idempotencyKey),
           normalizeStripeContext(this.stripeContext),
+          stripeRequestTrigger,
           normalizeStripeAccount(this.stripeAccount),
           normalizeStripeVersion(this.stripeVersionOverride),
           normalizeBaseUrl(this.baseUrl),

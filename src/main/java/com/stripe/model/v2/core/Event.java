@@ -98,11 +98,14 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
       objectClass = StripeRawJsonObject.class;
     }
 
-    RequestOptions opts = null;
+    RequestOptions.RequestOptionsBuilder optsBuilder =
+        new RequestOptions.RequestOptionsBuilder().setStripeRequestTrigger("event=" + id);
 
     if (context != null) {
-      opts = new RequestOptions.RequestOptionsBuilder().setStripeAccount(context).build();
+      optsBuilder.setStripeAccount(context);
     }
+
+    RequestOptions opts = optsBuilder.build();
 
     return this.responseGetter.request(
         new ApiRequest(

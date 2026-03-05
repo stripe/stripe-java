@@ -321,6 +321,11 @@ public class StripeRequest {
       headerMap.put("Stripe-Context", Arrays.asList(options.getStripeContext()));
     }
 
+    // Stripe-Request-Trigger
+    if (options.getStripeRequestTrigger() != null) {
+      headerMap.put("Stripe-Request-Trigger", Arrays.asList(options.getStripeRequestTrigger()));
+    }
+
     // Stripe-Account
     if (options.getStripeAccount() != null) {
       headerMap.put("Stripe-Account", Arrays.asList(options.getStripeAccount()));
