@@ -99,7 +99,7 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
     }
 
     RequestOptions.RequestOptionsBuilder optsBuilder = new RequestOptions.RequestOptionsBuilder();
-    optsBuilder.setStripeRequestTrigger("event=" + id);
+    // optsBuilder.setStripeRequestTrigger("event=" + id); // TODO https://go/j/DEVSDK-3018
 
     if (context != null) {
       optsBuilder.setStripeAccount(context);

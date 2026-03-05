@@ -115,6 +115,7 @@ public class EventTests extends BaseStripeTest {
     assertEquals("foo", data.getDeveloperMessageSummary());
   }
 
+  // currently intentionally broken while we wait for the major & https://go/j/DEVSDK-3018
   @Test
   public void retrieveObjectFetchesAndDeserializesObject() throws StripeException, IOException {
     V1BillingMeterErrorReportTriggeredEvent event =
