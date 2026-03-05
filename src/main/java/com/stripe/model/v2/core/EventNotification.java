@@ -15,6 +15,8 @@ import com.stripe.net.ApiResource.RequestMethod;
 import com.stripe.net.RawRequestOptions;
 import com.stripe.net.StripeResponse;
 import java.time.Instant;
+import java.util.Collections;
+import java.util.Map;
 import lombok.AccessLevel;
 import lombok.Getter;
 
@@ -107,7 +109,9 @@ public abstract class EventNotification {
 
   private RawRequestOptions getRequestOptions() {
     RawRequestOptions.RawRequestOptionsBuilder builder =
-        new RawRequestOptions.RawRequestOptionsBuilder().setStripeRequestTrigger("event=" + id);
+        new RawRequestOptions.RawRequestOptionsBuilder()
+            .setAdditionalHeaders(
+                Collections.singletonMap("Stripe-Request-Trigger", "event=" + id));
     if (context != null) {
       builder.setStripeContext(context.toString());
     }

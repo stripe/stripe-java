@@ -8,12 +8,13 @@ import java.util.Map;
 public class RawRequestOptions extends RequestOptions {
   private Map<String, String> additionalHeaders;
 
-  private RawRequestOptions(
+  // TODO: make this private
+  // see: https://go/j/DEVSDK-3018
+  public RawRequestOptions(
       Authenticator authenticator,
       String clientId,
       String idempotencyKey,
       String stripeContext,
-      String stripeRequestTrigger,
       String stripeAccount,
       String stripeVersionOverride,
       String baseUrl,
@@ -28,7 +29,7 @@ public class RawRequestOptions extends RequestOptions {
         clientId,
         idempotencyKey,
         stripeContext,
-        stripeRequestTrigger,
+        null,
         stripeAccount,
         stripeVersionOverride,
         baseUrl,
@@ -91,12 +92,6 @@ public class RawRequestOptions extends RequestOptions {
     }
 
     @Override
-    public RawRequestOptionsBuilder setStripeRequestTrigger(String stripeRequestTrigger) {
-      super.setStripeRequestTrigger(stripeRequestTrigger);
-      return this;
-    }
-
-    @Override
     public RawRequestOptionsBuilder setStripeAccount(String stripeAccount) {
       super.setStripeAccount(stripeAccount);
       return this;
@@ -145,7 +140,6 @@ public class RawRequestOptions extends RequestOptions {
           normalizeClientId(this.clientId),
           normalizeIdempotencyKey(this.idempotencyKey),
           normalizeStripeContext(this.stripeContext),
-          stripeRequestTrigger,
           normalizeStripeAccount(this.stripeAccount),
           normalizeStripeVersion(this.stripeVersionOverride),
           normalizeBaseUrl(this.baseUrl),
