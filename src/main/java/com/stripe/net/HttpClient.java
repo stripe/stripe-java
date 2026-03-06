@@ -144,13 +144,18 @@ public abstract class HttpClient {
 
   static String detectAIAgent(Function<String, String> getEnv) {
     String[][] agents = {
+      // The beginning of the section generated from our OpenAPI spec
       {"ANTIGRAVITY_CLI_ALIAS", "antigravity"},
       {"CLAUDECODE", "claude_code"},
       {"CLINE_ACTIVE", "cline"},
       {"CODEX_SANDBOX", "codex_cli"},
+      {"CODEX_THREAD_ID", "codex_cli"},
+      {"CODEX_SANDBOX_NETWORK_DISABLED", "codex_cli"},
+      {"CODEX_CI", "codex_cli"},
       {"CURSOR_AGENT", "cursor"},
       {"GEMINI_CLI", "gemini_cli"},
       {"OPENCODE", "open_code"},
+      // The end of the section generated from our OpenAPI spec
     };
     for (String[] agent : agents) {
       String val = getEnv.apply(agent[0]);
