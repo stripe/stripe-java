@@ -63,6 +63,11 @@ This release uses the API version `2026-01-28.preview`.
   * Add support for `url` on `financialconnections.Session`
   * Add support for `billingCycleAnchor` on `SubscriptionCreateParams.trial_settings.end_behavior` and `SubscriptionUpdateParams.trial_settings.end_behavior`
 
+## 31.4.1 - 2026-03-06
+* [#2168](https://github.com/stripe/stripe-java/pull/2168) Support serializing Stripe objects with ApiResource.GSON
+  * `ApiResource.GSON` now supports serializing Stripe objects back into compatible JSON
+* [#2165](https://github.com/stripe/stripe-java/pull/2165) Add AI Agent information to UserAgent
+
 ## 31.4.0 - 2026-02-25
 This release changes the pinned API version to `2026-02-25.clover`.
 
