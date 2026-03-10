@@ -57,9 +57,11 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
             .registerTypeAdapter(Event.Request.class, new EventRequestDeserializer())
             .registerTypeAdapter(StripeContext.class, new StripeContextDeserializer())
             .registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
+            .registerTypeAdapter(ExpandableField.class, new ExpandableFieldSerializer())
             .registerTypeAdapter(Instant.class, new InstantDeserializer())
             .registerTypeAdapterFactory(new EventTypeAdapterFactory())
             .registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
+            .registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectSerializer())
             .registerTypeAdapterFactory(new StripeCollectionItemTypeSettingFactory())
             .addReflectionAccessFilter(
                 new ReflectionAccessFilter() {
