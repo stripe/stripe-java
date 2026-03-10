@@ -201,15 +201,7 @@ public abstract class HttpClient {
   }
 
   static String buildXStripeClientUserAgentString(String aiAgent) {
-    String[] propertyNames = {
-      "os.name",
-      "os.version",
-      "os.arch",
-      "java.version",
-      "java.vendor",
-      "java.vm.version",
-      "java.vm.vendor"
-    };
+    String[] propertyNames = {"java.version", "java.vendor", "java.vm.version", "java.vm.vendor"};
 
     Map<String, String> propertyMap = new HashMap<>();
     for (String propertyName : propertyNames) {
@@ -217,7 +209,15 @@ public abstract class HttpClient {
     }
     propertyMap.put("bindings.version", Stripe.VERSION);
     propertyMap.put("lang", "Java");
-    propertyMap.put("publisher", "Stripe");
+    if (Stripe.enableTelemetry) {
+      propertyMap.put(
+          "platform",
+          System.getProperty("os.name")
+              + " "
+              + System.getProperty("os.version")
+              + " "
+              + System.getProperty("os.arch"));
+    }
     if (Stripe.getAppInfo() != null) {
       propertyMap.put("application", ApiResource.INTERNAL_GSON.toJson(Stripe.getAppInfo()));
     }
