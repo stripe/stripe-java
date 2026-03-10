@@ -25,9 +25,6 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
     }
     final String discriminator = "object";
     final TypeAdapter<JsonElement> jsonElementAdapter = gson.getAdapter(JsonElement.class);
-    final TypeAdapter<com.stripe.model.BalanceTransactionSource> balanceTransactionSourceAdapter =
-        gson.getDelegateAdapter(
-            this, TypeToken.get(com.stripe.model.BalanceTransactionSource.class));
     final TypeAdapter<com.stripe.model.ApplicationFee> applicationFeeAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.ApplicationFee.class));
     final TypeAdapter<com.stripe.model.Charge> chargeAdapter =
@@ -68,7 +65,13 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
         new TypeAdapter<BalanceTransactionSource>() {
           @Override
           public void write(JsonWriter out, BalanceTransactionSource value) throws IOException {
-            balanceTransactionSourceAdapter.write(out, value);
+            @SuppressWarnings("unchecked")
+            TypeAdapter<BalanceTransactionSource> adapter =
+                (TypeAdapter<BalanceTransactionSource>)
+                    gson.getDelegateAdapter(
+                        BalanceTransactionSourceTypeAdapterFactory.this,
+                        TypeToken.get(value.getClass()));
+            adapter.write(out, value);
           }
 
           @Override
