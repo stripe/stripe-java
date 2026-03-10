@@ -17,6 +17,12 @@ public final class RadarService extends ApiService {
     return new com.stripe.service.radar.EarlyFraudWarningService(this.getResponseGetter());
   }
 
+  public com.stripe.service.radar.IssuingAuthorizationEvaluationService
+      issuingAuthorizationEvaluations() {
+    return new com.stripe.service.radar.IssuingAuthorizationEvaluationService(
+        this.getResponseGetter());
+  }
+
   public com.stripe.service.radar.PaymentEvaluationService paymentEvaluations() {
     return new com.stripe.service.radar.PaymentEvaluationService(this.getResponseGetter());
   }

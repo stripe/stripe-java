@@ -92,6 +92,13 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("discounts")
   List<ExpandableField<Discount>> discounts;
 
+  /**
+   * Array of field names that can't be modified. Attempting to update a frozen field returns an
+   * error.
+   */
+  @SerializedName("frozen_fields")
+  List<String> frozenFields;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

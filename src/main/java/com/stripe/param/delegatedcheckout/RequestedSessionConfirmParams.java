@@ -14,8 +14,8 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class RequestedSessionConfirmParams extends ApiRequestParams {
   /** Affiliate attribution data associated with this requested session. */
-  @SerializedName("affiliate_attributions")
-  List<RequestedSessionConfirmParams.AffiliateAttribution> affiliateAttributions;
+  @SerializedName("affiliate_attribution")
+  AffiliateAttribution affiliateAttribution;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -43,13 +43,13 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
   RiskDetails riskDetails;
 
   private RequestedSessionConfirmParams(
-      List<RequestedSessionConfirmParams.AffiliateAttribution> affiliateAttributions,
+      AffiliateAttribution affiliateAttribution,
       List<String> expand,
       Map<String, Object> extraParams,
       String paymentMethod,
       PaymentMethodData paymentMethodData,
       RiskDetails riskDetails) {
-    this.affiliateAttributions = affiliateAttributions;
+    this.affiliateAttribution = affiliateAttribution;
     this.expand = expand;
     this.extraParams = extraParams;
     this.paymentMethod = paymentMethod;
@@ -62,7 +62,7 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private List<RequestedSessionConfirmParams.AffiliateAttribution> affiliateAttributions;
+    private AffiliateAttribution affiliateAttribution;
 
     private List<String> expand;
 
@@ -77,7 +77,7 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public RequestedSessionConfirmParams build() {
       return new RequestedSessionConfirmParams(
-          this.affiliateAttributions,
+          this.affiliateAttribution,
           this.expand,
           this.extraParams,
           this.paymentMethod,
@@ -85,31 +85,10 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
           this.riskDetails);
     }
 
-    /**
-     * Add an element to `affiliateAttributions` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link RequestedSessionConfirmParams#affiliateAttributions} for the field documentation.
-     */
-    public Builder addAffiliateAttribution(
-        RequestedSessionConfirmParams.AffiliateAttribution element) {
-      if (this.affiliateAttributions == null) {
-        this.affiliateAttributions = new ArrayList<>();
-      }
-      this.affiliateAttributions.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `affiliateAttributions` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link RequestedSessionConfirmParams#affiliateAttributions} for the field documentation.
-     */
-    public Builder addAllAffiliateAttribution(
-        List<RequestedSessionConfirmParams.AffiliateAttribution> elements) {
-      if (this.affiliateAttributions == null) {
-        this.affiliateAttributions = new ArrayList<>();
-      }
-      this.affiliateAttributions.addAll(elements);
+    /** Affiliate attribution data associated with this requested session. */
+    public Builder setAffiliateAttribution(
+        RequestedSessionConfirmParams.AffiliateAttribution affiliateAttribution) {
+      this.affiliateAttribution = affiliateAttribution;
       return this;
     }
 
