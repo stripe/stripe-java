@@ -26,6 +26,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.checkout.SessionApproveParams;
 import com.stripe.param.checkout.SessionCreateParams;
 import com.stripe.param.checkout.SessionExpireParams;
 import com.stripe.param.checkout.SessionListLineItemsParams;
@@ -81,6 +82,20 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /** Total of all items after discounts and taxes are applied. */
   @SerializedName("amount_total")
   Long amountTotal;
+
+  /**
+   * Determines whether the customer's attempt to pay must be manually approved.
+   *
+   * <p>Default is {@code auto}, when the customer's attempt to pay is approved automatically with
+   * no action required on your server.
+   *
+   * <p>When set to {@code manual}, you must approve the customer's attempt to pay by calling <a
+   * href="api/checkout/sessions/approve">approve</a> from your server.
+   *
+   * <p>One of {@code auto}, or {@code manual}.
+   */
+  @SerializedName("approval_method")
+  String approvalMethod;
 
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
@@ -157,6 +172,13 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    */
   @SerializedName("currency_conversion")
   CurrencyConversion currencyConversion;
+
+  /**
+   * The customer's pending attempt to pay that requires your approval. Contains information about
+   * the customer and their payment details.
+   */
+  @SerializedName("current_attempt")
+  CurrentAttempt currentAttempt;
 
   /**
    * Collect additional information from your customer using custom fields. Up to 3 fields are
@@ -605,6 +627,54 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   public void setSubscriptionObject(Subscription expandableObject) {
     this.subscription =
         new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * Approves a customer’s attempt to pay for a Checkout Session with {@code approval_method} set to
+   * {@code manual}.
+   */
+  public Session approve(Map<String, Object> params) throws StripeException {
+    return approve(params, (RequestOptions) null);
+  }
+
+  /**
+   * Approves a customer’s attempt to pay for a Checkout Session with {@code approval_method} set to
+   * {@code manual}.
+   */
+  public Session approve(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/checkout/sessions/%s/approve", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Session.class);
+  }
+
+  /**
+   * Approves a customer’s attempt to pay for a Checkout Session with {@code approval_method} set to
+   * {@code manual}.
+   */
+  public Session approve(SessionApproveParams params) throws StripeException {
+    return approve(params, (RequestOptions) null);
+  }
+
+  /**
+   * Approves a customer’s attempt to pay for a Checkout Session with {@code approval_method} set to
+   * {@code manual}.
+   */
+  public Session approve(SessionApproveParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/checkout/sessions/%s/approve", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Session.class);
   }
 
   /** Creates a Checkout Session object. */
@@ -1430,6 +1500,191 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     /** Creation currency of the CheckoutSession before localization. */
     @SerializedName("source_currency")
     String sourceCurrency;
+  }
+
+  /**
+   * For more details about CurrentAttempt, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CurrentAttempt extends StripeObject implements HasId {
+    /** The customer's billing information, if provided. */
+    @SerializedName("billing_details")
+    BillingDetails billingDetails;
+
+    /** The customer's email. */
+    @SerializedName("email")
+    String email;
+
+    /**
+     * The attempt ID you will pass to the <a href="api/checkout/sessions/approve">Checkout Session
+     * approve</a> endpoint to approve the attempt.
+     */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+
+    /** Information about the payment method the customer is attempting to pay with. */
+    @SerializedName("payment_method_details")
+    PaymentMethodDetails paymentMethodDetails;
+
+    /** The customer's phone number. */
+    @SerializedName("phone")
+    String phone;
+
+    /** The customer's shipping information, if provided. */
+    @SerializedName("shipping_details")
+    ShippingDetails shippingDetails;
+
+    /**
+     * For more details about BillingDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingDetails extends StripeObject {
+      @SerializedName("address")
+      Address address;
+
+      /** Customer name. */
+      @SerializedName("name")
+      String name;
+    }
+
+    /**
+     * For more details about PaymentMethodDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentMethodDetails extends StripeObject {
+      /**
+       * Indicates whether this payment method can be shown again to its customer in a checkout
+       * flow.
+       *
+       * <p>One of {@code always}, {@code limited}, or {@code unspecified}.
+       */
+      @SerializedName("allow_redisplay")
+      String allowRedisplay;
+
+      @SerializedName("card")
+      Card card;
+
+      /**
+       * The type of payment method the customer is attempting to pay with. An additional hash is
+       * included in the payment method details with a name matching this value. It contains
+       * additional information specific to the payment method type.
+       */
+      @SerializedName("type")
+      String type;
+
+      /**
+       * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Card extends StripeObject {
+        /**
+         * The brand of the card, accounting for customer's brand choice on dual-branded cards.
+         *
+         * <p>One of {@code accel}, {@code amex}, {@code carnet}, {@code cartes_bancaires}, {@code
+         * conecs}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code elo}, {@code
+         * girocard}, {@code interac}, {@code jcb}, {@code link}, {@code maestro}, {@code
+         * mastercard}, {@code nyce}, {@code pulse}, {@code rupay}, {@code star}, {@code unionpay},
+         * {@code unknown}, or {@code visa}.
+         */
+        @SerializedName("brand")
+        String brand;
+
+        /**
+         * Two-letter ISO code representing the country of the card. You could use this attribute to
+         * get a sense of the international breakdown of cards you've collected.
+         */
+        @SerializedName("country")
+        String country;
+
+        /** Two-digit number representing the card's expiration month. */
+        @SerializedName("exp_month")
+        Long expMonth;
+
+        /** Four-digit number representing the card's expiration year. */
+        @SerializedName("exp_year")
+        Long expYear;
+
+        /**
+         * Uniquely identifies this particular card number. You can use this attribute to check
+         * whether two customers who’ve signed up with you are using the same card number, for
+         * example. For payment methods that tokenize card information (Apple Pay, Google Pay), the
+         * tokenized number might be provided instead of the underlying card number.
+         *
+         * <p><em>As of May 1, 2021, card fingerprint in India for Connect changed to allow two
+         * fingerprints for the same card---one for India and one for the rest of the world.</em>
+         */
+        @SerializedName("fingerprint")
+        String fingerprint;
+
+        /**
+         * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
+         * unknown}.
+         */
+        @SerializedName("funding")
+        String funding;
+
+        /**
+         * Issuer identification number of the card. (For internal use only and not typically
+         * available in standard API requests.)
+         */
+        @SerializedName("iin")
+        String iin;
+
+        /** The last four digits of the card. */
+        @SerializedName("last4")
+        String last4;
+
+        /** If this Card is part of a card wallet, this contains the details of the card wallet. */
+        @SerializedName("wallet")
+        Wallet wallet;
+
+        /**
+         * For more details about Wallet, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Wallet extends StripeObject {
+          /**
+           * The type of the wallet, one of {@code amex_express_checkout}, {@code apple_pay}, {@code
+           * google_pay}, {@code masterpass}, {@code samsung_pay}, {@code visa_checkout}, {@code
+           * meta_pay}, or {@code link}.
+           */
+          @SerializedName("type")
+          String type;
+        }
+      }
+    }
+
+    /**
+     * For more details about ShippingDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ShippingDetails extends StripeObject {
+      @SerializedName("address")
+      Address address;
+
+      /** Customer name. */
+      @SerializedName("name")
+      String name;
+    }
   }
 
   /**
@@ -4730,6 +4985,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(consent, responseGetter);
     trySetResponseGetter(consentCollection, responseGetter);
     trySetResponseGetter(currencyConversion, responseGetter);
+    trySetResponseGetter(currentAttempt, responseGetter);
     trySetResponseGetter(customText, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(customerDetails, responseGetter);
