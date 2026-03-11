@@ -1016,7 +1016,7 @@ public class CollectionSettingCreateParams extends ApiRequestParams {
       public static class MandateOptions {
         /** Amount to be charged for future payments. */
         @SerializedName("amount")
-        String amount;
+        Long amount;
 
         /** The AmountType for the mandate. One of {@code fixed} or {@code maximum}. */
         @SerializedName("amount_type")
@@ -1037,7 +1037,7 @@ public class CollectionSettingCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         private MandateOptions(
-            String amount,
+            Long amount,
             AmountType amountType,
             String description,
             Map<String, Object> extraParams) {
@@ -1052,7 +1052,7 @@ public class CollectionSettingCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private String amount;
+          private Long amount;
 
           private AmountType amountType;
 
@@ -1067,7 +1067,7 @@ public class CollectionSettingCreateParams extends ApiRequestParams {
           }
 
           /** Amount to be charged for future payments. */
-          public Builder setAmount(String amount) {
+          public Builder setAmount(Long amount) {
             this.amount = amount;
             return this;
           }

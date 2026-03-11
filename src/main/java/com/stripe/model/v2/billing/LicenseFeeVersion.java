@@ -124,7 +124,7 @@ public class LicenseFeeVersion extends StripeObject implements HasId {
   public static class TransformQuantity extends StripeObject {
     /** Divide usage by this number. */
     @SerializedName("divide_by")
-    String divideBy;
+    Long divideBy;
 
     /**
      * After division, round the result up or down.
