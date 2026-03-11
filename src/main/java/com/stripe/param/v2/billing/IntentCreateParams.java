@@ -495,6 +495,9 @@ public class IntentCreateParams extends ApiRequestParams {
           @SerializedName("current_billing_period_end")
           CURRENT_BILLING_PERIOD_END("current_billing_period_end"),
 
+          @SerializedName("next_billing_period_start")
+          NEXT_BILLING_PERIOD_START("next_billing_period_start"),
+
           @SerializedName("on_reserve")
           ON_RESERVE("on_reserve");
 

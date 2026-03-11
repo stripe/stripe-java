@@ -516,7 +516,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
   public static class TransformQuantity {
     /** <strong>Required.</strong> Divide usage by this number. */
     @SerializedName("divide_by")
-    Long divideBy;
+    String divideBy;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -531,7 +531,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
     @SerializedName("round")
     Round round;
 
-    private TransformQuantity(Long divideBy, Map<String, Object> extraParams, Round round) {
+    private TransformQuantity(String divideBy, Map<String, Object> extraParams, Round round) {
       this.divideBy = divideBy;
       this.extraParams = extraParams;
       this.round = round;
@@ -542,7 +542,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Long divideBy;
+      private String divideBy;
 
       private Map<String, Object> extraParams;
 
@@ -555,7 +555,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
       }
 
       /** <strong>Required.</strong> Divide usage by this number. */
-      public Builder setDivideBy(Long divideBy) {
+      public Builder setDivideBy(String divideBy) {
         this.divideBy = divideBy;
         return this;
       }

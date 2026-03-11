@@ -122,7 +122,7 @@ public class ReportRun extends StripeObject implements HasId {
 
       /** The total size of the file in bytes. */
       @SerializedName("size")
-      Long size;
+      String size;
 
       /** A pre-signed URL that allows secure, time-limited access to download the file. */
       @Getter

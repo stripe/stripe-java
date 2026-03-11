@@ -226,7 +226,7 @@ public class CollectionSettingVersion extends StripeObject implements HasId {
       public static class MandateOptions extends StripeObject {
         /** Amount to be charged for future payments. */
         @SerializedName("amount")
-        Long amount;
+        String amount;
 
         /** The AmountType for the mandate. One of {@code fixed} or {@code maximum}. */
         @SerializedName("amount_type")
