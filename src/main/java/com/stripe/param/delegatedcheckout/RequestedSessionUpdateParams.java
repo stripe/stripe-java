@@ -328,19 +328,27 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
     @SerializedName("selected_fulfillment_option")
     SelectedFulfillmentOption selectedFulfillmentOption;
 
+    /** The fulfillment option overrides for specific line items. */
+    @SerializedName("selected_fulfillment_option_overrides")
+    List<RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride>
+        selectedFulfillmentOptionOverrides;
+
     private FulfillmentDetails(
         Address address,
         Object email,
         Map<String, Object> extraParams,
         Object name,
         Object phone,
-        SelectedFulfillmentOption selectedFulfillmentOption) {
+        SelectedFulfillmentOption selectedFulfillmentOption,
+        List<RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride>
+            selectedFulfillmentOptionOverrides) {
       this.address = address;
       this.email = email;
       this.extraParams = extraParams;
       this.name = name;
       this.phone = phone;
       this.selectedFulfillmentOption = selectedFulfillmentOption;
+      this.selectedFulfillmentOptionOverrides = selectedFulfillmentOptionOverrides;
     }
 
     public static Builder builder() {
@@ -360,6 +368,10 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
 
       private SelectedFulfillmentOption selectedFulfillmentOption;
 
+      private List<
+              RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride>
+          selectedFulfillmentOptionOverrides;
+
       /** Finalize and obtain parameter instance from this builder. */
       public RequestedSessionUpdateParams.FulfillmentDetails build() {
         return new RequestedSessionUpdateParams.FulfillmentDetails(
@@ -368,7 +380,8 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
             this.extraParams,
             this.name,
             this.phone,
-            this.selectedFulfillmentOption);
+            this.selectedFulfillmentOption,
+            this.selectedFulfillmentOptionOverrides);
       }
 
       /** The customer's address. */
@@ -445,6 +458,40 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
           RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption
               selectedFulfillmentOption) {
         this.selectedFulfillmentOption = selectedFulfillmentOption;
+        return this;
+      }
+
+      /**
+       * Add an element to `selectedFulfillmentOptionOverrides` list. A list is initialized for the
+       * first `add/addAll` call, and subsequent calls adds additional elements to the original
+       * list. See {@link
+       * RequestedSessionUpdateParams.FulfillmentDetails#selectedFulfillmentOptionOverrides} for the
+       * field documentation.
+       */
+      public Builder addSelectedFulfillmentOptionOverride(
+          RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride
+              element) {
+        if (this.selectedFulfillmentOptionOverrides == null) {
+          this.selectedFulfillmentOptionOverrides = new ArrayList<>();
+        }
+        this.selectedFulfillmentOptionOverrides.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `selectedFulfillmentOptionOverrides` list. A list is initialized for
+       * the first `add/addAll` call, and subsequent calls adds additional elements to the original
+       * list. See {@link
+       * RequestedSessionUpdateParams.FulfillmentDetails#selectedFulfillmentOptionOverrides} for the
+       * field documentation.
+       */
+      public Builder addAllSelectedFulfillmentOptionOverride(
+          List<RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride>
+              elements) {
+        if (this.selectedFulfillmentOptionOverrides == null) {
+          this.selectedFulfillmentOptionOverrides = new ArrayList<>();
+        }
+        this.selectedFulfillmentOptionOverrides.addAll(elements);
         return this;
       }
     }
@@ -858,7 +905,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** <strong>Required.</strong> The shipping option identifer. */
+        /** <strong>Required.</strong> The shipping option identifier. */
         @SerializedName("shipping_option")
         Object shippingOption;
 
@@ -913,13 +960,336 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> The shipping option identifer. */
+          /** <strong>Required.</strong> The shipping option identifier. */
           public Builder setShippingOption(String shippingOption) {
             this.shippingOption = shippingOption;
             return this;
           }
 
-          /** <strong>Required.</strong> The shipping option identifer. */
+          /** <strong>Required.</strong> The shipping option identifier. */
+          public Builder setShippingOption(EmptyParam shippingOption) {
+            this.shippingOption = shippingOption;
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SelectedFulfillmentOptionOverride {
+      /** The digital fulfillment option. */
+      @SerializedName("digital")
+      Digital digital;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> The line item keys that this fulfillment option override applies
+       * to.
+       */
+      @SerializedName("line_item_keys")
+      List<String> lineItemKeys;
+
+      /** The shipping fulfillment option. */
+      @SerializedName("shipping")
+      Shipping shipping;
+
+      /** <strong>Required.</strong> The type of fulfillment option. */
+      @SerializedName("type")
+      Object type;
+
+      private SelectedFulfillmentOptionOverride(
+          Digital digital,
+          Map<String, Object> extraParams,
+          List<String> lineItemKeys,
+          Shipping shipping,
+          Object type) {
+        this.digital = digital;
+        this.extraParams = extraParams;
+        this.lineItemKeys = lineItemKeys;
+        this.shipping = shipping;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Digital digital;
+
+        private Map<String, Object> extraParams;
+
+        private List<String> lineItemKeys;
+
+        private Shipping shipping;
+
+        private Object type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride
+            build() {
+          return new RequestedSessionUpdateParams.FulfillmentDetails
+              .SelectedFulfillmentOptionOverride(
+              this.digital, this.extraParams, this.lineItemKeys, this.shipping, this.type);
+        }
+
+        /** The digital fulfillment option. */
+        public Builder setDigital(
+            RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride
+                    .Digital
+                digital) {
+          this.digital = digital;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `lineItemKeys` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride#lineItemKeys}
+         * for the field documentation.
+         */
+        public Builder addLineItemKey(String element) {
+          if (this.lineItemKeys == null) {
+            this.lineItemKeys = new ArrayList<>();
+          }
+          this.lineItemKeys.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `lineItemKeys` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride#lineItemKeys}
+         * for the field documentation.
+         */
+        public Builder addAllLineItemKey(List<String> elements) {
+          if (this.lineItemKeys == null) {
+            this.lineItemKeys = new ArrayList<>();
+          }
+          this.lineItemKeys.addAll(elements);
+          return this;
+        }
+
+        /** The shipping fulfillment option. */
+        public Builder setShipping(
+            RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride
+                    .Shipping
+                shipping) {
+          this.shipping = shipping;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The type of fulfillment option. */
+        public Builder setType(String type) {
+          this.type = type;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The type of fulfillment option. */
+        public Builder setType(EmptyParam type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Digital {
+        /** <strong>Required.</strong> The digital option identifier. */
+        @SerializedName("digital_option")
+        Object digitalOption;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Digital(Object digitalOption, Map<String, Object> extraParams) {
+          this.digitalOption = digitalOption;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object digitalOption;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride
+                  .Digital
+              build() {
+            return new RequestedSessionUpdateParams.FulfillmentDetails
+                .SelectedFulfillmentOptionOverride.Digital(this.digitalOption, this.extraParams);
+          }
+
+          /** <strong>Required.</strong> The digital option identifier. */
+          public Builder setDigitalOption(String digitalOption) {
+            this.digitalOption = digitalOption;
+            return this;
+          }
+
+          /** <strong>Required.</strong> The digital option identifier. */
+          public Builder setDigitalOption(EmptyParam digitalOption) {
+            this.digitalOption = digitalOption;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride.Digital#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride.Digital#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Shipping {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> The shipping option identifier. */
+        @SerializedName("shipping_option")
+        Object shippingOption;
+
+        private Shipping(Map<String, Object> extraParams, Object shippingOption) {
+          this.extraParams = extraParams;
+          this.shippingOption = shippingOption;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object shippingOption;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride
+                  .Shipping
+              build() {
+            return new RequestedSessionUpdateParams.FulfillmentDetails
+                .SelectedFulfillmentOptionOverride.Shipping(this.extraParams, this.shippingOption);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride.Shipping#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride.Shipping#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> The shipping option identifier. */
+          public Builder setShippingOption(String shippingOption) {
+            this.shippingOption = shippingOption;
+            return this;
+          }
+
+          /** <strong>Required.</strong> The shipping option identifier. */
           public Builder setShippingOption(EmptyParam shippingOption) {
             this.shippingOption = shippingOption;
             return this;
