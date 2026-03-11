@@ -226,6 +226,9 @@ public final class EventDataClassLookup {
 
     classLookup.put("radar.account_evaluation", com.stripe.model.radar.AccountEvaluation.class);
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);
+    classLookup.put(
+        "radar.issuing_authorization_evaluation",
+        com.stripe.model.radar.IssuingAuthorizationEvaluation.class);
     classLookup.put("radar.payment_evaluation", com.stripe.model.radar.PaymentEvaluation.class);
     classLookup.put("radar.value_list", com.stripe.model.radar.ValueList.class);
     classLookup.put("radar.value_list_item", com.stripe.model.radar.ValueListItem.class);

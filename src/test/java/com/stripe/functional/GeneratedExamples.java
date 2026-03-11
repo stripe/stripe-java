@@ -29918,7 +29918,6 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.v2.payments.OffSessionPaymentCreateParams.Cadence.UNSCHEDULED)
             .setCustomer("customer")
             .putMetadata("key", "metadata")
-            .setPaymentMethod("payment_method")
             .build();
 
     com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =

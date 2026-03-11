@@ -23,9 +23,11 @@ public final class V2CoreAccountIncludingConfigurationCardCreatorCapabilityStatu
      * Open Enum. The capability which had its status updated.
      *
      * <p>One of {@code commercial.celtic.charge_card}, {@code commercial.celtic.spend_card}, {@code
-     * commercial.cross_river_bank.charge_card}, {@code commercial.cross_river_bank.spend_card},
-     * {@code commercial.lead.prepaid_card}, {@code commercial.stripe.charge_card}, or {@code
-     * commercial.stripe.prepaid_card}.
+     * commercial.cross_river_bank.charge_card}, {@code commercial.cross_river_bank.prepaid_card},
+     * {@code commercial.cross_river_bank.spend_card}, {@code commercial.fifth_third.charge_card},
+     * {@code commercial.lead.prepaid_card}, {@code commercial.stripe.charge_card}, {@code
+     * commercial.stripe.prepaid_card}, {@code consumer.celtic.revolving_credit_card}, {@code
+     * consumer.cross_river_bank.prepaid_card}, or {@code consumer.lead.prepaid_card}.
      */
     @SerializedName("updated_capability")
     String updatedCapability;

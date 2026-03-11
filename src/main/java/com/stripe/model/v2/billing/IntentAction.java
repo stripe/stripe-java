@@ -108,7 +108,8 @@ public class IntentAction extends StripeObject implements HasId {
       /**
        * When the apply action will take effect.
        *
-       * <p>One of {@code current_billing_period_end}, or {@code on_reserve}.
+       * <p>One of {@code current_billing_period_end}, {@code next_billing_period_start}, or {@code
+       * on_reserve}.
        */
       @SerializedName("type")
       String type;

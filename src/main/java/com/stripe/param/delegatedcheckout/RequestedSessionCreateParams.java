@@ -14,8 +14,8 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class RequestedSessionCreateParams extends ApiRequestParams {
   /** Affiliate attribution data associated with this requested session. */
-  @SerializedName("affiliate_attributions")
-  List<RequestedSessionCreateParams.AffiliateAttribution> affiliateAttributions;
+  @SerializedName("affiliate_attribution")
+  AffiliateAttribution affiliateAttribution;
 
   /** <strong>Required.</strong> The currency for this requested session. */
   @SerializedName("currency")
@@ -71,7 +71,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
   Map<String, String> sharedMetadata;
 
   private RequestedSessionCreateParams(
-      List<RequestedSessionCreateParams.AffiliateAttribution> affiliateAttributions,
+      AffiliateAttribution affiliateAttribution,
       String currency,
       String customer,
       List<String> expand,
@@ -84,7 +84,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
       SellerDetails sellerDetails,
       SetupFutureUsage setupFutureUsage,
       Map<String, String> sharedMetadata) {
-    this.affiliateAttributions = affiliateAttributions;
+    this.affiliateAttribution = affiliateAttribution;
     this.currency = currency;
     this.customer = customer;
     this.expand = expand;
@@ -104,7 +104,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private List<RequestedSessionCreateParams.AffiliateAttribution> affiliateAttributions;
+    private AffiliateAttribution affiliateAttribution;
 
     private String currency;
 
@@ -133,7 +133,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public RequestedSessionCreateParams build() {
       return new RequestedSessionCreateParams(
-          this.affiliateAttributions,
+          this.affiliateAttribution,
           this.currency,
           this.customer,
           this.expand,
@@ -148,31 +148,10 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
           this.sharedMetadata);
     }
 
-    /**
-     * Add an element to `affiliateAttributions` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link RequestedSessionCreateParams#affiliateAttributions} for the field documentation.
-     */
-    public Builder addAffiliateAttribution(
-        RequestedSessionCreateParams.AffiliateAttribution element) {
-      if (this.affiliateAttributions == null) {
-        this.affiliateAttributions = new ArrayList<>();
-      }
-      this.affiliateAttributions.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `affiliateAttributions` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link RequestedSessionCreateParams#affiliateAttributions} for the field documentation.
-     */
-    public Builder addAllAffiliateAttribution(
-        List<RequestedSessionCreateParams.AffiliateAttribution> elements) {
-      if (this.affiliateAttributions == null) {
-        this.affiliateAttributions = new ArrayList<>();
-      }
-      this.affiliateAttributions.addAll(elements);
+    /** Affiliate attribution data associated with this requested session. */
+    public Builder setAffiliateAttribution(
+        RequestedSessionCreateParams.AffiliateAttribution affiliateAttribution) {
+      this.affiliateAttribution = affiliateAttribution;
       return this;
     }
 
