@@ -5,7 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.param.common.EmptyParam;
 import java.time.Instant;
 import java.util.Arrays;
@@ -121,6 +125,13 @@ public class ApiRequestParamsConverterTest {
     @SerializedName("instant_param")
     public Instant instantParam;
   }
+
+  private static class HasStringInt64Param extends ApiRequestParams {
+    @SerializedName("divide_by")
+    @JsonAdapter(StringInt64TypeAdapter.class)
+    public Long divideBy;
+  }
+
 
   @Test
   public void testHasExtraParams() {
@@ -286,6 +297,28 @@ public class ApiRequestParamsConverterTest {
     assertEquals(objBar.get("enum_value"), "enum_bar");
     assertEquals(objBar.get("string_value"), "foo");
     assertEquals(objBar.get("hello"), "world");
+  }
+
+
+  @Test
+  public void testToMapWithStringInt64Params() {
+    HasStringInt64Param params = new HasStringInt64Param();
+    params.divideBy = 123L;
+
+    Map<String, Object> paramMap = toMap(params);
+
+    TestCase.assertEquals(1, paramMap.size());
+    TestCase.assertTrue(paramMap.containsKey("divide_by"));
+    TestCase.assertEquals("123", paramMap.get("divide_by"));
+  }
+
+  @Test
+  public void testFromJsonWithStringInt64ResourceField() {
+    Gson gson = new GsonBuilder().create();
+
+    HasStringInt64Param resource = gson.fromJson("{\"divide_by\":\"123\"}", HasStringInt64Param.class);
+
+    TestCase.assertEquals(Long.valueOf(123L), resource.divideBy);
   }
 
   @Test
