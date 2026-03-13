@@ -228,6 +228,7 @@ public final class EventDataClassLookup {
         "product_catalog.trial_offer", com.stripe.model.productcatalog.TrialOffer.class);
 
     classLookup.put("radar.account_evaluation", com.stripe.model.radar.AccountEvaluation.class);
+    classLookup.put("radar.customer_evaluation", com.stripe.model.radar.CustomerEvaluation.class);
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);
     classLookup.put(
         "radar.issuing_authorization_evaluation",
