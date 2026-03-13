@@ -13,7 +13,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentRecordReportRefundParams extends ApiRequestParams {
+public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
   /**
    * A positive integer in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
    * currency unit</a> representing how much of this payment to refund. Can refund only up to the
@@ -60,7 +60,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
   @SerializedName("refunded")
   Refunded refunded;
 
-  private PaymentRecordReportRefundParams(
+  private PaymentAttemptRecordReportRefundParams(
       Amount amount,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -101,8 +101,8 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     private Refunded refunded;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentRecordReportRefundParams build() {
-      return new PaymentRecordReportRefundParams(
+    public PaymentAttemptRecordReportRefundParams build() {
+      return new PaymentAttemptRecordReportRefundParams(
           this.amount,
           this.expand,
           this.extraParams,
@@ -118,7 +118,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
      * currency unit</a> representing how much of this payment to refund. Can refund only up to the
      * remaining, unrefunded amount of the payment.
      */
-    public Builder setAmount(PaymentRecordReportRefundParams.Amount amount) {
+    public Builder setAmount(PaymentAttemptRecordReportRefundParams.Amount amount) {
       this.amount = amount;
       return this;
     }
@@ -126,7 +126,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentRecordReportRefundParams#expand} for the field documentation.
+     * PaymentAttemptRecordReportRefundParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -139,7 +139,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentRecordReportRefundParams#expand} for the field documentation.
+     * PaymentAttemptRecordReportRefundParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -152,7 +152,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentRecordReportRefundParams#extraParams} for the field documentation.
+     * PaymentAttemptRecordReportRefundParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -165,7 +165,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentRecordReportRefundParams#extraParams} for the field documentation.
+     * See {@link PaymentAttemptRecordReportRefundParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -184,7 +184,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentRecordReportRefundParams#metadata} for the field documentation.
+     * PaymentAttemptRecordReportRefundParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -198,7 +198,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentRecordReportRefundParams#metadata} for the field documentation.
+     * See {@link PaymentAttemptRecordReportRefundParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
@@ -232,20 +232,20 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     }
 
     /** <strong>Required.</strong> The outcome of the reported refund. */
-    public Builder setOutcome(PaymentRecordReportRefundParams.Outcome outcome) {
+    public Builder setOutcome(PaymentAttemptRecordReportRefundParams.Outcome outcome) {
       this.outcome = outcome;
       return this;
     }
 
     /** <strong>Required.</strong> Processor information for this refund. */
     public Builder setProcessorDetails(
-        PaymentRecordReportRefundParams.ProcessorDetails processorDetails) {
+        PaymentAttemptRecordReportRefundParams.ProcessorDetails processorDetails) {
       this.processorDetails = processorDetails;
       return this;
     }
 
     /** Information about the payment attempt refund. */
-    public Builder setRefunded(PaymentRecordReportRefundParams.Refunded refunded) {
+    public Builder setRefunded(PaymentAttemptRecordReportRefundParams.Refunded refunded) {
       this.refunded = refunded;
       return this;
     }
@@ -297,8 +297,8 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       private Long value;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentRecordReportRefundParams.Amount build() {
-        return new PaymentRecordReportRefundParams.Amount(
+      public PaymentAttemptRecordReportRefundParams.Amount build() {
+        return new PaymentAttemptRecordReportRefundParams.Amount(
             this.currency, this.extraParams, this.value);
       }
 
@@ -315,7 +315,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentRecordReportRefundParams.Amount#extraParams} for the field documentation.
+       * PaymentAttemptRecordReportRefundParams.Amount#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -328,7 +328,8 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentRecordReportRefundParams.Amount#extraParams} for the field documentation.
+       * See {@link PaymentAttemptRecordReportRefundParams.Amount#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -392,13 +393,14 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentRecordReportRefundParams.ProcessorDetails build() {
-        return new PaymentRecordReportRefundParams.ProcessorDetails(
+      public PaymentAttemptRecordReportRefundParams.ProcessorDetails build() {
+        return new PaymentAttemptRecordReportRefundParams.ProcessorDetails(
             this.custom, this.extraParams, this.type);
       }
 
       /** Information about the custom processor used to make this refund. */
-      public Builder setCustom(PaymentRecordReportRefundParams.ProcessorDetails.Custom custom) {
+      public Builder setCustom(
+          PaymentAttemptRecordReportRefundParams.ProcessorDetails.Custom custom) {
         this.custom = custom;
         return this;
       }
@@ -406,7 +408,8 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentRecordReportRefundParams.ProcessorDetails#extraParams} for the field documentation.
+       * PaymentAttemptRecordReportRefundParams.ProcessorDetails#extraParams} for the field
+       * documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -419,8 +422,8 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentRecordReportRefundParams.ProcessorDetails#extraParams} for the field
-       * documentation.
+       * See {@link PaymentAttemptRecordReportRefundParams.ProcessorDetails#extraParams} for the
+       * field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -435,7 +438,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
        * included on processor_details with a name matching this value. It contains additional
        * information specific to the processor.
        */
-      public Builder setType(PaymentRecordReportRefundParams.ProcessorDetails.Type type) {
+      public Builder setType(PaymentAttemptRecordReportRefundParams.ProcessorDetails.Type type) {
         this.type = type;
         return this;
       }
@@ -475,16 +478,17 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
         private String refundReference;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PaymentRecordReportRefundParams.ProcessorDetails.Custom build() {
-          return new PaymentRecordReportRefundParams.ProcessorDetails.Custom(
+        public PaymentAttemptRecordReportRefundParams.ProcessorDetails.Custom build() {
+          return new PaymentAttemptRecordReportRefundParams.ProcessorDetails.Custom(
               this.extraParams, this.refundReference);
         }
 
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link PaymentRecordReportRefundParams.ProcessorDetails.Custom#extraParams} for
-         * the field documentation.
+         * map. See {@link
+         * PaymentAttemptRecordReportRefundParams.ProcessorDetails.Custom#extraParams} for the field
+         * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -497,8 +501,9 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link PaymentRecordReportRefundParams.ProcessorDetails.Custom#extraParams} for
-         * the field documentation.
+         * map. See {@link
+         * PaymentAttemptRecordReportRefundParams.ProcessorDetails.Custom#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -566,14 +571,15 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       private Long refundedAt;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentRecordReportRefundParams.Refunded build() {
-        return new PaymentRecordReportRefundParams.Refunded(this.extraParams, this.refundedAt);
+      public PaymentAttemptRecordReportRefundParams.Refunded build() {
+        return new PaymentAttemptRecordReportRefundParams.Refunded(
+            this.extraParams, this.refundedAt);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentRecordReportRefundParams.Refunded#extraParams} for the field documentation.
+       * PaymentAttemptRecordReportRefundParams.Refunded#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -586,7 +592,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentRecordReportRefundParams.Refunded#extraParams} for the field
+       * See {@link PaymentAttemptRecordReportRefundParams.Refunded#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {

@@ -13,14 +13,14 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentRecordReportRefundParams extends ApiRequestParams {
-  /**
-   * A positive integer in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
-   * currency unit</a> representing how much of this payment to refund. Can refund only up to the
-   * remaining, unrefunded amount of the payment.
-   */
-  @SerializedName("amount")
-  Amount amount;
+public class PaymentAttemptRecordReportInformationalParams extends ApiRequestParams {
+  /** Customer information for this payment. */
+  @SerializedName("customer_details")
+  CustomerDetails customerDetails;
+
+  /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
+  Object description;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -35,10 +35,6 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** When the reported refund was initiated. Measured in seconds since the Unix epoch. */
-  @SerializedName("initiated_at")
-  Long initiatedAt;
-
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -48,35 +44,23 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
-  /** <strong>Required.</strong> The outcome of the reported refund. */
-  @SerializedName("outcome")
-  Outcome outcome;
+  /** Shipping information for this payment. */
+  @SerializedName("shipping_details")
+  Object shippingDetails;
 
-  /** <strong>Required.</strong> Processor information for this refund. */
-  @SerializedName("processor_details")
-  ProcessorDetails processorDetails;
-
-  /** Information about the payment attempt refund. */
-  @SerializedName("refunded")
-  Refunded refunded;
-
-  private PaymentRecordReportRefundParams(
-      Amount amount,
+  private PaymentAttemptRecordReportInformationalParams(
+      CustomerDetails customerDetails,
+      Object description,
       List<String> expand,
       Map<String, Object> extraParams,
-      Long initiatedAt,
       Object metadata,
-      Outcome outcome,
-      ProcessorDetails processorDetails,
-      Refunded refunded) {
-    this.amount = amount;
+      Object shippingDetails) {
+    this.customerDetails = customerDetails;
+    this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.initiatedAt = initiatedAt;
     this.metadata = metadata;
-    this.outcome = outcome;
-    this.processorDetails = processorDetails;
-    this.refunded = refunded;
+    this.shippingDetails = shippingDetails;
   }
 
   public static Builder builder() {
@@ -84,49 +68,52 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Amount amount;
+    private CustomerDetails customerDetails;
+
+    private Object description;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private Long initiatedAt;
-
     private Object metadata;
 
-    private Outcome outcome;
-
-    private ProcessorDetails processorDetails;
-
-    private Refunded refunded;
+    private Object shippingDetails;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentRecordReportRefundParams build() {
-      return new PaymentRecordReportRefundParams(
-          this.amount,
+    public PaymentAttemptRecordReportInformationalParams build() {
+      return new PaymentAttemptRecordReportInformationalParams(
+          this.customerDetails,
+          this.description,
           this.expand,
           this.extraParams,
-          this.initiatedAt,
           this.metadata,
-          this.outcome,
-          this.processorDetails,
-          this.refunded);
+          this.shippingDetails);
     }
 
-    /**
-     * A positive integer in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
-     * currency unit</a> representing how much of this payment to refund. Can refund only up to the
-     * remaining, unrefunded amount of the payment.
-     */
-    public Builder setAmount(PaymentRecordReportRefundParams.Amount amount) {
-      this.amount = amount;
+    /** Customer information for this payment. */
+    public Builder setCustomerDetails(
+        PaymentAttemptRecordReportInformationalParams.CustomerDetails customerDetails) {
+      this.customerDetails = customerDetails;
+      return this;
+    }
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    public Builder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    public Builder setDescription(EmptyParam description) {
+      this.description = description;
       return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentRecordReportRefundParams#expand} for the field documentation.
+     * PaymentAttemptRecordReportInformationalParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -139,7 +126,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentRecordReportRefundParams#expand} for the field documentation.
+     * PaymentAttemptRecordReportInformationalParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -152,7 +139,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentRecordReportRefundParams#extraParams} for the field documentation.
+     * PaymentAttemptRecordReportInformationalParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -165,7 +152,8 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentRecordReportRefundParams#extraParams} for the field documentation.
+     * See {@link PaymentAttemptRecordReportInformationalParams#extraParams} for the field
+     * documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -175,16 +163,10 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       return this;
     }
 
-    /** When the reported refund was initiated. Measured in seconds since the Unix epoch. */
-    public Builder setInitiatedAt(Long initiatedAt) {
-      this.initiatedAt = initiatedAt;
-      return this;
-    }
-
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentRecordReportRefundParams#metadata} for the field documentation.
+     * PaymentAttemptRecordReportInformationalParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -198,7 +180,8 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentRecordReportRefundParams#metadata} for the field documentation.
+     * See {@link PaymentAttemptRecordReportInformationalParams#metadata} for the field
+     * documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
@@ -231,36 +214,30 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The outcome of the reported refund. */
-    public Builder setOutcome(PaymentRecordReportRefundParams.Outcome outcome) {
-      this.outcome = outcome;
+    /** Shipping information for this payment. */
+    public Builder setShippingDetails(
+        PaymentAttemptRecordReportInformationalParams.ShippingDetails shippingDetails) {
+      this.shippingDetails = shippingDetails;
       return this;
     }
 
-    /** <strong>Required.</strong> Processor information for this refund. */
-    public Builder setProcessorDetails(
-        PaymentRecordReportRefundParams.ProcessorDetails processorDetails) {
-      this.processorDetails = processorDetails;
-      return this;
-    }
-
-    /** Information about the payment attempt refund. */
-    public Builder setRefunded(PaymentRecordReportRefundParams.Refunded refunded) {
-      this.refunded = refunded;
+    /** Shipping information for this payment. */
+    public Builder setShippingDetails(EmptyParam shippingDetails) {
+      this.shippingDetails = shippingDetails;
       return this;
     }
   }
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class Amount {
-    /**
-     * <strong>Required.</strong> Three-letter <a
-     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
-     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
-     */
-    @SerializedName("currency")
-    String currency;
+  public static class CustomerDetails {
+    /** The customer who made the payment. */
+    @SerializedName("customer")
+    String customer;
+
+    /** The customer's phone number. */
+    @SerializedName("email")
+    String email;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -271,18 +248,21 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * <strong>Required.</strong> A positive integer representing the amount in the currency's <a
-     * href="https://docs.stripe.com/currencies#zero-decimal">minor unit</a>. For example, {@code
-     * 100} can represent 1 USD or 100 JPY.
-     */
-    @SerializedName("value")
-    Long value;
+    /** The customer's name. */
+    @SerializedName("name")
+    String name;
 
-    private Amount(String currency, Map<String, Object> extraParams, Long value) {
-      this.currency = currency;
+    /** The customer's phone number. */
+    @SerializedName("phone")
+    String phone;
+
+    private CustomerDetails(
+        String customer, String email, Map<String, Object> extraParams, String name, String phone) {
+      this.customer = customer;
+      this.email = email;
       this.extraParams = extraParams;
-      this.value = value;
+      this.name = name;
+      this.phone = phone;
     }
 
     public static Builder builder() {
@@ -290,138 +270,54 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private String currency;
+      private String customer;
+
+      private String email;
 
       private Map<String, Object> extraParams;
 
-      private Long value;
+      private String name;
+
+      private String phone;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentRecordReportRefundParams.Amount build() {
-        return new PaymentRecordReportRefundParams.Amount(
-            this.currency, this.extraParams, this.value);
+      public PaymentAttemptRecordReportInformationalParams.CustomerDetails build() {
+        return new PaymentAttemptRecordReportInformationalParams.CustomerDetails(
+            this.customer, this.email, this.extraParams, this.name, this.phone);
       }
 
-      /**
-       * <strong>Required.</strong> Three-letter <a
-       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
-       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
-       */
-      public Builder setCurrency(String currency) {
-        this.currency = currency;
+      /** The customer who made the payment. */
+      public Builder setCustomer(String customer) {
+        this.customer = customer;
+        return this;
+      }
+
+      /** The customer's phone number. */
+      public Builder setEmail(String email) {
+        this.email = email;
         return this;
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentRecordReportRefundParams.Amount#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentRecordReportRefundParams.Amount#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /**
-       * <strong>Required.</strong> A positive integer representing the amount in the currency's <a
-       * href="https://docs.stripe.com/currencies#zero-decimal">minor unit</a>. For example, {@code
-       * 100} can represent 1 USD or 100 JPY.
-       */
-      public Builder setValue(Long value) {
-        this.value = value;
-        return this;
-      }
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
-  public static class ProcessorDetails {
-    /** Information about the custom processor used to make this refund. */
-    @SerializedName("custom")
-    Custom custom;
-
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /**
-     * <strong>Required.</strong> The type of the processor details. An additional hash is included
-     * on processor_details with a name matching this value. It contains additional information
-     * specific to the processor.
-     */
-    @SerializedName("type")
-    Type type;
-
-    private ProcessorDetails(Custom custom, Map<String, Object> extraParams, Type type) {
-      this.custom = custom;
-      this.extraParams = extraParams;
-      this.type = type;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Custom custom;
-
-      private Map<String, Object> extraParams;
-
-      private Type type;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public PaymentRecordReportRefundParams.ProcessorDetails build() {
-        return new PaymentRecordReportRefundParams.ProcessorDetails(
-            this.custom, this.extraParams, this.type);
-      }
-
-      /** Information about the custom processor used to make this refund. */
-      public Builder setCustom(PaymentRecordReportRefundParams.ProcessorDetails.Custom custom) {
-        this.custom = custom;
-        return this;
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentRecordReportRefundParams.ProcessorDetails#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentRecordReportRefundParams.ProcessorDetails#extraParams} for the field
+       * PaymentAttemptRecordReportInformationalParams.CustomerDetails#extraParams} for the field
        * documentation.
        */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentAttemptRecordReportInformationalParams.CustomerDetails#extraParams} for
+       * the field documentation.
+       */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
           this.extraParams = new HashMap<>();
@@ -430,20 +326,133 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
         return this;
       }
 
+      /** The customer's name. */
+      public Builder setName(String name) {
+        this.name = name;
+        return this;
+      }
+
+      /** The customer's phone number. */
+      public Builder setPhone(String phone) {
+        this.phone = phone;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ShippingDetails {
+    /** The physical shipping address. */
+    @SerializedName("address")
+    Address address;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The shipping recipient's name. */
+    @SerializedName("name")
+    String name;
+
+    /** The shipping recipient's phone number. */
+    @SerializedName("phone")
+    String phone;
+
+    private ShippingDetails(
+        Address address, Map<String, Object> extraParams, String name, String phone) {
+      this.address = address;
+      this.extraParams = extraParams;
+      this.name = name;
+      this.phone = phone;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Address address;
+
+      private Map<String, Object> extraParams;
+
+      private String name;
+
+      private String phone;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentAttemptRecordReportInformationalParams.ShippingDetails build() {
+        return new PaymentAttemptRecordReportInformationalParams.ShippingDetails(
+            this.address, this.extraParams, this.name, this.phone);
+      }
+
+      /** The physical shipping address. */
+      public Builder setAddress(
+          PaymentAttemptRecordReportInformationalParams.ShippingDetails.Address address) {
+        this.address = address;
+        return this;
+      }
+
       /**
-       * <strong>Required.</strong> The type of the processor details. An additional hash is
-       * included on processor_details with a name matching this value. It contains additional
-       * information specific to the processor.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentAttemptRecordReportInformationalParams.ShippingDetails#extraParams} for the field
+       * documentation.
        */
-      public Builder setType(PaymentRecordReportRefundParams.ProcessorDetails.Type type) {
-        this.type = type;
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentAttemptRecordReportInformationalParams.ShippingDetails#extraParams} for
+       * the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The shipping recipient's name. */
+      public Builder setName(String name) {
+        this.name = name;
+        return this;
+      }
+
+      /** The shipping recipient's phone number. */
+      public Builder setPhone(String phone) {
+        this.phone = phone;
         return this;
       }
     }
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
-    public static class Custom {
+    public static class Address {
+      /** City, district, suburb, town, or village. */
+      @SerializedName("city")
+      String city;
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      String country;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -453,16 +462,40 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * <strong>Required.</strong> A reference to the external refund. This field must be unique
-       * across all refunds.
-       */
-      @SerializedName("refund_reference")
-      String refundReference;
+      /** Address line 1, such as the street, PO Box, or company name. */
+      @SerializedName("line1")
+      String line1;
 
-      private Custom(Map<String, Object> extraParams, String refundReference) {
+      /** Address line 2, such as the apartment, suite, unit, or building. */
+      @SerializedName("line2")
+      String line2;
+
+      /** ZIP or postal code. */
+      @SerializedName("postal_code")
+      String postalCode;
+
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
+      @SerializedName("state")
+      String state;
+
+      private Address(
+          String city,
+          String country,
+          Map<String, Object> extraParams,
+          String line1,
+          String line2,
+          String postalCode,
+          String state) {
+        this.city = city;
+        this.country = country;
         this.extraParams = extraParams;
-        this.refundReference = refundReference;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.postalCode = postalCode;
+        this.state = state;
       }
 
       public static Builder builder() {
@@ -470,20 +503,52 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private String city;
+
+        private String country;
+
         private Map<String, Object> extraParams;
 
-        private String refundReference;
+        private String line1;
+
+        private String line2;
+
+        private String postalCode;
+
+        private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PaymentRecordReportRefundParams.ProcessorDetails.Custom build() {
-          return new PaymentRecordReportRefundParams.ProcessorDetails.Custom(
-              this.extraParams, this.refundReference);
+        public PaymentAttemptRecordReportInformationalParams.ShippingDetails.Address build() {
+          return new PaymentAttemptRecordReportInformationalParams.ShippingDetails.Address(
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
+        }
+
+        /** City, district, suburb, town, or village. */
+        public Builder setCity(String city) {
+          this.city = city;
+          return this;
+        }
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        public Builder setCountry(String country) {
+          this.country = country;
+          return this;
         }
 
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link PaymentRecordReportRefundParams.ProcessorDetails.Custom#extraParams} for
+         * map. See {@link
+         * PaymentAttemptRecordReportInformationalParams.ShippingDetails.Address#extraParams} for
          * the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -497,7 +562,8 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link PaymentRecordReportRefundParams.ProcessorDetails.Custom#extraParams} for
+         * map. See {@link
+         * PaymentAttemptRecordReportInformationalParams.ShippingDetails.Address#extraParams} for
          * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -508,115 +574,33 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
           return this;
         }
 
+        /** Address line 1, such as the street, PO Box, or company name. */
+        public Builder setLine1(String line1) {
+          this.line1 = line1;
+          return this;
+        }
+
+        /** Address line 2, such as the apartment, suite, unit, or building. */
+        public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** ZIP or postal code. */
+        public Builder setPostalCode(String postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
         /**
-         * <strong>Required.</strong> A reference to the external refund. This field must be unique
-         * across all refunds.
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
          */
-        public Builder setRefundReference(String refundReference) {
-          this.refundReference = refundReference;
+        public Builder setState(String state) {
+          this.state = state;
           return this;
         }
       }
-    }
-
-    public enum Type implements ApiRequestParams.EnumParam {
-      @SerializedName("custom")
-      CUSTOM("custom");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Type(String value) {
-        this.value = value;
-      }
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Refunded {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /**
-     * <strong>Required.</strong> When the reported refund completed. Measured in seconds since the
-     * Unix epoch.
-     */
-    @SerializedName("refunded_at")
-    Long refundedAt;
-
-    private Refunded(Map<String, Object> extraParams, Long refundedAt) {
-      this.extraParams = extraParams;
-      this.refundedAt = refundedAt;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private Long refundedAt;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public PaymentRecordReportRefundParams.Refunded build() {
-        return new PaymentRecordReportRefundParams.Refunded(this.extraParams, this.refundedAt);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentRecordReportRefundParams.Refunded#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentRecordReportRefundParams.Refunded#extraParams} for the field
-       * documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /**
-       * <strong>Required.</strong> When the reported refund completed. Measured in seconds since
-       * the Unix epoch.
-       */
-      public Builder setRefundedAt(Long refundedAt) {
-        this.refundedAt = refundedAt;
-        return this;
-      }
-    }
-  }
-
-  public enum Outcome implements ApiRequestParams.EnumParam {
-    @SerializedName("refunded")
-    REFUNDED("refunded");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Outcome(String value) {
-      this.value = value;
     }
   }
 }

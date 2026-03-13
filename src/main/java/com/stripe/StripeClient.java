@@ -635,6 +635,18 @@ public class StripeClient {
   }
 
   /**
+   * @deprecated StripeClient.orchestration() is deprecated, use StripeClient.v1().orchestration()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().orchestration(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.OrchestrationService orchestration() {
+    return new com.stripe.service.OrchestrationService(this.getResponseGetter());
+  }
+
+  /**
    * @deprecated StripeClient.orders() is deprecated, use StripeClient.v1().orders() instead. All
    *     functionality under it has been copied over to StripeClient.v1().orders(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration

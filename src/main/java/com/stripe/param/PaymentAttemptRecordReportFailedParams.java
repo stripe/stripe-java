@@ -13,7 +13,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiRequestParams {
+public class PaymentAttemptRecordReportFailedParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -27,9 +27,16 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** When the reported payment was guaranteed. Measured in seconds since the Unix epoch. */
-  @SerializedName("guaranteed_at")
-  Long guaranteedAt;
+  /** When the reported payment failed. Measured in seconds since the Unix epoch. */
+  @SerializedName("failed_at")
+  Long failedAt;
+
+  /**
+   * The failure code for this payment attempt. Must be one of {@code
+   * payment_method_customer_decline} or {@code payment_method_provider_unknown_outcome}.
+   */
+  @SerializedName("failure_code")
+  FailureCode failureCode;
 
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
@@ -40,11 +47,16 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
   @SerializedName("metadata")
   Object metadata;
 
-  private PaymentRecordReportPaymentAttemptGuaranteedParams(
-      List<String> expand, Map<String, Object> extraParams, Long guaranteedAt, Object metadata) {
+  private PaymentAttemptRecordReportFailedParams(
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Long failedAt,
+      FailureCode failureCode,
+      Object metadata) {
     this.expand = expand;
     this.extraParams = extraParams;
-    this.guaranteedAt = guaranteedAt;
+    this.failedAt = failedAt;
+    this.failureCode = failureCode;
     this.metadata = metadata;
   }
 
@@ -57,20 +69,22 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
 
     private Map<String, Object> extraParams;
 
-    private Long guaranteedAt;
+    private Long failedAt;
+
+    private FailureCode failureCode;
 
     private Object metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentRecordReportPaymentAttemptGuaranteedParams build() {
-      return new PaymentRecordReportPaymentAttemptGuaranteedParams(
-          this.expand, this.extraParams, this.guaranteedAt, this.metadata);
+    public PaymentAttemptRecordReportFailedParams build() {
+      return new PaymentAttemptRecordReportFailedParams(
+          this.expand, this.extraParams, this.failedAt, this.failureCode, this.metadata);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentRecordReportPaymentAttemptGuaranteedParams#expand} for the field documentation.
+     * PaymentAttemptRecordReportFailedParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -83,7 +97,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentRecordReportPaymentAttemptGuaranteedParams#expand} for the field documentation.
+     * PaymentAttemptRecordReportFailedParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -96,7 +110,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentRecordReportPaymentAttemptGuaranteedParams#extraParams} for the field documentation.
+     * PaymentAttemptRecordReportFailedParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -109,8 +123,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentRecordReportPaymentAttemptGuaranteedParams#extraParams} for the field
-     * documentation.
+     * See {@link PaymentAttemptRecordReportFailedParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -120,16 +133,25 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
       return this;
     }
 
-    /** When the reported payment was guaranteed. Measured in seconds since the Unix epoch. */
-    public Builder setGuaranteedAt(Long guaranteedAt) {
-      this.guaranteedAt = guaranteedAt;
+    /** When the reported payment failed. Measured in seconds since the Unix epoch. */
+    public Builder setFailedAt(Long failedAt) {
+      this.failedAt = failedAt;
+      return this;
+    }
+
+    /**
+     * The failure code for this payment attempt. Must be one of {@code
+     * payment_method_customer_decline} or {@code payment_method_provider_unknown_outcome}.
+     */
+    public Builder setFailureCode(PaymentAttemptRecordReportFailedParams.FailureCode failureCode) {
+      this.failureCode = failureCode;
       return this;
     }
 
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentRecordReportPaymentAttemptGuaranteedParams#metadata} for the field documentation.
+     * PaymentAttemptRecordReportFailedParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -143,8 +165,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentRecordReportPaymentAttemptGuaranteedParams#metadata} for the field
-     * documentation.
+     * See {@link PaymentAttemptRecordReportFailedParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
@@ -175,6 +196,21 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
+    }
+  }
+
+  public enum FailureCode implements ApiRequestParams.EnumParam {
+    @SerializedName("payment_method_customer_decline")
+    PAYMENT_METHOD_CUSTOMER_DECLINE("payment_method_customer_decline"),
+
+    @SerializedName("payment_method_provider_unknown_outcome")
+    PAYMENT_METHOD_PROVIDER_UNKNOWN_OUTCOME("payment_method_provider_unknown_outcome");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    FailureCode(String value) {
+      this.value = value;
     }
   }
 }

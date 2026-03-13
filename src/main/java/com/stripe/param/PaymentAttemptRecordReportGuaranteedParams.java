@@ -13,7 +13,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiRequestParams {
+public class PaymentAttemptRecordReportGuaranteedParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -40,7 +40,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
   @SerializedName("metadata")
   Object metadata;
 
-  private PaymentRecordReportPaymentAttemptGuaranteedParams(
+  private PaymentAttemptRecordReportGuaranteedParams(
       List<String> expand, Map<String, Object> extraParams, Long guaranteedAt, Object metadata) {
     this.expand = expand;
     this.extraParams = extraParams;
@@ -62,15 +62,15 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     private Object metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentRecordReportPaymentAttemptGuaranteedParams build() {
-      return new PaymentRecordReportPaymentAttemptGuaranteedParams(
+    public PaymentAttemptRecordReportGuaranteedParams build() {
+      return new PaymentAttemptRecordReportGuaranteedParams(
           this.expand, this.extraParams, this.guaranteedAt, this.metadata);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentRecordReportPaymentAttemptGuaranteedParams#expand} for the field documentation.
+     * PaymentAttemptRecordReportGuaranteedParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -83,7 +83,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentRecordReportPaymentAttemptGuaranteedParams#expand} for the field documentation.
+     * PaymentAttemptRecordReportGuaranteedParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -96,7 +96,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentRecordReportPaymentAttemptGuaranteedParams#extraParams} for the field documentation.
+     * PaymentAttemptRecordReportGuaranteedParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -109,7 +109,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentRecordReportPaymentAttemptGuaranteedParams#extraParams} for the field
+     * See {@link PaymentAttemptRecordReportGuaranteedParams#extraParams} for the field
      * documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
@@ -129,7 +129,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentRecordReportPaymentAttemptGuaranteedParams#metadata} for the field documentation.
+     * PaymentAttemptRecordReportGuaranteedParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -143,8 +143,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentRecordReportPaymentAttemptGuaranteedParams#metadata} for the field
-     * documentation.
+     * See {@link PaymentAttemptRecordReportGuaranteedParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {

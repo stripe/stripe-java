@@ -242,6 +242,16 @@ public class PaymentRecord extends ApiResource implements HasId {
   }
 
   /** Report that the most recent payment attempt on the specified Payment Record was canceled. */
+  public PaymentRecord reportPaymentAttemptCanceled() throws StripeException {
+    return reportPaymentAttemptCanceled((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was canceled. */
+  public PaymentRecord reportPaymentAttemptCanceled(RequestOptions options) throws StripeException {
+    return reportPaymentAttemptCanceled((Map<String, Object>) null, options);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was canceled. */
   public PaymentRecord reportPaymentAttemptCanceled(Map<String, Object> params)
       throws StripeException {
     return reportPaymentAttemptCanceled(params, (RequestOptions) null);
@@ -282,6 +292,20 @@ public class PaymentRecord extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /**
+   * Report that the most recent payment attempt on the specified Payment Record failed or errored.
+   */
+  public PaymentRecord reportPaymentAttemptFailed() throws StripeException {
+    return reportPaymentAttemptFailed((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Report that the most recent payment attempt on the specified Payment Record failed or errored.
+   */
+  public PaymentRecord reportPaymentAttemptFailed(RequestOptions options) throws StripeException {
+    return reportPaymentAttemptFailed((Map<String, Object>) null, options);
   }
 
   /**
@@ -333,6 +357,17 @@ public class PaymentRecord extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was guaranteed. */
+  public PaymentRecord reportPaymentAttemptGuaranteed() throws StripeException {
+    return reportPaymentAttemptGuaranteed((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was guaranteed. */
+  public PaymentRecord reportPaymentAttemptGuaranteed(RequestOptions options)
+      throws StripeException {
+    return reportPaymentAttemptGuaranteed((Map<String, Object>) null, options);
   }
 
   /** Report that the most recent payment attempt on the specified Payment Record was guaranteed. */

@@ -12,6 +12,7 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.checkout.SessionApproveParams;
 import com.stripe.param.checkout.SessionCreateParams;
 import com.stripe.param.checkout.SessionExpireParams;
 import com.stripe.param.checkout.SessionListParams;
@@ -133,6 +134,30 @@ public final class SessionService extends ApiService {
   public Session update(String session, SessionUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Session.class);
+  }
+  /**
+   * Approves a customer’s attempt to pay for a Checkout Session with {@code approval_method} set to
+   * {@code manual}.
+   */
+  public Session approve(String session, SessionApproveParams params) throws StripeException {
+    return approve(session, params, (RequestOptions) null);
+  }
+  /**
+   * Approves a customer’s attempt to pay for a Checkout Session with {@code approval_method} set to
+   * {@code manual}.
+   */
+  public Session approve(String session, SessionApproveParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/checkout/sessions/%s/approve", ApiResource.urlEncodeId(session));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

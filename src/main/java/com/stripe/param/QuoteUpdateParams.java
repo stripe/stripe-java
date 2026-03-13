@@ -9943,9 +9943,6 @@ public class QuoteUpdateParams extends ApiRequestParams {
           @SerializedName("line_starts_at")
           LINE_STARTS_AT("line_starts_at"),
 
-          @SerializedName("now")
-          NOW("now"),
-
           @SerializedName("pause_collection_start")
           PAUSE_COLLECTION_START("pause_collection_start"),
 
@@ -12141,9 +12138,6 @@ public class QuoteUpdateParams extends ApiRequestParams {
         public enum Type implements ApiRequestParams.EnumParam {
           @SerializedName("line_starts_at")
           LINE_STARTS_AT("line_starts_at"),
-
-          @SerializedName("now")
-          NOW("now"),
 
           @SerializedName("pause_collection_start")
           PAUSE_COLLECTION_START("pause_collection_start"),
