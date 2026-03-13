@@ -11,6 +11,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.radar.CustomerEvaluationCreateParams;
+import com.stripe.param.radar.CustomerEvaluationUpdateParams;
 
 public final class CustomerEvaluationService extends ApiService {
   public CustomerEvaluationService(StripeResponseGetter responseGetter) {
@@ -25,6 +26,28 @@ public final class CustomerEvaluationService extends ApiService {
   public CustomerEvaluation create(CustomerEvaluationCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/radar/customer_evaluations";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, CustomerEvaluation.class);
+  }
+  /** Reports an event on a {@code CustomerEvaluation} object. */
+  public CustomerEvaluation update(String customerEvaluation, CustomerEvaluationUpdateParams params)
+      throws StripeException {
+    return update(customerEvaluation, params, (RequestOptions) null);
+  }
+  /** Reports an event on a {@code CustomerEvaluation} object. */
+  public CustomerEvaluation update(
+      String customerEvaluation, CustomerEvaluationUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/radar/customer_evaluations/%s/report",
+            ApiResource.urlEncodeId(customerEvaluation));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -542,6 +542,9 @@ public class CustomerEvaluationCreateParams extends ApiRequestParams {
   }
 
   public enum EventType implements ApiRequestParams.EnumParam {
+    @SerializedName("login")
+    LOGIN("login"),
+
     @SerializedName("registration")
     REGISTRATION("registration");
 
