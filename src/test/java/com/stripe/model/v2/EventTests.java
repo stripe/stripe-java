@@ -8,10 +8,15 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.billing.Meter;
 import com.stripe.model.v2.core.Event;
 import com.stripe.net.ApiResource;
+import com.stripe.net.HttpHeaders;
+import com.stripe.net.StripeResponse;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.mockito.stubbing.Answer;
 
 public class EventTests extends BaseStripeTest {
   public static String v2PayloadNoData = null;
@@ -110,17 +115,19 @@ public class EventTests extends BaseStripeTest {
     assertEquals("foo", data.getDeveloperMessageSummary());
   }
 
+  // currently intentionally broken while we wait for the major & https://go/j/DEVSDK-3018
   @Test
   public void retrieveObjectFetchesAndDeserializesObject() throws StripeException, IOException {
     V1BillingMeterErrorReportTriggeredEvent event =
         (V1BillingMeterErrorReportTriggeredEvent) Event.parse(v2PayloadNoData);
     event.setResponseGetter(networkSpy);
-    stubRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/billing/meters/meter_123",
-        null,
-        Meter.class,
-        getResourceAsString("/api_fixtures/billing_meter.json"));
+    String fixtureJson = getResourceAsString("/api_fixtures/billing_meter.json");
+    Mockito.doAnswer(
+            (Answer<StripeResponse>)
+                invocation ->
+                    new StripeResponse(200, HttpHeaders.of(Collections.emptyMap()), fixtureJson))
+        .when(httpClientSpy)
+        .request(Mockito.any());
 
     assertEquals("/v1/billing/meters/meter_123", event.getRelatedObject().getUrl());
     assertEquals("meter_123", event.getRelatedObject().getId());
@@ -141,6 +148,11 @@ public class EventTests extends BaseStripeTest {
     assertEquals("active", meter.getStatus());
     assertNull(meter.getStatusTransitions().getDeactivatedAt());
     assertEquals(1727303036, meter.getUpdated());
+
+    verifyStripeRequest(
+        req ->
+            assertEquals(
+                "event=evt_234", req.headers().firstValue("Stripe-Request-Trigger").orElse(null)));
   }
 
   // FIXME (jar) this should no longer be possible; confirm this and remove before merge

@@ -15,6 +15,7 @@ import com.stripe.net.ApiResource.RequestMethod;
 import com.stripe.net.RawRequestOptions;
 import com.stripe.net.StripeResponse;
 import java.time.Instant;
+import java.util.Collections;
 import lombok.AccessLevel;
 import lombok.Getter;
 
@@ -106,12 +107,14 @@ public abstract class EventNotification {
   }
 
   private RawRequestOptions getRequestOptions() {
-    if (context == null) {
-      return null;
+    RawRequestOptions.RawRequestOptionsBuilder builder =
+        new RawRequestOptions.RawRequestOptionsBuilder()
+            .setAdditionalHeaders(
+                Collections.singletonMap("Stripe-Request-Trigger", "event=" + id));
+    if (context != null) {
+      builder.setStripeContext(context.toString());
     }
-    return new RawRequestOptions.RawRequestOptionsBuilder()
-        .setStripeContext(context.toString())
-        .build();
+    return builder.build();
   }
 
   /* retrieves the full payload for an event. Protected because individual push classes use it, but type it correctly */

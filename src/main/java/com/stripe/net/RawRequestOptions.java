@@ -8,6 +8,8 @@ import java.util.Map;
 public class RawRequestOptions extends RequestOptions {
   private Map<String, String> additionalHeaders;
 
+  // TODO: make this private
+  // see: https://go/j/DEVSDK-3018
   public RawRequestOptions(
       Authenticator authenticator,
       String clientId,
@@ -27,6 +29,7 @@ public class RawRequestOptions extends RequestOptions {
         clientId,
         idempotencyKey,
         stripeContext,
+        null,
         stripeAccount,
         stripeVersionOverride,
         baseUrl,
