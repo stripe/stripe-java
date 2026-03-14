@@ -161,6 +161,21 @@ public class WebhookTest extends BaseStripeTest {
   }
 
   @Test
+  public void testMalformedTimestampValue() throws SignatureVerificationException {
+    // Test with non-numeric timestamp value - should throw SignatureVerificationException,
+    // not NumberFormatException
+    final String sigHeader = "t=not_a_number,v1=somesignature";
+
+    Throwable exception =
+        assertThrows(
+            SignatureVerificationException.class,
+            () -> {
+              Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0, null);
+            });
+    assertEquals("Unable to extract timestamp and signatures from header", exception.getMessage());
+  }
+
+  @Test
   public void testNoSignaturesWithExpectedScheme()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
     final Map<String, Object> options = new HashMap<>();

@@ -176,7 +176,11 @@ public final class Webhook {
       for (String item : items) {
         String[] itemParts = item.split("=", 2);
         if (itemParts[0].equals("t")) {
-          return Long.parseLong(itemParts[1]);
+          try {
+            return Long.parseLong(itemParts[1]);
+          } catch (NumberFormatException e) {
+            return -1;
+          }
         }
       }
 
