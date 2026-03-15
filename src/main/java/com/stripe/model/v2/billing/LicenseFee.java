@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec
 package com.stripe.model.v2.billing;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
 import java.util.List;
@@ -196,6 +198,7 @@ public class LicenseFee extends StripeObject implements HasId {
   public static class TransformQuantity extends StripeObject {
     /** Divide usage by this number. */
     @SerializedName("divide_by")
+    @JsonAdapter(StringInt64TypeAdapter.class)
     Long divideBy;
 
     /**
