@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec
 package com.stripe.model.v2.billing;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
 import java.util.List;
@@ -722,6 +724,7 @@ public class Cadence extends StripeObject implements HasId {
           public static class MandateOptions extends StripeObject {
             /** Amount to be charged for future payments. */
             @SerializedName("amount")
+            @JsonAdapter(StringInt64TypeAdapter.class)
             Long amount;
 
             /** The AmountType for the mandate. One of {@code fixed} or {@code maximum}. */

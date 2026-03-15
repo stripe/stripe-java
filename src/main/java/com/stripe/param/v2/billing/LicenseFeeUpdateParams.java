@@ -1,7 +1,9 @@
 // File generated from our OpenAPI spec
 package com.stripe.param.v2.billing;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
@@ -511,6 +513,7 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
   public static class TransformQuantity {
     /** <strong>Required.</strong> Divide usage by this number. */
     @SerializedName("divide_by")
+    @JsonAdapter(StringInt64TypeAdapter.class)
     Long divideBy;
 
     /**
