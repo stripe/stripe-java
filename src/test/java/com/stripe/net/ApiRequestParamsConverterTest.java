@@ -132,7 +132,6 @@ public class ApiRequestParamsConverterTest {
     public Long divideBy;
   }
 
-
   @Test
   public void testHasExtraParams() {
     ModelHasExtraParams params = new ModelHasExtraParams(ParamCode.ENUM_FOO);
@@ -299,7 +298,6 @@ public class ApiRequestParamsConverterTest {
     assertEquals(objBar.get("hello"), "world");
   }
 
-
   @Test
   public void testToMapWithStringInt64Params() {
     HasStringInt64Param params = new HasStringInt64Param();
@@ -316,7 +314,8 @@ public class ApiRequestParamsConverterTest {
   public void testFromJsonWithStringInt64ResourceField() {
     Gson gson = new GsonBuilder().create();
 
-    HasStringInt64Param resource = gson.fromJson("{\"divide_by\":\"123\"}", HasStringInt64Param.class);
+    HasStringInt64Param resource =
+        gson.fromJson("{\"divide_by\":\"123\"}", HasStringInt64Param.class);
 
     TestCase.assertEquals(Long.valueOf(123L), resource.divideBy);
   }
