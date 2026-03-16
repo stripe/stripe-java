@@ -343,7 +343,9 @@ public class PagingIteratorTest extends BaseStripeTest {
     Stripe.apiKey = null;
     final PageableModelCollection collection =
         PageableModel.list(page0Params, RequestOptions.builder().setApiKey("sk_test_xyz").build());
-    assertEquals(collection.getRequestOptions().getApiKey(), "sk_test_xyz");
+    assertEquals(
+        new BearerTokenAuthenticator("sk_test_xyz"),
+        collection.getRequestOptions().getAuthenticator());
     final List<PageableModel> models = new ArrayList<>();
 
     for (PageableModel model : collection.autoPagingIterable()) {

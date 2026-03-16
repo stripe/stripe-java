@@ -1059,19 +1059,29 @@ public class StripeClient {
       return this.authenticator;
     }
 
+    /**
+     * Sets the authenticator used to authorize requests. Use this for custom authentication
+     * strategies. For standard API key authentication, prefer {@link #setApiKey(String)}.
+     *
+     * <p>This shares a backing field with {@link #setApiKey(String)} — calling one overwrites the
+     * other.
+     *
+     * @param authenticator the authenticator to use
+     */
     public StripeClientBuilder setAuthenticator(Authenticator authenticator) {
       this.authenticator = authenticator;
       return this;
     }
 
-    public String getApiKey() {
-      if (authenticator instanceof BearerTokenAuthenticator) {
-        return ((BearerTokenAuthenticator) authenticator).getApiKey();
-      }
-
-      return null;
-    }
-
+    /**
+     * Sets the API key for bearer token authentication. This is a convenience method equivalent to
+     * calling {@code setAuthenticator(new BearerTokenAuthenticator(apiKey))}.
+     *
+     * <p>This shares a backing field with {@link #setAuthenticator(Authenticator)} — calling one
+     * overwrites the other.
+     *
+     * @param apiKey the API key; if null, clears the authenticator
+     */
     public StripeClientBuilder setApiKey(String apiKey) {
       if (apiKey == null) {
         this.authenticator = null;
@@ -1179,7 +1189,8 @@ public class StripeClient {
      * Set the base URL for the Stripe API. By default this is "https://api.stripe.com".
      *
      * <p>This only affects requests made with a {@link com.stripe.net.BaseAddress} of API. Use
-     * {@link setFilesBase} or {@link setConnectBase} to interpect requests with other bases.
+     * {@link #setFilesBase}, {@link #setConnectBase} or {@link #setMeterEventsBase} to interpect
+     * requests with other bases.
      */
     public StripeClientBuilder setApiBase(String address) {
       this.apiBase = address;
