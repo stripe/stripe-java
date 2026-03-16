@@ -3,6 +3,7 @@ package com.stripe.events;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.v2.core.Event;
+import com.stripe.v2.Amount;
 import java.time.Instant;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,23 +49,7 @@ public final class V2CoreHealthFraudRateIncreasedEvent extends Event {
       Long impactedRequests;
       /** Estimated aggregated amount for the impacted requests. */
       @SerializedName("realized_fraud_amount")
-      RealizedFraudAmount realizedFraudAmount;
-
-      public static final class RealizedFraudAmount {
-        /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
-         */
-        @SerializedName("currency")
-        String currency;
-        /**
-         * A non-negative integer representing how much to charge in the <a
-         * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-         */
-        @SerializedName("value")
-        Long value;
-      }
+      Amount realizedFraudAmount;
     }
   }
 }

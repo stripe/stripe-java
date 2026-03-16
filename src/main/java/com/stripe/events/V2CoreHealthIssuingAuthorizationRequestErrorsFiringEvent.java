@@ -3,6 +3,7 @@ package com.stripe.events;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.v2.core.Event;
+import com.stripe.v2.Amount;
 import java.time.Instant;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,48 +33,16 @@ public final class V2CoreHealthIssuingAuthorizationRequestErrorsFiringEvent exte
     public static final class Impact {
       /** Estimated aggregated amount for the approved requests. */
       @SerializedName("approved_amount")
-      ApprovedAmount approvedAmount;
+      Amount approvedAmount;
       /** The number of approved requests which are impacted. */
       @SerializedName("approved_impacted_requests")
       Long approvedImpactedRequests;
       /** Estimated aggregated amount for the declined requests. */
       @SerializedName("declined_amount")
-      DeclinedAmount declinedAmount;
+      Amount declinedAmount;
       /** The number of declined requests which are impacted. */
       @SerializedName("declined_impacted_requests")
       Long declinedImpactedRequests;
-
-      public static final class ApprovedAmount {
-        /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
-         */
-        @SerializedName("currency")
-        String currency;
-        /**
-         * A non-negative integer representing how much to charge in the <a
-         * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-         */
-        @SerializedName("value")
-        Long value;
-      }
-
-      public static final class DeclinedAmount {
-        /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
-         */
-        @SerializedName("currency")
-        String currency;
-        /**
-         * A non-negative integer representing how much to charge in the <a
-         * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-         */
-        @SerializedName("value")
-        Long value;
-      }
     }
   }
 }

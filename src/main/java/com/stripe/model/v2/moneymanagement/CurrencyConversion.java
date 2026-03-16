@@ -4,6 +4,7 @@ package com.stripe.model.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
 import java.time.Instant;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -63,27 +64,6 @@ public class CurrencyConversion extends StripeObject implements HasId {
     /** Amount object. */
     @SerializedName("amount")
     Amount amount;
-
-    /** Amount object. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Amount extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
   }
 
   /** The to block containing what was credited. */
@@ -94,26 +74,5 @@ public class CurrencyConversion extends StripeObject implements HasId {
     /** Amount object. */
     @SerializedName("amount")
     Amount amount;
-
-    /** Amount object. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Amount extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
   }
 }
