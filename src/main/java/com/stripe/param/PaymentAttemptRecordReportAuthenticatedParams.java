@@ -13,7 +13,11 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiRequestParams {
+public class PaymentAttemptRecordReportAuthenticatedParams extends ApiRequestParams {
+  /** When the reported payment was authenticated. Measured in seconds since the Unix epoch. */
+  @SerializedName("authenticated_at")
+  Long authenticatedAt;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -27,10 +31,6 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** When the reported payment was guaranteed. Measured in seconds since the Unix epoch. */
-  @SerializedName("guaranteed_at")
-  Long guaranteedAt;
-
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -40,11 +40,11 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
   @SerializedName("metadata")
   Object metadata;
 
-  private PaymentRecordReportPaymentAttemptGuaranteedParams(
-      List<String> expand, Map<String, Object> extraParams, Long guaranteedAt, Object metadata) {
+  private PaymentAttemptRecordReportAuthenticatedParams(
+      Long authenticatedAt, List<String> expand, Map<String, Object> extraParams, Object metadata) {
+    this.authenticatedAt = authenticatedAt;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.guaranteedAt = guaranteedAt;
     this.metadata = metadata;
   }
 
@@ -53,24 +53,30 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
   }
 
   public static class Builder {
+    private Long authenticatedAt;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private Long guaranteedAt;
-
     private Object metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentRecordReportPaymentAttemptGuaranteedParams build() {
-      return new PaymentRecordReportPaymentAttemptGuaranteedParams(
-          this.expand, this.extraParams, this.guaranteedAt, this.metadata);
+    public PaymentAttemptRecordReportAuthenticatedParams build() {
+      return new PaymentAttemptRecordReportAuthenticatedParams(
+          this.authenticatedAt, this.expand, this.extraParams, this.metadata);
+    }
+
+    /** When the reported payment was authenticated. Measured in seconds since the Unix epoch. */
+    public Builder setAuthenticatedAt(Long authenticatedAt) {
+      this.authenticatedAt = authenticatedAt;
+      return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentRecordReportPaymentAttemptGuaranteedParams#expand} for the field documentation.
+     * PaymentAttemptRecordReportAuthenticatedParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -83,7 +89,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentRecordReportPaymentAttemptGuaranteedParams#expand} for the field documentation.
+     * PaymentAttemptRecordReportAuthenticatedParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -96,7 +102,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentRecordReportPaymentAttemptGuaranteedParams#extraParams} for the field documentation.
+     * PaymentAttemptRecordReportAuthenticatedParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -109,7 +115,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentRecordReportPaymentAttemptGuaranteedParams#extraParams} for the field
+     * See {@link PaymentAttemptRecordReportAuthenticatedParams#extraParams} for the field
      * documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
@@ -120,16 +126,10 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
       return this;
     }
 
-    /** When the reported payment was guaranteed. Measured in seconds since the Unix epoch. */
-    public Builder setGuaranteedAt(Long guaranteedAt) {
-      this.guaranteedAt = guaranteedAt;
-      return this;
-    }
-
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentRecordReportPaymentAttemptGuaranteedParams#metadata} for the field documentation.
+     * PaymentAttemptRecordReportAuthenticatedParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -143,7 +143,7 @@ public class PaymentRecordReportPaymentAttemptGuaranteedParams extends ApiReques
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentRecordReportPaymentAttemptGuaranteedParams#metadata} for the field
+     * See {@link PaymentAttemptRecordReportAuthenticatedParams#metadata} for the field
      * documentation.
      */
     @SuppressWarnings("unchecked")

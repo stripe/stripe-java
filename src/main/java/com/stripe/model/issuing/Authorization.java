@@ -214,6 +214,9 @@ public class Authorization extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Token> token;
 
+  @SerializedName("token_details")
+  TokenDetails tokenDetails;
+
   /**
    * List of <a href="https://docs.stripe.com/api/issuing/transactions">transactions</a> associated
    * with this authorization.
@@ -1159,6 +1162,203 @@ public class Authorization extends ApiResource
   }
 
   /**
+   * For more details about TokenDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TokenDetails extends StripeObject {
+    /** The card associated with this token. */
+    @SerializedName("card")
+    String card;
+
+    /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+    @SerializedName("created")
+    Long created;
+
+    /** The hashed ID derived from the device ID from the card network associated with the token. */
+    @SerializedName("device_fingerprint")
+    String deviceFingerprint;
+
+    @SerializedName("network_data")
+    NetworkData networkData;
+
+    /**
+     * For more details about NetworkData, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NetworkData extends StripeObject {
+      @SerializedName("device")
+      Device device;
+
+      @SerializedName("mastercard")
+      Mastercard mastercard;
+
+      /**
+       * The card network for this token.
+       *
+       * <p>One of {@code mastercard}, or {@code visa}.
+       */
+      @SerializedName("type")
+      String type;
+
+      @SerializedName("visa")
+      Visa visa;
+
+      @SerializedName("wallet_provider")
+      WalletProvider walletProvider;
+
+      /**
+       * For more details about Device, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Device extends StripeObject {
+        /** The IP address of the device at provisioning time. */
+        @SerializedName("ip_address")
+        String ipAddress;
+
+        /**
+         * The ISO 639-1 language code of the device associated with the tokenization request.
+         *
+         * <p>One of {@code aa}, {@code ab}, {@code ae}, {@code af}, {@code ak}, {@code am}, {@code
+         * an}, {@code ar}, {@code as}, {@code av}, {@code ay}, {@code az}, {@code ba}, {@code be},
+         * {@code bg}, {@code bi}, {@code bm}, {@code bn}, {@code bo}, {@code br}, {@code bs},
+         * {@code ca}, {@code ce}, {@code ch}, {@code co}, {@code cr}, {@code cs}, {@code cu},
+         * {@code cv}, {@code cy}, {@code da}, {@code de}, {@code dv}, {@code dz}, {@code ee},
+         * {@code el}, {@code en}, {@code eo}, {@code es}, {@code et}, {@code eu}, {@code fa},
+         * {@code ff}, {@code fi}, {@code fj}, {@code fo}, {@code fr}, {@code fy}, {@code ga},
+         * {@code gd}, {@code gl}, {@code gn}, {@code gu}, {@code gv}, {@code ha}, {@code he},
+         * {@code hi}, {@code ho}, {@code hr}, {@code ht}, {@code hu}, {@code hy}, {@code hz},
+         * {@code ia}, {@code id}, {@code ie}, {@code ig}, {@code ii}, {@code ik}, {@code io},
+         * {@code is}, {@code it}, {@code iu}, {@code ja}, {@code jv}, {@code ka}, {@code kg},
+         * {@code ki}, {@code kj}, {@code kk}, {@code kl}, {@code km}, {@code kn}, {@code ko},
+         * {@code kr}, {@code ks}, {@code ku}, {@code kv}, {@code kw}, {@code ky}, {@code la},
+         * {@code lb}, {@code lg}, {@code li}, {@code ln}, {@code lo}, {@code lt}, {@code lu},
+         * {@code lv}, {@code mg}, {@code mh}, {@code mi}, {@code mk}, {@code ml}, {@code mn},
+         * {@code mr}, {@code ms}, {@code mt}, {@code my}, {@code na}, {@code nb}, {@code nd},
+         * {@code ne}, {@code ng}, {@code nl}, {@code nn}, {@code no}, {@code nr}, {@code nv},
+         * {@code ny}, {@code oc}, {@code oj}, {@code om}, {@code or}, {@code os}, {@code pa},
+         * {@code pi}, {@code pl}, {@code ps}, {@code pt}, {@code qu}, {@code rm}, {@code rn},
+         * {@code ro}, {@code ru}, {@code rw}, {@code sa}, {@code sc}, {@code sd}, {@code se},
+         * {@code sg}, {@code si}, {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so},
+         * {@code sq}, {@code sr}, {@code ss}, {@code st}, {@code su}, {@code sv}, {@code sw},
+         * {@code ta}, {@code te}, {@code tg}, {@code th}, {@code ti}, {@code tk}, {@code tl},
+         * {@code tn}, {@code to}, {@code tr}, {@code ts}, {@code tt}, {@code tw}, {@code ty},
+         * {@code ug}, {@code uk}, {@code ur}, {@code uz}, {@code ve}, {@code vi}, {@code vo},
+         * {@code wa}, {@code wo}, {@code xh}, {@code yi}, {@code yo}, {@code za}, {@code zh}, or
+         * {@code zu}.
+         */
+        @SerializedName("language")
+        String language;
+
+        /** The phone number of the device used for tokenization. */
+        @SerializedName("phone_number")
+        String phoneNumber;
+      }
+
+      /**
+       * For more details about Mastercard, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Mastercard extends StripeObject {
+        /** A unique reference ID from the network to represent the card account number. */
+        @SerializedName("card_reference_id")
+        String cardReferenceId;
+
+        /** The network-unique identifier for the token. */
+        @SerializedName("token_reference_id")
+        String tokenReferenceId;
+
+        /** The ID of the entity requesting tokenization. */
+        @SerializedName("token_requestor_id")
+        String tokenRequestorId;
+      }
+
+      /**
+       * For more details about Visa, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Visa extends StripeObject {
+        /** A unique reference ID from the network to represent the card account number. */
+        @SerializedName("card_reference_id")
+        String cardReferenceId;
+
+        /** The network-unique identifier for the token. */
+        @SerializedName("token_reference_id")
+        String tokenReferenceId;
+
+        /** The ID of the entity requesting tokenization. */
+        @SerializedName("token_requestor_id")
+        String tokenRequestorId;
+
+        /**
+         * Degree of risk associated with the token between {@code 01} and {@code 99}, with higher
+         * number indicating higher risk. A {@code 00} value indicates the token was not scored by
+         * Visa.
+         */
+        @SerializedName("token_risk_score")
+        String tokenRiskScore;
+      }
+
+      /**
+       * For more details about WalletProvider, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class WalletProvider extends StripeObject {
+        /**
+         * An evaluation on the trustworthiness of the wallet account between 1 and 5. A higher
+         * score indicates more trustworthy.
+         */
+        @SerializedName("account_trust_score")
+        Long accountTrustScore;
+
+        /**
+         * The method used for tokenizing a card.
+         *
+         * <p>One of {@code app}, {@code manual}, {@code on_file}, or {@code other}.
+         */
+        @SerializedName("card_number_source")
+        String cardNumberSource;
+
+        /**
+         * An evaluation on the trustworthiness of the device. A higher score indicates more
+         * trustworthy.
+         */
+        @SerializedName("device_trust_score")
+        Long deviceTrustScore;
+
+        /** The reasons for suggested tokenization given by the card network. */
+        @SerializedName("reason_codes")
+        List<String> reasonCodes;
+
+        /**
+         * The recommendation on responding to the tokenization request.
+         *
+         * <p>One of {@code approve}, {@code decline}, or {@code require_auth}.
+         */
+        @SerializedName("suggested_decision")
+        String suggestedDecision;
+      }
+    }
+  }
+
+  /**
    * For more details about Treasury, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -1642,6 +1842,7 @@ public class Authorization extends ApiResource
     trySetResponseGetter(networkData, responseGetter);
     trySetResponseGetter(pendingRequest, responseGetter);
     trySetResponseGetter(token, responseGetter);
+    trySetResponseGetter(tokenDetails, responseGetter);
     trySetResponseGetter(treasury, responseGetter);
     trySetResponseGetter(verificationData, responseGetter);
   }

@@ -38,7 +38,10 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> Details about the merchant where the authorization occurred. */
+  /**
+   * <strong>Required.</strong> Details about the seller (grocery store, e-commerce website, etc.)
+   * where the card authorization happened.
+   */
   @SerializedName("merchant_details")
   MerchantDetails merchantDetails;
 
@@ -51,15 +54,15 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** Details about the card network processing. */
+  /** Details about the authorization, such as identifiers, set by the card network. */
   @SerializedName("network_details")
   NetworkDetails networkDetails;
 
-  /** Details about the token, if a tokenized payment method was used. */
+  /** Details about the token, if a tokenized payment method was used for the authorization. */
   @SerializedName("token_details")
   TokenDetails tokenDetails;
 
-  /** Details about verification checks performed. */
+  /** Details about verification data for the authorization. */
   @SerializedName("verification_details")
   VerificationDetails verificationDetails;
 
@@ -200,7 +203,10 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
       return this;
     }
 
-    /** <strong>Required.</strong> Details about the merchant where the authorization occurred. */
+    /**
+     * <strong>Required.</strong> Details about the seller (grocery store, e-commerce website, etc.)
+     * where the card authorization happened.
+     */
     public Builder setMerchantDetails(
         IssuingAuthorizationEvaluationCreateParams.MerchantDetails merchantDetails) {
       this.merchantDetails = merchantDetails;
@@ -233,21 +239,21 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
       return this;
     }
 
-    /** Details about the card network processing. */
+    /** Details about the authorization, such as identifiers, set by the card network. */
     public Builder setNetworkDetails(
         IssuingAuthorizationEvaluationCreateParams.NetworkDetails networkDetails) {
       this.networkDetails = networkDetails;
       return this;
     }
 
-    /** Details about the token, if a tokenized payment method was used. */
+    /** Details about the token, if a tokenized payment method was used for the authorization. */
     public Builder setTokenDetails(
         IssuingAuthorizationEvaluationCreateParams.TokenDetails tokenDetails) {
       this.tokenDetails = tokenDetails;
       return this;
     }
 
-    /** Details about verification checks performed. */
+    /** Details about verification data for the authorization. */
     public Builder setVerificationDetails(
         IssuingAuthorizationEvaluationCreateParams.VerificationDetails verificationDetails) {
       this.verificationDetails = verificationDetails;
@@ -258,23 +264,30 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class AuthorizationDetails {
-    /** <strong>Required.</strong> The authorization amount in the smallest currency unit. */
+    /**
+     * <strong>Required.</strong> The total amount of the authorization in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     */
     @SerializedName("amount")
     Long amount;
 
-    /** The method used for authorization. */
+    /** How the card details were provided. */
     @SerializedName("authorization_method")
     AuthorizationMethod authorizationMethod;
 
-    /** <strong>Required.</strong> Three-letter ISO currency code in lowercase. */
+    /**
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+     */
     @SerializedName("currency")
     String currency;
 
-    /** The card entry mode. */
+    /** Defines how the card's information was entered for the authorization. */
     @SerializedName("entry_mode")
     EntryMode entryMode;
 
-    /** The raw code for the card entry mode. */
+    /** Raw code indicating the entry mode from the network message. */
     @SerializedName("entry_mode_raw_code")
     String entryModeRawCode;
 
@@ -287,21 +300,22 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * <strong>Required.</strong> The time when the authorization was initiated (Unix timestamp).
-     */
+    /** <strong>Required.</strong> The timestamp of the authorization initiated in seconds. */
     @SerializedName("initiated_at")
     Long initiatedAt;
 
-    /** The point of sale condition. */
+    /** Defines how the card was read at the point of sale. */
     @SerializedName("point_of_sale_condition")
     PointOfSaleCondition pointOfSaleCondition;
 
-    /** The raw code for the point of sale condition. */
+    /** Raw code indicating the point of sale condition from the network message. */
     @SerializedName("point_of_sale_condition_raw_code")
     String pointOfSaleConditionRawCode;
 
-    /** <strong>Required.</strong> External reference for the authorization. */
+    /**
+     * <strong>Required.</strong> User's specified unique ID for this authorization attempt (e.g.,
+     * RRN or internal reference).
+     */
     @SerializedName("reference")
     String reference;
 
@@ -368,13 +382,16 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
             this.reference);
       }
 
-      /** <strong>Required.</strong> The authorization amount in the smallest currency unit. */
+      /**
+       * <strong>Required.</strong> The total amount of the authorization in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }
 
-      /** The method used for authorization. */
+      /** How the card details were provided. */
       public Builder setAuthorizationMethod(
           IssuingAuthorizationEvaluationCreateParams.AuthorizationDetails.AuthorizationMethod
               authorizationMethod) {
@@ -382,20 +399,24 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
         return this;
       }
 
-      /** <strong>Required.</strong> Three-letter ISO currency code in lowercase. */
+      /**
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+       */
       public Builder setCurrency(String currency) {
         this.currency = currency;
         return this;
       }
 
-      /** The card entry mode. */
+      /** Defines how the card's information was entered for the authorization. */
       public Builder setEntryMode(
           IssuingAuthorizationEvaluationCreateParams.AuthorizationDetails.EntryMode entryMode) {
         this.entryMode = entryMode;
         return this;
       }
 
-      /** The raw code for the card entry mode. */
+      /** Raw code indicating the entry mode from the network message. */
       public Builder setEntryModeRawCode(String entryModeRawCode) {
         this.entryModeRawCode = entryModeRawCode;
         return this;
@@ -429,15 +450,13 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
         return this;
       }
 
-      /**
-       * <strong>Required.</strong> The time when the authorization was initiated (Unix timestamp).
-       */
+      /** <strong>Required.</strong> The timestamp of the authorization initiated in seconds. */
       public Builder setInitiatedAt(Long initiatedAt) {
         this.initiatedAt = initiatedAt;
         return this;
       }
 
-      /** The point of sale condition. */
+      /** Defines how the card was read at the point of sale. */
       public Builder setPointOfSaleCondition(
           IssuingAuthorizationEvaluationCreateParams.AuthorizationDetails.PointOfSaleCondition
               pointOfSaleCondition) {
@@ -445,13 +464,16 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
         return this;
       }
 
-      /** The raw code for the point of sale condition. */
+      /** Raw code indicating the point of sale condition from the network message. */
       public Builder setPointOfSaleConditionRawCode(String pointOfSaleConditionRawCode) {
         this.pointOfSaleConditionRawCode = pointOfSaleConditionRawCode;
         return this;
       }
 
-      /** <strong>Required.</strong> External reference for the authorization. */
+      /**
+       * <strong>Required.</strong> User's specified unique ID for this authorization attempt (e.g.,
+       * RRN or internal reference).
+       */
       public Builder setReference(String reference) {
         this.reference = reference;
         return this;
@@ -561,19 +583,19 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class CardDetails {
-    /** <strong>Required.</strong> Bank Identification Number (BIN) of the card. */
+    /** <strong>Required.</strong> The Bank Identification Number (BIN) of the card. */
     @SerializedName("bin")
     String bin;
 
-    /** Two-letter ISO country code of the card's issuing bank. */
+    /** <strong>Required.</strong> The two-letter country code of the BIN issuer. */
     @SerializedName("bin_country")
     String binCountry;
 
-    /** <strong>Required.</strong> The type of card (physical or virtual). */
+    /** <strong>Required.</strong> The type of the card. */
     @SerializedName("card_type")
     CardType cardType;
 
-    /** <strong>Required.</strong> The time when the card was created (Unix timestamp). */
+    /** <strong>Required.</strong> The timestamp when the card was created. */
     @SerializedName("created_at")
     Long createdAt;
 
@@ -586,11 +608,14 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Last 4 digits of the card number. */
+    /** The last 4 digits of the card number. */
     @SerializedName("last4")
     String last4;
 
-    /** <strong>Required.</strong> External reference for the card. */
+    /**
+     * <strong>Required.</strong> User's specified unique ID of the card for this authorization
+     * attempt (e.g., RRN or internal reference).
+     */
     @SerializedName("reference")
     String reference;
 
@@ -642,26 +667,26 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
             this.reference);
       }
 
-      /** <strong>Required.</strong> Bank Identification Number (BIN) of the card. */
+      /** <strong>Required.</strong> The Bank Identification Number (BIN) of the card. */
       public Builder setBin(String bin) {
         this.bin = bin;
         return this;
       }
 
-      /** Two-letter ISO country code of the card's issuing bank. */
+      /** <strong>Required.</strong> The two-letter country code of the BIN issuer. */
       public Builder setBinCountry(String binCountry) {
         this.binCountry = binCountry;
         return this;
       }
 
-      /** <strong>Required.</strong> The type of card (physical or virtual). */
+      /** <strong>Required.</strong> The type of the card. */
       public Builder setCardType(
           IssuingAuthorizationEvaluationCreateParams.CardDetails.CardType cardType) {
         this.cardType = cardType;
         return this;
       }
 
-      /** <strong>Required.</strong> The time when the card was created (Unix timestamp). */
+      /** <strong>Required.</strong> The timestamp when the card was created. */
       public Builder setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
         return this;
@@ -695,13 +720,16 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
         return this;
       }
 
-      /** Last 4 digits of the card number. */
+      /** The last 4 digits of the card number. */
       public Builder setLast4(String last4) {
         this.last4 = last4;
         return this;
       }
 
-      /** <strong>Required.</strong> External reference for the card. */
+      /**
+       * <strong>Required.</strong> User's specified unique ID of the card for this authorization
+       * attempt (e.g., RRN or internal reference).
+       */
       public Builder setReference(String reference) {
         this.reference = reference;
         return this;
@@ -727,7 +755,7 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class CardholderDetails {
-    /** The time when the cardholder was created (Unix timestamp). */
+    /** The timestamp when the cardholder was created. */
     @SerializedName("created_at")
     Long createdAt;
 
@@ -740,7 +768,10 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** External reference for the cardholder. */
+    /**
+     * User's specified unique ID of the cardholder for this authorization attempt (e.g., RRN or
+     * internal reference).
+     */
     @SerializedName("reference")
     String reference;
 
@@ -767,7 +798,7 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
             this.createdAt, this.extraParams, this.reference);
       }
 
-      /** The time when the cardholder was created (Unix timestamp). */
+      /** The timestamp when the cardholder was created. */
       public Builder setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
         return this;
@@ -801,7 +832,10 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
         return this;
       }
 
-      /** External reference for the cardholder. */
+      /**
+       * User's specified unique ID of the cardholder for this authorization attempt (e.g., RRN or
+       * internal reference).
+       */
       public Builder setReference(String reference) {
         this.reference = reference;
         return this;
@@ -812,11 +846,11 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class MerchantDetails {
-    /** <strong>Required.</strong> Merchant Category Code (MCC). */
+    /** <strong>Required.</strong> The merchant category code for the seller's business. */
     @SerializedName("category_code")
     String categoryCode;
 
-    /** Two-letter ISO country code of the merchant. */
+    /** Country where the seller is located. */
     @SerializedName("country")
     String country;
 
@@ -829,15 +863,18 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> Name of the merchant. */
+    /** <strong>Required.</strong> Name of the seller. */
     @SerializedName("name")
     String name;
 
-    /** <strong>Required.</strong> Network merchant identifier. */
+    /**
+     * <strong>Required.</strong> Identifier assigned to the seller by the card network. Different
+     * card networks may assign different network_id fields to the same merchant.
+     */
     @SerializedName("network_id")
     String networkId;
 
-    /** Terminal identifier. */
+    /** An ID assigned by the seller to the location of the sale. */
     @SerializedName("terminal_id")
     String terminalId;
 
@@ -884,13 +921,13 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
             this.terminalId);
       }
 
-      /** <strong>Required.</strong> Merchant Category Code (MCC). */
+      /** <strong>Required.</strong> The merchant category code for the seller's business. */
       public Builder setCategoryCode(String categoryCode) {
         this.categoryCode = categoryCode;
         return this;
       }
 
-      /** Two-letter ISO country code of the merchant. */
+      /** Country where the seller is located. */
       public Builder setCountry(String country) {
         this.country = country;
         return this;
@@ -924,19 +961,22 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
         return this;
       }
 
-      /** <strong>Required.</strong> Name of the merchant. */
+      /** <strong>Required.</strong> Name of the seller. */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
-      /** <strong>Required.</strong> Network merchant identifier. */
+      /**
+       * <strong>Required.</strong> Identifier assigned to the seller by the card network. Different
+       * card networks may assign different network_id fields to the same merchant.
+       */
       public Builder setNetworkId(String networkId) {
         this.networkId = networkId;
         return this;
       }
 
-      /** Terminal identifier. */
+      /** An ID assigned by the seller to the location of the sale. */
       public Builder setTerminalId(String terminalId) {
         this.terminalId = terminalId;
         return this;
@@ -947,7 +987,10 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class NetworkDetails {
-    /** The acquiring institution identifier. */
+    /**
+     * Identifier assigned to the acquirer by the card network. Sometimes this value is not provided
+     * by the network; in this case, the value will be null.
+     */
     @SerializedName("acquiring_institution_id")
     String acquiringInstitutionId;
 
@@ -960,7 +1003,7 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The card network that routed the authorization. */
+    /** The card network over which Stripe received the authorization. */
     @SerializedName("routed_network")
     RoutedNetwork routedNetwork;
 
@@ -990,7 +1033,10 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
             this.acquiringInstitutionId, this.extraParams, this.routedNetwork);
       }
 
-      /** The acquiring institution identifier. */
+      /**
+       * Identifier assigned to the acquirer by the card network. Sometimes this value is not
+       * provided by the network; in this case, the value will be null.
+       */
       public Builder setAcquiringInstitutionId(String acquiringInstitutionId) {
         this.acquiringInstitutionId = acquiringInstitutionId;
         return this;
@@ -1024,7 +1070,7 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
         return this;
       }
 
-      /** The card network that routed the authorization. */
+      /** The card network over which Stripe received the authorization. */
       public Builder setRoutedNetwork(
           IssuingAuthorizationEvaluationCreateParams.NetworkDetails.RoutedNetwork routedNetwork) {
         this.routedNetwork = routedNetwork;
@@ -1066,7 +1112,7 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class TokenDetails {
-    /** The time when the token was created (Unix timestamp). */
+    /** The timestamp when the network token was created. */
     @SerializedName("created_at")
     Long createdAt;
 
@@ -1079,11 +1125,17 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** External reference for the token. */
+    /**
+     * User's specified unique ID of the card token for this authorization attempt (e.g., RRN or
+     * internal reference).
+     */
     @SerializedName("reference")
     String reference;
 
-    /** The wallet provider for the tokenized payment method. */
+    /**
+     * The digital wallet used for this transaction. One of {@code apple_pay}, {@code google_pay},
+     * or {@code samsung_pay}.
+     */
     @SerializedName("wallet")
     Wallet wallet;
 
@@ -1114,7 +1166,7 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
             this.createdAt, this.extraParams, this.reference, this.wallet);
       }
 
-      /** The time when the token was created (Unix timestamp). */
+      /** The timestamp when the network token was created. */
       public Builder setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
         return this;
@@ -1148,13 +1200,19 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
         return this;
       }
 
-      /** External reference for the token. */
+      /**
+       * User's specified unique ID of the card token for this authorization attempt (e.g., RRN or
+       * internal reference).
+       */
       public Builder setReference(String reference) {
         this.reference = reference;
         return this;
       }
 
-      /** The wallet provider for the tokenized payment method. */
+      /**
+       * The digital wallet used for this transaction. One of {@code apple_pay}, {@code google_pay},
+       * or {@code samsung_pay}.
+       */
       public Builder setWallet(
           IssuingAuthorizationEvaluationCreateParams.TokenDetails.Wallet wallet) {
         this.wallet = wallet;
@@ -1193,7 +1251,7 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The result of 3D Secure verification. */
+    /** The outcome of the 3D Secure authentication request. */
     @SerializedName("three_d_secure_result")
     ThreeDSecureResult threeDSecureResult;
 
@@ -1246,7 +1304,7 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
         return this;
       }
 
-      /** The result of 3D Secure verification. */
+      /** The outcome of the 3D Secure authentication request. */
       public Builder setThreeDSecureResult(
           IssuingAuthorizationEvaluationCreateParams.VerificationDetails.ThreeDSecureResult
               threeDSecureResult) {

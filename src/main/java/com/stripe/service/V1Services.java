@@ -185,6 +185,10 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.MarginService(this.getResponseGetter());
   }
 
+  public com.stripe.service.OrchestrationService orchestration() {
+    return new com.stripe.service.OrchestrationService(this.getResponseGetter());
+  }
+
   public com.stripe.service.OrderService orders() {
     return new com.stripe.service.OrderService(this.getResponseGetter());
   }

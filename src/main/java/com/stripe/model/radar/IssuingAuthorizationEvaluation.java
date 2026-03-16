@@ -26,7 +26,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class IssuingAuthorizationEvaluation extends ApiResource implements HasId {
-  /** Details about the authorization transaction. */
+  /** Details about the authorization. */
   @SerializedName("authorization_details")
   AuthorizationDetails authorizationDetails;
 
@@ -50,7 +50,10 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** Details about the merchant where the authorization occurred. */
+  /**
+   * Details about the seller (grocery store, e-commerce website, etc.) where the card authorization
+   * happened.
+   */
   @SerializedName("merchant_details")
   MerchantDetails merchantDetails;
 
@@ -61,7 +64,7 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** Details about the card network processing. */
+  /** Details about the authorization, such as identifiers, set by the card network. */
   @SerializedName("network_details")
   NetworkDetails networkDetails;
 
@@ -77,11 +80,11 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
   @SerializedName("signals")
   Signals signals;
 
-  /** Details about the token, if a tokenized payment method was used. */
+  /** Details about the token, if a tokenized payment method was used for the authorization. */
   @SerializedName("token_details")
   TokenDetails tokenDetails;
 
-  /** Details about verification checks performed. */
+  /** Details about verification data for the authorization. */
   @SerializedName("verification_details")
   VerificationDetails verificationDetails;
 
@@ -122,17 +125,20 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
     return getGlobalResponseGetter().request(request, IssuingAuthorizationEvaluation.class);
   }
 
-  /** Details about the authorization transaction. */
+  /** Details about the authorization. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AuthorizationDetails extends StripeObject {
-    /** The authorization amount in the smallest currency unit. */
+    /**
+     * The total amount of the authorization in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * The method used for authorization.
+     * How the card details were provided.
      *
      * <p>One of {@code chip}, {@code contactless}, {@code keyed_in}, {@code online}, or {@code
      * swipe}.
@@ -140,12 +146,16 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
     @SerializedName("authorization_method")
     String authorizationMethod;
 
-    /** Three-letter ISO currency code in lowercase. */
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
     @SerializedName("currency")
     String currency;
 
     /**
-     * The card entry mode.
+     * Defines how the card's information was entered for the authorization.
      *
      * <p>One of {@code contactless}, {@code contactless_magstripe}, {@code credential_on_file},
      * {@code integrated_circuit_card}, {@code magstripe}, {@code magstripe_no_cvv}, {@code manual},
@@ -154,16 +164,16 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
     @SerializedName("entry_mode")
     String entryMode;
 
-    /** The raw code for the card entry mode. */
+    /** Raw code indicating the entry mode from the network message. */
     @SerializedName("entry_mode_raw_code")
     String entryModeRawCode;
 
-    /** The time when the authorization was initiated. */
+    /** The timestamp of the authorization initiated in seconds. */
     @SerializedName("initiated_at")
     Long initiatedAt;
 
     /**
-     * The point of sale condition.
+     * Defines how the card was read at the point of sale.
      *
      * <p>One of {@code account_verification}, {@code card_not_present}, {@code card_present},
      * {@code e_commerce}, {@code key_entered_pos}, {@code missing}, {@code moto}, {@code other},
@@ -172,11 +182,13 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
     @SerializedName("point_of_sale_condition")
     String pointOfSaleCondition;
 
-    /** The raw code for the point of sale condition. */
+    /** Raw code indicating the point of sale condition from the network message. */
     @SerializedName("point_of_sale_condition_raw_code")
     String pointOfSaleConditionRawCode;
 
-    /** External reference for the authorization. */
+    /**
+     * User's specified unique ID for this authorization attempt (e.g., RRN or internal reference).
+     */
     @SerializedName("reference")
     String reference;
   }
@@ -190,19 +202,19 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
     @SerializedName("bin")
     String bin;
 
-    /** The country code associated with the card BIN. */
+    /** The two-letter country code of the BIN issuer. */
     @SerializedName("bin_country")
     String binCountry;
 
     /**
-     * The type of card (physical or virtual).
+     * The type of the card.
      *
      * <p>One of {@code physical}, or {@code virtual}.
      */
     @SerializedName("card_type")
     String cardType;
 
-    /** The time when the card was created. */
+    /** The timestamp when the card was created. */
     @SerializedName("created_at")
     Long createdAt;
 
@@ -210,7 +222,10 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
     @SerializedName("last4")
     String last4;
 
-    /** External reference for the card. */
+    /**
+     * User's specified unique ID of the card for this authorization attempt (e.g., RRN or internal
+     * reference).
+     */
     @SerializedName("reference")
     String reference;
   }
@@ -220,52 +235,64 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CardholderDetails extends StripeObject {
-    /** The time when the cardholder was created. */
+    /** The timestamp when the cardholder was created. */
     @SerializedName("created_at")
     Long createdAt;
 
-    /** External reference for the cardholder. */
+    /**
+     * User's specified unique ID of the cardholder for this authorization attempt (e.g., RRN or
+     * internal reference).
+     */
     @SerializedName("reference")
     String reference;
   }
 
-  /** Details about the merchant where the authorization occurred. */
+  /**
+   * Details about the seller (grocery store, e-commerce website, etc.) where the card authorization
+   * happened.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class MerchantDetails extends StripeObject {
-    /** The merchant category code (MCC). */
+    /** The merchant category code for the seller's business. */
     @SerializedName("category_code")
     String categoryCode;
 
-    /** The merchant country code. */
+    /** Country where the seller is located. */
     @SerializedName("country")
     String country;
 
-    /** The merchant name. */
+    /** Name of the seller. */
     @SerializedName("name")
     String name;
 
-    /** The merchant identifier from the card network. */
+    /**
+     * Identifier assigned to the seller by the card network. Different card networks may assign
+     * different network_id fields to the same merchant.
+     */
     @SerializedName("network_id")
     String networkId;
 
-    /** The terminal identifier. */
+    /** An ID assigned by the seller to the location of the sale. */
     @SerializedName("terminal_id")
     String terminalId;
   }
 
-  /** Details about the card network processing. */
+  /** Details about the authorization, such as identifiers, set by the card network. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class NetworkDetails extends StripeObject {
-    /** The acquiring institution identifier. */
+    /**
+     * Identifier assigned to the acquirer by the card network. Sometimes this value is not provided
+     * by the network; in this case, the value will be null.
+     */
     @SerializedName("acquiring_institution_id")
     String acquiringInstitutionId;
 
     /**
-     * The card network that processed the authorization.
+     * The card network over which Stripe received the authorization.
      *
      * <p>One of {@code cirrus}, {@code interlink}, {@code maestro}, {@code mastercard}, {@code
      * other}, {@code plus}, or {@code visa}.
@@ -332,35 +359,37 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
     }
   }
 
-  /** Details about the token, if a tokenized payment method was used. */
+  /** Details about the token, if a tokenized payment method was used for the authorization. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TokenDetails extends StripeObject {
-    /** The time when the token was created. */
+    /** The timestamp when the network token was created. */
     @SerializedName("created_at")
     Long createdAt;
 
-    /** External reference for the token. */
+    /**
+     * User's specified unique ID of the card token for this authorization attempt (e.g., RRN or
+     * internal reference).
+     */
     @SerializedName("reference")
     String reference;
 
     /**
-     * The wallet provider, if applicable.
-     *
-     * <p>One of {@code apple_pay}, {@code google_pay}, or {@code samsung_pay}.
+     * The digital wallet used for this transaction. One of {@code apple_pay}, {@code google_pay},
+     * or {@code samsung_pay}.
      */
     @SerializedName("wallet")
     String wallet;
   }
 
-  /** Details about verification checks performed. */
+  /** Details about verification data for the authorization. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class VerificationDetails extends StripeObject {
     /**
-     * The result of the 3D Secure verification.
+     * The outcome of the 3D Secure authentication request.
      *
      * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code exempted}, {@code
      * failed}, or {@code required}.

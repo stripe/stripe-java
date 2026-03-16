@@ -2852,7 +2852,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** An empty list, because this embedded component has no features. */
+      /** The list of features enabled in the embedded component. */
       @SerializedName("features")
       Features features;
 
@@ -2913,7 +2913,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** An empty list, because this embedded component has no features. */
+        /** The list of features enabled in the embedded component. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.CheckScanning.Features features) {
           this.features = features;
@@ -2924,6 +2924,9 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Features {
+        @SerializedName("create_us_paper_check_on_application")
+        Boolean createUsPaperCheckOnApplication;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -2934,7 +2937,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private Features(Map<String, Object> extraParams) {
+        private Features(Boolean createUsPaperCheckOnApplication, Map<String, Object> extraParams) {
+          this.createUsPaperCheckOnApplication = createUsPaperCheckOnApplication;
           this.extraParams = extraParams;
         }
 
@@ -2943,12 +2947,20 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Boolean createUsPaperCheckOnApplication;
+
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.CheckScanning.Features build() {
             return new AccountSessionCreateParams.Components.CheckScanning.Features(
-                this.extraParams);
+                this.createUsPaperCheckOnApplication, this.extraParams);
+          }
+
+          public Builder setCreateUsPaperCheckOnApplication(
+              Boolean createUsPaperCheckOnApplication) {
+            this.createUsPaperCheckOnApplication = createUsPaperCheckOnApplication;
+            return this;
           }
 
           /**

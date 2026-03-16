@@ -230,8 +230,8 @@ public class GrantedTokenCreateParams extends ApiRequestParams {
     String currency;
 
     /**
-     * <strong>Required.</strong> Time at which this SharedPaymentToken expires and can no longer be
-     * used to confirm a PaymentIntent.
+     * Time at which this SharedPaymentToken expires and can no longer be used to confirm a
+     * PaymentIntent.
      */
     @SerializedName("expires_at")
     Long expiresAt;
@@ -249,12 +249,23 @@ public class GrantedTokenCreateParams extends ApiRequestParams {
     @SerializedName("max_amount")
     Long maxAmount;
 
+    /**
+     * The recurring interval at which the shared payment token's amount usage restrictions reset.
+     */
+    @SerializedName("recurring_interval")
+    RecurringInterval recurringInterval;
+
     private UsageLimits(
-        String currency, Long expiresAt, Map<String, Object> extraParams, Long maxAmount) {
+        String currency,
+        Long expiresAt,
+        Map<String, Object> extraParams,
+        Long maxAmount,
+        RecurringInterval recurringInterval) {
       this.currency = currency;
       this.expiresAt = expiresAt;
       this.extraParams = extraParams;
       this.maxAmount = maxAmount;
+      this.recurringInterval = recurringInterval;
     }
 
     public static Builder builder() {
@@ -270,10 +281,16 @@ public class GrantedTokenCreateParams extends ApiRequestParams {
 
       private Long maxAmount;
 
+      private RecurringInterval recurringInterval;
+
       /** Finalize and obtain parameter instance from this builder. */
       public GrantedTokenCreateParams.UsageLimits build() {
         return new GrantedTokenCreateParams.UsageLimits(
-            this.currency, this.expiresAt, this.extraParams, this.maxAmount);
+            this.currency,
+            this.expiresAt,
+            this.extraParams,
+            this.maxAmount,
+            this.recurringInterval);
       }
 
       /**
@@ -287,8 +304,8 @@ public class GrantedTokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> Time at which this SharedPaymentToken expires and can no longer
-       * be used to confirm a PaymentIntent.
+       * Time at which this SharedPaymentToken expires and can no longer be used to confirm a
+       * PaymentIntent.
        */
       public Builder setExpiresAt(Long expiresAt) {
         this.expiresAt = expiresAt;
@@ -327,6 +344,33 @@ public class GrantedTokenCreateParams extends ApiRequestParams {
       public Builder setMaxAmount(Long maxAmount) {
         this.maxAmount = maxAmount;
         return this;
+      }
+
+      /**
+       * The recurring interval at which the shared payment token's amount usage restrictions reset.
+       */
+      public Builder setRecurringInterval(
+          GrantedTokenCreateParams.UsageLimits.RecurringInterval recurringInterval) {
+        this.recurringInterval = recurringInterval;
+        return this;
+      }
+    }
+
+    public enum RecurringInterval implements ApiRequestParams.EnumParam {
+      @SerializedName("month")
+      MONTH("month"),
+
+      @SerializedName("week")
+      WEEK("week"),
+
+      @SerializedName("year")
+      YEAR("year");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      RecurringInterval(String value) {
+        this.value = value;
       }
     }
   }

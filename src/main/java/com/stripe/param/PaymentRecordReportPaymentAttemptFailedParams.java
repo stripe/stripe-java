@@ -27,12 +27,16 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * <strong>Required.</strong> When the reported payment failed. Measured in seconds since the Unix
-   * epoch.
-   */
+  /** When the reported payment failed. Measured in seconds since the Unix epoch. */
   @SerializedName("failed_at")
   Long failedAt;
+
+  /**
+   * The failure code for this payment attempt. Must be one of {@code
+   * payment_method_customer_decline} or {@code payment_method_provider_unknown_outcome}.
+   */
+  @SerializedName("failure_code")
+  FailureCode failureCode;
 
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
@@ -44,10 +48,15 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
   Object metadata;
 
   private PaymentRecordReportPaymentAttemptFailedParams(
-      List<String> expand, Map<String, Object> extraParams, Long failedAt, Object metadata) {
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Long failedAt,
+      FailureCode failureCode,
+      Object metadata) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.failedAt = failedAt;
+    this.failureCode = failureCode;
     this.metadata = metadata;
   }
 
@@ -62,12 +71,14 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
 
     private Long failedAt;
 
+    private FailureCode failureCode;
+
     private Object metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentRecordReportPaymentAttemptFailedParams build() {
       return new PaymentRecordReportPaymentAttemptFailedParams(
-          this.expand, this.extraParams, this.failedAt, this.metadata);
+          this.expand, this.extraParams, this.failedAt, this.failureCode, this.metadata);
     }
 
     /**
@@ -123,12 +134,19 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
       return this;
     }
 
-    /**
-     * <strong>Required.</strong> When the reported payment failed. Measured in seconds since the
-     * Unix epoch.
-     */
+    /** When the reported payment failed. Measured in seconds since the Unix epoch. */
     public Builder setFailedAt(Long failedAt) {
       this.failedAt = failedAt;
+      return this;
+    }
+
+    /**
+     * The failure code for this payment attempt. Must be one of {@code
+     * payment_method_customer_decline} or {@code payment_method_provider_unknown_outcome}.
+     */
+    public Builder setFailureCode(
+        PaymentRecordReportPaymentAttemptFailedParams.FailureCode failureCode) {
+      this.failureCode = failureCode;
       return this;
     }
 
@@ -181,6 +199,21 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
+    }
+  }
+
+  public enum FailureCode implements ApiRequestParams.EnumParam {
+    @SerializedName("payment_method_customer_decline")
+    PAYMENT_METHOD_CUSTOMER_DECLINE("payment_method_customer_decline"),
+
+    @SerializedName("payment_method_provider_unknown_outcome")
+    PAYMENT_METHOD_PROVIDER_UNKNOWN_OUTCOME("payment_method_provider_unknown_outcome");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    FailureCode(String value) {
+      this.value = value;
     }
   }
 }

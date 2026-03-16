@@ -2895,6 +2895,9 @@ public class Registration extends ApiResource implements HasId {
       @SerializedName("gross_receipts_tax")
       GrossReceiptsTax grossReceiptsTax;
 
+      @SerializedName("home_rule_tax")
+      HomeRuleTax homeRuleTax;
+
       @SerializedName("hospitality_tax")
       HospitalityTax hospitalityTax;
 
@@ -2927,9 +2930,10 @@ public class Registration extends ApiResource implements HasId {
        * Type of registration in the US.
        *
        * <p>One of {@code admissions_tax}, {@code attendance_tax}, {@code entertainment_tax}, {@code
-       * gross_receipts_tax}, {@code hospitality_tax}, {@code local_amusement_tax}, {@code
-       * local_lease_tax}, {@code luxury_tax}, {@code resort_tax}, {@code state_communications_tax},
-       * {@code state_retail_delivery_fee}, {@code state_sales_tax}, or {@code tourism_tax}.
+       * gross_receipts_tax}, {@code home_rule_tax}, {@code hospitality_tax}, {@code
+       * local_amusement_tax}, {@code local_lease_tax}, {@code luxury_tax}, {@code resort_tax},
+       * {@code state_communications_tax}, {@code state_retail_delivery_fee}, {@code
+       * state_sales_tax}, or {@code tourism_tax}.
        */
       @SerializedName("type")
       String type;
@@ -2996,6 +3000,23 @@ public class Registration extends ApiResource implements HasId {
         /**
          * A <a
          * href="https://docs.stripe.com/tax/registering?type=gross_receipts_tax#registration-types">jurisdiction
+         * code</a> representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+      }
+
+      /**
+       * For more details about HomeRuleTax, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class HomeRuleTax extends StripeObject {
+        /**
+         * A <a
+         * href="https://docs.stripe.com/tax/registering?type=home_rule_tax#registration-types">jurisdiction
          * code</a> representing the local jurisdiction.
          */
         @SerializedName("jurisdiction")

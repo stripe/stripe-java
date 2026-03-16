@@ -299,9 +299,17 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
     @SerializedName("failed_at")
     Long failedAt;
 
-    private Failed(Map<String, Object> extraParams, Long failedAt) {
+    /**
+     * The failure code for this payment attempt. Must be one of {@code
+     * payment_method_customer_decline} or {@code payment_method_provider_unknown_outcome}.
+     */
+    @SerializedName("failure_code")
+    FailureCode failureCode;
+
+    private Failed(Map<String, Object> extraParams, Long failedAt, FailureCode failureCode) {
       this.extraParams = extraParams;
       this.failedAt = failedAt;
+      this.failureCode = failureCode;
     }
 
     public static Builder builder() {
@@ -313,9 +321,12 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
 
       private Long failedAt;
 
+      private FailureCode failureCode;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentRecordReportPaymentAttemptParams.Failed build() {
-        return new PaymentRecordReportPaymentAttemptParams.Failed(this.extraParams, this.failedAt);
+        return new PaymentRecordReportPaymentAttemptParams.Failed(
+            this.extraParams, this.failedAt, this.failureCode);
       }
 
       /**
@@ -352,6 +363,31 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
       public Builder setFailedAt(Long failedAt) {
         this.failedAt = failedAt;
         return this;
+      }
+
+      /**
+       * The failure code for this payment attempt. Must be one of {@code
+       * payment_method_customer_decline} or {@code payment_method_provider_unknown_outcome}.
+       */
+      public Builder setFailureCode(
+          PaymentRecordReportPaymentAttemptParams.Failed.FailureCode failureCode) {
+        this.failureCode = failureCode;
+        return this;
+      }
+    }
+
+    public enum FailureCode implements ApiRequestParams.EnumParam {
+      @SerializedName("payment_method_customer_decline")
+      PAYMENT_METHOD_CUSTOMER_DECLINE("payment_method_customer_decline"),
+
+      @SerializedName("payment_method_provider_unknown_outcome")
+      PAYMENT_METHOD_PROVIDER_UNKNOWN_OUTCOME("payment_method_provider_unknown_outcome");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      FailureCode(String value) {
+        this.value = value;
       }
     }
   }

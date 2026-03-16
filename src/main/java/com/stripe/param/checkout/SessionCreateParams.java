@@ -34,6 +34,18 @@ public class SessionCreateParams extends ApiRequestParams {
   Boolean allowPromotionCodes;
 
   /**
+   * Determines whether the customer's attempt to pay must be manually approved.
+   *
+   * <p>Default is {@code auto}, when the customer's attempt to pay is approved automatically with
+   * no action required on your server.
+   *
+   * <p>When set to {@code manual}, you must approve the customer's attempt to pay by calling <a
+   * href="api/checkout/sessions/approve">approve</a> from your server.
+   */
+  @SerializedName("approval_method")
+  ApprovalMethod approvalMethod;
+
+  /**
    * Settings for automatic tax lookup for this session and resulting payments, invoices, and
    * subscriptions.
    */
@@ -449,6 +461,7 @@ public class SessionCreateParams extends ApiRequestParams {
       AdaptivePricing adaptivePricing,
       AfterExpiration afterExpiration,
       Boolean allowPromotionCodes,
+      ApprovalMethod approvalMethod,
       AutomaticTax automaticTax,
       BillingAddressCollection billingAddressCollection,
       BrandingSettings brandingSettings,
@@ -501,6 +514,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.adaptivePricing = adaptivePricing;
     this.afterExpiration = afterExpiration;
     this.allowPromotionCodes = allowPromotionCodes;
+    this.approvalMethod = approvalMethod;
     this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
     this.brandingSettings = brandingSettings;
@@ -562,6 +576,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private AfterExpiration afterExpiration;
 
     private Boolean allowPromotionCodes;
+
+    private ApprovalMethod approvalMethod;
 
     private AutomaticTax automaticTax;
 
@@ -667,6 +683,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.adaptivePricing,
           this.afterExpiration,
           this.allowPromotionCodes,
+          this.approvalMethod,
           this.automaticTax,
           this.billingAddressCollection,
           this.brandingSettings,
@@ -739,6 +756,20 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Enables user redeemable promotion codes. */
     public Builder setAllowPromotionCodes(Boolean allowPromotionCodes) {
       this.allowPromotionCodes = allowPromotionCodes;
+      return this;
+    }
+
+    /**
+     * Determines whether the customer's attempt to pay must be manually approved.
+     *
+     * <p>Default is {@code auto}, when the customer's attempt to pay is approved automatically with
+     * no action required on your server.
+     *
+     * <p>When set to {@code manual}, you must approve the customer's attempt to pay by calling <a
+     * href="api/checkout/sessions/approve">approve</a> from your server.
+     */
+    public Builder setApprovalMethod(SessionCreateParams.ApprovalMethod approvalMethod) {
+      this.approvalMethod = approvalMethod;
       return this;
     }
 
@@ -21809,6 +21840,21 @@ public class SessionCreateParams extends ApiRequestParams {
           this.value = value;
         }
       }
+    }
+  }
+
+  public enum ApprovalMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("auto")
+    AUTO("auto"),
+
+    @SerializedName("manual")
+    MANUAL("manual");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    ApprovalMethod(String value) {
+      this.value = value;
     }
   }
 

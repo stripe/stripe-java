@@ -83,6 +83,17 @@ public final class PaymentRecordService extends ApiService {
     return reportPaymentAttemptCanceled(id, params, (RequestOptions) null);
   }
   /** Report that the most recent payment attempt on the specified Payment Record was canceled. */
+  public PaymentRecord reportPaymentAttemptCanceled(String id, RequestOptions options)
+      throws StripeException {
+    return reportPaymentAttemptCanceled(
+        id, (PaymentRecordReportPaymentAttemptCanceledParams) null, options);
+  }
+  /** Report that the most recent payment attempt on the specified Payment Record was canceled. */
+  public PaymentRecord reportPaymentAttemptCanceled(String id) throws StripeException {
+    return reportPaymentAttemptCanceled(
+        id, (PaymentRecordReportPaymentAttemptCanceledParams) null, (RequestOptions) null);
+  }
+  /** Report that the most recent payment attempt on the specified Payment Record was canceled. */
   public PaymentRecord reportPaymentAttemptCanceled(
       String id, PaymentRecordReportPaymentAttemptCanceledParams params, RequestOptions options)
       throws StripeException {
@@ -108,6 +119,21 @@ public final class PaymentRecordService extends ApiService {
   /**
    * Report that the most recent payment attempt on the specified Payment Record failed or errored.
    */
+  public PaymentRecord reportPaymentAttemptFailed(String id, RequestOptions options)
+      throws StripeException {
+    return reportPaymentAttemptFailed(
+        id, (PaymentRecordReportPaymentAttemptFailedParams) null, options);
+  }
+  /**
+   * Report that the most recent payment attempt on the specified Payment Record failed or errored.
+   */
+  public PaymentRecord reportPaymentAttemptFailed(String id) throws StripeException {
+    return reportPaymentAttemptFailed(
+        id, (PaymentRecordReportPaymentAttemptFailedParams) null, (RequestOptions) null);
+  }
+  /**
+   * Report that the most recent payment attempt on the specified Payment Record failed or errored.
+   */
   public PaymentRecord reportPaymentAttemptFailed(
       String id, PaymentRecordReportPaymentAttemptFailedParams params, RequestOptions options)
       throws StripeException {
@@ -127,6 +153,17 @@ public final class PaymentRecordService extends ApiService {
   public PaymentRecord reportPaymentAttemptGuaranteed(
       String id, PaymentRecordReportPaymentAttemptGuaranteedParams params) throws StripeException {
     return reportPaymentAttemptGuaranteed(id, params, (RequestOptions) null);
+  }
+  /** Report that the most recent payment attempt on the specified Payment Record was guaranteed. */
+  public PaymentRecord reportPaymentAttemptGuaranteed(String id, RequestOptions options)
+      throws StripeException {
+    return reportPaymentAttemptGuaranteed(
+        id, (PaymentRecordReportPaymentAttemptGuaranteedParams) null, options);
+  }
+  /** Report that the most recent payment attempt on the specified Payment Record was guaranteed. */
+  public PaymentRecord reportPaymentAttemptGuaranteed(String id) throws StripeException {
+    return reportPaymentAttemptGuaranteed(
+        id, (PaymentRecordReportPaymentAttemptGuaranteedParams) null, (RequestOptions) null);
   }
   /** Report that the most recent payment attempt on the specified Payment Record was guaranteed. */
   public PaymentRecord reportPaymentAttemptGuaranteed(

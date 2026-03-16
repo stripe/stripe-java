@@ -14,10 +14,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentRecordReportPaymentAttemptCanceledParams extends ApiRequestParams {
-  /**
-   * <strong>Required.</strong> When the reported payment was canceled. Measured in seconds since
-   * the Unix epoch.
-   */
+  /** When the reported payment was canceled. Measured in seconds since the Unix epoch. */
   @SerializedName("canceled_at")
   Long canceledAt;
 
@@ -70,10 +67,7 @@ public class PaymentRecordReportPaymentAttemptCanceledParams extends ApiRequestP
           this.canceledAt, this.expand, this.extraParams, this.metadata);
     }
 
-    /**
-     * <strong>Required.</strong> When the reported payment was canceled. Measured in seconds since
-     * the Unix epoch.
-     */
+    /** When the reported payment was canceled. Measured in seconds since the Unix epoch. */
     public Builder setCanceledAt(Long canceledAt) {
       this.canceledAt = canceledAt;
       return this;

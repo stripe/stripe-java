@@ -13,6 +13,10 @@ public final class RadarService extends ApiService {
     return new com.stripe.service.radar.AccountEvaluationService(this.getResponseGetter());
   }
 
+  public com.stripe.service.radar.CustomerEvaluationService customerEvaluations() {
+    return new com.stripe.service.radar.CustomerEvaluationService(this.getResponseGetter());
+  }
+
   public com.stripe.service.radar.EarlyFraudWarningService earlyFraudWarnings() {
     return new com.stripe.service.radar.EarlyFraudWarningService(this.getResponseGetter());
   }
