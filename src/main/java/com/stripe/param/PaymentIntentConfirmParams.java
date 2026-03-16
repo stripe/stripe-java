@@ -27304,6 +27304,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Crypto {
+      /** Specific configuration for this PaymentIntent when the mode is {@code deposit}. */
+      @SerializedName("deposit_options")
+      DepositOptions depositOptions;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -27312,6 +27316,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
+
+      /** The mode of the crypto payment. */
+      @SerializedName("mode")
+      Mode mode;
 
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -27339,8 +27347,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
-      private Crypto(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+      private Crypto(
+          DepositOptions depositOptions,
+          Map<String, Object> extraParams,
+          Mode mode,
+          SetupFutureUsage setupFutureUsage) {
+        this.depositOptions = depositOptions;
         this.extraParams = extraParams;
+        this.mode = mode;
         this.setupFutureUsage = setupFutureUsage;
       }
 
@@ -27349,14 +27363,25 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private DepositOptions depositOptions;
+
         private Map<String, Object> extraParams;
+
+        private Mode mode;
 
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentConfirmParams.PaymentMethodOptions.Crypto build() {
           return new PaymentIntentConfirmParams.PaymentMethodOptions.Crypto(
-              this.extraParams, this.setupFutureUsage);
+              this.depositOptions, this.extraParams, this.mode, this.setupFutureUsage);
+        }
+
+        /** Specific configuration for this PaymentIntent when the mode is {@code deposit}. */
+        public Builder setDepositOptions(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions depositOptions) {
+          this.depositOptions = depositOptions;
+          return this;
         }
 
         /**
@@ -27384,6 +27409,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The mode of the crypto payment. */
+        public Builder setMode(PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.Mode mode) {
+          this.mode = mode;
           return this;
         }
 
@@ -27416,6 +27447,151 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
                 setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class DepositOptions {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> The blockchain networks to support for deposits. Learn more
+         * about <a
+         * href="https://docs.stripe.com/payments/deposit-mode-stablecoin-payments#token-and-network-support">supported
+         * networks and tokens</a>.
+         */
+        @SerializedName("networks")
+        List<PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions.Network>
+            networks;
+
+        private DepositOptions(
+            Map<String, Object> extraParams,
+            List<PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions.Network>
+                networks) {
+          this.extraParams = extraParams;
+          this.networks = networks;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private List<
+                  PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions.Network>
+              networks;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions(
+                this.extraParams, this.networks);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `networks` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions#networks} for the
+           * field documentation.
+           */
+          public Builder addNetwork(
+              PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions.Network
+                  element) {
+            if (this.networks == null) {
+              this.networks = new ArrayList<>();
+            }
+            this.networks.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `networks` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions#networks} for the
+           * field documentation.
+           */
+          public Builder addAllNetwork(
+              List<PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions.Network>
+                  elements) {
+            if (this.networks == null) {
+              this.networks = new ArrayList<>();
+            }
+            this.networks.addAll(elements);
+            return this;
+          }
+        }
+
+        public enum Network implements ApiRequestParams.EnumParam {
+          @SerializedName("base")
+          BASE("base"),
+
+          @SerializedName("solana")
+          SOLANA("solana"),
+
+          @SerializedName("tempo")
+          TEMPO("tempo");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Network(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum Mode implements ApiRequestParams.EnumParam {
+        @SerializedName("default")
+        DEFAULT("default"),
+
+        @SerializedName("deposit")
+        DEPOSIT("deposit");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Mode(String value) {
+          this.value = value;
         }
       }
 
