@@ -4,7 +4,6 @@ package com.stripe.model.v2.payments;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.v2.Amount;
 import java.time.Instant;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -27,11 +26,11 @@ import lombok.Setter;
 public class OffSessionPayment extends StripeObject implements HasId {
   /** The amount available to be captured. */
   @SerializedName("amount_capturable")
-  Amount amountCapturable;
+  AmountCapturable amountCapturable;
 
   /** The “presentment amount” to be collected from the customer. */
   @SerializedName("amount_requested")
-  Amount amountRequested;
+  AmountRequested amountRequested;
 
   /**
    * The frequency of the underlying payment.
@@ -165,6 +164,48 @@ public class OffSessionPayment extends StripeObject implements HasId {
    */
   @SerializedName("transfer_data")
   TransferData transferData;
+
+  /** The amount available to be captured. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AmountCapturable extends StripeObject {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * A non-negative integer representing how much to charge in the <a
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+     */
+    @SerializedName("value")
+    Long value;
+  }
+
+  /** The “presentment amount” to be collected from the customer. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AmountRequested extends StripeObject {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * A non-negative integer representing how much to charge in the <a
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+     */
+    @SerializedName("value")
+    Long value;
+  }
 
   /** Details about the capture configuration for the OffSessionPayment. */
   @Getter
