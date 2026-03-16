@@ -109,7 +109,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
   StripeBalancePayment stripeBalancePayment;
 
   /**
-   * Open enum, the type of the received debit.
+   * Open Enum. The type of the ReceivedDebit.
    *
    * <p>One of {@code balance_transfer}, {@code bank_transfer}, {@code card_spend}, {@code
    * external_debit}, or {@code stripe_balance_payment}.
