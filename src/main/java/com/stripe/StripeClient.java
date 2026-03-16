@@ -1048,6 +1048,7 @@ public class StripeClient {
     private String meterEventsBase = Stripe.METER_EVENTS_API_BASE;
     private String stripeAccount;
     private String stripeContext;
+    private HttpClient httpClient;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as
@@ -1267,9 +1268,23 @@ public class StripeClient {
       return this.stripeContext;
     }
 
+    /**
+     * Sets the HTTP client to use for making requests to the Stripe API. If not set, a default
+     * {@link HttpURLConnectionClient} will be created.
+     *
+     * <p>This is useful for providing a custom HTTP client implementation, e.g. for testing or for
+     * using a different HTTP library.
+     *
+     * @param httpClient the HTTP client to use
+     */
+    public StripeClientBuilder setHttpClient(HttpClient httpClient) {
+      this.httpClient = httpClient;
+      return this;
+    }
+
     /** Constructs a {@link StripeResponseGetterOptions} with the specified values. */
     public StripeClient build() {
-      return new StripeClient(new LiveStripeResponseGetter(buildOptions(), null));
+      return new StripeClient(new LiveStripeResponseGetter(buildOptions(), this.httpClient));
     }
 
     StripeResponseGetterOptions buildOptions() {
