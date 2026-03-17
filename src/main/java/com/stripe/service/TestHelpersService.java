@@ -25,6 +25,10 @@ public final class TestHelpersService extends ApiService {
     return new com.stripe.service.testhelpers.IssuingService(this.getResponseGetter());
   }
 
+  public com.stripe.service.testhelpers.PaymentIntentService paymentIntents() {
+    return new com.stripe.service.testhelpers.PaymentIntentService(this.getResponseGetter());
+  }
+
   public com.stripe.service.testhelpers.RefundService refunds() {
     return new com.stripe.service.testhelpers.RefundService(this.getResponseGetter());
   }

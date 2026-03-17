@@ -20,6 +20,7 @@ import com.stripe.param.PaymentIntentListParams;
 import com.stripe.param.PaymentIntentReauthorizeParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
 import com.stripe.param.PaymentIntentSearchParams;
+import com.stripe.param.PaymentIntentSimulateCryptoDepositParams;
 import com.stripe.param.PaymentIntentTriggerActionParams;
 import com.stripe.param.PaymentIntentUpdateParams;
 import com.stripe.param.PaymentIntentVerifyMicrodepositsParams;
@@ -2113,6 +2114,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("cashapp_handle_redirect_or_display_qr_code")
     CashappHandleRedirectOrDisplayQrCode cashappHandleRedirectOrDisplayQrCode;
 
+    @SerializedName("crypto_display_details")
+    CryptoDisplayDetails cryptoDisplayDetails;
+
     @SerializedName("display_bank_transfer_instructions")
     DisplayBankTransferInstructions displayBankTransferInstructions;
 
@@ -2295,6 +2299,162 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         /** The image_url_svg string used to render QR code. */
         @SerializedName("image_url_svg")
         String imageUrlSvg;
+      }
+    }
+
+    /**
+     * For more details about CryptoDisplayDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CryptoDisplayDetails extends StripeObject {
+      @SerializedName("deposit_addresses")
+      DepositAddresses depositAddresses;
+
+      /**
+       * For more details about DepositAddresses, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class DepositAddresses extends StripeObject {
+        @SerializedName("base")
+        Base base;
+
+        @SerializedName("solana")
+        Solana solana;
+
+        @SerializedName("tempo")
+        Tempo tempo;
+
+        /**
+         * For more details about Base, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Base extends StripeObject {
+          /** Address of the deposit address. */
+          @SerializedName("address")
+          String address;
+
+          /** The token currencies supported on this network. */
+          @SerializedName("supported_tokens")
+          List<PaymentIntent.NextAction.CryptoDisplayDetails.DepositAddresses.Base.SupportedToken>
+              supportedTokens;
+
+          /**
+           * For more details about SupportedToken, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class SupportedToken extends StripeObject {
+            /**
+             * The on-chain contract address for the supported token currency on this specific
+             * network.
+             */
+            @SerializedName("token_contract_address")
+            String tokenContractAddress;
+
+            /**
+             * The supported token currency. Supported token currencies include: {@code usdc}.
+             *
+             * <p>Equal to {@code usdc}.
+             */
+            @SerializedName("token_currency")
+            String tokenCurrency;
+          }
+        }
+
+        /**
+         * For more details about Solana, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Solana extends StripeObject {
+          /** Address of the deposit address. */
+          @SerializedName("address")
+          String address;
+
+          /** The token currencies supported on this network. */
+          @SerializedName("supported_tokens")
+          List<PaymentIntent.NextAction.CryptoDisplayDetails.DepositAddresses.Solana.SupportedToken>
+              supportedTokens;
+
+          /**
+           * For more details about SupportedToken, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class SupportedToken extends StripeObject {
+            /**
+             * The on-chain contract address for the supported token currency on this specific
+             * network.
+             */
+            @SerializedName("token_contract_address")
+            String tokenContractAddress;
+
+            /**
+             * The supported token currency. Supported token currencies include: {@code usdc}.
+             *
+             * <p>Equal to {@code usdc}.
+             */
+            @SerializedName("token_currency")
+            String tokenCurrency;
+          }
+        }
+
+        /**
+         * For more details about Tempo, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Tempo extends StripeObject {
+          /** Address of the deposit address. */
+          @SerializedName("address")
+          String address;
+
+          /** The token currencies supported on this network. */
+          @SerializedName("supported_tokens")
+          List<PaymentIntent.NextAction.CryptoDisplayDetails.DepositAddresses.Tempo.SupportedToken>
+              supportedTokens;
+
+          /**
+           * For more details about SupportedToken, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class SupportedToken extends StripeObject {
+            /**
+             * The on-chain contract address for the supported token currency on this specific
+             * network.
+             */
+            @SerializedName("token_contract_address")
+            String tokenContractAddress;
+
+            /**
+             * The supported token currency. Supported token currencies include: {@code usdc}.
+             *
+             * <p>Equal to {@code usdc}.
+             */
+            @SerializedName("token_currency")
+            String tokenCurrency;
+          }
+        }
       }
     }
 
@@ -5718,6 +5878,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Crypto extends StripeObject {
+      @SerializedName("deposit_options")
+      DepositOptions depositOptions;
+
+      /**
+       * The mode of the crypto payment.
+       *
+       * <p>One of {@code default}, or {@code deposit}.
+       */
+      @SerializedName("mode")
+      String mode;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -5741,6 +5912,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * For more details about DepositOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class DepositOptions extends StripeObject {
+        /**
+         * The blockchain networks to support for deposits. Learn more about <a
+         * href="https://docs.stripe.com/payments/deposit-mode-stablecoin-payments#token-and-network-support">supported
+         * networks and tokens</a>.
+         */
+        @SerializedName("networks")
+        List<String> networks;
+      }
     }
 
     /**
@@ -7768,6 +7956,84 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     public void setDestinationObject(Account expandableObject) {
       this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  public TestHelpers getTestHelpers() {
+    return new TestHelpers(this);
+  }
+
+  public static class TestHelpers {
+    private final PaymentIntent resource;
+
+    private TestHelpers(PaymentIntent resource) {
+      this.resource = resource;
+    }
+
+    /**
+     * Simulate an incoming crypto deposit for a testmode PaymentIntent with {@code
+     * payment_method_options[crypto][mode]=deposit}. The {@code transaction_hash} parameter
+     * determines whether the simulated deposit succeeds or fails. Learn more about <a
+     * href="https://stripe.com/docs/payments/deposit-mode-stablecoin-payments#test-your-integration">testing
+     * your integration</a>.
+     */
+    public PaymentIntent simulateCryptoDeposit(Map<String, Object> params) throws StripeException {
+      return simulateCryptoDeposit(params, (RequestOptions) null);
+    }
+
+    /**
+     * Simulate an incoming crypto deposit for a testmode PaymentIntent with {@code
+     * payment_method_options[crypto][mode]=deposit}. The {@code transaction_hash} parameter
+     * determines whether the simulated deposit succeeds or fails. Learn more about <a
+     * href="https://stripe.com/docs/payments/deposit-mode-stablecoin-payments#test-your-integration">testing
+     * your integration</a>.
+     */
+    public PaymentIntent simulateCryptoDeposit(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/payment_intents/%s/simulate_crypto_deposit",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+      return resource.getResponseGetter().request(request, PaymentIntent.class);
+    }
+
+    /**
+     * Simulate an incoming crypto deposit for a testmode PaymentIntent with {@code
+     * payment_method_options[crypto][mode]=deposit}. The {@code transaction_hash} parameter
+     * determines whether the simulated deposit succeeds or fails. Learn more about <a
+     * href="https://stripe.com/docs/payments/deposit-mode-stablecoin-payments#test-your-integration">testing
+     * your integration</a>.
+     */
+    public PaymentIntent simulateCryptoDeposit(PaymentIntentSimulateCryptoDepositParams params)
+        throws StripeException {
+      return simulateCryptoDeposit(params, (RequestOptions) null);
+    }
+
+    /**
+     * Simulate an incoming crypto deposit for a testmode PaymentIntent with {@code
+     * payment_method_options[crypto][mode]=deposit}. The {@code transaction_hash} parameter
+     * determines whether the simulated deposit succeeds or fails. Learn more about <a
+     * href="https://stripe.com/docs/payments/deposit-mode-stablecoin-payments#test-your-integration">testing
+     * your integration</a>.
+     */
+    public PaymentIntent simulateCryptoDeposit(
+        PaymentIntentSimulateCryptoDepositParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/payment_intents/%s/simulate_crypto_deposit",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options);
+      return resource.getResponseGetter().request(request, PaymentIntent.class);
     }
   }
 
