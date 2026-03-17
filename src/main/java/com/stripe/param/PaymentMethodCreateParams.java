@@ -416,6 +416,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   Type type;
 
   /**
+   * If this is a {@code upi} PaymentMethod, this hash contains details about the UPI payment
+   * method.
+   */
+  @SerializedName("upi")
+  Upi upi;
+
+  /**
    * If this is an {@code us_bank_account} PaymentMethod, this hash contains details about the US
    * bank account payment method.
    */
@@ -495,6 +502,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       Swish swish,
       Twint twint,
       Type type,
+      Upi upi,
       UsBankAccount usBankAccount,
       WechatPay wechatPay,
       Zip zip) {
@@ -556,6 +564,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.swish = swish;
     this.twint = twint;
     this.type = type;
+    this.upi = upi;
     this.usBankAccount = usBankAccount;
     this.wechatPay = wechatPay;
     this.zip = zip;
@@ -682,6 +691,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private Type type;
 
+    private Upi upi;
+
     private UsBankAccount usBankAccount;
 
     private WechatPay wechatPay;
@@ -749,6 +760,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.swish,
           this.twint,
           this.type,
+          this.upi,
           this.usBankAccount,
           this.wechatPay,
           this.zip);
@@ -1337,6 +1349,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      */
     public Builder setType(PaymentMethodCreateParams.Type type) {
       this.type = type;
+      return this;
+    }
+
+    /**
+     * If this is a {@code upi} PaymentMethod, this hash contains details about the UPI payment
+     * method.
+     */
+    public Builder setUpi(PaymentMethodCreateParams.Upi upi) {
+      this.upi = upi;
       return this;
     }
 
@@ -5653,6 +5674,221 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class Upi {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Configuration options for setting up an eMandate. */
+    @SerializedName("mandate_options")
+    MandateOptions mandateOptions;
+
+    private Upi(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+      this.extraParams = extraParams;
+      this.mandateOptions = mandateOptions;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private MandateOptions mandateOptions;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodCreateParams.Upi build() {
+        return new PaymentMethodCreateParams.Upi(this.extraParams, this.mandateOptions);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Upi#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Upi#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Configuration options for setting up an eMandate. */
+      public Builder setMandateOptions(
+          PaymentMethodCreateParams.Upi.MandateOptions mandateOptions) {
+        this.mandateOptions = mandateOptions;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MandateOptions {
+      /** Amount to be charged for future payments. */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param refers
+       * to the exact amount to be charged in future payments. If {@code maximum}, the amount
+       * charged can be up to the value passed for the {@code amount} param.
+       */
+      @SerializedName("amount_type")
+      AmountType amountType;
+
+      /**
+       * A description of the mandate or subscription that is meant to be displayed to the customer.
+       */
+      @SerializedName("description")
+      String description;
+
+      /** End date of the mandate or subscription. */
+      @SerializedName("end_date")
+      Long endDate;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private MandateOptions(
+          Long amount,
+          AmountType amountType,
+          String description,
+          Long endDate,
+          Map<String, Object> extraParams) {
+        this.amount = amount;
+        this.amountType = amountType;
+        this.description = description;
+        this.endDate = endDate;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long amount;
+
+        private AmountType amountType;
+
+        private String description;
+
+        private Long endDate;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodCreateParams.Upi.MandateOptions build() {
+          return new PaymentMethodCreateParams.Upi.MandateOptions(
+              this.amount, this.amountType, this.description, this.endDate, this.extraParams);
+        }
+
+        /** Amount to be charged for future payments. */
+        public Builder setAmount(Long amount) {
+          this.amount = amount;
+          return this;
+        }
+
+        /**
+         * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+         * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+         * amount charged can be up to the value passed for the {@code amount} param.
+         */
+        public Builder setAmountType(
+            PaymentMethodCreateParams.Upi.MandateOptions.AmountType amountType) {
+          this.amountType = amountType;
+          return this;
+        }
+
+        /**
+         * A description of the mandate or subscription that is meant to be displayed to the
+         * customer.
+         */
+        public Builder setDescription(String description) {
+          this.description = description;
+          return this;
+        }
+
+        /** End date of the mandate or subscription. */
+        public Builder setEndDate(Long endDate) {
+          this.endDate = endDate;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentMethodCreateParams.Upi.MandateOptions#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentMethodCreateParams.Upi.MandateOptions#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum AmountType implements ApiRequestParams.EnumParam {
+        @SerializedName("fixed")
+        FIXED("fixed"),
+
+        @SerializedName("maximum")
+        MAXIMUM("maximum");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        AmountType(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class UsBankAccount {
     /** Account holder type: individual or company. */
     @SerializedName("account_holder_type")
@@ -6091,6 +6327,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     @SerializedName("twint")
     TWINT("twint"),
+
+    @SerializedName("upi")
+    UPI("upi"),
 
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),

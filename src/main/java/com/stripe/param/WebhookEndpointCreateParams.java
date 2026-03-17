@@ -645,7 +645,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2026_01_28_CLOVER("2026-01-28.clover"),
 
     @SerializedName("2026-02-25.clover")
-    VERSION_2026_02_25_CLOVER("2026-02-25.clover");
+    VERSION_2026_02_25_CLOVER("2026-02-25.clover"),
+
+    @SerializedName("2026-03-25.dahlia")
+    VERSION_2026_03_25_DAHLIA("2026-03-25.dahlia");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

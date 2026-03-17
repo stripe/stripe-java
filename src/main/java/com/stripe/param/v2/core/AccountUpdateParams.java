@@ -11081,9 +11081,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         @EqualsAndHashCode(callSuper = false)
         public static class Amount {
           /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           * <strong>Required.</strong> Three-letter <a
+           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+           * currency</a>.
            */
           @SerializedName("currency")
           Object currency;
@@ -11099,8 +11100,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * A non-negative integer representing how much to charge in the <a
-           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+           * <strong>Required.</strong> A non-negative integer representing how much to charge in
+           * the <a href="https://docs.stripe.com/currencies#minor-units">smallest currency
+           * unit</a>.
            */
           @SerializedName("value")
           Long value;
@@ -11129,9 +11131,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-             * code</a>, in lowercase. Must be a <a
-             * href="https://stripe.com/docs/currencies">supported currency</a>.
+             * <strong>Required.</strong> Three-letter <a
+             * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+             * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+             * currency</a>.
              */
             public Builder setCurrency(String currency) {
               this.currency = currency;
@@ -11139,9 +11142,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-             * code</a>, in lowercase. Must be a <a
-             * href="https://stripe.com/docs/currencies">supported currency</a>.
+             * <strong>Required.</strong> Three-letter <a
+             * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+             * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+             * currency</a>.
              */
             public Builder setCurrency(EmptyParam currency) {
               this.currency = currency;
@@ -11179,8 +11183,9 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * A non-negative integer representing how much to charge in the <a
-             * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+             * <strong>Required.</strong> A non-negative integer representing how much to charge in
+             * the <a href="https://docs.stripe.com/currencies#minor-units">smallest currency
+             * unit</a>.
              */
             public Builder setValue(Long value) {
               this.value = value;
@@ -13478,9 +13483,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         @EqualsAndHashCode(callSuper = false)
         public static class Amount {
           /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           * <strong>Required.</strong> Three-letter <a
+           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+           * currency</a>.
            */
           @SerializedName("currency")
           Object currency;
@@ -13496,8 +13502,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * A non-negative integer representing how much to charge in the <a
-           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+           * <strong>Required.</strong> A non-negative integer representing how much to charge in
+           * the <a href="https://docs.stripe.com/currencies#minor-units">smallest currency
+           * unit</a>.
            */
           @SerializedName("value")
           Long value;
@@ -13527,9 +13534,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-             * code</a>, in lowercase. Must be a <a
-             * href="https://stripe.com/docs/currencies">supported currency</a>.
+             * <strong>Required.</strong> Three-letter <a
+             * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+             * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+             * currency</a>.
              */
             public Builder setCurrency(String currency) {
               this.currency = currency;
@@ -13537,9 +13545,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-             * code</a>, in lowercase. Must be a <a
-             * href="https://stripe.com/docs/currencies">supported currency</a>.
+             * <strong>Required.</strong> Three-letter <a
+             * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+             * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+             * currency</a>.
              */
             public Builder setCurrency(EmptyParam currency) {
               this.currency = currency;
@@ -13577,8 +13586,9 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * A non-negative integer representing how much to charge in the <a
-             * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+             * <strong>Required.</strong> A non-negative integer representing how much to charge in
+             * the <a href="https://docs.stripe.com/currencies#minor-units">smallest currency
+             * unit</a>.
              */
             public Builder setValue(Long value) {
               this.value = value;

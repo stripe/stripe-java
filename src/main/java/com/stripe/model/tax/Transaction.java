@@ -62,8 +62,8 @@ public class Transaction extends ApiResource implements HasId {
   TransactionLineItemCollection lineItems;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -469,7 +469,7 @@ public class Transaction extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost extends StripeObject {
     /**
-     * The shipping amount in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
+     * The shipping amount in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
      * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
      * Otherwise, taxes were calculated on top of this amount.
      */
@@ -478,7 +478,7 @@ public class Transaction extends ApiResource implements HasId {
 
     /**
      * The amount of tax calculated for shipping, in the <a
-     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
      */
     @SerializedName("amount_tax")
     Long amountTax;
@@ -521,8 +521,8 @@ public class Transaction extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class TaxBreakdown extends StripeObject {
       /**
-       * The amount of tax, in the <a
-       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+       * The amount of tax, in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
+       * currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -561,7 +561,7 @@ public class Transaction extends ApiResource implements HasId {
 
       /**
        * The amount on which tax is calculated, in the <a
-       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
        */
       @SerializedName("taxable_amount")
       Long taxableAmount;

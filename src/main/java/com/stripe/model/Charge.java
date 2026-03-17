@@ -171,8 +171,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   Level3 level3;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -1318,6 +1318,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
      */
     @SerializedName("type")
     String type;
+
+    @SerializedName("upi")
+    Upi upi;
 
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
@@ -2725,7 +2728,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, or {@code solana}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, or {@code
+       * tempo}.
        */
       @SerializedName("network")
       String network;
@@ -3998,6 +4002,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Twint extends StripeObject {}
+
+    /**
+     * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Upi extends StripeObject {
+      /** Customer's unique Virtual Payment Address. */
+      @SerializedName("vpa")
+      String vpa;
+    }
 
     /**
      * For more details about UsBankAccount, please refer to the <a

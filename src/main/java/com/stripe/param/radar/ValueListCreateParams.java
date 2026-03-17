@@ -32,9 +32,9 @@ public class ValueListCreateParams extends ApiRequestParams {
 
   /**
    * Type of the items in the value list. One of {@code card_fingerprint}, {@code card_bin}, {@code
-   * email}, {@code ip_address}, {@code country}, {@code string}, {@code case_sensitive_string},
-   * {@code customer_id}, {@code sepa_debit_fingerprint}, or {@code us_bank_account_fingerprint}.
-   * Use {@code string} if the item type is unknown or mixed.
+   * crypto_fingerprint}, {@code email}, {@code ip_address}, {@code country}, {@code string}, {@code
+   * case_sensitive_string}, {@code customer_id}, {@code sepa_debit_fingerprint}, or {@code
+   * us_bank_account_fingerprint}. Use {@code string} if the item type is unknown or mixed.
    */
   @SerializedName("item_type")
   ItemType itemType;
@@ -150,9 +150,10 @@ public class ValueListCreateParams extends ApiRequestParams {
 
     /**
      * Type of the items in the value list. One of {@code card_fingerprint}, {@code card_bin},
-     * {@code email}, {@code ip_address}, {@code country}, {@code string}, {@code
-     * case_sensitive_string}, {@code customer_id}, {@code sepa_debit_fingerprint}, or {@code
-     * us_bank_account_fingerprint}. Use {@code string} if the item type is unknown or mixed.
+     * {@code crypto_fingerprint}, {@code email}, {@code ip_address}, {@code country}, {@code
+     * string}, {@code case_sensitive_string}, {@code customer_id}, {@code sepa_debit_fingerprint},
+     * or {@code us_bank_account_fingerprint}. Use {@code string} if the item type is unknown or
+     * mixed.
      */
     public Builder setItemType(ValueListCreateParams.ItemType itemType) {
       this.itemType = itemType;
@@ -204,6 +205,9 @@ public class ValueListCreateParams extends ApiRequestParams {
 
     @SerializedName("country")
     COUNTRY("country"),
+
+    @SerializedName("crypto_fingerprint")
+    CRYPTO_FINGERPRINT("crypto_fingerprint"),
 
     @SerializedName("customer_id")
     CUSTOMER_ID("customer_id"),
