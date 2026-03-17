@@ -29,9 +29,16 @@ public class EventDestinationCreateParams extends ApiRequestParams {
   @SerializedName("event_payload")
   EventPayload eventPayload;
 
-  /** Where events should be routed from. */
+  /**
+   * Specifies which accounts' events route to this destination. {@code @self}: Receive events from
+   * the account that owns the event destination. {@code @accounts}: Receive events emitted from
+   * other accounts you manage which includes your v1 and v2 accounts.
+   * {@code @organization_members}: Receive events from accounts directly linked to the
+   * organization. {@code @organization_members/@accounts}: Receive events from all accounts
+   * connected to any platform accounts in the organization.
+   */
   @SerializedName("events_from")
-  List<EventDestinationCreateParams.EventsFrom> eventsFrom;
+  List<String> eventsFrom;
 
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -71,7 +78,7 @@ public class EventDestinationCreateParams extends ApiRequestParams {
       String description,
       List<String> enabledEvents,
       EventPayload eventPayload,
-      List<EventDestinationCreateParams.EventsFrom> eventsFrom,
+      List<String> eventsFrom,
       Map<String, Object> extraParams,
       List<EventDestinationCreateParams.Include> include,
       Map<String, String> metadata,
@@ -106,7 +113,7 @@ public class EventDestinationCreateParams extends ApiRequestParams {
 
     private EventPayload eventPayload;
 
-    private List<EventDestinationCreateParams.EventsFrom> eventsFrom;
+    private List<String> eventsFrom;
 
     private Map<String, Object> extraParams;
 
@@ -189,7 +196,7 @@ public class EventDestinationCreateParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * EventDestinationCreateParams#eventsFrom} for the field documentation.
      */
-    public Builder addEventsFrom(EventDestinationCreateParams.EventsFrom element) {
+    public Builder addEventsFrom(String element) {
       if (this.eventsFrom == null) {
         this.eventsFrom = new ArrayList<>();
       }
@@ -202,7 +209,7 @@ public class EventDestinationCreateParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * EventDestinationCreateParams#eventsFrom} for the field documentation.
      */
-    public Builder addAllEventsFrom(List<EventDestinationCreateParams.EventsFrom> elements) {
+    public Builder addAllEventsFrom(List<String> elements) {
       if (this.eventsFrom == null) {
         this.eventsFrom = new ArrayList<>();
       }
@@ -480,21 +487,6 @@ public class EventDestinationCreateParams extends ApiRequestParams {
     private final String value;
 
     EventPayload(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum EventsFrom implements ApiRequestParams.EnumParam {
-    @SerializedName("other_accounts")
-    OTHER_ACCOUNTS("other_accounts"),
-
-    @SerializedName("self")
-    SELF("self");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    EventsFrom(String value) {
       this.value = value;
     }
   }
