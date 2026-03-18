@@ -254,4 +254,45 @@ public class HttpClientTest extends BaseStripeTest {
         com.google.gson.JsonParser.parseString(json).getAsJsonObject();
     assertEquals("cursor", parsed.get("ai_agent").getAsString());
   }
+
+  @Test
+  public void testBuildXStripeClientUserAgentStringOmitsPublisherAndOsKeys() {
+    String json = HttpClient.buildXStripeClientUserAgentString("");
+    com.google.gson.JsonObject parsed =
+        com.google.gson.JsonParser.parseString(json).getAsJsonObject();
+    assertTrue(!parsed.has("publisher"));
+    assertTrue(!parsed.has("os.name"));
+    assertTrue(!parsed.has("os.version"));
+    assertTrue(!parsed.has("os.arch"));
+  }
+
+  @Test
+  public void testBuildXStripeClientUserAgentStringPlatformWithTelemetry() {
+    boolean originalTelemetry = Stripe.enableTelemetry;
+    try {
+      Stripe.enableTelemetry = true;
+      String json = HttpClient.buildXStripeClientUserAgentString("");
+      com.google.gson.JsonObject parsed =
+          com.google.gson.JsonParser.parseString(json).getAsJsonObject();
+      assertTrue(parsed.has("platform"));
+      String platform = parsed.get("platform").getAsString();
+      assertTrue(platform.contains(System.getProperty("os.name")));
+    } finally {
+      Stripe.enableTelemetry = originalTelemetry;
+    }
+  }
+
+  @Test
+  public void testBuildXStripeClientUserAgentStringNoPlatformWithoutTelemetry() {
+    boolean originalTelemetry = Stripe.enableTelemetry;
+    try {
+      Stripe.enableTelemetry = false;
+      String json = HttpClient.buildXStripeClientUserAgentString("");
+      com.google.gson.JsonObject parsed =
+          com.google.gson.JsonParser.parseString(json).getAsJsonObject();
+      assertTrue(!parsed.has("platform"));
+    } finally {
+      Stripe.enableTelemetry = originalTelemetry;
+    }
+  }
 }

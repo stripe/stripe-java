@@ -144,13 +144,18 @@ public abstract class HttpClient {
 
   static String detectAIAgent(Function<String, String> getEnv) {
     String[][] agents = {
+      // The beginning of the section generated from our OpenAPI spec
       {"ANTIGRAVITY_CLI_ALIAS", "antigravity"},
       {"CLAUDECODE", "claude_code"},
       {"CLINE_ACTIVE", "cline"},
       {"CODEX_SANDBOX", "codex_cli"},
+      {"CODEX_THREAD_ID", "codex_cli"},
+      {"CODEX_SANDBOX_NETWORK_DISABLED", "codex_cli"},
+      {"CODEX_CI", "codex_cli"},
       {"CURSOR_AGENT", "cursor"},
       {"GEMINI_CLI", "gemini_cli"},
       {"OPENCODE", "open_code"},
+      // The end of the section generated from our OpenAPI spec
     };
     for (String[] agent : agents) {
       String val = getEnv.apply(agent[0]);
@@ -196,15 +201,7 @@ public abstract class HttpClient {
   }
 
   static String buildXStripeClientUserAgentString(String aiAgent) {
-    String[] propertyNames = {
-      "os.name",
-      "os.version",
-      "os.arch",
-      "java.version",
-      "java.vendor",
-      "java.vm.version",
-      "java.vm.vendor"
-    };
+    String[] propertyNames = {"java.version", "java.vendor", "java.vm.version", "java.vm.vendor"};
 
     Map<String, String> propertyMap = new HashMap<>();
     for (String propertyName : propertyNames) {
@@ -212,7 +209,15 @@ public abstract class HttpClient {
     }
     propertyMap.put("bindings.version", Stripe.VERSION);
     propertyMap.put("lang", "Java");
-    propertyMap.put("publisher", "Stripe");
+    if (Stripe.enableTelemetry) {
+      propertyMap.put(
+          "platform",
+          System.getProperty("os.name")
+              + " "
+              + System.getProperty("os.version")
+              + " "
+              + System.getProperty("os.arch"));
+    }
     if (Stripe.getAppInfo() != null) {
       propertyMap.put("application", ApiResource.INTERNAL_GSON.toJson(Stripe.getAppInfo()));
     }
