@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec
 package com.stripe.service.v2.core;
 
+import com.stripe.exception.RateLimitException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.core.AccountLink;
 import com.stripe.net.ApiRequest;
@@ -21,7 +22,8 @@ public final class AccountLinkService extends ApiService {
    * Creates an AccountLink object that includes a single-use URL that an account can use to access
    * a Stripe-hosted flow for collecting or updating required information.
    */
-  public AccountLink create(AccountLinkCreateParams params) throws StripeException {
+  public AccountLink create(AccountLinkCreateParams params)
+      throws StripeException, RateLimitException {
     return create(params, (RequestOptions) null);
   }
   /**
@@ -29,7 +31,7 @@ public final class AccountLinkService extends ApiService {
    * a Stripe-hosted flow for collecting or updating required information.
    */
   public AccountLink create(AccountLinkCreateParams params, RequestOptions options)
-      throws StripeException {
+      throws StripeException, RateLimitException {
     String path = "/v2/core/account_links";
     ApiRequest request =
         new ApiRequest(

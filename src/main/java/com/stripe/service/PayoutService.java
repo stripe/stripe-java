@@ -75,8 +75,8 @@ public final class PayoutService extends ApiService {
    *
    * <p>If you create a manual payout on a Stripe account that uses multiple payment source types,
    * you need to specify the source type balance that the payout draws from. The <a
-   * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
-   * pending amounts by source type.
+   * href="https://stripe.com/api/balances/object">balance object</a> details available and pending
+   * amounts by source type.
    */
   public Payout create(PayoutCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -91,8 +91,8 @@ public final class PayoutService extends ApiService {
    *
    * <p>If you create a manual payout on a Stripe account that uses multiple payment source types,
    * you need to specify the source type balance that the payout draws from. The <a
-   * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
-   * pending amounts by source type.
+   * href="https://stripe.com/api/balances/object">balance object</a> details available and pending
+   * amounts by source type.
    */
   public Payout create(PayoutCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/payouts";

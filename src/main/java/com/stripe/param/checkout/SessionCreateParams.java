@@ -196,6 +196,13 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * The integration identifier for this Checkout Session. Multiple Checkout Sessions can have the
+   * same integration identifier.
+   */
+  @SerializedName("integration_identifier")
+  String integrationIdentifier;
+
   /** Generate a post-purchase Invoice for one-time payments. */
   @SerializedName("invoice_creation")
   InvoiceCreation invoiceCreation;
@@ -456,6 +463,7 @@ public class SessionCreateParams extends ApiRequestParams {
       List<String> expand,
       Long expiresAt,
       Map<String, Object> extraParams,
+      String integrationIdentifier,
       InvoiceCreation invoiceCreation,
       List<SessionCreateParams.LineItem> lineItems,
       Locale locale,
@@ -506,6 +514,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.expiresAt = expiresAt;
     this.extraParams = extraParams;
+    this.integrationIdentifier = integrationIdentifier;
     this.invoiceCreation = invoiceCreation;
     this.lineItems = lineItems;
     this.locale = locale;
@@ -584,6 +593,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private Long expiresAt;
 
     private Map<String, Object> extraParams;
+
+    private String integrationIdentifier;
 
     private InvoiceCreation invoiceCreation;
 
@@ -666,6 +677,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.expand,
           this.expiresAt,
           this.extraParams,
+          this.integrationIdentifier,
           this.invoiceCreation,
           this.lineItems,
           this.locale,
@@ -1005,6 +1017,15 @@ public class SessionCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * The integration identifier for this Checkout Session. Multiple Checkout Sessions can have the
+     * same integration identifier.
+     */
+    public Builder setIntegrationIdentifier(String integrationIdentifier) {
+      this.integrationIdentifier = integrationIdentifier;
       return this;
     }
 
@@ -7218,6 +7239,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("cashapp")
     Cashapp cashapp;
 
+    /** contains details about the Crypto payment method options. */
+    @SerializedName("crypto")
+    Crypto crypto;
+
     /** contains details about the Customer Balance payment method options. */
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
@@ -7347,6 +7372,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("twint")
     Twint twint;
 
+    /** contains details about the UPI payment method options. */
+    @SerializedName("upi")
+    Upi upi;
+
     /** contains details about the Us Bank Account payment method options. */
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
@@ -7369,6 +7398,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Boleto boleto,
         Card card,
         Cashapp cashapp,
+        Crypto crypto,
         CustomerBalance customerBalance,
         DemoPay demoPay,
         Eps eps,
@@ -7400,6 +7430,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Sofort sofort,
         Swish swish,
         Twint twint,
+        Upi upi,
         UsBankAccount usBankAccount,
         WechatPay wechatPay) {
       this.acssDebit = acssDebit;
@@ -7415,6 +7446,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.boleto = boleto;
       this.card = card;
       this.cashapp = cashapp;
+      this.crypto = crypto;
       this.customerBalance = customerBalance;
       this.demoPay = demoPay;
       this.eps = eps;
@@ -7446,6 +7478,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.sofort = sofort;
       this.swish = swish;
       this.twint = twint;
+      this.upi = upi;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
     }
@@ -7480,6 +7513,8 @@ public class SessionCreateParams extends ApiRequestParams {
       private Card card;
 
       private Cashapp cashapp;
+
+      private Crypto crypto;
 
       private CustomerBalance customerBalance;
 
@@ -7543,6 +7578,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Twint twint;
 
+      private Upi upi;
+
       private UsBankAccount usBankAccount;
 
       private WechatPay wechatPay;
@@ -7563,6 +7600,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.boleto,
             this.card,
             this.cashapp,
+            this.crypto,
             this.customerBalance,
             this.demoPay,
             this.eps,
@@ -7594,6 +7632,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.sofort,
             this.swish,
             this.twint,
+            this.upi,
             this.usBankAccount,
             this.wechatPay);
       }
@@ -7678,6 +7717,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Cashapp Pay payment method options. */
       public Builder setCashapp(SessionCreateParams.PaymentMethodOptions.Cashapp cashapp) {
         this.cashapp = cashapp;
+        return this;
+      }
+
+      /** contains details about the Crypto payment method options. */
+      public Builder setCrypto(SessionCreateParams.PaymentMethodOptions.Crypto crypto) {
+        this.crypto = crypto;
         return this;
       }
 
@@ -7886,6 +7931,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the TWINT payment method options. */
       public Builder setTwint(SessionCreateParams.PaymentMethodOptions.Twint twint) {
         this.twint = twint;
+        return this;
+      }
+
+      /** contains details about the UPI payment method options. */
+      public Builder setUpi(SessionCreateParams.PaymentMethodOptions.Upi upi) {
+        this.upi = upi;
         return this;
       }
 
@@ -10631,6 +10682,128 @@ public class SessionCreateParams extends ApiRequestParams {
 
         @SerializedName("on_session")
         ON_SESSION("on_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Crypto {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Crypto(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Crypto build() {
+          return new SessionCreateParams.PaymentMethodOptions.Crypto(
+              this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Crypto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Crypto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.Crypto.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -15840,6 +16013,266 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Upi {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Additional fields for Mandate creation. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      private Upi(
+          Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
+          ApiRequestParams.EnumParam setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private MandateOptions mandateOptions;
+
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Upi build() {
+          return new SessionCreateParams.PaymentMethodOptions.Upi(
+              this.extraParams, this.mandateOptions, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Upi#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Upi#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Additional fields for Mandate creation. */
+        public Builder setMandateOptions(
+            SessionCreateParams.PaymentMethodOptions.Upi.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
+          return this;
+        }
+
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.Upi.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions {
+        /** Amount to be charged for future payments. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+         * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+         * amount charged can be up to the value passed for the {@code amount} param.
+         */
+        @SerializedName("amount_type")
+        AmountType amountType;
+
+        /**
+         * A description of the mandate or subscription that is meant to be displayed to the
+         * customer.
+         */
+        @SerializedName("description")
+        String description;
+
+        /** End date of the mandate or subscription. */
+        @SerializedName("end_date")
+        Long endDate;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private MandateOptions(
+            Long amount,
+            AmountType amountType,
+            String description,
+            Long endDate,
+            Map<String, Object> extraParams) {
+          this.amount = amount;
+          this.amountType = amountType;
+          this.description = description;
+          this.endDate = endDate;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long amount;
+
+          private AmountType amountType;
+
+          private String description;
+
+          private Long endDate;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.PaymentMethodOptions.Upi.MandateOptions build() {
+            return new SessionCreateParams.PaymentMethodOptions.Upi.MandateOptions(
+                this.amount, this.amountType, this.description, this.endDate, this.extraParams);
+          }
+
+          /** Amount to be charged for future payments. */
+          public Builder setAmount(Long amount) {
+            this.amount = amount;
+            return this;
+          }
+
+          /**
+           * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+           * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+           * amount charged can be up to the value passed for the {@code amount} param.
+           */
+          public Builder setAmountType(
+              SessionCreateParams.PaymentMethodOptions.Upi.MandateOptions.AmountType amountType) {
+            this.amountType = amountType;
+            return this;
+          }
+
+          /**
+           * A description of the mandate or subscription that is meant to be displayed to the
+           * customer.
+           */
+          public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+          }
+
+          /** End date of the mandate or subscription. */
+          public Builder setEndDate(Long endDate) {
+            this.endDate = endDate;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.Upi.MandateOptions#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.Upi.MandateOptions#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        public enum AmountType implements ApiRequestParams.EnumParam {
+          @SerializedName("fixed")
+          FIXED("fixed"),
+
+          @SerializedName("maximum")
+          MAXIMUM("maximum");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountType(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session"),
+
+        @SerializedName("on_session")
+        ON_SESSION("on_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -18770,6 +19203,14 @@ public class SessionCreateParams extends ApiRequestParams {
     String onBehalfOf;
 
     /**
+     * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
+     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
+     * given subscription at the specified interval.
+     */
+    @SerializedName("pending_invoice_item_interval")
+    PendingInvoiceItemInterval pendingInvoiceItemInterval;
+
+    /**
      * Determines how to handle prorations resulting from the {@code billing_cycle_anchor}. If no
      * value is passed, the default is {@code create_prorations}.
      */
@@ -18811,6 +19252,7 @@ public class SessionCreateParams extends ApiRequestParams {
         InvoiceSettings invoiceSettings,
         Map<String, String> metadata,
         String onBehalfOf,
+        PendingInvoiceItemInterval pendingInvoiceItemInterval,
         ProrationBehavior prorationBehavior,
         TransferData transferData,
         Long trialEnd,
@@ -18825,6 +19267,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.invoiceSettings = invoiceSettings;
       this.metadata = metadata;
       this.onBehalfOf = onBehalfOf;
+      this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
       this.prorationBehavior = prorationBehavior;
       this.transferData = transferData;
       this.trialEnd = trialEnd;
@@ -18855,6 +19298,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private String onBehalfOf;
 
+      private PendingInvoiceItemInterval pendingInvoiceItemInterval;
+
       private ProrationBehavior prorationBehavior;
 
       private TransferData transferData;
@@ -18877,6 +19322,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.invoiceSettings,
             this.metadata,
             this.onBehalfOf,
+            this.pendingInvoiceItemInterval,
             this.prorationBehavior,
             this.transferData,
             this.trialEnd,
@@ -19010,6 +19456,18 @@ public class SessionCreateParams extends ApiRequestParams {
       /** The account on behalf of which to charge, for each of the subscription's invoices. */
       public Builder setOnBehalfOf(String onBehalfOf) {
         this.onBehalfOf = onBehalfOf;
+        return this;
+      }
+
+      /**
+       * Specifies an interval for how often to bill for any pending invoice items. It is analogous
+       * to calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for
+       * the given subscription at the specified interval.
+       */
+      public Builder setPendingInvoiceItemInterval(
+          SessionCreateParams.SubscriptionData.PendingInvoiceItemInterval
+              pendingInvoiceItemInterval) {
+        this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
         return this;
       }
 
@@ -19439,6 +19897,130 @@ public class SessionCreateParams extends ApiRequestParams {
           Type(String value) {
             this.value = value;
           }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PendingInvoiceItemInterval {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> Specifies invoicing frequency. Either {@code day}, {@code week},
+       * {@code month} or {@code year}.
+       */
+      @SerializedName("interval")
+      Interval interval;
+
+      /**
+       * The number of intervals between invoices. For example, {@code interval=month} and {@code
+       * interval_count=3} bills every 3 months. Maximum of one year interval allowed (1 year, 12
+       * months, or 52 weeks).
+       */
+      @SerializedName("interval_count")
+      Long intervalCount;
+
+      private PendingInvoiceItemInterval(
+          Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+        this.extraParams = extraParams;
+        this.interval = interval;
+        this.intervalCount = intervalCount;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Interval interval;
+
+        private Long intervalCount;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.SubscriptionData.PendingInvoiceItemInterval build() {
+          return new SessionCreateParams.SubscriptionData.PendingInvoiceItemInterval(
+              this.extraParams, this.interval, this.intervalCount);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SessionCreateParams.SubscriptionData.PendingInvoiceItemInterval#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SessionCreateParams.SubscriptionData.PendingInvoiceItemInterval#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Specifies invoicing frequency. Either {@code day}, {@code
+         * week}, {@code month} or {@code year}.
+         */
+        public Builder setInterval(
+            SessionCreateParams.SubscriptionData.PendingInvoiceItemInterval.Interval interval) {
+          this.interval = interval;
+          return this;
+        }
+
+        /**
+         * The number of intervals between invoices. For example, {@code interval=month} and {@code
+         * interval_count=3} bills every 3 months. Maximum of one year interval allowed (1 year, 12
+         * months, or 52 weeks).
+         */
+        public Builder setIntervalCount(Long intervalCount) {
+          this.intervalCount = intervalCount;
+          return this;
+        }
+      }
+
+      public enum Interval implements ApiRequestParams.EnumParam {
+        @SerializedName("day")
+        DAY("day"),
+
+        @SerializedName("month")
+        MONTH("month"),
+
+        @SerializedName("week")
+        WEEK("week"),
+
+        @SerializedName("year")
+        YEAR("year");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Interval(String value) {
+          this.value = value;
         }
       }
     }
@@ -20176,6 +20758,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("twint")
     TWINT("twint"),
 
+    @SerializedName("upi")
+    UPI("upi"),
+
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),
 
@@ -20515,6 +21100,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("twint")
     TWINT("twint"),
 
+    @SerializedName("upi")
+    UPI("upi"),
+
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),
 
@@ -20578,11 +21166,23 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("custom")
     CUSTOM("custom"),
 
+    @SerializedName("elements")
+    ELEMENTS("elements"),
+
     @SerializedName("embedded")
     EMBEDDED("embedded"),
 
+    @SerializedName("embedded_page")
+    EMBEDDED_PAGE("embedded_page"),
+
+    @SerializedName("form")
+    FORM("form"),
+
     @SerializedName("hosted")
-    HOSTED("hosted");
+    HOSTED("hosted"),
+
+    @SerializedName("hosted_page")
+    HOSTED_PAGE("hosted_page");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

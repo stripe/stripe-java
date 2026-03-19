@@ -279,9 +279,19 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
     @SerializedName("pricing")
     Pricing pricing;
 
-    /** Non-negative integer. The quantity of units for the line item. */
+    /**
+     * Non-negative integer. The quantity of units for the line item. Use {@code quantity_decimal}
+     * instead to provide decimal precision. This field will be deprecated in favor of {@code
+     * quantity_decimal} in a future version.
+     */
     @SerializedName("quantity")
     Long quantity;
+
+    /**
+     * Non-negative decimal with at most 12 decimal places. The quantity of units for the line item.
+     */
+    @SerializedName("quantity_decimal")
+    BigDecimal quantityDecimal;
 
     /**
      * A list of up to 10 tax amounts for this line item. This can be useful if you calculate taxes
@@ -316,6 +326,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
         PriceData priceData,
         Pricing pricing,
         Long quantity,
+        BigDecimal quantityDecimal,
         Object taxAmounts,
         Object taxRates) {
       this.amount = amount;
@@ -329,6 +340,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
       this.priceData = priceData;
       this.pricing = pricing;
       this.quantity = quantity;
+      this.quantityDecimal = quantityDecimal;
       this.taxAmounts = taxAmounts;
       this.taxRates = taxRates;
     }
@@ -360,6 +372,8 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
 
       private Long quantity;
 
+      private BigDecimal quantityDecimal;
+
       private Object taxAmounts;
 
       private Object taxRates;
@@ -378,6 +392,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
             this.priceData,
             this.pricing,
             this.quantity,
+            this.quantityDecimal,
             this.taxAmounts,
             this.taxRates);
       }
@@ -572,9 +587,22 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
         return this;
       }
 
-      /** Non-negative integer. The quantity of units for the line item. */
+      /**
+       * Non-negative integer. The quantity of units for the line item. Use {@code quantity_decimal}
+       * instead to provide decimal precision. This field will be deprecated in favor of {@code
+       * quantity_decimal} in a future version.
+       */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
+        return this;
+      }
+
+      /**
+       * Non-negative decimal with at most 12 decimal places. The quantity of units for the line
+       * item.
+       */
+      public Builder setQuantityDecimal(BigDecimal quantityDecimal) {
+        this.quantityDecimal = quantityDecimal;
         return this;
       }
 

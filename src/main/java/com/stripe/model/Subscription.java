@@ -216,8 +216,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   ExpandableField<Invoice> latestInvoice;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -272,8 +272,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-   * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-   * given subscription at the specified interval.
+   * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+   * subscription at the specified interval.
    */
   @SerializedName("pending_invoice_item_interval")
   PendingInvoiceItemInterval pendingInvoiceItemInterval;
@@ -590,9 +590,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * href="https://stripe.com/metadata">metadata</a>.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve
-   * set the subscription to cancel at the end of the period, any pending prorations are also left
-   * in place and collected at the end of the period. But if the subscription is set to cancel
+   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * the subscription to cancel at the end of the period, any pending prorations are also left in
+   * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
    * set to true.
    *
@@ -612,9 +612,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * href="https://stripe.com/metadata">metadata</a>.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve
-   * set the subscription to cancel at the end of the period, any pending prorations are also left
-   * in place and collected at the end of the period. But if the subscription is set to cancel
+   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * the subscription to cancel at the end of the period, any pending prorations are also left in
+   * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
    * set to true.
    *
@@ -634,9 +634,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * href="https://stripe.com/metadata">metadata</a>.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve
-   * set the subscription to cancel at the end of the period, any pending prorations are also left
-   * in place and collected at the end of the period. But if the subscription is set to cancel
+   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * the subscription to cancel at the end of the period, any pending prorations are also left in
+   * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
    * set to true.
    *
@@ -660,9 +660,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * href="https://stripe.com/metadata">metadata</a>.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve
-   * set the subscription to cancel at the end of the period, any pending prorations are also left
-   * in place and collected at the end of the period. But if the subscription is set to cancel
+   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * the subscription to cancel at the end of the period, any pending prorations are also left in
+   * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
    * set to true.
    *
@@ -682,9 +682,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * href="https://stripe.com/metadata">metadata</a>.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve
-   * set the subscription to cancel at the end of the period, any pending prorations are also left
-   * in place and collected at the end of the period. But if the subscription is set to cancel
+   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * the subscription to cancel at the end of the period, any pending prorations are also left in
+   * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
    * set to true.
    *
@@ -1493,8 +1493,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     /**
      * Why this subscription was canceled.
      *
-     * <p>One of {@code cancellation_requested}, {@code payment_disputed}, or {@code
-     * payment_failed}.
+     * <p>One of {@code canceled_by_retention_policy}, {@code cancellation_requested}, {@code
+     * payment_disputed}, or {@code payment_failed}.
      */
     @SerializedName("reason")
     String reason;
@@ -1613,8 +1613,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @EqualsAndHashCode(callSuper = false)
   public static class PauseCollection extends StripeObject {
     /**
-     * The payment collection behavior for this subscription while paused. One of {@code
-     * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+     * The payment collection behavior for this subscription while paused.
+     *
+     * <p>One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
      */
     @SerializedName("behavior")
     String behavior;
@@ -1731,7 +1732,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         MandateOptions mandateOptions;
 
         /**
-         * Bank account verification method.
+         * Bank account verification method. The default value is {@code automatic}.
          *
          * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
          */
@@ -1815,7 +1816,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class MandateOptions extends StripeObject {
-          /** Amount to be charged for future payments. */
+          /** Amount to be charged for future payments, specified in the presentment currency. */
           @SerializedName("amount")
           Long amount;
 
@@ -1972,7 +1973,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         FinancialConnections financialConnections;
 
         /**
-         * Bank account verification method.
+         * Bank account verification method. The default value is {@code automatic}.
          *
          * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
          */

@@ -1132,7 +1132,7 @@ public class CalculationCreateParams extends ApiRequestParams {
   public static class LineItem {
     /**
      * <strong>Required.</strong> A positive integer representing the line item's total price in the
-     * <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. If
+     * <a href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>. If
      * {@code tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes are
      * calculated on top of this amount.
      */
@@ -1246,8 +1246,8 @@ public class CalculationCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> A positive integer representing the line item's total price in
-       * the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
-       * If {@code tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes are
+       * the <a href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>. If
+       * {@code tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes are
        * calculated on top of this amount.
        */
       public Builder setAmount(Long amount) {
@@ -1639,7 +1639,7 @@ public class CalculationCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost {
     /**
-     * A positive integer in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
+     * A positive integer in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
      * currency unit</a> representing the shipping charge. If {@code tax_behavior=inclusive}, then
      * this amount includes taxes. Otherwise, taxes are calculated on top of this amount.
      */
@@ -1714,10 +1714,9 @@ public class CalculationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A positive integer in the <a
-       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>
-       * representing the shipping charge. If {@code tax_behavior=inclusive}, then this amount
-       * includes taxes. Otherwise, taxes are calculated on top of this amount.
+       * A positive integer in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
+       * currency unit</a> representing the shipping charge. If {@code tax_behavior=inclusive}, then
+       * this amount includes taxes. Otherwise, taxes are calculated on top of this amount.
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;

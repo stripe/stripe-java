@@ -251,8 +251,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-   * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-   * given subscription at the specified interval.
+   * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+   * subscription at the specified interval.
    */
   @SerializedName("pending_invoice_item_interval")
   Object pendingInvoiceItemInterval;
@@ -1022,8 +1022,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-     * given subscription at the specified interval.
+     * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+     * subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(
         SubscriptionCreateParams.PendingInvoiceItemInterval pendingInvoiceItemInterval) {
@@ -1033,8 +1033,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-     * given subscription at the specified interval.
+     * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+     * subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(EmptyParam pendingInvoiceItemInterval) {
       this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
@@ -4714,7 +4714,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         @Getter
         @EqualsAndHashCode(callSuper = false)
         public static class MandateOptions {
-          /** Amount to be charged for future payments. */
+          /** Amount to be charged for future payments, specified in the presentment currency. */
           @SerializedName("amount")
           Long amount;
 
@@ -4774,7 +4774,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
                   .MandateOptions(this.amount, this.amountType, this.description, this.extraParams);
             }
 
-            /** Amount to be charged for future payments. */
+            /** Amount to be charged for future payments, specified in the presentment currency. */
             public Builder setAmount(Long amount) {
               this.amount = amount;
               return this;
