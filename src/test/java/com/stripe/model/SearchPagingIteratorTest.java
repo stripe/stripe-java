@@ -235,7 +235,9 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
     final SearchableModelCollection collection =
         SearchableModel.search(
             page0Params, RequestOptions.builder().setApiKey("sk_test_xyz").build());
-    assertEquals(collection.getRequestOptions().getApiKey(), "sk_test_xyz");
+    assertEquals(
+        new BearerTokenAuthenticator("sk_test_xyz"),
+        collection.getRequestOptions().getAuthenticator());
     final List<SearchableModel> models = new ArrayList<>();
 
     for (SearchableModel model : collection.autoPagingIterable()) {
