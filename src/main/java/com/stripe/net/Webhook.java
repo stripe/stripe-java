@@ -54,8 +54,8 @@ public final class Webhook {
 
   /**
    * Returns an Event instance using the provided JSON payload. Throws a JsonSyntaxException if the
-   * payload is not valid JSON, and a SignatureVerificationException if the signature verification
-   * fails for any reason.
+   * payload is not valid JSON, a SignatureVerificationException if the signature verification fails
+   * for any reason, and an IllegalArgumentException if you pass the wrong type of input.
    *
    * @param payload the payload sent by Stripe.
    * @param sigHeader the contents of the signature header sent by Stripe.
@@ -72,6 +72,13 @@ public final class Webhook {
     Event event =
         StripeObject.deserializeStripeObject(
             payload, Event.class, ApiResource.getGlobalResponseGetter());
+
+    if ("v2.core.event".equals(event.getObject())) {
+      throw new IllegalArgumentException(
+          "You passed an event notification to Webhook.constructEvent, which expects a webhook payload."
+              + " Use StripeClient.parseEventNotification instead.");
+    }
+
     Signature.verifyHeader(payload, sigHeader, secret, tolerance, clock);
     // StripeObjects source their raw JSON object from their last response, but constructed webhooks
     // don't have that

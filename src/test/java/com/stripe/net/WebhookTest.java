@@ -335,4 +335,22 @@ public class WebhookTest extends BaseStripeTest {
 
     assertNotNull(event.getRawJsonObject());
   }
+
+  @Test
+  public void testConstructEventRejectsV2Payload()
+      throws NoSuchAlgorithmException, InvalidKeyException {
+    final String v2Payload =
+        "{\n  \"id\": \"evt_test_webhook\",\n  \"object\": \"v2.core.event\"\n}";
+    final Map<String, Object> options = new HashMap<>();
+    options.put("payload", v2Payload);
+    final String sigHeader = generateSigHeader(options);
+
+    Throwable exception =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+              Webhook.constructEvent(v2Payload, sigHeader, secret);
+            });
+    assertTrue(exception.getMessage().contains("StripeClient.parseEventNotification"));
+  }
 }

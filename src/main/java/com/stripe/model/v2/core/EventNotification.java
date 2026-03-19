@@ -85,13 +85,19 @@ public abstract class EventNotification {
 
   /**
    * Helper for constructing an Event Notification. Doesn't perform signature validation, so you
-   * should use {@link com.stripe.StripeClient#parseEventNotification} instead for initial handling.
+   * should use {@link com.stripe.StripeClient.parseEventNotification} instead for initial handling.
    * This is useful in unit tests and working with EventNotifications that you've already validated
    * the authenticity of.
    */
   public static EventNotification fromJson(String payload, StripeClient client) {
     // don't love the double json parse here, but I don't think we can avoid it?
     JsonObject jsonObject = ApiResource.GSON.fromJson(payload, JsonObject.class).getAsJsonObject();
+
+    if (jsonObject.has("object") && "event".equals(jsonObject.get("object").getAsString())) {
+      throw new IllegalArgumentException(
+          "You passed a webhook payload to StripeClient.parseEventNotification, which expects an event notification."
+              + " Use Webhook.constructEvent instead.");
+    }
 
     Class<? extends EventNotification> cls =
         EventNotificationClassLookup.eventClassLookup.get(jsonObject.get("type").getAsString());
