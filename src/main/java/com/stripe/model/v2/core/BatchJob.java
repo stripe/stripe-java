@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec
 package com.stripe.model.v2.core;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
 import java.util.Map;
@@ -120,6 +122,7 @@ public class BatchJob extends StripeObject implements HasId {
     public static class Canceled extends StripeObject {
       /** The total number of records that failed processing. */
       @SerializedName("failure_count")
+      @JsonAdapter(StringInt64TypeAdapter.class)
       Long failureCount;
 
       /**
@@ -131,6 +134,7 @@ public class BatchJob extends StripeObject implements HasId {
 
       /** The total number of records that were successfully processed. */
       @SerializedName("success_count")
+      @JsonAdapter(StringInt64TypeAdapter.class)
       Long successCount;
 
       /**
@@ -151,6 +155,7 @@ public class BatchJob extends StripeObject implements HasId {
 
         /** The total size of the file in bytes. */
         @SerializedName("size")
+        @JsonAdapter(StringInt64TypeAdapter.class)
         Long size;
 
         /** A pre-signed URL that allows secure, time-limited access to download the file. */
@@ -176,6 +181,7 @@ public class BatchJob extends StripeObject implements HasId {
     public static class Complete extends StripeObject {
       /** The total number of records that failed processing. */
       @SerializedName("failure_count")
+      @JsonAdapter(StringInt64TypeAdapter.class)
       Long failureCount;
 
       /**
@@ -187,6 +193,7 @@ public class BatchJob extends StripeObject implements HasId {
 
       /** The total number of records that were successfully processed. */
       @SerializedName("success_count")
+      @JsonAdapter(StringInt64TypeAdapter.class)
       Long successCount;
 
       /**
@@ -207,6 +214,7 @@ public class BatchJob extends StripeObject implements HasId {
 
         /** The total size of the file in bytes. */
         @SerializedName("size")
+        @JsonAdapter(StringInt64TypeAdapter.class)
         Long size;
 
         /** A pre-signed URL that allows secure, time-limited access to download the file. */
@@ -232,10 +240,12 @@ public class BatchJob extends StripeObject implements HasId {
     public static class InProgress extends StripeObject {
       /** The number of records that failed processing so far. */
       @SerializedName("failure_count")
+      @JsonAdapter(StringInt64TypeAdapter.class)
       Long failureCount;
 
       /** The number of records that were successfully processed so far. */
       @SerializedName("success_count")
+      @JsonAdapter(StringInt64TypeAdapter.class)
       Long successCount;
     }
 
@@ -270,6 +280,7 @@ public class BatchJob extends StripeObject implements HasId {
     public static class Timeout extends StripeObject {
       /** The total number of records that failed processing. */
       @SerializedName("failure_count")
+      @JsonAdapter(StringInt64TypeAdapter.class)
       Long failureCount;
 
       /**
@@ -281,6 +292,7 @@ public class BatchJob extends StripeObject implements HasId {
 
       /** The total number of records that were successfully processed. */
       @SerializedName("success_count")
+      @JsonAdapter(StringInt64TypeAdapter.class)
       Long successCount;
 
       /**
@@ -301,6 +313,7 @@ public class BatchJob extends StripeObject implements HasId {
 
         /** The total size of the file in bytes. */
         @SerializedName("size")
+        @JsonAdapter(StringInt64TypeAdapter.class)
         Long size;
 
         /** A pre-signed URL that allows secure, time-limited access to download the file. */
@@ -329,6 +342,7 @@ public class BatchJob extends StripeObject implements HasId {
        * we have any validation failures we give up.
        */
       @SerializedName("validated_count")
+      @JsonAdapter(StringInt64TypeAdapter.class)
       Long validatedCount;
     }
 
@@ -339,6 +353,7 @@ public class BatchJob extends StripeObject implements HasId {
     public static class ValidationFailed extends StripeObject {
       /** The total number of records that failed processing. */
       @SerializedName("failure_count")
+      @JsonAdapter(StringInt64TypeAdapter.class)
       Long failureCount;
 
       /**
@@ -350,6 +365,7 @@ public class BatchJob extends StripeObject implements HasId {
 
       /** The total number of records that were successfully processed. */
       @SerializedName("success_count")
+      @JsonAdapter(StringInt64TypeAdapter.class)
       Long successCount;
 
       /**
@@ -370,6 +386,7 @@ public class BatchJob extends StripeObject implements HasId {
 
         /** The total size of the file in bytes. */
         @SerializedName("size")
+        @JsonAdapter(StringInt64TypeAdapter.class)
         Long size;
 
         /** A pre-signed URL that allows secure, time-limited access to download the file. */
