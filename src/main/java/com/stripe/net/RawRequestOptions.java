@@ -8,34 +8,9 @@ import java.util.Map;
 public class RawRequestOptions extends RequestOptions {
   private Map<String, String> additionalHeaders;
 
-  public RawRequestOptions(
-      Authenticator authenticator,
-      String clientId,
-      String idempotencyKey,
-      String stripeContext,
-      String stripeAccount,
-      String stripeVersionOverride,
-      String baseUrl,
-      Integer connectTimeout,
-      Integer readTimeout,
-      Integer maxNetworkRetries,
-      Proxy connectionProxy,
-      PasswordAuthentication proxyCredential,
-      Map<String, String> additionalHeaders) {
-    super(
-        authenticator,
-        clientId,
-        idempotencyKey,
-        stripeContext,
-        stripeAccount,
-        stripeVersionOverride,
-        baseUrl,
-        connectTimeout,
-        readTimeout,
-        maxNetworkRetries,
-        connectionProxy,
-        proxyCredential);
-    this.additionalHeaders = additionalHeaders;
+  private RawRequestOptions(RawRequestOptionsBuilder builder) {
+    super(builder);
+    this.additionalHeaders = builder.additionalHeaders;
   }
 
   public Map<String, String> getAdditionalHeaders() {
@@ -89,6 +64,12 @@ public class RawRequestOptions extends RequestOptions {
     }
 
     @Override
+    public RawRequestOptionsBuilder setStripeRequestTrigger(String stripeRequestTrigger) {
+      super.setStripeRequestTrigger(stripeRequestTrigger);
+      return this;
+    }
+
+    @Override
     public RawRequestOptionsBuilder setStripeAccount(String stripeAccount) {
       super.setStripeAccount(stripeAccount);
       return this;
@@ -132,20 +113,7 @@ public class RawRequestOptions extends RequestOptions {
 
     @Override
     public RawRequestOptions build() {
-      return new RawRequestOptions(
-          authenticator,
-          normalizeClientId(this.clientId),
-          normalizeIdempotencyKey(this.idempotencyKey),
-          normalizeStripeContext(this.stripeContext),
-          normalizeStripeAccount(this.stripeAccount),
-          normalizeStripeVersion(this.stripeVersionOverride),
-          normalizeBaseUrl(this.baseUrl),
-          connectTimeout,
-          readTimeout,
-          maxNetworkRetries,
-          connectionProxy,
-          proxyCredential,
-          additionalHeaders);
+      return new RawRequestOptions(this);
     }
   }
 }
