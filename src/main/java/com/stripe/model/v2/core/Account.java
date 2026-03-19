@@ -4,6 +4,8 @@ package com.stripe.model.v2.core;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -4250,27 +4252,6 @@ public class Account extends StripeObject implements HasId {
          */
         @SerializedName("fiscal_year_end")
         String fiscalYearEnd;
-
-        /** Annual revenue amount in minor currency units (for example, '123' for 1.23 USD). */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Amount extends StripeObject {
-          /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
-           */
-          @SerializedName("currency")
-          String currency;
-
-          /**
-           * A non-negative integer representing how much to charge in the <a
-           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-           */
-          @SerializedName("value")
-          Long value;
-        }
       }
 
       /** Documents that may be submitted to satisfy various informational requests. */
@@ -4649,30 +4630,6 @@ public class Account extends StripeObject implements HasId {
          */
         @SerializedName("amount")
         Amount amount;
-
-        /**
-         * Estimated monthly revenue amount in minor currency units (for example, '123' for 1.23
-         * USD).
-         */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Amount extends StripeObject {
-          /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
-           */
-          @SerializedName("currency")
-          String currency;
-
-          /**
-           * A non-negative integer representing how much to charge in the <a
-           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-           */
-          @SerializedName("value")
-          Long value;
-        }
       }
 
       /** When the business was incorporated or registered. */
@@ -5389,7 +5346,7 @@ public class Account extends StripeObject implements HasId {
 
         /** The percentage of the Account's identity that the individual owns. */
         @SerializedName("percent_ownership")
-        String percentOwnership;
+        BigDecimal percentOwnership;
 
         /**
          * Whether the individual is authorized as the primary representative of the Account. This

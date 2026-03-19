@@ -22585,10 +22585,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("networks")
       Networks networks;
 
-      /** Preferred transaction settlement speed. */
-      @SerializedName("preferred_settlement_speed")
-      ApiRequestParams.EnumParam preferredSettlementSpeed;
-
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -22636,7 +22632,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           FinancialConnections financialConnections,
           MandateOptions mandateOptions,
           Networks networks,
-          ApiRequestParams.EnumParam preferredSettlementSpeed,
           ApiRequestParams.EnumParam setupFutureUsage,
           Object targetDate,
           ApiRequestParams.EnumParam transactionPurpose,
@@ -22645,7 +22640,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         this.financialConnections = financialConnections;
         this.mandateOptions = mandateOptions;
         this.networks = networks;
-        this.preferredSettlementSpeed = preferredSettlementSpeed;
         this.setupFutureUsage = setupFutureUsage;
         this.targetDate = targetDate;
         this.transactionPurpose = transactionPurpose;
@@ -22665,8 +22659,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private Networks networks;
 
-        private ApiRequestParams.EnumParam preferredSettlementSpeed;
-
         private ApiRequestParams.EnumParam setupFutureUsage;
 
         private Object targetDate;
@@ -22682,7 +22674,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.financialConnections,
               this.mandateOptions,
               this.networks,
-              this.preferredSettlementSpeed,
               this.setupFutureUsage,
               this.targetDate,
               this.transactionPurpose,
@@ -22737,20 +22728,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         public Builder setNetworks(
             PaymentIntentUpdateParams.PaymentMethodOptions.UsBankAccount.Networks networks) {
           this.networks = networks;
-          return this;
-        }
-
-        /** Preferred transaction settlement speed. */
-        public Builder setPreferredSettlementSpeed(
-            PaymentIntentUpdateParams.PaymentMethodOptions.UsBankAccount.PreferredSettlementSpeed
-                preferredSettlementSpeed) {
-          this.preferredSettlementSpeed = preferredSettlementSpeed;
-          return this;
-        }
-
-        /** Preferred transaction settlement speed. */
-        public Builder setPreferredSettlementSpeed(EmptyParam preferredSettlementSpeed) {
-          this.preferredSettlementSpeed = preferredSettlementSpeed;
           return this;
         }
 
@@ -23476,21 +23453,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           Requested(String value) {
             this.value = value;
           }
-        }
-      }
-
-      public enum PreferredSettlementSpeed implements ApiRequestParams.EnumParam {
-        @SerializedName("fastest")
-        FASTEST("fastest"),
-
-        @SerializedName("standard")
-        STANDARD("standard");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        PreferredSettlementSpeed(String value) {
-          this.value = value;
         }
       }
 
