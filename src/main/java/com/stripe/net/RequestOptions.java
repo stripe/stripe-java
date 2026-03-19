@@ -13,6 +13,7 @@ public class RequestOptions {
   private final Authenticator authenticator;
   private final String clientId;
   private final String stripeContext;
+  private final String stripeRequestTrigger;
   private final String idempotencyKey;
   private final String stripeAccount;
 
@@ -33,15 +34,15 @@ public class RequestOptions {
   private final PasswordAuthentication proxyCredential;
 
   public static RequestOptions getDefault() {
-    return new RequestOptions(
-        null, null, null, null, null, null, null, null, null, null, null, null);
+    return new RequestOptionsBuilder().build();
   }
 
-  protected RequestOptions(
+  private RequestOptions(
       Authenticator authenticator,
       String clientId,
       String idempotencyKey,
       String stripeContext,
+      String stripeRequestTrigger,
       String stripeAccount,
       String stripeVersionOverride,
       String baseUrl,
@@ -54,6 +55,7 @@ public class RequestOptions {
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
     this.stripeContext = stripeContext;
+    this.stripeRequestTrigger = stripeRequestTrigger;
     this.stripeAccount = stripeAccount;
     this.stripeVersionOverride = stripeVersionOverride;
     this.baseUrl = baseUrl;
@@ -64,16 +66,25 @@ public class RequestOptions {
     this.proxyCredential = proxyCredential;
   }
 
-  public Authenticator getAuthenticator() {
-    return this.authenticator;
+  RequestOptions(RequestOptionsBuilder builder) {
+    this(
+        builder.authenticator,
+        normalizeClientId(builder.clientId),
+        normalizeIdempotencyKey(builder.idempotencyKey),
+        builder.stripeContext,
+        builder.stripeRequestTrigger,
+        normalizeStripeAccount(builder.stripeAccount),
+        normalizeStripeVersion(builder.stripeVersionOverride),
+        normalizeBaseUrl(builder.baseUrl),
+        builder.connectTimeout,
+        builder.readTimeout,
+        builder.maxNetworkRetries,
+        builder.connectionProxy,
+        builder.proxyCredential);
   }
 
-  public String getApiKey() {
-    if (authenticator instanceof BearerTokenAuthenticator) {
-      return ((BearerTokenAuthenticator) authenticator).getApiKey();
-    }
-
-    return null;
+  public Authenticator getAuthenticator() {
+    return this.authenticator;
   }
 
   public String getClientId() {
@@ -82,6 +93,10 @@ public class RequestOptions {
 
   public String getStripeContext() {
     return stripeContext;
+  }
+
+  public String getStripeRequestTrigger() {
+    return stripeRequestTrigger;
   }
 
   public String getIdempotencyKey() {
@@ -155,6 +170,7 @@ public class RequestOptions {
             .setClientId(this.clientId)
             .setIdempotencyKey(this.idempotencyKey)
             .setStripeAccount(this.stripeAccount)
+            .setStripeRequestTrigger(this.stripeRequestTrigger)
             .setConnectTimeout(this.connectTimeout)
             .setReadTimeout(this.readTimeout)
             .setMaxNetworkRetries(this.maxNetworkRetries)
@@ -168,6 +184,7 @@ public class RequestOptions {
     protected String clientId;
     protected String idempotencyKey;
     protected String stripeContext;
+    protected String stripeRequestTrigger;
     protected String stripeAccount;
     protected String stripeVersionOverride;
     protected Integer connectTimeout;
@@ -187,19 +204,29 @@ public class RequestOptions {
       return this.authenticator;
     }
 
+    /**
+     * Sets the authenticator used to authorize requests. Use this for custom authentication
+     * strategies. For standard API key authentication, prefer {@link #setApiKey(String)}.
+     *
+     * <p>This shares a backing field with {@link #setApiKey(String)} — calling one overwrites the
+     * other.
+     *
+     * @param authenticator the authenticator to use
+     */
     public RequestOptionsBuilder setAuthenticator(Authenticator authenticator) {
       this.authenticator = authenticator;
       return this;
     }
 
-    public String getApiKey() {
-      if (authenticator instanceof BearerTokenAuthenticator) {
-        return ((BearerTokenAuthenticator) authenticator).getApiKey();
-      }
-
-      return null;
-    }
-
+    /**
+     * Sets the API key for bearer token authentication. This is a convenience method equivalent to
+     * calling {@code setAuthenticator(new BearerTokenAuthenticator(apiKey))}.
+     *
+     * <p>This shares a backing field with {@link #setAuthenticator(Authenticator)} — calling one
+     * overwrites the other.
+     *
+     * @param apiKey the API key; if null, clears the authenticator
+     */
     public RequestOptionsBuilder setApiKey(String apiKey) {
       if (apiKey == null) {
         this.authenticator = null;
@@ -250,6 +277,15 @@ public class RequestOptions {
      */
     public RequestOptionsBuilder clearStripeContext() {
       this.stripeContext = null;
+      return this;
+    }
+
+    public String getStripeRequestTrigger() {
+      return stripeRequestTrigger;
+    }
+
+    public RequestOptionsBuilder setStripeRequestTrigger(String stripeRequestTrigger) {
+      this.stripeRequestTrigger = stripeRequestTrigger;
       return this;
     }
 
@@ -368,19 +404,7 @@ public class RequestOptions {
 
     /** Constructs a {@link RequestOptions} with the specified values. */
     public RequestOptions build() {
-      return new RequestOptions(
-          this.authenticator,
-          normalizeClientId(this.clientId),
-          normalizeIdempotencyKey(this.idempotencyKey),
-          stripeContext,
-          normalizeStripeAccount(this.stripeAccount),
-          normalizeStripeVersion(this.stripeVersionOverride),
-          normalizeBaseUrl(this.baseUrl),
-          connectTimeout,
-          readTimeout,
-          maxNetworkRetries,
-          connectionProxy,
-          proxyCredential);
+      return new RequestOptions(this);
     }
   }
 
@@ -470,20 +494,17 @@ public class RequestOptions {
 
   static RequestOptions merge(StripeResponseGetterOptions clientOptions, RequestOptions options) {
     if (options == null) {
-      return new RequestOptions(
-          clientOptions.getAuthenticator(), // authenticator
-          clientOptions.getClientId(), // clientId
-          null, // idempotencyKey
-          clientOptions.getStripeContext(), // stripeContext
-          clientOptions.getStripeAccount(), // stripeAccount
-          null, // stripeVersionOverride
-          null, // baseUrl
-          clientOptions.getConnectTimeout(), // connectTimeout
-          clientOptions.getReadTimeout(), // readTimeout
-          clientOptions.getMaxNetworkRetries(), // maxNetworkRetries
-          clientOptions.getConnectionProxy(), // connectionProxy
-          clientOptions.getProxyCredential() // proxyCredential
-          );
+      return new RequestOptionsBuilder()
+          .setAuthenticator(clientOptions.getAuthenticator())
+          .setClientId(clientOptions.getClientId())
+          .setStripeContext(clientOptions.getStripeContext())
+          .setStripeAccount(clientOptions.getStripeAccount())
+          .setConnectTimeout(clientOptions.getConnectTimeout())
+          .setReadTimeout(clientOptions.getReadTimeout())
+          .setMaxNetworkRetries(clientOptions.getMaxNetworkRetries())
+          .setConnectionProxy(clientOptions.getConnectionProxy())
+          .setProxyCredential(clientOptions.getProxyCredential())
+          .build();
     }
 
     // callers need to be able to explicitly unset context per-request
@@ -500,33 +521,46 @@ public class RequestOptions {
     } else {
       stripeContext = clientOptions.getStripeContext();
     }
-    return new RequestOptions(
-        options.getAuthenticator() != null
-            ? options.getAuthenticator()
-            : clientOptions.getAuthenticator(),
-        options.getClientId() != null ? options.getClientId() : clientOptions.getClientId(),
-        options.getIdempotencyKey(),
-        stripeContext,
-        options.getStripeAccount() != null
-            ? options.getStripeAccount()
-            : clientOptions.getStripeAccount(),
-        RequestOptions.unsafeGetStripeVersionOverride(options),
-        options.getBaseUrl(),
-        options.getConnectTimeout() != null
-            ? options.getConnectTimeout()
-            : clientOptions.getConnectTimeout(),
-        options.getReadTimeout() != null
-            ? options.getReadTimeout()
-            : clientOptions.getReadTimeout(),
-        options.getMaxNetworkRetries() != null
-            ? options.getMaxNetworkRetries()
-            : clientOptions.getMaxNetworkRetries(),
-        options.getConnectionProxy() != null
-            ? options.getConnectionProxy()
-            : clientOptions.getConnectionProxy(),
-        options.getProxyCredential() != null
-            ? options.getProxyCredential()
-            : clientOptions.getProxyCredential());
+
+    return RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+            new RequestOptionsBuilder()
+                .setAuthenticator(
+                    options.getAuthenticator() != null
+                        ? options.getAuthenticator()
+                        : clientOptions.getAuthenticator())
+                .setClientId(
+                    options.getClientId() != null
+                        ? options.getClientId()
+                        : clientOptions.getClientId())
+                .setIdempotencyKey(options.getIdempotencyKey())
+                .setStripeContext(stripeContext)
+                .setStripeRequestTrigger(options.getStripeRequestTrigger())
+                .setStripeAccount(
+                    options.getStripeAccount() != null
+                        ? options.getStripeAccount()
+                        : clientOptions.getStripeAccount())
+                .setConnectTimeout(
+                    options.getConnectTimeout() != null
+                        ? options.getConnectTimeout()
+                        : clientOptions.getConnectTimeout())
+                .setReadTimeout(
+                    options.getReadTimeout() != null
+                        ? options.getReadTimeout()
+                        : clientOptions.getReadTimeout())
+                .setMaxNetworkRetries(
+                    options.getMaxNetworkRetries() != null
+                        ? options.getMaxNetworkRetries()
+                        : clientOptions.getMaxNetworkRetries())
+                .setConnectionProxy(
+                    options.getConnectionProxy() != null
+                        ? options.getConnectionProxy()
+                        : clientOptions.getConnectionProxy())
+                .setProxyCredential(
+                    options.getProxyCredential() != null
+                        ? options.getProxyCredential()
+                        : clientOptions.getProxyCredential()),
+            RequestOptions.unsafeGetStripeVersionOverride(options))
+        .build();
   }
 
   public static class InvalidRequestOptionsException extends RuntimeException {

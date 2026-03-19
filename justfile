@@ -5,6 +5,10 @@ import? '../sdk-codegen/utils.just'
 _default:
     just --list --unsorted
 
+# ⭐ run format and tests to prepare for CI
+[no-exit-message]
+prepare: format test
+
 # ⭐ run the whole test suite
 [no-exit-message]
 test *args:

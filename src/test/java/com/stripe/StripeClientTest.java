@@ -304,6 +304,23 @@ public class StripeClientTest extends BaseStripeTest {
   }
 
   @Test
+  public void builderUsesProvidedHttpClient() throws StripeException {
+    HttpClient customHttpClient = Mockito.spy(new HttpURLConnectionClient());
+
+    StripeClient client =
+        StripeClient.builder()
+            .setApiKey(TEST_API_KEY)
+            .setApiBase(getStripeMockUrl())
+            .setHttpClient(customHttpClient)
+            .build();
+
+    client.customers().create();
+
+    ArgumentCaptor<StripeRequest> requestCaptor = ArgumentCaptor.forClass(StripeRequest.class);
+    Mockito.verify(customHttpClient, Mockito.atLeastOnce()).request(requestCaptor.capture());
+  }
+
+  @Test
   public void stripeClientWithStripeAccount() throws StripeException {
 
     StripeResponseGetterOptions options =
