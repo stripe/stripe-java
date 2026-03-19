@@ -73,7 +73,7 @@ jobs:
           - "25"
           # non-LTS versions
           # we should periodically add the latest non-LTS version here to test against
-          # as of 2025-09-29, the latest version of java (25) is LTS, so this section is empty. In March 2026, we'll add "26".
+          - "26"
 
     steps:
       - uses: extractions/setup-just@v2
@@ -114,8 +114,7 @@ jobs:
   publish:
     if: >-
       ((github.event_name == 'workflow_dispatch') || (github.event_name == 'push')) &&
-      startsWith(github.ref, 'refs/tags/v') &&
-      endsWith(github.actor, '-stripe')
+      startsWith(github.ref, 'refs/tags/v')
     needs: [build, test]
     runs-on: "ubuntu-24.04"
     permissions:
@@ -157,12 +156,11 @@ jobs:
       ((github.event_name == 'workflow_dispatch') || (github.event_name == 'push')) &&
       startsWith(github.ref, 'refs/tags/v') &&
       !contains(github.ref, 'beta') &&
-      !contains(github.ref, 'alpha') &&
-      endsWith(github.actor, '-stripe')
+      !contains(github.ref, 'alpha')
     needs: [build, test]
     runs-on: "ubuntu-24.04"
     permissions:
-        contents: write
+      contents: write
     steps:
       - uses: actions/checkout@master
       - name: Setup Java
