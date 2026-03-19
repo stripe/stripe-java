@@ -370,6 +370,10 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     @SerializedName("shipping")
     Object shipping;
 
+    /** Contains information about the surcharge portion of the amount. */
+    @SerializedName("surcharge")
+    Object surcharge;
+
     /** Contains information about the tax portion of the amount. */
     @SerializedName("tax")
     Object tax;
@@ -380,12 +384,14 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
         Map<String, Object> extraParams,
         Object lineItems,
         Object shipping,
+        Object surcharge,
         Object tax) {
       this.discountAmount = discountAmount;
       this.enforceArithmeticValidation = enforceArithmeticValidation;
       this.extraParams = extraParams;
       this.lineItems = lineItems;
       this.shipping = shipping;
+      this.surcharge = surcharge;
       this.tax = tax;
     }
 
@@ -404,6 +410,8 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
       private Object shipping;
 
+      private Object surcharge;
+
       private Object tax;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -414,6 +422,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
             this.extraParams,
             this.lineItems,
             this.shipping,
+            this.surcharge,
             this.tax);
       }
 
@@ -553,6 +562,19 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       /** Contains information about the shipping portion of the amount. */
       public Builder setShipping(EmptyParam shipping) {
         this.shipping = shipping;
+        return this;
+      }
+
+      /** Contains information about the surcharge portion of the amount. */
+      public Builder setSurcharge(
+          PaymentIntentIncrementAuthorizationParams.AmountDetails.Surcharge surcharge) {
+        this.surcharge = surcharge;
+        return this;
+      }
+
+      /** Contains information about the surcharge portion of the amount. */
+      public Builder setSurcharge(EmptyParam surcharge) {
+        this.surcharge = surcharge;
         return this;
       }
 
@@ -1621,6 +1643,128 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
         public Builder setToPostalCode(EmptyParam toPostalCode) {
           this.toPostalCode = toPostalCode;
           return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Surcharge {
+      /** Portion of the amount that corresponds to a surcharge. */
+      @SerializedName("amount")
+      Object amount;
+
+      /** Indicate whether to enforce validations on the surcharge amount. */
+      @SerializedName("enforce_validation")
+      ApiRequestParams.EnumParam enforceValidation;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Surcharge(
+          Object amount,
+          ApiRequestParams.EnumParam enforceValidation,
+          Map<String, Object> extraParams) {
+        this.amount = amount;
+        this.enforceValidation = enforceValidation;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object amount;
+
+        private ApiRequestParams.EnumParam enforceValidation;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentIncrementAuthorizationParams.AmountDetails.Surcharge build() {
+          return new PaymentIntentIncrementAuthorizationParams.AmountDetails.Surcharge(
+              this.amount, this.enforceValidation, this.extraParams);
+        }
+
+        /** Portion of the amount that corresponds to a surcharge. */
+        public Builder setAmount(Long amount) {
+          this.amount = amount;
+          return this;
+        }
+
+        /** Portion of the amount that corresponds to a surcharge. */
+        public Builder setAmount(EmptyParam amount) {
+          this.amount = amount;
+          return this;
+        }
+
+        /** Indicate whether to enforce validations on the surcharge amount. */
+        public Builder setEnforceValidation(
+            PaymentIntentIncrementAuthorizationParams.AmountDetails.Surcharge.EnforceValidation
+                enforceValidation) {
+          this.enforceValidation = enforceValidation;
+          return this;
+        }
+
+        /** Indicate whether to enforce validations on the surcharge amount. */
+        public Builder setEnforceValidation(EmptyParam enforceValidation) {
+          this.enforceValidation = enforceValidation;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentIntentIncrementAuthorizationParams.AmountDetails.Surcharge#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentIntentIncrementAuthorizationParams.AmountDetails.Surcharge#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum EnforceValidation implements ApiRequestParams.EnumParam {
+        @SerializedName("automatic")
+        AUTOMATIC("automatic"),
+
+        @SerializedName("disabled")
+        DISABLED("disabled"),
+
+        @SerializedName("enabled")
+        ENABLED("enabled");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        EnforceValidation(String value) {
+          this.value = value;
         }
       }
     }

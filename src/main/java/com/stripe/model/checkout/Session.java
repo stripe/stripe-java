@@ -226,6 +226,13 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("id")
   String id;
 
+  /**
+   * The integration identifier for this Checkout Session. Multiple Checkout Sessions can have the
+   * same integration identifier.
+   */
+  @SerializedName("integration_identifier")
+  String integrationIdentifier;
+
   /** ID of the invoice created by the Checkout Session, if it exists. */
   @SerializedName("invoice")
   @Getter(lombok.AccessLevel.NONE)
@@ -241,8 +248,8 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   LineItemCollection lineItems;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -475,7 +482,8 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /**
    * The UI mode of the Session. Defaults to {@code hosted}.
    *
-   * <p>One of {@code custom}, {@code embedded}, or {@code hosted}.
+   * <p>One of {@code custom}, {@code elements}, {@code embedded}, {@code embedded_page}, {@code
+   * form}, {@code hosted}, or {@code hosted_page}.
    */
   @SerializedName("ui_mode")
   String uiMode;
@@ -2170,6 +2178,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("twint")
     Twint twint;
 
+    @SerializedName("upi")
+    Upi upi;
+
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
@@ -2225,7 +2236,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String targetDate;
 
       /**
-       * Bank account verification method.
+       * Bank account verification method. The default value is {@code automatic}.
        *
        * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
        */
@@ -4039,6 +4050,74 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
 
     /**
+     * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Upi extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** Amount to be charged for future payments. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+         * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+         * amount charged can be up to the value passed for the {@code amount} param.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * A description of the mandate or subscription that is meant to be displayed to the
+         * customer.
+         */
+        @SerializedName("description")
+        String description;
+
+        /** End date of the mandate or subscription. */
+        @SerializedName("end_date")
+        Long endDate;
+      }
+    }
+
+    /**
      * For more details about UsBankAccount, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -4082,7 +4161,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String targetDate;
 
       /**
-       * Bank account verification method.
+       * Bank account verification method. The default value is {@code automatic}.
        *
        * <p>One of {@code automatic}, or {@code instant}.
        */

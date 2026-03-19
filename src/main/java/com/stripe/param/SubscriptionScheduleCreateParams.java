@@ -4651,6 +4651,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       @SerializedName("trial")
       Trial trial;
 
+      /** The ID of the trial offer to apply to the configuration item. */
+      @SerializedName("trial_offer")
+      String trialOffer;
+
       private Item(
           Object billingThresholds,
           Object discounts,
@@ -4661,7 +4665,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           PriceData priceData,
           Long quantity,
           Object taxRates,
-          Trial trial) {
+          Trial trial,
+          String trialOffer) {
         this.billingThresholds = billingThresholds;
         this.discounts = discounts;
         this.extraParams = extraParams;
@@ -4672,6 +4677,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         this.quantity = quantity;
         this.taxRates = taxRates;
         this.trial = trial;
+        this.trialOffer = trialOffer;
       }
 
       public static Builder builder() {
@@ -4699,6 +4705,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         private Trial trial;
 
+        private String trialOffer;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionScheduleCreateParams.Phase.Item build() {
           return new SubscriptionScheduleCreateParams.Phase.Item(
@@ -4711,7 +4719,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
               this.priceData,
               this.quantity,
               this.taxRates,
-              this.trial);
+              this.trial,
+              this.trialOffer);
         }
 
         /**
@@ -4921,6 +4930,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         /** Options that configure the trial on the subscription item. */
         public Builder setTrial(SubscriptionScheduleCreateParams.Phase.Item.Trial trial) {
           this.trial = trial;
+          return this;
+        }
+
+        /** The ID of the trial offer to apply to the configuration item. */
+        public Builder setTrialOffer(String trialOffer) {
+          this.trialOffer = trialOffer;
           return this;
         }
       }
@@ -5858,7 +5873,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     public static class PauseCollection {
       /**
        * <strong>Required.</strong> The payment collection behavior for this subscription while
-       * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       * paused.
        */
       @SerializedName("behavior")
       Behavior behavior;
@@ -5894,7 +5909,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The payment collection behavior for this subscription while
-         * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+         * paused.
          */
         public Builder setBehavior(
             SubscriptionScheduleCreateParams.Phase.PauseCollection.Behavior behavior) {

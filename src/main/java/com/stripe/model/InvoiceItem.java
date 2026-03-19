@@ -104,8 +104,8 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   ExpandableField<Invoice> invoice;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -163,11 +163,20 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   ProrationDetails prorationDetails;
 
   /**
-   * Quantity of units for the invoice item. If the invoice item is a proration, the quantity of the
-   * subscription that the proration was computed for.
+   * Quantity of units for the invoice item in integer format, with any decimal precision truncated.
+   * For the item's full-precision decimal quantity, use {@code quantity_decimal}. This field will
+   * be deprecated in favor of {@code quantity_decimal} in a future version. If the invoice item is
+   * a proration, the quantity of the subscription that the proration was computed for.
    */
   @SerializedName("quantity")
   Long quantity;
+
+  /**
+   * Non-negative decimal with at most 12 decimal places. The quantity of units for the invoice
+   * item.
+   */
+  @SerializedName("quantity_decimal")
+  BigDecimal quantityDecimal;
 
   /**
    * The tax rates which apply to the invoice item. When set, the {@code default_tax_rates} on the

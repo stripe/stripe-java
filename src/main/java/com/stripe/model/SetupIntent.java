@@ -151,8 +151,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   ExpandableField<SetupAttempt> latestAttempt;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -910,6 +910,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("type")
     String type;
 
+    @SerializedName("upi_handle_redirect_or_display_qr_code")
+    UpiHandleRedirectOrDisplayQrCode upiHandleRedirectOrDisplayQrCode;
+
     /**
      * When confirming a SetupIntent with Stripe.js, Stripe.js depends on the contents of this
      * dictionary to invoke authentication flows. The shape of the contents is subject to change and
@@ -1021,6 +1024,45 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     }
 
     /**
+     * For more details about UpiHandleRedirectOrDisplayQrCode, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UpiHandleRedirectOrDisplayQrCode extends StripeObject {
+      /**
+       * The URL to the hosted UPI instructions page, which allows customers to view the QR code.
+       */
+      @SerializedName("hosted_instructions_url")
+      String hostedInstructionsUrl;
+
+      @SerializedName("qr_code")
+      QrCode qrCode;
+
+      /**
+       * For more details about QrCode, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class QrCode extends StripeObject {
+        /** The date (unix timestamp) when the QR code expires. */
+        @SerializedName("expires_at")
+        Long expiresAt;
+
+        /** The image_url_png string used to render QR code. */
+        @SerializedName("image_url_png")
+        String imageUrlPng;
+
+        /** The image_url_svg string used to render QR code. */
+        @SerializedName("image_url_svg")
+        String imageUrlSvg;
+      }
+    }
+
+    /**
      * For more details about VerifyWithMicrodeposits, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1109,6 +1151,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    @SerializedName("upi")
+    Upi upi;
+
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
@@ -1132,7 +1177,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       MandateOptions mandateOptions;
 
       /**
-       * Bank account verification method.
+       * Bank account verification method. The default value is {@code automatic}.
        *
        * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
        */
@@ -1261,7 +1306,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions extends StripeObject {
-        /** Amount to be charged for future payments. */
+        /** Amount to be charged for future payments, specified in the presentment currency. */
         @SerializedName("amount")
         Long amount;
 
@@ -1582,6 +1627,50 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     }
 
     /**
+     * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Upi extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** Amount to be charged for future payments. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+         * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+         * amount charged can be up to the value passed for the {@code amount} param.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * A description of the mandate or subscription that is meant to be displayed to the
+         * customer.
+         */
+        @SerializedName("description")
+        String description;
+
+        /** End date of the mandate or subscription. */
+        @SerializedName("end_date")
+        Long endDate;
+      }
+    }
+
+    /**
      * For more details about UsBankAccount, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1596,7 +1685,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       MandateOptions mandateOptions;
 
       /**
-       * Bank account verification method.
+       * Bank account verification method. The default value is {@code automatic}.
        *
        * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
        */

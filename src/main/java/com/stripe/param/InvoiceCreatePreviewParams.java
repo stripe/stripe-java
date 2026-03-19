@@ -2310,9 +2310,20 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @SerializedName("price_data")
     PriceData priceData;
 
-    /** Non-negative integer. The quantity of units for the invoice item. */
+    /**
+     * Non-negative integer. The quantity of units for the invoice item. Use {@code
+     * quantity_decimal} instead to provide decimal precision. This field will be deprecated in
+     * favor of {@code quantity_decimal} in a future version.
+     */
     @SerializedName("quantity")
     Long quantity;
+
+    /**
+     * Non-negative decimal with at most 12 decimal places. The quantity of units for the invoice
+     * item.
+     */
+    @SerializedName("quantity_decimal")
+    BigDecimal quantityDecimal;
 
     /**
      * Only required if a <a
@@ -2365,6 +2376,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         String price,
         PriceData priceData,
         Long quantity,
+        BigDecimal quantityDecimal,
         TaxBehavior taxBehavior,
         Object taxCode,
         Object taxRates,
@@ -2382,6 +2394,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       this.price = price;
       this.priceData = priceData;
       this.quantity = quantity;
+      this.quantityDecimal = quantityDecimal;
       this.taxBehavior = taxBehavior;
       this.taxCode = taxCode;
       this.taxRates = taxRates;
@@ -2418,6 +2431,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       private Long quantity;
 
+      private BigDecimal quantityDecimal;
+
       private TaxBehavior taxBehavior;
 
       private Object taxCode;
@@ -2443,6 +2458,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             this.price,
             this.priceData,
             this.quantity,
+            this.quantityDecimal,
             this.taxBehavior,
             this.taxCode,
             this.taxRates,
@@ -2638,9 +2654,22 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         return this;
       }
 
-      /** Non-negative integer. The quantity of units for the invoice item. */
+      /**
+       * Non-negative integer. The quantity of units for the invoice item. Use {@code
+       * quantity_decimal} instead to provide decimal precision. This field will be deprecated in
+       * favor of {@code quantity_decimal} in a future version.
+       */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
+        return this;
+      }
+
+      /**
+       * Non-negative decimal with at most 12 decimal places. The quantity of units for the invoice
+       * item.
+       */
+      public Builder setQuantityDecimal(BigDecimal quantityDecimal) {
+        this.quantityDecimal = quantityDecimal;
         return this;
       }
 
@@ -5602,6 +5631,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           @SerializedName("trial")
           Trial trial;
 
+          /** The ID of the trial offer to apply to the configuration item. */
+          @SerializedName("trial_offer")
+          String trialOffer;
+
           private Add(
               List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount>
                   discounts,
@@ -5610,7 +5643,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               String price,
               Long quantity,
               List<String> taxRates,
-              Trial trial) {
+              Trial trial,
+              String trialOffer) {
             this.discounts = discounts;
             this.extraParams = extraParams;
             this.metadata = metadata;
@@ -5618,6 +5652,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             this.quantity = quantity;
             this.taxRates = taxRates;
             this.trial = trial;
+            this.trialOffer = trialOffer;
           }
 
           public static Builder builder() {
@@ -5641,6 +5676,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
             private Trial trial;
 
+            private String trialOffer;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add build() {
               return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add(
@@ -5650,7 +5687,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                   this.price,
                   this.quantity,
                   this.taxRates,
-                  this.trial);
+                  this.trial,
+                  this.trialOffer);
             }
 
             /**
@@ -5790,6 +5828,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             public Builder setTrial(
                 InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Trial trial) {
               this.trial = trial;
+              return this;
+            }
+
+            /** The ID of the trial offer to apply to the configuration item. */
+            public Builder setTrialOffer(String trialOffer) {
+              this.trialOffer = trialOffer;
               return this;
             }
           }
@@ -6454,6 +6498,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           @SerializedName("trial")
           Trial trial;
 
+          /** The ID of the trial offer to apply to the configuration item. */
+          @SerializedName("trial_offer")
+          String trialOffer;
+
           private Set(
               List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount>
                   discounts,
@@ -6462,7 +6510,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               String price,
               Long quantity,
               List<String> taxRates,
-              Trial trial) {
+              Trial trial,
+              String trialOffer) {
             this.discounts = discounts;
             this.extraParams = extraParams;
             this.metadata = metadata;
@@ -6470,6 +6519,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             this.quantity = quantity;
             this.taxRates = taxRates;
             this.trial = trial;
+            this.trialOffer = trialOffer;
           }
 
           public static Builder builder() {
@@ -6493,6 +6543,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
             private Trial trial;
 
+            private String trialOffer;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set build() {
               return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set(
@@ -6502,7 +6554,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                   this.price,
                   this.quantity,
                   this.taxRates,
-                  this.trial);
+                  this.trial,
+                  this.trialOffer);
             }
 
             /**
@@ -6652,6 +6705,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             public Builder setTrial(
                 InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Trial trial) {
               this.trial = trial;
+              return this;
+            }
+
+            /** The ID of the trial offer to apply to the configuration item. */
+            public Builder setTrialOffer(String trialOffer) {
+              this.trialOffer = trialOffer;
               return this;
             }
           }
@@ -7530,7 +7589,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         public static class Set {
           /**
            * <strong>Required.</strong> The payment collection behavior for this subscription while
-           * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+           * paused.
            */
           @SerializedName("behavior")
           Behavior behavior;
@@ -7568,8 +7627,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
             /**
              * <strong>Required.</strong> The payment collection behavior for this subscription
-             * while paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code
-             * void}.
+             * while paused.
              */
             public Builder setBehavior(
                 InvoiceCreatePreviewParams.ScheduleDetails.Amendment.SetPauseCollection.Set.Behavior
@@ -11239,6 +11297,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("trial")
         Trial trial;
 
+        /** The ID of the trial offer to apply to the configuration item. */
+        @SerializedName("trial_offer")
+        String trialOffer;
+
         private Item(
             Object billingThresholds,
             Object discounts,
@@ -11249,7 +11311,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             PriceData priceData,
             Long quantity,
             Object taxRates,
-            Trial trial) {
+            Trial trial,
+            String trialOffer) {
           this.billingThresholds = billingThresholds;
           this.discounts = discounts;
           this.extraParams = extraParams;
@@ -11260,6 +11323,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           this.quantity = quantity;
           this.taxRates = taxRates;
           this.trial = trial;
+          this.trialOffer = trialOffer;
         }
 
         public static Builder builder() {
@@ -11287,6 +11351,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
           private Trial trial;
 
+          private String trialOffer;
+
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item build() {
             return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item(
@@ -11299,7 +11365,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                 this.priceData,
                 this.quantity,
                 this.taxRates,
-                this.trial);
+                this.trial,
+                this.trialOffer);
           }
 
           /**
@@ -11519,6 +11586,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           public Builder setTrial(
               InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Trial trial) {
             this.trial = trial;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(String trialOffer) {
+            this.trialOffer = trialOffer;
             return this;
           }
         }
@@ -12480,7 +12553,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       public static class PauseCollection {
         /**
          * <strong>Required.</strong> The payment collection behavior for this subscription while
-         * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+         * paused.
          */
         @SerializedName("behavior")
         Behavior behavior;
@@ -12517,7 +12590,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> The payment collection behavior for this subscription while
-           * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+           * paused.
            */
           public Builder setBehavior(
               InvoiceCreatePreviewParams.ScheduleDetails.Phase.PauseCollection.Behavior behavior) {
@@ -14658,6 +14731,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @SerializedName("clear_usage")
       Boolean clearUsage;
 
+      /** The trial offer to apply to this subscription item. */
+      @SerializedName("current_trial")
+      CurrentTrial currentTrial;
+
       /** A flag that, if set to {@code true}, will delete the specified item. */
       @SerializedName("deleted")
       Boolean deleted;
@@ -14724,6 +14801,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       private Item(
           Object billingThresholds,
           Boolean clearUsage,
+          CurrentTrial currentTrial,
           Boolean deleted,
           Object discounts,
           Map<String, Object> extraParams,
@@ -14736,6 +14814,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           Object taxRates) {
         this.billingThresholds = billingThresholds;
         this.clearUsage = clearUsage;
+        this.currentTrial = currentTrial;
         this.deleted = deleted;
         this.discounts = discounts;
         this.extraParams = extraParams;
@@ -14756,6 +14835,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         private Object billingThresholds;
 
         private Boolean clearUsage;
+
+        private CurrentTrial currentTrial;
 
         private Boolean deleted;
 
@@ -14782,6 +14863,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           return new InvoiceCreatePreviewParams.SubscriptionDetails.Item(
               this.billingThresholds,
               this.clearUsage,
+              this.currentTrial,
               this.deleted,
               this.discounts,
               this.extraParams,
@@ -14821,6 +14903,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
          */
         public Builder setClearUsage(Boolean clearUsage) {
           this.clearUsage = clearUsage;
+          return this;
+        }
+
+        /** The trial offer to apply to this subscription item. */
+        public Builder setCurrentTrial(
+            InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial currentTrial) {
+          this.currentTrial = currentTrial;
           return this;
         }
 
@@ -15132,6 +15221,106 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
            */
           public Builder setUsageGte(Long usageGte) {
             this.usageGte = usageGte;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CurrentTrial {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Unix timestamp representing the end of the trial offer period. Required when the trial
+         * offer has {@code duration.type=timestamp}. Cannot be specified when {@code
+         * duration.type=relative}.
+         */
+        @SerializedName("trial_end")
+        Long trialEnd;
+
+        /**
+         * <strong>Required.</strong> The ID of the trial offer to apply to the subscription item.
+         */
+        @SerializedName("trial_offer")
+        String trialOffer;
+
+        private CurrentTrial(Map<String, Object> extraParams, Long trialEnd, String trialOffer) {
+          this.extraParams = extraParams;
+          this.trialEnd = trialEnd;
+          this.trialOffer = trialOffer;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Long trialEnd;
+
+          private String trialOffer;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial build() {
+            return new InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial(
+                this.extraParams, this.trialEnd, this.trialOffer);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Unix timestamp representing the end of the trial offer period. Required when the trial
+           * offer has {@code duration.type=timestamp}. Cannot be specified when {@code
+           * duration.type=relative}.
+           */
+          public Builder setTrialEnd(Long trialEnd) {
+            this.trialEnd = trialEnd;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The ID of the trial offer to apply to the subscription item.
+           */
+          public Builder setTrialOffer(String trialOffer) {
+            this.trialOffer = trialOffer;
             return this;
           }
         }

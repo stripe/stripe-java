@@ -3,6 +3,7 @@ package com.stripe.param.v2.core;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.v2.Amount;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10095,17 +10096,26 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("responsibilities")
     Responsibilities responsibilities;
 
+    /**
+     * The Account's local timezone. A list of possible time zone values is maintained at the <a
+     * href="https://www.iana.org/time-zones">IANA Time Zone Database</a>.
+     */
+    @SerializedName("timezone")
+    String timezone;
+
     private Defaults(
         String currency,
         Map<String, Object> extraParams,
         List<AccountCreateParams.Defaults.Locale> locales,
         Profile profile,
-        Responsibilities responsibilities) {
+        Responsibilities responsibilities,
+        String timezone) {
       this.currency = currency;
       this.extraParams = extraParams;
       this.locales = locales;
       this.profile = profile;
       this.responsibilities = responsibilities;
+      this.timezone = timezone;
     }
 
     public static Builder builder() {
@@ -10123,10 +10133,17 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private Responsibilities responsibilities;
 
+      private String timezone;
+
       /** Finalize and obtain parameter instance from this builder. */
       public AccountCreateParams.Defaults build() {
         return new AccountCreateParams.Defaults(
-            this.currency, this.extraParams, this.locales, this.profile, this.responsibilities);
+            this.currency,
+            this.extraParams,
+            this.locales,
+            this.profile,
+            this.responsibilities,
+            this.timezone);
       }
 
       /**
@@ -10201,6 +10218,15 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setResponsibilities(
           AccountCreateParams.Defaults.Responsibilities responsibilities) {
         this.responsibilities = responsibilities;
+        return this;
+      }
+
+      /**
+       * The Account's local timezone. A list of possible time zone values is maintained at the <a
+       * href="https://www.iana.org/time-zones">IANA Time Zone Database</a>.
+       */
+      public Builder setTimezone(String timezone) {
+        this.timezone = timezone;
         return this;
       }
     }
@@ -12347,8 +12373,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /** A non-negative integer representing the amount in the smallest currency unit. */
-          public Builder setAmount(
-              AccountCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount amount) {
+          public Builder setAmount(Amount amount) {
             this.amount = amount;
             return this;
           }
@@ -12388,112 +12413,6 @@ public class AccountCreateParams extends ApiRequestParams {
           public Builder setFiscalYearEnd(String fiscalYearEnd) {
             this.fiscalYearEnd = fiscalYearEnd;
             return this;
-          }
-        }
-
-        @Getter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Amount {
-          /**
-           * <strong>Required.</strong> Three-letter <a
-           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
-           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-           * currency</a>.
-           */
-          @SerializedName("currency")
-          String currency;
-
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
-
-          /**
-           * <strong>Required.</strong> A non-negative integer representing how much to charge in
-           * the <a href="https://docs.stripe.com/currencies#minor-units">smallest currency
-           * unit</a>.
-           */
-          @SerializedName("value")
-          Long value;
-
-          private Amount(String currency, Map<String, Object> extraParams, Long value) {
-            this.currency = currency;
-            this.extraParams = extraParams;
-            this.value = value;
-          }
-
-          public static Builder builder() {
-            return new Builder();
-          }
-
-          public static class Builder {
-            private String currency;
-
-            private Map<String, Object> extraParams;
-
-            private Long value;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public AccountCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount build() {
-              return new AccountCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount(
-                  this.currency, this.extraParams, this.value);
-            }
-
-            /**
-             * <strong>Required.</strong> Three-letter <a
-             * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
-             * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-             * currency</a>.
-             */
-            public Builder setCurrency(String currency) {
-              this.currency = currency;
-              return this;
-            }
-
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * AccountCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount#extraParams} for
-             * the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
-
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * AccountCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount#extraParams} for
-             * the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-
-            /**
-             * <strong>Required.</strong> A non-negative integer representing how much to charge in
-             * the <a href="https://docs.stripe.com/currencies#minor-units">smallest currency
-             * unit</a>.
-             */
-            public Builder setValue(Long value) {
-              this.value = value;
-              return this;
-            }
           }
         }
       }
@@ -14710,8 +14629,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /** A non-negative integer representing the amount in the smallest currency unit. */
-          public Builder setAmount(
-              AccountCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue.Amount amount) {
+          public Builder setAmount(Amount amount) {
             this.amount = amount;
             return this;
           }
@@ -14744,113 +14662,6 @@ public class AccountCreateParams extends ApiRequestParams {
             }
             this.extraParams.putAll(map);
             return this;
-          }
-        }
-
-        @Getter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Amount {
-          /**
-           * <strong>Required.</strong> Three-letter <a
-           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
-           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-           * currency</a>.
-           */
-          @SerializedName("currency")
-          String currency;
-
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
-
-          /**
-           * <strong>Required.</strong> A non-negative integer representing how much to charge in
-           * the <a href="https://docs.stripe.com/currencies#minor-units">smallest currency
-           * unit</a>.
-           */
-          @SerializedName("value")
-          Long value;
-
-          private Amount(String currency, Map<String, Object> extraParams, Long value) {
-            this.currency = currency;
-            this.extraParams = extraParams;
-            this.value = value;
-          }
-
-          public static Builder builder() {
-            return new Builder();
-          }
-
-          public static class Builder {
-            private String currency;
-
-            private Map<String, Object> extraParams;
-
-            private Long value;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public AccountCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue.Amount
-                build() {
-              return new AccountCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue
-                  .Amount(this.currency, this.extraParams, this.value);
-            }
-
-            /**
-             * <strong>Required.</strong> Three-letter <a
-             * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
-             * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-             * currency</a>.
-             */
-            public Builder setCurrency(String currency) {
-              this.currency = currency;
-              return this;
-            }
-
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * AccountCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue.Amount#extraParams}
-             * for the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
-
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * AccountCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue.Amount#extraParams}
-             * for the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-
-            /**
-             * <strong>Required.</strong> A non-negative integer representing how much to charge in
-             * the <a href="https://docs.stripe.com/currencies#minor-units">smallest currency
-             * unit</a>.
-             */
-            public Builder setValue(Long value) {
-              this.value = value;
-              return this;
-            }
           }
         }
       }

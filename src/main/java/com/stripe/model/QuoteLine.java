@@ -308,6 +308,10 @@ public class QuoteLine extends StripeObject implements HasId {
       @SerializedName("trial")
       Trial trial;
 
+      /** The ID of the trial offer to apply to the configuration item. */
+      @SerializedName("trial_offer")
+      String trialOffer;
+
       /** Get ID of expandable {@code price} object. */
       public String getPrice() {
         return (this.price != null) ? this.price.getId() : null;
@@ -755,6 +759,10 @@ public class QuoteLine extends StripeObject implements HasId {
       @SerializedName("trial")
       Trial trial;
 
+      /** The ID of the trial offer to apply to the configuration item. */
+      @SerializedName("trial_offer")
+      String trialOffer;
+
       /** Get ID of expandable {@code price} object. */
       public String getPrice() {
         return (this.price != null) ? this.price.getId() : null;
@@ -1077,8 +1085,9 @@ public class QuoteLine extends StripeObject implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Set extends StripeObject {
       /**
-       * The payment collection behavior for this subscription while paused. One of {@code
-       * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       * The payment collection behavior for this subscription while paused.
+       *
+       * <p>One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
        */
       @SerializedName("behavior")
       String behavior;

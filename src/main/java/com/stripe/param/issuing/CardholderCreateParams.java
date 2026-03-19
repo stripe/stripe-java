@@ -898,10 +898,7 @@ public class CardholderCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class UserTermsAcceptance {
-        /**
-         * The Unix timestamp marking when the cardholder accepted the Authorized User Terms.
-         * Required for Celtic Spend Card users.
-         */
+        /** The Unix timestamp marking when the cardholder accepted the Authorized User Terms. */
         @SerializedName("date")
         Long date;
 
@@ -915,10 +912,7 @@ public class CardholderCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /**
-         * The IP address from which the cardholder accepted the Authorized User Terms. Required for
-         * Celtic Spend Card users.
-         */
+        /** The IP address from which the cardholder accepted the Authorized User Terms. */
         @SerializedName("ip")
         String ip;
 
@@ -956,10 +950,7 @@ public class CardholderCreateParams extends ApiRequestParams {
                 this.date, this.extraParams, this.ip, this.userAgent);
           }
 
-          /**
-           * The Unix timestamp marking when the cardholder accepted the Authorized User Terms.
-           * Required for Celtic Spend Card users.
-           */
+          /** The Unix timestamp marking when the cardholder accepted the Authorized User Terms. */
           public Builder setDate(Long date) {
             this.date = date;
             return this;
@@ -995,10 +986,7 @@ public class CardholderCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /**
-           * The IP address from which the cardholder accepted the Authorized User Terms. Required
-           * for Celtic Spend Card users.
-           */
+          /** The IP address from which the cardholder accepted the Authorized User Terms. */
           public Builder setIp(String ip) {
             this.ip = ip;
             return this;

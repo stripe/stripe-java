@@ -62,8 +62,8 @@ public class Transaction extends ApiResource implements HasId {
   TransactionLineItemCollection lineItems;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -469,7 +469,7 @@ public class Transaction extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost extends StripeObject {
     /**
-     * The shipping amount in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
+     * The shipping amount in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
      * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
      * Otherwise, taxes were calculated on top of this amount.
      */
@@ -478,7 +478,7 @@ public class Transaction extends ApiResource implements HasId {
 
     /**
      * The amount of tax calculated for shipping, in the <a
-     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
      */
     @SerializedName("amount_tax")
     Long amountTax;
@@ -521,8 +521,8 @@ public class Transaction extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class TaxBreakdown extends StripeObject {
       /**
-       * The amount of tax, in the <a
-       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+       * The amount of tax, in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
+       * currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -534,7 +534,7 @@ public class Transaction extends ApiResource implements HasId {
        * Indicates whether the jurisdiction was determined by the origin (merchant's address) or
        * destination (customer's address).
        *
-       * <p>One of {@code destination}, or {@code origin}.
+       * <p>One of {@code destination}, {@code origin}, or {@code performance}.
        */
       @SerializedName("sourcing")
       String sourcing;
@@ -561,7 +561,7 @@ public class Transaction extends ApiResource implements HasId {
 
       /**
        * The amount on which tax is calculated, in the <a
-       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
        */
       @SerializedName("taxable_amount")
       Long taxableAmount;
@@ -627,10 +627,12 @@ public class Transaction extends ApiResource implements HasId {
         /**
          * The tax type, such as {@code vat} or {@code sales_tax}.
          *
-         * <p>One of {@code amusement_tax}, {@code communications_tax}, {@code gst}, {@code hst},
-         * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code
-         * retail_delivery_fee}, {@code rst}, {@code sales_tax}, {@code service_tax}, or {@code
-         * vat}.
+         * <p>One of {@code admissions_tax}, {@code amusement_tax}, {@code attendance_tax}, {@code
+         * communications_tax}, {@code entertainment_tax}, {@code gross_receipts_tax}, {@code gst},
+         * {@code hospitality_tax}, {@code hst}, {@code igst}, {@code jct}, {@code lease_tax},
+         * {@code luxury_tax}, {@code pst}, {@code qst}, {@code resort_tax}, {@code
+         * retail_delivery_fee}, {@code rst}, {@code sales_tax}, {@code service_tax}, {@code
+         * tourism_tax}, or {@code vat}.
          */
         @SerializedName("tax_type")
         String taxType;

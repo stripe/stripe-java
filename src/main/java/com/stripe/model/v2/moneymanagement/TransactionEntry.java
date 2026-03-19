@@ -4,6 +4,7 @@ package com.stripe.model.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
 import java.time.Instant;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -68,78 +69,15 @@ public class TransactionEntry extends StripeObject implements HasId {
   public static class BalanceImpact extends StripeObject {
     /** Impact to the available balance. */
     @SerializedName("available")
-    Available available;
+    Amount available;
 
     /** Impact to the inbound_pending balance. */
     @SerializedName("inbound_pending")
-    InboundPending inboundPending;
+    Amount inboundPending;
 
     /** Impact to the outbound_pending balance. */
     @SerializedName("outbound_pending")
-    OutboundPending outboundPending;
-
-    /** Impact to the available balance. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Available extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
-
-    /** Impact to the inbound_pending balance. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class InboundPending extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
-
-    /** Impact to the outbound_pending balance. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class OutboundPending extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
+    Amount outboundPending;
   }
 
   /** Details copied from the transaction that this TransactionEntry belongs to. */

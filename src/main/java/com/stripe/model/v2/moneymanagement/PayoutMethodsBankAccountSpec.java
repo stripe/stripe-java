@@ -54,6 +54,13 @@ public class PayoutMethodsBankAccountSpec extends StripeObject {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Field extends StripeObject {
+      /**
+       * The currencies supported by the corresponding credentials for bank accounts in the
+       * specified country.
+       */
+      @SerializedName("currencies")
+      List<String> currencies;
+
       /** The local name of the field. */
       @SerializedName("local_name")
       String localName;

@@ -61,6 +61,13 @@ public class PayoutMethod extends StripeObject implements HasId {
   String object;
 
   /**
+   * Whether the Payout Method is currently unusable for money movement, despite potentially being
+   * correctly set up. Please reach out to Stripe Support for more information.
+   */
+  @SerializedName("restricted")
+  Boolean restricted;
+
+  /**
    * Closed Enum. The type of payout method.
    *
    * <p>One of {@code bank_account}, {@code card}, or {@code crypto_wallet}.
@@ -188,6 +195,10 @@ public class PayoutMethod extends StripeObject implements HasId {
     /** The last 4 digits of the card number. */
     @SerializedName("last4")
     String last4;
+
+    /** The list of currencies supported by this bank account. */
+    @SerializedName("supported_currencies")
+    List<String> supportedCurrencies;
   }
 
   /**

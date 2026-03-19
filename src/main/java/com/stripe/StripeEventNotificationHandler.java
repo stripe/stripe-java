@@ -25,6 +25,16 @@ import com.stripe.events.V2CoreAccountPersonCreatedEventNotification;
 import com.stripe.events.V2CoreAccountPersonDeletedEventNotification;
 import com.stripe.events.V2CoreAccountPersonUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountUpdatedEventNotification;
+import com.stripe.events.V2CoreBatchJobBatchFailedEventNotification;
+import com.stripe.events.V2CoreBatchJobCanceledEventNotification;
+import com.stripe.events.V2CoreBatchJobCompletedEventNotification;
+import com.stripe.events.V2CoreBatchJobCreatedEventNotification;
+import com.stripe.events.V2CoreBatchJobReadyForUploadEventNotification;
+import com.stripe.events.V2CoreBatchJobTimeoutEventNotification;
+import com.stripe.events.V2CoreBatchJobUpdatedEventNotification;
+import com.stripe.events.V2CoreBatchJobUploadTimeoutEventNotification;
+import com.stripe.events.V2CoreBatchJobValidatingEventNotification;
+import com.stripe.events.V2CoreBatchJobValidationFailedEventNotification;
 import com.stripe.events.V2CoreEventDestinationPingEventNotification;
 import com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEventNotification;
 import com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification;
@@ -316,6 +326,66 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV2CoreAccountPersonUpdated(
       Callback<V2CoreAccountPersonUpdatedEventNotification> callback) {
     this.register("v2.core.account_person.updated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreBatchJobBatchFailed(
+      Callback<V2CoreBatchJobBatchFailedEventNotification> callback) {
+    this.register("v2.core.batch_job.batch_failed", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreBatchJobCanceled(
+      Callback<V2CoreBatchJobCanceledEventNotification> callback) {
+    this.register("v2.core.batch_job.canceled", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreBatchJobCompleted(
+      Callback<V2CoreBatchJobCompletedEventNotification> callback) {
+    this.register("v2.core.batch_job.completed", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreBatchJobCreated(
+      Callback<V2CoreBatchJobCreatedEventNotification> callback) {
+    this.register("v2.core.batch_job.created", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreBatchJobReadyForUpload(
+      Callback<V2CoreBatchJobReadyForUploadEventNotification> callback) {
+    this.register("v2.core.batch_job.ready_for_upload", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreBatchJobTimeout(
+      Callback<V2CoreBatchJobTimeoutEventNotification> callback) {
+    this.register("v2.core.batch_job.timeout", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreBatchJobUpdated(
+      Callback<V2CoreBatchJobUpdatedEventNotification> callback) {
+    this.register("v2.core.batch_job.updated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreBatchJobUploadTimeout(
+      Callback<V2CoreBatchJobUploadTimeoutEventNotification> callback) {
+    this.register("v2.core.batch_job.upload_timeout", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreBatchJobValidating(
+      Callback<V2CoreBatchJobValidatingEventNotification> callback) {
+    this.register("v2.core.batch_job.validating", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreBatchJobValidationFailed(
+      Callback<V2CoreBatchJobValidationFailedEventNotification> callback) {
+    this.register("v2.core.batch_job.validation_failed", callback);
     return this;
   }
 

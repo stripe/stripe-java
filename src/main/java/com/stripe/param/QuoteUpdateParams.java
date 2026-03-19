@@ -2454,6 +2454,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("trial")
         Trial trial;
 
+        /** The ID of the trial offer to apply to the configuration item. */
+        @SerializedName("trial_offer")
+        Object trialOffer;
+
         private AddItem(
             List<QuoteUpdateParams.Line.Action.AddItem.Discount> discounts,
             Map<String, Object> extraParams,
@@ -2461,7 +2465,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             Object price,
             Long quantity,
             List<String> taxRates,
-            Trial trial) {
+            Trial trial,
+            Object trialOffer) {
           this.discounts = discounts;
           this.extraParams = extraParams;
           this.metadata = metadata;
@@ -2469,6 +2474,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
           this.quantity = quantity;
           this.taxRates = taxRates;
           this.trial = trial;
+          this.trialOffer = trialOffer;
         }
 
         public static Builder builder() {
@@ -2490,6 +2496,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
           private Trial trial;
 
+          private Object trialOffer;
+
           /** Finalize and obtain parameter instance from this builder. */
           public QuoteUpdateParams.Line.Action.AddItem build() {
             return new QuoteUpdateParams.Line.Action.AddItem(
@@ -2499,7 +2507,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
                 this.price,
                 this.quantity,
                 this.taxRates,
-                this.trial);
+                this.trial,
+                this.trialOffer);
           }
 
           /**
@@ -2631,6 +2640,18 @@ public class QuoteUpdateParams extends ApiRequestParams {
           /** Options that configure the trial on the subscription item. */
           public Builder setTrial(QuoteUpdateParams.Line.Action.AddItem.Trial trial) {
             this.trial = trial;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(String trialOffer) {
+            this.trialOffer = trialOffer;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(EmptyParam trialOffer) {
+            this.trialOffer = trialOffer;
             return this;
           }
         }
@@ -3524,6 +3545,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("trial")
         Trial trial;
 
+        /** The ID of the trial offer to apply to the configuration item. */
+        @SerializedName("trial_offer")
+        Object trialOffer;
+
         private SetItem(
             List<QuoteUpdateParams.Line.Action.SetItem.Discount> discounts,
             Map<String, Object> extraParams,
@@ -3531,7 +3556,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             Object price,
             Long quantity,
             List<String> taxRates,
-            Trial trial) {
+            Trial trial,
+            Object trialOffer) {
           this.discounts = discounts;
           this.extraParams = extraParams;
           this.metadata = metadata;
@@ -3539,6 +3565,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
           this.quantity = quantity;
           this.taxRates = taxRates;
           this.trial = trial;
+          this.trialOffer = trialOffer;
         }
 
         public static Builder builder() {
@@ -3560,6 +3587,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
           private Trial trial;
 
+          private Object trialOffer;
+
           /** Finalize and obtain parameter instance from this builder. */
           public QuoteUpdateParams.Line.Action.SetItem build() {
             return new QuoteUpdateParams.Line.Action.SetItem(
@@ -3569,7 +3598,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
                 this.price,
                 this.quantity,
                 this.taxRates,
-                this.trial);
+                this.trial,
+                this.trialOffer);
           }
 
           /**
@@ -3710,6 +3740,18 @@ public class QuoteUpdateParams extends ApiRequestParams {
            */
           public Builder setTrial(QuoteUpdateParams.Line.Action.SetItem.Trial trial) {
             this.trial = trial;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(String trialOffer) {
+            this.trialOffer = trialOffer;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(EmptyParam trialOffer) {
+            this.trialOffer = trialOffer;
             return this;
           }
         }
@@ -4981,7 +5023,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       public static class Set {
         /**
          * <strong>Required.</strong> The payment collection behavior for this subscription while
-         * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+         * paused.
          */
         @SerializedName("behavior")
         Behavior behavior;
@@ -5018,7 +5060,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> The payment collection behavior for this subscription while
-           * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+           * paused.
            */
           public Builder setBehavior(
               QuoteUpdateParams.Line.SetPauseCollection.Set.Behavior behavior) {
