@@ -4,6 +4,7 @@ package com.stripe.model.v2.core;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -584,7 +585,7 @@ public class AccountPerson extends StripeObject implements HasId {
 
     /** The percentage of the Account's identity that the individual owns. */
     @SerializedName("percent_ownership")
-    String percentOwnership;
+    BigDecimal percentOwnership;
 
     /**
      * Whether the individual is authorized as the primary representative of the Account. This is
