@@ -523,6 +523,15 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
     @SerializedName("invoice_line_item")
     String invoiceLineItem;
 
+    /**
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
     /** The line item quantity to credit. */
     @SerializedName("quantity")
     Long quantity;
@@ -570,6 +579,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
         String description,
         Map<String, Object> extraParams,
         String invoiceLineItem,
+        Map<String, String> metadata,
         Long quantity,
         Object taxAmounts,
         Object taxRates,
@@ -580,6 +590,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
       this.description = description;
       this.extraParams = extraParams;
       this.invoiceLineItem = invoiceLineItem;
+      this.metadata = metadata;
       this.quantity = quantity;
       this.taxAmounts = taxAmounts;
       this.taxRates = taxRates;
@@ -601,6 +612,8 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
 
       private String invoiceLineItem;
 
+      private Map<String, String> metadata;
+
       private Long quantity;
 
       private Object taxAmounts;
@@ -620,6 +633,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
             this.description,
             this.extraParams,
             this.invoiceLineItem,
+            this.metadata,
             this.quantity,
             this.taxAmounts,
             this.taxRates,
@@ -678,6 +692,32 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
        */
       public Builder setInvoiceLineItem(String invoiceLineItem) {
         this.invoiceLineItem = invoiceLineItem;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CreditNotePreviewLinesListParams.Line#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CreditNotePreviewLinesListParams.Line#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
         return this;
       }
 

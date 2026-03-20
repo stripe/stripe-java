@@ -156,8 +156,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   Link link;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -262,11 +262,14 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * mobilepay}, {@code multibanco}, {@code naver_pay}, {@code nz_bank_account}, {@code oxxo},
    * {@code p24}, {@code pay_by_bank}, {@code payco}, {@code paynow}, {@code paypal}, {@code payto},
    * {@code pix}, {@code promptpay}, {@code revolut_pay}, {@code samsung_pay}, {@code satispay},
-   * {@code sepa_debit}, {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account},
-   * {@code wechat_pay}, or {@code zip}.
+   * {@code sepa_debit}, {@code sofort}, {@code swish}, {@code twint}, {@code upi}, {@code
+   * us_bank_account}, {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
+
+  @SerializedName("upi")
+  Upi upi;
 
   @SerializedName("us_bank_account")
   UsBankAccount usBankAccount;
@@ -2559,6 +2562,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static class Twint extends StripeObject {}
 
   /**
+   * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Upi extends StripeObject {
+    /** Customer's unique Virtual Payment Address. */
+    @SerializedName("vpa")
+    String vpa;
+  }
+
+  /**
    * For more details about UsBankAccount, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -2746,6 +2762,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(swish, responseGetter);
     trySetResponseGetter(twint, responseGetter);
+    trySetResponseGetter(upi, responseGetter);
     trySetResponseGetter(usBankAccount, responseGetter);
     trySetResponseGetter(wechatPay, responseGetter);
     trySetResponseGetter(zip, responseGetter);

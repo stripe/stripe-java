@@ -488,6 +488,13 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   Twint twint;
 
   /**
+   * Unified Payment Interface (UPI) is India's leading payment method with exponential growth since
+   * it launched in 2016.
+   */
+  @SerializedName("upi")
+  Upi upi;
+
+  /**
    * Stripe users in the United States can accept ACH direct debit payments from customers with a US
    * bank account using the Automated Clearing House (ACH) payments system operated by Nacha. Check
    * this <a href="https://docs.stripe.com/payments/ach-direct-debit">page</a> for more details.
@@ -571,6 +578,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
       Sofort sofort,
       Swish swish,
       Twint twint,
+      Upi upi,
       UsBankAccount usBankAccount,
       WechatPay wechatPay,
       Zip zip) {
@@ -631,6 +639,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     this.sofort = sofort;
     this.swish = swish;
     this.twint = twint;
+    this.upi = upi;
     this.usBankAccount = usBankAccount;
     this.wechatPay = wechatPay;
     this.zip = zip;
@@ -755,6 +764,8 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
 
     private Twint twint;
 
+    private Upi upi;
+
     private UsBankAccount usBankAccount;
 
     private WechatPay wechatPay;
@@ -821,6 +832,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
           this.sofort,
           this.swish,
           this.twint,
+          this.upi,
           this.usBankAccount,
           this.wechatPay,
           this.zip);
@@ -1456,6 +1468,15 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
      */
     public Builder setTwint(PaymentMethodConfigurationCreateParams.Twint twint) {
       this.twint = twint;
+      return this;
+    }
+
+    /**
+     * Unified Payment Interface (UPI) is India's leading payment method with exponential growth
+     * since it launched in 2016.
+     */
+    public Builder setUpi(PaymentMethodConfigurationCreateParams.Upi upi) {
+      this.upi = upi;
       return this;
     }
 
@@ -10246,6 +10267,169 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
         /** The account's preference for whether or not to display this payment method. */
         public Builder setPreference(
             PaymentMethodConfigurationCreateParams.Twint.DisplayPreference.Preference preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Upi {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Upi(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationCreateParams.Upi build() {
+        return new PaymentMethodConfigurationCreateParams.Upi(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationCreateParams.Upi.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationCreateParams.Upi#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationCreateParams.Upi#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationCreateParams.Upi.DisplayPreference build() {
+          return new PaymentMethodConfigurationCreateParams.Upi.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentMethodConfigurationCreateParams.Upi.DisplayPreference#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentMethodConfigurationCreateParams.Upi.DisplayPreference#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationCreateParams.Upi.DisplayPreference.Preference preference) {
           this.preference = preference;
           return this;
         }

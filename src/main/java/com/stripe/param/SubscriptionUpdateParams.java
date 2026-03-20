@@ -226,8 +226,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   /**
    * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-   * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-   * given subscription at the specified interval.
+   * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+   * subscription at the specified interval.
    */
   @SerializedName("pending_invoice_item_interval")
   Object pendingInvoiceItemInterval;
@@ -1006,8 +1006,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-     * given subscription at the specified interval.
+     * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+     * subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(
         SubscriptionUpdateParams.PendingInvoiceItemInterval pendingInvoiceItemInterval) {
@@ -1017,8 +1017,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-     * given subscription at the specified interval.
+     * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+     * subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(EmptyParam pendingInvoiceItemInterval) {
       this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
@@ -3837,7 +3837,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   public static class PauseCollection {
     /**
      * <strong>Required.</strong> The payment collection behavior for this subscription while
-     * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+     * paused.
      */
     @SerializedName("behavior")
     Behavior behavior;
@@ -3880,7 +3880,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The payment collection behavior for this subscription while
-       * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       * paused.
        */
       public Builder setBehavior(SubscriptionUpdateParams.PauseCollection.Behavior behavior) {
         this.behavior = behavior;
@@ -4879,7 +4879,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         @Getter
         @EqualsAndHashCode(callSuper = false)
         public static class MandateOptions {
-          /** Amount to be charged for future payments. */
+          /** Amount to be charged for future payments, specified in the presentment currency. */
           @SerializedName("amount")
           Long amount;
 
@@ -4939,7 +4939,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
                   .MandateOptions(this.amount, this.amountType, this.description, this.extraParams);
             }
 
-            /** Amount to be charged for future payments. */
+            /** Amount to be charged for future payments, specified in the presentment currency. */
             public Builder setAmount(Long amount) {
               this.amount = amount;
               return this;

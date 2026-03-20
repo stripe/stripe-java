@@ -15,7 +15,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class CalculationLineItem extends StripeObject implements HasId {
   /**
-   * The line item amount in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
+   * The line item amount in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
    * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
    * Otherwise, taxes were calculated on top of this amount.
    */
@@ -24,7 +24,7 @@ public class CalculationLineItem extends StripeObject implements HasId {
 
   /**
    * The amount of tax calculated for this line item, in the <a
-   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+   * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
    */
   @SerializedName("amount_tax")
   Long amountTax;
@@ -35,8 +35,8 @@ public class CalculationLineItem extends StripeObject implements HasId {
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -100,7 +100,7 @@ public class CalculationLineItem extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class TaxBreakdown extends StripeObject {
     /**
-     * The amount of tax, in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
+     * The amount of tax, in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
      * currency unit</a>.
      */
     @SerializedName("amount")
@@ -140,7 +140,7 @@ public class CalculationLineItem extends StripeObject implements HasId {
 
     /**
      * The amount on which tax is calculated, in the <a
-     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
      */
     @SerializedName("taxable_amount")
     Long taxableAmount;

@@ -67,7 +67,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
 
   /**
    * Error code explaining reason for top-up failure if available (see <a
-   * href="https://docs.stripe.com/api#errors">the errors section</a> for a list of codes).
+   * href="https://stripe.com/api/errors">the errors section</a> for a list of codes).
    */
   @SerializedName("failure_code")
   String failureCode;
@@ -82,8 +82,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
