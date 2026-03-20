@@ -3,6 +3,7 @@ package com.stripe.param.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -645,12 +646,12 @@ public class IntentCreateParams extends ApiRequestParams {
            * percent_off of 50.0 will make $100 amount $50 instead.
            */
           @SerializedName("percent_off")
-          String percentOff;
+          BigDecimal percentOff;
 
           private PercentOff(
               Map<String, Object> extraParams,
               MaximumApplications maximumApplications,
-              String percentOff) {
+              BigDecimal percentOff) {
             this.extraParams = extraParams;
             this.maximumApplications = maximumApplications;
             this.percentOff = percentOff;
@@ -665,7 +666,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
             private MaximumApplications maximumApplications;
 
-            private String percentOff;
+            private BigDecimal percentOff;
 
             /** Finalize and obtain parameter instance from this builder. */
             public IntentCreateParams.Action.Apply.InvoiceDiscountRule.PercentOff build() {
@@ -718,7 +719,7 @@ public class IntentCreateParams extends ApiRequestParams {
              * <strong>Required.</strong> Percent that will be taken off of the amount. For example,
              * percent_off of 50.0 will make $100 amount $50 instead.
              */
-            public Builder setPercentOff(String percentOff) {
+            public Builder setPercentOff(BigDecimal percentOff) {
               this.percentOff = percentOff;
               return this;
             }

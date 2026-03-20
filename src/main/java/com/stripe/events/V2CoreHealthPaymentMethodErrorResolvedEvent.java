@@ -3,6 +3,7 @@ package com.stripe.events;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.v2.core.Event;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import lombok.Getter;
@@ -42,7 +43,7 @@ public final class V2CoreHealthPaymentMethodErrorResolvedEvent extends Event {
       Long impactedRequests;
       /** The percentage of impacted requests. */
       @SerializedName("impacted_requests_percentage")
-      String impactedRequestsPercentage;
+      BigDecimal impactedRequestsPercentage;
       /**
        * The type of the payment method.
        *
@@ -78,7 +79,7 @@ public final class V2CoreHealthPaymentMethodErrorResolvedEvent extends Event {
         Long impactedRequests;
         /** The percentage of impacted requests. */
         @SerializedName("impacted_requests_percentage")
-        String impactedRequestsPercentage;
+        BigDecimal impactedRequestsPercentage;
       }
     }
   }

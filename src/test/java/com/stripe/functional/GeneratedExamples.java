@@ -25124,7 +25124,7 @@ class GeneratedExamples extends BaseStripeTest {
                                                             .InvoiceDiscountRule.PercentOff
                                                             .MaximumApplications.Type.INDEFINITE)
                                                     .build())
-                                            .setPercentOff("percent_off")
+                                            .setPercentOff(new BigDecimal("991934883.3333334"))
                                             .build())
                                     .build())
                             .setSpendModifierRule(
@@ -30353,7 +30353,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.tax.ManualRule>>() {}.getType(),
-        "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.tax.manual_rule\",\"products\":[{\"type\":\"licensed_item\"}],\"scheduled_tax_rates\":[{\"rates\":[{\"display_name\":\"display_name\",\"percentage\":\"percentage\"}]}],\"status\":\"active\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.tax.manual_rule\",\"products\":[{\"type\":\"licensed_item\"}],\"scheduled_tax_rates\":[{\"rates\":[{\"display_name\":\"display_name\",\"percentage\":\"614555204\"}]}],\"status\":\"active\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.tax.ManualRuleListParams params =
@@ -30379,7 +30379,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.tax.ManualRule.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.tax.manual_rule\",\"products\":[{\"type\":\"licensed_item\"}],\"scheduled_tax_rates\":[{\"rates\":[{\"display_name\":\"display_name\",\"percentage\":\"percentage\"}]}],\"status\":\"active\",\"livemode\":true}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.tax.manual_rule\",\"products\":[{\"type\":\"licensed_item\"}],\"scheduled_tax_rates\":[{\"rates\":[{\"display_name\":\"display_name\",\"percentage\":\"614555204\"}]}],\"status\":\"active\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.tax.ManualRuleCreateParams params =
@@ -30393,7 +30393,7 @@ class GeneratedExamples extends BaseStripeTest {
                             .setDescription("description")
                             .setDisplayName("display_name")
                             .setJurisdiction("jurisdiction")
-                            .setPercentage("percentage")
+                            .setPercentage(new BigDecimal("614555204"))
                             .setState("state")
                             .build())
                     .setStartsAt(Instant.parse("1970-01-25T15:13:01.215Z"))
@@ -30419,7 +30419,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.tax.ManualRule.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.tax.manual_rule\",\"products\":[{\"type\":\"licensed_item\"}],\"scheduled_tax_rates\":[{\"rates\":[{\"display_name\":\"display_name\",\"percentage\":\"percentage\"}]}],\"status\":\"active\",\"livemode\":true}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.tax.manual_rule\",\"products\":[{\"type\":\"licensed_item\"}],\"scheduled_tax_rates\":[{\"rates\":[{\"display_name\":\"display_name\",\"percentage\":\"614555204\"}]}],\"status\":\"active\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.tax.ManualRule manualRule =
@@ -30438,7 +30438,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.tax.ManualRule.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.tax.manual_rule\",\"products\":[{\"type\":\"licensed_item\"}],\"scheduled_tax_rates\":[{\"rates\":[{\"display_name\":\"display_name\",\"percentage\":\"percentage\"}]}],\"status\":\"active\",\"livemode\":true}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.tax.manual_rule\",\"products\":[{\"type\":\"licensed_item\"}],\"scheduled_tax_rates\":[{\"rates\":[{\"display_name\":\"display_name\",\"percentage\":\"614555204\"}]}],\"status\":\"active\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.tax.ManualRuleUpdateParams params =
@@ -30452,7 +30452,7 @@ class GeneratedExamples extends BaseStripeTest {
                             .setDescription("description")
                             .setDisplayName("display_name")
                             .setJurisdiction("jurisdiction")
-                            .setPercentage("percentage")
+                            .setPercentage(new BigDecimal("614555204"))
                             .setState("state")
                             .build())
                     .setStartsAt(Instant.parse("1970-01-25T15:13:01.215Z"))
@@ -30479,7 +30479,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.tax.ManualRule.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.tax.manual_rule\",\"products\":[{\"type\":\"licensed_item\"}],\"scheduled_tax_rates\":[{\"rates\":[{\"display_name\":\"display_name\",\"percentage\":\"percentage\"}]}],\"status\":\"active\",\"livemode\":true}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.tax.manual_rule\",\"products\":[{\"type\":\"licensed_item\"}],\"scheduled_tax_rates\":[{\"rates\":[{\"display_name\":\"display_name\",\"percentage\":\"614555204\"}]}],\"status\":\"active\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.tax.ManualRule manualRule =

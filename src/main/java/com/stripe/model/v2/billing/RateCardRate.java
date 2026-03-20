@@ -4,6 +4,7 @@ package com.stripe.model.v2.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -147,7 +148,7 @@ public class RateCardRate extends StripeObject implements HasId {
      * up_to_decimal} and {@code up_to_inf} may be set.
      */
     @SerializedName("up_to_decimal")
-    String upToDecimal;
+    BigDecimal upToDecimal;
 
     /**
      * No upper bound to this tier. Only one of {@code up_to_decimal} and {@code up_to_inf} may be

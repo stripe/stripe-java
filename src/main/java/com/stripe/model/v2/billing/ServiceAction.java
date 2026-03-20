@@ -4,6 +4,7 @@ package com.stripe.model.v2.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -159,7 +160,7 @@ public class ServiceAction extends StripeObject implements HasId {
 
         /** The value of the credit grant, decimal value represented as a string. */
         @SerializedName("value")
-        String value;
+        BigDecimal value;
       }
     }
 
@@ -292,7 +293,7 @@ public class ServiceAction extends StripeObject implements HasId {
 
         /** The value of the credit grant, decimal value represented as a string. */
         @SerializedName("value")
-        String value;
+        BigDecimal value;
       }
     }
 

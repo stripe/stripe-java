@@ -3,6 +3,7 @@ package com.stripe.param.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -463,9 +464,9 @@ public class ActionServiceCreateParams extends ApiRequestParams {
          * string.
          */
         @SerializedName("value")
-        String value;
+        BigDecimal value;
 
-        private CustomPricingUnit(Map<String, Object> extraParams, String id, String value) {
+        private CustomPricingUnit(Map<String, Object> extraParams, String id, BigDecimal value) {
           this.extraParams = extraParams;
           this.id = id;
           this.value = value;
@@ -480,7 +481,7 @@ public class ActionServiceCreateParams extends ApiRequestParams {
 
           private String id;
 
-          private String value;
+          private BigDecimal value;
 
           /** Finalize and obtain parameter instance from this builder. */
           public ActionServiceCreateParams.CreditGrant.Amount.CustomPricingUnit build() {
@@ -528,7 +529,7 @@ public class ActionServiceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The value of the credit grant, decimal value represented as
            * a string.
            */
-          public Builder setValue(String value) {
+          public Builder setValue(BigDecimal value) {
             this.value = value;
             return this;
           }
@@ -1176,9 +1177,9 @@ public class ActionServiceCreateParams extends ApiRequestParams {
          * string.
          */
         @SerializedName("value")
-        String value;
+        BigDecimal value;
 
-        private CustomPricingUnit(Map<String, Object> extraParams, String id, String value) {
+        private CustomPricingUnit(Map<String, Object> extraParams, String id, BigDecimal value) {
           this.extraParams = extraParams;
           this.id = id;
           this.value = value;
@@ -1193,7 +1194,7 @@ public class ActionServiceCreateParams extends ApiRequestParams {
 
           private String id;
 
-          private String value;
+          private BigDecimal value;
 
           /** Finalize and obtain parameter instance from this builder. */
           public ActionServiceCreateParams.CreditGrantPerTenant.Amount.CustomPricingUnit build() {
@@ -1241,7 +1242,7 @@ public class ActionServiceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The value of the credit grant, decimal value represented as
            * a string.
            */
-          public Builder setValue(String value) {
+          public Builder setValue(BigDecimal value) {
             this.value = value;
             return this;
           }

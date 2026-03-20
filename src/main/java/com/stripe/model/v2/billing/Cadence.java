@@ -4,6 +4,7 @@ package com.stripe.model.v2.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -356,7 +357,7 @@ public class Cadence extends StripeObject implements HasId {
        * $100 amount $50 instead.
        */
       @SerializedName("percent_off")
-      String percentOff;
+      BigDecimal percentOff;
 
       /** The maximum applications configuration for this discount. */
       @Getter

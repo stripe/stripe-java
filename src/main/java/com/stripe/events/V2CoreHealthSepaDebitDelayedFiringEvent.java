@@ -3,6 +3,7 @@ package com.stripe.events;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.v2.core.Event;
+import java.math.BigDecimal;
 import java.time.Instant;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,7 +36,7 @@ public final class V2CoreHealthSepaDebitDelayedFiringEvent extends Event {
       Long impactedPayments;
       /** The percentage of impacted payments. */
       @SerializedName("impacted_payments_percentage")
-      String impactedPaymentsPercentage;
+      BigDecimal impactedPaymentsPercentage;
     }
   }
 }

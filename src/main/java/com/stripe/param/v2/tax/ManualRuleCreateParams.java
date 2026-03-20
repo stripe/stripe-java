@@ -3,6 +3,7 @@ package com.stripe.param.v2.tax;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -505,7 +506,7 @@ public class ManualRuleCreateParams extends ApiRequestParams {
        * decimal points.
        */
       @SerializedName("percentage")
-      String percentage;
+      BigDecimal percentage;
 
       /** State of the tax rate. */
       @SerializedName("state")
@@ -517,7 +518,7 @@ public class ManualRuleCreateParams extends ApiRequestParams {
           String displayName,
           Map<String, Object> extraParams,
           String jurisdiction,
-          String percentage,
+          BigDecimal percentage,
           String state) {
         this.country = country;
         this.description = description;
@@ -543,7 +544,7 @@ public class ManualRuleCreateParams extends ApiRequestParams {
 
         private String jurisdiction;
 
-        private String percentage;
+        private BigDecimal percentage;
 
         private String state;
 
@@ -618,7 +619,7 @@ public class ManualRuleCreateParams extends ApiRequestParams {
          * <strong>Required.</strong> Percentage of the tax rate. Must be positive and maximum of 4
          * decimal points.
          */
-        public Builder setPercentage(String percentage) {
+        public Builder setPercentage(BigDecimal percentage) {
           this.percentage = percentage;
           return this;
         }

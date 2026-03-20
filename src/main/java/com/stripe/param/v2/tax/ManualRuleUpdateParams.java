@@ -4,6 +4,7 @@ package com.stripe.param.v2.tax;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -676,7 +677,7 @@ public class ManualRuleUpdateParams extends ApiRequestParams {
          * <strong>Required.</strong> Percentage of the tax rate. Must be positive and maximum of 4
          * decimal points.
          */
-        public Builder setPercentage(String percentage) {
+        public Builder setPercentage(BigDecimal percentage) {
           this.percentage = percentage;
           return this;
         }

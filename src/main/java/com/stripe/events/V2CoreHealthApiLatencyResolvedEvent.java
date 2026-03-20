@@ -3,6 +3,7 @@ package com.stripe.events;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.v2.core.Event;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import lombok.Getter;
@@ -52,7 +53,7 @@ public final class V2CoreHealthApiLatencyResolvedEvent extends Event {
       Long impactedRequests;
       /** The percentage of impacted requests. */
       @SerializedName("impacted_requests_percentage")
-      String impactedRequestsPercentage;
+      BigDecimal impactedRequestsPercentage;
       /** The top impacted connected accounts (only for platforms). */
       @SerializedName("top_impacted_accounts")
       List<V2CoreHealthApiLatencyResolvedEvent.EventData.Impact.TopImpactedAccount>
@@ -67,7 +68,7 @@ public final class V2CoreHealthApiLatencyResolvedEvent extends Event {
         Long impactedRequests;
         /** The percentage of impacted requests. */
         @SerializedName("impacted_requests_percentage")
-        String impactedRequestsPercentage;
+        BigDecimal impactedRequestsPercentage;
       }
     }
   }
