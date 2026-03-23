@@ -74,9 +74,9 @@ public class CardholderCreateParams extends ApiRequestParams {
 
   /**
    * The cardholder’s preferred locales (languages), ordered by preference. Locales can be {@code
-   * de}, {@code en}, {@code es}, {@code fr}, or {@code it}. This changes the language of the <a
-   * href="https://docs.stripe.com/issuing/3d-secure">3D Secure flow</a> and one-time password
-   * messages sent to the cardholder.
+   * da}, {@code de}, {@code en}, {@code es}, {@code fr}, {@code it}, {@code pl}, or {@code sv}.
+   * This changes the language of the <a href="https://docs.stripe.com/issuing/3d-secure">3D Secure
+   * flow</a> and one-time password messages sent to the cardholder.
    */
   @SerializedName("preferred_locales")
   List<CardholderCreateParams.PreferredLocale> preferredLocales;

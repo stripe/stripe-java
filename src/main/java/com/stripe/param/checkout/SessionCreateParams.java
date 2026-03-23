@@ -5943,15 +5943,12 @@ public class SessionCreateParams extends ApiRequestParams {
           @SerializedName("performance_location")
           String performanceLocation;
 
-          /**
-           * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
-           * code</a> ID.
-           */
+          /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
           @SerializedName("tax_code")
-          String taxCode;
+          Object taxCode;
 
           private TaxDetails(
-              Map<String, Object> extraParams, String performanceLocation, String taxCode) {
+              Map<String, Object> extraParams, String performanceLocation, Object taxCode) {
             this.extraParams = extraParams;
             this.performanceLocation = performanceLocation;
             this.taxCode = taxCode;
@@ -5966,7 +5963,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
             private String performanceLocation;
 
-            private String taxCode;
+            private Object taxCode;
 
             /** Finalize and obtain parameter instance from this builder. */
             public SessionCreateParams.LineItem.PriceData.ProductData.TaxDetails build() {
@@ -6014,11 +6011,14 @@ public class SessionCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /**
-             * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
-             * code</a> ID.
-             */
+            /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
             public Builder setTaxCode(String taxCode) {
+              this.taxCode = taxCode;
+              return this;
+            }
+
+            /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+            public Builder setTaxCode(EmptyParam taxCode) {
               this.taxCode = taxCode;
               return this;
             }
@@ -22360,23 +22360,14 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public enum UiMode implements ApiRequestParams.EnumParam {
-    @SerializedName("custom")
-    CUSTOM("custom"),
-
     @SerializedName("elements")
     ELEMENTS("elements"),
-
-    @SerializedName("embedded")
-    EMBEDDED("embedded"),
 
     @SerializedName("embedded_page")
     EMBEDDED_PAGE("embedded_page"),
 
     @SerializedName("form")
     FORM("form"),
-
-    @SerializedName("hosted")
-    HOSTED("hosted"),
 
     @SerializedName("hosted_page")
     HOSTED_PAGE("hosted_page");

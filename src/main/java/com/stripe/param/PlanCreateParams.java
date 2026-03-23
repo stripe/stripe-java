@@ -778,15 +778,12 @@ public class PlanCreateParams extends ApiRequestParams {
       @SerializedName("performance_location")
       String performanceLocation;
 
-      /**
-       * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
-       * code</a> ID.
-       */
+      /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
       @SerializedName("tax_code")
-      String taxCode;
+      Object taxCode;
 
       private TaxDetails(
-          Map<String, Object> extraParams, String performanceLocation, String taxCode) {
+          Map<String, Object> extraParams, String performanceLocation, Object taxCode) {
         this.extraParams = extraParams;
         this.performanceLocation = performanceLocation;
         this.taxCode = taxCode;
@@ -801,7 +798,7 @@ public class PlanCreateParams extends ApiRequestParams {
 
         private String performanceLocation;
 
-        private String taxCode;
+        private Object taxCode;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PlanCreateParams.Product.TaxDetails build() {
@@ -847,11 +844,14 @@ public class PlanCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
-         * code</a> ID.
-         */
+        /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
         public Builder setTaxCode(String taxCode) {
+          this.taxCode = taxCode;
+          return this;
+        }
+
+        /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+        public Builder setTaxCode(EmptyParam taxCode) {
           this.taxCode = taxCode;
           return this;
         }

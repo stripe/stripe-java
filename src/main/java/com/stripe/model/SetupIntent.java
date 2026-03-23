@@ -1151,6 +1151,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    @SerializedName("stripe_balance")
+    StripeBalance stripeBalance;
+
     @SerializedName("upi")
     Upi upi;
 
@@ -1623,6 +1626,31 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
          */
         @SerializedName("reference_prefix")
         String referencePrefix;
+      }
+    }
+
+    /**
+     * For more details about StripeBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeBalance extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** The ID of the Stripe Balance Debit Agreement used for this mandate. */
+        @SerializedName("stripe_balance_debit_agreement")
+        String stripeBalanceDebitAgreement;
       }
     }
 
