@@ -120,8 +120,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   LineItemCollection lineItems;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -742,7 +742,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String targetDate;
 
           /**
-           * Bank account verification method.
+           * Bank account verification method. The default value is {@code automatic}.
            *
            * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
            */

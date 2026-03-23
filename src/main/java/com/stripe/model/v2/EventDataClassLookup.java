@@ -49,6 +49,7 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.core.account_person_token", com.stripe.model.v2.core.AccountPersonToken.class);
     classLookup.put("v2.core.account_token", com.stripe.model.v2.core.AccountToken.class);
+    classLookup.put("v2.core.batch_job", com.stripe.model.v2.core.BatchJob.class);
     classLookup.put("v2.core.event", com.stripe.model.v2.core.Event.class);
     classLookup.put("v2.core.event_destination", com.stripe.model.v2.core.EventDestination.class);
 
@@ -157,6 +158,29 @@ public final class EventDataClassLookup {
         "v2.core.account_person.deleted", com.stripe.events.V2CoreAccountPersonDeletedEvent.class);
     eventClassLookup.put(
         "v2.core.account_person.updated", com.stripe.events.V2CoreAccountPersonUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.batch_failed", com.stripe.events.V2CoreBatchJobBatchFailedEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.canceled", com.stripe.events.V2CoreBatchJobCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.completed", com.stripe.events.V2CoreBatchJobCompletedEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.created", com.stripe.events.V2CoreBatchJobCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.ready_for_upload",
+        com.stripe.events.V2CoreBatchJobReadyForUploadEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.timeout", com.stripe.events.V2CoreBatchJobTimeoutEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.updated", com.stripe.events.V2CoreBatchJobUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.upload_timeout",
+        com.stripe.events.V2CoreBatchJobUploadTimeoutEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.validating", com.stripe.events.V2CoreBatchJobValidatingEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.validation_failed",
+        com.stripe.events.V2CoreBatchJobValidationFailedEvent.class);
     eventClassLookup.put(
         "v2.core.event_destination.ping", com.stripe.events.V2CoreEventDestinationPingEvent.class);
     eventClassLookup.put(

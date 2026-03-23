@@ -3954,6 +3954,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         AmountIncludesIof amountIncludesIof;
 
         /**
+         * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
+         * Defaults to 86400 seconds.
+         */
+        @SerializedName("expires_after_seconds")
+        Long expiresAfterSeconds;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -3963,8 +3970,12 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private Pix(AmountIncludesIof amountIncludesIof, Map<String, Object> extraParams) {
+        private Pix(
+            AmountIncludesIof amountIncludesIof,
+            Long expiresAfterSeconds,
+            Map<String, Object> extraParams) {
           this.amountIncludesIof = amountIncludesIof;
+          this.expiresAfterSeconds = expiresAfterSeconds;
           this.extraParams = extraParams;
         }
 
@@ -3975,12 +3986,14 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         public static class Builder {
           private AmountIncludesIof amountIncludesIof;
 
+          private Long expiresAfterSeconds;
+
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Pix build() {
             return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Pix(
-                this.amountIncludesIof, this.extraParams);
+                this.amountIncludesIof, this.expiresAfterSeconds, this.extraParams);
           }
 
           /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
@@ -3988,6 +4001,15 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Pix.AmountIncludesIof
                   amountIncludesIof) {
             this.amountIncludesIof = amountIncludesIof;
+            return this;
+          }
+
+          /**
+           * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
+           * Defaults to 86400 seconds.
+           */
+          public Builder setExpiresAfterSeconds(Long expiresAfterSeconds) {
+            this.expiresAfterSeconds = expiresAfterSeconds;
             return this;
           }
 

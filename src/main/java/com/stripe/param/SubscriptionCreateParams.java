@@ -255,8 +255,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-   * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-   * given subscription at the specified interval.
+   * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+   * subscription at the specified interval.
    */
   @SerializedName("pending_invoice_item_interval")
   Object pendingInvoiceItemInterval;
@@ -1066,8 +1066,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-     * given subscription at the specified interval.
+     * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+     * subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(
         SubscriptionCreateParams.PendingInvoiceItemInterval pendingInvoiceItemInterval) {
@@ -1077,8 +1077,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-     * given subscription at the specified interval.
+     * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+     * subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(EmptyParam pendingInvoiceItemInterval) {
       this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
@@ -3994,6 +3994,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName("billing_thresholds")
     Object billingThresholds;
 
+    /** The trial offer to apply to this subscription item. */
+    @SerializedName("current_trial")
+    CurrentTrial currentTrial;
+
     /** The coupons to redeem into discounts for the subscription item. */
     @SerializedName("discounts")
     Object discounts;
@@ -4051,6 +4055,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private Item(
         Object billingThresholds,
+        CurrentTrial currentTrial,
         Object discounts,
         Map<String, Object> extraParams,
         Map<String, String> metadata,
@@ -4061,6 +4066,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         Object taxRates,
         Trial trial) {
       this.billingThresholds = billingThresholds;
+      this.currentTrial = currentTrial;
       this.discounts = discounts;
       this.extraParams = extraParams;
       this.metadata = metadata;
@@ -4078,6 +4084,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     public static class Builder {
       private Object billingThresholds;
+
+      private CurrentTrial currentTrial;
 
       private Object discounts;
 
@@ -4101,6 +4109,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       public SubscriptionCreateParams.Item build() {
         return new SubscriptionCreateParams.Item(
             this.billingThresholds,
+            this.currentTrial,
             this.discounts,
             this.extraParams,
             this.metadata,
@@ -4128,6 +4137,12 @@ public class SubscriptionCreateParams extends ApiRequestParams {
        */
       public Builder setBillingThresholds(EmptyParam billingThresholds) {
         this.billingThresholds = billingThresholds;
+        return this;
+      }
+
+      /** The trial offer to apply to this subscription item. */
+      public Builder setCurrentTrial(SubscriptionCreateParams.Item.CurrentTrial currentTrial) {
+        this.currentTrial = currentTrial;
         return this;
       }
 
@@ -4386,6 +4401,101 @@ public class SubscriptionCreateParams extends ApiRequestParams {
          */
         public Builder setUsageGte(Long usageGte) {
           this.usageGte = usageGte;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CurrentTrial {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Unix timestamp representing the end of the trial offer period. Required when the trial
+       * offer has {@code duration.type=timestamp}. Cannot be specified when {@code
+       * duration.type=relative}.
+       */
+      @SerializedName("trial_end")
+      Long trialEnd;
+
+      /** <strong>Required.</strong> The ID of the trial offer to apply to the subscription item. */
+      @SerializedName("trial_offer")
+      String trialOffer;
+
+      private CurrentTrial(Map<String, Object> extraParams, Long trialEnd, String trialOffer) {
+        this.extraParams = extraParams;
+        this.trialEnd = trialEnd;
+        this.trialOffer = trialOffer;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Long trialEnd;
+
+        private String trialOffer;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionCreateParams.Item.CurrentTrial build() {
+          return new SubscriptionCreateParams.Item.CurrentTrial(
+              this.extraParams, this.trialEnd, this.trialOffer);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.Item.CurrentTrial#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.Item.CurrentTrial#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Unix timestamp representing the end of the trial offer period. Required when the trial
+         * offer has {@code duration.type=timestamp}. Cannot be specified when {@code
+         * duration.type=relative}.
+         */
+        public Builder setTrialEnd(Long trialEnd) {
+          this.trialEnd = trialEnd;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The ID of the trial offer to apply to the subscription item.
+         */
+        public Builder setTrialOffer(String trialOffer) {
+          this.trialOffer = trialOffer;
           return this;
         }
       }
@@ -6250,7 +6360,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         @Getter
         @EqualsAndHashCode(callSuper = false)
         public static class MandateOptions {
-          /** Amount to be charged for future payments. */
+          /** Amount to be charged for future payments, specified in the presentment currency. */
           @SerializedName("amount")
           Long amount;
 
@@ -6310,7 +6420,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
                   .MandateOptions(this.amount, this.amountType, this.description, this.extraParams);
             }
 
-            /** Amount to be charged for future payments. */
+            /** Amount to be charged for future payments, specified in the presentment currency. */
             public Builder setAmount(Long amount) {
               this.amount = amount;
               return this;
@@ -7096,6 +7206,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Pix {
         /**
+         * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
+         * Defaults to 86400 seconds.
+         */
+        @SerializedName("expires_after_seconds")
+        Long expiresAfterSeconds;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -7109,7 +7226,11 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
-        private Pix(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+        private Pix(
+            Long expiresAfterSeconds,
+            Map<String, Object> extraParams,
+            MandateOptions mandateOptions) {
+          this.expiresAfterSeconds = expiresAfterSeconds;
           this.extraParams = extraParams;
           this.mandateOptions = mandateOptions;
         }
@@ -7119,6 +7240,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Long expiresAfterSeconds;
+
           private Map<String, Object> extraParams;
 
           private MandateOptions mandateOptions;
@@ -7126,7 +7249,16 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix build() {
             return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix(
-                this.extraParams, this.mandateOptions);
+                this.expiresAfterSeconds, this.extraParams, this.mandateOptions);
+          }
+
+          /**
+           * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
+           * Defaults to 86400 seconds.
+           */
+          public Builder setExpiresAfterSeconds(Long expiresAfterSeconds) {
+            this.expiresAfterSeconds = expiresAfterSeconds;
+            return this;
           }
 
           /**
@@ -7196,7 +7328,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** Schedule at which the future payments will be charged. Defaults to {@code weekly}. */
+          /** Schedule at which the future payments will be charged. Defaults to {@code monthly}. */
           @SerializedName("payment_schedule")
           PaymentSchedule paymentSchedule;
 
@@ -7295,7 +7427,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             }
 
             /**
-             * Schedule at which the future payments will be charged. Defaults to {@code weekly}.
+             * Schedule at which the future payments will be charged. Defaults to {@code monthly}.
              */
             public Builder setPaymentSchedule(
                 SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix.MandateOptions
@@ -8716,6 +8848,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class EndBehavior {
       /**
+       * Indicates how the subscription's billing cycle anchor is reset when a trial ends. Defaults
+       * to {@code now}.
+       */
+      @SerializedName("billing_cycle_anchor")
+      BillingCycleAnchor billingCycleAnchor;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -8732,7 +8871,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       MissingPaymentMethod missingPaymentMethod;
 
       private EndBehavior(
-          Map<String, Object> extraParams, MissingPaymentMethod missingPaymentMethod) {
+          BillingCycleAnchor billingCycleAnchor,
+          Map<String, Object> extraParams,
+          MissingPaymentMethod missingPaymentMethod) {
+        this.billingCycleAnchor = billingCycleAnchor;
         this.extraParams = extraParams;
         this.missingPaymentMethod = missingPaymentMethod;
       }
@@ -8742,6 +8884,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private BillingCycleAnchor billingCycleAnchor;
+
         private Map<String, Object> extraParams;
 
         private MissingPaymentMethod missingPaymentMethod;
@@ -8749,7 +8893,18 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionCreateParams.TrialSettings.EndBehavior build() {
           return new SubscriptionCreateParams.TrialSettings.EndBehavior(
-              this.extraParams, this.missingPaymentMethod);
+              this.billingCycleAnchor, this.extraParams, this.missingPaymentMethod);
+        }
+
+        /**
+         * Indicates how the subscription's billing cycle anchor is reset when a trial ends.
+         * Defaults to {@code now}.
+         */
+        public Builder setBillingCycleAnchor(
+            SubscriptionCreateParams.TrialSettings.EndBehavior.BillingCycleAnchor
+                billingCycleAnchor) {
+          this.billingCycleAnchor = billingCycleAnchor;
+          return this;
         }
 
         /**
@@ -8789,6 +8944,21 @@ public class SubscriptionCreateParams extends ApiRequestParams {
                 missingPaymentMethod) {
           this.missingPaymentMethod = missingPaymentMethod;
           return this;
+        }
+      }
+
+      public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
+        @SerializedName("now")
+        NOW("now"),
+
+        @SerializedName("unchanged")
+        UNCHANGED("unchanged");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        BillingCycleAnchor(String value) {
+          this.value = value;
         }
       }
 

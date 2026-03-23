@@ -231,8 +231,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   ExpandableField<Charge> latestCharge;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -609,9 +609,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
    * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
-   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
-   * instead.
+   * <p>You can directly cancel the PaymentIntent for a Checkout Session only when the PaymentIntent
+   * has a status of {@code requires_capture}. Otherwise, you must <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>.
    */
   public PaymentIntent cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
@@ -627,9 +627,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
    * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
-   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
-   * instead.
+   * <p>You can directly cancel the PaymentIntent for a Checkout Session only when the PaymentIntent
+   * has a status of {@code requires_capture}. Otherwise, you must <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>.
    */
   public PaymentIntent cancel(RequestOptions options) throws StripeException {
     return cancel((Map<String, Object>) null, options);
@@ -645,9 +645,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
    * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
-   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
-   * instead.
+   * <p>You can directly cancel the PaymentIntent for a Checkout Session only when the PaymentIntent
+   * has a status of {@code requires_capture}. Otherwise, you must <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>.
    */
   public PaymentIntent cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
@@ -663,9 +663,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
    * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
-   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
-   * instead.
+   * <p>You can directly cancel the PaymentIntent for a Checkout Session only when the PaymentIntent
+   * has a status of {@code requires_capture}. Otherwise, you must <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>.
    */
   public PaymentIntent cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -686,9 +686,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
    * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
-   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
-   * instead.
+   * <p>You can directly cancel the PaymentIntent for a Checkout Session only when the PaymentIntent
+   * has a status of {@code requires_capture}. Otherwise, you must <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>.
    */
   public PaymentIntent cancel(PaymentIntentCancelParams params) throws StripeException {
     return cancel(params, (RequestOptions) null);
@@ -704,9 +704,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
    * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
    *
-   * <p>You can’t cancel the PaymentIntent for a Checkout Session. <a
-   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
-   * instead.
+   * <p>You can directly cancel the PaymentIntent for a Checkout Session only when the PaymentIntent
+   * has a status of {@code requires_capture}. Otherwise, you must <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>.
    */
   public PaymentIntent cancel(PaymentIntentCancelParams params, RequestOptions options)
       throws StripeException {
@@ -1741,6 +1741,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("shipping")
     Shipping shipping;
 
+    @SerializedName("surcharge")
+    Surcharge surcharge;
+
     @SerializedName("tax")
     Tax tax;
 
@@ -1798,6 +1801,35 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("to_postal_code")
       String toPostalCode;
+    }
+
+    /**
+     * For more details about Surcharge, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Surcharge extends StripeObject {
+      /** Portion of the amount that corresponds to a surcharge. */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Indicate whether to enforce validations on the surcharge amount.
+       *
+       * <p>One of {@code automatic}, {@code disabled}, or {@code enabled}.
+       */
+      @SerializedName("enforce_validation")
+      String enforceValidation;
+
+      /** The maximum amount allowed for the surcharge. */
+      @SerializedName("maximum_amount")
+      Long maximumAmount;
+
+      /** The status of the surcharge. */
+      @SerializedName("status")
+      String status;
     }
 
     /**
@@ -2007,6 +2039,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
      */
     @SerializedName("type")
     String type;
+
+    @SerializedName("upi_handle_redirect_or_display_qr_code")
+    UpiHandleRedirectOrDisplayQrCode upiHandleRedirectOrDisplayQrCode;
 
     /**
      * When confirming a PaymentIntent with Stripe.js, Stripe.js depends on the contents of this
@@ -2768,6 +2803,45 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     }
 
     /**
+     * For more details about UpiHandleRedirectOrDisplayQrCode, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UpiHandleRedirectOrDisplayQrCode extends StripeObject {
+      /**
+       * The URL to the hosted UPI instructions page, which allows customers to view the QR code.
+       */
+      @SerializedName("hosted_instructions_url")
+      String hostedInstructionsUrl;
+
+      @SerializedName("qr_code")
+      QrCode qrCode;
+
+      /**
+       * For more details about QrCode, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class QrCode extends StripeObject {
+        /** The date (unix timestamp) when the QR code expires. */
+        @SerializedName("expires_at")
+        Long expiresAt;
+
+        /** The image_url_png string used to render QR code. */
+        @SerializedName("image_url_png")
+        String imageUrlPng;
+
+        /** The image_url_svg string used to render QR code. */
+        @SerializedName("image_url_svg")
+        String imageUrlSvg;
+      }
+    }
+
+    /**
      * For more details about VerifyWithMicrodeposits, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -2924,10 +2998,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     /**
      * A unique value assigned by the business to identify the transaction. Required for L2 and L3
      * rates.
-     *
-     * <p>Required when the Payment Method Types array contains {@code card}, including when <a
-     * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
-     * is set to {@code true}.
      *
      * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces, before
      * being sent to card networks. For Klarna, this field is truncated to 255 characters and is
@@ -4543,6 +4613,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("twint")
     Twint twint;
 
+    @SerializedName("upi")
+    Upi upi;
+
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
@@ -4596,7 +4669,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String targetDate;
 
       /**
-       * Bank account verification method.
+       * Bank account verification method. The default value is {@code automatic}.
        *
        * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
        */
@@ -5310,7 +5383,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions extends StripeObject {
-        /** Amount to be charged for future payments. */
+        /** Amount to be charged for future payments, specified in the presentment currency. */
         @SerializedName("amount")
         Long amount;
 
@@ -7119,6 +7192,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class StripeBalance extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -7142,6 +7218,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** The ID of the Stripe Balance Debit Agreement used for this mandate. */
+        @SerializedName("stripe_balance_debit_agreement")
+        String stripeBalanceDebitAgreement;
+      }
     }
 
     /**
@@ -7215,6 +7304,39 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     }
 
     /**
+     * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Upi extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>One of {@code off_session}, or {@code on_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    /**
      * For more details about UsBankAccount, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -7227,14 +7349,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
-
-      /**
-       * Preferred transaction settlement speed
-       *
-       * <p>One of {@code fastest}, or {@code standard}.
-       */
-      @SerializedName("preferred_settlement_speed")
-      String preferredSettlementSpeed;
 
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -7277,7 +7391,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String transactionPurpose;
 
       /**
-       * Bank account verification method.
+       * Bank account verification method. The default value is {@code automatic}.
        *
        * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
        */

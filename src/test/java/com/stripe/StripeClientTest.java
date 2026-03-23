@@ -140,7 +140,7 @@ public class StripeClientTest extends BaseStripeTest {
     StripeClient client = new StripeClient("sk_123");
 
     String payload =
-        "{\n  \"id\": \"evt_test_webhook\",\n \"type\": \"v1.whatever\",\n  \"object\": \"event\"\n}";
+        "{\n  \"id\": \"evt_test_webhook\",\n \"type\": \"v1.whatever\",\n  \"object\": \"v2.core.event\"\n}";
     String secret = "whsec_test_secret";
 
     Map<String, Object> options = new HashMap<>();
@@ -159,7 +159,7 @@ public class StripeClientTest extends BaseStripeTest {
     StripeClient client = new StripeClient("sk_123");
 
     String payload =
-        "{\n  \"id\": \"evt_test_webhook\",\n \"type\": \"v1.whatever\",\n  \"object\": \"event\"\n}";
+        "{\n  \"id\": \"evt_test_webhook\",\n \"type\": \"v1.whatever\",\n  \"object\": \"v2.core.event\"\n}";
     String secret = "whsec_test_secret";
     String signature = "bad signature";
 
@@ -173,7 +173,7 @@ public class StripeClientTest extends BaseStripeTest {
   static final String v2EventNotificationWithRelatedObject =
       "{\n"
           + "  \"id\": \"evt_234\",\n"
-          + "  \"object\": \"event\",\n"
+          + "  \"object\": \"v2.core.event\",\n"
           + "  \"type\": \"v1.billing.meter.error_report_triggered\",\n"
           + "  \"livemode\": false,\n"
           + "  \"context\": \"org_123\",\n"
@@ -191,7 +191,7 @@ public class StripeClientTest extends BaseStripeTest {
   static final String v2EventNotificationWithoutRelatedObject =
       "{\n"
           + "  \"id\": \"evt_234\",\n"
-          + "  \"object\": \"event\",\n"
+          + "  \"object\": \"v2.core.event\",\n"
           + "  \"type\": \"v1.billing.meter.no_meter_found\",\n"
           + "  \"livemode\": false,\n"
           + "  \"created\": \"2022-02-15T00:27:45.330Z\"\n"
@@ -200,7 +200,7 @@ public class StripeClientTest extends BaseStripeTest {
   static final String v2UnknownEventNotification =
       "{\n"
           + "  \"id\": \"evt_234\",\n"
-          + "  \"object\": \"event\",\n"
+          + "  \"object\": \"v2.core.event\",\n"
           + "  \"type\": \"v1.imaginary_event\",\n"
           + "  \"livemode\": false,\n"
           + "  \"created\": \"2022-02-15T00:27:45.330Z\"\n"
@@ -416,5 +416,29 @@ public class StripeClientTest extends BaseStripeTest {
     for (RawApiRequest v : requestCaptor.getAllValues()) {
       assertEquals("org_123", v.getOptions().getStripeContext());
     }
+  }
+
+  @Test
+  public void parseEventNotificationRejectsV1Payload()
+      throws InvalidKeyException, NoSuchAlgorithmException {
+    StripeClient client = new StripeClient("sk_123");
+
+    String payload =
+        "{\n  \"id\": \"evt_test_webhook\",\n  \"object\": \"event\",\n  \"type\": \"charge.succeeded\"\n}";
+    String secret = "whsec_test_secret";
+
+    Map<String, Object> options = new HashMap<>();
+    options.put("payload", payload);
+    options.put("secret", secret);
+
+    String signature = WebhookTest.generateSigHeader(options);
+
+    IllegalArgumentException exception =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+              client.parseEventNotification(payload, signature, secret);
+            });
+    assertTrue(exception.getMessage().contains("constructEvent"));
   }
 }

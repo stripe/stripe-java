@@ -2287,6 +2287,14 @@ public class SessionUpdateParams extends ApiRequestParams {
         Object taxCode;
 
         /**
+         * Tax details for this product, including the <a
+         * href="https://stripe.com/tax/tax-codes">tax code</a> and an optional performance
+         * location.
+         */
+        @SerializedName("tax_details")
+        TaxDetails taxDetails;
+
+        /**
          * A label that represents units of this product. When set, this will be included in
          * customers' receipts, invoices, Checkout, and the customer portal.
          */
@@ -2300,6 +2308,7 @@ public class SessionUpdateParams extends ApiRequestParams {
             Map<String, String> metadata,
             Object name,
             Object taxCode,
+            TaxDetails taxDetails,
             Object unitLabel) {
           this.description = description;
           this.extraParams = extraParams;
@@ -2307,6 +2316,7 @@ public class SessionUpdateParams extends ApiRequestParams {
           this.metadata = metadata;
           this.name = name;
           this.taxCode = taxCode;
+          this.taxDetails = taxDetails;
           this.unitLabel = unitLabel;
         }
 
@@ -2327,6 +2337,8 @@ public class SessionUpdateParams extends ApiRequestParams {
 
           private Object taxCode;
 
+          private TaxDetails taxDetails;
+
           private Object unitLabel;
 
           /** Finalize and obtain parameter instance from this builder. */
@@ -2338,6 +2350,7 @@ public class SessionUpdateParams extends ApiRequestParams {
                 this.metadata,
                 this.name,
                 this.taxCode,
+                this.taxDetails,
                 this.unitLabel);
           }
 
@@ -2472,6 +2485,17 @@ public class SessionUpdateParams extends ApiRequestParams {
           }
 
           /**
+           * Tax details for this product, including the <a
+           * href="https://stripe.com/tax/tax-codes">tax code</a> and an optional performance
+           * location.
+           */
+          public Builder setTaxDetails(
+              SessionUpdateParams.LineItem.PriceData.ProductData.TaxDetails taxDetails) {
+            this.taxDetails = taxDetails;
+            return this;
+          }
+
+          /**
            * A label that represents units of this product. When set, this will be included in
            * customers' receipts, invoices, Checkout, and the customer portal.
            */
@@ -2487,6 +2511,119 @@ public class SessionUpdateParams extends ApiRequestParams {
           public Builder setUnitLabel(EmptyParam unitLabel) {
             this.unitLabel = unitLabel;
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class TaxDetails {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * A tax location ID. Depending on the <a
+           * href="https://stripe.com/tax/tax-for-tickets/reference/tax-location-performance">tax
+           * code</a>, this is required, optional, or not supported.
+           */
+          @SerializedName("performance_location")
+          Object performanceLocation;
+
+          /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+          @SerializedName("tax_code")
+          Object taxCode;
+
+          private TaxDetails(
+              Map<String, Object> extraParams, Object performanceLocation, Object taxCode) {
+            this.extraParams = extraParams;
+            this.performanceLocation = performanceLocation;
+            this.taxCode = taxCode;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Object performanceLocation;
+
+            private Object taxCode;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SessionUpdateParams.LineItem.PriceData.ProductData.TaxDetails build() {
+              return new SessionUpdateParams.LineItem.PriceData.ProductData.TaxDetails(
+                  this.extraParams, this.performanceLocation, this.taxCode);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionUpdateParams.LineItem.PriceData.ProductData.TaxDetails#extraParams} for the
+             * field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionUpdateParams.LineItem.PriceData.ProductData.TaxDetails#extraParams} for the
+             * field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * A tax location ID. Depending on the <a
+             * href="https://stripe.com/tax/tax-for-tickets/reference/tax-location-performance">tax
+             * code</a>, this is required, optional, or not supported.
+             */
+            public Builder setPerformanceLocation(String performanceLocation) {
+              this.performanceLocation = performanceLocation;
+              return this;
+            }
+
+            /**
+             * A tax location ID. Depending on the <a
+             * href="https://stripe.com/tax/tax-for-tickets/reference/tax-location-performance">tax
+             * code</a>, this is required, optional, or not supported.
+             */
+            public Builder setPerformanceLocation(EmptyParam performanceLocation) {
+              this.performanceLocation = performanceLocation;
+              return this;
+            }
+
+            /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+            public Builder setTaxCode(String taxCode) {
+              this.taxCode = taxCode;
+              return this;
+            }
+
+            /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+            public Builder setTaxCode(EmptyParam taxCode) {
+              this.taxCode = taxCode;
+              return this;
+            }
           }
         }
       }
@@ -3640,6 +3777,14 @@ public class SessionUpdateParams extends ApiRequestParams {
     InvoiceSettings invoiceSettings;
 
     /**
+     * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
+     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
+     * given subscription at the specified interval.
+     */
+    @SerializedName("pending_invoice_item_interval")
+    Object pendingInvoiceItemInterval;
+
+    /**
      * Unix timestamp representing the end of the trial period the customer will get before being
      * charged for the first time. Has to be at least 48 hours in the future.
      */
@@ -3656,10 +3801,12 @@ public class SessionUpdateParams extends ApiRequestParams {
     private SubscriptionData(
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
+        Object pendingInvoiceItemInterval,
         Long trialEnd,
         Object trialPeriodDays) {
       this.extraParams = extraParams;
       this.invoiceSettings = invoiceSettings;
+      this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
       this.trialEnd = trialEnd;
       this.trialPeriodDays = trialPeriodDays;
     }
@@ -3673,6 +3820,8 @@ public class SessionUpdateParams extends ApiRequestParams {
 
       private InvoiceSettings invoiceSettings;
 
+      private Object pendingInvoiceItemInterval;
+
       private Long trialEnd;
 
       private Object trialPeriodDays;
@@ -3680,7 +3829,11 @@ public class SessionUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SessionUpdateParams.SubscriptionData build() {
         return new SessionUpdateParams.SubscriptionData(
-            this.extraParams, this.invoiceSettings, this.trialEnd, this.trialPeriodDays);
+            this.extraParams,
+            this.invoiceSettings,
+            this.pendingInvoiceItemInterval,
+            this.trialEnd,
+            this.trialPeriodDays);
       }
 
       /**
@@ -3713,6 +3866,28 @@ public class SessionUpdateParams extends ApiRequestParams {
       public Builder setInvoiceSettings(
           SessionUpdateParams.SubscriptionData.InvoiceSettings invoiceSettings) {
         this.invoiceSettings = invoiceSettings;
+        return this;
+      }
+
+      /**
+       * Specifies an interval for how often to bill for any pending invoice items. It is analogous
+       * to calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for
+       * the given subscription at the specified interval.
+       */
+      public Builder setPendingInvoiceItemInterval(
+          SessionUpdateParams.SubscriptionData.PendingInvoiceItemInterval
+              pendingInvoiceItemInterval) {
+        this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
+        return this;
+      }
+
+      /**
+       * Specifies an interval for how often to bill for any pending invoice items. It is analogous
+       * to calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for
+       * the given subscription at the specified interval.
+       */
+      public Builder setPendingInvoiceItemInterval(EmptyParam pendingInvoiceItemInterval) {
+        this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
         return this;
       }
 
@@ -3929,6 +4104,130 @@ public class SessionUpdateParams extends ApiRequestParams {
           Type(String value) {
             this.value = value;
           }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PendingInvoiceItemInterval {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> Specifies invoicing frequency. Either {@code day}, {@code week},
+       * {@code month} or {@code year}.
+       */
+      @SerializedName("interval")
+      Interval interval;
+
+      /**
+       * The number of intervals between invoices. For example, {@code interval=month} and {@code
+       * interval_count=3} bills every 3 months. Maximum of one year interval allowed (1 year, 12
+       * months, or 52 weeks).
+       */
+      @SerializedName("interval_count")
+      Long intervalCount;
+
+      private PendingInvoiceItemInterval(
+          Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+        this.extraParams = extraParams;
+        this.interval = interval;
+        this.intervalCount = intervalCount;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Interval interval;
+
+        private Long intervalCount;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionUpdateParams.SubscriptionData.PendingInvoiceItemInterval build() {
+          return new SessionUpdateParams.SubscriptionData.PendingInvoiceItemInterval(
+              this.extraParams, this.interval, this.intervalCount);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SessionUpdateParams.SubscriptionData.PendingInvoiceItemInterval#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SessionUpdateParams.SubscriptionData.PendingInvoiceItemInterval#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Specifies invoicing frequency. Either {@code day}, {@code
+         * week}, {@code month} or {@code year}.
+         */
+        public Builder setInterval(
+            SessionUpdateParams.SubscriptionData.PendingInvoiceItemInterval.Interval interval) {
+          this.interval = interval;
+          return this;
+        }
+
+        /**
+         * The number of intervals between invoices. For example, {@code interval=month} and {@code
+         * interval_count=3} bills every 3 months. Maximum of one year interval allowed (1 year, 12
+         * months, or 52 weeks).
+         */
+        public Builder setIntervalCount(Long intervalCount) {
+          this.intervalCount = intervalCount;
+          return this;
+        }
+      }
+
+      public enum Interval implements ApiRequestParams.EnumParam {
+        @SerializedName("day")
+        DAY("day"),
+
+        @SerializedName("month")
+        MONTH("month"),
+
+        @SerializedName("week")
+        WEEK("week"),
+
+        @SerializedName("year")
+        YEAR("year");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Interval(String value) {
+          this.value = value;
         }
       }
     }

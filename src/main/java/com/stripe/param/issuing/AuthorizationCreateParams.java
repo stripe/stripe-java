@@ -2738,18 +2738,18 @@ public class AuthorizationCreateParams extends ApiRequestParams {
        * <strong>Required.</strong> The likelihood that this authorization is associated with card
        * testing activity. This is assessed by evaluating decline activity over the last hour.
        */
-      @SerializedName("risk_level")
-      RiskLevel riskLevel;
+      @SerializedName("level")
+      Level level;
 
       private CardTestingRisk(
           Map<String, Object> extraParams,
           Long invalidAccountNumberDeclineRatePastHour,
           Long invalidCredentialsDeclineRatePastHour,
-          RiskLevel riskLevel) {
+          Level level) {
         this.extraParams = extraParams;
         this.invalidAccountNumberDeclineRatePastHour = invalidAccountNumberDeclineRatePastHour;
         this.invalidCredentialsDeclineRatePastHour = invalidCredentialsDeclineRatePastHour;
-        this.riskLevel = riskLevel;
+        this.level = level;
       }
 
       public static Builder builder() {
@@ -2763,7 +2763,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
         private Long invalidCredentialsDeclineRatePastHour;
 
-        private RiskLevel riskLevel;
+        private Level level;
 
         /** Finalize and obtain parameter instance from this builder. */
         public AuthorizationCreateParams.RiskAssessment.CardTestingRisk build() {
@@ -2771,7 +2771,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
               this.extraParams,
               this.invalidAccountNumberDeclineRatePastHour,
               this.invalidCredentialsDeclineRatePastHour,
-              this.riskLevel);
+              this.level);
         }
 
         /**
@@ -2830,14 +2830,14 @@ public class AuthorizationCreateParams extends ApiRequestParams {
          * <strong>Required.</strong> The likelihood that this authorization is associated with card
          * testing activity. This is assessed by evaluating decline activity over the last hour.
          */
-        public Builder setRiskLevel(
-            AuthorizationCreateParams.RiskAssessment.CardTestingRisk.RiskLevel riskLevel) {
-          this.riskLevel = riskLevel;
+        public Builder setLevel(
+            AuthorizationCreateParams.RiskAssessment.CardTestingRisk.Level level) {
+          this.level = level;
           return this;
         }
       }
 
-      public enum RiskLevel implements ApiRequestParams.EnumParam {
+      public enum Level implements ApiRequestParams.EnumParam {
         @SerializedName("elevated")
         ELEVATED("elevated"),
 
@@ -2859,7 +2859,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
         @Getter(onMethod_ = {@Override})
         private final String value;
 
-        RiskLevel(String value) {
+        Level(String value) {
           this.value = value;
         }
       }
@@ -3016,14 +3016,13 @@ public class AuthorizationCreateParams extends ApiRequestParams {
        * <strong>Required.</strong> The likelihood that authorizations from this merchant will
        * result in a dispute based on their history on Stripe Issuing.
        */
-      @SerializedName("risk_level")
-      RiskLevel riskLevel;
+      @SerializedName("level")
+      Level level;
 
-      private MerchantDisputeRisk(
-          Long disputeRate, Map<String, Object> extraParams, RiskLevel riskLevel) {
+      private MerchantDisputeRisk(Long disputeRate, Map<String, Object> extraParams, Level level) {
         this.disputeRate = disputeRate;
         this.extraParams = extraParams;
-        this.riskLevel = riskLevel;
+        this.level = level;
       }
 
       public static Builder builder() {
@@ -3035,12 +3034,12 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private RiskLevel riskLevel;
+        private Level level;
 
         /** Finalize and obtain parameter instance from this builder. */
         public AuthorizationCreateParams.RiskAssessment.MerchantDisputeRisk build() {
           return new AuthorizationCreateParams.RiskAssessment.MerchantDisputeRisk(
-              this.disputeRate, this.extraParams, this.riskLevel);
+              this.disputeRate, this.extraParams, this.level);
         }
 
         /**
@@ -3086,14 +3085,14 @@ public class AuthorizationCreateParams extends ApiRequestParams {
          * <strong>Required.</strong> The likelihood that authorizations from this merchant will
          * result in a dispute based on their history on Stripe Issuing.
          */
-        public Builder setRiskLevel(
-            AuthorizationCreateParams.RiskAssessment.MerchantDisputeRisk.RiskLevel riskLevel) {
-          this.riskLevel = riskLevel;
+        public Builder setLevel(
+            AuthorizationCreateParams.RiskAssessment.MerchantDisputeRisk.Level level) {
+          this.level = level;
           return this;
         }
       }
 
-      public enum RiskLevel implements ApiRequestParams.EnumParam {
+      public enum Level implements ApiRequestParams.EnumParam {
         @SerializedName("elevated")
         ELEVATED("elevated"),
 
@@ -3115,7 +3114,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
         @Getter(onMethod_ = {@Override})
         private final String value;
 
-        RiskLevel(String value) {
+        Level(String value) {
           this.value = value;
         }
       }

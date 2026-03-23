@@ -96,7 +96,8 @@ public class StripeError extends StripeObject {
    * refer_to_customer}, {@code refund_disputed_payment}, {@code request_blocked}, {@code
    * resource_already_exists}, {@code resource_missing}, {@code return_intent_already_processed},
    * {@code routing_number_invalid}, {@code secret_key_required}, {@code
-   * sensitive_data_access_expired}, {@code sepa_unsupported_account}, {@code setup_attempt_failed},
+   * sensitive_data_access_expired}, {@code sepa_unsupported_account}, {@code
+   * service_period_coupon_with_metered_tiered_item_unsupported}, {@code setup_attempt_failed},
    * {@code setup_intent_authentication_failure}, {@code setup_intent_invalid_parameter}, {@code
    * setup_intent_mandate_invalid}, {@code setup_intent_mobile_wallet_unsupported}, {@code
    * setup_intent_setup_attempt_expired}, {@code setup_intent_unexpected_state}, {@code

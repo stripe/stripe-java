@@ -208,6 +208,9 @@ public final class EventDataClassLookup {
         "privacy.redaction_job_validation_error",
         com.stripe.model.privacy.RedactionJobValidationError.class);
 
+    classLookup.put(
+        "product_catalog.trial_offer", com.stripe.model.productcatalog.TrialOffer.class);
+
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);
     classLookup.put("radar.payment_evaluation", com.stripe.model.radar.PaymentEvaluation.class);
     classLookup.put("radar.value_list", com.stripe.model.radar.ValueList.class);
@@ -226,6 +229,7 @@ public final class EventDataClassLookup {
     classLookup.put("tax.calculation", com.stripe.model.tax.Calculation.class);
     classLookup.put("tax.calculation_line_item", com.stripe.model.tax.CalculationLineItem.class);
     classLookup.put("tax.form", com.stripe.model.tax.Form.class);
+    classLookup.put("tax.location", com.stripe.model.tax.Location.class);
     classLookup.put("tax.registration", com.stripe.model.tax.Registration.class);
     classLookup.put("tax.settings", com.stripe.model.tax.Settings.class);
     classLookup.put("tax.transaction", com.stripe.model.tax.Transaction.class);

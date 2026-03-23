@@ -247,6 +247,10 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
       @SerializedName("country")
       String country;
 
+      /** <strong>Required.</strong> The currency of the bank account. */
+      @SerializedName("currency")
+      String currency;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -269,6 +273,7 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
           BankAccountType bankAccountType,
           String branchNumber,
           String country,
+          String currency,
           Map<String, Object> extraParams,
           String routingNumber,
           String swiftCode) {
@@ -276,6 +281,7 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
         this.bankAccountType = bankAccountType;
         this.branchNumber = branchNumber;
         this.country = country;
+        this.currency = currency;
         this.extraParams = extraParams;
         this.routingNumber = routingNumber;
         this.swiftCode = swiftCode;
@@ -294,6 +300,8 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
 
         private String country;
 
+        private String currency;
+
         private Map<String, Object> extraParams;
 
         private String routingNumber;
@@ -307,6 +315,7 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
               this.bankAccountType,
               this.branchNumber,
               this.country,
+              this.currency,
               this.extraParams,
               this.routingNumber,
               this.swiftCode);
@@ -335,6 +344,12 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
         /** <strong>Required.</strong> The country code of the bank account. */
         public Builder setCountry(String country) {
           this.country = country;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The currency of the bank account. */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
           return this;
         }
 
@@ -398,6 +413,10 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Card {
+      /** <strong>Required.</strong> The currency of the card. */
+      @SerializedName("currency")
+      String currency;
+
       /** <strong>Required.</strong> The expiration month of the card. */
       @SerializedName("exp_month")
       String expMonth;
@@ -420,7 +439,12 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
       String number;
 
       private Card(
-          String expMonth, String expYear, Map<String, Object> extraParams, String number) {
+          String currency,
+          String expMonth,
+          String expYear,
+          Map<String, Object> extraParams,
+          String number) {
+        this.currency = currency;
         this.expMonth = expMonth;
         this.expYear = expYear;
         this.extraParams = extraParams;
@@ -432,6 +456,8 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private String currency;
+
         private String expMonth;
 
         private String expYear;
@@ -443,7 +469,13 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public OutboundSetupIntentCreateParams.PayoutMethodData.Card build() {
           return new OutboundSetupIntentCreateParams.PayoutMethodData.Card(
-              this.expMonth, this.expYear, this.extraParams, this.number);
+              this.currency, this.expMonth, this.expYear, this.extraParams, this.number);
+        }
+
+        /** <strong>Required.</strong> The currency of the card. */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
         }
 
         /** <strong>Required.</strong> The expiration month of the card. */

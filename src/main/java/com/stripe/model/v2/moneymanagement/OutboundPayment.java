@@ -4,6 +4,7 @@ package com.stripe.model.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
 import java.time.Instant;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -145,31 +146,10 @@ public class OutboundPayment extends StripeObject implements HasId {
 
   /**
    * A unique identifier that can be used to track this OutboundPayment with recipient bank. Banks
-   * might call this a “reference number” or something similar.
+   * might call this a &quot;reference number&quot; or something similar.
    */
   @SerializedName("trace_id")
   TraceId traceId;
-
-  /** The &quot;presentment amount&quot; for the OutboundPayment. */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Amount extends StripeObject {
-    /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /**
-     * A non-negative integer representing how much to charge in the <a
-     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-     */
-    @SerializedName("value")
-    Long value;
-  }
 
   /** Delivery options to be used to send the OutboundPayment. */
   @Getter
@@ -192,32 +172,11 @@ public class OutboundPayment extends StripeObject implements HasId {
   public static class From extends StripeObject {
     /** The monetary amount debited from the sender, only set on responses. */
     @SerializedName("debited")
-    Debited debited;
+    Amount debited;
 
     /** The FinancialAccount that funds were pulled from. */
     @SerializedName("financial_account")
     String financialAccount;
-
-    /** The monetary amount debited from the sender, only set on responses. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Debited extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
   }
 
   /** Details about the OutboundPayment notification settings for recipient. */
@@ -329,7 +288,7 @@ public class OutboundPayment extends StripeObject implements HasId {
   public static class To extends StripeObject {
     /** The monetary amount being credited to the destination. */
     @SerializedName("credited")
-    Credited credited;
+    Amount credited;
 
     /** The payout method which the OutboundPayment uses to send payout. */
     @SerializedName("payout_method")
@@ -338,32 +297,11 @@ public class OutboundPayment extends StripeObject implements HasId {
     /** To which account the OutboundPayment is sent. */
     @SerializedName("recipient")
     String recipient;
-
-    /** The monetary amount being credited to the destination. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Credited extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
   }
 
   /**
    * A unique identifier that can be used to track this OutboundPayment with recipient bank. Banks
-   * might call this a “reference number” or something similar.
+   * might call this a &quot;reference number&quot; or something similar.
    */
   @Getter
   @Setter

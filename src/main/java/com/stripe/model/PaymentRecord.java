@@ -96,8 +96,8 @@ public class PaymentRecord extends ApiResource implements HasId {
   String latestPaymentAttemptRecord;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -892,6 +892,9 @@ public class PaymentRecord extends ApiResource implements HasId {
      */
     @SerializedName("type")
     String type;
+
+    @SerializedName("upi")
+    Upi upi;
 
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
@@ -1697,6 +1700,38 @@ public class PaymentRecord extends ApiResource implements HasId {
         String authenticationFlow;
 
         /**
+         * The 3D Secure cryptogram, also known as the &quot;authentication value&quot; (AAV, CAVV
+         * or AEVV).
+         */
+        @SerializedName("cryptogram")
+        String cryptogram;
+
+        /**
+         * The Electronic Commerce Indicator (ECI). A protocol-level field indicating what degree of
+         * authentication was performed.
+         *
+         * <p>One of {@code 01}, {@code 02}, {@code 03}, {@code 04}, {@code 05}, {@code 06}, or
+         * {@code 07}.
+         */
+        @SerializedName("electronic_commerce_indicator")
+        String electronicCommerceIndicator;
+
+        /**
+         * The exemption requested via 3DS and accepted by the issuer at authentication time.
+         *
+         * <p>One of {@code low_risk}, or {@code none}.
+         */
+        @SerializedName("exemption_indicator")
+        String exemptionIndicator;
+
+        /**
+         * Whether Stripe requested the value of {@code exemption_indicator} in the transaction.
+         * This will depend on the outcome of Stripe's internal risk assessment.
+         */
+        @SerializedName("exemption_indicator_applied")
+        Boolean exemptionIndicatorApplied;
+
+        /**
          * Indicates the outcome of 3D Secure authentication.
          *
          * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code exempted}, {@code
@@ -2111,7 +2146,8 @@ public class PaymentRecord extends ApiResource implements HasId {
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, or {@code solana}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, or {@code
+       * tempo}.
        */
       @SerializedName("network")
       String network;
@@ -3510,16 +3546,6 @@ public class PaymentRecord extends ApiResource implements HasId {
       /** The connected account ID whose Stripe balance to use as the source of payment. */
       @SerializedName("account")
       String account;
-
-      /**
-       * The <a
-       * href="https://docs.stripe.com/api/balance/balance_object#balance_object-available-source_types">source_type</a>
-       * of the balance
-       *
-       * <p>One of {@code bank_account}, {@code card}, or {@code fpx}.
-       */
-      @SerializedName("source_type")
-      String sourceType;
     }
 
     /**
@@ -3554,6 +3580,19 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Twint extends StripeObject {}
+
+    /**
+     * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Upi extends StripeObject {
+      /** Customer's unique Virtual Payment Address. */
+      @SerializedName("vpa")
+      String vpa;
+    }
 
     /**
      * For more details about UsBankAccount, please refer to the <a

@@ -4,6 +4,7 @@ package com.stripe.model.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -86,6 +87,7 @@ public class FinancialAccount extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
+  /** Additional details related to the status of the FinancialAccount. */
   @SerializedName("status_details")
   StatusDetails statusDetails;
 
@@ -117,87 +119,15 @@ public class FinancialAccount extends StripeObject implements HasId {
   public static class Balance extends StripeObject {
     /** Balance that can be used for money movement. */
     @SerializedName("available")
-    Map<String, FinancialAccount.Balance.Available> available;
+    Map<String, Amount> available;
 
     /** Balance of inbound funds that will later transition to the {@code available} balance. */
     @SerializedName("inbound_pending")
-    Map<String, FinancialAccount.Balance.InboundPending> inboundPending;
+    Map<String, Amount> inboundPending;
 
     /** Balance of funds that are being used for a pending outbound money movement. */
     @SerializedName("outbound_pending")
-    Map<String, FinancialAccount.Balance.OutboundPending> outboundPending;
-
-    /**
-     * For more details about Available, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Available extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
-
-    /**
-     * For more details about InboundPending, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class InboundPending extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
-
-    /**
-     * For more details about OutboundPending, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class OutboundPending extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
+    Map<String, Amount> outboundPending;
   }
 
   /**
@@ -216,35 +146,33 @@ public class FinancialAccount extends StripeObject implements HasId {
     String type;
   }
 
-  /**
-   * For more details about StatusDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Additional details related to the status of the FinancialAccount. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusDetails extends StripeObject {
+    /** Details related to the closed state of the FinancialAccount. */
     @SerializedName("closed")
     Closed closed;
 
-    /**
-     * For more details about Closed, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Details related to the closed state of the FinancialAccount. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Closed extends StripeObject {
+      /** The forwarding settings for the closed FinancialAccount. */
       @SerializedName("forwarding_settings")
       ForwardingSettings forwardingSettings;
 
+      /**
+       * The reason the FinancialAccount was closed.
+       *
+       * <p>One of {@code account_closed}, {@code closed_by_platform}, or {@code other}.
+       */
       @SerializedName("reason")
       String reason;
 
-      /**
-       * For more details about ForwardingSettings, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The forwarding settings for the closed FinancialAccount. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

@@ -96,9 +96,19 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   @SerializedName("pricing")
   Pricing pricing;
 
-  /** Non-negative integer. The quantity of units for the invoice item. */
+  /**
+   * Non-negative integer. The quantity of units for the invoice item. Use {@code quantity_decimal}
+   * instead to provide decimal precision. This field will be deprecated in favor of {@code
+   * quantity_decimal} in a future version.
+   */
   @SerializedName("quantity")
   Long quantity;
+
+  /**
+   * Non-negative decimal with at most 12 decimal places. The quantity of units for the line item.
+   */
+  @SerializedName("quantity_decimal")
+  Object quantityDecimal;
 
   /**
    * Only required if a <a
@@ -145,6 +155,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       PriceData priceData,
       Pricing pricing,
       Long quantity,
+      Object quantityDecimal,
       TaxBehavior taxBehavior,
       Object taxCode,
       Object taxRates,
@@ -161,6 +172,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     this.priceData = priceData;
     this.pricing = pricing;
     this.quantity = quantity;
+    this.quantityDecimal = quantityDecimal;
     this.taxBehavior = taxBehavior;
     this.taxCode = taxCode;
     this.taxRates = taxRates;
@@ -196,6 +208,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
     private Long quantity;
 
+    private Object quantityDecimal;
+
     private TaxBehavior taxBehavior;
 
     private Object taxCode;
@@ -219,6 +233,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
           this.priceData,
           this.pricing,
           this.quantity,
+          this.quantityDecimal,
           this.taxBehavior,
           this.taxCode,
           this.taxRates,
@@ -486,9 +501,29 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Non-negative integer. The quantity of units for the invoice item. */
+    /**
+     * Non-negative integer. The quantity of units for the invoice item. Use {@code
+     * quantity_decimal} instead to provide decimal precision. This field will be deprecated in
+     * favor of {@code quantity_decimal} in a future version.
+     */
     public Builder setQuantity(Long quantity) {
       this.quantity = quantity;
+      return this;
+    }
+
+    /**
+     * Non-negative decimal with at most 12 decimal places. The quantity of units for the line item.
+     */
+    public Builder setQuantityDecimal(BigDecimal quantityDecimal) {
+      this.quantityDecimal = quantityDecimal;
+      return this;
+    }
+
+    /**
+     * Non-negative decimal with at most 12 decimal places. The quantity of units for the line item.
+     */
+    public Builder setQuantityDecimal(EmptyParam quantityDecimal) {
+      this.quantityDecimal = quantityDecimal;
       return this;
     }
 

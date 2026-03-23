@@ -4,6 +4,8 @@ package com.stripe.model.v2.core;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -3737,15 +3739,16 @@ public class Account extends StripeObject implements HasId {
          * Closed Enum. The payout method type of the default outbound destination.
          *
          * <p>One of {@code ae_bank_account}, {@code ag_bank_account}, {@code al_bank_account},
-         * {@code am_bank_account}, {@code at_bank_account}, {@code au_bank_account}, {@code
-         * ba_bank_account}, {@code be_bank_account}, {@code bg_bank_account}, {@code
-         * bh_bank_account}, {@code bj_bank_account}, {@code bn_bank_account}, {@code
-         * bs_bank_account}, {@code bt_bank_account}, {@code bw_bank_account}, {@code card}, {@code
-         * ca_bank_account}, {@code ch_bank_account}, {@code ci_bank_account}, {@code
-         * crypto_wallet}, {@code cr_bank_account}, {@code cy_bank_account}, {@code
-         * cz_bank_account}, {@code de_bank_account}, {@code dk_bank_account}, {@code
-         * do_bank_account}, {@code dz_bank_account}, {@code ec_bank_account}, {@code
-         * ee_bank_account}, {@code es_bank_account}, {@code et_bank_account}, {@code
+         * {@code am_bank_account}, {@code ar_bank_account}, {@code at_bank_account}, {@code
+         * au_bank_account}, {@code ba_bank_account}, {@code be_bank_account}, {@code
+         * bg_bank_account}, {@code bh_bank_account}, {@code bj_bank_account}, {@code
+         * bn_bank_account}, {@code bs_bank_account}, {@code bt_bank_account}, {@code
+         * bw_bank_account}, {@code card}, {@code ca_bank_account}, {@code ch_bank_account}, {@code
+         * ci_bank_account}, {@code co_bank_account}, {@code crypto_wallet}, {@code
+         * cr_bank_account}, {@code cy_bank_account}, {@code cz_bank_account}, {@code
+         * de_bank_account}, {@code dk_bank_account}, {@code do_bank_account}, {@code
+         * dz_bank_account}, {@code ec_bank_account}, {@code ee_bank_account}, {@code
+         * eg_bank_account}, {@code es_bank_account}, {@code et_bank_account}, {@code
          * fi_bank_account}, {@code fr_bank_account}, {@code gb_bank_account}, {@code
          * gm_bank_account}, {@code gr_bank_account}, {@code gt_bank_account}, {@code
          * gy_bank_account}, {@code hk_bank_account}, {@code hr_bank_account}, {@code
@@ -4491,6 +4494,13 @@ public class Account extends StripeObject implements HasId {
     /** Default responsibilities held by either Stripe or the platform. */
     @SerializedName("responsibilities")
     Responsibilities responsibilities;
+
+    /**
+     * The Account's local timezone. A list of possible time zone values is maintained at the <a
+     * href="https://www.iana.org/time-zones">IANA Time Zone Database</a>.
+     */
+    @SerializedName("timezone")
+    String timezone;
 
     /** Account profile information. */
     @Getter
@@ -5264,27 +5274,6 @@ public class Account extends StripeObject implements HasId {
          */
         @SerializedName("fiscal_year_end")
         String fiscalYearEnd;
-
-        /** Annual revenue amount in minor currency units (for example, '123' for 1.23 USD). */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Amount extends StripeObject {
-          /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
-           */
-          @SerializedName("currency")
-          String currency;
-
-          /**
-           * A non-negative integer representing how much to charge in the <a
-           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-           */
-          @SerializedName("value")
-          Long value;
-        }
       }
 
       /** Documents that may be submitted to satisfy various informational requests. */
@@ -5663,30 +5652,6 @@ public class Account extends StripeObject implements HasId {
          */
         @SerializedName("amount")
         Amount amount;
-
-        /**
-         * Estimated monthly revenue amount in minor currency units (for example, '123' for 1.23
-         * USD).
-         */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Amount extends StripeObject {
-          /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
-           */
-          @SerializedName("currency")
-          String currency;
-
-          /**
-           * A non-negative integer representing how much to charge in the <a
-           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-           */
-          @SerializedName("value")
-          Long value;
-        }
       }
 
       /** When the business was incorporated or registered. */
@@ -6403,7 +6368,7 @@ public class Account extends StripeObject implements HasId {
 
         /** The percentage of the Account's identity that the individual owns. */
         @SerializedName("percent_ownership")
-        String percentOwnership;
+        BigDecimal percentOwnership;
 
         /**
          * Whether the individual is authorized as the primary representative of the Account. This

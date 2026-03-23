@@ -226,6 +226,10 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("country")
       Object country;
 
+      /** <strong>Required.</strong> The currency of the bank account. */
+      @SerializedName("currency")
+      Object currency;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -248,6 +252,7 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
           BankAccountType bankAccountType,
           Object branchNumber,
           Object country,
+          Object currency,
           Map<String, Object> extraParams,
           Object routingNumber,
           Object swiftCode) {
@@ -255,6 +260,7 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
         this.bankAccountType = bankAccountType;
         this.branchNumber = branchNumber;
         this.country = country;
+        this.currency = currency;
         this.extraParams = extraParams;
         this.routingNumber = routingNumber;
         this.swiftCode = swiftCode;
@@ -273,6 +279,8 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
 
         private Object country;
 
+        private Object currency;
+
         private Map<String, Object> extraParams;
 
         private Object routingNumber;
@@ -286,6 +294,7 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
               this.bankAccountType,
               this.branchNumber,
               this.country,
+              this.currency,
               this.extraParams,
               this.routingNumber,
               this.swiftCode);
@@ -332,6 +341,18 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
         /** <strong>Required.</strong> The country code of the bank account. */
         public Builder setCountry(EmptyParam country) {
           this.country = country;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The currency of the bank account. */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The currency of the bank account. */
+        public Builder setCurrency(EmptyParam currency) {
+          this.currency = currency;
           return this;
         }
 
@@ -407,6 +428,10 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Card {
+      /** The currency of the card. */
+      @SerializedName("currency")
+      Object currency;
+
       /** The expiration month of the card. */
       @SerializedName("exp_month")
       Object expMonth;
@@ -432,7 +457,12 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
       Object number;
 
       private Card(
-          Object expMonth, Object expYear, Map<String, Object> extraParams, Object number) {
+          Object currency,
+          Object expMonth,
+          Object expYear,
+          Map<String, Object> extraParams,
+          Object number) {
+        this.currency = currency;
         this.expMonth = expMonth;
         this.expYear = expYear;
         this.extraParams = extraParams;
@@ -444,6 +474,8 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Object currency;
+
         private Object expMonth;
 
         private Object expYear;
@@ -455,7 +487,19 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public OutboundSetupIntentUpdateParams.PayoutMethodData.Card build() {
           return new OutboundSetupIntentUpdateParams.PayoutMethodData.Card(
-              this.expMonth, this.expYear, this.extraParams, this.number);
+              this.currency, this.expMonth, this.expYear, this.extraParams, this.number);
+        }
+
+        /** The currency of the card. */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /** The currency of the card. */
+        public Builder setCurrency(EmptyParam currency) {
+          this.currency = currency;
+          return this;
         }
 
         /** The expiration month of the card. */

@@ -118,8 +118,8 @@ public class SubscriptionSchedule extends ApiResource
   LastPriceMigrationError lastPriceMigrationError;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -1913,6 +1913,10 @@ public class SubscriptionSchedule extends ApiResource
       @SerializedName("trial")
       Trial trial;
 
+      /** The ID of the trial offer to apply to the configuration item. */
+      @SerializedName("trial_offer")
+      String trialOffer;
+
       /** Get ID of expandable {@code plan} object. */
       public String getPlan() {
         return (this.plan != null) ? this.plan.getId() : null;
@@ -2105,8 +2109,9 @@ public class SubscriptionSchedule extends ApiResource
     @EqualsAndHashCode(callSuper = false)
     public static class PauseCollection extends StripeObject {
       /**
-       * The payment collection behavior for this subscription while paused. One of {@code
-       * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       * The payment collection behavior for this subscription while paused.
+       *
+       * <p>One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
        */
       @SerializedName("behavior")
       String behavior;

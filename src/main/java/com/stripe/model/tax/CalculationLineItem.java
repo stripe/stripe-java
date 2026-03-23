@@ -15,7 +15,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class CalculationLineItem extends StripeObject implements HasId {
   /**
-   * The line item amount in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
+   * The line item amount in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
    * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
    * Otherwise, taxes were calculated on top of this amount.
    */
@@ -24,7 +24,7 @@ public class CalculationLineItem extends StripeObject implements HasId {
 
   /**
    * The amount of tax calculated for this line item, in the <a
-   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+   * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
    */
   @SerializedName("amount_tax")
   Long amountTax;
@@ -35,8 +35,8 @@ public class CalculationLineItem extends StripeObject implements HasId {
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -56,6 +56,15 @@ public class CalculationLineItem extends StripeObject implements HasId {
    */
   @SerializedName("object")
   String object;
+
+  /**
+   * Indicates the line item represents a performance where the venue location might determine the
+   * tax, not the customer address. Leave empty if the tax code doesn't require a tax location. If
+   * you provide this value for tax codes with an {@code optional} location requirement, it
+   * overrides the customer address.
+   */
+  @SerializedName("performance_location")
+  String performanceLocation;
 
   /** The ID of an existing <a href="https://docs.stripe.com/api/products/object">Product</a>. */
   @SerializedName("product")
@@ -100,7 +109,7 @@ public class CalculationLineItem extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class TaxBreakdown extends StripeObject {
     /**
-     * The amount of tax, in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
+     * The amount of tax, in the <a href="https://docs.stripe.com/currencies#minor-units">smallest
      * currency unit</a>.
      */
     @SerializedName("amount")
@@ -113,7 +122,7 @@ public class CalculationLineItem extends StripeObject implements HasId {
      * Indicates whether the jurisdiction was determined by the origin (merchant's address) or
      * destination (customer's address).
      *
-     * <p>One of {@code destination}, or {@code origin}.
+     * <p>One of {@code destination}, {@code origin}, or {@code performance}.
      */
     @SerializedName("sourcing")
     String sourcing;
@@ -140,7 +149,7 @@ public class CalculationLineItem extends StripeObject implements HasId {
 
     /**
      * The amount on which tax is calculated, in the <a
-     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
      */
     @SerializedName("taxable_amount")
     Long taxableAmount;
@@ -206,9 +215,11 @@ public class CalculationLineItem extends StripeObject implements HasId {
       /**
        * The tax type, such as {@code vat} or {@code sales_tax}.
        *
-       * <p>One of {@code amusement_tax}, {@code communications_tax}, {@code gst}, {@code hst},
-       * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code
-       * retail_delivery_fee}, {@code rst}, {@code sales_tax}, {@code service_tax}, or {@code vat}.
+       * <p>One of {@code admissions_tax}, {@code amusement_tax}, {@code attendance_tax}, {@code
+       * communications_tax}, {@code entertainment_tax}, {@code gross_receipts_tax}, {@code gst},
+       * {@code hospitality_tax}, {@code hst}, {@code igst}, {@code jct}, {@code lease_tax}, {@code
+       * luxury_tax}, {@code pst}, {@code qst}, {@code resort_tax}, {@code retail_delivery_fee},
+       * {@code rst}, {@code sales_tax}, {@code service_tax}, {@code tourism_tax}, or {@code vat}.
        */
       @SerializedName("tax_type")
       String taxType;

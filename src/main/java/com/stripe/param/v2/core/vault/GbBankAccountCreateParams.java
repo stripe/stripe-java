@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class GbBankAccountCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The Account Number of the bank account. */
+  /** The Account Number of the bank account. */
   @SerializedName("account_number")
   String accountNumber;
 
@@ -27,6 +27,10 @@ public class GbBankAccountCreateParams extends ApiRequestParams {
   @SerializedName("confirmation_of_payee")
   ConfirmationOfPayee confirmationOfPayee;
 
+  /** <strong>Required.</strong> The currency of the bank account. */
+  @SerializedName("currency")
+  String currency;
+
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -36,7 +40,11 @@ public class GbBankAccountCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> The Sort Code of the bank account. */
+  /** The IBAN of the bank account. */
+  @SerializedName("iban")
+  String iban;
+
+  /** The Sort Code of the bank account. */
   @SerializedName("sort_code")
   String sortCode;
 
@@ -44,12 +52,16 @@ public class GbBankAccountCreateParams extends ApiRequestParams {
       String accountNumber,
       BankAccountType bankAccountType,
       ConfirmationOfPayee confirmationOfPayee,
+      String currency,
       Map<String, Object> extraParams,
+      String iban,
       String sortCode) {
     this.accountNumber = accountNumber;
     this.bankAccountType = bankAccountType;
     this.confirmationOfPayee = confirmationOfPayee;
+    this.currency = currency;
     this.extraParams = extraParams;
+    this.iban = iban;
     this.sortCode = sortCode;
   }
 
@@ -64,7 +76,11 @@ public class GbBankAccountCreateParams extends ApiRequestParams {
 
     private ConfirmationOfPayee confirmationOfPayee;
 
+    private String currency;
+
     private Map<String, Object> extraParams;
+
+    private String iban;
 
     private String sortCode;
 
@@ -74,11 +90,13 @@ public class GbBankAccountCreateParams extends ApiRequestParams {
           this.accountNumber,
           this.bankAccountType,
           this.confirmationOfPayee,
+          this.currency,
           this.extraParams,
+          this.iban,
           this.sortCode);
     }
 
-    /** <strong>Required.</strong> The Account Number of the bank account. */
+    /** The Account Number of the bank account. */
     public Builder setAccountNumber(String accountNumber) {
       this.accountNumber = accountNumber;
       return this;
@@ -98,6 +116,12 @@ public class GbBankAccountCreateParams extends ApiRequestParams {
     public Builder setConfirmationOfPayee(
         GbBankAccountCreateParams.ConfirmationOfPayee confirmationOfPayee) {
       this.confirmationOfPayee = confirmationOfPayee;
+      return this;
+    }
+
+    /** <strong>Required.</strong> The currency of the bank account. */
+    public Builder setCurrency(String currency) {
+      this.currency = currency;
       return this;
     }
 
@@ -127,7 +151,13 @@ public class GbBankAccountCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The Sort Code of the bank account. */
+    /** The IBAN of the bank account. */
+    public Builder setIban(String iban) {
+      this.iban = iban;
+      return this;
+    }
+
+    /** The Sort Code of the bank account. */
     public Builder setSortCode(String sortCode) {
       this.sortCode = sortCode;
       return this;

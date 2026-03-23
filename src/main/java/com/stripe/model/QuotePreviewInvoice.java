@@ -374,8 +374,8 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   InvoiceLineItemCollection lines;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -1287,8 +1287,9 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       @EqualsAndHashCode(callSuper = false)
       public static class PauseCollection extends StripeObject {
         /**
-         * The payment collection behavior for this subscription while paused. One of {@code
-         * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+         * The payment collection behavior for this subscription while paused.
+         *
+         * <p>One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
          */
         @SerializedName("behavior")
         String behavior;
@@ -1426,7 +1427,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
         MandateOptions mandateOptions;
 
         /**
-         * Bank account verification method.
+         * Bank account verification method. The default value is {@code automatic}.
          *
          * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
          */
@@ -1648,6 +1649,13 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
          */
         @SerializedName("amount_includes_iof")
         String amountIncludesIof;
+
+        /**
+         * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
+         * Defaults to 86400 seconds.
+         */
+        @SerializedName("expires_after_seconds")
+        Long expiresAfterSeconds;
       }
 
       /**
@@ -1715,7 +1723,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
         FinancialConnections financialConnections;
 
         /**
-         * Bank account verification method.
+         * Bank account verification method. The default value is {@code automatic}.
          *
          * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
          */
