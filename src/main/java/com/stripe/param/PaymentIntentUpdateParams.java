@@ -2674,10 +2674,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * A unique value assigned by the business to identify the transaction. Required for L2 and L3
      * rates.
      *
-     * <p>Required when the Payment Method Types array contains {@code card}, including when <a
-     * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
-     * is set to {@code true}.
-     *
      * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces, before
      * being sent to card networks. For Klarna, this field is truncated to 255 characters and is
      * visible to customers when they view the order in the Klarna app.
@@ -2762,10 +2758,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        * A unique value assigned by the business to identify the transaction. Required for L2 and L3
        * rates.
        *
-       * <p>Required when the Payment Method Types array contains {@code card}, including when <a
-       * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
-       * is set to {@code true}.
-       *
        * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces,
        * before being sent to card networks. For Klarna, this field is truncated to 255 characters
        * and is visible to customers when they view the order in the Klarna app.
@@ -2778,10 +2770,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       /**
        * A unique value assigned by the business to identify the transaction. Required for L2 and L3
        * rates.
-       *
-       * <p>Required when the Payment Method Types array contains {@code card}, including when <a
-       * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
-       * is set to {@code true}.
        *
        * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces,
        * before being sent to card networks. For Klarna, this field is truncated to 255 characters

@@ -299,6 +299,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("pending_update")
   PendingUpdate pendingUpdate;
 
+  @SerializedName("presentment_details")
+  PresentmentDetails presentmentDetails;
+
   /** The schedule attached to the subscription. */
   @SerializedName("schedule")
   @Getter(lombok.AccessLevel.NONE)
@@ -2097,6 +2100,19 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /**
+   * For more details about PresentmentDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PresentmentDetails extends StripeObject {
+    /** Currency used for customer payments. */
+    @SerializedName("presentment_currency")
+    String presentmentCurrency;
+  }
+
+  /**
    * For more details about TransferData, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -2183,6 +2199,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     trySetResponseGetter(pendingInvoiceItemInterval, responseGetter);
     trySetResponseGetter(pendingSetupIntent, responseGetter);
     trySetResponseGetter(pendingUpdate, responseGetter);
+    trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(schedule, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
     trySetResponseGetter(transferData, responseGetter);

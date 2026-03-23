@@ -21163,23 +21163,14 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public enum UiMode implements ApiRequestParams.EnumParam {
-    @SerializedName("custom")
-    CUSTOM("custom"),
-
     @SerializedName("elements")
     ELEMENTS("elements"),
-
-    @SerializedName("embedded")
-    EMBEDDED("embedded"),
 
     @SerializedName("embedded_page")
     EMBEDDED_PAGE("embedded_page"),
 
     @SerializedName("form")
     FORM("form"),
-
-    @SerializedName("hosted")
-    HOSTED("hosted"),
 
     @SerializedName("hosted_page")
     HOSTED_PAGE("hosted_page");

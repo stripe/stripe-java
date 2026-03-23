@@ -471,10 +471,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   TotalDetails totalDetails;
 
   /**
-   * The UI mode of the Session. Defaults to {@code hosted}.
+   * The UI mode of the Session. Defaults to {@code hosted_page}.
    *
-   * <p>One of {@code custom}, {@code elements}, {@code embedded}, {@code embedded_page}, {@code
-   * form}, {@code hosted}, or {@code hosted_page}.
+   * <p>One of {@code elements}, {@code embedded_page}, {@code form}, or {@code hosted_page}.
    */
   @SerializedName("ui_mode")
   String uiMode;
