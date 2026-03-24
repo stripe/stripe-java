@@ -7,7 +7,7 @@ import com.stripe.net.StripeResponseGetter;
 import lombok.Getter;
 
 @Getter
-public class RateLimitException extends ApiException {
+public class RateLimitException extends StripeException {
   private static final long serialVersionUID = 2L;
 
   private final String param;

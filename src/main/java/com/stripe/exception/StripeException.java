@@ -20,13 +20,16 @@ public abstract class StripeException extends Exception {
   ApiMode stripeErrorApiMode;
 
   public void setStripeError(StripeError err) {
+    setStripeError(err, ApiMode.V1);
+  }
+
+  public void setStripeError(StripeError err, ApiMode mode) {
     stripeError = err;
-    stripeErrorApiMode = ApiMode.V1;
+    stripeErrorApiMode = mode;
   }
 
   public void setStripeV2Error(StripeError err) {
-    stripeError = err;
-    stripeErrorApiMode = ApiMode.V2;
+    setStripeError(err, ApiMode.V2);
   }
   /**
    * Returns the error code of the response that triggered this exception. For {@link ApiException}
