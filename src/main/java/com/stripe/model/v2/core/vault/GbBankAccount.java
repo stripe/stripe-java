@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -79,6 +80,10 @@ public class GbBankAccount extends StripeObject implements HasId {
   /** The Sort Code of the bank account. */
   @SerializedName("sort_code")
   String sortCode;
+
+  /** The list of currencies supported by this bank account. */
+  @SerializedName("supported_currencies")
+  List<String> supportedCurrencies;
 
   /** The alternative reference for this payout method, if it's a projected payout method. */
   @Getter

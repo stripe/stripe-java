@@ -4,6 +4,7 @@ package com.stripe.model.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
 import java.time.Instant;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -61,6 +62,10 @@ public class TransactionEntry extends StripeObject implements HasId {
   @SerializedName("transaction_details")
   TransactionDetails transactionDetails;
 
+  /** The v1 Treasury transaction entry associated with this transaction entry. */
+  @SerializedName("treasury_transaction_entry")
+  String treasuryTransactionEntry;
+
   /** The delta to the FinancialAccount's balance. */
   @Getter
   @Setter
@@ -68,78 +73,15 @@ public class TransactionEntry extends StripeObject implements HasId {
   public static class BalanceImpact extends StripeObject {
     /** Impact to the available balance. */
     @SerializedName("available")
-    Available available;
+    Amount available;
 
     /** Impact to the inbound_pending balance. */
     @SerializedName("inbound_pending")
-    InboundPending inboundPending;
+    Amount inboundPending;
 
     /** Impact to the outbound_pending balance. */
     @SerializedName("outbound_pending")
-    OutboundPending outboundPending;
-
-    /** Impact to the available balance. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Available extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
-
-    /** Impact to the inbound_pending balance. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class InboundPending extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
-
-    /** Impact to the outbound_pending balance. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class OutboundPending extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
+    Amount outboundPending;
   }
 
   /** Details copied from the transaction that this TransactionEntry belongs to. */
@@ -265,6 +207,40 @@ public class TransactionEntry extends StripeObject implements HasId {
       @SerializedName("transfer_reversal")
       String transferReversal;
 
+      /** If applicable, the ID of the Treasury CreditReversal that created this Transaction. */
+      @SerializedName("treasury_credit_reversal")
+      String treasuryCreditReversal;
+
+      /** If applicable, the ID of the Treasury DebitReversal that created this Transaction. */
+      @SerializedName("treasury_debit_reversal")
+      String treasuryDebitReversal;
+
+      /** If applicable, the ID of the Treasury InboundTransfer that created this Transaction. */
+      @SerializedName("treasury_inbound_transfer")
+      String treasuryInboundTransfer;
+
+      /**
+       * If applicable, the ID of the Treasury IssuingAuthorization that created this Transaction.
+       */
+      @SerializedName("treasury_issuing_authorization")
+      String treasuryIssuingAuthorization;
+
+      /** If applicable, the ID of the Treasury OutboundPayment that created this Transaction. */
+      @SerializedName("treasury_outbound_payment")
+      String treasuryOutboundPayment;
+
+      /** If applicable, the ID of the Treasury OutboundTransfer that created this Transaction. */
+      @SerializedName("treasury_outbound_transfer")
+      String treasuryOutboundTransfer;
+
+      /** If applicable, the ID of the Treasury ReceivedCredit that created this Transaction. */
+      @SerializedName("treasury_received_credit")
+      String treasuryReceivedCredit;
+
+      /** If applicable, the ID of the Treasury ReceivedDebit that created this Transaction. */
+      @SerializedName("treasury_received_debit")
+      String treasuryReceivedDebit;
+
       /**
        * Open Enum. Type of the flow that created the Transaction. The field matching this value
        * will contain the ID of the flow.
@@ -273,8 +249,11 @@ public class TransactionEntry extends StripeObject implements HasId {
        * {@code charge}, {@code currency_conversion}, {@code dispute}, {@code fee_transaction},
        * {@code inbound_transfer}, {@code outbound_payment}, {@code outbound_transfer}, {@code
        * payout}, {@code received_credit}, {@code received_debit}, {@code refund}, {@code
-       * reserve_hold}, {@code reserve_release}, {@code topup}, {@code transfer}, or {@code
-       * transfer_reversal}.
+       * reserve_hold}, {@code reserve_release}, {@code topup}, {@code transfer}, {@code
+       * transfer_reversal}, {@code treasury_credit_reversal}, {@code treasury_debit_reversal},
+       * {@code treasury_inbound_transfer}, {@code treasury_issuing_authorization}, {@code
+       * treasury_other}, {@code treasury_outbound_payment}, {@code treasury_outbound_transfer},
+       * {@code treasury_received_credit}, or {@code treasury_received_debit}.
        */
       @SerializedName("type")
       String type;

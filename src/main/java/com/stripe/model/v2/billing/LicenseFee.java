@@ -1,9 +1,12 @@
 // File generated from our OpenAPI spec
 package com.stripe.model.v2.billing;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -48,10 +51,6 @@ public class LicenseFee extends StripeObject implements HasId {
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
-
-  /** The ID of the license fee's most recently created version. */
-  @SerializedName("latest_version")
-  String latestVersion;
 
   /**
    * A Licensed Item represents a billable item whose pricing is based on license fees. You can use
@@ -98,20 +97,9 @@ public class LicenseFee extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /**
-   * The interval for assessing service.
-   *
-   * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
-   */
-  @SerializedName("service_interval")
-  String serviceInterval;
-
-  /**
-   * The length of the interval for assessing service. For example, set this to 3 and {@code
-   * service_interval} to {@code "month"} in order to specify quarterly service.
-   */
-  @SerializedName("service_interval_count")
-  Long serviceIntervalCount;
+  /** The service cycle configuration for this License Fee. */
+  @SerializedName("service_cycle")
+  ServiceCycle serviceCycle;
 
   /**
    * The Stripe Tax tax behavior - whether the license fee is inclusive or exclusive of tax.
@@ -149,6 +137,27 @@ public class LicenseFee extends StripeObject implements HasId {
   @SerializedName("unit_amount")
   String unitAmount;
 
+  /** The service cycle configuration for this License Fee. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ServiceCycle extends StripeObject {
+    /**
+     * The interval for assessing service.
+     *
+     * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+     */
+    @SerializedName("interval")
+    String interval;
+
+    /**
+     * The length of the interval for assessing service. For example, set this to 3 and {@code
+     * interval} to {@code "month"} in order to specify quarterly service.
+     */
+    @SerializedName("interval_count")
+    Long intervalCount;
+  }
+
   /**
    * For more details about Tier, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
@@ -176,7 +185,7 @@ public class LicenseFee extends StripeObject implements HasId {
      * up_to_decimal} and {@code up_to_inf} may be set.
      */
     @SerializedName("up_to_decimal")
-    String upToDecimal;
+    BigDecimal upToDecimal;
 
     /**
      * No upper bound to this tier. Only one of {@code up_to_decimal} and {@code up_to_inf} may be
@@ -196,6 +205,7 @@ public class LicenseFee extends StripeObject implements HasId {
   public static class TransformQuantity extends StripeObject {
     /** Divide usage by this number. */
     @SerializedName("divide_by")
+    @JsonAdapter(StringInt64TypeAdapter.class)
     Long divideBy;
 
     /**

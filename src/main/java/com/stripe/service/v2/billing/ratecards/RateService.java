@@ -22,7 +22,7 @@ public final class RateService extends ApiService {
   }
 
   /**
-   * List all Rates associated with a Rate Card for a specific version (defaults to latest). Rates
+   * List all Rates associated with a Rate Card for a specific version. Defaults to latest. Rates
    * remain active for all subsequent versions until a new rate is created for the same Metered
    * Item.
    */
@@ -31,7 +31,7 @@ public final class RateService extends ApiService {
     return list(rateCardId, params, (RequestOptions) null);
   }
   /**
-   * List all Rates associated with a Rate Card for a specific version (defaults to latest). Rates
+   * List all Rates associated with a Rate Card for a specific version. Defaults to latest. Rates
    * remain active for all subsequent versions until a new rate is created for the same Metered
    * Item.
    */
@@ -40,7 +40,7 @@ public final class RateService extends ApiService {
     return list(rateCardId, (RateListParams) null, options);
   }
   /**
-   * List all Rates associated with a Rate Card for a specific version (defaults to latest). Rates
+   * List all Rates associated with a Rate Card for a specific version. Defaults to latest. Rates
    * remain active for all subsequent versions until a new rate is created for the same Metered
    * Item.
    */
@@ -48,7 +48,7 @@ public final class RateService extends ApiService {
     return list(rateCardId, (RateListParams) null, (RequestOptions) null);
   }
   /**
-   * List all Rates associated with a Rate Card for a specific version (defaults to latest). Rates
+   * List all Rates associated with a Rate Card for a specific version. Defaults to latest. Rates
    * remain active for all subsequent versions until a new rate is created for the same Metered
    * Item.
    */

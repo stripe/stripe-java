@@ -4,6 +4,7 @@ package com.stripe.model.v2.tax;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -145,7 +146,7 @@ public class ManualRule extends StripeObject implements HasId {
 
       /** Percentage of the tax rate. Must be positive and maximum of 4 decimal points. */
       @SerializedName("percentage")
-      String percentage;
+      BigDecimal percentage;
 
       /** State of the tax rate. */
       @SerializedName("state")

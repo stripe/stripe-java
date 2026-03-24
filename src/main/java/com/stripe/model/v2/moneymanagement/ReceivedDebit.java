@@ -4,6 +4,7 @@ package com.stripe.model.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
 import java.time.Instant;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -53,7 +54,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
 
   /** The amount and currency of the original/external debit request. */
   @SerializedName("external_amount")
-  ExternalAmount externalAmount;
+  Amount externalAmount;
 
   /** Financial Account on which funds for ReceivedDebit were debited. */
   @SerializedName("financial_account")
@@ -115,27 +116,6 @@ public class ReceivedDebit extends StripeObject implements HasId {
    */
   @SerializedName("type")
   String type;
-
-  /** Amount and currency of the ReceivedDebit. */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Amount extends StripeObject {
-    /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /**
-     * A non-negative integer representing how much to charge in the <a
-     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-     */
-    @SerializedName("value")
-    Long value;
-  }
 
   /**
    * This object stores details about the balance transfer object that resulted in the
@@ -252,27 +232,6 @@ public class ReceivedDebit extends StripeObject implements HasId {
       /** The reference to the v1 issuing authorization ID. */
       @SerializedName("issuing_authorization_v1")
       String issuingAuthorizationV1;
-
-      /** Amount associated with this issuing authorization. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Amount extends StripeObject {
-        /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
-         */
-        @SerializedName("currency")
-        String currency;
-
-        /**
-         * A non-negative integer representing how much to charge in the <a
-         * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-         */
-        @SerializedName("value")
-        Long value;
-      }
     }
 
     /**
@@ -290,49 +249,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
       /** The reference to the v1 issuing transaction ID. */
       @SerializedName("issuing_transaction_v1")
       String issuingTransactionV1;
-
-      /** Amount associated with this issuing transaction. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Amount extends StripeObject {
-        /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
-         */
-        @SerializedName("currency")
-        String currency;
-
-        /**
-         * A non-negative integer representing how much to charge in the <a
-         * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-         */
-        @SerializedName("value")
-        Long value;
-      }
     }
-  }
-
-  /** The amount and currency of the original/external debit request. */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class ExternalAmount extends StripeObject {
-    /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /**
-     * A non-negative integer representing how much to charge in the <a
-     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-     */
-    @SerializedName("value")
-    Long value;
   }
 
   /** Detailed information about the status of the ReceivedDebit. */

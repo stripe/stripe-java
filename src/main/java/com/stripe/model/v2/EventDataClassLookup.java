@@ -44,9 +44,6 @@ public final class EventDataClassLookup {
     classLookup.put("v2.billing.intent_action", com.stripe.model.v2.billing.IntentAction.class);
     classLookup.put("v2.billing.license_fee", com.stripe.model.v2.billing.LicenseFee.class);
     classLookup.put(
-        "v2.billing.license_fee_subscription",
-        com.stripe.model.v2.billing.LicenseFeeSubscription.class);
-    classLookup.put(
         "v2.billing.license_fee_version", com.stripe.model.v2.billing.LicenseFeeVersion.class);
     classLookup.put("v2.billing.licensed_item", com.stripe.model.v2.billing.LicensedItem.class);
     classLookup.put("v2.billing.meter_event", com.stripe.model.v2.billing.MeterEvent.class);
@@ -65,9 +62,6 @@ public final class EventDataClassLookup {
         "v2.billing.pricing_plan_subscription",
         com.stripe.model.v2.billing.PricingPlanSubscription.class);
     classLookup.put(
-        "v2.billing.pricing_plan_subscription_components",
-        com.stripe.model.v2.billing.PricingPlanSubscriptionComponents.class);
-    classLookup.put(
         "v2.billing.pricing_plan_version", com.stripe.model.v2.billing.PricingPlanVersion.class);
     classLookup.put("v2.billing.profile", com.stripe.model.v2.billing.Profile.class);
     classLookup.put("v2.billing.rate_card", com.stripe.model.v2.billing.RateCard.class);
@@ -83,11 +77,13 @@ public final class EventDataClassLookup {
     classLookup.put("v2.billing.service_action", com.stripe.model.v2.billing.ServiceAction.class);
 
     classLookup.put("v2.core.account", com.stripe.model.v2.core.Account.class);
+    classLookup.put("v2.core.account_evaluation", com.stripe.model.v2.core.AccountEvaluation.class);
     classLookup.put("v2.core.account_link", com.stripe.model.v2.core.AccountLink.class);
     classLookup.put("v2.core.account_person", com.stripe.model.v2.core.AccountPerson.class);
     classLookup.put(
         "v2.core.account_person_token", com.stripe.model.v2.core.AccountPersonToken.class);
     classLookup.put("v2.core.account_token", com.stripe.model.v2.core.AccountToken.class);
+    classLookup.put("v2.core.batch_job", com.stripe.model.v2.core.BatchJob.class);
     classLookup.put("v2.core.claimable_sandbox", com.stripe.model.v2.core.ClaimableSandbox.class);
     classLookup.put("v2.core.connection_session", com.stripe.model.v2.core.ConnectionSession.class);
     classLookup.put("v2.core.event", com.stripe.model.v2.core.Event.class);
@@ -161,6 +157,9 @@ public final class EventDataClassLookup {
 
     classLookup.put("v2.tax.manual_rule", com.stripe.model.v2.tax.ManualRule.class);
 
+    eventClassLookup.put(
+        "v1.account_signals[delinquency].created",
+        com.stripe.events.V1AccountSignalsIncludingDelinquencyCreatedEvent.class);
     eventClassLookup.put(
         "v1.billing.meter.error_report_triggered",
         com.stripe.events.V1BillingMeterErrorReportTriggeredEvent.class);
@@ -335,6 +334,32 @@ public final class EventDataClassLookup {
         "v2.core.account_person.deleted", com.stripe.events.V2CoreAccountPersonDeletedEvent.class);
     eventClassLookup.put(
         "v2.core.account_person.updated", com.stripe.events.V2CoreAccountPersonUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.account_signals.fraudulent_website_ready",
+        com.stripe.events.V2CoreAccountSignalsFraudulentWebsiteReadyEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.batch_failed", com.stripe.events.V2CoreBatchJobBatchFailedEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.canceled", com.stripe.events.V2CoreBatchJobCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.completed", com.stripe.events.V2CoreBatchJobCompletedEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.created", com.stripe.events.V2CoreBatchJobCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.ready_for_upload",
+        com.stripe.events.V2CoreBatchJobReadyForUploadEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.timeout", com.stripe.events.V2CoreBatchJobTimeoutEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.updated", com.stripe.events.V2CoreBatchJobUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.upload_timeout",
+        com.stripe.events.V2CoreBatchJobUploadTimeoutEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.validating", com.stripe.events.V2CoreBatchJobValidatingEvent.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.validation_failed",
+        com.stripe.events.V2CoreBatchJobValidationFailedEvent.class);
     eventClassLookup.put(
         "v2.core.claimable_sandbox.claimed",
         com.stripe.events.V2CoreClaimableSandboxClaimedEvent.class);
@@ -624,5 +649,8 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.reporting.report_run.updated",
         com.stripe.events.V2ReportingReportRunUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.signals.account_signal.fraudulent_merchant_ready",
+        com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEvent.class);
   }
 }

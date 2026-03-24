@@ -34,8 +34,8 @@ public class MeteredItemCreateParams extends ApiRequestParams {
   List<String> invoicePresentationDimensions;
 
   /**
-   * An internal key you can use to search for a particular billable item. Must be unique among
-   * billable items. Maximum length of 200 characters.
+   * An internal key you can use to search for a particular metered item. Must be unique among
+   * metered items. Maximum length of 200 characters.
    */
   @SerializedName("lookup_key")
   String lookupKey;
@@ -189,8 +189,8 @@ public class MeteredItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * An internal key you can use to search for a particular billable item. Must be unique among
-     * billable items. Maximum length of 200 characters.
+     * An internal key you can use to search for a particular metered item. Must be unique among
+     * metered items. Maximum length of 200 characters.
      */
     public Builder setLookupKey(String lookupKey) {
       this.lookupKey = lookupKey;

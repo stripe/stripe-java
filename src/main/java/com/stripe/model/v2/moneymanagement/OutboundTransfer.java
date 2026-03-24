@@ -4,6 +4,7 @@ package com.stripe.model.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
 import java.time.Instant;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -138,27 +139,6 @@ public class OutboundTransfer extends StripeObject implements HasId {
   @SerializedName("trace_id")
   TraceId traceId;
 
-  /** The &quot;presentment amount&quot; for the OutboundTransfer. */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Amount extends StripeObject {
-    /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /**
-     * A non-negative integer representing how much to charge in the <a
-     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-     */
-    @SerializedName("value")
-    Long value;
-  }
-
   /** Delivery options to be used to send the OutboundTransfer. */
   @Getter
   @Setter
@@ -180,32 +160,11 @@ public class OutboundTransfer extends StripeObject implements HasId {
   public static class From extends StripeObject {
     /** The monetary amount debited from the sender, only set on responses. */
     @SerializedName("debited")
-    Debited debited;
+    Amount debited;
 
     /** The FinancialAccount that funds were pulled from. */
     @SerializedName("financial_account")
     String financialAccount;
-
-    /** The monetary amount debited from the sender, only set on responses. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Debited extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
   }
 
   /** Status details for an OutboundTransfer in a {@code failed} or {@code returned} state. */
@@ -301,32 +260,11 @@ public class OutboundTransfer extends StripeObject implements HasId {
   public static class To extends StripeObject {
     /** The monetary amount being credited to the destination. */
     @SerializedName("credited")
-    Credited credited;
+    Amount credited;
 
     /** The payout method which the OutboundTransfer uses to send payout. */
     @SerializedName("payout_method")
     String payoutMethod;
-
-    /** The monetary amount being credited to the destination. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Credited extends StripeObject {
-      /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * A non-negative integer representing how much to charge in the <a
-       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-       */
-      @SerializedName("value")
-      Long value;
-    }
   }
 
   /**

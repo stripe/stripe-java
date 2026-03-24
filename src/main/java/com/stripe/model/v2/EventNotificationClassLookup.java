@@ -17,6 +17,9 @@ public final class EventNotificationClassLookup {
 
   static {
     eventClassLookup.put(
+        "v1.account_signals[delinquency].created",
+        com.stripe.events.V1AccountSignalsIncludingDelinquencyCreatedEventNotification.class);
+    eventClassLookup.put(
         "v1.billing.meter.error_report_triggered",
         com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification.class);
     eventClassLookup.put(
@@ -215,6 +218,39 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.core.account_person.updated",
         com.stripe.events.V2CoreAccountPersonUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.account_signals.fraudulent_website_ready",
+        com.stripe.events.V2CoreAccountSignalsFraudulentWebsiteReadyEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.batch_failed",
+        com.stripe.events.V2CoreBatchJobBatchFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.canceled",
+        com.stripe.events.V2CoreBatchJobCanceledEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.completed",
+        com.stripe.events.V2CoreBatchJobCompletedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.created",
+        com.stripe.events.V2CoreBatchJobCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.ready_for_upload",
+        com.stripe.events.V2CoreBatchJobReadyForUploadEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.timeout",
+        com.stripe.events.V2CoreBatchJobTimeoutEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.updated",
+        com.stripe.events.V2CoreBatchJobUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.upload_timeout",
+        com.stripe.events.V2CoreBatchJobUploadTimeoutEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.validating",
+        com.stripe.events.V2CoreBatchJobValidatingEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.batch_job.validation_failed",
+        com.stripe.events.V2CoreBatchJobValidationFailedEventNotification.class);
     eventClassLookup.put(
         "v2.core.claimable_sandbox.claimed",
         com.stripe.events.V2CoreClaimableSandboxClaimedEventNotification.class);
@@ -521,5 +557,8 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.reporting.report_run.updated",
         com.stripe.events.V2ReportingReportRunUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.signals.account_signal.fraudulent_merchant_ready",
+        com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEventNotification.class);
   }
 }

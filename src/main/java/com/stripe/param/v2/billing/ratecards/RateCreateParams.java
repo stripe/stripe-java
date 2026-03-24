@@ -1,8 +1,11 @@
 // File generated from our OpenAPI spec
 package com.stripe.param.v2.billing.ratecards;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.net.ApiRequestParams;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -364,7 +367,7 @@ public class RateCreateParams extends ApiRequestParams {
      * up_to_decimal} and {@code up_to_inf} may be set.
      */
     @SerializedName("up_to_decimal")
-    String upToDecimal;
+    BigDecimal upToDecimal;
 
     /**
      * No upper bound to this tier. Only one of {@code up_to_decimal} and {@code up_to_inf} may be
@@ -377,7 +380,7 @@ public class RateCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         String flatAmount,
         String unitAmount,
-        String upToDecimal,
+        BigDecimal upToDecimal,
         UpToInf upToInf) {
       this.extraParams = extraParams;
       this.flatAmount = flatAmount;
@@ -397,7 +400,7 @@ public class RateCreateParams extends ApiRequestParams {
 
       private String unitAmount;
 
-      private String upToDecimal;
+      private BigDecimal upToDecimal;
 
       private UpToInf upToInf;
 
@@ -455,7 +458,7 @@ public class RateCreateParams extends ApiRequestParams {
        * Up to and including this quantity will be contained in the tier. Only one of {@code
        * up_to_decimal} and {@code up_to_inf} may be set.
        */
-      public Builder setUpToDecimal(String upToDecimal) {
+      public Builder setUpToDecimal(BigDecimal upToDecimal) {
         this.upToDecimal = upToDecimal;
         return this;
       }
@@ -488,6 +491,7 @@ public class RateCreateParams extends ApiRequestParams {
   public static class TransformQuantity {
     /** <strong>Required.</strong> Divide usage by this number. */
     @SerializedName("divide_by")
+    @JsonAdapter(StringInt64TypeAdapter.class)
     Long divideBy;
 
     /**

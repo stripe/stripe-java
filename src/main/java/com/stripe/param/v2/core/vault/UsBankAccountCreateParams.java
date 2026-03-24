@@ -19,6 +19,10 @@ public class UsBankAccountCreateParams extends ApiRequestParams {
   @SerializedName("bank_account_type")
   BankAccountType bankAccountType;
 
+  /** <strong>Required.</strong> The currency of the bank account. */
+  @SerializedName("currency")
+  String currency;
+
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -45,11 +49,13 @@ public class UsBankAccountCreateParams extends ApiRequestParams {
   private UsBankAccountCreateParams(
       String accountNumber,
       BankAccountType bankAccountType,
+      String currency,
       Map<String, Object> extraParams,
       String fedwireRoutingNumber,
       String routingNumber) {
     this.accountNumber = accountNumber;
     this.bankAccountType = bankAccountType;
+    this.currency = currency;
     this.extraParams = extraParams;
     this.fedwireRoutingNumber = fedwireRoutingNumber;
     this.routingNumber = routingNumber;
@@ -64,6 +70,8 @@ public class UsBankAccountCreateParams extends ApiRequestParams {
 
     private BankAccountType bankAccountType;
 
+    private String currency;
+
     private Map<String, Object> extraParams;
 
     private String fedwireRoutingNumber;
@@ -75,6 +83,7 @@ public class UsBankAccountCreateParams extends ApiRequestParams {
       return new UsBankAccountCreateParams(
           this.accountNumber,
           this.bankAccountType,
+          this.currency,
           this.extraParams,
           this.fedwireRoutingNumber,
           this.routingNumber);
@@ -89,6 +98,12 @@ public class UsBankAccountCreateParams extends ApiRequestParams {
     /** Closed Enum. The type of the bank account (checking or savings). */
     public Builder setBankAccountType(UsBankAccountCreateParams.BankAccountType bankAccountType) {
       this.bankAccountType = bankAccountType;
+      return this;
+    }
+
+    /** <strong>Required.</strong> The currency of the bank account. */
+    public Builder setCurrency(String currency) {
+      this.currency = currency;
       return this;
     }
 

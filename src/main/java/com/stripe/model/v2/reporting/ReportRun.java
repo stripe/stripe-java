@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec
 package com.stripe.model.v2.reporting;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
 import java.util.Map;
@@ -122,6 +124,7 @@ public class ReportRun extends StripeObject implements HasId {
 
       /** The total size of the file in bytes. */
       @SerializedName("size")
+      @JsonAdapter(StringInt64TypeAdapter.class)
       Long size;
 
       /** A pre-signed URL that allows secure, time-limited access to download the file. */

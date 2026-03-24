@@ -3,7 +3,9 @@ package com.stripe.param.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,6 +29,13 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * Expand to include additional data such as discount_details, billing_cadence_details, or
+   * pricing_plan_component_details.
+   */
+  @SerializedName("include")
+  List<PricingPlanSubscriptionListParams.Include> include;
+
   /** Optionally set the maximum number of results per page. Defaults to 20. */
   @SerializedName("limit")
   Long limit;
@@ -39,14 +48,14 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
   Payer payer;
 
   /**
-   * Filter by PricingPlan ID. Mutually exlcusive with {@code billing_cadence}, {@code payer}, and
+   * Filter by PricingPlan ID. Mutually exclusive with {@code billing_cadence}, {@code payer}, and
    * {@code pricing_plan_version}.
    */
   @SerializedName("pricing_plan")
   String pricingPlan;
 
   /**
-   * Filter by Pricing Plan Version ID. Mutually exlcusive with {@code billing_cadence}, {@code
+   * Filter by Pricing Plan Version ID. Mutually exclusive with {@code billing_cadence}, {@code
    * payer}, and {@code pricing_plan}.
    */
   @SerializedName("pricing_plan_version")
@@ -59,6 +68,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
   private PricingPlanSubscriptionListParams(
       String billingCadence,
       Map<String, Object> extraParams,
+      List<PricingPlanSubscriptionListParams.Include> include,
       Long limit,
       Payer payer,
       String pricingPlan,
@@ -66,6 +76,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
       ServicingStatus servicingStatus) {
     this.billingCadence = billingCadence;
     this.extraParams = extraParams;
+    this.include = include;
     this.limit = limit;
     this.payer = payer;
     this.pricingPlan = pricingPlan;
@@ -82,6 +93,8 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private List<PricingPlanSubscriptionListParams.Include> include;
+
     private Long limit;
 
     private Payer payer;
@@ -97,6 +110,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
       return new PricingPlanSubscriptionListParams(
           this.billingCadence,
           this.extraParams,
+          this.include,
           this.limit,
           this.payer,
           this.pricingPlan,
@@ -139,6 +153,32 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Add an element to `include` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * PricingPlanSubscriptionListParams#include} for the field documentation.
+     */
+    public Builder addInclude(PricingPlanSubscriptionListParams.Include element) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `include` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * PricingPlanSubscriptionListParams#include} for the field documentation.
+     */
+    public Builder addAllInclude(List<PricingPlanSubscriptionListParams.Include> elements) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.addAll(elements);
+      return this;
+    }
+
     /** Optionally set the maximum number of results per page. Defaults to 20. */
     public Builder setLimit(Long limit) {
       this.limit = limit;
@@ -155,7 +195,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Filter by PricingPlan ID. Mutually exlcusive with {@code billing_cadence}, {@code payer}, and
+     * Filter by PricingPlan ID. Mutually exclusive with {@code billing_cadence}, {@code payer}, and
      * {@code pricing_plan_version}.
      */
     public Builder setPricingPlan(String pricingPlan) {
@@ -164,7 +204,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Filter by Pricing Plan Version ID. Mutually exlcusive with {@code billing_cadence}, {@code
+     * Filter by Pricing Plan Version ID. Mutually exclusive with {@code billing_cadence}, {@code
      * payer}, and {@code pricing_plan}.
      */
     public Builder setPricingPlanVersion(String pricingPlanVersion) {
@@ -285,6 +325,21 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
       Type(String value) {
         this.value = value;
       }
+    }
+  }
+
+  public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("discount_details")
+    DISCOUNT_DETAILS("discount_details"),
+
+    @SerializedName("pricing_plan_component_details")
+    PRICING_PLAN_COMPONENT_DETAILS("pricing_plan_component_details");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Include(String value) {
+      this.value = value;
     }
   }
 

@@ -13,6 +13,8 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.billing.PricingPlanSubscriptionListParams;
+import com.stripe.param.v2.billing.PricingPlanSubscriptionRemoveDiscountsParams;
+import com.stripe.param.v2.billing.PricingPlanSubscriptionRetrieveParams;
 import com.stripe.param.v2.billing.PricingPlanSubscriptionUpdateParams;
 
 public final class PricingPlanSubscriptionService extends ApiService {
@@ -49,16 +51,32 @@ public final class PricingPlanSubscriptionService extends ApiService {
         request, new TypeToken<StripeCollection<PricingPlanSubscription>>() {}.getType());
   }
   /** Retrieve a Pricing Plan Subscription object. */
-  public PricingPlanSubscription retrieve(String id) throws StripeException {
-    return retrieve(id, (RequestOptions) null);
+  public PricingPlanSubscription retrieve(String id, PricingPlanSubscriptionRetrieveParams params)
+      throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieve a Pricing Plan Subscription object. */
   public PricingPlanSubscription retrieve(String id, RequestOptions options)
       throws StripeException {
+    return retrieve(id, (PricingPlanSubscriptionRetrieveParams) null, options);
+  }
+  /** Retrieve a Pricing Plan Subscription object. */
+  public PricingPlanSubscription retrieve(String id) throws StripeException {
+    return retrieve(id, (PricingPlanSubscriptionRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieve a Pricing Plan Subscription object. */
+  public PricingPlanSubscription retrieve(
+      String id, PricingPlanSubscriptionRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String path =
         String.format("/v2/billing/pricing_plan_subscriptions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return this.request(request, PricingPlanSubscription.class);
   }
   /** Update a Pricing Plan Subscription object. */
@@ -89,9 +107,36 @@ public final class PricingPlanSubscriptionService extends ApiService {
             options);
     return this.request(request, PricingPlanSubscription.class);
   }
-
-  public com.stripe.service.v2.billing.pricingplansubscriptions.ComponentService components() {
-    return new com.stripe.service.v2.billing.pricingplansubscriptions.ComponentService(
-        this.getResponseGetter());
+  /** Remove Discounts from a Pricing Plan Subscription. */
+  public PricingPlanSubscription removeDiscounts(
+      String id, PricingPlanSubscriptionRemoveDiscountsParams params) throws StripeException {
+    return removeDiscounts(id, params, (RequestOptions) null);
+  }
+  /** Remove Discounts from a Pricing Plan Subscription. */
+  public PricingPlanSubscription removeDiscounts(String id, RequestOptions options)
+      throws StripeException {
+    return removeDiscounts(id, (PricingPlanSubscriptionRemoveDiscountsParams) null, options);
+  }
+  /** Remove Discounts from a Pricing Plan Subscription. */
+  public PricingPlanSubscription removeDiscounts(String id) throws StripeException {
+    return removeDiscounts(
+        id, (PricingPlanSubscriptionRemoveDiscountsParams) null, (RequestOptions) null);
+  }
+  /** Remove Discounts from a Pricing Plan Subscription. */
+  public PricingPlanSubscription removeDiscounts(
+      String id, PricingPlanSubscriptionRemoveDiscountsParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v2/billing/pricing_plan_subscriptions/%s/remove_discounts",
+            ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, PricingPlanSubscription.class);
   }
 }

@@ -4,6 +4,7 @@ package com.stripe.model.v2.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -85,7 +86,7 @@ public class ServiceAction extends StripeObject implements HasId {
   public static class CreditGrant extends StripeObject {
     /** The amount of the credit grant. */
     @SerializedName("amount")
-    Amount amount;
+    com.stripe.model.v2.billing.ServiceAction.CreditGrant.Amount amount;
 
     /** Defines the scope where the credit grant is applicable. */
     @SerializedName("applicability_config")
@@ -129,7 +130,7 @@ public class ServiceAction extends StripeObject implements HasId {
 
       /** The monetary amount of the credit grant. Required if {@code type} is {@code monetary}. */
       @SerializedName("monetary")
-      Monetary monetary;
+      com.stripe.v2.Amount monetary;
 
       /**
        * The type of the credit grant amount. We currently support {@code monetary} and {@code
@@ -159,28 +160,7 @@ public class ServiceAction extends StripeObject implements HasId {
 
         /** The value of the credit grant, decimal value represented as a string. */
         @SerializedName("value")
-        String value;
-      }
-
-      /** The monetary amount of the credit grant. Required if {@code type} is {@code monetary}. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Monetary extends StripeObject {
-        /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
-         */
-        @SerializedName("currency")
-        String currency;
-
-        /**
-         * A non-negative integer representing how much to charge in the <a
-         * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-         */
-        @SerializedName("value")
-        Long value;
+        BigDecimal value;
       }
     }
 
@@ -239,7 +219,7 @@ public class ServiceAction extends StripeObject implements HasId {
   public static class CreditGrantPerTenant extends StripeObject {
     /** The amount of the credit grant. */
     @SerializedName("amount")
-    Amount amount;
+    com.stripe.model.v2.billing.ServiceAction.CreditGrantPerTenant.Amount amount;
 
     /** Defines the scope where the credit grant is applicable. */
     @SerializedName("applicability_config")
@@ -283,7 +263,7 @@ public class ServiceAction extends StripeObject implements HasId {
 
       /** The monetary amount of the credit grant. Required if {@code type} is {@code monetary}. */
       @SerializedName("monetary")
-      Monetary monetary;
+      com.stripe.v2.Amount monetary;
 
       /**
        * The type of the credit grant amount. We currently support {@code monetary} and {@code
@@ -313,28 +293,7 @@ public class ServiceAction extends StripeObject implements HasId {
 
         /** The value of the credit grant, decimal value represented as a string. */
         @SerializedName("value")
-        String value;
-      }
-
-      /** The monetary amount of the credit grant. Required if {@code type} is {@code monetary}. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Monetary extends StripeObject {
-        /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
-         */
-        @SerializedName("currency")
-        String currency;
-
-        /**
-         * A non-negative integer representing how much to charge in the <a
-         * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-         */
-        @SerializedName("value")
-        Long value;
+        BigDecimal value;
       }
     }
 

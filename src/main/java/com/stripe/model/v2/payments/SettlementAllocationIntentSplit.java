@@ -4,7 +4,9 @@ package com.stripe.model.v2.payments;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
 import java.time.Instant;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,6 +44,10 @@ public class SettlementAllocationIntentSplit extends StripeObject implements Has
   @SerializedName("livemode")
   Boolean livemode;
 
+  /** Metadata associated with the SettlementAllocationIntentSplit. */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
+
   /**
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
@@ -51,7 +57,7 @@ public class SettlementAllocationIntentSplit extends StripeObject implements Has
   @SerializedName("object")
   String object;
 
-  /** The ID of the SettlementAllocationIntent that this split belongs too. */
+  /** The ID of the SettlementAllocationIntent that this split belongs to. */
   @SerializedName("settlement_allocation_intent")
   String settlementAllocationIntent;
 
@@ -70,27 +76,6 @@ public class SettlementAllocationIntentSplit extends StripeObject implements Has
    */
   @SerializedName("type")
   String type;
-
-  /** The amount and currency of the SettlementAllocationIntentSplit. */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Amount extends StripeObject {
-    /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /**
-     * A non-negative integer representing how much to charge in the <a
-     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-     */
-    @SerializedName("value")
-    Long value;
-  }
 
   /** Details about the Flow object that settled the split. */
   @Getter
