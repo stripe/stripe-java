@@ -110,8 +110,8 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
      * The fee type.
      *
      * <p>One of {@code cross_border_payout_fee}, {@code foreign_exchange_fee}, {@code
-     * instant_payout_fee}, {@code real_time_payout_fee}, {@code standard_payout_fee}, or {@code
-     * wire_payout_fee}.
+     * instant_payout_fee}, {@code next_day_payout_fee}, {@code real_time_payout_fee}, {@code
+     * standard_payout_fee}, or {@code wire_payout_fee}.
      */
     @SerializedName("type")
     String type;

@@ -28,7 +28,7 @@ public class MeteredItemUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * An internal key you can use to search for a particular billable item. Maximum length of 200
+   * An internal key you can use to search for a particular metered item. Maximum length of 200
    * characters. To remove the lookup_key from the object, set it to null in the request.
    */
   @SerializedName("lookup_key")
@@ -144,7 +144,7 @@ public class MeteredItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * An internal key you can use to search for a particular billable item. Maximum length of 200
+     * An internal key you can use to search for a particular metered item. Maximum length of 200
      * characters. To remove the lookup_key from the object, set it to null in the request.
      */
     public Builder setLookupKey(String lookupKey) {
@@ -153,7 +153,7 @@ public class MeteredItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * An internal key you can use to search for a particular billable item. Maximum length of 200
+     * An internal key you can use to search for a particular metered item. Maximum length of 200
      * characters. To remove the lookup_key from the object, set it to null in the request.
      */
     public Builder setLookupKey(EmptyParam lookupKey) {

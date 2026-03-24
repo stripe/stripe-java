@@ -51,6 +51,13 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
   @SerializedName("recipient_verification")
   String recipientVerification;
 
+  /**
+   * The description that appears on the receiving end for an OutboundTransfer (for example, on a
+   * bank statement). Must be between 3 and 22 characters long, and not contain profanity.
+   */
+  @SerializedName("statement_descriptor")
+  String statementDescriptor;
+
   /** <strong>Required.</strong> To which payout method to send the OutboundTransfer. */
   @SerializedName("to")
   To to;
@@ -63,6 +70,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       From from,
       Map<String, String> metadata,
       String recipientVerification,
+      String statementDescriptor,
       To to) {
     this.amount = amount;
     this.deliveryOptions = deliveryOptions;
@@ -71,6 +79,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
     this.from = from;
     this.metadata = metadata;
     this.recipientVerification = recipientVerification;
+    this.statementDescriptor = statementDescriptor;
     this.to = to;
   }
 
@@ -93,6 +102,8 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
 
     private String recipientVerification;
 
+    private String statementDescriptor;
+
     private To to;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -105,6 +116,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
           this.from,
           this.metadata,
           this.recipientVerification,
+          this.statementDescriptor,
           this.to);
     }
 
@@ -193,6 +205,15 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
      */
     public Builder setRecipientVerification(String recipientVerification) {
       this.recipientVerification = recipientVerification;
+      return this;
+    }
+
+    /**
+     * The description that appears on the receiving end for an OutboundTransfer (for example, on a
+     * bank statement). Must be between 3 and 22 characters long, and not contain profanity.
+     */
+    public Builder setStatementDescriptor(String statementDescriptor) {
+      this.statementDescriptor = statementDescriptor;
       return this;
     }
 

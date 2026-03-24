@@ -41,7 +41,7 @@ public class LicensedItem extends StripeObject implements HasId {
   Boolean livemode;
 
   /**
-   * An internal key you can use to search for a particular billable item. Maximum length of 200
+   * An internal key you can use to search for a particular licensed item. Maximum length of 200
    * characters.
    */
   @SerializedName("lookup_key")

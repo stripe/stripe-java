@@ -66,6 +66,13 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   @SerializedName("recipient_verification")
   String recipientVerification;
 
+  /**
+   * The description that appears on the receiving end for an OutboundPayment (for example, on a
+   * bank statement). Must be between 3 and 22 characters long, and not contain profanity.
+   */
+  @SerializedName("statement_descriptor")
+  String statementDescriptor;
+
   /** <strong>Required.</strong> To which payout method to send the OutboundPayment. */
   @SerializedName("to")
   To to;
@@ -81,6 +88,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       Purpose purpose,
       RecipientNotification recipientNotification,
       String recipientVerification,
+      String statementDescriptor,
       To to) {
     this.amount = amount;
     this.deliveryOptions = deliveryOptions;
@@ -92,6 +100,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     this.purpose = purpose;
     this.recipientNotification = recipientNotification;
     this.recipientVerification = recipientVerification;
+    this.statementDescriptor = statementDescriptor;
     this.to = to;
   }
 
@@ -120,6 +129,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
     private String recipientVerification;
 
+    private String statementDescriptor;
+
     private To to;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -135,6 +146,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
           this.purpose,
           this.recipientNotification,
           this.recipientVerification,
+          this.statementDescriptor,
           this.to);
     }
 
@@ -248,6 +260,15 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
      */
     public Builder setRecipientVerification(String recipientVerification) {
       this.recipientVerification = recipientVerification;
+      return this;
+    }
+
+    /**
+     * The description that appears on the receiving end for an OutboundPayment (for example, on a
+     * bank statement). Must be between 3 and 22 characters long, and not contain profanity.
+     */
+    public Builder setStatementDescriptor(String statementDescriptor) {
+      this.statementDescriptor = statementDescriptor;
       return this;
     }
 

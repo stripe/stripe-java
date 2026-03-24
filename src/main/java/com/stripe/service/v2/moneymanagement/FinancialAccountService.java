@@ -18,6 +18,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.moneymanagement.FinancialAccountCloseParams;
 import com.stripe.param.v2.moneymanagement.FinancialAccountCreateParams;
 import com.stripe.param.v2.moneymanagement.FinancialAccountListParams;
+import com.stripe.param.v2.moneymanagement.FinancialAccountRetrieveParams;
 import com.stripe.param.v2.moneymanagement.FinancialAccountUpdateParams;
 
 public final class FinancialAccountService extends ApiService {
@@ -70,15 +71,31 @@ public final class FinancialAccountService extends ApiService {
     return this.request(request, FinancialAccount.class);
   }
   /** Retrieves the details of an existing FinancialAccount. */
-  public FinancialAccount retrieve(String id) throws StripeException {
-    return retrieve(id, (RequestOptions) null);
+  public FinancialAccount retrieve(String id, FinancialAccountRetrieveParams params)
+      throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of an existing FinancialAccount. */
   public FinancialAccount retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (FinancialAccountRetrieveParams) null, options);
+  }
+  /** Retrieves the details of an existing FinancialAccount. */
+  public FinancialAccount retrieve(String id) throws StripeException {
+    return retrieve(id, (FinancialAccountRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves the details of an existing FinancialAccount. */
+  public FinancialAccount retrieve(
+      String id, FinancialAccountRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String path =
         String.format("/v2/money_management/financial_accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return this.request(request, FinancialAccount.class);
   }
   /** Updates an existing FinancialAccount. */

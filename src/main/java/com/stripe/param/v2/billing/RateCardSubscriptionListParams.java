@@ -27,7 +27,7 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The page size limit, if not provided the default is 20. */
+  /** The page size limit. Defaults to 20. */
   @SerializedName("limit")
   Long limit;
 
@@ -140,7 +140,7 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The page size limit, if not provided the default is 20. */
+    /** The page size limit. Defaults to 20. */
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;

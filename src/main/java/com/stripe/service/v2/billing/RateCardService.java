@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.StripeCollection;
 import com.stripe.model.v2.billing.RateCard;
+import com.stripe.model.v2.billing.RateCardVersion;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -14,6 +15,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.billing.RateCardCreateParams;
 import com.stripe.param.v2.billing.RateCardListParams;
+import com.stripe.param.v2.billing.RateCardModifyRatesParams;
 import com.stripe.param.v2.billing.RateCardUpdateParams;
 
 public final class RateCardService extends ApiService {
@@ -98,6 +100,25 @@ public final class RateCardService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, RateCard.class);
+  }
+  /** Creates, updates, and/or deletes multiple Rates on a Rate Card atomically. */
+  public RateCardVersion modifyRates(String id, RateCardModifyRatesParams params)
+      throws StripeException {
+    return modifyRates(id, params, (RequestOptions) null);
+  }
+  /** Creates, updates, and/or deletes multiple Rates on a Rate Card atomically. */
+  public RateCardVersion modifyRates(
+      String id, RateCardModifyRatesParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v2/billing/rate_cards/%s/modify_rates", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, RateCardVersion.class);
   }
 
   public com.stripe.service.v2.billing.ratecards.CustomPricingUnitOverageRateService

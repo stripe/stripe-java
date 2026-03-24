@@ -63,8 +63,8 @@ public class OffSessionPayment extends StripeObject implements HasId {
   /**
    * The reason why the OffSessionPayment failed.
    *
-   * <p>One of {@code authorization_expired}, {@code rejected_by_partner}, or {@code
-   * retries_exhausted}.
+   * <p>One of {@code authorization_expired}, {@code no_valid_payment_method}, {@code
+   * rejected_by_partner}, or {@code retries_exhausted}.
    */
   @SerializedName("failure_reason")
   String failureReason;

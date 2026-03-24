@@ -26,6 +26,10 @@ public class EventDestination extends StripeObject implements HasId {
   @SerializedName("amazon_eventbridge")
   AmazonEventbridge amazonEventbridge;
 
+  /** Azure Event Grid configuration. */
+  @SerializedName("azure_event_grid")
+  AzureEventGrid azureEventGrid;
+
   /** Time at which the object was created. */
   @SerializedName("created")
   Instant created;
@@ -46,7 +50,14 @@ public class EventDestination extends StripeObject implements HasId {
   @SerializedName("event_payload")
   String eventPayload;
 
-  /** Where events should be routed from. */
+  /**
+   * Specifies which accounts' events route to this destination. {@code @self}: Receive events from
+   * the account that owns the event destination. {@code @accounts}: Receive events emitted from
+   * other accounts you manage which includes your v1 and v2 accounts.
+   * {@code @organization_members}: Receive events from accounts directly linked to the
+   * organization. {@code @organization_members/@accounts}: Receive events from all accounts
+   * connected to any platform accounts in the organization.
+   */
   @SerializedName("events_from")
   List<String> eventsFrom;
 
@@ -98,7 +109,7 @@ public class EventDestination extends StripeObject implements HasId {
   /**
    * Event destination type.
    *
-   * <p>One of {@code amazon_eventbridge}, or {@code webhook_endpoint}.
+   * <p>One of {@code amazon_eventbridge}, {@code azure_event_grid}, or {@code webhook_endpoint}.
    */
   @SerializedName("type")
   String type;
@@ -133,6 +144,36 @@ public class EventDestination extends StripeObject implements HasId {
     String awsEventSourceStatus;
   }
 
+  /** Azure Event Grid configuration. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AzureEventGrid extends StripeObject {
+    /** The name of the Azure partner topic. */
+    @SerializedName("azure_partner_topic_name")
+    String azurePartnerTopicName;
+
+    /**
+     * The status of the Azure partner topic.
+     *
+     * <p>One of {@code activated}, {@code deleted}, {@code never_activated}, or {@code unknown}.
+     */
+    @SerializedName("azure_partner_topic_status")
+    String azurePartnerTopicStatus;
+
+    /** The Azure region. */
+    @SerializedName("azure_region")
+    String azureRegion;
+
+    /** The name of the Azure resource group. */
+    @SerializedName("azure_resource_group_name")
+    String azureResourceGroupName;
+
+    /** The Azure subscription ID. */
+    @SerializedName("azure_subscription_id")
+    String azureSubscriptionId;
+  }
+
   /** Additional information about event destination status. */
   @Getter
   @Setter
@@ -150,7 +191,8 @@ public class EventDestination extends StripeObject implements HasId {
       /**
        * Reason event destination has been disabled.
        *
-       * <p>One of {@code no_aws_event_source_exists}, or {@code user}.
+       * <p>One of {@code no_aws_event_source_exists}, {@code no_azure_partner_topic_exists}, or
+       * {@code user}.
        */
       @SerializedName("reason")
       String reason;

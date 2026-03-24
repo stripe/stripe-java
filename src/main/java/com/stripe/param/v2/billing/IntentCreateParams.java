@@ -43,17 +43,23 @@ public class IntentCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Select additional fields to include in the response. */
+  @SerializedName("include")
+  List<IntentCreateParams.Include> include;
+
   private IntentCreateParams(
       List<IntentCreateParams.Action> actions,
       String cadence,
       CadenceData cadenceData,
       String currency,
-      Map<String, Object> extraParams) {
+      Map<String, Object> extraParams,
+      List<IntentCreateParams.Include> include) {
     this.actions = actions;
     this.cadence = cadence;
     this.cadenceData = cadenceData;
     this.currency = currency;
     this.extraParams = extraParams;
+    this.include = include;
   }
 
   public static Builder builder() {
@@ -71,10 +77,17 @@ public class IntentCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private List<IntentCreateParams.Include> include;
+
     /** Finalize and obtain parameter instance from this builder. */
     public IntentCreateParams build() {
       return new IntentCreateParams(
-          this.actions, this.cadence, this.cadenceData, this.currency, this.extraParams);
+          this.actions,
+          this.cadence,
+          this.cadenceData,
+          this.currency,
+          this.extraParams,
+          this.include);
     }
 
     /**
@@ -147,6 +160,32 @@ public class IntentCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add an element to `include` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * IntentCreateParams#include} for the field documentation.
+     */
+    public Builder addInclude(IntentCreateParams.Include element) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `include` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * IntentCreateParams#include} for the field documentation.
+     */
+    public Builder addAllInclude(List<IntentCreateParams.Include> elements) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.addAll(elements);
       return this;
     }
   }
@@ -301,7 +340,11 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Apply {
-      /** When the apply action will take effect. Defaults to on_reserve if not specified. */
+      /** Details for applying a discount. */
+      @SerializedName("discount")
+      Discount discount;
+
+      /** When the apply action will take effect. If not specified, defaults to on_reserve. */
       @SerializedName("effective_at")
       EffectiveAt effectiveAt;
 
@@ -329,11 +372,13 @@ public class IntentCreateParams extends ApiRequestParams {
       Type type;
 
       private Apply(
+          Discount discount,
           EffectiveAt effectiveAt,
           Map<String, Object> extraParams,
           InvoiceDiscountRule invoiceDiscountRule,
           SpendModifierRule spendModifierRule,
           Type type) {
+        this.discount = discount;
         this.effectiveAt = effectiveAt;
         this.extraParams = extraParams;
         this.invoiceDiscountRule = invoiceDiscountRule;
@@ -346,6 +391,8 @@ public class IntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Discount discount;
+
         private EffectiveAt effectiveAt;
 
         private Map<String, Object> extraParams;
@@ -359,6 +406,7 @@ public class IntentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public IntentCreateParams.Action.Apply build() {
           return new IntentCreateParams.Action.Apply(
+              this.discount,
               this.effectiveAt,
               this.extraParams,
               this.invoiceDiscountRule,
@@ -366,7 +414,13 @@ public class IntentCreateParams extends ApiRequestParams {
               this.type);
         }
 
-        /** When the apply action will take effect. Defaults to on_reserve if not specified. */
+        /** Details for applying a discount. */
+        public Builder setDiscount(IntentCreateParams.Action.Apply.Discount discount) {
+          this.discount = discount;
+          return this;
+        }
+
+        /** When the apply action will take effect. If not specified, defaults to on_reserve. */
         public Builder setEffectiveAt(IntentCreateParams.Action.Apply.EffectiveAt effectiveAt) {
           this.effectiveAt = effectiveAt;
           return this;
@@ -423,6 +477,121 @@ public class IntentCreateParams extends ApiRequestParams {
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
+      public static class Discount {
+        /** The ID of the Coupon to apply. */
+        @SerializedName("coupon")
+        String coupon;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The ID of the PromotionCode to apply. */
+        @SerializedName("promotion_code")
+        String promotionCode;
+
+        /** <strong>Required.</strong> Type of the discount. */
+        @SerializedName("type")
+        Type type;
+
+        private Discount(
+            String coupon, Map<String, Object> extraParams, String promotionCode, Type type) {
+          this.coupon = coupon;
+          this.extraParams = extraParams;
+          this.promotionCode = promotionCode;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String coupon;
+
+          private Map<String, Object> extraParams;
+
+          private String promotionCode;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.Action.Apply.Discount build() {
+            return new IntentCreateParams.Action.Apply.Discount(
+                this.coupon, this.extraParams, this.promotionCode, this.type);
+          }
+
+          /** The ID of the Coupon to apply. */
+          public Builder setCoupon(String coupon) {
+            this.coupon = coupon;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Apply.Discount#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Apply.Discount#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The ID of the PromotionCode to apply. */
+          public Builder setPromotionCode(String promotionCode) {
+            this.promotionCode = promotionCode;
+            return this;
+          }
+
+          /** <strong>Required.</strong> Type of the discount. */
+          public Builder setType(IntentCreateParams.Action.Apply.Discount.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("coupon")
+          COUPON("coupon"),
+
+          @SerializedName("promotion_code")
+          PROMOTION_CODE("promotion_code");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class EffectiveAt {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -434,12 +603,20 @@ public class IntentCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /**
+         * The timestamp at which the apply action will take effect. Only present if type is
+         * timestamp. Only allowed for discount actions.
+         */
+        @SerializedName("timestamp")
+        Instant timestamp;
+
         /** <strong>Required.</strong> When the apply action will take effect. */
         @SerializedName("type")
         Type type;
 
-        private EffectiveAt(Map<String, Object> extraParams, Type type) {
+        private EffectiveAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
           this.extraParams = extraParams;
+          this.timestamp = timestamp;
           this.type = type;
         }
 
@@ -450,11 +627,14 @@ public class IntentCreateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
+          private Instant timestamp;
+
           private Type type;
 
           /** Finalize and obtain parameter instance from this builder. */
           public IntentCreateParams.Action.Apply.EffectiveAt build() {
-            return new IntentCreateParams.Action.Apply.EffectiveAt(this.extraParams, this.type);
+            return new IntentCreateParams.Action.Apply.EffectiveAt(
+                this.extraParams, this.timestamp, this.type);
           }
 
           /**
@@ -485,6 +665,15 @@ public class IntentCreateParams extends ApiRequestParams {
             return this;
           }
 
+          /**
+           * The timestamp at which the apply action will take effect. Only present if type is
+           * timestamp. Only allowed for discount actions.
+           */
+          public Builder setTimestamp(Instant timestamp) {
+            this.timestamp = timestamp;
+            return this;
+          }
+
           /** <strong>Required.</strong> When the apply action will take effect. */
           public Builder setType(IntentCreateParams.Action.Apply.EffectiveAt.Type type) {
             this.type = type;
@@ -496,11 +685,17 @@ public class IntentCreateParams extends ApiRequestParams {
           @SerializedName("current_billing_period_end")
           CURRENT_BILLING_PERIOD_END("current_billing_period_end"),
 
+          @SerializedName("current_billing_period_start")
+          CURRENT_BILLING_PERIOD_START("current_billing_period_start"),
+
           @SerializedName("next_billing_period_start")
           NEXT_BILLING_PERIOD_START("next_billing_period_start"),
 
           @SerializedName("on_reserve")
-          ON_RESERVE("on_reserve");
+          ON_RESERVE("on_reserve"),
+
+          @SerializedName("timestamp")
+          TIMESTAMP("timestamp");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
@@ -962,8 +1157,8 @@ public class IntentCreateParams extends ApiRequestParams {
           Amount amount;
 
           /**
-           * <strong>Required.</strong> The configration for the overage rate for the custom pricing
-           * unit.
+           * <strong>Required.</strong> The configuration for the overage rate for the custom
+           * pricing unit.
            */
           @SerializedName("custom_pricing_unit_overage_rate")
           CustomPricingUnitOverageRate customPricingUnitOverageRate;
@@ -1013,7 +1208,7 @@ public class IntentCreateParams extends ApiRequestParams {
             }
 
             /**
-             * <strong>Required.</strong> The configration for the overage rate for the custom
+             * <strong>Required.</strong> The configuration for the overage rate for the custom
              * pricing unit.
              */
             public Builder setCustomPricingUnitOverageRate(
@@ -1344,6 +1539,9 @@ public class IntentCreateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("discount")
+        DISCOUNT("discount"),
+
         @SerializedName("invoice_discount_rule")
         INVOICE_DISCOUNT_RULE("invoice_discount_rule"),
 
@@ -2175,7 +2373,10 @@ public class IntentCreateParams extends ApiRequestParams {
 
             public enum Type implements ApiRequestParams.EnumParam {
               @SerializedName("license_fee")
-              LICENSE_FEE("license_fee");
+              LICENSE_FEE("license_fee"),
+
+              @SerializedName("recurring_credit_grant")
+              RECURRING_CREDIT_GRANT("recurring_credit_grant");
 
               @Getter(onMethod_ = {@Override})
               private final String value;
@@ -3115,7 +3316,10 @@ public class IntentCreateParams extends ApiRequestParams {
 
             public enum Type implements ApiRequestParams.EnumParam {
               @SerializedName("license_fee")
-              LICENSE_FEE("license_fee");
+              LICENSE_FEE("license_fee"),
+
+              @SerializedName("recurring_credit_grant")
+              RECURRING_CREDIT_GRANT("recurring_credit_grant");
 
               @Getter(onMethod_ = {@Override})
               private final String value;
@@ -3162,7 +3366,7 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Remove {
-      /** When the remove action will take effect. Defaults to on_reserve if not specified. */
+      /** When the remove action will take effect. If not specified, defaults to on_reserve. */
       @SerializedName("effective_at")
       EffectiveAt effectiveAt;
 
@@ -3225,7 +3429,7 @@ public class IntentCreateParams extends ApiRequestParams {
               this.type);
         }
 
-        /** When the remove action will take effect. Defaults to on_reserve if not specified. */
+        /** When the remove action will take effect. If not specified, defaults to on_reserve. */
         public Builder setEffectiveAt(IntentCreateParams.Action.Remove.EffectiveAt effectiveAt) {
           this.effectiveAt = effectiveAt;
           return this;
@@ -4277,7 +4481,10 @@ public class IntentCreateParams extends ApiRequestParams {
 
             public enum Type implements ApiRequestParams.EnumParam {
               @SerializedName("license_fee")
-              LICENSE_FEE("license_fee");
+              LICENSE_FEE("license_fee"),
+
+              @SerializedName("recurring_credit_grant")
+              RECURRING_CREDIT_GRANT("recurring_credit_grant");
 
               @Getter(onMethod_ = {@Override})
               private final String value;
@@ -4476,7 +4683,7 @@ public class IntentCreateParams extends ApiRequestParams {
           @SerializedName("price")
           String price;
 
-          /** Quantity for this item. If not provided, will default to 1. */
+          /** Quantity for this item. If not provided, defaults to 1. */
           @SerializedName("quantity")
           Long quantity;
 
@@ -4576,7 +4783,7 @@ public class IntentCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Quantity for this item. If not provided, will default to 1. */
+            /** Quantity for this item. If not provided, defaults to 1. */
             public Builder setQuantity(Long quantity) {
               this.quantity = quantity;
               return this;
@@ -6293,6 +6500,18 @@ public class IntentCreateParams extends ApiRequestParams {
           }
         }
       }
+    }
+  }
+
+  public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("invoice_resources.preview_invoice")
+    INVOICE_RESOURCES__PREVIEW_INVOICE("invoice_resources.preview_invoice");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Include(String value) {
+      this.value = value;
     }
   }
 }

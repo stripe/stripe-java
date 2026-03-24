@@ -81,7 +81,11 @@ public class IntentAction extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Apply extends StripeObject {
-    /** When the apply action will take effect. Defaults to on_reserve if not specified. */
+    /** Details for applying a discount. */
+    @SerializedName("discount")
+    Discount discount;
+
+    /** When the apply action will take effect. If not specified, defaults to on_reserve. */
     @SerializedName("effective_at")
     EffectiveAt effectiveAt;
 
@@ -96,21 +100,54 @@ public class IntentAction extends StripeObject implements HasId {
     /**
      * Type of the apply action details.
      *
-     * <p>One of {@code invoice_discount_rule}, or {@code spend_modifier_rule}.
+     * <p>One of {@code discount}, {@code invoice_discount_rule}, or {@code spend_modifier_rule}.
      */
     @SerializedName("type")
     String type;
 
-    /** When the apply action will take effect. Defaults to on_reserve if not specified. */
+    /** Details for applying a discount. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Discount extends StripeObject {
+      /** The ID of the Coupon applied. */
+      @SerializedName("coupon")
+      String coupon;
+
+      /** The ID of the created Discount. */
+      @SerializedName("discount")
+      String discount;
+
+      /** The ID of the PromotionCode applied. */
+      @SerializedName("promotion_code")
+      String promotionCode;
+
+      /**
+       * Type of the discount.
+       *
+       * <p>One of {@code coupon}, or {@code promotion_code}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /** When the apply action will take effect. If not specified, defaults to on_reserve. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class EffectiveAt extends StripeObject {
       /**
+       * The timestamp at which the apply action will take effect. Only present if type is
+       * timestamp. Only allowed for discount actions.
+       */
+      @SerializedName("timestamp")
+      Instant timestamp;
+
+      /**
        * When the apply action will take effect.
        *
-       * <p>One of {@code current_billing_period_end}, {@code next_billing_period_start}, or {@code
-       * on_reserve}.
+       * <p>One of {@code current_billing_period_end}, {@code current_billing_period_start}, {@code
+       * next_billing_period_start}, {@code on_reserve}, or {@code timestamp}.
        */
       @SerializedName("type")
       String type;
@@ -225,7 +262,7 @@ public class IntentAction extends StripeObject implements HasId {
         @SerializedName("amount")
         Amount amount;
 
-        /** The configration for the overage rate for the custom pricing unit. */
+        /** The configuration for the overage rate for the custom pricing unit. */
         @SerializedName("custom_pricing_unit_overage_rate")
         CustomPricingUnitOverageRate customPricingUnitOverageRate;
 
@@ -257,7 +294,7 @@ public class IntentAction extends StripeObject implements HasId {
           }
         }
 
-        /** The configration for the overage rate for the custom pricing unit. */
+        /** The configuration for the overage rate for the custom pricing unit. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -397,7 +434,7 @@ public class IntentAction extends StripeObject implements HasId {
           /**
            * The type of behavior to override.
            *
-           * <p>Equal to {@code license_fee}.
+           * <p>One of {@code license_fee}, or {@code recurring_credit_grant}.
            */
           @SerializedName("type")
           String type;
@@ -555,7 +592,7 @@ public class IntentAction extends StripeObject implements HasId {
           /**
            * The type of behavior to override.
            *
-           * <p>Equal to {@code license_fee}.
+           * <p>One of {@code license_fee}, or {@code recurring_credit_grant}.
            */
           @SerializedName("type")
           String type;
@@ -598,7 +635,7 @@ public class IntentAction extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Remove extends StripeObject {
-    /** When the remove action will take effect. Defaults to on_reserve if not specified. */
+    /** When the remove action will take effect. If not specified, defaults to on_reserve. */
     @SerializedName("effective_at")
     EffectiveAt effectiveAt;
 
@@ -618,7 +655,7 @@ public class IntentAction extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
-    /** When the remove action will take effect. Defaults to on_reserve if not specified. */
+    /** When the remove action will take effect. If not specified, defaults to on_reserve. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -779,7 +816,7 @@ public class IntentAction extends StripeObject implements HasId {
           /**
            * The type of behavior to override.
            *
-           * <p>Equal to {@code license_fee}.
+           * <p>One of {@code license_fee}, or {@code recurring_credit_grant}.
            */
           @SerializedName("type")
           String type;
@@ -848,7 +885,7 @@ public class IntentAction extends StripeObject implements HasId {
         @SerializedName("price")
         String price;
 
-        /** Quantity for this item. If not provided, will default to 1. */
+        /** Quantity for this item. If not provided, defaults to 1. */
         @SerializedName("quantity")
         Long quantity;
       }

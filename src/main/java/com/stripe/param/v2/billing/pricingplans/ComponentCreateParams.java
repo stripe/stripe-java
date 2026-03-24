@@ -195,7 +195,7 @@ public class ComponentCreateParams extends ApiRequestParams {
     @SerializedName("id")
     String id;
 
-    /** The version of the LicenseFee. Defaults to 'latest', if not specified. */
+    /** The ID of the License Fee Version. If not specified, defaults to 'latest'. */
     @SerializedName("version")
     String version;
 
@@ -253,7 +253,7 @@ public class ComponentCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The version of the LicenseFee. Defaults to 'latest', if not specified. */
+      /** The ID of the License Fee Version. If not specified, defaults to 'latest'. */
       public Builder setVersion(String version) {
         this.version = version;
         return this;
@@ -277,7 +277,7 @@ public class ComponentCreateParams extends ApiRequestParams {
     @SerializedName("id")
     String id;
 
-    /** The version of the RateCard. Defaults to 'latest', if not specified. */
+    /** The ID of the Rate Card Version. If not specified, defaults to 'latest'. */
     @SerializedName("version")
     String version;
 
@@ -335,7 +335,7 @@ public class ComponentCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The version of the RateCard. Defaults to 'latest', if not specified. */
+      /** The ID of the Rate Card Version. If not specified, defaults to 'latest'. */
       public Builder setVersion(String version) {
         this.version = version;
         return this;

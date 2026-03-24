@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -80,6 +81,10 @@ public class UsBankAccount extends StripeObject implements HasId {
   /** The ACH routing number of the bank account. */
   @SerializedName("routing_number")
   String routingNumber;
+
+  /** The list of currencies supported by this bank account. */
+  @SerializedName("supported_currencies")
+  List<String> supportedCurrencies;
 
   /** The bank account verification details. */
   @SerializedName("verification")

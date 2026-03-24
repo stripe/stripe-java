@@ -9,6 +9,10 @@ public final class CoreService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.v2.core.AccountEvaluationService accountEvaluations() {
+    return new com.stripe.service.v2.core.AccountEvaluationService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.core.AccountLinkService accountLinks() {
     return new com.stripe.service.v2.core.AccountLinkService(this.getResponseGetter());
   }
@@ -19,6 +23,10 @@ public final class CoreService extends ApiService {
 
   public com.stripe.service.v2.core.AccountService accounts() {
     return new com.stripe.service.v2.core.AccountService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.core.BatchJobService batchJobs() {
+    return new com.stripe.service.v2.core.BatchJobService(this.getResponseGetter());
   }
 
   public com.stripe.service.v2.core.ClaimableSandboxService claimableSandboxes() {

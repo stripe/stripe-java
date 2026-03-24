@@ -29,7 +29,7 @@ public class OneTimeItemCreateParams extends ApiRequestParams {
 
   /**
    * An internal key you can use to search for a particular one-time item. Must be unique among
-   * billable items. Maximum length of 200 characters.
+   * one-time items. Maximum length of 200 characters.
    */
   @SerializedName("lookup_key")
   String lookupKey;
@@ -134,7 +134,7 @@ public class OneTimeItemCreateParams extends ApiRequestParams {
 
     /**
      * An internal key you can use to search for a particular one-time item. Must be unique among
-     * billable items. Maximum length of 200 characters.
+     * one-time items. Maximum length of 200 characters.
      */
     public Builder setLookupKey(String lookupKey) {
       this.lookupKey = lookupKey;

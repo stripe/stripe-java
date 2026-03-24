@@ -95,7 +95,7 @@ public class PricingPlanComponent extends StripeObject implements HasId {
     @SerializedName("id")
     String id;
 
-    /** The version of the LicenseFee. Defaults to 'latest', if not specified. */
+    /** The ID of the License Fee Version. If not specified, defaults to 'latest'. */
     @SerializedName("version")
     String version;
   }
@@ -110,7 +110,7 @@ public class PricingPlanComponent extends StripeObject implements HasId {
     @SerializedName("id")
     String id;
 
-    /** The version of the RateCard. Defaults to 'latest', if not specified. */
+    /** The ID of the Rate Card Version. If not specified, defaults to 'latest'. */
     @SerializedName("version")
     String version;
   }

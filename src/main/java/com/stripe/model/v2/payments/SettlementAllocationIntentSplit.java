@@ -6,6 +6,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.v2.Amount;
 import java.time.Instant;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,6 +44,10 @@ public class SettlementAllocationIntentSplit extends StripeObject implements Has
   @SerializedName("livemode")
   Boolean livemode;
 
+  /** Metadata associated with the SettlementAllocationIntentSplit. */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
+
   /**
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
@@ -52,7 +57,7 @@ public class SettlementAllocationIntentSplit extends StripeObject implements Has
   @SerializedName("object")
   String object;
 
-  /** The ID of the SettlementAllocationIntent that this split belongs too. */
+  /** The ID of the SettlementAllocationIntent that this split belongs to. */
   @SerializedName("settlement_allocation_intent")
   String settlementAllocationIntent;
 

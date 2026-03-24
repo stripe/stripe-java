@@ -109,6 +109,7 @@ public class FinancialAccount extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
+  /** Additional details related to the status of the FinancialAccount. */
   @SerializedName("status_details")
   StatusDetails statusDetails;
 
@@ -214,6 +215,14 @@ public class FinancialAccount extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Payments extends StripeObject {
+    /**
+     * The balance of the {@code payments} FinancialAccount is a mix of payment processing and
+     * stored value funds, and this field describes the breakdown between the two. The sum will
+     * match the balance of the FinancialAccount.
+     */
+    @SerializedName("balance_by_funds_type")
+    BalanceByFundsType balanceByFundsType;
+
     /** The currency that non-settlement currency payments will be converted to. */
     @SerializedName("default_currency")
     String defaultCurrency;
@@ -228,6 +237,66 @@ public class FinancialAccount extends StripeObject implements HasId {
     /** Describes the available balance when it was projected. */
     @SerializedName("starting_balance")
     StartingBalance startingBalance;
+
+    /**
+     * The balance of the {@code payments} FinancialAccount is a mix of payment processing and
+     * stored value funds, and this field describes the breakdown between the two. The sum will
+     * match the balance of the FinancialAccount.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BalanceByFundsType extends StripeObject {
+      /**
+       * Payment processing funds are those that are received for goods or services and may only be
+       * used for payouts to self. These funds may be converted to stored value funds.
+       */
+      @SerializedName("payment_processing")
+      PaymentProcessing paymentProcessing;
+
+      /** Stored value funds may be used for either payouts to self or payments to others. */
+      @SerializedName("stored_value")
+      StoredValue storedValue;
+
+      /**
+       * Payment processing funds are those that are received for goods or services and may only be
+       * used for payouts to self. These funds may be converted to stored value funds.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PaymentProcessing extends StripeObject {
+        /** Balance that can be used for money movement. */
+        @SerializedName("available")
+        Map<String, Amount> available;
+
+        /** Balance of inbound funds that will later transition to the {@code available} balance. */
+        @SerializedName("inbound_pending")
+        Map<String, Amount> inboundPending;
+
+        /** Balance of funds that are being used for a pending outbound money movement. */
+        @SerializedName("outbound_pending")
+        Map<String, Amount> outboundPending;
+      }
+
+      /** Stored value funds may be used for either payouts to self or payments to others. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class StoredValue extends StripeObject {
+        /** Balance that can be used for money movement. */
+        @SerializedName("available")
+        Map<String, Amount> available;
+
+        /** Balance of inbound funds that will later transition to the {@code available} balance. */
+        @SerializedName("inbound_pending")
+        Map<String, Amount> inboundPending;
+
+        /** Balance of funds that are being used for a pending outbound money movement. */
+        @SerializedName("outbound_pending")
+        Map<String, Amount> outboundPending;
+      }
+    }
 
     /** Describes the available balance when it was projected. */
     @Getter
@@ -244,35 +313,33 @@ public class FinancialAccount extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about StatusDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Additional details related to the status of the FinancialAccount. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusDetails extends StripeObject {
+    /** Details related to the closed state of the FinancialAccount. */
     @SerializedName("closed")
     Closed closed;
 
-    /**
-     * For more details about Closed, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Details related to the closed state of the FinancialAccount. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Closed extends StripeObject {
+      /** The forwarding settings for the closed FinancialAccount. */
       @SerializedName("forwarding_settings")
       ForwardingSettings forwardingSettings;
 
+      /**
+       * The reason the FinancialAccount was closed.
+       *
+       * <p>One of {@code account_closed}, {@code closed_by_platform}, or {@code other}.
+       */
       @SerializedName("reason")
       String reason;
 
-      /**
-       * For more details about ForwardingSettings, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The forwarding settings for the closed FinancialAccount. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

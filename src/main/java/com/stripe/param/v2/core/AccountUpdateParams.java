@@ -14239,17 +14239,26 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("responsibilities")
     Responsibilities responsibilities;
 
+    /**
+     * The Account's local timezone. A list of possible time zone values is maintained at the <a
+     * href="https://www.iana.org/time-zones">IANA Time Zone Database</a>.
+     */
+    @SerializedName("timezone")
+    Object timezone;
+
     private Defaults(
         Object currency,
         Map<String, Object> extraParams,
         List<AccountUpdateParams.Defaults.Locale> locales,
         Profile profile,
-        Responsibilities responsibilities) {
+        Responsibilities responsibilities,
+        Object timezone) {
       this.currency = currency;
       this.extraParams = extraParams;
       this.locales = locales;
       this.profile = profile;
       this.responsibilities = responsibilities;
+      this.timezone = timezone;
     }
 
     public static Builder builder() {
@@ -14267,10 +14276,17 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private Responsibilities responsibilities;
 
+      private Object timezone;
+
       /** Finalize and obtain parameter instance from this builder. */
       public AccountUpdateParams.Defaults build() {
         return new AccountUpdateParams.Defaults(
-            this.currency, this.extraParams, this.locales, this.profile, this.responsibilities);
+            this.currency,
+            this.extraParams,
+            this.locales,
+            this.profile,
+            this.responsibilities,
+            this.timezone);
       }
 
       /**
@@ -14355,6 +14371,24 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setResponsibilities(
           AccountUpdateParams.Defaults.Responsibilities responsibilities) {
         this.responsibilities = responsibilities;
+        return this;
+      }
+
+      /**
+       * The Account's local timezone. A list of possible time zone values is maintained at the <a
+       * href="https://www.iana.org/time-zones">IANA Time Zone Database</a>.
+       */
+      public Builder setTimezone(String timezone) {
+        this.timezone = timezone;
+        return this;
+      }
+
+      /**
+       * The Account's local timezone. A list of possible time zone values is maintained at the <a
+       * href="https://www.iana.org/time-zones">IANA Time Zone Database</a>.
+       */
+      public Builder setTimezone(EmptyParam timezone) {
+        this.timezone = timezone;
         return this;
       }
     }

@@ -15,6 +15,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.billing.IntentCommitParams;
 import com.stripe.param.v2.billing.IntentCreateParams;
 import com.stripe.param.v2.billing.IntentListParams;
+import com.stripe.param.v2.billing.IntentReserveParams;
 
 public final class IntentService extends ApiService {
   public IntentService(StripeResponseGetter responseGetter) {
@@ -122,14 +123,28 @@ public final class IntentService extends ApiService {
     return this.request(request, Intent.class);
   }
   /** Reserve a Billing Intent. */
-  public Intent reserve(String id) throws StripeException {
-    return reserve(id, (RequestOptions) null);
+  public Intent reserve(String id, IntentReserveParams params) throws StripeException {
+    return reserve(id, params, (RequestOptions) null);
   }
   /** Reserve a Billing Intent. */
   public Intent reserve(String id, RequestOptions options) throws StripeException {
+    return reserve(id, (IntentReserveParams) null, options);
+  }
+  /** Reserve a Billing Intent. */
+  public Intent reserve(String id) throws StripeException {
+    return reserve(id, (IntentReserveParams) null, (RequestOptions) null);
+  }
+  /** Reserve a Billing Intent. */
+  public Intent reserve(String id, IntentReserveParams params, RequestOptions options)
+      throws StripeException {
     String path = String.format("/v2/billing/intents/%s/reserve", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return this.request(request, Intent.class);
   }
 

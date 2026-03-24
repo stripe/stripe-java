@@ -46,7 +46,7 @@ public class MeteredItem extends StripeObject implements HasId {
   Boolean livemode;
 
   /**
-   * An internal key you can use to search for a particular billable item. Maximum length of 200
+   * An internal key you can use to search for a particular metered item. Maximum length of 200
    * characters.
    */
   @SerializedName("lookup_key")
