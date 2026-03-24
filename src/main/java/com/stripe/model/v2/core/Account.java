@@ -4,6 +4,8 @@ package com.stripe.model.v2.core;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +14,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A V2 Account is a representation of a company or individual that a Stripe user does business
- * with. Accounts contain the contact details, Legal Entity information, and configuration required
- * to enable the Account for use across Stripe products.
+ * An Account v2 object represents a company, individual, or other entity that interacts with a
+ * platform on Stripe. It contains both identifying information and properties that control its
+ * behavior and functionality. An Account can have one or more configurations that enable sets of
+ * related features, such as allowing it to act as a merchant or customer. The Accounts v2 API
+ * supports both the Global Payouts preview feature and the Connect-Billing integration preview
+ * feature. However, a particular Account can only access one of them. The Connect-Billing
+ * integration preview feature allows an Account v2 to pay subscription fees to a platform. An
+ * Account v1 required a separate Customer object to pay subscription fees.
  */
 @Getter
 @Setter
@@ -42,6 +49,10 @@ public class Account extends StripeObject implements HasId {
    */
   @SerializedName("contact_email")
   String contactEmail;
+
+  /** The default contact phone for the Account. */
+  @SerializedName("contact_phone")
+  String contactPhone;
 
   /**
    * Time at which the object was created. Represented as a RFC 3339 date &amp; time UTC value in
@@ -4160,6 +4171,10 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("registered_name")
       String registeredName;
 
+      /** When the business was incorporated or registered. */
+      @SerializedName("registration_date")
+      RegistrationDate registrationDate;
+
       /** The business registration address of the business entity in non latin script. */
       @SerializedName("script_addresses")
       ScriptAddresses scriptAddresses;
@@ -4237,27 +4252,6 @@ public class Account extends StripeObject implements HasId {
          */
         @SerializedName("fiscal_year_end")
         String fiscalYearEnd;
-
-        /** Annual revenue amount in minor currency units (for example, '123' for 1.23 USD). */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Amount extends StripeObject {
-          /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
-           */
-          @SerializedName("currency")
-          String currency;
-
-          /**
-           * A non-negative integer representing how much to charge in the <a
-           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-           */
-          @SerializedName("value")
-          Long value;
-        }
       }
 
       /** Documents that may be submitted to satisfy various informational requests. */
@@ -4603,20 +4597,20 @@ public class Account extends StripeObject implements HasId {
          * cy_he}, {@code cy_tic}, {@code cy_vat}, {@code cz_ico}, {@code cz_vat}, {@code de_hrn},
          * {@code de_stn}, {@code de_vat}, {@code dk_cvr}, {@code dk_vat}, {@code do_rcn}, {@code
          * ee_rk}, {@code ee_vat}, {@code es_cif}, {@code es_vat}, {@code fi_vat}, {@code fi_yt},
-         * {@code fr_rna}, {@code fr_siren}, {@code fr_vat}, {@code gb_crn}, {@code gi_crn}, {@code
-         * gr_afm}, {@code gr_gemi}, {@code gr_vat}, {@code gt_nit}, {@code hk_br}, {@code hk_cr},
-         * {@code hr_mbs}, {@code hr_oib}, {@code hr_vat}, {@code hu_cjs}, {@code hu_tin}, {@code
-         * hu_vat}, {@code ie_crn}, {@code ie_trn}, {@code ie_vat}, {@code it_rea}, {@code it_vat},
-         * {@code jp_cn}, {@code kz_bin}, {@code li_uid}, {@code lt_ccrn}, {@code lt_vat}, {@code
-         * lu_nif}, {@code lu_rcs}, {@code lu_vat}, {@code lv_urn}, {@code lv_vat}, {@code mt_crn},
-         * {@code mt_tin}, {@code mt_vat}, {@code mx_rfc}, {@code my_brn}, {@code my_coid}, {@code
-         * my_itn}, {@code my_sst}, {@code mz_nuit}, {@code nl_kvk}, {@code nl_rsin}, {@code
-         * nl_vat}, {@code no_orgnr}, {@code nz_bn}, {@code nz_ird}, {@code pe_ruc}, {@code pk_ntn},
-         * {@code pl_nip}, {@code pl_regon}, {@code pl_vat}, {@code pt_vat}, {@code ro_cui}, {@code
-         * ro_orc}, {@code ro_vat}, {@code sa_crn}, {@code sa_tin}, {@code se_orgnr}, {@code
-         * se_vat}, {@code sg_uen}, {@code si_msp}, {@code si_tin}, {@code si_vat}, {@code sk_dic},
-         * {@code sk_ico}, {@code sk_vat}, {@code th_crn}, {@code th_prn}, {@code th_tin}, or {@code
-         * us_ein}.
+         * {@code fr_rna}, {@code fr_siren}, {@code fr_vat}, {@code gb_crn}, {@code gb_vat}, {@code
+         * gi_crn}, {@code gr_afm}, {@code gr_gemi}, {@code gr_vat}, {@code gt_nit}, {@code hk_br},
+         * {@code hk_cr}, {@code hr_mbs}, {@code hr_oib}, {@code hr_vat}, {@code hu_cjs}, {@code
+         * hu_tin}, {@code hu_vat}, {@code ie_crn}, {@code ie_trn}, {@code ie_vat}, {@code it_rea},
+         * {@code it_vat}, {@code jp_cn}, {@code kz_bin}, {@code li_uid}, {@code lt_ccrn}, {@code
+         * lt_vat}, {@code lu_nif}, {@code lu_rcs}, {@code lu_vat}, {@code lv_urn}, {@code lv_vat},
+         * {@code mt_crn}, {@code mt_tin}, {@code mt_vat}, {@code mx_rfc}, {@code my_brn}, {@code
+         * my_coid}, {@code my_itn}, {@code my_sst}, {@code mz_nuit}, {@code nl_kvk}, {@code
+         * nl_rsin}, {@code nl_vat}, {@code no_orgnr}, {@code nz_bn}, {@code nz_ird}, {@code
+         * pe_ruc}, {@code pk_ntn}, {@code pl_nip}, {@code pl_regon}, {@code pl_vat}, {@code
+         * pt_vat}, {@code ro_cui}, {@code ro_orc}, {@code ro_vat}, {@code sa_crn}, {@code sa_tin},
+         * {@code se_orgnr}, {@code se_vat}, {@code sg_uen}, {@code si_msp}, {@code si_tin}, {@code
+         * si_vat}, {@code sk_dic}, {@code sk_ico}, {@code sk_vat}, {@code th_crn}, {@code th_prn},
+         * {@code th_tin}, or {@code us_ein}.
          */
         @SerializedName("type")
         String type;
@@ -4636,30 +4630,24 @@ public class Account extends StripeObject implements HasId {
          */
         @SerializedName("amount")
         Amount amount;
+      }
 
-        /**
-         * Estimated monthly revenue amount in minor currency units (for example, '123' for 1.23
-         * USD).
-         */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Amount extends StripeObject {
-          /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
-           */
-          @SerializedName("currency")
-          String currency;
+      /** When the business was incorporated or registered. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RegistrationDate extends StripeObject {
+        /** The day of registration, between 1 and 31. */
+        @SerializedName("day")
+        Long day;
 
-          /**
-           * A non-negative integer representing how much to charge in the <a
-           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-           */
-          @SerializedName("value")
-          Long value;
-        }
+        /** The month of registration, between 1 and 12. */
+        @SerializedName("month")
+        Long month;
+
+        /** The four-digit year of registration. */
+        @SerializedName("year")
+        Long year;
       }
 
       /** The business registration address of the business entity in non latin script. */
@@ -5358,7 +5346,7 @@ public class Account extends StripeObject implements HasId {
 
         /** The percentage of the Account's identity that the individual owns. */
         @SerializedName("percent_ownership")
-        String percentOwnership;
+        BigDecimal percentOwnership;
 
         /**
          * Whether the individual is authorized as the primary representative of the Account. This

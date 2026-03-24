@@ -61,7 +61,7 @@ public class BalanceTransactionListParams extends ApiRequestParams {
   @SerializedName("payout")
   String payout;
 
-  /** Only returns the original transaction. */
+  /** Only returns transactions associated with the given object. */
   @SerializedName("source")
   String source;
 
@@ -85,11 +85,11 @@ public class BalanceTransactionListParams extends ApiRequestParams {
    * payment_network_reserve_release}, {@code payment_refund}, {@code payment_reversal}, {@code
    * payment_unreconciled}, {@code payout}, {@code payout_cancel}, {@code payout_failure}, {@code
    * payout_minimum_balance_hold}, {@code payout_minimum_balance_release}, {@code refund}, {@code
-   * refund_failure}, {@code reserve_transaction}, {@code reserved_funds}, {@code stripe_fee},
-   * {@code stripe_fx_fee}, {@code stripe_balance_payment_debit}, {@code
-   * stripe_balance_payment_debit_reversal}, {@code tax_fee}, {@code topup}, {@code topup_reversal},
-   * {@code transfer}, {@code transfer_cancel}, {@code transfer_failure}, or {@code
-   * transfer_refund}.
+   * refund_failure}, {@code reserve_transaction}, {@code reserved_funds}, {@code reserve_hold},
+   * {@code reserve_release}, {@code stripe_fee}, {@code stripe_fx_fee}, {@code
+   * stripe_balance_payment_debit}, {@code stripe_balance_payment_debit_reversal}, {@code tax_fee},
+   * {@code topup}, {@code topup_reversal}, {@code transfer}, {@code transfer_cancel}, {@code
+   * transfer_failure}, or {@code transfer_refund}.
    */
   @SerializedName("type")
   String type;
@@ -260,7 +260,7 @@ public class BalanceTransactionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only returns the original transaction. */
+    /** Only returns transactions associated with the given object. */
     public Builder setSource(String source) {
       this.source = source;
       return this;
@@ -289,10 +289,11 @@ public class BalanceTransactionListParams extends ApiRequestParams {
      * payment_refund}, {@code payment_reversal}, {@code payment_unreconciled}, {@code payout},
      * {@code payout_cancel}, {@code payout_failure}, {@code payout_minimum_balance_hold}, {@code
      * payout_minimum_balance_release}, {@code refund}, {@code refund_failure}, {@code
-     * reserve_transaction}, {@code reserved_funds}, {@code stripe_fee}, {@code stripe_fx_fee},
-     * {@code stripe_balance_payment_debit}, {@code stripe_balance_payment_debit_reversal}, {@code
-     * tax_fee}, {@code topup}, {@code topup_reversal}, {@code transfer}, {@code transfer_cancel},
-     * {@code transfer_failure}, or {@code transfer_refund}.
+     * reserve_transaction}, {@code reserved_funds}, {@code reserve_hold}, {@code reserve_release},
+     * {@code stripe_fee}, {@code stripe_fx_fee}, {@code stripe_balance_payment_debit}, {@code
+     * stripe_balance_payment_debit_reversal}, {@code tax_fee}, {@code topup}, {@code
+     * topup_reversal}, {@code transfer}, {@code transfer_cancel}, {@code transfer_failure}, or
+     * {@code transfer_refund}.
      */
     public Builder setType(String type) {
       this.type = type;

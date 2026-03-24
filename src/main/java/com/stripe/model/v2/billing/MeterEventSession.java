@@ -9,6 +9,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Meter Event Session is an authentication session for the high-throughput meter event API. Meter
+ * Event Sessions provide temporary authentication tokens with expiration times, enabling secure and
+ * efficient bulk submission of usage events.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

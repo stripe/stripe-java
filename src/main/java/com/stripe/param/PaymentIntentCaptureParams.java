@@ -392,6 +392,21 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     Object discountAmount;
 
     /**
+     * Set to {@code false} to return arithmetic validation errors in the response without failing
+     * the request. Use this when you want the operation to proceed regardless of arithmetic errors
+     * in the line item data.
+     *
+     * <p>Omit or set to {@code true} to immediately return a 400 error when arithmetic validation
+     * fails. Use this for strict validation that prevents processing with line item data that has
+     * arithmetic inconsistencies.
+     *
+     * <p>For card payments, Stripe doesn't send line item data to card networks if there's an
+     * arithmetic validation error.
+     */
+    @SerializedName("enforce_arithmetic_validation")
+    Boolean enforceArithmeticValidation;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -417,11 +432,13 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
     private AmountDetails(
         Object discountAmount,
+        Boolean enforceArithmeticValidation,
         Map<String, Object> extraParams,
         Object lineItems,
         Object shipping,
         Object tax) {
       this.discountAmount = discountAmount;
+      this.enforceArithmeticValidation = enforceArithmeticValidation;
       this.extraParams = extraParams;
       this.lineItems = lineItems;
       this.shipping = shipping;
@@ -435,6 +452,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     public static class Builder {
       private Object discountAmount;
 
+      private Boolean enforceArithmeticValidation;
+
       private Map<String, Object> extraParams;
 
       private Object lineItems;
@@ -446,7 +465,12 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentCaptureParams.AmountDetails build() {
         return new PaymentIntentCaptureParams.AmountDetails(
-            this.discountAmount, this.extraParams, this.lineItems, this.shipping, this.tax);
+            this.discountAmount,
+            this.enforceArithmeticValidation,
+            this.extraParams,
+            this.lineItems,
+            this.shipping,
+            this.tax);
       }
 
       /**
@@ -472,6 +496,23 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
        */
       public Builder setDiscountAmount(EmptyParam discountAmount) {
         this.discountAmount = discountAmount;
+        return this;
+      }
+
+      /**
+       * Set to {@code false} to return arithmetic validation errors in the response without failing
+       * the request. Use this when you want the operation to proceed regardless of arithmetic
+       * errors in the line item data.
+       *
+       * <p>Omit or set to {@code true} to immediately return a 400 error when arithmetic validation
+       * fails. Use this for strict validation that prevents processing with line item data that has
+       * arithmetic inconsistencies.
+       *
+       * <p>For card payments, Stripe doesn't send line item data to card networks if there's an
+       * arithmetic validation error.
+       */
+      public Builder setEnforceArithmeticValidation(Boolean enforceArithmeticValidation) {
+        this.enforceArithmeticValidation = enforceArithmeticValidation;
         return this;
       }
 
@@ -613,7 +654,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
        * most 1024 characters long.
        *
        * <p>For Cards, this field is truncated to 26 alphanumeric characters before being sent to
-       * the card networks. For Paypal, this field is truncated to 127 characters.
+       * the card networks. For PayPal, this field is truncated to 127 characters.
        */
       @SerializedName("product_name")
       String productName;
@@ -762,7 +803,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
          * most 1024 characters long.
          *
          * <p>For Cards, this field is truncated to 26 alphanumeric characters before being sent to
-         * the card networks. For Paypal, this field is truncated to 127 characters.
+         * the card networks. For PayPal, this field is truncated to 127 characters.
          */
         public Builder setProductName(String productName) {
           this.productName = productName;
@@ -805,15 +846,15 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class PaymentMethodOptions {
         /**
-         * This sub-hash contains line item details that are specific to {@code card} payment
-         * method.&quot;.
+         * This sub-hash contains line item details that are specific to the {@code card} payment
+         * method.
          */
         @SerializedName("card")
         Card card;
 
         /**
-         * This sub-hash contains line item details that are specific to {@code card_present}
-         * payment method.&quot;.
+         * This sub-hash contains line item details that are specific to the {@code card_present}
+         * payment method.
          */
         @SerializedName("card_present")
         CardPresent cardPresent;
@@ -829,15 +870,15 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * This sub-hash contains line item details that are specific to {@code klarna} payment
-         * method.&quot;.
+         * This sub-hash contains line item details that are specific to the {@code klarna} payment
+         * method.
          */
         @SerializedName("klarna")
         Klarna klarna;
 
         /**
-         * This sub-hash contains line item details that are specific to {@code paypal} payment
-         * method.&quot;.
+         * This sub-hash contains line item details that are specific to the {@code paypal} payment
+         * method.
          */
         @SerializedName("paypal")
         Paypal paypal;
@@ -877,8 +918,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           }
 
           /**
-           * This sub-hash contains line item details that are specific to {@code card} payment
-           * method.&quot;.
+           * This sub-hash contains line item details that are specific to the {@code card} payment
+           * method.
            */
           public Builder setCard(
               PaymentIntentCaptureParams.AmountDetails.LineItem.PaymentMethodOptions.Card card) {
@@ -887,8 +928,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           }
 
           /**
-           * This sub-hash contains line item details that are specific to {@code card_present}
-           * payment method.&quot;.
+           * This sub-hash contains line item details that are specific to the {@code card_present}
+           * payment method.
            */
           public Builder setCardPresent(
               PaymentIntentCaptureParams.AmountDetails.LineItem.PaymentMethodOptions.CardPresent
@@ -928,8 +969,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           }
 
           /**
-           * This sub-hash contains line item details that are specific to {@code klarna} payment
-           * method.&quot;.
+           * This sub-hash contains line item details that are specific to the {@code klarna}
+           * payment method.
            */
           public Builder setKlarna(
               PaymentIntentCaptureParams.AmountDetails.LineItem.PaymentMethodOptions.Klarna
@@ -939,8 +980,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           }
 
           /**
-           * This sub-hash contains line item details that are specific to {@code paypal} payment
-           * method.&quot;.
+           * This sub-hash contains line item details that are specific to the {@code paypal}
+           * payment method.
            */
           public Builder setPaypal(
               PaymentIntentCaptureParams.AmountDetails.LineItem.PaymentMethodOptions.Paypal
@@ -955,7 +996,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
         public static class Card {
           /**
            * Identifier that categorizes the items being purchased using a standardized commodity
-           * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, etc.
+           * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, and so on.
            */
           @SerializedName("commodity_code")
           String commodityCode;
@@ -993,7 +1034,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
             /**
              * Identifier that categorizes the items being purchased using a standardized commodity
-             * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, etc.
+             * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, and so on.
              */
             public Builder setCommodityCode(String commodityCode) {
               this.commodityCode = commodityCode;
@@ -1037,7 +1078,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
         public static class CardPresent {
           /**
            * Identifier that categorizes the items being purchased using a standardized commodity
-           * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, etc.
+           * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, and so on.
            */
           @SerializedName("commodity_code")
           String commodityCode;
@@ -1076,7 +1117,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
             /**
              * Identifier that categorizes the items being purchased using a standardized commodity
-             * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, etc.
+             * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, and so on.
              */
             public Builder setCommodityCode(String commodityCode) {
               this.commodityCode = commodityCode;
@@ -1952,10 +1993,6 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
      * A unique value assigned by the business to identify the transaction. Required for L2 and L3
      * rates.
      *
-     * <p>Required when the Payment Method Types array contains {@code card}, including when <a
-     * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
-     * is set to {@code true}.
-     *
      * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces, before
      * being sent to card networks. For Klarna, this field is truncated to 255 characters and is
      * visible to customers when they view the order in the Klarna app.
@@ -2040,10 +2077,6 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
        * A unique value assigned by the business to identify the transaction. Required for L2 and L3
        * rates.
        *
-       * <p>Required when the Payment Method Types array contains {@code card}, including when <a
-       * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
-       * is set to {@code true}.
-       *
        * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces,
        * before being sent to card networks. For Klarna, this field is truncated to 255 characters
        * and is visible to customers when they view the order in the Klarna app.
@@ -2056,10 +2089,6 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       /**
        * A unique value assigned by the business to identify the transaction. Required for L2 and L3
        * rates.
-       *
-       * <p>Required when the Payment Method Types array contains {@code card}, including when <a
-       * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
-       * is set to {@code true}.
        *
        * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces,
        * before being sent to card networks. For Klarna, this field is truncated to 255 characters

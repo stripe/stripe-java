@@ -3,6 +3,8 @@ package com.stripe.param.v2.core;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.v2.Amount;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +33,10 @@ public class AccountCreateParams extends ApiRequestParams {
    */
   @SerializedName("contact_email")
   String contactEmail;
+
+  /** The default contact phone for the Account. */
+  @SerializedName("contact_phone")
+  String contactPhone;
 
   /**
    * A value indicating the Stripe dashboard this Account has access to. This will depend on which
@@ -78,6 +84,7 @@ public class AccountCreateParams extends ApiRequestParams {
       String accountToken,
       Configuration configuration,
       String contactEmail,
+      String contactPhone,
       Dashboard dashboard,
       Defaults defaults,
       String displayName,
@@ -88,6 +95,7 @@ public class AccountCreateParams extends ApiRequestParams {
     this.accountToken = accountToken;
     this.configuration = configuration;
     this.contactEmail = contactEmail;
+    this.contactPhone = contactPhone;
     this.dashboard = dashboard;
     this.defaults = defaults;
     this.displayName = displayName;
@@ -107,6 +115,8 @@ public class AccountCreateParams extends ApiRequestParams {
     private Configuration configuration;
 
     private String contactEmail;
+
+    private String contactPhone;
 
     private Dashboard dashboard;
 
@@ -128,6 +138,7 @@ public class AccountCreateParams extends ApiRequestParams {
           this.accountToken,
           this.configuration,
           this.contactEmail,
+          this.contactPhone,
           this.dashboard,
           this.defaults,
           this.displayName,
@@ -158,6 +169,12 @@ public class AccountCreateParams extends ApiRequestParams {
      */
     public Builder setContactEmail(String contactEmail) {
       this.contactEmail = contactEmail;
+      return this;
+    }
+
+    /** The default contact phone for the Account. */
+    public Builder setContactPhone(String contactPhone) {
+      this.contactPhone = contactPhone;
       return this;
     }
 
@@ -9589,6 +9606,10 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName("registered_name")
       String registeredName;
 
+      /** When the business was incorporated or registered. */
+      @SerializedName("registration_date")
+      RegistrationDate registrationDate;
+
       /** The business registration address of the business entity in non latin script. */
       @SerializedName("script_addresses")
       ScriptAddresses scriptAddresses;
@@ -9611,6 +9632,7 @@ public class AccountCreateParams extends ApiRequestParams {
           MonthlyEstimatedRevenue monthlyEstimatedRevenue,
           String phone,
           String registeredName,
+          RegistrationDate registrationDate,
           ScriptAddresses scriptAddresses,
           ScriptNames scriptNames,
           Structure structure) {
@@ -9623,6 +9645,7 @@ public class AccountCreateParams extends ApiRequestParams {
         this.monthlyEstimatedRevenue = monthlyEstimatedRevenue;
         this.phone = phone;
         this.registeredName = registeredName;
+        this.registrationDate = registrationDate;
         this.scriptAddresses = scriptAddresses;
         this.scriptNames = scriptNames;
         this.structure = structure;
@@ -9651,6 +9674,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
         private String registeredName;
 
+        private RegistrationDate registrationDate;
+
         private ScriptAddresses scriptAddresses;
 
         private ScriptNames scriptNames;
@@ -9669,6 +9694,7 @@ public class AccountCreateParams extends ApiRequestParams {
               this.monthlyEstimatedRevenue,
               this.phone,
               this.registeredName,
+              this.registrationDate,
               this.scriptAddresses,
               this.scriptNames,
               this.structure);
@@ -9775,6 +9801,13 @@ public class AccountCreateParams extends ApiRequestParams {
         /** The business legal name. */
         public Builder setRegisteredName(String registeredName) {
           this.registeredName = registeredName;
+          return this;
+        }
+
+        /** When the business was incorporated or registered. */
+        public Builder setRegistrationDate(
+            AccountCreateParams.Identity.BusinessDetails.RegistrationDate registrationDate) {
+          this.registrationDate = registrationDate;
           return this;
         }
 
@@ -10021,8 +10054,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /** A non-negative integer representing the amount in the smallest currency unit. */
-          public Builder setAmount(
-              AccountCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount amount) {
+          public Builder setAmount(Amount amount) {
             this.amount = amount;
             return this;
           }
@@ -10062,108 +10094,6 @@ public class AccountCreateParams extends ApiRequestParams {
           public Builder setFiscalYearEnd(String fiscalYearEnd) {
             this.fiscalYearEnd = fiscalYearEnd;
             return this;
-          }
-        }
-
-        @Getter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Amount {
-          /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
-           */
-          @SerializedName("currency")
-          String currency;
-
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
-
-          /**
-           * A non-negative integer representing how much to charge in the <a
-           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-           */
-          @SerializedName("value")
-          Long value;
-
-          private Amount(String currency, Map<String, Object> extraParams, Long value) {
-            this.currency = currency;
-            this.extraParams = extraParams;
-            this.value = value;
-          }
-
-          public static Builder builder() {
-            return new Builder();
-          }
-
-          public static class Builder {
-            private String currency;
-
-            private Map<String, Object> extraParams;
-
-            private Long value;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public AccountCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount build() {
-              return new AccountCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount(
-                  this.currency, this.extraParams, this.value);
-            }
-
-            /**
-             * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-             * code</a>, in lowercase. Must be a <a
-             * href="https://stripe.com/docs/currencies">supported currency</a>.
-             */
-            public Builder setCurrency(String currency) {
-              this.currency = currency;
-              return this;
-            }
-
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * AccountCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount#extraParams} for
-             * the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
-
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * AccountCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount#extraParams} for
-             * the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-
-            /**
-             * A non-negative integer representing how much to charge in the <a
-             * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-             */
-            public Builder setValue(Long value) {
-              this.value = value;
-              return this;
-            }
           }
         }
       }
@@ -12129,6 +12059,9 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("gb_crn")
           GB_CRN("gb_crn"),
 
+          @SerializedName("gb_vat")
+          GB_VAT("gb_vat"),
+
           @SerializedName("gi_crn")
           GI_CRN("gi_crn"),
 
@@ -12377,8 +12310,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /** A non-negative integer representing the amount in the smallest currency unit. */
-          public Builder setAmount(
-              AccountCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue.Amount amount) {
+          public Builder setAmount(Amount amount) {
             this.amount = amount;
             return this;
           }
@@ -12413,107 +12345,105 @@ public class AccountCreateParams extends ApiRequestParams {
             return this;
           }
         }
+      }
 
-        @Getter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Amount {
-          /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
-           */
-          @SerializedName("currency")
-          String currency;
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RegistrationDate {
+        /** <strong>Required.</strong> The day of registration, between 1 and 31. */
+        @SerializedName("day")
+        Long day;
 
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
 
-          /**
-           * A non-negative integer representing how much to charge in the <a
-           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-           */
-          @SerializedName("value")
-          Long value;
+        /** <strong>Required.</strong> The month of registration, between 1 and 12. */
+        @SerializedName("month")
+        Long month;
 
-          private Amount(String currency, Map<String, Object> extraParams, Long value) {
-            this.currency = currency;
-            this.extraParams = extraParams;
-            this.value = value;
+        /** <strong>Required.</strong> The four-digit year of registration. */
+        @SerializedName("year")
+        Long year;
+
+        private RegistrationDate(Long day, Map<String, Object> extraParams, Long month, Long year) {
+          this.day = day;
+          this.extraParams = extraParams;
+          this.month = month;
+          this.year = year;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long day;
+
+          private Map<String, Object> extraParams;
+
+          private Long month;
+
+          private Long year;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountCreateParams.Identity.BusinessDetails.RegistrationDate build() {
+            return new AccountCreateParams.Identity.BusinessDetails.RegistrationDate(
+                this.day, this.extraParams, this.month, this.year);
           }
 
-          public static Builder builder() {
-            return new Builder();
+          /** <strong>Required.</strong> The day of registration, between 1 and 31. */
+          public Builder setDay(Long day) {
+            this.day = day;
+            return this;
           }
 
-          public static class Builder {
-            private String currency;
-
-            private Map<String, Object> extraParams;
-
-            private Long value;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public AccountCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue.Amount
-                build() {
-              return new AccountCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue
-                  .Amount(this.currency, this.extraParams, this.value);
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountCreateParams.Identity.BusinessDetails.RegistrationDate#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
             }
+            this.extraParams.put(key, value);
+            return this;
+          }
 
-            /**
-             * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-             * code</a>, in lowercase. Must be a <a
-             * href="https://stripe.com/docs/currencies">supported currency</a>.
-             */
-            public Builder setCurrency(String currency) {
-              this.currency = currency;
-              return this;
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountCreateParams.Identity.BusinessDetails.RegistrationDate#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
             }
+            this.extraParams.putAll(map);
+            return this;
+          }
 
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * AccountCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue.Amount#extraParams}
-             * for the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
+          /** <strong>Required.</strong> The month of registration, between 1 and 12. */
+          public Builder setMonth(Long month) {
+            this.month = month;
+            return this;
+          }
 
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * AccountCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue.Amount#extraParams}
-             * for the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-
-            /**
-             * A non-negative integer representing how much to charge in the <a
-             * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
-             */
-            public Builder setValue(Long value) {
-              this.value = value;
-              return this;
-            }
+          /** <strong>Required.</strong> The four-digit year of registration. */
+          public Builder setYear(Long year) {
+            this.year = year;
+            return this;
           }
         }
       }
@@ -15726,7 +15656,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
         /** The percent owned by the person of the account's legal entity. */
         @SerializedName("percent_ownership")
-        String percentOwnership;
+        BigDecimal percentOwnership;
 
         /** The person's title (e.g., CEO, Support Engineer). */
         @SerializedName("title")
@@ -15737,7 +15667,7 @@ public class AccountCreateParams extends ApiRequestParams {
             Boolean executive,
             Map<String, Object> extraParams,
             Boolean owner,
-            String percentOwnership,
+            BigDecimal percentOwnership,
             String title) {
           this.director = director;
           this.executive = executive;
@@ -15760,7 +15690,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
           private Boolean owner;
 
-          private String percentOwnership;
+          private BigDecimal percentOwnership;
 
           private String title;
 
@@ -15829,7 +15759,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /** The percent owned by the person of the account's legal entity. */
-          public Builder setPercentOwnership(String percentOwnership) {
+          public Builder setPercentOwnership(BigDecimal percentOwnership) {
             this.percentOwnership = percentOwnership;
             return this;
           }

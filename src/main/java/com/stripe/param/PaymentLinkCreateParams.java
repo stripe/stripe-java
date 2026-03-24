@@ -62,12 +62,15 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
   /**
    * Collect additional information from your customer using custom fields. Up to 3 fields are
-   * supported.
+   * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
    */
   @SerializedName("custom_fields")
   List<PaymentLinkCreateParams.CustomField> customFields;
 
-  /** Display additional text for your customers using custom text. */
+  /**
+   * Display additional text for your customers using custom text. You can't set this parameter if
+   * {@code ui_mode} is {@code custom}.
+   */
   @SerializedName("custom_text")
   CustomText customText;
 
@@ -476,7 +479,10 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Display additional text for your customers using custom text. */
+    /**
+     * Display additional text for your customers using custom text. You can't set this parameter if
+     * {@code ui_mode} is {@code custom}.
+     */
     public Builder setCustomText(PaymentLinkCreateParams.CustomText customText) {
       this.customText = customText;
       return this;
@@ -1710,8 +1716,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Dropdown {
       /**
-       * The value that will pre-fill the field on the payment page.Must match a {@code value} in
-       * the {@code options} array.
+       * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+       * {@code options} array.
        */
       @SerializedName("default_value")
       String defaultValue;
@@ -1759,8 +1765,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The value that will pre-fill the field on the payment page.Must match a {@code value} in
-         * the {@code options} array.
+         * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+         * {@code options} array.
          */
         public Builder setDefaultValue(String defaultValue) {
           this.defaultValue = defaultValue;
@@ -2030,7 +2036,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Numeric {
-      /** The value that will pre-fill the field on the payment page. */
+      /** The value that pre-fills the field on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
 
@@ -2081,7 +2087,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
               this.defaultValue, this.extraParams, this.maximumLength, this.minimumLength);
         }
 
-        /** The value that will pre-fill the field on the payment page. */
+        /** The value that pre-fills the field on the payment page. */
         public Builder setDefaultValue(String defaultValue) {
           this.defaultValue = defaultValue;
           return this;
@@ -2132,7 +2138,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Text {
-      /** The value that will pre-fill the field on the payment page. */
+      /** The value that pre-fills the field on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
 
@@ -2183,7 +2189,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
               this.defaultValue, this.extraParams, this.maximumLength, this.minimumLength);
         }
 
-        /** The value that will pre-fill the field on the payment page. */
+        /** The value that pre-fills the field on the payment page. */
         public Builder setDefaultValue(String defaultValue) {
           this.defaultValue = defaultValue;
           return this;
@@ -2413,7 +2419,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+      /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -2464,7 +2470,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+        /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -2484,7 +2490,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+      /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -2536,7 +2542,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+        /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -2556,7 +2562,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+      /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -2607,7 +2613,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+        /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -2627,7 +2633,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+      /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -2679,7 +2685,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+        /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -6750,7 +6756,10 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Describes whether a tax ID is required during checkout. Defaults to {@code never}. */
+    /**
+     * Describes whether a tax ID is required during checkout. Defaults to {@code never}. You can't
+     * set this parameter if {@code ui_mode} is {@code custom}.
+     */
     @SerializedName("required")
     Required required;
 
@@ -6813,7 +6822,10 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Describes whether a tax ID is required during checkout. Defaults to {@code never}. */
+      /**
+       * Describes whether a tax ID is required during checkout. Defaults to {@code never}. You
+       * can't set this parameter if {@code ui_mode} is {@code custom}.
+       */
       public Builder setRequired(PaymentLinkCreateParams.TaxIdCollection.Required required) {
         this.required = required;
         return this;
@@ -7082,6 +7094,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     @SerializedName("twint")
     TWINT("twint"),
+
+    @SerializedName("upi")
+    UPI("upi"),
 
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),

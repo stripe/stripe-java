@@ -249,6 +249,9 @@ public class ReaderListParams extends ApiRequestParams {
     @SerializedName("simulated_stripe_s700")
     SIMULATED_STRIPE_S700("simulated_stripe_s700"),
 
+    @SerializedName("simulated_stripe_s710")
+    SIMULATED_STRIPE_S710("simulated_stripe_s710"),
+
     @SerializedName("simulated_wisepos_e")
     SIMULATED_WISEPOS_E("simulated_wisepos_e"),
 
@@ -257,6 +260,9 @@ public class ReaderListParams extends ApiRequestParams {
 
     @SerializedName("stripe_s700")
     STRIPE_S700("stripe_s700"),
+
+    @SerializedName("stripe_s710")
+    STRIPE_S710("stripe_s710"),
 
     @SerializedName("verifone_P400")
     VERIFONE_P400("verifone_P400");

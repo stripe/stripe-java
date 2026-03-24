@@ -20,7 +20,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
   /**
    * The customer-facing code. Regardless of case, this code must be unique across all active
    * promotion codes for a specific customer. Valid characters are lower case letters (a-z), upper
-   * case letters (A-Z), and digits (0-9).
+   * case letters (A-Z), digits (0-9), and dashes (-).
    *
    * <p>If left blank, we will generate one automatically.
    */
@@ -163,7 +163,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
     /**
      * The customer-facing code. Regardless of case, this code must be unique across all active
      * promotion codes for a specific customer. Valid characters are lower case letters (a-z), upper
-     * case letters (A-Z), and digits (0-9).
+     * case letters (A-Z), digits (0-9), and dashes (-).
      *
      * <p>If left blank, we will generate one automatically.
      */

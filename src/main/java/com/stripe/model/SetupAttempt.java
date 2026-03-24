@@ -84,8 +84,8 @@ public class SetupAttempt extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -346,6 +346,9 @@ public class SetupAttempt extends ApiResource implements HasId {
      */
     @SerializedName("type")
     String type;
+
+    @SerializedName("upi")
+    Upi upi;
 
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
@@ -673,7 +676,7 @@ public class SetupAttempt extends ApiResource implements HasId {
         /**
          * The version of 3D Secure that was used.
          *
-         * <p>One of {@code 1.0.2}, {@code 2.1.0}, or {@code 2.2.0}.
+         * <p>One of {@code 1.0.2}, {@code 2.1.0}, {@code 2.2.0}, {@code 2.3.0}, or {@code 2.3.1}.
          */
         @SerializedName("version")
         String version;
@@ -798,11 +801,11 @@ public class SetupAttempt extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Ideal extends StripeObject {
       /**
-       * The customer's bank. Can be one of {@code abn_amro}, {@code asn_bank}, {@code bunq}, {@code
-       * buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code knab}, {@code mollie},
-       * {@code moneyou}, {@code n26}, {@code nn}, {@code rabobank}, {@code regiobank}, {@code
-       * revolut}, {@code sns_bank}, {@code triodos_bank}, {@code van_lanschot}, or {@code
-       * yoursafe}.
+       * The customer's bank. Can be one of {@code abn_amro}, {@code adyen}, {@code asn_bank},
+       * {@code bunq}, {@code buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code
+       * knab}, {@code mollie}, {@code moneyou}, {@code n26}, {@code nn}, {@code rabobank}, {@code
+       * regiobank}, {@code revolut}, {@code sns_bank}, {@code triodos_bank}, {@code van_lanschot},
+       * or {@code yoursafe}.
        */
       @SerializedName("bank")
       String bank;
@@ -810,11 +813,11 @@ public class SetupAttempt extends ApiResource implements HasId {
       /**
        * The Bank Identifier Code of the customer's bank.
        *
-       * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code BUNQNL2A}, {@code
-       * BUUTNL2A}, {@code FNOMNL22}, {@code FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code
-       * KNABNL2H}, {@code MLLENL2A}, {@code MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code
-       * RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or
-       * {@code TRIONL2U}.
+       * <p>One of {@code ABNANL2A}, {@code ADYBNL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code
+       * BUNQNL2A}, {@code BUUTNL2A}, {@code FNOMNL22}, {@code FVLBNL22}, {@code HANDNL2A}, {@code
+       * INGBNL2A}, {@code KNABNL2H}, {@code MLLENL2A}, {@code MOYONL21}, {@code NNBANL2G}, {@code
+       * NTSBDEB1}, {@code RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code
+       * SNSBNL2A}, or {@code TRIONL2U}.
        */
       @SerializedName("bic")
       String bic;
@@ -1082,6 +1085,15 @@ public class SetupAttempt extends ApiResource implements HasId {
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
     }
+
+    /**
+     * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Upi extends StripeObject {}
 
     /**
      * For more details about UsBankAccount, please refer to the <a

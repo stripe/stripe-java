@@ -13,6 +13,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class LineItem extends StripeObject implements HasId {
+  @SerializedName("adjustable_quantity")
+  AdjustableQuantity adjustableQuantity;
+
   /** Total discount amount applied. If no discounts were applied, defaults to 0. */
   @SerializedName("amount_discount")
   Long amountDiscount;
@@ -79,6 +82,24 @@ public class LineItem extends StripeObject implements HasId {
   /** The taxes applied to the line item. */
   @SerializedName("taxes")
   List<LineItem.Tax> taxes;
+
+  /**
+   * For more details about AdjustableQuantity, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AdjustableQuantity extends StripeObject {
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    @SerializedName("maximum")
+    Long maximum;
+
+    @SerializedName("minimum")
+    Long minimum;
+  }
 
   /**
    * For more details about Discount, please refer to the <a href="https://docs.stripe.com/api">API

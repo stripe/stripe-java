@@ -912,6 +912,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     Type type;
 
     /**
+     * If this is a {@code upi} PaymentMethod, this hash contains details about the UPI payment
+     * method.
+     */
+    @SerializedName("upi")
+    Upi upi;
+
+    /**
      * If this is an {@code us_bank_account} PaymentMethod, this hash contains details about the US
      * bank account payment method.
      */
@@ -986,6 +993,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Swish swish,
         Twint twint,
         Type type,
+        Upi upi,
         UsBankAccount usBankAccount,
         WechatPay wechatPay,
         Zip zip) {
@@ -1042,6 +1050,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.swish = swish;
       this.twint = twint;
       this.type = type;
+      this.upi = upi;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
       this.zip = zip;
@@ -1158,6 +1167,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private Type type;
 
+      private Upi upi;
+
       private UsBankAccount usBankAccount;
 
       private WechatPay wechatPay;
@@ -1220,6 +1231,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.swish,
             this.twint,
             this.type,
+            this.upi,
             this.usBankAccount,
             this.wechatPay,
             this.zip);
@@ -1748,6 +1760,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setType(SetupIntentUpdateParams.PaymentMethodData.Type type) {
         this.type = type;
+        return this;
+      }
+
+      /**
+       * If this is a {@code upi} PaymentMethod, this hash contains details about the UPI payment
+       * method.
+       */
+      public Builder setUpi(SetupIntentUpdateParams.PaymentMethodData.Upi upi) {
+        this.upi = upi;
         return this;
       }
 
@@ -3730,6 +3751,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public enum Bank implements ApiRequestParams.EnumParam {
         @SerializedName("abn_amro")
         ABN_AMRO("abn_amro"),
+
+        @SerializedName("adyen")
+        ADYEN("adyen"),
 
         @SerializedName("asn_bank")
         ASN_BANK("asn_bank"),
@@ -5961,6 +5985,237 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Upi {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Configuration options for setting up an eMandate. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      private Upi(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+        this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private MandateOptions mandateOptions;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Upi build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Upi(
+              this.extraParams, this.mandateOptions);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Upi#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Upi#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Configuration options for setting up an eMandate. */
+        public Builder setMandateOptions(
+            SetupIntentUpdateParams.PaymentMethodData.Upi.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions {
+        /** Amount to be charged for future payments. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+         * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+         * amount charged can be up to the value passed for the {@code amount} param.
+         */
+        @SerializedName("amount_type")
+        AmountType amountType;
+
+        /**
+         * A description of the mandate or subscription that is meant to be displayed to the
+         * customer.
+         */
+        @SerializedName("description")
+        Object description;
+
+        /** End date of the mandate or subscription. */
+        @SerializedName("end_date")
+        Long endDate;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private MandateOptions(
+            Long amount,
+            AmountType amountType,
+            Object description,
+            Long endDate,
+            Map<String, Object> extraParams) {
+          this.amount = amount;
+          this.amountType = amountType;
+          this.description = description;
+          this.endDate = endDate;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long amount;
+
+          private AmountType amountType;
+
+          private Object description;
+
+          private Long endDate;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SetupIntentUpdateParams.PaymentMethodData.Upi.MandateOptions build() {
+            return new SetupIntentUpdateParams.PaymentMethodData.Upi.MandateOptions(
+                this.amount, this.amountType, this.description, this.endDate, this.extraParams);
+          }
+
+          /** Amount to be charged for future payments. */
+          public Builder setAmount(Long amount) {
+            this.amount = amount;
+            return this;
+          }
+
+          /**
+           * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+           * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+           * amount charged can be up to the value passed for the {@code amount} param.
+           */
+          public Builder setAmountType(
+              SetupIntentUpdateParams.PaymentMethodData.Upi.MandateOptions.AmountType amountType) {
+            this.amountType = amountType;
+            return this;
+          }
+
+          /**
+           * A description of the mandate or subscription that is meant to be displayed to the
+           * customer.
+           */
+          public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+          }
+
+          /**
+           * A description of the mandate or subscription that is meant to be displayed to the
+           * customer.
+           */
+          public Builder setDescription(EmptyParam description) {
+            this.description = description;
+            return this;
+          }
+
+          /** End date of the mandate or subscription. */
+          public Builder setEndDate(Long endDate) {
+            this.endDate = endDate;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentUpdateParams.PaymentMethodData.Upi.MandateOptions#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentUpdateParams.PaymentMethodData.Upi.MandateOptions#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        public enum AmountType implements ApiRequestParams.EnumParam {
+          @SerializedName("fixed")
+          FIXED("fixed"),
+
+          @SerializedName("maximum")
+          MAXIMUM("maximum");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountType(String value) {
+            this.value = value;
+          }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount {
       /** Account holder type: individual or company. */
       @SerializedName("account_holder_type")
@@ -6418,6 +6673,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("twint")
       TWINT("twint"),
 
+      @SerializedName("upi")
+      UPI("upi"),
+
       @SerializedName("us_bank_account")
       US_BANK_ACCOUNT("us_bank_account"),
 
@@ -6516,6 +6774,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     SepaDebit sepaDebit;
 
     /**
+     * If this is a {@code upi} SetupIntent, this sub-hash contains details about the UPI payment
+     * method options.
+     */
+    @SerializedName("upi")
+    Upi upi;
+
+    /**
      * If this is a {@code us_bank_account} SetupIntent, this sub-hash contains details about the US
      * bank account payment method options.
      */
@@ -6534,6 +6799,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Paypal paypal,
         Payto payto,
         SepaDebit sepaDebit,
+        Upi upi,
         UsBankAccount usBankAccount) {
       this.acssDebit = acssDebit;
       this.amazonPay = amazonPay;
@@ -6546,6 +6812,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.paypal = paypal;
       this.payto = payto;
       this.sepaDebit = sepaDebit;
+      this.upi = upi;
       this.usBankAccount = usBankAccount;
     }
 
@@ -6576,6 +6843,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private SepaDebit sepaDebit;
 
+      private Upi upi;
+
       private UsBankAccount usBankAccount;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -6592,6 +6861,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.paypal,
             this.payto,
             this.sepaDebit,
+            this.upi,
             this.usBankAccount);
       }
 
@@ -6715,6 +6985,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
+       * If this is a {@code upi} SetupIntent, this sub-hash contains details about the UPI payment
+       * method options.
+       */
+      public Builder setUpi(SetupIntentUpdateParams.PaymentMethodOptions.Upi upi) {
+        this.upi = upi;
+        return this;
+      }
+
+      /**
        * If this is a {@code us_bank_account} SetupIntent, this sub-hash contains details about the
        * US bank account payment method options.
        */
@@ -6749,7 +7028,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
-      /** Bank account verification method. */
+      /** Bank account verification method. The default value is {@code automatic}. */
       @SerializedName("verification_method")
       VerificationMethod verificationMethod;
 
@@ -6829,7 +7108,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Bank account verification method. */
+        /** Bank account verification method. The default value is {@code automatic}. */
         public Builder setVerificationMethod(
             SetupIntentUpdateParams.PaymentMethodOptions.AcssDebit.VerificationMethod
                 verificationMethod) {
@@ -7534,7 +7813,10 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
-        /** <strong>Required.</strong> Amount to be charged for future payments. */
+        /**
+         * <strong>Required.</strong> Amount to be charged for future payments, specified in the
+         * presentment currency.
+         */
         @SerializedName("amount")
         Long amount;
 
@@ -7683,7 +7965,10 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
                 this.supportedTypes);
           }
 
-          /** <strong>Required.</strong> Amount to be charged for future payments. */
+          /**
+           * <strong>Required.</strong> Amount to be charged for future payments, specified in the
+           * presentment currency.
+           */
           public Builder setAmount(Long amount) {
             this.amount = amount;
             return this;
@@ -8460,7 +8745,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           N2__1__0("2.1.0"),
 
           @SerializedName("2.2.0")
-          N2__2__0("2.2.0");
+          N2__2__0("2.2.0"),
+
+          @SerializedName("2.3.0")
+          N2__3__0("2.3.0"),
+
+          @SerializedName("2.3.1")
+          N2__3__1("2.3.1");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
@@ -10165,6 +10456,276 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Upi {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Configuration options for setting up an eMandate. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      private Upi(
+          Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
+          ApiRequestParams.EnumParam setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private MandateOptions mandateOptions;
+
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodOptions.Upi build() {
+          return new SetupIntentUpdateParams.PaymentMethodOptions.Upi(
+              this.extraParams, this.mandateOptions, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodOptions.Upi#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodOptions.Upi#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Configuration options for setting up an eMandate. */
+        public Builder setMandateOptions(
+            SetupIntentUpdateParams.PaymentMethodOptions.Upi.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
+          return this;
+        }
+
+        public Builder setSetupFutureUsage(
+            SetupIntentUpdateParams.PaymentMethodOptions.Upi.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions {
+        /** Amount to be charged for future payments. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+         * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+         * amount charged can be up to the value passed for the {@code amount} param.
+         */
+        @SerializedName("amount_type")
+        AmountType amountType;
+
+        /**
+         * A description of the mandate or subscription that is meant to be displayed to the
+         * customer.
+         */
+        @SerializedName("description")
+        Object description;
+
+        /** End date of the mandate or subscription. */
+        @SerializedName("end_date")
+        Long endDate;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private MandateOptions(
+            Long amount,
+            AmountType amountType,
+            Object description,
+            Long endDate,
+            Map<String, Object> extraParams) {
+          this.amount = amount;
+          this.amountType = amountType;
+          this.description = description;
+          this.endDate = endDate;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long amount;
+
+          private AmountType amountType;
+
+          private Object description;
+
+          private Long endDate;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SetupIntentUpdateParams.PaymentMethodOptions.Upi.MandateOptions build() {
+            return new SetupIntentUpdateParams.PaymentMethodOptions.Upi.MandateOptions(
+                this.amount, this.amountType, this.description, this.endDate, this.extraParams);
+          }
+
+          /** Amount to be charged for future payments. */
+          public Builder setAmount(Long amount) {
+            this.amount = amount;
+            return this;
+          }
+
+          /**
+           * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+           * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+           * amount charged can be up to the value passed for the {@code amount} param.
+           */
+          public Builder setAmountType(
+              SetupIntentUpdateParams.PaymentMethodOptions.Upi.MandateOptions.AmountType
+                  amountType) {
+            this.amountType = amountType;
+            return this;
+          }
+
+          /**
+           * A description of the mandate or subscription that is meant to be displayed to the
+           * customer.
+           */
+          public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+          }
+
+          /**
+           * A description of the mandate or subscription that is meant to be displayed to the
+           * customer.
+           */
+          public Builder setDescription(EmptyParam description) {
+            this.description = description;
+            return this;
+          }
+
+          /** End date of the mandate or subscription. */
+          public Builder setEndDate(Long endDate) {
+            this.endDate = endDate;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentUpdateParams.PaymentMethodOptions.Upi.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentUpdateParams.PaymentMethodOptions.Upi.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        public enum AmountType implements ApiRequestParams.EnumParam {
+          @SerializedName("fixed")
+          FIXED("fixed"),
+
+          @SerializedName("maximum")
+          MAXIMUM("maximum");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountType(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session"),
+
+        @SerializedName("on_session")
+        ON_SESSION("on_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10187,7 +10748,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("networks")
       Networks networks;
 
-      /** Bank account verification method. */
+      /** Bank account verification method. The default value is {@code automatic}. */
       @SerializedName("verification_method")
       VerificationMethod verificationMethod;
 
@@ -10280,7 +10841,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Bank account verification method. */
+        /** Bank account verification method. The default value is {@code automatic}. */
         public Builder setVerificationMethod(
             SetupIntentUpdateParams.PaymentMethodOptions.UsBankAccount.VerificationMethod
                 verificationMethod) {
@@ -11068,6 +11629,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("twint")
     TWINT("twint"),
+
+    @SerializedName("upi")
+    UPI("upi"),
 
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),

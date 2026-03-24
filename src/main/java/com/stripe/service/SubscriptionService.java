@@ -34,9 +34,9 @@ public final class SubscriptionService extends ApiService {
    * href="https://stripe.com/metadata">metadata</a>.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve
-   * set the subscription to cancel at the end of the period, any pending prorations are also left
-   * in place and collected at the end of the period. But if the subscription is set to cancel
+   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * the subscription to cancel at the end of the period, any pending prorations are also left in
+   * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
    * set to true.
    *
@@ -56,9 +56,9 @@ public final class SubscriptionService extends ApiService {
    * href="https://stripe.com/metadata">metadata</a>.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve
-   * set the subscription to cancel at the end of the period, any pending prorations are also left
-   * in place and collected at the end of the period. But if the subscription is set to cancel
+   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * the subscription to cancel at the end of the period, any pending prorations are also left in
+   * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
    * set to true.
    *
@@ -78,9 +78,9 @@ public final class SubscriptionService extends ApiService {
    * href="https://stripe.com/metadata">metadata</a>.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve
-   * set the subscription to cancel at the end of the period, any pending prorations are also left
-   * in place and collected at the end of the period. But if the subscription is set to cancel
+   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * the subscription to cancel at the end of the period, any pending prorations are also left in
+   * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
    * set to true.
    *
@@ -99,9 +99,9 @@ public final class SubscriptionService extends ApiService {
    * href="https://stripe.com/metadata">metadata</a>.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/docs/api#delete_invoiceitem">deleted</a>. If you’ve
-   * set the subscription to cancel at the end of the period, any pending prorations are also left
-   * in place and collected at the end of the period. But if the subscription is set to cancel
+   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * the subscription to cancel at the end of the period, any pending prorations are also left in
+   * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
    * set to true.
    *
@@ -554,10 +554,10 @@ public final class SubscriptionService extends ApiService {
   }
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
-   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
-   * resumption invoice will void automatically if not paid by the expiration date.
+   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
+   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
+   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}.
    */
   public Subscription resume(String subscription, SubscriptionResumeParams params)
       throws StripeException {
@@ -565,30 +565,30 @@ public final class SubscriptionService extends ApiService {
   }
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
-   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
-   * resumption invoice will void automatically if not paid by the expiration date.
+   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
+   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
+   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}.
    */
   public Subscription resume(String subscription, RequestOptions options) throws StripeException {
     return resume(subscription, (SubscriptionResumeParams) null, options);
   }
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
-   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
-   * resumption invoice will void automatically if not paid by the expiration date.
+   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
+   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
+   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}.
    */
   public Subscription resume(String subscription) throws StripeException {
     return resume(subscription, (SubscriptionResumeParams) null, (RequestOptions) null);
   }
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
-   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
-   * resumption invoice will void automatically if not paid by the expiration date.
+   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
+   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
+   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}.
    */
   public Subscription resume(
       String subscription, SubscriptionResumeParams params, RequestOptions options)

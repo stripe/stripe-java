@@ -251,8 +251,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-   * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-   * given subscription at the specified interval.
+   * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+   * subscription at the specified interval.
    */
   @SerializedName("pending_invoice_item_interval")
   Object pendingInvoiceItemInterval;
@@ -1022,8 +1022,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-     * given subscription at the specified interval.
+     * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+     * subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(
         SubscriptionCreateParams.PendingInvoiceItemInterval pendingInvoiceItemInterval) {
@@ -1033,8 +1033,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-     * given subscription at the specified interval.
+     * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+     * subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(EmptyParam pendingInvoiceItemInterval) {
       this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
@@ -4714,7 +4714,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         @Getter
         @EqualsAndHashCode(callSuper = false)
         public static class MandateOptions {
-          /** Amount to be charged for future payments. */
+          /** Amount to be charged for future payments, specified in the presentment currency. */
           @SerializedName("amount")
           Long amount;
 
@@ -4774,7 +4774,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
                   .MandateOptions(this.amount, this.amountType, this.description, this.extraParams);
             }
 
-            /** Amount to be charged for future payments. */
+            /** Amount to be charged for future payments, specified in the presentment currency. */
             public Builder setAmount(Long amount) {
               this.amount = amount;
               return this;
@@ -5126,8 +5126,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           public static class EuBankTransfer {
             /**
              * <strong>Required.</strong> The desired country code of the bank account information.
-             * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
-             * or {@code NL}.
+             * Permitted values include: {@code DE}, {@code FR}, {@code IE}, or {@code NL}.
              */
             @SerializedName("country")
             String country;
@@ -5166,8 +5165,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
               /**
                * <strong>Required.</strong> The desired country code of the bank account
-               * information. Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code
-               * FR}, {@code IE}, or {@code NL}.
+               * information. Permitted values include: {@code DE}, {@code FR}, {@code IE}, or
+               * {@code NL}.
                */
               public Builder setCountry(String country) {
                 this.country = country;
@@ -6136,6 +6135,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       @SerializedName("p24")
       P24("p24"),
+
+      @SerializedName("pay_by_bank")
+      PAY_BY_BANK("pay_by_bank"),
 
       @SerializedName("payco")
       PAYCO("payco"),

@@ -93,6 +93,12 @@ public abstract class EventNotification {
     // don't love the double json parse here, but I don't think we can avoid it?
     JsonObject jsonObject = ApiResource.GSON.fromJson(payload, JsonObject.class).getAsJsonObject();
 
+    if (jsonObject.has("object") && "event".equals(jsonObject.get("object").getAsString())) {
+      throw new IllegalArgumentException(
+          "You passed a webhook payload to StripeClient.parseEventNotification, which expects an event notification."
+              + " Use StripeClient.constructEvent instead.");
+    }
+
     Class<? extends EventNotification> cls =
         EventNotificationClassLookup.eventClassLookup.get(jsonObject.get("type").getAsString());
     if (cls == null) {
@@ -106,12 +112,12 @@ public abstract class EventNotification {
   }
 
   private RawRequestOptions getRequestOptions() {
-    if (context == null) {
-      return null;
+    RawRequestOptions.RawRequestOptionsBuilder builder =
+        RawRequestOptions.builder().setStripeRequestTrigger("event=" + id);
+    if (context != null) {
+      builder.setStripeContext(context.toString());
     }
-    return new RawRequestOptions.RawRequestOptionsBuilder()
-        .setStripeContext(context.toString())
-        .build();
+    return builder.build();
   }
 
   /* retrieves the full payload for an event. Protected because individual push classes use it, but type it correctly */

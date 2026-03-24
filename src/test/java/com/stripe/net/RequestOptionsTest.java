@@ -34,7 +34,7 @@ public class RequestOptionsTest {
 
     // only api keys and account should persist
     // assuming these are stable across a given stripe integration
-    assertEquals("sk_foo", optsRebuilt.getApiKey());
+    assertEquals(new BearerTokenAuthenticator("sk_foo"), optsRebuilt.getAuthenticator());
     assertEquals("acct_bar", optsRebuilt.getStripeAccount());
 
     assertNull(optsRebuilt.getClientId());
@@ -158,7 +158,7 @@ public class RequestOptionsTest {
             .build();
 
     RequestOptions merged = RequestOptions.merge(clientOptions, requestOptions);
-    assertEquals("key2", merged.getApiKey());
+    assertEquals(new BearerTokenAuthenticator("key2"), merged.getAuthenticator());
     assertEquals(3, merged.getConnectTimeout());
     assertEquals(4, merged.getMaxNetworkRetries());
     assertEquals(5, merged.getReadTimeout());
@@ -242,7 +242,7 @@ public class RequestOptionsTest {
     RequestOptions requestOptions = RequestOptions.builder().build();
 
     RequestOptions merged = RequestOptions.merge(clientOptions, requestOptions);
-    assertEquals("key1", merged.getApiKey());
+    assertEquals(new BearerTokenAuthenticator("key1"), merged.getAuthenticator());
     assertEquals(1, merged.getConnectTimeout());
     assertEquals(1, merged.getMaxNetworkRetries());
     assertEquals(1, merged.getReadTimeout());
@@ -257,7 +257,7 @@ public class RequestOptionsTest {
   @Test
   public void defaultsToAllNullValues() {
     RequestOptions merged = RequestOptions.getDefault();
-    assertEquals(null, merged.getApiKey());
+    assertNull(merged.getAuthenticator());
     assertEquals(null, merged.getConnectTimeout());
     assertEquals(null, merged.getMaxNetworkRetries());
     assertEquals(null, merged.getReadTimeout());

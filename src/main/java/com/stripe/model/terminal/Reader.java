@@ -65,8 +65,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
    * Device type of the reader.
    *
    * <p>One of {@code bbpos_chipper2x}, {@code bbpos_wisepad3}, {@code bbpos_wisepos_e}, {@code
-   * mobile_phone_reader}, {@code simulated_stripe_s700}, {@code simulated_wisepos_e}, {@code
-   * stripe_m2}, {@code stripe_s700}, or {@code verifone_P400}.
+   * mobile_phone_reader}, {@code simulated_stripe_s700}, {@code simulated_stripe_s710}, {@code
+   * simulated_wisepos_e}, {@code stripe_m2}, {@code stripe_s700}, {@code stripe_s710}, or {@code
+   * verifone_P400}.
    */
   @SerializedName("device_type")
   String deviceType;
@@ -93,8 +94,8 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   Long lastSeenAt;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;

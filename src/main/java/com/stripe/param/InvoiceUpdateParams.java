@@ -2915,8 +2915,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           public static class EuBankTransfer {
             /**
              * <strong>Required.</strong> The desired country code of the bank account information.
-             * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
-             * or {@code NL}.
+             * Permitted values include: {@code DE}, {@code FR}, {@code IE}, or {@code NL}.
              */
             @SerializedName("country")
             Object country;
@@ -2955,8 +2954,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
               /**
                * <strong>Required.</strong> The desired country code of the bank account
-               * information. Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code
-               * FR}, {@code IE}, or {@code NL}.
+               * information. Permitted values include: {@code DE}, {@code FR}, {@code IE}, or
+               * {@code NL}.
                */
               public Builder setCountry(String country) {
                 this.country = country;
@@ -2965,8 +2964,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
               /**
                * <strong>Required.</strong> The desired country code of the bank account
-               * information. Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code
-               * FR}, {@code IE}, or {@code NL}.
+               * information. Permitted values include: {@code DE}, {@code FR}, {@code IE}, or
+               * {@code NL}.
                */
               public Builder setCountry(EmptyParam country) {
                 this.country = country;
@@ -3932,6 +3931,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       @SerializedName("p24")
       P24("p24"),
+
+      @SerializedName("pay_by_bank")
+      PAY_BY_BANK("pay_by_bank"),
 
       @SerializedName("payco")
       PAYCO("payco"),

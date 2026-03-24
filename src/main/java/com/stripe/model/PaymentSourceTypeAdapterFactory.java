@@ -25,8 +25,6 @@ public class PaymentSourceTypeAdapterFactory implements TypeAdapterFactory {
     }
     final String discriminator = "object";
     final TypeAdapter<JsonElement> jsonElementAdapter = gson.getAdapter(JsonElement.class);
-    final TypeAdapter<com.stripe.model.PaymentSource> paymentSourceAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.PaymentSource.class));
     final TypeAdapter<com.stripe.model.Account> accountAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Account.class));
     final TypeAdapter<com.stripe.model.BankAccount> bankAccountAdapter =
@@ -40,7 +38,12 @@ public class PaymentSourceTypeAdapterFactory implements TypeAdapterFactory {
         new TypeAdapter<PaymentSource>() {
           @Override
           public void write(JsonWriter out, PaymentSource value) throws IOException {
-            paymentSourceAdapter.write(out, value);
+            @SuppressWarnings("unchecked")
+            TypeAdapter<PaymentSource> adapter =
+                (TypeAdapter<PaymentSource>)
+                    gson.getDelegateAdapter(
+                        PaymentSourceTypeAdapterFactory.this, TypeToken.get(value.getClass()));
+            adapter.write(out, value);
           }
 
           @Override

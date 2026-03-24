@@ -1,5 +1,58 @@
 # Changelog
 
+## 31.4.1 - 2026-03-06
+* [#2168](https://github.com/stripe/stripe-java/pull/2168) Support serializing Stripe objects with ApiResource.GSON
+  * `ApiResource.GSON` now supports serializing Stripe objects back into compatible JSON
+* [#2165](https://github.com/stripe/stripe-java/pull/2165) Add AI Agent information to UserAgent
+
+## 31.4.0 - 2026-02-25
+This release changes the pinned API version to `2026-02-25.clover`.
+
+* [#2158](https://github.com/stripe/stripe-java/pull/2158) Update generated code
+  * Add support for new resources `reserve.Hold`, `reserve.Plan`, and `reserve.Release`
+  * Add support for `location` and `reader` on `Charge.payment_method_details.card_present`, `Charge.payment_method_details.interac_present`, `ConfirmationToken.payment_method_preview.card.generated_from.payment_method_details.card_present`, `PaymentAttemptRecord.payment_method_details.card_present`, `PaymentAttemptRecord.payment_method_details.interac_present`, `PaymentMethod.card.generated_from.payment_method_details.card_present`, `PaymentRecord.payment_method_details.card_present`, and `PaymentRecord.payment_method_details.interac_present`
+  * Add support for new value `lk_vat` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceCreatePreviewParams.customer_details.tax_ids[].type`, `TaxIdCreateParams.type`, and `tax.CalculationCreateParams.customer_details.tax_ids[].type`
+  * Add support for new values `terminal_wifi_certificate` and `terminal_wifi_private_key` on enum `FileListParams.purpose`
+  * Add support for new values `terminal_wifi_certificate` and `terminal_wifi_private_key` on enum `FileCreateParams.purpose`
+  * Add support for new value `pay_by_bank` on enums `InvoiceCreateParams.payment_settings.paymentMethodTypes`, `InvoiceUpdateParams.payment_settings.paymentMethodTypes`, `SubscriptionCreateParams.payment_settings.paymentMethodTypes`, and `SubscriptionUpdateParams.payment_settings.paymentMethodTypes`
+  * Add support for `displayName` and `serviceUserNumber` on `Mandate.payment_method_details.bacs_debit`
+  * Add support for `transactionPurpose` on `PaymentIntent.payment_method_options.us_bank_account`, `PaymentIntentConfirmParams.payment_method_options.us_bank_account`, `PaymentIntentCreateParams.payment_method_options.us_bank_account`, and `PaymentIntentUpdateParams.payment_method_options.us_bank_account`
+  * Add support for `optionalItems` on `PaymentLinkUpdateParams`
+  * Remove support for unused `cardIssuerDecline` on `radar.PaymentEvaluation.insights`
+  * Add support for `paymentBehavior` on `SubscriptionItemDeleteParams`
+  * Add support for `lk` on `tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
+  * Add support for `cellular` and `stripeS710` on `terminal.ConfigurationCreateParams`, `terminal.ConfigurationUpdateParams`, and `terminal.Configuration`
+  * Add support for new values `simulated_stripe_s710` and `stripe_s710` on enum `terminal.ReaderListParams.deviceType`
+  * Add support for new values `reserve.hold.created`, `reserve.hold.updated`, `reserve.plan.created`, `reserve.plan.disabled`, `reserve.plan.expired`, `reserve.plan.updated`, and `reserve.release.created` on enums `WebhookEndpointCreateParams.enabledEvents` and `WebhookEndpointUpdateParams.enabledEvents`
+  * Add support for new value `2026-02-25.clover` on enum `WebhookEndpointCreateParams.apiVersion`
+  * Add support for snapshot events `reserve.hold.created` and `reserve.hold.updated` with resource `reserve.Hold`
+  * Add support for snapshot events `reserve.plan.created`, `reserve.plan.disabled`, `reserve.plan.expired`, and `reserve.plan.updated` with resource `reserve.Plan`
+  * Add support for snapshot event `reserve.release.created` with resource `reserve.Release`
+
+## 31.3.0 - 2026-01-28
+This release changes the pinned API version to `2026-01-28.clover`.
+
+* [#2147](https://github.com/stripe/stripe-java/pull/2147) Update generated code
+  * Add support for new resource `radar.PaymentEvaluation`
+  * Add support for `create` method on resource `radar.PaymentEvaluation`
+  * Add support for `adjustableQuantity` on `LineItem`
+  * Add support for new value `adyen` on enums `ConfirmationTokenCreateParams.payment_method_data.ideal.bank`, `PaymentIntentConfirmParams.payment_method_data.ideal.bank`, `PaymentIntentCreateParams.payment_method_data.ideal.bank`, `PaymentIntentUpdateParams.payment_method_data.ideal.bank`, `PaymentMethodCreateParams.ideal.bank`, `SetupIntentConfirmParams.payment_method_data.ideal.bank`, `SetupIntentCreateParams.payment_method_data.ideal.bank`, and `SetupIntentUpdateParams.payment_method_data.ideal.bank`
+  * Add support for new value `pl_nip` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceCreatePreviewParams.customer_details.tax_ids[].type`, `TaxIdCreateParams.type`, and `tax.CalculationCreateParams.customer_details.tax_ids[].type`
+  * Add support for `enforceArithmeticValidation` on `PaymentIntentCaptureParams.amount_details`, `PaymentIntentConfirmParams.amount_details`, `PaymentIntentCreateParams.amount_details`, `PaymentIntentIncrementAuthorizationParams.amount_details`, and `PaymentIntentUpdateParams.amount_details`
+  * Add support for new values `2.3.0` and `2.3.1` on enums `PaymentIntentConfirmParams.payment_method_options.card.three_d_secure.version`, `PaymentIntentCreateParams.payment_method_options.card.three_d_secure.version`, `PaymentIntentUpdateParams.payment_method_options.card.three_d_secure.version`, `SetupIntentConfirmParams.payment_method_options.card.three_d_secure.version`, `SetupIntentCreateParams.payment_method_options.card.three_d_secure.version`, and `SetupIntentUpdateParams.payment_method_options.card.three_d_secure.version`
+  * Add support for `error` on `PaymentIntent.amount_details`
+  * Remove support for `bgn` on `terminal.Configuration.tipping`, `terminal.ConfigurationCreateParams.tipping`, and `terminal.ConfigurationUpdateParams.tipping`
+  * Add support for `topup` on `treasury.ReceivedDebit.linked_flows`
+  * Add support for `contactPhone` on `v2.core.AccountCreateParams`, `v2.core.AccountTokenCreateParams`, `v2.core.AccountUpdateParams`, and `v2.core.Account`
+  * Add support for `registrationDate` on `v2.core.Account.identity.business_details`, `v2.core.AccountCreateParams.identity.business_details`, `v2.core.AccountTokenCreateParams.identity.business_details`, and `v2.core.AccountUpdateParams.identity.business_details`
+  * Add support for new value `gb_vat` on enums `v2.core.AccountCreateParams.identity.business_details.id_numbers[].type`, `v2.core.AccountTokenCreateParams.identity.business_details.id_numbers[].type`, and `v2.core.AccountUpdateParams.identity.business_details.id_numbers[].type`
+
+## 31.2.0 - 2026-01-16
+* [#2144](https://github.com/stripe/stripe-java/pull/2144) Update generated code
+  * Add support for event notifications `V2CoreAccountClosedEvent`, `V2CoreAccountCreatedEvent`, `V2CoreAccountIncludingConfigurationCustomerCapabilityStatusUpdatedEvent`, `V2CoreAccountIncludingConfigurationCustomerUpdatedEvent`, `V2CoreAccountIncludingConfigurationMerchantCapabilityStatusUpdatedEvent`, `V2CoreAccountIncludingConfigurationMerchantUpdatedEvent`, `V2CoreAccountIncludingConfigurationRecipientCapabilityStatusUpdatedEvent`, `V2CoreAccountIncludingConfigurationRecipientUpdatedEvent`, `V2CoreAccountIncludingDefaultsUpdatedEvent`, `V2CoreAccountIncludingFutureRequirementsUpdatedEvent`, `V2CoreAccountIncludingIdentityUpdatedEvent`, `V2CoreAccountIncludingRequirementsUpdatedEvent`, and `V2CoreAccountUpdatedEvent` with related object `v2.core.Account`
+  * Add support for event notification `V2CoreAccountLinkReturnedEvent`
+  * Add support for event notifications `V2CoreAccountPersonCreatedEvent`, `V2CoreAccountPersonDeletedEvent`, and `V2CoreAccountPersonUpdatedEvent` with related object `v2.core.AccountPerson`
+
 ## 31.1.0 - 2025-12-16
 This release changes the pinned API version to `2025-12-15.clover`.
 

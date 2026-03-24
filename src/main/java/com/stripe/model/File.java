@@ -70,8 +70,8 @@ public class File extends ApiResource implements HasId {
    * financial_account_statement}, {@code identity_document}, {@code
    * identity_document_downloadable}, {@code issuing_regulatory_reporting}, {@code pci_document},
    * {@code platform_terms_of_service}, {@code selfie}, {@code sigma_scheduled_query}, {@code
-   * tax_document_user_upload}, {@code terminal_android_apk}, or {@code
-   * terminal_reader_splashscreen}.
+   * tax_document_user_upload}, {@code terminal_android_apk}, {@code terminal_reader_splashscreen},
+   * {@code terminal_wifi_certificate}, or {@code terminal_wifi_private_key}.
    */
   @SerializedName("purpose")
   String purpose;

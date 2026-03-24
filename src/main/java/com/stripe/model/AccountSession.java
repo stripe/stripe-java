@@ -58,8 +58,8 @@ public class AccountSession extends ApiResource {
   Long expiresAt;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -322,9 +322,9 @@ public class AccountSession extends ApiResource {
         Boolean externalAccountCollection;
 
         /**
-         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
-         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
-         * false}.
+         * Whether to allow creation of instant payouts. The default value is {@code enabled} when
+         * Stripe is responsible for negative account balances, and {@code use_dashboard_rules}
+         * otherwise.
          */
         @SerializedName("instant_payouts")
         Boolean instantPayouts;
@@ -538,9 +538,9 @@ public class AccountSession extends ApiResource {
         Boolean externalAccountCollection;
 
         /**
-         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
-         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
-         * false}.
+         * Whether to allow creation of instant payouts. The default value is {@code enabled} when
+         * Stripe is responsible for negative account balances, and {@code use_dashboard_rules}
+         * otherwise.
          */
         @SerializedName("instant_payouts")
         Boolean instantPayouts;
@@ -902,9 +902,9 @@ public class AccountSession extends ApiResource {
         Boolean externalAccountCollection;
 
         /**
-         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
-         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
-         * false}.
+         * Whether to allow creation of instant payouts. The default value is {@code enabled} when
+         * Stripe is responsible for negative account balances, and {@code use_dashboard_rules}
+         * otherwise.
          */
         @SerializedName("instant_payouts")
         Boolean instantPayouts;

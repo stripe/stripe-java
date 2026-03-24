@@ -96,7 +96,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
 
   /**
    * Collect additional information from your customer using custom fields. Up to 3 fields are
-   * supported.
+   * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
    */
   @SerializedName("custom_fields")
   List<PaymentLink.CustomField> customFields;
@@ -130,8 +130,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   LineItemCollection lineItems;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -688,7 +688,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Dropdown extends StripeObject {
-      /** The value that will pre-fill on the payment page. */
+      /** The value that pre-fills on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
 
@@ -747,7 +747,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Numeric extends StripeObject {
-      /** The value that will pre-fill the field on the payment page. */
+      /** The value that pre-fills the field on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
 
@@ -768,7 +768,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Text extends StripeObject {
-      /** The value that will pre-fill the field on the payment page. */
+      /** The value that pre-fills the field on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
 
@@ -816,7 +816,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AfterSubmit extends StripeObject {
-      /** Text may be up to 1200 characters in length. */
+      /** Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
     }
@@ -829,7 +829,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class ShippingAddress extends StripeObject {
-      /** Text may be up to 1200 characters in length. */
+      /** Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
     }
@@ -842,7 +842,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Submit extends StripeObject {
-      /** Text may be up to 1200 characters in length. */
+      /** Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
     }
@@ -855,7 +855,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class TermsOfServiceAcceptance extends StripeObject {
-      /** Text may be up to 1200 characters in length. */
+      /** Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
     }

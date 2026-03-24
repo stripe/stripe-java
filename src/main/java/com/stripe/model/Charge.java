@@ -171,8 +171,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   Level3 level3;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -1319,6 +1319,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("type")
     String type;
 
+    @SerializedName("upi")
+    Upi upi;
+
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
@@ -2218,7 +2221,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         /**
          * The version of 3D Secure that was used.
          *
-         * <p>One of {@code 1.0.2}, {@code 2.1.0}, or {@code 2.2.0}.
+         * <p>One of {@code 1.0.2}, {@code 2.1.0}, {@code 2.2.0}, {@code 2.3.0}, or {@code 2.3.1}.
          */
         @SerializedName("version")
         String version;
@@ -2516,6 +2519,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String last4;
 
       /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
+      /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
        * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
        * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
@@ -2556,6 +2566,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("read_method")
       String readMethod;
+
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
 
       /**
        * A collection of fields required to be displayed on receipts. Only required for EMV
@@ -2711,7 +2728,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, or {@code solana}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, or {@code
+       * tempo}.
        */
       @SerializedName("network")
       String network;
@@ -2851,11 +2869,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @EqualsAndHashCode(callSuper = false)
     public static class Ideal extends StripeObject {
       /**
-       * The customer's bank. Can be one of {@code abn_amro}, {@code asn_bank}, {@code bunq}, {@code
-       * buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code knab}, {@code mollie},
-       * {@code moneyou}, {@code n26}, {@code nn}, {@code rabobank}, {@code regiobank}, {@code
-       * revolut}, {@code sns_bank}, {@code triodos_bank}, {@code van_lanschot}, or {@code
-       * yoursafe}.
+       * The customer's bank. Can be one of {@code abn_amro}, {@code adyen}, {@code asn_bank},
+       * {@code bunq}, {@code buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code
+       * knab}, {@code mollie}, {@code moneyou}, {@code n26}, {@code nn}, {@code rabobank}, {@code
+       * regiobank}, {@code revolut}, {@code sns_bank}, {@code triodos_bank}, {@code van_lanschot},
+       * or {@code yoursafe}.
        */
       @SerializedName("bank")
       String bank;
@@ -2863,11 +2881,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The Bank Identifier Code of the customer's bank.
        *
-       * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code BUNQNL2A}, {@code
-       * BUUTNL2A}, {@code FNOMNL22}, {@code FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code
-       * KNABNL2H}, {@code MLLENL2A}, {@code MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code
-       * RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or
-       * {@code TRIONL2U}.
+       * <p>One of {@code ABNANL2A}, {@code ADYBNL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code
+       * BUNQNL2A}, {@code BUUTNL2A}, {@code FNOMNL22}, {@code FVLBNL22}, {@code HANDNL2A}, {@code
+       * INGBNL2A}, {@code KNABNL2H}, {@code MLLENL2A}, {@code MOYONL21}, {@code NNBANL2G}, {@code
+       * NTSBDEB1}, {@code RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code
+       * SNSBNL2A}, or {@code TRIONL2U}.
        */
       @SerializedName("bic")
       String bic;
@@ -3038,6 +3056,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String last4;
 
       /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
+      /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
        * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
        * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
@@ -3070,6 +3095,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("read_method")
       String readMethod;
+
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
 
       /**
        * A collection of fields required to be displayed on receipts. Only required for EMV
@@ -3970,6 +4002,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Twint extends StripeObject {}
+
+    /**
+     * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Upi extends StripeObject {
+      /** Customer's unique Virtual Payment Address. */
+      @SerializedName("vpa")
+      String vpa;
+    }
 
     /**
      * For more details about UsBankAccount, please refer to the <a

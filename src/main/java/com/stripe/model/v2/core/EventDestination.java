@@ -46,7 +46,14 @@ public class EventDestination extends StripeObject implements HasId {
   @SerializedName("event_payload")
   String eventPayload;
 
-  /** Where events should be routed from. */
+  /**
+   * Specifies which accounts' events route to this destination. {@code @self}: Receive events from
+   * the account that owns the event destination. {@code @accounts}: Receive events emitted from
+   * other accounts you manage which includes your v1 and v2 accounts.
+   * {@code @organization_members}: Receive events from accounts directly linked to the
+   * organization. {@code @organization_members/@accounts}: Receive events from all accounts
+   * connected to any platform accounts in the organization.
+   */
   @SerializedName("events_from")
   List<String> eventsFrom;
 

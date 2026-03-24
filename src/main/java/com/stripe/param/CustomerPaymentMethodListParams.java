@@ -384,6 +384,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
     @SerializedName("twint")
     TWINT("twint"),
 
+    @SerializedName("upi")
+    UPI("upi"),
+
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),
 

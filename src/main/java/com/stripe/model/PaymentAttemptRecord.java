@@ -85,8 +85,8 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -570,6 +570,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
+    @SerializedName("upi")
+    Upi upi;
+
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
@@ -698,17 +701,11 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Affirm extends StripeObject {
-      /**
-       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
-       * transaction's reader is assigned to.
-       */
+      /** ID of the location that this reader is assigned to. */
       @SerializedName("location")
       String location;
 
-      /**
-       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
-       * transaction was made on.
-       */
+      /** ID of the reader this transaction was made on. */
       @SerializedName("reader")
       String reader;
 
@@ -729,7 +726,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @SerializedName("order_id")
       String orderId;
 
-      /** Order identifier shown to the merchant in Afterpay’s online portal. */
+      /** Order identifier shown to the merchant in Afterpay's online portal. */
       @SerializedName("reference")
       String reference;
     }
@@ -1273,12 +1270,24 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Checks extends StripeObject {
+        /**
+         * If you provide a value for {@code address.line1}, the check result is one of {@code
+         * pass}, {@code fail}, {@code unavailable}, or {@code unchecked}.
+         */
         @SerializedName("address_line1_check")
         String addressLine1Check;
 
+        /**
+         * If you provide a address postal code, the check result is one of {@code pass}, {@code
+         * fail}, {@code unavailable}, or {@code unchecked}.
+         */
         @SerializedName("address_postal_code_check")
         String addressPostalCodeCheck;
 
+        /**
+         * If you provide a CVC, the check results is one of {@code pass}, {@code fail}, {@code
+         * unavailable}, or {@code unchecked}.
+         */
         @SerializedName("cvc_check")
         String cvcCheck;
       }
@@ -1291,6 +1300,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Installments extends StripeObject {
+        /** Installment plan selected for the payment. */
         @SerializedName("plan")
         Plan plan;
 
@@ -1349,15 +1359,72 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class ThreeDSecure extends StripeObject {
+        /**
+         * For authenticated transactions: Indicates how the issuing bank authenticated the
+         * customer.
+         *
+         * <p>One of {@code challenge}, or {@code frictionless}.
+         */
         @SerializedName("authentication_flow")
         String authenticationFlow;
 
+        /**
+         * The 3D Secure cryptogram, also known as the &quot;authentication value&quot; (AAV, CAVV
+         * or AEVV).
+         */
+        @SerializedName("cryptogram")
+        String cryptogram;
+
+        /**
+         * The Electronic Commerce Indicator (ECI). A protocol-level field indicating what degree of
+         * authentication was performed.
+         *
+         * <p>One of {@code 01}, {@code 02}, {@code 03}, {@code 04}, {@code 05}, {@code 06}, or
+         * {@code 07}.
+         */
+        @SerializedName("electronic_commerce_indicator")
+        String electronicCommerceIndicator;
+
+        /**
+         * The exemption requested via 3DS and accepted by the issuer at authentication time.
+         *
+         * <p>One of {@code low_risk}, or {@code none}.
+         */
+        @SerializedName("exemption_indicator")
+        String exemptionIndicator;
+
+        /**
+         * Whether Stripe requested the value of {@code exemption_indicator} in the transaction.
+         * This will depend on the outcome of Stripe's internal risk assessment.
+         */
+        @SerializedName("exemption_indicator_applied")
+        Boolean exemptionIndicatorApplied;
+
+        /**
+         * Indicates the outcome of 3D Secure authentication.
+         *
+         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code exempted}, {@code
+         * failed}, {@code not_supported}, or {@code processing_error}.
+         */
         @SerializedName("result")
         String result;
 
+        /**
+         * Additional information about why 3D Secure succeeded or failed, based on the {@code
+         * result}.
+         *
+         * <p>One of {@code abandoned}, {@code bypassed}, {@code canceled}, {@code
+         * card_not_enrolled}, {@code network_not_supported}, {@code protocol_error}, or {@code
+         * rejected}.
+         */
         @SerializedName("result_reason")
         String resultReason;
 
+        /**
+         * The version of 3D Secure that was used.
+         *
+         * <p>One of {@code 1.0.2}, {@code 2.1.0}, or {@code 2.2.0}.
+         */
         @SerializedName("version")
         String version;
       }
@@ -1539,6 +1606,13 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       String last4;
 
       /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
+      /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
        * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
        * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
@@ -1579,6 +1653,13 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
        */
       @SerializedName("read_method")
       String readMethod;
+
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
 
       /**
        * A collection of fields required to be displayed on receipts. Only required for EMV
@@ -1734,7 +1815,8 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, or {@code solana}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, or {@code
+       * tempo}.
        */
       @SerializedName("network")
       String network;
@@ -1894,11 +1976,11 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Ideal extends StripeObject {
       /**
-       * The customer's bank. Can be one of {@code abn_amro}, {@code asn_bank}, {@code bunq}, {@code
-       * buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code knab}, {@code mollie},
-       * {@code moneyou}, {@code n26}, {@code nn}, {@code rabobank}, {@code regiobank}, {@code
-       * revolut}, {@code sns_bank}, {@code triodos_bank}, {@code van_lanschot}, or {@code
-       * yoursafe}.
+       * The customer's bank. Can be one of {@code abn_amro}, {@code adyen}, {@code asn_bank},
+       * {@code bunq}, {@code buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code
+       * knab}, {@code mollie}, {@code moneyou}, {@code n26}, {@code nn}, {@code rabobank}, {@code
+       * regiobank}, {@code revolut}, {@code sns_bank}, {@code triodos_bank}, {@code van_lanschot},
+       * or {@code yoursafe}.
        */
       @SerializedName("bank")
       String bank;
@@ -1906,11 +1988,11 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /**
        * The Bank Identifier Code of the customer's bank.
        *
-       * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code BUNQNL2A}, {@code
-       * BUUTNL2A}, {@code FNOMNL22}, {@code FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code
-       * KNABNL2H}, {@code MLLENL2A}, {@code MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code
-       * RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or
-       * {@code TRIONL2U}.
+       * <p>One of {@code ABNANL2A}, {@code ADYBNL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code
+       * BUNQNL2A}, {@code BUUTNL2A}, {@code FNOMNL22}, {@code FVLBNL22}, {@code HANDNL2A}, {@code
+       * INGBNL2A}, {@code KNABNL2H}, {@code MLLENL2A}, {@code MOYONL21}, {@code NNBANL2G}, {@code
+       * NTSBDEB1}, {@code RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code
+       * SNSBNL2A}, or {@code TRIONL2U}.
        */
       @SerializedName("bic")
       String bic;
@@ -2081,6 +2163,13 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       String last4;
 
       /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
+      /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
        * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
        * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
@@ -2113,6 +2202,13 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
        */
       @SerializedName("read_method")
       String readMethod;
+
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
 
       /**
        * A collection of fields required to be displayed on receipts. Only required for EMV
@@ -3013,6 +3109,19 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Twint extends StripeObject {}
+
+    /**
+     * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Upi extends StripeObject {
+      /** Customer's unique Virtual Payment Address. */
+      @SerializedName("vpa")
+      String vpa;
+    }
 
     /**
      * For more details about UsBankAccount, please refer to the <a

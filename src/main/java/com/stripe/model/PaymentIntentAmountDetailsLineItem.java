@@ -57,7 +57,7 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
    * The product name of the line item. Required for L3 rates. At most 1024 characters long.
    *
    * <p>For Cards, this field is truncated to 26 alphanumeric characters before being sent to the
-   * card networks. For Paypal, this field is truncated to 127 characters.
+   * card networks. For PayPal, this field is truncated to 127 characters.
    */
   @SerializedName("product_name")
   String productName;

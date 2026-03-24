@@ -100,8 +100,8 @@ public final class SessionService extends ApiService {
   /**
    * Updates a Checkout Session object.
    *
-   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
-   * update Checkout</a>.
+   * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
+   * update a Checkout Session</a>.
    */
   public Session update(String session, SessionUpdateParams params) throws StripeException {
     return update(session, params, (RequestOptions) null);
@@ -109,8 +109,8 @@ public final class SessionService extends ApiService {
   /**
    * Updates a Checkout Session object.
    *
-   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
-   * update Checkout</a>.
+   * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
+   * update a Checkout Session</a>.
    */
   public Session update(String session, RequestOptions options) throws StripeException {
     return update(session, (SessionUpdateParams) null, options);
@@ -118,8 +118,8 @@ public final class SessionService extends ApiService {
   /**
    * Updates a Checkout Session object.
    *
-   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
-   * update Checkout</a>.
+   * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
+   * update a Checkout Session</a>.
    */
   public Session update(String session) throws StripeException {
     return update(session, (SessionUpdateParams) null, (RequestOptions) null);
@@ -127,8 +127,8 @@ public final class SessionService extends ApiService {
   /**
    * Updates a Checkout Session object.
    *
-   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
-   * update Checkout</a>.
+   * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
+   * update a Checkout Session</a>.
    */
   public Session update(String session, SessionUpdateParams params, RequestOptions options)
       throws StripeException {

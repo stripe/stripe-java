@@ -523,27 +523,37 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
     @SerializedName("invoice_line_item")
     String invoiceLineItem;
 
+    /**
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
     /** The line item quantity to credit. */
     @SerializedName("quantity")
     Long quantity;
 
     /**
-     * A list of up to 10 tax amounts for the credit note line item. Cannot be mixed with {@code
-     * tax_rates}.
+     * A list of up to 10 tax amounts for the credit note line item. Not valid when {@code
+     * tax_rates} is used or if invoice is set up with {@code automatic_tax[enabled]=true}.
      */
     @SerializedName("tax_amounts")
     Object taxAmounts;
 
     /**
      * The tax rates which apply to the credit note line item. Only valid when the {@code type} is
-     * {@code custom_line_item} and cannot be mixed with {@code tax_amounts}.
+     * {@code custom_line_item} and {@code tax_amounts} is not used.
      */
     @SerializedName("tax_rates")
     Object taxRates;
 
     /**
      * <strong>Required.</strong> Type of the credit note line item, one of {@code
-     * invoice_line_item} or {@code custom_line_item}
+     * invoice_line_item} or {@code custom_line_item}. {@code custom_line_item} is not valid when
+     * the invoice is set up with {@code automatic_tax[enabled]=true}.
      */
     @SerializedName("type")
     Type type;
@@ -569,6 +579,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
         String description,
         Map<String, Object> extraParams,
         String invoiceLineItem,
+        Map<String, String> metadata,
         Long quantity,
         Object taxAmounts,
         Object taxRates,
@@ -579,6 +590,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
       this.description = description;
       this.extraParams = extraParams;
       this.invoiceLineItem = invoiceLineItem;
+      this.metadata = metadata;
       this.quantity = quantity;
       this.taxAmounts = taxAmounts;
       this.taxRates = taxRates;
@@ -600,6 +612,8 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
 
       private String invoiceLineItem;
 
+      private Map<String, String> metadata;
+
       private Long quantity;
 
       private Object taxAmounts;
@@ -619,6 +633,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
             this.description,
             this.extraParams,
             this.invoiceLineItem,
+            this.metadata,
             this.quantity,
             this.taxAmounts,
             this.taxRates,
@@ -680,6 +695,32 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CreditNotePreviewLinesListParams.Line#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CreditNotePreviewLinesListParams.Line#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
+        return this;
+      }
+
       /** The line item quantity to credit. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
@@ -716,8 +757,8 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
       }
 
       /**
-       * A list of up to 10 tax amounts for the credit note line item. Cannot be mixed with {@code
-       * tax_rates}.
+       * A list of up to 10 tax amounts for the credit note line item. Not valid when {@code
+       * tax_rates} is used or if invoice is set up with {@code automatic_tax[enabled]=true}.
        */
       public Builder setTaxAmounts(EmptyParam taxAmounts) {
         this.taxAmounts = taxAmounts;
@@ -725,8 +766,8 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
       }
 
       /**
-       * A list of up to 10 tax amounts for the credit note line item. Cannot be mixed with {@code
-       * tax_rates}.
+       * A list of up to 10 tax amounts for the credit note line item. Not valid when {@code
+       * tax_rates} is used or if invoice is set up with {@code automatic_tax[enabled]=true}.
        */
       public Builder setTaxAmounts(
           List<CreditNotePreviewLinesListParams.Line.TaxAmount> taxAmounts) {
@@ -764,7 +805,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
 
       /**
        * The tax rates which apply to the credit note line item. Only valid when the {@code type} is
-       * {@code custom_line_item} and cannot be mixed with {@code tax_amounts}.
+       * {@code custom_line_item} and {@code tax_amounts} is not used.
        */
       public Builder setTaxRates(EmptyParam taxRates) {
         this.taxRates = taxRates;
@@ -773,7 +814,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
 
       /**
        * The tax rates which apply to the credit note line item. Only valid when the {@code type} is
-       * {@code custom_line_item} and cannot be mixed with {@code tax_amounts}.
+       * {@code custom_line_item} and {@code tax_amounts} is not used.
        */
       public Builder setTaxRates(List<String> taxRates) {
         this.taxRates = taxRates;
@@ -782,7 +823,8 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Type of the credit note line item, one of {@code
-       * invoice_line_item} or {@code custom_line_item}
+       * invoice_line_item} or {@code custom_line_item}. {@code custom_line_item} is not valid when
+       * the invoice is set up with {@code automatic_tax[enabled]=true}.
        */
       public Builder setType(CreditNotePreviewLinesListParams.Line.Type type) {
         this.type = type;

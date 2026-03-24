@@ -371,7 +371,13 @@ public class FileCreateParams extends ApiRequestParams {
     TERMINAL_ANDROID_APK("terminal_android_apk"),
 
     @SerializedName("terminal_reader_splashscreen")
-    TERMINAL_READER_SPLASHSCREEN("terminal_reader_splashscreen");
+    TERMINAL_READER_SPLASHSCREEN("terminal_reader_splashscreen"),
+
+    @SerializedName("terminal_wifi_certificate")
+    TERMINAL_WIFI_CERTIFICATE("terminal_wifi_certificate"),
+
+    @SerializedName("terminal_wifi_private_key")
+    TERMINAL_WIFI_PRIVATE_KEY("terminal_wifi_private_key");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
