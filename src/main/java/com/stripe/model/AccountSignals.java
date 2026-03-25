@@ -32,6 +32,10 @@ public class AccountSignals extends ApiResource {
   @SerializedName("delinquency")
   Delinquency delinquency;
 
+  /** The fraud intent signal of the account. */
+  @SerializedName("fraud_intent")
+  FraudIntent fraudIntent;
+
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
@@ -146,7 +150,78 @@ public class AccountSignals extends ApiResource {
        * <p>One of {@code account_balance}, {@code aov}, {@code charge_concentration}, {@code
        * dispute_window}, {@code disputes}, {@code duplicates}, {@code exposure}, {@code
        * firmographic}, {@code lifetime_metrics}, {@code payment_processing}, {@code
-       * payment_volume}, {@code payouts}, {@code refunds}, {@code tenure}, or {@code transfers}.
+       * payment_volume}, {@code payouts}, {@code refunds}, {@code related_accounts}, {@code
+       * tenure}, or {@code transfers}.
+       */
+      @SerializedName("indicator")
+      String indicator;
+    }
+  }
+
+  /**
+   * For more details about FraudIntent, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FraudIntent extends StripeObject {
+    /** Time at which the signal was evaluated, measured in seconds since the Unix epoch. */
+    @SerializedName("evaluated_at")
+    Long evaluatedAt;
+
+    /**
+     * Array of objects representing individual factors that contributed to the calculated
+     * probability of fraud intent.
+     */
+    @SerializedName("indicators")
+    List<AccountSignals.FraudIntent.Indicator> indicators;
+
+    /** The probability of fraud intent. Can be between 0.00 and 100.00 */
+    @SerializedName("probability")
+    BigDecimal probability;
+
+    /**
+     * Categorical assessment of the fraud intent risk based on probability.
+     *
+     * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+     * not_assessed}, or {@code unknown}.
+     */
+    @SerializedName("risk_level")
+    String riskLevel;
+
+    /** Unique identifier for the fraud intent signal. */
+    @SerializedName("signal_id")
+    String signalId;
+
+    /**
+     * For more details about Indicator, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Indicator extends StripeObject {
+      /** A brief explanation of how this indicator contributed to the delinquency probability. */
+      @SerializedName("description")
+      String description;
+
+      /**
+       * The effect this indicator had on the overall risk level.
+       *
+       * <p>One of {@code decrease}, {@code neutral}, {@code slight_increase}, or {@code
+       * strong_increase}.
+       */
+      @SerializedName("impact")
+      String impact;
+
+      /**
+       * The name of the specific indicator used in the risk assessment.
+       *
+       * <p>One of {@code bank_account}, {@code business_information_and_account_activity}, {@code
+       * disputes}, {@code failures}, {@code geo_location}, {@code other}, {@code
+       * other_related_accounts}, {@code other_transaction_activity}, {@code owner_email}, or {@code
+       * web_presence}.
        */
       @SerializedName("indicator")
       String indicator;
@@ -157,5 +232,6 @@ public class AccountSignals extends ApiResource {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(delinquency, responseGetter);
+    trySetResponseGetter(fraudIntent, responseGetter);
   }
 }

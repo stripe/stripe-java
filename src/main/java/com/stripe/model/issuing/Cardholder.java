@@ -62,8 +62,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   Individual individual;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -99,9 +99,9 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
 
   /**
    * The cardholder’s preferred locales (languages), ordered by preference. Locales can be {@code
-   * de}, {@code en}, {@code es}, {@code fr}, or {@code it}. This changes the language of the <a
-   * href="https://docs.stripe.com/issuing/3d-secure">3D Secure flow</a> and one-time password
-   * messages sent to the cardholder.
+   * da}, {@code de}, {@code en}, {@code es}, {@code fr}, {@code it}, {@code pl}, or {@code sv}.
+   * This changes the language of the <a href="https://docs.stripe.com/issuing/3d-secure">3D Secure
+   * flow</a> and one-time password messages sent to the cardholder.
    */
   @SerializedName("preferred_locales")
   List<String> preferredLocales;

@@ -40,7 +40,7 @@ public final class InvoiceService extends ApiService {
    * Permanently deletes a one-off invoice draft. This cannot be undone. Attempts to delete invoices
    * that are no longer in a draft state will fail; once an invoice has been finalized or if an
    * invoice is for a subscription, it must be <a
-   * href="https://stripe.com/docs/api#void_invoice">voided</a>.
+   * href="https://stripe.com/api/invoices/void">voided</a>.
    */
   public Invoice delete(String invoice) throws StripeException {
     return delete(invoice, (RequestOptions) null);
@@ -49,7 +49,7 @@ public final class InvoiceService extends ApiService {
    * Permanently deletes a one-off invoice draft. This cannot be undone. Attempts to delete invoices
    * that are no longer in a draft state will fail; once an invoice has been finalized or if an
    * invoice is for a subscription, it must be <a
-   * href="https://stripe.com/docs/api#void_invoice">voided</a>.
+   * href="https://stripe.com/api/invoices/void">voided</a>.
    */
   public Invoice delete(String invoice, RequestOptions options) throws StripeException {
     String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
@@ -182,8 +182,8 @@ public final class InvoiceService extends ApiService {
   }
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
-   * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
-   * allows you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
+   * you <a href="https://stripe.com/api/invoices/finalize">finalize</a> the invoice, which allows
+   * you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
    * href="https://stripe.com/api/invoices/send">send</a> the invoice to your customers.
    */
   public Invoice create(InvoiceCreateParams params) throws StripeException {
@@ -191,8 +191,8 @@ public final class InvoiceService extends ApiService {
   }
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
-   * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
-   * allows you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
+   * you <a href="https://stripe.com/api/invoices/finalize">finalize</a> the invoice, which allows
+   * you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
    * href="https://stripe.com/api/invoices/send">send</a> the invoice to your customers.
    */
   public Invoice create(RequestOptions options) throws StripeException {
@@ -200,8 +200,8 @@ public final class InvoiceService extends ApiService {
   }
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
-   * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
-   * allows you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
+   * you <a href="https://stripe.com/api/invoices/finalize">finalize</a> the invoice, which allows
+   * you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
    * href="https://stripe.com/api/invoices/send">send</a> the invoice to your customers.
    */
   public Invoice create() throws StripeException {
@@ -209,8 +209,8 @@ public final class InvoiceService extends ApiService {
   }
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
-   * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
-   * allows you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
+   * you <a href="https://stripe.com/api/invoices/finalize">finalize</a> the invoice, which allows
+   * you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
    * href="https://stripe.com/api/invoices/send">send</a> the invoice to your customers.
    */
   public Invoice create(InvoiceCreateParams params, RequestOptions options) throws StripeException {
@@ -625,14 +625,14 @@ public final class InvoiceService extends ApiService {
   }
   /**
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
-   * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
+   * href="https://stripe.com/api/invoices/delete">deletion</a>, however it only applies to
    * finalized invoices and maintains a papertrail where the invoice can still be found.
    *
    * <p>Consult with local regulations to determine whether and how an invoice might be amended,
    * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
-   * href="https://stripe.com/docs/api#create_invoice">issue another invoice</a> or <a
-   * href="https://stripe.com/docs/api#create_credit_note">credit note</a> instead. Stripe
-   * recommends that you consult with your legal counsel for advice specific to your business.
+   * href="https://stripe.com/api/invoices/create">issue another invoice</a> or <a
+   * href="https://stripe.com/api/credit_notes/create">credit note</a> instead. Stripe recommends
+   * that you consult with your legal counsel for advice specific to your business.
    */
   public Invoice voidInvoice(String invoice, InvoiceVoidInvoiceParams params)
       throws StripeException {
@@ -640,42 +640,42 @@ public final class InvoiceService extends ApiService {
   }
   /**
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
-   * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
+   * href="https://stripe.com/api/invoices/delete">deletion</a>, however it only applies to
    * finalized invoices and maintains a papertrail where the invoice can still be found.
    *
    * <p>Consult with local regulations to determine whether and how an invoice might be amended,
    * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
-   * href="https://stripe.com/docs/api#create_invoice">issue another invoice</a> or <a
-   * href="https://stripe.com/docs/api#create_credit_note">credit note</a> instead. Stripe
-   * recommends that you consult with your legal counsel for advice specific to your business.
+   * href="https://stripe.com/api/invoices/create">issue another invoice</a> or <a
+   * href="https://stripe.com/api/credit_notes/create">credit note</a> instead. Stripe recommends
+   * that you consult with your legal counsel for advice specific to your business.
    */
   public Invoice voidInvoice(String invoice, RequestOptions options) throws StripeException {
     return voidInvoice(invoice, (InvoiceVoidInvoiceParams) null, options);
   }
   /**
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
-   * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
+   * href="https://stripe.com/api/invoices/delete">deletion</a>, however it only applies to
    * finalized invoices and maintains a papertrail where the invoice can still be found.
    *
    * <p>Consult with local regulations to determine whether and how an invoice might be amended,
    * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
-   * href="https://stripe.com/docs/api#create_invoice">issue another invoice</a> or <a
-   * href="https://stripe.com/docs/api#create_credit_note">credit note</a> instead. Stripe
-   * recommends that you consult with your legal counsel for advice specific to your business.
+   * href="https://stripe.com/api/invoices/create">issue another invoice</a> or <a
+   * href="https://stripe.com/api/credit_notes/create">credit note</a> instead. Stripe recommends
+   * that you consult with your legal counsel for advice specific to your business.
    */
   public Invoice voidInvoice(String invoice) throws StripeException {
     return voidInvoice(invoice, (InvoiceVoidInvoiceParams) null, (RequestOptions) null);
   }
   /**
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
-   * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
+   * href="https://stripe.com/api/invoices/delete">deletion</a>, however it only applies to
    * finalized invoices and maintains a papertrail where the invoice can still be found.
    *
    * <p>Consult with local regulations to determine whether and how an invoice might be amended,
    * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
-   * href="https://stripe.com/docs/api#create_invoice">issue another invoice</a> or <a
-   * href="https://stripe.com/docs/api#create_credit_note">credit note</a> instead. Stripe
-   * recommends that you consult with your legal counsel for advice specific to your business.
+   * href="https://stripe.com/api/invoices/create">issue another invoice</a> or <a
+   * href="https://stripe.com/api/credit_notes/create">credit note</a> instead. Stripe recommends
+   * that you consult with your legal counsel for advice specific to your business.
    */
   public Invoice voidInvoice(
       String invoice, InvoiceVoidInvoiceParams params, RequestOptions options)

@@ -186,8 +186,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   List<String> lines;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -1259,7 +1259,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       /**
        * Type of the account referenced.
        *
-       * <p>One of {@code account}, or {@code self}.
+       * <p>One of {@code account}, {@code application}, or {@code self}.
        */
       @SerializedName("type")
       String type;
@@ -1731,7 +1731,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       /**
        * Type of the account referenced.
        *
-       * <p>One of {@code account}, or {@code self}.
+       * <p>One of {@code account}, {@code application}, or {@code self}.
        */
       @SerializedName("type")
       String type;

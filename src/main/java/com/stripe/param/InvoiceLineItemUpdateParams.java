@@ -69,11 +69,10 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}. For <a
-   * href="https://docs.stripe.com/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
-   * line items, the incoming metadata specified on the request is directly used to set this value,
-   * in contrast to <a
-   * href="api/invoices/line_item#invoice_line_item_object-type">type=invoiceitem</a> line items,
-   * where any existing metadata on the invoice line is merged with the incoming data.
+   * href="https://stripe.com/api/invoices/line_item">type=subscription</a> line items, the incoming
+   * metadata specified on the request is directly used to set this value, in contrast to <a
+   * href="https://stripe.com/api/invoices/line_item">type=invoiceitem</a> line items, where any
+   * existing metadata on the invoice line is merged with the incoming data.
    */
   @SerializedName("metadata")
   Object metadata;
@@ -100,9 +99,19 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
   @SerializedName("pricing")
   Pricing pricing;
 
-  /** Non-negative integer. The quantity of units for the line item. */
+  /**
+   * Non-negative integer. The quantity of units for the line item. Use {@code quantity_decimal}
+   * instead to provide decimal precision. This field will be deprecated in favor of {@code
+   * quantity_decimal} in a future version.
+   */
   @SerializedName("quantity")
   Long quantity;
+
+  /**
+   * Non-negative decimal with at most 12 decimal places. The quantity of units for the line item.
+   */
+  @SerializedName("quantity_decimal")
+  Object quantityDecimal;
 
   /**
    * A list of up to 10 tax amounts for this line item. This can be useful if you calculate taxes on
@@ -138,6 +147,7 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
       PriceData priceData,
       Pricing pricing,
       Long quantity,
+      Object quantityDecimal,
       Object taxAmounts,
       Object taxRates) {
     this.amount = amount;
@@ -152,6 +162,7 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
     this.priceData = priceData;
     this.pricing = pricing;
     this.quantity = quantity;
+    this.quantityDecimal = quantityDecimal;
     this.taxAmounts = taxAmounts;
     this.taxRates = taxRates;
   }
@@ -185,6 +196,8 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
 
     private Long quantity;
 
+    private Object quantityDecimal;
+
     private Object taxAmounts;
 
     private Object taxRates;
@@ -204,6 +217,7 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
           this.priceData,
           this.pricing,
           this.quantity,
+          this.quantityDecimal,
           this.taxAmounts,
           this.taxRates);
     }
@@ -423,11 +437,10 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}. For <a
-     * href="https://docs.stripe.com/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
-     * line items, the incoming metadata specified on the request is directly used to set this
-     * value, in contrast to <a
-     * href="api/invoices/line_item#invoice_line_item_object-type">type=invoiceitem</a> line items,
-     * where any existing metadata on the invoice line is merged with the incoming data.
+     * href="https://stripe.com/api/invoices/line_item">type=subscription</a> line items, the
+     * incoming metadata specified on the request is directly used to set this value, in contrast to
+     * <a href="https://stripe.com/api/invoices/line_item">type=invoiceitem</a> line items, where
+     * any existing metadata on the invoice line is merged with the incoming data.
      */
     public Builder setMetadata(EmptyParam metadata) {
       this.metadata = metadata;
@@ -439,11 +452,10 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}. For <a
-     * href="https://docs.stripe.com/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
-     * line items, the incoming metadata specified on the request is directly used to set this
-     * value, in contrast to <a
-     * href="api/invoices/line_item#invoice_line_item_object-type">type=invoiceitem</a> line items,
-     * where any existing metadata on the invoice line is merged with the incoming data.
+     * href="https://stripe.com/api/invoices/line_item">type=subscription</a> line items, the
+     * incoming metadata specified on the request is directly used to set this value, in contrast to
+     * <a href="https://stripe.com/api/invoices/line_item">type=invoiceitem</a> line items, where
+     * any existing metadata on the invoice line is merged with the incoming data.
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
@@ -478,9 +490,29 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Non-negative integer. The quantity of units for the line item. */
+    /**
+     * Non-negative integer. The quantity of units for the line item. Use {@code quantity_decimal}
+     * instead to provide decimal precision. This field will be deprecated in favor of {@code
+     * quantity_decimal} in a future version.
+     */
     public Builder setQuantity(Long quantity) {
       this.quantity = quantity;
+      return this;
+    }
+
+    /**
+     * Non-negative decimal with at most 12 decimal places. The quantity of units for the line item.
+     */
+    public Builder setQuantityDecimal(BigDecimal quantityDecimal) {
+      this.quantityDecimal = quantityDecimal;
+      return this;
+    }
+
+    /**
+     * Non-negative decimal with at most 12 decimal places. The quantity of units for the line item.
+     */
+    public Builder setQuantityDecimal(EmptyParam quantityDecimal) {
+      this.quantityDecimal = quantityDecimal;
       return this;
     }
 
@@ -1569,10 +1601,7 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
         @SerializedName("performance_location")
         Object performanceLocation;
 
-        /**
-         * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
-         * code</a> ID.
-         */
+        /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
         @SerializedName("tax_code")
         Object taxCode;
 
@@ -1650,19 +1679,13 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /**
-           * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
-           * code</a> ID.
-           */
+          /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
           public Builder setTaxCode(String taxCode) {
             this.taxCode = taxCode;
             return this;
           }
 
-          /**
-           * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
-           * code</a> ID.
-           */
+          /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
           public Builder setTaxCode(EmptyParam taxCode) {
             this.taxCode = taxCode;
             return this;

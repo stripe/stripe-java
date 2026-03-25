@@ -1401,6 +1401,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           @SerializedName("account")
           ACCOUNT("account"),
 
+          @SerializedName("application")
+          APPLICATION("application"),
+
           @SerializedName("self")
           SELF("self");
 
@@ -1768,6 +1771,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         public enum Type implements ApiRequestParams.EnumParam {
           @SerializedName("account")
           ACCOUNT("account"),
+
+          @SerializedName("application")
+          APPLICATION("application"),
 
           @SerializedName("self")
           SELF("self");
@@ -4207,6 +4213,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           @SerializedName("account")
           ACCOUNT("account"),
 
+          @SerializedName("application")
+          APPLICATION("application"),
+
           @SerializedName("self")
           SELF("self");
 
@@ -5462,6 +5471,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         public enum Type implements ApiRequestParams.EnumParam {
           @SerializedName("account")
           ACCOUNT("account"),
+
+          @SerializedName("application")
+          APPLICATION("application"),
 
           @SerializedName("self")
           SELF("self");
@@ -7245,7 +7257,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     public static class PauseCollection {
       /**
        * <strong>Required.</strong> The payment collection behavior for this subscription while
-       * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       * paused.
        */
       @SerializedName("behavior")
       Behavior behavior;
@@ -7281,7 +7293,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The payment collection behavior for this subscription while
-         * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+         * paused.
          */
         public Builder setBehavior(
             SubscriptionScheduleUpdateParams.Phase.PauseCollection.Behavior behavior) {

@@ -690,6 +690,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("account")
         ACCOUNT("account"),
 
+        @SerializedName("application")
+        APPLICATION("application"),
+
         @SerializedName("self")
         SELF("self");
 
@@ -2726,9 +2729,20 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @SerializedName("price_data")
     PriceData priceData;
 
-    /** Non-negative integer. The quantity of units for the invoice item. */
+    /**
+     * Non-negative integer. The quantity of units for the invoice item. Use {@code
+     * quantity_decimal} instead to provide decimal precision. This field will be deprecated in
+     * favor of {@code quantity_decimal} in a future version.
+     */
     @SerializedName("quantity")
     Long quantity;
+
+    /**
+     * Non-negative decimal with at most 12 decimal places. The quantity of units for the invoice
+     * item.
+     */
+    @SerializedName("quantity_decimal")
+    BigDecimal quantityDecimal;
 
     /**
      * Only required if a <a
@@ -2781,6 +2795,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         String price,
         PriceData priceData,
         Long quantity,
+        BigDecimal quantityDecimal,
         TaxBehavior taxBehavior,
         Object taxCode,
         Object taxRates,
@@ -2798,6 +2813,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       this.price = price;
       this.priceData = priceData;
       this.quantity = quantity;
+      this.quantityDecimal = quantityDecimal;
       this.taxBehavior = taxBehavior;
       this.taxCode = taxCode;
       this.taxRates = taxRates;
@@ -2834,6 +2850,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       private Long quantity;
 
+      private BigDecimal quantityDecimal;
+
       private TaxBehavior taxBehavior;
 
       private Object taxCode;
@@ -2859,6 +2877,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             this.price,
             this.priceData,
             this.quantity,
+            this.quantityDecimal,
             this.taxBehavior,
             this.taxCode,
             this.taxRates,
@@ -3054,9 +3073,22 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         return this;
       }
 
-      /** Non-negative integer. The quantity of units for the invoice item. */
+      /**
+       * Non-negative integer. The quantity of units for the invoice item. Use {@code
+       * quantity_decimal} instead to provide decimal precision. This field will be deprecated in
+       * favor of {@code quantity_decimal} in a future version.
+       */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
+        return this;
+      }
+
+      /**
+       * Non-negative decimal with at most 12 decimal places. The quantity of units for the invoice
+       * item.
+       */
+      public Builder setQuantityDecimal(BigDecimal quantityDecimal) {
+        this.quantityDecimal = quantityDecimal;
         return this;
       }
 
@@ -3911,6 +3943,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("account")
       ACCOUNT("account"),
+
+      @SerializedName("application")
+      APPLICATION("application"),
 
       @SerializedName("self")
       SELF("self");
@@ -10010,7 +10045,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         public static class Set {
           /**
            * <strong>Required.</strong> The payment collection behavior for this subscription while
-           * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+           * paused.
            */
           @SerializedName("behavior")
           Behavior behavior;
@@ -10048,8 +10083,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
             /**
              * <strong>Required.</strong> The payment collection behavior for this subscription
-             * while paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code
-             * void}.
+             * while paused.
              */
             public Builder setBehavior(
                 InvoiceCreatePreviewParams.ScheduleDetails.Amendment.SetPauseCollection.Set.Behavior
@@ -13382,6 +13416,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             @SerializedName("account")
             ACCOUNT("account"),
 
+            @SerializedName("application")
+            APPLICATION("application"),
+
             @SerializedName("self")
             SELF("self");
 
@@ -14640,6 +14677,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           public enum Type implements ApiRequestParams.EnumParam {
             @SerializedName("account")
             ACCOUNT("account"),
+
+            @SerializedName("application")
+            APPLICATION("application"),
 
             @SerializedName("self")
             SELF("self");
@@ -16391,7 +16431,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       public static class PauseCollection {
         /**
          * <strong>Required.</strong> The payment collection behavior for this subscription while
-         * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+         * paused.
          */
         @SerializedName("behavior")
         Behavior behavior;
@@ -16428,7 +16468,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> The payment collection behavior for this subscription while
-           * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+           * paused.
            */
           public Builder setBehavior(
               InvoiceCreatePreviewParams.ScheduleDetails.Phase.PauseCollection.Behavior behavior) {

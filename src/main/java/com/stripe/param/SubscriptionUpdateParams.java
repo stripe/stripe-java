@@ -239,8 +239,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   /**
    * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-   * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-   * given subscription at the specified interval.
+   * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+   * subscription at the specified interval.
    */
   @SerializedName("pending_invoice_item_interval")
   Object pendingInvoiceItemInterval;
@@ -1101,8 +1101,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-     * given subscription at the specified interval.
+     * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+     * subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(
         SubscriptionUpdateParams.PendingInvoiceItemInterval pendingInvoiceItemInterval) {
@@ -1112,8 +1112,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
-     * given subscription at the specified interval.
+     * calling <a href="https://stripe.com/api/invoices/create">Create an invoice</a> for the given
+     * subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(EmptyParam pendingInvoiceItemInterval) {
       this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
@@ -2602,6 +2602,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("account")
         ACCOUNT("account"),
+
+        @SerializedName("application")
+        APPLICATION("application"),
 
         @SerializedName("self")
         SELF("self");
@@ -4330,6 +4333,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("account")
         ACCOUNT("account"),
+
+        @SerializedName("application")
+        APPLICATION("application"),
 
         @SerializedName("self")
         SELF("self");
@@ -6116,7 +6122,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   public static class PauseCollection {
     /**
      * <strong>Required.</strong> The payment collection behavior for this subscription while
-     * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+     * paused.
      */
     @SerializedName("behavior")
     Behavior behavior;
@@ -6159,7 +6165,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The payment collection behavior for this subscription while
-       * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       * paused.
        */
       public Builder setBehavior(SubscriptionUpdateParams.PauseCollection.Behavior behavior) {
         this.behavior = behavior;
@@ -7252,7 +7258,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         @Getter
         @EqualsAndHashCode(callSuper = false)
         public static class MandateOptions {
-          /** Amount to be charged for future payments. */
+          /** Amount to be charged for future payments, specified in the presentment currency. */
           @SerializedName("amount")
           Long amount;
 
@@ -7312,7 +7318,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
                   .MandateOptions(this.amount, this.amountType, this.description, this.extraParams);
             }
 
-            /** Amount to be charged for future payments. */
+            /** Amount to be charged for future payments, specified in the presentment currency. */
             public Builder setAmount(Long amount) {
               this.amount = amount;
               return this;
@@ -8136,6 +8142,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Pix {
         /**
+         * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
+         * Defaults to 86400 seconds.
+         */
+        @SerializedName("expires_after_seconds")
+        Long expiresAfterSeconds;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -8149,7 +8162,11 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         @SerializedName("mandate_options")
         MandateOptions mandateOptions;
 
-        private Pix(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+        private Pix(
+            Long expiresAfterSeconds,
+            Map<String, Object> extraParams,
+            MandateOptions mandateOptions) {
+          this.expiresAfterSeconds = expiresAfterSeconds;
           this.extraParams = extraParams;
           this.mandateOptions = mandateOptions;
         }
@@ -8159,6 +8176,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Long expiresAfterSeconds;
+
           private Map<String, Object> extraParams;
 
           private MandateOptions mandateOptions;
@@ -8166,7 +8185,16 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Pix build() {
             return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Pix(
-                this.extraParams, this.mandateOptions);
+                this.expiresAfterSeconds, this.extraParams, this.mandateOptions);
+          }
+
+          /**
+           * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
+           * Defaults to 86400 seconds.
+           */
+          public Builder setExpiresAfterSeconds(Long expiresAfterSeconds) {
+            this.expiresAfterSeconds = expiresAfterSeconds;
+            return this;
           }
 
           /**
@@ -8236,7 +8264,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** Schedule at which the future payments will be charged. Defaults to {@code weekly}. */
+          /** Schedule at which the future payments will be charged. Defaults to {@code monthly}. */
           @SerializedName("payment_schedule")
           PaymentSchedule paymentSchedule;
 
@@ -8344,7 +8372,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Schedule at which the future payments will be charged. Defaults to {@code weekly}.
+             * Schedule at which the future payments will be charged. Defaults to {@code monthly}.
              */
             public Builder setPaymentSchedule(
                 SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Pix.MandateOptions

@@ -53,8 +53,9 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
 
   /**
    * The type of items in the value list. One of {@code card_fingerprint}, {@code card_bin}, {@code
-   * email}, {@code ip_address}, {@code country}, {@code string}, {@code case_sensitive_string},
-   * {@code customer_id}, {@code sepa_debit_fingerprint}, or {@code us_bank_account_fingerprint}.
+   * crypto_fingerprint}, {@code email}, {@code ip_address}, {@code country}, {@code string}, {@code
+   * case_sensitive_string}, {@code customer_id}, {@code sepa_debit_fingerprint}, or {@code
+   * us_bank_account_fingerprint}.
    */
   @SerializedName("item_type")
   String itemType;
@@ -64,8 +65,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   ValueListItemCollection listItems;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;

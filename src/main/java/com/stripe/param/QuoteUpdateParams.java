@@ -936,6 +936,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("account")
         ACCOUNT("account"),
 
+        @SerializedName("application")
+        APPLICATION("application"),
+
         @SerializedName("self")
         SELF("self");
 
@@ -1508,6 +1511,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("account")
         ACCOUNT("account"),
+
+        @SerializedName("application")
+        APPLICATION("application"),
 
         @SerializedName("self")
         SELF("self");
@@ -6636,7 +6642,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       public static class Set {
         /**
          * <strong>Required.</strong> The payment collection behavior for this subscription while
-         * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+         * paused.
          */
         @SerializedName("behavior")
         Behavior behavior;
@@ -6673,7 +6679,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> The payment collection behavior for this subscription while
-           * paused. One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+           * paused.
            */
           public Builder setBehavior(
               QuoteUpdateParams.Line.SetPauseCollection.Set.Behavior behavior) {

@@ -116,8 +116,8 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
   ExpandableField<Invoice> latestInvoice;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -715,7 +715,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
         /**
          * Type of the account referenced.
          *
-         * <p>One of {@code account}, or {@code self}.
+         * <p>One of {@code account}, {@code application}, or {@code self}.
          */
         @SerializedName("type")
         String type;
@@ -850,7 +850,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
         /**
          * Type of the account referenced.
          *
-         * <p>One of {@code account}, or {@code self}.
+         * <p>One of {@code account}, {@code application}, or {@code self}.
          */
         @SerializedName("type")
         String type;
@@ -1461,7 +1461,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
         /**
          * Type of the account referenced.
          *
-         * <p>One of {@code account}, or {@code self}.
+         * <p>One of {@code account}, {@code application}, or {@code self}.
          */
         @SerializedName("type")
         String type;
@@ -1783,7 +1783,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
         /**
          * Type of the account referenced.
          *
-         * <p>One of {@code account}, or {@code self}.
+         * <p>One of {@code account}, {@code application}, or {@code self}.
          */
         @SerializedName("type")
         String type;
@@ -2132,8 +2132,9 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     @EqualsAndHashCode(callSuper = false)
     public static class PauseCollection extends StripeObject {
       /**
-       * The payment collection behavior for this subscription while paused. One of {@code
-       * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       * The payment collection behavior for this subscription while paused.
+       *
+       * <p>One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
        */
       @SerializedName("behavior")
       String behavior;

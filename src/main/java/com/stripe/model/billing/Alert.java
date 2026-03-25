@@ -54,8 +54,8 @@ public class Alert extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -525,10 +525,6 @@ public class Alert extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Filters extends StripeObject {
-      /** Filter by billable item IDs. */
-      @SerializedName("billable_items")
-      List<String> billableItems;
-
       /** Filter by billing cadence ID. */
       @SerializedName("billing_cadence")
       String billingCadence;

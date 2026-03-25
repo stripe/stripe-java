@@ -62,9 +62,9 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
   /**
    * The cardholder’s preferred locales (languages), ordered by preference. Locales can be {@code
-   * de}, {@code en}, {@code es}, {@code fr}, or {@code it}. This changes the language of the <a
-   * href="https://docs.stripe.com/issuing/3d-secure">3D Secure flow</a> and one-time password
-   * messages sent to the cardholder.
+   * da}, {@code de}, {@code en}, {@code es}, {@code fr}, {@code it}, {@code pl}, or {@code sv}.
+   * This changes the language of the <a href="https://docs.stripe.com/issuing/3d-secure">3D Secure
+   * flow</a> and one-time password messages sent to the cardholder.
    */
   @SerializedName("preferred_locales")
   List<CardholderUpdateParams.PreferredLocale> preferredLocales;
@@ -924,10 +924,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class UserTermsAcceptance {
-        /**
-         * The Unix timestamp marking when the cardholder accepted the Authorized User Terms.
-         * Required for Celtic Spend Card users.
-         */
+        /** The Unix timestamp marking when the cardholder accepted the Authorized User Terms. */
         @SerializedName("date")
         Long date;
 
@@ -941,10 +938,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /**
-         * The IP address from which the cardholder accepted the Authorized User Terms. Required for
-         * Celtic Spend Card users.
-         */
+        /** The IP address from which the cardholder accepted the Authorized User Terms. */
         @SerializedName("ip")
         Object ip;
 
@@ -982,10 +976,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
                 this.date, this.extraParams, this.ip, this.userAgent);
           }
 
-          /**
-           * The Unix timestamp marking when the cardholder accepted the Authorized User Terms.
-           * Required for Celtic Spend Card users.
-           */
+          /** The Unix timestamp marking when the cardholder accepted the Authorized User Terms. */
           public Builder setDate(Long date) {
             this.date = date;
             return this;
@@ -1021,19 +1012,13 @@ public class CardholderUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /**
-           * The IP address from which the cardholder accepted the Authorized User Terms. Required
-           * for Celtic Spend Card users.
-           */
+          /** The IP address from which the cardholder accepted the Authorized User Terms. */
           public Builder setIp(String ip) {
             this.ip = ip;
             return this;
           }
 
-          /**
-           * The IP address from which the cardholder accepted the Authorized User Terms. Required
-           * for Celtic Spend Card users.
-           */
+          /** The IP address from which the cardholder accepted the Authorized User Terms. */
           public Builder setIp(EmptyParam ip) {
             this.ip = ip;
             return this;
@@ -4552,6 +4537,9 @@ public class CardholderUpdateParams extends ApiRequestParams {
   }
 
   public enum PreferredLocale implements ApiRequestParams.EnumParam {
+    @SerializedName("da")
+    DA("da"),
+
     @SerializedName("de")
     DE("de"),
 
@@ -4565,7 +4553,13 @@ public class CardholderUpdateParams extends ApiRequestParams {
     FR("fr"),
 
     @SerializedName("it")
-    IT("it");
+    IT("it"),
+
+    @SerializedName("pl")
+    PL("pl"),
+
+    @SerializedName("sv")
+    SV("sv");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

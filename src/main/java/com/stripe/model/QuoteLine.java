@@ -1389,8 +1389,9 @@ public class QuoteLine extends StripeObject implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Set extends StripeObject {
       /**
-       * The payment collection behavior for this subscription while paused. One of {@code
-       * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       * The payment collection behavior for this subscription while paused.
+       *
+       * <p>One of {@code keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
        */
       @SerializedName("behavior")
       String behavior;

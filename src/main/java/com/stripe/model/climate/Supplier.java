@@ -59,8 +59,8 @@ public class Supplier extends ApiResource implements HasId {
   /**
    * The scientific pathway used for carbon removal.
    *
-   * <p>One of {@code biomass_carbon_removal_and_storage}, {@code direct_air_capture}, or {@code
-   * enhanced_weathering}.
+   * <p>One of {@code biomass_carbon_removal_and_storage}, {@code direct_air_capture}, {@code
+   * enhanced_weathering}, or {@code marine_carbon_removal}.
    */
   @SerializedName("removal_pathway")
   String removalPathway;

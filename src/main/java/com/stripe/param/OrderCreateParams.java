@@ -2666,7 +2666,7 @@ public class OrderCreateParams extends ApiRequestParams {
           @SerializedName("target_date")
           String targetDate;
 
-          /** Bank account verification method. */
+          /** Bank account verification method. The default value is {@code automatic}. */
           @SerializedName("verification_method")
           VerificationMethod verificationMethod;
 
@@ -2816,7 +2816,7 @@ public class OrderCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Bank account verification method. */
+            /** Bank account verification method. The default value is {@code automatic}. */
             public Builder setVerificationMethod(
                 OrderCreateParams.Payment.Settings.PaymentMethodOptions.AcssDebit.VerificationMethod
                     verificationMethod) {
