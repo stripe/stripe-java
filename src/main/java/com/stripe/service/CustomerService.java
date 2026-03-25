@@ -2,6 +2,7 @@
 package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.Discount;
@@ -247,6 +248,30 @@ public final class CustomerService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, new TypeToken<StripeSearchResult<Customer>>() {}.getType());
+  }
+  /** Serializes a Customer update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(String customer, CustomerUpdateParams params)
+      throws StripeException {
+    return serializeBatchUpdate(customer, params, (RequestOptions) null);
+  }
+  /** Serializes a Customer update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(
+      String customer, CustomerUpdateParams params, RequestOptions options) throws StripeException {
+    String itemId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("customer", customer);
+    java.util.Map<String, Object> item = new java.util.LinkedHashMap<>();
+    item.put("id", itemId);
+    item.put("path_params", pathParams);
+    item.put("params", (params != null) ? params.toMap() : null);
+    item.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      item.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(item);
   }
 
   public com.stripe.service.CustomerBalanceTransactionService balanceTransactions() {

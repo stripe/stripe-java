@@ -25579,7 +25579,9 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.v2.core.BatchJobCreateParams.Endpoint.builder()
                     .setHttpMethod(
                         com.stripe.param.v2.core.BatchJobCreateParams.Endpoint.HttpMethod.POST)
-                    .setPath("path")
+                    .setPath(
+                        com.stripe.param.v2.core.BatchJobCreateParams.Endpoint.Path
+                            .V1_SUBSCRIPTION_SCHEDULE_CREATE)
                     .build())
             .putMetadata("key", "metadata")
             .setSkipValidation(true)
