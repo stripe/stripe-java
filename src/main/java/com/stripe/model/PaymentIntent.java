@@ -7192,9 +7192,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class StripeBalance extends StripeObject {
-      @SerializedName("mandate_options")
-      MandateOptions mandateOptions;
-
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -7218,19 +7215,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
-
-      /**
-       * For more details about MandateOptions, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class MandateOptions extends StripeObject {
-        /** The ID of the Stripe Balance Debit Agreement used for this mandate. */
-        @SerializedName("stripe_balance_debit_agreement")
-        String stripeBalanceDebitAgreement;
-      }
     }
 
     /**
