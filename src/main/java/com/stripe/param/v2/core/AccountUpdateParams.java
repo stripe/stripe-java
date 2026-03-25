@@ -15788,6 +15788,17 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("card_creator")
         CardCreator cardCreator;
 
+        /**
+         * Details on the Account's acceptance of Consumer-privacy-disclosures-specific terms of
+         * service.
+         */
+        @SerializedName("consumer_privacy_disclosures")
+        ConsumerPrivacyDisclosures consumerPrivacyDisclosures;
+
+        /** Details on the Account's acceptance of Consumer-storer-specific terms of service. */
+        @SerializedName("consumer_storer")
+        ConsumerStorer consumerStorer;
+
         /** Details on the Account's acceptance of Crypto-storer-specific terms of service. */
         @SerializedName("crypto_storer")
         CryptoStorer cryptoStorer;
@@ -15809,11 +15820,15 @@ public class AccountUpdateParams extends ApiRequestParams {
         private TermsOfService(
             Account account,
             CardCreator cardCreator,
+            ConsumerPrivacyDisclosures consumerPrivacyDisclosures,
+            ConsumerStorer consumerStorer,
             CryptoStorer cryptoStorer,
             Map<String, Object> extraParams,
             Storer storer) {
           this.account = account;
           this.cardCreator = cardCreator;
+          this.consumerPrivacyDisclosures = consumerPrivacyDisclosures;
+          this.consumerStorer = consumerStorer;
           this.cryptoStorer = cryptoStorer;
           this.extraParams = extraParams;
           this.storer = storer;
@@ -15828,6 +15843,10 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private CardCreator cardCreator;
 
+          private ConsumerPrivacyDisclosures consumerPrivacyDisclosures;
+
+          private ConsumerStorer consumerStorer;
+
           private CryptoStorer cryptoStorer;
 
           private Map<String, Object> extraParams;
@@ -15837,7 +15856,13 @@ public class AccountUpdateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public AccountUpdateParams.Identity.Attestations.TermsOfService build() {
             return new AccountUpdateParams.Identity.Attestations.TermsOfService(
-                this.account, this.cardCreator, this.cryptoStorer, this.extraParams, this.storer);
+                this.account,
+                this.cardCreator,
+                this.consumerPrivacyDisclosures,
+                this.consumerStorer,
+                this.cryptoStorer,
+                this.extraParams,
+                this.storer);
           }
 
           /**
@@ -15855,6 +15880,25 @@ public class AccountUpdateParams extends ApiRequestParams {
           public Builder setCardCreator(
               AccountUpdateParams.Identity.Attestations.TermsOfService.CardCreator cardCreator) {
             this.cardCreator = cardCreator;
+            return this;
+          }
+
+          /**
+           * Details on the Account's acceptance of Consumer-privacy-disclosures-specific terms of
+           * service.
+           */
+          public Builder setConsumerPrivacyDisclosures(
+              AccountUpdateParams.Identity.Attestations.TermsOfService.ConsumerPrivacyDisclosures
+                  consumerPrivacyDisclosures) {
+            this.consumerPrivacyDisclosures = consumerPrivacyDisclosures;
+            return this;
+          }
+
+          /** Details on the Account's acceptance of Consumer-storer-specific terms of service. */
+          public Builder setConsumerStorer(
+              AccountUpdateParams.Identity.Attestations.TermsOfService.ConsumerStorer
+                  consumerStorer) {
+            this.consumerStorer = consumerStorer;
             return this;
           }
 
@@ -23647,6 +23691,288 @@ public class AccountUpdateParams extends ApiRequestParams {
                   }
                 }
               }
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ConsumerPrivacyDisclosures {
+          /**
+           * The time when the Account's representative accepted the terms of service. Represented
+           * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+           * 2022-09-18T13:22:18.123Z.
+           */
+          @SerializedName("date")
+          java.time.Instant date;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * The IP address from which the Account's representative accepted the terms of service.
+           */
+          @SerializedName("ip")
+          Object ip;
+
+          /**
+           * The user agent of the browser from which the Account's representative accepted the
+           * terms of service.
+           */
+          @SerializedName("user_agent")
+          Object userAgent;
+
+          private ConsumerPrivacyDisclosures(
+              java.time.Instant date,
+              Map<String, Object> extraParams,
+              Object ip,
+              Object userAgent) {
+            this.date = date;
+            this.extraParams = extraParams;
+            this.ip = ip;
+            this.userAgent = userAgent;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private java.time.Instant date;
+
+            private Map<String, Object> extraParams;
+
+            private Object ip;
+
+            private Object userAgent;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountUpdateParams.Identity.Attestations.TermsOfService
+                    .ConsumerPrivacyDisclosures
+                build() {
+              return new AccountUpdateParams.Identity.Attestations.TermsOfService
+                  .ConsumerPrivacyDisclosures(this.date, this.extraParams, this.ip, this.userAgent);
+            }
+
+            /**
+             * The time when the Account's representative accepted the terms of service. Represented
+             * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+             * 2022-09-18T13:22:18.123Z.
+             */
+            public Builder setDate(java.time.Instant date) {
+              this.date = date;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Identity.Attestations.TermsOfService.ConsumerPrivacyDisclosures#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Identity.Attestations.TermsOfService.ConsumerPrivacyDisclosures#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * The IP address from which the Account's representative accepted the terms of service.
+             */
+            public Builder setIp(String ip) {
+              this.ip = ip;
+              return this;
+            }
+
+            /**
+             * The IP address from which the Account's representative accepted the terms of service.
+             */
+            public Builder setIp(EmptyParam ip) {
+              this.ip = ip;
+              return this;
+            }
+
+            /**
+             * The user agent of the browser from which the Account's representative accepted the
+             * terms of service.
+             */
+            public Builder setUserAgent(String userAgent) {
+              this.userAgent = userAgent;
+              return this;
+            }
+
+            /**
+             * The user agent of the browser from which the Account's representative accepted the
+             * terms of service.
+             */
+            public Builder setUserAgent(EmptyParam userAgent) {
+              this.userAgent = userAgent;
+              return this;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ConsumerStorer {
+          /**
+           * The time when the Account's representative accepted the terms of service. Represented
+           * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+           * 2022-09-18T13:22:18.123Z.
+           */
+          @SerializedName("date")
+          java.time.Instant date;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * The IP address from which the Account's representative accepted the terms of service.
+           */
+          @SerializedName("ip")
+          Object ip;
+
+          /**
+           * The user agent of the browser from which the Account's representative accepted the
+           * terms of service.
+           */
+          @SerializedName("user_agent")
+          Object userAgent;
+
+          private ConsumerStorer(
+              java.time.Instant date,
+              Map<String, Object> extraParams,
+              Object ip,
+              Object userAgent) {
+            this.date = date;
+            this.extraParams = extraParams;
+            this.ip = ip;
+            this.userAgent = userAgent;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private java.time.Instant date;
+
+            private Map<String, Object> extraParams;
+
+            private Object ip;
+
+            private Object userAgent;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountUpdateParams.Identity.Attestations.TermsOfService.ConsumerStorer build() {
+              return new AccountUpdateParams.Identity.Attestations.TermsOfService.ConsumerStorer(
+                  this.date, this.extraParams, this.ip, this.userAgent);
+            }
+
+            /**
+             * The time when the Account's representative accepted the terms of service. Represented
+             * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+             * 2022-09-18T13:22:18.123Z.
+             */
+            public Builder setDate(java.time.Instant date) {
+              this.date = date;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Identity.Attestations.TermsOfService.ConsumerStorer#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Identity.Attestations.TermsOfService.ConsumerStorer#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * The IP address from which the Account's representative accepted the terms of service.
+             */
+            public Builder setIp(String ip) {
+              this.ip = ip;
+              return this;
+            }
+
+            /**
+             * The IP address from which the Account's representative accepted the terms of service.
+             */
+            public Builder setIp(EmptyParam ip) {
+              this.ip = ip;
+              return this;
+            }
+
+            /**
+             * The user agent of the browser from which the Account's representative accepted the
+             * terms of service.
+             */
+            public Builder setUserAgent(String userAgent) {
+              this.userAgent = userAgent;
+              return this;
+            }
+
+            /**
+             * The user agent of the browser from which the Account's representative accepted the
+             * terms of service.
+             */
+            public Builder setUserAgent(EmptyParam userAgent) {
+              this.userAgent = userAgent;
+              return this;
             }
           }
         }

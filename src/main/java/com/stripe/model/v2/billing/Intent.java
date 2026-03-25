@@ -45,13 +45,6 @@ public class Intent extends StripeObject implements HasId {
   String id;
 
   /**
-   * Invoice resources associated with this Billing Intent. Populated when include parameters are
-   * specified.
-   */
-  @SerializedName("invoice_resources")
-  InvoiceResources invoiceResources;
-
-  /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
    */
@@ -84,17 +77,9 @@ public class Intent extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AmountDetails extends StripeObject {
-    /** The outstanding amount after discount, tax, and customer balance application. */
-    @SerializedName("amount_due")
-    String amountDue;
-
     /** Three-letter ISO currency code, in lowercase. Must be a supported currency. */
     @SerializedName("currency")
     String currency;
-
-    /** The customer's account balance applied to the amount. */
-    @SerializedName("customer_balance_applied")
-    String customerBalanceApplied;
 
     /** Amount of discount applied. */
     @SerializedName("discount")
@@ -436,23 +421,6 @@ public class Intent extends StripeObject implements HasId {
         String version;
       }
     }
-  }
-
-  /**
-   * Invoice resources associated with this Billing Intent. Populated when include parameters are
-   * specified.
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class InvoiceResources extends StripeObject {
-    /**
-     * ID of a preview invoice showing the breakdown of line items. Null if the billing intent will
-     * not create an invoice. Only present when &quot;invoice_resources.preview_invoice&quot; is
-     * included.
-     */
-    @SerializedName("preview_invoice")
-    String previewInvoice;
   }
 
   /** Timestamps for status transitions of the Billing Intent. */

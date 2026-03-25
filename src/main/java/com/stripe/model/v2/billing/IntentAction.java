@@ -590,6 +590,13 @@ public class IntentAction extends StripeObject implements HasId {
           LicenseFee licenseFee;
 
           /**
+           * Overrides the behavior for recurring credit grant components when the action takes
+           * effect during the service period.
+           */
+          @SerializedName("recurring_credit_grant")
+          RecurringCreditGrant recurringCreditGrant;
+
+          /**
            * The type of behavior to override.
            *
            * <p>One of {@code license_fee}, or {@code recurring_credit_grant}.
@@ -624,6 +631,24 @@ public class IntentAction extends StripeObject implements HasId {
              */
             @SerializedName("debit_proration_behavior")
             String debitProrationBehavior;
+          }
+
+          /**
+           * Overrides the behavior for recurring credit grant components when the action takes
+           * effect during the service period.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class RecurringCreditGrant extends StripeObject {
+            /**
+             * Controls credit grant creation behavior during partial periods. If not specified,
+             * defaults to full_credits.
+             *
+             * <p>One of {@code full_credits}, or {@code none}.
+             */
+            @SerializedName("create_behavior")
+            String createBehavior;
           }
         }
       }
@@ -814,6 +839,13 @@ public class IntentAction extends StripeObject implements HasId {
           LicenseFee licenseFee;
 
           /**
+           * Overrides the behavior for recurring credit grant components when the action takes
+           * effect during the service period.
+           */
+          @SerializedName("recurring_credit_grant")
+          RecurringCreditGrant recurringCreditGrant;
+
+          /**
            * The type of behavior to override.
            *
            * <p>One of {@code license_fee}, or {@code recurring_credit_grant}.
@@ -837,6 +869,24 @@ public class IntentAction extends StripeObject implements HasId {
              */
             @SerializedName("debit_proration_behavior")
             String debitProrationBehavior;
+          }
+
+          /**
+           * Overrides the behavior for recurring credit grant components when the action takes
+           * effect during the service period.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class RecurringCreditGrant extends StripeObject {
+            /**
+             * Controls credit grant creation behavior during partial periods. If not specified,
+             * defaults to full_credits.
+             *
+             * <p>One of {@code full_credits}, or {@code none}.
+             */
+            @SerializedName("create_behavior")
+            String createBehavior;
           }
         }
       }

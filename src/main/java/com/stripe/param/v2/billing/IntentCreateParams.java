@@ -43,23 +43,17 @@ public class IntentCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Select additional fields to include in the response. */
-  @SerializedName("include")
-  List<IntentCreateParams.Include> include;
-
   private IntentCreateParams(
       List<IntentCreateParams.Action> actions,
       String cadence,
       CadenceData cadenceData,
       String currency,
-      Map<String, Object> extraParams,
-      List<IntentCreateParams.Include> include) {
+      Map<String, Object> extraParams) {
     this.actions = actions;
     this.cadence = cadence;
     this.cadenceData = cadenceData;
     this.currency = currency;
     this.extraParams = extraParams;
-    this.include = include;
   }
 
   public static Builder builder() {
@@ -77,17 +71,10 @@ public class IntentCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private List<IntentCreateParams.Include> include;
-
     /** Finalize and obtain parameter instance from this builder. */
     public IntentCreateParams build() {
       return new IntentCreateParams(
-          this.actions,
-          this.cadence,
-          this.cadenceData,
-          this.currency,
-          this.extraParams,
-          this.include);
+          this.actions, this.cadence, this.cadenceData, this.currency, this.extraParams);
     }
 
     /**
@@ -160,32 +147,6 @@ public class IntentCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /**
-     * Add an element to `include` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * IntentCreateParams#include} for the field documentation.
-     */
-    public Builder addInclude(IntentCreateParams.Include element) {
-      if (this.include == null) {
-        this.include = new ArrayList<>();
-      }
-      this.include.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `include` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * IntentCreateParams#include} for the field documentation.
-     */
-    public Builder addAllInclude(List<IntentCreateParams.Include> elements) {
-      if (this.include == null) {
-        this.include = new ArrayList<>();
-      }
-      this.include.addAll(elements);
       return this;
     }
   }
@@ -3086,14 +3047,25 @@ public class IntentCreateParams extends ApiRequestParams {
             @SerializedName("license_fee")
             LicenseFee licenseFee;
 
+            /**
+             * Overrides the behavior for recurring credit grant components when the action takes
+             * effect during the service period.
+             */
+            @SerializedName("recurring_credit_grant")
+            RecurringCreditGrant recurringCreditGrant;
+
             /** <strong>Required.</strong> The type of behavior to override. */
             @SerializedName("type")
             Type type;
 
             private PartialPeriodBehavior(
-                Map<String, Object> extraParams, LicenseFee licenseFee, Type type) {
+                Map<String, Object> extraParams,
+                LicenseFee licenseFee,
+                RecurringCreditGrant recurringCreditGrant,
+                Type type) {
               this.extraParams = extraParams;
               this.licenseFee = licenseFee;
+              this.recurringCreditGrant = recurringCreditGrant;
               this.type = type;
             }
 
@@ -3106,6 +3078,8 @@ public class IntentCreateParams extends ApiRequestParams {
 
               private LicenseFee licenseFee;
 
+              private RecurringCreditGrant recurringCreditGrant;
+
               private Type type;
 
               /** Finalize and obtain parameter instance from this builder. */
@@ -3113,7 +3087,8 @@ public class IntentCreateParams extends ApiRequestParams {
                       .PartialPeriodBehavior
                   build() {
                 return new IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
-                    .PartialPeriodBehavior(this.extraParams, this.licenseFee, this.type);
+                    .PartialPeriodBehavior(
+                    this.extraParams, this.licenseFee, this.recurringCreditGrant, this.type);
               }
 
               /**
@@ -3155,6 +3130,18 @@ public class IntentCreateParams extends ApiRequestParams {
                           .PartialPeriodBehavior.LicenseFee
                       licenseFee) {
                 this.licenseFee = licenseFee;
+                return this;
+              }
+
+              /**
+               * Overrides the behavior for recurring credit grant components when the action takes
+               * effect during the service period.
+               */
+              public Builder setRecurringCreditGrant(
+                  IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                          .PartialPeriodBehavior.RecurringCreditGrant
+                      recurringCreditGrant) {
+                this.recurringCreditGrant = recurringCreditGrant;
                 return this;
               }
 
@@ -3309,6 +3296,109 @@ public class IntentCreateParams extends ApiRequestParams {
                 private final String value;
 
                 DebitProrationBehavior(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class RecurringCreditGrant {
+              /**
+               * <strong>Required.</strong> Controls credit grant creation behavior during partial
+               * periods. If not specified, defaults to full_credits.
+               */
+              @SerializedName("create_behavior")
+              CreateBehavior createBehavior;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              private RecurringCreditGrant(
+                  CreateBehavior createBehavior, Map<String, Object> extraParams) {
+                this.createBehavior = createBehavior;
+                this.extraParams = extraParams;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private CreateBehavior createBehavior;
+
+                private Map<String, Object> extraParams;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                        .PartialPeriodBehavior.RecurringCreditGrant
+                    build() {
+                  return new IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails
+                      .Overrides.PartialPeriodBehavior.RecurringCreditGrant(
+                      this.createBehavior, this.extraParams);
+                }
+
+                /**
+                 * <strong>Required.</strong> Controls credit grant creation behavior during partial
+                 * periods. If not specified, defaults to full_credits.
+                 */
+                public Builder setCreateBehavior(
+                    IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                            .PartialPeriodBehavior.RecurringCreditGrant.CreateBehavior
+                        createBehavior) {
+                  this.createBehavior = createBehavior;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior.RecurringCreditGrant#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior.RecurringCreditGrant#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+              }
+
+              public enum CreateBehavior implements ApiRequestParams.EnumParam {
+                @SerializedName("full_credits")
+                FULL_CREDITS("full_credits"),
+
+                @SerializedName("none")
+                NONE("none");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                CreateBehavior(String value) {
                   this.value = value;
                 }
               }
@@ -4292,14 +4382,25 @@ public class IntentCreateParams extends ApiRequestParams {
             @SerializedName("license_fee")
             LicenseFee licenseFee;
 
+            /**
+             * Overrides the behavior for recurring credit grant components when the action takes
+             * effect during the service period.
+             */
+            @SerializedName("recurring_credit_grant")
+            RecurringCreditGrant recurringCreditGrant;
+
             /** <strong>Required.</strong> The type of behavior to override. */
             @SerializedName("type")
             Type type;
 
             private PartialPeriodBehavior(
-                Map<String, Object> extraParams, LicenseFee licenseFee, Type type) {
+                Map<String, Object> extraParams,
+                LicenseFee licenseFee,
+                RecurringCreditGrant recurringCreditGrant,
+                Type type) {
               this.extraParams = extraParams;
               this.licenseFee = licenseFee;
+              this.recurringCreditGrant = recurringCreditGrant;
               this.type = type;
             }
 
@@ -4312,6 +4413,8 @@ public class IntentCreateParams extends ApiRequestParams {
 
               private LicenseFee licenseFee;
 
+              private RecurringCreditGrant recurringCreditGrant;
+
               private Type type;
 
               /** Finalize and obtain parameter instance from this builder. */
@@ -4319,7 +4422,8 @@ public class IntentCreateParams extends ApiRequestParams {
                       .PartialPeriodBehavior
                   build() {
                 return new IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails
-                    .Overrides.PartialPeriodBehavior(this.extraParams, this.licenseFee, this.type);
+                    .Overrides.PartialPeriodBehavior(
+                    this.extraParams, this.licenseFee, this.recurringCreditGrant, this.type);
               }
 
               /**
@@ -4361,6 +4465,18 @@ public class IntentCreateParams extends ApiRequestParams {
                           .PartialPeriodBehavior.LicenseFee
                       licenseFee) {
                 this.licenseFee = licenseFee;
+                return this;
+              }
+
+              /**
+               * Overrides the behavior for recurring credit grant components when the action takes
+               * effect during the service period.
+               */
+              public Builder setRecurringCreditGrant(
+                  IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                          .PartialPeriodBehavior.RecurringCreditGrant
+                      recurringCreditGrant) {
+                this.recurringCreditGrant = recurringCreditGrant;
                 return this;
               }
 
@@ -4474,6 +4590,109 @@ public class IntentCreateParams extends ApiRequestParams {
                 private final String value;
 
                 DebitProrationBehavior(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class RecurringCreditGrant {
+              /**
+               * <strong>Required.</strong> Controls credit grant creation behavior during partial
+               * periods. If not specified, defaults to full_credits.
+               */
+              @SerializedName("create_behavior")
+              CreateBehavior createBehavior;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              private RecurringCreditGrant(
+                  CreateBehavior createBehavior, Map<String, Object> extraParams) {
+                this.createBehavior = createBehavior;
+                this.extraParams = extraParams;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private CreateBehavior createBehavior;
+
+                private Map<String, Object> extraParams;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                        .PartialPeriodBehavior.RecurringCreditGrant
+                    build() {
+                  return new IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails
+                      .Overrides.PartialPeriodBehavior.RecurringCreditGrant(
+                      this.createBehavior, this.extraParams);
+                }
+
+                /**
+                 * <strong>Required.</strong> Controls credit grant creation behavior during partial
+                 * periods. If not specified, defaults to full_credits.
+                 */
+                public Builder setCreateBehavior(
+                    IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                            .PartialPeriodBehavior.RecurringCreditGrant.CreateBehavior
+                        createBehavior) {
+                  this.createBehavior = createBehavior;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior.RecurringCreditGrant#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior.RecurringCreditGrant#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+              }
+
+              public enum CreateBehavior implements ApiRequestParams.EnumParam {
+                @SerializedName("full_credits")
+                FULL_CREDITS("full_credits"),
+
+                @SerializedName("none")
+                NONE("none");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                CreateBehavior(String value) {
                   this.value = value;
                 }
               }
@@ -6500,18 +6719,6 @@ public class IntentCreateParams extends ApiRequestParams {
           }
         }
       }
-    }
-  }
-
-  public enum Include implements ApiRequestParams.EnumParam {
-    @SerializedName("invoice_resources.preview_invoice")
-    INVOICE_RESOURCES__PREVIEW_INVOICE("invoice_resources.preview_invoice");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Include(String value) {
-      this.value = value;
     }
   }
 }
