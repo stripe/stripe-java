@@ -2,6 +2,7 @@
 package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Discount;
 import com.stripe.model.StripeCollection;
@@ -661,5 +662,55 @@ public final class SubscriptionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, Subscription.class);
+  }
+  /** Serializes a Subscription update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(String subscriptionExposedId, SubscriptionUpdateParams params)
+      throws StripeException {
+    return serializeBatchUpdate(subscriptionExposedId, params, (RequestOptions) null);
+  }
+  /** Serializes a Subscription update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(
+      String subscriptionExposedId, SubscriptionUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String itemId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("subscription_exposed_id", subscriptionExposedId);
+    java.util.Map<String, Object> item = new java.util.LinkedHashMap<>();
+    item.put("id", itemId);
+    item.put("path_params", pathParams);
+    item.put("params", (params != null) ? params.toMap() : null);
+    item.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      item.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(item);
+  }
+  /** Serializes a Subscription migrate request into a batch job JSONL line. */
+  public String serializeBatchMigrate(String subscription, SubscriptionMigrateParams params)
+      throws StripeException {
+    return serializeBatchMigrate(subscription, params, (RequestOptions) null);
+  }
+  /** Serializes a Subscription migrate request into a batch job JSONL line. */
+  public String serializeBatchMigrate(
+      String subscription, SubscriptionMigrateParams params, RequestOptions options)
+      throws StripeException {
+    String itemId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("subscription", subscription);
+    java.util.Map<String, Object> item = new java.util.LinkedHashMap<>();
+    item.put("id", itemId);
+    item.put("path_params", pathParams);
+    item.put("params", (params != null) ? params.toMap() : null);
+    item.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      item.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(item);
   }
 }

@@ -2,6 +2,7 @@
 package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.CreditNote;
 import com.stripe.model.StripeCollection;
@@ -219,6 +220,26 @@ public final class CreditNoteService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, CreditNote.class);
+  }
+  /** Serializes a CreditNote create request into a batch job JSONL line. */
+  public String serializeBatchCreate(CreditNoteCreateParams params) throws StripeException {
+    return serializeBatchCreate(params, (RequestOptions) null);
+  }
+  /** Serializes a CreditNote create request into a batch job JSONL line. */
+  public String serializeBatchCreate(CreditNoteCreateParams params, RequestOptions options)
+      throws StripeException {
+    String itemId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, Object> item = new java.util.LinkedHashMap<>();
+    item.put("id", itemId);
+    item.put("params", (params != null) ? params.toMap() : null);
+    item.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      item.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(item);
   }
 
   public com.stripe.service.CreditNoteLineItemService lineItems() {
