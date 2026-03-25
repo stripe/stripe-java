@@ -27,7 +27,7 @@ import lombok.Setter;
  * href="https://api.stripe.com#invoices">invoices</a>, <a
  * href="https://docs.stripe.com/api/checkout/sessions">checkout sessions</a>, <a
  * href="https://api.stripe.com#quotes">quotes</a>, and more. Coupons do not work with conventional
- * one-off <a href="https://api.stripe.com#create_charge">charges</a> or <a
+ * one-off <a href="https://stripe.com/api/charges/create">charges</a> or <a
  * href="https://docs.stripe.com/api/payment_intents">payment intents</a>.
  */
 @Getter
@@ -88,8 +88,8 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;

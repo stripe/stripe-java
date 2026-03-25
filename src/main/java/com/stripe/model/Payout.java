@@ -128,8 +128,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -403,8 +403,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
    *
    * <p>If you create a manual payout on a Stripe account that uses multiple payment source types,
    * you need to specify the source type balance that the payout draws from. The <a
-   * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
-   * pending amounts by source type.
+   * href="https://stripe.com/api/balances/object">balance object</a> details available and pending
+   * amounts by source type.
    */
   public static Payout create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -420,8 +420,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
    *
    * <p>If you create a manual payout on a Stripe account that uses multiple payment source types,
    * you need to specify the source type balance that the payout draws from. The <a
-   * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
-   * pending amounts by source type.
+   * href="https://stripe.com/api/balances/object">balance object</a> details available and pending
+   * amounts by source type.
    */
   public static Payout create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -441,8 +441,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
    *
    * <p>If you create a manual payout on a Stripe account that uses multiple payment source types,
    * you need to specify the source type balance that the payout draws from. The <a
-   * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
-   * pending amounts by source type.
+   * href="https://stripe.com/api/balances/object">balance object</a> details available and pending
+   * amounts by source type.
    */
   public static Payout create(PayoutCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -458,8 +458,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
    *
    * <p>If you create a manual payout on a Stripe account that uses multiple payment source types,
    * you need to specify the source type balance that the payout draws from. The <a
-   * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
-   * pending amounts by source type.
+   * href="https://stripe.com/api/balances/object">balance object</a> details available and pending
+   * amounts by source type.
    */
   public static Payout create(PayoutCreateParams params, RequestOptions options)
       throws StripeException {

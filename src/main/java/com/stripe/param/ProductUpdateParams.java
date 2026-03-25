@@ -778,10 +778,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     @SerializedName("performance_location")
     Object performanceLocation;
 
-    /**
-     * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
-     * code</a> ID.
-     */
+    /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
     @SerializedName("tax_code")
     Object taxCode;
 
@@ -855,19 +852,13 @@ public class ProductUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
-       * code</a> ID.
-       */
+      /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
       public Builder setTaxCode(String taxCode) {
         this.taxCode = taxCode;
         return this;
       }
 
-      /**
-       * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
-       * code</a> ID.
-       */
+      /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
       public Builder setTaxCode(EmptyParam taxCode) {
         this.taxCode = taxCode;
         return this;

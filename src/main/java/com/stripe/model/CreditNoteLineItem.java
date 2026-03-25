@@ -6,6 +6,7 @@ import com.stripe.model.billing.CreditBalanceTransaction;
 import com.stripe.net.ApiResource;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,11 +48,19 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
   String invoiceLineItem;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
+
+  /**
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
+   */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.

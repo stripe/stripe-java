@@ -1235,6 +1235,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         @SerializedName("account")
         ACCOUNT("account"),
 
+        @SerializedName("application")
+        APPLICATION("application"),
+
         @SerializedName("self")
         SELF("self");
 
@@ -3105,6 +3108,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         public enum Type implements ApiRequestParams.EnumParam {
           @SerializedName("account")
           ACCOUNT("account"),
+
+          @SerializedName("application")
+          APPLICATION("application"),
 
           @SerializedName("self")
           SELF("self");
@@ -5696,6 +5702,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           @SerializedName("account")
           ACCOUNT("account"),
 
+          @SerializedName("application")
+          APPLICATION("application"),
+
           @SerializedName("self")
           SELF("self");
 
@@ -6171,6 +6180,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     @SerializedName("twint")
     TWINT("twint"),
+
+    @SerializedName("upi")
+    UPI("upi"),
 
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),

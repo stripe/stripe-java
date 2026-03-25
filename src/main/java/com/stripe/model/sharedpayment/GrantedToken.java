@@ -43,7 +43,7 @@ public class GrantedToken extends ApiResource implements HasId {
   /**
    * The reason why the SharedPaymentGrantedToken has been deactivated.
    *
-   * <p>One of {@code consumed}, {@code expired}, or {@code revoked}.
+   * <p>One of {@code consumed}, {@code expired}, {@code resolved}, or {@code revoked}.
    */
   @SerializedName("deactivated_reason")
   String deactivatedReason;
@@ -174,6 +174,14 @@ public class GrantedToken extends ApiResource implements HasId {
     /** Max amount that can be captured using this SharedPaymentToken. */
     @SerializedName("max_amount")
     Long maxAmount;
+
+    /**
+     * The recurring interval at which the shared payment token's amount usage restrictions reset.
+     *
+     * <p>One of {@code month}, {@code week}, or {@code year}.
+     */
+    @SerializedName("recurring_interval")
+    String recurringInterval;
   }
 
   public TestHelpers getTestHelpers() {

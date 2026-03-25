@@ -3099,7 +3099,7 @@ public class OrderUpdateParams extends ApiRequestParams {
           @SerializedName("target_date")
           Object targetDate;
 
-          /** Bank account verification method. */
+          /** Bank account verification method. The default value is {@code automatic}. */
           @SerializedName("verification_method")
           VerificationMethod verificationMethod;
 
@@ -3259,7 +3259,7 @@ public class OrderUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Bank account verification method. */
+            /** Bank account verification method. The default value is {@code automatic}. */
             public Builder setVerificationMethod(
                 OrderUpdateParams.Payment.Settings.PaymentMethodOptions.AcssDebit.VerificationMethod
                     verificationMethod) {

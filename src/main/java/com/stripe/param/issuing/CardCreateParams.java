@@ -62,6 +62,14 @@ public class CardCreateParams extends ApiRequestParams {
   String financialAccount;
 
   /**
+   * Rules that control the lifecycle of this card, such as automatic cancellation. Refer to our <a
+   * href="https://stripe.com/issuing/controls/lifecycle-controls">documentation</a> for more
+   * details.
+   */
+  @SerializedName("lifecycle_controls")
+  LifecycleControls lifecycleControls;
+
+  /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -126,6 +134,7 @@ public class CardCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String financialAccount,
+      LifecycleControls lifecycleControls,
       Map<String, String> metadata,
       String personalizationDesign,
       Pin pin,
@@ -143,6 +152,7 @@ public class CardCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.financialAccount = financialAccount;
+    this.lifecycleControls = lifecycleControls;
     this.metadata = metadata;
     this.personalizationDesign = personalizationDesign;
     this.pin = pin;
@@ -174,6 +184,8 @@ public class CardCreateParams extends ApiRequestParams {
 
     private String financialAccount;
 
+    private LifecycleControls lifecycleControls;
+
     private Map<String, String> metadata;
 
     private String personalizationDesign;
@@ -204,6 +216,7 @@ public class CardCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.financialAccount,
+          this.lifecycleControls,
           this.metadata,
           this.personalizationDesign,
           this.pin,
@@ -313,6 +326,16 @@ public class CardCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Rules that control the lifecycle of this card, such as automatic cancellation. Refer to our
+     * <a href="https://stripe.com/issuing/controls/lifecycle-controls">documentation</a> for more
+     * details.
+     */
+    public Builder setLifecycleControls(CardCreateParams.LifecycleControls lifecycleControls) {
+      this.lifecycleControls = lifecycleControls;
+      return this;
+    }
+
+    /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * CardCreateParams#metadata} for the field documentation.
@@ -409,6 +432,155 @@ public class CardCreateParams extends ApiRequestParams {
     public Builder setType(CardCreateParams.Type type) {
       this.type = type;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class LifecycleControls {
+    /** <strong>Required.</strong> Cancels the card after the specified conditions are met. */
+    @SerializedName("cancel_after")
+    CancelAfter cancelAfter;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private LifecycleControls(CancelAfter cancelAfter, Map<String, Object> extraParams) {
+      this.cancelAfter = cancelAfter;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private CancelAfter cancelAfter;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CardCreateParams.LifecycleControls build() {
+        return new CardCreateParams.LifecycleControls(this.cancelAfter, this.extraParams);
+      }
+
+      /** <strong>Required.</strong> Cancels the card after the specified conditions are met. */
+      public Builder setCancelAfter(CardCreateParams.LifecycleControls.CancelAfter cancelAfter) {
+        this.cancelAfter = cancelAfter;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CardCreateParams.LifecycleControls#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CardCreateParams.LifecycleControls#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CancelAfter {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> The card is automatically cancelled when it makes this number of
+       * non-zero payment authorizations and transactions. The count includes penny authorizations,
+       * but doesn't include non-payment actions, such as authorization advice.
+       */
+      @SerializedName("payment_count")
+      Long paymentCount;
+
+      private CancelAfter(Map<String, Object> extraParams, Long paymentCount) {
+        this.extraParams = extraParams;
+        this.paymentCount = paymentCount;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Long paymentCount;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CardCreateParams.LifecycleControls.CancelAfter build() {
+          return new CardCreateParams.LifecycleControls.CancelAfter(
+              this.extraParams, this.paymentCount);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardCreateParams.LifecycleControls.CancelAfter#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardCreateParams.LifecycleControls.CancelAfter#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The card is automatically cancelled when it makes this number
+         * of non-zero payment authorizations and transactions. The count includes penny
+         * authorizations, but doesn't include non-payment actions, such as authorization advice.
+         */
+        public Builder setPaymentCount(Long paymentCount) {
+          this.paymentCount = paymentCount;
+          return this;
+        }
+      }
     }
   }
 

@@ -34,8 +34,8 @@ public class Mandate extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -307,6 +307,9 @@ public class Mandate extends ApiResource implements HasId {
      */
     @SerializedName("type")
     String type;
+
+    @SerializedName("upi")
+    Upi upi;
 
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
@@ -662,6 +665,37 @@ public class Mandate extends ApiResource implements HasId {
        */
       @SerializedName("url")
       String url;
+    }
+
+    /**
+     * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Upi extends StripeObject {
+      /** Amount to be charged for future payments. */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param refers
+       * to the exact amount to be charged in future payments. If {@code maximum}, the amount
+       * charged can be up to the value passed for the {@code amount} param.
+       */
+      @SerializedName("amount_type")
+      String amountType;
+
+      /**
+       * A description of the mandate or subscription that is meant to be displayed to the customer.
+       */
+      @SerializedName("description")
+      String description;
+
+      /** End date of the mandate or subscription. */
+      @SerializedName("end_date")
+      Long endDate;
     }
 
     /**

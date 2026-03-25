@@ -477,9 +477,14 @@ public class RequestedSession extends ApiResource
     @SerializedName("phone")
     String phone;
 
-    /** The fulfillment option. */
+    /** The selected fulfillment option. */
     @SerializedName("selected_fulfillment_option")
     SelectedFulfillmentOption selectedFulfillmentOption;
+
+    /** Per-item fulfillment option overrides. */
+    @SerializedName("selected_fulfillment_option_overrides")
+    List<RequestedSession.FulfillmentDetails.SelectedFulfillmentOptionOverride>
+        selectedFulfillmentOptionOverrides;
 
     /**
      * For more details about Address, please refer to the <a href="https://docs.stripe.com/api">API
@@ -576,6 +581,10 @@ public class RequestedSession extends ApiResource
           /** The key of the digital fulfillment option. */
           @SerializedName("key")
           String key;
+
+          /** The line item keys associated with this digital fulfillment option. */
+          @SerializedName("line_item_keys")
+          List<String> lineItemKeys;
         }
       }
 
@@ -620,6 +629,10 @@ public class RequestedSession extends ApiResource
           @SerializedName("latest_delivery_time")
           Long latestDeliveryTime;
 
+          /** The line item keys associated with this shipping option. */
+          @SerializedName("line_item_keys")
+          List<String> lineItemKeys;
+
           /** The shipping amount of the shipping option. */
           @SerializedName("shipping_amount")
           Long shippingAmount;
@@ -638,6 +651,57 @@ public class RequestedSession extends ApiResource
       /** The digital fulfillment option. */
       @SerializedName("digital")
       Digital digital;
+
+      /** The shipping option. */
+      @SerializedName("shipping")
+      Shipping shipping;
+
+      /** The type of the selected fulfillment option. */
+      @SerializedName("type")
+      String type;
+
+      /**
+       * For more details about Digital, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Digital extends StripeObject {
+        /** The digital option. */
+        @SerializedName("digital_option")
+        String digitalOption;
+      }
+
+      /**
+       * For more details about Shipping, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Shipping extends StripeObject {
+        /** The shipping option. */
+        @SerializedName("shipping_option")
+        String shippingOption;
+      }
+    }
+
+    /**
+     * For more details about SelectedFulfillmentOptionOverride, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SelectedFulfillmentOptionOverride extends StripeObject {
+      /** The digital fulfillment option. */
+      @SerializedName("digital")
+      Digital digital;
+
+      /** The line items this fulfillment option applies to. */
+      @SerializedName("line_item_keys")
+      List<String> lineItemKeys;
 
       /** The shipping option. */
       @SerializedName("shipping")

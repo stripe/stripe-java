@@ -303,9 +303,19 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
     @SerializedName("pricing")
     Pricing pricing;
 
-    /** Non-negative integer. The quantity of units for the line item. */
+    /**
+     * Non-negative integer. The quantity of units for the line item. Use {@code quantity_decimal}
+     * instead to provide decimal precision. This field will be deprecated in favor of {@code
+     * quantity_decimal} in a future version.
+     */
     @SerializedName("quantity")
     Long quantity;
+
+    /**
+     * Non-negative decimal with at most 12 decimal places. The quantity of units for the line item.
+     */
+    @SerializedName("quantity_decimal")
+    BigDecimal quantityDecimal;
 
     /**
      * A list of up to 10 tax amounts for this line item. This can be useful if you calculate taxes
@@ -341,6 +351,7 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
         PriceData priceData,
         Pricing pricing,
         Long quantity,
+        BigDecimal quantityDecimal,
         Object taxAmounts,
         Object taxRates) {
       this.amount = amount;
@@ -355,6 +366,7 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
       this.priceData = priceData;
       this.pricing = pricing;
       this.quantity = quantity;
+      this.quantityDecimal = quantityDecimal;
       this.taxAmounts = taxAmounts;
       this.taxRates = taxRates;
     }
@@ -388,6 +400,8 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
 
       private Long quantity;
 
+      private BigDecimal quantityDecimal;
+
       private Object taxAmounts;
 
       private Object taxRates;
@@ -407,6 +421,7 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
             this.priceData,
             this.pricing,
             this.quantity,
+            this.quantityDecimal,
             this.taxAmounts,
             this.taxRates);
       }
@@ -654,9 +669,22 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
         return this;
       }
 
-      /** Non-negative integer. The quantity of units for the line item. */
+      /**
+       * Non-negative integer. The quantity of units for the line item. Use {@code quantity_decimal}
+       * instead to provide decimal precision. This field will be deprecated in favor of {@code
+       * quantity_decimal} in a future version.
+       */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
+        return this;
+      }
+
+      /**
+       * Non-negative decimal with at most 12 decimal places. The quantity of units for the line
+       * item.
+       */
+      public Builder setQuantityDecimal(BigDecimal quantityDecimal) {
+        this.quantityDecimal = quantityDecimal;
         return this;
       }
 
@@ -1684,15 +1712,12 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
           @SerializedName("performance_location")
           String performanceLocation;
 
-          /**
-           * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
-           * code</a> ID.
-           */
+          /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
           @SerializedName("tax_code")
-          String taxCode;
+          Object taxCode;
 
           private TaxDetails(
-              Map<String, Object> extraParams, String performanceLocation, String taxCode) {
+              Map<String, Object> extraParams, String performanceLocation, Object taxCode) {
             this.extraParams = extraParams;
             this.performanceLocation = performanceLocation;
             this.taxCode = taxCode;
@@ -1707,7 +1732,7 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
 
             private String performanceLocation;
 
-            private String taxCode;
+            private Object taxCode;
 
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceUpdateLinesParams.Line.PriceData.ProductData.TaxDetails build() {
@@ -1755,11 +1780,14 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
               return this;
             }
 
-            /**
-             * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
-             * code</a> ID.
-             */
+            /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
             public Builder setTaxCode(String taxCode) {
+              this.taxCode = taxCode;
+              return this;
+            }
+
+            /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+            public Builder setTaxCode(EmptyParam taxCode) {
               this.taxCode = taxCode;
               return this;
             }

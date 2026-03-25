@@ -6450,6 +6450,17 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("card_creator")
         CardCreator cardCreator;
 
+        /**
+         * Details on the Account's acceptance of Consumer-privacy-disclosures-specific terms of
+         * service.
+         */
+        @SerializedName("consumer_privacy_disclosures")
+        ConsumerPrivacyDisclosures consumerPrivacyDisclosures;
+
+        /** Details on the Account's acceptance of Consumer-storer-specific terms of service. */
+        @SerializedName("consumer_storer")
+        ConsumerStorer consumerStorer;
+
         /** Details on the Account's acceptance of Crypto-storer-specific terms of service. */
         @SerializedName("crypto_storer")
         CryptoStorer cryptoStorer;
@@ -8134,6 +8145,63 @@ public class Account extends StripeObject implements HasId {
               }
             }
           }
+        }
+
+        /**
+         * Details on the Account's acceptance of Consumer-privacy-disclosures-specific terms of
+         * service.
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ConsumerPrivacyDisclosures extends StripeObject {
+          /**
+           * The time when the Account's representative accepted the terms of service. Represented
+           * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+           * 2022-09-18T13:22:18.123Z.
+           */
+          @SerializedName("date")
+          java.time.Instant date;
+
+          /**
+           * The IP address from which the Account's representative accepted the terms of service.
+           */
+          @SerializedName("ip")
+          String ip;
+
+          /**
+           * The user agent of the browser from which the Account's representative accepted the
+           * terms of service.
+           */
+          @SerializedName("user_agent")
+          String userAgent;
+        }
+
+        /** Details on the Account's acceptance of Consumer-storer-specific terms of service. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ConsumerStorer extends StripeObject {
+          /**
+           * The time when the Account's representative accepted the terms of service. Represented
+           * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+           * 2022-09-18T13:22:18.123Z.
+           */
+          @SerializedName("date")
+          java.time.Instant date;
+
+          /**
+           * The IP address from which the Account's representative accepted the terms of service.
+           */
+          @SerializedName("ip")
+          String ip;
+
+          /**
+           * The user agent of the browser from which the Account's representative accepted the
+           * terms of service.
+           */
+          @SerializedName("user_agent")
+          String userAgent;
         }
 
         /** Details on the Account's acceptance of Crypto-storer-specific terms of service. */

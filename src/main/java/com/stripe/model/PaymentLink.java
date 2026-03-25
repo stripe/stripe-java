@@ -130,11 +130,21 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   LineItemCollection lineItems;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
+
+  /**
+   * Settings for Managed Payments for this Payment Link and resulting <a
+   * href="https://stripe.com/api/checkout/sessions/object">CheckoutSessions</a>, <a
+   * href="https://stripe.com/api/payment_intents/object">PaymentIntents</a>, <a
+   * href="https://stripe.com/api/invoices/object">Invoices</a>, and <a
+   * href="https://stripe.com/api/subscriptions/object">Subscriptions</a>.
+   */
+  @SerializedName("managed_payments")
+  ManagedPayments managedPayments;
 
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
@@ -560,7 +570,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       /**
        * Type of the account referenced.
        *
-       * <p>One of {@code account}, or {@code self}.
+       * <p>One of {@code account}, {@code application}, or {@code self}.
        */
       @SerializedName("type")
       String type;
@@ -998,7 +1008,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         /**
          * Type of the account referenced.
          *
-         * <p>One of {@code account}, or {@code self}.
+         * <p>One of {@code account}, {@code application}, or {@code self}.
          */
         @SerializedName("type")
         String type;
@@ -1041,6 +1051,23 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         String template;
       }
     }
+  }
+
+  /**
+   * For more details about ManagedPayments, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManagedPayments extends StripeObject {
+    /**
+     * Set to {@code true} to enable <a
+     * href="https://docs.stripe.com/payments/managed-payments">Managed Payments</a>, Stripe's
+     * merchant of record solution, for this session.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
   }
 
   /**
@@ -1374,7 +1401,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         /**
          * Type of the account referenced.
          *
-         * <p>One of {@code account}, or {@code self}.
+         * <p>One of {@code account}, {@code application}, or {@code self}.
          */
         @SerializedName("type")
         String type;
@@ -1491,6 +1518,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     trySetResponseGetter(customText, responseGetter);
     trySetResponseGetter(invoiceCreation, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
+    trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(nameCollection, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(paymentIntentData, responseGetter);

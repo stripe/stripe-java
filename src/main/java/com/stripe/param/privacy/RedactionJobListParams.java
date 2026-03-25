@@ -51,6 +51,7 @@ public class RedactionJobListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
+  /** If provided, only RedactionJob objects with the given status will be returned. */
   @SerializedName("status")
   Status status;
 
@@ -180,6 +181,7 @@ public class RedactionJobListParams extends ApiRequestParams {
       return this;
     }
 
+    /** If provided, only RedactionJob objects with the given status will be returned. */
     public Builder setStatus(RedactionJobListParams.Status status) {
       this.status = status;
       return this;

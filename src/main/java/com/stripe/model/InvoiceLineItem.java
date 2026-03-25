@@ -72,8 +72,8 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   String invoice;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -125,9 +125,21 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @SerializedName("pricing")
   Pricing pricing;
 
-  /** The quantity of the subscription, if the line item is a subscription or a proration. */
+  /**
+   * Quantity of units for the invoice line item in integer format, with any decimal precision
+   * truncated. For the line item's full-precision decimal quantity, use {@code quantity_decimal}.
+   * This field will be deprecated in favor of {@code quantity_decimal} in a future version. If the
+   * line item is a proration or subscription, the quantity of the subscription that the proration
+   * was computed for.
+   */
   @SerializedName("quantity")
   Long quantity;
+
+  /**
+   * Non-negative decimal with at most 12 decimal places. The quantity of units for the line item.
+   */
+  @SerializedName("quantity_decimal")
+  BigDecimal quantityDecimal;
 
   @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)

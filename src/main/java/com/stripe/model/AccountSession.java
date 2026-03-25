@@ -58,8 +58,8 @@ public class AccountSession extends ApiResource {
   Long expiresAt;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -169,6 +169,14 @@ public class AccountSession extends ApiResource {
     @SerializedName("financial_account")
     FinancialAccount financialAccount;
 
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/financial-account-rewards/">financial
+     * account rewards</a> embedded component.
+     */
+    @SerializedName("financial_account_rewards")
+    FinancialAccountRewards financialAccountRewards;
+
     @SerializedName("financial_account_transactions")
     FinancialAccountTransactions financialAccountTransactions;
 
@@ -180,6 +188,14 @@ public class AccountSession extends ApiResource {
 
     @SerializedName("issuing_cards_list")
     IssuingCardsList issuingCardsList;
+
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/nesting-demo/">Nestingdemo</a>
+     * embedded component.
+     */
+    @SerializedName("nesting_demo")
+    NestingDemo nestingDemo;
 
     /**
      * Configuration for the <a
@@ -641,6 +657,31 @@ public class AccountSession extends ApiResource {
     }
 
     /**
+     * For more details about FinancialAccountRewards, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FinancialAccountRewards extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
+    }
+
+    /**
      * For more details about FinancialAccountTransactions, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -811,6 +852,31 @@ public class AccountSession extends ApiResource {
         @SerializedName("spend_control_management")
         Boolean spendControlManagement;
       }
+    }
+
+    /**
+     * For more details about NestingDemo, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NestingDemo extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
     }
 
     /**

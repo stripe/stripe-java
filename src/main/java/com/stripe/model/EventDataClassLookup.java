@@ -94,6 +94,7 @@ public final class EventDataClassLookup {
     classLookup.put("refund", com.stripe.model.Refund.class);
     classLookup.put("reserve_transaction", com.stripe.model.ReserveTransaction.class);
     classLookup.put("review", com.stripe.model.Review.class);
+    classLookup.put("risk_signals", com.stripe.model.RiskSignals.class);
     classLookup.put("setup_attempt", com.stripe.model.SetupAttempt.class);
     classLookup.put("setup_intent", com.stripe.model.SetupIntent.class);
     classLookup.put("shipping_rate", com.stripe.model.ShippingRate.class);

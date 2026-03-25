@@ -14,6 +14,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.radar.PaymentEvaluationCreateParams;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -54,13 +55,9 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
-  /** Collection of scores and insights for this payment evaluation. */
-  @SerializedName("insights")
-  Insights insights;
-
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -88,6 +85,19 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   /** Payment details attached to this payment evaluation. */
   @SerializedName("payment_details")
   PaymentDetails paymentDetails;
+
+  /**
+   * Recommended action based on the score of the fraudulent_payment signal. Possible values are
+   * {@code block} and {@code continue}.
+   *
+   * <p>One of {@code block}, or {@code continue}.
+   */
+  @SerializedName("recommended_action")
+  String recommendedAction;
+
+  /** Collection of signals for this payment evaluation. */
+  @SerializedName("signals")
+  Signals signals;
 
   /**
    * Request a Radar API fraud risk score from Stripe for a payment before sending it for external
@@ -346,42 +356,6 @@ public class PaymentEvaluation extends ApiResource implements HasId {
        */
       @SerializedName("outcome")
       String outcome;
-    }
-  }
-
-  /** Collection of scores and insights for this payment evaluation. */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Insights extends StripeObject {
-    /** The timestamp when the evaluation was performed. */
-    @SerializedName("evaluated_at")
-    Long evaluatedAt;
-
-    /** Scores, insights and recommended action for one scorer for this PaymentEvaluation. */
-    @SerializedName("fraudulent_dispute")
-    FraudulentDispute fraudulentDispute;
-
-    /** Scores, insights and recommended action for one scorer for this PaymentEvaluation. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class FraudulentDispute extends StripeObject {
-      /**
-       * Recommended action based on the risk score. Possible values are {@code block} and {@code
-       * continue}.
-       *
-       * <p>One of {@code block}, or {@code continue}.
-       */
-      @SerializedName("recommended_action")
-      String recommendedAction;
-
-      /**
-       * Stripe Radar’s evaluation of the risk level of the payment. Possible values for evaluated
-       * payments are between 0 and 100, with higher scores indicating higher risk.
-       */
-      @SerializedName("risk_score")
-      Long riskScore;
     }
   }
 
@@ -757,13 +731,49 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     }
   }
 
+  /** Collection of signals for this payment evaluation. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Signals extends StripeObject {
+    /** A payment evaluation signal with evaluated_at, risk_level, and score fields. */
+    @SerializedName("fraudulent_payment")
+    FraudulentPayment fraudulentPayment;
+
+    /** A payment evaluation signal with evaluated_at, risk_level, and score fields. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FraudulentPayment extends StripeObject {
+      /** The time when this signal was evaluated. */
+      @SerializedName("evaluated_at")
+      Long evaluatedAt;
+
+      /**
+       * Risk level of this signal, based on the score.
+       *
+       * <p>One of {@code elevated}, {@code highest}, or {@code normal}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
+
+      /**
+       * Score for this insight. Possible values for evaluated payments are -1 and any value between
+       * 0 and 100. The value is returned with two decimal places. A score of -1 indicates a test
+       * integration and higher scores indicate a higher likelihood of the signal being true.
+       */
+      @SerializedName("score")
+      BigDecimal score;
+    }
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(clientDeviceMetadataDetails, responseGetter);
     trySetResponseGetter(customerDetails, responseGetter);
-    trySetResponseGetter(insights, responseGetter);
     trySetResponseGetter(outcome, responseGetter);
     trySetResponseGetter(paymentDetails, responseGetter);
+    trySetResponseGetter(signals, responseGetter);
   }
 }

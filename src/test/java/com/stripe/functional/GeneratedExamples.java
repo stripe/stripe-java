@@ -25056,7 +25056,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.billing.Intent>>() {}.getType(),
-        "{\"data\":[{\"amount_details\":{\"amount_due\":\"amount_due\",\"currency\":\"usd\",\"customer_balance_applied\":\"customer_balance_applied\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"amount_details\":{\"currency\":\"usd\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.IntentListParams params =
@@ -25082,7 +25082,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.Intent.class,
-        "{\"amount_details\":{\"amount_due\":\"amount_due\",\"currency\":\"usd\",\"customer_balance_applied\":\"customer_balance_applied\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}");
+        "{\"amount_details\":{\"currency\":\"usd\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.IntentCreateParams params =
@@ -25302,6 +25302,21 @@ class GeneratedExamples extends BaseStripeTest {
                                                                     .LicenseFee
                                                                     .DebitProrationBehavior.NONE)
                                                             .build())
+                                                    .setRecurringCreditGrant(
+                                                        com.stripe.param.v2.billing
+                                                            .IntentCreateParams.Action.Modify
+                                                            .PricingPlanSubscriptionDetails
+                                                            .Overrides.PartialPeriodBehavior
+                                                            .RecurringCreditGrant.builder()
+                                                            .setCreateBehavior(
+                                                                com.stripe.param.v2.billing
+                                                                    .IntentCreateParams.Action
+                                                                    .Modify
+                                                                    .PricingPlanSubscriptionDetails
+                                                                    .Overrides.PartialPeriodBehavior
+                                                                    .RecurringCreditGrant
+                                                                    .CreateBehavior.NONE)
+                                                            .build())
                                                     .build())
                                             .build())
                                     .setPricingPlanSubscription("pricing_plan_subscription")
@@ -25383,6 +25398,21 @@ class GeneratedExamples extends BaseStripeTest {
                                                                     .LicenseFee
                                                                     .DebitProrationBehavior.NONE)
                                                             .build())
+                                                    .setRecurringCreditGrant(
+                                                        com.stripe.param.v2.billing
+                                                            .IntentCreateParams.Action.Subscribe
+                                                            .PricingPlanSubscriptionDetails
+                                                            .Overrides.PartialPeriodBehavior
+                                                            .RecurringCreditGrant.builder()
+                                                            .setCreateBehavior(
+                                                                com.stripe.param.v2.billing
+                                                                    .IntentCreateParams.Action
+                                                                    .Subscribe
+                                                                    .PricingPlanSubscriptionDetails
+                                                                    .Overrides.PartialPeriodBehavior
+                                                                    .RecurringCreditGrant
+                                                                    .CreateBehavior.NONE)
+                                                            .build())
                                                     .build())
                                             .build())
                                     .setPricingPlan("pricing_plan")
@@ -25425,7 +25455,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.Intent.class,
-        "{\"amount_details\":{\"amount_due\":\"amount_due\",\"currency\":\"usd\",\"customer_balance_applied\":\"customer_balance_applied\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}");
+        "{\"amount_details\":{\"currency\":\"usd\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.billing.Intent intent = client.v2().billing().intents().retrieve("id_123");
@@ -25443,7 +25473,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.Intent.class,
-        "{\"amount_details\":{\"amount_due\":\"amount_due\",\"currency\":\"usd\",\"customer_balance_applied\":\"customer_balance_applied\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}");
+        "{\"amount_details\":{\"currency\":\"usd\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.billing.Intent intent = client.v2().billing().intents().cancel("id_123");
@@ -25465,7 +25495,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.Intent.class,
-        "{\"amount_details\":{\"amount_due\":\"amount_due\",\"currency\":\"usd\",\"customer_balance_applied\":\"customer_balance_applied\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}");
+        "{\"amount_details\":{\"currency\":\"usd\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.IntentCommitParams params =
@@ -25491,7 +25521,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.Intent.class,
-        "{\"amount_details\":{\"amount_due\":\"amount_due\",\"currency\":\"usd\",\"customer_balance_applied\":\"customer_balance_applied\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}");
+        "{\"amount_details\":{\"currency\":\"usd\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.billing.Intent intent =
@@ -25514,20 +25544,16 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.Intent.class,
-        "{\"amount_details\":{\"amount_due\":\"amount_due\",\"currency\":\"usd\",\"customer_balance_applied\":\"customer_balance_applied\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}");
+        "{\"amount_details\":{\"currency\":\"usd\",\"discount\":\"discount\",\"shipping\":\"shipping\",\"subtotal\":\"subtotal\",\"tax\":\"tax\",\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"id\":\"obj_123\",\"object\":\"v2.billing.intent\",\"status\":\"draft\",\"status_transitions\":{\"expires_at\":\"1970-01-10T15:36:51.170Z\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.billing.IntentReserveParams params =
-        com.stripe.param.v2.billing.IntentReserveParams.builder().build();
-
-    com.stripe.model.v2.billing.Intent intent =
-        client.v2().billing().intents().reserve("id_123", params);
+    com.stripe.model.v2.billing.Intent intent = client.v2().billing().intents().reserve("id_123");
     assertNotNull(intent);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         "/v2/billing/intents/id_123/reserve",
-        params.toMap(),
+        null,
         null);
   }
 

@@ -24,7 +24,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * This is an object representing a Stripe account. You can retrieve it to see properties on the
+ * For new integrations, we recommend using the <a
+ * href="https://stripe.com/api/v2/core/accounts">Accounts v2 API</a>, in place of /v1/accounts and
+ * /v1/customers to represent a user.
+ *
+ * <p>This is an object representing a Stripe account. You can retrieve it to see properties on the
  * account like its current requirements or if the account is enabled to make live charges or
  * receive payouts.
  *
@@ -168,6 +172,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
   @SerializedName("risk_controls")
   RiskControls riskControls;
+
+  /** A hash containing information about risk signal collection. */
+  @SerializedName("risk_signals")
+  RiskSignals riskSignals;
 
   /** Options for customizing how the account functions within Stripe. */
   @SerializedName("settings")
@@ -1496,6 +1504,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("twint_payments")
     String twintPayments;
+
+    /**
+     * The status of the upi payments capability of the account, or whether the account can directly
+     * process upi charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("upi_payments")
+    String upiPayments;
 
     /**
      * The status of the US bank account ACH payments capability of the account, or whether the
@@ -3076,7 +3093,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       List<String> additionalFiles;
 
       /**
-       * Whether your business sells digital content or not.
+       * The type of goods your business sells. Use {@code digital_content} if you sell digital
+       * content. Use {@code other} for all other types of goods or services.
        *
        * <p>One of {@code digital_content}, or {@code other}.
        */
@@ -3290,6 +3308,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     trySetResponseGetter(individual, responseGetter);
     trySetResponseGetter(requirements, responseGetter);
     trySetResponseGetter(riskControls, responseGetter);
+    trySetResponseGetter(riskSignals, responseGetter);
     trySetResponseGetter(settings, responseGetter);
     trySetResponseGetter(tosAcceptance, responseGetter);
   }

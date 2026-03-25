@@ -112,8 +112,16 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   LatestFraudWarning latestFraudWarning;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Rules that control the lifecycle of this card, such as automatic cancellation. Refer to our <a
+   * href="https://stripe.com/issuing/controls/lifecycle-controls">documentation</a> for more
+   * details.
+   */
+  @SerializedName("lifecycle_controls")
+  LifecycleControls lifecycleControls;
+
+  /**
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -441,6 +449,35 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      */
     @SerializedName("type")
     String type;
+  }
+
+  /**
+   * For more details about LifecycleControls, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class LifecycleControls extends StripeObject {
+    @SerializedName("cancel_after")
+    CancelAfter cancelAfter;
+
+    /**
+     * For more details about CancelAfter, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CancelAfter extends StripeObject {
+      /**
+       * The card is automatically cancelled when it makes this number of non-zero payment
+       * authorizations and transactions. The count includes penny authorizations, but doesn't
+       * include non-payment actions, such as authorization advice.
+       */
+      @SerializedName("payment_count")
+      Long paymentCount;
+    }
   }
 
   /**
@@ -1081,6 +1118,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
     trySetResponseGetter(latestFraudWarning, responseGetter);
+    trySetResponseGetter(lifecycleControls, responseGetter);
     trySetResponseGetter(personalizationDesign, responseGetter);
     trySetResponseGetter(replacedBy, responseGetter);
     trySetResponseGetter(replacementFor, responseGetter);
