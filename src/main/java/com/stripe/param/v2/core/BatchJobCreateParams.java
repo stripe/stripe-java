@@ -189,9 +189,9 @@ public class BatchJobCreateParams extends ApiRequestParams {
      * /v1/subscriptions/:id/migrate}.
      */
     @SerializedName("path")
-    String path;
+    Path path;
 
-    private Endpoint(Map<String, Object> extraParams, HttpMethod httpMethod, String path) {
+    private Endpoint(Map<String, Object> extraParams, HttpMethod httpMethod, Path path) {
       this.extraParams = extraParams;
       this.httpMethod = httpMethod;
       this.path = path;
@@ -206,7 +206,7 @@ public class BatchJobCreateParams extends ApiRequestParams {
 
       private HttpMethod httpMethod;
 
-      private String path;
+      private Path path;
 
       /** Finalize and obtain parameter instance from this builder. */
       public BatchJobCreateParams.Endpoint build() {
@@ -250,7 +250,7 @@ public class BatchJobCreateParams extends ApiRequestParams {
        * form used in the documentation. For instance, for subscription migration this would be
        * {@code /v1/subscriptions/:id/migrate}.
        */
-      public Builder setPath(String path) {
+      public Builder setPath(BatchJobCreateParams.Endpoint.Path path) {
         this.path = path;
         return this;
       }
@@ -264,6 +264,51 @@ public class BatchJobCreateParams extends ApiRequestParams {
       private final String value;
 
       HttpMethod(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum Path implements ApiRequestParams.EnumParam {
+      @SerializedName("/v1/accounts/:account")
+      V1_ACCOUNT_UPDATE("/v1/accounts/:account"),
+
+      @SerializedName("/v1/credit_notes")
+      V1_CREDIT_NOTE_CREATE("/v1/credit_notes"),
+
+      @SerializedName("/v1/customers/:customer")
+      V1_CUSTOMER_UPDATE("/v1/customers/:customer"),
+
+      @SerializedName("/v1/invoices/:invoice")
+      V1_INVOICE_UPDATE("/v1/invoices/:invoice"),
+
+      @SerializedName("/v1/invoices/:invoice/pay")
+      V1_INVOICE_PAY("/v1/invoices/:invoice/pay"),
+
+      @SerializedName("/v1/promotion_codes")
+      V1_PROMOTION_CODE_CREATE("/v1/promotion_codes"),
+
+      @SerializedName("/v1/promotion_codes/:promotion_code")
+      V1_PROMOTION_CODE_UPDATE("/v1/promotion_codes/:promotion_code"),
+
+      @SerializedName("/v1/subscriptions/:subscription_exposed_id")
+      V1_SUBSCRIPTION_UPDATE("/v1/subscriptions/:subscription_exposed_id"),
+
+      @SerializedName("/v1/subscriptions/:subscription/migrate")
+      V1_SUBSCRIPTION_MIGRATE("/v1/subscriptions/:subscription/migrate"),
+
+      @SerializedName("/v1/subscription_schedules")
+      V1_SUBSCRIPTION_SCHEDULE_CREATE("/v1/subscription_schedules"),
+
+      @SerializedName("/v1/subscription_schedules/:schedule")
+      V1_SUBSCRIPTION_SCHEDULE_UPDATE("/v1/subscription_schedules/:schedule"),
+
+      @SerializedName("/v1/subscription_schedules/:schedule/cancel")
+      V1_SUBSCRIPTION_SCHEDULE_CANCEL("/v1/subscription_schedules/:schedule/cancel");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Path(String value) {
         this.value = value;
       }
     }
