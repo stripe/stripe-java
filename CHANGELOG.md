@@ -48,6 +48,58 @@ This release changes the pinned API version to `2026-03-25.preview`. It is built
 * [#2189](https://github.com/stripe/stripe-java/pull/2189) Merge to beta
 * [#2175](https://github.com/stripe/stripe-java/pull/2175) Merge to beta
 
+## 32.0.0 - 2026-03-25
+
+This release changes the pinned API version to `2026-03-25.dahlia` and contains breaking changes (prefixed with ⚠️ below). There's also a [detailed migration guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v32) to simplify your upgrade process.
+
+Please review details for the breaking changes and alternatives in the [Stripe API changelog](https://docs.stripe.com/changelog/dahlia) before upgrading.
+
+* ⚠️ **Breaking change:** [#2182](https://github.com/stripe/stripe-java/pull/2182) Add setHttpClient to StripeClientBuilder; clean up apiKey/authenticator coupling
+  - ⚠️ Removed `RequestOptions.getApiKey()`, `RequestOptions.RequestOptionsBuilder.getApiKey()`, and `StripeClient.StripeClientBuilder.getApiKey()`. Use `getAuthenticator()` instead.
+  - Added `StripeClient.StripeClientBuilder.setHttpClient(HttpClient)` to allow injecting a custom HTTP client.
+* ⚠️ **Breaking change:** [#2187](https://github.com/stripe/stripe-java/pull/2187) Regenerate with decimal_string enabled for v2 APIs
+  - V2 API decimal fields changed type from `String` to `BigDecimal`. Code that reads or writes these fields as `String` will need to use `BigDecimal` instead. Affected fields:
+    - **V2.Core.Account** / **V2.Core.AccountPerson**: `percentOwnership`
+    - **PaymentEvaluation.Signals.FraudulentPayment**: `score`
+    - Params: `AccountCreateParams`, `PersonCreateParams`, `AccountTokenCreateParams`, `PersonTokenCreateParams` (all: `percentOwnership`)
+    - Params: `InvoiceItemCreateParams`, `InvoiceAddLinesParams`, `InvoiceUpdateLinesParams`, `InvoiceCreatePreviewParams` (all: `quantityDecimal`)
+* ⚠️ **Breaking change:** [#2131](https://github.com/stripe/stripe-java/pull/2131) Use HTTP status code in V2 errors
+  - `RateLimitException` now extends `StripeException` rather than `ApiException`
+  - Non-200 status codes from V2 endpoints will throw a `StripeException` (e.g. `RateLimitException`, `InvalidRequestException`, etc.) like in V1 instead of a generic `ApiException`
+* ⚠️ **Breaking change:** [#2190](https://github.com/stripe/stripe-java/pull/2190) Throw an error when using the wrong webhook parsing method
+* ⚠️ **Breaking change:** [#2172](https://github.com/stripe/stripe-java/pull/2172) Make `RequestOptions` & `RawRequestOptions` constructors private and add Stripe-Request-Trigger header
+* ⚠️ **Breaking change:** [#2181](https://github.com/stripe/stripe-java/pull/2181) Change Automatic-Module-Name to com.stripe
+  - Changes `Automatic-Module-Name` from `stripe.java` to `com.stripe`. Users with `requires stripe.java;` in their `module-info.java` will need to update to `requires com.stripe;`.
+* [#2179](https://github.com/stripe/stripe-java/pull/2179) Add runtime support for V2 int64 string-encoded fields
+
+
+### ⚠️ Breaking changes due to changes in the Stripe API
+
+* Generated changes from [#2170](https://github.com/stripe/stripe-java/pull/2170), [#2193](https://github.com/stripe/stripe-java/pull/2193), [#2191](https://github.com/stripe/stripe-java/pull/2191)
+  * Add support for `upiPayments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
+  * Add support for `upi` on `Charge.payment_method_details`, `ConfirmationToken.payment_method_preview`, `ConfirmationTokenCreateParams.payment_method_data`, `Mandate.payment_method_details`, `PaymentAttemptRecord.payment_method_details`, `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, `PaymentMethodConfiguration`, `PaymentMethodCreateParams`, `PaymentMethod`, `PaymentRecord.payment_method_details`, `SetupAttempt.payment_method_details`, `SetupIntent.payment_method_options`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentConfirmParams.payment_method_options`, `SetupIntentCreateParams.payment_method_data`, `SetupIntentCreateParams.payment_method_options`, `SetupIntentUpdateParams.payment_method_data`, `SetupIntentUpdateParams.payment_method_options`, `checkout.Session.payment_method_options`, and `checkout.SessionCreateParams.payment_method_options`
+  * Add support for `integrationIdentifier` on `checkout.SessionCreateParams` and `checkout.Session`
+  * Add support for new value `upi` on enums `PaymentIntentConfirmParams.excludedPaymentMethodTypes`, `PaymentIntentCreateParams.excludedPaymentMethodTypes`, `PaymentIntentUpdateParams.excludedPaymentMethodTypes`, `SetupIntentCreateParams.excludedPaymentMethodTypes`, `SetupIntentUpdateParams.excludedPaymentMethodTypes`, and `checkout.SessionCreateParams.excludedPaymentMethodTypes`
+  * Add support for `crypto` on `checkout.SessionCreateParams.payment_method_options`
+  * Add support for new value `upi` on enum `checkout.SessionCreateParams.paymentMethodTypes`
+  * Add support for `pendingInvoiceItemInterval` on `checkout.SessionCreateParams.subscription_data`
+  * Add support for new values `elements`, `embedded_page`, `form`, and `hosted_page` on enum `checkout.SessionCreateParams.uiMode`
+  * Add support for new value `upi` on enums `ConfirmationTokenCreateParams.payment_method_data.type`, `PaymentIntentConfirmParams.payment_method_data.type`, `PaymentIntentCreateParams.payment_method_data.type`, `PaymentIntentUpdateParams.payment_method_data.type`, `SetupIntentConfirmParams.payment_method_data.type`, `SetupIntentCreateParams.payment_method_data.type`, and `SetupIntentUpdateParams.payment_method_data.type`
+  * Add support for `metadata` on `CreditNoteCreateParams.lines[]`, `CreditNoteLineItem`, `CreditNotePreviewLinesParams.lines[]`, and `CreditNotePreviewParams.lines[]`
+  * Add support for new value `upi` on enums `CustomerListPaymentMethodsParams.type`, `PaymentMethodCreateParams.type`, and `PaymentMethodListParams.type`
+  * Add support for `quantityDecimal` on `InvoiceAddLinesParams.lines[]`, `InvoiceCreatePreviewParams.invoice_items[]`, `InvoiceItemCreateParams`, `InvoiceItemUpdateParams`, `InvoiceItem`, `InvoiceLineItemUpdateParams`, `InvoiceLineItem`, and `InvoiceUpdateLinesParams.lines[]`
+  * ⚠️ Add support for `level` on `issuing.AuthorizationCreateParams.risk_assessment.card_testing_risk` and `issuing.AuthorizationCreateParams.risk_assessment.merchant_dispute_risk`
+  * ⚠️ Remove support for `riskLevel` on `issuing.AuthorizationCreateParams.risk_assessment.card_testing_risk` and `issuing.AuthorizationCreateParams.risk_assessment.merchant_dispute_risk`
+  * Add support for `lifecycleControls` on `issuing.CardCreateParams` and `issuing.Card`
+  * Add support for `cryptogram`, `electronicCommerceIndicator`, `exemptionIndicatorApplied`, and `exemptionIndicator` on `PaymentAttemptRecord.payment_method_details.card.three_d_secure` and `PaymentRecord.payment_method_details.card.three_d_secure`
+  * Add support for `upiHandleRedirectOrDisplayQrCode` on `PaymentIntent.next_action` and `SetupIntent.next_action`
+  * Add support for new value `upi` on enums `PaymentLinkCreateParams.paymentMethodTypes` and `PaymentLinkUpdateParams.paymentMethodTypes`
+  * Add support for `recommendedAction` and `signals` on `radar.PaymentEvaluation`
+  * ⚠️ Remove support for `insights` on `radar.PaymentEvaluation`
+  * Add support for new value `crypto_fingerprint` on enum `radar.ValueListCreateParams.itemType`
+  * Add support for new value `2026-03-25.dahlia` on enum `WebhookEndpointCreateParams.apiVersion`
+  * ⚠️ Change type of `v2.core.EventDestinationCreateParams.eventsFrom` from `enum('other_accounts'|'self')` to `string`
+
 ## 31.5.0-beta.1 - 2026-02-25
 This release changes the pinned API version to `2026-02-25.preview`.
 
