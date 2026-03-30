@@ -45,10 +45,6 @@ public class OffSessionPayment extends StripeObject implements HasId {
   @SerializedName("capture")
   Capture capture;
 
-  /** ID of the owning compartment. */
-  @SerializedName("compartment_id")
-  String compartmentId;
-
   /**
    * Creation time of the OffSessionPayment. Represented as a RFC 3339 date &amp; time UTC value in
    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
@@ -63,8 +59,8 @@ public class OffSessionPayment extends StripeObject implements HasId {
   /**
    * The reason why the OffSessionPayment failed.
    *
-   * <p>One of {@code authorization_expired}, {@code no_valid_payment_method}, {@code
-   * rejected_by_partner}, or {@code retries_exhausted}.
+   * <p>One of {@code authorization_expired}, {@code exceeded_retry_window}, {@code
+   * no_valid_payment_method}, {@code rejected_by_partner}, or {@code retries_exhausted}.
    */
   @SerializedName("failure_reason")
   String failureReason;
@@ -217,6 +213,13 @@ public class OffSessionPayment extends StripeObject implements HasId {
      */
     @SerializedName("retry_strategy")
     String retryStrategy;
+
+    /**
+     * The timestamp when this payment is no longer eligible to be retried. When this timestamp is
+     * reached, the payment will be marked as failed.
+     */
+    @SerializedName("retry_until")
+    Instant retryUntil;
   }
 
   /**

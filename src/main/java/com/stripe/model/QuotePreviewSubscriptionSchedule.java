@@ -391,10 +391,6 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     @SerializedName("applies_to")
     List<QuotePreviewSubscriptionSchedule.BillingSchedule.AppliesTo> appliesTo;
 
-    /** Specifies the start of the billing period. */
-    @SerializedName("bill_from")
-    BillFrom billFrom;
-
     /** Specifies the end of billing period. */
     @SerializedName("bill_until")
     BillUntil billUntil;
@@ -439,32 +435,6 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       public void setPriceObject(Price expandableObject) {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
-    }
-
-    /** Specifies the start of the billing period. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BillFrom extends StripeObject {
-      /** The time the billing schedule applies from. */
-      @SerializedName("computed_timestamp")
-      Long computedTimestamp;
-
-      /**
-       * Use a precise Unix timestamp for prebilling to start. Must be earlier than {@code
-       * bill_until}.
-       */
-      @SerializedName("timestamp")
-      Long timestamp;
-
-      /**
-       * Describes how the billing schedule determines the start date. Possible values are {@code
-       * timestamp}.
-       *
-       * <p>Equal to {@code timestamp}.
-       */
-      @SerializedName("type")
-      String type;
     }
 
     /** Specifies the end of billing period. */

@@ -18,6 +18,9 @@ public final class V2CoreHealthPaymentMethodErrorResolvedEvent extends Event {
   @Getter
   @Setter
   public static final class EventData {
+    /** The alert ID. */
+    @SerializedName("alert_id")
+    String alertId;
     /** The grouping key for the alert. */
     @SerializedName("grouping_key")
     String groupingKey;

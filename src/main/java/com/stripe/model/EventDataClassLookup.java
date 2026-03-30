@@ -249,6 +249,8 @@ public final class EventDataClassLookup {
 
     classLookup.put(
         "shared_payment.granted_token", com.stripe.model.sharedpayment.GrantedToken.class);
+    classLookup.put(
+        "shared_payment.issued_token", com.stripe.model.sharedpayment.IssuedToken.class);
 
     classLookup.put("tax.association", com.stripe.model.tax.Association.class);
     classLookup.put("tax.calculation", com.stripe.model.tax.Calculation.class);

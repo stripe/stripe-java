@@ -14,6 +14,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.sharedpayment.GrantedTokenCreateParams;
 import com.stripe.param.sharedpayment.GrantedTokenRetrieveParams;
 import com.stripe.param.sharedpayment.GrantedTokenRevokeParams;
+import java.math.BigDecimal;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -29,6 +30,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class GrantedToken extends ApiResource implements HasId {
+  /** Details about the agent that issued this SharedPaymentGrantedToken. */
+  @SerializedName("agent_details")
+  AgentDetails agentDetails;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -67,6 +72,10 @@ public class GrantedToken extends ApiResource implements HasId {
    */
   @SerializedName("object")
   String object;
+
+  /** Risk details of the SharedPaymentGrantedToken. */
+  @SerializedName("risk_details")
+  RiskDetails riskDetails;
 
   /** Metadata about the SharedPaymentGrantedToken. */
   @SerializedName("shared_metadata")
@@ -121,6 +130,129 @@ public class GrantedToken extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, GrantedToken.class);
+  }
+
+  /**
+   * For more details about AgentDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AgentDetails extends StripeObject {
+    /** The Stripe Profile ID of the agent that issued this SharedPaymentGrantedToken. */
+    @SerializedName("network_business_profile")
+    String networkBusinessProfile;
+  }
+
+  /** Risk details of the SharedPaymentGrantedToken. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RiskDetails extends StripeObject {
+    /**
+     * Risk insights for this token, including scores and recommended actions for each risk type.
+     */
+    @SerializedName("insights")
+    Insights insights;
+
+    /**
+     * Risk insights for this token, including scores and recommended actions for each risk type.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Insights extends StripeObject {
+      /** Bot risk insight (score: Float, recommended_action). */
+      @SerializedName("bot")
+      Bot bot;
+
+      /** Card issuer decline risk insight (score: Float, recommended_action). */
+      @SerializedName("card_issuer_decline")
+      CardIssuerDecline cardIssuerDecline;
+
+      /** Card testing risk insight (score: Float, recommended_action). */
+      @SerializedName("card_testing")
+      CardTesting cardTesting;
+
+      /** Fraudulent dispute risk insight (score: Integer, recommended_action). */
+      @SerializedName("fraudulent_dispute")
+      FraudulentDispute fraudulentDispute;
+
+      /** Stolen card risk insight (score: Integer, recommended_action). */
+      @SerializedName("stolen_card")
+      StolenCard stolenCard;
+
+      /** Risk insight with a float score and recommended action. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Bot extends StripeObject {
+        /** Recommended action for this insight. */
+        @SerializedName("recommended_action")
+        String recommendedAction;
+
+        /** Risk score for this insight (float). */
+        @SerializedName("score")
+        BigDecimal score;
+      }
+
+      /** Risk insight with a float score and recommended action. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CardIssuerDecline extends StripeObject {
+        /** Recommended action for this insight. */
+        @SerializedName("recommended_action")
+        String recommendedAction;
+
+        /** Risk score for this insight (float). */
+        @SerializedName("score")
+        BigDecimal score;
+      }
+
+      /** Risk insight with a float score and recommended action. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CardTesting extends StripeObject {
+        /** Recommended action for this insight. */
+        @SerializedName("recommended_action")
+        String recommendedAction;
+
+        /** Risk score for this insight (float). */
+        @SerializedName("score")
+        BigDecimal score;
+      }
+
+      /** Risk insight with an integer score and recommended action. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FraudulentDispute extends StripeObject {
+        /** Recommended action for this insight. */
+        @SerializedName("recommended_action")
+        String recommendedAction;
+
+        /** Risk score for this insight (integer). */
+        @SerializedName("score")
+        Long score;
+      }
+
+      /** Risk insight with an integer score and recommended action. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class StolenCard extends StripeObject {
+        /** Recommended action for this insight. */
+        @SerializedName("recommended_action")
+        String recommendedAction;
+
+        /** Risk score for this insight (integer). */
+        @SerializedName("score")
+        Long score;
+      }
+    }
   }
 
   /** Some details on how the SharedPaymentGrantedToken has been used so far. */
@@ -313,6 +445,8 @@ public class GrantedToken extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(agentDetails, responseGetter);
+    trySetResponseGetter(riskDetails, responseGetter);
     trySetResponseGetter(usageDetails, responseGetter);
     trySetResponseGetter(usageLimits, responseGetter);
   }

@@ -10654,6 +10654,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** Capabilities that enable OutboundPayments via paper check. */
+        @SerializedName("paper_checks")
+        PaperChecks paperChecks;
+
         /** Capabilities that enable the recipient to manage their Stripe Balance (/v1/balance). */
         @SerializedName("stripe_balance")
         StripeBalance stripeBalance;
@@ -10663,11 +10667,13 @@ public class AccountUpdateParams extends ApiRequestParams {
             Cards cards,
             CryptoWallets cryptoWallets,
             Map<String, Object> extraParams,
+            PaperChecks paperChecks,
             StripeBalance stripeBalance) {
           this.bankAccounts = bankAccounts;
           this.cards = cards;
           this.cryptoWallets = cryptoWallets;
           this.extraParams = extraParams;
+          this.paperChecks = paperChecks;
           this.stripeBalance = stripeBalance;
         }
 
@@ -10684,6 +10690,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private PaperChecks paperChecks;
+
           private StripeBalance stripeBalance;
 
           /** Finalize and obtain parameter instance from this builder. */
@@ -10693,6 +10701,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                 this.cards,
                 this.cryptoWallets,
                 this.extraParams,
+                this.paperChecks,
                 this.stripeBalance);
           }
 
@@ -10745,6 +10754,13 @@ public class AccountUpdateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Capabilities that enable OutboundPayments via paper check. */
+          public Builder setPaperChecks(
+              AccountUpdateParams.Configuration.Recipient.Capabilities.PaperChecks paperChecks) {
+            this.paperChecks = paperChecks;
             return this;
           }
 
@@ -11276,6 +11292,87 @@ public class AccountUpdateParams extends ApiRequestParams {
              * original map. See {@link
              * AccountUpdateParams.Configuration.Recipient.Capabilities.CryptoWallets#extraParams}
              * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * To request a new Capability for an account, pass true. There can be a delay before
+             * the requested Capability becomes active.
+             */
+            public Builder setRequested(Boolean requested) {
+              this.requested = requested;
+              return this;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PaperChecks {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * To request a new Capability for an account, pass true. There can be a delay before the
+           * requested Capability becomes active.
+           */
+          @SerializedName("requested")
+          Boolean requested;
+
+          private PaperChecks(Map<String, Object> extraParams, Boolean requested) {
+            this.extraParams = extraParams;
+            this.requested = requested;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Boolean requested;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountUpdateParams.Configuration.Recipient.Capabilities.PaperChecks build() {
+              return new AccountUpdateParams.Configuration.Recipient.Capabilities.PaperChecks(
+                  this.extraParams, this.requested);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Recipient.Capabilities.PaperChecks#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Recipient.Capabilities.PaperChecks#extraParams} for
+             * the field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
               if (this.extraParams == null) {
@@ -13075,17 +13172,23 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("financial_accounts")
           FinancialAccounts financialAccounts;
 
+          /** Can send funds from a FinancialAccount to someone else via paper check. */
+          @SerializedName("paper_checks")
+          PaperChecks paperChecks;
+
           private OutboundPayments(
               BankAccounts bankAccounts,
               Cards cards,
               CryptoWallets cryptoWallets,
               Map<String, Object> extraParams,
-              FinancialAccounts financialAccounts) {
+              FinancialAccounts financialAccounts,
+              PaperChecks paperChecks) {
             this.bankAccounts = bankAccounts;
             this.cards = cards;
             this.cryptoWallets = cryptoWallets;
             this.extraParams = extraParams;
             this.financialAccounts = financialAccounts;
+            this.paperChecks = paperChecks;
           }
 
           public static Builder builder() {
@@ -13103,6 +13206,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
             private FinancialAccounts financialAccounts;
 
+            private PaperChecks paperChecks;
+
             /** Finalize and obtain parameter instance from this builder. */
             public AccountUpdateParams.Configuration.Storer.Capabilities.OutboundPayments build() {
               return new AccountUpdateParams.Configuration.Storer.Capabilities.OutboundPayments(
@@ -13110,7 +13215,8 @@ public class AccountUpdateParams extends ApiRequestParams {
                   this.cards,
                   this.cryptoWallets,
                   this.extraParams,
-                  this.financialAccounts);
+                  this.financialAccounts,
+                  this.paperChecks);
             }
 
             /** Can send funds from a FinancialAccount to a bank account owned by someone else. */
@@ -13176,6 +13282,14 @@ public class AccountUpdateParams extends ApiRequestParams {
                         .FinancialAccounts
                     financialAccounts) {
               this.financialAccounts = financialAccounts;
+              return this;
+            }
+
+            /** Can send funds from a FinancialAccount to someone else via paper check. */
+            public Builder setPaperChecks(
+                AccountUpdateParams.Configuration.Storer.Capabilities.OutboundPayments.PaperChecks
+                    paperChecks) {
+              this.paperChecks = paperChecks;
               return this;
             }
           }
@@ -13490,6 +13604,89 @@ public class AccountUpdateParams extends ApiRequestParams {
                * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
                * AccountUpdateParams.Configuration.Storer.Capabilities.OutboundPayments.FinancialAccounts#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * To request a new Capability for an account, pass true. There can be a delay before
+               * the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class PaperChecks {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * To request a new Capability for an account, pass true. There can be a delay before
+             * the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private PaperChecks(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountUpdateParams.Configuration.Storer.Capabilities.OutboundPayments
+                      .PaperChecks
+                  build() {
+                return new AccountUpdateParams.Configuration.Storer.Capabilities.OutboundPayments
+                    .PaperChecks(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Storer.Capabilities.OutboundPayments.PaperChecks#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Storer.Capabilities.OutboundPayments.PaperChecks#extraParams}
                * for the field documentation.
                */
               public Builder putAllExtraParam(Map<String, Object> map) {

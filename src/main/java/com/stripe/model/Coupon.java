@@ -455,9 +455,13 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class ServicePeriod extends StripeObject {
+    /**
+     * Specifies coupon frequency. Either {@code day}, {@code week}, {@code month} or {@code year}.
+     */
     @SerializedName("interval")
     String interval;
 
+    /** The number of intervals for which the coupon will be applied. */
     @SerializedName("interval_count")
     Long intervalCount;
 
@@ -472,9 +476,18 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Iterations extends StripeObject {
+      /**
+       * The number of iterations the service period will repeat for. Only used when type is {@code
+       * count}.
+       */
       @SerializedName("count")
       Long count;
 
+      /**
+       * The type of iterations.
+       *
+       * <p>One of {@code count}, or {@code forever}.
+       */
       @SerializedName("type")
       String type;
     }

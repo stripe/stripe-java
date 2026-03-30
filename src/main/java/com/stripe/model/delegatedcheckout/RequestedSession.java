@@ -8,6 +8,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.Profile;
 import com.stripe.model.StripeObject;
+import com.stripe.model.sharedpayment.IssuedToken;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -132,7 +133,9 @@ public class RequestedSession extends ApiResource
 
   /** The SPT used for payment. */
   @SerializedName("shared_payment_issued_token")
-  String sharedPaymentIssuedToken;
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<IssuedToken> sharedPaymentIssuedToken;
 
   /**
    * The status of the requested session.
@@ -148,6 +151,28 @@ public class RequestedSession extends ApiResource
   /** Time at which the object was last updated. Measured in seconds since the Unix epoch. */
   @SerializedName("updated_at")
   Long updatedAt;
+
+  /** Get ID of expandable {@code sharedPaymentIssuedToken} object. */
+  public String getSharedPaymentIssuedToken() {
+    return (this.sharedPaymentIssuedToken != null) ? this.sharedPaymentIssuedToken.getId() : null;
+  }
+
+  public void setSharedPaymentIssuedToken(String id) {
+    this.sharedPaymentIssuedToken =
+        ApiResource.setExpandableFieldId(id, this.sharedPaymentIssuedToken);
+  }
+
+  /** Get expanded {@code sharedPaymentIssuedToken}. */
+  public IssuedToken getSharedPaymentIssuedTokenObject() {
+    return (this.sharedPaymentIssuedToken != null)
+        ? this.sharedPaymentIssuedToken.getExpanded()
+        : null;
+  }
+
+  public void setSharedPaymentIssuedTokenObject(IssuedToken expandableObject) {
+    this.sharedPaymentIssuedToken =
+        new ExpandableField<IssuedToken>(expandableObject.getId(), expandableObject);
+  }
 
   /** Confirms a requested session. */
   public RequestedSession confirm() throws StripeException {
@@ -1146,6 +1171,7 @@ public class RequestedSession extends ApiResource
     trySetResponseGetter(paymentMethodPreview, responseGetter);
     trySetResponseGetter(riskDetails, responseGetter);
     trySetResponseGetter(sellerDetails, responseGetter);
+    trySetResponseGetter(sharedPaymentIssuedToken, responseGetter);
     trySetResponseGetter(totalDetails, responseGetter);
   }
 }

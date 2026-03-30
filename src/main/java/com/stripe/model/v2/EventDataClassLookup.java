@@ -94,6 +94,9 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.core.vault.us_bank_account", com.stripe.model.v2.core.vault.UsBankAccount.class);
 
+    classLookup.put(
+        "v2.data.reporting.query_run", com.stripe.model.v2.data.reporting.QueryRun.class);
+
     classLookup.put("v2.iam.api_key", com.stripe.model.v2.iam.ApiKey.class);
 
     classLookup.put(
@@ -436,6 +439,18 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.core.health.webhook_latency.resolved",
         com.stripe.events.V2CoreHealthWebhookLatencyResolvedEvent.class);
+    eventClassLookup.put(
+        "v2.data.reporting.query_run.created",
+        com.stripe.events.V2DataReportingQueryRunCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.data.reporting.query_run.failed",
+        com.stripe.events.V2DataReportingQueryRunFailedEvent.class);
+    eventClassLookup.put(
+        "v2.data.reporting.query_run.succeeded",
+        com.stripe.events.V2DataReportingQueryRunSucceededEvent.class);
+    eventClassLookup.put(
+        "v2.data.reporting.query_run.updated",
+        com.stripe.events.V2DataReportingQueryRunUpdatedEvent.class);
     eventClassLookup.put("v2.iam.api_key.created", com.stripe.events.V2IamApiKeyCreatedEvent.class);
     eventClassLookup.put(
         "v2.iam.api_key.default_secret_revealed",
@@ -600,8 +615,14 @@ public final class EventDataClassLookup {
         "v2.payments.off_session_payment.failed",
         com.stripe.events.V2PaymentsOffSessionPaymentFailedEvent.class);
     eventClassLookup.put(
+        "v2.payments.off_session_payment.paused",
+        com.stripe.events.V2PaymentsOffSessionPaymentPausedEvent.class);
+    eventClassLookup.put(
         "v2.payments.off_session_payment.requires_capture",
         com.stripe.events.V2PaymentsOffSessionPaymentRequiresCaptureEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.resumed",
+        com.stripe.events.V2PaymentsOffSessionPaymentResumedEvent.class);
     eventClassLookup.put(
         "v2.payments.off_session_payment.succeeded",
         com.stripe.events.V2PaymentsOffSessionPaymentSucceededEvent.class);

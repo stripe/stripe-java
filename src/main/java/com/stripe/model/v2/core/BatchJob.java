@@ -12,16 +12,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** BatchJob resource. */
+/** A batch job allows you to perform an API operation on a large set of records asynchronously. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class BatchJob extends StripeObject implements HasId {
-  /** Timestamp at which BatchJob was created. */
+  /** Timestamp at which the {@code batch_job} was created. */
   @SerializedName("created")
   Instant created;
 
-  /** Unique identifier for the BatchJob. */
+  /** Unique identifier for the {@code batch_job}. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -33,11 +33,11 @@ public class BatchJob extends StripeObject implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** The maximum rps defined for the {@code BatchJob}. */
+  /** The maximum requests per second defined for the {@code batch_job}. */
   @SerializedName("maximum_rps")
   Long maximumRps;
 
-  /** The metadata of the {@code BatchJob} object. */
+  /** The metadata of the {@code batch_job}. */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -50,12 +50,12 @@ public class BatchJob extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** If the validation will be run previous to the execution of the {@code BatchJob}. */
+  /** Whether validation runs before executing the {@code batch_job}. */
   @SerializedName("skip_validation")
   Boolean skipValidation;
 
   /**
-   * The current status of the {@code BatchJob}.
+   * The current status of the {@code batch_job}.
    *
    * <p>One of {@code batch_failed}, {@code canceled}, {@code cancelling}, {@code complete}, {@code
    * in_progress}, {@code ready_for_upload}, {@code timeout}, {@code upload_timeout}, {@code
@@ -64,58 +64,58 @@ public class BatchJob extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
-  /** Additional details about the current state of the {@code BatchJob}. */
+  /** Additional details about the current state of the {@code batch_job}. */
   @SerializedName("status_details")
   StatusDetails statusDetails;
 
-  /** Additional details about the current state of the {@code BatchJob}. */
+  /** Additional details about the current state of the {@code batch_job}. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusDetails extends StripeObject {
-    /** Additional details for the {@code BATCH_FAILED} status of the {@code BatchJob}. */
+    /** Additional details for the {@code BATCH_FAILED} status of the {@code batch_job}. */
     @SerializedName("batch_failed")
     BatchFailed batchFailed;
 
-    /** Additional details for the {@code CANCELED} status of the {@code BatchJob}. */
+    /** Additional details for the {@code CANCELED} status of the {@code batch_job}. */
     @SerializedName("canceled")
     Canceled canceled;
 
-    /** Additional details for the {@code COMPLETE} status of the {@code BatchJob}. */
+    /** Additional details for the {@code COMPLETE} status of the {@code batch_job}. */
     @SerializedName("complete")
     Complete complete;
 
-    /** Additional details for the {@code IN_PROGRESS} status of the {@code BatchJob}. */
+    /** Additional details for the {@code IN_PROGRESS} status of the {@code batch_job}. */
     @SerializedName("in_progress")
     InProgress inProgress;
 
-    /** Additional details for the {@code READY_FOR_UPLOAD} status of the {@code BatchJob}. */
+    /** Additional details for the {@code READY_FOR_UPLOAD} status of the {@code batch_job}. */
     @SerializedName("ready_for_upload")
     ReadyForUpload readyForUpload;
 
-    /** Additional details for the {@code TIMEOUT} status of the {@code BatchJob}. */
+    /** Additional details for the {@code TIMEOUT} status of the {@code batch_job}. */
     @SerializedName("timeout")
     Timeout timeout;
 
-    /** Additional details for the {@code VALIDATING} status of the {@code BatchJob}. */
+    /** Additional details for the {@code VALIDATING} status of the {@code batch_job}. */
     @SerializedName("validating")
     Validating validating;
 
-    /** Additional details for the {@code VALIDATION_FAILED} status of the {@code BatchJob}. */
+    /** Additional details for the {@code VALIDATION_FAILED} status of the {@code batch_job}. */
     @SerializedName("validation_failed")
     ValidationFailed validationFailed;
 
-    /** Additional details for the {@code BATCH_FAILED} status of the {@code BatchJob}. */
+    /** Additional details for the {@code BATCH_FAILED} status of the {@code batch_job}. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BatchFailed extends StripeObject {
-      /** Details about the {@code BatchJob} failure. */
+      /** Details about the {@code batch_job} failure. */
       @SerializedName("error")
       String error;
     }
 
-    /** Additional details for the {@code CANCELED} status of the {@code BatchJob}. */
+    /** Additional details for the {@code CANCELED} status of the {@code batch_job}. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -126,8 +126,8 @@ public class BatchJob extends StripeObject implements HasId {
       Long failureCount;
 
       /**
-       * The output file details. If BatchJob is cancelled it's provided only if there is already
-       * output at this point.
+       * The output file details. If the {@code batch_job} is canceled, this is provided only if
+       * there is already output at this point.
        */
       @SerializedName("output_file")
       OutputFile outputFile;
@@ -138,8 +138,8 @@ public class BatchJob extends StripeObject implements HasId {
       Long successCount;
 
       /**
-       * The output file details. If BatchJob is cancelled it's provided only if there is already
-       * output at this point.
+       * The output file details. If the {@code batch_job} is canceled, this is provided only if
+       * there is already output at this point.
        */
       @Getter
       @Setter
@@ -174,7 +174,7 @@ public class BatchJob extends StripeObject implements HasId {
       }
     }
 
-    /** Additional details for the {@code COMPLETE} status of the {@code BatchJob}. */
+    /** Additional details for the {@code COMPLETE} status of the {@code batch_job}. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -185,8 +185,8 @@ public class BatchJob extends StripeObject implements HasId {
       Long failureCount;
 
       /**
-       * The output file details. If BatchJob is cancelled it's provided only if there is already
-       * output at this point.
+       * The output file details. If the {@code batch_job} is canceled, this is provided only if
+       * there is already output at this point.
        */
       @SerializedName("output_file")
       OutputFile outputFile;
@@ -197,8 +197,8 @@ public class BatchJob extends StripeObject implements HasId {
       Long successCount;
 
       /**
-       * The output file details. If BatchJob is cancelled it's provided only if there is already
-       * output at this point.
+       * The output file details. If the {@code batch_job} is canceled, this is provided only if
+       * there is already output at this point.
        */
       @Getter
       @Setter
@@ -233,7 +233,7 @@ public class BatchJob extends StripeObject implements HasId {
       }
     }
 
-    /** Additional details for the {@code IN_PROGRESS} status of the {@code BatchJob}. */
+    /** Additional details for the {@code IN_PROGRESS} status of the {@code batch_job}. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -249,7 +249,7 @@ public class BatchJob extends StripeObject implements HasId {
       Long successCount;
     }
 
-    /** Additional details for the {@code READY_FOR_UPLOAD} status of the {@code BatchJob}. */
+    /** Additional details for the {@code READY_FOR_UPLOAD} status of the {@code batch_job}. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -273,7 +273,7 @@ public class BatchJob extends StripeObject implements HasId {
       }
     }
 
-    /** Additional details for the {@code TIMEOUT} status of the {@code BatchJob}. */
+    /** Additional details for the {@code TIMEOUT} status of the {@code batch_job}. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -284,8 +284,8 @@ public class BatchJob extends StripeObject implements HasId {
       Long failureCount;
 
       /**
-       * The output file details. If BatchJob is cancelled it's provided only if there is already
-       * output at this point.
+       * The output file details. If the {@code batch_job} is canceled, this is provided only if
+       * there is already output at this point.
        */
       @SerializedName("output_file")
       OutputFile outputFile;
@@ -296,8 +296,8 @@ public class BatchJob extends StripeObject implements HasId {
       Long successCount;
 
       /**
-       * The output file details. If BatchJob is cancelled it's provided only if there is already
-       * output at this point.
+       * The output file details. If the {@code batch_job} is canceled, this is provided only if
+       * there is already output at this point.
        */
       @Getter
       @Setter
@@ -332,7 +332,7 @@ public class BatchJob extends StripeObject implements HasId {
       }
     }
 
-    /** Additional details for the {@code VALIDATING} status of the {@code BatchJob}. */
+    /** Additional details for the {@code VALIDATING} status of the {@code batch_job}. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -346,7 +346,7 @@ public class BatchJob extends StripeObject implements HasId {
       Long validatedCount;
     }
 
-    /** Additional details for the {@code VALIDATION_FAILED} status of the {@code BatchJob}. */
+    /** Additional details for the {@code VALIDATION_FAILED} status of the {@code batch_job}. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -357,8 +357,8 @@ public class BatchJob extends StripeObject implements HasId {
       Long failureCount;
 
       /**
-       * The output file details. If BatchJob is cancelled it's provided only if there is already
-       * output at this point.
+       * The output file details. If the {@code batch_job} is canceled, this is provided only if
+       * there is already output at this point.
        */
       @SerializedName("output_file")
       OutputFile outputFile;
@@ -369,8 +369,8 @@ public class BatchJob extends StripeObject implements HasId {
       Long successCount;
 
       /**
-       * The output file details. If BatchJob is cancelled it's provided only if there is already
-       * output at this point.
+       * The output file details. If the {@code batch_job} is canceled, this is provided only if
+       * there is already output at this point.
        */
       @Getter
       @Setter
