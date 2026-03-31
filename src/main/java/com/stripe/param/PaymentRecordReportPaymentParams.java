@@ -581,10 +581,19 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
     @SerializedName("failure_code")
     FailureCode failureCode;
 
-    private Failed(Map<String, Object> extraParams, Long failedAt, FailureCode failureCode) {
+    /** Processor information for this payment. */
+    @SerializedName("processor_details")
+    ProcessorDetails processorDetails;
+
+    private Failed(
+        Map<String, Object> extraParams,
+        Long failedAt,
+        FailureCode failureCode,
+        ProcessorDetails processorDetails) {
       this.extraParams = extraParams;
       this.failedAt = failedAt;
       this.failureCode = failureCode;
+      this.processorDetails = processorDetails;
     }
 
     public static Builder builder() {
@@ -598,10 +607,12 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
 
       private FailureCode failureCode;
 
+      private ProcessorDetails processorDetails;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentRecordReportPaymentParams.Failed build() {
         return new PaymentRecordReportPaymentParams.Failed(
-            this.extraParams, this.failedAt, this.failureCode);
+            this.extraParams, this.failedAt, this.failureCode, this.processorDetails);
       }
 
       /**
@@ -649,6 +660,200 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
         this.failureCode = failureCode;
         return this;
       }
+
+      /** Processor information for this payment. */
+      public Builder setProcessorDetails(
+          PaymentRecordReportPaymentParams.Failed.ProcessorDetails processorDetails) {
+        this.processorDetails = processorDetails;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ProcessorDetails {
+      /** Information about the custom processor used to make this payment. */
+      @SerializedName("custom")
+      Custom custom;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> The type of the processor details. An additional hash is
+       * included on processor_details with a name matching this value. It contains additional
+       * information specific to the processor.
+       */
+      @SerializedName("type")
+      Type type;
+
+      private ProcessorDetails(Custom custom, Map<String, Object> extraParams, Type type) {
+        this.custom = custom;
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Custom custom;
+
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentRecordReportPaymentParams.Failed.ProcessorDetails build() {
+          return new PaymentRecordReportPaymentParams.Failed.ProcessorDetails(
+              this.custom, this.extraParams, this.type);
+        }
+
+        /** Information about the custom processor used to make this payment. */
+        public Builder setCustom(
+            PaymentRecordReportPaymentParams.Failed.ProcessorDetails.Custom custom) {
+          this.custom = custom;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentRecordReportPaymentParams.Failed.ProcessorDetails#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentRecordReportPaymentParams.Failed.ProcessorDetails#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The type of the processor details. An additional hash is
+         * included on processor_details with a name matching this value. It contains additional
+         * information specific to the processor.
+         */
+        public Builder setType(PaymentRecordReportPaymentParams.Failed.ProcessorDetails.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Custom {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> An opaque string for manual reconciliation of this payment,
+         * for example a check number or a payment processor ID.
+         */
+        @SerializedName("payment_reference")
+        String paymentReference;
+
+        private Custom(Map<String, Object> extraParams, String paymentReference) {
+          this.extraParams = extraParams;
+          this.paymentReference = paymentReference;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String paymentReference;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentRecordReportPaymentParams.Failed.ProcessorDetails.Custom build() {
+            return new PaymentRecordReportPaymentParams.Failed.ProcessorDetails.Custom(
+                this.extraParams, this.paymentReference);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentRecordReportPaymentParams.Failed.ProcessorDetails.Custom#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentRecordReportPaymentParams.Failed.ProcessorDetails.Custom#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> An opaque string for manual reconciliation of this payment,
+           * for example a check number or a payment processor ID.
+           */
+          public Builder setPaymentReference(String paymentReference) {
+            this.paymentReference = paymentReference;
+            return this;
+          }
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("custom")
+        CUSTOM("custom");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
     }
 
     public enum FailureCode implements ApiRequestParams.EnumParam {
@@ -686,9 +891,15 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
     @SerializedName("guaranteed_at")
     Long guaranteedAt;
 
-    private Guaranteed(Map<String, Object> extraParams, Long guaranteedAt) {
+    /** Processor information for this payment. */
+    @SerializedName("processor_details")
+    ProcessorDetails processorDetails;
+
+    private Guaranteed(
+        Map<String, Object> extraParams, Long guaranteedAt, ProcessorDetails processorDetails) {
       this.extraParams = extraParams;
       this.guaranteedAt = guaranteedAt;
+      this.processorDetails = processorDetails;
     }
 
     public static Builder builder() {
@@ -700,9 +911,12 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
 
       private Long guaranteedAt;
 
+      private ProcessorDetails processorDetails;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentRecordReportPaymentParams.Guaranteed build() {
-        return new PaymentRecordReportPaymentParams.Guaranteed(this.extraParams, this.guaranteedAt);
+        return new PaymentRecordReportPaymentParams.Guaranteed(
+            this.extraParams, this.guaranteedAt, this.processorDetails);
       }
 
       /**
@@ -739,6 +953,201 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
       public Builder setGuaranteedAt(Long guaranteedAt) {
         this.guaranteedAt = guaranteedAt;
         return this;
+      }
+
+      /** Processor information for this payment. */
+      public Builder setProcessorDetails(
+          PaymentRecordReportPaymentParams.Guaranteed.ProcessorDetails processorDetails) {
+        this.processorDetails = processorDetails;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ProcessorDetails {
+      /** Information about the custom processor used to make this payment. */
+      @SerializedName("custom")
+      Custom custom;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> The type of the processor details. An additional hash is
+       * included on processor_details with a name matching this value. It contains additional
+       * information specific to the processor.
+       */
+      @SerializedName("type")
+      Type type;
+
+      private ProcessorDetails(Custom custom, Map<String, Object> extraParams, Type type) {
+        this.custom = custom;
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Custom custom;
+
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentRecordReportPaymentParams.Guaranteed.ProcessorDetails build() {
+          return new PaymentRecordReportPaymentParams.Guaranteed.ProcessorDetails(
+              this.custom, this.extraParams, this.type);
+        }
+
+        /** Information about the custom processor used to make this payment. */
+        public Builder setCustom(
+            PaymentRecordReportPaymentParams.Guaranteed.ProcessorDetails.Custom custom) {
+          this.custom = custom;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentRecordReportPaymentParams.Guaranteed.ProcessorDetails#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentRecordReportPaymentParams.Guaranteed.ProcessorDetails#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The type of the processor details. An additional hash is
+         * included on processor_details with a name matching this value. It contains additional
+         * information specific to the processor.
+         */
+        public Builder setType(
+            PaymentRecordReportPaymentParams.Guaranteed.ProcessorDetails.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Custom {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> An opaque string for manual reconciliation of this payment,
+         * for example a check number or a payment processor ID.
+         */
+        @SerializedName("payment_reference")
+        String paymentReference;
+
+        private Custom(Map<String, Object> extraParams, String paymentReference) {
+          this.extraParams = extraParams;
+          this.paymentReference = paymentReference;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String paymentReference;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentRecordReportPaymentParams.Guaranteed.ProcessorDetails.Custom build() {
+            return new PaymentRecordReportPaymentParams.Guaranteed.ProcessorDetails.Custom(
+                this.extraParams, this.paymentReference);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentRecordReportPaymentParams.Guaranteed.ProcessorDetails.Custom#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentRecordReportPaymentParams.Guaranteed.ProcessorDetails.Custom#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> An opaque string for manual reconciliation of this payment,
+           * for example a check number or a payment processor ID.
+           */
+          public Builder setPaymentReference(String paymentReference) {
+            this.paymentReference = paymentReference;
+            return this;
+          }
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("custom")
+        CUSTOM("custom");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
   }
