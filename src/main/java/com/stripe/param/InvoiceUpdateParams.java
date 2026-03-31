@@ -2198,6 +2198,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Object card;
 
       /**
+       * If paying by {@code check_scan}, this sub-hash contains details about the Check Scan
+       * payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("check_scan")
+      Object checkScan;
+
+      /**
        * If paying by {@code customer_balance}, this sub-hash contains details about the Bank
        * transfer payment method options to pass to the invoice’s PaymentIntent.
        */
@@ -2266,6 +2273,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           Object acssDebit,
           Object bancontact,
           Object card,
+          Object checkScan,
           Object customerBalance,
           Map<String, Object> extraParams,
           Object idBankTransfer,
@@ -2278,6 +2286,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
         this.card = card;
+        this.checkScan = checkScan;
         this.customerBalance = customerBalance;
         this.extraParams = extraParams;
         this.idBankTransfer = idBankTransfer;
@@ -2299,6 +2308,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         private Object bancontact;
 
         private Object card;
+
+        private Object checkScan;
 
         private Object customerBalance;
 
@@ -2324,6 +2335,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               this.acssDebit,
               this.bancontact,
               this.card,
+              this.checkScan,
               this.customerBalance,
               this.extraParams,
               this.idBankTransfer,
@@ -2388,6 +2400,25 @@ public class InvoiceUpdateParams extends ApiRequestParams {
          */
         public Builder setCard(EmptyParam card) {
           this.card = card;
+          return this;
+        }
+
+        /**
+         * If paying by {@code check_scan}, this sub-hash contains details about the Check Scan
+         * payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setCheckScan(
+            InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CheckScan checkScan) {
+          this.checkScan = checkScan;
+          return this;
+        }
+
+        /**
+         * If paying by {@code check_scan}, this sub-hash contains details about the Check Scan
+         * payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setCheckScan(EmptyParam checkScan) {
+          this.checkScan = checkScan;
           return this;
         }
 
@@ -3283,6 +3314,256 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
           RequestThreeDSecure(String value) {
             this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CheckScan {
+        @SerializedName("check_deposit_address")
+        CheckDepositAddress checkDepositAddress;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private CheckScan(
+            CheckDepositAddress checkDepositAddress, Map<String, Object> extraParams) {
+          this.checkDepositAddress = checkDepositAddress;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private CheckDepositAddress checkDepositAddress;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CheckScan build() {
+            return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CheckScan(
+                this.checkDepositAddress, this.extraParams);
+          }
+
+          public Builder setCheckDepositAddress(
+              InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CheckScan.CheckDepositAddress
+                  checkDepositAddress) {
+            this.checkDepositAddress = checkDepositAddress;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CheckScan#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CheckScan#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CheckDepositAddress {
+          @SerializedName("city")
+          Object city;
+
+          @SerializedName("country")
+          Object country;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          @SerializedName("line1")
+          Object line1;
+
+          @SerializedName("line2")
+          Object line2;
+
+          @SerializedName("postal_code")
+          Object postalCode;
+
+          @SerializedName("state")
+          Object state;
+
+          private CheckDepositAddress(
+              Object city,
+              Object country,
+              Map<String, Object> extraParams,
+              Object line1,
+              Object line2,
+              Object postalCode,
+              Object state) {
+            this.city = city;
+            this.country = country;
+            this.extraParams = extraParams;
+            this.line1 = line1;
+            this.line2 = line2;
+            this.postalCode = postalCode;
+            this.state = state;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Object city;
+
+            private Object country;
+
+            private Map<String, Object> extraParams;
+
+            private Object line1;
+
+            private Object line2;
+
+            private Object postalCode;
+
+            private Object state;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CheckScan
+                    .CheckDepositAddress
+                build() {
+              return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CheckScan
+                  .CheckDepositAddress(
+                  this.city,
+                  this.country,
+                  this.extraParams,
+                  this.line1,
+                  this.line2,
+                  this.postalCode,
+                  this.state);
+            }
+
+            public Builder setCity(String city) {
+              this.city = city;
+              return this;
+            }
+
+            public Builder setCity(EmptyParam city) {
+              this.city = city;
+              return this;
+            }
+
+            public Builder setCountry(String country) {
+              this.country = country;
+              return this;
+            }
+
+            public Builder setCountry(EmptyParam country) {
+              this.country = country;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CheckScan.CheckDepositAddress#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CheckScan.CheckDepositAddress#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            public Builder setLine1(String line1) {
+              this.line1 = line1;
+              return this;
+            }
+
+            public Builder setLine1(EmptyParam line1) {
+              this.line1 = line1;
+              return this;
+            }
+
+            public Builder setLine2(String line2) {
+              this.line2 = line2;
+              return this;
+            }
+
+            public Builder setLine2(EmptyParam line2) {
+              this.line2 = line2;
+              return this;
+            }
+
+            public Builder setPostalCode(String postalCode) {
+              this.postalCode = postalCode;
+              return this;
+            }
+
+            public Builder setPostalCode(EmptyParam postalCode) {
+              this.postalCode = postalCode;
+              return this;
+            }
+
+            public Builder setState(String state) {
+              this.state = state;
+              return this;
+            }
+
+            public Builder setState(EmptyParam state) {
+              this.state = state;
+              return this;
+            }
           }
         }
       }
@@ -4915,6 +5196,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       @SerializedName("cashapp")
       CASHAPP("cashapp"),
+
+      @SerializedName("check_scan")
+      CHECK_SCAN("check_scan"),
 
       @SerializedName("crypto")
       CRYPTO("crypto"),

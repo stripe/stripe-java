@@ -1420,6 +1420,13 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       Card card;
 
       /**
+       * If paying by {@code check_scan}, this sub-hash contains details about the Check Scan
+       * payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("check_scan")
+      CheckScan checkScan;
+
+      /**
        * If paying by {@code customer_balance}, this sub-hash contains details about the Bank
        * transfer payment method options to pass to the invoice’s PaymentIntent.
        */
@@ -1567,6 +1574,45 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
           /** Whether Installments are enabled for this Invoice. */
           @SerializedName("enabled")
           Boolean enabled;
+        }
+      }
+
+      /**
+       * For more details about CheckScan, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CheckScan extends StripeObject {
+        @SerializedName("check_deposit_address")
+        CheckDepositAddress checkDepositAddress;
+
+        /**
+         * For more details about CheckDepositAddress, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CheckDepositAddress extends StripeObject {
+          @SerializedName("city")
+          String city;
+
+          @SerializedName("country")
+          String country;
+
+          @SerializedName("line1")
+          String line1;
+
+          @SerializedName("line2")
+          String line2;
+
+          @SerializedName("postal_code")
+          String postalCode;
+
+          @SerializedName("state")
+          String state;
         }
       }
 
