@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -42,10 +41,6 @@ public class IssuedToken extends StripeObject implements HasId {
   @SerializedName("deactivated_reason")
   String deactivatedReason;
 
-  /** Which requested uses have been enabled for this SharedPaymentIssuedToken. */
-  @SerializedName("enabled_uses")
-  List<String> enabledUses;
-
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -69,13 +64,6 @@ public class IssuedToken extends StripeObject implements HasId {
   /** ID of an existing PaymentMethod. */
   @SerializedName("payment_method")
   String paymentMethod;
-
-  /**
-   * Requested uses for this SharedPaymentIssuedToken, which controls which Stripe APIs it can be
-   * used with.
-   */
-  @SerializedName("requested_uses")
-  List<String> requestedUses;
 
   /**
    * If the customer does not exit their browser while authenticating, they will be redirected to
