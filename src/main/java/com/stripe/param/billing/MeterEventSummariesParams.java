@@ -84,6 +84,28 @@ public class MeterEventSummariesParams extends ApiRequestParams {
   String startingAfter;
 
   /**
+   * List of tenant payload keys to filter on. Must be used together with tenant_operator and
+   * tenant_values. Cannot be used with tenant_filters.
+   */
+  @SerializedName("tenant_keys")
+  List<String> tenantKeys;
+
+  /**
+   * The operator to apply when filtering by tenant values. Must be used together with tenant_keys
+   * and tenant_values. Cannot be used with tenant_filters.
+   */
+  @SerializedName("tenant_operator")
+  TenantOperator tenantOperator;
+
+  /**
+   * List of value lists corresponding to each key in tenant_keys. Each element contains the values
+   * to filter on for the corresponding tenant key. Must be used together with tenant_operator and
+   * tenant_keys. Cannot be used with tenant_filters.
+   */
+  @SerializedName("tenant_values")
+  List<List<String>> tenantValues;
+
+  /**
    * Specifies what granularity to use when generating event summaries. If not specified, a single
    * event summary would be returned for the specified time range. For hourly granularity, start and
    * end times must align with hour boundaries (e.g., 00:00, 01:00, ..., 23:00). For daily
@@ -103,6 +125,9 @@ public class MeterEventSummariesParams extends ApiRequestParams {
       Long limit,
       Long startTime,
       String startingAfter,
+      List<String> tenantKeys,
+      TenantOperator tenantOperator,
+      List<List<String>> tenantValues,
       ValueGroupingWindow valueGroupingWindow) {
     this.customer = customer;
     this.dimensionFilters = dimensionFilters;
@@ -114,6 +139,9 @@ public class MeterEventSummariesParams extends ApiRequestParams {
     this.limit = limit;
     this.startTime = startTime;
     this.startingAfter = startingAfter;
+    this.tenantKeys = tenantKeys;
+    this.tenantOperator = tenantOperator;
+    this.tenantValues = tenantValues;
     this.valueGroupingWindow = valueGroupingWindow;
   }
 
@@ -142,6 +170,12 @@ public class MeterEventSummariesParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    private List<String> tenantKeys;
+
+    private TenantOperator tenantOperator;
+
+    private List<List<String>> tenantValues;
+
     private ValueGroupingWindow valueGroupingWindow;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -157,6 +191,9 @@ public class MeterEventSummariesParams extends ApiRequestParams {
           this.limit,
           this.startTime,
           this.startingAfter,
+          this.tenantKeys,
+          this.tenantOperator,
+          this.tenantValues,
           this.valueGroupingWindow);
     }
 
@@ -320,6 +357,67 @@ public class MeterEventSummariesParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `tenantKeys` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * MeterEventSummariesParams#tenantKeys} for the field documentation.
+     */
+    public Builder addTenantKey(String element) {
+      if (this.tenantKeys == null) {
+        this.tenantKeys = new ArrayList<>();
+      }
+      this.tenantKeys.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `tenantKeys` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * MeterEventSummariesParams#tenantKeys} for the field documentation.
+     */
+    public Builder addAllTenantKey(List<String> elements) {
+      if (this.tenantKeys == null) {
+        this.tenantKeys = new ArrayList<>();
+      }
+      this.tenantKeys.addAll(elements);
+      return this;
+    }
+
+    /**
+     * The operator to apply when filtering by tenant values. Must be used together with tenant_keys
+     * and tenant_values. Cannot be used with tenant_filters.
+     */
+    public Builder setTenantOperator(MeterEventSummariesParams.TenantOperator tenantOperator) {
+      this.tenantOperator = tenantOperator;
+      return this;
+    }
+
+    /**
+     * Add an element to `tenantValues` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * MeterEventSummariesParams#tenantValues} for the field documentation.
+     */
+    public Builder addTenantValue(List<String> element) {
+      if (this.tenantValues == null) {
+        this.tenantValues = new ArrayList<>();
+      }
+      this.tenantValues.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `tenantValues` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * MeterEventSummariesParams#tenantValues} for the field documentation.
+     */
+    public Builder addAllTenantValue(List<List<String>> elements) {
+      if (this.tenantValues == null) {
+        this.tenantValues = new ArrayList<>();
+      }
+      this.tenantValues.addAll(elements);
+      return this;
+    }
+
+    /**
      * Specifies what granularity to use when generating event summaries. If not specified, a single
      * event summary would be returned for the specified time range. For hourly granularity, start
      * and end times must align with hour boundaries (e.g., 00:00, 01:00, ..., 23:00). For daily
@@ -329,6 +427,21 @@ public class MeterEventSummariesParams extends ApiRequestParams {
         MeterEventSummariesParams.ValueGroupingWindow valueGroupingWindow) {
       this.valueGroupingWindow = valueGroupingWindow;
       return this;
+    }
+  }
+
+  public enum TenantOperator implements ApiRequestParams.EnumParam {
+    @SerializedName("excludes")
+    EXCLUDES("excludes"),
+
+    @SerializedName("includes")
+    INCLUDES("includes");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    TenantOperator(String value) {
+      this.value = value;
     }
   }
 
