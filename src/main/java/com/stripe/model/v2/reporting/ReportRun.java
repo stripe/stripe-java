@@ -88,14 +88,14 @@ public class ReportRun extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Result extends StripeObject {
     /**
-     * Contains metadata about the file produced by the {@code ReportRun}, including its content
-     * type, size, and a URL to download its contents.
+     * Contains metadata about the file produced by the {@code ReportRun} or {@code QueryRun},
+     * including its content type, size, and a URL to download its contents.
      */
     @SerializedName("file")
     File file;
 
     /**
-     * The type of the {@code ReportRun} result.
+     * The type of the {@code ReportRun} or {@code QueryRun} result.
      *
      * <p>Equal to {@code file}.
      */
@@ -103,8 +103,8 @@ public class ReportRun extends StripeObject implements HasId {
     String type;
 
     /**
-     * Contains metadata about the file produced by the {@code ReportRun}, including its content
-     * type, size, and a URL to download its contents.
+     * Contains metadata about the file produced by the {@code ReportRun} or {@code QueryRun},
+     * including its content type, size, and a URL to download its contents.
      */
     @Getter
     @Setter
@@ -149,8 +149,8 @@ public class ReportRun extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class ResultOptions extends StripeObject {
     /**
-     * If set, the generated report file will be compressed into a ZIP folder. This is useful for
-     * reducing file size and download time for large reports.
+     * If set, the generated results file will be compressed into a ZIP folder. This is useful for
+     * reducing file size and download time for large results.
      */
     @SerializedName("compress_file")
     Boolean compressFile;

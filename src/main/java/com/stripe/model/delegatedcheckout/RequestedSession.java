@@ -8,6 +8,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.Profile;
 import com.stripe.model.StripeObject;
+import com.stripe.model.sharedpayment.IssuedToken;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -107,6 +108,10 @@ public class RequestedSession extends ApiResource
   @SerializedName("payment_method")
   String paymentMethod;
 
+  /** The payment method options for this requested session. */
+  @SerializedName("payment_method_options")
+  PaymentMethodOptions paymentMethodOptions;
+
   /** The preview of the payment method to be created when the requested session is confirmed. */
   @SerializedName("payment_method_preview")
   PaymentMethodPreview paymentMethodPreview;
@@ -132,7 +137,9 @@ public class RequestedSession extends ApiResource
 
   /** The SPT used for payment. */
   @SerializedName("shared_payment_issued_token")
-  String sharedPaymentIssuedToken;
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<IssuedToken> sharedPaymentIssuedToken;
 
   /**
    * The status of the requested session.
@@ -148,6 +155,28 @@ public class RequestedSession extends ApiResource
   /** Time at which the object was last updated. Measured in seconds since the Unix epoch. */
   @SerializedName("updated_at")
   Long updatedAt;
+
+  /** Get ID of expandable {@code sharedPaymentIssuedToken} object. */
+  public String getSharedPaymentIssuedToken() {
+    return (this.sharedPaymentIssuedToken != null) ? this.sharedPaymentIssuedToken.getId() : null;
+  }
+
+  public void setSharedPaymentIssuedToken(String id) {
+    this.sharedPaymentIssuedToken =
+        ApiResource.setExpandableFieldId(id, this.sharedPaymentIssuedToken);
+  }
+
+  /** Get expanded {@code sharedPaymentIssuedToken}. */
+  public IssuedToken getSharedPaymentIssuedTokenObject() {
+    return (this.sharedPaymentIssuedToken != null)
+        ? this.sharedPaymentIssuedToken.getExpanded()
+        : null;
+  }
+
+  public void setSharedPaymentIssuedTokenObject(IssuedToken expandableObject) {
+    this.sharedPaymentIssuedToken =
+        new ExpandableField<IssuedToken>(expandableObject.getId(), expandableObject);
+  }
 
   /** Confirms a requested session. */
   public RequestedSession confirm() throws StripeException {
@@ -872,6 +901,44 @@ public class RequestedSession extends ApiResource
   }
 
   /**
+   * For more details about PaymentMethodOptions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodOptions extends StripeObject {
+    /** Card-specific payment method options. */
+    @SerializedName("card")
+    Card card;
+
+    /** The computed displayable card brands. */
+    @SerializedName("displayable_card_brands")
+    List<String> displayableCardBrands;
+
+    /** The computed displayable payment method types. */
+    @SerializedName("displayable_payment_method_types")
+    List<String> displayablePaymentMethodTypes;
+
+    /** The payment method types excluded by the agent. */
+    @SerializedName("excluded_payment_method_types")
+    List<String> excludedPaymentMethodTypes;
+
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      /** The card brands blocked by the agent. */
+      @SerializedName("brands_blocked")
+      List<String> brandsBlocked;
+    }
+  }
+
+  /**
    * For more details about PaymentMethodPreview, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1027,6 +1094,10 @@ public class RequestedSession extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class SellerDetails extends StripeObject {
+    /** The card brands supported by the seller. */
+    @SerializedName("card_brands")
+    List<String> cardBrands;
+
     /** The marketplace seller details. */
     @SerializedName("marketplace_seller_details")
     MarketplaceSellerDetails marketplaceSellerDetails;
@@ -1036,6 +1107,10 @@ public class RequestedSession extends ApiResource
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Profile> networkProfile;
+
+    /** The payment method types supported by the seller. */
+    @SerializedName("payment_method_types")
+    List<String> paymentMethodTypes;
 
     /** The URL to the seller's privacy notice. */
     @SerializedName("privacy_notice_url")
@@ -1143,9 +1218,11 @@ public class RequestedSession extends ApiResource
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(fulfillmentDetails, responseGetter);
     trySetResponseGetter(orderDetails, responseGetter);
+    trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(paymentMethodPreview, responseGetter);
     trySetResponseGetter(riskDetails, responseGetter);
     trySetResponseGetter(sellerDetails, responseGetter);
+    trySetResponseGetter(sharedPaymentIssuedToken, responseGetter);
     trySetResponseGetter(totalDetails, responseGetter);
   }
 }

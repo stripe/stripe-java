@@ -108,4 +108,28 @@ public final class OffSessionPaymentService extends ApiService {
             options);
     return this.request(request, OffSessionPayment.class);
   }
+  /** Pauses an OffSessionPayment that has previously been created. */
+  public OffSessionPayment pause(String id) throws StripeException {
+    return pause(id, (RequestOptions) null);
+  }
+  /** Pauses an OffSessionPayment that has previously been created. */
+  public OffSessionPayment pause(String id, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v2/payments/off_session_payments/%s/pause", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, OffSessionPayment.class);
+  }
+  /** Resumes an OffSessionPayment that has previously been paused. */
+  public OffSessionPayment resume(String id) throws StripeException {
+    return resume(id, (RequestOptions) null);
+  }
+  /** Resumes an OffSessionPayment that has previously been paused. */
+  public OffSessionPayment resume(String id, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v2/payments/off_session_payments/%s/resume", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, OffSessionPayment.class);
+  }
 }

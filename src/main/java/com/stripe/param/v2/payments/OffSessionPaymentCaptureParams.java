@@ -3,6 +3,7 @@ package com.stripe.param.v2.payments;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.v2.Amount;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -14,6 +15,10 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
   /** The amount to capture. */
   @SerializedName("amount_to_capture")
   Long amountToCapture;
+
+  /** The amount of the application fee for this capture. */
+  @SerializedName("application_fee_amount")
+  Amount applicationFeeAmount;
 
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -63,12 +68,14 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
 
   private OffSessionPaymentCaptureParams(
       Long amountToCapture,
+      Amount applicationFeeAmount,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
       String statementDescriptor,
       String statementDescriptorSuffix,
       TransferData transferData) {
     this.amountToCapture = amountToCapture;
+    this.applicationFeeAmount = applicationFeeAmount;
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.statementDescriptor = statementDescriptor;
@@ -82,6 +89,8 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
 
   public static class Builder {
     private Long amountToCapture;
+
+    private Amount applicationFeeAmount;
 
     private Map<String, Object> extraParams;
 
@@ -97,6 +106,7 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
     public OffSessionPaymentCaptureParams build() {
       return new OffSessionPaymentCaptureParams(
           this.amountToCapture,
+          this.applicationFeeAmount,
           this.extraParams,
           this.metadata,
           this.statementDescriptor,
@@ -107,6 +117,12 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
     /** The amount to capture. */
     public Builder setAmountToCapture(Long amountToCapture) {
       this.amountToCapture = amountToCapture;
+      return this;
+    }
+
+    /** The amount of the application fee for this capture. */
+    public Builder setApplicationFeeAmount(Amount applicationFeeAmount) {
+      this.applicationFeeAmount = applicationFeeAmount;
       return this;
     }
 

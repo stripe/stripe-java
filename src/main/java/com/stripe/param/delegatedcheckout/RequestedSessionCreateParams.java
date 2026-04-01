@@ -54,9 +54,9 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
   @SerializedName("payment_method")
   String paymentMethod;
 
-  /** The payment method data for this requested session. */
-  @SerializedName("payment_method_data")
-  PaymentMethodData paymentMethodData;
+  /** The payment method options for this requested session. */
+  @SerializedName("payment_method_options")
+  PaymentMethodOptions paymentMethodOptions;
 
   /** <strong>Required.</strong> The details of the seller. */
   @SerializedName("seller_details")
@@ -80,7 +80,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
       List<RequestedSessionCreateParams.LineItemDetail> lineItemDetails,
       Map<String, String> metadata,
       String paymentMethod,
-      PaymentMethodData paymentMethodData,
+      PaymentMethodOptions paymentMethodOptions,
       SellerDetails sellerDetails,
       SetupFutureUsage setupFutureUsage,
       Map<String, String> sharedMetadata) {
@@ -93,7 +93,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
     this.lineItemDetails = lineItemDetails;
     this.metadata = metadata;
     this.paymentMethod = paymentMethod;
-    this.paymentMethodData = paymentMethodData;
+    this.paymentMethodOptions = paymentMethodOptions;
     this.sellerDetails = sellerDetails;
     this.setupFutureUsage = setupFutureUsage;
     this.sharedMetadata = sharedMetadata;
@@ -122,7 +122,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
 
     private String paymentMethod;
 
-    private PaymentMethodData paymentMethodData;
+    private PaymentMethodOptions paymentMethodOptions;
 
     private SellerDetails sellerDetails;
 
@@ -142,7 +142,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
           this.lineItemDetails,
           this.metadata,
           this.paymentMethod,
-          this.paymentMethodData,
+          this.paymentMethodOptions,
           this.sellerDetails,
           this.setupFutureUsage,
           this.sharedMetadata);
@@ -285,10 +285,10 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The payment method data for this requested session. */
-    public Builder setPaymentMethodData(
-        RequestedSessionCreateParams.PaymentMethodData paymentMethodData) {
-      this.paymentMethodData = paymentMethodData;
+    /** The payment method options for this requested session. */
+    public Builder setPaymentMethodOptions(
+        RequestedSessionCreateParams.PaymentMethodOptions paymentMethodOptions) {
+      this.paymentMethodOptions = paymentMethodOptions;
       return this;
     }
 
@@ -1078,14 +1078,15 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodData {
-    /** The billing details for the payment method data. */
-    @SerializedName("billing_details")
-    BillingDetails billingDetails;
-
-    /** The card for the payment method data. */
+  public static class PaymentMethodOptions {
+    /** Card-specific payment method options. */
     @SerializedName("card")
     Card card;
+
+    /** The payment method types to exclude from the session. */
+    @SerializedName("excluded_payment_method_types")
+    List<RequestedSessionCreateParams.PaymentMethodOptions.ExcludedPaymentMethodType>
+        excludedPaymentMethodTypes;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1096,16 +1097,14 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The type of the payment method data. */
-    @SerializedName("type")
-    Type type;
-
-    private PaymentMethodData(
-        BillingDetails billingDetails, Card card, Map<String, Object> extraParams, Type type) {
-      this.billingDetails = billingDetails;
+    private PaymentMethodOptions(
+        Card card,
+        List<RequestedSessionCreateParams.PaymentMethodOptions.ExcludedPaymentMethodType>
+            excludedPaymentMethodTypes,
+        Map<String, Object> extraParams) {
       this.card = card;
+      this.excludedPaymentMethodTypes = excludedPaymentMethodTypes;
       this.extraParams = extraParams;
-      this.type = type;
     }
 
     public static Builder builder() {
@@ -1113,37 +1112,60 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private BillingDetails billingDetails;
-
       private Card card;
+
+      private List<RequestedSessionCreateParams.PaymentMethodOptions.ExcludedPaymentMethodType>
+          excludedPaymentMethodTypes;
 
       private Map<String, Object> extraParams;
 
-      private Type type;
-
       /** Finalize and obtain parameter instance from this builder. */
-      public RequestedSessionCreateParams.PaymentMethodData build() {
-        return new RequestedSessionCreateParams.PaymentMethodData(
-            this.billingDetails, this.card, this.extraParams, this.type);
+      public RequestedSessionCreateParams.PaymentMethodOptions build() {
+        return new RequestedSessionCreateParams.PaymentMethodOptions(
+            this.card, this.excludedPaymentMethodTypes, this.extraParams);
       }
 
-      /** The billing details for the payment method data. */
-      public Builder setBillingDetails(
-          RequestedSessionCreateParams.PaymentMethodData.BillingDetails billingDetails) {
-        this.billingDetails = billingDetails;
+      /** Card-specific payment method options. */
+      public Builder setCard(RequestedSessionCreateParams.PaymentMethodOptions.Card card) {
+        this.card = card;
         return this;
       }
 
-      /** The card for the payment method data. */
-      public Builder setCard(RequestedSessionCreateParams.PaymentMethodData.Card card) {
-        this.card = card;
+      /**
+       * Add an element to `excludedPaymentMethodTypes` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link RequestedSessionCreateParams.PaymentMethodOptions#excludedPaymentMethodTypes} for
+       * the field documentation.
+       */
+      public Builder addExcludedPaymentMethodType(
+          RequestedSessionCreateParams.PaymentMethodOptions.ExcludedPaymentMethodType element) {
+        if (this.excludedPaymentMethodTypes == null) {
+          this.excludedPaymentMethodTypes = new ArrayList<>();
+        }
+        this.excludedPaymentMethodTypes.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `excludedPaymentMethodTypes` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link RequestedSessionCreateParams.PaymentMethodOptions#excludedPaymentMethodTypes} for
+       * the field documentation.
+       */
+      public Builder addAllExcludedPaymentMethodType(
+          List<RequestedSessionCreateParams.PaymentMethodOptions.ExcludedPaymentMethodType>
+              elements) {
+        if (this.excludedPaymentMethodTypes == null) {
+          this.excludedPaymentMethodTypes = new ArrayList<>();
+        }
+        this.excludedPaymentMethodTypes.addAll(elements);
         return this;
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * RequestedSessionCreateParams.PaymentMethodData#extraParams} for the field documentation.
+       * RequestedSessionCreateParams.PaymentMethodOptions#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -1156,7 +1178,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link RequestedSessionCreateParams.PaymentMethodData#extraParams} for the field
+       * See {@link RequestedSessionCreateParams.PaymentMethodOptions#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
@@ -1166,312 +1188,14 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
         this.extraParams.putAll(map);
         return this;
       }
-
-      /** The type of the payment method data. */
-      public Builder setType(RequestedSessionCreateParams.PaymentMethodData.Type type) {
-        this.type = type;
-        return this;
-      }
-    }
-
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BillingDetails {
-      /** The address for the billing details. */
-      @SerializedName("address")
-      Address address;
-
-      /** The email for the billing details. */
-      @SerializedName("email")
-      String email;
-
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** The name for the billing details. */
-      @SerializedName("name")
-      String name;
-
-      /** The phone for the billing details. */
-      @SerializedName("phone")
-      String phone;
-
-      private BillingDetails(
-          Address address,
-          String email,
-          Map<String, Object> extraParams,
-          String name,
-          String phone) {
-        this.address = address;
-        this.email = email;
-        this.extraParams = extraParams;
-        this.name = name;
-        this.phone = phone;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Address address;
-
-        private String email;
-
-        private Map<String, Object> extraParams;
-
-        private String name;
-
-        private String phone;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public RequestedSessionCreateParams.PaymentMethodData.BillingDetails build() {
-          return new RequestedSessionCreateParams.PaymentMethodData.BillingDetails(
-              this.address, this.email, this.extraParams, this.name, this.phone);
-        }
-
-        /** The address for the billing details. */
-        public Builder setAddress(
-            RequestedSessionCreateParams.PaymentMethodData.BillingDetails.Address address) {
-          this.address = address;
-          return this;
-        }
-
-        /** The email for the billing details. */
-        public Builder setEmail(String email) {
-          this.email = email;
-          return this;
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link
-         * RequestedSessionCreateParams.PaymentMethodData.BillingDetails#extraParams} for the field
-         * documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link
-         * RequestedSessionCreateParams.PaymentMethodData.BillingDetails#extraParams} for the field
-         * documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** The name for the billing details. */
-        public Builder setName(String name) {
-          this.name = name;
-          return this;
-        }
-
-        /** The phone for the billing details. */
-        public Builder setPhone(String phone) {
-          this.phone = phone;
-          return this;
-        }
-      }
-
-      @Getter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Address {
-        /** <strong>Required.</strong> City, district, suburb, town, or village. */
-        @SerializedName("city")
-        String city;
-
-        /**
-         * <strong>Required.</strong> Two-letter country code (<a
-         * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
-         */
-        @SerializedName("country")
-        String country;
-
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        /** Address line 1, such as the street, PO Box, or company name. */
-        @SerializedName("line1")
-        String line1;
-
-        /** Address line 2, such as the apartment, suite, unit, or building. */
-        @SerializedName("line2")
-        String line2;
-
-        /** <strong>Required.</strong> ZIP or postal code. */
-        @SerializedName("postal_code")
-        String postalCode;
-
-        /**
-         * <strong>Required.</strong> State, county, province, or region (<a
-         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
-         */
-        @SerializedName("state")
-        String state;
-
-        private Address(
-            String city,
-            String country,
-            Map<String, Object> extraParams,
-            String line1,
-            String line2,
-            String postalCode,
-            String state) {
-          this.city = city;
-          this.country = country;
-          this.extraParams = extraParams;
-          this.line1 = line1;
-          this.line2 = line2;
-          this.postalCode = postalCode;
-          this.state = state;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private String city;
-
-          private String country;
-
-          private Map<String, Object> extraParams;
-
-          private String line1;
-
-          private String line2;
-
-          private String postalCode;
-
-          private String state;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public RequestedSessionCreateParams.PaymentMethodData.BillingDetails.Address build() {
-            return new RequestedSessionCreateParams.PaymentMethodData.BillingDetails.Address(
-                this.city,
-                this.country,
-                this.extraParams,
-                this.line1,
-                this.line2,
-                this.postalCode,
-                this.state);
-          }
-
-          /** <strong>Required.</strong> City, district, suburb, town, or village. */
-          public Builder setCity(String city) {
-            this.city = city;
-            return this;
-          }
-
-          /**
-           * <strong>Required.</strong> Two-letter country code (<a
-           * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
-           */
-          public Builder setCountry(String country) {
-            this.country = country;
-            return this;
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * RequestedSessionCreateParams.PaymentMethodData.BillingDetails.Address#extraParams} for
-           * the field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * RequestedSessionCreateParams.PaymentMethodData.BillingDetails.Address#extraParams} for
-           * the field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /** Address line 1, such as the street, PO Box, or company name. */
-          public Builder setLine1(String line1) {
-            this.line1 = line1;
-            return this;
-          }
-
-          /** Address line 2, such as the apartment, suite, unit, or building. */
-          public Builder setLine2(String line2) {
-            this.line2 = line2;
-            return this;
-          }
-
-          /** <strong>Required.</strong> ZIP or postal code. */
-          public Builder setPostalCode(String postalCode) {
-            this.postalCode = postalCode;
-            return this;
-          }
-
-          /**
-           * <strong>Required.</strong> State, county, province, or region (<a
-           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
-           */
-          public Builder setState(String state) {
-            this.state = state;
-            return this;
-          }
-        }
-      }
     }
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Card {
-      /** The CVC of the card. */
-      @SerializedName("cvc")
-      String cvc;
-
-      /** <strong>Required.</strong> The expiration month of the card. */
-      @SerializedName("exp_month")
-      Long expMonth;
-
-      /** <strong>Required.</strong> The expiration year of the card. */
-      @SerializedName("exp_year")
-      Long expYear;
+      /** The card brands to exclude from the session. */
+      @SerializedName("brands_blocked")
+      List<RequestedSessionCreateParams.PaymentMethodOptions.Card.BrandsBlocked> brandsBlocked;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1482,17 +1206,11 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> The number of the card. */
-      @SerializedName("number")
-      String number;
-
       private Card(
-          String cvc, Long expMonth, Long expYear, Map<String, Object> extraParams, String number) {
-        this.cvc = cvc;
-        this.expMonth = expMonth;
-        this.expYear = expYear;
+          List<RequestedSessionCreateParams.PaymentMethodOptions.Card.BrandsBlocked> brandsBlocked,
+          Map<String, Object> extraParams) {
+        this.brandsBlocked = brandsBlocked;
         this.extraParams = extraParams;
-        this.number = number;
       }
 
       public static Builder builder() {
@@ -1500,45 +1218,52 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String cvc;
-
-        private Long expMonth;
-
-        private Long expYear;
+        private List<RequestedSessionCreateParams.PaymentMethodOptions.Card.BrandsBlocked>
+            brandsBlocked;
 
         private Map<String, Object> extraParams;
 
-        private String number;
-
         /** Finalize and obtain parameter instance from this builder. */
-        public RequestedSessionCreateParams.PaymentMethodData.Card build() {
-          return new RequestedSessionCreateParams.PaymentMethodData.Card(
-              this.cvc, this.expMonth, this.expYear, this.extraParams, this.number);
+        public RequestedSessionCreateParams.PaymentMethodOptions.Card build() {
+          return new RequestedSessionCreateParams.PaymentMethodOptions.Card(
+              this.brandsBlocked, this.extraParams);
         }
 
-        /** The CVC of the card. */
-        public Builder setCvc(String cvc) {
-          this.cvc = cvc;
+        /**
+         * Add an element to `brandsBlocked` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * RequestedSessionCreateParams.PaymentMethodOptions.Card#brandsBlocked} for the field
+         * documentation.
+         */
+        public Builder addBrandsBlocked(
+            RequestedSessionCreateParams.PaymentMethodOptions.Card.BrandsBlocked element) {
+          if (this.brandsBlocked == null) {
+            this.brandsBlocked = new ArrayList<>();
+          }
+          this.brandsBlocked.add(element);
           return this;
         }
 
-        /** <strong>Required.</strong> The expiration month of the card. */
-        public Builder setExpMonth(Long expMonth) {
-          this.expMonth = expMonth;
-          return this;
-        }
-
-        /** <strong>Required.</strong> The expiration year of the card. */
-        public Builder setExpYear(Long expYear) {
-          this.expYear = expYear;
+        /**
+         * Add all elements to `brandsBlocked` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link RequestedSessionCreateParams.PaymentMethodOptions.Card#brandsBlocked} for the
+         * field documentation.
+         */
+        public Builder addAllBrandsBlocked(
+            List<RequestedSessionCreateParams.PaymentMethodOptions.Card.BrandsBlocked> elements) {
+          if (this.brandsBlocked == null) {
+            this.brandsBlocked = new ArrayList<>();
+          }
+          this.brandsBlocked.addAll(elements);
           return this;
         }
 
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link RequestedSessionCreateParams.PaymentMethodData.Card#extraParams} for the
-         * field documentation.
+         * map. See {@link RequestedSessionCreateParams.PaymentMethodOptions.Card#extraParams} for
+         * the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -1551,8 +1276,8 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link RequestedSessionCreateParams.PaymentMethodData.Card#extraParams} for the
-         * field documentation.
+         * map. See {@link RequestedSessionCreateParams.PaymentMethodOptions.Card#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -1561,23 +1286,41 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+      }
 
-        /** <strong>Required.</strong> The number of the card. */
-        public Builder setNumber(String number) {
-          this.number = number;
-          return this;
+      public enum BrandsBlocked implements ApiRequestParams.EnumParam {
+        @SerializedName("american_express")
+        AMERICAN_EXPRESS("american_express"),
+
+        @SerializedName("mastercard")
+        MASTERCARD("mastercard"),
+
+        @SerializedName("visa")
+        VISA("visa");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        BrandsBlocked(String value) {
+          this.value = value;
         }
       }
     }
 
-    public enum Type implements ApiRequestParams.EnumParam {
+    public enum ExcludedPaymentMethodType implements ApiRequestParams.EnumParam {
+      @SerializedName("affirm")
+      AFFIRM("affirm"),
+
       @SerializedName("card")
-      CARD("card");
+      CARD("card"),
+
+      @SerializedName("klarna")
+      KLARNA("klarna");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
 
-      Type(String value) {
+      ExcludedPaymentMethodType(String value) {
         this.value = value;
       }
     }

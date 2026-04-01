@@ -15,6 +15,9 @@ public final class V2IamApiKeyRotatedEvent extends Event {
   @Getter
   @Setter
   public static final class EventData {
+    /** ID of the old key that was rotated. */
+    @SerializedName("api_key")
+    String apiKey;
     /** ID of the new key that was created due to rotation. */
     @SerializedName("new_api_key")
     String newApiKey;

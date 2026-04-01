@@ -10081,6 +10081,10 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** Capabilities that enable OutboundPayments via paper check. */
+        @SerializedName("paper_checks")
+        PaperChecks paperChecks;
+
         /** Capabilities that enable the recipient to manage their Stripe Balance (/v1/balance). */
         @SerializedName("stripe_balance")
         StripeBalance stripeBalance;
@@ -10090,11 +10094,13 @@ public class AccountCreateParams extends ApiRequestParams {
             Cards cards,
             CryptoWallets cryptoWallets,
             Map<String, Object> extraParams,
+            PaperChecks paperChecks,
             StripeBalance stripeBalance) {
           this.bankAccounts = bankAccounts;
           this.cards = cards;
           this.cryptoWallets = cryptoWallets;
           this.extraParams = extraParams;
+          this.paperChecks = paperChecks;
           this.stripeBalance = stripeBalance;
         }
 
@@ -10111,6 +10117,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private PaperChecks paperChecks;
+
           private StripeBalance stripeBalance;
 
           /** Finalize and obtain parameter instance from this builder. */
@@ -10120,6 +10128,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 this.cards,
                 this.cryptoWallets,
                 this.extraParams,
+                this.paperChecks,
                 this.stripeBalance);
           }
 
@@ -10172,6 +10181,13 @@ public class AccountCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Capabilities that enable OutboundPayments via paper check. */
+          public Builder setPaperChecks(
+              AccountCreateParams.Configuration.Recipient.Capabilities.PaperChecks paperChecks) {
+            this.paperChecks = paperChecks;
             return this;
           }
 
@@ -10703,6 +10719,87 @@ public class AccountCreateParams extends ApiRequestParams {
              * original map. See {@link
              * AccountCreateParams.Configuration.Recipient.Capabilities.CryptoWallets#extraParams}
              * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            public Builder setRequested(Boolean requested) {
+              this.requested = requested;
+              return this;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PaperChecks {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> To request a new Capability for an account, pass true. There
+           * can be a delay before the requested Capability becomes active.
+           */
+          @SerializedName("requested")
+          Boolean requested;
+
+          private PaperChecks(Map<String, Object> extraParams, Boolean requested) {
+            this.extraParams = extraParams;
+            this.requested = requested;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Boolean requested;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Configuration.Recipient.Capabilities.PaperChecks build() {
+              return new AccountCreateParams.Configuration.Recipient.Capabilities.PaperChecks(
+                  this.extraParams, this.requested);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Recipient.Capabilities.PaperChecks#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Recipient.Capabilities.PaperChecks#extraParams} for
+             * the field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
               if (this.extraParams == null) {
@@ -12457,17 +12554,23 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("financial_accounts")
           FinancialAccounts financialAccounts;
 
+          /** Can send funds from a FinancialAccount to someone else via paper check. */
+          @SerializedName("paper_checks")
+          PaperChecks paperChecks;
+
           private OutboundPayments(
               BankAccounts bankAccounts,
               Cards cards,
               CryptoWallets cryptoWallets,
               Map<String, Object> extraParams,
-              FinancialAccounts financialAccounts) {
+              FinancialAccounts financialAccounts,
+              PaperChecks paperChecks) {
             this.bankAccounts = bankAccounts;
             this.cards = cards;
             this.cryptoWallets = cryptoWallets;
             this.extraParams = extraParams;
             this.financialAccounts = financialAccounts;
+            this.paperChecks = paperChecks;
           }
 
           public static Builder builder() {
@@ -12485,6 +12588,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
             private FinancialAccounts financialAccounts;
 
+            private PaperChecks paperChecks;
+
             /** Finalize and obtain parameter instance from this builder. */
             public AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments build() {
               return new AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments(
@@ -12492,7 +12597,8 @@ public class AccountCreateParams extends ApiRequestParams {
                   this.cards,
                   this.cryptoWallets,
                   this.extraParams,
-                  this.financialAccounts);
+                  this.financialAccounts,
+                  this.paperChecks);
             }
 
             /** Can send funds from a FinancialAccount to a bank account owned by someone else. */
@@ -12558,6 +12664,14 @@ public class AccountCreateParams extends ApiRequestParams {
                         .FinancialAccounts
                     financialAccounts) {
               this.financialAccounts = financialAccounts;
+              return this;
+            }
+
+            /** Can send funds from a FinancialAccount to someone else via paper check. */
+            public Builder setPaperChecks(
+                AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments.PaperChecks
+                    paperChecks) {
+              this.paperChecks = paperChecks;
               return this;
             }
           }
@@ -12872,6 +12986,89 @@ public class AccountCreateParams extends ApiRequestParams {
                * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
                * AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments.FinancialAccounts#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class PaperChecks {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private PaperChecks(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments
+                      .PaperChecks
+                  build() {
+                return new AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments
+                    .PaperChecks(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments.PaperChecks#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments.PaperChecks#extraParams}
                * for the field documentation.
                */
               public Builder putAllExtraParam(Map<String, Object> map) {
@@ -25237,8 +25434,17 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("bg_vat")
           BG_VAT("bg_vat"),
 
+          @SerializedName("bm_crn")
+          BM_CRN("bm_crn"),
+
+          @SerializedName("bo_tin")
+          BO_TIN("bo_tin"),
+
           @SerializedName("br_cnpj")
           BR_CNPJ("br_cnpj"),
+
+          @SerializedName("bt_tpn")
+          BT_TPN("bt_tpn"),
 
           @SerializedName("ca_cn")
           CA_CN("ca_cn"),
@@ -25260,6 +25466,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
           @SerializedName("ch_uid")
           CH_UID("ch_uid"),
+
+          @SerializedName("co_nit")
+          CO_NIT("co_nit"),
 
           @SerializedName("cr_cpj")
           CR_CPJ("cr_cpj"),
@@ -25300,11 +25509,17 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("do_rcn")
           DO_RCN("do_rcn"),
 
+          @SerializedName("ec_ruc")
+          EC_RUC("ec_ruc"),
+
           @SerializedName("ee_rk")
           EE_RK("ee_rk"),
 
           @SerializedName("ee_vat")
           EE_VAT("ee_vat"),
+
+          @SerializedName("eg_tin")
+          EG_TIN("eg_tin"),
 
           @SerializedName("es_cif")
           ES_CIF("es_cif"),
@@ -25333,6 +25548,9 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("gb_vat")
           GB_VAT("gb_vat"),
 
+          @SerializedName("gh_tin")
+          GH_TIN("gh_tin"),
+
           @SerializedName("gi_crn")
           GI_CRN("gi_crn"),
 
@@ -25348,11 +25566,17 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("gt_nit")
           GT_NIT("gt_nit"),
 
+          @SerializedName("gy_tin")
+          GY_TIN("gy_tin"),
+
           @SerializedName("hk_br")
           HK_BR("hk_br"),
 
           @SerializedName("hk_cr")
           HK_CR("hk_cr"),
+
+          @SerializedName("hn_rtn")
+          HN_RTN("hn_rtn"),
 
           @SerializedName("hr_mbs")
           HR_MBS("hr_mbs"),
@@ -25387,14 +25611,29 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("it_vat")
           IT_VAT("it_vat"),
 
+          @SerializedName("jm_trn")
+          JM_TRN("jm_trn"),
+
+          @SerializedName("jo_crn")
+          JO_CRN("jo_crn"),
+
           @SerializedName("jp_cn")
           JP_CN("jp_cn"),
+
+          @SerializedName("ke_pin")
+          KE_PIN("ke_pin"),
+
+          @SerializedName("ky_crn")
+          KY_CRN("ky_crn"),
 
           @SerializedName("kz_bin")
           KZ_BIN("kz_bin"),
 
           @SerializedName("li_uid")
           LI_UID("li_uid"),
+
+          @SerializedName("lk_tin")
+          LK_TIN("lk_tin"),
 
           @SerializedName("lt_ccrn")
           LT_CCRN("lt_ccrn"),
@@ -25417,6 +25656,9 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("lv_vat")
           LV_VAT("lv_vat"),
 
+          @SerializedName("mo_tin")
+          MO_TIN("mo_tin"),
+
           @SerializedName("mt_crn")
           MT_CRN("mt_crn"),
 
@@ -25425,6 +25667,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
           @SerializedName("mt_vat")
           MT_VAT("mt_vat"),
+
+          @SerializedName("mv_tin")
+          MV_TIN("mv_tin"),
 
           @SerializedName("mx_rfc")
           MX_RFC("mx_rfc"),
@@ -25444,6 +25689,9 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("mz_nuit")
           MZ_NUIT("mz_nuit"),
 
+          @SerializedName("ng_tin")
+          NG_TIN("ng_tin"),
+
           @SerializedName("nl_kvk")
           NL_KVK("nl_kvk"),
 
@@ -25462,8 +25710,14 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("nz_ird")
           NZ_IRD("nz_ird"),
 
+          @SerializedName("pa_ruc")
+          PA_RUC("pa_ruc"),
+
           @SerializedName("pe_ruc")
           PE_RUC("pe_ruc"),
+
+          @SerializedName("ph_tin")
+          PH_TIN("ph_tin"),
 
           @SerializedName("pk_ntn")
           PK_NTN("pk_ntn"),
@@ -25479,6 +25733,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
           @SerializedName("pt_vat")
           PT_VAT("pt_vat"),
+
+          @SerializedName("py_ruc")
+          PY_RUC("py_ruc"),
 
           @SerializedName("ro_cui")
           RO_CUI("ro_cui"),
@@ -25522,6 +25779,12 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("sk_vat")
           SK_VAT("sk_vat"),
 
+          @SerializedName("sl_tin")
+          SL_TIN("sl_tin"),
+
+          @SerializedName("sv_nit")
+          SV_NIT("sv_nit"),
+
           @SerializedName("th_crn")
           TH_CRN("th_crn"),
 
@@ -25532,7 +25795,16 @@ public class AccountCreateParams extends ApiRequestParams {
           TH_TIN("th_tin"),
 
           @SerializedName("us_ein")
-          US_EIN("us_ein");
+          US_EIN("us_ein"),
+
+          @SerializedName("uy_ruc")
+          UY_RUC("uy_ruc"),
+
+          @SerializedName("vg_cn")
+          VG_CN("vg_cn"),
+
+          @SerializedName("za_tin")
+          ZA_TIN("za_tin");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
@@ -28686,11 +28958,20 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("bg_ucn")
           BG_UCN("bg_ucn"),
 
+          @SerializedName("bm_pp")
+          BM_PP("bm_pp"),
+
           @SerializedName("bn_nric")
           BN_NRIC("bn_nric"),
 
+          @SerializedName("bo_ci")
+          BO_CI("bo_ci"),
+
           @SerializedName("br_cpf")
           BR_CPF("br_cpf"),
+
+          @SerializedName("bt_cid")
+          BT_CID("bt_cid"),
 
           @SerializedName("ca_sin")
           CA_SIN("ca_sin"),
@@ -28743,6 +29024,9 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("ee_ik")
           EE_IK("ee_ik"),
 
+          @SerializedName("eg_tin")
+          EG_TIN("eg_tin"),
+
           @SerializedName("es_nif")
           ES_NIF("es_nif"),
 
@@ -28755,14 +29039,23 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("gb_nino")
           GB_NINO("gb_nino"),
 
+          @SerializedName("gh_pin")
+          GH_PIN("gh_pin"),
+
           @SerializedName("gr_afm")
           GR_AFM("gr_afm"),
 
           @SerializedName("gt_nit")
           GT_NIT("gt_nit"),
 
+          @SerializedName("gy_tin")
+          GY_TIN("gy_tin"),
+
           @SerializedName("hk_id")
           HK_ID("hk_id"),
+
+          @SerializedName("hn_rtn")
+          HN_RTN("hn_rtn"),
 
           @SerializedName("hr_oib")
           HR_OIB("hr_oib"),
@@ -28782,17 +29075,29 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("it_cf")
           IT_CF("it_cf"),
 
+          @SerializedName("jm_trn")
+          JM_TRN("jm_trn"),
+
+          @SerializedName("jo_pin")
+          JO_PIN("jo_pin"),
+
           @SerializedName("jp_inc")
           JP_INC("jp_inc"),
 
           @SerializedName("ke_pin")
           KE_PIN("ke_pin"),
 
+          @SerializedName("ky_pp")
+          KY_PP("ky_pp"),
+
           @SerializedName("kz_iin")
           KZ_IIN("kz_iin"),
 
           @SerializedName("li_peid")
           LI_PEID("li_peid"),
+
+          @SerializedName("lk_nic")
+          LK_NIC("lk_nic"),
 
           @SerializedName("lt_ak")
           LT_AK("lt_ak"),
@@ -28802,6 +29107,15 @@ public class AccountCreateParams extends ApiRequestParams {
 
           @SerializedName("lv_pk")
           LV_PK("lv_pk"),
+
+          @SerializedName("mo_bir")
+          MO_BIR("mo_bir"),
+
+          @SerializedName("mt_nic")
+          MT_NIC("mt_nic"),
+
+          @SerializedName("mv_tin")
+          MV_TIN("mv_tin"),
 
           @SerializedName("mx_rfc")
           MX_RFC("mx_rfc"),
@@ -28824,8 +29138,14 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("nz_ird")
           NZ_IRD("nz_ird"),
 
+          @SerializedName("pa_ruc")
+          PA_RUC("pa_ruc"),
+
           @SerializedName("pe_dni")
           PE_DNI("pe_dni"),
+
+          @SerializedName("ph_tin")
+          PH_TIN("ph_tin"),
 
           @SerializedName("pk_cnic")
           PK_CNIC("pk_cnic"),
@@ -28838,6 +29158,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
           @SerializedName("pt_nif")
           PT_NIF("pt_nif"),
+
+          @SerializedName("py_ruc")
+          PY_RUC("py_ruc"),
 
           @SerializedName("ro_cnp")
           RO_CNP("ro_cnp"),
@@ -28854,8 +29177,14 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("sg_nric")
           SG_NRIC("sg_nric"),
 
+          @SerializedName("si_pin")
+          SI_PIN("si_pin"),
+
           @SerializedName("sk_dic")
           SK_DIC("sk_dic"),
+
+          @SerializedName("sv_nit")
+          SV_NIT("sv_nit"),
 
           @SerializedName("th_lc")
           TH_LC("th_lc"),
@@ -28880,6 +29209,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
           @SerializedName("uy_dni")
           UY_DNI("uy_dni"),
+
+          @SerializedName("vg_pp")
+          VG_PP("vg_pp"),
 
           @SerializedName("za_id")
           ZA_ID("za_id");

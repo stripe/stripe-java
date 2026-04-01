@@ -2993,6 +2993,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     @SerializedName("lodging_data")
     Object lodgingData;
 
+    /** Money services details for this PaymentIntent. */
+    @SerializedName("money_services")
+    Object moneyServices;
+
     /**
      * A unique value assigned by the business to identify the transaction. Required for L2 and L3
      * rates.
@@ -3019,6 +3023,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Object flightData,
         Lodging lodging,
         Object lodgingData,
+        Object moneyServices,
         Object orderReference,
         Subscription subscription) {
       this.benefit = benefit;
@@ -3031,6 +3036,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.flightData = flightData;
       this.lodging = lodging;
       this.lodgingData = lodgingData;
+      this.moneyServices = moneyServices;
       this.orderReference = orderReference;
       this.subscription = subscription;
     }
@@ -3060,6 +3066,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Object lodgingData;
 
+      private Object moneyServices;
+
       private Object orderReference;
 
       private Subscription subscription;
@@ -3077,6 +3085,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.flightData,
             this.lodging,
             this.lodgingData,
+            this.moneyServices,
             this.orderReference,
             this.subscription);
       }
@@ -3292,6 +3301,19 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       public Builder setLodgingData(
           List<PaymentIntentConfirmParams.PaymentDetails.LodgingData> lodgingData) {
         this.lodgingData = lodgingData;
+        return this;
+      }
+
+      /** Money services details for this PaymentIntent. */
+      public Builder setMoneyServices(
+          PaymentIntentConfirmParams.PaymentDetails.MoneyServices moneyServices) {
+        this.moneyServices = moneyServices;
+        return this;
+      }
+
+      /** Money services details for this PaymentIntent. */
+      public Builder setMoneyServices(EmptyParam moneyServices) {
+        this.moneyServices = moneyServices;
         return this;
       }
 
@@ -13351,6 +13373,175 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               }
             }
           }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MoneyServices {
+      /** Account funding transaction details including sender and beneficiary information. */
+      @SerializedName("account_funding")
+      Object accountFunding;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The type of money services transaction. */
+      @SerializedName("transaction_type")
+      TransactionType transactionType;
+
+      private MoneyServices(
+          Object accountFunding, Map<String, Object> extraParams, TransactionType transactionType) {
+        this.accountFunding = accountFunding;
+        this.extraParams = extraParams;
+        this.transactionType = transactionType;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object accountFunding;
+
+        private Map<String, Object> extraParams;
+
+        private TransactionType transactionType;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentDetails.MoneyServices build() {
+          return new PaymentIntentConfirmParams.PaymentDetails.MoneyServices(
+              this.accountFunding, this.extraParams, this.transactionType);
+        }
+
+        /** Account funding transaction details including sender and beneficiary information. */
+        public Builder setAccountFunding(
+            PaymentIntentConfirmParams.PaymentDetails.MoneyServices.AccountFunding accountFunding) {
+          this.accountFunding = accountFunding;
+          return this;
+        }
+
+        /** Account funding transaction details including sender and beneficiary information. */
+        public Builder setAccountFunding(EmptyParam accountFunding) {
+          this.accountFunding = accountFunding;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentDetails.MoneyServices#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentDetails.MoneyServices#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The type of money services transaction. */
+        public Builder setTransactionType(
+            PaymentIntentConfirmParams.PaymentDetails.MoneyServices.TransactionType
+                transactionType) {
+          this.transactionType = transactionType;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AccountFunding {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private AccountFunding(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentConfirmParams.PaymentDetails.MoneyServices.AccountFunding build() {
+            return new PaymentIntentConfirmParams.PaymentDetails.MoneyServices.AccountFunding(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentDetails.MoneyServices.AccountFunding#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentDetails.MoneyServices.AccountFunding#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
+      public enum TransactionType implements ApiRequestParams.EnumParam {
+        @SerializedName("account_funding")
+        ACCOUNT_FUNDING("account_funding");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        TransactionType(String value) {
+          this.value = value;
         }
       }
     }
@@ -24902,6 +25093,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("network")
       Network network;
 
+      /** Payment details for payment method specific funding fields. */
+      @SerializedName("payment_details")
+      PaymentDetails paymentDetails;
+
       /**
        * Request ability to <a
        * href="https://docs.stripe.com/payments/decremental-authorization">decrement the
@@ -25041,6 +25236,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           MandateOptions mandateOptions,
           Boolean moto,
           Network network,
+          PaymentDetails paymentDetails,
           RequestDecrementalAuthorization requestDecrementalAuthorization,
           RequestExtendedAuthorization requestExtendedAuthorization,
           RequestIncrementalAuthorization requestIncrementalAuthorization,
@@ -25062,6 +25258,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         this.mandateOptions = mandateOptions;
         this.moto = moto;
         this.network = network;
+        this.paymentDetails = paymentDetails;
         this.requestDecrementalAuthorization = requestDecrementalAuthorization;
         this.requestExtendedAuthorization = requestExtendedAuthorization;
         this.requestIncrementalAuthorization = requestIncrementalAuthorization;
@@ -25096,6 +25293,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Boolean moto;
 
         private Network network;
+
+        private PaymentDetails paymentDetails;
 
         private RequestDecrementalAuthorization requestDecrementalAuthorization;
 
@@ -25135,6 +25334,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.mandateOptions,
               this.moto,
               this.network,
+              this.paymentDetails,
               this.requestDecrementalAuthorization,
               this.requestExtendedAuthorization,
               this.requestIncrementalAuthorization,
@@ -25256,6 +25456,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         public Builder setNetwork(
             PaymentIntentConfirmParams.PaymentMethodOptions.Card.Network network) {
           this.network = network;
+          return this;
+        }
+
+        /** Payment details for payment method specific funding fields. */
+        public Builder setPaymentDetails(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails paymentDetails) {
+          this.paymentDetails = paymentDetails;
           return this;
         }
 
@@ -26103,6 +26310,226 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
           SupportedType(String value) {
             this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PaymentDetails {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Money services details for payment method specific funding fields. */
+        @SerializedName("money_services")
+        MoneyServices moneyServices;
+
+        private PaymentDetails(Map<String, Object> extraParams, MoneyServices moneyServices) {
+          this.extraParams = extraParams;
+          this.moneyServices = moneyServices;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private MoneyServices moneyServices;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails(
+                this.extraParams, this.moneyServices);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Money services details for payment method specific funding fields. */
+          public Builder setMoneyServices(
+              PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices
+                  moneyServices) {
+            this.moneyServices = moneyServices;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MoneyServices {
+          /** Payment method specific account funding transaction details. */
+          @SerializedName("account_funding")
+          AccountFunding accountFunding;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private MoneyServices(AccountFunding accountFunding, Map<String, Object> extraParams) {
+            this.accountFunding = accountFunding;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private AccountFunding accountFunding;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices
+                build() {
+              return new PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails
+                  .MoneyServices(this.accountFunding, this.extraParams);
+            }
+
+            /** Payment method specific account funding transaction details. */
+            public Builder setAccountFunding(
+                PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices
+                        .AccountFunding
+                    accountFunding) {
+              this.accountFunding = accountFunding;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class AccountFunding {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            private AccountFunding(Map<String, Object> extraParams) {
+              this.extraParams = extraParams;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails
+                      .MoneyServices.AccountFunding
+                  build() {
+                return new PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails
+                    .MoneyServices.AccountFunding(this.extraParams);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices.AccountFunding#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices.AccountFunding#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+            }
           }
         }
       }
@@ -27152,6 +27579,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Payment details for payment method specific funding transaction fields. */
+      @SerializedName("payment_details")
+      PaymentDetails paymentDetails;
+
       /**
        * Request ability to capture this payment beyond the standard <a
        * href="https://docs.stripe.com/terminal/features/extended-authorizations#authorization-validity">authorization
@@ -27189,12 +27620,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private CardPresent(
           CaptureMethod captureMethod,
           Map<String, Object> extraParams,
+          PaymentDetails paymentDetails,
           Boolean requestExtendedAuthorization,
           Boolean requestIncrementalAuthorizationSupport,
           RequestReauthorization requestReauthorization,
           Routing routing) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
+        this.paymentDetails = paymentDetails;
         this.requestExtendedAuthorization = requestExtendedAuthorization;
         this.requestIncrementalAuthorizationSupport = requestIncrementalAuthorizationSupport;
         this.requestReauthorization = requestReauthorization;
@@ -27210,6 +27643,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private PaymentDetails paymentDetails;
+
         private Boolean requestExtendedAuthorization;
 
         private Boolean requestIncrementalAuthorizationSupport;
@@ -27223,6 +27658,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return new PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent(
               this.captureMethod,
               this.extraParams,
+              this.paymentDetails,
               this.requestExtendedAuthorization,
               this.requestIncrementalAuthorizationSupport,
               this.requestReauthorization,
@@ -27274,6 +27710,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
+        /** Payment details for payment method specific funding transaction fields. */
+        public Builder setPaymentDetails(
+            PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails
+                paymentDetails) {
+          this.paymentDetails = paymentDetails;
+          return this;
+        }
+
         /**
          * Request ability to capture this payment beyond the standard <a
          * href="https://docs.stripe.com/terminal/features/extended-authorizations#authorization-validity">authorization
@@ -27318,6 +27762,229 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Routing routing) {
           this.routing = routing;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PaymentDetails {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Money services details for payment method specific funding fields. */
+        @SerializedName("money_services")
+        MoneyServices moneyServices;
+
+        private PaymentDetails(Map<String, Object> extraParams, MoneyServices moneyServices) {
+          this.extraParams = extraParams;
+          this.moneyServices = moneyServices;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private MoneyServices moneyServices;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails
+              build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails(
+                this.extraParams, this.moneyServices);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Money services details for payment method specific funding fields. */
+          public Builder setMoneyServices(
+              PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails
+                      .MoneyServices
+                  moneyServices) {
+            this.moneyServices = moneyServices;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MoneyServices {
+          /** Payment method specific account funding transaction details. */
+          @SerializedName("account_funding")
+          AccountFunding accountFunding;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private MoneyServices(AccountFunding accountFunding, Map<String, Object> extraParams) {
+            this.accountFunding = accountFunding;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private AccountFunding accountFunding;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails
+                    .MoneyServices
+                build() {
+              return new PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails
+                  .MoneyServices(this.accountFunding, this.extraParams);
+            }
+
+            /** Payment method specific account funding transaction details. */
+            public Builder setAccountFunding(
+                PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails
+                        .MoneyServices.AccountFunding
+                    accountFunding) {
+              this.accountFunding = accountFunding;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails.MoneyServices#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails.MoneyServices#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class AccountFunding {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            private AccountFunding(Map<String, Object> extraParams) {
+              this.extraParams = extraParams;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails
+                      .MoneyServices.AccountFunding
+                  build() {
+                return new PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent
+                    .PaymentDetails.MoneyServices.AccountFunding(this.extraParams);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails.MoneyServices.AccountFunding#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails.MoneyServices.AccountFunding#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+            }
+          }
         }
       }
 

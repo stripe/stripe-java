@@ -287,7 +287,12 @@ public class IntentAction extends StripeObject implements HasId {
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class CustomPricingUnit extends StripeObject {
+          public static class CustomPricingUnit extends StripeObject implements HasId {
+            /** The id of the custom pricing unit. */
+            @Getter(onMethod_ = {@Override})
+            @SerializedName("id")
+            String id;
+
             /** The value of the custom pricing unit. */
             @SerializedName("value")
             String value;

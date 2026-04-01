@@ -335,6 +335,18 @@ public final class EventNotificationClassLookup {
         "v2.core.health.webhook_latency.resolved",
         com.stripe.events.V2CoreHealthWebhookLatencyResolvedEventNotification.class);
     eventClassLookup.put(
+        "v2.data.reporting.query_run.created",
+        com.stripe.events.V2DataReportingQueryRunCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.reporting.query_run.failed",
+        com.stripe.events.V2DataReportingQueryRunFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.reporting.query_run.succeeded",
+        com.stripe.events.V2DataReportingQueryRunSucceededEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.reporting.query_run.updated",
+        com.stripe.events.V2DataReportingQueryRunUpdatedEventNotification.class);
+    eventClassLookup.put(
         "v2.iam.api_key.created", com.stripe.events.V2IamApiKeyCreatedEventNotification.class);
     eventClassLookup.put(
         "v2.iam.api_key.default_secret_revealed",
@@ -506,8 +518,14 @@ public final class EventNotificationClassLookup {
         "v2.payments.off_session_payment.failed",
         com.stripe.events.V2PaymentsOffSessionPaymentFailedEventNotification.class);
     eventClassLookup.put(
+        "v2.payments.off_session_payment.paused",
+        com.stripe.events.V2PaymentsOffSessionPaymentPausedEventNotification.class);
+    eventClassLookup.put(
         "v2.payments.off_session_payment.requires_capture",
         com.stripe.events.V2PaymentsOffSessionPaymentRequiresCaptureEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.resumed",
+        com.stripe.events.V2PaymentsOffSessionPaymentResumedEventNotification.class);
     eventClassLookup.put(
         "v2.payments.off_session_payment.succeeded",
         com.stripe.events.V2PaymentsOffSessionPaymentSucceededEventNotification.class);

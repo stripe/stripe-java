@@ -27,8 +27,9 @@ public final class V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpda
      * holds_currencies.gbp}, {@code holds_currencies.usd}, {@code holds_currencies.usdc}, {@code
      * inbound_transfers.bank_accounts}, {@code outbound_payments.bank_accounts}, {@code
      * outbound_payments.cards}, {@code outbound_payments.crypto_wallets}, {@code
-     * outbound_payments.financial_accounts}, {@code outbound_transfers.bank_accounts}, {@code
-     * outbound_transfers.crypto_wallets}, or {@code outbound_transfers.financial_accounts}.
+     * outbound_payments.financial_accounts}, {@code outbound_payments.paper_checks}, {@code
+     * outbound_transfers.bank_accounts}, {@code outbound_transfers.crypto_wallets}, or {@code
+     * outbound_transfers.financial_accounts}.
      */
     @SerializedName("updated_capability")
     String updatedCapability;

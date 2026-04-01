@@ -8,7 +8,6 @@ import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
 import java.util.List;
-import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -132,11 +131,11 @@ public class CollectionSettingVersion extends StripeObject implements HasId {
 
     /** This sub-hash contains details about the Konbini payment method options. */
     @SerializedName("konbini")
-    Map<String, Object> konbini;
+    Konbini konbini;
 
     /** This sub-hash contains details about the SEPA Direct Debit payment method options. */
     @SerializedName("sepa_debit")
-    Map<String, Object> sepaDebit;
+    SepaDebit sepaDebit;
 
     /** This sub-hash contains details about the ACH direct debit payment method options. */
     @SerializedName("us_bank_account")
@@ -304,6 +303,18 @@ public class CollectionSettingVersion extends StripeObject implements HasId {
         }
       }
     }
+
+    /** This sub-hash contains details about the Konbini payment method options. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Konbini extends StripeObject {}
+
+    /** This sub-hash contains details about the SEPA Direct Debit payment method options. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebit extends StripeObject {}
 
     /** This sub-hash contains details about the ACH direct debit payment method options. */
     @Getter

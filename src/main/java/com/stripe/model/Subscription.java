@@ -1589,10 +1589,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @SerializedName("applies_to")
     List<Subscription.BillingSchedule.AppliesTo> appliesTo;
 
-    /** Specifies the start of the billing period. */
-    @SerializedName("bill_from")
-    BillFrom billFrom;
-
     /** Specifies the end of billing period. */
     @SerializedName("bill_until")
     BillUntil billUntil;
@@ -1637,32 +1633,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       public void setPriceObject(Price expandableObject) {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
-    }
-
-    /** Specifies the start of the billing period. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BillFrom extends StripeObject {
-      /** The time the billing schedule applies from. */
-      @SerializedName("computed_timestamp")
-      Long computedTimestamp;
-
-      /**
-       * Use a precise Unix timestamp for prebilling to start. Must be earlier than {@code
-       * bill_until}.
-       */
-      @SerializedName("timestamp")
-      Long timestamp;
-
-      /**
-       * Describes how the billing schedule determines the start date. Possible values are {@code
-       * timestamp}.
-       *
-       * <p>Equal to {@code timestamp}.
-       */
-      @SerializedName("type")
-      String type;
     }
 
     /** Specifies the end of billing period. */
@@ -2018,6 +1988,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       Card card;
 
       /**
+       * This sub-hash contains details about the Check Scan payment method options to pass to
+       * invoices created by the subscription.
+       */
+      @SerializedName("check_scan")
+      CheckScan checkScan;
+
+      /**
        * This sub-hash contains details about the Bank transfer payment method options to pass to
        * invoices created by the subscription.
        */
@@ -2187,6 +2164,45 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
            */
           @SerializedName("description")
           String description;
+        }
+      }
+
+      /**
+       * For more details about CheckScan, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CheckScan extends StripeObject {
+        @SerializedName("check_deposit_address")
+        CheckDepositAddress checkDepositAddress;
+
+        /**
+         * For more details about CheckDepositAddress, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CheckDepositAddress extends StripeObject {
+          @SerializedName("city")
+          String city;
+
+          @SerializedName("country")
+          String country;
+
+          @SerializedName("line1")
+          String line1;
+
+          @SerializedName("line2")
+          String line2;
+
+          @SerializedName("postal_code")
+          String postalCode;
+
+          @SerializedName("state")
+          String state;
         }
       }
 

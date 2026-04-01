@@ -134,8 +134,8 @@ public class ReportRunCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class ResultOptions {
     /**
-     * If set, the generated report file will be compressed into a ZIP folder. This is useful for
-     * reducing file size and download time for large reports.
+     * If set, the generated results file will be compressed into a ZIP folder. This is useful for
+     * reducing file size and download time for large results.
      */
     @SerializedName("compress_file")
     Boolean compressFile;
@@ -169,8 +169,8 @@ public class ReportRunCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If set, the generated report file will be compressed into a ZIP folder. This is useful for
-       * reducing file size and download time for large reports.
+       * If set, the generated results file will be compressed into a ZIP folder. This is useful for
+       * reducing file size and download time for large results.
        */
       public Builder setCompressFile(Boolean compressFile) {
         this.compressFile = compressFile;
