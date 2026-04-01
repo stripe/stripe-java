@@ -54,6 +54,10 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
   @SerializedName("payment_method")
   String paymentMethod;
 
+  /** The payment method options for this requested session. */
+  @SerializedName("payment_method_options")
+  PaymentMethodOptions paymentMethodOptions;
+
   /** <strong>Required.</strong> The details of the seller. */
   @SerializedName("seller_details")
   SellerDetails sellerDetails;
@@ -76,6 +80,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
       List<RequestedSessionCreateParams.LineItemDetail> lineItemDetails,
       Map<String, String> metadata,
       String paymentMethod,
+      PaymentMethodOptions paymentMethodOptions,
       SellerDetails sellerDetails,
       SetupFutureUsage setupFutureUsage,
       Map<String, String> sharedMetadata) {
@@ -88,6 +93,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
     this.lineItemDetails = lineItemDetails;
     this.metadata = metadata;
     this.paymentMethod = paymentMethod;
+    this.paymentMethodOptions = paymentMethodOptions;
     this.sellerDetails = sellerDetails;
     this.setupFutureUsage = setupFutureUsage;
     this.sharedMetadata = sharedMetadata;
@@ -116,6 +122,8 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
 
     private String paymentMethod;
 
+    private PaymentMethodOptions paymentMethodOptions;
+
     private SellerDetails sellerDetails;
 
     private SetupFutureUsage setupFutureUsage;
@@ -134,6 +142,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
           this.lineItemDetails,
           this.metadata,
           this.paymentMethod,
+          this.paymentMethodOptions,
           this.sellerDetails,
           this.setupFutureUsage,
           this.sharedMetadata);
@@ -273,6 +282,13 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
     /** The payment method for this requested session. */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
+      return this;
+    }
+
+    /** The payment method options for this requested session. */
+    public Builder setPaymentMethodOptions(
+        RequestedSessionCreateParams.PaymentMethodOptions paymentMethodOptions) {
+      this.paymentMethodOptions = paymentMethodOptions;
       return this;
     }
 
@@ -1056,6 +1072,256 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
       public Builder setSkuId(String skuId) {
         this.skuId = skuId;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodOptions {
+    /** Card-specific payment method options. */
+    @SerializedName("card")
+    Card card;
+
+    /** The payment method types to exclude from the session. */
+    @SerializedName("excluded_payment_method_types")
+    List<RequestedSessionCreateParams.PaymentMethodOptions.ExcludedPaymentMethodType>
+        excludedPaymentMethodTypes;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private PaymentMethodOptions(
+        Card card,
+        List<RequestedSessionCreateParams.PaymentMethodOptions.ExcludedPaymentMethodType>
+            excludedPaymentMethodTypes,
+        Map<String, Object> extraParams) {
+      this.card = card;
+      this.excludedPaymentMethodTypes = excludedPaymentMethodTypes;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Card card;
+
+      private List<RequestedSessionCreateParams.PaymentMethodOptions.ExcludedPaymentMethodType>
+          excludedPaymentMethodTypes;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public RequestedSessionCreateParams.PaymentMethodOptions build() {
+        return new RequestedSessionCreateParams.PaymentMethodOptions(
+            this.card, this.excludedPaymentMethodTypes, this.extraParams);
+      }
+
+      /** Card-specific payment method options. */
+      public Builder setCard(RequestedSessionCreateParams.PaymentMethodOptions.Card card) {
+        this.card = card;
+        return this;
+      }
+
+      /**
+       * Add an element to `excludedPaymentMethodTypes` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link RequestedSessionCreateParams.PaymentMethodOptions#excludedPaymentMethodTypes} for
+       * the field documentation.
+       */
+      public Builder addExcludedPaymentMethodType(
+          RequestedSessionCreateParams.PaymentMethodOptions.ExcludedPaymentMethodType element) {
+        if (this.excludedPaymentMethodTypes == null) {
+          this.excludedPaymentMethodTypes = new ArrayList<>();
+        }
+        this.excludedPaymentMethodTypes.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `excludedPaymentMethodTypes` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link RequestedSessionCreateParams.PaymentMethodOptions#excludedPaymentMethodTypes} for
+       * the field documentation.
+       */
+      public Builder addAllExcludedPaymentMethodType(
+          List<RequestedSessionCreateParams.PaymentMethodOptions.ExcludedPaymentMethodType>
+              elements) {
+        if (this.excludedPaymentMethodTypes == null) {
+          this.excludedPaymentMethodTypes = new ArrayList<>();
+        }
+        this.excludedPaymentMethodTypes.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * RequestedSessionCreateParams.PaymentMethodOptions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link RequestedSessionCreateParams.PaymentMethodOptions#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card {
+      /** The card brands to exclude from the session. */
+      @SerializedName("brands_blocked")
+      List<RequestedSessionCreateParams.PaymentMethodOptions.Card.BrandsBlocked> brandsBlocked;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Card(
+          List<RequestedSessionCreateParams.PaymentMethodOptions.Card.BrandsBlocked> brandsBlocked,
+          Map<String, Object> extraParams) {
+        this.brandsBlocked = brandsBlocked;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private List<RequestedSessionCreateParams.PaymentMethodOptions.Card.BrandsBlocked>
+            brandsBlocked;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public RequestedSessionCreateParams.PaymentMethodOptions.Card build() {
+          return new RequestedSessionCreateParams.PaymentMethodOptions.Card(
+              this.brandsBlocked, this.extraParams);
+        }
+
+        /**
+         * Add an element to `brandsBlocked` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * RequestedSessionCreateParams.PaymentMethodOptions.Card#brandsBlocked} for the field
+         * documentation.
+         */
+        public Builder addBrandsBlocked(
+            RequestedSessionCreateParams.PaymentMethodOptions.Card.BrandsBlocked element) {
+          if (this.brandsBlocked == null) {
+            this.brandsBlocked = new ArrayList<>();
+          }
+          this.brandsBlocked.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `brandsBlocked` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link RequestedSessionCreateParams.PaymentMethodOptions.Card#brandsBlocked} for the
+         * field documentation.
+         */
+        public Builder addAllBrandsBlocked(
+            List<RequestedSessionCreateParams.PaymentMethodOptions.Card.BrandsBlocked> elements) {
+          if (this.brandsBlocked == null) {
+            this.brandsBlocked = new ArrayList<>();
+          }
+          this.brandsBlocked.addAll(elements);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link RequestedSessionCreateParams.PaymentMethodOptions.Card#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link RequestedSessionCreateParams.PaymentMethodOptions.Card#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum BrandsBlocked implements ApiRequestParams.EnumParam {
+        @SerializedName("american_express")
+        AMERICAN_EXPRESS("american_express"),
+
+        @SerializedName("mastercard")
+        MASTERCARD("mastercard"),
+
+        @SerializedName("visa")
+        VISA("visa");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        BrandsBlocked(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    public enum ExcludedPaymentMethodType implements ApiRequestParams.EnumParam {
+      @SerializedName("affirm")
+      AFFIRM("affirm"),
+
+      @SerializedName("card")
+      CARD("card"),
+
+      @SerializedName("klarna")
+      KLARNA("klarna");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      ExcludedPaymentMethodType(String value) {
+        this.value = value;
       }
     }
   }
