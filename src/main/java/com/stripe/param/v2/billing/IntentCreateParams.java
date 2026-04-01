@@ -1319,12 +1319,17 @@ public class IntentCreateParams extends ApiRequestParams {
               @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
               Map<String, Object> extraParams;
 
+              /** The id of the custom pricing unit. */
+              @SerializedName("id")
+              String id;
+
               /** <strong>Required.</strong> The value of the custom pricing unit. */
               @SerializedName("value")
               String value;
 
-              private CustomPricingUnit(Map<String, Object> extraParams, String value) {
+              private CustomPricingUnit(Map<String, Object> extraParams, String id, String value) {
                 this.extraParams = extraParams;
+                this.id = id;
                 this.value = value;
               }
 
@@ -1335,6 +1340,8 @@ public class IntentCreateParams extends ApiRequestParams {
               public static class Builder {
                 private Map<String, Object> extraParams;
 
+                private String id;
+
                 private String value;
 
                 /** Finalize and obtain parameter instance from this builder. */
@@ -1342,7 +1349,7 @@ public class IntentCreateParams extends ApiRequestParams {
                         .Amount.CustomPricingUnit
                     build() {
                   return new IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend
-                      .Amount.CustomPricingUnit(this.extraParams, this.value);
+                      .Amount.CustomPricingUnit(this.extraParams, this.id, this.value);
                 }
 
                 /**
@@ -1372,6 +1379,12 @@ public class IntentCreateParams extends ApiRequestParams {
                     this.extraParams = new HashMap<>();
                   }
                   this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** The id of the custom pricing unit. */
+                public Builder setId(String id) {
+                  this.id = id;
                   return this;
                 }
 

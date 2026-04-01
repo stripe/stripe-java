@@ -460,11 +460,11 @@ public class CollectionSettingUpdateParams extends ApiRequestParams {
 
     /** This sub-hash contains details about the Konbini payment method options. */
     @SerializedName("konbini")
-    Map<String, Object> konbini;
+    Konbini konbini;
 
     /** This sub-hash contains details about the SEPA Direct Debit payment method options. */
     @SerializedName("sepa_debit")
-    Map<String, Object> sepaDebit;
+    SepaDebit sepaDebit;
 
     /** This sub-hash contains details about the ACH direct debit payment method options. */
     @SerializedName("us_bank_account")
@@ -476,8 +476,8 @@ public class CollectionSettingUpdateParams extends ApiRequestParams {
         Card card,
         CustomerBalance customerBalance,
         Map<String, Object> extraParams,
-        Map<String, Object> konbini,
-        Map<String, Object> sepaDebit,
+        Konbini konbini,
+        SepaDebit sepaDebit,
         UsBankAccount usBankAccount) {
       this.acssDebit = acssDebit;
       this.bancontact = bancontact;
@@ -504,9 +504,9 @@ public class CollectionSettingUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private Map<String, Object> konbini;
+      private Konbini konbini;
 
-      private Map<String, Object> sepaDebit;
+      private SepaDebit sepaDebit;
 
       private UsBankAccount usBankAccount;
 
@@ -581,57 +581,17 @@ public class CollectionSettingUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Add a key/value pair to `konbini` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CollectionSettingUpdateParams.PaymentMethodOptions#konbini} for the field documentation.
-       */
-      public Builder putKonbini(String key, Object value) {
-        if (this.konbini == null) {
-          this.konbini = new HashMap<>();
-        }
-        this.konbini.put(key, value);
+      /** This sub-hash contains details about the Konbini payment method options. */
+      public Builder setKonbini(
+          CollectionSettingUpdateParams.PaymentMethodOptions.Konbini konbini) {
+        this.konbini = konbini;
         return this;
       }
 
-      /**
-       * Add all map key/value pairs to `konbini` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CollectionSettingUpdateParams.PaymentMethodOptions#konbini} for the field
-       * documentation.
-       */
-      public Builder putAllKonbini(Map<String, Object> map) {
-        if (this.konbini == null) {
-          this.konbini = new HashMap<>();
-        }
-        this.konbini.putAll(map);
-        return this;
-      }
-
-      /**
-       * Add a key/value pair to `sepaDebit` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CollectionSettingUpdateParams.PaymentMethodOptions#sepaDebit} for the field documentation.
-       */
-      public Builder putSepaDebit(String key, Object value) {
-        if (this.sepaDebit == null) {
-          this.sepaDebit = new HashMap<>();
-        }
-        this.sepaDebit.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `sepaDebit` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CollectionSettingUpdateParams.PaymentMethodOptions#sepaDebit} for the field
-       * documentation.
-       */
-      public Builder putAllSepaDebit(Map<String, Object> map) {
-        if (this.sepaDebit == null) {
-          this.sepaDebit = new HashMap<>();
-        }
-        this.sepaDebit.putAll(map);
+      /** This sub-hash contains details about the SEPA Direct Debit payment method options. */
+      public Builder setSepaDebit(
+          CollectionSettingUpdateParams.PaymentMethodOptions.SepaDebit sepaDebit) {
+        this.sepaDebit = sepaDebit;
         return this;
       }
 
@@ -1581,6 +1541,122 @@ public class CollectionSettingUpdateParams extends ApiRequestParams {
 
         FundingType(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Konbini {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Konbini(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CollectionSettingUpdateParams.PaymentMethodOptions.Konbini build() {
+          return new CollectionSettingUpdateParams.PaymentMethodOptions.Konbini(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CollectionSettingUpdateParams.PaymentMethodOptions.Konbini#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CollectionSettingUpdateParams.PaymentMethodOptions.Konbini#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebit {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private SepaDebit(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CollectionSettingUpdateParams.PaymentMethodOptions.SepaDebit build() {
+          return new CollectionSettingUpdateParams.PaymentMethodOptions.SepaDebit(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CollectionSettingUpdateParams.PaymentMethodOptions.SepaDebit#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CollectionSettingUpdateParams.PaymentMethodOptions.SepaDebit#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }

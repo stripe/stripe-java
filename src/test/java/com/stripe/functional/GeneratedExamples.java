@@ -3211,7 +3211,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.Event.class,
-        "{\"changes\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.event\",\"reason\":{\"type\":\"request\",\"request\":{\"client\":{\"type\":\"api_key\",\"api_key\":{\"id\":\"obj_123\"},\"dashboard_user\":{\"email\":\"email\",\"ip_address\":\"ip_address\",\"machine_identifier\":\"machine_identifier\"},\"stripe_action\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]}},\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"}},\"type\":\"type\"}");
+        "{\"changes\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.event\",\"reason\":{\"type\":\"request\",\"request\":{\"client\":{\"type\":\"api_key\",\"api_key\":{\"id\":\"obj_123\"},\"dashboard_user\":{\"email\":\"email\",\"ip_address\":\"ip_address\",\"machine_identifier\":\"machine_identifier\"},\"stripe_action\":{}},\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"}},\"type\":\"type\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventRetrieveParams params =
@@ -25163,6 +25163,7 @@ class GeneratedExamples extends BaseStripeTest {
                                                             .IntentCreateParams.Action.Apply
                                                             .SpendModifierRule.MaxBillingPeriodSpend
                                                             .Amount.CustomPricingUnit.builder()
+                                                            .setId("obj_123")
                                                             .setValue("value")
                                                             .build())
                                                     .build())

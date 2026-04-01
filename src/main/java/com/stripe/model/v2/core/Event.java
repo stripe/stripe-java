@@ -192,7 +192,7 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
 
         /** Stripe action that triggered the event. */
         @SerializedName("stripe_action")
-        Map<String, Object> stripeAction;
+        StripeAction stripeAction;
 
         /**
          * The type of the client.
@@ -230,6 +230,12 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
           @SerializedName("machine_identifier")
           String machineIdentifier;
         }
+
+        /** Stripe action that triggered the event. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class StripeAction extends StripeObject {}
       }
     }
   }

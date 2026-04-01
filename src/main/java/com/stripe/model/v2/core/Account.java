@@ -8874,25 +8874,30 @@ public class Account extends StripeObject implements HasId {
          * <p>One of {@code ae_crn}, {@code ae_vat}, {@code ao_nif}, {@code ar_cuit}, {@code at_fn},
          * {@code at_stn}, {@code at_vat}, {@code au_abn}, {@code au_acn}, {@code au_in}, {@code
          * az_tin}, {@code bd_etin}, {@code be_cbe}, {@code be_vat}, {@code bg_uic}, {@code bg_vat},
-         * {@code br_cnpj}, {@code ca_cn}, {@code ca_crarr}, {@code ca_gst_hst}, {@code ca_neq},
-         * {@code ca_rid}, {@code ch_chid}, {@code ch_uid}, {@code cr_cpj}, {@code cr_nite}, {@code
-         * cy_he}, {@code cy_tic}, {@code cy_vat}, {@code cz_ico}, {@code cz_vat}, {@code de_hrn},
-         * {@code de_stn}, {@code de_vat}, {@code dk_cvr}, {@code dk_vat}, {@code do_rcn}, {@code
-         * ee_rk}, {@code ee_vat}, {@code es_cif}, {@code es_vat}, {@code fi_vat}, {@code fi_yt},
-         * {@code fr_rna}, {@code fr_siren}, {@code fr_vat}, {@code gb_crn}, {@code gb_vat}, {@code
-         * gi_crn}, {@code gr_afm}, {@code gr_gemi}, {@code gr_vat}, {@code gt_nit}, {@code hk_br},
-         * {@code hk_cr}, {@code hr_mbs}, {@code hr_oib}, {@code hr_vat}, {@code hu_cjs}, {@code
-         * hu_tin}, {@code hu_vat}, {@code ie_crn}, {@code ie_trn}, {@code ie_vat}, {@code it_rea},
-         * {@code it_vat}, {@code jp_cn}, {@code kz_bin}, {@code li_uid}, {@code lt_ccrn}, {@code
-         * lt_vat}, {@code lu_nif}, {@code lu_rcs}, {@code lu_vat}, {@code lv_urn}, {@code lv_vat},
-         * {@code mt_crn}, {@code mt_tin}, {@code mt_vat}, {@code mx_rfc}, {@code my_brn}, {@code
-         * my_coid}, {@code my_itn}, {@code my_sst}, {@code mz_nuit}, {@code nl_kvk}, {@code
+         * {@code bm_crn}, {@code bo_tin}, {@code br_cnpj}, {@code bt_tpn}, {@code ca_cn}, {@code
+         * ca_crarr}, {@code ca_gst_hst}, {@code ca_neq}, {@code ca_rid}, {@code ch_chid}, {@code
+         * ch_uid}, {@code co_nit}, {@code cr_cpj}, {@code cr_nite}, {@code cy_he}, {@code cy_tic},
+         * {@code cy_vat}, {@code cz_ico}, {@code cz_vat}, {@code de_hrn}, {@code de_stn}, {@code
+         * de_vat}, {@code dk_cvr}, {@code dk_vat}, {@code do_rcn}, {@code ec_ruc}, {@code ee_rk},
+         * {@code ee_vat}, {@code eg_tin}, {@code es_cif}, {@code es_vat}, {@code fi_vat}, {@code
+         * fi_yt}, {@code fr_rna}, {@code fr_siren}, {@code fr_vat}, {@code gb_crn}, {@code gb_vat},
+         * {@code gh_tin}, {@code gi_crn}, {@code gr_afm}, {@code gr_gemi}, {@code gr_vat}, {@code
+         * gt_nit}, {@code gy_tin}, {@code hk_br}, {@code hk_cr}, {@code hn_rtn}, {@code hr_mbs},
+         * {@code hr_oib}, {@code hr_vat}, {@code hu_cjs}, {@code hu_tin}, {@code hu_vat}, {@code
+         * ie_crn}, {@code ie_trn}, {@code ie_vat}, {@code it_rea}, {@code it_vat}, {@code jm_trn},
+         * {@code jo_crn}, {@code jp_cn}, {@code ke_pin}, {@code ky_crn}, {@code kz_bin}, {@code
+         * li_uid}, {@code lk_tin}, {@code lt_ccrn}, {@code lt_vat}, {@code lu_nif}, {@code lu_rcs},
+         * {@code lu_vat}, {@code lv_urn}, {@code lv_vat}, {@code mo_tin}, {@code mt_crn}, {@code
+         * mt_tin}, {@code mt_vat}, {@code mv_tin}, {@code mx_rfc}, {@code my_brn}, {@code my_coid},
+         * {@code my_itn}, {@code my_sst}, {@code mz_nuit}, {@code ng_tin}, {@code nl_kvk}, {@code
          * nl_rsin}, {@code nl_vat}, {@code no_orgnr}, {@code nz_bn}, {@code nz_ird}, {@code
-         * pe_ruc}, {@code pk_ntn}, {@code pl_nip}, {@code pl_regon}, {@code pl_vat}, {@code
-         * pt_vat}, {@code ro_cui}, {@code ro_orc}, {@code ro_vat}, {@code sa_crn}, {@code sa_tin},
-         * {@code se_orgnr}, {@code se_vat}, {@code sg_uen}, {@code si_msp}, {@code si_tin}, {@code
-         * si_vat}, {@code sk_dic}, {@code sk_ico}, {@code sk_vat}, {@code th_crn}, {@code th_prn},
-         * {@code th_tin}, or {@code us_ein}.
+         * pa_ruc}, {@code pe_ruc}, {@code ph_tin}, {@code pk_ntn}, {@code pl_nip}, {@code
+         * pl_regon}, {@code pl_vat}, {@code pt_vat}, {@code py_ruc}, {@code ro_cui}, {@code
+         * ro_orc}, {@code ro_vat}, {@code sa_crn}, {@code sa_tin}, {@code se_orgnr}, {@code
+         * se_vat}, {@code sg_uen}, {@code si_msp}, {@code si_tin}, {@code si_vat}, {@code sk_dic},
+         * {@code sk_ico}, {@code sk_vat}, {@code sl_tin}, {@code sv_nit}, {@code th_crn}, {@code
+         * th_prn}, {@code th_tin}, {@code us_ein}, {@code uy_ruc}, {@code vg_cn}, or {@code
+         * za_tin}.
          */
         @SerializedName("type")
         String type;
@@ -9576,19 +9581,23 @@ public class Account extends StripeObject implements HasId {
          *
          * <p>One of {@code ae_eid}, {@code ao_nif}, {@code ar_cuil}, {@code ar_dni}, {@code
          * at_stn}, {@code az_tin}, {@code bd_brc}, {@code bd_etin}, {@code bd_nid}, {@code be_nrn},
-         * {@code bg_ucn}, {@code bn_nric}, {@code br_cpf}, {@code ca_sin}, {@code ch_oasi}, {@code
-         * cl_rut}, {@code cn_pp}, {@code co_nuip}, {@code cr_ci}, {@code cr_cpf}, {@code cr_dimex},
-         * {@code cr_nite}, {@code cy_tic}, {@code cz_rc}, {@code de_stn}, {@code dk_cpr}, {@code
-         * do_cie}, {@code do_rcn}, {@code ec_ci}, {@code ee_ik}, {@code es_nif}, {@code fi_hetu},
-         * {@code fr_nir}, {@code gb_nino}, {@code gr_afm}, {@code gt_nit}, {@code hk_id}, {@code
-         * hr_oib}, {@code hu_ad}, {@code id_nik}, {@code ie_ppsn}, {@code is_kt}, {@code it_cf},
-         * {@code jp_inc}, {@code ke_pin}, {@code kz_iin}, {@code li_peid}, {@code lt_ak}, {@code
-         * lu_nif}, {@code lv_pk}, {@code mx_rfc}, {@code my_nric}, {@code mz_nuit}, {@code ng_nin},
-         * {@code nl_bsn}, {@code no_nin}, {@code nz_ird}, {@code pe_dni}, {@code pk_cnic}, {@code
-         * pk_snic}, {@code pl_pesel}, {@code pt_nif}, {@code ro_cnp}, {@code sa_tin}, {@code
-         * se_pin}, {@code sg_fin}, {@code sg_nric}, {@code sk_dic}, {@code th_lc}, {@code th_pin},
-         * {@code tr_tin}, {@code us_itin}, {@code us_itin_last_4}, {@code us_ssn}, {@code
-         * us_ssn_last_4}, {@code uy_dni}, or {@code za_id}.
+         * {@code bg_ucn}, {@code bm_pp}, {@code bn_nric}, {@code bo_ci}, {@code br_cpf}, {@code
+         * bt_cid}, {@code ca_sin}, {@code ch_oasi}, {@code cl_rut}, {@code cn_pp}, {@code co_nuip},
+         * {@code cr_ci}, {@code cr_cpf}, {@code cr_dimex}, {@code cr_nite}, {@code cy_tic}, {@code
+         * cz_rc}, {@code de_stn}, {@code dk_cpr}, {@code do_cie}, {@code do_rcn}, {@code ec_ci},
+         * {@code ee_ik}, {@code eg_tin}, {@code es_nif}, {@code fi_hetu}, {@code fr_nir}, {@code
+         * gb_nino}, {@code gh_pin}, {@code gr_afm}, {@code gt_nit}, {@code gy_tin}, {@code hk_id},
+         * {@code hn_rtn}, {@code hr_oib}, {@code hu_ad}, {@code id_nik}, {@code ie_ppsn}, {@code
+         * is_kt}, {@code it_cf}, {@code jm_trn}, {@code jo_pin}, {@code jp_inc}, {@code ke_pin},
+         * {@code ky_pp}, {@code kz_iin}, {@code li_peid}, {@code lk_nic}, {@code lt_ak}, {@code
+         * lu_nif}, {@code lv_pk}, {@code mo_bir}, {@code mt_nic}, {@code mv_tin}, {@code mx_rfc},
+         * {@code my_nric}, {@code mz_nuit}, {@code ng_nin}, {@code nl_bsn}, {@code no_nin}, {@code
+         * nz_ird}, {@code pa_ruc}, {@code pe_dni}, {@code ph_tin}, {@code pk_cnic}, {@code
+         * pk_snic}, {@code pl_pesel}, {@code pt_nif}, {@code py_ruc}, {@code ro_cnp}, {@code
+         * sa_tin}, {@code se_pin}, {@code sg_fin}, {@code sg_nric}, {@code si_pin}, {@code sk_dic},
+         * {@code sv_nit}, {@code th_lc}, {@code th_pin}, {@code tr_tin}, {@code us_itin}, {@code
+         * us_itin_last_4}, {@code us_ssn}, {@code us_ssn_last_4}, {@code uy_dni}, {@code vg_pp}, or
+         * {@code za_id}.
          */
         @SerializedName("type")
         String type;

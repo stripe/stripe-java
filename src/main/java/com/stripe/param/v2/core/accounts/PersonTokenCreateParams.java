@@ -2305,11 +2305,20 @@ public class PersonTokenCreateParams extends ApiRequestParams {
       @SerializedName("bg_ucn")
       BG_UCN("bg_ucn"),
 
+      @SerializedName("bm_pp")
+      BM_PP("bm_pp"),
+
       @SerializedName("bn_nric")
       BN_NRIC("bn_nric"),
 
+      @SerializedName("bo_ci")
+      BO_CI("bo_ci"),
+
       @SerializedName("br_cpf")
       BR_CPF("br_cpf"),
+
+      @SerializedName("bt_cid")
+      BT_CID("bt_cid"),
 
       @SerializedName("ca_sin")
       CA_SIN("ca_sin"),
@@ -2362,6 +2371,9 @@ public class PersonTokenCreateParams extends ApiRequestParams {
       @SerializedName("ee_ik")
       EE_IK("ee_ik"),
 
+      @SerializedName("eg_tin")
+      EG_TIN("eg_tin"),
+
       @SerializedName("es_nif")
       ES_NIF("es_nif"),
 
@@ -2374,14 +2386,23 @@ public class PersonTokenCreateParams extends ApiRequestParams {
       @SerializedName("gb_nino")
       GB_NINO("gb_nino"),
 
+      @SerializedName("gh_pin")
+      GH_PIN("gh_pin"),
+
       @SerializedName("gr_afm")
       GR_AFM("gr_afm"),
 
       @SerializedName("gt_nit")
       GT_NIT("gt_nit"),
 
+      @SerializedName("gy_tin")
+      GY_TIN("gy_tin"),
+
       @SerializedName("hk_id")
       HK_ID("hk_id"),
+
+      @SerializedName("hn_rtn")
+      HN_RTN("hn_rtn"),
 
       @SerializedName("hr_oib")
       HR_OIB("hr_oib"),
@@ -2401,17 +2422,29 @@ public class PersonTokenCreateParams extends ApiRequestParams {
       @SerializedName("it_cf")
       IT_CF("it_cf"),
 
+      @SerializedName("jm_trn")
+      JM_TRN("jm_trn"),
+
+      @SerializedName("jo_pin")
+      JO_PIN("jo_pin"),
+
       @SerializedName("jp_inc")
       JP_INC("jp_inc"),
 
       @SerializedName("ke_pin")
       KE_PIN("ke_pin"),
 
+      @SerializedName("ky_pp")
+      KY_PP("ky_pp"),
+
       @SerializedName("kz_iin")
       KZ_IIN("kz_iin"),
 
       @SerializedName("li_peid")
       LI_PEID("li_peid"),
+
+      @SerializedName("lk_nic")
+      LK_NIC("lk_nic"),
 
       @SerializedName("lt_ak")
       LT_AK("lt_ak"),
@@ -2421,6 +2454,15 @@ public class PersonTokenCreateParams extends ApiRequestParams {
 
       @SerializedName("lv_pk")
       LV_PK("lv_pk"),
+
+      @SerializedName("mo_bir")
+      MO_BIR("mo_bir"),
+
+      @SerializedName("mt_nic")
+      MT_NIC("mt_nic"),
+
+      @SerializedName("mv_tin")
+      MV_TIN("mv_tin"),
 
       @SerializedName("mx_rfc")
       MX_RFC("mx_rfc"),
@@ -2443,8 +2485,14 @@ public class PersonTokenCreateParams extends ApiRequestParams {
       @SerializedName("nz_ird")
       NZ_IRD("nz_ird"),
 
+      @SerializedName("pa_ruc")
+      PA_RUC("pa_ruc"),
+
       @SerializedName("pe_dni")
       PE_DNI("pe_dni"),
+
+      @SerializedName("ph_tin")
+      PH_TIN("ph_tin"),
 
       @SerializedName("pk_cnic")
       PK_CNIC("pk_cnic"),
@@ -2457,6 +2505,9 @@ public class PersonTokenCreateParams extends ApiRequestParams {
 
       @SerializedName("pt_nif")
       PT_NIF("pt_nif"),
+
+      @SerializedName("py_ruc")
+      PY_RUC("py_ruc"),
 
       @SerializedName("ro_cnp")
       RO_CNP("ro_cnp"),
@@ -2473,8 +2524,14 @@ public class PersonTokenCreateParams extends ApiRequestParams {
       @SerializedName("sg_nric")
       SG_NRIC("sg_nric"),
 
+      @SerializedName("si_pin")
+      SI_PIN("si_pin"),
+
       @SerializedName("sk_dic")
       SK_DIC("sk_dic"),
+
+      @SerializedName("sv_nit")
+      SV_NIT("sv_nit"),
 
       @SerializedName("th_lc")
       TH_LC("th_lc"),
@@ -2499,6 +2556,9 @@ public class PersonTokenCreateParams extends ApiRequestParams {
 
       @SerializedName("uy_dni")
       UY_DNI("uy_dni"),
+
+      @SerializedName("vg_pp")
+      VG_PP("vg_pp"),
 
       @SerializedName("za_id")
       ZA_ID("za_id");

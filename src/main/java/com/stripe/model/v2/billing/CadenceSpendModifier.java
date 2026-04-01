@@ -104,7 +104,12 @@ public class CadenceSpendModifier extends StripeObject implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class CustomPricingUnit extends StripeObject {
+      public static class CustomPricingUnit extends StripeObject implements HasId {
+        /** The id of the custom pricing unit. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+
         /** The decimal value of custom pricing units, represented as a string. */
         @SerializedName("value")
         String value;

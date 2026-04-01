@@ -16,6 +16,13 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
   @SerializedName("amount")
   Amount amount;
 
+  /**
+   * The amount of the application fee (if any) that will be requested to be applied to the payment
+   * and transferred to the application owner's Stripe account.
+   */
+  @SerializedName("application_fee_amount")
+  Amount applicationFeeAmount;
+
   /** <strong>Required.</strong> The frequency of the underlying payment. */
   @SerializedName("cadence")
   Cadence cadence;
@@ -107,6 +114,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
 
   private OffSessionPaymentCreateParams(
       Amount amount,
+      Amount applicationFeeAmount,
       Cadence cadence,
       Capture capture,
       String customer,
@@ -123,6 +131,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       String testClock,
       TransferData transferData) {
     this.amount = amount;
+    this.applicationFeeAmount = applicationFeeAmount;
     this.cadence = cadence;
     this.capture = capture;
     this.customer = customer;
@@ -146,6 +155,8 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private Amount amount;
+
+    private Amount applicationFeeAmount;
 
     private Cadence cadence;
 
@@ -181,6 +192,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     public OffSessionPaymentCreateParams build() {
       return new OffSessionPaymentCreateParams(
           this.amount,
+          this.applicationFeeAmount,
           this.cadence,
           this.capture,
           this.customer,
@@ -201,6 +213,15 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     /** <strong>Required.</strong> The “presentment amount” to be collected from the customer. */
     public Builder setAmount(Amount amount) {
       this.amount = amount;
+      return this;
+    }
+
+    /**
+     * The amount of the application fee (if any) that will be requested to be applied to the
+     * payment and transferred to the application owner's Stripe account.
+     */
+    public Builder setApplicationFeeAmount(Amount applicationFeeAmount) {
+      this.applicationFeeAmount = applicationFeeAmount;
       return this;
     }
 
