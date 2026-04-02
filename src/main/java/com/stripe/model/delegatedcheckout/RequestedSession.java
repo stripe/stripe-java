@@ -144,7 +144,7 @@ public class RequestedSession extends ApiResource
   /**
    * The status of the requested session.
    *
-   * <p>One of {@code completed}, {@code expired}, or {@code open}.
+   * <p>One of {@code completed}, {@code expired}, {@code open}, or {@code requires_action}.
    */
   @SerializedName("status")
   String status;

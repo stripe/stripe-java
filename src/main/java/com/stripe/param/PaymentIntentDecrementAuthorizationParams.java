@@ -956,9 +956,14 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          private Card(String commodityCode, Map<String, Object> extraParams) {
+          /** Fleet data for this line item. */
+          @SerializedName("fleet_data")
+          FleetData fleetData;
+
+          private Card(String commodityCode, Map<String, Object> extraParams, FleetData fleetData) {
             this.commodityCode = commodityCode;
             this.extraParams = extraParams;
+            this.fleetData = fleetData;
           }
 
           public static Builder builder() {
@@ -970,12 +975,14 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
 
             private Map<String, Object> extraParams;
 
+            private FleetData fleetData;
+
             /** Finalize and obtain parameter instance from this builder. */
             public PaymentIntentDecrementAuthorizationParams.AmountDetails.LineItem
                     .PaymentMethodOptions.Card
                 build() {
               return new PaymentIntentDecrementAuthorizationParams.AmountDetails.LineItem
-                  .PaymentMethodOptions.Card(this.commodityCode, this.extraParams);
+                  .PaymentMethodOptions.Card(this.commodityCode, this.extraParams, this.fleetData);
             }
 
             /**
@@ -1015,6 +1022,268 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
               }
               this.extraParams.putAll(map);
               return this;
+            }
+
+            /** Fleet data for this line item. */
+            public Builder setFleetData(
+                PaymentIntentDecrementAuthorizationParams.AmountDetails.LineItem
+                        .PaymentMethodOptions.Card.FleetData
+                    fleetData) {
+              this.fleetData = fleetData;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class FleetData {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> The type of product being purchased at this line item. */
+            @SerializedName("product_type")
+            ProductType productType;
+
+            /** The type of service received at the acceptor location. */
+            @SerializedName("service_type")
+            ServiceType serviceType;
+
+            private FleetData(
+                Map<String, Object> extraParams, ProductType productType, ServiceType serviceType) {
+              this.extraParams = extraParams;
+              this.productType = productType;
+              this.serviceType = serviceType;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private ProductType productType;
+
+              private ServiceType serviceType;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public PaymentIntentDecrementAuthorizationParams.AmountDetails.LineItem
+                      .PaymentMethodOptions.Card.FleetData
+                  build() {
+                return new PaymentIntentDecrementAuthorizationParams.AmountDetails.LineItem
+                    .PaymentMethodOptions.Card.FleetData(
+                    this.extraParams, this.productType, this.serviceType);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentDecrementAuthorizationParams.AmountDetails.LineItem.PaymentMethodOptions.Card.FleetData#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentDecrementAuthorizationParams.AmountDetails.LineItem.PaymentMethodOptions.Card.FleetData#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The type of product being purchased at this line item.
+               */
+              public Builder setProductType(
+                  PaymentIntentDecrementAuthorizationParams.AmountDetails.LineItem
+                          .PaymentMethodOptions.Card.FleetData.ProductType
+                      productType) {
+                this.productType = productType;
+                return this;
+              }
+
+              /** The type of service received at the acceptor location. */
+              public Builder setServiceType(
+                  PaymentIntentDecrementAuthorizationParams.AmountDetails.LineItem
+                          .PaymentMethodOptions.Card.FleetData.ServiceType
+                      serviceType) {
+                this.serviceType = serviceType;
+                return this;
+              }
+            }
+
+            public enum ProductType implements ApiRequestParams.EnumParam {
+              @SerializedName("air_conditioning_service")
+              AIR_CONDITIONING_SERVICE("air_conditioning_service"),
+
+              @SerializedName("alcohol")
+              ALCOHOL("alcohol"),
+
+              @SerializedName("aviation_fuel_premium")
+              AVIATION_FUEL_PREMIUM("aviation_fuel_premium"),
+
+              @SerializedName("aviation_fuel_regular")
+              AVIATION_FUEL_REGULAR("aviation_fuel_regular"),
+
+              @SerializedName("car_care_detailing")
+              CAR_CARE_DETAILING("car_care_detailing"),
+
+              @SerializedName("compressed_natural_gas")
+              COMPRESSED_NATURAL_GAS("compressed_natural_gas"),
+
+              @SerializedName("deli")
+              DELI("deli"),
+
+              @SerializedName("food_service")
+              FOOD_SERVICE("food_service"),
+
+              @SerializedName("green_gasoline_mid_plus")
+              GREEN_GASOLINE_MID_PLUS("green_gasoline_mid_plus"),
+
+              @SerializedName("green_gasoline_premium_super")
+              GREEN_GASOLINE_PREMIUM_SUPER("green_gasoline_premium_super"),
+
+              @SerializedName("green_gasoline_regular")
+              GREEN_GASOLINE_REGULAR("green_gasoline_regular"),
+
+              @SerializedName("grocery")
+              GROCERY("grocery"),
+
+              @SerializedName("liquid_natural_gas")
+              LIQUID_NATURAL_GAS("liquid_natural_gas"),
+
+              @SerializedName("liquid_propane_gas")
+              LIQUID_PROPANE_GAS("liquid_propane_gas"),
+
+              @SerializedName("lodging")
+              LODGING("lodging"),
+
+              @SerializedName("marine_diesel")
+              MARINE_DIESEL("marine_diesel"),
+
+              @SerializedName("marine_fuel")
+              MARINE_FUEL("marine_fuel"),
+
+              @SerializedName("merchandise")
+              MERCHANDISE("merchandise"),
+
+              @SerializedName("mid_plus")
+              MID_PLUS("mid_plus"),
+
+              @SerializedName("mid_plus_ethanol")
+              MID_PLUS_ETHANOL("mid_plus_ethanol"),
+
+              @SerializedName("miscellaneous_aviation_products_services")
+              MISCELLANEOUS_AVIATION_PRODUCTS_SERVICES("miscellaneous_aviation_products_services"),
+
+              @SerializedName("miscellaneous_fuel")
+              MISCELLANEOUS_FUEL("miscellaneous_fuel"),
+
+              @SerializedName("miscellaneous_marine_products_services")
+              MISCELLANEOUS_MARINE_PRODUCTS_SERVICES("miscellaneous_marine_products_services"),
+
+              @SerializedName("miscellaneous_vehicle_products_services")
+              MISCELLANEOUS_VEHICLE_PRODUCTS_SERVICES("miscellaneous_vehicle_products_services"),
+
+              @SerializedName("packaged_beverage")
+              PACKAGED_BEVERAGE("packaged_beverage"),
+
+              @SerializedName("premium_diesel")
+              PREMIUM_DIESEL("premium_diesel"),
+
+              @SerializedName("premium_super")
+              PREMIUM_SUPER("premium_super"),
+
+              @SerializedName("premium_super_ethanol")
+              PREMIUM_SUPER_ETHANOL("premium_super_ethanol"),
+
+              @SerializedName("preventative_maintenance")
+              PREVENTATIVE_MAINTENANCE("preventative_maintenance"),
+
+              @SerializedName("regular")
+              REGULAR("regular"),
+
+              @SerializedName("regular_diesel")
+              REGULAR_DIESEL("regular_diesel"),
+
+              @SerializedName("regular_ethanol")
+              REGULAR_ETHANOL("regular_ethanol"),
+
+              @SerializedName("repairs")
+              REPAIRS("repairs"),
+
+              @SerializedName("self_service_car_wash")
+              SELF_SERVICE_CAR_WASH("self_service_car_wash"),
+
+              @SerializedName("shower")
+              SHOWER("shower"),
+
+              @SerializedName("store_service")
+              STORE_SERVICE("store_service"),
+
+              @SerializedName("tobacco")
+              TOBACCO("tobacco"),
+
+              @SerializedName("vehicle_accessories")
+              VEHICLE_ACCESSORIES("vehicle_accessories"),
+
+              @SerializedName("vehicle_parking")
+              VEHICLE_PARKING("vehicle_parking"),
+
+              @SerializedName("vehicle_parts")
+              VEHICLE_PARTS("vehicle_parts"),
+
+              @SerializedName("wash_out")
+              WASH_OUT("wash_out");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              ProductType(String value) {
+                this.value = value;
+              }
+            }
+
+            public enum ServiceType implements ApiRequestParams.EnumParam {
+              @SerializedName("full_service")
+              FULL_SERVICE("full_service"),
+
+              @SerializedName("high_speed_diesel")
+              HIGH_SPEED_DIESEL("high_speed_diesel"),
+
+              @SerializedName("non_fuel_only")
+              NON_FUEL_ONLY("non_fuel_only"),
+
+              @SerializedName("self_service")
+              SELF_SERVICE("self_service");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              ServiceType(String value) {
+                this.value = value;
+              }
             }
           }
         }

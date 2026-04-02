@@ -158,6 +158,26 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
     public static class Card extends StripeObject {
       @SerializedName("commodity_code")
       String commodityCode;
+
+      @SerializedName("fleet_data")
+      FleetData fleetData;
+
+      /**
+       * For more details about FleetData, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FleetData extends StripeObject {
+        /** The type of product being purchased at this line item. */
+        @SerializedName("product_type")
+        String productType;
+
+        /** The type of service received at the acceptor location. */
+        @SerializedName("service_type")
+        String serviceType;
+      }
     }
 
     /**
