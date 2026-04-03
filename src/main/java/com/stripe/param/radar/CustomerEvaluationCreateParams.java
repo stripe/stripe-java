@@ -335,7 +335,7 @@ public class CustomerEvaluationCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class CustomerDetails {
-      /** Stripe customer ID. */
+      /** The ID of an existing Customer. */
       @SerializedName("customer")
       String customer;
 
@@ -376,7 +376,7 @@ public class CustomerEvaluationCreateParams extends ApiRequestParams {
               this.customer, this.customerData, this.extraParams);
         }
 
-        /** Stripe customer ID. */
+        /** The ID of an existing Customer. */
         public Builder setCustomer(String customer) {
           this.customer = customer;
           return this;

@@ -29,11 +29,15 @@ public class CustomerEvaluation extends ApiResource implements HasId {
   @SerializedName("created_at")
   Long createdAt;
 
-  /** The ID of the Stripe customer the customer evaluation is associated with. */
+  /** The ID of the Customer to associate with this CustomerEvaluation. */
   @SerializedName("customer")
   String customer;
 
-  /** The type of evaluation event. */
+  /**
+   * The type of evaluation event.
+   *
+   * <p>One of {@code login}, or {@code registration}.
+   */
   @SerializedName("event_type")
   String eventType;
 
@@ -61,7 +65,7 @@ public class CustomerEvaluation extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** A hash of signal objects providing Radar's evaluation for the lifecycle event. */
+  /** A hash of signal objects providing Radar's evaluation of the customer. */
   @SerializedName("signals")
   Signals signals;
 
@@ -203,11 +207,16 @@ public class CustomerEvaluation extends ApiResource implements HasId {
       @SerializedName("evaluated_at")
       Long evaluatedAt;
 
-      /** The risk level for this signal. */
+      /**
+       * The risk level for this signal.
+       *
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+       * not_assessed}, or {@code unknown}.
+       */
       @SerializedName("risk_level")
       String riskLevel;
 
-      /** Score for this signal (float between 0.0-100.0). */
+      /** Score for this signal (between 0.0 and 100.0). */
       @SerializedName("score")
       BigDecimal score;
     }
@@ -224,11 +233,16 @@ public class CustomerEvaluation extends ApiResource implements HasId {
       @SerializedName("evaluated_at")
       Long evaluatedAt;
 
-      /** The risk level for this signal. */
+      /**
+       * The risk level for this signal.
+       *
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+       * not_assessed}, or {@code unknown}.
+       */
       @SerializedName("risk_level")
       String riskLevel;
 
-      /** Score for this signal (float between 0.0-100.0). */
+      /** Score for this signal (between 0.0 and 100.0). */
       @SerializedName("score")
       BigDecimal score;
     }
