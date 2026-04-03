@@ -262,6 +262,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
+  /** ID of the shared payment granted token used in the creation of this PaymentMethod. */
+  @SerializedName("shared_payment_granted_token")
+  String sharedPaymentGrantedToken;
+
   @SerializedName("shopeepay")
   Shopeepay shopeepay;
 
