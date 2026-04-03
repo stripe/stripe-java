@@ -152,6 +152,13 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class ClientDeviceMetadataDetails extends StripeObject {
     /**
+     * Direct client device attributes such as IP address and user agent. Use this as an alternative
+     * to radar_session when a Radar Session isn't available.
+     */
+    @SerializedName("data")
+    Data data;
+
+    /**
      * ID for the Radar Session associated with the payment evaluation. A <a
      * href="https://docs.stripe.com/radar/radar-session">Radar Session</a> is a snapshot of the
      * browser metadata and device details that help Radar make more accurate predictions on your
@@ -159,6 +166,35 @@ public class PaymentEvaluation extends ApiResource implements HasId {
      */
     @SerializedName("radar_session")
     String radarSession;
+
+    /**
+     * Direct client device attributes such as IP address and user agent. Use this as an alternative
+     * to radar_session when a Radar Session isn't available.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Data extends StripeObject {
+      /** The IP address of the client device. */
+      @SerializedName("ip")
+      String ip;
+
+      /** Pasted fields from the checkout flow. */
+      @SerializedName("pasted_fields")
+      List<String> pastedFields;
+
+      /** The referrer of the client device. */
+      @SerializedName("referrer")
+      String referrer;
+
+      /** The time on page in milliseconds. */
+      @SerializedName("time_on_page_ms")
+      Long timeOnPageMs;
+
+      /** The user agent of the client device. */
+      @SerializedName("user_agent")
+      String userAgent;
+    }
   }
 
   /** Customer details attached to this payment evaluation. */
