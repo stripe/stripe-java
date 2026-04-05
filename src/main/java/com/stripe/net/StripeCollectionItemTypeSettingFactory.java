@@ -8,6 +8,8 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.stripe.model.*;
 import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 class StripeCollectionItemTypeSettingFactory implements TypeAdapterFactory {
   @Override
@@ -27,6 +29,13 @@ class StripeCollectionItemTypeSettingFactory implements TypeAdapterFactory {
           ((StripeCollectionInterface<?>) obj).setPageTypeToken(type.getType());
         } else if (obj instanceof com.stripe.model.v2.StripeCollection<?>) {
           ((com.stripe.model.v2.StripeCollection<?>) obj).setPageTypeToken(type.getType());
+        } else if (obj instanceof com.stripe.model.v2.Ref<?>) {
+          // Extract T from Ref<T> so that fetch() can deserialize the referenced object directly.
+          Type refType = type.getType();
+          if (refType instanceof ParameterizedType) {
+            Type itemType = ((ParameterizedType) refType).getActualTypeArguments()[0];
+            ((com.stripe.model.v2.Ref<?>) obj).setTargetType(itemType);
+          }
         }
         return obj;
       }

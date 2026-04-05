@@ -1,13 +1,16 @@
 package com.stripe.model.v2;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.StripeClient;
 import com.stripe.exception.StripeException;
+import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
-import com.stripe.net.ApiMode;
-import com.stripe.net.ApiResource.RequestMethod;
-import com.stripe.net.StripeResponse;
+import com.stripe.net.ApiRequest;
+import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
+import com.stripe.net.StripeResponseGetter;
+import java.lang.reflect.Type;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * A typed object reference with wire shape {@code {type: string, id: string, url: string}}. Call
@@ -16,7 +19,7 @@ import lombok.Getter;
  * @param <T> the type of the referenced Stripe object
  */
 @Getter
-public class Ref<T extends StripeObject> {
+public class Ref<T extends StripeObject> implements StripeActiveObject {
   /** The type of the referenced object (e.g. {@code "v2.billing.meter_event"}). */
   @SerializedName("type")
   String type;
@@ -29,24 +32,33 @@ public class Ref<T extends StripeObject> {
   @SerializedName("url")
   String url;
 
-  /** The client used to fetch the referenced object. Set externally after deserialization. */
-  transient StripeClient client;
+  /** The response getter used to fetch the referenced object. Auto-injected during deserialization. */
+  transient StripeResponseGetter responseGetter;
+
+  /** The concrete type of {@code T}, captured at deserialization time to work around type erasure. */
+  @Setter private transient Type targetType;
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    this.responseGetter = responseGetter;
+  }
 
   /**
    * Fetches the full object from the Stripe API by issuing a GET to {@link #getUrl()}.
    *
    * @return the deserialized Stripe object
    * @throws StripeException if the request fails
-   * @throws IllegalStateException if no client has been set on this reference
+   * @throws IllegalStateException if no responseGetter has been set on this reference
    */
-  @SuppressWarnings("unchecked")
   public T fetch() throws StripeException {
-    if (client == null) {
+    if (responseGetter == null) {
       throw new IllegalStateException(
-          "Cannot fetch Ref without a StripeClient. Set the client field before calling fetch().");
+          "Cannot fetch Ref without a StripeResponseGetter. Ensure this object was obtained via"
+              + " deserialization.");
     }
 
-    StripeResponse response = client.rawRequest(RequestMethod.GET, url, null);
-    return (T) client.deserialize(response.body(), ApiMode.getMode(url));
+    return responseGetter.request(
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, url, null, null),
+        targetType);
   }
 }
