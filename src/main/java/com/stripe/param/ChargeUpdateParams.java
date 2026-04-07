@@ -12711,10 +12711,12 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
       /** The type of money services transaction. */
       @SerializedName("transaction_type")
-      TransactionType transactionType;
+      ApiRequestParams.EnumParam transactionType;
 
       private MoneyServices(
-          Object accountFunding, Map<String, Object> extraParams, TransactionType transactionType) {
+          Object accountFunding,
+          Map<String, Object> extraParams,
+          ApiRequestParams.EnumParam transactionType) {
         this.accountFunding = accountFunding;
         this.extraParams = extraParams;
         this.transactionType = transactionType;
@@ -12729,7 +12731,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private TransactionType transactionType;
+        private ApiRequestParams.EnumParam transactionType;
 
         /** Finalize and obtain parameter instance from this builder. */
         public ChargeUpdateParams.PaymentDetails.MoneyServices build() {
@@ -12784,11 +12786,25 @@ public class ChargeUpdateParams extends ApiRequestParams {
           this.transactionType = transactionType;
           return this;
         }
+
+        /** The type of money services transaction. */
+        public Builder setTransactionType(EmptyParam transactionType) {
+          this.transactionType = transactionType;
+          return this;
+        }
       }
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class AccountFunding {
+        /** ID of the Account representing the beneficiary in this account funding transaction. */
+        @SerializedName("beneficiary_account")
+        Object beneficiaryAccount;
+
+        /** Inline identity details for the beneficiary of this account funding transaction. */
+        @SerializedName("beneficiary_details")
+        Object beneficiaryDetails;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -12799,8 +12815,25 @@ public class ChargeUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private AccountFunding(Map<String, Object> extraParams) {
+        /** ID of the Account representing the sender in this account funding transaction. */
+        @SerializedName("sender_account")
+        Object senderAccount;
+
+        /** Inline identity details for the sender of this account funding transaction. */
+        @SerializedName("sender_details")
+        Object senderDetails;
+
+        private AccountFunding(
+            Object beneficiaryAccount,
+            Object beneficiaryDetails,
+            Map<String, Object> extraParams,
+            Object senderAccount,
+            Object senderDetails) {
+          this.beneficiaryAccount = beneficiaryAccount;
+          this.beneficiaryDetails = beneficiaryDetails;
           this.extraParams = extraParams;
+          this.senderAccount = senderAccount;
+          this.senderDetails = senderDetails;
         }
 
         public static Builder builder() {
@@ -12808,12 +12841,50 @@ public class ChargeUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Object beneficiaryAccount;
+
+          private Object beneficiaryDetails;
+
           private Map<String, Object> extraParams;
+
+          private Object senderAccount;
+
+          private Object senderDetails;
 
           /** Finalize and obtain parameter instance from this builder. */
           public ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding build() {
             return new ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding(
-                this.extraParams);
+                this.beneficiaryAccount,
+                this.beneficiaryDetails,
+                this.extraParams,
+                this.senderAccount,
+                this.senderDetails);
+          }
+
+          /** ID of the Account representing the beneficiary in this account funding transaction. */
+          public Builder setBeneficiaryAccount(String beneficiaryAccount) {
+            this.beneficiaryAccount = beneficiaryAccount;
+            return this;
+          }
+
+          /** ID of the Account representing the beneficiary in this account funding transaction. */
+          public Builder setBeneficiaryAccount(EmptyParam beneficiaryAccount) {
+            this.beneficiaryAccount = beneficiaryAccount;
+            return this;
+          }
+
+          /** Inline identity details for the beneficiary of this account funding transaction. */
+          public Builder setBeneficiaryDetails(
+              ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.BeneficiaryDetails
+                  beneficiaryDetails) {
+            this.beneficiaryDetails = beneficiaryDetails;
+            return this;
+          }
+
+          /** Inline identity details for the beneficiary of this account funding transaction. */
+          public Builder setBeneficiaryDetails(EmptyParam beneficiaryDetails) {
+            this.beneficiaryDetails = beneficiaryDetails;
+            return this;
           }
 
           /**
@@ -12844,6 +12915,986 @@ public class ChargeUpdateParams extends ApiRequestParams {
             }
             this.extraParams.putAll(map);
             return this;
+          }
+
+          /** ID of the Account representing the sender in this account funding transaction. */
+          public Builder setSenderAccount(String senderAccount) {
+            this.senderAccount = senderAccount;
+            return this;
+          }
+
+          /** ID of the Account representing the sender in this account funding transaction. */
+          public Builder setSenderAccount(EmptyParam senderAccount) {
+            this.senderAccount = senderAccount;
+            return this;
+          }
+
+          /** Inline identity details for the sender of this account funding transaction. */
+          public Builder setSenderDetails(
+              ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.SenderDetails
+                  senderDetails) {
+            this.senderDetails = senderDetails;
+            return this;
+          }
+
+          /** Inline identity details for the sender of this account funding transaction. */
+          public Builder setSenderDetails(EmptyParam senderDetails) {
+            this.senderDetails = senderDetails;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BeneficiaryDetails {
+          /** Address. */
+          @SerializedName("address")
+          Address address;
+
+          /** Date of birth. */
+          @SerializedName("date_of_birth")
+          DateOfBirth dateOfBirth;
+
+          /** Email address. */
+          @SerializedName("email")
+          Object email;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Full name. */
+          @SerializedName("name")
+          Object name;
+
+          /** Phone number. */
+          @SerializedName("phone")
+          Object phone;
+
+          private BeneficiaryDetails(
+              Address address,
+              DateOfBirth dateOfBirth,
+              Object email,
+              Map<String, Object> extraParams,
+              Object name,
+              Object phone) {
+            this.address = address;
+            this.dateOfBirth = dateOfBirth;
+            this.email = email;
+            this.extraParams = extraParams;
+            this.name = name;
+            this.phone = phone;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Address address;
+
+            private DateOfBirth dateOfBirth;
+
+            private Object email;
+
+            private Map<String, Object> extraParams;
+
+            private Object name;
+
+            private Object phone;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.BeneficiaryDetails
+                build() {
+              return new ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding
+                  .BeneficiaryDetails(
+                  this.address,
+                  this.dateOfBirth,
+                  this.email,
+                  this.extraParams,
+                  this.name,
+                  this.phone);
+            }
+
+            /** Address. */
+            public Builder setAddress(
+                ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.BeneficiaryDetails
+                        .Address
+                    address) {
+              this.address = address;
+              return this;
+            }
+
+            /** Date of birth. */
+            public Builder setDateOfBirth(
+                ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.BeneficiaryDetails
+                        .DateOfBirth
+                    dateOfBirth) {
+              this.dateOfBirth = dateOfBirth;
+              return this;
+            }
+
+            /** Email address. */
+            public Builder setEmail(String email) {
+              this.email = email;
+              return this;
+            }
+
+            /** Email address. */
+            public Builder setEmail(EmptyParam email) {
+              this.email = email;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.BeneficiaryDetails#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.BeneficiaryDetails#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Full name. */
+            public Builder setName(String name) {
+              this.name = name;
+              return this;
+            }
+
+            /** Full name. */
+            public Builder setName(EmptyParam name) {
+              this.name = name;
+              return this;
+            }
+
+            /** Phone number. */
+            public Builder setPhone(String phone) {
+              this.phone = phone;
+              return this;
+            }
+
+            /** Phone number. */
+            public Builder setPhone(EmptyParam phone) {
+              this.phone = phone;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Address {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            Object city;
+
+            /**
+             * Two-letter country code (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+             */
+            @SerializedName("country")
+            Object country;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Address line 1, such as the street, PO Box, or company name. */
+            @SerializedName("line1")
+            Object line1;
+
+            /** Address line 2, such as the apartment, suite, unit, or building. */
+            @SerializedName("line2")
+            Object line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            Object postalCode;
+
+            /**
+             * State, county, province, or region (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+             */
+            @SerializedName("state")
+            Object state;
+
+            private Address(
+                Object city,
+                Object country,
+                Map<String, Object> extraParams,
+                Object line1,
+                Object line2,
+                Object postalCode,
+                Object state) {
+              this.city = city;
+              this.country = country;
+              this.extraParams = extraParams;
+              this.line1 = line1;
+              this.line2 = line2;
+              this.postalCode = postalCode;
+              this.state = state;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Object city;
+
+              private Object country;
+
+              private Map<String, Object> extraParams;
+
+              private Object line1;
+
+              private Object line2;
+
+              private Object postalCode;
+
+              private Object state;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding
+                      .BeneficiaryDetails.Address
+                  build() {
+                return new ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding
+                    .BeneficiaryDetails.Address(
+                    this.city,
+                    this.country,
+                    this.extraParams,
+                    this.line1,
+                    this.line2,
+                    this.postalCode,
+                    this.state);
+              }
+
+              /** City, district, suburb, town, or village. */
+              public Builder setCity(String city) {
+                this.city = city;
+                return this;
+              }
+
+              /** City, district, suburb, town, or village. */
+              public Builder setCity(EmptyParam city) {
+                this.city = city;
+                return this;
+              }
+
+              /**
+               * Two-letter country code (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+               */
+              public Builder setCountry(String country) {
+                this.country = country;
+                return this;
+              }
+
+              /**
+               * Two-letter country code (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+               */
+              public Builder setCountry(EmptyParam country) {
+                this.country = country;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.BeneficiaryDetails.Address#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.BeneficiaryDetails.Address#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Address line 1, such as the street, PO Box, or company name. */
+              public Builder setLine1(String line1) {
+                this.line1 = line1;
+                return this;
+              }
+
+              /** Address line 1, such as the street, PO Box, or company name. */
+              public Builder setLine1(EmptyParam line1) {
+                this.line1 = line1;
+                return this;
+              }
+
+              /** Address line 2, such as the apartment, suite, unit, or building. */
+              public Builder setLine2(String line2) {
+                this.line2 = line2;
+                return this;
+              }
+
+              /** Address line 2, such as the apartment, suite, unit, or building. */
+              public Builder setLine2(EmptyParam line2) {
+                this.line2 = line2;
+                return this;
+              }
+
+              /** ZIP or postal code. */
+              public Builder setPostalCode(String postalCode) {
+                this.postalCode = postalCode;
+                return this;
+              }
+
+              /** ZIP or postal code. */
+              public Builder setPostalCode(EmptyParam postalCode) {
+                this.postalCode = postalCode;
+                return this;
+              }
+
+              /**
+               * State, county, province, or region (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+               */
+              public Builder setState(String state) {
+                this.state = state;
+                return this;
+              }
+
+              /**
+               * State, county, province, or region (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+               */
+              public Builder setState(EmptyParam state) {
+                this.state = state;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class DateOfBirth {
+            /** <strong>Required.</strong> Day of birth, between 1 and 31. */
+            @SerializedName("day")
+            Long day;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> Month of birth, between 1 and 12. */
+            @SerializedName("month")
+            Long month;
+
+            /** <strong>Required.</strong> Four-digit year of birth. */
+            @SerializedName("year")
+            Long year;
+
+            private DateOfBirth(Long day, Map<String, Object> extraParams, Long month, Long year) {
+              this.day = day;
+              this.extraParams = extraParams;
+              this.month = month;
+              this.year = year;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Long day;
+
+              private Map<String, Object> extraParams;
+
+              private Long month;
+
+              private Long year;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding
+                      .BeneficiaryDetails.DateOfBirth
+                  build() {
+                return new ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding
+                    .BeneficiaryDetails.DateOfBirth(
+                    this.day, this.extraParams, this.month, this.year);
+              }
+
+              /** <strong>Required.</strong> Day of birth, between 1 and 31. */
+              public Builder setDay(Long day) {
+                this.day = day;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.BeneficiaryDetails.DateOfBirth#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.BeneficiaryDetails.DateOfBirth#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> Month of birth, between 1 and 12. */
+              public Builder setMonth(Long month) {
+                this.month = month;
+                return this;
+              }
+
+              /** <strong>Required.</strong> Four-digit year of birth. */
+              public Builder setYear(Long year) {
+                this.year = year;
+                return this;
+              }
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SenderDetails {
+          /** Address. */
+          @SerializedName("address")
+          Address address;
+
+          /** Date of birth. */
+          @SerializedName("date_of_birth")
+          DateOfBirth dateOfBirth;
+
+          /** Email address. */
+          @SerializedName("email")
+          Object email;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Full name. */
+          @SerializedName("name")
+          Object name;
+
+          /** Phone number. */
+          @SerializedName("phone")
+          Object phone;
+
+          private SenderDetails(
+              Address address,
+              DateOfBirth dateOfBirth,
+              Object email,
+              Map<String, Object> extraParams,
+              Object name,
+              Object phone) {
+            this.address = address;
+            this.dateOfBirth = dateOfBirth;
+            this.email = email;
+            this.extraParams = extraParams;
+            this.name = name;
+            this.phone = phone;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Address address;
+
+            private DateOfBirth dateOfBirth;
+
+            private Object email;
+
+            private Map<String, Object> extraParams;
+
+            private Object name;
+
+            private Object phone;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.SenderDetails
+                build() {
+              return new ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding
+                  .SenderDetails(
+                  this.address,
+                  this.dateOfBirth,
+                  this.email,
+                  this.extraParams,
+                  this.name,
+                  this.phone);
+            }
+
+            /** Address. */
+            public Builder setAddress(
+                ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.SenderDetails.Address
+                    address) {
+              this.address = address;
+              return this;
+            }
+
+            /** Date of birth. */
+            public Builder setDateOfBirth(
+                ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.SenderDetails
+                        .DateOfBirth
+                    dateOfBirth) {
+              this.dateOfBirth = dateOfBirth;
+              return this;
+            }
+
+            /** Email address. */
+            public Builder setEmail(String email) {
+              this.email = email;
+              return this;
+            }
+
+            /** Email address. */
+            public Builder setEmail(EmptyParam email) {
+              this.email = email;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.SenderDetails#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.SenderDetails#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Full name. */
+            public Builder setName(String name) {
+              this.name = name;
+              return this;
+            }
+
+            /** Full name. */
+            public Builder setName(EmptyParam name) {
+              this.name = name;
+              return this;
+            }
+
+            /** Phone number. */
+            public Builder setPhone(String phone) {
+              this.phone = phone;
+              return this;
+            }
+
+            /** Phone number. */
+            public Builder setPhone(EmptyParam phone) {
+              this.phone = phone;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Address {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            Object city;
+
+            /**
+             * Two-letter country code (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+             */
+            @SerializedName("country")
+            Object country;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Address line 1, such as the street, PO Box, or company name. */
+            @SerializedName("line1")
+            Object line1;
+
+            /** Address line 2, such as the apartment, suite, unit, or building. */
+            @SerializedName("line2")
+            Object line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            Object postalCode;
+
+            /**
+             * State, county, province, or region (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+             */
+            @SerializedName("state")
+            Object state;
+
+            private Address(
+                Object city,
+                Object country,
+                Map<String, Object> extraParams,
+                Object line1,
+                Object line2,
+                Object postalCode,
+                Object state) {
+              this.city = city;
+              this.country = country;
+              this.extraParams = extraParams;
+              this.line1 = line1;
+              this.line2 = line2;
+              this.postalCode = postalCode;
+              this.state = state;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Object city;
+
+              private Object country;
+
+              private Map<String, Object> extraParams;
+
+              private Object line1;
+
+              private Object line2;
+
+              private Object postalCode;
+
+              private Object state;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.SenderDetails
+                      .Address
+                  build() {
+                return new ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding
+                    .SenderDetails.Address(
+                    this.city,
+                    this.country,
+                    this.extraParams,
+                    this.line1,
+                    this.line2,
+                    this.postalCode,
+                    this.state);
+              }
+
+              /** City, district, suburb, town, or village. */
+              public Builder setCity(String city) {
+                this.city = city;
+                return this;
+              }
+
+              /** City, district, suburb, town, or village. */
+              public Builder setCity(EmptyParam city) {
+                this.city = city;
+                return this;
+              }
+
+              /**
+               * Two-letter country code (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+               */
+              public Builder setCountry(String country) {
+                this.country = country;
+                return this;
+              }
+
+              /**
+               * Two-letter country code (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+               */
+              public Builder setCountry(EmptyParam country) {
+                this.country = country;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.SenderDetails.Address#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.SenderDetails.Address#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Address line 1, such as the street, PO Box, or company name. */
+              public Builder setLine1(String line1) {
+                this.line1 = line1;
+                return this;
+              }
+
+              /** Address line 1, such as the street, PO Box, or company name. */
+              public Builder setLine1(EmptyParam line1) {
+                this.line1 = line1;
+                return this;
+              }
+
+              /** Address line 2, such as the apartment, suite, unit, or building. */
+              public Builder setLine2(String line2) {
+                this.line2 = line2;
+                return this;
+              }
+
+              /** Address line 2, such as the apartment, suite, unit, or building. */
+              public Builder setLine2(EmptyParam line2) {
+                this.line2 = line2;
+                return this;
+              }
+
+              /** ZIP or postal code. */
+              public Builder setPostalCode(String postalCode) {
+                this.postalCode = postalCode;
+                return this;
+              }
+
+              /** ZIP or postal code. */
+              public Builder setPostalCode(EmptyParam postalCode) {
+                this.postalCode = postalCode;
+                return this;
+              }
+
+              /**
+               * State, county, province, or region (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+               */
+              public Builder setState(String state) {
+                this.state = state;
+                return this;
+              }
+
+              /**
+               * State, county, province, or region (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+               */
+              public Builder setState(EmptyParam state) {
+                this.state = state;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class DateOfBirth {
+            /** <strong>Required.</strong> Day of birth, between 1 and 31. */
+            @SerializedName("day")
+            Long day;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> Month of birth, between 1 and 12. */
+            @SerializedName("month")
+            Long month;
+
+            /** <strong>Required.</strong> Four-digit year of birth. */
+            @SerializedName("year")
+            Long year;
+
+            private DateOfBirth(Long day, Map<String, Object> extraParams, Long month, Long year) {
+              this.day = day;
+              this.extraParams = extraParams;
+              this.month = month;
+              this.year = year;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Long day;
+
+              private Map<String, Object> extraParams;
+
+              private Long month;
+
+              private Long year;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.SenderDetails
+                      .DateOfBirth
+                  build() {
+                return new ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding
+                    .SenderDetails.DateOfBirth(this.day, this.extraParams, this.month, this.year);
+              }
+
+              /** <strong>Required.</strong> Day of birth, between 1 and 31. */
+              public Builder setDay(Long day) {
+                this.day = day;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.SenderDetails.DateOfBirth#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ChargeUpdateParams.PaymentDetails.MoneyServices.AccountFunding.SenderDetails.DateOfBirth#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> Month of birth, between 1 and 12. */
+              public Builder setMonth(Long month) {
+                this.month = month;
+                return this;
+              }
+
+              /** <strong>Required.</strong> Four-digit year of birth. */
+              public Builder setYear(Long year) {
+                this.year = year;
+                return this;
+              }
+            }
           }
         }
       }

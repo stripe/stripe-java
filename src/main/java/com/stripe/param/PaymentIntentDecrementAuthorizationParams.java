@@ -600,6 +600,13 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
       @SerializedName("quantity")
       Long quantity;
 
+      /**
+       * The number of decimal places implied in the quantity. For example, if quantity is 10000 and
+       * quantity_precision is 2, the actual quantity is 100.00. Defaults to 0 if not provided.
+       */
+      @SerializedName("quantity_precision")
+      Long quantityPrecision;
+
       /** Contains information about the tax on the item. */
       @SerializedName("tax")
       Tax tax;
@@ -623,6 +630,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
           String productCode,
           String productName,
           Long quantity,
+          Long quantityPrecision,
           Tax tax,
           Long unitCost,
           String unitOfMeasure) {
@@ -632,6 +640,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
         this.productCode = productCode;
         this.productName = productName;
         this.quantity = quantity;
+        this.quantityPrecision = quantityPrecision;
         this.tax = tax;
         this.unitCost = unitCost;
         this.unitOfMeasure = unitOfMeasure;
@@ -654,6 +663,8 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
 
         private Long quantity;
 
+        private Long quantityPrecision;
+
         private Tax tax;
 
         private Long unitCost;
@@ -669,6 +680,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
               this.productCode,
               this.productName,
               this.quantity,
+              this.quantityPrecision,
               this.tax,
               this.unitCost,
               this.unitOfMeasure);
@@ -752,6 +764,16 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
          */
         public Builder setQuantity(Long quantity) {
           this.quantity = quantity;
+          return this;
+        }
+
+        /**
+         * The number of decimal places implied in the quantity. For example, if quantity is 10000
+         * and quantity_precision is 2, the actual quantity is 100.00. Defaults to 0 if not
+         * provided.
+         */
+        public Builder setQuantityPrecision(Long quantityPrecision) {
+          this.quantityPrecision = quantityPrecision;
           return this;
         }
 

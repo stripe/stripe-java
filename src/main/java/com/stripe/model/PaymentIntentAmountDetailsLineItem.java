@@ -66,6 +66,13 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
   @SerializedName("quantity")
   Long quantity;
 
+  /**
+   * The number of decimal places implied in the quantity. For example, if quantity is 10000 and
+   * quantity_precision is 2, the actual quantity is 100.00. Defaults to 0 if not provided.
+   */
+  @SerializedName("quantity_precision")
+  Long quantityPrecision;
+
   /** Contains information about the tax on the item. */
   @SerializedName("tax")
   Tax tax;
