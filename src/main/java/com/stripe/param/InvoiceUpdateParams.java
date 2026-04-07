@@ -2191,6 +2191,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Object bancontact;
 
       /**
+       * If paying by {@code bizum}, this sub-hash contains details about the Bizum payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("bizum")
+      Object bizum;
+
+      /**
        * If paying by {@code card}, this sub-hash contains details about the Card payment method
        * options to pass to the invoice’s PaymentIntent.
        */
@@ -2272,6 +2279,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       private PaymentMethodOptions(
           Object acssDebit,
           Object bancontact,
+          Object bizum,
           Object card,
           Object checkScan,
           Object customerBalance,
@@ -2285,6 +2293,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           Object usBankAccount) {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
+        this.bizum = bizum;
         this.card = card;
         this.checkScan = checkScan;
         this.customerBalance = customerBalance;
@@ -2306,6 +2315,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         private Object acssDebit;
 
         private Object bancontact;
+
+        private Object bizum;
 
         private Object card;
 
@@ -2334,6 +2345,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions(
               this.acssDebit,
               this.bancontact,
+              this.bizum,
               this.card,
               this.checkScan,
               this.customerBalance,
@@ -2382,6 +2394,25 @@ public class InvoiceUpdateParams extends ApiRequestParams {
          */
         public Builder setBancontact(EmptyParam bancontact) {
           this.bancontact = bancontact;
+          return this;
+        }
+
+        /**
+         * If paying by {@code bizum}, this sub-hash contains details about the Bizum payment method
+         * options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setBizum(
+            InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Bizum bizum) {
+          this.bizum = bizum;
+          return this;
+        }
+
+        /**
+         * If paying by {@code bizum}, this sub-hash contains details about the Bizum payment method
+         * options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setBizum(EmptyParam bizum) {
+          this.bizum = bizum;
           return this;
         }
 
@@ -2910,6 +2941,68 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
           PreferredLanguage(String value) {
             this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Bizum {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Bizum(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Bizum build() {
+            return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Bizum(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Bizum#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Bizum#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
           }
         }
       }
@@ -5187,6 +5280,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       @SerializedName("bancontact")
       BANCONTACT("bancontact"),
+
+      @SerializedName("bizum")
+      BIZUM("bizum"),
 
       @SerializedName("boleto")
       BOLETO("boleto"),

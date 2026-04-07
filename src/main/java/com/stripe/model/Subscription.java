@@ -1981,6 +1981,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       Bancontact bancontact;
 
       /**
+       * This sub-hash contains details about the Bizum payment method options to pass to invoices
+       * created by the subscription.
+       */
+      @SerializedName("bizum")
+      Bizum bizum;
+
+      /**
        * This sub-hash contains details about the Card payment method options to pass to invoices
        * created by the subscription.
        */
@@ -2103,6 +2110,39 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
          */
         @SerializedName("preferred_language")
         String preferredLanguage;
+      }
+
+      /**
+       * For more details about Bizum, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Bizum extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /** Amount to be charged for future payments. Required when {@code amount_type=fixed}. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * Indicates the mandate amount type.
+           *
+           * <p>Equal to {@code fixed}.
+           */
+          @SerializedName("amount_type")
+          String amountType;
+        }
       }
 
       /**
