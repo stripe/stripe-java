@@ -197,6 +197,13 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class ClientDeviceMetadataDetails {
     /**
+     * Direct client device attributes such as IP address and user agent. Use this as an alternative
+     * to radar_session when a Radar Session isn't available.
+     */
+    @SerializedName("data")
+    Data data;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -214,7 +221,9 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
     @SerializedName("radar_session")
     String radarSession;
 
-    private ClientDeviceMetadataDetails(Map<String, Object> extraParams, String radarSession) {
+    private ClientDeviceMetadataDetails(
+        Data data, Map<String, Object> extraParams, String radarSession) {
+      this.data = data;
       this.extraParams = extraParams;
       this.radarSession = radarSession;
     }
@@ -224,6 +233,8 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Data data;
+
       private Map<String, Object> extraParams;
 
       private String radarSession;
@@ -231,7 +242,16 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentEvaluationCreateParams.ClientDeviceMetadataDetails build() {
         return new PaymentEvaluationCreateParams.ClientDeviceMetadataDetails(
-            this.extraParams, this.radarSession);
+            this.data, this.extraParams, this.radarSession);
+      }
+
+      /**
+       * Direct client device attributes such as IP address and user agent. Use this as an
+       * alternative to radar_session when a Radar Session isn't available.
+       */
+      public Builder setData(PaymentEvaluationCreateParams.ClientDeviceMetadataDetails.Data data) {
+        this.data = data;
+        return this;
       }
 
       /**
@@ -271,6 +291,191 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
       public Builder setRadarSession(String radarSession) {
         this.radarSession = radarSession;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Data {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The IP address of the client device. */
+      @SerializedName("ip")
+      String ip;
+
+      /** Pasted fields from the checkout flow. */
+      @SerializedName("pasted_fields")
+      List<PaymentEvaluationCreateParams.ClientDeviceMetadataDetails.Data.PastedField> pastedFields;
+
+      /** The referrer of the client device. */
+      @SerializedName("referrer")
+      String referrer;
+
+      /** The time on page in milliseconds. */
+      @SerializedName("time_on_page_ms")
+      Long timeOnPageMs;
+
+      /** <strong>Required.</strong> The user agent of the client device. */
+      @SerializedName("user_agent")
+      String userAgent;
+
+      private Data(
+          Map<String, Object> extraParams,
+          String ip,
+          List<PaymentEvaluationCreateParams.ClientDeviceMetadataDetails.Data.PastedField>
+              pastedFields,
+          String referrer,
+          Long timeOnPageMs,
+          String userAgent) {
+        this.extraParams = extraParams;
+        this.ip = ip;
+        this.pastedFields = pastedFields;
+        this.referrer = referrer;
+        this.timeOnPageMs = timeOnPageMs;
+        this.userAgent = userAgent;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String ip;
+
+        private List<PaymentEvaluationCreateParams.ClientDeviceMetadataDetails.Data.PastedField>
+            pastedFields;
+
+        private String referrer;
+
+        private Long timeOnPageMs;
+
+        private String userAgent;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentEvaluationCreateParams.ClientDeviceMetadataDetails.Data build() {
+          return new PaymentEvaluationCreateParams.ClientDeviceMetadataDetails.Data(
+              this.extraParams,
+              this.ip,
+              this.pastedFields,
+              this.referrer,
+              this.timeOnPageMs,
+              this.userAgent);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentEvaluationCreateParams.ClientDeviceMetadataDetails.Data#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentEvaluationCreateParams.ClientDeviceMetadataDetails.Data#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> The IP address of the client device. */
+        public Builder setIp(String ip) {
+          this.ip = ip;
+          return this;
+        }
+
+        /**
+         * Add an element to `pastedFields` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * PaymentEvaluationCreateParams.ClientDeviceMetadataDetails.Data#pastedFields} for the
+         * field documentation.
+         */
+        public Builder addPastedField(
+            PaymentEvaluationCreateParams.ClientDeviceMetadataDetails.Data.PastedField element) {
+          if (this.pastedFields == null) {
+            this.pastedFields = new ArrayList<>();
+          }
+          this.pastedFields.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `pastedFields` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * PaymentEvaluationCreateParams.ClientDeviceMetadataDetails.Data#pastedFields} for the
+         * field documentation.
+         */
+        public Builder addAllPastedField(
+            List<PaymentEvaluationCreateParams.ClientDeviceMetadataDetails.Data.PastedField>
+                elements) {
+          if (this.pastedFields == null) {
+            this.pastedFields = new ArrayList<>();
+          }
+          this.pastedFields.addAll(elements);
+          return this;
+        }
+
+        /** The referrer of the client device. */
+        public Builder setReferrer(String referrer) {
+          this.referrer = referrer;
+          return this;
+        }
+
+        /** The time on page in milliseconds. */
+        public Builder setTimeOnPageMs(Long timeOnPageMs) {
+          this.timeOnPageMs = timeOnPageMs;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The user agent of the client device. */
+        public Builder setUserAgent(String userAgent) {
+          this.userAgent = userAgent;
+          return this;
+        }
+      }
+
+      public enum PastedField implements ApiRequestParams.EnumParam {
+        @SerializedName("cvc")
+        CVC("cvc"),
+
+        @SerializedName("exp")
+        EXP("exp"),
+
+        @SerializedName("number")
+        NUMBER("number"),
+
+        @SerializedName("zip")
+        ZIP("zip");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PastedField(String value) {
+          this.value = value;
+        }
       }
     }
   }

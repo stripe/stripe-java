@@ -122,6 +122,9 @@ public abstract class StripeException extends Exception {
       case "blocked_by_stripe":
         return com.stripe.exception.BlockedByStripeException.parse(
             body, statusCode, requestId, responseGetter);
+      case "cannot_proceed":
+        return com.stripe.exception.CannotProceedException.parse(
+            body, statusCode, requestId, responseGetter);
       case "controlled_by_alternate_resource":
         return com.stripe.exception.ControlledByAlternateResourceException.parse(
             body, statusCode, requestId, responseGetter);

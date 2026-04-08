@@ -30965,6 +30965,32 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testCannotProceedErrorServices() throws StripeException {
+    stubRequestReturnError(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/payout_methods/id_123/archive",
+        null,
+        null,
+        "{\"error\":{\"type\":\"cannot_proceed\",\"code\":\"default_payout_method_cannot_be_archived\"}}",
+        400);
+    StripeClient client = new StripeClient(networkSpy);
+
+    try {
+      client.v2().moneyManagement().payoutMethods().archive("id_123");
+    } catch (CannotProceedException e) {
+
+    }
+    ;
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/payout_methods/id_123/archive",
+        null,
+        null);
+  }
+
+  @Test
   public void testControlledByAlternateResourceErrorServices() throws StripeException {
     stubRequestReturnError(
         BaseAddress.API,

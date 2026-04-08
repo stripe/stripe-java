@@ -2592,6 +2592,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       Bancontact bancontact;
 
       /**
+       * If paying by {@code bizum}, this sub-hash contains details about the Bizum payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("bizum")
+      Bizum bizum;
+
+      /**
        * If paying by {@code card}, this sub-hash contains details about the Card payment method
        * options to pass to the invoice’s PaymentIntent.
        */
@@ -2715,6 +2722,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
         @SerializedName("preferred_language")
         String preferredLanguage;
       }
+
+      /**
+       * For more details about Bizum, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Bizum extends StripeObject {}
 
       /**
        * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API

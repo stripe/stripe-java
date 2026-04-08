@@ -66,6 +66,13 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
   @SerializedName("quantity")
   Long quantity;
 
+  /**
+   * The number of decimal places implied in the quantity. For example, if quantity is 10000 and
+   * quantity_precision is 2, the actual quantity is 100.00. Defaults to 0 if not provided.
+   */
+  @SerializedName("quantity_precision")
+  Long quantityPrecision;
+
   /** Contains information about the tax on the item. */
   @SerializedName("tax")
   Tax tax;
@@ -158,6 +165,26 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
     public static class Card extends StripeObject {
       @SerializedName("commodity_code")
       String commodityCode;
+
+      @SerializedName("fleet_data")
+      FleetData fleetData;
+
+      /**
+       * For more details about FleetData, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FleetData extends StripeObject {
+        /** The type of product being purchased at this line item. */
+        @SerializedName("product_type")
+        String productType;
+
+        /** The type of service received at the acceptor location. */
+        @SerializedName("service_type")
+        String serviceType;
+      }
     }
 
     /**

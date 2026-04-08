@@ -338,7 +338,7 @@ public class CustomerEvaluationUpdateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class RegistrationSuccess {
-    /** Stripe customer ID to attach to an entity-less registration evaluation. */
+    /** The ID of a Customer to attach to an entity-less registration evaluation. */
     @SerializedName("customer")
     Object customer;
 
@@ -371,13 +371,13 @@ public class CustomerEvaluationUpdateParams extends ApiRequestParams {
             this.customer, this.extraParams);
       }
 
-      /** Stripe customer ID to attach to an entity-less registration evaluation. */
+      /** The ID of a Customer to attach to an entity-less registration evaluation. */
       public Builder setCustomer(String customer) {
         this.customer = customer;
         return this;
       }
 
-      /** Stripe customer ID to attach to an entity-less registration evaluation. */
+      /** The ID of a Customer to attach to an entity-less registration evaluation. */
       public Builder setCustomer(EmptyParam customer) {
         this.customer = customer;
         return this;

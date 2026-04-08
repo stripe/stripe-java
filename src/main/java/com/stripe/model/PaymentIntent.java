@@ -3293,6 +3293,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("event_details")
     EventDetails eventDetails;
 
+    /** Fleet data for this PaymentIntent. */
+    @SerializedName("fleet_data")
+    List<PaymentIntent.PaymentDetails.FleetDatum> fleetData;
+
     @SerializedName("flight_data")
     List<PaymentIntent.PaymentDetails.FlightDatum> flightData;
 
@@ -4011,6 +4015,82 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           @SerializedName("phone")
           String phone;
         }
+      }
+    }
+
+    /**
+     * For more details about FleetDatum, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FleetDatum extends StripeObject {
+      @SerializedName("primary_fuel_fields")
+      PrimaryFuelFields primaryFuelFields;
+
+      @SerializedName("station")
+      Station station;
+
+      @SerializedName("vat")
+      Vat vat;
+
+      /**
+       * For more details about PrimaryFuelFields, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PrimaryFuelFields extends StripeObject {
+        /** The fuel brand. */
+        @SerializedName("brand")
+        String brand;
+      }
+
+      /**
+       * For more details about Station, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Station extends StripeObject {
+        /** Additional contact information for the station. */
+        @SerializedName("additional_contact_info")
+        String additionalContactInfo;
+
+        /** The customer service phone number of the station. */
+        @SerializedName("customer_service_phone_number")
+        String customerServicePhoneNumber;
+
+        /** The partner ID code of the station. */
+        @SerializedName("partner_id_code")
+        String partnerIdCode;
+
+        /** The phone number of the station. */
+        @SerializedName("phone_number")
+        String phoneNumber;
+
+        @SerializedName("service_location")
+        com.stripe.model.Address serviceLocation;
+
+        /** The URL of the station. */
+        @SerializedName("url")
+        String url;
+      }
+
+      /**
+       * For more details about Vat, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Vat extends StripeObject {
+        /** Indicates the merchant's agreement for Invoice on Behalf (IOB) VAT processing. */
+        @SerializedName("iob_indicator")
+        String iobIndicator;
       }
     }
 

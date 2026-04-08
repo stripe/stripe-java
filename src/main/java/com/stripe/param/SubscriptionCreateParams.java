@@ -6345,6 +6345,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Object bancontact;
 
       /**
+       * This sub-hash contains details about the Bizum payment method options to pass to the
+       * invoice’s PaymentIntent.
+       */
+      @SerializedName("bizum")
+      Object bizum;
+
+      /**
        * This sub-hash contains details about the Card payment method options to pass to the
        * invoice’s PaymentIntent.
        */
@@ -6426,6 +6433,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       private PaymentMethodOptions(
           Object acssDebit,
           Object bancontact,
+          Object bizum,
           Object card,
           Object checkScan,
           Object customerBalance,
@@ -6439,6 +6447,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           Object usBankAccount) {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
+        this.bizum = bizum;
         this.card = card;
         this.checkScan = checkScan;
         this.customerBalance = customerBalance;
@@ -6460,6 +6469,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         private Object acssDebit;
 
         private Object bancontact;
+
+        private Object bizum;
 
         private Object card;
 
@@ -6488,6 +6499,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions(
               this.acssDebit,
               this.bancontact,
+              this.bizum,
               this.card,
               this.checkScan,
               this.customerBalance,
@@ -6536,6 +6548,25 @@ public class SubscriptionCreateParams extends ApiRequestParams {
          */
         public Builder setBancontact(EmptyParam bancontact) {
           this.bancontact = bancontact;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Bizum payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setBizum(
+            SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bizum bizum) {
+          this.bizum = bizum;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Bizum payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setBizum(EmptyParam bizum) {
+          this.bizum = bizum;
           return this;
         }
 
@@ -7073,6 +7104,195 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
           PreferredLanguage(String value) {
             this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Bizum {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Configuration options for setting up a mandate. */
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        private Bizum(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+          this.extraParams = extraParams;
+          this.mandateOptions = mandateOptions;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private MandateOptions mandateOptions;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bizum build() {
+            return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bizum(
+                this.extraParams, this.mandateOptions);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bizum#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bizum#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Configuration options for setting up a mandate. */
+          public Builder setMandateOptions(
+              SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bizum.MandateOptions
+                  mandateOptions) {
+            this.mandateOptions = mandateOptions;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions {
+          /**
+           * <strong>Required.</strong> Amount to be charged for future payments. Required when
+           * {@code amount_type=fixed}.
+           */
+          @SerializedName("amount")
+          Long amount;
+
+          /** <strong>Required.</strong> Indicates the mandate amount type. */
+          @SerializedName("amount_type")
+          AmountType amountType;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private MandateOptions(
+              Long amount, AmountType amountType, Map<String, Object> extraParams) {
+            this.amount = amount;
+            this.amountType = amountType;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long amount;
+
+            private AmountType amountType;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bizum
+                    .MandateOptions
+                build() {
+              return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bizum
+                  .MandateOptions(this.amount, this.amountType, this.extraParams);
+            }
+
+            /**
+             * <strong>Required.</strong> Amount to be charged for future payments. Required when
+             * {@code amount_type=fixed}.
+             */
+            public Builder setAmount(Long amount) {
+              this.amount = amount;
+              return this;
+            }
+
+            /** <strong>Required.</strong> Indicates the mandate amount type. */
+            public Builder setAmountType(
+                SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bizum.MandateOptions
+                        .AmountType
+                    amountType) {
+              this.amountType = amountType;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bizum.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bizum.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+
+          public enum AmountType implements ApiRequestParams.EnumParam {
+            @SerializedName("fixed")
+            FIXED("fixed");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            AmountType(String value) {
+              this.value = value;
+            }
           }
         }
       }
@@ -9379,6 +9599,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       @SerializedName("bancontact")
       BANCONTACT("bancontact"),
+
+      @SerializedName("bizum")
+      BIZUM("bizum"),
 
       @SerializedName("boleto")
       BOLETO("boleto"),

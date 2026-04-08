@@ -328,6 +328,10 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     @SerializedName("charge")
     String charge;
 
+    /** PaymentRecord ID that created this application fee. */
+    @SerializedName("payment_record")
+    String paymentRecord;
+
     /** Payout ID that created this application fee. */
     @SerializedName("payout")
     String payout;
