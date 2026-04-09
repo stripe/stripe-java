@@ -146,9 +146,20 @@ public class BalanceSettings extends ApiResource {
     @SerializedName("debit_negative_balances")
     Boolean debitNegativeBalances;
 
+    /** The default settlement currency for the account. */
+    @SerializedName("default_settlement_currency")
+    String defaultSettlementCurrency;
+
     /** Settings specific to the account's payouts. */
     @SerializedName("payouts")
     Payouts payouts;
+
+    /**
+     * A hash of settlement currencies and their states. Each key is an ISO 4217 currency code, and
+     * the value is one of {@code enabled}, {@code disabled}, or {@code restricted_by_application}.
+     */
+    @SerializedName("settlement_currencies")
+    Map<String, String> settlementCurrencies;
 
     @SerializedName("settlement_timing")
     SettlementTiming settlementTiming;
