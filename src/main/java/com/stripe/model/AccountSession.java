@@ -143,6 +143,14 @@ public class AccountSession extends ApiResource {
     @SerializedName("balances")
     Balances balances;
 
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/bills/">Bills</a> embedded
+     * component.
+     */
+    @SerializedName("bills")
+    Bills bills;
+
     @SerializedName("capital_financing")
     CapitalFinancing capitalFinancing;
 
@@ -427,6 +435,31 @@ public class AccountSession extends ApiResource {
         @SerializedName("standard_payouts")
         Boolean standardPayouts;
       }
+    }
+
+    /**
+     * For more details about Bills, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bills extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
     }
 
     /**

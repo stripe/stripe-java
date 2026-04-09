@@ -15,6 +15,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.identity.VerificationReportListParams;
 import com.stripe.param.identity.VerificationReportRetrieveParams;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -378,6 +379,10 @@ public class VerificationReport extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Email extends StripeObject {
+    /** Additional email verification details. */
+    @SerializedName("details")
+    Details details;
+
     /** Email to be verified. */
     @SerializedName("email")
     String email;
@@ -393,6 +398,30 @@ public class VerificationReport extends ApiResource implements HasId {
      */
     @SerializedName("status")
     String status;
+
+    /** Additional email verification details. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Details extends StripeObject {
+      /**
+       * Number of days from the time when the email domain was first observed to the time of
+       * verification.
+       */
+      @SerializedName("days_since_domain_creation")
+      BigDecimal daysSinceDomainCreation;
+
+      /**
+       * Number of days from the time when the email address was first observed to the time of
+       * verification.
+       */
+      @SerializedName("days_since_ownership_started")
+      BigDecimal daysSinceOwnershipStarted;
+
+      /** Two-letter ISO 3166-1 alpha-2 country code of the email domain's country. */
+      @SerializedName("domain_country")
+      String domainCountry;
+    }
 
     /**
      * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API

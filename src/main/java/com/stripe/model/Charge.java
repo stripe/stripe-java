@@ -1866,6 +1866,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
+      @SerializedName("account_funding")
+      AccountFunding accountFunding;
+
       /** The authorized amount. */
       @SerializedName("amount_authorized")
       Long amountAuthorized;
@@ -2045,6 +2048,22 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** If this Card is part of a card wallet, this contains the details of the card wallet. */
       @SerializedName("wallet")
       Wallet wallet;
+
+      /**
+       * For more details about AccountFunding, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AccountFunding extends StripeObject {
+        /**
+         * The transaction type of the card transaction. One of {@code account_funding} or {@code
+         * purchase}.
+         */
+        @SerializedName("processed_transaction_type")
+        String processedTransactionType;
+      }
 
       /**
        * For more details about Benefits, please refer to the <a

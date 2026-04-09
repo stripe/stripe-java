@@ -97,6 +97,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("approval_method")
   String approvalMethod;
 
+  @SerializedName("automatic_surcharge")
+  AutomaticSurcharge automaticSurcharge;
+
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
 
@@ -496,6 +499,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    */
   @SerializedName("success_url")
   String successUrl;
+
+  @SerializedName("surcharge_cost")
+  SurchargeCost surchargeCost;
 
   @SerializedName("tax_id_collection")
   TaxIdCollection taxIdCollection;
@@ -1039,6 +1045,51 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("url")
       String url;
     }
+  }
+
+  /**
+   * For more details about AutomaticSurcharge, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AutomaticSurcharge extends StripeObject {
+    /**
+     * Determines which amount is used as the basis for calculating the surcharge.
+     *
+     * <p>One of {@code total_after_tax}, or {@code total_before_tax}.
+     */
+    @SerializedName("calculation_basis")
+    String calculationBasis;
+
+    /** Indicates whether automatic surcharge is enabled for the session. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * The surcharge provider used for this session.
+     *
+     * <p>One of {@code interpayments}, or {@code yeeld}.
+     */
+    @SerializedName("provider")
+    String provider;
+
+    /**
+     * The status of the most recent surcharge calculation for this session.
+     *
+     * <p>One of {@code complete}, {@code failed}, or {@code requires_input}.
+     */
+    @SerializedName("status")
+    String status;
+
+    /**
+     * Specifies whether the surcharge is considered inclusive or exclusive of taxes.
+     *
+     * <p>One of {@code exclusive}, {@code inclusive}, or {@code unspecified}.
+     */
+    @SerializedName("tax_behavior")
+    String taxBehavior;
   }
 
   /**
@@ -5009,6 +5060,27 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /**
+   * For more details about SurchargeCost, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SurchargeCost extends StripeObject {
+    /** Total surcharge cost before taxes are applied. */
+    @SerializedName("amount_subtotal")
+    Long amountSubtotal;
+
+    /** Total tax amount applied due to surcharging. If no tax was applied, defaults to 0. */
+    @SerializedName("amount_tax")
+    Long amountTax;
+
+    /** Total surcharge cost after taxes are applied. */
+    @SerializedName("amount_total")
+    Long amountTotal;
+  }
+
+  /**
    * For more details about TaxIdCollection, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -5044,6 +5116,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     /** This is the sum of all the shipping amounts. */
     @SerializedName("amount_shipping")
     Long amountShipping;
+
+    /** The surcharge amount that was applied to the Checkout Session. */
+    @SerializedName("amount_surcharge")
+    Long amountSurcharge;
 
     /** This is the sum of all the tax amounts. */
     @SerializedName("amount_tax")
@@ -5172,6 +5248,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(adaptivePricing, responseGetter);
     trySetResponseGetter(afterExpiration, responseGetter);
+    trySetResponseGetter(automaticSurcharge, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(brandingSettings, responseGetter);
     trySetResponseGetter(collectedInformation, responseGetter);
@@ -5199,6 +5276,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(shippingAddressCollection, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
+    trySetResponseGetter(surchargeCost, responseGetter);
     trySetResponseGetter(taxIdCollection, responseGetter);
     trySetResponseGetter(totalDetails, responseGetter);
     trySetResponseGetter(walletOptions, responseGetter);

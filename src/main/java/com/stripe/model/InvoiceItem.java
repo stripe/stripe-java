@@ -625,6 +625,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       /** The subscription schedule that generated this invoice item. */
       @SerializedName("schedule")
       String schedule;
+
+      /** The subscription associated with this schedule. */
+      @SerializedName("subscription")
+      String subscription;
     }
 
     /**
