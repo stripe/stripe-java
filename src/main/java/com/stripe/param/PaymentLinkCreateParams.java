@@ -1116,7 +1116,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class AutomaticSurcharge {
-    /** Determines which amount is used as the basis for calculating the surcharge. */
+    /** Determines which amount serves as the basis for calculating the surcharge. */
     @SerializedName("calculation_basis")
     CalculationBasis calculationBasis;
 
@@ -1170,7 +1170,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
             this.calculationBasis, this.enabled, this.extraParams, this.taxBehavior);
       }
 
-      /** Determines which amount is used as the basis for calculating the surcharge. */
+      /** Determines which amount serves as the basis for calculating the surcharge. */
       public Builder setCalculationBasis(
           PaymentLinkCreateParams.AutomaticSurcharge.CalculationBasis calculationBasis) {
         this.calculationBasis = calculationBasis;

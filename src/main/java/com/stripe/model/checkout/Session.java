@@ -1056,7 +1056,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @EqualsAndHashCode(callSuper = false)
   public static class AutomaticSurcharge extends StripeObject {
     /**
-     * Determines which amount is used as the basis for calculating the surcharge.
+     * Determines which amount serves as the basis for calculating the surcharge.
      *
      * <p>One of {@code total_after_tax}, or {@code total_before_tax}.
      */
