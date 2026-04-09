@@ -99,7 +99,7 @@ public class VerificationReport extends ApiResource implements HasId {
   /**
    * Type of report.
    *
-   * <p>One of {@code document}, {@code id_number}, or {@code verification_flow}.
+   * <p>One of {@code document}, {@code email}, {@code id_number}, or {@code verification_flow}.
    */
   @SerializedName("type")
   String type;

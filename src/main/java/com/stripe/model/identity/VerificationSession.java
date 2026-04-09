@@ -154,7 +154,7 @@ public class VerificationSession extends ApiResource
    * The type of <a href="https://docs.stripe.com/identity/verification-checks">verification
    * check</a> to be performed.
    *
-   * <p>One of {@code document}, {@code id_number}, or {@code verification_flow}.
+   * <p>One of {@code document}, {@code email}, {@code id_number}, or {@code verification_flow}.
    */
   @SerializedName("type")
   String type;

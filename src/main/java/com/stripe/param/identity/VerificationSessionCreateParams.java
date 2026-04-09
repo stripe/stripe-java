@@ -760,6 +760,9 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     @SerializedName("document")
     DOCUMENT("document"),
 
+    @SerializedName("email")
+    EMAIL("email"),
+
     @SerializedName("id_number")
     ID_NUMBER("id_number");
 
