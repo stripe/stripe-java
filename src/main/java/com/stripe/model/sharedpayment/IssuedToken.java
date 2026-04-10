@@ -177,23 +177,23 @@ public class IssuedToken extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Insights extends StripeObject {
-      /** Bot risk insight (score: Float, recommended_action). */
+      /** Bot risk insight. */
       @SerializedName("bot")
       Bot bot;
 
-      /** Card issuer decline risk insight (score: Float, recommended_action). */
+      /** Card issuer decline risk insight. */
       @SerializedName("card_issuer_decline")
       CardIssuerDecline cardIssuerDecline;
 
-      /** Card testing risk insight (score: Float, recommended_action). */
+      /** Card testing risk insight. */
       @SerializedName("card_testing")
       CardTesting cardTesting;
 
-      /** Fraudulent dispute risk insight (score: Integer, recommended_action). */
+      /** Fraudulent dispute risk insight. */
       @SerializedName("fraudulent_dispute")
       FraudulentDispute fraudulentDispute;
 
-      /** Stolen card risk insight (score: Integer, recommended_action). */
+      /** Stolen card risk insight. */
       @SerializedName("stolen_card")
       StolenCard stolenCard;
 
@@ -206,7 +206,7 @@ public class IssuedToken extends StripeObject implements HasId {
         @SerializedName("recommended_action")
         String recommendedAction;
 
-        /** Risk score for this insight (float). */
+        /** Risk score for this insight. */
         @SerializedName("score")
         BigDecimal score;
       }
@@ -220,7 +220,7 @@ public class IssuedToken extends StripeObject implements HasId {
         @SerializedName("recommended_action")
         String recommendedAction;
 
-        /** Risk score for this insight (float). */
+        /** Risk score for this insight. */
         @SerializedName("score")
         BigDecimal score;
       }
@@ -234,7 +234,7 @@ public class IssuedToken extends StripeObject implements HasId {
         @SerializedName("recommended_action")
         String recommendedAction;
 
-        /** Risk score for this insight (float). */
+        /** Risk score for this insight. */
         @SerializedName("score")
         BigDecimal score;
       }
@@ -248,7 +248,7 @@ public class IssuedToken extends StripeObject implements HasId {
         @SerializedName("recommended_action")
         String recommendedAction;
 
-        /** Risk score for this insight (integer). */
+        /** Risk score for this insight. */
         @SerializedName("score")
         Long score;
       }
@@ -262,7 +262,7 @@ public class IssuedToken extends StripeObject implements HasId {
         @SerializedName("recommended_action")
         String recommendedAction;
 
-        /** Risk score for this insight (integer). */
+        /** Risk score for this insight. */
         @SerializedName("score")
         Long score;
       }
