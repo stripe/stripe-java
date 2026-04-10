@@ -290,13 +290,6 @@ public class IssuedToken extends StripeObject implements HasId {
      */
     @SerializedName("network_business_profile")
     String networkBusinessProfile;
-
-    /**
-     * The unique and logical string that identifies the seller platform that this SharedToken is
-     * being created for.
-     */
-    @SerializedName("network_id")
-    String networkId;
   }
 
   /** Some details on how the SharedPaymentGrantedToken has been used so far. */
