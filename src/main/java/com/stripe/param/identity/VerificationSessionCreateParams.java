@@ -21,6 +21,10 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   @SerializedName("client_reference_id")
   String clientReferenceId;
 
+  /** Confirm and submit the provided details for verification. */
+  @SerializedName("confirm")
+  Boolean confirm;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -84,6 +88,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
 
   private VerificationSessionCreateParams(
       String clientReferenceId,
+      Boolean confirm,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
@@ -96,6 +101,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       Type type,
       String verificationFlow) {
     this.clientReferenceId = clientReferenceId;
+    this.confirm = confirm;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
@@ -115,6 +121,8 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private String clientReferenceId;
+
+    private Boolean confirm;
 
     private List<String> expand;
 
@@ -142,6 +150,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     public VerificationSessionCreateParams build() {
       return new VerificationSessionCreateParams(
           this.clientReferenceId,
+          this.confirm,
           this.expand,
           this.extraParams,
           this.metadata,
@@ -161,6 +170,12 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
      */
     public Builder setClientReferenceId(String clientReferenceId) {
       this.clientReferenceId = clientReferenceId;
+      return this;
+    }
+
+    /** Confirm and submit the provided details for verification. */
+    public Builder setConfirm(Boolean confirm) {
+      this.confirm = confirm;
       return this;
     }
 
