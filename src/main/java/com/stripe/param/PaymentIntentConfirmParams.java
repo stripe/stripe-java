@@ -186,10 +186,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   @SerializedName("setup_future_usage")
   ApiRequestParams.EnumParam setupFutureUsage;
 
-  /** ID of the SharedPaymentToken used to confirm this PaymentIntent. */
-  @SerializedName("shared_payment_granted_token")
-  String sharedPaymentGrantedToken;
-
   /** Shipping information for this PaymentIntent. */
   @SerializedName("shipping")
   Object shipping;
@@ -225,7 +221,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Object receiptEmail,
       String returnUrl,
       ApiRequestParams.EnumParam setupFutureUsage,
-      String sharedPaymentGrantedToken,
       Object shipping,
       Boolean useStripeSdk) {
     this.allocatedFunds = allocatedFunds;
@@ -251,7 +246,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     this.receiptEmail = receiptEmail;
     this.returnUrl = returnUrl;
     this.setupFutureUsage = setupFutureUsage;
-    this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
     this.shipping = shipping;
     this.useStripeSdk = useStripeSdk;
   }
@@ -307,8 +301,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     private ApiRequestParams.EnumParam setupFutureUsage;
 
-    private String sharedPaymentGrantedToken;
-
     private Object shipping;
 
     private Boolean useStripeSdk;
@@ -339,7 +331,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.receiptEmail,
           this.returnUrl,
           this.setupFutureUsage,
-          this.sharedPaymentGrantedToken,
           this.shipping,
           this.useStripeSdk);
     }
@@ -734,12 +725,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      */
     public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
       this.setupFutureUsage = setupFutureUsage;
-      return this;
-    }
-
-    /** ID of the SharedPaymentToken used to confirm this PaymentIntent. */
-    public Builder setSharedPaymentGrantedToken(String sharedPaymentGrantedToken) {
-      this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
       return this;
     }
 
