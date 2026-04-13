@@ -28644,6 +28644,146 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2CoreWorkflowGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/workflows",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.Workflow>>() {}.getType(),
+        "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.workflow\",\"status\":\"draft\",\"triggers\":[{\"type\":\"event_trigger\"}]}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.WorkflowListParams params =
+        com.stripe.param.v2.core.WorkflowListParams.builder()
+            .addStatus(com.stripe.param.v2.core.WorkflowListParams.Status.DRAFT)
+            .build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.Workflow> stripeCollection =
+        client.v2().core().workflows().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/workflows", params.toMap(), null);
+  }
+
+  @Test
+  public void testV2CoreWorkflowGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/workflows/id_123",
+        null,
+        null,
+        com.stripe.model.v2.core.Workflow.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.workflow\",\"status\":\"draft\",\"triggers\":[{\"type\":\"event_trigger\"}]}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.core.Workflow workflow = client.v2().core().workflows().retrieve("id_123");
+    assertNotNull(workflow);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/workflows/id_123", null, null);
+  }
+
+  @Test
+  public void testV2CoreWorkflowPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/workflows/id_123/invoke",
+        null,
+        null,
+        com.stripe.model.v2.core.WorkflowRun.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.workflow_run\",\"status\":\"failed\",\"status_transitions\":{},\"trigger\":{\"type\":\"event_trigger\"},\"workflow\":\"workflow\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.WorkflowInvokeParams params =
+        com.stripe.param.v2.core.WorkflowInvokeParams.builder()
+            .putInputParameter("int_key", new BigDecimal(123))
+            .putInputParameter("string_key", "value")
+            .putInputParameter("boolean_key", true)
+            .putInputParameter(
+                "object_key",
+                new HashMap<String, Object>() {
+                  {
+                    put("object_int_key", new BigDecimal(123));
+                    put("object_string_key", "value");
+                    put("object_boolean_key", true);
+                  }
+                })
+            .putInputParameter(
+                "array_key",
+                new ArrayList<>(
+                    Arrays.asList(new BigDecimal(1), new BigDecimal(2), new BigDecimal(3))))
+            .build();
+
+    com.stripe.model.v2.core.WorkflowRun workflowRun =
+        client.v2().core().workflows().invoke("id_123", params);
+    assertNotNull(workflowRun);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/workflows/id_123/invoke",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreWorkflowRunGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/workflow_runs",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.core.WorkflowRun>>() {}.getType(),
+        "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.workflow_run\",\"status\":\"failed\",\"status_transitions\":{},\"trigger\":{\"type\":\"event_trigger\"},\"workflow\":\"workflow\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.WorkflowRunListParams params =
+        com.stripe.param.v2.core.WorkflowRunListParams.builder()
+            .addStatus(com.stripe.param.v2.core.WorkflowRunListParams.Status.FAILED)
+            .addWorkflow("workflow")
+            .build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.WorkflowRun> stripeCollection =
+        client.v2().core().workflowRuns().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/workflow_runs",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreWorkflowRunGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/workflow_runs/id_123",
+        null,
+        null,
+        com.stripe.model.v2.core.WorkflowRun.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.workflow_run\",\"status\":\"failed\",\"status_transitions\":{},\"trigger\":{\"type\":\"event_trigger\"},\"workflow\":\"workflow\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.core.WorkflowRun workflowRun =
+        client.v2().core().workflowRuns().retrieve("id_123");
+    assertNotNull(workflowRun);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/workflow_runs/id_123",
+        null,
+        null);
+  }
+
+  @Test
   public void testV2DataReportingQueryRunPostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
