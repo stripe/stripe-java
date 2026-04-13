@@ -8560,6 +8560,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("billie")
     Billie billie;
 
+    /** contains details about the Bizum payment method options. */
+    @SerializedName("bizum")
+    Bizum bizum;
+
     /** contains details about the Boleto payment method options. */
     @SerializedName("boleto")
     Boleto boleto;
@@ -8728,6 +8732,7 @@ public class SessionCreateParams extends ApiRequestParams {
         BacsDebit bacsDebit,
         Bancontact bancontact,
         Billie billie,
+        Bizum bizum,
         Boleto boleto,
         Card card,
         Cashapp cashapp,
@@ -8776,6 +8781,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
       this.billie = billie;
+      this.bizum = bizum;
       this.boleto = boleto;
       this.card = card;
       this.cashapp = cashapp;
@@ -8840,6 +8846,8 @@ public class SessionCreateParams extends ApiRequestParams {
       private Bancontact bancontact;
 
       private Billie billie;
+
+      private Bizum bizum;
 
       private Boleto boleto;
 
@@ -8930,6 +8938,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.bacsDebit,
             this.bancontact,
             this.billie,
+            this.bizum,
             this.boleto,
             this.card,
             this.cashapp,
@@ -9032,6 +9041,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Billie payment method options. */
       public Builder setBillie(SessionCreateParams.PaymentMethodOptions.Billie billie) {
         this.billie = billie;
+        return this;
+      }
+
+      /** contains details about the Bizum payment method options. */
+      public Builder setBizum(SessionCreateParams.PaymentMethodOptions.Bizum bizum) {
+        this.bizum = bizum;
         return this;
       }
 
@@ -11052,6 +11067,141 @@ public class SessionCreateParams extends ApiRequestParams {
 
         CaptureMethod(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bizum {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Additional fields for mandate creation. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      private Bizum(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+        this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private MandateOptions mandateOptions;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Bizum build() {
+          return new SessionCreateParams.PaymentMethodOptions.Bizum(
+              this.extraParams, this.mandateOptions);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Bizum#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Bizum#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Additional fields for mandate creation. */
+        public Builder setMandateOptions(
+            SessionCreateParams.PaymentMethodOptions.Bizum.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private MandateOptions(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.PaymentMethodOptions.Bizum.MandateOptions build() {
+            return new SessionCreateParams.PaymentMethodOptions.Bizum.MandateOptions(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.Bizum.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.Bizum.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
         }
       }
     }

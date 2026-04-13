@@ -2605,6 +2605,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("billie")
     Billie billie;
 
+    @SerializedName("bizum")
+    Bizum bizum;
+
     @SerializedName("boleto")
     Boleto boleto;
 
@@ -3130,6 +3133,27 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        */
       @SerializedName("capture_method")
       String captureMethod;
+    }
+
+    /**
+     * For more details about Bizum, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bizum extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {}
     }
 
     /**
