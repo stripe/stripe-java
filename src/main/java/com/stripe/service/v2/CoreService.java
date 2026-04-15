@@ -48,4 +48,12 @@ public final class CoreService extends ApiService {
   public com.stripe.service.v2.core.VaultService vault() {
     return new com.stripe.service.v2.core.VaultService(this.getResponseGetter());
   }
+
+  public com.stripe.service.v2.core.WorkflowRunService workflowRuns() {
+    return new com.stripe.service.v2.core.WorkflowRunService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.core.WorkflowService workflows() {
+    return new com.stripe.service.v2.core.WorkflowService(this.getResponseGetter());
+  }
 }

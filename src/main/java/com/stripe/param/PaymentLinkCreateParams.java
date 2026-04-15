@@ -40,6 +40,10 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   @SerializedName("application_fee_percent")
   BigDecimal applicationFeePercent;
 
+  /** Configuration for automatic surcharge calculation. */
+  @SerializedName("automatic_surcharge")
+  AutomaticSurcharge automaticSurcharge;
+
   /** Configuration for automatic tax collection. */
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
@@ -237,6 +241,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       Boolean allowPromotionCodes,
       Long applicationFeeAmount,
       BigDecimal applicationFeePercent,
+      AutomaticSurcharge automaticSurcharge,
       AutomaticTax automaticTax,
       BillingAddressCollection billingAddressCollection,
       ConsentCollection consentCollection,
@@ -269,6 +274,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     this.allowPromotionCodes = allowPromotionCodes;
     this.applicationFeeAmount = applicationFeeAmount;
     this.applicationFeePercent = applicationFeePercent;
+    this.automaticSurcharge = automaticSurcharge;
     this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
     this.consentCollection = consentCollection;
@@ -311,6 +317,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     private Long applicationFeeAmount;
 
     private BigDecimal applicationFeePercent;
+
+    private AutomaticSurcharge automaticSurcharge;
 
     private AutomaticTax automaticTax;
 
@@ -375,6 +383,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           this.allowPromotionCodes,
           this.applicationFeeAmount,
           this.applicationFeePercent,
+          this.automaticSurcharge,
           this.automaticTax,
           this.billingAddressCollection,
           this.consentCollection,
@@ -435,6 +444,13 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      */
     public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
       this.applicationFeePercent = applicationFeePercent;
+      return this;
+    }
+
+    /** Configuration for automatic surcharge calculation. */
+    public Builder setAutomaticSurcharge(
+        PaymentLinkCreateParams.AutomaticSurcharge automaticSurcharge) {
+      this.automaticSurcharge = automaticSurcharge;
       return this;
     }
 
@@ -1092,6 +1108,148 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       private final String value;
 
       Type(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AutomaticSurcharge {
+    /** Determines which amount serves as the basis for calculating the surcharge. */
+    @SerializedName("calculation_basis")
+    CalculationBasis calculationBasis;
+
+    /**
+     * <strong>Required.</strong> Set to {@code true} to calculate surcharge automatically using the
+     * customer's card details and location.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Specifies whether the surcharge is considered inclusive or exclusive of taxes. */
+    @SerializedName("tax_behavior")
+    TaxBehavior taxBehavior;
+
+    private AutomaticSurcharge(
+        CalculationBasis calculationBasis,
+        Boolean enabled,
+        Map<String, Object> extraParams,
+        TaxBehavior taxBehavior) {
+      this.calculationBasis = calculationBasis;
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+      this.taxBehavior = taxBehavior;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private CalculationBasis calculationBasis;
+
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      private TaxBehavior taxBehavior;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkCreateParams.AutomaticSurcharge build() {
+        return new PaymentLinkCreateParams.AutomaticSurcharge(
+            this.calculationBasis, this.enabled, this.extraParams, this.taxBehavior);
+      }
+
+      /** Determines which amount serves as the basis for calculating the surcharge. */
+      public Builder setCalculationBasis(
+          PaymentLinkCreateParams.AutomaticSurcharge.CalculationBasis calculationBasis) {
+        this.calculationBasis = calculationBasis;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Set to {@code true} to calculate surcharge automatically using
+       * the customer's card details and location.
+       */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkCreateParams.AutomaticSurcharge#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkCreateParams.AutomaticSurcharge#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Specifies whether the surcharge is considered inclusive or exclusive of taxes. */
+      public Builder setTaxBehavior(
+          PaymentLinkCreateParams.AutomaticSurcharge.TaxBehavior taxBehavior) {
+        this.taxBehavior = taxBehavior;
+        return this;
+      }
+    }
+
+    public enum CalculationBasis implements ApiRequestParams.EnumParam {
+      @SerializedName("total_after_tax")
+      TOTAL_AFTER_TAX("total_after_tax"),
+
+      @SerializedName("total_before_tax")
+      TOTAL_BEFORE_TAX("total_before_tax");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      CalculationBasis(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum TaxBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("exclusive")
+      EXCLUSIVE("exclusive"),
+
+      @SerializedName("inclusive")
+      INCLUSIVE("inclusive"),
+
+      @SerializedName("unspecified")
+      UNSPECIFIED("unspecified");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      TaxBehavior(String value) {
         this.value = value;
       }
     }

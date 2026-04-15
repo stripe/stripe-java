@@ -88,6 +88,8 @@ public final class EventDataClassLookup {
     classLookup.put("v2.core.connection_session", com.stripe.model.v2.core.ConnectionSession.class);
     classLookup.put("v2.core.event", com.stripe.model.v2.core.Event.class);
     classLookup.put("v2.core.event_destination", com.stripe.model.v2.core.EventDestination.class);
+    classLookup.put("v2.core.workflow", com.stripe.model.v2.core.Workflow.class);
+    classLookup.put("v2.core.workflow_run", com.stripe.model.v2.core.WorkflowRun.class);
 
     classLookup.put(
         "v2.core.vault.gb_bank_account", com.stripe.model.v2.core.vault.GbBankAccount.class);

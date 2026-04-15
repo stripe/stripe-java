@@ -3303,6 +3303,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("lodging_data")
     List<PaymentIntent.PaymentDetails.LodgingDatum> lodgingData;
 
+    @SerializedName("money_services")
+    MoneyServices moneyServices;
+
     /**
      * A unique value assigned by the business to identify the transaction. Required for L2 and L3
      * rates.
@@ -4753,6 +4756,221 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             /** Type of tax applied. */
             @SerializedName("type")
             String type;
+          }
+        }
+      }
+    }
+
+    /**
+     * For more details about MoneyServices, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MoneyServices extends StripeObject {
+      @SerializedName("account_funding")
+      AccountFunding accountFunding;
+
+      /**
+       * The type of money services transaction.
+       *
+       * <p>Equal to {@code account_funding}.
+       */
+      @SerializedName("transaction_type")
+      String transactionType;
+
+      /**
+       * For more details about AccountFunding, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AccountFunding extends StripeObject {
+        /** ID of the Account representing the beneficiary in this account funding transaction. */
+        @SerializedName("beneficiary_account")
+        String beneficiaryAccount;
+
+        @SerializedName("beneficiary_details")
+        BeneficiaryDetails beneficiaryDetails;
+
+        /** ID of the Account representing the sender in this account funding transaction. */
+        @SerializedName("sender_account")
+        String senderAccount;
+
+        @SerializedName("sender_details")
+        SenderDetails senderDetails;
+
+        /**
+         * For more details about BeneficiaryDetails, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BeneficiaryDetails extends StripeObject {
+          @SerializedName("address")
+          com.stripe.model.PaymentIntent.PaymentDetails.MoneyServices.AccountFunding
+                  .BeneficiaryDetails.Address
+              address;
+
+          @SerializedName("date_of_birth")
+          DateOfBirth dateOfBirth;
+
+          /** Email address. */
+          @SerializedName("email")
+          String email;
+
+          /** Full name. */
+          @SerializedName("name")
+          String name;
+
+          /** Phone number. */
+          @SerializedName("phone")
+          String phone;
+
+          /**
+           * For more details about Address, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Address extends StripeObject {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            String city;
+
+            /**
+             * Two-letter country code (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+             */
+            @SerializedName("country")
+            String country;
+
+            /** Address line 1 (e.g., street, PO Box, or company name). */
+            @SerializedName("line1")
+            String line1;
+
+            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            @SerializedName("line2")
+            String line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            String postalCode;
+
+            /** State, county, province, or region. */
+            @SerializedName("state")
+            String state;
+          }
+
+          /**
+           * For more details about DateOfBirth, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class DateOfBirth extends StripeObject {
+            /** Day of birth, between 1 and 31. */
+            @SerializedName("day")
+            Long day;
+
+            /** Month of birth, between 1 and 12. */
+            @SerializedName("month")
+            Long month;
+
+            /** Four-digit year of birth. */
+            @SerializedName("year")
+            Long year;
+          }
+        }
+
+        /**
+         * For more details about SenderDetails, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SenderDetails extends StripeObject {
+          @SerializedName("address")
+          com.stripe.model.PaymentIntent.PaymentDetails.MoneyServices.AccountFunding.SenderDetails
+                  .Address
+              address;
+
+          @SerializedName("date_of_birth")
+          DateOfBirth dateOfBirth;
+
+          /** Email address. */
+          @SerializedName("email")
+          String email;
+
+          /** Full name. */
+          @SerializedName("name")
+          String name;
+
+          /** Phone number. */
+          @SerializedName("phone")
+          String phone;
+
+          /**
+           * For more details about Address, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Address extends StripeObject {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            String city;
+
+            /**
+             * Two-letter country code (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+             */
+            @SerializedName("country")
+            String country;
+
+            /** Address line 1 (e.g., street, PO Box, or company name). */
+            @SerializedName("line1")
+            String line1;
+
+            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            @SerializedName("line2")
+            String line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            String postalCode;
+
+            /** State, county, province, or region. */
+            @SerializedName("state")
+            String state;
+          }
+
+          /**
+           * For more details about DateOfBirth, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class DateOfBirth extends StripeObject {
+            /** Day of birth, between 1 and 31. */
+            @SerializedName("day")
+            Long day;
+
+            /** Month of birth, between 1 and 12. */
+            @SerializedName("month")
+            Long month;
+
+            /** Four-digit year of birth. */
+            @SerializedName("year")
+            Long year;
           }
         }
       }

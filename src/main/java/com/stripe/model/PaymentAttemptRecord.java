@@ -11,6 +11,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentAttemptRecordListParams;
 import com.stripe.param.PaymentAttemptRecordReportAuthenticatedParams;
+import com.stripe.param.PaymentAttemptRecordReportAuthorizedParams;
 import com.stripe.param.PaymentAttemptRecordReportCanceledParams;
 import com.stripe.param.PaymentAttemptRecordReportFailedParams;
 import com.stripe.param.PaymentAttemptRecordReportGuaranteedParams;
@@ -214,6 +215,58 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     String path =
         String.format(
             "/v1/payment_attempt_records/%s/report_authenticated",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, PaymentAttemptRecord.class);
+  }
+
+  /** Report that the specified Payment Attempt Record was authorized. */
+  public PaymentAttemptRecord reportAuthorized() throws StripeException {
+    return reportAuthorized((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Report that the specified Payment Attempt Record was authorized. */
+  public PaymentAttemptRecord reportAuthorized(RequestOptions options) throws StripeException {
+    return reportAuthorized((Map<String, Object>) null, options);
+  }
+
+  /** Report that the specified Payment Attempt Record was authorized. */
+  public PaymentAttemptRecord reportAuthorized(Map<String, Object> params) throws StripeException {
+    return reportAuthorized(params, (RequestOptions) null);
+  }
+
+  /** Report that the specified Payment Attempt Record was authorized. */
+  public PaymentAttemptRecord reportAuthorized(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_attempt_records/%s/report_authorized",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, PaymentAttemptRecord.class);
+  }
+
+  /** Report that the specified Payment Attempt Record was authorized. */
+  public PaymentAttemptRecord reportAuthorized(PaymentAttemptRecordReportAuthorizedParams params)
+      throws StripeException {
+    return reportAuthorized(params, (RequestOptions) null);
+  }
+
+  /** Report that the specified Payment Attempt Record was authorized. */
+  public PaymentAttemptRecord reportAuthorized(
+      PaymentAttemptRecordReportAuthorizedParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_attempt_records/%s/report_authorized",
             ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =

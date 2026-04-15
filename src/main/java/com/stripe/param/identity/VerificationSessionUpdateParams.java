@@ -14,6 +14,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class VerificationSessionUpdateParams extends ApiRequestParams {
+  /** Confirm and submit the provided details for verification. */
+  @SerializedName("confirm")
+  Boolean confirm;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -52,12 +56,14 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
   Type type;
 
   private VerificationSessionUpdateParams(
+      Boolean confirm,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
       Options options,
       ProvidedDetails providedDetails,
       Type type) {
+    this.confirm = confirm;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
@@ -71,6 +77,8 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Boolean confirm;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -86,12 +94,19 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public VerificationSessionUpdateParams build() {
       return new VerificationSessionUpdateParams(
+          this.confirm,
           this.expand,
           this.extraParams,
           this.metadata,
           this.options,
           this.providedDetails,
           this.type);
+    }
+
+    /** Confirm and submit the provided details for verification. */
+    public Builder setConfirm(Boolean confirm) {
+      this.confirm = confirm;
+      return this;
     }
 
     /**
@@ -571,6 +586,9 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
   public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("document")
     DOCUMENT("document"),
+
+    @SerializedName("email")
+    EMAIL("email"),
 
     @SerializedName("id_number")
     ID_NUMBER("id_number");

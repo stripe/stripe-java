@@ -143,6 +143,13 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
     @SerializedName("payouts")
     Payouts payouts;
 
+    /**
+     * A hash of settlement currencies to update. Each key is an ISO 4217 currency code, and the
+     * value is either {@code enabled} or {@code disabled}.
+     */
+    @SerializedName("settlement_currencies")
+    Map<String, BalanceSettingsUpdateParams.Payments.SettlementCurrency> settlementCurrencies;
+
     /** Settings related to the account's balance settlement timing. */
     @SerializedName("settlement_timing")
     SettlementTiming settlementTiming;
@@ -151,10 +158,12 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
         Boolean debitNegativeBalances,
         Map<String, Object> extraParams,
         Payouts payouts,
+        Map<String, BalanceSettingsUpdateParams.Payments.SettlementCurrency> settlementCurrencies,
         SettlementTiming settlementTiming) {
       this.debitNegativeBalances = debitNegativeBalances;
       this.extraParams = extraParams;
       this.payouts = payouts;
+      this.settlementCurrencies = settlementCurrencies;
       this.settlementTiming = settlementTiming;
     }
 
@@ -169,12 +178,19 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
 
       private Payouts payouts;
 
+      private Map<String, BalanceSettingsUpdateParams.Payments.SettlementCurrency>
+          settlementCurrencies;
+
       private SettlementTiming settlementTiming;
 
       /** Finalize and obtain parameter instance from this builder. */
       public BalanceSettingsUpdateParams.Payments build() {
         return new BalanceSettingsUpdateParams.Payments(
-            this.debitNegativeBalances, this.extraParams, this.payouts, this.settlementTiming);
+            this.debitNegativeBalances,
+            this.extraParams,
+            this.payouts,
+            this.settlementCurrencies,
+            this.settlementTiming);
       }
 
       /**
@@ -217,6 +233,36 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       /** Settings specific to the account's payouts. */
       public Builder setPayouts(BalanceSettingsUpdateParams.Payments.Payouts payouts) {
         this.payouts = payouts;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `settlementCurrencies` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link BalanceSettingsUpdateParams.Payments#settlementCurrencies} for the field
+       * documentation.
+       */
+      public Builder putSettlementCurrency(
+          String key, BalanceSettingsUpdateParams.Payments.SettlementCurrency value) {
+        if (this.settlementCurrencies == null) {
+          this.settlementCurrencies = new HashMap<>();
+        }
+        this.settlementCurrencies.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `settlementCurrencies` map. A map is initialized for the
+       * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+       * original map. See {@link BalanceSettingsUpdateParams.Payments#settlementCurrencies} for the
+       * field documentation.
+       */
+      public Builder putAllSettlementCurrency(
+          Map<String, BalanceSettingsUpdateParams.Payments.SettlementCurrency> map) {
+        if (this.settlementCurrencies == null) {
+          this.settlementCurrencies = new HashMap<>();
+        }
+        this.settlementCurrencies.putAll(map);
         return this;
       }
 
@@ -744,6 +790,21 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+      }
+    }
+
+    public enum SettlementCurrency implements ApiRequestParams.EnumParam {
+      @SerializedName("disabled")
+      DISABLED("disabled"),
+
+      @SerializedName("enabled")
+      ENABLED("enabled");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      SettlementCurrency(String value) {
+        this.value = value;
       }
     }
   }

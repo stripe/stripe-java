@@ -54,6 +54,13 @@ public class IssuedToken extends StripeObject implements HasId {
   Boolean livemode;
 
   /**
+   * If present, describes the action required to make this {@code SharedPaymentIssuedToken} usable
+   * for payments. Present when the token is in {@code requires_action} state.
+   */
+  @SerializedName("next_action")
+  NextAction nextAction;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value.
    *
    * <p>Equal to {@code shared_payment.issued_token}.
@@ -93,6 +100,13 @@ public class IssuedToken extends StripeObject implements HasId {
   @SerializedName("shared_metadata")
   Map<String, String> sharedMetadata;
 
+  /**
+   * Status of this SharedPaymentIssuedToken, one of {@code active}, {@code requires_action}, or
+   * {@code deactivated}.
+   */
+  @SerializedName("status")
+  String status;
+
   /** Usage details of the SharedPaymentIssuedToken. */
   @SerializedName("usage_details")
   UsageDetails usageDetails;
@@ -100,6 +114,47 @@ public class IssuedToken extends StripeObject implements HasId {
   /** Usage limits of the SharedPaymentIssuedToken. */
   @SerializedName("usage_limits")
   UsageLimits usageLimits;
+
+  /**
+   * For more details about NextAction, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NextAction extends StripeObject {
+    /**
+     * Specifies the type of next action required. Determines which child attribute contains action
+     * details.
+     *
+     * <p>Equal to {@code use_stripe_sdk}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * Contains details for handling the next action using Stripe.js, iOS, or Android SDKs. Present
+     * when {@code next_action.type} is {@code use_stripe_sdk}.
+     */
+    @SerializedName("use_stripe_sdk")
+    UseStripeSdk useStripeSdk;
+
+    /**
+     * For more details about UseStripeSdk, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UseStripeSdk extends StripeObject {
+      /**
+       * A base64-encoded string used by Stripe.js and the iOS and Android client SDKs to handle the
+       * next action. Its content is subject to change.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
 
   /**
    * For more details about RiskDetails, please refer to the <a
@@ -122,23 +177,23 @@ public class IssuedToken extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Insights extends StripeObject {
-      /** Bot risk insight (score: Float, recommended_action). */
+      /** Bot risk insight. */
       @SerializedName("bot")
       Bot bot;
 
-      /** Card issuer decline risk insight (score: Float, recommended_action). */
+      /** Card issuer decline risk insight. */
       @SerializedName("card_issuer_decline")
       CardIssuerDecline cardIssuerDecline;
 
-      /** Card testing risk insight (score: Float, recommended_action). */
+      /** Card testing risk insight. */
       @SerializedName("card_testing")
       CardTesting cardTesting;
 
-      /** Fraudulent dispute risk insight (score: Integer, recommended_action). */
+      /** Fraudulent dispute risk insight. */
       @SerializedName("fraudulent_dispute")
       FraudulentDispute fraudulentDispute;
 
-      /** Stolen card risk insight (score: Integer, recommended_action). */
+      /** Stolen card risk insight. */
       @SerializedName("stolen_card")
       StolenCard stolenCard;
 
@@ -151,7 +206,7 @@ public class IssuedToken extends StripeObject implements HasId {
         @SerializedName("recommended_action")
         String recommendedAction;
 
-        /** Risk score for this insight (float). */
+        /** Risk score for this insight. */
         @SerializedName("score")
         BigDecimal score;
       }
@@ -165,7 +220,7 @@ public class IssuedToken extends StripeObject implements HasId {
         @SerializedName("recommended_action")
         String recommendedAction;
 
-        /** Risk score for this insight (float). */
+        /** Risk score for this insight. */
         @SerializedName("score")
         BigDecimal score;
       }
@@ -179,7 +234,7 @@ public class IssuedToken extends StripeObject implements HasId {
         @SerializedName("recommended_action")
         String recommendedAction;
 
-        /** Risk score for this insight (float). */
+        /** Risk score for this insight. */
         @SerializedName("score")
         BigDecimal score;
       }
@@ -193,7 +248,7 @@ public class IssuedToken extends StripeObject implements HasId {
         @SerializedName("recommended_action")
         String recommendedAction;
 
-        /** Risk score for this insight (integer). */
+        /** Risk score for this insight. */
         @SerializedName("score")
         Long score;
       }
@@ -207,7 +262,7 @@ public class IssuedToken extends StripeObject implements HasId {
         @SerializedName("recommended_action")
         String recommendedAction;
 
-        /** Risk score for this insight (integer). */
+        /** Risk score for this insight. */
         @SerializedName("score")
         Long score;
       }
@@ -235,13 +290,6 @@ public class IssuedToken extends StripeObject implements HasId {
      */
     @SerializedName("network_business_profile")
     String networkBusinessProfile;
-
-    /**
-     * The unique and logical string that identifies the seller platform that this SharedToken is
-     * being created for.
-     */
-    @SerializedName("network_id")
-    String networkId;
   }
 
   /** Some details on how the SharedPaymentGrantedToken has been used so far. */

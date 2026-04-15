@@ -186,10 +186,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   @SerializedName("setup_future_usage")
   ApiRequestParams.EnumParam setupFutureUsage;
 
-  /** ID of the SharedPaymentToken used to confirm this PaymentIntent. */
-  @SerializedName("shared_payment_granted_token")
-  String sharedPaymentGrantedToken;
-
   /** Shipping information for this PaymentIntent. */
   @SerializedName("shipping")
   Object shipping;
@@ -225,7 +221,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Object receiptEmail,
       String returnUrl,
       ApiRequestParams.EnumParam setupFutureUsage,
-      String sharedPaymentGrantedToken,
       Object shipping,
       Boolean useStripeSdk) {
     this.allocatedFunds = allocatedFunds;
@@ -251,7 +246,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     this.receiptEmail = receiptEmail;
     this.returnUrl = returnUrl;
     this.setupFutureUsage = setupFutureUsage;
-    this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
     this.shipping = shipping;
     this.useStripeSdk = useStripeSdk;
   }
@@ -307,8 +301,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     private ApiRequestParams.EnumParam setupFutureUsage;
 
-    private String sharedPaymentGrantedToken;
-
     private Object shipping;
 
     private Boolean useStripeSdk;
@@ -339,7 +331,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.receiptEmail,
           this.returnUrl,
           this.setupFutureUsage,
-          this.sharedPaymentGrantedToken,
           this.shipping,
           this.useStripeSdk);
     }
@@ -734,12 +725,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      */
     public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
       this.setupFutureUsage = setupFutureUsage;
-      return this;
-    }
-
-    /** ID of the SharedPaymentToken used to confirm this PaymentIntent. */
-    public Builder setSharedPaymentGrantedToken(String sharedPaymentGrantedToken) {
-      this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
       return this;
     }
 
@@ -16566,6 +16551,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    /** ID of the SharedPaymentGrantedToken used to confirm this PaymentIntent. */
+    @SerializedName("shared_payment_granted_token")
+    String sharedPaymentGrantedToken;
+
     /**
      * If this is a Shopeepay PaymentMethod, this hash contains details about the Shopeepay payment
      * method.
@@ -16688,6 +16677,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         SamsungPay samsungPay,
         Satispay satispay,
         SepaDebit sepaDebit,
+        String sharedPaymentGrantedToken,
         Shopeepay shopeepay,
         Sofort sofort,
         StripeBalance stripeBalance,
@@ -16752,6 +16742,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.samsungPay = samsungPay;
       this.satispay = satispay;
       this.sepaDebit = sepaDebit;
+      this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
       this.shopeepay = shopeepay;
       this.sofort = sofort;
       this.stripeBalance = stripeBalance;
@@ -16877,6 +16868,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private SepaDebit sepaDebit;
 
+      private String sharedPaymentGrantedToken;
+
       private Shopeepay shopeepay;
 
       private Sofort sofort;
@@ -16954,6 +16947,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.samsungPay,
             this.satispay,
             this.sepaDebit,
+            this.sharedPaymentGrantedToken,
             this.shopeepay,
             this.sofort,
             this.stripeBalance,
@@ -17506,6 +17500,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       public Builder setSepaDebit(
           PaymentIntentConfirmParams.PaymentMethodData.SepaDebit sepaDebit) {
         this.sepaDebit = sepaDebit;
+        return this;
+      }
+
+      /** ID of the SharedPaymentGrantedToken used to confirm this PaymentIntent. */
+      public Builder setSharedPaymentGrantedToken(String sharedPaymentGrantedToken) {
+        this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
         return this;
       }
 

@@ -72,6 +72,9 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @SerializedName("application_fee_percent")
   BigDecimal applicationFeePercent;
 
+  @SerializedName("automatic_surcharge")
+  AutomaticSurcharge automaticSurcharge;
+
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
 
@@ -531,6 +534,43 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @SerializedName("url")
       String url;
     }
+  }
+
+  /**
+   * For more details about AutomaticSurcharge, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AutomaticSurcharge extends StripeObject {
+    /**
+     * Determines which amount serves as the basis for calculating the surcharge.
+     *
+     * <p>One of {@code total_after_tax}, or {@code total_before_tax}.
+     */
+    @SerializedName("calculation_basis")
+    String calculationBasis;
+
+    /** Indicates whether automatic surcharge is enabled for the payment link. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * The surcharge provider used for this payment link.
+     *
+     * <p>One of {@code interpayments}, or {@code yeeld}.
+     */
+    @SerializedName("provider")
+    String provider;
+
+    /**
+     * Specifies whether the surcharge is considered inclusive or exclusive of taxes.
+     *
+     * <p>One of {@code exclusive}, {@code inclusive}, or {@code unspecified}.
+     */
+    @SerializedName("tax_behavior")
+    String taxBehavior;
   }
 
   /**
@@ -1513,6 +1553,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(afterCompletion, responseGetter);
     trySetResponseGetter(application, responseGetter);
+    trySetResponseGetter(automaticSurcharge, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(consentCollection, responseGetter);
     trySetResponseGetter(customText, responseGetter);
