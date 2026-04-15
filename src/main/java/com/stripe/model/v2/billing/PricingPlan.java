@@ -46,6 +46,10 @@ public class PricingPlan extends StripeObject implements HasId {
   @SerializedName("id")
   String id;
 
+  /** The ID of the latest version of the PricingPlan. */
+  @SerializedName("latest_version")
+  String latestVersion;
+
   /** The ID of the live version of the PricingPlan. */
   @SerializedName("live_version")
   String liveVersion;

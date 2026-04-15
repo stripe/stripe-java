@@ -47,6 +47,10 @@ public class RateCard extends StripeObject implements HasId {
   @SerializedName("id")
   String id;
 
+  /** The ID of this rate card's most recently created version. */
+  @SerializedName("latest_version")
+  String latestVersion;
+
   /**
    * The ID of the Rate Card Version that will be used by all subscriptions when no specific version
    * is specified.
@@ -94,6 +98,25 @@ public class RateCard extends StripeObject implements HasId {
    */
   @SerializedName("service_cycle")
   ServiceCycle serviceCycle;
+
+  /**
+   * The interval for assessing service. For example, a monthly Rate Card with a rate of $1 for the
+   * first 10 &quot;workloads&quot; and $2 thereafter means &quot;$1 per workload up to 10 workloads
+   * during a month of service.&quot; This is similar to but distinct from billing interval; the
+   * service interval deals with the rate at which the customer accumulates fees, while the billing
+   * interval in Cadence deals with the rate the customer is billed.
+   *
+   * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+   */
+  @SerializedName("service_interval")
+  String serviceInterval;
+
+  /**
+   * The length of the interval for assessing service. For example, set this to 3 and {@code
+   * service_interval} to {@code "month"} in order to specify quarterly service.
+   */
+  @SerializedName("service_interval_count")
+  Long serviceIntervalCount;
 
   /**
    * The Stripe Tax tax behavior - whether the rates are inclusive or exclusive of tax.
