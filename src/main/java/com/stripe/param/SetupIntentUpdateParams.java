@@ -932,10 +932,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
-    /** ID of the SharedPaymentGrantedToken used to confirm this PaymentIntent. */
-    @SerializedName("shared_payment_granted_token")
-    Object sharedPaymentGrantedToken;
-
     /**
      * If this is a Shopeepay PaymentMethod, this hash contains details about the Shopeepay payment
      * method.
@@ -1058,7 +1054,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         SamsungPay samsungPay,
         Satispay satispay,
         SepaDebit sepaDebit,
-        Object sharedPaymentGrantedToken,
         Shopeepay shopeepay,
         Sofort sofort,
         StripeBalance stripeBalance,
@@ -1123,7 +1118,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.samsungPay = samsungPay;
       this.satispay = satispay;
       this.sepaDebit = sepaDebit;
-      this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
       this.shopeepay = shopeepay;
       this.sofort = sofort;
       this.stripeBalance = stripeBalance;
@@ -1249,8 +1243,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private SepaDebit sepaDebit;
 
-      private Object sharedPaymentGrantedToken;
-
       private Shopeepay shopeepay;
 
       private Sofort sofort;
@@ -1328,7 +1320,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.samsungPay,
             this.satispay,
             this.sepaDebit,
-            this.sharedPaymentGrantedToken,
             this.shopeepay,
             this.sofort,
             this.stripeBalance,
@@ -1873,18 +1864,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setSepaDebit(SetupIntentUpdateParams.PaymentMethodData.SepaDebit sepaDebit) {
         this.sepaDebit = sepaDebit;
-        return this;
-      }
-
-      /** ID of the SharedPaymentGrantedToken used to confirm this PaymentIntent. */
-      public Builder setSharedPaymentGrantedToken(String sharedPaymentGrantedToken) {
-        this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
-        return this;
-      }
-
-      /** ID of the SharedPaymentGrantedToken used to confirm this PaymentIntent. */
-      public Builder setSharedPaymentGrantedToken(EmptyParam sharedPaymentGrantedToken) {
-        this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
         return this;
       }
 

@@ -25,10 +25,6 @@ public class IssuedToken extends StripeObject implements HasId {
   @SerializedName("created")
   Long created;
 
-  /** ID of an existing Customer. */
-  @SerializedName("customer")
-  String customer;
-
   /** Time at which this SharedPaymentIssuedToken was deactivated. */
   @SerializedName("deactivated_at")
   Long deactivatedAt;

@@ -48,6 +48,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentIntent extends ApiResource implements HasId, MetadataStore<PaymentIntent> {
+  /** Details about the agent that initiated the creation of this PaymentIntent. */
+  @SerializedName("agent_details")
+  AgentDetails agentDetails;
+
   /** Allocated Funds configuration for this PaymentIntent. */
   @SerializedName("allocated_funds")
   AllocatedFunds allocatedFunds;
@@ -373,10 +377,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    */
   @SerializedName("setup_future_usage")
   String setupFutureUsage;
-
-  /** ID of the shared payment token granted to be used in this PaymentIntent. */
-  @SerializedName("shared_payment_granted_token")
-  String sharedPaymentGrantedToken;
 
   /** Shipping information for this PaymentIntent. */
   @SerializedName("shipping")
@@ -1836,6 +1836,47 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, PaymentIntent.class);
+  }
+
+  /**
+   * For more details about AgentDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AgentDetails extends StripeObject {
+    /** The name of the agent that initiated the payment. */
+    @SerializedName("name")
+    String name;
+
+    /** The Stripe profile associated with the agent that initiated the payment. */
+    @SerializedName("network_business_profile")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Profile> networkBusinessProfile;
+
+    /** Get ID of expandable {@code networkBusinessProfile} object. */
+    public String getNetworkBusinessProfile() {
+      return (this.networkBusinessProfile != null) ? this.networkBusinessProfile.getId() : null;
+    }
+
+    public void setNetworkBusinessProfile(String id) {
+      this.networkBusinessProfile =
+          ApiResource.setExpandableFieldId(id, this.networkBusinessProfile);
+    }
+
+    /** Get expanded {@code networkBusinessProfile}. */
+    public Profile getNetworkBusinessProfileObject() {
+      return (this.networkBusinessProfile != null)
+          ? this.networkBusinessProfile.getExpanded()
+          : null;
+    }
+
+    public void setNetworkBusinessProfileObject(Profile expandableObject) {
+      this.networkBusinessProfile =
+          new ExpandableField<Profile>(expandableObject.getId(), expandableObject);
+    }
   }
 
   /**
@@ -8452,6 +8493,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(agentDetails, responseGetter);
     trySetResponseGetter(allocatedFunds, responseGetter);
     trySetResponseGetter(amountDetails, responseGetter);
     trySetResponseGetter(application, responseGetter);

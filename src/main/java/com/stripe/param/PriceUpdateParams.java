@@ -32,6 +32,13 @@ public class PriceUpdateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
+   * A custom identifier for this price, such as a SKU number or product code, that can be used to
+   * reference records from external systems.
+   */
+  @SerializedName("external_reference")
+  Object externalReference;
+
+  /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
    * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -88,6 +95,7 @@ public class PriceUpdateParams extends ApiRequestParams {
       Boolean active,
       Object currencyOptions,
       List<String> expand,
+      Object externalReference,
       Map<String, Object> extraParams,
       Object lookupKey,
       Object metadata,
@@ -98,6 +106,7 @@ public class PriceUpdateParams extends ApiRequestParams {
     this.active = active;
     this.currencyOptions = currencyOptions;
     this.expand = expand;
+    this.externalReference = externalReference;
     this.extraParams = extraParams;
     this.lookupKey = lookupKey;
     this.metadata = metadata;
@@ -117,6 +126,8 @@ public class PriceUpdateParams extends ApiRequestParams {
     private Object currencyOptions;
 
     private List<String> expand;
+
+    private Object externalReference;
 
     private Map<String, Object> extraParams;
 
@@ -138,6 +149,7 @@ public class PriceUpdateParams extends ApiRequestParams {
           this.active,
           this.currencyOptions,
           this.expand,
+          this.externalReference,
           this.extraParams,
           this.lookupKey,
           this.metadata,
@@ -225,6 +237,24 @@ public class PriceUpdateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * A custom identifier for this price, such as a SKU number or product code, that can be used to
+     * reference records from external systems.
+     */
+    public Builder setExternalReference(String externalReference) {
+      this.externalReference = externalReference;
+      return this;
+    }
+
+    /**
+     * A custom identifier for this price, such as a SKU number or product code, that can be used to
+     * reference records from external systems.
+     */
+    public Builder setExternalReference(EmptyParam externalReference) {
+      this.externalReference = externalReference;
       return this;
     }
 

@@ -2386,6 +2386,12 @@ public class ConfirmationToken extends ApiResource implements HasId {
         @Setter(lombok.AccessLevel.NONE)
         ExpandableField<Charge> charge;
 
+        /** The ID of the PaymentMethod that generated this PaymentMethod, if any. */
+        @SerializedName("payment_method")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<PaymentMethod> paymentMethod;
+
         /** The ID of the SetupAttempt that generated this PaymentMethod, if any. */
         @SerializedName("setup_attempt")
         @Getter(lombok.AccessLevel.NONE)
@@ -2408,6 +2414,25 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
         public void setChargeObject(Charge expandableObject) {
           this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
+        }
+
+        /** Get ID of expandable {@code paymentMethod} object. */
+        public String getPaymentMethod() {
+          return (this.paymentMethod != null) ? this.paymentMethod.getId() : null;
+        }
+
+        public void setPaymentMethod(String id) {
+          this.paymentMethod = ApiResource.setExpandableFieldId(id, this.paymentMethod);
+        }
+
+        /** Get expanded {@code paymentMethod}. */
+        public PaymentMethod getPaymentMethodObject() {
+          return (this.paymentMethod != null) ? this.paymentMethod.getExpanded() : null;
+        }
+
+        public void setPaymentMethodObject(PaymentMethod expandableObject) {
+          this.paymentMethod =
+              new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
         }
 
         /** Get ID of expandable {@code setupAttempt} object. */
