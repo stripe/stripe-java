@@ -9660,6 +9660,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("link")
       LINK("link"),
 
+      @SerializedName("momo")
+      MOMO("momo"),
+
       @SerializedName("multibanco")
       MULTIBANCO("multibanco"),
 
