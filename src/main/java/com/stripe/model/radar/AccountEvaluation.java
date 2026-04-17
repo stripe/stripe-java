@@ -191,6 +191,10 @@ public class AccountEvaluation extends ApiResource implements HasId {
     @SerializedName("login_failed")
     LoginFailed loginFailed;
 
+    /** Data about a succeeded login event. */
+    @SerializedName("login_succeeded")
+    LoginSucceeded loginSucceeded;
+
     /** Time at which the event occurred. Measured in seconds since the Unix epoch. */
     @SerializedName("occurred_at")
     Long occurredAt;
@@ -198,6 +202,10 @@ public class AccountEvaluation extends ApiResource implements HasId {
     /** Data about a failed registration event. */
     @SerializedName("registration_failed")
     RegistrationFailed registrationFailed;
+
+    /** Data about a succeeded registration event. */
+    @SerializedName("registration_succeeded")
+    RegistrationSucceeded registrationSucceeded;
 
     /** The type of event that occurred. */
     @SerializedName("type")
@@ -213,6 +221,16 @@ public class AccountEvaluation extends ApiResource implements HasId {
       String reason;
     }
 
+    /** Data about a succeeded login event. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class LoginSucceeded extends StripeObject {
+      /** The qualification for a login success. */
+      @SerializedName("qualification")
+      String qualification;
+    }
+
     /** Data about a failed registration event. */
     @Getter
     @Setter
@@ -221,6 +239,16 @@ public class AccountEvaluation extends ApiResource implements HasId {
       /** The reason why this registration failed. */
       @SerializedName("reason")
       String reason;
+    }
+
+    /** Data about a succeeded registration event. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RegistrationSucceeded extends StripeObject {
+      /** The qualification for a registration success. */
+      @SerializedName("qualification")
+      String qualification;
     }
   }
 
