@@ -4,15 +4,37 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiResource;
 import com.stripe.net.StripeResponse;
 import com.stripe.net.StripeResponseGetter;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.time.Instant;
 
 public abstract class StripeObject implements StripeObjectInterface {
+  private static final TypeAdapter<BigDecimal> BIG_DECIMAL_STRING_ADAPTER =
+      new TypeAdapter<BigDecimal>() {
+        @Override
+        public void write(JsonWriter out, BigDecimal value) throws IOException {
+          if (value == null) {
+            out.nullValue();
+          } else {
+            out.value(value.toPlainString());
+          }
+        }
+
+        @Override
+        public BigDecimal read(JsonReader in) throws IOException {
+          return new BigDecimal(in.nextString());
+        }
+      };
+
   public static final Gson PRETTY_PRINT_GSON =
       new GsonBuilder()
           .setPrettyPrinting()
@@ -20,6 +42,7 @@ public abstract class StripeObject implements StripeObjectInterface {
           .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
           .registerTypeAdapter(ExpandableField.class, new ExpandableFieldSerializer())
           .registerTypeAdapter(Instant.class, new InstantSerializer())
+          .registerTypeAdapter(BigDecimal.class, BIG_DECIMAL_STRING_ADAPTER)
           .create();
 
   private transient StripeResponse lastResponse;
