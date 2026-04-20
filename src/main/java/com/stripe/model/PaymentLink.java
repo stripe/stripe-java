@@ -137,6 +137,16 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   Boolean livemode;
 
   /**
+   * Settings for Managed Payments for this Payment Link and resulting <a
+   * href="https://stripe.com/api/checkout/sessions/object">CheckoutSessions</a>, <a
+   * href="https://stripe.com/api/payment_intents/object">PaymentIntents</a>, <a
+   * href="https://stripe.com/api/invoices/object">Invoices</a>, and <a
+   * href="https://stripe.com/api/subscriptions/object">Subscriptions</a>.
+   */
+  @SerializedName("managed_payments")
+  ManagedPayments managedPayments;
+
+  /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
@@ -1044,6 +1054,23 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   }
 
   /**
+   * For more details about ManagedPayments, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManagedPayments extends StripeObject {
+    /**
+     * Set to {@code true} to enable <a
+     * href="https://docs.stripe.com/payments/managed-payments">Managed Payments</a>, Stripe's
+     * merchant of record solution, for this session.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+  }
+
+  /**
    * For more details about NameCollection, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1491,6 +1518,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     trySetResponseGetter(customText, responseGetter);
     trySetResponseGetter(invoiceCreation, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
+    trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(nameCollection, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(paymentIntentData, responseGetter);

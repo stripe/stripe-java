@@ -330,6 +330,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("payto")
     Payto payto;
 
+    @SerializedName("pix")
+    Pix pix;
+
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
 
@@ -573,6 +576,10 @@ public class SetupAttempt extends ApiResource implements HasId {
       /** The last four digits of the card. */
       @SerializedName("last4")
       String last4;
+
+      /** True if this payment was marked as MOTO and out of scope for SCA. */
+      @SerializedName("moto")
+      Boolean moto;
 
       /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
@@ -970,6 +977,15 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Payto extends StripeObject {}
+
+    /**
+     * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pix extends StripeObject {}
 
     /**
      * For more details about RevolutPay, please refer to the <a

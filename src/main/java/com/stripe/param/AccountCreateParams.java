@@ -177,8 +177,9 @@ public class AccountCreateParams extends ApiRequestParams {
   TosAcceptance tosAcceptance;
 
   /**
-   * The type of Stripe account to create. May be one of {@code custom}, {@code express} or {@code
-   * standard}.
+   * The {@code type} parameter is deprecated. Use <a
+   * href="https://stripe.com/api/accounts/create#create_account-controller">{@code controller}</a>
+   * instead to configure dashboard access, fee payer, loss liability, and requirement collection.
    */
   @SerializedName("type")
   Type type;
@@ -564,8 +565,10 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The type of Stripe account to create. May be one of {@code custom}, {@code express} or {@code
-     * standard}.
+     * The {@code type} parameter is deprecated. Use <a
+     * href="https://stripe.com/api/accounts/create#create_account-controller">{@code
+     * controller}</a> instead to configure dashboard access, fee payer, loss liability, and
+     * requirement collection.
      */
     public Builder setType(AccountCreateParams.Type type) {
       this.type = type;
@@ -1301,6 +1304,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("amazon_pay_payments")
     AmazonPayPayments amazonPayPayments;
 
+    /** The app_distribution capability. */
+    @SerializedName("app_distribution")
+    AppDistribution appDistribution;
+
     /** The au_becs_debit_payments capability. */
     @SerializedName("au_becs_debit_payments")
     AuBecsDebitPayments auBecsDebitPayments;
@@ -1498,6 +1505,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("sofort_payments")
     SofortPayments sofortPayments;
 
+    /** The sunbit_payments capability. */
+    @SerializedName("sunbit_payments")
+    SunbitPayments sunbitPayments;
+
     /** The swish_payments capability. */
     @SerializedName("swish_payments")
     SwishPayments swishPayments;
@@ -1544,6 +1555,7 @@ public class AccountCreateParams extends ApiRequestParams {
         AfterpayClearpayPayments afterpayClearpayPayments,
         AlmaPayments almaPayments,
         AmazonPayPayments amazonPayPayments,
+        AppDistribution appDistribution,
         AuBecsDebitPayments auBecsDebitPayments,
         BacsDebitPayments bacsDebitPayments,
         BancontactPayments bancontactPayments,
@@ -1592,6 +1604,7 @@ public class AccountCreateParams extends ApiRequestParams {
         SepaBankTransferPayments sepaBankTransferPayments,
         SepaDebitPayments sepaDebitPayments,
         SofortPayments sofortPayments,
+        SunbitPayments sunbitPayments,
         SwishPayments swishPayments,
         TaxReportingUs1099K taxReportingUs1099K,
         TaxReportingUs1099Misc taxReportingUs1099Misc,
@@ -1607,6 +1620,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.afterpayClearpayPayments = afterpayClearpayPayments;
       this.almaPayments = almaPayments;
       this.amazonPayPayments = amazonPayPayments;
+      this.appDistribution = appDistribution;
       this.auBecsDebitPayments = auBecsDebitPayments;
       this.bacsDebitPayments = bacsDebitPayments;
       this.bancontactPayments = bancontactPayments;
@@ -1655,6 +1669,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.sepaBankTransferPayments = sepaBankTransferPayments;
       this.sepaDebitPayments = sepaDebitPayments;
       this.sofortPayments = sofortPayments;
+      this.sunbitPayments = sunbitPayments;
       this.swishPayments = swishPayments;
       this.taxReportingUs1099K = taxReportingUs1099K;
       this.taxReportingUs1099Misc = taxReportingUs1099Misc;
@@ -1681,6 +1696,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private AlmaPayments almaPayments;
 
       private AmazonPayPayments amazonPayPayments;
+
+      private AppDistribution appDistribution;
 
       private AuBecsDebitPayments auBecsDebitPayments;
 
@@ -1778,6 +1795,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private SofortPayments sofortPayments;
 
+      private SunbitPayments sunbitPayments;
+
       private SwishPayments swishPayments;
 
       private TaxReportingUs1099K taxReportingUs1099K;
@@ -1806,6 +1825,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.afterpayClearpayPayments,
             this.almaPayments,
             this.amazonPayPayments,
+            this.appDistribution,
             this.auBecsDebitPayments,
             this.bacsDebitPayments,
             this.bancontactPayments,
@@ -1854,6 +1874,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.sepaBankTransferPayments,
             this.sepaDebitPayments,
             this.sofortPayments,
+            this.sunbitPayments,
             this.swishPayments,
             this.taxReportingUs1099K,
             this.taxReportingUs1099Misc,
@@ -1897,6 +1918,13 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setAmazonPayPayments(
           AccountCreateParams.Capabilities.AmazonPayPayments amazonPayPayments) {
         this.amazonPayPayments = amazonPayPayments;
+        return this;
+      }
+
+      /** The app_distribution capability. */
+      public Builder setAppDistribution(
+          AccountCreateParams.Capabilities.AppDistribution appDistribution) {
+        this.appDistribution = appDistribution;
         return this;
       }
 
@@ -2243,6 +2271,13 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setSofortPayments(
           AccountCreateParams.Capabilities.SofortPayments sofortPayments) {
         this.sofortPayments = sofortPayments;
+        return this;
+      }
+
+      /** The sunbit_payments capability. */
+      public Builder setSunbitPayments(
+          AccountCreateParams.Capabilities.SunbitPayments sunbitPayments) {
+        this.sunbitPayments = sunbitPayments;
         return this;
       }
 
@@ -2691,6 +2726,86 @@ public class AccountCreateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.AmazonPayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AppDistribution {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private AppDistribution(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.AppDistribution build() {
+          return new AccountCreateParams.Capabilities.AppDistribution(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.AppDistribution#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.AppDistribution#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -6447,6 +6562,86 @@ public class AccountCreateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.SofortPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SunbitPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private SunbitPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.SunbitPayments build() {
+          return new AccountCreateParams.Capabilities.SunbitPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.SunbitPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.SunbitPayments#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
