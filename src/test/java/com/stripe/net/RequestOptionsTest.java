@@ -47,25 +47,25 @@ public class RequestOptionsTest {
     assertNull(optsRebuilt.getBaseUrl());
   }
 
-    @Test
-    public void testToBuilderFullCopy() {
+  @Test
+  public void testToBuilderFullCopy() {
     RequestOptions opts =
         RequestOptionsBuilder.unsafeSetStripeVersionOverride(
-            RequestOptions.builder()
-                .setApiKey("sk_foo")
-                .setBaseUrl("http://example.com")
-                .setClientId("123")
-                .setIdempotencyKey("123")
-                .setStripeAccount("acct_bar")
-                .setStripeContext("acct_context_123")
-                .setStripeRequestTrigger("some_trigger")
-                .setConnectTimeout(100)
-                .setReadTimeout(100)
-                .setConnectionProxy(
-                    new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 1234)))
-                .setProxyCredential(
-                    new PasswordAuthentication("username", "password".toCharArray())),
-            "2015-05-05")
+                RequestOptions.builder()
+                    .setApiKey("sk_foo")
+                    .setBaseUrl("http://example.com")
+                    .setClientId("123")
+                    .setIdempotencyKey("123")
+                    .setStripeAccount("acct_bar")
+                    .setStripeContext("acct_context_123")
+                    .setStripeRequestTrigger("some_trigger")
+                    .setConnectTimeout(100)
+                    .setReadTimeout(100)
+                    .setConnectionProxy(
+                        new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 1234)))
+                    .setProxyCredential(
+                        new PasswordAuthentication("username", "password".toCharArray())),
+                "2015-05-05")
             .build();
 
     RequestOptions optsRebuilt = opts.toBuilderFullCopy().build();
@@ -73,22 +73,7 @@ public class RequestOptionsTest {
     assertEquals(opts, optsRebuilt);
     assertEquals("acct_context_123", optsRebuilt.getStripeContext());
     assertEquals("some_trigger", optsRebuilt.getStripeRequestTrigger());
-    }
-
-    @Test
-    public void testToBuilderFullCopy_preservesStripeContext() {
-    RequestOptions opts =
-        RequestOptions.builder()
-            .setApiKey("sk_test")
-            .setStripeContext("ctx_123")
-            .setStripeRequestTrigger("trigger_123")
-            .build();
-
-    RequestOptions rebuilt = opts.toBuilderFullCopy().build();
-
-    assertEquals("ctx_123", rebuilt.getStripeContext());
-    assertEquals("trigger_123", rebuilt.getStripeRequestTrigger());
-    }
+  }
 
   @Test
   public void testStripeVersionOverride() {
