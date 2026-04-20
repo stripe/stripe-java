@@ -80,6 +80,13 @@ public class RedactionJob extends ApiResource implements HasId {
   String validationBehavior;
 
   /**
+   * The first 10 validation errors for the current validation attempt. Use the validation errors
+   * list endpoint to paginate through the full list.
+   */
+  @SerializedName("validation_errors")
+  RedactionJobValidationErrorCollection validationErrors;
+
+  /**
    * You can cancel a redaction job when it’s in one of these statuses: {@code ready}, {@code
    * failed}.
    *
@@ -579,5 +586,6 @@ public class RedactionJob extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(objects, responseGetter);
+    trySetResponseGetter(validationErrors, responseGetter);
   }
 }

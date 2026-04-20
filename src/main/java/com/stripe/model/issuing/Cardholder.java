@@ -534,6 +534,14 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @EqualsAndHashCode(callSuper = false)
   public static class SpendingControls extends StripeObject {
     /**
+     * Array of card presence statuses from which authorizations will be allowed. Possible options
+     * are {@code present}, {@code not_present}. All other statuses will be blocked. Cannot be set
+     * with {@code blocked_card_presences}. Provide an empty value to unset this control.
+     */
+    @SerializedName("allowed_card_presences")
+    List<String> allowedCardPresences;
+
+    /**
      * Array of strings containing <a
      * href="https://docs.stripe.com/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to allow. All other categories will be blocked. Cannot be set with {@code
@@ -550,6 +558,14 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
      */
     @SerializedName("allowed_merchant_countries")
     List<String> allowedMerchantCountries;
+
+    /**
+     * Array of card presence statuses from which authorizations will be declined. Possible options
+     * are {@code present}, {@code not_present}. Cannot be set with {@code allowed_card_presences}.
+     * Provide an empty value to unset this control.
+     */
+    @SerializedName("blocked_card_presences")
+    List<String> blockedCardPresences;
 
     /**
      * Array of strings containing <a

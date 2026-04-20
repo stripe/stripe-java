@@ -917,6 +917,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String amazonPayPayments;
 
     /**
+     * The status of the {@code app_distribution} capability of the account, or whether the platform
+     * can distribute apps to other accounts.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("app_distribution")
+    String appDistribution;
+
+    /**
      * The status of the BECS Direct Debit (AU) payments capability of the account, or whether the
      * account can directly process BECS Direct Debit (AU) charges.
      *
@@ -1425,6 +1434,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("stripe_balance_payments")
     String stripeBalancePayments;
+
+    /**
+     * The status of the Sunbit capability of the account, or whether the account can directly
+     * process Sunbit payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("sunbit_payments")
+    String sunbitPayments;
 
     /**
      * The status of the Swish capability of the account, or whether the account can directly

@@ -557,8 +557,10 @@ public final class SubscriptionService extends ApiService {
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(String subscription, SubscriptionResumeParams params)
       throws StripeException {
@@ -568,8 +570,10 @@ public final class SubscriptionService extends ApiService {
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(String subscription, RequestOptions options) throws StripeException {
     return resume(subscription, (SubscriptionResumeParams) null, options);
@@ -578,8 +582,10 @@ public final class SubscriptionService extends ApiService {
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(String subscription) throws StripeException {
     return resume(subscription, (SubscriptionResumeParams) null, (RequestOptions) null);
@@ -588,8 +594,10 @@ public final class SubscriptionService extends ApiService {
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(
       String subscription, SubscriptionResumeParams params, RequestOptions options)

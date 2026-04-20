@@ -47,7 +47,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   @SerializedName("options")
   Options options;
 
-  /** Details provided about the user being verified. These details may be shown to the user. */
+  /** Details provided about the user being verified. These details might be shown to the user. */
   @SerializedName("provided_details")
   ProvidedDetails providedDetails;
 
@@ -59,7 +59,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   @SerializedName("related_customer_account")
   String relatedCustomerAccount;
 
-  /** Tokens referencing a Person resource and it's associated account. */
+  /** Tokens referencing a Person resource and its associated account. */
   @SerializedName("related_person")
   RelatedPerson relatedPerson;
 
@@ -248,7 +248,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Details provided about the user being verified. These details may be shown to the user. */
+    /** Details provided about the user being verified. These details might be shown to the user. */
     public Builder setProvidedDetails(
         VerificationSessionCreateParams.ProvidedDetails providedDetails) {
       this.providedDetails = providedDetails;
@@ -267,7 +267,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Tokens referencing a Person resource and it's associated account. */
+    /** Tokens referencing a Person resource and its associated account. */
     public Builder setRelatedPerson(VerificationSessionCreateParams.RelatedPerson relatedPerson) {
       this.relatedPerson = relatedPerson;
       return this;

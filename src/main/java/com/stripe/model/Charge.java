@@ -1324,6 +1324,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("stripe_balance")
     StripeBalance stripeBalance;
 
+    @SerializedName("sunbit")
+    Sunbit sunbit;
+
     @SerializedName("swish")
     Swish swish;
 
@@ -1471,17 +1474,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Affirm extends StripeObject {
-      /**
-       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
-       * transaction's reader is assigned to.
-       */
+      /** ID of the location that this reader is assigned to. */
       @SerializedName("location")
       String location;
 
-      /**
-       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
-       * transaction was made on.
-       */
+      /** ID of the reader this transaction was made on. */
       @SerializedName("reader")
       String reader;
 
@@ -1502,7 +1499,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("order_id")
       String orderId;
 
-      /** Order identifier shown to the merchant in Afterpay’s online portal. */
+      /** Order identifier shown to the merchant in Afterpay's online portal. */
       @SerializedName("reference")
       String reference;
     }
@@ -2812,7 +2809,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The token currency that the transaction was sent with.
        *
-       * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
+       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, or {@code usdt}.
        */
       @SerializedName("token_currency")
       String tokenCurrency;
@@ -3326,6 +3323,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Klarna extends StripeObject {
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
       /** The payer details for this transaction. */
       @SerializedName("payer_details")
       PayerDetails payerDetails;
@@ -3350,6 +3354,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("preferred_locale")
       String preferredLocale;
+
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
 
       /**
        * For more details about PayerDetails, please refer to the <a
@@ -4183,6 +4194,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** The connected account ID whose Stripe balance to use as the source of payment. */
       @SerializedName("account")
       String account;
+    }
+
+    /**
+     * For more details about Sunbit, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sunbit extends StripeObject {
+      /** The Sunbit transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**

@@ -136,6 +136,14 @@ public class OutboundPayment extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /**
+   * The purpose of the OutboundPayment, if applicable.
+   *
+   * <p>Equal to {@code payroll}.
+   */
+  @SerializedName("purpose")
+  String purpose;
+
   /** Details about a returned OutboundPayment. Only set when the status is {@code returned}. */
   @SerializedName("returned_details")
   ReturnedDetails returnedDetails;

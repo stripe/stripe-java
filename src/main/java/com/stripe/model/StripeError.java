@@ -30,16 +30,16 @@ public class StripeError extends StripeObject {
    * account_error_country_change_requires_additional_steps}, {@code account_information_mismatch},
    * {@code account_invalid}, {@code account_number_invalid}, {@code
    * account_token_required_for_v2_account}, {@code acss_debit_session_incomplete}, {@code
-   * alipay_upgrade_required}, {@code amount_too_large}, {@code amount_too_small}, {@code
-   * api_key_expired}, {@code application_fees_not_allowed}, {@code authentication_required}, {@code
-   * balance_insufficient}, {@code balance_invalid_parameter}, {@code
-   * bank_account_bad_routing_numbers}, {@code bank_account_declined}, {@code bank_account_exists},
-   * {@code bank_account_restricted}, {@code bank_account_unusable}, {@code
-   * bank_account_unverified}, {@code bank_account_verification_failed}, {@code
-   * billing_invalid_mandate}, {@code bitcoin_upgrade_required}, {@code
-   * capture_charge_authorization_expired}, {@code capture_unauthorized_payment}, {@code
-   * card_decline_rate_limit_exceeded}, {@code card_declined}, {@code
-   * cardholder_phone_number_required}, {@code charge_already_captured}, {@code
+   * action_blocked}, {@code alipay_upgrade_required}, {@code amount_too_large}, {@code
+   * amount_too_small}, {@code api_key_expired}, {@code application_fees_not_allowed}, {@code
+   * approval_required}, {@code authentication_required}, {@code balance_insufficient}, {@code
+   * balance_invalid_parameter}, {@code bank_account_bad_routing_numbers}, {@code
+   * bank_account_declined}, {@code bank_account_exists}, {@code bank_account_restricted}, {@code
+   * bank_account_unusable}, {@code bank_account_unverified}, {@code
+   * bank_account_verification_failed}, {@code billing_invalid_mandate}, {@code
+   * bitcoin_upgrade_required}, {@code capture_charge_authorization_expired}, {@code
+   * capture_unauthorized_payment}, {@code card_decline_rate_limit_exceeded}, {@code card_declined},
+   * {@code cardholder_phone_number_required}, {@code charge_already_captured}, {@code
    * charge_already_refunded}, {@code charge_disputed}, {@code charge_exceeds_source_limit}, {@code
    * charge_exceeds_transaction_limit}, {@code charge_expired_for_capture}, {@code
    * charge_invalid_parameter}, {@code charge_not_refundable}, {@code clearing_code_unsupported},

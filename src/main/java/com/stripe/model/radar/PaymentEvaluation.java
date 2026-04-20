@@ -87,8 +87,8 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   PaymentDetails paymentDetails;
 
   /**
-   * Recommended action based on the score of the fraudulent_payment signal. Possible values are
-   * {@code block} and {@code continue}.
+   * Recommended action based on the score of the {@code fraudulent_payment} signal. Possible values
+   * are {@code block} and {@code continue}.
    *
    * <p>One of {@code block}, or {@code continue}.
    */
@@ -752,15 +752,17 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       /**
        * Risk level of this signal, based on the score.
        *
-       * <p>One of {@code elevated}, {@code highest}, or {@code normal}.
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+       * not_assessed}, or {@code unknown}.
        */
       @SerializedName("risk_level")
       String riskLevel;
 
       /**
-       * Score for this insight. Possible values for evaluated payments are -1 and any value between
-       * 0 and 100. The value is returned with two decimal places. A score of -1 indicates a test
-       * integration and higher scores indicate a higher likelihood of the signal being true.
+       * Score for this signal. Possible values for evaluated payments are between 0 and 100. The
+       * value is returned with two decimal places and higher scores indicate a higher likelihood of
+       * the signal being true. A score of -1 is returned when a model evaluation was not performed,
+       * such as requests from incomplete integrations.
        */
       @SerializedName("score")
       BigDecimal score;
