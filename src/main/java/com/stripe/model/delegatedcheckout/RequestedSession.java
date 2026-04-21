@@ -570,7 +570,11 @@ public class RequestedSession extends ApiResource
       @SerializedName("shipping")
       Shipping shipping;
 
-      /** The type of the fulfillment option. */
+      /**
+       * The type of the fulfillment option.
+       *
+       * <p>One of {@code digital}, or {@code shipping}.
+       */
       @SerializedName("type")
       String type;
 
@@ -685,7 +689,11 @@ public class RequestedSession extends ApiResource
       @SerializedName("shipping")
       Shipping shipping;
 
-      /** The type of the selected fulfillment option. */
+      /**
+       * The type of the selected fulfillment option.
+       *
+       * <p>One of {@code digital}, or {@code shipping}.
+       */
       @SerializedName("type")
       String type;
 
@@ -736,7 +744,11 @@ public class RequestedSession extends ApiResource
       @SerializedName("shipping")
       Shipping shipping;
 
-      /** The type of the selected fulfillment option. */
+      /**
+       * The type of the selected fulfillment option.
+       *
+       * <p>One of {@code digital}, or {@code shipping}.
+       */
       @SerializedName("type")
       String type;
 
