@@ -44,7 +44,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /**
    * The reason why the card was canceled.
    *
-   * <p>One of {@code design_rejected}, {@code lost}, or {@code stolen}.
+   * <p>One of {@code design_rejected}, {@code fulfillment_error}, {@code lost}, or {@code stolen}.
    */
   @SerializedName("cancellation_reason")
   String cancellationReason;
@@ -175,7 +175,8 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /**
    * The reason why the previous card needed to be replaced.
    *
-   * <p>One of {@code damaged}, {@code expired}, {@code lost}, or {@code stolen}.
+   * <p>One of {@code damaged}, {@code expired}, {@code fulfillment_error}, {@code lost}, or {@code
+   * stolen}.
    */
   @SerializedName("replacement_reason")
   String replacementReason;
@@ -627,6 +628,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @EqualsAndHashCode(callSuper = false)
   public static class SpendingControls extends StripeObject {
     /**
+     * Array of card presence statuses from which authorizations will be allowed. Possible options
+     * are {@code present}, {@code not_present}. All other statuses will be blocked. Cannot be set
+     * with {@code blocked_card_presences}. Provide an empty value to unset this control.
+     */
+    @SerializedName("allowed_card_presences")
+    List<String> allowedCardPresences;
+
+    /**
      * Array of strings containing <a
      * href="https://docs.stripe.com/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to allow. All other categories will be blocked. Cannot be set with {@code
@@ -643,6 +652,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      */
     @SerializedName("allowed_merchant_countries")
     List<String> allowedMerchantCountries;
+
+    /**
+     * Array of card presence statuses from which authorizations will be declined. Possible options
+     * are {@code present}, {@code not_present}. Cannot be set with {@code allowed_card_presences}.
+     * Provide an empty value to unset this control.
+     */
+    @SerializedName("blocked_card_presences")
+    List<String> blockedCardPresences;
 
     /**
      * Array of strings containing <a

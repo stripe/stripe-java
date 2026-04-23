@@ -87,6 +87,14 @@ public class Authorization extends ApiResource
   @SerializedName("card")
   Card card;
 
+  /**
+   * Whether the card was present at the point of sale for the authorization.
+   *
+   * <p>One of {@code not_present}, or {@code present}.
+   */
+  @SerializedName("card_presence")
+  String cardPresence;
+
   /** The cardholder to whom this authorization belongs. */
   @SerializedName("cardholder")
   @Getter(lombok.AccessLevel.NONE)

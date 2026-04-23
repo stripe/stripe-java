@@ -15880,14 +15880,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * <strong>Required.</strong> A <a
-         * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
-         * representing the local jurisdiction. Supported FIPS codes are: {@code 02154} (Arlington
-         * Heights), {@code 05248} (Bensenville), {@code 06613} (Bloomington), {@code 10906}
-         * (Campton Hills), {@code 14000} (Chicago), {@code 21696} (East Dundee), {@code 24582}
-         * (Evanston), {@code 45421} (Lynwood), {@code 48892} (Midlothian), {@code 64343} (River
-         * Grove), {@code 64421} (Riverside), {@code 65806} (Roselle), and {@code 68081} (Schiller
-         * Park).
+         * <strong>Required.</strong> A jurisdiction code representing the <a
+         * href="https://stripe.com/tax/registering?type=amusement_tax#registration-types">local
+         * jurisdiction</a>.
          */
         @SerializedName("jurisdiction")
         String jurisdiction;
@@ -15943,14 +15938,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
           }
 
           /**
-           * <strong>Required.</strong> A <a
-           * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
-           * representing the local jurisdiction. Supported FIPS codes are: {@code 02154} (Arlington
-           * Heights), {@code 05248} (Bensenville), {@code 06613} (Bloomington), {@code 10906}
-           * (Campton Hills), {@code 14000} (Chicago), {@code 21696} (East Dundee), {@code 24582}
-           * (Evanston), {@code 45421} (Lynwood), {@code 48892} (Midlothian), {@code 64343} (River
-           * Grove), {@code 64421} (Riverside), {@code 65806} (Roselle), and {@code 68081} (Schiller
-           * Park).
+           * <strong>Required.</strong> A jurisdiction code representing the <a
+           * href="https://stripe.com/tax/registering?type=amusement_tax#registration-types">local
+           * jurisdiction</a>.
            */
           public Builder setJurisdiction(String jurisdiction) {
             this.jurisdiction = jurisdiction;

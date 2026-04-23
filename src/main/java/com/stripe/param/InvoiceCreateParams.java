@@ -1756,11 +1756,25 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Object payto;
 
       /**
+       * If paying by {@code pix}, this sub-hash contains details about the Pix payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("pix")
+      Object pix;
+
+      /**
        * If paying by {@code sepa_debit}, this sub-hash contains details about the SEPA Direct Debit
        * payment method options to pass to the invoice’s PaymentIntent.
        */
       @SerializedName("sepa_debit")
       Object sepaDebit;
+
+      /**
+       * If paying by {@code upi}, this sub-hash contains details about the UPI payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("upi")
+      Object upi;
 
       /**
        * If paying by {@code us_bank_account}, this sub-hash contains details about the ACH direct
@@ -1777,7 +1791,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           Object konbini,
           Object payto,
+          Object pix,
           Object sepaDebit,
+          Object upi,
           Object usBankAccount) {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
@@ -1786,7 +1802,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
         this.extraParams = extraParams;
         this.konbini = konbini;
         this.payto = payto;
+        this.pix = pix;
         this.sepaDebit = sepaDebit;
+        this.upi = upi;
         this.usBankAccount = usBankAccount;
       }
 
@@ -1809,7 +1827,11 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
         private Object payto;
 
+        private Object pix;
+
         private Object sepaDebit;
+
+        private Object upi;
 
         private Object usBankAccount;
 
@@ -1823,7 +1845,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
               this.extraParams,
               this.konbini,
               this.payto,
+              this.pix,
               this.sepaDebit,
+              this.upi,
               this.usBankAccount);
         }
 
@@ -1970,6 +1994,24 @@ public class InvoiceCreateParams extends ApiRequestParams {
         }
 
         /**
+         * If paying by {@code pix}, this sub-hash contains details about the Pix payment method
+         * options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setPix(InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Pix pix) {
+          this.pix = pix;
+          return this;
+        }
+
+        /**
+         * If paying by {@code pix}, this sub-hash contains details about the Pix payment method
+         * options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setPix(EmptyParam pix) {
+          this.pix = pix;
+          return this;
+        }
+
+        /**
          * If paying by {@code sepa_debit}, this sub-hash contains details about the SEPA Direct
          * Debit payment method options to pass to the invoice’s PaymentIntent.
          */
@@ -1985,6 +2027,24 @@ public class InvoiceCreateParams extends ApiRequestParams {
          */
         public Builder setSepaDebit(EmptyParam sepaDebit) {
           this.sepaDebit = sepaDebit;
+          return this;
+        }
+
+        /**
+         * If paying by {@code upi}, this sub-hash contains details about the UPI payment method
+         * options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setUpi(InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Upi upi) {
+          this.upi = upi;
+          return this;
+        }
+
+        /**
+         * If paying by {@code upi}, this sub-hash contains details about the UPI payment method
+         * options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setUpi(EmptyParam upi) {
+          this.upi = upi;
           return this;
         }
 
@@ -3299,6 +3359,120 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
+      public static class Pix {
+        /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+        @SerializedName("amount_includes_iof")
+        AmountIncludesIof amountIncludesIof;
+
+        /**
+         * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
+         * Defaults to 86400 seconds.
+         */
+        @SerializedName("expires_after_seconds")
+        Long expiresAfterSeconds;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Pix(
+            AmountIncludesIof amountIncludesIof,
+            Long expiresAfterSeconds,
+            Map<String, Object> extraParams) {
+          this.amountIncludesIof = amountIncludesIof;
+          this.expiresAfterSeconds = expiresAfterSeconds;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private AmountIncludesIof amountIncludesIof;
+
+          private Long expiresAfterSeconds;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Pix build() {
+            return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Pix(
+                this.amountIncludesIof, this.expiresAfterSeconds, this.extraParams);
+          }
+
+          /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+          public Builder setAmountIncludesIof(
+              InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Pix.AmountIncludesIof
+                  amountIncludesIof) {
+            this.amountIncludesIof = amountIncludesIof;
+            return this;
+          }
+
+          /**
+           * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
+           * Defaults to 86400 seconds.
+           */
+          public Builder setExpiresAfterSeconds(Long expiresAfterSeconds) {
+            this.expiresAfterSeconds = expiresAfterSeconds;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Pix#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Pix#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        public enum AmountIncludesIof implements ApiRequestParams.EnumParam {
+          @SerializedName("always")
+          ALWAYS("always"),
+
+          @SerializedName("never")
+          NEVER("never");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountIncludesIof(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class SepaDebit {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3355,6 +3529,236 @@ public class InvoiceCreateParams extends ApiRequestParams {
             }
             this.extraParams.putAll(map);
             return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Upi {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Configuration options for setting up an eMandate. */
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        private Upi(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+          this.extraParams = extraParams;
+          this.mandateOptions = mandateOptions;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private MandateOptions mandateOptions;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Upi build() {
+            return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Upi(
+                this.extraParams, this.mandateOptions);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Upi#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Upi#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Configuration options for setting up an eMandate. */
+          public Builder setMandateOptions(
+              InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Upi.MandateOptions
+                  mandateOptions) {
+            this.mandateOptions = mandateOptions;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions {
+          /** Amount to be charged for future payments. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+           * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+           * amount charged can be up to the value passed for the {@code amount} param.
+           */
+          @SerializedName("amount_type")
+          AmountType amountType;
+
+          /**
+           * A description of the mandate or subscription that is meant to be displayed to the
+           * customer.
+           */
+          @SerializedName("description")
+          String description;
+
+          /** End date of the mandate or subscription. */
+          @SerializedName("end_date")
+          Long endDate;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private MandateOptions(
+              Long amount,
+              AmountType amountType,
+              String description,
+              Long endDate,
+              Map<String, Object> extraParams) {
+            this.amount = amount;
+            this.amountType = amountType;
+            this.description = description;
+            this.endDate = endDate;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long amount;
+
+            private AmountType amountType;
+
+            private String description;
+
+            private Long endDate;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Upi.MandateOptions
+                build() {
+              return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Upi
+                  .MandateOptions(
+                  this.amount, this.amountType, this.description, this.endDate, this.extraParams);
+            }
+
+            /** Amount to be charged for future payments. */
+            public Builder setAmount(Long amount) {
+              this.amount = amount;
+              return this;
+            }
+
+            /**
+             * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+             * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+             * amount charged can be up to the value passed for the {@code amount} param.
+             */
+            public Builder setAmountType(
+                InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Upi.MandateOptions
+                        .AmountType
+                    amountType) {
+              this.amountType = amountType;
+              return this;
+            }
+
+            /**
+             * A description of the mandate or subscription that is meant to be displayed to the
+             * customer.
+             */
+            public Builder setDescription(String description) {
+              this.description = description;
+              return this;
+            }
+
+            /** End date of the mandate or subscription. */
+            public Builder setEndDate(Long endDate) {
+              this.endDate = endDate;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Upi.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Upi.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+
+          public enum AmountType implements ApiRequestParams.EnumParam {
+            @SerializedName("fixed")
+            FIXED("fixed"),
+
+            @SerializedName("maximum")
+            MAXIMUM("maximum");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            AmountType(String value) {
+              this.value = value;
+            }
           }
         }
       }
@@ -3953,6 +4357,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("payto")
       PAYTO("payto"),
 
+      @SerializedName("pix")
+      PIX("pix"),
+
       @SerializedName("promptpay")
       PROMPTPAY("promptpay"),
 
@@ -3970,6 +4377,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
       @SerializedName("swish")
       SWISH("swish"),
+
+      @SerializedName("upi")
+      UPI("upi"),
 
       @SerializedName("us_bank_account")
       US_BANK_ACCOUNT("us_bank_account"),

@@ -223,6 +223,14 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   Boolean livemode;
 
   /**
+   * Settings for Managed Payments for this Subscription and resulting <a
+   * href="https://stripe.com/api/invoices/object">Invoices</a> and <a
+   * href="https://stripe.com/api/payment_intents/object">PaymentIntents</a>.
+   */
+  @SerializedName("managed_payments")
+  ManagedPayments managedPayments;
+
+  /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
@@ -903,8 +911,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume() throws StripeException {
     return resume((Map<String, Object>) null, (RequestOptions) null);
@@ -914,8 +924,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(RequestOptions options) throws StripeException {
     return resume((Map<String, Object>) null, options);
@@ -925,8 +937,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(Map<String, Object> params) throws StripeException {
     return resume(params, (RequestOptions) null);
@@ -936,8 +950,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -952,8 +968,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(SubscriptionResumeParams params) throws StripeException {
     return resume(params, (RequestOptions) null);
@@ -963,8 +981,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(SubscriptionResumeParams params, RequestOptions options)
       throws StripeException {
@@ -1608,6 +1628,23 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /**
+   * For more details about ManagedPayments, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManagedPayments extends StripeObject {
+    /**
+     * Set to {@code true} to enable <a
+     * href="https://docs.stripe.com/payments/managed-payments">Managed Payments</a>, Stripe's
+     * merchant of record solution, for this session.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+  }
+
+  /**
    * The Pause Collection settings determine how we will pause collection for this subscription and
    * for how long the subscription should be paused.
    */
@@ -1710,11 +1747,25 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       Payto payto;
 
       /**
+       * This sub-hash contains details about the Pix payment method options to pass to invoices
+       * created by the subscription.
+       */
+      @SerializedName("pix")
+      Pix pix;
+
+      /**
        * This sub-hash contains details about the SEPA Direct Debit payment method options to pass
        * to invoices created by the subscription.
        */
       @SerializedName("sepa_debit")
       SepaDebit sepaDebit;
+
+      /**
+       * This sub-hash contains details about the UPI payment method options to pass to invoices
+       * created by the subscription.
+       */
+      @SerializedName("upi")
+      Upi upi;
 
       /**
        * This sub-hash contains details about the ACH direct debit payment method options to pass to
@@ -1956,6 +2007,62 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       }
 
       /**
+       * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Pix extends StripeObject {
+        /**
+         * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
+         * Defaults to 86400 seconds.
+         */
+        @SerializedName("expires_after_seconds")
+        Long expiresAfterSeconds;
+
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /** Amount to be charged for future payments. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * Determines if the amount includes the IOF tax.
+           *
+           * <p>One of {@code always}, or {@code never}.
+           */
+          @SerializedName("amount_includes_iof")
+          String amountIncludesIof;
+
+          /**
+           * Date when the mandate expires and no further payments will be charged, in {@code
+           * YYYY-MM-DD}.
+           */
+          @SerializedName("end_date")
+          String endDate;
+
+          /**
+           * Schedule at which the future payments will be charged.
+           *
+           * <p>One of {@code halfyearly}, {@code monthly}, {@code quarterly}, {@code weekly}, or
+           * {@code yearly}.
+           */
+          @SerializedName("payment_schedule")
+          String paymentSchedule;
+        }
+      }
+
+      /**
        * For more details about SepaDebit, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
        */
@@ -1963,6 +2070,50 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class SepaDebit extends StripeObject {}
+
+      /**
+       * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Upi extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /** Amount to be charged for future payments. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+           * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+           * amount charged can be up to the value passed for the {@code amount} param.
+           */
+          @SerializedName("amount_type")
+          String amountType;
+
+          /**
+           * A description of the mandate or subscription that is meant to be displayed to the
+           * customer.
+           */
+          @SerializedName("description")
+          String description;
+
+          /** End date of the mandate or subscription. */
+          @SerializedName("end_date")
+          Long endDate;
+        }
+      }
 
       /**
        * For more details about UsBankAccount, please refer to the <a
@@ -2193,6 +2344,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     trySetResponseGetter(invoiceSettings, responseGetter);
     trySetResponseGetter(items, responseGetter);
     trySetResponseGetter(latestInvoice, responseGetter);
+    trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(pauseCollection, responseGetter);
     trySetResponseGetter(paymentSettings, responseGetter);
