@@ -583,6 +583,10 @@ public class SetupAttempt extends ApiResource implements HasId {
       @SerializedName("last4")
       String last4;
 
+      /** True if this payment was marked as MOTO and out of scope for SCA. */
+      @SerializedName("moto")
+      Boolean moto;
+
       /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
        * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},

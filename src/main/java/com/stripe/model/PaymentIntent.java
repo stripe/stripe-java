@@ -2007,6 +2007,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("display_bank_transfer_instructions")
     DisplayBankTransferInstructions displayBankTransferInstructions;
 
+    @SerializedName("klarna_display_qr_code")
+    KlarnaDisplayQrCode klarnaDisplayQrCode;
+
     @SerializedName("konbini_display_details")
     KonbiniDisplayDetails konbiniDisplayDetails;
 
@@ -2466,6 +2469,31 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           String branchName;
         }
       }
+    }
+
+    /**
+     * For more details about KlarnaDisplayQrCode, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class KlarnaDisplayQrCode extends StripeObject {
+      /** The data being used to generate QR code. */
+      @SerializedName("data")
+      String data;
+
+      /** The timestamp at which the QR code expires. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /** The image_url_png string used to render QR code. */
+      @SerializedName("image_url_png")
+      String imageUrlPng;
+
+      /** The image_url_svg string used to render QR code. */
+      @SerializedName("image_url_svg")
+      String imageUrlSvg;
     }
 
     /**

@@ -61,6 +61,8 @@ public class RequestOptionsTest extends BaseStripeTest {
                     .setClientId("123")
                     .setIdempotencyKey("123")
                     .setStripeAccount("acct_bar")
+                    .setStripeContext("acct_context_123")
+                    .setStripeRequestTrigger("some_trigger")
                     .setConnectTimeout(100)
                     .setReadTimeout(100)
                     .setConnectionProxy(
@@ -73,6 +75,8 @@ public class RequestOptionsTest extends BaseStripeTest {
     RequestOptions optsRebuilt = opts.toBuilderFullCopy().build();
 
     assertEquals(opts, optsRebuilt);
+    assertEquals("acct_context_123", optsRebuilt.getStripeContext());
+    assertEquals("some_trigger", optsRebuilt.getStripeRequestTrigger());
   }
 
   @Test

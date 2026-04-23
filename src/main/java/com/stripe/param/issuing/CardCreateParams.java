@@ -1201,6 +1201,14 @@ public class CardCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class SpendingControls {
     /**
+     * Array of card presence statuses from which authorizations will be allowed. Possible options
+     * are {@code present}, {@code not_present}. All other statuses will be blocked. Cannot be set
+     * with {@code blocked_card_presences}. Provide an empty value to unset this control.
+     */
+    @SerializedName("allowed_card_presences")
+    List<CardCreateParams.SpendingControls.AllowedCardPresence> allowedCardPresences;
+
+    /**
      * Array of strings containing <a
      * href="https://docs.stripe.com/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to allow. All other categories will be blocked. Cannot be set with {@code
@@ -1217,6 +1225,14 @@ public class CardCreateParams extends ApiRequestParams {
      */
     @SerializedName("allowed_merchant_countries")
     List<String> allowedMerchantCountries;
+
+    /**
+     * Array of card presence statuses from which authorizations will be declined. Possible options
+     * are {@code present}, {@code not_present}. Cannot be set with {@code allowed_card_presences}.
+     * Provide an empty value to unset this control.
+     */
+    @SerializedName("blocked_card_presences")
+    List<CardCreateParams.SpendingControls.BlockedCardPresence> blockedCardPresences;
 
     /**
      * Array of strings containing <a
@@ -1253,14 +1269,18 @@ public class CardCreateParams extends ApiRequestParams {
     List<CardCreateParams.SpendingControls.SpendingLimit> spendingLimits;
 
     private SpendingControls(
+        List<CardCreateParams.SpendingControls.AllowedCardPresence> allowedCardPresences,
         List<CardCreateParams.SpendingControls.AllowedCategory> allowedCategories,
         List<String> allowedMerchantCountries,
+        List<CardCreateParams.SpendingControls.BlockedCardPresence> blockedCardPresences,
         List<CardCreateParams.SpendingControls.BlockedCategory> blockedCategories,
         List<String> blockedMerchantCountries,
         Map<String, Object> extraParams,
         List<CardCreateParams.SpendingControls.SpendingLimit> spendingLimits) {
+      this.allowedCardPresences = allowedCardPresences;
       this.allowedCategories = allowedCategories;
       this.allowedMerchantCountries = allowedMerchantCountries;
+      this.blockedCardPresences = blockedCardPresences;
       this.blockedCategories = blockedCategories;
       this.blockedMerchantCountries = blockedMerchantCountries;
       this.extraParams = extraParams;
@@ -1272,9 +1292,13 @@ public class CardCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private List<CardCreateParams.SpendingControls.AllowedCardPresence> allowedCardPresences;
+
       private List<CardCreateParams.SpendingControls.AllowedCategory> allowedCategories;
 
       private List<String> allowedMerchantCountries;
+
+      private List<CardCreateParams.SpendingControls.BlockedCardPresence> blockedCardPresences;
 
       private List<CardCreateParams.SpendingControls.BlockedCategory> blockedCategories;
 
@@ -1287,12 +1311,42 @@ public class CardCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public CardCreateParams.SpendingControls build() {
         return new CardCreateParams.SpendingControls(
+            this.allowedCardPresences,
             this.allowedCategories,
             this.allowedMerchantCountries,
+            this.blockedCardPresences,
             this.blockedCategories,
             this.blockedMerchantCountries,
             this.extraParams,
             this.spendingLimits);
+      }
+
+      /**
+       * Add an element to `allowedCardPresences` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link CardCreateParams.SpendingControls#allowedCardPresences} for the field documentation.
+       */
+      public Builder addAllowedCardPresence(
+          CardCreateParams.SpendingControls.AllowedCardPresence element) {
+        if (this.allowedCardPresences == null) {
+          this.allowedCardPresences = new ArrayList<>();
+        }
+        this.allowedCardPresences.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `allowedCardPresences` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link CardCreateParams.SpendingControls#allowedCardPresences} for the field documentation.
+       */
+      public Builder addAllAllowedCardPresence(
+          List<CardCreateParams.SpendingControls.AllowedCardPresence> elements) {
+        if (this.allowedCardPresences == null) {
+          this.allowedCardPresences = new ArrayList<>();
+        }
+        this.allowedCardPresences.addAll(elements);
+        return this;
       }
 
       /**
@@ -1347,6 +1401,34 @@ public class CardCreateParams extends ApiRequestParams {
           this.allowedMerchantCountries = new ArrayList<>();
         }
         this.allowedMerchantCountries.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add an element to `blockedCardPresences` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link CardCreateParams.SpendingControls#blockedCardPresences} for the field documentation.
+       */
+      public Builder addBlockedCardPresence(
+          CardCreateParams.SpendingControls.BlockedCardPresence element) {
+        if (this.blockedCardPresences == null) {
+          this.blockedCardPresences = new ArrayList<>();
+        }
+        this.blockedCardPresences.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `blockedCardPresences` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link CardCreateParams.SpendingControls#blockedCardPresences} for the field documentation.
+       */
+      public Builder addAllBlockedCardPresence(
+          List<CardCreateParams.SpendingControls.BlockedCardPresence> elements) {
+        if (this.blockedCardPresences == null) {
+          this.blockedCardPresences = new ArrayList<>();
+        }
+        this.blockedCardPresences.addAll(elements);
         return this;
       }
 
@@ -2531,6 +2613,21 @@ public class CardCreateParams extends ApiRequestParams {
       }
     }
 
+    public enum AllowedCardPresence implements ApiRequestParams.EnumParam {
+      @SerializedName("not_present")
+      NOT_PRESENT("not_present"),
+
+      @SerializedName("present")
+      PRESENT("present");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AllowedCardPresence(String value) {
+        this.value = value;
+      }
+    }
+
     public enum AllowedCategory implements ApiRequestParams.EnumParam {
       @SerializedName("ac_refrigeration_repair")
       AC_REFRIGERATION_REPAIR("ac_refrigeration_repair"),
@@ -3443,6 +3540,21 @@ public class CardCreateParams extends ApiRequestParams {
       private final String value;
 
       AllowedCategory(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum BlockedCardPresence implements ApiRequestParams.EnumParam {
+      @SerializedName("not_present")
+      NOT_PRESENT("not_present"),
+
+      @SerializedName("present")
+      PRESENT("present");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BlockedCardPresence(String value) {
         this.value = value;
       }
     }

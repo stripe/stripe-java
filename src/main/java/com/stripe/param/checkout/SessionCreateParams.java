@@ -7728,6 +7728,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("billie")
     Billie billie;
 
+    /** contains details about the BLIK payment method options. */
+    @SerializedName("blik")
+    Blik blik;
+
     /** contains details about the Boleto payment method options. */
     @SerializedName("boleto")
     Boleto boleto;
@@ -7896,6 +7900,7 @@ public class SessionCreateParams extends ApiRequestParams {
         BacsDebit bacsDebit,
         Bancontact bancontact,
         Billie billie,
+        Blik blik,
         Boleto boleto,
         Card card,
         Cashapp cashapp,
@@ -7944,6 +7949,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
       this.billie = billie;
+      this.blik = blik;
       this.boleto = boleto;
       this.card = card;
       this.cashapp = cashapp;
@@ -8008,6 +8014,8 @@ public class SessionCreateParams extends ApiRequestParams {
       private Bancontact bancontact;
 
       private Billie billie;
+
+      private Blik blik;
 
       private Boleto boleto;
 
@@ -8098,6 +8106,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.bacsDebit,
             this.bancontact,
             this.billie,
+            this.blik,
             this.boleto,
             this.card,
             this.cashapp,
@@ -8200,6 +8209,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Billie payment method options. */
       public Builder setBillie(SessionCreateParams.PaymentMethodOptions.Billie billie) {
         this.billie = billie;
+        return this;
+      }
+
+      /** contains details about the BLIK payment method options. */
+      public Builder setBlik(SessionCreateParams.PaymentMethodOptions.Blik blik) {
+        this.blik = blik;
         return this;
       }
 
@@ -10219,6 +10234,198 @@ public class SessionCreateParams extends ApiRequestParams {
         private final String value;
 
         CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Blik {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Additional fields for Mandate creation. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      private Blik(
+          Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
+          ApiRequestParams.EnumParam setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private MandateOptions mandateOptions;
+
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Blik build() {
+          return new SessionCreateParams.PaymentMethodOptions.Blik(
+              this.extraParams, this.mandateOptions, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Blik#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Blik#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Additional fields for Mandate creation. */
+        public Builder setMandateOptions(
+            SessionCreateParams.PaymentMethodOptions.Blik.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
+          return this;
+        }
+
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.Blik.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions {
+        /**
+         * Date when the mandate expires and no further payments will be charged. If not provided,
+         * the mandate will be set to be indefinite.
+         */
+        @SerializedName("expires_after")
+        Long expiresAfter;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private MandateOptions(Long expiresAfter, Map<String, Object> extraParams) {
+          this.expiresAfter = expiresAfter;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long expiresAfter;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.PaymentMethodOptions.Blik.MandateOptions build() {
+            return new SessionCreateParams.PaymentMethodOptions.Blik.MandateOptions(
+                this.expiresAfter, this.extraParams);
+          }
+
+          /**
+           * Date when the mandate expires and no further payments will be charged. If not provided,
+           * the mandate will be set to be indefinite.
+           */
+          public Builder setExpiresAfter(Long expiresAfter) {
+            this.expiresAfter = expiresAfter;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.Blik.MandateOptions#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.Blik.MandateOptions#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session"),
+
+        @SerializedName("on_session")
+        ON_SESSION("on_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
           this.value = value;
         }
       }
@@ -21934,6 +22141,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("sofort")
     SOFORT("sofort"),
 
+    @SerializedName("sunbit")
+    SUNBIT("sunbit"),
+
     @SerializedName("swish")
     SWISH("swish"),
 
@@ -22290,6 +22500,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("sofort")
     SOFORT("sofort"),
+
+    @SerializedName("sunbit")
+    SUNBIT("sunbit"),
 
     @SerializedName("swish")
     SWISH("swish"),

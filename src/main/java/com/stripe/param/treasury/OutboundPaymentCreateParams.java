@@ -86,6 +86,13 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
+   * The purpose of the OutboundPayment, if applicable. This list is not exhaustive, do not specify
+   * this parameter if your purpose does not match any that are provided.
+   */
+  @SerializedName("purpose")
+  Purpose purpose;
+
+  /**
    * The description that appears on the receiving end for this OutboundPayment (for example, bank
    * statement for external bank transfer). Maximum 10 characters for {@code ach} payments, 140
    * characters for {@code us_domestic_wire} payments, or 500 characters for {@code stripe} network
@@ -108,6 +115,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String financialAccount,
       Map<String, String> metadata,
+      Purpose purpose,
       String statementDescriptor) {
     this.amount = amount;
     this.currency = currency;
@@ -121,6 +129,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.financialAccount = financialAccount;
     this.metadata = metadata;
+    this.purpose = purpose;
     this.statementDescriptor = statementDescriptor;
   }
 
@@ -153,6 +162,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private Purpose purpose;
+
     private String statementDescriptor;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -170,6 +181,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
           this.extraParams,
           this.financialAccount,
           this.metadata,
+          this.purpose,
           this.statementDescriptor);
     }
 
@@ -318,6 +330,15 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * The purpose of the OutboundPayment, if applicable. This list is not exhaustive, do not
+     * specify this parameter if your purpose does not match any that are provided.
+     */
+    public Builder setPurpose(OutboundPaymentCreateParams.Purpose purpose) {
+      this.purpose = purpose;
       return this;
     }
 
@@ -1288,6 +1309,18 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
         this.present = present;
         return this;
       }
+    }
+  }
+
+  public enum Purpose implements ApiRequestParams.EnumParam {
+    @SerializedName("payroll")
+    PAYROLL("payroll");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Purpose(String value) {
+      this.value = value;
     }
   }
 }

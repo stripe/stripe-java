@@ -280,7 +280,27 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
     public static class TaxRateDetails extends StripeObject {
       /** ID of the tax rate. */
       @SerializedName("tax_rate")
-      String taxRate;
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<TaxRate> taxRate;
+
+      /** Get ID of expandable {@code taxRate} object. */
+      public String getTaxRate() {
+        return (this.taxRate != null) ? this.taxRate.getId() : null;
+      }
+
+      public void setTaxRate(String id) {
+        this.taxRate = ApiResource.setExpandableFieldId(id, this.taxRate);
+      }
+
+      /** Get expanded {@code taxRate}. */
+      public TaxRate getTaxRateObject() {
+        return (this.taxRate != null) ? this.taxRate.getExpanded() : null;
+      }
+
+      public void setTaxRateObject(TaxRate expandableObject) {
+        this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
+      }
     }
   }
 

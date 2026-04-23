@@ -14325,6 +14325,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    /** ID of the SharedPaymentGrantedToken used to confirm this PaymentIntent. */
+    @SerializedName("shared_payment_granted_token")
+    String sharedPaymentGrantedToken;
+
     /**
      * If this is a Shopeepay PaymentMethod, this hash contains details about the Shopeepay payment
      * method.
@@ -14342,6 +14346,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /** This hash contains details about the Stripe balance payment method. */
     @SerializedName("stripe_balance")
     StripeBalance stripeBalance;
+
+    /**
+     * If this is a Sunbit PaymentMethod, this hash contains details about the Sunbit payment
+     * method.
+     */
+    @SerializedName("sunbit")
+    Sunbit sunbit;
 
     /**
      * If this is a {@code swish} PaymentMethod, this hash contains details about the Swish payment
@@ -14447,9 +14458,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         SamsungPay samsungPay,
         Satispay satispay,
         SepaDebit sepaDebit,
+        String sharedPaymentGrantedToken,
         Shopeepay shopeepay,
         Sofort sofort,
         StripeBalance stripeBalance,
+        Sunbit sunbit,
         Swish swish,
         Twint twint,
         Type type,
@@ -14511,9 +14524,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.samsungPay = samsungPay;
       this.satispay = satispay;
       this.sepaDebit = sepaDebit;
+      this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
       this.shopeepay = shopeepay;
       this.sofort = sofort;
       this.stripeBalance = stripeBalance;
+      this.sunbit = sunbit;
       this.swish = swish;
       this.twint = twint;
       this.type = type;
@@ -14636,11 +14651,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private SepaDebit sepaDebit;
 
+      private String sharedPaymentGrantedToken;
+
       private Shopeepay shopeepay;
 
       private Sofort sofort;
 
       private StripeBalance stripeBalance;
+
+      private Sunbit sunbit;
 
       private Swish swish;
 
@@ -14713,9 +14732,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.samsungPay,
             this.satispay,
             this.sepaDebit,
+            this.sharedPaymentGrantedToken,
             this.shopeepay,
             this.sofort,
             this.stripeBalance,
+            this.sunbit,
             this.swish,
             this.twint,
             this.type,
@@ -15261,6 +15282,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** ID of the SharedPaymentGrantedToken used to confirm this PaymentIntent. */
+      public Builder setSharedPaymentGrantedToken(String sharedPaymentGrantedToken) {
+        this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
+        return this;
+      }
+
       /**
        * If this is a Shopeepay PaymentMethod, this hash contains details about the Shopeepay
        * payment method.
@@ -15283,6 +15310,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       public Builder setStripeBalance(
           PaymentIntentCreateParams.PaymentMethodData.StripeBalance stripeBalance) {
         this.stripeBalance = stripeBalance;
+        return this;
+      }
+
+      /**
+       * If this is a Sunbit PaymentMethod, this hash contains details about the Sunbit payment
+       * method.
+       */
+      public Builder setSunbit(PaymentIntentCreateParams.PaymentMethodData.Sunbit sunbit) {
+        this.sunbit = sunbit;
         return this;
       }
 
@@ -19819,6 +19855,64 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Sunbit {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Sunbit(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentCreateParams.PaymentMethodData.Sunbit build() {
+          return new PaymentIntentCreateParams.PaymentMethodData.Sunbit(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Sunbit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Sunbit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Swish {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -20611,6 +20705,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       @SerializedName("stripe_balance")
       STRIPE_BALANCE("stripe_balance"),
+
+      @SerializedName("sunbit")
+      SUNBIT("sunbit"),
 
       @SerializedName("swish")
       SWISH("swish"),
@@ -40768,10 +40865,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
        * with regional legislation and network rules, such as <a
        * href="https://stripe.com/strong-customer-authentication">SCA</a>.
-       *
-       * <p>If you've already set {@code setup_future_usage} and you're performing a request using a
-       * publishable key, you can only update the value from {@code on_session} to {@code
-       * off_session}.
        */
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
@@ -40902,10 +40995,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
          * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
          * comply with regional legislation and network rules, such as <a
          * href="https://stripe.com/strong-customer-authentication">SCA</a>.
-         *
-         * <p>If you've already set {@code setup_future_usage} and you're performing a request using
-         * a publishable key, you can only update the value from {@code on_session} to {@code
-         * off_session}.
          */
         public Builder setSetupFutureUsage(
             PaymentIntentCreateParams.PaymentMethodOptions.Pix.SetupFutureUsage setupFutureUsage) {
@@ -45400,6 +45489,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     @SerializedName("stripe_balance")
     STRIPE_BALANCE("stripe_balance"),
+
+    @SerializedName("sunbit")
+    SUNBIT("sunbit"),
 
     @SerializedName("swish")
     SWISH("swish"),

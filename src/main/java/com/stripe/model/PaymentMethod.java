@@ -261,6 +261,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
+  /** ID of the shared payment granted token used in the creation of this PaymentMethod. */
+  @SerializedName("shared_payment_granted_token")
+  String sharedPaymentGrantedToken;
+
   @SerializedName("shopeepay")
   Shopeepay shopeepay;
 
@@ -269,6 +273,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
   @SerializedName("stripe_balance")
   StripeBalance stripeBalance;
+
+  @SerializedName("sunbit")
+  Sunbit sunbit;
 
   @SerializedName("swish")
   Swish swish;
@@ -290,8 +297,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * nz_bank_account}, {@code oxxo}, {@code p24}, {@code pay_by_bank}, {@code payco}, {@code
    * paynow}, {@code paypal}, {@code paypay}, {@code payto}, {@code pix}, {@code promptpay}, {@code
    * qris}, {@code rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code satispay}, {@code
-   * sepa_debit}, {@code shopeepay}, {@code sofort}, {@code stripe_balance}, {@code swish}, {@code
-   * twint}, {@code upi}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+   * sepa_debit}, {@code shopeepay}, {@code sofort}, {@code stripe_balance}, {@code sunbit}, {@code
+   * swish}, {@code twint}, {@code upi}, {@code us_bank_account}, {@code wechat_pay}, or {@code
+   * zip}.
    */
   @SerializedName("type")
   String type;
@@ -2693,6 +2701,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
+   * For more details about Sunbit, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Sunbit extends StripeObject {}
+
+  /**
    * For more details about Swish, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -2921,6 +2938,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(shopeepay, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(stripeBalance, responseGetter);
+    trySetResponseGetter(sunbit, responseGetter);
     trySetResponseGetter(swish, responseGetter);
     trySetResponseGetter(twint, responseGetter);
     trySetResponseGetter(upi, responseGetter);

@@ -427,6 +427,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("stripe_balance")
     STRIPE_BALANCE("stripe_balance"),
 
+    @SerializedName("sunbit")
+    SUNBIT("sunbit"),
+
     @SerializedName("swish")
     SWISH("swish"),
 

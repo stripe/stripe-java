@@ -15726,6 +15726,18 @@ public class RegistrationCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Us {
+      /** Options for the admission tax registration. */
+      @SerializedName("admissions_tax")
+      AdmissionsTax admissionsTax;
+
+      /** Options for the attendance tax registration. */
+      @SerializedName("attendance_tax")
+      AttendanceTax attendanceTax;
+
+      /** Options for the entertainment tax registration. */
+      @SerializedName("entertainment_tax")
+      EntertainmentTax entertainmentTax;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -15735,6 +15747,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the gross receipts tax registration. */
+      @SerializedName("gross_receipts_tax")
+      GrossReceiptsTax grossReceiptsTax;
+
+      /** Options for the hospitality tax registration. */
+      @SerializedName("hospitality_tax")
+      HospitalityTax hospitalityTax;
+
       /** Options for the local amusement tax registration. */
       @SerializedName("local_amusement_tax")
       LocalAmusementTax localAmusementTax;
@@ -15742,6 +15762,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       /** Options for the local lease tax registration. */
       @SerializedName("local_lease_tax")
       LocalLeaseTax localLeaseTax;
+
+      /** Options for the luxury tax registration. */
+      @SerializedName("luxury_tax")
+      LuxuryTax luxuryTax;
+
+      /** Options for the resort tax registration. */
+      @SerializedName("resort_tax")
+      ResortTax resortTax;
 
       /**
        * <strong>Required.</strong> Two-letter US state code (<a
@@ -15754,22 +15782,42 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName("state_sales_tax")
       StateSalesTax stateSalesTax;
 
+      /** Options for the tourism tax registration. */
+      @SerializedName("tourism_tax")
+      TourismTax tourismTax;
+
       /** <strong>Required.</strong> Type of registration to be created in the US. */
       @SerializedName("type")
       Type type;
 
       private Us(
+          AdmissionsTax admissionsTax,
+          AttendanceTax attendanceTax,
+          EntertainmentTax entertainmentTax,
           Map<String, Object> extraParams,
+          GrossReceiptsTax grossReceiptsTax,
+          HospitalityTax hospitalityTax,
           LocalAmusementTax localAmusementTax,
           LocalLeaseTax localLeaseTax,
+          LuxuryTax luxuryTax,
+          ResortTax resortTax,
           String state,
           StateSalesTax stateSalesTax,
+          TourismTax tourismTax,
           Type type) {
+        this.admissionsTax = admissionsTax;
+        this.attendanceTax = attendanceTax;
+        this.entertainmentTax = entertainmentTax;
         this.extraParams = extraParams;
+        this.grossReceiptsTax = grossReceiptsTax;
+        this.hospitalityTax = hospitalityTax;
         this.localAmusementTax = localAmusementTax;
         this.localLeaseTax = localLeaseTax;
+        this.luxuryTax = luxuryTax;
+        this.resortTax = resortTax;
         this.state = state;
         this.stateSalesTax = stateSalesTax;
+        this.tourismTax = tourismTax;
         this.type = type;
       }
 
@@ -15778,27 +15826,72 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private AdmissionsTax admissionsTax;
+
+        private AttendanceTax attendanceTax;
+
+        private EntertainmentTax entertainmentTax;
+
         private Map<String, Object> extraParams;
+
+        private GrossReceiptsTax grossReceiptsTax;
+
+        private HospitalityTax hospitalityTax;
 
         private LocalAmusementTax localAmusementTax;
 
         private LocalLeaseTax localLeaseTax;
 
+        private LuxuryTax luxuryTax;
+
+        private ResortTax resortTax;
+
         private String state;
 
         private StateSalesTax stateSalesTax;
+
+        private TourismTax tourismTax;
 
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Us build() {
           return new RegistrationCreateParams.CountryOptions.Us(
+              this.admissionsTax,
+              this.attendanceTax,
+              this.entertainmentTax,
               this.extraParams,
+              this.grossReceiptsTax,
+              this.hospitalityTax,
               this.localAmusementTax,
               this.localLeaseTax,
+              this.luxuryTax,
+              this.resortTax,
               this.state,
               this.stateSalesTax,
+              this.tourismTax,
               this.type);
+        }
+
+        /** Options for the admission tax registration. */
+        public Builder setAdmissionsTax(
+            RegistrationCreateParams.CountryOptions.Us.AdmissionsTax admissionsTax) {
+          this.admissionsTax = admissionsTax;
+          return this;
+        }
+
+        /** Options for the attendance tax registration. */
+        public Builder setAttendanceTax(
+            RegistrationCreateParams.CountryOptions.Us.AttendanceTax attendanceTax) {
+          this.attendanceTax = attendanceTax;
+          return this;
+        }
+
+        /** Options for the entertainment tax registration. */
+        public Builder setEntertainmentTax(
+            RegistrationCreateParams.CountryOptions.Us.EntertainmentTax entertainmentTax) {
+          this.entertainmentTax = entertainmentTax;
+          return this;
         }
 
         /**
@@ -15829,6 +15922,20 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the gross receipts tax registration. */
+        public Builder setGrossReceiptsTax(
+            RegistrationCreateParams.CountryOptions.Us.GrossReceiptsTax grossReceiptsTax) {
+          this.grossReceiptsTax = grossReceiptsTax;
+          return this;
+        }
+
+        /** Options for the hospitality tax registration. */
+        public Builder setHospitalityTax(
+            RegistrationCreateParams.CountryOptions.Us.HospitalityTax hospitalityTax) {
+          this.hospitalityTax = hospitalityTax;
+          return this;
+        }
+
         /** Options for the local amusement tax registration. */
         public Builder setLocalAmusementTax(
             RegistrationCreateParams.CountryOptions.Us.LocalAmusementTax localAmusementTax) {
@@ -15840,6 +15947,20 @@ public class RegistrationCreateParams extends ApiRequestParams {
         public Builder setLocalLeaseTax(
             RegistrationCreateParams.CountryOptions.Us.LocalLeaseTax localLeaseTax) {
           this.localLeaseTax = localLeaseTax;
+          return this;
+        }
+
+        /** Options for the luxury tax registration. */
+        public Builder setLuxuryTax(
+            RegistrationCreateParams.CountryOptions.Us.LuxuryTax luxuryTax) {
+          this.luxuryTax = luxuryTax;
+          return this;
+        }
+
+        /** Options for the resort tax registration. */
+        public Builder setResortTax(
+            RegistrationCreateParams.CountryOptions.Us.ResortTax resortTax) {
+          this.resortTax = resortTax;
           return this;
         }
 
@@ -15859,10 +15980,426 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the tourism tax registration. */
+        public Builder setTourismTax(
+            RegistrationCreateParams.CountryOptions.Us.TourismTax tourismTax) {
+          this.tourismTax = tourismTax;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in the US. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Us.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AdmissionsTax {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> A jurisdiction code representing the <a
+         * href="https://stripe.com/tax/registering?type=admissions_tax#registration-types">local
+         * jurisdiction</a>.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+
+        private AdmissionsTax(Map<String, Object> extraParams, String jurisdiction) {
+          this.extraParams = extraParams;
+          this.jurisdiction = jurisdiction;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String jurisdiction;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Us.AdmissionsTax build() {
+            return new RegistrationCreateParams.CountryOptions.Us.AdmissionsTax(
+                this.extraParams, this.jurisdiction);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.AdmissionsTax#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.AdmissionsTax#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> A jurisdiction code representing the <a
+           * href="https://stripe.com/tax/registering?type=admissions_tax#registration-types">local
+           * jurisdiction</a>.
+           */
+          public Builder setJurisdiction(String jurisdiction) {
+            this.jurisdiction = jurisdiction;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AttendanceTax {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> A jurisdiction code representing the <a
+         * href="https://stripe.com/tax/registering?type=attendance_tax#registration-types">local
+         * jurisdiction</a>.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+
+        private AttendanceTax(Map<String, Object> extraParams, String jurisdiction) {
+          this.extraParams = extraParams;
+          this.jurisdiction = jurisdiction;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String jurisdiction;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Us.AttendanceTax build() {
+            return new RegistrationCreateParams.CountryOptions.Us.AttendanceTax(
+                this.extraParams, this.jurisdiction);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.AttendanceTax#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.AttendanceTax#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> A jurisdiction code representing the <a
+           * href="https://stripe.com/tax/registering?type=attendance_tax#registration-types">local
+           * jurisdiction</a>.
+           */
+          public Builder setJurisdiction(String jurisdiction) {
+            this.jurisdiction = jurisdiction;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EntertainmentTax {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> A jurisdiction code representing the <a
+         * href="https://stripe.com/tax/registering?type=entertainment_tax#registration-types">local
+         * jurisdiction</a>.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+
+        private EntertainmentTax(Map<String, Object> extraParams, String jurisdiction) {
+          this.extraParams = extraParams;
+          this.jurisdiction = jurisdiction;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String jurisdiction;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Us.EntertainmentTax build() {
+            return new RegistrationCreateParams.CountryOptions.Us.EntertainmentTax(
+                this.extraParams, this.jurisdiction);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RegistrationCreateParams.CountryOptions.Us.EntertainmentTax#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RegistrationCreateParams.CountryOptions.Us.EntertainmentTax#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> A jurisdiction code representing the <a
+           * href="https://stripe.com/tax/registering?type=entertainment_tax#registration-types">local
+           * jurisdiction</a>.
+           */
+          public Builder setJurisdiction(String jurisdiction) {
+            this.jurisdiction = jurisdiction;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class GrossReceiptsTax {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> A jurisdiction code representing the <a
+         * href="https://stripe.com/tax/registering?type=gross_receipts_tax#registration-types">local
+         * jurisdiction</a>.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+
+        private GrossReceiptsTax(Map<String, Object> extraParams, String jurisdiction) {
+          this.extraParams = extraParams;
+          this.jurisdiction = jurisdiction;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String jurisdiction;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Us.GrossReceiptsTax build() {
+            return new RegistrationCreateParams.CountryOptions.Us.GrossReceiptsTax(
+                this.extraParams, this.jurisdiction);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RegistrationCreateParams.CountryOptions.Us.GrossReceiptsTax#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RegistrationCreateParams.CountryOptions.Us.GrossReceiptsTax#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> A jurisdiction code representing the <a
+           * href="https://stripe.com/tax/registering?type=gross_receipts_tax#registration-types">local
+           * jurisdiction</a>.
+           */
+          public Builder setJurisdiction(String jurisdiction) {
+            this.jurisdiction = jurisdiction;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class HospitalityTax {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> A jurisdiction code representing the <a
+         * href="https://stripe.com/tax/registering?type=hospitality_tax#registration-types">local
+         * jurisdiction</a>.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+
+        private HospitalityTax(Map<String, Object> extraParams, String jurisdiction) {
+          this.extraParams = extraParams;
+          this.jurisdiction = jurisdiction;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String jurisdiction;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Us.HospitalityTax build() {
+            return new RegistrationCreateParams.CountryOptions.Us.HospitalityTax(
+                this.extraParams, this.jurisdiction);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.HospitalityTax#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.HospitalityTax#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> A jurisdiction code representing the <a
+           * href="https://stripe.com/tax/registering?type=hospitality_tax#registration-types">local
+           * jurisdiction</a>.
+           */
+          public Builder setJurisdiction(String jurisdiction) {
+            this.jurisdiction = jurisdiction;
+            return this;
+          }
         }
       }
 
@@ -15880,14 +16417,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * <strong>Required.</strong> A <a
-         * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
-         * representing the local jurisdiction. Supported FIPS codes are: {@code 02154} (Arlington
-         * Heights), {@code 05248} (Bensenville), {@code 06613} (Bloomington), {@code 10906}
-         * (Campton Hills), {@code 14000} (Chicago), {@code 21696} (East Dundee), {@code 24582}
-         * (Evanston), {@code 45421} (Lynwood), {@code 48892} (Midlothian), {@code 64343} (River
-         * Grove), {@code 64421} (Riverside), {@code 65806} (Roselle), and {@code 68081} (Schiller
-         * Park).
+         * <strong>Required.</strong> A jurisdiction code representing the <a
+         * href="https://stripe.com/tax/registering?type=amusement_tax#registration-types">local
+         * jurisdiction</a>.
          */
         @SerializedName("jurisdiction")
         String jurisdiction;
@@ -15943,14 +16475,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
           }
 
           /**
-           * <strong>Required.</strong> A <a
-           * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
-           * representing the local jurisdiction. Supported FIPS codes are: {@code 02154} (Arlington
-           * Heights), {@code 05248} (Bensenville), {@code 06613} (Bloomington), {@code 10906}
-           * (Campton Hills), {@code 14000} (Chicago), {@code 21696} (East Dundee), {@code 24582}
-           * (Evanston), {@code 45421} (Lynwood), {@code 48892} (Midlothian), {@code 64343} (River
-           * Grove), {@code 64421} (Riverside), {@code 65806} (Roselle), and {@code 68081} (Schiller
-           * Park).
+           * <strong>Required.</strong> A jurisdiction code representing the <a
+           * href="https://stripe.com/tax/registering?type=amusement_tax#registration-types">local
+           * jurisdiction</a>.
            */
           public Builder setJurisdiction(String jurisdiction) {
             this.jurisdiction = jurisdiction;
@@ -16032,6 +16559,168 @@ public class RegistrationCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> A <a
            * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
            * representing the local jurisdiction. Supported FIPS codes are: {@code 14000} (Chicago).
+           */
+          public Builder setJurisdiction(String jurisdiction) {
+            this.jurisdiction = jurisdiction;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class LuxuryTax {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> A jurisdiction code representing the <a
+         * href="https://stripe.com/tax/registering?type=luxury_tax#registration-types">local
+         * jurisdiction</a>.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+
+        private LuxuryTax(Map<String, Object> extraParams, String jurisdiction) {
+          this.extraParams = extraParams;
+          this.jurisdiction = jurisdiction;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String jurisdiction;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Us.LuxuryTax build() {
+            return new RegistrationCreateParams.CountryOptions.Us.LuxuryTax(
+                this.extraParams, this.jurisdiction);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.LuxuryTax#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.LuxuryTax#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> A jurisdiction code representing the <a
+           * href="https://stripe.com/tax/registering?type=luxury_tax#registration-types">local
+           * jurisdiction</a>.
+           */
+          public Builder setJurisdiction(String jurisdiction) {
+            this.jurisdiction = jurisdiction;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ResortTax {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> A jurisdiction code representing the <a
+         * href="https://stripe.com/tax/registering?type=resort_tax#registration-types">local
+         * jurisdiction</a>.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+
+        private ResortTax(Map<String, Object> extraParams, String jurisdiction) {
+          this.extraParams = extraParams;
+          this.jurisdiction = jurisdiction;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String jurisdiction;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Us.ResortTax build() {
+            return new RegistrationCreateParams.CountryOptions.Us.ResortTax(
+                this.extraParams, this.jurisdiction);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.ResortTax#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.ResortTax#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> A jurisdiction code representing the <a
+           * href="https://stripe.com/tax/registering?type=resort_tax#registration-types">local
+           * jurisdiction</a>.
            */
           public Builder setJurisdiction(String jurisdiction) {
             this.jurisdiction = jurisdiction;
@@ -16256,6 +16945,87 @@ public class RegistrationCreateParams extends ApiRequestParams {
             Type(String value) {
               this.value = value;
             }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class TourismTax {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> A jurisdiction code representing the <a
+         * href="https://stripe.com/tax/registering?type=tourism_tax#registration-types">local
+         * jurisdiction</a>.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+
+        private TourismTax(Map<String, Object> extraParams, String jurisdiction) {
+          this.extraParams = extraParams;
+          this.jurisdiction = jurisdiction;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String jurisdiction;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Us.TourismTax build() {
+            return new RegistrationCreateParams.CountryOptions.Us.TourismTax(
+                this.extraParams, this.jurisdiction);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.TourismTax#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.TourismTax#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> A jurisdiction code representing the <a
+           * href="https://stripe.com/tax/registering?type=tourism_tax#registration-types">local
+           * jurisdiction</a>.
+           */
+          public Builder setJurisdiction(String jurisdiction) {
+            this.jurisdiction = jurisdiction;
+            return this;
           }
         }
       }

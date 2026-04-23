@@ -923,8 +923,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume() throws StripeException {
     return resume((Map<String, Object>) null, (RequestOptions) null);
@@ -934,8 +936,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(RequestOptions options) throws StripeException {
     return resume((Map<String, Object>) null, options);
@@ -945,8 +949,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(Map<String, Object> params) throws StripeException {
     return resume(params, (RequestOptions) null);
@@ -956,8 +962,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -972,8 +980,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(SubscriptionResumeParams params) throws StripeException {
     return resume(params, (RequestOptions) null);
@@ -983,8 +993,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
    * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
+   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
+   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
+   * send_invoice} subscriptions are not supported.
    */
   public Subscription resume(SubscriptionResumeParams params, RequestOptions options)
       throws StripeException {
@@ -1866,6 +1878,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       Bancontact bancontact;
 
       /**
+       * This sub-hash contains details about the Blik payment method options to pass to invoices
+       * created by the subscription.
+       */
+      @SerializedName("blik")
+      Blik blik;
+
+      /**
        * This sub-hash contains details about the Card payment method options to pass to invoices
        * created by the subscription.
        */
@@ -1981,6 +2000,34 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
          */
         @SerializedName("preferred_language")
         String preferredLanguage;
+      }
+
+      /**
+       * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Blik extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /**
+           * Date when the mandate expires and no further payments will be charged. If not provided,
+           * the mandate will be set to be indefinite.
+           */
+          @SerializedName("expires_after")
+          Long expiresAfter;
+        }
       }
 
       /**
