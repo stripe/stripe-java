@@ -168,6 +168,7 @@ public class RequestOptions {
             .setClientId(this.clientId)
             .setIdempotencyKey(this.idempotencyKey)
             .setStripeAccount(this.stripeAccount)
+            .setStripeContext(this.stripeContext)
             .setStripeRequestTrigger(this.stripeRequestTrigger)
             .setConnectTimeout(this.connectTimeout)
             .setReadTimeout(this.readTimeout)
