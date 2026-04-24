@@ -18,6 +18,9 @@ public final class V2MoneyManagementTransactionCreatedEvent extends Event {
   @Getter
   @Setter
   public static final class EventData {
+    /** Id of the v1 Treasury Transaction corresponding to this Transaction. */
+    @SerializedName("treasury_transaction")
+    String treasuryTransaction;
     /** Id of the v1 Transaction corresponding to this Transaction. */
     @SerializedName("v1_id")
     String v1Id;

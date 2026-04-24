@@ -2,6 +2,7 @@
 package com.stripe.service.v2.moneymanagement;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.exception.CannotProceedException;
 import com.stripe.exception.ControlledByAlternateResourceException;
 import com.stripe.exception.ControlledByDashboardException;
 import com.stripe.exception.InvalidPayoutMethodException;
@@ -65,8 +66,8 @@ public final class PayoutMethodService extends ApiService {
    * appear in the payout method list.
    */
   public PayoutMethod archive(String id)
-      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException,
-          ControlledByAlternateResourceException {
+      throws StripeException, ControlledByDashboardException, CannotProceedException,
+          InvalidPayoutMethodException, ControlledByAlternateResourceException {
     return archive(id, (RequestOptions) null);
   }
   /**
@@ -74,8 +75,8 @@ public final class PayoutMethodService extends ApiService {
    * appear in the payout method list.
    */
   public PayoutMethod archive(String id, RequestOptions options)
-      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException,
-          ControlledByAlternateResourceException {
+      throws StripeException, ControlledByDashboardException, CannotProceedException,
+          InvalidPayoutMethodException, ControlledByAlternateResourceException {
     String path =
         String.format(
             "/v2/money_management/payout_methods/%s/archive", ApiResource.urlEncodeId(id));

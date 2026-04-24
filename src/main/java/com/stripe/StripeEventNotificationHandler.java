@@ -6,6 +6,10 @@ package com.stripe;
 // - as do these comments, explaining the whole thing
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification;
 import com.stripe.events.V1BillingMeterNoMeterFoundEventNotification;
+import com.stripe.events.V2CommerceProductCatalogImportsFailedEventNotification;
+import com.stripe.events.V2CommerceProductCatalogImportsProcessingEventNotification;
+import com.stripe.events.V2CommerceProductCatalogImportsSucceededEventNotification;
+import com.stripe.events.V2CommerceProductCatalogImportsSucceededWithErrorsEventNotification;
 import com.stripe.events.V2CoreAccountClosedEventNotification;
 import com.stripe.events.V2CoreAccountCreatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingConfigurationCustomerCapabilityStatusUpdatedEventNotification;
@@ -37,6 +41,13 @@ import com.stripe.events.V2CoreBatchJobValidatingEventNotification;
 import com.stripe.events.V2CoreBatchJobValidationFailedEventNotification;
 import com.stripe.events.V2CoreEventDestinationPingEventNotification;
 import com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEventNotification;
+import com.stripe.events.V2DataReportingQueryRunCreatedEventNotification;
+import com.stripe.events.V2DataReportingQueryRunFailedEventNotification;
+import com.stripe.events.V2DataReportingQueryRunSucceededEventNotification;
+import com.stripe.events.V2DataReportingQueryRunUpdatedEventNotification;
+import com.stripe.events.V2ExtendWorkflowRunFailedEventNotification;
+import com.stripe.events.V2ExtendWorkflowRunStartedEventNotification;
+import com.stripe.events.V2ExtendWorkflowRunSucceededEventNotification;
 import com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountUpdatedEventNotification;
@@ -73,6 +84,10 @@ import com.stripe.events.V2MoneyManagementReceivedDebitSucceededEventNotificatio
 import com.stripe.events.V2MoneyManagementReceivedDebitUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementTransactionCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementTransactionUpdatedEventNotification;
+import com.stripe.events.V2OrchestratedCommerceAgreementConfirmedEventNotification;
+import com.stripe.events.V2OrchestratedCommerceAgreementCreatedEventNotification;
+import com.stripe.events.V2OrchestratedCommerceAgreementPartiallyConfirmedEventNotification;
+import com.stripe.events.V2OrchestratedCommerceAgreementTerminatedEventNotification;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.v2.core.EventNotification;
 import java.util.ArrayList;
@@ -200,6 +215,30 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV1BillingMeterNoMeterFound(
       Callback<V1BillingMeterNoMeterFoundEventNotification> callback) {
     this.register("v1.billing.meter.no_meter_found", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CommerceProductCatalogImportsFailed(
+      Callback<V2CommerceProductCatalogImportsFailedEventNotification> callback) {
+    this.register("v2.commerce.product_catalog.imports.failed", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CommerceProductCatalogImportsProcessing(
+      Callback<V2CommerceProductCatalogImportsProcessingEventNotification> callback) {
+    this.register("v2.commerce.product_catalog.imports.processing", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CommerceProductCatalogImportsSucceeded(
+      Callback<V2CommerceProductCatalogImportsSucceededEventNotification> callback) {
+    this.register("v2.commerce.product_catalog.imports.succeeded", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CommerceProductCatalogImportsSucceededWithErrors(
+      Callback<V2CommerceProductCatalogImportsSucceededWithErrorsEventNotification> callback) {
+    this.register("v2.commerce.product_catalog.imports.succeeded_with_errors", callback);
     return this;
   }
 
@@ -398,6 +437,48 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV2CoreHealthEventGenerationFailureResolved(
       Callback<V2CoreHealthEventGenerationFailureResolvedEventNotification> callback) {
     this.register("v2.core.health.event_generation_failure.resolved", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2DataReportingQueryRunCreated(
+      Callback<V2DataReportingQueryRunCreatedEventNotification> callback) {
+    this.register("v2.data.reporting.query_run.created", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2DataReportingQueryRunFailed(
+      Callback<V2DataReportingQueryRunFailedEventNotification> callback) {
+    this.register("v2.data.reporting.query_run.failed", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2DataReportingQueryRunSucceeded(
+      Callback<V2DataReportingQueryRunSucceededEventNotification> callback) {
+    this.register("v2.data.reporting.query_run.succeeded", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2DataReportingQueryRunUpdated(
+      Callback<V2DataReportingQueryRunUpdatedEventNotification> callback) {
+    this.register("v2.data.reporting.query_run.updated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2ExtendWorkflowRunFailed(
+      Callback<V2ExtendWorkflowRunFailedEventNotification> callback) {
+    this.register("v2.extend.workflow_run.failed", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2ExtendWorkflowRunStarted(
+      Callback<V2ExtendWorkflowRunStartedEventNotification> callback) {
+    this.register("v2.extend.workflow_run.started", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2ExtendWorkflowRunSucceeded(
+      Callback<V2ExtendWorkflowRunSucceededEventNotification> callback) {
+    this.register("v2.extend.workflow_run.succeeded", callback);
     return this;
   }
 
@@ -614,6 +695,30 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV2MoneyManagementTransactionUpdated(
       Callback<V2MoneyManagementTransactionUpdatedEventNotification> callback) {
     this.register("v2.money_management.transaction.updated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2OrchestratedCommerceAgreementConfirmed(
+      Callback<V2OrchestratedCommerceAgreementConfirmedEventNotification> callback) {
+    this.register("v2.orchestrated_commerce.agreement.confirmed", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2OrchestratedCommerceAgreementCreated(
+      Callback<V2OrchestratedCommerceAgreementCreatedEventNotification> callback) {
+    this.register("v2.orchestrated_commerce.agreement.created", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2OrchestratedCommerceAgreementPartiallyConfirmed(
+      Callback<V2OrchestratedCommerceAgreementPartiallyConfirmedEventNotification> callback) {
+    this.register("v2.orchestrated_commerce.agreement.partially_confirmed", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2OrchestratedCommerceAgreementTerminated(
+      Callback<V2OrchestratedCommerceAgreementTerminatedEventNotification> callback) {
+    this.register("v2.orchestrated_commerce.agreement.terminated", callback);
     return this;
   }
   // notification-handler-methods: The end of the section generated from our OpenAPI spec

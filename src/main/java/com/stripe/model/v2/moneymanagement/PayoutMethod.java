@@ -118,7 +118,7 @@ public class PayoutMethod extends StripeObject implements HasId {
     /**
      * The type of bank account (checking or savings).
      *
-     * <p>One of {@code checking}, or {@code savings}.
+     * <p>One of {@code checking}, {@code futsu}, {@code savings}, or {@code toza}.
      */
     @SerializedName("bank_account_type")
     String bankAccountType;

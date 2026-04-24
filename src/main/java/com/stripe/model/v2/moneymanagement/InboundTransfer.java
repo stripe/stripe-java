@@ -7,7 +7,6 @@ import com.stripe.model.StripeObject;
 import com.stripe.v2.Amount;
 import java.time.Instant;
 import java.util.List;
-import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -134,11 +133,11 @@ public class InboundTransfer extends StripeObject implements HasId {
 
     /** The history entry for a processing InboundTransfer. */
     @SerializedName("bank_debit_processing")
-    Map<String, Object> bankDebitProcessing;
+    BankDebitProcessing bankDebitProcessing;
 
     /** The history entry for a queued InboundTransfer. */
     @SerializedName("bank_debit_queued")
-    Map<String, Object> bankDebitQueued;
+    BankDebitQueued bankDebitQueued;
 
     /** The history entry for a returned InboundTransfer. */
     @SerializedName("bank_debit_returned")
@@ -146,7 +145,7 @@ public class InboundTransfer extends StripeObject implements HasId {
 
     /** The history entry for a succeeded InboundTransfer. */
     @SerializedName("bank_debit_succeeded")
-    Map<String, Object> bankDebitSucceeded;
+    BankDebitSucceeded bankDebitSucceeded;
 
     /** Creation time of the HistoryEntry in RFC 3339 format and UTC. */
     @SerializedName("created")
@@ -194,6 +193,18 @@ public class InboundTransfer extends StripeObject implements HasId {
       String failureReason;
     }
 
+    /** The history entry for a processing InboundTransfer. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BankDebitProcessing extends StripeObject {}
+
+    /** The history entry for a queued InboundTransfer. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BankDebitQueued extends StripeObject {}
+
     /** The history entry for a returned InboundTransfer. */
     @Getter
     @Setter
@@ -209,5 +220,11 @@ public class InboundTransfer extends StripeObject implements HasId {
       @SerializedName("return_reason")
       String returnReason;
     }
+
+    /** The history entry for a succeeded InboundTransfer. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BankDebitSucceeded extends StripeObject {}
   }
 }

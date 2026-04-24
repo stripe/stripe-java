@@ -398,8 +398,14 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
         @SerializedName("checking")
         CHECKING("checking"),
 
+        @SerializedName("futsu")
+        FUTSU("futsu"),
+
         @SerializedName("savings")
-        SAVINGS("savings");
+        SAVINGS("savings"),
+
+        @SerializedName("toza")
+        TOZA("toza");
 
         @Getter(onMethod_ = {@Override})
         private final String value;

@@ -173,8 +173,8 @@ public class Cadence extends StripeObject implements HasId {
     public static class Month extends StripeObject {
       /**
        * The day to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-31. If
-       * this number is greater than the number of days in the month being billed, this will anchor
-       * to the last day of the month.
+       * this number is greater than the number of days in the month being billed, this anchors to
+       * the last day of the month.
        */
       @SerializedName("day_of_month")
       Long dayOfMonth;
@@ -269,15 +269,15 @@ public class Cadence extends StripeObject implements HasId {
     public static class Year extends StripeObject {
       /**
        * The day to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-31. If
-       * this number is greater than the number of days in the month being billed, this will anchor
-       * to the last day of the month.
+       * this number is greater than the number of days in the month being billed, this anchors to
+       * the last day of the month.
        */
       @SerializedName("day_of_month")
       Long dayOfMonth;
 
       /**
-       * The month to bill on from 1-12. If not provided, this will default to the month the cadence
-       * was created.
+       * The month to bill on from 1-12. If not provided, this defaults to the month the cadence was
+       * created.
        */
       @SerializedName("month_of_year")
       Long monthOfYear;
@@ -320,7 +320,7 @@ public class Cadence extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Payer extends StripeObject {
-    /** The ID of the Billing Profile object which determines how a bill will be paid. */
+    /** The ID of the Billing Profile object which determines how a bill is paid. */
     @SerializedName("billing_profile")
     String billingProfile;
 
@@ -433,8 +433,8 @@ public class Cadence extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class Tax extends StripeObject {
           /**
-           * Determines if tax will be calculated automatically based on a PTC or manually based on
-           * rules defined by the merchant. Defaults to &quot;manual&quot;.
+           * Determines if tax is calculated automatically based on a PTC or manually based on rules
+           * defined by the business. Defaults to &quot;manual&quot;.
            *
            * <p>One of {@code automatic}, or {@code manual}.
            */
@@ -448,11 +448,11 @@ public class Cadence extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Invoice extends StripeObject {
-        /** The amount of time until the invoice will be overdue for payment. */
+        /** The amount of time until the invoice is overdue for payment. */
         @SerializedName("time_until_due")
         TimeUntilDue timeUntilDue;
 
-        /** The amount of time until the invoice will be overdue for payment. */
+        /** The amount of time until the invoice is overdue for payment. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -467,7 +467,7 @@ public class Cadence extends StripeObject implements HasId {
 
           /**
            * The number of interval units. For example, if interval=day and interval_count=30, the
-           * invoice will be due in 30 days.
+           * invoice is due in 30 days.
            */
           @SerializedName("interval_count")
           Long intervalCount;
@@ -481,9 +481,9 @@ public class Cadence extends StripeObject implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Collection extends StripeObject {
       /**
-       * Either automatic, or send_invoice. When charging automatically, Stripe will attempt to pay
-       * this bill at the end of the period using the payment method attached to the payer profile.
-       * When sending an invoice, Stripe will email your payer profile an invoice with payment
+       * Either automatic, or send_invoice. When charging automatically, Stripe attempts to pay this
+       * bill at the end of the period using the payment method attached to the billing profile.
+       * When sending an invoice, Stripe emails your billing profile an invoice with payment
        * instructions. Defaults to automatic.
        *
        * <p>One of {@code automatic}, or {@code send_invoice}.
@@ -565,11 +565,11 @@ public class Cadence extends StripeObject implements HasId {
 
         /** This sub-hash contains details about the Konbini payment method options. */
         @SerializedName("konbini")
-        Map<String, Object> konbini;
+        Konbini konbini;
 
         /** This sub-hash contains details about the SEPA Direct Debit payment method options. */
         @SerializedName("sepa_debit")
-        Map<String, Object> sepaDebit;
+        SepaDebit sepaDebit;
 
         /** This sub-hash contains details about the ACH direct debit payment method options. */
         @SerializedName("us_bank_account")
@@ -740,6 +740,18 @@ public class Cadence extends StripeObject implements HasId {
             }
           }
         }
+
+        /** This sub-hash contains details about the Konbini payment method options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Konbini extends StripeObject {}
+
+        /** This sub-hash contains details about the SEPA Direct Debit payment method options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SepaDebit extends StripeObject {}
 
         /** This sub-hash contains details about the ACH direct debit payment method options. */
         @Getter

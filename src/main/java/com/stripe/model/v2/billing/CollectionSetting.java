@@ -8,7 +8,6 @@ import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
 import java.util.List;
-import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,9 +18,9 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class CollectionSetting extends StripeObject implements HasId {
   /**
-   * Either automatic, or send_invoice. When charging automatically, Stripe will attempt to pay this
-   * bill at the end of the period using the payment method attached to the payer profile. When
-   * sending an invoice, Stripe will email your payer profile an invoice with payment instructions.
+   * Either automatic, or send_invoice. When charging automatically, Stripe attempts to pay this
+   * bill at the end of the period using the payment method attached to the billing profile. When
+   * sending an invoice, Stripe emails your billing profile an invoice with payment instructions.
    * Defaults to automatic.
    *
    * <p>One of {@code automatic}, or {@code send_invoice}.
@@ -47,8 +46,8 @@ public class CollectionSetting extends StripeObject implements HasId {
   String id;
 
   /**
-   * The latest version of the current settings object. This will be Updated every time an attribute
-   * of the settings is updated.
+   * The latest version of the current settings object. This is updated every time an attribute of
+   * the settings is updated.
    */
   @SerializedName("latest_version")
   String latestVersion;
@@ -153,11 +152,11 @@ public class CollectionSetting extends StripeObject implements HasId {
 
     /** This sub-hash contains details about the Konbini payment method options. */
     @SerializedName("konbini")
-    Map<String, Object> konbini;
+    Konbini konbini;
 
     /** This sub-hash contains details about the SEPA Direct Debit payment method options. */
     @SerializedName("sepa_debit")
-    Map<String, Object> sepaDebit;
+    SepaDebit sepaDebit;
 
     /** This sub-hash contains details about the ACH direct debit payment method options. */
     @SerializedName("us_bank_account")
@@ -325,6 +324,18 @@ public class CollectionSetting extends StripeObject implements HasId {
         }
       }
     }
+
+    /** This sub-hash contains details about the Konbini payment method options. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Konbini extends StripeObject {}
+
+    /** This sub-hash contains details about the SEPA Direct Debit payment method options. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebit extends StripeObject {}
 
     /** This sub-hash contains details about the ACH direct debit payment method options. */
     @Getter

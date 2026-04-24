@@ -23,6 +23,19 @@ public final class EventNotificationClassLookup {
         "v1.billing.meter.no_meter_found",
         com.stripe.events.V1BillingMeterNoMeterFoundEventNotification.class);
     eventClassLookup.put(
+        "v2.commerce.product_catalog.imports.failed",
+        com.stripe.events.V2CommerceProductCatalogImportsFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.commerce.product_catalog.imports.processing",
+        com.stripe.events.V2CommerceProductCatalogImportsProcessingEventNotification.class);
+    eventClassLookup.put(
+        "v2.commerce.product_catalog.imports.succeeded",
+        com.stripe.events.V2CommerceProductCatalogImportsSucceededEventNotification.class);
+    eventClassLookup.put(
+        "v2.commerce.product_catalog.imports.succeeded_with_errors",
+        com.stripe.events.V2CommerceProductCatalogImportsSucceededWithErrorsEventNotification
+            .class);
+    eventClassLookup.put(
         "v2.core.account.closed", com.stripe.events.V2CoreAccountClosedEventNotification.class);
     eventClassLookup.put(
         "v2.core.account.created", com.stripe.events.V2CoreAccountCreatedEventNotification.class);
@@ -123,6 +136,27 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.core.health.event_generation_failure.resolved",
         com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.reporting.query_run.created",
+        com.stripe.events.V2DataReportingQueryRunCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.reporting.query_run.failed",
+        com.stripe.events.V2DataReportingQueryRunFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.reporting.query_run.succeeded",
+        com.stripe.events.V2DataReportingQueryRunSucceededEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.reporting.query_run.updated",
+        com.stripe.events.V2DataReportingQueryRunUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.extend.workflow_run.failed",
+        com.stripe.events.V2ExtendWorkflowRunFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.extend.workflow_run.started",
+        com.stripe.events.V2ExtendWorkflowRunStartedEventNotification.class);
+    eventClassLookup.put(
+        "v2.extend.workflow_run.succeeded",
+        com.stripe.events.V2ExtendWorkflowRunSucceededEventNotification.class);
     eventClassLookup.put(
         "v2.money_management.adjustment.created",
         com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification.class);
@@ -233,5 +267,17 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.money_management.transaction.updated",
         com.stripe.events.V2MoneyManagementTransactionUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.orchestrated_commerce.agreement.confirmed",
+        com.stripe.events.V2OrchestratedCommerceAgreementConfirmedEventNotification.class);
+    eventClassLookup.put(
+        "v2.orchestrated_commerce.agreement.created",
+        com.stripe.events.V2OrchestratedCommerceAgreementCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.orchestrated_commerce.agreement.partially_confirmed",
+        com.stripe.events.V2OrchestratedCommerceAgreementPartiallyConfirmedEventNotification.class);
+    eventClassLookup.put(
+        "v2.orchestrated_commerce.agreement.terminated",
+        com.stripe.events.V2OrchestratedCommerceAgreementTerminatedEventNotification.class);
   }
 }
