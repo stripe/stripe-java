@@ -90,8 +90,10 @@ public class TransactionEntry extends StripeObject implements HasId {
      * to classify the Transaction.
      *
      * <p>One of {@code adjustment}, {@code currency_conversion}, {@code inbound_transfer}, {@code
-     * outbound_payment}, {@code outbound_transfer}, {@code received_credit}, {@code
-     * received_debit}, {@code return}, or {@code stripe_fee}.
+     * inbound_transfer_reversal}, {@code outbound_payment}, {@code outbound_payment_reversal},
+     * {@code outbound_transfer}, {@code outbound_transfer_reversal}, {@code received_credit},
+     * {@code received_credit_reversal}, {@code received_debit}, {@code received_debit_reversal},
+     * {@code stripe_fee}, or {@code stripe_fee_tax}.
      */
     @SerializedName("category")
     String category;

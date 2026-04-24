@@ -29,11 +29,11 @@ public class MeterEventSession extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** The time at which this session will expire. */
+  /** The time at which this session expires. */
   @SerializedName("expires_at")
   Instant expiresAt;
 
-  /** The unique id of this auth session. */
+  /** The unique ID of this auth session. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;

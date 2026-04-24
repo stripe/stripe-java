@@ -32,8 +32,8 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * <strong>Required.</strong> Specifies whether to cancel a single event or a range of events for
-   * a time period. Time period cancellation is not supported yet.
+   * <strong>Required.</strong> Specifies the type of cancellation. Currently supports canceling a
+   * single event.
    */
   @SerializedName("type")
   Type type;
@@ -107,8 +107,8 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Specifies whether to cancel a single event or a range of events
-     * for a time period. Time period cancellation is not supported yet.
+     * <strong>Required.</strong> Specifies the type of cancellation. Currently supports canceling a
+     * single event.
      */
     public Builder setType(MeterEventAdjustmentCreateParams.Type type) {
       this.type = type;
@@ -129,8 +129,8 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * <strong>Required.</strong> Unique identifier for the event. You can only cancel events within
-     * 24 hours of Stripe receiving them.
+     * <strong>Required.</strong> The identifier that was originally assigned to the meter event.
+     * You can only cancel events within 24 hours of Stripe receiving them.
      */
     @SerializedName("identifier")
     String identifier;
@@ -182,8 +182,8 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> Unique identifier for the event. You can only cancel events
-       * within 24 hours of Stripe receiving them.
+       * <strong>Required.</strong> The identifier that was originally assigned to the meter event.
+       * You can only cancel events within 24 hours of Stripe receiving them.
        */
       public Builder setIdentifier(String identifier) {
         this.identifier = identifier;

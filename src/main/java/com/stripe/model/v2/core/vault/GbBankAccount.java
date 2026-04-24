@@ -31,7 +31,7 @@ public class GbBankAccount extends StripeObject implements HasId {
   /**
    * Closed Enum. The type of the bank account (checking or savings).
    *
-   * <p>One of {@code checking}, or {@code savings}.
+   * <p>One of {@code checking}, {@code futsu}, {@code savings}, or {@code toza}.
    */
   @SerializedName("bank_account_type")
   String bankAccountType;

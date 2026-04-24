@@ -31,7 +31,7 @@ public class BatchJobCreateParams extends ApiRequestParams {
   @SerializedName("maximum_rps")
   Long maximumRps;
 
-  /** <strong>Required.</strong> The metadata of the {@code BatchJob} object. */
+  /** <strong>Required.</strong> The metadata of the {@code batch_job}. */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -257,6 +257,9 @@ public class BatchJobCreateParams extends ApiRequestParams {
     }
 
     public enum HttpMethod implements ApiRequestParams.EnumParam {
+      @SerializedName("delete")
+      DELETE("delete"),
+
       @SerializedName("post")
       POST("post");
 
