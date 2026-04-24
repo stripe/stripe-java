@@ -168,7 +168,7 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
     @SerializedName("entry_mode_raw_code")
     String entryModeRawCode;
 
-    /** The timestamp of the authorization initiated in seconds. */
+    /** The time the authorization was initiated, as a Unix timestamp in seconds. */
     @SerializedName("initiated_at")
     Long initiatedAt;
 
@@ -214,7 +214,7 @@ public class IssuingAuthorizationEvaluation extends ApiResource implements HasId
     @SerializedName("card_type")
     String cardType;
 
-    /** The timestamp when the card was created. */
+    /** The timestamp when the card was created, as a Unix timestamp in seconds. */
     @SerializedName("created_at")
     Long createdAt;
 

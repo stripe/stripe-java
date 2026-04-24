@@ -459,7 +459,20 @@ public class AccountSession extends ApiResource {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Features extends StripeObject {}
+      public static class Features extends StripeObject {
+        /**
+         * Whether to enable the bill management feature that grants access to bill creation and
+         * payment.
+         */
+        @SerializedName("bill_management")
+        Boolean billManagement;
+
+        /**
+         * Whether to enable the send money feature that grants access to bill creation and payment.
+         */
+        @SerializedName("send_money")
+        Boolean sendMoney;
+      }
     }
 
     /**

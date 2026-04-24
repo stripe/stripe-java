@@ -14,6 +14,7 @@ import com.stripe.model.LineItemCollection;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentLink;
+import com.stripe.model.PaymentRecord;
 import com.stripe.model.PromotionCode;
 import com.stripe.model.SetupIntent;
 import com.stripe.model.ShippingRate;
@@ -189,6 +190,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    */
   @SerializedName("custom_fields")
   List<Session.CustomField> customFields;
+
+  /**
+   * A list of the types of <a
+   * href="https://docs.stripe.com/payments/payment-methods/custom-payment-methods">custom payment
+   * methods</a> (e.g. cpmt_123) this Checkout Session is allowed to accept.
+   */
+  @SerializedName("custom_payment_method_types")
+  List<String> customPaymentMethodTypes;
 
   @SerializedName("custom_text")
   CustomText customText;
@@ -390,6 +399,15 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
+
+  /**
+   * The <a href="https://docs.stripe.com/api/payment-record">Payment Record</a> for this Checkout
+   * Session.
+   */
+  @SerializedName("payment_record")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentRecord> paymentRecord;
 
   /**
    * The payment status of the Checkout Session, one of {@code paid}, {@code unpaid}, or {@code
@@ -603,6 +621,25 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
   public void setPaymentLinkObject(PaymentLink expandableObject) {
     this.paymentLink = new ExpandableField<PaymentLink>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code paymentRecord} object. */
+  public String getPaymentRecord() {
+    return (this.paymentRecord != null) ? this.paymentRecord.getId() : null;
+  }
+
+  public void setPaymentRecord(String id) {
+    this.paymentRecord = ApiResource.setExpandableFieldId(id, this.paymentRecord);
+  }
+
+  /** Get expanded {@code paymentRecord}. */
+  public PaymentRecord getPaymentRecordObject() {
+    return (this.paymentRecord != null) ? this.paymentRecord.getExpanded() : null;
+  }
+
+  public void setPaymentRecordObject(PaymentRecord expandableObject) {
+    this.paymentRecord =
+        new ExpandableField<PaymentRecord>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code setupIntent} object. */
@@ -5292,6 +5329,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(paymentLink, responseGetter);
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
+    trySetResponseGetter(paymentRecord, responseGetter);
     trySetResponseGetter(permissions, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
     trySetResponseGetter(presentmentDetails, responseGetter);

@@ -12,9 +12,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class OneTimeItemUpdateParams extends ApiRequestParams {
-  /**
-   * Description that customers will see in the invoice line item. Maximum length of 250 characters.
-   */
+  /** Description that customers see in the invoice line item. Maximum length of 250 characters. */
   @SerializedName("display_name")
   Object displayName;
 
@@ -98,8 +96,7 @@ public class OneTimeItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Description that customers will see in the invoice line item. Maximum length of 250
-     * characters.
+     * Description that customers see in the invoice line item. Maximum length of 250 characters.
      */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;
@@ -107,8 +104,7 @@ public class OneTimeItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Description that customers will see in the invoice line item. Maximum length of 250
-     * characters.
+     * Description that customers see in the invoice line item. Maximum length of 250 characters.
      */
     public Builder setDisplayName(EmptyParam displayName) {
       this.displayName = displayName;

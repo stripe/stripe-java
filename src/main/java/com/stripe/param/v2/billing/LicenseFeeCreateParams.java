@@ -61,33 +61,32 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
 
   /**
    * <strong>Required.</strong> The interval for assessing service. For example, a monthly license
-   * fee with a rate of $1 for the first 10 &quot;workloads&quot; and $2 thereafter means &quot;$1
-   * per workload up to 10 workloads during a month of service.&quot; This is similar to but
-   * distinct from billing interval; the service interval deals with the rate at which the customer
-   * accumulates fees, while the billing interval in Cadence deals with the rate the customer is
-   * billed.
+   * fee with a rate of 1 USD for the first 10 &quot;workloads&quot; and 2 USD thereafter means
+   * &quot;1 USD per workload up to 10 workloads during a month of service.&quot; This is similar to
+   * but distinct from billing interval; the service interval deals with the rate at which the
+   * customer accumulates fees, while the billing interval in Cadence deals with the rate the
+   * customer is billed.
    */
   @SerializedName("service_interval")
   ServiceInterval serviceInterval;
 
   /**
    * <strong>Required.</strong> The length of the interval for assessing service. For example, set
-   * this to 3 and {@code service_interval} to {@code "month"} in order to specify quarterly
-   * service.
+   * this to 3 and {@code service_interval} to {@code "month"} to specify quarterly service.
    */
   @SerializedName("service_interval_count")
   Long serviceIntervalCount;
 
   /**
-   * <strong>Required.</strong> The Stripe Tax tax behavior - whether the license fee is inclusive
-   * or exclusive of tax.
+   * <strong>Required.</strong> The tax behavior for Stripe Tax — whether the license fee price
+   * includes or excludes tax.
    */
   @SerializedName("tax_behavior")
   TaxBehavior taxBehavior;
 
   /**
-   * Defines whether the tiered price should be graduated or volume-based. In volume-based tiering,
-   * the maximum quantity within a period determines the per-unit price. In graduated tiering, the
+   * Defines whether the tiered price is graduated or volume-based. In volume-based tiering, the
+   * maximum quantity within a period determines the per-unit price. In graduated tiering, the
    * pricing changes as the quantity grows into new tiers. Can only be set if {@code tiers} is set.
    */
   @SerializedName("tiering_mode")
@@ -277,9 +276,9 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The interval for assessing service. For example, a monthly license
-     * fee with a rate of $1 for the first 10 &quot;workloads&quot; and $2 thereafter means &quot;$1
-     * per workload up to 10 workloads during a month of service.&quot; This is similar to but
-     * distinct from billing interval; the service interval deals with the rate at which the
+     * fee with a rate of 1 USD for the first 10 &quot;workloads&quot; and 2 USD thereafter means
+     * &quot;1 USD per workload up to 10 workloads during a month of service.&quot; This is similar
+     * to but distinct from billing interval; the service interval deals with the rate at which the
      * customer accumulates fees, while the billing interval in Cadence deals with the rate the
      * customer is billed.
      */
@@ -290,8 +289,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The length of the interval for assessing service. For example, set
-     * this to 3 and {@code service_interval} to {@code "month"} in order to specify quarterly
-     * service.
+     * this to 3 and {@code service_interval} to {@code "month"} to specify quarterly service.
      */
     public Builder setServiceIntervalCount(Long serviceIntervalCount) {
       this.serviceIntervalCount = serviceIntervalCount;
@@ -299,8 +297,8 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The Stripe Tax tax behavior - whether the license fee is inclusive
-     * or exclusive of tax.
+     * <strong>Required.</strong> The tax behavior for Stripe Tax — whether the license fee price
+     * includes or excludes tax.
      */
     public Builder setTaxBehavior(LicenseFeeCreateParams.TaxBehavior taxBehavior) {
       this.taxBehavior = taxBehavior;
@@ -308,10 +306,10 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Defines whether the tiered price should be graduated or volume-based. In volume-based
-     * tiering, the maximum quantity within a period determines the per-unit price. In graduated
-     * tiering, the pricing changes as the quantity grows into new tiers. Can only be set if {@code
-     * tiers} is set.
+     * Defines whether the tiered price is graduated or volume-based. In volume-based tiering, the
+     * maximum quantity within a period determines the per-unit price. In graduated tiering, the
+     * pricing changes as the quantity grows into new tiers. Can only be set if {@code tiers} is
+     * set.
      */
     public Builder setTieringMode(LicenseFeeCreateParams.TieringMode tieringMode) {
       this.tieringMode = tieringMode;
@@ -391,8 +389,8 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
     String unitAmount;
 
     /**
-     * Up to and including this quantity will be contained in the tier. Only one of {@code
-     * up_to_decimal} and {@code up_to_inf} may be set.
+     * Up to and including this quantity is contained in the tier. Only one of {@code up_to_decimal}
+     * and {@code up_to_inf} may be set.
      */
     @SerializedName("up_to_decimal")
     BigDecimal upToDecimal;
@@ -483,7 +481,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Up to and including this quantity will be contained in the tier. Only one of {@code
+       * Up to and including this quantity is contained in the tier. Only one of {@code
        * up_to_decimal} and {@code up_to_inf} may be set.
        */
       public Builder setUpToDecimal(BigDecimal upToDecimal) {

@@ -16,7 +16,7 @@ public class CustomPricingUnitUpdateParams extends ApiRequestParams {
   @SerializedName("active")
   Boolean active;
 
-  /** Description that customers will see in the invoice line item. */
+  /** Description that customers see in the invoice line item. */
   @SerializedName("display_name")
   Object displayName;
 
@@ -77,13 +77,13 @@ public class CustomPricingUnitUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Description that customers will see in the invoice line item. */
+    /** Description that customers see in the invoice line item. */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;
       return this;
     }
 
-    /** Description that customers will see in the invoice line item. */
+    /** Description that customers see in the invoice line item. */
     public Builder setDisplayName(EmptyParam displayName) {
       this.displayName = displayName;
       return this;

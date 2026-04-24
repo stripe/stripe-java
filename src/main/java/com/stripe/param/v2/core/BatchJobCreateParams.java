@@ -257,6 +257,9 @@ public class BatchJobCreateParams extends ApiRequestParams {
     }
 
     public enum HttpMethod implements ApiRequestParams.EnumParam {
+      @SerializedName("delete")
+      DELETE("delete"),
+
       @SerializedName("post")
       POST("post");
 

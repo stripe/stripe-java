@@ -16,7 +16,7 @@ public class PricingPlanUpdateParams extends ApiRequestParams {
   @SerializedName("active")
   Boolean active;
 
-  /** Description of pricing plan subscription. */
+  /** Description of the pricing plan. Maximum length of 500 characters. */
   @SerializedName("description")
   Object description;
 
@@ -102,13 +102,13 @@ public class PricingPlanUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Description of pricing plan subscription. */
+    /** Description of the pricing plan. Maximum length of 500 characters. */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
     }
 
-    /** Description of pricing plan subscription. */
+    /** Description of the pricing plan. Maximum length of 500 characters. */
     public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;

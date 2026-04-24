@@ -73,6 +73,9 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("id")
   String id;
 
+  @SerializedName("identifiers")
+  Identifiers identifiers;
+
   /** A list of up to 8 URLs of images for this product, meant to be displayable to the customer. */
   @SerializedName("images")
   List<String> images;
@@ -473,6 +476,62 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   }
 
   /**
+   * For more details about Identifiers, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Identifiers extends StripeObject {
+    /**
+     * European Article Number (EAN) consisting of 8 or 13 digits and optional dashes. You may
+     * optionally provide a leading 0 for a total of 14 digits. The final digit is a validated check
+     * digit.
+     */
+    @SerializedName("ean")
+    String ean;
+
+    /**
+     * Global Trade Item Number (GTIN) consisting of 8, 12, 13, or 14 digits and optional dashes.
+     * The final digit is a validated check digit.
+     */
+    @SerializedName("gtin")
+    String gtin;
+
+    /**
+     * International Standard Book Number (ISBN) consisting of 10 or 13 digits and optional dashes.
+     * The final digit is a validated check digit. For ISBN-10, the final digit may be a {@code X}.
+     */
+    @SerializedName("isbn")
+    String isbn;
+
+    /**
+     * Japanese Article Number (JAN) consisting of 13 digits and optional dashes. The first two
+     * digits must either be {@code 45} or {@code 49}. The final digit is a validated check digit.
+     */
+    @SerializedName("jan")
+    String jan;
+
+    /** Manufacturer Part Number (MPN). May include up to 70 alphanumeric characters and dashes. */
+    @SerializedName("mpn")
+    String mpn;
+
+    /**
+     * National Stock Number (NSN) consisting of 13 digits and optional dashes. The seventh
+     * character may also be alphanumeric.
+     */
+    @SerializedName("nsn")
+    String nsn;
+
+    /**
+     * Universal Product Code (UPC) consisting of 12 digits and optional dashes. The final digit is
+     * a validated check digit.
+     */
+    @SerializedName("upc")
+    String upc;
+  }
+
+  /**
    * For more details about MarketingFeature, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -514,6 +573,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(defaultPrice, responseGetter);
+    trySetResponseGetter(identifiers, responseGetter);
     trySetResponseGetter(packageDimensions, responseGetter);
     trySetResponseGetter(taxCode, responseGetter);
   }

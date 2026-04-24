@@ -45,10 +45,9 @@ public class RateCreateParams extends ApiRequestParams {
   String meteredItem;
 
   /**
-   * Defines whether the tiered price should be graduated or volume-based. In volume-based tiering,
-   * the maximum quantity within a period determines the per-unit price. In graduated tiering, the
-   * pricing changes as the quantity grows into new tiers. One of {@code unit_amount}, {@code
-   * tiers}, or {@code custom_pricing_unit_amount} is required.
+   * Defines whether the tiered price is graduated or volume-based. In volume-based tiering, the
+   * maximum quantity within a period determines the per-unit price. In graduated tiering, the
+   * pricing changes as the quantity grows into new tiers. Can only be set if {@code tiers} is set.
    */
   @SerializedName("tiering_mode")
   TieringMode tieringMode;
@@ -197,10 +196,10 @@ public class RateCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Defines whether the tiered price should be graduated or volume-based. In volume-based
-     * tiering, the maximum quantity within a period determines the per-unit price. In graduated
-     * tiering, the pricing changes as the quantity grows into new tiers. One of {@code
-     * unit_amount}, {@code tiers}, or {@code custom_pricing_unit_amount} is required.
+     * Defines whether the tiered price is graduated or volume-based. In volume-based tiering, the
+     * maximum quantity within a period determines the per-unit price. In graduated tiering, the
+     * pricing changes as the quantity grows into new tiers. Can only be set if {@code tiers} is
+     * set.
      */
     public Builder setTieringMode(RateCreateParams.TieringMode tieringMode) {
       this.tieringMode = tieringMode;
@@ -363,8 +362,8 @@ public class RateCreateParams extends ApiRequestParams {
     String unitAmount;
 
     /**
-     * Up to and including this quantity will be contained in the tier. Only one of {@code
-     * up_to_decimal} and {@code up_to_inf} may be set.
+     * Up to and including this quantity is contained in the tier. Only one of {@code up_to_decimal}
+     * and {@code up_to_inf} may be set.
      */
     @SerializedName("up_to_decimal")
     BigDecimal upToDecimal;
@@ -455,7 +454,7 @@ public class RateCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Up to and including this quantity will be contained in the tier. Only one of {@code
+       * Up to and including this quantity is contained in the tier. Only one of {@code
        * up_to_decimal} and {@code up_to_inf} may be set.
        */
       public Builder setUpToDecimal(BigDecimal upToDecimal) {

@@ -23,9 +23,7 @@ public class MeteredItem extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /**
-   * Description that customers will see in the invoice line item. Maximum length of 250 characters.
-   */
+  /** Description that customers see in the invoice line item. Maximum length of 250 characters. */
   @SerializedName("display_name")
   String displayName;
 

@@ -827,6 +827,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @SerializedName("failure_message")
     String failureMessage;
 
+    /** Represents a reader action to print content. */
+    @SerializedName("print_content")
+    PrintContent printContent;
+
     /** Represents a reader action to process a payment intent. */
     @SerializedName("process_payment_intent")
     ProcessPaymentIntent processPaymentIntent;
@@ -855,8 +859,8 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
      * Type of action performed by the reader.
      *
      * <p>One of {@code collect_inputs}, {@code collect_payment_method}, {@code
-     * confirm_payment_intent}, {@code process_payment_intent}, {@code process_setup_intent}, {@code
-     * refund_payment}, or {@code set_reader_display}.
+     * confirm_payment_intent}, {@code print_content}, {@code process_payment_intent}, {@code
+     * process_setup_intent}, {@code refund_payment}, or {@code set_reader_display}.
      */
     @SerializedName("type")
     String type;
@@ -1198,6 +1202,46 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
          */
         @SerializedName("return_url")
         String returnUrl;
+      }
+    }
+
+    /** Represents a reader action to print content. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PrintContent extends StripeObject {
+      /** Metadata of an uploaded file. */
+      @SerializedName("image")
+      Image image;
+
+      /**
+       * The type of content to print. Currently supports {@code image}.
+       *
+       * <p>Equal to {@code image}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Metadata of an uploaded file. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Image extends StripeObject {
+        /** Creation time of the object (in seconds since the Unix epoch). */
+        @SerializedName("created_at")
+        Long createdAt;
+
+        /** The original name of the uploaded file (e.g. {@code receipt.png}). */
+        @SerializedName("filename")
+        String filename;
+
+        /** The size (in bytes) of the uploaded file. */
+        @SerializedName("size")
+        Long size;
+
+        /** The format of the uploaded file. */
+        @SerializedName("type")
+        String type;
       }
     }
 

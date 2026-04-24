@@ -716,10 +716,10 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
 
       /** <strong>Required.</strong> The type of fulfillment option. */
       @SerializedName("type")
-      Object type;
+      Type type;
 
       private SelectedFulfillmentOption(
-          Digital digital, Map<String, Object> extraParams, Shipping shipping, Object type) {
+          Digital digital, Map<String, Object> extraParams, Shipping shipping, Type type) {
         this.digital = digital;
         this.extraParams = extraParams;
         this.shipping = shipping;
@@ -737,7 +737,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
 
         private Shipping shipping;
 
-        private Object type;
+        private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption build() {
@@ -792,13 +792,8 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
         }
 
         /** <strong>Required.</strong> The type of fulfillment option. */
-        public Builder setType(String type) {
-          this.type = type;
-          return this;
-        }
-
-        /** <strong>Required.</strong> The type of fulfillment option. */
-        public Builder setType(EmptyParam type) {
+        public Builder setType(
+            RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption.Type type) {
           this.type = type;
           return this;
         }
@@ -967,6 +962,21 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
           }
         }
       }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("digital")
+        DIGITAL("digital"),
+
+        @SerializedName("shipping")
+        SHIPPING("shipping");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
     }
 
     @Getter
@@ -998,14 +1008,14 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
 
       /** <strong>Required.</strong> The type of fulfillment option. */
       @SerializedName("type")
-      Object type;
+      Type type;
 
       private SelectedFulfillmentOptionOverride(
           Digital digital,
           Map<String, Object> extraParams,
           List<String> lineItemKeys,
           Shipping shipping,
-          Object type) {
+          Type type) {
         this.digital = digital;
         this.extraParams = extraParams;
         this.lineItemKeys = lineItemKeys;
@@ -1026,7 +1036,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
 
         private Shipping shipping;
 
-        private Object type;
+        private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride
@@ -1113,13 +1123,9 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
         }
 
         /** <strong>Required.</strong> The type of fulfillment option. */
-        public Builder setType(String type) {
-          this.type = type;
-          return this;
-        }
-
-        /** <strong>Required.</strong> The type of fulfillment option. */
-        public Builder setType(EmptyParam type) {
+        public Builder setType(
+            RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOptionOverride.Type
+                type) {
           this.type = type;
           return this;
         }
@@ -1288,6 +1294,21 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
             this.shippingOption = shippingOption;
             return this;
           }
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("digital")
+        DIGITAL("digital"),
+
+        @SerializedName("shipping")
+        SHIPPING("shipping");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
         }
       }
     }

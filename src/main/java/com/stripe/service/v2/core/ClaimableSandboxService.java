@@ -11,6 +11,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.core.ClaimableSandboxCreateParams;
+import com.stripe.param.v2.core.ClaimableSandboxRenewOnboardingLinkParams;
 
 public final class ClaimableSandboxService extends ApiService {
   public ClaimableSandboxService(StripeResponseGetter responseGetter) {
@@ -57,6 +58,53 @@ public final class ClaimableSandboxService extends ApiService {
     String path = String.format("/v2/core/claimable_sandboxes/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+    return this.request(request, ClaimableSandbox.class);
+  }
+  /**
+   * Renew the claimable sandbox onboarding link. This will invalidate any existing onboarding
+   * links. The endpoint only works on a claimable sandbox with status {@code unclaimed} or {@code
+   * claimed}.
+   */
+  public ClaimableSandbox renewOnboardingLink(
+      String id, ClaimableSandboxRenewOnboardingLinkParams params) throws StripeException {
+    return renewOnboardingLink(id, params, (RequestOptions) null);
+  }
+  /**
+   * Renew the claimable sandbox onboarding link. This will invalidate any existing onboarding
+   * links. The endpoint only works on a claimable sandbox with status {@code unclaimed} or {@code
+   * claimed}.
+   */
+  public ClaimableSandbox renewOnboardingLink(String id, RequestOptions options)
+      throws StripeException {
+    return renewOnboardingLink(id, (ClaimableSandboxRenewOnboardingLinkParams) null, options);
+  }
+  /**
+   * Renew the claimable sandbox onboarding link. This will invalidate any existing onboarding
+   * links. The endpoint only works on a claimable sandbox with status {@code unclaimed} or {@code
+   * claimed}.
+   */
+  public ClaimableSandbox renewOnboardingLink(String id) throws StripeException {
+    return renewOnboardingLink(
+        id, (ClaimableSandboxRenewOnboardingLinkParams) null, (RequestOptions) null);
+  }
+  /**
+   * Renew the claimable sandbox onboarding link. This will invalidate any existing onboarding
+   * links. The endpoint only works on a claimable sandbox with status {@code unclaimed} or {@code
+   * claimed}.
+   */
+  public ClaimableSandbox renewOnboardingLink(
+      String id, ClaimableSandboxRenewOnboardingLinkParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v2/core/claimable_sandboxes/%s/renew_onboarding_link", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return this.request(request, ClaimableSandbox.class);
   }
 }

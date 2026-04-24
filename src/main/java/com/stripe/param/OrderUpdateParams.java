@@ -1731,6 +1731,10 @@ public class OrderUpdateParams extends ApiRequestParams {
       @SerializedName("id")
       Object id;
 
+      /** Other identifiers for this product. */
+      @SerializedName("identifiers")
+      Identifiers identifiers;
+
       /**
        * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
        */
@@ -1770,6 +1774,7 @@ public class OrderUpdateParams extends ApiRequestParams {
           Object description,
           Map<String, Object> extraParams,
           Object id,
+          Identifiers identifiers,
           Object images,
           Object metadata,
           Object name,
@@ -1780,6 +1785,7 @@ public class OrderUpdateParams extends ApiRequestParams {
         this.description = description;
         this.extraParams = extraParams;
         this.id = id;
+        this.identifiers = identifiers;
         this.images = images;
         this.metadata = metadata;
         this.name = name;
@@ -1799,6 +1805,8 @@ public class OrderUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         private Object id;
+
+        private Identifiers identifiers;
 
         private Object images;
 
@@ -1820,6 +1828,7 @@ public class OrderUpdateParams extends ApiRequestParams {
               this.description,
               this.extraParams,
               this.id,
+              this.identifiers,
               this.images,
               this.metadata,
               this.name,
@@ -1904,6 +1913,13 @@ public class OrderUpdateParams extends ApiRequestParams {
          */
         public Builder setId(EmptyParam id) {
           this.id = id;
+          return this;
+        }
+
+        /** Other identifiers for this product. */
+        public Builder setIdentifiers(
+            OrderUpdateParams.LineItem.ProductData.Identifiers identifiers) {
+          this.identifiers = identifiers;
           return this;
         }
 
@@ -2061,6 +2077,285 @@ public class OrderUpdateParams extends ApiRequestParams {
         public Builder setUrl(EmptyParam url) {
           this.url = url;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Identifiers {
+        /**
+         * European Article Number (EAN) consisting of 8 or 13 digits and optional dashes. You may
+         * optionally provide a leading 0 for a total of 14 digits. The final digit is a validated
+         * check digit.
+         */
+        @SerializedName("ean")
+        Object ean;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Global Trade Item Number (GTIN) consisting of 8, 12, 13, or 14 digits and optional
+         * dashes. The final digit is a validated check digit.
+         */
+        @SerializedName("gtin")
+        Object gtin;
+
+        /**
+         * International Standard Book Number (ISBN) consisting of 10 or 13 digits and optional
+         * dashes. The final digit is a validated check digit. For ISBN-10, the final digit may be a
+         * {@code X}.
+         */
+        @SerializedName("isbn")
+        Object isbn;
+
+        /**
+         * Japanese Article Number (JAN) consisting of 13 digits and optional dashes. The first two
+         * digits must either be {@code 45} or {@code 49}. The final digit is a validated check
+         * digit.
+         */
+        @SerializedName("jan")
+        Object jan;
+
+        /**
+         * Manufacturer Part Number (MPN). May include up to 70 alphanumeric characters and dashes.
+         */
+        @SerializedName("mpn")
+        Object mpn;
+
+        /**
+         * National Stock Number (NSN) consisting of 13 digits and optional dashes. The seventh
+         * character may also be alphanumeric.
+         */
+        @SerializedName("nsn")
+        Object nsn;
+
+        /**
+         * Universal Product Code (UPC) consisting of 12 digits and optional dashes. The final digit
+         * is a validated check digit.
+         */
+        @SerializedName("upc")
+        Object upc;
+
+        private Identifiers(
+            Object ean,
+            Map<String, Object> extraParams,
+            Object gtin,
+            Object isbn,
+            Object jan,
+            Object mpn,
+            Object nsn,
+            Object upc) {
+          this.ean = ean;
+          this.extraParams = extraParams;
+          this.gtin = gtin;
+          this.isbn = isbn;
+          this.jan = jan;
+          this.mpn = mpn;
+          this.nsn = nsn;
+          this.upc = upc;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object ean;
+
+          private Map<String, Object> extraParams;
+
+          private Object gtin;
+
+          private Object isbn;
+
+          private Object jan;
+
+          private Object mpn;
+
+          private Object nsn;
+
+          private Object upc;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public OrderUpdateParams.LineItem.ProductData.Identifiers build() {
+            return new OrderUpdateParams.LineItem.ProductData.Identifiers(
+                this.ean,
+                this.extraParams,
+                this.gtin,
+                this.isbn,
+                this.jan,
+                this.mpn,
+                this.nsn,
+                this.upc);
+          }
+
+          /**
+           * European Article Number (EAN) consisting of 8 or 13 digits and optional dashes. You may
+           * optionally provide a leading 0 for a total of 14 digits. The final digit is a validated
+           * check digit.
+           */
+          public Builder setEan(String ean) {
+            this.ean = ean;
+            return this;
+          }
+
+          /**
+           * European Article Number (EAN) consisting of 8 or 13 digits and optional dashes. You may
+           * optionally provide a leading 0 for a total of 14 digits. The final digit is a validated
+           * check digit.
+           */
+          public Builder setEan(EmptyParam ean) {
+            this.ean = ean;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link OrderUpdateParams.LineItem.ProductData.Identifiers#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link OrderUpdateParams.LineItem.ProductData.Identifiers#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Global Trade Item Number (GTIN) consisting of 8, 12, 13, or 14 digits and optional
+           * dashes. The final digit is a validated check digit.
+           */
+          public Builder setGtin(String gtin) {
+            this.gtin = gtin;
+            return this;
+          }
+
+          /**
+           * Global Trade Item Number (GTIN) consisting of 8, 12, 13, or 14 digits and optional
+           * dashes. The final digit is a validated check digit.
+           */
+          public Builder setGtin(EmptyParam gtin) {
+            this.gtin = gtin;
+            return this;
+          }
+
+          /**
+           * International Standard Book Number (ISBN) consisting of 10 or 13 digits and optional
+           * dashes. The final digit is a validated check digit. For ISBN-10, the final digit may be
+           * a {@code X}.
+           */
+          public Builder setIsbn(String isbn) {
+            this.isbn = isbn;
+            return this;
+          }
+
+          /**
+           * International Standard Book Number (ISBN) consisting of 10 or 13 digits and optional
+           * dashes. The final digit is a validated check digit. For ISBN-10, the final digit may be
+           * a {@code X}.
+           */
+          public Builder setIsbn(EmptyParam isbn) {
+            this.isbn = isbn;
+            return this;
+          }
+
+          /**
+           * Japanese Article Number (JAN) consisting of 13 digits and optional dashes. The first
+           * two digits must either be {@code 45} or {@code 49}. The final digit is a validated
+           * check digit.
+           */
+          public Builder setJan(String jan) {
+            this.jan = jan;
+            return this;
+          }
+
+          /**
+           * Japanese Article Number (JAN) consisting of 13 digits and optional dashes. The first
+           * two digits must either be {@code 45} or {@code 49}. The final digit is a validated
+           * check digit.
+           */
+          public Builder setJan(EmptyParam jan) {
+            this.jan = jan;
+            return this;
+          }
+
+          /**
+           * Manufacturer Part Number (MPN). May include up to 70 alphanumeric characters and
+           * dashes.
+           */
+          public Builder setMpn(String mpn) {
+            this.mpn = mpn;
+            return this;
+          }
+
+          /**
+           * Manufacturer Part Number (MPN). May include up to 70 alphanumeric characters and
+           * dashes.
+           */
+          public Builder setMpn(EmptyParam mpn) {
+            this.mpn = mpn;
+            return this;
+          }
+
+          /**
+           * National Stock Number (NSN) consisting of 13 digits and optional dashes. The seventh
+           * character may also be alphanumeric.
+           */
+          public Builder setNsn(String nsn) {
+            this.nsn = nsn;
+            return this;
+          }
+
+          /**
+           * National Stock Number (NSN) consisting of 13 digits and optional dashes. The seventh
+           * character may also be alphanumeric.
+           */
+          public Builder setNsn(EmptyParam nsn) {
+            this.nsn = nsn;
+            return this;
+          }
+
+          /**
+           * Universal Product Code (UPC) consisting of 12 digits and optional dashes. The final
+           * digit is a validated check digit.
+           */
+          public Builder setUpc(String upc) {
+            this.upc = upc;
+            return this;
+          }
+
+          /**
+           * Universal Product Code (UPC) consisting of 12 digits and optional dashes. The final
+           * digit is a validated check digit.
+           */
+          public Builder setUpc(EmptyParam upc) {
+            this.upc = upc;
+            return this;
+          }
         }
       }
 

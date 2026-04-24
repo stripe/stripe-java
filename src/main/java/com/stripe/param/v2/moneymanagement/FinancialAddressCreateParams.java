@@ -191,6 +191,9 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("ca_bank_account")
+    CA_BANK_ACCOUNT("ca_bank_account"),
+
     @SerializedName("gb_bank_account")
     GB_BANK_ACCOUNT("gb_bank_account"),
 

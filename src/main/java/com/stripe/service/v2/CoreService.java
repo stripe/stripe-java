@@ -25,6 +25,10 @@ public final class CoreService extends ApiService {
     return new com.stripe.service.v2.core.AccountService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.core.ApprovalRequestService approvalRequests() {
+    return new com.stripe.service.v2.core.ApprovalRequestService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.core.BatchJobService batchJobs() {
     return new com.stripe.service.v2.core.BatchJobService(this.getResponseGetter());
   }
@@ -47,13 +51,5 @@ public final class CoreService extends ApiService {
 
   public com.stripe.service.v2.core.VaultService vault() {
     return new com.stripe.service.v2.core.VaultService(this.getResponseGetter());
-  }
-
-  public com.stripe.service.v2.core.WorkflowRunService workflowRuns() {
-    return new com.stripe.service.v2.core.WorkflowRunService(this.getResponseGetter());
-  }
-
-  public com.stripe.service.v2.core.WorkflowService workflows() {
-    return new com.stripe.service.v2.core.WorkflowService(this.getResponseGetter());
   }
 }

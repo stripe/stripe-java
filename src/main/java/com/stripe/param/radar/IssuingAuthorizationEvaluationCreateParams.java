@@ -300,7 +300,10 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The timestamp of the authorization initiated in seconds. */
+    /**
+     * <strong>Required.</strong> The time the authorization was initiated, as a Unix timestamp in
+     * seconds. Must not be in the future.
+     */
     @SerializedName("initiated_at")
     Long initiatedAt;
 
@@ -450,7 +453,10 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
         return this;
       }
 
-      /** <strong>Required.</strong> The timestamp of the authorization initiated in seconds. */
+      /**
+       * <strong>Required.</strong> The time the authorization was initiated, as a Unix timestamp in
+       * seconds. Must not be in the future.
+       */
       public Builder setInitiatedAt(Long initiatedAt) {
         this.initiatedAt = initiatedAt;
         return this;
@@ -595,7 +601,10 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
     @SerializedName("card_type")
     CardType cardType;
 
-    /** <strong>Required.</strong> The timestamp when the card was created. */
+    /**
+     * <strong>Required.</strong> The timestamp when the card was created, as a Unix timestamp in
+     * seconds.
+     */
     @SerializedName("created_at")
     Long createdAt;
 
@@ -686,7 +695,10 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
         return this;
       }
 
-      /** <strong>Required.</strong> The timestamp when the card was created. */
+      /**
+       * <strong>Required.</strong> The timestamp when the card was created, as a Unix timestamp in
+       * seconds.
+       */
       public Builder setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
         return this;

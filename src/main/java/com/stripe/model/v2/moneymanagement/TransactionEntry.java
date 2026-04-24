@@ -108,7 +108,7 @@ public class TransactionEntry extends StripeObject implements HasId {
      * payment_network_reserved_funds}, {@code platform_earning}, {@code platform_earning_refund},
      * {@code platform_fee}, {@code received_credit}, {@code received_credit_reversal}, {@code
      * received_debit}, {@code received_debit_reversal}, {@code refund}, {@code refund_failure},
-     * {@code return}, {@code risk_reserved_funds}, {@code stripe_balance_payment_debit}, {@code
+     * {@code risk_reserved_funds}, {@code stripe_balance_payment_debit}, {@code
      * stripe_balance_payment_debit_reversal}, {@code stripe_fee}, {@code stripe_fee_tax}, {@code
      * tax_withholding}, {@code transfer_reversal}, or {@code unreconciled_customer_funds}.
      */

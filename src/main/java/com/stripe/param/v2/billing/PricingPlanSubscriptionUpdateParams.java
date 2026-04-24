@@ -12,9 +12,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class PricingPlanSubscriptionUpdateParams extends ApiRequestParams {
-  /**
-   * When set to true, the {@code servicing_status_transition.will_cancel_at} field will be cleared.
-   */
+  /** When set to true, the {@code servicing_status_transition.will_cancel_at} field is cleared. */
   @SerializedName("clear_cancel_at")
   Boolean clearCancelAt;
 
@@ -60,8 +58,7 @@ public class PricingPlanSubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * When set to true, the {@code servicing_status_transition.will_cancel_at} field will be
-     * cleared.
+     * When set to true, the {@code servicing_status_transition.will_cancel_at} field is cleared.
      */
     public Builder setClearCancelAt(Boolean clearCancelAt) {
       this.clearCancelAt = clearCancelAt;

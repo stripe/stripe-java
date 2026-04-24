@@ -34,6 +34,13 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
   @SerializedName("payment_method")
   String paymentMethod;
 
+  /**
+   * The URL to redirect your customer back to after they authenticate or complete a payment action.
+   * Required for redirect-based payment methods such as Affirm or Klarna.
+   */
+  @SerializedName("return_url")
+  String returnUrl;
+
   /** Risk details/signals associated with the requested session. */
   @SerializedName("risk_details")
   RiskDetails riskDetails;
@@ -43,11 +50,13 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String paymentMethod,
+      String returnUrl,
       RiskDetails riskDetails) {
     this.affiliateAttribution = affiliateAttribution;
     this.expand = expand;
     this.extraParams = extraParams;
     this.paymentMethod = paymentMethod;
+    this.returnUrl = returnUrl;
     this.riskDetails = riskDetails;
   }
 
@@ -64,6 +73,8 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
 
     private String paymentMethod;
 
+    private String returnUrl;
+
     private RiskDetails riskDetails;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -73,6 +84,7 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.paymentMethod,
+          this.returnUrl,
           this.riskDetails);
     }
 
@@ -138,6 +150,15 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
     /** The PaymentMethod to use with the requested session. */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
+      return this;
+    }
+
+    /**
+     * The URL to redirect your customer back to after they authenticate or complete a payment
+     * action. Required for redirect-based payment methods such as Affirm or Klarna.
+     */
+    public Builder setReturnUrl(String returnUrl) {
+      this.returnUrl = returnUrl;
       return this;
     }
 

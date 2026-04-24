@@ -237,8 +237,8 @@ public class CadenceCreateParams extends ApiRequestParams {
 
     /**
      * The number of intervals (specified in the interval attribute) between cadence billings. For
-     * example, type=month and interval_count=3 bills every 3 months. If this is not provided, it
-     * will default to 1.
+     * example, type=month and interval_count=3 bills every 3 months. If not provided, this defaults
+     * to 1.
      */
     @SerializedName("interval_count")
     Long intervalCount;
@@ -341,8 +341,8 @@ public class CadenceCreateParams extends ApiRequestParams {
 
       /**
        * The number of intervals (specified in the interval attribute) between cadence billings. For
-       * example, type=month and interval_count=3 bills every 3 months. If this is not provided, it
-       * will default to 1.
+       * example, type=month and interval_count=3 bills every 3 months. If not provided, this
+       * defaults to 1.
        */
       public Builder setIntervalCount(Long intervalCount) {
         this.intervalCount = intervalCount;
@@ -388,7 +388,7 @@ public class CadenceCreateParams extends ApiRequestParams {
 
       /**
        * The time at which the billing cycle ends. This field is optional, and if not provided, it
-       * will default to the time at which the cadence was created in UTC timezone.
+       * defaults to the time at which the cadence was created in UTC timezone.
        */
       @SerializedName("time")
       Time time;
@@ -442,7 +442,7 @@ public class CadenceCreateParams extends ApiRequestParams {
 
         /**
          * The time at which the billing cycle ends. This field is optional, and if not provided, it
-         * will default to the time at which the cadence was created in UTC timezone.
+         * defaults to the time at which the cadence was created in UTC timezone.
          */
         public Builder setTime(CadenceCreateParams.BillingCycle.Day.Time time) {
           this.time = time;
@@ -574,8 +574,8 @@ public class CadenceCreateParams extends ApiRequestParams {
       /**
        * <strong>Required.</strong> The day to anchor the billing on for a type=&quot;month&quot;
        * billing cycle from 1-31. If this number is greater than the number of days in the month
-       * being billed, this will anchor to the last day of the month. If not provided, this will
-       * default to the day the cadence was created.
+       * being billed, this anchors to the last day of the month. If not provided, this defaults to
+       * the day the cadence was created.
        */
       @SerializedName("day_of_month")
       Long dayOfMonth;
@@ -591,16 +591,16 @@ public class CadenceCreateParams extends ApiRequestParams {
 
       /**
        * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-12. If
-       * not provided, this will default to the month the cadence was created. This setting can only
-       * be used for monthly billing cycles with {@code interval_count} of 2, 3, 4 or 6. All
-       * occurrences will be calculated from month provided.
+       * not provided, this defaults to the month the cadence was created. This setting can only be
+       * used for monthly billing cycles with {@code interval_count} of 2, 3, 4 or 6. All
+       * occurrences are calculated from the month provided.
        */
       @SerializedName("month_of_year")
       Long monthOfYear;
 
       /**
        * The time at which the billing cycle ends. This field is optional, and if not provided, it
-       * will default to the time at which the cadence was created in UTC timezone.
+       * defaults to the time at which the cadence was created in UTC timezone.
        */
       @SerializedName("time")
       Time time;
@@ -634,8 +634,8 @@ public class CadenceCreateParams extends ApiRequestParams {
         /**
          * <strong>Required.</strong> The day to anchor the billing on for a type=&quot;month&quot;
          * billing cycle from 1-31. If this number is greater than the number of days in the month
-         * being billed, this will anchor to the last day of the month. If not provided, this will
-         * default to the day the cadence was created.
+         * being billed, this anchors to the last day of the month. If not provided, this defaults
+         * to the day the cadence was created.
          */
         public Builder setDayOfMonth(Long dayOfMonth) {
           this.dayOfMonth = dayOfMonth;
@@ -672,9 +672,9 @@ public class CadenceCreateParams extends ApiRequestParams {
 
         /**
          * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-12.
-         * If not provided, this will default to the month the cadence was created. This setting can
+         * If not provided, this defaults to the month the cadence was created. This setting can
          * only be used for monthly billing cycles with {@code interval_count} of 2, 3, 4 or 6. All
-         * occurrences will be calculated from month provided.
+         * occurrences are calculated from the month provided.
          */
         public Builder setMonthOfYear(Long monthOfYear) {
           this.monthOfYear = monthOfYear;
@@ -683,7 +683,7 @@ public class CadenceCreateParams extends ApiRequestParams {
 
         /**
          * The time at which the billing cycle ends. This field is optional, and if not provided, it
-         * will default to the time at which the cadence was created in UTC timezone.
+         * defaults to the time at which the cadence was created in UTC timezone.
          */
         public Builder setTime(CadenceCreateParams.BillingCycle.Month.Time time) {
           this.time = time;
@@ -815,7 +815,7 @@ public class CadenceCreateParams extends ApiRequestParams {
       /**
        * <strong>Required.</strong> The day of the week to bill the type=week billing cycle on.
        * Numbered from 1-7 for Monday to Sunday respectively, based on the ISO-8601 week day
-       * numbering. If not provided, this will default to the day the cadence was created.
+       * numbering. If not provided, this defaults to the day the cadence was created.
        */
       @SerializedName("day_of_week")
       Long dayOfWeek;
@@ -831,7 +831,7 @@ public class CadenceCreateParams extends ApiRequestParams {
 
       /**
        * The time at which the billing cycle ends. This field is optional, and if not provided, it
-       * will default to the time at which the cadence was created in UTC timezone.
+       * defaults to the time at which the cadence was created in UTC timezone.
        */
       @SerializedName("time")
       Time time;
@@ -862,7 +862,7 @@ public class CadenceCreateParams extends ApiRequestParams {
         /**
          * <strong>Required.</strong> The day of the week to bill the type=week billing cycle on.
          * Numbered from 1-7 for Monday to Sunday respectively, based on the ISO-8601 week day
-         * numbering. If not provided, this will default to the day the cadence was created.
+         * numbering. If not provided, this defaults to the day the cadence was created.
          */
         public Builder setDayOfWeek(Long dayOfWeek) {
           this.dayOfWeek = dayOfWeek;
@@ -899,7 +899,7 @@ public class CadenceCreateParams extends ApiRequestParams {
 
         /**
          * The time at which the billing cycle ends. This field is optional, and if not provided, it
-         * will default to the time at which the cadence was created in UTC timezone.
+         * defaults to the time at which the cadence was created in UTC timezone.
          */
         public Builder setTime(CadenceCreateParams.BillingCycle.Week.Time time) {
           this.time = time;
@@ -1030,8 +1030,8 @@ public class CadenceCreateParams extends ApiRequestParams {
     public static class Year {
       /**
        * The day to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-31. If
-       * this number is greater than the number of days in the month being billed, this will anchor
-       * to the last day of the month. If not provided, this will default to the day the cadence was
+       * this number is greater than the number of days in the month being billed, this anchors to
+       * the last day of the month. If not provided, this defaults to the day the cadence was
        * created.
        */
       @SerializedName("day_of_month")
@@ -1047,15 +1047,15 @@ public class CadenceCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * The month to bill on from 1-12. If not provided, this will default to the month the cadence
-       * was created.
+       * The month to bill on from 1-12. If not provided, this defaults to the month the cadence was
+       * created.
        */
       @SerializedName("month_of_year")
       Long monthOfYear;
 
       /**
        * The time at which the billing cycle ends. This field is optional, and if not provided, it
-       * will default to the time at which the cadence was created in UTC timezone.
+       * defaults to the time at which the cadence was created in UTC timezone.
        */
       @SerializedName("time")
       Time time;
@@ -1088,9 +1088,9 @@ public class CadenceCreateParams extends ApiRequestParams {
 
         /**
          * The day to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-31. If
-         * this number is greater than the number of days in the month being billed, this will
-         * anchor to the last day of the month. If not provided, this will default to the day the
-         * cadence was created.
+         * this number is greater than the number of days in the month being billed, this anchors to
+         * the last day of the month. If not provided, this defaults to the day the cadence was
+         * created.
          */
         public Builder setDayOfMonth(Long dayOfMonth) {
           this.dayOfMonth = dayOfMonth;
@@ -1126,8 +1126,8 @@ public class CadenceCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The month to bill on from 1-12. If not provided, this will default to the month the
-         * cadence was created.
+         * The month to bill on from 1-12. If not provided, this defaults to the month the cadence
+         * was created.
          */
         public Builder setMonthOfYear(Long monthOfYear) {
           this.monthOfYear = monthOfYear;
@@ -1136,7 +1136,7 @@ public class CadenceCreateParams extends ApiRequestParams {
 
         /**
          * The time at which the billing cycle ends. This field is optional, and if not provided, it
-         * will default to the time at which the cadence was created in UTC timezone.
+         * defaults to the time at which the cadence was created in UTC timezone.
          */
         public Builder setTime(CadenceCreateParams.BillingCycle.Year.Time time) {
           this.time = time;
@@ -1289,7 +1289,7 @@ public class CadenceCreateParams extends ApiRequestParams {
   public static class Payer {
     /**
      * <strong>Required.</strong> The ID of the Billing Profile object which determines how a bill
-     * will be paid.
+     * is paid.
      */
     @SerializedName("billing_profile")
     String billingProfile;
@@ -1324,7 +1324,7 @@ public class CadenceCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The ID of the Billing Profile object which determines how a bill
-       * will be paid.
+       * is paid.
        */
       public Builder setBillingProfile(String billingProfile) {
         this.billingProfile = billingProfile;
@@ -1476,8 +1476,8 @@ public class CadenceCreateParams extends ApiRequestParams {
       String id;
 
       /**
-       * An optional field to specify the version of the Settings to use. If not provided, this will
-       * always default to the live version any time the settings are used.
+       * An optional field to specify the version of the Settings to use. If not provided, this
+       * defaults to the live version any time the settings are used.
        */
       @SerializedName("version")
       String version;
@@ -1540,7 +1540,7 @@ public class CadenceCreateParams extends ApiRequestParams {
 
         /**
          * An optional field to specify the version of the Settings to use. If not provided, this
-         * will always default to the live version any time the settings are used.
+         * defaults to the live version any time the settings are used.
          */
         public Builder setVersion(String version) {
           this.version = version;
@@ -1566,8 +1566,8 @@ public class CadenceCreateParams extends ApiRequestParams {
       String id;
 
       /**
-       * An optional field to specify the version of the Settings to use. If not provided, this will
-       * always default to the live version any time the settings are used.
+       * An optional field to specify the version of the Settings to use. If not provided, this
+       * defaults to the live version any time the settings are used.
        */
       @SerializedName("version")
       String version;
@@ -1631,7 +1631,7 @@ public class CadenceCreateParams extends ApiRequestParams {
 
         /**
          * An optional field to specify the version of the Settings to use. If not provided, this
-         * will always default to the live version any time the settings are used.
+         * defaults to the live version any time the settings are used.
          */
         public Builder setVersion(String version) {
           this.version = version;

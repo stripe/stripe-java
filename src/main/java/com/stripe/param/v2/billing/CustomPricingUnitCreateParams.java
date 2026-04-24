@@ -12,8 +12,8 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class CustomPricingUnitCreateParams extends ApiRequestParams {
   /**
-   * <strong>Required.</strong> Description that customers will see in the invoice line item.
-   * Maximum length of 10 characters.
+   * <strong>Required.</strong> Description that customers see in the invoice line item. Maximum
+   * length of 10 characters.
    */
   @SerializedName("display_name")
   String displayName;
@@ -73,8 +73,8 @@ public class CustomPricingUnitCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Description that customers will see in the invoice line item.
-     * Maximum length of 10 characters.
+     * <strong>Required.</strong> Description that customers see in the invoice line item. Maximum
+     * length of 10 characters.
      */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;

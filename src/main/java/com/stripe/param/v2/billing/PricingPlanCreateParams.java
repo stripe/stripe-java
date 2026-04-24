@@ -15,7 +15,7 @@ public class PricingPlanCreateParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
-  /** Description of pricing plan subscription. */
+  /** Description of the pricing plan. Maximum length of 500 characters. */
   @SerializedName("description")
   String description;
 
@@ -48,8 +48,8 @@ public class PricingPlanCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * <strong>Required.</strong> The Stripe Tax tax behavior - whether the PricingPlan is inclusive
-   * or exclusive of tax.
+   * <strong>Required.</strong> The tax behavior for Stripe Tax — whether the pricing plan price
+   * includes or excludes tax.
    */
   @SerializedName("tax_behavior")
   TaxBehavior taxBehavior;
@@ -108,7 +108,7 @@ public class PricingPlanCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Description of pricing plan subscription. */
+    /** Description of the pricing plan. Maximum length of 500 characters. */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
@@ -182,8 +182,8 @@ public class PricingPlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The Stripe Tax tax behavior - whether the PricingPlan is inclusive
-     * or exclusive of tax.
+     * <strong>Required.</strong> The tax behavior for Stripe Tax — whether the pricing plan price
+     * includes or excludes tax.
      */
     public Builder setTaxBehavior(PricingPlanCreateParams.TaxBehavior taxBehavior) {
       this.taxBehavior = taxBehavior;

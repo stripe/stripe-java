@@ -137,6 +137,9 @@ public abstract class StripeException extends Exception {
       case "financial_account_not_open":
         return com.stripe.exception.FinancialAccountNotOpenException.parse(
             body, statusCode, requestId, responseGetter);
+      case "fx_quote_expired":
+        return com.stripe.exception.FxQuoteExpiredException.parse(
+            body, statusCode, requestId, responseGetter);
       case "insufficient_funds":
         return com.stripe.exception.InsufficientFundsException.parse(
             body, statusCode, requestId, responseGetter);

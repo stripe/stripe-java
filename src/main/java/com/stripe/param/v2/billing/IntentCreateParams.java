@@ -305,7 +305,7 @@ public class IntentCreateParams extends ApiRequestParams {
       @SerializedName("discount")
       Discount discount;
 
-      /** When the apply action will take effect. If not specified, defaults to on_reserve. */
+      /** When the apply action takes effect. If not specified, defaults to on_reserve. */
       @SerializedName("effective_at")
       EffectiveAt effectiveAt;
 
@@ -381,7 +381,7 @@ public class IntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** When the apply action will take effect. If not specified, defaults to on_reserve. */
+        /** When the apply action takes effect. If not specified, defaults to on_reserve. */
         public Builder setEffectiveAt(IntentCreateParams.Action.Apply.EffectiveAt effectiveAt) {
           this.effectiveAt = effectiveAt;
           return this;
@@ -565,13 +565,13 @@ public class IntentCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The timestamp at which the apply action will take effect. Only present if type is
-         * timestamp. Only allowed for discount actions.
+         * The timestamp at which the apply action takes effect. Only present if type is timestamp.
+         * Only allowed for discount actions.
          */
         @SerializedName("timestamp")
         Instant timestamp;
 
-        /** <strong>Required.</strong> When the apply action will take effect. */
+        /** <strong>Required.</strong> When the apply action takes effect. */
         @SerializedName("type")
         Type type;
 
@@ -627,7 +627,7 @@ public class IntentCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The timestamp at which the apply action will take effect. Only present if type is
+           * The timestamp at which the apply action takes effect. Only present if type is
            * timestamp. Only allowed for discount actions.
            */
           public Builder setTimestamp(Instant timestamp) {
@@ -635,7 +635,7 @@ public class IntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> When the apply action will take effect. */
+          /** <strong>Required.</strong> When the apply action takes effect. */
           public Builder setType(IntentCreateParams.Action.Apply.EffectiveAt.Type type) {
             this.type = type;
             return this;
@@ -798,8 +798,8 @@ public class IntentCreateParams extends ApiRequestParams {
           MaximumApplications maximumApplications;
 
           /**
-           * <strong>Required.</strong> Percent that will be taken off of the amount. For example,
-           * percent_off of 50.0 will make $100 amount $50 instead.
+           * <strong>Required.</strong> Percent that is taken off the amount. For example, a
+           * percent_off of 50.0 reduces a 100 USD amount to 50 USD.
            */
           @SerializedName("percent_off")
           BigDecimal percentOff;
@@ -872,8 +872,8 @@ public class IntentCreateParams extends ApiRequestParams {
             }
 
             /**
-             * <strong>Required.</strong> Percent that will be taken off of the amount. For example,
-             * percent_off of 50.0 will make $100 amount $50 instead.
+             * <strong>Required.</strong> Percent that is taken off the amount. For example, a
+             * percent_off of 50.0 reduces a 100 USD amount to 50 USD.
              */
             public Builder setPercentOff(BigDecimal percentOff) {
               this.percentOff = percentOff;
@@ -1539,14 +1539,13 @@ public class IntentCreateParams extends ApiRequestParams {
       CancellationDetails cancellationDetails;
 
       /**
-       * When the invoice will be collected. If not specified, the default behavior is
-       * on_effective_at.
+       * When the invoice is collected. If not specified, the default behavior is on_effective_at.
        */
       @SerializedName("collect_at")
       CollectAt collectAt;
 
       /**
-       * When the deactivate action will take effect. If not specified, the default behavior is
+       * When the deactivate action takes effect. If not specified, the default behavior is
        * on_reserve.
        */
       @SerializedName("effective_at")
@@ -1620,8 +1619,7 @@ public class IntentCreateParams extends ApiRequestParams {
         }
 
         /**
-         * When the invoice will be collected. If not specified, the default behavior is
-         * on_effective_at.
+         * When the invoice is collected. If not specified, the default behavior is on_effective_at.
          */
         public Builder setCollectAt(IntentCreateParams.Action.Deactivate.CollectAt collectAt) {
           this.collectAt = collectAt;
@@ -1629,7 +1627,7 @@ public class IntentCreateParams extends ApiRequestParams {
         }
 
         /**
-         * When the deactivate action will take effect. If not specified, the default behavior is
+         * When the deactivate action takes effect. If not specified, the default behavior is
          * on_reserve.
          */
         public Builder setEffectiveAt(
@@ -1828,13 +1826,13 @@ public class IntentCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The timestamp at which the deactivate action will take effect. Only present if type is
+         * The timestamp at which the deactivate action takes effect. Only present if type is
          * timestamp.
          */
         @SerializedName("timestamp")
         Instant timestamp;
 
-        /** <strong>Required.</strong> When the deactivate action will take effect. */
+        /** <strong>Required.</strong> When the deactivate action takes effect. */
         @SerializedName("type")
         Type type;
 
@@ -1890,7 +1888,7 @@ public class IntentCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The timestamp at which the deactivate action will take effect. Only present if type is
+           * The timestamp at which the deactivate action takes effect. Only present if type is
            * timestamp.
            */
           public Builder setTimestamp(Instant timestamp) {
@@ -1898,7 +1896,7 @@ public class IntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> When the deactivate action will take effect. */
+          /** <strong>Required.</strong> When the deactivate action takes effect. */
           public Builder setType(IntentCreateParams.Action.Deactivate.EffectiveAt.Type type) {
             this.type = type;
             return this;
@@ -2398,15 +2396,13 @@ public class IntentCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Modify {
       /**
-       * When the invoice will be collected. If not specified, the default behavior is
-       * next_billing_date.
+       * When the invoice is collected. If not specified, the default behavior is next_billing_date.
        */
       @SerializedName("collect_at")
       CollectAt collectAt;
 
       /**
-       * When the modify action will take effect. If not specified, the default behavior is
-       * on_reserve.
+       * When the modify action takes effect. If not specified, the default behavior is on_reserve.
        */
       @SerializedName("effective_at")
       EffectiveAt effectiveAt;
@@ -2467,7 +2463,7 @@ public class IntentCreateParams extends ApiRequestParams {
         }
 
         /**
-         * When the invoice will be collected. If not specified, the default behavior is
+         * When the invoice is collected. If not specified, the default behavior is
          * next_billing_date.
          */
         public Builder setCollectAt(IntentCreateParams.Action.Modify.CollectAt collectAt) {
@@ -2476,7 +2472,7 @@ public class IntentCreateParams extends ApiRequestParams {
         }
 
         /**
-         * When the modify action will take effect. If not specified, the default behavior is
+         * When the modify action takes effect. If not specified, the default behavior is
          * on_reserve.
          */
         public Builder setEffectiveAt(IntentCreateParams.Action.Modify.EffectiveAt effectiveAt) {
@@ -2541,13 +2537,12 @@ public class IntentCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The timestamp at which the modify action will take effect. Only present if type is
-         * timestamp.
+         * The timestamp at which the modify action takes effect. Only present if type is timestamp.
          */
         @SerializedName("timestamp")
         Instant timestamp;
 
-        /** <strong>Required.</strong> When the modify action will take effect. */
+        /** <strong>Required.</strong> When the modify action takes effect. */
         @SerializedName("type")
         Type type;
 
@@ -2603,7 +2598,7 @@ public class IntentCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The timestamp at which the modify action will take effect. Only present if type is
+           * The timestamp at which the modify action takes effect. Only present if type is
            * timestamp.
            */
           public Builder setTimestamp(Instant timestamp) {
@@ -2611,7 +2606,7 @@ public class IntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> When the modify action will take effect. */
+          /** <strong>Required.</strong> When the modify action takes effect. */
           public Builder setType(IntentCreateParams.Action.Modify.EffectiveAt.Type type) {
             this.type = type;
             return this;
@@ -3469,7 +3464,7 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Remove {
-      /** When the remove action will take effect. If not specified, defaults to on_reserve. */
+      /** When the remove action takes effect. If not specified, defaults to on_reserve. */
       @SerializedName("effective_at")
       EffectiveAt effectiveAt;
 
@@ -3532,7 +3527,7 @@ public class IntentCreateParams extends ApiRequestParams {
               this.type);
         }
 
-        /** When the remove action will take effect. If not specified, defaults to on_reserve. */
+        /** When the remove action takes effect. If not specified, defaults to on_reserve. */
         public Builder setEffectiveAt(IntentCreateParams.Action.Remove.EffectiveAt effectiveAt) {
           this.effectiveAt = effectiveAt;
           return this;
@@ -3598,7 +3593,7 @@ public class IntentCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** <strong>Required.</strong> When the remove action will take effect. */
+        /** <strong>Required.</strong> When the remove action takes effect. */
         @SerializedName("type")
         Type type;
 
@@ -3649,7 +3644,7 @@ public class IntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> When the remove action will take effect. */
+          /** <strong>Required.</strong> When the remove action takes effect. */
           public Builder setType(IntentCreateParams.Action.Remove.EffectiveAt.Type type) {
             this.type = type;
             return this;
@@ -3691,12 +3686,12 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Subscribe {
-      /** When the invoice will be collected. If not specified, defaults to on_effective_at. */
+      /** When the invoice is collected. If not specified, defaults to on_effective_at. */
       @SerializedName("collect_at")
       CollectAt collectAt;
 
       /**
-       * When the subscribe action will take effect. If not specified, the default behavior is
+       * When the subscribe action takes effect. If not specified, the default behavior is
        * on_reserve.
        */
       @SerializedName("effective_at")
@@ -3766,14 +3761,14 @@ public class IntentCreateParams extends ApiRequestParams {
               this.v1SubscriptionDetails);
         }
 
-        /** When the invoice will be collected. If not specified, defaults to on_effective_at. */
+        /** When the invoice is collected. If not specified, defaults to on_effective_at. */
         public Builder setCollectAt(IntentCreateParams.Action.Subscribe.CollectAt collectAt) {
           this.collectAt = collectAt;
           return this;
         }
 
         /**
-         * When the subscribe action will take effect. If not specified, the default behavior is
+         * When the subscribe action takes effect. If not specified, the default behavior is
          * on_reserve.
          */
         public Builder setEffectiveAt(IntentCreateParams.Action.Subscribe.EffectiveAt effectiveAt) {
@@ -3845,13 +3840,13 @@ public class IntentCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The timestamp at which the subscribe action will take effect. Only present if type is
+         * The timestamp at which the subscribe action takes effect. Only present if type is
          * timestamp.
          */
         @SerializedName("timestamp")
         Instant timestamp;
 
-        /** <strong>Required.</strong> When the subscribe action will take effect. */
+        /** <strong>Required.</strong> When the subscribe action takes effect. */
         @SerializedName("type")
         Type type;
 
@@ -3907,7 +3902,7 @@ public class IntentCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The timestamp at which the subscribe action will take effect. Only present if type is
+           * The timestamp at which the subscribe action takes effect. Only present if type is
            * timestamp.
            */
           public Builder setTimestamp(Instant timestamp) {
@@ -3915,7 +3910,7 @@ public class IntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> When the subscribe action will take effect. */
+          /** <strong>Required.</strong> When the subscribe action takes effect. */
           public Builder setType(IntentCreateParams.Action.Subscribe.EffectiveAt.Type type) {
             this.type = type;
             return this;
@@ -5197,8 +5192,8 @@ public class IntentCreateParams extends ApiRequestParams {
 
       /**
        * The number of intervals (specified in the interval attribute) between cadence billings. For
-       * example, type=month and interval_count=3 bills every 3 months. If this is not provided, it
-       * will default to 1.
+       * example, type=month and interval_count=3 bills every 3 months. If not provided, this
+       * defaults to 1.
        */
       @SerializedName("interval_count")
       Long intervalCount;
@@ -5303,8 +5298,8 @@ public class IntentCreateParams extends ApiRequestParams {
 
         /**
          * The number of intervals (specified in the interval attribute) between cadence billings.
-         * For example, type=month and interval_count=3 bills every 3 months. If this is not
-         * provided, it will default to 1.
+         * For example, type=month and interval_count=3 bills every 3 months. If not provided, this
+         * defaults to 1.
          */
         public Builder setIntervalCount(Long intervalCount) {
           this.intervalCount = intervalCount;
@@ -5351,7 +5346,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
         /**
          * The time at which the billing cycle ends. This field is optional, and if not provided, it
-         * will default to the time at which the cadence was created in UTC timezone.
+         * defaults to the time at which the cadence was created in UTC timezone.
          */
         @SerializedName("time")
         Time time;
@@ -5405,7 +5400,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
           /**
            * The time at which the billing cycle ends. This field is optional, and if not provided,
-           * it will default to the time at which the cadence was created in UTC timezone.
+           * it defaults to the time at which the cadence was created in UTC timezone.
            */
           public Builder setTime(IntentCreateParams.CadenceData.BillingCycle.Day.Time time) {
             this.time = time;
@@ -5539,8 +5534,8 @@ public class IntentCreateParams extends ApiRequestParams {
         /**
          * <strong>Required.</strong> The day to anchor the billing on for a type=&quot;month&quot;
          * billing cycle from 1-31. If this number is greater than the number of days in the month
-         * being billed, this will anchor to the last day of the month. If not provided, this will
-         * default to the day the cadence was created.
+         * being billed, this anchors to the last day of the month. If not provided, this defaults
+         * to the day the cadence was created.
          */
         @SerializedName("day_of_month")
         Long dayOfMonth;
@@ -5557,16 +5552,16 @@ public class IntentCreateParams extends ApiRequestParams {
 
         /**
          * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-12.
-         * If not provided, this will default to the month the cadence was created. This setting can
+         * If not provided, this defaults to the month the cadence was created. This setting can
          * only be used for monthly billing cycles with {@code interval_count} of 2, 3, 4 or 6. All
-         * occurrences will be calculated from month provided.
+         * occurrences are calculated from the month provided.
          */
         @SerializedName("month_of_year")
         Long monthOfYear;
 
         /**
          * The time at which the billing cycle ends. This field is optional, and if not provided, it
-         * will default to the time at which the cadence was created in UTC timezone.
+         * defaults to the time at which the cadence was created in UTC timezone.
          */
         @SerializedName("time")
         Time time;
@@ -5601,8 +5596,8 @@ public class IntentCreateParams extends ApiRequestParams {
           /**
            * <strong>Required.</strong> The day to anchor the billing on for a
            * type=&quot;month&quot; billing cycle from 1-31. If this number is greater than the
-           * number of days in the month being billed, this will anchor to the last day of the
-           * month. If not provided, this will default to the day the cadence was created.
+           * number of days in the month being billed, this anchors to the last day of the month. If
+           * not provided, this defaults to the day the cadence was created.
            */
           public Builder setDayOfMonth(Long dayOfMonth) {
             this.dayOfMonth = dayOfMonth;
@@ -5639,9 +5634,9 @@ public class IntentCreateParams extends ApiRequestParams {
 
           /**
            * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from
-           * 1-12. If not provided, this will default to the month the cadence was created. This
-           * setting can only be used for monthly billing cycles with {@code interval_count} of 2,
-           * 3, 4 or 6. All occurrences will be calculated from month provided.
+           * 1-12. If not provided, this defaults to the month the cadence was created. This setting
+           * can only be used for monthly billing cycles with {@code interval_count} of 2, 3, 4 or
+           * 6. All occurrences are calculated from the month provided.
            */
           public Builder setMonthOfYear(Long monthOfYear) {
             this.monthOfYear = monthOfYear;
@@ -5650,7 +5645,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
           /**
            * The time at which the billing cycle ends. This field is optional, and if not provided,
-           * it will default to the time at which the cadence was created in UTC timezone.
+           * it defaults to the time at which the cadence was created in UTC timezone.
            */
           public Builder setTime(IntentCreateParams.CadenceData.BillingCycle.Month.Time time) {
             this.time = time;
@@ -5784,7 +5779,7 @@ public class IntentCreateParams extends ApiRequestParams {
         /**
          * <strong>Required.</strong> The day of the week to bill the type=week billing cycle on.
          * Numbered from 1-7 for Monday to Sunday respectively, based on the ISO-8601 week day
-         * numbering. If not provided, this will default to the day the cadence was created.
+         * numbering. If not provided, this defaults to the day the cadence was created.
          */
         @SerializedName("day_of_week")
         Long dayOfWeek;
@@ -5801,7 +5796,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
         /**
          * The time at which the billing cycle ends. This field is optional, and if not provided, it
-         * will default to the time at which the cadence was created in UTC timezone.
+         * defaults to the time at which the cadence was created in UTC timezone.
          */
         @SerializedName("time")
         Time time;
@@ -5832,7 +5827,7 @@ public class IntentCreateParams extends ApiRequestParams {
           /**
            * <strong>Required.</strong> The day of the week to bill the type=week billing cycle on.
            * Numbered from 1-7 for Monday to Sunday respectively, based on the ISO-8601 week day
-           * numbering. If not provided, this will default to the day the cadence was created.
+           * numbering. If not provided, this defaults to the day the cadence was created.
            */
           public Builder setDayOfWeek(Long dayOfWeek) {
             this.dayOfWeek = dayOfWeek;
@@ -5869,7 +5864,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
           /**
            * The time at which the billing cycle ends. This field is optional, and if not provided,
-           * it will default to the time at which the cadence was created in UTC timezone.
+           * it defaults to the time at which the cadence was created in UTC timezone.
            */
           public Builder setTime(IntentCreateParams.CadenceData.BillingCycle.Week.Time time) {
             this.time = time;
@@ -6002,9 +5997,9 @@ public class IntentCreateParams extends ApiRequestParams {
       public static class Year {
         /**
          * The day to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-31. If
-         * this number is greater than the number of days in the month being billed, this will
-         * anchor to the last day of the month. If not provided, this will default to the day the
-         * cadence was created.
+         * this number is greater than the number of days in the month being billed, this anchors to
+         * the last day of the month. If not provided, this defaults to the day the cadence was
+         * created.
          */
         @SerializedName("day_of_month")
         Long dayOfMonth;
@@ -6020,15 +6015,15 @@ public class IntentCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The month to bill on from 1-12. If not provided, this will default to the month the
-         * cadence was created.
+         * The month to bill on from 1-12. If not provided, this defaults to the month the cadence
+         * was created.
          */
         @SerializedName("month_of_year")
         Long monthOfYear;
 
         /**
          * The time at which the billing cycle ends. This field is optional, and if not provided, it
-         * will default to the time at which the cadence was created in UTC timezone.
+         * defaults to the time at which the cadence was created in UTC timezone.
          */
         @SerializedName("time")
         Time time;
@@ -6062,8 +6057,8 @@ public class IntentCreateParams extends ApiRequestParams {
 
           /**
            * The day to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-31.
-           * If this number is greater than the number of days in the month being billed, this will
-           * anchor to the last day of the month. If not provided, this will default to the day the
+           * If this number is greater than the number of days in the month being billed, this
+           * anchors to the last day of the month. If not provided, this defaults to the day the
            * cadence was created.
            */
           public Builder setDayOfMonth(Long dayOfMonth) {
@@ -6100,8 +6095,8 @@ public class IntentCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The month to bill on from 1-12. If not provided, this will default to the month the
-           * cadence was created.
+           * The month to bill on from 1-12. If not provided, this defaults to the month the cadence
+           * was created.
            */
           public Builder setMonthOfYear(Long monthOfYear) {
             this.monthOfYear = monthOfYear;
@@ -6110,7 +6105,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
           /**
            * The time at which the billing cycle ends. This field is optional, and if not provided,
-           * it will default to the time at which the cadence was created in UTC timezone.
+           * it defaults to the time at which the cadence was created in UTC timezone.
            */
           public Builder setTime(IntentCreateParams.CadenceData.BillingCycle.Year.Time time) {
             this.time = time;
@@ -6263,7 +6258,7 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Payer {
-      /** The ID of the Billing Profile object which determines how a bill will be paid. */
+      /** The ID of the Billing Profile object which determines how a bill is paid. */
       @SerializedName("billing_profile")
       String billingProfile;
 
@@ -6306,7 +6301,7 @@ public class IntentCreateParams extends ApiRequestParams {
               this.billingProfile, this.billingProfileData, this.extraParams);
         }
 
-        /** The ID of the Billing Profile object which determines how a bill will be paid. */
+        /** The ID of the Billing Profile object which determines how a bill is paid. */
         public Builder setBillingProfile(String billingProfile) {
           this.billingProfile = billingProfile;
           return this;
@@ -6357,8 +6352,8 @@ public class IntentCreateParams extends ApiRequestParams {
 
         /**
          * The default payment method to use when billing this profile. If left blank, the {@code
-         * PaymentMethod} from the {@code PaymentIntent} provided on commit will be used to create
-         * the profile.
+         * PaymentMethod} from the {@code PaymentIntent} provided on commit is used to create the
+         * profile.
          */
         @SerializedName("default_payment_method")
         String defaultPaymentMethod;
@@ -6405,8 +6400,8 @@ public class IntentCreateParams extends ApiRequestParams {
 
           /**
            * The default payment method to use when billing this profile. If left blank, the {@code
-           * PaymentMethod} from the {@code PaymentIntent} provided on commit will be used to create
-           * the profile.
+           * PaymentMethod} from the {@code PaymentIntent} provided on commit is used to create the
+           * profile.
            */
           public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
             this.defaultPaymentMethod = defaultPaymentMethod;
@@ -6568,7 +6563,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
         /**
          * An optional field to specify the version of the Settings to use. If not provided, this
-         * will always default to the live version any time the settings are used.
+         * defaults to the live version any time the settings are used.
          */
         @SerializedName("version")
         String version;
@@ -6632,7 +6627,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
           /**
            * An optional field to specify the version of the Settings to use. If not provided, this
-           * will always default to the live version any time the settings are used.
+           * defaults to the live version any time the settings are used.
            */
           public Builder setVersion(String version) {
             this.version = version;
@@ -6660,7 +6655,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
         /**
          * An optional field to specify the version of the Settings to use. If not provided, this
-         * will always default to the live version any time the settings are used.
+         * defaults to the live version any time the settings are used.
          */
         @SerializedName("version")
         String version;
@@ -6724,7 +6719,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
           /**
            * An optional field to specify the version of the Settings to use. If not provided, this
-           * will always default to the live version any time the settings are used.
+           * defaults to the live version any time the settings are used.
            */
           public Builder setVersion(String version) {
             this.version = version;

@@ -64,8 +64,8 @@ public class LicenseFee extends StripeObject implements HasId {
   LicensedItem licensedItem;
 
   /**
-   * The ID of the License Fee Version that will be used by all subscriptions when no specific
-   * version is specified.
+   * The ID of the License Fee Version used by all subscriptions when no specific version is
+   * specified.
    */
   @SerializedName("live_version")
   String liveVersion;
@@ -115,13 +115,13 @@ public class LicenseFee extends StripeObject implements HasId {
 
   /**
    * The length of the interval for assessing service. For example, set this to 3 and {@code
-   * service_interval} to {@code "month"} in order to specify quarterly service.
+   * service_interval} to {@code "month"} to specify quarterly service.
    */
   @SerializedName("service_interval_count")
   Long serviceIntervalCount;
 
   /**
-   * The Stripe Tax tax behavior - whether the license fee is inclusive or exclusive of tax.
+   * The tax behavior for Stripe Tax — whether the license fee price includes or excludes tax.
    *
    * <p>One of {@code exclusive}, or {@code inclusive}.
    */
@@ -129,8 +129,8 @@ public class LicenseFee extends StripeObject implements HasId {
   String taxBehavior;
 
   /**
-   * Defines whether the tiering price should be graduated or volume-based. In volume-based tiering,
-   * the maximum quantity within a period determines the per-unit price. In graduated tiering, the
+   * Defines whether the tiering price is graduated or volume-based. In volume-based tiering, the
+   * maximum quantity within a period determines the per-unit price. In graduated tiering, the
    * pricing changes as the quantity grows into new tiers. Can only be set if {@code tiers} is set.
    *
    * <p>One of {@code graduated}, or {@code volume}.
@@ -171,7 +171,7 @@ public class LicenseFee extends StripeObject implements HasId {
 
     /**
      * The length of the interval for assessing service. For example, set this to 3 and {@code
-     * interval} to {@code "month"} in order to specify quarterly service.
+     * interval} to {@code "month"} to specify quarterly service.
      */
     @SerializedName("interval_count")
     Long intervalCount;
@@ -200,8 +200,8 @@ public class LicenseFee extends StripeObject implements HasId {
     String unitAmount;
 
     /**
-     * Up to and including this quantity will be contained in the tier. Only one of {@code
-     * up_to_decimal} and {@code up_to_inf} may be set.
+     * Up to and including this quantity is contained in the tier. Only one of {@code up_to_decimal}
+     * and {@code up_to_inf} may be set.
      */
     @SerializedName("up_to_decimal")
     BigDecimal upToDecimal;

@@ -78,6 +78,13 @@ public class FinancialAccount extends StripeObject implements HasId {
   Map<String, String> metadata;
 
   /**
+   * If this is a {@code multiprocessor_settlement} FinancialAccount, this hash includes details
+   * specific to {@code multiprocessor_settlement} FinancialAccounts.
+   */
+  @SerializedName("multiprocessor_settlement")
+  MultiprocessorSettlement multiprocessorSettlement;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *
@@ -125,7 +132,8 @@ public class FinancialAccount extends StripeObject implements HasId {
    * name matching this value. It contains additional information specific to the FinancialAccount
    * type.
    *
-   * <p>One of {@code accrued_fees}, {@code other}, {@code payments}, or {@code storage}.
+   * <p>One of {@code accrued_fees}, {@code multiprocessor_settlement}, {@code other}, {@code
+   * payments}, or {@code storage}.
    */
   @SerializedName("type")
   String type;
@@ -189,6 +197,19 @@ public class FinancialAccount extends StripeObject implements HasId {
      */
     @SerializedName("type")
     String type;
+  }
+
+  /**
+   * If this is a {@code multiprocessor_settlement} FinancialAccount, this hash includes details
+   * specific to {@code multiprocessor_settlement} FinancialAccounts.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MultiprocessorSettlement extends StripeObject {
+    /** Settlement currencies enabled for this FinancialAccount. */
+    @SerializedName("settlement_currencies")
+    List<String> settlementCurrencies;
   }
 
   /**

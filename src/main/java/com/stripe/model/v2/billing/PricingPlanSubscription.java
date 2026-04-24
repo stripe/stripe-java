@@ -287,7 +287,7 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
       ServiceCycle serviceCycle;
 
       /**
-       * Defines whether the tiering price should be graduated or volume-based.
+       * Defines whether the tiering price is graduated or volume-based.
        *
        * <p>One of {@code graduated}, or {@code volume}.
        */
@@ -313,8 +313,8 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
       String unitAmount;
 
       /**
-       * The unit label from the licensed item, used for display purposes (e.g. &quot;seat&quot;,
-       * &quot;environment&quot;).
+       * The unit label from the licensed item, used for display purposes (for example,
+       * &quot;seat&quot;, &quot;environment&quot;).
        */
       @SerializedName("unit_label")
       String unitLabel;
@@ -334,7 +334,7 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
 
         /**
          * The length of the interval for assessing service. For example, set this to 3 and {@code
-         * interval} to {@code "month"} in order to specify quarterly service.
+         * interval} to {@code "month"} to specify quarterly service.
          */
         @SerializedName("interval_count")
         Long intervalCount;
@@ -363,7 +363,7 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
         String unitAmount;
 
         /**
-         * Up to and including this quantity will be contained in the tier. Only one of {@code
+         * Up to and including this quantity is contained in the tier. Only one of {@code
          * up_to_decimal} and {@code up_to_inf} may be set.
          */
         @SerializedName("up_to_decimal")
@@ -448,7 +448,7 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
 
         /**
          * The length of the interval for assessing service. For example, set this to 3 and {@code
-         * interval} to {@code "month"} in order to specify quarterly service.
+         * interval} to {@code "month"} to specify quarterly service.
          */
         @SerializedName("interval_count")
         Long intervalCount;
@@ -574,9 +574,9 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
             List<String> billableItems;
 
             /**
-             * The price type that credit grants can apply to. We currently only support the {@code
-             * metered} price type. This will apply to metered prices and rate cards. Cannot be used
-             * in combination with {@code billable_items}.
+             * The price type that credit grants can apply to. Stripe supports the {@code metered}
+             * price type, which applies to metered prices and rate cards. Cannot be used in
+             * combination with {@code billable_items}.
              *
              * <p>Equal to {@code metered}.
              */
@@ -691,9 +691,9 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
             List<String> billableItems;
 
             /**
-             * The price type that credit grants can apply to. We currently only support the {@code
-             * metered} price type. This will apply to metered prices and rate cards. Cannot be used
-             * in combination with {@code billable_items}.
+             * The price type that credit grants can apply to. Stripe supports the {@code metered}
+             * price type, which applies to metered prices and rate cards. Cannot be used in
+             * combination with {@code billable_items}.
              *
              * <p>Equal to {@code metered}.
              */
@@ -733,7 +733,7 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
 
         /**
          * The length of the interval for assessing service. For example, set this to 3 and {@code
-         * interval} to {@code "month"} in order to specify quarterly service.
+         * interval} to {@code "month"} to specify quarterly service.
          */
         @SerializedName("interval_count")
         Long intervalCount;

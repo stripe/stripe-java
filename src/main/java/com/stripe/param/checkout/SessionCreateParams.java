@@ -108,6 +108,19 @@ public class SessionCreateParams extends ApiRequestParams {
   List<SessionCreateParams.CustomField> customFields;
 
   /**
+   * A list of custom payment methods (e.g., {@code cpmt_123}) this Checkout Session can accept.
+   *
+   * <p>You can add custom payment methods to your account through the dashboard under Settings &gt;
+   * Custom Payment Methods.
+   *
+   * <p>Read more about custom payment methods in checkout in our <a
+   * href="https://docs.stripe.com/payments/payment-methods/custom-payment-methods">custom payment
+   * method types guide</a>.
+   */
+  @SerializedName("custom_payment_method_types")
+  List<String> customPaymentMethodTypes;
+
+  /**
    * Display additional text for your customers using custom text. You can't set this parameter if
    * {@code ui_mode} is {@code custom}.
    */
@@ -483,6 +496,7 @@ public class SessionCreateParams extends ApiRequestParams {
       ConsentCollection consentCollection,
       String currency,
       List<SessionCreateParams.CustomField> customFields,
+      List<String> customPaymentMethodTypes,
       CustomText customText,
       String customer,
       String customerAccount,
@@ -538,6 +552,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.consentCollection = consentCollection;
     this.currency = currency;
     this.customFields = customFields;
+    this.customPaymentMethodTypes = customPaymentMethodTypes;
     this.customText = customText;
     this.customer = customer;
     this.customerAccount = customerAccount;
@@ -613,6 +628,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private String currency;
 
     private List<SessionCreateParams.CustomField> customFields;
+
+    private List<String> customPaymentMethodTypes;
 
     private CustomText customText;
 
@@ -713,6 +730,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.consentCollection,
           this.currency,
           this.customFields,
+          this.customPaymentMethodTypes,
           this.customText,
           this.customer,
           this.customerAccount,
@@ -913,6 +931,32 @@ public class SessionCreateParams extends ApiRequestParams {
         this.customFields = new ArrayList<>();
       }
       this.customFields.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `customPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SessionCreateParams#customPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addCustomPaymentMethodType(String element) {
+      if (this.customPaymentMethodTypes == null) {
+        this.customPaymentMethodTypes = new ArrayList<>();
+      }
+      this.customPaymentMethodTypes.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `customPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SessionCreateParams#customPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllCustomPaymentMethodType(List<String> elements) {
+      if (this.customPaymentMethodTypes == null) {
+        this.customPaymentMethodTypes = new ArrayList<>();
+      }
+      this.customPaymentMethodTypes.addAll(elements);
       return this;
     }
 

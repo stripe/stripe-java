@@ -5341,6 +5341,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("link")
       LINK("link"),
 
+      @SerializedName("momo")
+      MOMO("momo"),
+
       @SerializedName("multibanco")
       MULTIBANCO("multibanco"),
 

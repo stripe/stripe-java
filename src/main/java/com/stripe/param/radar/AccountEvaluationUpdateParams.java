@@ -30,9 +30,17 @@ public class AccountEvaluationUpdateParams extends ApiRequestParams {
   @SerializedName("login_failed")
   LoginFailed loginFailed;
 
+  /** Event payload for login_succeeded. */
+  @SerializedName("login_succeeded")
+  LoginSucceeded loginSucceeded;
+
   /** Event payload for registration_failed. */
   @SerializedName("registration_failed")
   RegistrationFailed registrationFailed;
+
+  /** Event payload for registration_succeeded. */
+  @SerializedName("registration_succeeded")
+  RegistrationSucceeded registrationSucceeded;
 
   /** <strong>Required.</strong> The type of event to report. */
   @SerializedName("type")
@@ -42,12 +50,16 @@ public class AccountEvaluationUpdateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       LoginFailed loginFailed,
+      LoginSucceeded loginSucceeded,
       RegistrationFailed registrationFailed,
+      RegistrationSucceeded registrationSucceeded,
       Type type) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.loginFailed = loginFailed;
+    this.loginSucceeded = loginSucceeded;
     this.registrationFailed = registrationFailed;
+    this.registrationSucceeded = registrationSucceeded;
     this.type = type;
   }
 
@@ -62,14 +74,24 @@ public class AccountEvaluationUpdateParams extends ApiRequestParams {
 
     private LoginFailed loginFailed;
 
+    private LoginSucceeded loginSucceeded;
+
     private RegistrationFailed registrationFailed;
+
+    private RegistrationSucceeded registrationSucceeded;
 
     private Type type;
 
     /** Finalize and obtain parameter instance from this builder. */
     public AccountEvaluationUpdateParams build() {
       return new AccountEvaluationUpdateParams(
-          this.expand, this.extraParams, this.loginFailed, this.registrationFailed, this.type);
+          this.expand,
+          this.extraParams,
+          this.loginFailed,
+          this.loginSucceeded,
+          this.registrationFailed,
+          this.registrationSucceeded,
+          this.type);
     }
 
     /**
@@ -130,10 +152,23 @@ public class AccountEvaluationUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Event payload for login_succeeded. */
+    public Builder setLoginSucceeded(AccountEvaluationUpdateParams.LoginSucceeded loginSucceeded) {
+      this.loginSucceeded = loginSucceeded;
+      return this;
+    }
+
     /** Event payload for registration_failed. */
     public Builder setRegistrationFailed(
         AccountEvaluationUpdateParams.RegistrationFailed registrationFailed) {
       this.registrationFailed = registrationFailed;
+      return this;
+    }
+
+    /** Event payload for registration_succeeded. */
+    public Builder setRegistrationSucceeded(
+        AccountEvaluationUpdateParams.RegistrationSucceeded registrationSucceeded) {
+      this.registrationSucceeded = registrationSucceeded;
       return this;
     }
 
@@ -231,6 +266,90 @@ public class AccountEvaluationUpdateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class LoginSucceeded {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** An optional qualification for a login success. */
+    @SerializedName("qualification")
+    Qualification qualification;
+
+    private LoginSucceeded(Map<String, Object> extraParams, Qualification qualification) {
+      this.extraParams = extraParams;
+      this.qualification = qualification;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Qualification qualification;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountEvaluationUpdateParams.LoginSucceeded build() {
+        return new AccountEvaluationUpdateParams.LoginSucceeded(
+            this.extraParams, this.qualification);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountEvaluationUpdateParams.LoginSucceeded#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountEvaluationUpdateParams.LoginSucceeded#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** An optional qualification for a login success. */
+      public Builder setQualification(
+          AccountEvaluationUpdateParams.LoginSucceeded.Qualification qualification) {
+        this.qualification = qualification;
+        return this;
+      }
+    }
+
+    public enum Qualification implements ApiRequestParams.EnumParam {
+      @SerializedName("suspected_account_sharing")
+      SUSPECTED_ACCOUNT_SHARING("suspected_account_sharing");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Qualification(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class RegistrationFailed {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -309,6 +428,91 @@ public class AccountEvaluationUpdateParams extends ApiRequestParams {
       private final String value;
 
       Reason(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RegistrationSucceeded {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** An optional qualification for a registration success. */
+    @SerializedName("qualification")
+    Qualification qualification;
+
+    private RegistrationSucceeded(Map<String, Object> extraParams, Qualification qualification) {
+      this.extraParams = extraParams;
+      this.qualification = qualification;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Qualification qualification;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountEvaluationUpdateParams.RegistrationSucceeded build() {
+        return new AccountEvaluationUpdateParams.RegistrationSucceeded(
+            this.extraParams, this.qualification);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountEvaluationUpdateParams.RegistrationSucceeded#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountEvaluationUpdateParams.RegistrationSucceeded#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** An optional qualification for a registration success. */
+      public Builder setQualification(
+          AccountEvaluationUpdateParams.RegistrationSucceeded.Qualification qualification) {
+        this.qualification = qualification;
+        return this;
+      }
+    }
+
+    public enum Qualification implements ApiRequestParams.EnumParam {
+      @SerializedName("suspected_multi_accounting")
+      SUSPECTED_MULTI_ACCOUNTING("suspected_multi_accounting");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Qualification(String value) {
         this.value = value;
       }
     }

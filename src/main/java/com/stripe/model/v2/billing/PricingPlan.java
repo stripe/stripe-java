@@ -33,7 +33,7 @@ public class PricingPlan extends StripeObject implements HasId {
   @SerializedName("currency")
   String currency;
 
-  /** A description for pricing plan subscription. Maximum length of 500 characters. */
+  /** A description of the pricing plan. Maximum length of 500 characters. */
   @SerializedName("description")
   String description;
 
@@ -86,7 +86,7 @@ public class PricingPlan extends StripeObject implements HasId {
   String object;
 
   /**
-   * The Stripe Tax tax behavior - whether the PricingPlan is inclusive or exclusive of tax.
+   * The tax behavior for Stripe Tax — whether the pricing plan price includes or excludes tax.
    *
    * <p>One of {@code exclusive}, or {@code inclusive}.
    */
