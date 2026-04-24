@@ -6,6 +6,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.v2.Amount;
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,6 +29,10 @@ public class OffSessionPayment extends StripeObject implements HasId {
   /** The amount available to be captured. */
   @SerializedName("amount_capturable")
   Amount amountCapturable;
+
+  /** Provides industry-specific information about the amount. */
+  @SerializedName("amount_details")
+  AmountDetails amountDetails;
 
   /** The “presentment amount” to be collected from the customer. */
   @SerializedName("amount_requested")
@@ -59,6 +64,10 @@ public class OffSessionPayment extends StripeObject implements HasId {
   /** ID of the Customer to which this OffSessionPayment belongs. */
   @SerializedName("customer")
   String customer;
+
+  /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
+  String description;
 
   /**
    * The reason why the OffSessionPayment failed.
@@ -111,6 +120,10 @@ public class OffSessionPayment extends StripeObject implements HasId {
   /** The account (if any) for which the funds of the OffSessionPayment are intended. */
   @SerializedName("on_behalf_of")
   String onBehalfOf;
+
+  /** Provides industry-specific information about the payment. */
+  @SerializedName("payment_details")
+  PaymentDetails paymentDetails;
 
   /** ID of the payment method used in this OffSessionPayment. */
   @SerializedName("payment_method")
@@ -166,6 +179,141 @@ public class OffSessionPayment extends StripeObject implements HasId {
   @SerializedName("transfer_data")
   TransferData transferData;
 
+  /** Provides industry-specific information about the amount. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AmountDetails extends StripeObject {
+    /** The amount the total transaction was discounted for. */
+    @SerializedName("discount_amount")
+    Long discountAmount;
+
+    /**
+     * Contains information about the error that occurred when validating the current amount
+     * details. This field populates when the amount details has a validation error that wasn't
+     * enforced because the <a
+     * href="https://docs.corp.stripe.com/api/payment_intents/create#create_payment_intent-amount_details-enforce_arithmetic_validation">enforce_arithmetic_validation</a>
+     * parameter was set to {@code false}.
+     */
+    @SerializedName("error")
+    Errors error;
+
+    /**
+     * A list of line items, each containing information about a product in the PaymentIntent. There
+     * is a maximum of 100 line items.
+     */
+    @SerializedName("line_items")
+    List<OffSessionPayment.AmountDetails.LineItem> lineItems;
+
+    /** Contains information about the shipping portion of the amount. */
+    @SerializedName("shipping")
+    Shipping shipping;
+
+    /** Contains information about the tax portion of the amount. */
+    @SerializedName("tax")
+    Tax tax;
+
+    /**
+     * Contains information about the error that occurred when validating the current amount
+     * details. This field populates when the amount details has a validation error that wasn't
+     * enforced because the <a
+     * href="https://docs.corp.stripe.com/api/payment_intents/create#create_payment_intent-amount_details-enforce_arithmetic_validation">enforce_arithmetic_validation</a>
+     * parameter was set to {@code false}.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Errors extends StripeObject {
+      /**
+       * The code of the error that occurred when validating the current amount details.
+       *
+       * <p>One of {@code amount_details_amount_mismatch}, or {@code
+       * amount_details_amount_greater_than_tax_shipping_discount}.
+       */
+      @SerializedName("code")
+      String code;
+
+      /** A message providing more details about the error. */
+      @SerializedName("message")
+      String message;
+    }
+
+    /**
+     * For more details about LineItem, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class LineItem extends StripeObject {
+      /** The amount an item was discounted for. Positive integer. */
+      @SerializedName("discount_amount")
+      Long discountAmount;
+
+      /** Unique identifier of the product. At most 12 characters long. */
+      @SerializedName("product_code")
+      String productCode;
+
+      /** Name of the product. At most 100 characters long. */
+      @SerializedName("product_name")
+      String productName;
+
+      /** Number of items of the product. Positive integer. */
+      @SerializedName("quantity")
+      Long quantity;
+
+      /** Contains information about the tax on the item. */
+      @SerializedName("tax")
+      Tax tax;
+
+      /** Cost of the product. Non-negative integer. */
+      @SerializedName("unit_cost")
+      Long unitCost;
+
+      /** Unit of measure for the product. At most 12 characters long. */
+      @SerializedName("unit_of_measure")
+      String unitOfMeasure;
+
+      /** Contains information about the tax on the item. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Tax extends StripeObject {
+        /** Total portion of the amount that is for tax. */
+        @SerializedName("total_tax_amount")
+        Long totalTaxAmount;
+      }
+    }
+
+    /** Contains information about the shipping portion of the amount. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Shipping extends StripeObject {
+      /** Portion of the amount that is for shipping. */
+      @SerializedName("amount")
+      Long amount;
+
+      /** The postal code that represents the shipping source. */
+      @SerializedName("from_postal_code")
+      String fromPostalCode;
+
+      /** The postal code that represents the shipping destination. */
+      @SerializedName("to_postal_code")
+      String toPostalCode;
+    }
+
+    /** Contains information about the tax portion of the amount. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Tax extends StripeObject {
+      /** Total portion of the amount that is for tax. */
+      @SerializedName("total_tax_amount")
+      Long totalTaxAmount;
+    }
+  }
+
   /** Details about the capture configuration for the OffSessionPayment. */
   @Getter
   @Setter
@@ -182,6 +330,28 @@ public class OffSessionPayment extends StripeObject implements HasId {
      */
     @SerializedName("capture_method")
     String captureMethod;
+  }
+
+  /** Provides industry-specific information about the payment. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentDetails extends StripeObject {
+    /**
+     * A unique value to identify the customer. This field is applicable only for card payments. For
+     * card payments, this field is truncated to 25 alphanumeric characters, excluding spaces,
+     * before being sent to card networks.
+     */
+    @SerializedName("customer_reference")
+    String customerReference;
+
+    /**
+     * A unique value assigned by the business to identify the transaction. Required for L2 and L3
+     * rates. For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces,
+     * before being sent to card networks.
+     */
+    @SerializedName("order_reference")
+    String orderReference;
   }
 
   /** Details about the payments orchestration configuration. */

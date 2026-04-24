@@ -54,6 +54,10 @@ public class Dispute extends ApiResource
   @SerializedName("created")
   Long created;
 
+  /** Array of onchain crypto transactions linked to this resource. */
+  @SerializedName("crypto_transactions")
+  List<Dispute.CryptoTransaction> cryptoTransactions;
+
   /** The currency the {@code transaction} was made in. */
   @SerializedName("currency")
   String currency;
@@ -408,6 +412,177 @@ public class Dispute extends ApiResource
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, Dispute.class);
+  }
+
+  /**
+   * For more details about CryptoTransaction, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CryptoTransaction extends StripeObject {
+    /**
+     * The confirmed crypto transaction details when {@code type} is {@code
+     * crypto_transaction_confirmed}; otherwise null.
+     */
+    @SerializedName("crypto_transaction_confirmed")
+    CryptoTransactionConfirmed cryptoTransactionConfirmed;
+
+    /**
+     * The failed crypto transaction details when {@code type} is {@code crypto_transaction_failed};
+     * otherwise null.
+     */
+    @SerializedName("crypto_transaction_failed")
+    CryptoTransactionFailed cryptoTransactionFailed;
+
+    /** The crypto transaction variant for this array entry. */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about CryptoTransactionConfirmed, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CryptoTransactionConfirmed extends StripeObject {
+      /** The crypto amount for the confirmed transaction. */
+      @SerializedName("amount")
+      String amount;
+
+      /** The upcharged MCC amount, if one was applied. */
+      @SerializedName("amount_mcc_upcharged")
+      String amountMccUpcharged;
+
+      /** The blockchain network for the confirmed transaction. */
+      @SerializedName("chain")
+      String chain;
+
+      /** When the transaction was confirmed onchain. */
+      @SerializedName("confirmed_at")
+      Long confirmedAt;
+
+      /** The currency of the crypto transaction amount. */
+      @SerializedName("currency")
+      String currency;
+
+      /** Fees associated with the transaction. */
+      @SerializedName("fees")
+      List<Dispute.CryptoTransaction.CryptoTransactionConfirmed.Fee> fees;
+
+      /** The source wallet address for the transaction. */
+      @SerializedName("from_address")
+      String fromAddress;
+
+      /** Memo metadata attached to the transaction, if present. */
+      @SerializedName("memo")
+      String memo;
+
+      /** The destination wallet address for the transaction. */
+      @SerializedName("to_address")
+      String toAddress;
+
+      /** The blockchain transaction hash. */
+      @SerializedName("transaction_hash")
+      String transactionHash;
+
+      /**
+       * For more details about Fee, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Fee extends StripeObject {
+        /** The fee amount. */
+        @SerializedName("amount")
+        String amount;
+
+        /** The fee currency. */
+        @SerializedName("currency")
+        String currency;
+
+        /** The fee type. */
+        @SerializedName("type")
+        String type;
+      }
+    }
+
+    /**
+     * For more details about CryptoTransactionFailed, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CryptoTransactionFailed extends StripeObject {
+      /** The crypto amount for the failed transaction. */
+      @SerializedName("amount")
+      String amount;
+
+      /** The upcharged MCC amount, if one was applied. */
+      @SerializedName("amount_mcc_upcharged")
+      String amountMccUpcharged;
+
+      /** The blockchain network for the failed transaction. */
+      @SerializedName("chain")
+      String chain;
+
+      /** The currency of the crypto transaction amount. */
+      @SerializedName("currency")
+      String currency;
+
+      /** When the transaction failed. */
+      @SerializedName("failed_at")
+      Long failedAt;
+
+      /** The reason the transaction failed. */
+      @SerializedName("failure_reason")
+      String failureReason;
+
+      /** Fees associated with the transaction. */
+      @SerializedName("fees")
+      List<Dispute.CryptoTransaction.CryptoTransactionFailed.Fee> fees;
+
+      /** The source wallet address for the attempted transaction. */
+      @SerializedName("from_address")
+      String fromAddress;
+
+      /** Memo metadata attached to the transaction, if present. */
+      @SerializedName("memo")
+      String memo;
+
+      /** The destination wallet address for the attempted transaction when one exists. */
+      @SerializedName("to_address")
+      String toAddress;
+
+      /** The blockchain transaction hash when one exists. */
+      @SerializedName("transaction_hash")
+      String transactionHash;
+
+      /**
+       * For more details about Fee, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Fee extends StripeObject {
+        /** The fee amount. */
+        @SerializedName("amount")
+        String amount;
+
+        /** The fee currency. */
+        @SerializedName("currency")
+        String currency;
+
+        /** The fee type. */
+        @SerializedName("type")
+        String type;
+      }
+    }
   }
 
   /**

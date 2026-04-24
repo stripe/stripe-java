@@ -9,6 +9,10 @@ public final class IamService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.v2.iam.ActivityLogService activityLogs() {
+    return new com.stripe.service.v2.iam.ActivityLogService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.iam.ApiKeyService apiKeys() {
     return new com.stripe.service.v2.iam.ApiKeyService(this.getResponseGetter());
   }

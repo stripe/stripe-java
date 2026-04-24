@@ -218,7 +218,7 @@ public class CadenceUpdateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Payer {
-    /** The ID of the Billing Profile object which determines how a bill will be paid. */
+    /** The ID of the Billing Profile object which determines how a bill is paid. */
     @SerializedName("billing_profile")
     Object billingProfile;
 
@@ -250,13 +250,13 @@ public class CadenceUpdateParams extends ApiRequestParams {
         return new CadenceUpdateParams.Payer(this.billingProfile, this.extraParams);
       }
 
-      /** The ID of the Billing Profile object which determines how a bill will be paid. */
+      /** The ID of the Billing Profile object which determines how a bill is paid. */
       public Builder setBillingProfile(String billingProfile) {
         this.billingProfile = billingProfile;
         return this;
       }
 
-      /** The ID of the Billing Profile object which determines how a bill will be paid. */
+      /** The ID of the Billing Profile object which determines how a bill is paid. */
       public Builder setBillingProfile(EmptyParam billingProfile) {
         this.billingProfile = billingProfile;
         return this;
@@ -402,10 +402,10 @@ public class CadenceUpdateParams extends ApiRequestParams {
       Object id;
 
       /**
-       * An optional field to specify the version of Settings to use. If not provided, this will
-       * always default to the {@code live_version} specified on the setting, any time the settings
-       * are used. Using a specific version here will prevent the settings from updating, and is
-       * discouraged for cadences. To clear a pinned version, set the version to null.
+       * An optional field to specify the version of Settings to use. If not provided, this defaults
+       * to the {@code live_version} specified on the setting, any time the settings are used. Using
+       * a specific version here prevents the settings from updating, and is discouraged for
+       * cadences. To clear a pinned version, set the version to null.
        */
       @SerializedName("version")
       Object version;
@@ -473,10 +473,10 @@ public class CadenceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * An optional field to specify the version of Settings to use. If not provided, this will
-         * always default to the {@code live_version} specified on the setting, any time the
-         * settings are used. Using a specific version here will prevent the settings from updating,
-         * and is discouraged for cadences. To clear a pinned version, set the version to null.
+         * An optional field to specify the version of Settings to use. If not provided, this
+         * defaults to the {@code live_version} specified on the setting, any time the settings are
+         * used. Using a specific version here prevents the settings from updating, and is
+         * discouraged for cadences. To clear a pinned version, set the version to null.
          */
         public Builder setVersion(String version) {
           this.version = version;
@@ -484,10 +484,10 @@ public class CadenceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * An optional field to specify the version of Settings to use. If not provided, this will
-         * always default to the {@code live_version} specified on the setting, any time the
-         * settings are used. Using a specific version here will prevent the settings from updating,
-         * and is discouraged for cadences. To clear a pinned version, set the version to null.
+         * An optional field to specify the version of Settings to use. If not provided, this
+         * defaults to the {@code live_version} specified on the setting, any time the settings are
+         * used. Using a specific version here prevents the settings from updating, and is
+         * discouraged for cadences. To clear a pinned version, set the version to null.
          */
         public Builder setVersion(EmptyParam version) {
           this.version = version;
@@ -513,10 +513,10 @@ public class CadenceUpdateParams extends ApiRequestParams {
       Object id;
 
       /**
-       * An optional field to specify the version of Settings to use. If not provided, this will
-       * always default to the {@code live_version} specified on the setting, any time the settings
-       * are used. Using a specific version here will prevent the settings from updating, and is
-       * discouraged for cadences. To clear a pinned version, set the version to null.
+       * An optional field to specify the version of Settings to use. If not provided, this defaults
+       * to the {@code live_version} specified on the setting, any time the settings are used. Using
+       * a specific version here prevents the settings from updating, and is discouraged for
+       * cadences. To clear a pinned version, set the version to null.
        */
       @SerializedName("version")
       Object version;
@@ -585,10 +585,10 @@ public class CadenceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * An optional field to specify the version of Settings to use. If not provided, this will
-         * always default to the {@code live_version} specified on the setting, any time the
-         * settings are used. Using a specific version here will prevent the settings from updating,
-         * and is discouraged for cadences. To clear a pinned version, set the version to null.
+         * An optional field to specify the version of Settings to use. If not provided, this
+         * defaults to the {@code live_version} specified on the setting, any time the settings are
+         * used. Using a specific version here prevents the settings from updating, and is
+         * discouraged for cadences. To clear a pinned version, set the version to null.
          */
         public Builder setVersion(String version) {
           this.version = version;
@@ -596,10 +596,10 @@ public class CadenceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * An optional field to specify the version of Settings to use. If not provided, this will
-         * always default to the {@code live_version} specified on the setting, any time the
-         * settings are used. Using a specific version here will prevent the settings from updating,
-         * and is discouraged for cadences. To clear a pinned version, set the version to null.
+         * An optional field to specify the version of Settings to use. If not provided, this
+         * defaults to the {@code live_version} specified on the setting, any time the settings are
+         * used. Using a specific version here prevents the settings from updating, and is
+         * discouraged for cadences. To clear a pinned version, set the version to null.
          */
         public Builder setVersion(EmptyParam version) {
           this.version = version;

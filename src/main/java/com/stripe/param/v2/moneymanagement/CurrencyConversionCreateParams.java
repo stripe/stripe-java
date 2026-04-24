@@ -21,7 +21,7 @@ public class CurrencyConversionCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> The FinancialAccount id to create the CurrencyConversion on. */
+  /** The FinancialAccount id to create the CurrencyConversion on. */
   @SerializedName("financial_account")
   String financialAccount;
 
@@ -31,15 +31,20 @@ public class CurrencyConversionCreateParams extends ApiRequestParams {
   @SerializedName("from")
   From from;
 
+  /** The FX quote to use for the conversion. */
+  @SerializedName("fx_quote")
+  String fxQuote;
+
   /** <strong>Required.</strong> To amount object indicating the to currency or optional amount. */
   @SerializedName("to")
   To to;
 
   private CurrencyConversionCreateParams(
-      Map<String, Object> extraParams, String financialAccount, From from, To to) {
+      Map<String, Object> extraParams, String financialAccount, From from, String fxQuote, To to) {
     this.extraParams = extraParams;
     this.financialAccount = financialAccount;
     this.from = from;
+    this.fxQuote = fxQuote;
     this.to = to;
   }
 
@@ -54,12 +59,14 @@ public class CurrencyConversionCreateParams extends ApiRequestParams {
 
     private From from;
 
+    private String fxQuote;
+
     private To to;
 
     /** Finalize and obtain parameter instance from this builder. */
     public CurrencyConversionCreateParams build() {
       return new CurrencyConversionCreateParams(
-          this.extraParams, this.financialAccount, this.from, this.to);
+          this.extraParams, this.financialAccount, this.from, this.fxQuote, this.to);
     }
 
     /**
@@ -88,7 +95,7 @@ public class CurrencyConversionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The FinancialAccount id to create the CurrencyConversion on. */
+    /** The FinancialAccount id to create the CurrencyConversion on. */
     public Builder setFinancialAccount(String financialAccount) {
       this.financialAccount = financialAccount;
       return this;
@@ -100,6 +107,12 @@ public class CurrencyConversionCreateParams extends ApiRequestParams {
      */
     public Builder setFrom(CurrencyConversionCreateParams.From from) {
       this.from = from;
+      return this;
+    }
+
+    /** The FX quote to use for the conversion. */
+    public Builder setFxQuote(String fxQuote) {
+      this.fxQuote = fxQuote;
       return this;
     }
 

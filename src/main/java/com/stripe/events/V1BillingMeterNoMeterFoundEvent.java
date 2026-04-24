@@ -44,8 +44,9 @@ public final class V1BillingMeterNoMeterFoundEvent extends Event {
          *
          * <p>One of {@code archived_meter}, {@code meter_event_customer_not_found}, {@code
          * meter_event_dimension_count_too_high}, {@code meter_event_invalid_value}, {@code
-         * meter_event_no_customer_defined}, {@code missing_dimension_payload_keys}, {@code
-         * no_meter}, {@code timestamp_in_future}, or {@code timestamp_too_far_in_past}.
+         * meter_event_no_customer_defined}, {@code meter_event_value_too_many_digits}, {@code
+         * missing_dimension_payload_keys}, {@code no_meter}, {@code timestamp_in_future}, or {@code
+         * timestamp_too_far_in_past}.
          */
         @SerializedName("code")
         String code;

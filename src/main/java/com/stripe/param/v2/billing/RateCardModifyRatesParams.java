@@ -176,10 +176,10 @@ public class RateCardModifyRatesParams extends ApiRequestParams {
     MeteredItemData meteredItemData;
 
     /**
-     * Defines whether the tiered price should be graduated or volume-based. In volume-based
-     * tiering, the maximum quantity within a period determines the per-unit price. In graduated
-     * tiering, the pricing changes as the quantity grows into new tiers. Can only be set if {@code
-     * tiers} is set.
+     * Defines whether the tiered price is graduated or volume-based. In volume-based tiering, the
+     * maximum quantity within a period determines the per-unit price. In graduated tiering, the
+     * pricing changes as the quantity grows into new tiers. Can only be set if {@code tiers} is
+     * set.
      */
     @SerializedName("tiering_mode")
     TieringMode tieringMode;
@@ -328,10 +328,10 @@ public class RateCardModifyRatesParams extends ApiRequestParams {
       }
 
       /**
-       * Defines whether the tiered price should be graduated or volume-based. In volume-based
-       * tiering, the maximum quantity within a period determines the per-unit price. In graduated
-       * tiering, the pricing changes as the quantity grows into new tiers. Can only be set if
-       * {@code tiers} is set.
+       * Defines whether the tiered price is graduated or volume-based. In volume-based tiering, the
+       * maximum quantity within a period determines the per-unit price. In graduated tiering, the
+       * pricing changes as the quantity grows into new tiers. Can only be set if {@code tiers} is
+       * set.
        */
       public Builder setTieringMode(
           RateCardModifyRatesParams.RatesToCreate.TieringMode tieringMode) {
@@ -389,8 +389,8 @@ public class RateCardModifyRatesParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class MeteredItemData {
       /**
-       * <strong>Required.</strong> Description that customers will see in the invoice line item.
-       * Maximum length of 250 characters.
+       * <strong>Required.</strong> Description that customers see in the invoice line item. Maximum
+       * length of 250 characters.
        */
       @SerializedName("display_name")
       String displayName;
@@ -478,7 +478,7 @@ public class RateCardModifyRatesParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> Description that customers will see in the invoice line item.
+         * <strong>Required.</strong> Description that customers see in the invoice line item.
          * Maximum length of 250 characters.
          */
         public Builder setDisplayName(String displayName) {
@@ -698,7 +698,7 @@ public class RateCardModifyRatesParams extends ApiRequestParams {
       String unitAmount;
 
       /**
-       * Up to and including this quantity will be contained in the tier. Only one of {@code
+       * Up to and including this quantity is contained in the tier. Only one of {@code
        * up_to_decimal} and {@code up_to_inf} may be set.
        */
       @SerializedName("up_to_decimal")
@@ -792,7 +792,7 @@ public class RateCardModifyRatesParams extends ApiRequestParams {
         }
 
         /**
-         * Up to and including this quantity will be contained in the tier. Only one of {@code
+         * Up to and including this quantity is contained in the tier. Only one of {@code
          * up_to_decimal} and {@code up_to_inf} may be set.
          */
         public Builder setUpToDecimal(BigDecimal upToDecimal) {

@@ -23,7 +23,7 @@ public class PricingPlanVersion extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** The timestamp when this version became inactive. Null if it's the latest version. */
+  /** The timestamp when this version became inactive. null if it's the latest version. */
   @SerializedName("end_date")
   Instant endDate;
 

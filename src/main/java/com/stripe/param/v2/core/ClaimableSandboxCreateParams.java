@@ -12,6 +12,13 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class ClaimableSandboxCreateParams extends ApiRequestParams {
   /**
+   * The app channel that will be used when pre-installing your app on the claimable sandbox. This
+   * field defaults to {@code public} if omitted.
+   */
+  @SerializedName("app_channel")
+  AppChannel appChannel;
+
+  /**
    * <strong>Required.</strong> If true, returns a key that can be used with <a
    * href="https://docs.stripe.com/mcp">Stripe's MCP server</a>.
    */
@@ -27,6 +34,10 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** <strong>Required.</strong> Details about the onboarding link. */
+  @SerializedName("onboarding_link_details")
+  OnboardingLinkDetails onboardingLinkDetails;
+
   /**
    * <strong>Required.</strong> Values that are prefilled when a user claims the sandbox. When a
    * user claims the sandbox, they will be able to update these values.
@@ -35,9 +46,15 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
   Prefill prefill;
 
   private ClaimableSandboxCreateParams(
-      Boolean enableMcpAccess, Map<String, Object> extraParams, Prefill prefill) {
+      AppChannel appChannel,
+      Boolean enableMcpAccess,
+      Map<String, Object> extraParams,
+      OnboardingLinkDetails onboardingLinkDetails,
+      Prefill prefill) {
+    this.appChannel = appChannel;
     this.enableMcpAccess = enableMcpAccess;
     this.extraParams = extraParams;
+    this.onboardingLinkDetails = onboardingLinkDetails;
     this.prefill = prefill;
   }
 
@@ -46,15 +63,33 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private AppChannel appChannel;
+
     private Boolean enableMcpAccess;
 
     private Map<String, Object> extraParams;
+
+    private OnboardingLinkDetails onboardingLinkDetails;
 
     private Prefill prefill;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ClaimableSandboxCreateParams build() {
-      return new ClaimableSandboxCreateParams(this.enableMcpAccess, this.extraParams, this.prefill);
+      return new ClaimableSandboxCreateParams(
+          this.appChannel,
+          this.enableMcpAccess,
+          this.extraParams,
+          this.onboardingLinkDetails,
+          this.prefill);
+    }
+
+    /**
+     * The app channel that will be used when pre-installing your app on the claimable sandbox. This
+     * field defaults to {@code public} if omitted.
+     */
+    public Builder setAppChannel(ClaimableSandboxCreateParams.AppChannel appChannel) {
+      this.appChannel = appChannel;
+      return this;
     }
 
     /**
@@ -92,6 +127,13 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** <strong>Required.</strong> Details about the onboarding link. */
+    public Builder setOnboardingLinkDetails(
+        ClaimableSandboxCreateParams.OnboardingLinkDetails onboardingLinkDetails) {
+      this.onboardingLinkDetails = onboardingLinkDetails;
+      return this;
+    }
+
     /**
      * <strong>Required.</strong> Values that are prefilled when a user claims the sandbox. When a
      * user claims the sandbox, they will be able to update these values.
@@ -99,6 +141,88 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
     public Builder setPrefill(ClaimableSandboxCreateParams.Prefill prefill) {
       this.prefill = prefill;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class OnboardingLinkDetails {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> The URL the user will be redirected to if the onboarding link is
+     * expired or invalid. The URL specified should attempt to generate a new onboarding link, and
+     * re-direct the user to this new onboarding link so that they can proceed with the onboarding
+     * flow.
+     */
+    @SerializedName("refresh_url")
+    String refreshUrl;
+
+    private OnboardingLinkDetails(Map<String, Object> extraParams, String refreshUrl) {
+      this.extraParams = extraParams;
+      this.refreshUrl = refreshUrl;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String refreshUrl;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ClaimableSandboxCreateParams.OnboardingLinkDetails build() {
+        return new ClaimableSandboxCreateParams.OnboardingLinkDetails(
+            this.extraParams, this.refreshUrl);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ClaimableSandboxCreateParams.OnboardingLinkDetails#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ClaimableSandboxCreateParams.OnboardingLinkDetails#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The URL the user will be redirected to if the onboarding link is
+       * expired or invalid. The URL specified should attempt to generate a new onboarding link, and
+       * re-direct the user to this new onboarding link so that they can proceed with the onboarding
+       * flow.
+       */
+      public Builder setRefreshUrl(String refreshUrl) {
+        this.refreshUrl = refreshUrl;
+        return this;
+      }
     }
   }
 
@@ -209,6 +333,21 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
         this.name = name;
         return this;
       }
+    }
+  }
+
+  public enum AppChannel implements ApiRequestParams.EnumParam {
+    @SerializedName("public")
+    PUBLIC("public"),
+
+    @SerializedName("testing")
+    TESTING("testing");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    AppChannel(String value) {
+      this.value = value;
     }
   }
 }

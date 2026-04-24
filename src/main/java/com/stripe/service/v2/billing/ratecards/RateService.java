@@ -66,15 +66,15 @@ public final class RateService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<RateCardRate>>() {}.getType());
   }
   /**
-   * Set the Rate for a Metered Item on the latest version of a Rate Card object. This will create a
-   * new Rate Card version if the Metered Item already has a rate on the Rate Card.
+   * Set the Rate for a Metered Item on the latest version of a Rate Card object. This creates a new
+   * Rate Card version if the Metered Item already has a rate on the Rate Card.
    */
   public RateCardRate create(String rateCardId, RateCreateParams params) throws StripeException {
     return create(rateCardId, params, (RequestOptions) null);
   }
   /**
-   * Set the Rate for a Metered Item on the latest version of a Rate Card object. This will create a
-   * new Rate Card version if the Metered Item already has a rate on the Rate Card.
+   * Set the Rate for a Metered Item on the latest version of a Rate Card object. This creates a new
+   * Rate Card version if the Metered Item already has a rate on the Rate Card.
    */
   public RateCardRate create(String rateCardId, RateCreateParams params, RequestOptions options)
       throws StripeException {
@@ -90,14 +90,14 @@ public final class RateService extends ApiService {
     return this.request(request, RateCardRate.class);
   }
   /**
-   * Remove an existing Rate from a Rate Card. This will create a new Rate Card Version without that
+   * Remove an existing Rate from a Rate Card. This creates a new Rate Card Version without that
    * Rate.
    */
   public DeletedObject delete(String rateCardId, String id) throws StripeException {
     return delete(rateCardId, id, (RequestOptions) null);
   }
   /**
-   * Remove an existing Rate from a Rate Card. This will create a new Rate Card Version without that
+   * Remove an existing Rate from a Rate Card. This creates a new Rate Card Version without that
    * Rate.
    */
   public DeletedObject delete(String rateCardId, String id, RequestOptions options)

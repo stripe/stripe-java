@@ -83,6 +83,14 @@ public class FinancialAddress extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Credentials extends StripeObject {
     /**
+     * The credentials of the Canadian Bank Account for the FinancialAddress. This contains unique
+     * banking details such as the account number, institution number, etc. of a Canadian bank
+     * account.
+     */
+    @SerializedName("ca_bank_account")
+    CaBankAccount caBankAccount;
+
+    /**
      * The credentials of the UK Bank Account for the FinancialAddress. This contains unique banking
      * details such as the sort code, account number, etc. of a UK bank account.
      */
@@ -99,7 +107,8 @@ public class FinancialAddress extends StripeObject implements HasId {
     /**
      * Open Enum. The type of Credentials that are provisioned for the FinancialAddress.
      *
-     * <p>One of {@code gb_bank_account}, {@code sepa_bank_account}, or {@code us_bank_account}.
+     * <p>One of {@code ca_bank_account}, {@code gb_bank_account}, {@code sepa_bank_account}, or
+     * {@code us_bank_account}.
      */
     @SerializedName("type")
     String type;
@@ -110,6 +119,44 @@ public class FinancialAddress extends StripeObject implements HasId {
      */
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
+
+    /**
+     * The credentials of the Canadian Bank Account for the FinancialAddress. This contains unique
+     * banking details such as the account number, institution number, etc. of a Canadian bank
+     * account.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CaBankAccount extends StripeObject {
+      /** The account holder name to be used during bank transfers. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The account number of the Canadian Bank Account. */
+      @SerializedName("account_number")
+      String accountNumber;
+
+      /** The name of the Bank. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** The institution number of the Canadian Bank Account. */
+      @SerializedName("institution_number")
+      String institutionNumber;
+
+      /**
+       * The last four digits of the Canadian Bank Account number. This will always be returned. To
+       * view the full account number when retrieving or listing FinancialAddresses, use the {@code
+       * include} request parameter.
+       */
+      @SerializedName("last4")
+      String last4;
+
+      /** The transit number of the Canadian Bank Account. */
+      @SerializedName("transit_number")
+      String transitNumber;
+    }
 
     /**
      * The credentials of the UK Bank Account for the FinancialAddress. This contains unique banking

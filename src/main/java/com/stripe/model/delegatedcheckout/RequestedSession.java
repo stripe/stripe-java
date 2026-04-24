@@ -44,6 +44,10 @@ public class RequestedSession extends ApiResource
   @SerializedName("amount_total")
   Long amountTotal;
 
+  /** The buyer consent options for this requested session, including marketing preferences. */
+  @SerializedName("buyer_consents")
+  BuyerConsents buyerConsents;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created_at")
   Long createdAt;
@@ -475,6 +479,57 @@ public class RequestedSession extends ApiResource
       /** The URL of the attribution source. */
       @SerializedName("url")
       String url;
+    }
+  }
+
+  /**
+   * For more details about BuyerConsents, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BuyerConsents extends StripeObject {
+    /** The marketing consent options. */
+    @SerializedName("marketing")
+    Marketing marketing;
+
+    /**
+     * For more details about Marketing, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Marketing extends StripeObject {
+      /** The available marketing consent options. */
+      @SerializedName("options")
+      List<RequestedSession.BuyerConsents.Marketing.Option> options;
+
+      /**
+       * For more details about Option, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Option extends StripeObject {
+        /**
+         * The marketing channel type.
+         *
+         * <p>One of {@code email}, or {@code sms}.
+         */
+        @SerializedName("channel")
+        String channel;
+
+        /** The description of the marketing consent option. */
+        @SerializedName("description")
+        String description;
+
+        /** The privacy policy URL for this marketing channel. */
+        @SerializedName("privacy_policy_url")
+        String privacyPolicyUrl;
+      }
     }
   }
 
@@ -1228,6 +1283,7 @@ public class RequestedSession extends ApiResource
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(buyerConsents, responseGetter);
     trySetResponseGetter(fulfillmentDetails, responseGetter);
     trySetResponseGetter(orderDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);

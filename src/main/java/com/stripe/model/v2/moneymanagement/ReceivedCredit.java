@@ -171,6 +171,13 @@ public class ReceivedCredit extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BankTransfer extends StripeObject {
+    /**
+     * Hash containing the transaction bank details. Present if {@code origin_type} field value is
+     * {@code ca_bank_account}.
+     */
+    @SerializedName("ca_bank_account")
+    CaBankAccount caBankAccount;
+
     /** Financial Address on which funds for ReceivedCredit were received. */
     @SerializedName("financial_address")
     String financialAddress;
@@ -185,7 +192,8 @@ public class ReceivedCredit extends StripeObject implements HasId {
     /**
      * Open Enum. Indicates the origin of source from which external funds originated from.
      *
-     * <p>One of {@code gb_bank_account}, {@code sepa_bank_account}, or {@code us_bank_account}.
+     * <p>One of {@code ca_bank_account}, {@code gb_bank_account}, {@code sepa_bank_account}, or
+     * {@code us_bank_account}.
      */
     @SerializedName("origin_type")
     String originType;
@@ -207,6 +215,38 @@ public class ReceivedCredit extends StripeObject implements HasId {
      */
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
+
+    /**
+     * Hash containing the transaction bank details. Present if {@code origin_type} field value is
+     * {@code ca_bank_account}.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CaBankAccount extends StripeObject {
+      /** The account holder name of the bank account the transfer was received from. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The bank name the transfer was received from. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /**
+       * The last 4 digits of the account number that originated the transfer. Depending on the
+       * bank, this may instead be the last 4 digits of the return account number.
+       */
+      @SerializedName("last4")
+      String last4;
+
+      /**
+       * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
+       *
+       * <p>Equal to {@code acss}.
+       */
+      @SerializedName("network")
+      String network;
+    }
 
     /**
      * Hash containing the transaction bank details. Present if {@code origin_type} field value is

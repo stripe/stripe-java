@@ -17,9 +17,9 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class CollectionSettingUpdateParams extends ApiRequestParams {
   /**
-   * Either automatic, or send_invoice. When charging automatically, Stripe will attempt to pay this
-   * bill at the end of the period using the payment method attached to the payer profile. When
-   * sending an invoice, Stripe will email your payer profile an invoice with payment instructions.
+   * Either automatic, or send_invoice. When charging automatically, Stripe attempts to pay this
+   * bill at the end of the period using the payment method attached to the billing profile. When
+   * sending an invoice, Stripe emails your billing profile an invoice with payment instructions.
    */
   @SerializedName("collection_method")
   CollectionMethod collectionMethod;
@@ -46,9 +46,9 @@ public class CollectionSettingUpdateParams extends ApiRequestParams {
 
   /**
    * Optionally change the live version of the CollectionSetting. Billing Cadences and other objects
-   * that refer to this CollectionSetting will use this version when no overrides are set. Providing
-   * {@code live_version = "latest"} will set the CollectionSetting's {@code live_version} to its
-   * latest version.
+   * that refer to this CollectionSetting uses this version when no overrides are set. Providing
+   * {@code live_version = "latest"} sets the CollectionSetting's {@code live_version} to its latest
+   * version.
    */
   @SerializedName("live_version")
   Object liveVersion;
@@ -125,10 +125,9 @@ public class CollectionSettingUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Either automatic, or send_invoice. When charging automatically, Stripe will attempt to pay
-     * this bill at the end of the period using the payment method attached to the payer profile.
-     * When sending an invoice, Stripe will email your payer profile an invoice with payment
-     * instructions.
+     * Either automatic, or send_invoice. When charging automatically, Stripe attempts to pay this
+     * bill at the end of the period using the payment method attached to the billing profile. When
+     * sending an invoice, Stripe emails your billing profile an invoice with payment instructions.
      */
     public Builder setCollectionMethod(
         CollectionSettingUpdateParams.CollectionMethod collectionMethod) {
@@ -188,9 +187,9 @@ public class CollectionSettingUpdateParams extends ApiRequestParams {
 
     /**
      * Optionally change the live version of the CollectionSetting. Billing Cadences and other
-     * objects that refer to this CollectionSetting will use this version when no overrides are set.
-     * Providing {@code live_version = "latest"} will set the CollectionSetting's {@code
-     * live_version} to its latest version.
+     * objects that refer to this CollectionSetting uses this version when no overrides are set.
+     * Providing {@code live_version = "latest"} sets the CollectionSetting's {@code live_version}
+     * to its latest version.
      */
     public Builder setLiveVersion(String liveVersion) {
       this.liveVersion = liveVersion;
@@ -199,9 +198,9 @@ public class CollectionSettingUpdateParams extends ApiRequestParams {
 
     /**
      * Optionally change the live version of the CollectionSetting. Billing Cadences and other
-     * objects that refer to this CollectionSetting will use this version when no overrides are set.
-     * Providing {@code live_version = "latest"} will set the CollectionSetting's {@code
-     * live_version} to its latest version.
+     * objects that refer to this CollectionSetting uses this version when no overrides are set.
+     * Providing {@code live_version = "latest"} sets the CollectionSetting's {@code live_version}
+     * to its latest version.
      */
     public Builder setLiveVersion(EmptyParam liveVersion) {
       this.liveVersion = liveVersion;

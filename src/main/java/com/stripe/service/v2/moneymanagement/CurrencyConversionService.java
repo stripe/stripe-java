@@ -3,6 +3,7 @@ package com.stripe.service.v2.moneymanagement;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.FeatureNotEnabledException;
+import com.stripe.exception.FxQuoteExpiredException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.StripeCollection;
 import com.stripe.model.v2.moneymanagement.CurrencyConversion;
@@ -50,12 +51,12 @@ public final class CurrencyConversionService extends ApiService {
   }
   /** Create a CurrencyConversion. */
   public CurrencyConversion create(CurrencyConversionCreateParams params)
-      throws StripeException, FeatureNotEnabledException {
+      throws StripeException, FxQuoteExpiredException, FeatureNotEnabledException {
     return create(params, (RequestOptions) null);
   }
   /** Create a CurrencyConversion. */
   public CurrencyConversion create(CurrencyConversionCreateParams params, RequestOptions options)
-      throws StripeException, FeatureNotEnabledException {
+      throws StripeException, FxQuoteExpiredException, FeatureNotEnabledException {
     String path = "/v2/money_management/currency_conversions";
     ApiRequest request =
         new ApiRequest(

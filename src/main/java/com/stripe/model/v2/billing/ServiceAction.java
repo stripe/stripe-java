@@ -183,9 +183,9 @@ public class ServiceAction extends StripeObject implements HasId {
         List<String> billableItems;
 
         /**
-         * The price type that credit grants can apply to. We currently only support the {@code
-         * metered} price type. This will apply to metered prices and rate cards. Cannot be used in
-         * combination with {@code billable_items}.
+         * The price type that credit grants can apply to. Stripe supports the {@code metered} price
+         * type, which applies to metered prices and rate cards. Cannot be used in combination with
+         * {@code billable_items}.
          *
          * <p>Equal to {@code metered}.
          */
@@ -316,9 +316,9 @@ public class ServiceAction extends StripeObject implements HasId {
         List<String> billableItems;
 
         /**
-         * The price type that credit grants can apply to. We currently only support the {@code
-         * metered} price type. This will apply to metered prices and rate cards. Cannot be used in
-         * combination with {@code billable_items}.
+         * The price type that credit grants can apply to. Stripe supports the {@code metered} price
+         * type, which applies to metered prices and rate cards. Cannot be used in combination with
+         * {@code billable_items}.
          *
          * <p>Equal to {@code metered}.
          */

@@ -86,6 +86,10 @@ public class Transaction extends ApiResource
   @SerializedName("created")
   Long created;
 
+  /** Array of onchain crypto transactions linked to this resource. */
+  @SerializedName("crypto_transactions")
+  List<Transaction.CryptoTransaction> cryptoTransactions;
+
   /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
    * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
@@ -472,6 +476,177 @@ public class Transaction extends ApiResource
   }
 
   /**
+   * For more details about CryptoTransaction, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CryptoTransaction extends StripeObject {
+    /**
+     * The confirmed crypto transaction details when {@code type} is {@code
+     * crypto_transaction_confirmed}; otherwise null.
+     */
+    @SerializedName("crypto_transaction_confirmed")
+    CryptoTransactionConfirmed cryptoTransactionConfirmed;
+
+    /**
+     * The failed crypto transaction details when {@code type} is {@code crypto_transaction_failed};
+     * otherwise null.
+     */
+    @SerializedName("crypto_transaction_failed")
+    CryptoTransactionFailed cryptoTransactionFailed;
+
+    /** The crypto transaction variant for this array entry. */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about CryptoTransactionConfirmed, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CryptoTransactionConfirmed extends StripeObject {
+      /** The crypto amount for the confirmed transaction. */
+      @SerializedName("amount")
+      String amount;
+
+      /** The upcharged MCC amount, if one was applied. */
+      @SerializedName("amount_mcc_upcharged")
+      String amountMccUpcharged;
+
+      /** The blockchain network for the confirmed transaction. */
+      @SerializedName("chain")
+      String chain;
+
+      /** When the transaction was confirmed onchain. */
+      @SerializedName("confirmed_at")
+      Long confirmedAt;
+
+      /** The currency of the crypto transaction amount. */
+      @SerializedName("currency")
+      String currency;
+
+      /** Fees associated with the transaction. */
+      @SerializedName("fees")
+      List<Transaction.CryptoTransaction.CryptoTransactionConfirmed.Fee> fees;
+
+      /** The source wallet address for the transaction. */
+      @SerializedName("from_address")
+      String fromAddress;
+
+      /** Memo metadata attached to the transaction, if present. */
+      @SerializedName("memo")
+      String memo;
+
+      /** The destination wallet address for the transaction. */
+      @SerializedName("to_address")
+      String toAddress;
+
+      /** The blockchain transaction hash. */
+      @SerializedName("transaction_hash")
+      String transactionHash;
+
+      /**
+       * For more details about Fee, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Fee extends StripeObject {
+        /** The fee amount. */
+        @SerializedName("amount")
+        String amount;
+
+        /** The fee currency. */
+        @SerializedName("currency")
+        String currency;
+
+        /** The fee type. */
+        @SerializedName("type")
+        String type;
+      }
+    }
+
+    /**
+     * For more details about CryptoTransactionFailed, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CryptoTransactionFailed extends StripeObject {
+      /** The crypto amount for the failed transaction. */
+      @SerializedName("amount")
+      String amount;
+
+      /** The upcharged MCC amount, if one was applied. */
+      @SerializedName("amount_mcc_upcharged")
+      String amountMccUpcharged;
+
+      /** The blockchain network for the failed transaction. */
+      @SerializedName("chain")
+      String chain;
+
+      /** The currency of the crypto transaction amount. */
+      @SerializedName("currency")
+      String currency;
+
+      /** When the transaction failed. */
+      @SerializedName("failed_at")
+      Long failedAt;
+
+      /** The reason the transaction failed. */
+      @SerializedName("failure_reason")
+      String failureReason;
+
+      /** Fees associated with the transaction. */
+      @SerializedName("fees")
+      List<Transaction.CryptoTransaction.CryptoTransactionFailed.Fee> fees;
+
+      /** The source wallet address for the attempted transaction. */
+      @SerializedName("from_address")
+      String fromAddress;
+
+      /** Memo metadata attached to the transaction, if present. */
+      @SerializedName("memo")
+      String memo;
+
+      /** The destination wallet address for the attempted transaction when one exists. */
+      @SerializedName("to_address")
+      String toAddress;
+
+      /** The blockchain transaction hash when one exists. */
+      @SerializedName("transaction_hash")
+      String transactionHash;
+
+      /**
+       * For more details about Fee, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Fee extends StripeObject {
+        /** The fee amount. */
+        @SerializedName("amount")
+        String amount;
+
+        /** The fee currency. */
+        @SerializedName("currency")
+        String currency;
+
+        /** The fee type. */
+        @SerializedName("type")
+        String type;
+      }
+    }
+  }
+
+  /**
    * For more details about MerchantData, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -510,6 +685,13 @@ public class Transaction extends ApiResource
     @SerializedName("network_id")
     String networkId;
 
+    /**
+     * The identifier of the payment facilitator (PayFac) that processed this authorization, as
+     * assigned by the card network. Null when the transaction was not processed through a PayFac.
+     */
+    @SerializedName("payment_facilitator_id")
+    String paymentFacilitatorId;
+
     /** Postal code where the seller is located. */
     @SerializedName("postal_code")
     String postalCode;
@@ -517,6 +699,14 @@ public class Transaction extends ApiResource
     /** State where the seller is located. */
     @SerializedName("state")
     String state;
+
+    /**
+     * The identifier of the sub-merchant involved in this authorization, as assigned by the payment
+     * facilitator. Null when the transaction was not processed through a PayFac or when no
+     * sub-merchant ID was provided.
+     */
+    @SerializedName("sub_merchant_id")
+    String subMerchantId;
 
     /** The seller's tax identification number. Currently populated for French merchants only. */
     @SerializedName("tax_id")

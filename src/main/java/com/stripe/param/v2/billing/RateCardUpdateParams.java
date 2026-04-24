@@ -37,8 +37,8 @@ public class RateCardUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Changes the version that new RateCard activations will use. Providing {@code live_version =
-   * "latest"} will set the RateCard's {@code live_version} to its latest version.
+   * Changes the version that new RateCard activations use. Providing {@code live_version =
+   * "latest"} sets the RateCard's {@code live_version} to its latest version.
    */
   @SerializedName("live_version")
   Object liveVersion;
@@ -157,8 +157,8 @@ public class RateCardUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Changes the version that new RateCard activations will use. Providing {@code live_version =
-     * "latest"} will set the RateCard's {@code live_version} to its latest version.
+     * Changes the version that new RateCard activations use. Providing {@code live_version =
+     * "latest"} sets the RateCard's {@code live_version} to its latest version.
      */
     public Builder setLiveVersion(String liveVersion) {
       this.liveVersion = liveVersion;
@@ -166,8 +166,8 @@ public class RateCardUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Changes the version that new RateCard activations will use. Providing {@code live_version =
-     * "latest"} will set the RateCard's {@code live_version} to its latest version.
+     * Changes the version that new RateCard activations use. Providing {@code live_version =
+     * "latest"} sets the RateCard's {@code live_version} to its latest version.
      */
     public Builder setLiveVersion(EmptyParam liveVersion) {
       this.liveVersion = liveVersion;

@@ -49,7 +49,7 @@ public class ProfileListParams extends ApiRequestParams {
 
   /**
    * Filter billing profiles by status. Can be combined with all other filters. If not provided, all
-   * billing profiles will be returned.
+   * billing profiles are returned.
    */
   @SerializedName("status")
   Status status;
@@ -175,7 +175,7 @@ public class ProfileListParams extends ApiRequestParams {
 
     /**
      * Filter billing profiles by status. Can be combined with all other filters. If not provided,
-     * all billing profiles will be returned.
+     * all billing profiles are returned.
      */
     public Builder setStatus(ProfileListParams.Status status) {
       this.status = status;

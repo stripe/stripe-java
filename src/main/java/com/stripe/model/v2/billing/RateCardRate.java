@@ -77,8 +77,8 @@ public class RateCardRate extends StripeObject implements HasId {
   String rateCardVersion;
 
   /**
-   * Defines whether the tiering price should be graduated or volume-based. In volume-based tiering,
-   * the maximum quantity within a period determines the per-unit price. In graduated tiering, the
+   * Defines whether the tiering price is graduated or volume-based. In volume-based tiering, the
+   * maximum quantity within a period determines the per-unit price. In graduated tiering, the
    * pricing changes as the quantity grows into new tiers. Can only be set if {@code tiers} is set.
    *
    * <p>One of {@code graduated}, or {@code volume}.
@@ -146,8 +146,8 @@ public class RateCardRate extends StripeObject implements HasId {
     String unitAmount;
 
     /**
-     * Up to and including this quantity will be contained in the tier. Only one of {@code
-     * up_to_decimal} and {@code up_to_inf} may be set.
+     * Up to and including this quantity is contained in the tier. Only one of {@code up_to_decimal}
+     * and {@code up_to_inf} may be set.
      */
     @SerializedName("up_to_decimal")
     BigDecimal upToDecimal;

@@ -85,7 +85,7 @@ public class IntentAction extends StripeObject implements HasId {
     @SerializedName("discount")
     Discount discount;
 
-    /** When the apply action will take effect. If not specified, defaults to on_reserve. */
+    /** When the apply action takes effect. If not specified, defaults to on_reserve. */
     @SerializedName("effective_at")
     EffectiveAt effectiveAt;
 
@@ -131,20 +131,20 @@ public class IntentAction extends StripeObject implements HasId {
       String type;
     }
 
-    /** When the apply action will take effect. If not specified, defaults to on_reserve. */
+    /** When the apply action takes effect. If not specified, defaults to on_reserve. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class EffectiveAt extends StripeObject {
       /**
-       * The timestamp at which the apply action will take effect. Only present if type is
-       * timestamp. Only allowed for discount actions.
+       * The timestamp at which the apply action takes effect. Only present if type is timestamp.
+       * Only allowed for discount actions.
        */
       @SerializedName("timestamp")
       Instant timestamp;
 
       /**
-       * When the apply action will take effect.
+       * When the apply action takes effect.
        *
        * <p>One of {@code current_billing_period_end}, {@code current_billing_period_start}, {@code
        * next_billing_period_start}, {@code on_reserve}, or {@code timestamp}.
@@ -195,8 +195,8 @@ public class IntentAction extends StripeObject implements HasId {
         MaximumApplications maximumApplications;
 
         /**
-         * Percent that will be taken off of the amount. For example, percent_off of 50.0 will make
-         * $100 amount $50 instead.
+         * Percent that is taken off the amount. For example, a percent_off of 50.0 reduces a 100
+         * USD amount to 50 USD.
          */
         @SerializedName("percent_off")
         BigDecimal percentOff;
@@ -331,7 +331,7 @@ public class IntentAction extends StripeObject implements HasId {
     String collectAt;
 
     /**
-     * When the deactivate action will take effect. If not specified, the default behavior is
+     * When the deactivate action takes effect. If not specified, the default behavior is
      * on_reserve.
      */
     @SerializedName("effective_at")
@@ -374,7 +374,7 @@ public class IntentAction extends StripeObject implements HasId {
     }
 
     /**
-     * When the deactivate action will take effect. If not specified, the default behavior is
+     * When the deactivate action takes effect. If not specified, the default behavior is
      * on_reserve.
      */
     @Getter
@@ -382,14 +382,14 @@ public class IntentAction extends StripeObject implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class EffectiveAt extends StripeObject {
       /**
-       * The timestamp at which the deactivate action will take effect. Only present if type is
+       * The timestamp at which the deactivate action takes effect. Only present if type is
        * timestamp.
        */
       @SerializedName("timestamp")
       Instant timestamp;
 
       /**
-       * When the deactivate action will take effect.
+       * When the deactivate action takes effect.
        *
        * <p>One of {@code current_billing_period_end}, {@code current_billing_period_start}, {@code
        * on_reserve}, or {@code timestamp}.
@@ -480,8 +480,7 @@ public class IntentAction extends StripeObject implements HasId {
     String collectAt;
 
     /**
-     * When the modify action will take effect. If not specified, the default behavior is
-     * on_reserve.
+     * When the modify action takes effect. If not specified, the default behavior is on_reserve.
      */
     @SerializedName("effective_at")
     EffectiveAt effectiveAt;
@@ -499,22 +498,20 @@ public class IntentAction extends StripeObject implements HasId {
     String type;
 
     /**
-     * When the modify action will take effect. If not specified, the default behavior is
-     * on_reserve.
+     * When the modify action takes effect. If not specified, the default behavior is on_reserve.
      */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class EffectiveAt extends StripeObject {
       /**
-       * The timestamp at which the modify action will take effect. Only present if type is
-       * timestamp.
+       * The timestamp at which the modify action takes effect. Only present if type is timestamp.
        */
       @SerializedName("timestamp")
       Instant timestamp;
 
       /**
-       * When the modify action will take effect.
+       * When the modify action takes effect.
        *
        * <p>One of {@code current_billing_period_start}, {@code on_reserve}, or {@code timestamp}.
        */
@@ -665,7 +662,7 @@ public class IntentAction extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Remove extends StripeObject {
-    /** When the remove action will take effect. If not specified, defaults to on_reserve. */
+    /** When the remove action takes effect. If not specified, defaults to on_reserve. */
     @SerializedName("effective_at")
     EffectiveAt effectiveAt;
 
@@ -685,13 +682,13 @@ public class IntentAction extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
-    /** When the remove action will take effect. If not specified, defaults to on_reserve. */
+    /** When the remove action takes effect. If not specified, defaults to on_reserve. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class EffectiveAt extends StripeObject {
       /**
-       * When the remove action will take effect.
+       * When the remove action takes effect.
        *
        * <p>One of {@code current_billing_period_end}, or {@code on_reserve}.
        */
@@ -714,8 +711,7 @@ public class IntentAction extends StripeObject implements HasId {
     String collectAt;
 
     /**
-     * When the subscribe action will take effect. If not specified, the default behavior is
-     * on_reserve.
+     * When the subscribe action takes effect. If not specified, the default behavior is on_reserve.
      */
     @SerializedName("effective_at")
     EffectiveAt effectiveAt;
@@ -737,22 +733,21 @@ public class IntentAction extends StripeObject implements HasId {
     V1SubscriptionDetails v1SubscriptionDetails;
 
     /**
-     * When the subscribe action will take effect. If not specified, the default behavior is
-     * on_reserve.
+     * When the subscribe action takes effect. If not specified, the default behavior is on_reserve.
      */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class EffectiveAt extends StripeObject {
       /**
-       * The timestamp at which the subscribe action will take effect. Only present if type is
+       * The timestamp at which the subscribe action takes effect. Only present if type is
        * timestamp.
        */
       @SerializedName("timestamp")
       Instant timestamp;
 
       /**
-       * When the subscribe action will take effect.
+       * When the subscribe action takes effect.
        *
        * <p>One of {@code current_billing_period_start}, {@code on_reserve}, or {@code timestamp}.
        */

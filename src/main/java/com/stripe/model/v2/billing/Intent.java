@@ -199,8 +199,8 @@ public class Intent extends StripeObject implements HasId {
       public static class Month extends StripeObject {
         /**
          * The day to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-31. If
-         * this number is greater than the number of days in the month being billed, this will
-         * anchor to the last day of the month.
+         * this number is greater than the number of days in the month being billed, this anchors to
+         * the last day of the month.
          */
         @SerializedName("day_of_month")
         Long dayOfMonth;
@@ -295,15 +295,15 @@ public class Intent extends StripeObject implements HasId {
       public static class Year extends StripeObject {
         /**
          * The day to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-31. If
-         * this number is greater than the number of days in the month being billed, this will
-         * anchor to the last day of the month.
+         * this number is greater than the number of days in the month being billed, this anchors to
+         * the last day of the month.
          */
         @SerializedName("day_of_month")
         Long dayOfMonth;
 
         /**
-         * The month to bill on from 1-12. If not provided, this will default to the month the
-         * cadence was created.
+         * The month to bill on from 1-12. If not provided, this defaults to the month the cadence
+         * was created.
          */
         @SerializedName("month_of_year")
         Long monthOfYear;
@@ -346,7 +346,7 @@ public class Intent extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Payer extends StripeObject {
-      /** The ID of the Billing Profile object which determines how a bill will be paid. */
+      /** The ID of the Billing Profile object which determines how a bill is paid. */
       @SerializedName("billing_profile")
       String billingProfile;
 
@@ -365,7 +365,7 @@ public class Intent extends StripeObject implements HasId {
 
         /**
          * The default payment method to use when billing this profile. If none is provided, the
-         * customer {@code default_payment_method} will be used.
+         * customer {@code default_payment_method} is used.
          */
         @SerializedName("default_payment_method")
         String defaultPaymentMethod;
@@ -440,7 +440,7 @@ public class Intent extends StripeObject implements HasId {
     @SerializedName("drafted_at")
     Instant draftedAt;
 
-    /** Time at which the Billing Intent will expire. */
+    /** Time at which the Billing Intent expires. */
     @SerializedName("expires_at")
     Instant expiresAt;
 

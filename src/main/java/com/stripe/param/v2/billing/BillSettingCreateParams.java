@@ -233,8 +233,8 @@ public class BillSettingCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> Determines if tax will be calculated automatically based on a
-       * PTC or manually based on rules defined by the merchant. Defaults to &quot;manual&quot;.
+       * <strong>Required.</strong> Determines if tax is calculated automatically based on a PTC or
+       * manually based on rules defined by the business. Defaults to &quot;manual&quot;.
        */
       @SerializedName("type")
       Type type;
@@ -287,8 +287,8 @@ public class BillSettingCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> Determines if tax will be calculated automatically based on a
-         * PTC or manually based on rules defined by the merchant. Defaults to &quot;manual&quot;.
+         * <strong>Required.</strong> Determines if tax is calculated automatically based on a PTC
+         * or manually based on rules defined by the business. Defaults to &quot;manual&quot;.
          */
         public Builder setType(BillSettingCreateParams.Calculation.Tax.Type type) {
           this.type = type;
@@ -325,7 +325,7 @@ public class BillSettingCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The amount of time until the invoice will be overdue for payment. */
+    /** The amount of time until the invoice is overdue for payment. */
     @SerializedName("time_until_due")
     TimeUntilDue timeUntilDue;
 
@@ -374,7 +374,7 @@ public class BillSettingCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The amount of time until the invoice will be overdue for payment. */
+      /** The amount of time until the invoice is overdue for payment. */
       public Builder setTimeUntilDue(BillSettingCreateParams.Invoice.TimeUntilDue timeUntilDue) {
         this.timeUntilDue = timeUntilDue;
         return this;
@@ -399,7 +399,7 @@ public class BillSettingCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The number of interval units. For example, if interval=day and
-       * interval_count=30, the invoice will be due in 30 days.
+       * interval_count=30, the invoice is due in 30 days.
        */
       @SerializedName("interval_count")
       Long intervalCount;
@@ -463,7 +463,7 @@ public class BillSettingCreateParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The number of interval units. For example, if interval=day and
-         * interval_count=30, the invoice will be due in 30 days.
+         * interval_count=30, the invoice is due in 30 days.
          */
         public Builder setIntervalCount(Long intervalCount) {
           this.intervalCount = intervalCount;

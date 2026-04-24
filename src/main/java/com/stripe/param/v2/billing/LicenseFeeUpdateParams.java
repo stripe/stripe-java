@@ -35,8 +35,8 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Changes the version that new license fee will use. Providing {@code live_version = "latest"}
-   * will set the license fee's {@code live_version} to its latest version.
+   * Changes the version that new license fee activations use. Providing {@code live_version =
+   * "latest"} sets the license fee's {@code live_version} to its latest version.
    */
   @SerializedName("live_version")
   Object liveVersion;
@@ -57,8 +57,8 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
   Map<String, Object> metadata;
 
   /**
-   * Defines whether the tiered price should be graduated or volume-based. In volume-based tiering,
-   * the maximum quantity within a period determines the per-unit price. In graduated tiering, the
+   * Defines whether the tiered price is graduated or volume-based. In volume-based tiering, the
+   * maximum quantity within a period determines the per-unit price. In graduated tiering, the
    * pricing changes as the quantity grows into new tiers. Can only be set if {@code tiers} is set.
    */
   @SerializedName("tiering_mode")
@@ -187,8 +187,8 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Changes the version that new license fee will use. Providing {@code live_version = "latest"}
-     * will set the license fee's {@code live_version} to its latest version.
+     * Changes the version that new license fee activations use. Providing {@code live_version =
+     * "latest"} sets the license fee's {@code live_version} to its latest version.
      */
     public Builder setLiveVersion(String liveVersion) {
       this.liveVersion = liveVersion;
@@ -196,8 +196,8 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Changes the version that new license fee will use. Providing {@code live_version = "latest"}
-     * will set the license fee's {@code live_version} to its latest version.
+     * Changes the version that new license fee activations use. Providing {@code live_version =
+     * "latest"} sets the license fee's {@code live_version} to its latest version.
      */
     public Builder setLiveVersion(EmptyParam liveVersion) {
       this.liveVersion = liveVersion;
@@ -267,10 +267,10 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Defines whether the tiered price should be graduated or volume-based. In volume-based
-     * tiering, the maximum quantity within a period determines the per-unit price. In graduated
-     * tiering, the pricing changes as the quantity grows into new tiers. Can only be set if {@code
-     * tiers} is set.
+     * Defines whether the tiered price is graduated or volume-based. In volume-based tiering, the
+     * maximum quantity within a period determines the per-unit price. In graduated tiering, the
+     * pricing changes as the quantity grows into new tiers. Can only be set if {@code tiers} is
+     * set.
      */
     public Builder setTieringMode(LicenseFeeUpdateParams.TieringMode tieringMode) {
       this.tieringMode = tieringMode;
@@ -359,8 +359,8 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     Object unitAmount;
 
     /**
-     * Up to and including this quantity will be contained in the tier. Only one of {@code
-     * up_to_decimal} and {@code up_to_inf} may be set.
+     * Up to and including this quantity is contained in the tier. Only one of {@code up_to_decimal}
+     * and {@code up_to_inf} may be set.
      */
     @SerializedName("up_to_decimal")
     Object upToDecimal;
@@ -469,7 +469,7 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Up to and including this quantity will be contained in the tier. Only one of {@code
+       * Up to and including this quantity is contained in the tier. Only one of {@code
        * up_to_decimal} and {@code up_to_inf} may be set.
        */
       public Builder setUpToDecimal(BigDecimal upToDecimal) {
@@ -478,7 +478,7 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Up to and including this quantity will be contained in the tier. Only one of {@code
+       * Up to and including this quantity is contained in the tier. Only one of {@code
        * up_to_decimal} and {@code up_to_inf} may be set.
        */
       public Builder setUpToDecimal(EmptyParam upToDecimal) {

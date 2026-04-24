@@ -642,9 +642,9 @@ public class ActionServiceCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The price type that credit grants can apply to. We currently only support the {@code
-         * metered} price type. This will apply to metered prices and rate cards. Cannot be used in
-         * combination with {@code billable_items}.
+         * The price type that credit grants can apply to. Stripe supports the {@code metered} price
+         * type, which applies to metered prices and rate cards. Cannot be used in combination with
+         * {@code billable_items}.
          */
         @SerializedName("price_type")
         PriceType priceType;
@@ -734,9 +734,9 @@ public class ActionServiceCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The price type that credit grants can apply to. We currently only support the {@code
-           * metered} price type. This will apply to metered prices and rate cards. Cannot be used
-           * in combination with {@code billable_items}.
+           * The price type that credit grants can apply to. Stripe supports the {@code metered}
+           * price type, which applies to metered prices and rate cards. Cannot be used in
+           * combination with {@code billable_items}.
            */
           public Builder setPriceType(
               ActionServiceCreateParams.CreditGrant.ApplicabilityConfig.Scope.PriceType priceType) {
@@ -1357,9 +1357,9 @@ public class ActionServiceCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The price type that credit grants can apply to. We currently only support the {@code
-         * metered} price type. This will apply to metered prices and rate cards. Cannot be used in
-         * combination with {@code billable_items}.
+         * The price type that credit grants can apply to. Stripe supports the {@code metered} price
+         * type, which applies to metered prices and rate cards. Cannot be used in combination with
+         * {@code billable_items}.
          */
         @SerializedName("price_type")
         PriceType priceType;
@@ -1449,9 +1449,9 @@ public class ActionServiceCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The price type that credit grants can apply to. We currently only support the {@code
-           * metered} price type. This will apply to metered prices and rate cards. Cannot be used
-           * in combination with {@code billable_items}.
+           * The price type that credit grants can apply to. Stripe supports the {@code metered}
+           * price type, which applies to metered prices and rate cards. Cannot be used in
+           * combination with {@code billable_items}.
            */
           public Builder setPriceType(
               ActionServiceCreateParams.CreditGrantPerTenant.ApplicabilityConfig.Scope.PriceType

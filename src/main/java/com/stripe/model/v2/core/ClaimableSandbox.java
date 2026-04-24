@@ -22,11 +22,12 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class ClaimableSandbox extends StripeObject implements HasId {
   /**
-   * URL for user to claim sandbox into their existing Stripe account. The value will be null if the
-   * sandbox status is {@code claimed} or {@code expired}.
+   * The app channel that will be used when pre-installing your app on the claimable sandbox.
+   *
+   * <p>One of {@code public}, or {@code testing}.
    */
-  @SerializedName("claim_url")
-  String claimUrl;
+  @SerializedName("app_channel")
+  String appChannel;
 
   /**
    * The timestamp the sandbox was claimed. The value will be null if the sandbox status is not
@@ -67,6 +68,17 @@ public class ClaimableSandbox extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
+  /** Details about the onboarding link. */
+  @SerializedName("onboarding_link_details")
+  OnboardingLinkDetails onboardingLinkDetails;
+
+  /**
+   * Details about the livemode owner account of the sandbox. This will be null until the sandbox is
+   * claimed.
+   */
+  @SerializedName("owner_details")
+  OwnerDetails ownerDetails;
+
   /**
    * Values prefilled during the creation of the sandbox. When a user claims the sandbox, they will
    * be able to update these values.
@@ -78,9 +90,62 @@ public class ClaimableSandbox extends StripeObject implements HasId {
   @SerializedName("sandbox_details")
   SandboxDetails sandboxDetails;
 
-  /** Status of the sandbox. One of {@code unclaimed}, {@code expired}, {@code claimed}. */
+  /**
+   * Status of the sandbox.
+   *
+   * <p>One of {@code claimed}, {@code expired}, {@code live}, or {@code unclaimed}.
+   */
   @SerializedName("status")
   String status;
+
+  /** Details about the onboarding link. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class OnboardingLinkDetails extends StripeObject {
+    /** The timestamp the onboarding link expires. */
+    @SerializedName("expires_at")
+    Instant expiresAt;
+
+    /**
+     * The URL the user will be redirected to if the onboarding link is expired or invalid. The URL
+     * specified should attempt to generate a new onboarding link, and re-direct the user to this
+     * new onboarding link so that they can proceed with the onboarding flow.
+     */
+    @SerializedName("refresh_url")
+    String refreshUrl;
+
+    /**
+     * URL that will redirect the user to either claim or onboard the claimable sandbox depending on
+     * its status.
+     */
+    @SerializedName("url")
+    String url;
+  }
+
+  /**
+   * Details about the livemode owner account of the sandbox. This will be null until the sandbox is
+   * claimed.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class OwnerDetails extends StripeObject {
+    /**
+     * The ID of the livemode Stripe account that owns the sandbox. This field is only set when
+     * owner_details.app_install_status is {@code installed}.
+     */
+    @SerializedName("account")
+    String account;
+
+    /**
+     * Indicates whether the platform app is installed on the sandbox’s livemode owner account.
+     *
+     * <p>One of {@code installed}, {@code pending_install}, or {@code pending_onboarding}.
+     */
+    @SerializedName("app_install_status")
+    String appInstallStatus;
+  }
 
   /**
    * Values prefilled during the creation of the sandbox. When a user claims the sandbox, they will
@@ -126,13 +191,6 @@ public class ClaimableSandbox extends StripeObject implements HasId {
      */
     @SerializedName("api_keys")
     ApiKeys apiKeys;
-
-    /**
-     * The livemode sandbox Stripe account ID. This field is only set if the user activates their
-     * sandbox and chooses to install your platform's Stripe App in their live account.
-     */
-    @SerializedName("owner_account")
-    String ownerAccount;
 
     /**
      * Keys that can be used to set up an integration for this sandbox and operate on the account.

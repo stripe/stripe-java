@@ -122,7 +122,7 @@ public class PayoutMethod extends StripeObject implements HasId {
     /**
      * The type of bank account (checking or savings).
      *
-     * <p>One of {@code checking}, or {@code savings}.
+     * <p>One of {@code checking}, {@code futsu}, {@code savings}, or {@code toza}.
      */
     @SerializedName("bank_account_type")
     String bankAccountType;
@@ -230,7 +230,7 @@ public class PayoutMethod extends StripeObject implements HasId {
      * Which rail is being used to make an outbound money movement to this wallet.
      *
      * <p>One of {@code arbitrum}, {@code avalanche_c_chain}, {@code base}, {@code ethereum}, {@code
-     * optimism}, {@code polygon}, {@code solana}, or {@code stellar}.
+     * optimism}, {@code polygon}, {@code solana}, {@code stellar}, or {@code tempo}.
      */
     @SerializedName("network")
     String network;

@@ -533,19 +533,22 @@ public class AccountPerson extends StripeObject implements HasId {
      *
      * <p>One of {@code ae_eid}, {@code ao_nif}, {@code ar_cuil}, {@code ar_dni}, {@code at_stn},
      * {@code az_tin}, {@code bd_brc}, {@code bd_etin}, {@code bd_nid}, {@code be_nrn}, {@code
-     * bg_ucn}, {@code bn_nric}, {@code br_cpf}, {@code ca_sin}, {@code ch_oasi}, {@code cl_rut},
-     * {@code cn_pp}, {@code co_nuip}, {@code cr_ci}, {@code cr_cpf}, {@code cr_dimex}, {@code
-     * cr_nite}, {@code cy_tic}, {@code cz_rc}, {@code de_stn}, {@code dk_cpr}, {@code do_cie},
-     * {@code do_rcn}, {@code ec_ci}, {@code ee_ik}, {@code es_nif}, {@code fi_hetu}, {@code
-     * fr_nir}, {@code gb_nino}, {@code gr_afm}, {@code gt_nit}, {@code hk_id}, {@code hr_oib},
-     * {@code hu_ad}, {@code id_nik}, {@code ie_ppsn}, {@code is_kt}, {@code it_cf}, {@code jp_inc},
-     * {@code ke_pin}, {@code kz_iin}, {@code li_peid}, {@code lt_ak}, {@code lu_nif}, {@code
-     * lv_pk}, {@code mx_rfc}, {@code my_nric}, {@code mz_nuit}, {@code ng_nin}, {@code nl_bsn},
-     * {@code no_nin}, {@code nz_ird}, {@code pe_dni}, {@code pk_cnic}, {@code pk_snic}, {@code
-     * pl_pesel}, {@code pt_nif}, {@code ro_cnp}, {@code sa_tin}, {@code se_pin}, {@code sg_fin},
-     * {@code sg_nric}, {@code sk_dic}, {@code th_lc}, {@code th_pin}, {@code tr_tin}, {@code
-     * us_itin}, {@code us_itin_last_4}, {@code us_ssn}, {@code us_ssn_last_4}, {@code uy_dni}, or
-     * {@code za_id}.
+     * bg_ucn}, {@code bm_pp}, {@code bn_nric}, {@code bo_ci}, {@code br_cpf}, {@code bt_cid},
+     * {@code ca_sin}, {@code ch_oasi}, {@code cl_rut}, {@code cn_pp}, {@code co_nuip}, {@code
+     * cr_ci}, {@code cr_cpf}, {@code cr_dimex}, {@code cr_nite}, {@code cy_tic}, {@code cz_rc},
+     * {@code de_stn}, {@code dk_cpr}, {@code do_cie}, {@code do_rcn}, {@code ec_ci}, {@code ee_ik},
+     * {@code eg_tin}, {@code es_nif}, {@code fi_hetu}, {@code fr_nir}, {@code gb_nino}, {@code
+     * gh_pin}, {@code gr_afm}, {@code gt_nit}, {@code gy_tin}, {@code hk_id}, {@code hn_rtn},
+     * {@code hr_oib}, {@code hu_ad}, {@code id_nik}, {@code ie_ppsn}, {@code is_kt}, {@code it_cf},
+     * {@code jm_trn}, {@code jo_pin}, {@code jp_inc}, {@code ke_pin}, {@code ky_pp}, {@code
+     * kz_iin}, {@code li_peid}, {@code lk_nic}, {@code lt_ak}, {@code lu_nif}, {@code lv_pk},
+     * {@code mo_bir}, {@code mt_nic}, {@code mv_tin}, {@code mx_rfc}, {@code my_nric}, {@code
+     * mz_nuit}, {@code ng_nin}, {@code nl_bsn}, {@code no_nin}, {@code nz_ird}, {@code pa_ruc},
+     * {@code pe_dni}, {@code ph_tin}, {@code pk_cnic}, {@code pk_snic}, {@code pl_pesel}, {@code
+     * pt_nif}, {@code py_ruc}, {@code ro_cnp}, {@code sa_tin}, {@code se_pin}, {@code sg_fin},
+     * {@code sg_nric}, {@code si_pin}, {@code sk_dic}, {@code sv_nit}, {@code th_lc}, {@code
+     * th_pin}, {@code tr_tin}, {@code us_itin}, {@code us_itin_last_4}, {@code us_ssn}, {@code
+     * us_ssn_last_4}, {@code uy_dni}, {@code vg_pp}, or {@code za_id}.
      */
     @SerializedName("type")
     String type;

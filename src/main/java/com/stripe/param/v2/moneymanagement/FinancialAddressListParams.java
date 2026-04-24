@@ -130,6 +130,9 @@ public class FinancialAddressListParams extends ApiRequestParams {
   }
 
   public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("credentials.ca_bank_account.account_number")
+    CREDENTIALS__CA_BANK_ACCOUNT__ACCOUNT_NUMBER("credentials.ca_bank_account.account_number"),
+
     @SerializedName("credentials.gb_bank_account.account_number")
     CREDENTIALS__GB_BANK_ACCOUNT__ACCOUNT_NUMBER("credentials.gb_bank_account.account_number"),
 
