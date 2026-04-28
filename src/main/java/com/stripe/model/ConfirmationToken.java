@@ -455,6 +455,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("stripe_balance")
     StripeBalance stripeBalance;
 
+    @SerializedName("sunbit")
+    Sunbit sunbit;
+
     @SerializedName("swish")
     Swish swish;
 
@@ -477,8 +480,8 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * pay_by_bank}, {@code payco}, {@code paynow}, {@code paypal}, {@code paypay}, {@code payto},
      * {@code pix}, {@code promptpay}, {@code qris}, {@code rechnung}, {@code revolut_pay}, {@code
      * samsung_pay}, {@code satispay}, {@code sepa_debit}, {@code shopeepay}, {@code sofort}, {@code
-     * stripe_balance}, {@code swish}, {@code twint}, {@code upi}, {@code us_bank_account}, {@code
-     * wechat_pay}, or {@code zip}.
+     * stripe_balance}, {@code sunbit}, {@code swish}, {@code twint}, {@code upi}, {@code
+     * us_bank_account}, {@code wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -2490,6 +2493,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @SerializedName("account")
       String account;
     }
+
+    /**
+     * For more details about Sunbit, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sunbit extends StripeObject {}
 
     /**
      * For more details about Swish, please refer to the <a href="https://docs.stripe.com/api">API

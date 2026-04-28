@@ -6428,6 +6428,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Object bizum;
 
       /**
+       * This sub-hash contains details about the Blik payment method options to pass to the
+       * invoice’s PaymentIntent.
+       */
+      @SerializedName("blik")
+      Object blik;
+
+      /**
        * This sub-hash contains details about the Card payment method options to pass to the
        * invoice’s PaymentIntent.
        */
@@ -6510,6 +6517,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           Object acssDebit,
           Object bancontact,
           Object bizum,
+          Object blik,
           Object card,
           Object checkScan,
           Object customerBalance,
@@ -6524,6 +6532,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
         this.bizum = bizum;
+        this.blik = blik;
         this.card = card;
         this.checkScan = checkScan;
         this.customerBalance = customerBalance;
@@ -6547,6 +6556,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         private Object bancontact;
 
         private Object bizum;
+
+        private Object blik;
 
         private Object card;
 
@@ -6576,6 +6587,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
               this.acssDebit,
               this.bancontact,
               this.bizum,
+              this.blik,
               this.card,
               this.checkScan,
               this.customerBalance,
@@ -6643,6 +6655,25 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          */
         public Builder setBizum(EmptyParam bizum) {
           this.bizum = bizum;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Blik payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setBlik(
+            SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik blik) {
+          this.blik = blik;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Blik payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setBlik(EmptyParam blik) {
+          this.blik = blik;
           return this;
         }
 
@@ -7368,6 +7399,165 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
             AmountType(String value) {
               this.value = value;
+            }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Blik {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Configuration options for setting up a mandate. */
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        private Blik(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+          this.extraParams = extraParams;
+          this.mandateOptions = mandateOptions;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private MandateOptions mandateOptions;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik build() {
+            return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik(
+                this.extraParams, this.mandateOptions);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Configuration options for setting up a mandate. */
+          public Builder setMandateOptions(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik.MandateOptions
+                  mandateOptions) {
+            this.mandateOptions = mandateOptions;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions {
+          /**
+           * Date when the mandate expires and no further payments will be charged. If not provided,
+           * the mandate will be set to be indefinite.
+           */
+          @SerializedName("expires_after")
+          Long expiresAfter;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private MandateOptions(Long expiresAfter, Map<String, Object> extraParams) {
+            this.expiresAfter = expiresAfter;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long expiresAfter;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik.MandateOptions
+                build() {
+              return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik
+                  .MandateOptions(this.expiresAfter, this.extraParams);
+            }
+
+            /**
+             * Date when the mandate expires and no further payments will be charged. If not
+             * provided, the mandate will be set to be indefinite.
+             */
+            public Builder setExpiresAfter(Long expiresAfter) {
+              this.expiresAfter = expiresAfter;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
             }
           }
         }
@@ -8766,7 +8956,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** Schedule at which the future payments will be charged. Defaults to {@code monthly}. */
+          /**
+           * Schedule at which the future payments will be charged. Defaults to the subscription
+           * servicing interval.
+           */
           @SerializedName("payment_schedule")
           PaymentSchedule paymentSchedule;
 
@@ -8874,7 +9067,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Schedule at which the future payments will be charged. Defaults to {@code monthly}.
+             * Schedule at which the future payments will be charged. Defaults to the subscription
+             * servicing interval.
              */
             public Builder setPaymentSchedule(
                 SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Pix.MandateOptions
@@ -9770,6 +9964,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       @SerializedName("bizum")
       BIZUM("bizum"),
+
+      @SerializedName("blik")
+      BLIK("blik"),
 
       @SerializedName("boleto")
       BOLETO("boleto"),

@@ -28880,6 +28880,42 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2DataAnalyticsMetricQueryPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/data/analytics/metric_query",
+        null,
+        null,
+        com.stripe.model.v2.data.analytics.MetricQueryResult.class,
+        "{\"object\":\"v2.data.analytics.metric_query_result\",\"created\":\"1970-01-12T21:42:34.472Z\",\"data\":[{\"dimensions\":{\"key\":\"dimensions\"},\"id\":\"obj_123\",\"results\":[{\"metric\":\"metric\",\"name\":\"name\",\"value\":\"111972721\"}],\"timestamp\":\"1970-01-01T15:18:46.294Z\"}],\"id\":\"obj_123\",\"livemode\":true,\"refreshed_at\":\"1970-01-01T11:25:45.896Z\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.data.analytics.MetricQueryCreateParams params =
+        com.stripe.param.v2.data.analytics.MetricQueryCreateParams.builder()
+            .setEndsAt(Instant.parse("1970-01-19T14:12:09.638Z"))
+            .setGranularity(
+                com.stripe.param.v2.data.analytics.MetricQueryCreateParams.Granularity.WEEK)
+            .addMetric(
+                com.stripe.param.v2.data.analytics.MetricQueryCreateParams.Metric.builder()
+                    .setId("obj_123")
+                    .setName("name")
+                    .build())
+            .setStartsAt(Instant.parse("1970-01-25T15:13:01.215Z"))
+            .build();
+
+    com.stripe.model.v2.data.analytics.MetricQueryResult metricQueryResult =
+        client.v2().data().analytics().metricQuery().create(params);
+    assertNotNull(metricQueryResult);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/data/analytics/metric_query",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testV2DataReportingQueryRunPostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -29551,7 +29587,7 @@ class GeneratedExamples extends BaseStripeTest {
             .setFinancialAccount("financial_account")
             .setType(
                 com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams.Type
-                    .SEPA_BANK_ACCOUNT)
+                    .CA_BANK_ACCOUNT)
             .build();
 
     com.stripe.model.v2.moneymanagement.FinancialAddress financialAddress =
@@ -30713,7 +30749,6 @@ class GeneratedExamples extends BaseStripeTest {
             .setCadence(
                 com.stripe.param.v2.payments.OffSessionPaymentCreateParams.Cadence.UNSCHEDULED)
             .setCustomer("customer")
-            .putMetadata("key", "metadata")
             .build();
 
     com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
@@ -30786,9 +30821,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.payments.OffSessionPaymentCaptureParams params =
-        com.stripe.param.v2.payments.OffSessionPaymentCaptureParams.builder()
-            .putMetadata("key", "metadata")
-            .build();
+        com.stripe.param.v2.payments.OffSessionPaymentCaptureParams.builder().build();
 
     com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
         client.v2().payments().offSessionPayments().capture("id_123", params);
@@ -31693,7 +31726,7 @@ class GeneratedExamples extends BaseStripeTest {
             .setFinancialAccount("financial_account")
             .setType(
                 com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams.Type
-                    .SEPA_BANK_ACCOUNT)
+                    .CA_BANK_ACCOUNT)
             .build();
 
     try {

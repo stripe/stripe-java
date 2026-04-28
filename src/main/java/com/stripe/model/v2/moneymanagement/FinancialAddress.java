@@ -91,11 +91,25 @@ public class FinancialAddress extends StripeObject implements HasId {
     CaBankAccount caBankAccount;
 
     /**
+     * The credentials of the crypto wallet for the Financial Address. This contains unique details
+     * such as the blockchain network, wallet address, and memo of a crypto wallet.
+     */
+    @SerializedName("crypto_wallet")
+    CryptoWallet cryptoWallet;
+
+    /**
      * The credentials of the UK Bank Account for the FinancialAddress. This contains unique banking
      * details such as the sort code, account number, etc. of a UK bank account.
      */
     @SerializedName("gb_bank_account")
     GbBankAccount gbBankAccount;
+
+    /**
+     * The credentials of the Mexican Bank Account for the FinancialAddress. This contains unique
+     * banking details such as the CLABE and account holder name of a Mexican bank account.
+     */
+    @SerializedName("mx_bank_account")
+    MxBankAccount mxBankAccount;
 
     /**
      * The credentials of the SEPA Bank Account for the FinancialAddress. This contains unique
@@ -107,8 +121,8 @@ public class FinancialAddress extends StripeObject implements HasId {
     /**
      * Open Enum. The type of Credentials that are provisioned for the FinancialAddress.
      *
-     * <p>One of {@code ca_bank_account}, {@code gb_bank_account}, {@code sepa_bank_account}, or
-     * {@code us_bank_account}.
+     * <p>One of {@code ca_bank_account}, {@code crypto_wallet}, {@code gb_bank_account}, {@code
+     * mx_bank_account}, {@code sepa_bank_account}, or {@code us_bank_account}.
      */
     @SerializedName("type")
     String type;
@@ -159,6 +173,32 @@ public class FinancialAddress extends StripeObject implements HasId {
     }
 
     /**
+     * The credentials of the crypto wallet for the Financial Address. This contains unique details
+     * such as the blockchain network, wallet address, and memo of a crypto wallet.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CryptoWallet extends StripeObject {
+      /** The blockchain address of the crypto wallet. */
+      @SerializedName("address")
+      String address;
+
+      /** Required if the network supports memos (e.g. Stellar). */
+      @SerializedName("memo")
+      String memo;
+
+      /**
+       * The blockchain network of the crypto wallet.
+       *
+       * <p>One of {@code arbitrum}, {@code avalanche_c_chain}, {@code base}, {@code ethereum},
+       * {@code optimism}, {@code polygon}, {@code solana}, {@code stellar}, or {@code tempo}.
+       */
+      @SerializedName("network")
+      String network;
+    }
+
+    /**
      * The credentials of the UK Bank Account for the FinancialAddress. This contains unique banking
      * details such as the sort code, account number, etc. of a UK bank account.
      */
@@ -185,6 +225,23 @@ public class FinancialAddress extends StripeObject implements HasId {
       /** The sort code of the UK Bank Account. */
       @SerializedName("sort_code")
       String sortCode;
+    }
+
+    /**
+     * The credentials of the Mexican Bank Account for the FinancialAddress. This contains unique
+     * banking details such as the CLABE and account holder name of a Mexican bank account.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MxBankAccount extends StripeObject {
+      /** The account holder name to be used during bank transfers. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The CLABE (Clave Bancaria Estandarizada) of the Mexican Bank Account. */
+      @SerializedName("clabe")
+      String clabe;
     }
 
     /**

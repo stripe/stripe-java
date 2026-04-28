@@ -27,10 +27,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   @SerializedName("configuration")
   Configuration configuration;
 
-  /**
-   * The default contact email address for the Account. Required when configuring the account as a
-   * merchant or recipient.
-   */
+  /** The primary contact email address for the Account. */
   @SerializedName("contact_email")
   Object contactEmail;
 
@@ -169,19 +166,13 @@ public class AccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * The default contact email address for the Account. Required when configuring the account as a
-     * merchant or recipient.
-     */
+    /** The primary contact email address for the Account. */
     public Builder setContactEmail(String contactEmail) {
       this.contactEmail = contactEmail;
       return this;
     }
 
-    /**
-     * The default contact email address for the Account. Required when configuring the account as a
-     * merchant or recipient.
-     */
+    /** The primary contact email address for the Account. */
     public Builder setContactEmail(EmptyParam contactEmail) {
       this.contactEmail = contactEmail;
       return this;
@@ -3045,8 +3036,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Billing {
         /**
-         * ID of a PaymentMethod attached to the customer account to use as the default for invoices
-         * and subscriptions.
+         * The ID of a {@code PaymentMethod} attached to this Account's {@code customer}
+         * configuration, used as the default payment method for invoices and subscriptions.
          */
         @SerializedName("default_payment_method")
         Object defaultPaymentMethod;
@@ -3090,8 +3081,8 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * ID of a PaymentMethod attached to the customer account to use as the default for
-           * invoices and subscriptions.
+           * The ID of a {@code PaymentMethod} attached to this Account's {@code customer}
+           * configuration, used as the default payment method for invoices and subscriptions.
            */
           public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
             this.defaultPaymentMethod = defaultPaymentMethod;
@@ -3099,8 +3090,8 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * ID of a PaymentMethod attached to the customer account to use as the default for
-           * invoices and subscriptions.
+           * The ID of a {@code PaymentMethod} attached to this Account's {@code customer}
+           * configuration, used as the default payment method for invoices and subscriptions.
            */
           public Builder setDefaultPaymentMethod(EmptyParam defaultPaymentMethod) {
             this.defaultPaymentMethod = defaultPaymentMethod;
@@ -15141,7 +15132,11 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("country")
     Object country;
 
-    /** The entity type. */
+    /**
+     * The entity type represented by the Account. Ensure this field is accurate before adding
+     * configurations that rely on identity information, as it determines which identity fields
+     * apply and how the Account is validated.
+     */
     @SerializedName("entity_type")
     EntityType entityType;
 
@@ -15242,7 +15237,11 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The entity type. */
+      /**
+       * The entity type represented by the Account. Ensure this field is accurate before adding
+       * configurations that rely on identity information, as it determines which identity fields
+       * apply and how the Account is validated.
+       */
       public Builder setEntityType(AccountUpdateParams.Identity.EntityType entityType) {
         this.entityType = entityType;
         return this;
@@ -28444,7 +28443,11 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("documents")
       Documents documents;
 
-      /** The individual's email address. */
+      /**
+       * The individual's email address. You can only set this field when the Account is configured
+       * as a {@code merchant} or {@code recipient}. Use {@code contact_email} as the primary
+       * contact email for this Account.
+       */
       @SerializedName("email")
       Object email;
 
@@ -28692,13 +28695,21 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The individual's email address. */
+        /**
+         * The individual's email address. You can only set this field when the Account is
+         * configured as a {@code merchant} or {@code recipient}. Use {@code contact_email} as the
+         * primary contact email for this Account.
+         */
         public Builder setEmail(String email) {
           this.email = email;
           return this;
         }
 
-        /** The individual's email address. */
+        /**
+         * The individual's email address. You can only set this field when the Account is
+         * configured as a {@code merchant} or {@code recipient}. Use {@code contact_email} as the
+         * primary contact email for this Account.
+         */
         public Builder setEmail(EmptyParam email) {
           this.email = email;
           return this;

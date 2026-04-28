@@ -1767,14 +1767,14 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
 
       /**
        * If a physical good is being shipped, the postal code of where it is being shipped from. At
-       * most 10 alphanumeric characters long, hyphens are allowed.
+       * most 10 alphanumeric characters long, hyphens and spaces are allowed.
        */
       @SerializedName("from_postal_code")
       Object fromPostalCode;
 
       /**
        * If a physical good is being shipped, the postal code of where it is being shipped to. At
-       * most 10 alphanumeric characters long, hyphens are allowed.
+       * most 10 alphanumeric characters long, hyphens and spaces are allowed.
        */
       @SerializedName("to_postal_code")
       Object toPostalCode;
@@ -1861,7 +1861,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
 
         /**
          * If a physical good is being shipped, the postal code of where it is being shipped from.
-         * At most 10 alphanumeric characters long, hyphens are allowed.
+         * At most 10 alphanumeric characters long, hyphens and spaces are allowed.
          */
         public Builder setFromPostalCode(String fromPostalCode) {
           this.fromPostalCode = fromPostalCode;
@@ -1870,7 +1870,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
 
         /**
          * If a physical good is being shipped, the postal code of where it is being shipped from.
-         * At most 10 alphanumeric characters long, hyphens are allowed.
+         * At most 10 alphanumeric characters long, hyphens and spaces are allowed.
          */
         public Builder setFromPostalCode(EmptyParam fromPostalCode) {
           this.fromPostalCode = fromPostalCode;
@@ -1879,7 +1879,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
 
         /**
          * If a physical good is being shipped, the postal code of where it is being shipped to. At
-         * most 10 alphanumeric characters long, hyphens are allowed.
+         * most 10 alphanumeric characters long, hyphens and spaces are allowed.
          */
         public Builder setToPostalCode(String toPostalCode) {
           this.toPostalCode = toPostalCode;
@@ -1888,7 +1888,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
 
         /**
          * If a physical good is being shipped, the postal code of where it is being shipped to. At
-         * most 10 alphanumeric characters long, hyphens are allowed.
+         * most 10 alphanumeric characters long, hyphens and spaces are allowed.
          */
         public Builder setToPostalCode(EmptyParam toPostalCode) {
           this.toPostalCode = toPostalCode;

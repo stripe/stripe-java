@@ -26,10 +26,7 @@ public class AccountCreateParams extends ApiRequestParams {
   @SerializedName("configuration")
   Configuration configuration;
 
-  /**
-   * The default contact email address for the Account. Required when configuring the account as a
-   * merchant or recipient.
-   */
+  /** The primary contact email address for the Account. */
   @SerializedName("contact_email")
   String contactEmail;
 
@@ -162,10 +159,7 @@ public class AccountCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * The default contact email address for the Account. Required when configuring the account as a
-     * merchant or recipient.
-     */
+    /** The primary contact email address for the Account. */
     public Builder setContactEmail(String contactEmail) {
       this.contactEmail = contactEmail;
       return this;
@@ -293,7 +287,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("card_creator")
     CardCreator cardCreator;
 
-    /** The Customer Configuration allows the Account to be used in inbound payment flows. */
+    /**
+     * The Customer Configuration allows the Account to be used in inbound payment flows (i.e.
+     * customer-facing payment and billing flows).
+     */
     @SerializedName("customer")
     Customer customer;
 
@@ -380,7 +377,10 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The Customer Configuration allows the Account to be used in inbound payment flows. */
+      /**
+       * The Customer Configuration allows the Account to be used in inbound payment flows (i.e.
+       * customer-facing payment and billing flows).
+       */
       public Builder setCustomer(AccountCreateParams.Configuration.Customer customer) {
         this.customer = customer;
         return this;
@@ -14447,7 +14447,11 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("country")
     String country;
 
-    /** The entity type. */
+    /**
+     * The entity type represented by the Account. Ensure this field is accurate before adding
+     * configurations that rely on identity information, as it determines which identity fields
+     * apply and how the Account is validated.
+     */
     @SerializedName("entity_type")
     EntityType entityType;
 
@@ -14534,7 +14538,11 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The entity type. */
+      /**
+       * The entity type represented by the Account. Ensure this field is accurate before adding
+       * configurations that rely on identity information, as it determines which identity fields
+       * apply and how the Account is validated.
+       */
       public Builder setEntityType(AccountCreateParams.Identity.EntityType entityType) {
         this.entityType = entityType;
         return this;
@@ -26781,7 +26789,11 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName("documents")
       Documents documents;
 
-      /** The individual's email address. */
+      /**
+       * The individual's email address. You can only set this field when the Account is configured
+       * as a {@code merchant} or {@code recipient}. Use {@code contact_email} as the primary
+       * contact email for this Account.
+       */
       @SerializedName("email")
       String email;
 
@@ -27029,7 +27041,11 @@ public class AccountCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The individual's email address. */
+        /**
+         * The individual's email address. You can only set this field when the Account is
+         * configured as a {@code merchant} or {@code recipient}. Use {@code contact_email} as the
+         * primary contact email for this Account.
+         */
         public Builder setEmail(String email) {
           this.email = email;
           return this;

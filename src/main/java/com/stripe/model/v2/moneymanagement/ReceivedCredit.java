@@ -50,6 +50,13 @@ public class ReceivedCredit extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
+  /**
+   * This object stores details about the originating crypto transaction that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code crypto_wallet_transfer}.
+   */
+  @SerializedName("crypto_wallet_transfer")
+  CryptoWalletTransfer cryptoWalletTransfer;
+
   /** Freeform string set by originator of the ReceivedCredit. */
   @SerializedName("description")
   String description;
@@ -120,7 +127,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
    * Open Enum. The type of flow that caused the ReceivedCredit.
    *
    * <p>One of {@code balance_transfer}, {@code bank_transfer}, {@code card_spend}, {@code
-   * external_credit}, or {@code stripe_balance_payment}.
+   * crypto_wallet_transfer}, {@code external_credit}, or {@code stripe_balance_payment}.
    */
   @SerializedName("type")
   String type;
@@ -178,6 +185,13 @@ public class ReceivedCredit extends StripeObject implements HasId {
     @SerializedName("ca_bank_account")
     CaBankAccount caBankAccount;
 
+    /**
+     * Hash containing the transaction bank details. Present if {@code origin_type} field value is
+     * {@code eu_bank_account}.
+     */
+    @SerializedName("eu_bank_account")
+    EuBankAccount euBankAccount;
+
     /** Financial Address on which funds for ReceivedCredit were received. */
     @SerializedName("financial_address")
     String financialAddress;
@@ -190,10 +204,18 @@ public class ReceivedCredit extends StripeObject implements HasId {
     GbBankAccount gbBankAccount;
 
     /**
+     * Hash containing the transaction bank details. Present if {@code origin_type} field value is
+     * {@code mx_bank_account}.
+     */
+    @SerializedName("mx_bank_account")
+    MxBankAccount mxBankAccount;
+
+    /**
      * Open Enum. Indicates the origin of source from which external funds originated from.
      *
-     * <p>One of {@code ca_bank_account}, {@code gb_bank_account}, {@code sepa_bank_account}, or
-     * {@code us_bank_account}.
+     * <p>One of {@code ca_bank_account}, {@code crypto_wallet}, {@code eu_bank_account}, {@code
+     * gb_bank_account}, {@code mx_bank_account}, {@code sepa_bank_account}, or {@code
+     * us_bank_account}.
      */
     @SerializedName("origin_type")
     String originType;
@@ -250,6 +272,39 @@ public class ReceivedCredit extends StripeObject implements HasId {
 
     /**
      * Hash containing the transaction bank details. Present if {@code origin_type} field value is
+     * {@code eu_bank_account}.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EuBankAccount extends StripeObject {
+      /** The account holder name of the bank account the transfer was received from. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The bank name the transfer was received from. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** The bic of the account that originated the transfer. */
+      @SerializedName("bic")
+      String bic;
+
+      /** The last 4 digits of the account number that originated the transfer. */
+      @SerializedName("last4")
+      String last4;
+
+      /**
+       * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
+       *
+       * <p>Equal to {@code sepa}.
+       */
+      @SerializedName("network")
+      String network;
+    }
+
+    /**
+     * Hash containing the transaction bank details. Present if {@code origin_type} field value is
      * {@code gb_bank_account}.
      */
     @Getter
@@ -279,6 +334,35 @@ public class ReceivedCredit extends StripeObject implements HasId {
       /** The sort code of the account that originated the transfer. */
       @SerializedName("sort_code")
       String sortCode;
+    }
+
+    /**
+     * Hash containing the transaction bank details. Present if {@code origin_type} field value is
+     * {@code mx_bank_account}.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MxBankAccount extends StripeObject {
+      /** The account holder name of the bank account the transfer was received from. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The bank name the transfer was received from. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** The last 4 digits of the account number that originated the transfer. */
+      @SerializedName("last4")
+      String last4;
+
+      /**
+       * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
+       *
+       * <p>Equal to {@code spei}.
+       */
+      @SerializedName("network")
+      String network;
     }
 
     /**
@@ -386,6 +470,60 @@ public class ReceivedCredit extends StripeObject implements HasId {
       /** The reference to the v1 issuing transaction ID. */
       @SerializedName("issuing_transaction_v1")
       String issuingTransactionV1;
+    }
+  }
+
+  /**
+   * This object stores details about the originating crypto transaction that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code crypto_wallet_transfer}.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CryptoWalletTransfer extends StripeObject {
+    /** Hash containing the transaction crypto wallet details. */
+    @SerializedName("crypto_wallet")
+    CryptoWallet cryptoWallet;
+
+    /** Financial Address on which funds for ReceivedCredit were received. */
+    @SerializedName("financial_address")
+    String financialAddress;
+
+    /**
+     * Open Enum. Indicates the origin of source from which external funds originated from.
+     *
+     * <p>One of {@code ca_bank_account}, {@code crypto_wallet}, {@code eu_bank_account}, {@code
+     * gb_bank_account}, {@code mx_bank_account}, {@code sepa_bank_account}, or {@code
+     * us_bank_account}.
+     */
+    @SerializedName("origin_type")
+    String originType;
+
+    /** Freeform string set by originator of the external ReceivedCredit. */
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+
+    /** Hash containing the transaction crypto wallet details. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CryptoWallet extends StripeObject {
+      /** The address of the wallet the crypto was received from. */
+      @SerializedName("address")
+      String address;
+
+      /** A memo also for identifying the recipient for memo-based blockchains (e.g., Stellar),. */
+      @SerializedName("memo")
+      String memo;
+
+      /**
+       * The network the crypto was received from.
+       *
+       * <p>One of {@code arbitrum}, {@code avalanche_c_chain}, {@code base}, {@code ethereum},
+       * {@code optimism}, {@code polygon}, {@code solana}, {@code stellar}, or {@code tempo}.
+       */
+      @SerializedName("network")
+      String network;
     }
   }
 

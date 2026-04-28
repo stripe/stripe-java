@@ -138,6 +138,13 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   ExpandableField<TaxCode> taxCode;
 
   /**
+   * Tax details for this product, including the <a href="https://stripe.com/tax/tax-codes">tax
+   * code</a> and an optional performance location.
+   */
+  @SerializedName("tax_details")
+  TaxDetails taxDetails;
+
+  /**
    * The type of the product. The product is either of type {@code good}, which is eligible for use
    * with Orders and SKUs, or {@code service}, which is eligible for use with Subscriptions and
    * Plans.
@@ -569,6 +576,20 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
     BigDecimal width;
   }
 
+  /** Tax details contains information about the data that was used to calculate taxes. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxDetails extends StripeObject {
+    /** The performance location. */
+    @SerializedName("performance_location")
+    String performanceLocation;
+
+    /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+    @SerializedName("tax_code")
+    String taxCode;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -576,5 +597,6 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
     trySetResponseGetter(identifiers, responseGetter);
     trySetResponseGetter(packageDimensions, responseGetter);
     trySetResponseGetter(taxCode, responseGetter);
+    trySetResponseGetter(taxDetails, responseGetter);
   }
 }

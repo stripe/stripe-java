@@ -242,6 +242,13 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
     @SerializedName("network_id")
     String networkId;
 
+    /**
+     * The identifier of the payment facilitator (PayFac) that processed this authorization, as
+     * assigned by the card network.
+     */
+    @SerializedName("payment_facilitator_id")
+    String paymentFacilitatorId;
+
     /** Postal code where the seller is located. */
     @SerializedName("postal_code")
     String postalCode;
@@ -249,6 +256,13 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
     /** State where the seller is located. */
     @SerializedName("state")
     String state;
+
+    /**
+     * The identifier of the sub-merchant involved in this authorization, as assigned by the payment
+     * facilitator.
+     */
+    @SerializedName("sub_merchant_id")
+    String subMerchantId;
 
     /** An ID assigned by the seller to the location of the sale. */
     @SerializedName("terminal_id")
@@ -265,8 +279,10 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         String name,
         String networkId,
+        String paymentFacilitatorId,
         String postalCode,
         String state,
+        String subMerchantId,
         String terminalId,
         String url) {
       this.category = category;
@@ -275,8 +291,10 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.name = name;
       this.networkId = networkId;
+      this.paymentFacilitatorId = paymentFacilitatorId;
       this.postalCode = postalCode;
       this.state = state;
+      this.subMerchantId = subMerchantId;
       this.terminalId = terminalId;
       this.url = url;
     }
@@ -298,9 +316,13 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
 
       private String networkId;
 
+      private String paymentFacilitatorId;
+
       private String postalCode;
 
       private String state;
+
+      private String subMerchantId;
 
       private String terminalId;
 
@@ -315,8 +337,10 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
             this.extraParams,
             this.name,
             this.networkId,
+            this.paymentFacilitatorId,
             this.postalCode,
             this.state,
+            this.subMerchantId,
             this.terminalId,
             this.url);
       }
@@ -387,6 +411,15 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * The identifier of the payment facilitator (PayFac) that processed this authorization, as
+       * assigned by the card network.
+       */
+      public Builder setPaymentFacilitatorId(String paymentFacilitatorId) {
+        this.paymentFacilitatorId = paymentFacilitatorId;
+        return this;
+      }
+
       /** Postal code where the seller is located. */
       public Builder setPostalCode(String postalCode) {
         this.postalCode = postalCode;
@@ -396,6 +429,15 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
       /** State where the seller is located. */
       public Builder setState(String state) {
         this.state = state;
+        return this;
+      }
+
+      /**
+       * The identifier of the sub-merchant involved in this authorization, as assigned by the
+       * payment facilitator.
+       */
+      public Builder setSubMerchantId(String subMerchantId) {
+        this.subMerchantId = subMerchantId;
         return this;
       }
 

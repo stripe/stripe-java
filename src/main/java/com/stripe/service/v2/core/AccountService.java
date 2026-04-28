@@ -52,37 +52,37 @@ public final class AccountService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Account>>() {}.getType());
   }
   /**
-   * An Account is a representation of a company, individual or other entity that a user interacts
-   * with. Accounts contain identifying information about the entity, and configurations that store
-   * the features an account has access to. An account can be configured as any or all of the
-   * following configurations: Customer, Merchant and/or Recipient.
+   * Create an Account that represents a company, individual, or other entity that your business
+   * interacts with. Accounts contain identifying information about the entity, and configurations
+   * that store the features an account has access to. An account can be configured as any or all of
+   * the following configurations: Customer, Merchant and/or Recipient.
    */
   public Account create(AccountCreateParams params) throws StripeException, RateLimitException {
     return create(params, (RequestOptions) null);
   }
   /**
-   * An Account is a representation of a company, individual or other entity that a user interacts
-   * with. Accounts contain identifying information about the entity, and configurations that store
-   * the features an account has access to. An account can be configured as any or all of the
-   * following configurations: Customer, Merchant and/or Recipient.
+   * Create an Account that represents a company, individual, or other entity that your business
+   * interacts with. Accounts contain identifying information about the entity, and configurations
+   * that store the features an account has access to. An account can be configured as any or all of
+   * the following configurations: Customer, Merchant and/or Recipient.
    */
   public Account create(RequestOptions options) throws StripeException, RateLimitException {
     return create((AccountCreateParams) null, options);
   }
   /**
-   * An Account is a representation of a company, individual or other entity that a user interacts
-   * with. Accounts contain identifying information about the entity, and configurations that store
-   * the features an account has access to. An account can be configured as any or all of the
-   * following configurations: Customer, Merchant and/or Recipient.
+   * Create an Account that represents a company, individual, or other entity that your business
+   * interacts with. Accounts contain identifying information about the entity, and configurations
+   * that store the features an account has access to. An account can be configured as any or all of
+   * the following configurations: Customer, Merchant and/or Recipient.
    */
   public Account create() throws StripeException, RateLimitException {
     return create((AccountCreateParams) null, (RequestOptions) null);
   }
   /**
-   * An Account is a representation of a company, individual or other entity that a user interacts
-   * with. Accounts contain identifying information about the entity, and configurations that store
-   * the features an account has access to. An account can be configured as any or all of the
-   * following configurations: Customer, Merchant and/or Recipient.
+   * Create an Account that represents a company, individual, or other entity that your business
+   * interacts with. Accounts contain identifying information about the entity, and configurations
+   * that store the features an account has access to. An account can be configured as any or all of
+   * the following configurations: Customer, Merchant and/or Recipient.
    */
   public Account create(AccountCreateParams params, RequestOptions options)
       throws StripeException, RateLimitException {

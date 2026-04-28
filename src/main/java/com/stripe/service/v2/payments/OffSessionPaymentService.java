@@ -94,6 +94,14 @@ public final class OffSessionPaymentService extends ApiService {
     return capture(id, params, (RequestOptions) null);
   }
   /** Captures an OffSessionPayment that has previously been created. */
+  public OffSessionPayment capture(String id, RequestOptions options) throws StripeException {
+    return capture(id, (OffSessionPaymentCaptureParams) null, options);
+  }
+  /** Captures an OffSessionPayment that has previously been created. */
+  public OffSessionPayment capture(String id) throws StripeException {
+    return capture(id, (OffSessionPaymentCaptureParams) null, (RequestOptions) null);
+  }
+  /** Captures an OffSessionPayment that has previously been created. */
   public OffSessionPayment capture(
       String id, OffSessionPaymentCaptureParams params, RequestOptions options)
       throws StripeException {

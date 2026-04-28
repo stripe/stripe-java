@@ -937,6 +937,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @SerializedName("stripe_balance")
     StripeBalance stripeBalance;
 
+    @SerializedName("sunbit")
+    Sunbit sunbit;
+
     @SerializedName("swish")
     Swish swish;
 
@@ -2243,7 +2246,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /**
        * The token currency that the transaction was sent with.
        *
-       * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
+       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, or {@code usdt}.
        */
       @SerializedName("token_currency")
       String tokenCurrency;
@@ -2302,7 +2305,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
        * hypo_bank_burgenland_aktiengesellschaft}, {@code marchfelder_bank}, {@code oberbank_ag},
        * {@code raiffeisen_bankengruppe_osterreich}, {@code schoellerbank_ag}, {@code
        * sparda_bank_wien}, {@code volksbank_gruppe}, {@code volkskreditbank_ag}, or {@code
-       * vr_bank_braunau}.
+       * vr_bank_braunau}
        */
       @SerializedName("bank")
       String bank;
@@ -2352,6 +2355,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class GiftCard extends StripeObject {
+      /** The balance of the gift card after the transaction. */
       @SerializedName("balance")
       Balance balance;
 
@@ -2374,6 +2378,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** The first six digits of the gift card number. */
       @SerializedName("first6")
       String first6;
+
+      /** The last four digits of the gift card number. */
+      @SerializedName("last4")
+      String last4;
 
       /** The transaction ID from the gift card processor. */
       @SerializedName("transaction_id")
@@ -2830,6 +2838,13 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Klarna extends StripeObject {
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
       /** The payer details for this transaction. */
       @SerializedName("payer_details")
       PayerDetails payerDetails;
@@ -2854,6 +2869,13 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
        */
       @SerializedName("preferred_locale")
       String preferredLocale;
+
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
 
       /**
        * For more details about PayerDetails, please refer to the <a
@@ -3688,6 +3710,19 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** The connected account ID whose Stripe balance to use as the source of payment. */
       @SerializedName("account")
       String account;
+    }
+
+    /**
+     * For more details about Sunbit, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sunbit extends StripeObject {
+      /** The Sunbit transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**

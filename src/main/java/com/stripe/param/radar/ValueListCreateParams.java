@@ -33,8 +33,9 @@ public class ValueListCreateParams extends ApiRequestParams {
   /**
    * Type of the items in the value list. One of {@code card_fingerprint}, {@code card_bin}, {@code
    * crypto_fingerprint}, {@code email}, {@code ip_address}, {@code country}, {@code string}, {@code
-   * case_sensitive_string}, {@code customer_id}, {@code sepa_debit_fingerprint}, or {@code
-   * us_bank_account_fingerprint}. Use {@code string} if the item type is unknown or mixed.
+   * case_sensitive_string}, {@code customer_id}, {@code account}, {@code sepa_debit_fingerprint},
+   * or {@code us_bank_account_fingerprint}. Use {@code string} if the item type is unknown or
+   * mixed.
    */
   @SerializedName("item_type")
   ItemType itemType;
@@ -151,9 +152,9 @@ public class ValueListCreateParams extends ApiRequestParams {
     /**
      * Type of the items in the value list. One of {@code card_fingerprint}, {@code card_bin},
      * {@code crypto_fingerprint}, {@code email}, {@code ip_address}, {@code country}, {@code
-     * string}, {@code case_sensitive_string}, {@code customer_id}, {@code sepa_debit_fingerprint},
-     * or {@code us_bank_account_fingerprint}. Use {@code string} if the item type is unknown or
-     * mixed.
+     * string}, {@code case_sensitive_string}, {@code customer_id}, {@code account}, {@code
+     * sepa_debit_fingerprint}, or {@code us_bank_account_fingerprint}. Use {@code string} if the
+     * item type is unknown or mixed.
      */
     public Builder setItemType(ValueListCreateParams.ItemType itemType) {
       this.itemType = itemType;
@@ -194,6 +195,9 @@ public class ValueListCreateParams extends ApiRequestParams {
   }
 
   public enum ItemType implements ApiRequestParams.EnumParam {
+    @SerializedName("account")
+    ACCOUNT("account"),
+
     @SerializedName("card_bin")
     CARD_BIN("card_bin"),
 

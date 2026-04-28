@@ -17,6 +17,10 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
   @SerializedName("affiliate_attribution")
   AffiliateAttribution affiliateAttribution;
 
+  /** The buyer's consent choices for marketing communications. */
+  @SerializedName("buyer_consents")
+  BuyerConsents buyerConsents;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -47,12 +51,14 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
 
   private RequestedSessionConfirmParams(
       AffiliateAttribution affiliateAttribution,
+      BuyerConsents buyerConsents,
       List<String> expand,
       Map<String, Object> extraParams,
       String paymentMethod,
       String returnUrl,
       RiskDetails riskDetails) {
     this.affiliateAttribution = affiliateAttribution;
+    this.buyerConsents = buyerConsents;
     this.expand = expand;
     this.extraParams = extraParams;
     this.paymentMethod = paymentMethod;
@@ -66,6 +72,8 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
 
   public static class Builder {
     private AffiliateAttribution affiliateAttribution;
+
+    private BuyerConsents buyerConsents;
 
     private List<String> expand;
 
@@ -81,6 +89,7 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
     public RequestedSessionConfirmParams build() {
       return new RequestedSessionConfirmParams(
           this.affiliateAttribution,
+          this.buyerConsents,
           this.expand,
           this.extraParams,
           this.paymentMethod,
@@ -92,6 +101,12 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
     public Builder setAffiliateAttribution(
         RequestedSessionConfirmParams.AffiliateAttribution affiliateAttribution) {
       this.affiliateAttribution = affiliateAttribution;
+      return this;
+    }
+
+    /** The buyer's consent choices for marketing communications. */
+    public Builder setBuyerConsents(RequestedSessionConfirmParams.BuyerConsents buyerConsents) {
+      this.buyerConsents = buyerConsents;
       return this;
     }
 
@@ -554,6 +569,300 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
 
       Touchpoint(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BuyerConsents {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The marketing consent data for the buyer. */
+    @SerializedName("marketing")
+    Marketing marketing;
+
+    private BuyerConsents(Map<String, Object> extraParams, Marketing marketing) {
+      this.extraParams = extraParams;
+      this.marketing = marketing;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Marketing marketing;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public RequestedSessionConfirmParams.BuyerConsents build() {
+        return new RequestedSessionConfirmParams.BuyerConsents(this.extraParams, this.marketing);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * RequestedSessionConfirmParams.BuyerConsents#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link RequestedSessionConfirmParams.BuyerConsents#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The marketing consent data for the buyer. */
+      public Builder setMarketing(RequestedSessionConfirmParams.BuyerConsents.Marketing marketing) {
+        this.marketing = marketing;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Marketing {
+      /** The list of marketing consent entries. */
+      @SerializedName("consents")
+      List<RequestedSessionConfirmParams.BuyerConsents.Marketing.Consent> consents;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Marketing(
+          List<RequestedSessionConfirmParams.BuyerConsents.Marketing.Consent> consents,
+          Map<String, Object> extraParams) {
+        this.consents = consents;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private List<RequestedSessionConfirmParams.BuyerConsents.Marketing.Consent> consents;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public RequestedSessionConfirmParams.BuyerConsents.Marketing build() {
+          return new RequestedSessionConfirmParams.BuyerConsents.Marketing(
+              this.consents, this.extraParams);
+        }
+
+        /**
+         * Add an element to `consents` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * RequestedSessionConfirmParams.BuyerConsents.Marketing#consents} for the field
+         * documentation.
+         */
+        public Builder addConsent(
+            RequestedSessionConfirmParams.BuyerConsents.Marketing.Consent element) {
+          if (this.consents == null) {
+            this.consents = new ArrayList<>();
+          }
+          this.consents.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `consents` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * RequestedSessionConfirmParams.BuyerConsents.Marketing#consents} for the field
+         * documentation.
+         */
+        public Builder addAllConsent(
+            List<RequestedSessionConfirmParams.BuyerConsents.Marketing.Consent> elements) {
+          if (this.consents == null) {
+            this.consents = new ArrayList<>();
+          }
+          this.consents.addAll(elements);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link RequestedSessionConfirmParams.BuyerConsents.Marketing#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link RequestedSessionConfirmParams.BuyerConsents.Marketing#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Consent {
+        /** <strong>Required.</strong> The marketing consent channel. */
+        @SerializedName("channel")
+        Channel channel;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> The consent status. Use 'granted' to indicate the buyer has
+         * opted in.
+         */
+        @SerializedName("status")
+        Status status;
+
+        private Consent(Channel channel, Map<String, Object> extraParams, Status status) {
+          this.channel = channel;
+          this.extraParams = extraParams;
+          this.status = status;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Channel channel;
+
+          private Map<String, Object> extraParams;
+
+          private Status status;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RequestedSessionConfirmParams.BuyerConsents.Marketing.Consent build() {
+            return new RequestedSessionConfirmParams.BuyerConsents.Marketing.Consent(
+                this.channel, this.extraParams, this.status);
+          }
+
+          /** <strong>Required.</strong> The marketing consent channel. */
+          public Builder setChannel(
+              RequestedSessionConfirmParams.BuyerConsents.Marketing.Consent.Channel channel) {
+            this.channel = channel;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RequestedSessionConfirmParams.BuyerConsents.Marketing.Consent#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RequestedSessionConfirmParams.BuyerConsents.Marketing.Consent#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The consent status. Use 'granted' to indicate the buyer has
+           * opted in.
+           */
+          public Builder setStatus(
+              RequestedSessionConfirmParams.BuyerConsents.Marketing.Consent.Status status) {
+            this.status = status;
+            return this;
+          }
+        }
+
+        public enum Channel implements ApiRequestParams.EnumParam {
+          @SerializedName("email")
+          EMAIL("email"),
+
+          @SerializedName("sms")
+          SMS("sms");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Channel(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Status implements ApiRequestParams.EnumParam {
+          @SerializedName("granted")
+          GRANTED("granted"),
+
+          @SerializedName("none")
+          NONE("none");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Status(String value) {
+            this.value = value;
+          }
+        }
       }
     }
   }

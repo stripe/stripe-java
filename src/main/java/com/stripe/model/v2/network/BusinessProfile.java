@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** The Stripe profile represents a business' public identity on the Stripe network. */
+/** The Stripe business profile represents a business' public identity on the Stripe network. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -21,7 +21,7 @@ public class BusinessProfile extends StripeObject implements HasId {
   @SerializedName("description")
   String description;
 
-  /** The display name of the Stripe profile. */
+  /** The display name of the Stripe business profile. */
   @SerializedName("display_name")
   String displayName;
 
@@ -53,7 +53,7 @@ public class BusinessProfile extends StripeObject implements HasId {
   @SerializedName("url")
   String url;
 
-  /** The username of the Stripe profile. */
+  /** The username of the Stripe business profile. */
   @SerializedName("username")
   String username;
 

@@ -502,9 +502,38 @@ public class RequestedSession extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Marketing extends StripeObject {
+      /** The buyer's marketing consent choices. */
+      @SerializedName("consents")
+      List<RequestedSession.BuyerConsents.Marketing.Consent> consents;
+
       /** The available marketing consent options. */
       @SerializedName("options")
       List<RequestedSession.BuyerConsents.Marketing.Option> options;
+
+      /**
+       * For more details about Consent, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Consent extends StripeObject {
+        /**
+         * The marketing consent channel.
+         *
+         * <p>One of {@code email}, or {@code sms}.
+         */
+        @SerializedName("channel")
+        String channel;
+
+        /**
+         * The consent status. 'granted' means the buyer opted in, 'none' means they did not.
+         *
+         * <p>One of {@code granted}, or {@code none}.
+         */
+        @SerializedName("status")
+        String status;
+      }
 
       /**
        * For more details about Option, please refer to the <a
