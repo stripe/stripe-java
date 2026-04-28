@@ -173,6 +173,10 @@ public final class EventDataClassLookup {
         "v2.core.vault.us_bank_account", com.stripe.model.v2.core.vault.UsBankAccount.class);
 
     classLookup.put(
+        "v2.data.analytics.metric_query_result",
+        com.stripe.model.v2.data.analytics.MetricQueryResult.class);
+
+    classLookup.put(
         "v2.data.reporting.query_run", com.stripe.model.v2.data.reporting.QueryRun.class);
 
     classLookup.put("v2.extend.workflow", com.stripe.model.v2.extend.Workflow.class);
@@ -854,6 +858,12 @@ public final class EventDataClassLookup {
         "v2.core.approval_request.canceled",
         com.stripe.events.V2CoreApprovalRequestCanceledEvent.class);
     eventClassLookup.put(
+        "v2.core.approval_request.created",
+        com.stripe.events.V2CoreApprovalRequestCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.expired",
+        com.stripe.events.V2CoreApprovalRequestExpiredEvent.class);
+    eventClassLookup.put(
         "v2.core.approval_request.failed",
         com.stripe.events.V2CoreApprovalRequestFailedEvent.class);
     eventClassLookup.put(
@@ -979,6 +989,8 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.data.reporting.query_run.updated",
         com.stripe.events.V2DataReportingQueryRunUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.extend.extension_run.failed", com.stripe.events.V2ExtendExtensionRunFailedEvent.class);
     eventClassLookup.put(
         "v2.extend.workflow_run.failed", com.stripe.events.V2ExtendWorkflowRunFailedEvent.class);
     eventClassLookup.put(

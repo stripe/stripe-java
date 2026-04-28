@@ -744,6 +744,12 @@ public final class EventNotificationClassLookup {
         "v2.core.approval_request.canceled",
         com.stripe.events.V2CoreApprovalRequestCanceledEventNotification.class);
     eventClassLookup.put(
+        "v2.core.approval_request.created",
+        com.stripe.events.V2CoreApprovalRequestCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.expired",
+        com.stripe.events.V2CoreApprovalRequestExpiredEventNotification.class);
+    eventClassLookup.put(
         "v2.core.approval_request.failed",
         com.stripe.events.V2CoreApprovalRequestFailedEventNotification.class);
     eventClassLookup.put(
@@ -882,6 +888,9 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.data.reporting.query_run.updated",
         com.stripe.events.V2DataReportingQueryRunUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.extend.extension_run.failed",
+        com.stripe.events.V2ExtendExtensionRunFailedEventNotification.class);
     eventClassLookup.put(
         "v2.extend.workflow_run.failed",
         com.stripe.events.V2ExtendWorkflowRunFailedEventNotification.class);

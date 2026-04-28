@@ -36,9 +36,9 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * <strong>Required.</strong> Set of <a href="https://docs.stripe.com/api/metadata">key-value
-   * pairs</a> that you can attach to an object. This can be useful for storing additional
-   * information about the object in a structured format. Learn more about <a
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format. Learn more about <a
    * href="https://docs.stripe.com/payments/payment-intents#storing-information-in-metadata">storing
    * information in metadata</a>.
    */

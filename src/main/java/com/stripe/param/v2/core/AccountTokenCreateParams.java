@@ -16,10 +16,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class AccountTokenCreateParams extends ApiRequestParams {
-  /**
-   * The default contact email address for the Account. Required when configuring the account as a
-   * merchant or recipient.
-   */
+  /** The primary contact email address for the Account. */
   @SerializedName("contact_email")
   String contactEmail;
 
@@ -81,10 +78,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           this.contactEmail, this.contactPhone, this.displayName, this.extraParams, this.identity);
     }
 
-    /**
-     * The default contact email address for the Account. Required when configuring the account as a
-     * merchant or recipient.
-     */
+    /** The primary contact email address for the Account. */
     public Builder setContactEmail(String contactEmail) {
       this.contactEmail = contactEmail;
       return this;
@@ -6968,7 +6962,11 @@ public class AccountTokenCreateParams extends ApiRequestParams {
       @SerializedName("documents")
       Documents documents;
 
-      /** The individual's email address. */
+      /**
+       * The individual's email address. You can only set this field when the Account is configured
+       * as a {@code merchant} or {@code recipient}. Use {@code contact_email} as the primary
+       * contact email for this Account.
+       */
       @SerializedName("email")
       String email;
 
@@ -7218,7 +7216,11 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The individual's email address. */
+        /**
+         * The individual's email address. You can only set this field when the Account is
+         * configured as a {@code merchant} or {@code recipient}. Use {@code contact_email} as the
+         * primary contact email for this Account.
+         */
         public Builder setEmail(String email) {
           this.email = email;
           return this;

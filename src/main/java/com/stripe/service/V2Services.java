@@ -21,8 +21,8 @@ public final class V2Services extends ApiService {
     return new com.stripe.service.v2.CoreService(this.getResponseGetter());
   }
 
-  public com.stripe.service.v2.DatumService data() {
-    return new com.stripe.service.v2.DatumService(this.getResponseGetter());
+  public com.stripe.service.v2.DataService data() {
+    return new com.stripe.service.v2.DataService(this.getResponseGetter());
   }
 
   public com.stripe.service.v2.ExtendService extend() {
