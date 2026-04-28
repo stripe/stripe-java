@@ -2,8 +2,18 @@
 package com.stripe.model.sharedpayment;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiRequest;
+import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.sharedpayment.IssuedTokenCreateParams;
+import com.stripe.param.sharedpayment.IssuedTokenRetrieveParams;
+import com.stripe.param.sharedpayment.IssuedTokenRevokeParams;
 import java.math.BigDecimal;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -20,7 +30,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class IssuedToken extends StripeObject implements HasId {
+public class IssuedToken extends ApiResource implements HasId {
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -110,6 +120,131 @@ public class IssuedToken extends StripeObject implements HasId {
   /** Usage limits of the SharedPaymentIssuedToken. */
   @SerializedName("usage_limits")
   UsageLimits usageLimits;
+
+  /** Creates a new SharedPaymentIssuedToken object. */
+  public static IssuedToken create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new SharedPaymentIssuedToken object. */
+  public static IssuedToken create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/shared_payment/issued_tokens";
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getGlobalResponseGetter().request(request, IssuedToken.class);
+  }
+
+  /** Creates a new SharedPaymentIssuedToken object. */
+  public static IssuedToken create(IssuedTokenCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new SharedPaymentIssuedToken object. */
+  public static IssuedToken create(IssuedTokenCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/shared_payment/issued_tokens";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, IssuedToken.class);
+  }
+
+  /** Retrieves an existing SharedPaymentIssuedToken object. */
+  public static IssuedToken retrieve(String sharedPaymentIssuedToken) throws StripeException {
+    return retrieve(sharedPaymentIssuedToken, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves an existing SharedPaymentIssuedToken object. */
+  public static IssuedToken retrieve(String sharedPaymentIssuedToken, RequestOptions options)
+      throws StripeException {
+    return retrieve(sharedPaymentIssuedToken, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves an existing SharedPaymentIssuedToken object. */
+  public static IssuedToken retrieve(
+      String sharedPaymentIssuedToken, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/shared_payment/issued_tokens/%s",
+            ApiResource.urlEncodeId(sharedPaymentIssuedToken));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, IssuedToken.class);
+  }
+
+  /** Retrieves an existing SharedPaymentIssuedToken object. */
+  public static IssuedToken retrieve(
+      String sharedPaymentIssuedToken, IssuedTokenRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/shared_payment/issued_tokens/%s",
+            ApiResource.urlEncodeId(sharedPaymentIssuedToken));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, IssuedToken.class);
+  }
+
+  /** Revokes a SharedPaymentIssuedToken. */
+  public IssuedToken revoke() throws StripeException {
+    return revoke((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Revokes a SharedPaymentIssuedToken. */
+  public IssuedToken revoke(RequestOptions options) throws StripeException {
+    return revoke((Map<String, Object>) null, options);
+  }
+
+  /** Revokes a SharedPaymentIssuedToken. */
+  public IssuedToken revoke(Map<String, Object> params) throws StripeException {
+    return revoke(params, (RequestOptions) null);
+  }
+
+  /** Revokes a SharedPaymentIssuedToken. */
+  public IssuedToken revoke(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/shared_payment/issued_tokens/%s/revoke", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, IssuedToken.class);
+  }
+
+  /** Revokes a SharedPaymentIssuedToken. */
+  public IssuedToken revoke(IssuedTokenRevokeParams params) throws StripeException {
+    return revoke(params, (RequestOptions) null);
+  }
+
+  /** Revokes a SharedPaymentIssuedToken. */
+  public IssuedToken revoke(IssuedTokenRevokeParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/shared_payment/issued_tokens/%s/revoke", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, IssuedToken.class);
+  }
 
   /**
    * For more details about NextAction, please refer to the <a
@@ -347,5 +482,15 @@ public class IssuedToken extends StripeObject implements HasId {
      */
     @SerializedName("recurring_interval")
     String recurringInterval;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(nextAction, responseGetter);
+    trySetResponseGetter(riskDetails, responseGetter);
+    trySetResponseGetter(sellerDetails, responseGetter);
+    trySetResponseGetter(usageDetails, responseGetter);
+    trySetResponseGetter(usageLimits, responseGetter);
   }
 }

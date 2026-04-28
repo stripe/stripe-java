@@ -1036,10 +1036,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
-   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
+   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
+   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
+   * resumption invoice will void automatically if not paid by the expiration date.
    */
   public Subscription resume() throws StripeException {
     return resume((Map<String, Object>) null, (RequestOptions) null);
@@ -1047,10 +1047,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
-   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
+   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
+   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
+   * resumption invoice will void automatically if not paid by the expiration date.
    */
   public Subscription resume(RequestOptions options) throws StripeException {
     return resume((Map<String, Object>) null, options);
@@ -1058,10 +1058,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
-   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
+   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
+   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
+   * resumption invoice will void automatically if not paid by the expiration date.
    */
   public Subscription resume(Map<String, Object> params) throws StripeException {
     return resume(params, (RequestOptions) null);
@@ -1069,10 +1069,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
-   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
+   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
+   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
+   * resumption invoice will void automatically if not paid by the expiration date.
    */
   public Subscription resume(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -1085,10 +1085,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
-   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
+   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
+   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
+   * resumption invoice will void automatically if not paid by the expiration date.
    */
   public Subscription resume(SubscriptionResumeParams params) throws StripeException {
     return resume(params, (RequestOptions) null);
@@ -1096,10 +1096,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
-   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice is not paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}.
+   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
+   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
+   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
+   * resumption invoice will void automatically if not paid by the expiration date.
    */
   public Subscription resume(SubscriptionResumeParams params, RequestOptions options)
       throws StripeException {
@@ -1988,6 +1988,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       Bizum bizum;
 
       /**
+       * This sub-hash contains details about the Blik payment method options to pass to invoices
+       * created by the subscription.
+       */
+      @SerializedName("blik")
+      Blik blik;
+
+      /**
        * This sub-hash contains details about the Card payment method options to pass to invoices
        * created by the subscription.
        */
@@ -2142,6 +2149,34 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
            */
           @SerializedName("amount_type")
           String amountType;
+        }
+      }
+
+      /**
+       * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Blik extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /**
+           * Date when the mandate expires and no further payments will be charged. If not provided,
+           * the mandate will be set to be indefinite.
+           */
+          @SerializedName("expires_after")
+          Long expiresAfter;
         }
       }
 

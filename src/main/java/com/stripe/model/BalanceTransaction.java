@@ -131,7 +131,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * Transaction type: {@code adjustment}, {@code advance}, {@code advance_funding}, {@code
    * anticipation_repayment}, {@code application_fee}, {@code application_fee_refund}, {@code
    * charge}, {@code climate_order_purchase}, {@code climate_order_refund}, {@code
-   * connect_collection_transfer}, {@code contribution}, {@code issuing_authorization_hold}, {@code
+   * connect_collection_transfer}, {@code contribution}, {@code inbound_transfer}, {@code
+   * inbound_transfer_reversal}, {@code issuing_authorization_hold}, {@code
    * issuing_authorization_release}, {@code issuing_dispute}, {@code issuing_transaction}, {@code
    * obligation_outbound}, {@code obligation_reversal_inbound}, {@code payment}, {@code
    * payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
@@ -142,7 +143,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * {@code reserve_release}, {@code stripe_fee}, {@code stripe_fx_fee}, {@code
    * stripe_balance_payment_debit}, {@code stripe_balance_payment_debit_reversal}, {@code tax_fee},
    * {@code topup}, {@code topup_reversal}, {@code transfer}, {@code transfer_cancel}, {@code
-   * transfer_failure}, or {@code transfer_refund}. Learn more about <a
+   * transfer_failure}, {@code transfer_refund}, or {@code fee_credit_funding}. Learn more about <a
    * href="https://stripe.com/docs/reports/balance-transaction-types">balance transaction types and
    * what they represent</a>. To classify transactions for accounting purposes, consider {@code
    * reporting_category} instead.
@@ -150,9 +151,10 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * <p>One of {@code adjustment}, {@code advance}, {@code advance_funding}, {@code
    * anticipation_repayment}, {@code application_fee}, {@code application_fee_refund}, {@code
    * charge}, {@code climate_order_purchase}, {@code climate_order_refund}, {@code
-   * connect_collection_transfer}, {@code contribution}, {@code issuing_authorization_hold}, {@code
-   * issuing_authorization_release}, {@code issuing_dispute}, {@code issuing_transaction}, {@code
-   * obligation_outbound}, {@code obligation_reversal_inbound}, {@code payment}, {@code
+   * connect_collection_transfer}, {@code contribution}, {@code fee_credit_funding}, {@code
+   * inbound_transfer}, {@code inbound_transfer_reversal}, {@code issuing_authorization_hold},
+   * {@code issuing_authorization_release}, {@code issuing_dispute}, {@code issuing_transaction},
+   * {@code obligation_outbound}, {@code obligation_reversal_inbound}, {@code payment}, {@code
    * payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
    * payment_network_reserve_release}, {@code payment_refund}, {@code payment_reversal}, {@code
    * payment_unreconciled}, {@code payout}, {@code payout_cancel}, {@code payout_failure}, {@code
@@ -331,7 +333,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
 
     /**
      * Type of the fee, one of: {@code application_fee}, {@code payment_method_passthrough_fee},
-     * {@code stripe_fee} or {@code tax}.
+     * {@code stripe_fee}, {@code tax}, or {@code withheld_tax}.
      */
     @SerializedName("type")
     String type;

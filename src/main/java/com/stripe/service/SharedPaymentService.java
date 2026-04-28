@@ -12,4 +12,8 @@ public final class SharedPaymentService extends ApiService {
   public com.stripe.service.sharedpayment.GrantedTokenService grantedTokens() {
     return new com.stripe.service.sharedpayment.GrantedTokenService(this.getResponseGetter());
   }
+
+  public com.stripe.service.sharedpayment.IssuedTokenService issuedTokens() {
+    return new com.stripe.service.sharedpayment.IssuedTokenService(this.getResponseGetter());
+  }
 }

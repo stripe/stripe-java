@@ -436,8 +436,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   InvoicePaymentCollection payments;
 
   /**
-   * End of the usage period during which invoice items were added to this invoice. This looks back
-   * one period for a subscription invoice. Use the <a
+   * The latest timestamp at which invoice items can be associated with this invoice. Use the <a
    * href="https://stripe.com/api/invoices/line_item#invoice_line_item_object-period">line item
    * period</a> to get the service period for each price.
    */
@@ -445,8 +444,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   Long periodEnd;
 
   /**
-   * Start of the usage period during which invoice items were added to this invoice. This looks
-   * back one period for a subscription invoice. Use the <a
+   * The earliest timestamp at which invoice items can be associated with this invoice. Use the <a
    * href="https://stripe.com/api/invoices/line_item#invoice_line_item_object-period">line item
    * period</a> to get the service period for each price.
    */
@@ -1082,20 +1080,21 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
      * {@code gb_vat}, {@code nz_gst}, {@code au_abn}, {@code au_arn}, {@code in_gst}, {@code
      * no_vat}, {@code no_voec}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen},
      * {@code ru_inn}, {@code ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code pl_nip},
-     * {@code tw_vat}, {@code th_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code li_uid},
-     * {@code li_vat}, {@code lk_vat}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code
-     * ca_qst}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code
-     * my_sst}, {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp},
-     * {@code my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code
-     * bg_uic}, {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin},
-     * {@code ph_tin}, {@code al_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin}, {@code
-     * om_vat}, {@code de_stn}, {@code ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code uz_tin},
-     * {@code md_vat}, {@code ma_vat}, {@code by_tin}, {@code ao_tin}, {@code bs_tin}, {@code
-     * bb_tin}, {@code cd_nif}, {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin},
-     * {@code gn_nif}, {@code mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code
-     * np_pan}, {@code tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code aw_tin},
-     * {@code az_tin}, {@code bd_bin}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code
-     * la_tin}, {@code cm_niu}, {@code cv_nif}, {@code bf_ifu}, or {@code unknown}.
+     * {@code it_cf}, {@code fo_vat}, {@code gi_tin}, {@code py_ruc}, {@code tw_vat}, {@code
+     * th_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code li_uid}, {@code li_vat}, {@code
+     * lk_vat}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code ca_qst}, {@code ca_gst_hst},
+     * {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code my_sst}, {@code sg_gst},
+     * {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code
+     * il_vat}, {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin},
+     * {@code si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code
+     * al_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn},
+     * {@code ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code
+     * ma_vat}, {@code by_tin}, {@code ao_tin}, {@code bs_tin}, {@code bb_tin}, {@code cd_nif},
+     * {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin}, {@code gn_nif}, {@code
+     * mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code np_pan}, {@code tj_tin},
+     * {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code aw_tin}, {@code az_tin}, {@code
+     * bd_bin}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin}, {@code cm_niu},
+     * {@code cv_nif}, {@code bf_ifu}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;
@@ -1420,6 +1419,13 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       Bizum bizum;
 
       /**
+       * If paying by {@code blik}, this sub-hash contains details about the Blik payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("blik")
+      Blik blik;
+
+      /**
        * If paying by {@code card}, this sub-hash contains details about the Card payment method
        * options to pass to the invoice’s PaymentIntent.
        */
@@ -1552,6 +1558,15 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Bizum extends StripeObject {}
+
+      /**
+       * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Blik extends StripeObject {}
 
       /**
        * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
@@ -2326,7 +2341,27 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     public static class TaxRateDetails extends StripeObject {
       /** ID of the tax rate. */
       @SerializedName("tax_rate")
-      String taxRate;
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<TaxRate> taxRate;
+
+      /** Get ID of expandable {@code taxRate} object. */
+      public String getTaxRate() {
+        return (this.taxRate != null) ? this.taxRate.getId() : null;
+      }
+
+      public void setTaxRate(String id) {
+        this.taxRate = ApiResource.setExpandableFieldId(id, this.taxRate);
+      }
+
+      /** Get expanded {@code taxRate}. */
+      public TaxRate getTaxRateObject() {
+        return (this.taxRate != null) ? this.taxRate.getExpanded() : null;
+      }
+
+      public void setTaxRateObject(TaxRate expandableObject) {
+        this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
+      }
     }
   }
 
