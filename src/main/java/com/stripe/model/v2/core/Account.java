@@ -931,9 +931,67 @@ public class Account extends StripeObject implements HasId {
           @Setter
           @EqualsAndHashCode(callSuper = false)
           public static class Lead extends StripeObject {
+            /** Can create consumer issuing debit cards with Lead as BIN sponsor. */
+            @SerializedName("debit_card")
+            DebitCard debitCard;
+
             /** Can create consumer issuing prepaid cards with Lead as BIN sponsor. */
             @SerializedName("prepaid_card")
             PrepaidCard prepaidCard;
+
+            /** Can create consumer issuing debit cards with Lead as BIN sponsor. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class DebitCard extends StripeObject {
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.CardCreator.Capabilities.Consumer.Lead.DebitCard
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
 
             /** Can create consumer issuing prepaid cards with Lead as BIN sponsor. */
             @Getter
@@ -6206,24 +6264,25 @@ public class Account extends StripeObject implements HasId {
            * {@code commercial.lead.prepaid_card}, {@code commercial.stripe.charge_card}, {@code
            * commercial.stripe.prepaid_card}, {@code consumer.celtic.revolving_credit_card}, {@code
            * consumer.cross_river_bank.prepaid_card}, {@code consumer.holds_currencies.usd}, {@code
-           * consumer.lead.prepaid_card}, {@code crypto_wallets}, {@code eps_payments}, {@code
-           * financial_addresses.bank_accounts}, {@code fpx_payments}, {@code
-           * gb_bank_transfer_payments}, {@code grabpay_payments}, {@code holds_currencies.eur},
-           * {@code holds_currencies.gbp}, {@code holds_currencies.usd}, {@code ideal_payments},
-           * {@code inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
-           * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
-           * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
-           * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},
-           * {@code naver_pay_payments}, {@code outbound_payments.bank_accounts}, {@code
-           * outbound_payments.cards}, {@code outbound_payments.financial_accounts}, {@code
-           * outbound_payments.paper_checks}, {@code outbound_transfers.bank_accounts}, {@code
-           * outbound_transfers.financial_accounts}, {@code oxxo_payments}, {@code p24_payments},
-           * {@code paper_checks}, {@code payco_payments}, {@code paynow_payments}, {@code
-           * pay_by_bank_payments}, {@code promptpay_payments}, {@code revolut_pay_payments}, {@code
-           * samsung_pay_payments}, {@code sepa_bank_transfer_payments}, {@code
-           * sepa_debit_payments}, {@code stripe_balance.payouts}, {@code
-           * stripe_balance.stripe_transfers}, {@code swish_payments}, {@code twint_payments},
-           * {@code us_bank_transfer_payments}, or {@code zip_payments}.
+           * consumer.lead.debit_card}, {@code consumer.lead.prepaid_card}, {@code crypto_wallets},
+           * {@code eps_payments}, {@code financial_addresses.bank_accounts}, {@code fpx_payments},
+           * {@code gb_bank_transfer_payments}, {@code grabpay_payments}, {@code
+           * holds_currencies.eur}, {@code holds_currencies.gbp}, {@code holds_currencies.usd},
+           * {@code ideal_payments}, {@code inbound_transfers.financial_accounts}, {@code
+           * jcb_payments}, {@code jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code
+           * klarna_payments}, {@code konbini_payments}, {@code kr_card_payments}, {@code
+           * link_payments}, {@code mobilepay_payments}, {@code multibanco_payments}, {@code
+           * mx_bank_transfer_payments}, {@code naver_pay_payments}, {@code
+           * outbound_payments.bank_accounts}, {@code outbound_payments.cards}, {@code
+           * outbound_payments.financial_accounts}, {@code outbound_payments.paper_checks}, {@code
+           * outbound_transfers.bank_accounts}, {@code outbound_transfers.financial_accounts},
+           * {@code oxxo_payments}, {@code p24_payments}, {@code paper_checks}, {@code
+           * payco_payments}, {@code paynow_payments}, {@code pay_by_bank_payments}, {@code
+           * promptpay_payments}, {@code revolut_pay_payments}, {@code samsung_pay_payments}, {@code
+           * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
+           * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
+           * swish_payments}, {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code
+           * zip_payments}.
            */
           @SerializedName("capability")
           String capability;
@@ -8083,6 +8142,13 @@ public class Account extends StripeObject implements HasId {
               ApplePay applePay;
 
               /**
+               * Terms of service acceptances for consumer issuing debit cards with Lead as BIN
+               * sponsor.
+               */
+              @SerializedName("debit_card")
+              DebitCard debitCard;
+
+              /**
                * Terms of service acceptances for commercial issuing revolving credit cards with
                * Lead as BIN sponsor.
                */
@@ -8122,6 +8188,141 @@ public class Account extends StripeObject implements HasId {
                  */
                 @SerializedName("user_agent")
                 String userAgent;
+              }
+
+              /**
+               * Terms of service acceptances for consumer issuing debit cards with Lead as BIN
+               * sponsor.
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class DebitCard extends StripeObject {
+                /**
+                 * Bank terms of service acceptance for consumer issuing debit cards with Lead as
+                 * BIN sponsor.
+                 */
+                @SerializedName("bank_terms")
+                BankTerms bankTerms;
+
+                /**
+                 * Financial disclosures terms of service acceptance for consumer issuing debit
+                 * cards with Lead as BIN sponsor.
+                 */
+                @SerializedName("financing_disclosures")
+                FinancingDisclosures financingDisclosures;
+
+                /**
+                 * Platform terms of service acceptance for consumer issuing debit cards with Lead
+                 * as BIN sponsor.
+                 */
+                @SerializedName("platform")
+                Platform platform;
+
+                /**
+                 * Bank terms of service acceptance for consumer issuing debit cards with Lead as
+                 * BIN sponsor.
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class BankTerms extends StripeObject {
+                  /**
+                   * The time when the Account's representative accepted the terms of service.
+                   * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
+                   * for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  java.time.Instant date;
+
+                  /**
+                   * The IP address from which the Account's representative accepted the terms of
+                   * service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /** The URL to the service agreement the Account's representative accepted. */
+                  @SerializedName("url")
+                  String url;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+                }
+
+                /**
+                 * Financial disclosures terms of service acceptance for consumer issuing debit
+                 * cards with Lead as BIN sponsor.
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class FinancingDisclosures extends StripeObject {
+                  /**
+                   * The time when the Account's representative accepted the terms of service.
+                   * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
+                   * for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  java.time.Instant date;
+
+                  /**
+                   * The IP address from which the Account's representative accepted the terms of
+                   * service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /** The URL to the service agreement the Account's representative accepted. */
+                  @SerializedName("url")
+                  String url;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+                }
+
+                /**
+                 * Platform terms of service acceptance for consumer issuing debit cards with Lead
+                 * as BIN sponsor.
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Platform extends StripeObject {
+                  /**
+                   * The time when the Account's representative accepted the terms of service.
+                   * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
+                   * for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  java.time.Instant date;
+
+                  /**
+                   * The IP address from which the Account's representative accepted the terms of
+                   * service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /** The URL to the service agreement the Account's representative accepted. */
+                  @SerializedName("url")
+                  String url;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+                }
               }
 
               /**
@@ -9975,24 +10176,25 @@ public class Account extends StripeObject implements HasId {
            * {@code commercial.lead.prepaid_card}, {@code commercial.stripe.charge_card}, {@code
            * commercial.stripe.prepaid_card}, {@code consumer.celtic.revolving_credit_card}, {@code
            * consumer.cross_river_bank.prepaid_card}, {@code consumer.holds_currencies.usd}, {@code
-           * consumer.lead.prepaid_card}, {@code crypto_wallets}, {@code eps_payments}, {@code
-           * financial_addresses.bank_accounts}, {@code fpx_payments}, {@code
-           * gb_bank_transfer_payments}, {@code grabpay_payments}, {@code holds_currencies.eur},
-           * {@code holds_currencies.gbp}, {@code holds_currencies.usd}, {@code ideal_payments},
-           * {@code inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
-           * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
-           * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
-           * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},
-           * {@code naver_pay_payments}, {@code outbound_payments.bank_accounts}, {@code
-           * outbound_payments.cards}, {@code outbound_payments.financial_accounts}, {@code
-           * outbound_payments.paper_checks}, {@code outbound_transfers.bank_accounts}, {@code
-           * outbound_transfers.financial_accounts}, {@code oxxo_payments}, {@code p24_payments},
-           * {@code paper_checks}, {@code payco_payments}, {@code paynow_payments}, {@code
-           * pay_by_bank_payments}, {@code promptpay_payments}, {@code revolut_pay_payments}, {@code
-           * samsung_pay_payments}, {@code sepa_bank_transfer_payments}, {@code
-           * sepa_debit_payments}, {@code stripe_balance.payouts}, {@code
-           * stripe_balance.stripe_transfers}, {@code swish_payments}, {@code twint_payments},
-           * {@code us_bank_transfer_payments}, or {@code zip_payments}.
+           * consumer.lead.debit_card}, {@code consumer.lead.prepaid_card}, {@code crypto_wallets},
+           * {@code eps_payments}, {@code financial_addresses.bank_accounts}, {@code fpx_payments},
+           * {@code gb_bank_transfer_payments}, {@code grabpay_payments}, {@code
+           * holds_currencies.eur}, {@code holds_currencies.gbp}, {@code holds_currencies.usd},
+           * {@code ideal_payments}, {@code inbound_transfers.financial_accounts}, {@code
+           * jcb_payments}, {@code jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code
+           * klarna_payments}, {@code konbini_payments}, {@code kr_card_payments}, {@code
+           * link_payments}, {@code mobilepay_payments}, {@code multibanco_payments}, {@code
+           * mx_bank_transfer_payments}, {@code naver_pay_payments}, {@code
+           * outbound_payments.bank_accounts}, {@code outbound_payments.cards}, {@code
+           * outbound_payments.financial_accounts}, {@code outbound_payments.paper_checks}, {@code
+           * outbound_transfers.bank_accounts}, {@code outbound_transfers.financial_accounts},
+           * {@code oxxo_payments}, {@code p24_payments}, {@code paper_checks}, {@code
+           * payco_payments}, {@code paynow_payments}, {@code pay_by_bank_payments}, {@code
+           * promptpay_payments}, {@code revolut_pay_payments}, {@code samsung_pay_payments}, {@code
+           * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
+           * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
+           * swish_payments}, {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code
+           * zip_payments}.
            */
           @SerializedName("capability")
           String capability;
