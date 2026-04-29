@@ -1,5 +1,10 @@
 # Changelog
 
+## 32.2.0-alpha.3 - 2026-04-28
+* [#2213](https://github.com/stripe/stripe-java/pull/2213) Update generated code for private-preview
+  * Add support for `debitCard` on `v2.core.Account.configuration.card_creator.capabilities.consumer.lead`, `v2.core.Account.identity.attestations.terms_of_service.card_creator.consumer.lead`, `v2.core.AccountCreateParams.configuration.card_creator.capabilities.consumer.lead`, `v2.core.AccountCreateParams.identity.attestations.terms_of_service.card_creator.consumer.lead`, `v2.core.AccountUpdateParams.configuration.card_creator.capabilities.consumer.lead`, and `v2.core.AccountUpdateParams.identity.attestations.terms_of_service.card_creator.consumer.lead`
+  * Add support for new value `consumer.lead.debit_card` on enum `EventsV2CoreAccountIncludingConfigurationCardCreatorCapabilityStatusUpdatedEvent.updatedCapability`
+
 ## 32.2.0-alpha.2 - 2026-04-28
 * [#2211](https://github.com/stripe/stripe-java/pull/2211) Update generated code for private-preview
   * Add support for new resource `v2.data.analytics.MetricQueryResult`
