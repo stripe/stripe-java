@@ -1,3 +1,4 @@
+// File copied from our code generator; changes here will be overwritten.
 package com.stripe.model.v2.core;
 
 import com.google.gson.JsonObject;
