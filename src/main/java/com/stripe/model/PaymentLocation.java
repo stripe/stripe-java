@@ -10,6 +10,8 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentLocationCreateParams;
+import com.stripe.param.PaymentLocationRetrieveParams;
+import com.stripe.param.PaymentLocationUpdateParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -34,6 +36,10 @@ public class PaymentLocation extends ApiResource implements HasId {
    */
   @SerializedName("capability_settings")
   CapabilitySettings capabilitySettings;
+
+  /** Always true for a deleted object. */
+  @SerializedName("deleted")
+  Boolean deleted;
 
   /** The display name of the location. */
   @SerializedName("display_name")
@@ -91,6 +97,99 @@ public class PaymentLocation extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, PaymentLocation.class);
+  }
+
+  /** Delete a Payment Location. */
+  public PaymentLocation delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Delete a Payment Location. */
+  public PaymentLocation delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /** Delete a Payment Location. */
+  public PaymentLocation delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /** Delete a Payment Location. */
+  public PaymentLocation delete(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/payment_locations/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
+    return getResponseGetter().request(request, PaymentLocation.class);
+  }
+
+  /** Retrieve a Payment Location. */
+  public static PaymentLocation retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieve a Payment Location. */
+  public static PaymentLocation retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieve a Payment Location. */
+  public static PaymentLocation retrieve(
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/payment_locations/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, PaymentLocation.class);
+  }
+
+  /** Retrieve a Payment Location. */
+  public static PaymentLocation retrieve(
+      String id, PaymentLocationRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/payment_locations/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, PaymentLocation.class);
+  }
+
+  /** Update a Payment Location. */
+  public PaymentLocation update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Update a Payment Location. */
+  public PaymentLocation update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/payment_locations/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, PaymentLocation.class);
+  }
+
+  /** Update a Payment Location. */
+  public PaymentLocation update(PaymentLocationUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Update a Payment Location. */
+  public PaymentLocation update(PaymentLocationUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/payment_locations/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, PaymentLocation.class);
   }
 
   /**
