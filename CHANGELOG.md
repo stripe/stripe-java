@@ -1,5 +1,20 @@
 # Changelog
 
+## 32.2.0-alpha.4 - 2026-05-06
+* [#2214](https://github.com/stripe/stripe-java/pull/2214) Update generated code for private-preview
+  * Add support for new resource `PaymentLocation`
+  * Add support for `create`, `delete`, `retrieve`, and `update` methods on resource `PaymentLocation`
+  * Add support for `protections` on `AccountCreateParams.capabilities.card_payments`, `AccountUpdateParams.capabilities.card_payments`, and `Capability`
+  * Add support for `giftCard` on `ConfirmationToken.payment_method_preview`, `ConfirmationTokenCreateParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentMethodCreateParams`, `PaymentMethod`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentCreateParams.payment_method_data`, `SetupIntentUpdateParams.payment_method_data`, and `sharedpayment.GrantedToken.payment_method_details`
+  * Add support for new value `gift_card` on enums `ConfirmationTokenCreateParams.payment_method_data.type`, `PaymentIntentConfirmParams.payment_method_data.type`, `PaymentIntentCreateParams.payment_method_data.type`, `PaymentIntentUpdateParams.payment_method_data.type`, `SetupIntentConfirmParams.payment_method_data.type`, `SetupIntentCreateParams.payment_method_data.type`, and `SetupIntentUpdateParams.payment_method_data.type`
+  * Add support for new value `gift_card` on enums `CustomerListPaymentMethodsParams.type`, `PaymentMethodCreateParams.type`, and `PaymentMethodListParams.type`
+  * Add support for `metadata` on `delegatedcheckout.RequestedSessionConfirmParams`
+  * Add support for `creditedItems` on `InvoiceItem.proration_details`
+  * Add support for `networkLifecycle` on `issuing.Dispute`
+  * Add support for new value `gift_card` on enums `PaymentIntentConfirmParams.excludedPaymentMethodTypes`, `PaymentIntentCreateParams.excludedPaymentMethodTypes`, `PaymentIntentUpdateParams.excludedPaymentMethodTypes`, `SetupIntentCreateParams.excludedPaymentMethodTypes`, and `SetupIntentUpdateParams.excludedPaymentMethodTypes`
+  * Add support for `statusDetails` on `Subscription`
+* [#2215](https://github.com/stripe/stripe-java/pull/2215) Add EventNotificationHandler (private preview)
+
 ## 32.2.0-alpha.3 - 2026-04-28
 * [#2213](https://github.com/stripe/stripe-java/pull/2213) Update generated code for private-preview
   * Add support for `debitCard` on `v2.core.Account.configuration.card_creator.capabilities.consumer.lead`, `v2.core.Account.identity.attestations.terms_of_service.card_creator.consumer.lead`, `v2.core.AccountCreateParams.configuration.card_creator.capabilities.consumer.lead`, `v2.core.AccountCreateParams.identity.attestations.terms_of_service.card_creator.consumer.lead`, `v2.core.AccountUpdateParams.configuration.card_creator.capabilities.consumer.lead`, and `v2.core.AccountUpdateParams.identity.attestations.terms_of_service.card_creator.consumer.lead`
