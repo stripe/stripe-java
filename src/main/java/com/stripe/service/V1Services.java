@@ -205,6 +205,10 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.PaymentLinkService(this.getResponseGetter());
   }
 
+  public com.stripe.service.PaymentLocationService paymentLocations() {
+    return new com.stripe.service.PaymentLocationService(this.getResponseGetter());
+  }
+
   public com.stripe.service.PaymentMethodConfigurationService paymentMethodConfigurations() {
     return new com.stripe.service.PaymentMethodConfigurationService(this.getResponseGetter());
   }

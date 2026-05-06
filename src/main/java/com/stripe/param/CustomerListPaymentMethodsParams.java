@@ -297,6 +297,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("fpx")
     FPX("fpx"),
 
+    @SerializedName("gift_card")
+    GIFT_CARD("gift_card"),
+
     @SerializedName("giropay")
     GIROPAY("giropay"),
 

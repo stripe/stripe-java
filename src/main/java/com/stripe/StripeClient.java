@@ -751,6 +751,18 @@ public class StripeClient {
   }
 
   /**
+   * @deprecated StripeClient.paymentLocations() is deprecated, use
+   *     StripeClient.v1().paymentLocations() instead. All functionality under it has been copied
+   *     over to StripeClient.v1().paymentLocations(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.PaymentLocationService paymentLocations() {
+    return new com.stripe.service.PaymentLocationService(this.getResponseGetter());
+  }
+
+  /**
    * @deprecated StripeClient.paymentMethodConfigurations() is deprecated, use
    *     StripeClient.v1().paymentMethodConfigurations() instead. All functionality under it has
    *     been copied over to StripeClient.v1().paymentMethodConfigurations(). See <a

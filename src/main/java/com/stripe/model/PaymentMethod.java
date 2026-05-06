@@ -124,6 +124,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("fpx")
   Fpx fpx;
 
+  @SerializedName("gift_card")
+  GiftCard giftCard;
+
   @SerializedName("giropay")
   Giropay giropay;
 
@@ -292,15 +295,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * alma}, {@code amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact},
    * {@code billie}, {@code blik}, {@code boleto}, {@code card}, {@code card_present}, {@code
    * cashapp}, {@code crypto}, {@code custom}, {@code customer_balance}, {@code eps}, {@code fpx},
-   * {@code giropay}, {@code gopay}, {@code grabpay}, {@code id_bank_transfer}, {@code ideal},
-   * {@code interac_present}, {@code kakao_pay}, {@code klarna}, {@code konbini}, {@code kr_card},
-   * {@code link}, {@code mb_way}, {@code mobilepay}, {@code multibanco}, {@code naver_pay}, {@code
-   * nz_bank_account}, {@code oxxo}, {@code p24}, {@code pay_by_bank}, {@code payco}, {@code
-   * paynow}, {@code paypal}, {@code paypay}, {@code payto}, {@code pix}, {@code promptpay}, {@code
-   * qris}, {@code rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code satispay}, {@code
-   * sepa_debit}, {@code shopeepay}, {@code sofort}, {@code stripe_balance}, {@code sunbit}, {@code
-   * swish}, {@code twint}, {@code upi}, {@code us_bank_account}, {@code wechat_pay}, or {@code
-   * zip}.
+   * {@code gift_card}, {@code giropay}, {@code gopay}, {@code grabpay}, {@code id_bank_transfer},
+   * {@code ideal}, {@code interac_present}, {@code kakao_pay}, {@code klarna}, {@code konbini},
+   * {@code kr_card}, {@code link}, {@code mb_way}, {@code mobilepay}, {@code multibanco}, {@code
+   * naver_pay}, {@code nz_bank_account}, {@code oxxo}, {@code p24}, {@code pay_by_bank}, {@code
+   * payco}, {@code paynow}, {@code paypal}, {@code paypay}, {@code payto}, {@code pix}, {@code
+   * promptpay}, {@code qris}, {@code rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code
+   * satispay}, {@code sepa_debit}, {@code shopeepay}, {@code sofort}, {@code stripe_balance},
+   * {@code sunbit}, {@code swish}, {@code twint}, {@code upi}, {@code us_bank_account}, {@code
+   * wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -2065,6 +2068,43 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
+   * For more details about GiftCard, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class GiftCard extends StripeObject {
+    /**
+     * The brand of the gift card.
+     *
+     * <p>One of {@code fiserv_valuelink}, {@code givex}, or {@code svs}.
+     */
+    @SerializedName("brand")
+    String brand;
+
+    /** The expiration month of the gift card. */
+    @SerializedName("exp_month")
+    Long expMonth;
+
+    /** The expiration year of the gift card. */
+    @SerializedName("exp_year")
+    Long expYear;
+
+    /** Uniquely identifies the gift card. */
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    /** The first six digits of the gift card number. */
+    @SerializedName("first6")
+    String first6;
+
+    /** The last four digits of the gift card number. */
+    @SerializedName("last4")
+    String last4;
+  }
+
+  /**
    * For more details about Giropay, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -3036,6 +3076,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(customerBalance, responseGetter);
     trySetResponseGetter(eps, responseGetter);
     trySetResponseGetter(fpx, responseGetter);
+    trySetResponseGetter(giftCard, responseGetter);
     trySetResponseGetter(giropay, responseGetter);
     trySetResponseGetter(gopay, responseGetter);
     trySetResponseGetter(grabpay, responseGetter);

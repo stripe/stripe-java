@@ -3,6 +3,7 @@ package com.stripe.param.delegatedcheckout;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +35,10 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** The metadata for this requested session. */
+  @SerializedName("metadata")
+  Object metadata;
+
   /** The PaymentMethod to use with the requested session. */
   @SerializedName("payment_method")
   String paymentMethod;
@@ -54,6 +59,7 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
       BuyerConsents buyerConsents,
       List<String> expand,
       Map<String, Object> extraParams,
+      Object metadata,
       String paymentMethod,
       String returnUrl,
       RiskDetails riskDetails) {
@@ -61,6 +67,7 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
     this.buyerConsents = buyerConsents;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.metadata = metadata;
     this.paymentMethod = paymentMethod;
     this.returnUrl = returnUrl;
     this.riskDetails = riskDetails;
@@ -79,6 +86,8 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Object metadata;
+
     private String paymentMethod;
 
     private String returnUrl;
@@ -92,6 +101,7 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
           this.buyerConsents,
           this.expand,
           this.extraParams,
+          this.metadata,
           this.paymentMethod,
           this.returnUrl,
           this.riskDetails);
@@ -159,6 +169,46 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * RequestedSessionConfirmParams#metadata} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
+      }
+      ((Map<String, String>) this.metadata).put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link RequestedSessionConfirmParams#metadata} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
+      }
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    /** The metadata for this requested session. */
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /** The metadata for this requested session. */
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
       return this;
     }
 

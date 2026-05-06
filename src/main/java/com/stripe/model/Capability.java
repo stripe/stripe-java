@@ -48,6 +48,9 @@ public class Capability extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  @SerializedName("protections")
+  Protections protections;
+
   /** Whether the capability has been requested. */
   @SerializedName("requested")
   Boolean requested;
@@ -327,6 +330,43 @@ public class Capability extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about Protections, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Protections extends StripeObject {
+    @SerializedName("psp_migration")
+    PspMigration pspMigration;
+
+    /**
+     * For more details about PspMigration, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PspMigration extends StripeObject {
+      /** Time at which the protection expires. Measured in seconds since the Unix epoch. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /** Time at which the protection was requested. Measured in seconds since the Unix epoch. */
+      @SerializedName("requested_at")
+      Long requestedAt;
+
+      /**
+       * The status of the capability protection.
+       *
+       * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+       */
+      @SerializedName("status")
+      String status;
+    }
+  }
+
+  /**
    * For more details about Requirements, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -520,6 +560,7 @@ public class Capability extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(account, responseGetter);
     trySetResponseGetter(futureRequirements, responseGetter);
+    trySetResponseGetter(protections, responseGetter);
     trySetResponseGetter(requirements, responseGetter);
   }
 }

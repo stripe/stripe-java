@@ -181,6 +181,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   Fpx fpx;
 
   /**
+   * If this is a {@code gift_card} PaymentMethod, this hash contains details about the gift card
+   * payment method.
+   */
+  @SerializedName("gift_card")
+  GiftCard giftCard;
+
+  /**
    * If this is a {@code giropay} PaymentMethod, this hash contains details about the Giropay
    * payment method.
    */
@@ -519,6 +526,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Fpx fpx,
+      GiftCard giftCard,
       Giropay giropay,
       Gopay gopay,
       Grabpay grabpay,
@@ -589,6 +597,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.fpx = fpx;
+    this.giftCard = giftCard;
     this.giropay = giropay;
     this.gopay = gopay;
     this.grabpay = grabpay;
@@ -689,6 +698,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     private Map<String, Object> extraParams;
 
     private Fpx fpx;
+
+    private GiftCard giftCard;
 
     private Giropay giropay;
 
@@ -809,6 +820,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.fpx,
+          this.giftCard,
           this.giropay,
           this.gopay,
           this.grabpay,
@@ -1120,6 +1132,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      */
     public Builder setFpx(PaymentMethodCreateParams.Fpx fpx) {
       this.fpx = fpx;
+      return this;
+    }
+
+    /**
+     * If this is a {@code gift_card} PaymentMethod, this hash contains details about the gift card
+     * payment method.
+     */
+    public Builder setGiftCard(PaymentMethodCreateParams.GiftCard giftCard) {
+      this.giftCard = giftCard;
       return this;
     }
 
@@ -3462,6 +3483,75 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
       Bank(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class GiftCard {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The gift card ID to redeem */
+    @SerializedName("gift_card")
+    String giftCard;
+
+    private GiftCard(Map<String, Object> extraParams, String giftCard) {
+      this.extraParams = extraParams;
+      this.giftCard = giftCard;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String giftCard;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodCreateParams.GiftCard build() {
+        return new PaymentMethodCreateParams.GiftCard(this.extraParams, this.giftCard);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.GiftCard#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.GiftCard#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The gift card ID to redeem */
+      public Builder setGiftCard(String giftCard) {
+        this.giftCard = giftCard;
+        return this;
       }
     }
   }
@@ -7010,6 +7100,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     @SerializedName("fpx")
     FPX("fpx"),
+
+    @SerializedName("gift_card")
+    GIFT_CARD("gift_card"),
 
     @SerializedName("giropay")
     GIROPAY("giropay"),

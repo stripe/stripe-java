@@ -105,6 +105,13 @@ public class Dispute extends ApiResource
   Map<String, String> metadata;
 
   /**
+   * Incoming information from the card network for this dispute. Includes the acquiring merchant's
+   * initial response, pre-arbitration submission, and pre-arbitration response to the dispute.
+   */
+  @SerializedName("network_lifecycle")
+  NetworkLifecycle networkLifecycle;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value.
    *
    * <p>Equal to {@code issuing.dispute}.
@@ -1169,6 +1176,91 @@ public class Dispute extends ApiResource
   }
 
   /**
+   * For more details about NetworkLifecycle, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NetworkLifecycle extends StripeObject {
+    /** Information related to the acquiring merchant's initial response to this dispute. */
+    @SerializedName("dispute_response")
+    DisputeResponse disputeResponse;
+
+    /**
+     * Information related to the acquiring merchant's pre-arbitration response for this dispute.
+     */
+    @SerializedName("pre_arbitration_response")
+    PreArbitrationResponse preArbitrationResponse;
+
+    /**
+     * Information related to the acquiring merchant's pre-arbitration submission for this dispute.
+     */
+    @SerializedName("pre_arbitration_submission")
+    PreArbitrationSubmission preArbitrationSubmission;
+
+    /**
+     * For more details about DisputeResponse, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisputeResponse extends StripeObject {
+      /** Error message if processing the acquiring merchant's initial dispute response failed. */
+      @SerializedName("error")
+      String error;
+
+      /**
+       * Array of <a href="https://docs.stripe.com/api/files">File</a> ids containing evidence the
+       * acquiring merchant provided in support of their initial dispute response.
+       */
+      @SerializedName("merchant_evidence_files")
+      List<String> merchantEvidenceFiles;
+    }
+
+    /**
+     * For more details about PreArbitrationResponse, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PreArbitrationResponse extends StripeObject {
+      /** Error message if processing the acquiring merchant's pre-arbitration response failed. */
+      @SerializedName("error")
+      String error;
+
+      /**
+       * Array of <a href="https://docs.stripe.com/api/files">File</a> ids containing evidence the
+       * acquiring merchant provided with their pre-arbitration response.
+       */
+      @SerializedName("merchant_evidence_files")
+      List<String> merchantEvidenceFiles;
+    }
+
+    /**
+     * For more details about PreArbitrationSubmission, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PreArbitrationSubmission extends StripeObject {
+      /** Error message if processing the acquiring merchant's pre-arbitration submission failed. */
+      @SerializedName("error")
+      String error;
+
+      /**
+       * Array of <a href="https://docs.stripe.com/api/files">File</a> ids containing evidence the
+       * acquiring merchant provided with their pre-arbitration submission.
+       */
+      @SerializedName("merchant_evidence_files")
+      List<String> merchantEvidenceFiles;
+    }
+  }
+
+  /**
    * For more details about Treasury, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -1195,6 +1287,7 @@ public class Dispute extends ApiResource
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(evidence, responseGetter);
+    trySetResponseGetter(networkLifecycle, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
     trySetResponseGetter(treasury, responseGetter);
   }
