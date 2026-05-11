@@ -20,6 +20,7 @@ import com.stripe.param.delegatedcheckout.RequestedSessionCreateParams;
 import com.stripe.param.delegatedcheckout.RequestedSessionExpireParams;
 import com.stripe.param.delegatedcheckout.RequestedSessionRetrieveParams;
 import com.stripe.param.delegatedcheckout.RequestedSessionUpdateParams;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -62,6 +63,10 @@ public class RequestedSession extends ApiResource
   /** The customer for this requested session. */
   @SerializedName("customer")
   String customer;
+
+  /** The discounts applied to and rejected from this requested session. */
+  @SerializedName("discounts")
+  Discounts discounts;
 
   /** Time at which the requested session expires. Measured in seconds since the Unix epoch. */
   @SerializedName("expires_at")
@@ -563,6 +568,81 @@ public class RequestedSession extends ApiResource
   }
 
   /**
+   * For more details about Discounts, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Discounts extends StripeObject {
+    /** The list of successfully applied discounts. */
+    @SerializedName("applied")
+    List<RequestedSession.Discounts.Applied> applied;
+
+    /** The list of discount codes that could not be applied. */
+    @SerializedName("invalid")
+    List<RequestedSession.Discounts.Invalid> invalid;
+
+    /**
+     * For more details about Applied, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Applied extends StripeObject {
+      /** The amount off provided by this discount. */
+      @SerializedName("amount_off")
+      Long amountOff;
+
+      /** The discount code. */
+      @SerializedName("code")
+      String code;
+
+      /** The currency of the discount amount. */
+      @SerializedName("currency")
+      String currency;
+
+      /** The unique key of the applied discount. */
+      @SerializedName("key")
+      String key;
+
+      /** The display name of the discount. */
+      @SerializedName("name")
+      String name;
+
+      /** The percentage off provided by this discount. */
+      @SerializedName("percent_off")
+      BigDecimal percentOff;
+
+      /**
+       * The type of discount.
+       *
+       * <p>One of {@code cart}, or {@code fulfillment}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Invalid, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Invalid extends StripeObject {
+      /** The discount code that was invalid. */
+      @SerializedName("code")
+      String code;
+
+      /** The reason the discount code is invalid. */
+      @SerializedName("reason")
+      String reason;
+    }
+  }
+
+  /**
    * For more details about FulfillmentDetails, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -875,6 +955,10 @@ public class RequestedSession extends ApiResource
     /** The total discount for this line item. If no discount were applied, defaults to 0. */
     @SerializedName("amount_discount")
     Long amountDiscount;
+
+    /** The sale amount for this line item. */
+    @SerializedName("amount_sale")
+    Long amountSale;
 
     /** The total before any discounts or taxes are applied. */
     @SerializedName("amount_subtotal")
@@ -1268,6 +1352,10 @@ public class RequestedSession extends ApiResource
     @SerializedName("amount_cart_discount")
     Long amountCartDiscount;
 
+    /** The total discount amount from discount codes across the session. */
+    @SerializedName("amount_discount")
+    Long amountDiscount;
+
     /** The amount fulfillment of the total details. */
     @SerializedName("amount_fulfillment")
     Long amountFulfillment;
@@ -1279,6 +1367,10 @@ public class RequestedSession extends ApiResource
     @SerializedName("amount_items_discount")
     Long amountItemsDiscount;
 
+    /** The total sale amount across the session. */
+    @SerializedName("amount_sale")
+    Long amountSale;
+
     /** The amount tax of the total details. */
     @SerializedName("amount_tax")
     Long amountTax;
@@ -1286,6 +1378,10 @@ public class RequestedSession extends ApiResource
     /** The applicable fees of the total details. */
     @SerializedName("applicable_fees")
     List<RequestedSession.TotalDetails.ApplicableFee> applicableFees;
+
+    /** The breakdown of discounts applied to the session. */
+    @SerializedName("breakdown")
+    Breakdown breakdown;
 
     /**
      * For more details about ApplicableFee, please refer to the <a
@@ -1307,12 +1403,43 @@ public class RequestedSession extends ApiResource
       @SerializedName("display_name")
       String displayName;
     }
+
+    /**
+     * For more details about Breakdown, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Breakdown extends StripeObject {
+      /** The breakdown of discounts applied to the session. */
+      @SerializedName("discounts")
+      List<RequestedSession.TotalDetails.Breakdown.Discount> discounts;
+
+      /**
+       * For more details about Discount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Discount extends StripeObject {
+        /** The amount this discount contributed to the total discount. */
+        @SerializedName("amount")
+        Long amount;
+
+        /** The key of the applied discount. */
+        @SerializedName("key")
+        String key;
+      }
+    }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(buyerConsents, responseGetter);
+    trySetResponseGetter(discounts, responseGetter);
     trySetResponseGetter(fulfillmentDetails, responseGetter);
     trySetResponseGetter(orderDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);

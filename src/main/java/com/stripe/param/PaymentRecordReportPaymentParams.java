@@ -891,14 +891,22 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
     @SerializedName("guaranteed_at")
     Long guaranteedAt;
 
+    /** Payment evaluations associated with this reported payment. */
+    @SerializedName("payment_evaluations")
+    List<String> paymentEvaluations;
+
     /** Processor information for this payment. */
     @SerializedName("processor_details")
     ProcessorDetails processorDetails;
 
     private Guaranteed(
-        Map<String, Object> extraParams, Long guaranteedAt, ProcessorDetails processorDetails) {
+        Map<String, Object> extraParams,
+        Long guaranteedAt,
+        List<String> paymentEvaluations,
+        ProcessorDetails processorDetails) {
       this.extraParams = extraParams;
       this.guaranteedAt = guaranteedAt;
+      this.paymentEvaluations = paymentEvaluations;
       this.processorDetails = processorDetails;
     }
 
@@ -911,12 +919,14 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
 
       private Long guaranteedAt;
 
+      private List<String> paymentEvaluations;
+
       private ProcessorDetails processorDetails;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentRecordReportPaymentParams.Guaranteed build() {
         return new PaymentRecordReportPaymentParams.Guaranteed(
-            this.extraParams, this.guaranteedAt, this.processorDetails);
+            this.extraParams, this.guaranteedAt, this.paymentEvaluations, this.processorDetails);
       }
 
       /**
@@ -952,6 +962,34 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
        */
       public Builder setGuaranteedAt(Long guaranteedAt) {
         this.guaranteedAt = guaranteedAt;
+        return this;
+      }
+
+      /**
+       * Add an element to `paymentEvaluations` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link PaymentRecordReportPaymentParams.Guaranteed#paymentEvaluations} for the field
+       * documentation.
+       */
+      public Builder addPaymentEvaluation(String element) {
+        if (this.paymentEvaluations == null) {
+          this.paymentEvaluations = new ArrayList<>();
+        }
+        this.paymentEvaluations.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `paymentEvaluations` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link PaymentRecordReportPaymentParams.Guaranteed#paymentEvaluations} for the field
+       * documentation.
+       */
+      public Builder addAllPaymentEvaluation(List<String> elements) {
+        if (this.paymentEvaluations == null) {
+          this.paymentEvaluations = new ArrayList<>();
+        }
+        this.paymentEvaluations.addAll(elements);
         return this;
       }
 

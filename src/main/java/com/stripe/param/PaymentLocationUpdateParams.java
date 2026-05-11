@@ -159,8 +159,8 @@ public class PaymentLocationUpdateParams extends ApiRequestParams {
     Object city;
 
     /**
-     * <strong>Required.</strong> Two-letter country code (<a
-     * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
      */
     @SerializedName("country")
     Object country;
@@ -254,8 +254,8 @@ public class PaymentLocationUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> Two-letter country code (<a
-       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       public Builder setCountry(String country) {
         this.country = country;
@@ -263,8 +263,8 @@ public class PaymentLocationUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> Two-letter country code (<a
-       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       public Builder setCountry(EmptyParam country) {
         this.country = country;
