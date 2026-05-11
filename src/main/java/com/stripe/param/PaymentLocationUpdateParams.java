@@ -39,17 +39,28 @@ public class PaymentLocationUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * Pass true when updating location fields that will trigger onboarding review for any of the
+   * location's active location capabilities. If this parameter is not set to true, updates that
+   * would trigger onboarding review will fail. Only applicable for locations with active location
+   * capabilities.
+   */
+  @SerializedName("onboarding_data_update_acknowledged")
+  Boolean onboardingDataUpdateAcknowledged;
+
   private PaymentLocationUpdateParams(
       Address address,
       BusinessRegistration businessRegistration,
       Object displayName,
       List<String> expand,
-      Map<String, Object> extraParams) {
+      Map<String, Object> extraParams,
+      Boolean onboardingDataUpdateAcknowledged) {
     this.address = address;
     this.businessRegistration = businessRegistration;
     this.displayName = displayName;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.onboardingDataUpdateAcknowledged = onboardingDataUpdateAcknowledged;
   }
 
   public static Builder builder() {
@@ -67,10 +78,17 @@ public class PaymentLocationUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Boolean onboardingDataUpdateAcknowledged;
+
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentLocationUpdateParams build() {
       return new PaymentLocationUpdateParams(
-          this.address, this.businessRegistration, this.displayName, this.expand, this.extraParams);
+          this.address,
+          this.businessRegistration,
+          this.displayName,
+          this.expand,
+          this.extraParams,
+          this.onboardingDataUpdateAcknowledged);
     }
 
     /** The full address of the location. */
@@ -147,6 +165,17 @@ public class PaymentLocationUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Pass true when updating location fields that will trigger onboarding review for any of the
+     * location's active location capabilities. If this parameter is not set to true, updates that
+     * would trigger onboarding review will fail. Only applicable for locations with active location
+     * capabilities.
+     */
+    public Builder setOnboardingDataUpdateAcknowledged(Boolean onboardingDataUpdateAcknowledged) {
+      this.onboardingDataUpdateAcknowledged = onboardingDataUpdateAcknowledged;
       return this;
     }
   }

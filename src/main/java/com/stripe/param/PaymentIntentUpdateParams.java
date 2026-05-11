@@ -3525,6 +3525,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName("flight_data")
     Object flightData;
 
+    /** The ID of the Payment Location for this PaymentIntent. */
+    @SerializedName("location")
+    Object location;
+
     /** Lodging reservation details for this PaymentIntent. */
     @SerializedName("lodging")
     Lodging lodging;
@@ -3562,6 +3566,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Object fleetData,
         Flight flight,
         Object flightData,
+        Object location,
         Lodging lodging,
         Object lodgingData,
         Object moneyServices,
@@ -3576,6 +3581,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.fleetData = fleetData;
       this.flight = flight;
       this.flightData = flightData;
+      this.location = location;
       this.lodging = lodging;
       this.lodgingData = lodgingData;
       this.moneyServices = moneyServices;
@@ -3606,6 +3612,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Object flightData;
 
+      private Object location;
+
       private Lodging lodging;
 
       private Object lodgingData;
@@ -3628,6 +3636,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.fleetData,
             this.flight,
             this.flightData,
+            this.location,
             this.lodging,
             this.lodgingData,
             this.moneyServices,
@@ -3839,6 +3848,18 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public Builder setFlightData(
           List<PaymentIntentUpdateParams.PaymentDetails.FlightData> flightData) {
         this.flightData = flightData;
+        return this;
+      }
+
+      /** The ID of the Payment Location for this PaymentIntent. */
+      public Builder setLocation(String location) {
+        this.location = location;
+        return this;
+      }
+
+      /** The ID of the Payment Location for this PaymentIntent. */
+      public Builder setLocation(EmptyParam location) {
+        this.location = location;
         return this;
       }
 

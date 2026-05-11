@@ -13255,9 +13255,14 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private SetupDetails(Benefit benefit, Map<String, Object> extraParams) {
+    /** The ID of the Payment Location for this SetupIntent. */
+    @SerializedName("location")
+    Object location;
+
+    private SetupDetails(Benefit benefit, Map<String, Object> extraParams, Object location) {
       this.benefit = benefit;
       this.extraParams = extraParams;
+      this.location = location;
     }
 
     public static Builder builder() {
@@ -13269,9 +13274,12 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Object location;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SetupIntentUpdateParams.SetupDetails build() {
-        return new SetupIntentUpdateParams.SetupDetails(this.benefit, this.extraParams);
+        return new SetupIntentUpdateParams.SetupDetails(
+            this.benefit, this.extraParams, this.location);
       }
 
       /** Benefit details for this SetupIntent. */
@@ -13303,6 +13311,18 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The ID of the Payment Location for this SetupIntent. */
+      public Builder setLocation(String location) {
+        this.location = location;
+        return this;
+      }
+
+      /** The ID of the Payment Location for this SetupIntent. */
+      public Builder setLocation(EmptyParam location) {
+        this.location = location;
         return this;
       }
     }
