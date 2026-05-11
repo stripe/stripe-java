@@ -69,6 +69,10 @@ public class CustomerEvaluation extends ApiResource implements HasId {
   @SerializedName("signals")
   Signals signals;
 
+  /** The outcome status reported for this evaluation: allowed, restricted, or blocked. */
+  @SerializedName("status")
+  String status;
+
   /** Creates a new {@code CustomerEvaluation} object. */
   public static CustomerEvaluation create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
