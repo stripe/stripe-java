@@ -96,10 +96,10 @@ public class TransactionEntry extends StripeObject implements HasId {
      * <p>One of {@code adjustment}, {@code advance}, {@code anticipation_repayment}, {@code
      * balance_transfer}, {@code climate_order_purchase}, {@code climate_order_refund}, {@code
      * connect_collection_transfer}, {@code connect_reserved_funds}, {@code contribution}, {@code
-     * currency_conversion}, {@code dispute}, {@code dispute_reversal}, {@code financing_paydown},
-     * {@code financing_paydown_reversal}, {@code inbound_payment}, {@code inbound_payment_failure},
-     * {@code inbound_transfer}, {@code inbound_transfer_reversal}, {@code
-     * india_mdr_processing_fee}, {@code issuing_dispute}, {@code
+     * currency_conversion}, {@code debit_dispute}, {@code dispute}, {@code dispute_reversal},
+     * {@code financing_paydown}, {@code financing_paydown_reversal}, {@code inbound_payment},
+     * {@code inbound_payment_failure}, {@code inbound_transfer}, {@code inbound_transfer_reversal},
+     * {@code india_mdr_processing_fee}, {@code issuing_dispute}, {@code
      * issuing_dispute_fraud_liability_debit}, {@code issuing_dispute_provisional_credit}, {@code
      * issuing_dispute_provisional_credit_reversal}, {@code minimum_balance_hold}, {@code
      * network_cost}, {@code obligation}, {@code outbound_payment}, {@code
@@ -150,6 +150,10 @@ public class TransactionEntry extends StripeObject implements HasId {
        */
       @SerializedName("currency_conversion")
       String currencyConversion;
+
+      /** If applicable, the ID of the DebitDispute that created this Transaction. */
+      @SerializedName("debit_dispute")
+      String debitDispute;
 
       /** If applicable, the ID of the Dispute that created this Transaction. */
       @SerializedName("dispute")
@@ -246,14 +250,15 @@ public class TransactionEntry extends StripeObject implements HasId {
        * will contain the ID of the flow.
        *
        * <p>One of {@code adjustment}, {@code application_fee}, {@code application_fee_refund},
-       * {@code charge}, {@code currency_conversion}, {@code dispute}, {@code fee_transaction},
-       * {@code inbound_transfer}, {@code outbound_payment}, {@code outbound_transfer}, {@code
-       * payout}, {@code received_credit}, {@code received_debit}, {@code refund}, {@code
-       * reserve_hold}, {@code reserve_release}, {@code topup}, {@code transfer}, {@code
-       * transfer_reversal}, {@code treasury_credit_reversal}, {@code treasury_debit_reversal},
-       * {@code treasury_inbound_transfer}, {@code treasury_issuing_authorization}, {@code
-       * treasury_other}, {@code treasury_outbound_payment}, {@code treasury_outbound_transfer},
-       * {@code treasury_received_credit}, or {@code treasury_received_debit}.
+       * {@code charge}, {@code currency_conversion}, {@code debit_dispute}, {@code dispute}, {@code
+       * fee_transaction}, {@code inbound_transfer}, {@code outbound_payment}, {@code
+       * outbound_transfer}, {@code payout}, {@code received_credit}, {@code received_debit}, {@code
+       * refund}, {@code reserve_hold}, {@code reserve_release}, {@code topup}, {@code transfer},
+       * {@code transfer_reversal}, {@code treasury_credit_reversal}, {@code
+       * treasury_debit_reversal}, {@code treasury_inbound_transfer}, {@code
+       * treasury_issuing_authorization}, {@code treasury_other}, {@code treasury_outbound_payment},
+       * {@code treasury_outbound_transfer}, {@code treasury_received_credit}, or {@code
+       * treasury_received_debit}.
        */
       @SerializedName("type")
       String type;

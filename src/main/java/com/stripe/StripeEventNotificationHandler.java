@@ -338,6 +338,8 @@ import com.stripe.events.V2IamStripeAccessGrantRequestedEventNotification;
 import com.stripe.events.V2IamStripeAccessGrantUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountCreatedEventNotification;
+import com.stripe.events.V2MoneyManagementFinancialAccountStatementCreatedEventNotification;
+import com.stripe.events.V2MoneyManagementFinancialAccountStatementRestatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAddressActivatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAddressFailedEventNotification;
@@ -2547,6 +2549,18 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV2MoneyManagementFinancialAccountUpdated(
       Callback<V2MoneyManagementFinancialAccountUpdatedEventNotification> callback) {
     this.register("v2.money_management.financial_account.updated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2MoneyManagementFinancialAccountStatementCreated(
+      Callback<V2MoneyManagementFinancialAccountStatementCreatedEventNotification> callback) {
+    this.register("v2.money_management.financial_account_statement.created", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2MoneyManagementFinancialAccountStatementRestated(
+      Callback<V2MoneyManagementFinancialAccountStatementRestatedEventNotification> callback) {
+    this.register("v2.money_management.financial_account_statement.restated", callback);
     return this;
   }
 

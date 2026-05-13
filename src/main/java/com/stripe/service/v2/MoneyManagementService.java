@@ -18,6 +18,10 @@ public final class MoneyManagementService extends ApiService {
         this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.moneymanagement.DebitDisputeService debitDisputes() {
+    return new com.stripe.service.v2.moneymanagement.DebitDisputeService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.moneymanagement.FinancialAccountService financialAccounts() {
     return new com.stripe.service.v2.moneymanagement.FinancialAccountService(
         this.getResponseGetter());

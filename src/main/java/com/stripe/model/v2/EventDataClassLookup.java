@@ -166,6 +166,8 @@ public final class EventDataClassLookup {
     classLookup.put("v2.core.connection_session", com.stripe.model.v2.core.ConnectionSession.class);
     classLookup.put("v2.core.event", com.stripe.model.v2.core.Event.class);
     classLookup.put("v2.core.event_destination", com.stripe.model.v2.core.EventDestination.class);
+    classLookup.put("v2.core.fee_batch", com.stripe.model.v2.core.FeeBatch.class);
+    classLookup.put("v2.core.fee_entry", com.stripe.model.v2.core.FeeEntry.class);
 
     classLookup.put(
         "v2.core.vault.gb_bank_account", com.stripe.model.v2.core.vault.GbBankAccount.class);
@@ -191,8 +193,14 @@ public final class EventDataClassLookup {
         "v2.money_management.currency_conversion",
         com.stripe.model.v2.moneymanagement.CurrencyConversion.class);
     classLookup.put(
+        "v2.money_management.debit_dispute",
+        com.stripe.model.v2.moneymanagement.DebitDispute.class);
+    classLookup.put(
         "v2.money_management.financial_account",
         com.stripe.model.v2.moneymanagement.FinancialAccount.class);
+    classLookup.put(
+        "v2.money_management.financial_account_statement",
+        com.stripe.model.v2.moneymanagement.FinancialAccountStatement.class);
     classLookup.put(
         "v2.money_management.financial_address",
         com.stripe.model.v2.moneymanagement.FinancialAddress.class);
@@ -1035,6 +1043,12 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.money_management.financial_account.updated",
         com.stripe.events.V2MoneyManagementFinancialAccountUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.financial_account_statement.created",
+        com.stripe.events.V2MoneyManagementFinancialAccountStatementCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.financial_account_statement.restated",
+        com.stripe.events.V2MoneyManagementFinancialAccountStatementRestatedEvent.class);
     eventClassLookup.put(
         "v2.money_management.financial_address.activated",
         com.stripe.events.V2MoneyManagementFinancialAddressActivatedEvent.class);

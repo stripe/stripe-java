@@ -5,22 +5,22 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.core.Event;
 import com.stripe.model.v2.core.Event.RelatedObject;
-import com.stripe.model.v2.payments.OffSessionPayment;
+import com.stripe.model.v2.moneymanagement.FinancialAccountStatement;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-public final class V2PaymentsOffSessionPaymentAttemptFailedEvent extends Event {
-  /** Data for the v2.payments.off_session_payment.attempt_failed event. */
+public final class V2MoneyManagementFinancialAccountStatementCreatedEvent extends Event {
+  /** Data for the v2.money_management.financial_account_statement.created event. */
   @SerializedName("data")
-  V2PaymentsOffSessionPaymentAttemptFailedEvent.EventData data;
+  V2MoneyManagementFinancialAccountStatementCreatedEvent.EventData data;
 
   @Getter
   @Setter
   public static final class EventData {
-    /** The ID of the payment attempt record associated with this failed attempt. */
-    @SerializedName("payment_attempt_record")
-    String paymentAttemptRecord;
+    /** The ID of the Financial Account this statement belongs to. */
+    @SerializedName("financial_account")
+    String financialAccount;
   }
 
   @SerializedName("related_object")
@@ -29,7 +29,7 @@ public final class V2PaymentsOffSessionPaymentAttemptFailedEvent extends Event {
   RelatedObject relatedObject;
 
   /** Retrieves the related object from the API. Make an API request on every call. */
-  public OffSessionPayment fetchRelatedObject() throws StripeException {
-    return (OffSessionPayment) super.fetchRelatedObject(this.relatedObject);
+  public FinancialAccountStatement fetchRelatedObject() throws StripeException {
+    return (FinancialAccountStatement) super.fetchRelatedObject(this.relatedObject);
   }
 }
