@@ -18,6 +18,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.DisputeCreateParams;
 import com.stripe.param.issuing.DisputeListParams;
 import com.stripe.param.issuing.DisputeRetrieveParams;
+import com.stripe.param.issuing.DisputeSimulateNetworkLifecycleDisputeResponseParams;
 import com.stripe.param.issuing.DisputeSimulateNetworkLifecyclePreArbitrationResponseParams;
 import com.stripe.param.issuing.DisputeSimulateNetworkLifecyclePreArbitrationSubmissionParams;
 import com.stripe.param.issuing.DisputeSubmitParams;
@@ -1294,6 +1295,61 @@ public class Dispute extends ApiResource
 
     private TestHelpers(Dispute resource) {
       this.resource = resource;
+    }
+
+    /**
+     * Test helper: populates {@code network_lifecycle.dispute_response} on a test-mode Visa Issuing
+     * Dispute using placeholder file tokens. Only supported for Visa disputes.
+     */
+    public Dispute simulateNetworkLifecycleDisputeResponse(Map<String, Object> params)
+        throws StripeException {
+      return simulateNetworkLifecycleDisputeResponse(params, (RequestOptions) null);
+    }
+
+    /**
+     * Test helper: populates {@code network_lifecycle.dispute_response} on a test-mode Visa Issuing
+     * Dispute using placeholder file tokens. Only supported for Visa disputes.
+     */
+    public Dispute simulateNetworkLifecycleDisputeResponse(
+        Map<String, Object> params, RequestOptions options) throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/disputes/%s/simulate_network_lifecycle_dispute_response",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+      return resource.getResponseGetter().request(request, Dispute.class);
+    }
+
+    /**
+     * Test helper: populates {@code network_lifecycle.dispute_response} on a test-mode Visa Issuing
+     * Dispute using placeholder file tokens. Only supported for Visa disputes.
+     */
+    public Dispute simulateNetworkLifecycleDisputeResponse(
+        DisputeSimulateNetworkLifecycleDisputeResponseParams params) throws StripeException {
+      return simulateNetworkLifecycleDisputeResponse(params, (RequestOptions) null);
+    }
+
+    /**
+     * Test helper: populates {@code network_lifecycle.dispute_response} on a test-mode Visa Issuing
+     * Dispute using placeholder file tokens. Only supported for Visa disputes.
+     */
+    public Dispute simulateNetworkLifecycleDisputeResponse(
+        DisputeSimulateNetworkLifecycleDisputeResponseParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/disputes/%s/simulate_network_lifecycle_dispute_response",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options);
+      return resource.getResponseGetter().request(request, Dispute.class);
     }
 
     /**

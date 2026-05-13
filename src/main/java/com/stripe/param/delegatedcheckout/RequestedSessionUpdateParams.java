@@ -14,7 +14,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class RequestedSessionUpdateParams extends ApiRequestParams {
-  /** The discount codes to apply to this requested session. */
+  /**
+   * The discount codes to apply to this requested session. Pass an empty value to remove all
+   * applied discounts.
+   */
   @SerializedName("discounts")
   Discounts discounts;
 
@@ -113,7 +116,10 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
           this.sharedMetadata);
     }
 
-    /** The discount codes to apply to this requested session. */
+    /**
+     * The discount codes to apply to this requested session. Pass an empty value to remove all
+     * applied discounts.
+     */
     public Builder setDiscounts(RequestedSessionUpdateParams.Discounts discounts) {
       this.discounts = discounts;
       return this;
@@ -308,9 +314,12 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Discounts {
-    /** <strong>Required.</strong> Array of discount codes to apply. */
+    /**
+     * <strong>Required.</strong> Array of discount codes to apply. Pass an empty value to remove
+     * all applied discounts.
+     */
     @SerializedName("codes")
-    List<String> codes;
+    Object codes;
 
     /**
      * Whether to enforce strict eligibility for discount codes. Defaults to true. When false,
@@ -329,7 +338,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     private Discounts(
-        List<String> codes, Boolean enforceStrictEligibility, Map<String, Object> extraParams) {
+        Object codes, Boolean enforceStrictEligibility, Map<String, Object> extraParams) {
       this.codes = codes;
       this.enforceStrictEligibility = enforceStrictEligibility;
       this.extraParams = extraParams;
@@ -340,7 +349,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private List<String> codes;
+      private Object codes;
 
       private Boolean enforceStrictEligibility;
 
@@ -357,11 +366,12 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
        * subsequent calls adds additional elements to the original list. See {@link
        * RequestedSessionUpdateParams.Discounts#codes} for the field documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder addCode(String element) {
-        if (this.codes == null) {
-          this.codes = new ArrayList<>();
+        if (this.codes == null || this.codes instanceof EmptyParam) {
+          this.codes = new ArrayList<String>();
         }
-        this.codes.add(element);
+        ((List<String>) this.codes).add(element);
         return this;
       }
 
@@ -370,11 +380,30 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
        * and subsequent calls adds additional elements to the original list. See {@link
        * RequestedSessionUpdateParams.Discounts#codes} for the field documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder addAllCode(List<String> elements) {
-        if (this.codes == null) {
-          this.codes = new ArrayList<>();
+        if (this.codes == null || this.codes instanceof EmptyParam) {
+          this.codes = new ArrayList<String>();
         }
-        this.codes.addAll(elements);
+        ((List<String>) this.codes).addAll(elements);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Array of discount codes to apply. Pass an empty value to remove
+       * all applied discounts.
+       */
+      public Builder setCodes(EmptyParam codes) {
+        this.codes = codes;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Array of discount codes to apply. Pass an empty value to remove
+       * all applied discounts.
+       */
+      public Builder setCodes(List<String> codes) {
+        this.codes = codes;
         return this;
       }
 

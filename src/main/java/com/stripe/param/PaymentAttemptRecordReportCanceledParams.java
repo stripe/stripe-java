@@ -40,12 +40,21 @@ public class PaymentAttemptRecordReportCanceledParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  /** Payment evaluations associated with this reported payment. */
+  @SerializedName("payment_evaluations")
+  List<String> paymentEvaluations;
+
   private PaymentAttemptRecordReportCanceledParams(
-      Long canceledAt, List<String> expand, Map<String, Object> extraParams, Object metadata) {
+      Long canceledAt,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Object metadata,
+      List<String> paymentEvaluations) {
     this.canceledAt = canceledAt;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.paymentEvaluations = paymentEvaluations;
   }
 
   public static Builder builder() {
@@ -61,10 +70,12 @@ public class PaymentAttemptRecordReportCanceledParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private List<String> paymentEvaluations;
+
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentAttemptRecordReportCanceledParams build() {
       return new PaymentAttemptRecordReportCanceledParams(
-          this.canceledAt, this.expand, this.extraParams, this.metadata);
+          this.canceledAt, this.expand, this.extraParams, this.metadata, this.paymentEvaluations);
     }
 
     /** When the reported payment was canceled. Measured in seconds since the Unix epoch. */
@@ -172,6 +183,33 @@ public class PaymentAttemptRecordReportCanceledParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Add an element to `paymentEvaluations` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentAttemptRecordReportCanceledParams#paymentEvaluations} for the field documentation.
+     */
+    public Builder addPaymentEvaluation(String element) {
+      if (this.paymentEvaluations == null) {
+        this.paymentEvaluations = new ArrayList<>();
+      }
+      this.paymentEvaluations.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `paymentEvaluations` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link PaymentAttemptRecordReportCanceledParams#paymentEvaluations} for the field
+     * documentation.
+     */
+    public Builder addAllPaymentEvaluation(List<String> elements) {
+      if (this.paymentEvaluations == null) {
+        this.paymentEvaluations = new ArrayList<>();
+      }
+      this.paymentEvaluations.addAll(elements);
       return this;
     }
   }
