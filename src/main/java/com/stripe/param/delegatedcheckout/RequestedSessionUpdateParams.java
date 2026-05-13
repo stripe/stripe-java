@@ -14,6 +14,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class RequestedSessionUpdateParams extends ApiRequestParams {
+  /** The discount codes to apply to this requested session. */
+  @SerializedName("discounts")
+  Discounts discounts;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -52,6 +56,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
   Object sharedMetadata;
 
   private RequestedSessionUpdateParams(
+      Discounts discounts,
       List<String> expand,
       Map<String, Object> extraParams,
       FulfillmentDetails fulfillmentDetails,
@@ -60,6 +65,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
       Object paymentMethod,
       PaymentMethodOptions paymentMethodOptions,
       Object sharedMetadata) {
+    this.discounts = discounts;
     this.expand = expand;
     this.extraParams = extraParams;
     this.fulfillmentDetails = fulfillmentDetails;
@@ -75,6 +81,8 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Discounts discounts;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -94,6 +102,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public RequestedSessionUpdateParams build() {
       return new RequestedSessionUpdateParams(
+          this.discounts,
           this.expand,
           this.extraParams,
           this.fulfillmentDetails,
@@ -102,6 +111,12 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
           this.paymentMethod,
           this.paymentMethodOptions,
           this.sharedMetadata);
+    }
+
+    /** The discount codes to apply to this requested session. */
+    public Builder setDiscounts(RequestedSessionUpdateParams.Discounts discounts) {
+      this.discounts = discounts;
+      return this;
     }
 
     /**
@@ -287,6 +302,116 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
     public Builder setSharedMetadata(Map<String, String> sharedMetadata) {
       this.sharedMetadata = sharedMetadata;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Discounts {
+    /** <strong>Required.</strong> Array of discount codes to apply. */
+    @SerializedName("codes")
+    List<String> codes;
+
+    /**
+     * Whether to enforce strict eligibility for discount codes. Defaults to true. When false,
+     * invalid codes are returned in the discounts.invalid array instead of raising an error.
+     */
+    @SerializedName("enforce_strict_eligibility")
+    Boolean enforceStrictEligibility;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Discounts(
+        List<String> codes, Boolean enforceStrictEligibility, Map<String, Object> extraParams) {
+      this.codes = codes;
+      this.enforceStrictEligibility = enforceStrictEligibility;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private List<String> codes;
+
+      private Boolean enforceStrictEligibility;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public RequestedSessionUpdateParams.Discounts build() {
+        return new RequestedSessionUpdateParams.Discounts(
+            this.codes, this.enforceStrictEligibility, this.extraParams);
+      }
+
+      /**
+       * Add an element to `codes` list. A list is initialized for the first `add/addAll` call, and
+       * subsequent calls adds additional elements to the original list. See {@link
+       * RequestedSessionUpdateParams.Discounts#codes} for the field documentation.
+       */
+      public Builder addCode(String element) {
+        if (this.codes == null) {
+          this.codes = new ArrayList<>();
+        }
+        this.codes.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `codes` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * RequestedSessionUpdateParams.Discounts#codes} for the field documentation.
+       */
+      public Builder addAllCode(List<String> elements) {
+        if (this.codes == null) {
+          this.codes = new ArrayList<>();
+        }
+        this.codes.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Whether to enforce strict eligibility for discount codes. Defaults to true. When false,
+       * invalid codes are returned in the discounts.invalid array instead of raising an error.
+       */
+      public Builder setEnforceStrictEligibility(Boolean enforceStrictEligibility) {
+        this.enforceStrictEligibility = enforceStrictEligibility;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * RequestedSessionUpdateParams.Discounts#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link RequestedSessionUpdateParams.Discounts#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
     }
   }
 

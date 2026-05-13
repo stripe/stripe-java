@@ -49,6 +49,14 @@ public final class CoreService extends ApiService {
     return new com.stripe.service.v2.core.EventService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.core.FeeBatchService feeBatches() {
+    return new com.stripe.service.v2.core.FeeBatchService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.core.FeeEntryService feeEntries() {
+    return new com.stripe.service.v2.core.FeeEntryService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.core.VaultService vault() {
     return new com.stripe.service.v2.core.VaultService(this.getResponseGetter());
   }

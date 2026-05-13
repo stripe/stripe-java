@@ -3800,6 +3800,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("flight_data")
     Object flightData;
 
+    /** The ID of the Payment Location for this PaymentIntent. */
+    @SerializedName("location")
+    String location;
+
     /** Lodging reservation details for this PaymentIntent. */
     @SerializedName("lodging")
     Lodging lodging;
@@ -3837,6 +3841,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Object fleetData,
         Flight flight,
         Object flightData,
+        String location,
         Lodging lodging,
         Object lodgingData,
         Object moneyServices,
@@ -3851,6 +3856,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.fleetData = fleetData;
       this.flight = flight;
       this.flightData = flightData;
+      this.location = location;
       this.lodging = lodging;
       this.lodgingData = lodgingData;
       this.moneyServices = moneyServices;
@@ -3881,6 +3887,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Object flightData;
 
+      private String location;
+
       private Lodging lodging;
 
       private Object lodgingData;
@@ -3903,6 +3911,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.fleetData,
             this.flight,
             this.flightData,
+            this.location,
             this.lodging,
             this.lodgingData,
             this.moneyServices,
@@ -4114,6 +4123,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       public Builder setFlightData(
           List<PaymentIntentCreateParams.PaymentDetails.FlightData> flightData) {
         this.flightData = flightData;
+        return this;
+      }
+
+      /** The ID of the Payment Location for this PaymentIntent. */
+      public Builder setLocation(String location) {
+        this.location = location;
         return this;
       }
 

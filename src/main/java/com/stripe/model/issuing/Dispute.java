@@ -18,6 +18,8 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.DisputeCreateParams;
 import com.stripe.param.issuing.DisputeListParams;
 import com.stripe.param.issuing.DisputeRetrieveParams;
+import com.stripe.param.issuing.DisputeSimulateNetworkLifecyclePreArbitrationResponseParams;
+import com.stripe.param.issuing.DisputeSimulateNetworkLifecyclePreArbitrationSubmissionParams;
 import com.stripe.param.issuing.DisputeSubmitParams;
 import com.stripe.param.issuing.DisputeUpdateParams;
 import java.util.List;
@@ -1281,6 +1283,134 @@ public class Dispute extends ApiResource
      */
     @SerializedName("received_debit")
     String receivedDebit;
+  }
+
+  public TestHelpers getTestHelpers() {
+    return new TestHelpers(this);
+  }
+
+  public static class TestHelpers {
+    private final Dispute resource;
+
+    private TestHelpers(Dispute resource) {
+      this.resource = resource;
+    }
+
+    /**
+     * Test helper: populates {@code network_lifecycle.pre_arbitration_response} on a test-mode Visa
+     * Issuing Dispute using placeholder file tokens. Only supported for Visa disputes in the
+     * collaboration flow.
+     */
+    public Dispute simulateNetworkLifecyclePreArbitrationResponse(Map<String, Object> params)
+        throws StripeException {
+      return simulateNetworkLifecyclePreArbitrationResponse(params, (RequestOptions) null);
+    }
+
+    /**
+     * Test helper: populates {@code network_lifecycle.pre_arbitration_response} on a test-mode Visa
+     * Issuing Dispute using placeholder file tokens. Only supported for Visa disputes in the
+     * collaboration flow.
+     */
+    public Dispute simulateNetworkLifecyclePreArbitrationResponse(
+        Map<String, Object> params, RequestOptions options) throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/disputes/%s/simulate_network_lifecycle_pre_arbitration_response",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+      return resource.getResponseGetter().request(request, Dispute.class);
+    }
+
+    /**
+     * Test helper: populates {@code network_lifecycle.pre_arbitration_response} on a test-mode Visa
+     * Issuing Dispute using placeholder file tokens. Only supported for Visa disputes in the
+     * collaboration flow.
+     */
+    public Dispute simulateNetworkLifecyclePreArbitrationResponse(
+        DisputeSimulateNetworkLifecyclePreArbitrationResponseParams params) throws StripeException {
+      return simulateNetworkLifecyclePreArbitrationResponse(params, (RequestOptions) null);
+    }
+
+    /**
+     * Test helper: populates {@code network_lifecycle.pre_arbitration_response} on a test-mode Visa
+     * Issuing Dispute using placeholder file tokens. Only supported for Visa disputes in the
+     * collaboration flow.
+     */
+    public Dispute simulateNetworkLifecyclePreArbitrationResponse(
+        DisputeSimulateNetworkLifecyclePreArbitrationResponseParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/disputes/%s/simulate_network_lifecycle_pre_arbitration_response",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options);
+      return resource.getResponseGetter().request(request, Dispute.class);
+    }
+
+    /**
+     * Test helper: populates {@code network_lifecycle.pre_arbitration_submission} on a test-mode
+     * Visa Issuing Dispute using placeholder file tokens. Only supported for Visa disputes.
+     */
+    public Dispute simulateNetworkLifecyclePreArbitrationSubmission(Map<String, Object> params)
+        throws StripeException {
+      return simulateNetworkLifecyclePreArbitrationSubmission(params, (RequestOptions) null);
+    }
+
+    /**
+     * Test helper: populates {@code network_lifecycle.pre_arbitration_submission} on a test-mode
+     * Visa Issuing Dispute using placeholder file tokens. Only supported for Visa disputes.
+     */
+    public Dispute simulateNetworkLifecyclePreArbitrationSubmission(
+        Map<String, Object> params, RequestOptions options) throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/disputes/%s/simulate_network_lifecycle_pre_arbitration_submission",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+      return resource.getResponseGetter().request(request, Dispute.class);
+    }
+
+    /**
+     * Test helper: populates {@code network_lifecycle.pre_arbitration_submission} on a test-mode
+     * Visa Issuing Dispute using placeholder file tokens. Only supported for Visa disputes.
+     */
+    public Dispute simulateNetworkLifecyclePreArbitrationSubmission(
+        DisputeSimulateNetworkLifecyclePreArbitrationSubmissionParams params)
+        throws StripeException {
+      return simulateNetworkLifecyclePreArbitrationSubmission(params, (RequestOptions) null);
+    }
+
+    /**
+     * Test helper: populates {@code network_lifecycle.pre_arbitration_submission} on a test-mode
+     * Visa Issuing Dispute using placeholder file tokens. Only supported for Visa disputes.
+     */
+    public Dispute simulateNetworkLifecyclePreArbitrationSubmission(
+        DisputeSimulateNetworkLifecyclePreArbitrationSubmissionParams params,
+        RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/disputes/%s/simulate_network_lifecycle_pre_arbitration_submission",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options);
+      return resource.getResponseGetter().request(request, Dispute.class);
+    }
   }
 
   @Override

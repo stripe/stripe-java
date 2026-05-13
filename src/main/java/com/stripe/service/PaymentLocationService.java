@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec
 package com.stripe.service;
 
+import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentLocation;
+import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -11,6 +13,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentLocationCreateParams;
+import com.stripe.param.PaymentLocationListParams;
 import com.stripe.param.PaymentLocationRetrieveParams;
 import com.stripe.param.PaymentLocationUpdateParams;
 
@@ -83,6 +86,32 @@ public final class PaymentLocationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, PaymentLocation.class);
+  }
+  /** List all Payment Locations. */
+  public StripeCollection<PaymentLocation> list(PaymentLocationListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** List all Payment Locations. */
+  public StripeCollection<PaymentLocation> list(RequestOptions options) throws StripeException {
+    return list((PaymentLocationListParams) null, options);
+  }
+  /** List all Payment Locations. */
+  public StripeCollection<PaymentLocation> list() throws StripeException {
+    return list((PaymentLocationListParams) null, (RequestOptions) null);
+  }
+  /** List all Payment Locations. */
+  public StripeCollection<PaymentLocation> list(
+      PaymentLocationListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/payment_locations";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, new TypeToken<StripeCollection<PaymentLocation>>() {}.getType());
   }
   /** Create a Payment Location. */
   public PaymentLocation create(PaymentLocationCreateParams params) throws StripeException {

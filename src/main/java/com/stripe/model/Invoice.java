@@ -2794,37 +2794,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class CheckScan extends StripeObject {
-        @SerializedName("check_deposit_address")
-        CheckDepositAddress checkDepositAddress;
-
-        /**
-         * For more details about CheckDepositAddress, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class CheckDepositAddress extends StripeObject {
-          @SerializedName("city")
-          String city;
-
-          @SerializedName("country")
-          String country;
-
-          @SerializedName("line1")
-          String line1;
-
-          @SerializedName("line2")
-          String line2;
-
-          @SerializedName("postal_code")
-          String postalCode;
-
-          @SerializedName("state")
-          String state;
-        }
-      }
+      public static class CheckScan extends StripeObject {}
 
       /**
        * For more details about CustomerBalance, please refer to the <a

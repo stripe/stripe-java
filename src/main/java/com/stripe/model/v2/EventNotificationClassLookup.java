@@ -942,6 +942,13 @@ public final class EventNotificationClassLookup {
         "v2.money_management.financial_account.updated",
         com.stripe.events.V2MoneyManagementFinancialAccountUpdatedEventNotification.class);
     eventClassLookup.put(
+        "v2.money_management.financial_account_statement.created",
+        com.stripe.events.V2MoneyManagementFinancialAccountStatementCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.financial_account_statement.restated",
+        com.stripe.events.V2MoneyManagementFinancialAccountStatementRestatedEventNotification
+            .class);
+    eventClassLookup.put(
         "v2.money_management.financial_address.activated",
         com.stripe.events.V2MoneyManagementFinancialAddressActivatedEventNotification.class);
     eventClassLookup.put(

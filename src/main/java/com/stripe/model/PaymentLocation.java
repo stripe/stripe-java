@@ -10,6 +10,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentLocationCreateParams;
+import com.stripe.param.PaymentLocationListParams;
 import com.stripe.param.PaymentLocationRetrieveParams;
 import com.stripe.param.PaymentLocationUpdateParams;
 import java.util.List;
@@ -121,6 +122,41 @@ public class PaymentLocation extends ApiResource implements HasId {
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
     return getResponseGetter().request(request, PaymentLocation.class);
+  }
+
+  /** List all Payment Locations. */
+  public static PaymentLocationCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** List all Payment Locations. */
+  public static PaymentLocationCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/payment_locations";
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, PaymentLocationCollection.class);
+  }
+
+  /** List all Payment Locations. */
+  public static PaymentLocationCollection list(PaymentLocationListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** List all Payment Locations. */
+  public static PaymentLocationCollection list(
+      PaymentLocationListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/payment_locations";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, PaymentLocationCollection.class);
   }
 
   /** Retrieve a Payment Location. */

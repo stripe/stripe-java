@@ -52,6 +52,10 @@ public class ReceivedDebit extends StripeObject implements HasId {
   @SerializedName("description")
   String description;
 
+  /** The dispute details. */
+  @SerializedName("dispute_details")
+  DisputeDetails disputeDetails;
+
   /** The amount and currency of the original/external debit request. */
   @SerializedName("external_amount")
   Amount externalAmount;
@@ -250,6 +254,20 @@ public class ReceivedDebit extends StripeObject implements HasId {
       @SerializedName("issuing_transaction_v1")
       String issuingTransactionV1;
     }
+  }
+
+  /** The dispute details. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class DisputeDetails extends StripeObject {
+    /** The ID of the debit dispute, if one has been created. */
+    @SerializedName("debit_dispute")
+    String debitDispute;
+
+    /** The time at which the dispute window closes. */
+    @SerializedName("dispute_window_closes_at")
+    Instant disputeWindowClosesAt;
   }
 
   /** Detailed information about the status of the ReceivedDebit. */

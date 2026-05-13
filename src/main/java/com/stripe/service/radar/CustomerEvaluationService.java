@@ -41,6 +41,15 @@ public final class CustomerEvaluationService extends ApiService {
     return update(customerEvaluation, params, (RequestOptions) null);
   }
   /** Reports an event on a {@code CustomerEvaluation} object. */
+  public CustomerEvaluation update(String customerEvaluation, RequestOptions options)
+      throws StripeException {
+    return update(customerEvaluation, (CustomerEvaluationUpdateParams) null, options);
+  }
+  /** Reports an event on a {@code CustomerEvaluation} object. */
+  public CustomerEvaluation update(String customerEvaluation) throws StripeException {
+    return update(customerEvaluation, (CustomerEvaluationUpdateParams) null, (RequestOptions) null);
+  }
+  /** Reports an event on a {@code CustomerEvaluation} object. */
   public CustomerEvaluation update(
       String customerEvaluation, CustomerEvaluationUpdateParams params, RequestOptions options)
       throws StripeException {

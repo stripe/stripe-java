@@ -14,6 +14,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class CustomerEvaluationUpdateParams extends ApiRequestParams {
+  /** The ID of a Customer to attach to an entity-less registration evaluation. */
+  @SerializedName("customer")
+  Object customer;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -27,34 +31,42 @@ public class CustomerEvaluationUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Event payload for login_failed. */
+  /** Data for a failed login event. */
   @SerializedName("login_failed")
   LoginFailed loginFailed;
 
-  /** Event payload for registration_failed. */
+  /** Data for a failed registration event. */
   @SerializedName("registration_failed")
   RegistrationFailed registrationFailed;
 
-  /** Event payload for registration_success. */
+  /** Data for a successful registration event. */
   @SerializedName("registration_success")
   RegistrationSuccess registrationSuccess;
 
-  /** <strong>Required.</strong> The type of event to report. */
+  /** The outcome status of the evaluation: allowed, restricted, or blocked. */
+  @SerializedName("status")
+  Status status;
+
+  /** The type of event to report on the customer evaluation. */
   @SerializedName("type")
   Type type;
 
   private CustomerEvaluationUpdateParams(
+      Object customer,
       List<String> expand,
       Map<String, Object> extraParams,
       LoginFailed loginFailed,
       RegistrationFailed registrationFailed,
       RegistrationSuccess registrationSuccess,
+      Status status,
       Type type) {
+    this.customer = customer;
     this.expand = expand;
     this.extraParams = extraParams;
     this.loginFailed = loginFailed;
     this.registrationFailed = registrationFailed;
     this.registrationSuccess = registrationSuccess;
+    this.status = status;
     this.type = type;
   }
 
@@ -63,6 +75,8 @@ public class CustomerEvaluationUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Object customer;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -73,17 +87,33 @@ public class CustomerEvaluationUpdateParams extends ApiRequestParams {
 
     private RegistrationSuccess registrationSuccess;
 
+    private Status status;
+
     private Type type;
 
     /** Finalize and obtain parameter instance from this builder. */
     public CustomerEvaluationUpdateParams build() {
       return new CustomerEvaluationUpdateParams(
+          this.customer,
           this.expand,
           this.extraParams,
           this.loginFailed,
           this.registrationFailed,
           this.registrationSuccess,
+          this.status,
           this.type);
+    }
+
+    /** The ID of a Customer to attach to an entity-less registration evaluation. */
+    public Builder setCustomer(String customer) {
+      this.customer = customer;
+      return this;
+    }
+
+    /** The ID of a Customer to attach to an entity-less registration evaluation. */
+    public Builder setCustomer(EmptyParam customer) {
+      this.customer = customer;
+      return this;
     }
 
     /**
@@ -138,27 +168,33 @@ public class CustomerEvaluationUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Event payload for login_failed. */
+    /** Data for a failed login event. */
     public Builder setLoginFailed(CustomerEvaluationUpdateParams.LoginFailed loginFailed) {
       this.loginFailed = loginFailed;
       return this;
     }
 
-    /** Event payload for registration_failed. */
+    /** Data for a failed registration event. */
     public Builder setRegistrationFailed(
         CustomerEvaluationUpdateParams.RegistrationFailed registrationFailed) {
       this.registrationFailed = registrationFailed;
       return this;
     }
 
-    /** Event payload for registration_success. */
+    /** Data for a successful registration event. */
     public Builder setRegistrationSuccess(
         CustomerEvaluationUpdateParams.RegistrationSuccess registrationSuccess) {
       this.registrationSuccess = registrationSuccess;
       return this;
     }
 
-    /** <strong>Required.</strong> The type of event to report. */
+    /** The outcome status of the evaluation: allowed, restricted, or blocked. */
+    public Builder setStatus(CustomerEvaluationUpdateParams.Status status) {
+      this.status = status;
+      return this;
+    }
+
+    /** The type of event to report on the customer evaluation. */
     public Builder setType(CustomerEvaluationUpdateParams.Type type) {
       this.type = type;
       return this;
@@ -410,6 +446,24 @@ public class CustomerEvaluationUpdateParams extends ApiRequestParams {
         this.extraParams.putAll(map);
         return this;
       }
+    }
+  }
+
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("allowed")
+    ALLOWED("allowed"),
+
+    @SerializedName("blocked")
+    BLOCKED("blocked"),
+
+    @SerializedName("restricted")
+    RESTRICTED("restricted");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
+      this.value = value;
     }
   }
 
