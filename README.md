@@ -1,6 +1,6 @@
 # Stripe Java client library
 
-[![Maven Central](https://img.shields.io/badge/maven--central-v32.2.0-alpha.4-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
+[![Maven Central](https://img.shields.io/badge/maven--central-v32.2.0-alpha.5-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
 [![JavaDoc](http://img.shields.io/badge/javadoc-reference-blue.svg)](https://stripe.dev/stripe-java)
 [![Build Status](https://github.com/stripe/stripe-java/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/stripe/stripe-java/actions?query=branch%3Amaster)
 
@@ -26,7 +26,7 @@ We support LTS versions of the JDK. Currently, that's Java versions:
 Add this dependency to your project's build file:
 
 ```groovy
-implementation "com.stripe:stripe-java:32.2.0-alpha.4"
+implementation "com.stripe:stripe-java:32.2.0-alpha.5"
 ```
 
 ### Maven users
@@ -37,7 +37,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.stripe</groupId>
   <artifactId>stripe-java</artifactId>
-  <version>32.2.0-alpha.4</version>
+  <version>32.2.0-alpha.5</version>
 </dependency>
 ```
 
