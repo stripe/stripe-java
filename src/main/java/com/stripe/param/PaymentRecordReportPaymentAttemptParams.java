@@ -306,6 +306,10 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
     @SerializedName("failure_code")
     FailureCode failureCode;
 
+    /** Payment evaluations associated with this reported payment. */
+    @SerializedName("payment_evaluations")
+    List<String> paymentEvaluations;
+
     /** Processor information for this payment. */
     @SerializedName("processor_details")
     ProcessorDetails processorDetails;
@@ -314,10 +318,12 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         Long failedAt,
         FailureCode failureCode,
+        List<String> paymentEvaluations,
         ProcessorDetails processorDetails) {
       this.extraParams = extraParams;
       this.failedAt = failedAt;
       this.failureCode = failureCode;
+      this.paymentEvaluations = paymentEvaluations;
       this.processorDetails = processorDetails;
     }
 
@@ -332,12 +338,18 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
 
       private FailureCode failureCode;
 
+      private List<String> paymentEvaluations;
+
       private ProcessorDetails processorDetails;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentRecordReportPaymentAttemptParams.Failed build() {
         return new PaymentRecordReportPaymentAttemptParams.Failed(
-            this.extraParams, this.failedAt, this.failureCode, this.processorDetails);
+            this.extraParams,
+            this.failedAt,
+            this.failureCode,
+            this.paymentEvaluations,
+            this.processorDetails);
       }
 
       /**
@@ -383,6 +395,34 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
       public Builder setFailureCode(
           PaymentRecordReportPaymentAttemptParams.Failed.FailureCode failureCode) {
         this.failureCode = failureCode;
+        return this;
+      }
+
+      /**
+       * Add an element to `paymentEvaluations` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link PaymentRecordReportPaymentAttemptParams.Failed#paymentEvaluations} for the field
+       * documentation.
+       */
+      public Builder addPaymentEvaluation(String element) {
+        if (this.paymentEvaluations == null) {
+          this.paymentEvaluations = new ArrayList<>();
+        }
+        this.paymentEvaluations.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `paymentEvaluations` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link PaymentRecordReportPaymentAttemptParams.Failed#paymentEvaluations} for the field
+       * documentation.
+       */
+      public Builder addAllPaymentEvaluation(List<String> elements) {
+        if (this.paymentEvaluations == null) {
+          this.paymentEvaluations = new ArrayList<>();
+        }
+        this.paymentEvaluations.addAll(elements);
         return this;
       }
 

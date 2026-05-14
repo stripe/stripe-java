@@ -47,6 +47,10 @@ public class PaymentAttemptRecordReportFailedParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  /** Payment evaluations associated with this reported payment. */
+  @SerializedName("payment_evaluations")
+  List<String> paymentEvaluations;
+
   /** Processor information for this payment. */
   @SerializedName("processor_details")
   ProcessorDetails processorDetails;
@@ -57,12 +61,14 @@ public class PaymentAttemptRecordReportFailedParams extends ApiRequestParams {
       Long failedAt,
       FailureCode failureCode,
       Object metadata,
+      List<String> paymentEvaluations,
       ProcessorDetails processorDetails) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.failedAt = failedAt;
     this.failureCode = failureCode;
     this.metadata = metadata;
+    this.paymentEvaluations = paymentEvaluations;
     this.processorDetails = processorDetails;
   }
 
@@ -81,6 +87,8 @@ public class PaymentAttemptRecordReportFailedParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private List<String> paymentEvaluations;
+
     private ProcessorDetails processorDetails;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -91,6 +99,7 @@ public class PaymentAttemptRecordReportFailedParams extends ApiRequestParams {
           this.failedAt,
           this.failureCode,
           this.metadata,
+          this.paymentEvaluations,
           this.processorDetails);
     }
 
@@ -208,6 +217,33 @@ public class PaymentAttemptRecordReportFailedParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Add an element to `paymentEvaluations` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentAttemptRecordReportFailedParams#paymentEvaluations} for the field documentation.
+     */
+    public Builder addPaymentEvaluation(String element) {
+      if (this.paymentEvaluations == null) {
+        this.paymentEvaluations = new ArrayList<>();
+      }
+      this.paymentEvaluations.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `paymentEvaluations` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link PaymentAttemptRecordReportFailedParams#paymentEvaluations} for the field
+     * documentation.
+     */
+    public Builder addAllPaymentEvaluation(List<String> elements) {
+      if (this.paymentEvaluations == null) {
+        this.paymentEvaluations = new ArrayList<>();
+      }
+      this.paymentEvaluations.addAll(elements);
       return this;
     }
 
