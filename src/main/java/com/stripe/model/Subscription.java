@@ -991,6 +991,24 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * generate invoices and will not advance to new billing periods. The subscription can be resumed
    * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
    */
+  public Subscription pause() throws StripeException {
+    return pause((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(RequestOptions options) throws StripeException {
+    return pause((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
   public Subscription pause(Map<String, Object> params) throws StripeException {
     return pause(params, (RequestOptions) null);
   }

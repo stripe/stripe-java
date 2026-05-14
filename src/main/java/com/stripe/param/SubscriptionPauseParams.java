@@ -37,7 +37,7 @@ public class SubscriptionPauseParams extends ApiRequestParams {
   @SerializedName("invoicing_behavior")
   InvoicingBehavior invoicingBehavior;
 
-  /** <strong>Required.</strong> The type of pause to apply. */
+  /** The type of pause to apply. Defaults to {@code subscription}. */
   @SerializedName("type")
   Type type;
 
@@ -143,7 +143,7 @@ public class SubscriptionPauseParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The type of pause to apply. */
+    /** The type of pause to apply. Defaults to {@code subscription}. */
     public Builder setType(SubscriptionPauseParams.Type type) {
       this.type = type;
       return this;
