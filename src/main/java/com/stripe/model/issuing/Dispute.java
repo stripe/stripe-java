@@ -15,6 +15,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.issuing.DisputeCloseParams;
 import com.stripe.param.issuing.DisputeCreateParams;
 import com.stripe.param.issuing.DisputeListParams;
 import com.stripe.param.issuing.DisputeRetrieveParams;
@@ -1295,6 +1296,45 @@ public class Dispute extends ApiResource
 
     private TestHelpers(Dispute resource) {
       this.resource = resource;
+    }
+
+    /** Test helper: closes a test-mode Issuing dispute as won or lost. */
+    public Dispute close(Map<String, Object> params) throws StripeException {
+      return close(params, (RequestOptions) null);
+    }
+
+    /** Test helper: closes a test-mode Issuing dispute as won or lost. */
+    public Dispute close(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/disputes/%s/close",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+      return resource.getResponseGetter().request(request, Dispute.class);
+    }
+
+    /** Test helper: closes a test-mode Issuing dispute as won or lost. */
+    public Dispute close(DisputeCloseParams params) throws StripeException {
+      return close(params, (RequestOptions) null);
+    }
+
+    /** Test helper: closes a test-mode Issuing dispute as won or lost. */
+    public Dispute close(DisputeCloseParams params, RequestOptions options) throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/issuing/disputes/%s/close",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options);
+      return resource.getResponseGetter().request(request, Dispute.class);
     }
 
     /**
