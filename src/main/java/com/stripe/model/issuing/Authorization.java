@@ -76,6 +76,9 @@ public class Authorization extends ApiResource
   @SerializedName("authorization_method")
   String authorizationMethod;
 
+  @SerializedName("balance_response")
+  BalanceResponse balanceResponse;
+
   /** List of balance transactions associated with this authorization. */
   @SerializedName("balance_transactions")
   List<BalanceTransaction> balanceTransactions;
@@ -640,6 +643,37 @@ public class Authorization extends ApiResource
     /** The amount of cash requested by the cardholder. */
     @SerializedName("cashback_amount")
     Long cashbackAmount;
+  }
+
+  /**
+   * For more details about BalanceResponse, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BalanceResponse extends StripeObject {
+    /**
+     * The cardholder account type affected by this authorization.
+     *
+     * <p>One of {@code checking}, {@code credit}, {@code default}, {@code other}, {@code savings},
+     * or {@code universal}.
+     */
+    @SerializedName("account_type")
+    String accountType;
+
+    /**
+     * The remaining balance in the cardholder's account after the authorization, in the smallest
+     * currency unit.
+     */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * The currency of the remaining balance in the cardholder's account after the authorization.
+     */
+    @SerializedName("currency")
+    String currency;
   }
 
   /**
@@ -2032,6 +2066,7 @@ public class Authorization extends ApiResource
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(amountDetails, responseGetter);
+    trySetResponseGetter(balanceResponse, responseGetter);
     trySetResponseGetter(card, responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
     trySetResponseGetter(fleet, responseGetter);
