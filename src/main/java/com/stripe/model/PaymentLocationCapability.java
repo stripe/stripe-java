@@ -9,6 +9,8 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.PaymentLocationCapabilityListParams;
+import com.stripe.param.PaymentLocationCapabilityRetrieveParams;
 import com.stripe.param.PaymentLocationCapabilityUpdateParams;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,13 @@ public class PaymentLocationCapability extends ApiResource {
    */
   @SerializedName("capability")
   String capability;
+
+  /**
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
 
   /** The payment location for which the capability enables functionality. */
   @SerializedName("location")
@@ -66,26 +75,78 @@ public class PaymentLocationCapability extends ApiResource {
   @SerializedName("status")
   String status;
 
-  /**
-   * Updates a specified Payment Location Capability. Request or remove a payment location
-   * capability by updating its {@code requested} parameter.
-   */
-  public static PaymentLocationCapability update(String capability, Map<String, Object> params)
+  /** Returns a list of {@code PaymentLocationCapability} objects associated with the location. */
+  public static PaymentLocationCapabilityCollection list(Map<String, Object> params)
       throws StripeException {
-    return update(capability, params, (RequestOptions) null);
+    return list(params, (RequestOptions) null);
   }
 
-  /**
-   * Updates a specified Payment Location Capability. Request or remove a payment location
-   * capability by updating its {@code requested} parameter.
-   */
-  public static PaymentLocationCapability update(
+  /** Returns a list of {@code PaymentLocationCapability} objects associated with the location. */
+  public static PaymentLocationCapabilityCollection list(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = "/v1/payment_location_capabilities";
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, PaymentLocationCapabilityCollection.class);
+  }
+
+  /** Returns a list of {@code PaymentLocationCapability} objects associated with the location. */
+  public static PaymentLocationCapabilityCollection list(PaymentLocationCapabilityListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of {@code PaymentLocationCapability} objects associated with the location. */
+  public static PaymentLocationCapabilityCollection list(
+      PaymentLocationCapabilityListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/payment_location_capabilities";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, PaymentLocationCapabilityCollection.class);
+  }
+
+  /** Retrieves information about the specified Payment Location Capability. */
+  public static PaymentLocationCapability retrieve(String capability) throws StripeException {
+    return retrieve(capability, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves information about the specified Payment Location Capability. */
+  public static PaymentLocationCapability retrieve(String capability, RequestOptions options)
+      throws StripeException {
+    return retrieve(capability, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves information about the specified Payment Location Capability. */
+  public static PaymentLocationCapability retrieve(
       String capability, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format("/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(capability));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, PaymentLocationCapability.class);
+  }
+
+  /** Retrieves information about the specified Payment Location Capability. */
+  public static PaymentLocationCapability retrieve(
+      String capability, PaymentLocationCapabilityRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(capability));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return getGlobalResponseGetter().request(request, PaymentLocationCapability.class);
   }
 
@@ -93,20 +154,42 @@ public class PaymentLocationCapability extends ApiResource {
    * Updates a specified Payment Location Capability. Request or remove a payment location
    * capability by updating its {@code requested} parameter.
    */
-  public static PaymentLocationCapability update(
-      String capability, PaymentLocationCapabilityUpdateParams params) throws StripeException {
-    return update(capability, params, (RequestOptions) null);
+  public PaymentLocationCapability update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /**
    * Updates a specified Payment Location Capability. Request or remove a payment location
    * capability by updating its {@code requested} parameter.
    */
-  public static PaymentLocationCapability update(
-      String capability, PaymentLocationCapabilityUpdateParams params, RequestOptions options)
+  public PaymentLocationCapability update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(capability));
+        String.format(
+            "/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(this.getCapability()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, PaymentLocationCapability.class);
+  }
+
+  /**
+   * Updates a specified Payment Location Capability. Request or remove a payment location
+   * capability by updating its {@code requested} parameter.
+   */
+  public PaymentLocationCapability update(PaymentLocationCapabilityUpdateParams params)
+      throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates a specified Payment Location Capability. Request or remove a payment location
+   * capability by updating its {@code requested} parameter.
+   */
+  public PaymentLocationCapability update(
+      PaymentLocationCapabilityUpdateParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(this.getCapability()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -115,7 +198,7 @@ public class PaymentLocationCapability extends ApiResource {
             path,
             ApiRequestParams.paramsToMap(params),
             options);
-    return getGlobalResponseGetter().request(request, PaymentLocationCapability.class);
+    return getResponseGetter().request(request, PaymentLocationCapability.class);
   }
 
   /**
