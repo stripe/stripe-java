@@ -48,6 +48,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentIntent extends ApiResource implements HasId, MetadataStore<PaymentIntent> {
+  @SerializedName("advanced_feature_details")
+  AdvancedFeatureDetails advancedFeatureDetails;
+
   /** Details about the agent that initiated the creation of this PaymentIntent. */
   @SerializedName("agent_details")
   AgentDetails agentDetails;
@@ -1845,6 +1848,127 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, PaymentIntent.class);
+  }
+
+  /**
+   * For more details about AdvancedFeatureDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AdvancedFeatureDetails extends StripeObject {
+    /** Timestamp at which the authorization will expire if not captured. */
+    @SerializedName("capture_before")
+    Long captureBefore;
+
+    @SerializedName("decremental_authorization")
+    DecrementalAuthorization decrementalAuthorization;
+
+    @SerializedName("incremental_authorization")
+    IncrementalAuthorization incrementalAuthorization;
+
+    @SerializedName("multicapture")
+    Multicapture multicapture;
+
+    @SerializedName("overcapture")
+    Overcapture overcapture;
+
+    @SerializedName("reauthorization")
+    Reauthorization reauthorization;
+
+    /** Timestamp at which the reauthorization window closes. */
+    @SerializedName("reauthorize_before")
+    Long reauthorizeBefore;
+
+    /**
+     * For more details about DecrementalAuthorization, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DecrementalAuthorization extends StripeObject {
+      /**
+       * Indicates whether the feature is supported.
+       *
+       * <p>One of {@code available}, or {@code unavailable}.
+       */
+      @SerializedName("status")
+      String status;
+    }
+
+    /**
+     * For more details about IncrementalAuthorization, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class IncrementalAuthorization extends StripeObject {
+      /**
+       * Indicates whether the feature is supported.
+       *
+       * <p>One of {@code available}, or {@code unavailable}.
+       */
+      @SerializedName("status")
+      String status;
+    }
+
+    /**
+     * For more details about Multicapture, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Multicapture extends StripeObject {
+      /**
+       * Indicates whether the feature is supported.
+       *
+       * <p>One of {@code available}, or {@code unavailable}.
+       */
+      @SerializedName("status")
+      String status;
+    }
+
+    /**
+     * For more details about Overcapture, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Overcapture extends StripeObject {
+      /** The maximum amount that can be captured. */
+      @SerializedName("maximum_amount_capturable")
+      Long maximumAmountCapturable;
+
+      /**
+       * Indicates whether overcapture is supported.
+       *
+       * <p>One of {@code available}, or {@code unavailable}.
+       */
+      @SerializedName("status")
+      String status;
+    }
+
+    /**
+     * For more details about Reauthorization, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Reauthorization extends StripeObject {
+      /**
+       * Indicates whether the feature is supported.
+       *
+       * <p>One of {@code available}, or {@code unavailable}.
+       */
+      @SerializedName("status")
+      String status;
+    }
   }
 
   /**
@@ -8530,6 +8654,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(advancedFeatureDetails, responseGetter);
     trySetResponseGetter(agentDetails, responseGetter);
     trySetResponseGetter(allocatedFunds, responseGetter);
     trySetResponseGetter(amountDetails, responseGetter);
