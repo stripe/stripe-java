@@ -55,6 +55,7 @@ If you are not using Gradle or Maven, you will need to manually install the foll
    - We recommend using the same version of Gson if possible to guarantee compatibility, but you should be able to use any stable version of Gson that is 2.10.1 or newer
 
 To use these JARs:
+
 1. Download the JARs from the links provided above
 2. Add the JARs to your project's classpath
 
@@ -241,6 +242,32 @@ String secondaryValue =
     .getAsString();
 ```
 
+> [!NOTE]
+> `.getRawJsonObject()` is only available on the top-level object returned by an API call. For most requests (like `.retrieve()` or `.create()`) you'll get the object itself. But for `.list()` calls, the top level object is a `List<T>`, so you can only access the raw json of an individual object by going through the list itself.
+>
+> ```java
+> var cards = stripeClient
+>   .v1()
+>   .issuing()
+>   .cards()
+>   .list(params);
+>
+> // doesn't work:
+> cards
+>   .getData()
+>   .get(0)
+>   .getRawJsonObject(); // null
+>
+> // instead, go through the list:
+> cards
+>  .getRawJsonObject()
+>  .getAsJsonArray("data")
+>  .get(0)
+>  .getAsJsonObject()
+>  .getAsJsonPrimitive("undocumented-val")
+>  .getAsString(); // "some-val"
+> ```
+
 ### Writing a plugin
 
 If you're writing a plugin that uses the library, we'd appreciate it if you
@@ -269,7 +296,7 @@ Stripe.enableTelemetry = false;
 Stripe has features in the [public preview phase](https://docs.stripe.com/release-phases) that can be accessed via versions of this package that have the `-beta.X` suffix like `25.2.0-beta.2`.
 We would love for you to try these as we incrementally release new features and improve them based on your feedback.
 
- To install, pick the latest version with the `beta` suffix by reviewing the [releases page](https://github.com/stripe/stripe-java/releases/) and then use it [installation steps above](#installation).
+To install, pick the latest version with the `beta` suffix by reviewing the [releases page](https://github.com/stripe/stripe-java/releases/) and then use it [installation steps above](#installation).
 
 > **Note**
 > There can be breaking changes between two versions of the public preview SDKs without a bump in the major version. Therefore we recommend pinning the package version to a specific version. This way you can install the same version each time without breaking changes unless you are intentionally looking for the latest public preview SDK.
@@ -279,6 +306,7 @@ Some preview features require a name and version to be set in the `Stripe-Versio
 ```java
 Stripe.addBetaVersion("feature_beta", "v3");
 ```
+
 ### Private Preview SDKs
 
 Stripe has features in the [private preview phase](https://docs.stripe.com/release-phases) that can be accessed via versions of this package that have the `-alpha.X` suffix like `25.2.0-alpha.2`. These are invite-only features. Once invited, you can install the private preview SDKs by following the same instructions as for the [public preview SDKs](https://github.com/stripe/stripe-java?tab=readme-ov-file#public-preview-sdks) above and replacing the term `beta` with `alpha`.
