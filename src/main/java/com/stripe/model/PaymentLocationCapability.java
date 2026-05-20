@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentLocationCapability extends ApiResource {
+public class PaymentLocationCapability extends ApiResource implements HasId {
   /** The account for which the capability enables functionality. */
   @SerializedName("account")
   String account;
@@ -199,6 +199,11 @@ public class PaymentLocationCapability extends ApiResource {
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, PaymentLocationCapability.class);
+  }
+
+  @Override
+  public String getId() {
+    return this.capability;
   }
 
   /**
