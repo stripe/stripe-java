@@ -13092,6 +13092,10 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class FrMealVoucher {
+        /** Whether to enable meal voucher benefit for this setup intent. */
+        @SerializedName("enabled")
+        Enabled enabled;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -13106,7 +13110,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         @SerializedName("siret")
         String siret;
 
-        private FrMealVoucher(Map<String, Object> extraParams, String siret) {
+        private FrMealVoucher(Enabled enabled, Map<String, Object> extraParams, String siret) {
+          this.enabled = enabled;
           this.extraParams = extraParams;
           this.siret = siret;
         }
@@ -13116,6 +13121,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Enabled enabled;
+
           private Map<String, Object> extraParams;
 
           private String siret;
@@ -13123,7 +13130,14 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public SetupIntentConfirmParams.SetupDetails.Benefit.FrMealVoucher build() {
             return new SetupIntentConfirmParams.SetupDetails.Benefit.FrMealVoucher(
-                this.extraParams, this.siret);
+                this.enabled, this.extraParams, this.siret);
+          }
+
+          /** Whether to enable meal voucher benefit for this setup intent. */
+          public Builder setEnabled(
+              SetupIntentConfirmParams.SetupDetails.Benefit.FrMealVoucher.Enabled enabled) {
+            this.enabled = enabled;
+            return this;
           }
 
           /**
@@ -13160,6 +13174,21 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           public Builder setSiret(String siret) {
             this.siret = siret;
             return this;
+          }
+        }
+
+        public enum Enabled implements ApiRequestParams.EnumParam {
+          @SerializedName("if_payment_method_is_eligible")
+          IF_PAYMENT_METHOD_IS_ELIGIBLE("if_payment_method_is_eligible"),
+
+          @SerializedName("never")
+          NEVER("never");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Enabled(String value) {
+            this.value = value;
           }
         }
       }

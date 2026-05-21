@@ -386,10 +386,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("status")
   String status;
 
-  /** Describes changes to the subscription's status. */
-  @SerializedName("status_details")
-  StatusDetails statusDetails;
-
   /** ID of the test clock this subscription belongs to. */
   @SerializedName("test_clock")
   @Getter(lombok.AccessLevel.NONE)
@@ -984,6 +980,24 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, Subscription.class);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause() throws StripeException {
+    return pause((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(RequestOptions options) throws StripeException {
+    return pause((Map<String, Object>) null, options);
   }
 
   /**
@@ -2691,55 +2705,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     String presentmentCurrency;
   }
 
-  /** Describes changes to the subscription's status. */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class StatusDetails extends StripeObject {
-    /** Indicates when and why the subscription transitioned to the paused status. */
-    @SerializedName("paused")
-    Paused paused;
-
-    /** Indicates when and why the subscription transitioned to the paused status. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Paused extends StripeObject {
-      /** Information on the {@code type=subscription} pause. */
-      @SerializedName("subscription")
-      InnerSubscription subscription;
-
-      /**
-       * Unix timestamp in seconds of when the subscription status transitioned to {@code paused}.
-       */
-      @SerializedName("transitioned_at")
-      Long transitionedAt;
-
-      /**
-       * The type of pause.
-       *
-       * <p>Equal to {@code subscription}.
-       */
-      @SerializedName("type")
-      String type;
-
-      /** Information on the {@code type=subscription} pause. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class InnerSubscription extends StripeObject {
-        /**
-         * The reason that the subscription was paused.
-         *
-         * <p>One of {@code pause_requested}, {@code system}, or {@code
-         * trial_end_without_payment_method}.
-         */
-        @SerializedName("type")
-        String type;
-      }
-    }
-  }
-
   /**
    * For more details about TransferData, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
@@ -2841,7 +2806,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     trySetResponseGetter(prebilling, responseGetter);
     trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(schedule, responseGetter);
-    trySetResponseGetter(statusDetails, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
     trySetResponseGetter(transferData, responseGetter);
     trySetResponseGetter(trialSettings, responseGetter);

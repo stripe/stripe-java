@@ -597,6 +597,22 @@ public final class SubscriptionService extends ApiService {
    * generate invoices and will not advance to new billing periods. The subscription can be resumed
    * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
    */
+  public Subscription pause(String subscription, RequestOptions options) throws StripeException {
+    return pause(subscription, (SubscriptionPauseParams) null, options);
+  }
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(String subscription) throws StripeException {
+    return pause(subscription, (SubscriptionPauseParams) null, (RequestOptions) null);
+  }
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
   public Subscription pause(
       String subscription, SubscriptionPauseParams params, RequestOptions options)
       throws StripeException {
