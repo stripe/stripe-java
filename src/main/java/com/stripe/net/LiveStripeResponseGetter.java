@@ -21,8 +21,11 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
+  private static final Logger logger = Logger.getLogger("Stripe");
+
   private final HttpClient httpClient;
   private final StripeResponseGetterOptions options;
 
@@ -131,6 +134,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     StripeResponse response =
         sendWithTelemetry(request, apiRequest.getUsage(), r -> httpClient.requestWithRetries(r));
 
+    maybeEmitStripeNotice(response.headers());
+
     int responseCode = response.code();
     String responseBody = response.body();
     String requestId = response.requestId();
@@ -173,6 +178,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     StripeResponseStream responseStream =
         sendWithTelemetry(
             request, apiRequest.getUsage(), r -> httpClient.requestStreamWithRetries(r));
+
+    maybeEmitStripeNotice(responseStream.headers());
 
     int responseCode = responseStream.code();
 
@@ -253,6 +260,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       ApiMode apiMode)
       throws StripeException {
     return this.requestStream(new ApiRequest(baseAddress, method, path, params, options));
+  }
+
+  private static void maybeEmitStripeNotice(HttpHeaders headers) {
+    headers.firstValue("Stripe-Notice").ifPresent(logger::warning);
   }
 
   private static HttpClient buildDefaultHttpClient() {
