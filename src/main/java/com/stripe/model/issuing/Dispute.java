@@ -125,7 +125,8 @@ public class Dispute extends ApiResource
 
   /**
    * <a href="https://docs.stripe.com/api/treasury">Treasury</a> details related to this dispute if
-   * it was created on a [FinancialAccount](/docs/api/treasury/financial_accounts
+   * it was created on a <a
+   * href="https://docs.stripe.com/api/treasury/financial_accounts">FinancialAccount.</a>
    */
   @SerializedName("treasury")
   Treasury treasury;

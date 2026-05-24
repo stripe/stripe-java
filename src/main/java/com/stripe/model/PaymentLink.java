@@ -192,6 +192,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @SerializedName("payment_method_collection")
   String paymentMethodCollection;
 
+  /** Payment-method-specific configuration. */
+  @SerializedName("payment_method_options")
+  PaymentMethodOptions paymentMethodOptions;
+
   /**
    * The list of payment method types that customers can use. When {@code null}, Stripe will
    * dynamically show relevant payment methods you've enabled in your <a
@@ -1233,6 +1237,51 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   }
 
   /**
+   * For more details about PaymentMethodOptions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodOptions extends StripeObject {
+    /** Configuration for {@code card} payment methods. */
+    @SerializedName("card")
+    Card card;
+
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      /**
+       * Restrictions to apply to the card payment method. For example, you can block specific card
+       * brands.
+       */
+      @SerializedName("restrictions")
+      Restrictions restrictions;
+
+      /**
+       * For more details about Restrictions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Restrictions extends StripeObject {
+        /**
+         * The card brands to block. If a customer enters or selects a card belonging to a blocked
+         * brand, they can't complete the payment.
+         */
+        @SerializedName("brands_blocked")
+        List<String> brandsBlocked;
+      }
+    }
+  }
+
+  /**
    * For more details about PhoneNumberCollection, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1522,6 +1571,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     trySetResponseGetter(nameCollection, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(paymentIntentData, responseGetter);
+    trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
     trySetResponseGetter(restrictions, responseGetter);
     trySetResponseGetter(shippingAddressCollection, responseGetter);

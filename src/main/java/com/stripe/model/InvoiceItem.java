@@ -622,9 +622,64 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class ProrationDetails extends StripeObject {
+    /**
+     * For a credit proration, links to the debit invoice line items or invoice item that the credit
+     * applies to.
+     */
+    @SerializedName("credited_items")
+    CreditedItems creditedItems;
+
     /** Discount amounts applied when the proration was created. */
     @SerializedName("discount_amounts")
     List<InvoiceItem.ProrationDetails.DiscountAmount> discountAmounts;
+
+    /**
+     * For more details about CreditedItems, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CreditedItems extends StripeObject {
+      /**
+       * When {@code type} is {@code invoice_item}, the invoice item id for the debited invoice item
+       * corresponding to this credit proration.
+       */
+      @SerializedName("invoice_item")
+      String invoiceItem;
+
+      @SerializedName("invoice_line_item_details")
+      InvoiceLineItemDetails invoiceLineItemDetails;
+
+      /**
+       * Whether the credit references a pending invoice item or one or more invoice line items on
+       * an invoice.
+       *
+       * <p>One of {@code invoice_item}, or {@code invoice_line_items}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /**
+       * For more details about InvoiceLineItemDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class InvoiceLineItemDetails extends StripeObject {
+        /** The invoice id for the debited line item(s). */
+        @SerializedName("invoice")
+        String invoice;
+
+        /**
+         * IDs of the debited invoice line item(s) on the invoice that correspond to the credit
+         * proration.
+         */
+        @SerializedName("invoice_line_items")
+        List<String> invoiceLineItems;
+      }
+    }
 
     /**
      * For more details about DiscountAmount, please refer to the <a

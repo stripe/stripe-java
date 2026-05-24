@@ -162,6 +162,14 @@ public class BalanceSettings extends ApiResource {
     @EqualsAndHashCode(callSuper = false)
     public static class Payouts extends StripeObject {
       /**
+       * Configures per-currency rules for automatically transferring funds from the payments
+       * balance to a FinancialAccount.
+       */
+      @SerializedName("automatic_transfer_rules_by_currency")
+      Map<String, List<BalanceSettings.Payments.Payouts.AutomaticTransferRulesByCurrency>>
+          automaticTransferRulesByCurrency;
+
+      /**
        * The minimum balance amount to retain per currency after automatic payouts. Only funds that
        * exceed these amounts are paid out. Learn more about the <a
        * href="https://stripe.com/payouts/minimum-balances-for-automatic-payouts">minimum balances
@@ -193,6 +201,37 @@ public class BalanceSettings extends ApiResource {
        */
       @SerializedName("status")
       String status;
+
+      /**
+       * For more details about AutomaticTransferRulesByCurrency, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AutomaticTransferRulesByCurrency extends StripeObject {
+        /**
+         * The ID of the FinancialAccount that funds will be transferred to during automatic
+         * transfers.
+         */
+        @SerializedName("payout_method")
+        String payoutMethod;
+
+        /**
+         * The maximum amount in minor units to transfer to the FinancialAccount. Only applicable
+         * when {@code type} is {@code transfer_up_to_amount}.
+         */
+        @SerializedName("transfer_up_to_amount")
+        Long transferUpToAmount;
+
+        /**
+         * The type of automatic transfer rule.
+         *
+         * <p>One of {@code transfer_all}, or {@code transfer_up_to_amount}.
+         */
+        @SerializedName("type")
+        String type;
+      }
 
       /**
        * For more details about Schedule, please refer to the <a
@@ -244,6 +283,48 @@ public class BalanceSettings extends ApiResource {
        */
       @SerializedName("delay_days_override")
       Long delayDaysOverride;
+
+      /**
+       * Customized start of day configuration for automatic payouts to group and send payments in
+       * local timezones with a customized day starting time. For details, see our <a
+       * href="https://stripe.com/connect/customized-start-of-day">Customized start of day</a>
+       * documentation.
+       */
+      @SerializedName("start_of_day")
+      StartOfDay startOfDay;
+
+      /**
+       * For more details about StartOfDay, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class StartOfDay extends StripeObject {
+        /**
+         * Hour at which the customized start of day begins according to the given timezone. Must be
+         * a <a
+         * href="https://stripe.com/connect/customized-start-of-day#available-timezones-and-cutoffs">supported
+         * customized start of day hour</a>.
+         */
+        @SerializedName("hour")
+        Long hour;
+
+        /**
+         * Minutes at which the customized start of day begins according to the given timezone. Must
+         * be either 0 or 30.
+         */
+        @SerializedName("minutes")
+        Long minutes;
+
+        /**
+         * Timezone for the customized start of day. Must be a <a
+         * href="https://stripe.com/connect/customized-start-of-day#available-timezones-and-cutoffs">supported
+         * customized start of day timezone</a>.
+         */
+        @SerializedName("timezone")
+        String timezone;
+      }
     }
   }
 

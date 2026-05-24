@@ -1188,6 +1188,13 @@ public class SubscriptionSchedule extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AddInvoiceItem extends StripeObject {
+      /**
+       * Controls whether discounts apply to this invoice item. Defaults to true if no value is
+       * provided.
+       */
+      @SerializedName("discountable")
+      Boolean discountable;
+
       /** The stackable discounts that will be applied to the item. */
       @SerializedName("discounts")
       List<SubscriptionSchedule.Phase.AddInvoiceItem.Discount> discounts;

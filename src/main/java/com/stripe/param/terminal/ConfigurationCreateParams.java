@@ -63,9 +63,25 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   @SerializedName("tipping")
   Object tipping;
 
+  /** An object containing device type specific settings for Verifone M425 readers. */
+  @SerializedName("verifone_m425")
+  VerifoneM425 verifoneM425;
+
   /** An object containing device type specific settings for Verifone P400 readers. */
   @SerializedName("verifone_p400")
   VerifoneP400 verifoneP400;
+
+  /** An object containing device type specific settings for Verifone P630 readers. */
+  @SerializedName("verifone_p630")
+  VerifoneP630 verifoneP630;
+
+  /** An object containing device type specific settings for Verifone UX700 readers. */
+  @SerializedName("verifone_ux700")
+  VerifoneUx700 verifoneUx700;
+
+  /** An object containing device type specific settings for Verifone V660p readers. */
+  @SerializedName("verifone_v660p")
+  VerifoneV660p verifoneV660p;
 
   /** Configurations for connecting to a WiFi network. */
   @SerializedName("wifi")
@@ -83,7 +99,11 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       StripeS700 stripeS700,
       StripeS710 stripeS710,
       Object tipping,
+      VerifoneM425 verifoneM425,
       VerifoneP400 verifoneP400,
+      VerifoneP630 verifoneP630,
+      VerifoneUx700 verifoneUx700,
+      VerifoneV660p verifoneV660p,
       Object wifi) {
     this.bbposWisepad3 = bbposWisepad3;
     this.bbposWiseposE = bbposWiseposE;
@@ -96,7 +116,11 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     this.stripeS700 = stripeS700;
     this.stripeS710 = stripeS710;
     this.tipping = tipping;
+    this.verifoneM425 = verifoneM425;
     this.verifoneP400 = verifoneP400;
+    this.verifoneP630 = verifoneP630;
+    this.verifoneUx700 = verifoneUx700;
+    this.verifoneV660p = verifoneV660p;
     this.wifi = wifi;
   }
 
@@ -127,7 +151,15 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     private Object tipping;
 
+    private VerifoneM425 verifoneM425;
+
     private VerifoneP400 verifoneP400;
+
+    private VerifoneP630 verifoneP630;
+
+    private VerifoneUx700 verifoneUx700;
+
+    private VerifoneV660p verifoneV660p;
 
     private Object wifi;
 
@@ -145,7 +177,11 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           this.stripeS700,
           this.stripeS710,
           this.tipping,
+          this.verifoneM425,
           this.verifoneP400,
+          this.verifoneP630,
+          this.verifoneUx700,
+          this.verifoneV660p,
           this.wifi);
     }
 
@@ -273,9 +309,33 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** An object containing device type specific settings for Verifone M425 readers. */
+    public Builder setVerifoneM425(ConfigurationCreateParams.VerifoneM425 verifoneM425) {
+      this.verifoneM425 = verifoneM425;
+      return this;
+    }
+
     /** An object containing device type specific settings for Verifone P400 readers. */
     public Builder setVerifoneP400(ConfigurationCreateParams.VerifoneP400 verifoneP400) {
       this.verifoneP400 = verifoneP400;
+      return this;
+    }
+
+    /** An object containing device type specific settings for Verifone P630 readers. */
+    public Builder setVerifoneP630(ConfigurationCreateParams.VerifoneP630 verifoneP630) {
+      this.verifoneP630 = verifoneP630;
+      return this;
+    }
+
+    /** An object containing device type specific settings for Verifone UX700 readers. */
+    public Builder setVerifoneUx700(ConfigurationCreateParams.VerifoneUx700 verifoneUx700) {
+      this.verifoneUx700 = verifoneUx700;
+      return this;
+    }
+
+    /** An object containing device type specific settings for Verifone V660p readers. */
+    public Builder setVerifoneV660p(ConfigurationCreateParams.VerifoneV660p verifoneV660p) {
+      this.verifoneV660p = verifoneV660p;
       return this;
     }
 
@@ -4322,6 +4382,81 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class VerifoneM425 {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** A File ID representing an image you want to display on the reader. */
+    @SerializedName("splashscreen")
+    Object splashscreen;
+
+    private VerifoneM425(Map<String, Object> extraParams, Object splashscreen) {
+      this.extraParams = extraParams;
+      this.splashscreen = splashscreen;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object splashscreen;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationCreateParams.VerifoneM425 build() {
+        return new ConfigurationCreateParams.VerifoneM425(this.extraParams, this.splashscreen);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationCreateParams.VerifoneM425#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationCreateParams.VerifoneM425#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** A File ID representing an image you want to display on the reader. */
+      public Builder setSplashscreen(String splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+
+      /** A File ID representing an image you want to display on the reader. */
+      public Builder setSplashscreen(EmptyParam splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class VerifoneP400 {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -4372,6 +4507,233 @@ public class ConfigurationCreateParams extends ApiRequestParams {
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link ConfigurationCreateParams.VerifoneP400#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** A File ID representing an image you want to display on the reader. */
+      public Builder setSplashscreen(String splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+
+      /** A File ID representing an image you want to display on the reader. */
+      public Builder setSplashscreen(EmptyParam splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class VerifoneP630 {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** A File ID representing an image you want to display on the reader. */
+    @SerializedName("splashscreen")
+    Object splashscreen;
+
+    private VerifoneP630(Map<String, Object> extraParams, Object splashscreen) {
+      this.extraParams = extraParams;
+      this.splashscreen = splashscreen;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object splashscreen;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationCreateParams.VerifoneP630 build() {
+        return new ConfigurationCreateParams.VerifoneP630(this.extraParams, this.splashscreen);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationCreateParams.VerifoneP630#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationCreateParams.VerifoneP630#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** A File ID representing an image you want to display on the reader. */
+      public Builder setSplashscreen(String splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+
+      /** A File ID representing an image you want to display on the reader. */
+      public Builder setSplashscreen(EmptyParam splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class VerifoneUx700 {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** A File ID representing an image you want to display on the reader. */
+    @SerializedName("splashscreen")
+    Object splashscreen;
+
+    private VerifoneUx700(Map<String, Object> extraParams, Object splashscreen) {
+      this.extraParams = extraParams;
+      this.splashscreen = splashscreen;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object splashscreen;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationCreateParams.VerifoneUx700 build() {
+        return new ConfigurationCreateParams.VerifoneUx700(this.extraParams, this.splashscreen);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationCreateParams.VerifoneUx700#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationCreateParams.VerifoneUx700#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** A File ID representing an image you want to display on the reader. */
+      public Builder setSplashscreen(String splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+
+      /** A File ID representing an image you want to display on the reader. */
+      public Builder setSplashscreen(EmptyParam splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class VerifoneV660p {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** A File ID representing an image you want to display on the reader. */
+    @SerializedName("splashscreen")
+    Object splashscreen;
+
+    private VerifoneV660p(Map<String, Object> extraParams, Object splashscreen) {
+      this.extraParams = extraParams;
+      this.splashscreen = splashscreen;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object splashscreen;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationCreateParams.VerifoneV660p build() {
+        return new ConfigurationCreateParams.VerifoneV660p(this.extraParams, this.splashscreen);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationCreateParams.VerifoneV660p#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationCreateParams.VerifoneV660p#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
