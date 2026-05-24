@@ -275,17 +275,183 @@ public class BatchJobCreateParams extends ApiRequestParams {
       @SerializedName("/v1/accounts/:account")
       V1_ACCOUNT_UPDATE("/v1/accounts/:account"),
 
+      @SerializedName("/v1/accounts")
+      V1_ACCOUNT_CREATE("/v1/accounts"),
+
+      @SerializedName("/v1/accounts/:account")
+      V1_ACCOUNT_DELETE("/v1/accounts/:account"),
+
+      @SerializedName("/v1/coupons")
+      V1_COUPON_CREATE("/v1/coupons"),
+
+      @SerializedName("/v1/coupons/:coupon")
+      V1_COUPON_UPDATE("/v1/coupons/:coupon"),
+
+      @SerializedName("/v1/coupons/:coupon")
+      V1_COUPON_DELETE("/v1/coupons/:coupon"),
+
       @SerializedName("/v1/credit_notes")
       V1_CREDIT_NOTE_CREATE("/v1/credit_notes"),
 
       @SerializedName("/v1/customers/:customer")
       V1_CUSTOMER_UPDATE("/v1/customers/:customer"),
 
+      @SerializedName("/v1/customers/:customer")
+      V1_CUSTOMER_DELETE("/v1/customers/:customer"),
+
+      @SerializedName("/v1/customers")
+      V1_CUSTOMER_CREATE("/v1/customers"),
+
+      @SerializedName("/v1/customers/:customer/discount")
+      V1_CUSTOMER_DELETE_DISCOUNT("/v1/customers/:customer/discount"),
+
+      @SerializedName("/v1/customers/:customer/funding_instructions")
+      V1_CUSTOMER_CREATE_FUNDING_INSTRUCTIONS("/v1/customers/:customer/funding_instructions"),
+
+      @SerializedName("/v1/customers/:customer/subscriptions")
+      V1_CUSTOMER_CREATE_SUBSCRIPTION("/v1/customers/:customer/subscriptions"),
+
+      @SerializedName("/v1/customers/:customer/subscriptions")
+      V1_CUSTOMER_DELETE_SUBSCRIPTION("/v1/customers/:customer/subscriptions"),
+
+      @SerializedName("/v1/customers/:customer/subscriptions/:subscription_exposed_id")
+      V1_CUSTOMER_UPDATE_SUBSCRIPTION(
+          "/v1/customers/:customer/subscriptions/:subscription_exposed_id"),
+
+      @SerializedName("/v1/customers/:customer/subscriptions/:subscription_exposed_id/discount")
+      V1_CUSTOMER_DELETE_SUBSCRIPTION_DISCOUNT(
+          "/v1/customers/:customer/subscriptions/:subscription_exposed_id/discount"),
+
+      @SerializedName("/v1/customers/:customer/bank_accounts")
+      V1_CUSTOMER_CREATE_BANK_ACCOUNT("/v1/customers/:customer/bank_accounts"),
+
+      @SerializedName("/v1/customers/:customer/bank_accounts/:id")
+      V1_CUSTOMER_UPDATE_BANK_ACCOUNT("/v1/customers/:customer/bank_accounts/:id"),
+
+      @SerializedName("/v1/customers/:customer/bank_accounts/:id")
+      V1_CUSTOMER_DELETE_BANK_ACCOUNT("/v1/customers/:customer/bank_accounts/:id"),
+
+      @SerializedName("/v1/customers/:customer/bank_accounts/:id/verify")
+      V1_CUSTOMER_VERIFY_BANK_ACCOUNT("/v1/customers/:customer/bank_accounts/:id/verify"),
+
+      @SerializedName("/v1/customers/:customer/cards")
+      V1_CUSTOMER_CREATE_CARD("/v1/customers/:customer/cards"),
+
+      @SerializedName("/v1/customers/:customer/cards/:id")
+      V1_CUSTOMER_UPDATE_CARD("/v1/customers/:customer/cards/:id"),
+
+      @SerializedName("/v1/customers/:customer/cards/:id")
+      V1_CUSTOMER_DELETE_CARD("/v1/customers/:customer/cards/:id"),
+
+      @SerializedName("/v1/customers/:customer/tax_ids")
+      V1_CUSTOMER_DELETE_TAX_IDS("/v1/customers/:customer/tax_ids"),
+
+      @SerializedName("/v1/customers/:customer/sources")
+      V1_PAYMENT_SOURCE_CREATE("/v1/customers/:customer/sources"),
+
+      @SerializedName("/v1/customers/:customer/sources/:id")
+      V1_BANK_ACCOUNT_UPDATE("/v1/customers/:customer/sources/:id"),
+
+      @SerializedName("/v1/customers/:customer/sources/:id")
+      V1_BANK_ACCOUNT_DELETE("/v1/customers/:customer/sources/:id"),
+
+      @SerializedName("/v1/customers/:customer/sources/:id/verify")
+      V1_BANK_ACCOUNT_VERIFY("/v1/customers/:customer/sources/:id/verify"),
+
+      @SerializedName("/v1/customers/:customer/balance_transactions")
+      V1_CUSTOMER_BALANCE_TRANSACTION_CREATE("/v1/customers/:customer/balance_transactions"),
+
+      @SerializedName("/v1/customers/:customer/balance_transactions/:transaction")
+      V1_CUSTOMER_BALANCE_TRANSACTION_UPDATE(
+          "/v1/customers/:customer/balance_transactions/:transaction"),
+
+      @SerializedName("/v1/customers/:customer/cash_balance")
+      V1_CASH_BALANCE_UPDATE("/v1/customers/:customer/cash_balance"),
+
+      @SerializedName("/v1/customer_sessions")
+      V1_CUSTOMER_SESSION_CREATE("/v1/customer_sessions"),
+
+      @SerializedName("/v1/disputes/:dispute/close")
+      V1_DISPUTE_CLOSE("/v1/disputes/:dispute/close"),
+
+      @SerializedName("/v1/invoices")
+      V1_INVOICE_CREATE("/v1/invoices"),
+
       @SerializedName("/v1/invoices/:invoice")
       V1_INVOICE_UPDATE("/v1/invoices/:invoice"),
 
+      @SerializedName("/v1/invoices/:invoice")
+      V1_INVOICE_DELETE("/v1/invoices/:invoice"),
+
       @SerializedName("/v1/invoices/:invoice/pay")
       V1_INVOICE_PAY("/v1/invoices/:invoice/pay"),
+
+      @SerializedName("/v1/invoices/:invoice/send")
+      V1_INVOICE_SEND_INVOICE("/v1/invoices/:invoice/send"),
+
+      @SerializedName("/v1/invoices/:invoice/void")
+      V1_INVOICE_VOID_INVOICE("/v1/invoices/:invoice/void"),
+
+      @SerializedName("/v1/invoices/:invoice/finalize")
+      V1_INVOICE_FINALIZE_INVOICE("/v1/invoices/:invoice/finalize"),
+
+      @SerializedName("/v1/invoices/:invoice/mark_uncollectible")
+      V1_INVOICE_MARK_UNCOLLECTIBLE("/v1/invoices/:invoice/mark_uncollectible"),
+
+      @SerializedName("/v1/invoices/:invoice/update_lines")
+      V1_INVOICE_UPDATE_LINES("/v1/invoices/:invoice/update_lines"),
+
+      @SerializedName("/v1/invoices/:invoice/add_lines")
+      V1_INVOICE_ADD_LINES("/v1/invoices/:invoice/add_lines"),
+
+      @SerializedName("/v1/invoices/:invoice/remove_lines")
+      V1_INVOICE_REMOVE_LINES("/v1/invoices/:invoice/remove_lines"),
+
+      @SerializedName("/v1/invoices/create_preview")
+      V1_INVOICE_CREATE_PREVIEW("/v1/invoices/create_preview"),
+
+      @SerializedName("/v1/invoices/:invoice/lines/:line_item_id")
+      V1_LINE_ITEM_UPDATE("/v1/invoices/:invoice/lines/:line_item_id"),
+
+      @SerializedName("/v1/invoiceitems")
+      V1_INVOICEITEM_CREATE("/v1/invoiceitems"),
+
+      @SerializedName("/v1/invoiceitems/:invoiceitem")
+      V1_INVOICEITEM_UPDATE("/v1/invoiceitems/:invoiceitem"),
+
+      @SerializedName("/v1/invoiceitems/:invoiceitem")
+      V1_INVOICEITEM_DELETE("/v1/invoiceitems/:invoiceitem"),
+
+      @SerializedName("/v1/invoice_rendering_templates/:template/archive")
+      V1_INVOICE_RENDERING_TEMPLATE_ARCHIVE("/v1/invoice_rendering_templates/:template/archive"),
+
+      @SerializedName("/v1/invoice_rendering_templates/:template/unarchive")
+      V1_INVOICE_RENDERING_TEMPLATE_UNARCHIVE(
+          "/v1/invoice_rendering_templates/:template/unarchive"),
+
+      @SerializedName("/v1/payment_methods/:payment_method/attach")
+      V1_PAYMENT_METHOD_ATTACH("/v1/payment_methods/:payment_method/attach"),
+
+      @SerializedName("/v1/prices")
+      V1_PRICE_CREATE("/v1/prices"),
+
+      @SerializedName("/v1/prices/:price")
+      V1_PRICE_UPDATE("/v1/prices/:price"),
+
+      @SerializedName("/v1/products")
+      V1_PRODUCT_CREATE("/v1/products"),
+
+      @SerializedName("/v1/products/:id")
+      V1_PRODUCT_UPDATE("/v1/products/:id"),
+
+      @SerializedName("/v1/products/:id")
+      V1_PRODUCT_DELETE("/v1/products/:id"),
+
+      @SerializedName("/v1/products/:product/features")
+      V1_PRODUCT_FEATURE_CREATE("/v1/products/:product/features"),
+
+      @SerializedName("/v1/products/:product/features/:id")
+      V1_PRODUCT_FEATURE_DELETE("/v1/products/:product/features/:id"),
 
       @SerializedName("/v1/promotion_codes")
       V1_PROMOTION_CODE_CREATE("/v1/promotion_codes"),
@@ -293,11 +459,41 @@ public class BatchJobCreateParams extends ApiRequestParams {
       @SerializedName("/v1/promotion_codes/:promotion_code")
       V1_PROMOTION_CODE_UPDATE("/v1/promotion_codes/:promotion_code"),
 
+      @SerializedName("/v1/radar/value_list_items")
+      V1_RADAR_VALUE_LIST_ITEM_CREATE("/v1/radar/value_list_items"),
+
+      @SerializedName("/v1/refunds")
+      V1_REFUND_CREATE("/v1/refunds"),
+
+      @SerializedName("/v1/refunds/:refund/cancel")
+      V1_REFUND_CANCEL("/v1/refunds/:refund/cancel"),
+
       @SerializedName("/v1/subscriptions/:subscription_exposed_id")
       V1_SUBSCRIPTION_UPDATE("/v1/subscriptions/:subscription_exposed_id"),
 
+      @SerializedName("/v1/subscriptions/:subscription_exposed_id")
+      V1_SUBSCRIPTION_CANCEL("/v1/subscriptions/:subscription_exposed_id"),
+
       @SerializedName("/v1/subscriptions/:subscription/migrate")
       V1_SUBSCRIPTION_MIGRATE("/v1/subscriptions/:subscription/migrate"),
+
+      @SerializedName("/v1/subscriptions")
+      V1_SUBSCRIPTION_CREATE("/v1/subscriptions"),
+
+      @SerializedName("/v1/subscriptions/:subscription/resume")
+      V1_SUBSCRIPTION_RESUME("/v1/subscriptions/:subscription/resume"),
+
+      @SerializedName("/v1/subscriptions/:subscription/pause")
+      V1_SUBSCRIPTION_PAUSE("/v1/subscriptions/:subscription/pause"),
+
+      @SerializedName("/v1/subscription_items")
+      V1_SUBSCRIPTION_ITEM_CREATE("/v1/subscription_items"),
+
+      @SerializedName("/v1/subscription_items/:item")
+      V1_SUBSCRIPTION_ITEM_UPDATE("/v1/subscription_items/:item"),
+
+      @SerializedName("/v1/subscription_items/:item")
+      V1_SUBSCRIPTION_ITEM_DELETE("/v1/subscription_items/:item"),
 
       @SerializedName("/v1/subscription_schedules")
       V1_SUBSCRIPTION_SCHEDULE_CREATE("/v1/subscription_schedules"),
@@ -306,7 +502,40 @@ public class BatchJobCreateParams extends ApiRequestParams {
       V1_SUBSCRIPTION_SCHEDULE_UPDATE("/v1/subscription_schedules/:schedule"),
 
       @SerializedName("/v1/subscription_schedules/:schedule/cancel")
-      V1_SUBSCRIPTION_SCHEDULE_CANCEL("/v1/subscription_schedules/:schedule/cancel");
+      V1_SUBSCRIPTION_SCHEDULE_CANCEL("/v1/subscription_schedules/:schedule/cancel"),
+
+      @SerializedName("/v1/subscription_schedules/:schedule/release")
+      V1_SUBSCRIPTION_SCHEDULE_RELEASE("/v1/subscription_schedules/:schedule/release"),
+
+      @SerializedName("/v1/tax/registrations")
+      V1_TAX_REGISTRATION_CREATE("/v1/tax/registrations"),
+
+      @SerializedName("/v1/tax/registrations/:id")
+      V1_TAX_REGISTRATION_UPDATE("/v1/tax/registrations/:id"),
+
+      @SerializedName("/v1/tax/settings")
+      V1_TAX_SETTINGS_UPDATE("/v1/tax/settings"),
+
+      @SerializedName("/v1/tax/transactions/create_reversal")
+      V1_TAX_TRANSACTION_CREATE_REVERSAL("/v1/tax/transactions/create_reversal"),
+
+      @SerializedName("/v1/tax_ids")
+      V1_TAX_ID_CREATE("/v1/tax_ids"),
+
+      @SerializedName("/v1/tax_ids/:id")
+      V1_TAX_ID_UPDATE("/v1/tax_ids/:id"),
+
+      @SerializedName("/v1/customers/:customer/tax_ids")
+      V1_TAX_ID_CREATE_FOR_CUSTOMER("/v1/customers/:customer/tax_ids"),
+
+      @SerializedName("/v1/customers/:customer/tax_ids/:id")
+      V1_TAX_ID_DELETE("/v1/customers/:customer/tax_ids/:id"),
+
+      @SerializedName("/v1/tax_rates")
+      V1_TAX_RATE_CREATE("/v1/tax_rates"),
+
+      @SerializedName("/v1/tax_rates/:tax_rate")
+      V1_TAX_RATE_UPDATE("/v1/tax_rates/:tax_rate");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

@@ -2,6 +2,7 @@
 package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.TaxId;
@@ -109,5 +110,54 @@ public final class CustomerTaxIdService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, TaxId.class);
+  }
+  /** Serializes a CustomerTaxId delete request into a batch job JSONL line. */
+  public String serializeBatchDelete(String customer, String id) throws StripeException {
+    return serializeBatchDelete(customer, id, (RequestOptions) null);
+  }
+  /** Serializes a CustomerTaxId delete request into a batch job JSONL line. */
+  public String serializeBatchDelete(String customer, String id, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("customer", customer);
+    pathParams.put("id", id);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes a CustomerTaxId create request into a batch job JSONL line. */
+  public String serializeBatchCreateForCustomer(String customer, CustomerTaxIdCreateParams params)
+      throws StripeException {
+    return serializeBatchCreateForCustomer(customer, params, (RequestOptions) null);
+  }
+  /** Serializes a CustomerTaxId create request into a batch job JSONL line. */
+  public String serializeBatchCreateForCustomer(
+      String customer, CustomerTaxIdCreateParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("customer", customer);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
 }

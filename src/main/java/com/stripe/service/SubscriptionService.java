@@ -679,6 +679,31 @@ public final class SubscriptionService extends ApiService {
             options);
     return this.request(request, Subscription.class);
   }
+  /** Serializes a Subscription cancel request into a batch job JSONL line. */
+  public String serializeBatchCancel(String subscriptionExposedId, SubscriptionCancelParams params)
+      throws StripeException {
+    return serializeBatchCancel(subscriptionExposedId, params, (RequestOptions) null);
+  }
+  /** Serializes a Subscription cancel request into a batch job JSONL line. */
+  public String serializeBatchCancel(
+      String subscriptionExposedId, SubscriptionCancelParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("subscription_exposed_id", subscriptionExposedId);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
   /** Serializes a Subscription update request into a batch job JSONL line. */
   public String serializeBatchUpdate(String subscriptionExposedId, SubscriptionUpdateParams params)
       throws StripeException {
@@ -688,21 +713,41 @@ public final class SubscriptionService extends ApiService {
   public String serializeBatchUpdate(
       String subscriptionExposedId, SubscriptionUpdateParams params, RequestOptions options)
       throws StripeException {
-    String itemId = java.util.UUID.randomUUID().toString();
+    String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
     pathParams.put("subscription_exposed_id", subscriptionExposedId);
-    java.util.Map<String, Object> item = new java.util.LinkedHashMap<>();
-    item.put("id", itemId);
-    item.put("path_params", pathParams);
-    item.put("params", (params != null) ? params.toMap() : null);
-    item.put("stripe_version", stripeVersion);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
     if (stripeContext != null) {
-      item.put("context", stripeContext);
+      requestBody.put("context", stripeContext);
     }
-    return ApiResource.GSON.toJson(item);
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes a Subscription create request into a batch job JSONL line. */
+  public String serializeBatchCreate(SubscriptionCreateParams params) throws StripeException {
+    return serializeBatchCreate(params, (RequestOptions) null);
+  }
+  /** Serializes a Subscription create request into a batch job JSONL line. */
+  public String serializeBatchCreate(SubscriptionCreateParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a Subscription migrate request into a batch job JSONL line. */
   public String serializeBatchMigrate(String subscription, SubscriptionMigrateParams params)
@@ -713,20 +758,70 @@ public final class SubscriptionService extends ApiService {
   public String serializeBatchMigrate(
       String subscription, SubscriptionMigrateParams params, RequestOptions options)
       throws StripeException {
-    String itemId = java.util.UUID.randomUUID().toString();
+    String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
     pathParams.put("subscription", subscription);
-    java.util.Map<String, Object> item = new java.util.LinkedHashMap<>();
-    item.put("id", itemId);
-    item.put("path_params", pathParams);
-    item.put("params", (params != null) ? params.toMap() : null);
-    item.put("stripe_version", stripeVersion);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
     if (stripeContext != null) {
-      item.put("context", stripeContext);
+      requestBody.put("context", stripeContext);
     }
-    return ApiResource.GSON.toJson(item);
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes a Subscription pause request into a batch job JSONL line. */
+  public String serializeBatchPause(String subscription, SubscriptionPauseParams params)
+      throws StripeException {
+    return serializeBatchPause(subscription, params, (RequestOptions) null);
+  }
+  /** Serializes a Subscription pause request into a batch job JSONL line. */
+  public String serializeBatchPause(
+      String subscription, SubscriptionPauseParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("subscription", subscription);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes a Subscription resume request into a batch job JSONL line. */
+  public String serializeBatchResume(String subscription, SubscriptionResumeParams params)
+      throws StripeException {
+    return serializeBatchResume(subscription, params, (RequestOptions) null);
+  }
+  /** Serializes a Subscription resume request into a batch job JSONL line. */
+  public String serializeBatchResume(
+      String subscription, SubscriptionResumeParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("subscription", subscription);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
 }

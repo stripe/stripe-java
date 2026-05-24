@@ -2,6 +2,7 @@
 package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.TaxRate;
@@ -124,5 +125,49 @@ public final class TaxRateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, TaxRate.class);
+  }
+  /** Serializes a TaxRate create request into a batch job JSONL line. */
+  public String serializeBatchCreate(TaxRateCreateParams params) throws StripeException {
+    return serializeBatchCreate(params, (RequestOptions) null);
+  }
+  /** Serializes a TaxRate create request into a batch job JSONL line. */
+  public String serializeBatchCreate(TaxRateCreateParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes a TaxRate update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(String taxRate, TaxRateUpdateParams params)
+      throws StripeException {
+    return serializeBatchUpdate(taxRate, params, (RequestOptions) null);
+  }
+  /** Serializes a TaxRate update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(
+      String taxRate, TaxRateUpdateParams params, RequestOptions options) throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("tax_rate", taxRate);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
 }

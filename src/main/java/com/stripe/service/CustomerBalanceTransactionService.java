@@ -2,6 +2,7 @@
 package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.CustomerBalanceTransaction;
 import com.stripe.model.StripeCollection;
@@ -194,5 +195,60 @@ public final class CustomerBalanceTransactionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, CustomerBalanceTransaction.class);
+  }
+  /** Serializes a CustomerBalanceTransaction create request into a batch job JSONL line. */
+  public String serializeBatchCreate(String customer, CustomerBalanceTransactionCreateParams params)
+      throws StripeException {
+    return serializeBatchCreate(customer, params, (RequestOptions) null);
+  }
+  /** Serializes a CustomerBalanceTransaction create request into a batch job JSONL line. */
+  public String serializeBatchCreate(
+      String customer, CustomerBalanceTransactionCreateParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("customer", customer);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes a CustomerBalanceTransaction update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(
+      String customer, String transaction, CustomerBalanceTransactionUpdateParams params)
+      throws StripeException {
+    return serializeBatchUpdate(customer, transaction, params, (RequestOptions) null);
+  }
+  /** Serializes a CustomerBalanceTransaction update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(
+      String customer,
+      String transaction,
+      CustomerBalanceTransactionUpdateParams params,
+      RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("customer", customer);
+    pathParams.put("transaction", transaction);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
 }

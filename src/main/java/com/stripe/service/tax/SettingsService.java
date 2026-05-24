@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec
 package com.stripe.service.tax;
 
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.tax.Settings;
 import com.stripe.net.ApiRequest;
@@ -79,5 +80,25 @@ public final class SettingsService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, Settings.class);
+  }
+  /** Serializes a Settings update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(SettingsUpdateParams params) throws StripeException {
+    return serializeBatchUpdate(params, (RequestOptions) null);
+  }
+  /** Serializes a Settings update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(SettingsUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
 }

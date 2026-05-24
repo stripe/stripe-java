@@ -28103,7 +28103,7 @@ class GeneratedExamples extends BaseStripeTest {
                         com.stripe.param.v2.core.BatchJobCreateParams.Endpoint.HttpMethod.DELETE)
                     .setPath(
                         com.stripe.param.v2.core.BatchJobCreateParams.Endpoint.Path
-                            .V1_SUBSCRIPTION_SCHEDULE_CREATE)
+                            .V1_PRODUCT_CREATE)
                     .build())
             .putMetadata("key", "metadata")
             .setSkipValidation(true)
