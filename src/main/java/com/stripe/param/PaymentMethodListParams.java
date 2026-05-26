@@ -298,6 +298,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("billie")
     BILLIE("billie"),
 
+    @SerializedName("bizum")
+    BIZUM("bizum"),
+
     @SerializedName("blik")
     BLIK("blik"),
 
@@ -417,6 +420,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("satispay")
     SATISPAY("satispay"),
+
+    @SerializedName("scalapay")
+    SCALAPAY("scalapay"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),

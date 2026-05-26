@@ -8,10 +8,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-public final class V2CoreHealthTrafficVolumeDropResolvedEvent extends Event {
-  /** Data for the v2.core.health.traffic_volume_drop.resolved event. */
+public final class V2CoreHealthElementsErrorResolvedEvent extends Event {
+  /** Data for the v2.core.health.elements_error.resolved event. */
   @SerializedName("data")
-  V2CoreHealthTrafficVolumeDropResolvedEvent.EventData data;
+  V2CoreHealthElementsErrorResolvedEvent.EventData data;
 
   @Getter
   @Setter
@@ -36,18 +36,16 @@ public final class V2CoreHealthTrafficVolumeDropResolvedEvent extends Event {
     String summary;
 
     public static final class Impact {
-      /** The total volume of payment requests within the latest observation time window. */
-      @SerializedName("actual_traffic")
-      Long actualTraffic;
-      /** The canonical path. */
-      @SerializedName("canonical_path")
-      String canonicalPath;
-      /** The expected volume of payment requests within the latest observation time window. */
-      @SerializedName("expected_traffic")
-      Long expectedTraffic;
-      /** The size of the observation time window. */
-      @SerializedName("time_window")
-      String timeWindow;
+      /**
+       * The type of the element.
+       *
+       * <p>One of {@code expressCheckout}, or {@code payment}.
+       */
+      @SerializedName("element_type")
+      String elementType;
+      /** The number of impacted sessions. */
+      @SerializedName("impacted_sessions")
+      Long impactedSessions;
     }
   }
 }

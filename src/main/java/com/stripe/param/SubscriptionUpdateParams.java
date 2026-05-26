@@ -146,8 +146,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   Object description;
 
   /**
-   * The coupons to redeem into discounts for the subscription. If not specified or empty, inherits
-   * the discount from the subscription's customer.
+   * The coupons to redeem into discounts for the subscription. A populated array overwrites the
+   * existing discounts on the subscription. If not specified or empty array, it leaves the
+   * subscription's discounts unchanged. If empty string, it clears the subscription's discounts.
    */
   @SerializedName("discounts")
   Object discounts;
@@ -203,32 +204,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   Object pauseCollection;
 
   /**
-   * Use {@code allow_incomplete} to transition the subscription to {@code status=past_due} if a
-   * payment is required but cannot be paid. This allows you to manage scenarios where additional
-   * user actions are needed to pay a subscription's invoice. For example, SCA regulation may
-   * require 3DS authentication to complete payment. See the <a
-   * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA Migration
-   * Guide</a> for Billing to learn more. This is the default behavior.
-   *
-   * <p>Use {@code default_incomplete} to transition the subscription to {@code status=past_due}
-   * when payment is required and await explicit confirmation of the invoice's payment intent. This
-   * allows simpler management of scenarios where additional user actions are needed to pay a
-   * subscription’s invoice. Such as failed payments, <a
-   * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA
-   * regulation</a>, or collecting a mandate for a bank debit payment method.
-   *
-   * <p>Use {@code pending_if_incomplete} to update the subscription using <a
-   * href="https://docs.stripe.com/billing/subscriptions/pending-updates">pending updates</a>. When
-   * you use {@code pending_if_incomplete} you can only pass the parameters <a
-   * href="https://docs.stripe.com/billing/pending-updates-reference#supported-attributes">supported
-   * by pending updates</a>.
-   *
-   * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
-   * subscription's invoice cannot be paid. For example, if a payment method requires 3DS
-   * authentication due to SCA regulation and further user action is needed, this parameter does not
-   * update the subscription and returns an error instead. This was the default behavior for API
-   * versions prior to 2019-03-14. See the <a
-   * href="https://docs.stripe.com/changelog/2019-03-14">changelog</a> to learn more.
+   * Controls how Stripe handles payment when a subscription update requires payment and {@code
+   * collection_method=charge_automatically}.
    */
   @SerializedName("payment_behavior")
   PaymentBehavior paymentBehavior;
@@ -866,8 +843,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The coupons to redeem into discounts for the subscription. If not specified or empty,
-     * inherits the discount from the subscription's customer.
+     * The coupons to redeem into discounts for the subscription. A populated array overwrites the
+     * existing discounts on the subscription. If not specified or empty array, it leaves the
+     * subscription's discounts unchanged. If empty string, it clears the subscription's discounts.
      */
     public Builder setDiscounts(EmptyParam discounts) {
       this.discounts = discounts;
@@ -875,8 +853,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The coupons to redeem into discounts for the subscription. If not specified or empty,
-     * inherits the discount from the subscription's customer.
+     * The coupons to redeem into discounts for the subscription. A populated array overwrites the
+     * existing discounts on the subscription. If not specified or empty array, it leaves the
+     * subscription's discounts unchanged. If empty string, it clears the subscription's discounts.
      */
     public Builder setDiscounts(List<SubscriptionUpdateParams.Discount> discounts) {
       this.discounts = discounts;
@@ -1061,32 +1040,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Use {@code allow_incomplete} to transition the subscription to {@code status=past_due} if a
-     * payment is required but cannot be paid. This allows you to manage scenarios where additional
-     * user actions are needed to pay a subscription's invoice. For example, SCA regulation may
-     * require 3DS authentication to complete payment. See the <a
-     * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA Migration
-     * Guide</a> for Billing to learn more. This is the default behavior.
-     *
-     * <p>Use {@code default_incomplete} to transition the subscription to {@code status=past_due}
-     * when payment is required and await explicit confirmation of the invoice's payment intent.
-     * This allows simpler management of scenarios where additional user actions are needed to pay a
-     * subscription’s invoice. Such as failed payments, <a
-     * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA
-     * regulation</a>, or collecting a mandate for a bank debit payment method.
-     *
-     * <p>Use {@code pending_if_incomplete} to update the subscription using <a
-     * href="https://docs.stripe.com/billing/subscriptions/pending-updates">pending updates</a>.
-     * When you use {@code pending_if_incomplete} you can only pass the parameters <a
-     * href="https://docs.stripe.com/billing/pending-updates-reference#supported-attributes">supported
-     * by pending updates</a>.
-     *
-     * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
-     * subscription's invoice cannot be paid. For example, if a payment method requires 3DS
-     * authentication due to SCA regulation and further user action is needed, this parameter does
-     * not update the subscription and returns an error instead. This was the default behavior for
-     * API versions prior to 2019-03-14. See the <a
-     * href="https://docs.stripe.com/changelog/2019-03-14">changelog</a> to learn more.
+     * Controls how Stripe handles payment when a subscription update requires payment and {@code
+     * collection_method=charge_automatically}.
      */
     public Builder setPaymentBehavior(SubscriptionUpdateParams.PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;
@@ -1220,6 +1175,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class AddInvoiceItem {
+    /**
+     * Controls whether discounts apply to this invoice item. Defaults to true if no value is
+     * provided.
+     */
+    @SerializedName("discountable")
+    Boolean discountable;
+
     /** The coupons to redeem into discounts for the item. */
     @SerializedName("discounts")
     List<SubscriptionUpdateParams.AddInvoiceItem.Discount> discounts;
@@ -1273,6 +1235,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Object taxRates;
 
     private AddInvoiceItem(
+        Boolean discountable,
         List<SubscriptionUpdateParams.AddInvoiceItem.Discount> discounts,
         Map<String, Object> extraParams,
         Map<String, String> metadata,
@@ -1281,6 +1244,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         PriceData priceData,
         Long quantity,
         Object taxRates) {
+      this.discountable = discountable;
       this.discounts = discounts;
       this.extraParams = extraParams;
       this.metadata = metadata;
@@ -1296,6 +1260,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Boolean discountable;
+
       private List<SubscriptionUpdateParams.AddInvoiceItem.Discount> discounts;
 
       private Map<String, Object> extraParams;
@@ -1315,6 +1281,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionUpdateParams.AddInvoiceItem build() {
         return new SubscriptionUpdateParams.AddInvoiceItem(
+            this.discountable,
             this.discounts,
             this.extraParams,
             this.metadata,
@@ -1323,6 +1290,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             this.priceData,
             this.quantity,
             this.taxRates);
+      }
+
+      /**
+       * Controls whether discounts apply to this invoice item. Defaults to true if no value is
+       * provided.
+       */
+      public Builder setDiscountable(Boolean discountable) {
+        this.discountable = discountable;
+        return this;
       }
 
       /**
@@ -6513,6 +6489,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @SerializedName("us_bank_account")
       Object usBankAccount;
 
+      /**
+       * This sub-hash contains details about the WeChat Pay payment method options to pass to the
+       * invoice’s PaymentIntent.
+       */
+      @SerializedName("wechat_pay")
+      Object wechatPay;
+
       private PaymentMethodOptions(
           Object acssDebit,
           Object bancontact,
@@ -6528,7 +6511,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           Object pix,
           Object sepaDebit,
           Object upi,
-          Object usBankAccount) {
+          Object usBankAccount,
+          Object wechatPay) {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
         this.bizum = bizum;
@@ -6544,6 +6528,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         this.sepaDebit = sepaDebit;
         this.upi = upi;
         this.usBankAccount = usBankAccount;
+        this.wechatPay = wechatPay;
       }
 
       public static Builder builder() {
@@ -6581,6 +6566,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
         private Object usBankAccount;
 
+        private Object wechatPay;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions build() {
           return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions(
@@ -6598,7 +6585,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
               this.pix,
               this.sepaDebit,
               this.upi,
-              this.usBankAccount);
+              this.usBankAccount,
+              this.wechatPay);
         }
 
         /**
@@ -6897,6 +6885,25 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          */
         public Builder setUsBankAccount(EmptyParam usBankAccount) {
           this.usBankAccount = usBankAccount;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the WeChat Pay payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setWechatPay(
+            SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.WechatPay wechatPay) {
+          this.wechatPay = wechatPay;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the WeChat Pay payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setWechatPay(EmptyParam wechatPay) {
+          this.wechatPay = wechatPay;
           return this;
         }
       }
@@ -9746,6 +9753,132 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           }
         }
       }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class WechatPay {
+        /**
+         * The app ID registered with WeChat Pay. Only required when client is {@code ios} or {@code
+         * android}.
+         */
+        @SerializedName("app_id")
+        Object appId;
+
+        /** The client type that the end customer will pay from. */
+        @SerializedName("client")
+        Client client;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private WechatPay(Object appId, Client client, Map<String, Object> extraParams) {
+          this.appId = appId;
+          this.client = client;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object appId;
+
+          private Client client;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.WechatPay build() {
+            return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.WechatPay(
+                this.appId, this.client, this.extraParams);
+          }
+
+          /**
+           * The app ID registered with WeChat Pay. Only required when client is {@code ios} or
+           * {@code android}.
+           */
+          public Builder setAppId(String appId) {
+            this.appId = appId;
+            return this;
+          }
+
+          /**
+           * The app ID registered with WeChat Pay. Only required when client is {@code ios} or
+           * {@code android}.
+           */
+          public Builder setAppId(EmptyParam appId) {
+            this.appId = appId;
+            return this;
+          }
+
+          /** The client type that the end customer will pay from. */
+          public Builder setClient(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.WechatPay.Client
+                  client) {
+            this.client = client;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.WechatPay#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.WechatPay#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        public enum Client implements ApiRequestParams.EnumParam {
+          @SerializedName("android")
+          ANDROID("android"),
+
+          @SerializedName("ios")
+          IOS("ios"),
+
+          @SerializedName("mobile_web")
+          MOBILE_WEB("mobile_web"),
+
+          @SerializedName("web")
+          WEB("web");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Client(String value) {
+            this.value = value;
+          }
+        }
+      }
     }
 
     public enum PaymentMethodType implements ApiRequestParams.EnumParam {
@@ -9889,6 +10022,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       @SerializedName("swish")
       SWISH("swish"),
+
+      @SerializedName("twint")
+      TWINT("twint"),
 
       @SerializedName("upi")
       UPI("upi"),
@@ -10483,6 +10619,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   }
 
   public enum CancelAt implements ApiRequestParams.EnumParam {
+    @SerializedName("max_billed_until")
+    MAX_BILLED_UNTIL("max_billed_until"),
+
     @SerializedName("max_period_end")
     MAX_PERIOD_END("max_period_end"),
 

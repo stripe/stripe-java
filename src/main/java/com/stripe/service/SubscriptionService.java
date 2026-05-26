@@ -33,8 +33,8 @@ public final class SubscriptionService extends ApiService {
 
   /**
    * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
-   * subscription. After it’s canceled, you can no longer update the subscription or its <a
-   * href="https://stripe.com/metadata">metadata</a>.
+   * subscription. After it’s canceled, the subscription is largely immutable. You can still update
+   * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
    * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
@@ -55,8 +55,8 @@ public final class SubscriptionService extends ApiService {
   }
   /**
    * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
-   * subscription. After it’s canceled, you can no longer update the subscription or its <a
-   * href="https://stripe.com/metadata">metadata</a>.
+   * subscription. After it’s canceled, the subscription is largely immutable. You can still update
+   * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
    * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
@@ -77,8 +77,8 @@ public final class SubscriptionService extends ApiService {
   }
   /**
    * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
-   * subscription. After it’s canceled, you can no longer update the subscription or its <a
-   * href="https://stripe.com/metadata">metadata</a>.
+   * subscription. After it’s canceled, the subscription is largely immutable. You can still update
+   * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
    * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
@@ -98,8 +98,8 @@ public final class SubscriptionService extends ApiService {
   }
   /**
    * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
-   * subscription. After it’s canceled, you can no longer update the subscription or its <a
-   * href="https://stripe.com/metadata">metadata</a>.
+   * subscription. After it’s canceled, the subscription is largely immutable. You can still update
+   * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
    * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
@@ -629,10 +629,15 @@ public final class SubscriptionService extends ApiService {
   }
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
-   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
-   * resumption invoice will void automatically if not paid by the expiration date.
+   * and creating prorations. Resume is only available for subscriptions that use {@code
+   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
+   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
+   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
+   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
+   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
+   * subscription stays {@code paused}. Learn more about <a
+   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
+   * subscriptions</a>.
    */
   public Subscription resume(String subscription, SubscriptionResumeParams params)
       throws StripeException {
@@ -640,30 +645,45 @@ public final class SubscriptionService extends ApiService {
   }
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
-   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
-   * resumption invoice will void automatically if not paid by the expiration date.
+   * and creating prorations. Resume is only available for subscriptions that use {@code
+   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
+   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
+   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
+   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
+   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
+   * subscription stays {@code paused}. Learn more about <a
+   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
+   * subscriptions</a>.
    */
   public Subscription resume(String subscription, RequestOptions options) throws StripeException {
     return resume(subscription, (SubscriptionResumeParams) null, options);
   }
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
-   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
-   * resumption invoice will void automatically if not paid by the expiration date.
+   * and creating prorations. Resume is only available for subscriptions that use {@code
+   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
+   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
+   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
+   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
+   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
+   * subscription stays {@code paused}. Learn more about <a
+   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
+   * subscriptions</a>.
    */
   public Subscription resume(String subscription) throws StripeException {
     return resume(subscription, (SubscriptionResumeParams) null, (RequestOptions) null);
   }
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
-   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
-   * resumption invoice will void automatically if not paid by the expiration date.
+   * and creating prorations. Resume is only available for subscriptions that use {@code
+   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
+   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
+   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
+   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
+   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
+   * subscription stays {@code paused}. Learn more about <a
+   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
+   * subscriptions</a>.
    */
   public Subscription resume(
       String subscription, SubscriptionResumeParams params, RequestOptions options)

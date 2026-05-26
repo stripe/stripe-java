@@ -326,7 +326,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
       /**
        * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
        *
-       * <p>Equal to {@code fps}.
+       * <p>One of {@code chaps}, or {@code fps}.
        */
       @SerializedName("network")
       String network;
@@ -623,6 +623,10 @@ public class ReceivedCredit extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StripeBalancePayment extends StripeObject {
+    /** ID of the debit agreement associated with this payment. */
+    @SerializedName("debit_agreement")
+    String debitAgreement;
+
     /** Statement descriptor for the Stripe Balance Payment. */
     @SerializedName("statement_descriptor")
     String statementDescriptor;

@@ -125,9 +125,9 @@ public class FinancialAccountStatement extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Period extends StripeObject {
     /**
-     * The end of the statement period (exclusive), as a UTC-aligned ISO 8601 date (e.g.,
-     * &quot;2025-02-01&quot;). For example, a January statement has end_date
-     * &quot;2025-02-01&quot;, meaning all transactions up to but not including February 1st UTC are
+     * The end of the statement period (inclusive), as a UTC-aligned ISO 8601 date (e.g.,
+     * &quot;2026-05-31&quot;). For example, a May 2026 statement has end_date
+     * &quot;2026-05-31&quot;, meaning all transactions up to and including May 31st UTC are
      * included.
      */
     @SerializedName("end_date")
@@ -135,7 +135,7 @@ public class FinancialAccountStatement extends StripeObject implements HasId {
 
     /**
      * The start of the statement period (inclusive), as a UTC-aligned ISO 8601 date (e.g.,
-     * &quot;2025-01-01&quot;).
+     * &quot;2026-05-01&quot;).
      */
     @SerializedName("start_date")
     String startDate;

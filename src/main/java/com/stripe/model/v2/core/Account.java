@@ -4800,40 +4800,47 @@ public class Account extends StripeObject implements HasId {
          * Closed Enum. The payout method type of the default outbound destination.
          *
          * <p>One of {@code ae_bank_account}, {@code ag_bank_account}, {@code al_bank_account},
-         * {@code am_bank_account}, {@code ar_bank_account}, {@code at_bank_account}, {@code
-         * au_bank_account}, {@code ba_bank_account}, {@code be_bank_account}, {@code
+         * {@code am_bank_account}, {@code ao_bank_account}, {@code ar_bank_account}, {@code
+         * at_bank_account}, {@code au_bank_account}, {@code az_bank_account}, {@code
+         * ba_bank_account}, {@code bd_bank_account}, {@code be_bank_account}, {@code
          * bg_bank_account}, {@code bh_bank_account}, {@code bj_bank_account}, {@code
-         * bn_bank_account}, {@code bs_bank_account}, {@code bt_bank_account}, {@code
-         * bw_bank_account}, {@code card}, {@code ca_bank_account}, {@code ch_bank_account}, {@code
-         * ci_bank_account}, {@code cn_bank_account}, {@code co_bank_account}, {@code
+         * bn_bank_account}, {@code bo_bank_account}, {@code br_bank_account}, {@code
+         * bs_bank_account}, {@code bt_bank_account}, {@code bw_bank_account}, {@code card}, {@code
+         * ca_bank_account}, {@code ch_bank_account}, {@code ci_bank_account}, {@code
+         * cl_bank_account}, {@code cn_bank_account}, {@code co_bank_account}, {@code
          * crypto_wallet}, {@code cr_bank_account}, {@code cy_bank_account}, {@code
          * cz_bank_account}, {@code de_bank_account}, {@code dk_bank_account}, {@code
          * do_bank_account}, {@code dz_bank_account}, {@code ec_bank_account}, {@code
          * ee_bank_account}, {@code eg_bank_account}, {@code es_bank_account}, {@code
          * et_bank_account}, {@code fi_bank_account}, {@code fr_bank_account}, {@code
-         * gb_bank_account}, {@code gm_bank_account}, {@code gr_bank_account}, {@code
+         * ga_bank_account}, {@code gb_bank_account}, {@code gh_bank_account}, {@code
+         * gi_bank_account}, {@code gm_bank_account}, {@code gr_bank_account}, {@code
          * gt_bank_account}, {@code gy_bank_account}, {@code hk_bank_account}, {@code
-         * hr_bank_account}, {@code hu_bank_account}, {@code id_bank_account}, {@code
-         * ie_bank_account}, {@code il_bank_account}, {@code in_bank_account}, {@code
-         * is_bank_account}, {@code it_bank_account}, {@code jm_bank_account}, {@code
-         * jo_bank_account}, {@code jp_bank_account}, {@code ke_bank_account}, {@code
-         * kh_bank_account}, {@code kw_bank_account}, {@code lc_bank_account}, {@code
-         * li_bank_account}, {@code lk_bank_account}, {@code lt_bank_account}, {@code
-         * lu_bank_account}, {@code lv_bank_account}, {@code ma_bank_account}, {@code
-         * mc_bank_account}, {@code md_bank_account}, {@code mg_bank_account}, {@code
-         * mk_bank_account}, {@code mn_bank_account}, {@code mo_bank_account}, {@code
-         * mt_bank_account}, {@code mu_bank_account}, {@code mx_bank_account}, {@code
-         * my_bank_account}, {@code mz_bank_account}, {@code na_bank_account}, {@code
-         * nl_bank_account}, {@code no_bank_account}, {@code nz_bank_account}, {@code
-         * om_bank_account}, {@code pa_bank_account}, {@code pe_bank_account}, {@code
-         * ph_bank_account}, {@code pk_bank_account}, {@code pl_bank_account}, {@code
-         * pt_bank_account}, {@code qa_bank_account}, {@code ro_bank_account}, {@code
-         * rs_bank_account}, {@code rw_bank_account}, {@code se_bank_account}, {@code
+         * hn_bank_account}, {@code hr_bank_account}, {@code hu_bank_account}, {@code
+         * id_bank_account}, {@code ie_bank_account}, {@code il_bank_account}, {@code
+         * in_bank_account}, {@code is_bank_account}, {@code it_bank_account}, {@code
+         * jm_bank_account}, {@code jo_bank_account}, {@code jp_bank_account}, {@code
+         * ke_bank_account}, {@code kh_bank_account}, {@code kr_bank_account}, {@code
+         * kw_bank_account}, {@code kz_bank_account}, {@code la_bank_account}, {@code
+         * lc_bank_account}, {@code li_bank_account}, {@code lk_bank_account}, {@code
+         * lt_bank_account}, {@code lu_bank_account}, {@code lv_bank_account}, {@code
+         * ma_bank_account}, {@code mc_bank_account}, {@code md_bank_account}, {@code
+         * mg_bank_account}, {@code mk_bank_account}, {@code mn_bank_account}, {@code
+         * mo_bank_account}, {@code mt_bank_account}, {@code mu_bank_account}, {@code
+         * mx_bank_account}, {@code my_bank_account}, {@code mz_bank_account}, {@code
+         * na_bank_account}, {@code ne_bank_account}, {@code ng_bank_account}, {@code
+         * ni_bank_account}, {@code nl_bank_account}, {@code no_bank_account}, {@code
+         * nz_bank_account}, {@code om_bank_account}, {@code pa_bank_account}, {@code
+         * pe_bank_account}, {@code ph_bank_account}, {@code pk_bank_account}, {@code
+         * pl_bank_account}, {@code pt_bank_account}, {@code py_bank_account}, {@code
+         * qa_bank_account}, {@code ro_bank_account}, {@code rs_bank_account}, {@code
+         * rw_bank_account}, {@code sa_bank_account}, {@code se_bank_account}, {@code
          * sg_bank_account}, {@code si_bank_account}, {@code sk_bank_account}, {@code
-         * sn_bank_account}, {@code sv_bank_account}, {@code th_bank_account}, {@code
-         * tn_bank_account}, {@code tr_bank_account}, {@code tt_bank_account}, {@code
-         * tw_bank_account}, {@code tz_bank_account}, {@code us_bank_account}, {@code
-         * uz_bank_account}, {@code vn_bank_account}, or {@code za_bank_account}.
+         * sm_bank_account}, {@code sn_bank_account}, {@code sv_bank_account}, {@code
+         * th_bank_account}, {@code tn_bank_account}, {@code tr_bank_account}, {@code
+         * tt_bank_account}, {@code tw_bank_account}, {@code tz_bank_account}, {@code
+         * us_bank_account}, {@code uy_bank_account}, {@code uz_bank_account}, {@code
+         * vn_bank_account}, or {@code za_bank_account}.
          */
         @SerializedName("type")
         String type;
@@ -9028,6 +9035,10 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("files")
           List<String> files;
 
+          /** Person that is signing the document. */
+          @SerializedName("signer")
+          Signer signer;
+
           /**
            * The format of the document. Currently supports {@code files} only.
            *
@@ -9035,6 +9046,16 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("type")
           String type;
+
+          /** Person that is signing the document. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Signer extends StripeObject {
+            /** Person signing the document. */
+            @SerializedName("person")
+            String person;
+          }
         }
 
         /** One or more documents that demonstrate proof of ultimate beneficial ownership. */
@@ -9050,6 +9071,10 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("files")
           List<String> files;
 
+          /** Person that is signing the document. */
+          @SerializedName("signer")
+          Signer signer;
+
           /**
            * The format of the document. Currently supports {@code files} only.
            *
@@ -9057,6 +9082,16 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("type")
           String type;
+
+          /** Person that is signing the document. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Signer extends StripeObject {
+            /** Person signing the document. */
+            @SerializedName("person")
+            String person;
+          }
         }
       }
 

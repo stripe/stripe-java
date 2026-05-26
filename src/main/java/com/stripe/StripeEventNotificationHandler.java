@@ -300,8 +300,12 @@ import com.stripe.events.V2CoreHealthApiLatencyFiringEventNotification;
 import com.stripe.events.V2CoreHealthApiLatencyResolvedEventNotification;
 import com.stripe.events.V2CoreHealthAuthorizationRateDropFiringEventNotification;
 import com.stripe.events.V2CoreHealthAuthorizationRateDropResolvedEventNotification;
+import com.stripe.events.V2CoreHealthElementsErrorFiringEventNotification;
+import com.stripe.events.V2CoreHealthElementsErrorResolvedEventNotification;
 import com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEventNotification;
 import com.stripe.events.V2CoreHealthFraudRateIncreasedEventNotification;
+import com.stripe.events.V2CoreHealthInvoiceCountDroppedFiringEventNotification;
+import com.stripe.events.V2CoreHealthInvoiceCountDroppedResolvedEventNotification;
 import com.stripe.events.V2CoreHealthIssuingAuthorizationRequestErrorsFiringEventNotification;
 import com.stripe.events.V2CoreHealthIssuingAuthorizationRequestErrorsResolvedEventNotification;
 import com.stripe.events.V2CoreHealthIssuingAuthorizationRequestTimeoutFiringEventNotification;
@@ -2318,6 +2322,18 @@ public class StripeEventNotificationHandler {
     return this;
   }
 
+  public StripeEventNotificationHandler onV2CoreHealthElementsErrorFiring(
+      Callback<V2CoreHealthElementsErrorFiringEventNotification> callback) {
+    this.register("v2.core.health.elements_error.firing", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreHealthElementsErrorResolved(
+      Callback<V2CoreHealthElementsErrorResolvedEventNotification> callback) {
+    this.register("v2.core.health.elements_error.resolved", callback);
+    return this;
+  }
+
   public StripeEventNotificationHandler onV2CoreHealthEventGenerationFailureResolved(
       Callback<V2CoreHealthEventGenerationFailureResolvedEventNotification> callback) {
     this.register("v2.core.health.event_generation_failure.resolved", callback);
@@ -2327,6 +2343,18 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV2CoreHealthFraudRateIncreased(
       Callback<V2CoreHealthFraudRateIncreasedEventNotification> callback) {
     this.register("v2.core.health.fraud_rate.increased", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreHealthInvoiceCountDroppedFiring(
+      Callback<V2CoreHealthInvoiceCountDroppedFiringEventNotification> callback) {
+    this.register("v2.core.health.invoice_count_dropped.firing", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreHealthInvoiceCountDroppedResolved(
+      Callback<V2CoreHealthInvoiceCountDroppedResolvedEventNotification> callback) {
+    this.register("v2.core.health.invoice_count_dropped.resolved", callback);
     return this;
   }
 

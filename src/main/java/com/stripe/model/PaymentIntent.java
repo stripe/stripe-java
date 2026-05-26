@@ -1285,9 +1285,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
    * declines. After it’s captured, a PaymentIntent can no longer be incremented.
    *
-   * <p>Learn more about <a
-   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
-   * authorizations</a>.
+   * <p>Learn more about incremental authorizations with <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">in-person
+   * payments</a> and <a
+   * href="https://stripe.com/docs/payments/incremental-authorization?platform=web&ui=elements">online
+   * payments</a>.
    */
   public PaymentIntent incrementAuthorization(Map<String, Object> params) throws StripeException {
     return incrementAuthorization(params, (RequestOptions) null);
@@ -1316,9 +1318,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
    * declines. After it’s captured, a PaymentIntent can no longer be incremented.
    *
-   * <p>Learn more about <a
-   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
-   * authorizations</a>.
+   * <p>Learn more about incremental authorizations with <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">in-person
+   * payments</a> and <a
+   * href="https://stripe.com/docs/payments/incremental-authorization?platform=web&ui=elements">online
+   * payments</a>.
    */
   public PaymentIntent incrementAuthorization(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -1354,9 +1358,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
    * declines. After it’s captured, a PaymentIntent can no longer be incremented.
    *
-   * <p>Learn more about <a
-   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
-   * authorizations</a>.
+   * <p>Learn more about incremental authorizations with <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">in-person
+   * payments</a> and <a
+   * href="https://stripe.com/docs/payments/incremental-authorization?platform=web&ui=elements">online
+   * payments</a>.
    */
   public PaymentIntent incrementAuthorization(PaymentIntentIncrementAuthorizationParams params)
       throws StripeException {
@@ -1386,9 +1392,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
    * declines. After it’s captured, a PaymentIntent can no longer be incremented.
    *
-   * <p>Learn more about <a
-   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
-   * authorizations</a>.
+   * <p>Learn more about incremental authorizations with <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">in-person
+   * payments</a> and <a
+   * href="https://stripe.com/docs/payments/incremental-authorization?platform=web&ui=elements">online
+   * payments</a>.
    */
   public PaymentIntent incrementAuthorization(
       PaymentIntentIncrementAuthorizationParams params, RequestOptions options)
@@ -2311,6 +2319,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("alipay_handle_redirect")
     AlipayHandleRedirect alipayHandleRedirect;
 
+    @SerializedName("blik_authorize")
+    BlikAuthorize blikAuthorize;
+
     @SerializedName("boleto_display_details")
     BoletoDisplayDetails boletoDisplayDetails;
 
@@ -2418,6 +2429,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("url")
       String url;
     }
+
+    /**
+     * For more details about BlikAuthorize, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BlikAuthorize extends StripeObject {}
 
     /**
      * For more details about BoletoDisplayDetails, please refer to the <a
@@ -3541,6 +3561,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class FrMealVoucher extends StripeObject {
+        /**
+         * Whether meal voucher benefit is enabled for this payment.
+         *
+         * <p>One of {@code if_payment_method_is_eligible}, or {@code never}.
+         */
+        @SerializedName("enabled")
+        String enabled;
+
         /** The 14-digit SIRET of the meal voucher acceptor. */
         @SerializedName("siret")
         String siret;
@@ -5304,6 +5332,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("billie")
     Billie billie;
 
+    @SerializedName("bizum")
+    Bizum bizum;
+
     @SerializedName("blik")
     Blik blik;
 
@@ -5330,6 +5361,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("fpx")
     Fpx fpx;
+
+    @SerializedName("gift_card")
+    GiftCard giftCard;
 
     @SerializedName("giropay")
     Giropay giropay;
@@ -5423,6 +5457,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("satispay")
     Satispay satispay;
+
+    @SerializedName("scalapay")
+    Scalapay scalapay;
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
@@ -5886,6 +5923,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("capture_method")
       String captureMethod;
     }
+
+    /**
+     * For more details about Bizum, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bizum extends StripeObject {}
 
     /**
      * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
@@ -6664,6 +6710,41 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+    }
+
+    /**
+     * For more details about GiftCard, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class GiftCard extends StripeObject {
+      /**
+       * Set to {@code yes} to ignore the application fee on the PaymentIntent when redeeming this
+       * gift card.
+       *
+       * <p>Equal to {@code yes}.
+       */
+      @SerializedName("ignore_application_fee")
+      String ignoreApplicationFee;
+
+      /**
+       * Set to {@code yes} to ignore transfer data on the PaymentIntent when redeeming this gift
+       * card.
+       *
+       * <p>Equal to {@code yes}.
+       */
+      @SerializedName("ignore_transfer_data")
+      String ignoreTransferData;
+
+      /**
+       * Request partial authorization on this PaymentIntent.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_partial_authorization")
+      String requestPartialAuthorization;
     }
 
     /**
@@ -7926,6 +8007,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     }
 
     /**
+     * For more details about Scalapay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Scalapay extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+    }
+
+    /**
      * For more details about SepaDebit, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -8174,7 +8272,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        * with regional legislation and network rules, such as <a
        * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
-       * <p>Equal to {@code none}.
+       * <p>One of {@code none}, or {@code off_session}.
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
@@ -8545,6 +8643,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("amount")
     Long amount;
 
+    /** An arbitrary string attached to the transfer. Often useful for displaying to users. */
+    @SerializedName("description")
+    String description;
+
     /**
      * The account (if any) that the payment is attributed to for tax reporting, and where funds
      * from the payment are transferred to after payment success.
@@ -8553,6 +8655,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Account> destination;
+
+    /**
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    @SerializedName("payment_data")
+    PaymentData paymentData;
 
     /** Get ID of expandable {@code destination} object. */
     public String getDestination() {
@@ -8570,6 +8683,30 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     public void setDestinationObject(Account expandableObject) {
       this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+    }
+
+    /**
+     * For more details about PaymentData, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentData extends StripeObject {
+      /**
+       * An arbitrary string attached to the destination payment. Often useful for displaying to
+       * users.
+       */
+      @SerializedName("description")
+      String description;
+
+      /**
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
     }
   }
 

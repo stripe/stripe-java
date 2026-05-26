@@ -511,7 +511,7 @@ public class Alert extends ApiResource implements HasId {
     /**
      * Defines the granularity of spend aggregation.
      *
-     * <p>Equal to {@code pricing_plan_subscription}.
+     * <p>One of {@code billing_cadence}, or {@code pricing_plan_subscription}.
      */
     @SerializedName("group_by")
     String groupBy;

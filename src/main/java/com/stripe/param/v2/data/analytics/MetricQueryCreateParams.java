@@ -306,11 +306,11 @@ public class MetricQueryCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The Gen6 ID for this metric, e.g. metric_61Sud3n5oAGVCWiSr5. */
+    /** The ID for this metric, e.g. metric_61Sud3n5oAGVCWiSr5. */
     @SerializedName("id")
     String id;
 
-    /** The common name for this metric, e.g. mrr_minor_units. */
+    /** The common name for this metric, e.g. revenue.mrr. */
     @SerializedName("name")
     String name;
 
@@ -362,13 +362,13 @@ public class MetricQueryCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The Gen6 ID for this metric, e.g. metric_61Sud3n5oAGVCWiSr5. */
+      /** The ID for this metric, e.g. metric_61Sud3n5oAGVCWiSr5. */
       public Builder setId(String id) {
         this.id = id;
         return this;
       }
 
-      /** The common name for this metric, e.g. mrr_minor_units. */
+      /** The common name for this metric, e.g. revenue.mrr. */
       public Builder setName(String name) {
         this.name = name;
         return this;

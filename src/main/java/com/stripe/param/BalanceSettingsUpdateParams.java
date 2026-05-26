@@ -278,6 +278,13 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Payouts {
       /**
+       * Configures per-currency rules for automatically transferring funds from the payments
+       * balance to a FinancialAccount.
+       */
+      @SerializedName("automatic_transfer_rules_by_currency")
+      Object automaticTransferRulesByCurrency;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -312,10 +319,12 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       Object statementDescriptor;
 
       private Payouts(
+          Object automaticTransferRulesByCurrency,
           Map<String, Object> extraParams,
           Object minimumBalanceByCurrency,
           Schedule schedule,
           Object statementDescriptor) {
+        this.automaticTransferRulesByCurrency = automaticTransferRulesByCurrency;
         this.extraParams = extraParams;
         this.minimumBalanceByCurrency = minimumBalanceByCurrency;
         this.schedule = schedule;
@@ -327,6 +336,8 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Object automaticTransferRulesByCurrency;
+
         private Map<String, Object> extraParams;
 
         private Object minimumBalanceByCurrency;
@@ -338,10 +349,90 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public BalanceSettingsUpdateParams.Payments.Payouts build() {
           return new BalanceSettingsUpdateParams.Payments.Payouts(
+              this.automaticTransferRulesByCurrency,
               this.extraParams,
               this.minimumBalanceByCurrency,
               this.schedule,
               this.statementDescriptor);
+        }
+
+        /**
+         * Add a key/value pair to `automaticTransferRulesByCurrency` map. A map is initialized for
+         * the first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+         * original map. See {@link
+         * BalanceSettingsUpdateParams.Payments.Payouts#automaticTransferRulesByCurrency} for the
+         * field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putAutomaticTransferRulesByCurrency(
+            String key,
+            List<BalanceSettingsUpdateParams.Payments.Payouts.AutomaticTransferRulesByCurrency>
+                value) {
+          if (this.automaticTransferRulesByCurrency == null
+              || this.automaticTransferRulesByCurrency instanceof EmptyParam) {
+            this.automaticTransferRulesByCurrency = new HashMap<String, Object>();
+          }
+          ((Map<String, Object>) this.automaticTransferRulesByCurrency).put(key, value);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `automaticTransferRulesByCurrency` map. A map is initialized for
+         * the first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+         * original map. See {@link
+         * BalanceSettingsUpdateParams.Payments.Payouts#automaticTransferRulesByCurrency} for the
+         * field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putAutomaticTransferRulesByCurrency(String key, EmptyParam value) {
+          if (this.automaticTransferRulesByCurrency == null
+              || this.automaticTransferRulesByCurrency instanceof EmptyParam) {
+            this.automaticTransferRulesByCurrency = new HashMap<String, Object>();
+          }
+          ((Map<String, Object>) this.automaticTransferRulesByCurrency).put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `automaticTransferRulesByCurrency` map. A map is
+         * initialized for the first `put/putAll` call, and subsequent calls add additional
+         * key/value pairs to the original map. Map values can only be one of the following types:
+         * `List`, `EmptyParam`. See {@link
+         * BalanceSettingsUpdateParams.Payments.Payouts#automaticTransferRulesByCurrency} for the
+         * field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putAllAutomaticTransferRulesByCurrency(Map<String, Object> map) {
+          if (!map.values().stream().allMatch(v -> v instanceof List || v instanceof EmptyParam)) {
+            throw new IllegalArgumentException(
+                "All map values must one of the following types: List, EmptyParam");
+          }
+          if (this.automaticTransferRulesByCurrency == null
+              || this.automaticTransferRulesByCurrency instanceof EmptyParam) {
+            this.automaticTransferRulesByCurrency = new HashMap<String, Object>();
+          }
+          ((Map<String, Object>) this.automaticTransferRulesByCurrency).putAll(map);
+          return this;
+        }
+
+        /**
+         * Configures per-currency rules for automatically transferring funds from the payments
+         * balance to a FinancialAccount.
+         */
+        public Builder setAutomaticTransferRulesByCurrency(
+            EmptyParam automaticTransferRulesByCurrency) {
+          this.automaticTransferRulesByCurrency = automaticTransferRulesByCurrency;
+          return this;
+        }
+
+        /**
+         * Configures per-currency rules for automatically transferring funds from the payments
+         * balance to a FinancialAccount.
+         */
+        public Builder setAutomaticTransferRulesByCurrency(
+            Map<String, Object> automaticTransferRulesByCurrency) {
+          this.automaticTransferRulesByCurrency = automaticTransferRulesByCurrency;
+          return this;
         }
 
         /**
@@ -476,6 +567,151 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
         public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
           this.statementDescriptor = statementDescriptor;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AutomaticTransferRulesByCurrency {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> The ID of the FinancialAccount that funds will be transferred
+         * to during automatic transfers.
+         */
+        @SerializedName("payout_method")
+        Object payoutMethod;
+
+        /**
+         * The maximum amount in minor units to transfer to the FinancialAccount. Required and only
+         * applicable when {@code type} is {@code transfer_up_to_amount}.
+         */
+        @SerializedName("transfer_up_to_amount")
+        Long transferUpToAmount;
+
+        /** <strong>Required.</strong> The type of automatic transfer rule. */
+        @SerializedName("type")
+        Type type;
+
+        private AutomaticTransferRulesByCurrency(
+            Map<String, Object> extraParams,
+            Object payoutMethod,
+            Long transferUpToAmount,
+            Type type) {
+          this.extraParams = extraParams;
+          this.payoutMethod = payoutMethod;
+          this.transferUpToAmount = transferUpToAmount;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object payoutMethod;
+
+          private Long transferUpToAmount;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public BalanceSettingsUpdateParams.Payments.Payouts.AutomaticTransferRulesByCurrency
+              build() {
+            return new BalanceSettingsUpdateParams.Payments.Payouts
+                .AutomaticTransferRulesByCurrency(
+                this.extraParams, this.payoutMethod, this.transferUpToAmount, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * BalanceSettingsUpdateParams.Payments.Payouts.AutomaticTransferRulesByCurrency#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * BalanceSettingsUpdateParams.Payments.Payouts.AutomaticTransferRulesByCurrency#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The ID of the FinancialAccount that funds will be
+           * transferred to during automatic transfers.
+           */
+          public Builder setPayoutMethod(String payoutMethod) {
+            this.payoutMethod = payoutMethod;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The ID of the FinancialAccount that funds will be
+           * transferred to during automatic transfers.
+           */
+          public Builder setPayoutMethod(EmptyParam payoutMethod) {
+            this.payoutMethod = payoutMethod;
+            return this;
+          }
+
+          /**
+           * The maximum amount in minor units to transfer to the FinancialAccount. Required and
+           * only applicable when {@code type} is {@code transfer_up_to_amount}.
+           */
+          public Builder setTransferUpToAmount(Long transferUpToAmount) {
+            this.transferUpToAmount = transferUpToAmount;
+            return this;
+          }
+
+          /** <strong>Required.</strong> The type of automatic transfer rule. */
+          public Builder setType(
+              BalanceSettingsUpdateParams.Payments.Payouts.AutomaticTransferRulesByCurrency.Type
+                  type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("transfer_all")
+          TRANSFER_ALL("transfer_all"),
+
+          @SerializedName("transfer_up_to_amount")
+          TRANSFER_UP_TO_AMOUNT("transfer_up_to_amount");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -717,9 +953,20 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private SettlementTiming(Object delayDaysOverride, Map<String, Object> extraParams) {
+      /**
+       * Customized start of day configuration for automatic payouts to group and send payments in
+       * local timezones with a customized day starting time. For details, see our <a
+       * href="https://stripe.com/connect/customized-start-of-day">Customized start of day</a>
+       * documentation.
+       */
+      @SerializedName("start_of_day")
+      Object startOfDay;
+
+      private SettlementTiming(
+          Object delayDaysOverride, Map<String, Object> extraParams, Object startOfDay) {
         this.delayDaysOverride = delayDaysOverride;
         this.extraParams = extraParams;
+        this.startOfDay = startOfDay;
       }
 
       public static Builder builder() {
@@ -731,10 +978,12 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Object startOfDay;
+
         /** Finalize and obtain parameter instance from this builder. */
         public BalanceSettingsUpdateParams.Payments.SettlementTiming build() {
           return new BalanceSettingsUpdateParams.Payments.SettlementTiming(
-              this.delayDaysOverride, this.extraParams);
+              this.delayDaysOverride, this.extraParams, this.startOfDay);
         }
 
         /**
@@ -789,6 +1038,165 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+
+        /**
+         * Customized start of day configuration for automatic payouts to group and send payments in
+         * local timezones with a customized day starting time. For details, see our <a
+         * href="https://stripe.com/connect/customized-start-of-day">Customized start of day</a>
+         * documentation.
+         */
+        public Builder setStartOfDay(
+            BalanceSettingsUpdateParams.Payments.SettlementTiming.StartOfDay startOfDay) {
+          this.startOfDay = startOfDay;
+          return this;
+        }
+
+        /**
+         * Customized start of day configuration for automatic payouts to group and send payments in
+         * local timezones with a customized day starting time. For details, see our <a
+         * href="https://stripe.com/connect/customized-start-of-day">Customized start of day</a>
+         * documentation.
+         */
+        public Builder setStartOfDay(EmptyParam startOfDay) {
+          this.startOfDay = startOfDay;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class StartOfDay {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Hour at which the customized start of day begins according to the given timezone. Must be
+         * a <a
+         * href="https://stripe.com/connect/customized-start-of-day#available-timezones-and-cutoffs">supported
+         * customized start of day hour</a>.
+         */
+        @SerializedName("hour")
+        Long hour;
+
+        /**
+         * Minutes at which the customized start of day begins according to the given timezone. Must
+         * be either 0 or 30.
+         */
+        @SerializedName("minutes")
+        Long minutes;
+
+        /**
+         * Timezone for the customized start of day. Must be a <a
+         * href="https://stripe.com/connect/customized-start-of-day#available-timezones-and-cutoffs">supported
+         * customized start of day timezone</a>.
+         */
+        @SerializedName("timezone")
+        Object timezone;
+
+        private StartOfDay(
+            Map<String, Object> extraParams, Long hour, Long minutes, Object timezone) {
+          this.extraParams = extraParams;
+          this.hour = hour;
+          this.minutes = minutes;
+          this.timezone = timezone;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Long hour;
+
+          private Long minutes;
+
+          private Object timezone;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public BalanceSettingsUpdateParams.Payments.SettlementTiming.StartOfDay build() {
+            return new BalanceSettingsUpdateParams.Payments.SettlementTiming.StartOfDay(
+                this.extraParams, this.hour, this.minutes, this.timezone);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * BalanceSettingsUpdateParams.Payments.SettlementTiming.StartOfDay#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * BalanceSettingsUpdateParams.Payments.SettlementTiming.StartOfDay#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Hour at which the customized start of day begins according to the given timezone. Must
+           * be a <a
+           * href="https://stripe.com/connect/customized-start-of-day#available-timezones-and-cutoffs">supported
+           * customized start of day hour</a>.
+           */
+          public Builder setHour(Long hour) {
+            this.hour = hour;
+            return this;
+          }
+
+          /**
+           * Minutes at which the customized start of day begins according to the given timezone.
+           * Must be either 0 or 30.
+           */
+          public Builder setMinutes(Long minutes) {
+            this.minutes = minutes;
+            return this;
+          }
+
+          /**
+           * Timezone for the customized start of day. Must be a <a
+           * href="https://stripe.com/connect/customized-start-of-day#available-timezones-and-cutoffs">supported
+           * customized start of day timezone</a>.
+           */
+          public Builder setTimezone(String timezone) {
+            this.timezone = timezone;
+            return this;
+          }
+
+          /**
+           * Timezone for the customized start of day. Must be a <a
+           * href="https://stripe.com/connect/customized-start-of-day#available-timezones-and-cutoffs">supported
+           * customized start of day timezone</a>.
+           */
+          public Builder setTimezone(EmptyParam timezone) {
+            this.timezone = timezone;
+            return this;
+          }
         }
       }
     }
