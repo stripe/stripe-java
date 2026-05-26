@@ -26,6 +26,10 @@ public class EventDestination extends StripeObject implements HasId {
   @SerializedName("amazon_eventbridge")
   AmazonEventbridge amazonEventbridge;
 
+  /** Azure Event Grid configuration. */
+  @SerializedName("azure_event_grid")
+  AzureEventGrid azureEventGrid;
+
   /** Time at which the object was created. */
   @SerializedName("created")
   Instant created;
@@ -105,7 +109,7 @@ public class EventDestination extends StripeObject implements HasId {
   /**
    * Event destination type.
    *
-   * <p>One of {@code amazon_eventbridge}, or {@code webhook_endpoint}.
+   * <p>One of {@code amazon_eventbridge}, {@code azure_event_grid}, or {@code webhook_endpoint}.
    */
   @SerializedName("type")
   String type;
@@ -140,6 +144,36 @@ public class EventDestination extends StripeObject implements HasId {
     String awsEventSourceStatus;
   }
 
+  /** Azure Event Grid configuration. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AzureEventGrid extends StripeObject {
+    /** The name of the Azure partner topic. */
+    @SerializedName("azure_partner_topic_name")
+    String azurePartnerTopicName;
+
+    /**
+     * The status of the Azure partner topic.
+     *
+     * <p>One of {@code activated}, {@code deleted}, {@code never_activated}, or {@code unknown}.
+     */
+    @SerializedName("azure_partner_topic_status")
+    String azurePartnerTopicStatus;
+
+    /** The Azure region. */
+    @SerializedName("azure_region")
+    String azureRegion;
+
+    /** The name of the Azure resource group. */
+    @SerializedName("azure_resource_group_name")
+    String azureResourceGroupName;
+
+    /** The Azure subscription ID. */
+    @SerializedName("azure_subscription_id")
+    String azureSubscriptionId;
+  }
+
   /** Additional information about event destination status. */
   @Getter
   @Setter
@@ -157,7 +191,8 @@ public class EventDestination extends StripeObject implements HasId {
       /**
        * Reason event destination has been disabled.
        *
-       * <p>One of {@code no_aws_event_source_exists}, or {@code user}.
+       * <p>One of {@code no_aws_event_source_exists}, {@code no_azure_partner_topic_exists}, or
+       * {@code user}.
        */
       @SerializedName("reason")
       String reason;

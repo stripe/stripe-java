@@ -14,14 +14,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * An Account v2 object represents a company, individual, or other entity that interacts with a
- * platform on Stripe. It contains both identifying information and properties that control its
- * behavior and functionality. An Account can have one or more configurations that enable sets of
- * related features, such as allowing it to act as a merchant or customer. The Accounts v2 API
- * supports both the Global Payouts preview feature and the Connect-Billing integration preview
- * feature. However, a particular Account can only access one of them. The Connect-Billing
- * integration preview feature allows an Account v2 to pay subscription fees to a platform. An
- * Account v1 required a separate Customer object to pay subscription fees.
+ * An Account v2 object represents a company, individual, or other entity that your Stripe
+ * integration interacts with. It contains both identifying information and properties that control
+ * its behavior and functionality. An Account can have one or more configurations that enable sets
+ * of related features, such as allowing it to act as a merchant or customer. The Accounts v2 API is
+ * broadly available to Connect platforms, and to other users in preview. The Accounts v2 API also
+ * supports the Global Payouts preview feature.
  */
 @Getter
 @Setter
@@ -43,10 +41,7 @@ public class Account extends StripeObject implements HasId {
   @SerializedName("configuration")
   Configuration configuration;
 
-  /**
-   * The default contact email address for the Account. Required when configuring the account as a
-   * merchant or recipient.
-   */
+  /** The primary contact email address for the Account. */
   @SerializedName("contact_email")
   String contactEmail;
 
@@ -136,7 +131,10 @@ public class Account extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Configuration extends StripeObject {
-    /** The Customer Configuration allows the Account to be used in inbound payment flows. */
+    /**
+     * The Customer Configuration allows the Account to be used in inbound payment flows (i.e.
+     * customer-facing payment and billing flows).
+     */
     @SerializedName("customer")
     Customer customer;
 
@@ -158,7 +156,10 @@ public class Account extends StripeObject implements HasId {
     @SerializedName("recipient")
     Recipient recipient;
 
-    /** The Customer Configuration allows the Account to be used in inbound payment flows. */
+    /**
+     * The Customer Configuration allows the Account to be used in inbound payment flows (i.e.
+     * customer-facing payment and billing flows).
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -267,8 +268,8 @@ public class Account extends StripeObject implements HasId {
       @EqualsAndHashCode(callSuper = false)
       public static class Billing extends StripeObject {
         /**
-         * ID of a PaymentMethod attached to the customer account to use as the default for invoices
-         * and subscriptions.
+         * The ID of a {@code PaymentMethod} attached to this Account's {@code customer}
+         * configuration, used as the default payment method for invoices and subscriptions.
          */
         @SerializedName("default_payment_method")
         String defaultPaymentMethod;
@@ -3917,7 +3918,9 @@ public class Account extends StripeObject implements HasId {
     String country;
 
     /**
-     * The entity type.
+     * The entity type represented by the Account. Ensure this field is accurate before adding
+     * configurations that rely on identity information, as it determines which identity fields
+     * apply and how the Account is validated.
      *
      * <p>One of {@code company}, {@code government_entity}, {@code individual}, or {@code
      * non_profit}.
@@ -4542,6 +4545,10 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("files")
           List<String> files;
 
+          /** Person that is signing the document. */
+          @SerializedName("signer")
+          Signer signer;
+
           /**
            * The format of the document. Currently supports {@code files} only.
            *
@@ -4549,6 +4556,16 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("type")
           String type;
+
+          /** Person that is signing the document. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Signer extends StripeObject {
+            /** Person signing the document. */
+            @SerializedName("person")
+            String person;
+          }
         }
 
         /** One or more documents that demonstrate proof of ultimate beneficial ownership. */
@@ -4564,6 +4581,10 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("files")
           List<String> files;
 
+          /** Person that is signing the document. */
+          @SerializedName("signer")
+          Signer signer;
+
           /**
            * The format of the document. Currently supports {@code files} only.
            *
@@ -4571,6 +4592,16 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("type")
           String type;
+
+          /** Person that is signing the document. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Signer extends StripeObject {
+            /** Person signing the document. */
+            @SerializedName("person")
+            String person;
+          }
         }
       }
 
@@ -4816,7 +4847,11 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("documents")
       Documents documents;
 
-      /** The individual's email address. */
+      /**
+       * The individual's email address. You can only set this field when the Account is configured
+       * as a {@code merchant} or {@code recipient}. Use {@code contact_email} as the primary
+       * contact email for this Account.
+       */
       @SerializedName("email")
       String email;
 

@@ -24490,6 +24490,88 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2CommerceProductCatalogImportGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/commerce/product_catalog/imports",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.commerce.ProductCatalogImport>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.commerce.product_catalog_import\",\"created\":\"1970-01-12T21:42:34.472Z\",\"feed_type\":\"pricing\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"status\":\"awaiting_upload\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.commerce.productcatalog.ImportListParams params =
+        com.stripe.param.v2.commerce.productcatalog.ImportListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.commerce.ProductCatalogImport>
+        stripeCollection = client.v2().commerce().productCatalog().imports().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/commerce/product_catalog/imports",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CommerceProductCatalogImportPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/commerce/product_catalog/imports",
+        null,
+        null,
+        com.stripe.model.v2.commerce.ProductCatalogImport.class,
+        "{\"object\":\"v2.commerce.product_catalog_import\",\"created\":\"1970-01-12T21:42:34.472Z\",\"feed_type\":\"pricing\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"status\":\"awaiting_upload\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.commerce.productcatalog.ImportCreateParams params =
+        com.stripe.param.v2.commerce.productcatalog.ImportCreateParams.builder()
+            .setFeedType(
+                com.stripe.param.v2.commerce.productcatalog.ImportCreateParams.FeedType.PRICING)
+            .putMetadata("key", "metadata")
+            .setMode(com.stripe.param.v2.commerce.productcatalog.ImportCreateParams.Mode.UPSERT)
+            .build();
+
+    com.stripe.model.v2.commerce.ProductCatalogImport productCatalogImport =
+        client.v2().commerce().productCatalog().imports().create(params);
+    assertNotNull(productCatalogImport);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/commerce/product_catalog/imports",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CommerceProductCatalogImportGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/commerce/product_catalog/imports/id_123",
+        null,
+        null,
+        com.stripe.model.v2.commerce.ProductCatalogImport.class,
+        "{\"object\":\"v2.commerce.product_catalog_import\",\"created\":\"1970-01-12T21:42:34.472Z\",\"feed_type\":\"pricing\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"status\":\"awaiting_upload\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.commerce.ProductCatalogImport productCatalogImport =
+        client.v2().commerce().productCatalog().imports().retrieve("id_123");
+    assertNotNull(productCatalogImport);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/commerce/product_catalog/imports/id_123",
+        null,
+        null);
+  }
+
+  @Test
   public void testV2CoreAccountGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,

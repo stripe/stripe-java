@@ -44,11 +44,17 @@ public final class EventService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<Event>>() {}.getType());
   }
-  /** Retrieves the details of an event. */
+  /**
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which might have been delivered to your event destination.
+   */
   public Event retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
-  /** Retrieves the details of an event. */
+  /**
+   * Retrieves the details of an event if it was created in the last 30 days. Supply the unique
+   * identifier of the event, which might have been delivered to your event destination.
+   */
   public Event retrieve(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/core/events/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =

@@ -26,6 +26,10 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.billing.meter_event_session", com.stripe.model.v2.billing.MeterEventSession.class);
 
+    classLookup.put(
+        "v2.commerce.product_catalog_import",
+        com.stripe.model.v2.commerce.ProductCatalogImport.class);
+
     classLookup.put("v2.core.account", com.stripe.model.v2.core.Account.class);
     classLookup.put("v2.core.account_link", com.stripe.model.v2.core.AccountLink.class);
     classLookup.put("v2.core.account_person", com.stripe.model.v2.core.AccountPerson.class);
@@ -40,6 +44,18 @@ public final class EventDataClassLookup {
         com.stripe.events.V1BillingMeterErrorReportTriggeredEvent.class);
     eventClassLookup.put(
         "v1.billing.meter.no_meter_found", com.stripe.events.V1BillingMeterNoMeterFoundEvent.class);
+    eventClassLookup.put(
+        "v2.commerce.product_catalog.imports.failed",
+        com.stripe.events.V2CommerceProductCatalogImportsFailedEvent.class);
+    eventClassLookup.put(
+        "v2.commerce.product_catalog.imports.processing",
+        com.stripe.events.V2CommerceProductCatalogImportsProcessingEvent.class);
+    eventClassLookup.put(
+        "v2.commerce.product_catalog.imports.succeeded",
+        com.stripe.events.V2CommerceProductCatalogImportsSucceededEvent.class);
+    eventClassLookup.put(
+        "v2.commerce.product_catalog.imports.succeeded_with_errors",
+        com.stripe.events.V2CommerceProductCatalogImportsSucceededWithErrorsEvent.class);
     eventClassLookup.put(
         "v2.core.account.closed", com.stripe.events.V2CoreAccountClosedEvent.class);
     eventClassLookup.put(
