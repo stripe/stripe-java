@@ -1,5 +1,20 @@
 # Changelog
 
+## 32.3.0-beta.1 - 2026-05-27
+This release changes the pinned API version to 2026-05-27.private.
+
+* [#2212](https://github.com/stripe/stripe-java/pull/2212) Update generated code for beta
+  * Add support for `pause` method on resource `Subscription`
+  * Add support for `retrieve` method on resource `v2.iam.ActivityLog`
+  * ⚠️ Change type of `productcatalog.TrialOffer.end_behavior.transition.price` from `string` to `expandable($Price)`
+  * Add support for `amountPaidOffStripe` on `QuotePreviewInvoice`
+  * Add support for `discountable` on `QuotePreviewSubscriptionSchedule.phases[].add_invoice_items[]`
+  * Add support for `bizum` and `scalapay` on `sharedpayment.GrantedToken.payment_method_details`
+  * Add support for `paymentBehavior` on `SubscriptionResumeParams`
+  * Add support for `statusDetails` on `Subscription`
+  * ⚠️ Change type of `v2.moneymanagement.ReceivedCredit.bank_transfer.gb_bank_account.network` from `literal('fps')` to `enum('chaps'|'fps')`
+  * Add support for new value `chaps` on enum `v2.FinancialAddressCreditSimulationCreditParams.network`
+
 ## 32.2.0-beta.2 - 2026-04-24
 * [#2210](https://github.com/stripe/stripe-java/pull/2210) Update generated code for beta
   * Add support for new resources `v2.commerce.ProductCatalogImport`, `v2.data.reporting.QueryRun`, `v2.extend.WorkflowRun`, `v2.extend.Workflow`, `v2.iam.ActivityLog`, `v2.network.BusinessProfile`, and `v2.orchestratedcommerce.Agreement`
