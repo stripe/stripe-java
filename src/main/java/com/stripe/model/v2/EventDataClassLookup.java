@@ -938,11 +938,23 @@ public final class EventDataClassLookup {
         "v2.core.health.authorization_rate_drop.resolved",
         com.stripe.events.V2CoreHealthAuthorizationRateDropResolvedEvent.class);
     eventClassLookup.put(
+        "v2.core.health.elements_error.firing",
+        com.stripe.events.V2CoreHealthElementsErrorFiringEvent.class);
+    eventClassLookup.put(
+        "v2.core.health.elements_error.resolved",
+        com.stripe.events.V2CoreHealthElementsErrorResolvedEvent.class);
+    eventClassLookup.put(
         "v2.core.health.event_generation_failure.resolved",
         com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEvent.class);
     eventClassLookup.put(
         "v2.core.health.fraud_rate.increased",
         com.stripe.events.V2CoreHealthFraudRateIncreasedEvent.class);
+    eventClassLookup.put(
+        "v2.core.health.invoice_count_dropped.firing",
+        com.stripe.events.V2CoreHealthInvoiceCountDroppedFiringEvent.class);
+    eventClassLookup.put(
+        "v2.core.health.invoice_count_dropped.resolved",
+        com.stripe.events.V2CoreHealthInvoiceCountDroppedResolvedEvent.class);
     eventClassLookup.put(
         "v2.core.health.issuing_authorization_request_errors.firing",
         com.stripe.events.V2CoreHealthIssuingAuthorizationRequestErrorsFiringEvent.class);

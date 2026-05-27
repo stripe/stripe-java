@@ -124,6 +124,13 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
   Billie billie;
 
   /**
+   * To enable Bizum, buyers need a Spanish IBAN from a bank connected to Bizum. Within their
+   * banking app, they can enable Bizum and link their mobile number to their IBAN.
+   */
+  @SerializedName("bizum")
+  Bizum bizum;
+
+  /**
    * BLIK is a <a href="https://docs.stripe.com/payments/payment-methods#usage">single use</a>
    * payment method that requires customers to authenticate their payments. When customers want to
    * pay online using BLIK, they request a six-digit code from their banking application and enter
@@ -469,7 +476,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
   SamsungPay samsungPay;
 
   /**
-   * Satispay is a <a href="https://docs.stripe.com/payments/payment-methods#usage">single-use</a>
+   * Satispay is a <a href="https://stripe.com/payments/payment-methods#usage">single-use</a>
    * payment method where customers are required to <a
    * href="https://stripe.com/payments/payment-methods#customer-actions">authenticate</a> their
    * payment. Customers pay by being redirected from your website or app, authorizing the payment
@@ -479,6 +486,16 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
    */
   @SerializedName("satispay")
   Satispay satispay;
+
+  /**
+   * Scalapay is a <a href="https://stripe.com/payments/payment-methods#usage">single-use</a>
+   * payment method that lets customers pay in 3 or 4 installments. Customers are redirected from
+   * your website or app, authorize the payment with Scalapay, then return to your website or app.
+   * You get <a href="https://stripe.com/payments/payment-methods#payment-notification">immediate
+   * notification</a> of whether the payment succeeded or failed.
+   */
+  @SerializedName("scalapay")
+  Scalapay scalapay;
 
   /**
    * The <a href="https://en.wikipedia.org/wiki/Single_Euro_Payments_Area">Single Euro Payments Area
@@ -585,6 +602,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
       BacsDebit bacsDebit,
       Bancontact bancontact,
       Billie billie,
+      Bizum bizum,
       Blik blik,
       Boleto boleto,
       Card card,
@@ -629,6 +647,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
       RevolutPay revolutPay,
       SamsungPay samsungPay,
       Satispay satispay,
+      Scalapay scalapay,
       SepaDebit sepaDebit,
       Shopeepay shopeepay,
       Sofort sofort,
@@ -652,6 +671,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     this.bacsDebit = bacsDebit;
     this.bancontact = bancontact;
     this.billie = billie;
+    this.bizum = bizum;
     this.blik = blik;
     this.boleto = boleto;
     this.card = card;
@@ -696,6 +716,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     this.revolutPay = revolutPay;
     this.samsungPay = samsungPay;
     this.satispay = satispay;
+    this.scalapay = scalapay;
     this.sepaDebit = sepaDebit;
     this.shopeepay = shopeepay;
     this.sofort = sofort;
@@ -738,6 +759,8 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     private Bancontact bancontact;
 
     private Billie billie;
+
+    private Bizum bizum;
 
     private Blik blik;
 
@@ -827,6 +850,8 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
 
     private Satispay satispay;
 
+    private Scalapay scalapay;
+
     private SepaDebit sepaDebit;
 
     private Shopeepay shopeepay;
@@ -863,6 +888,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
           this.bacsDebit,
           this.bancontact,
           this.billie,
+          this.bizum,
           this.blik,
           this.boleto,
           this.card,
@@ -907,6 +933,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
           this.revolutPay,
           this.samsungPay,
           this.satispay,
+          this.scalapay,
           this.sepaDebit,
           this.shopeepay,
           this.sofort,
@@ -1053,6 +1080,15 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
      */
     public Builder setBillie(PaymentMethodConfigurationUpdateParams.Billie billie) {
       this.billie = billie;
+      return this;
+    }
+
+    /**
+     * To enable Bizum, buyers need a Spanish IBAN from a bank connected to Bizum. Within their
+     * banking app, they can enable Bizum and link their mobile number to their IBAN.
+     */
+    public Builder setBizum(PaymentMethodConfigurationUpdateParams.Bizum bizum) {
+      this.bizum = bizum;
       return this;
     }
 
@@ -1537,7 +1573,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Satispay is a <a href="https://docs.stripe.com/payments/payment-methods#usage">single-use</a>
+     * Satispay is a <a href="https://stripe.com/payments/payment-methods#usage">single-use</a>
      * payment method where customers are required to <a
      * href="https://stripe.com/payments/payment-methods#customer-actions">authenticate</a> their
      * payment. Customers pay by being redirected from your website or app, authorizing the payment
@@ -1547,6 +1583,18 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
      */
     public Builder setSatispay(PaymentMethodConfigurationUpdateParams.Satispay satispay) {
       this.satispay = satispay;
+      return this;
+    }
+
+    /**
+     * Scalapay is a <a href="https://stripe.com/payments/payment-methods#usage">single-use</a>
+     * payment method that lets customers pay in 3 or 4 installments. Customers are redirected from
+     * your website or app, authorize the payment with Scalapay, then return to your website or app.
+     * You get <a href="https://stripe.com/payments/payment-methods#payment-notification">immediate
+     * notification</a> of whether the payment succeeded or failed.
+     */
+    public Builder setScalapay(PaymentMethodConfigurationUpdateParams.Scalapay scalapay) {
+      this.scalapay = scalapay;
       return this;
     }
 
@@ -3633,6 +3681,171 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
         /** The account's preference for whether or not to display this payment method. */
         public Builder setPreference(
             PaymentMethodConfigurationUpdateParams.Billie.DisplayPreference.Preference preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Bizum {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Bizum(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationUpdateParams.Bizum build() {
+        return new PaymentMethodConfigurationUpdateParams.Bizum(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationUpdateParams.Bizum.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationUpdateParams.Bizum#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationUpdateParams.Bizum#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationUpdateParams.Bizum.DisplayPreference build() {
+          return new PaymentMethodConfigurationUpdateParams.Bizum.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.Bizum.DisplayPreference#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.Bizum.DisplayPreference#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationUpdateParams.Bizum.DisplayPreference.Preference preference) {
           this.preference = preference;
           return this;
         }
@@ -10418,6 +10631,172 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
         /** The account's preference for whether or not to display this payment method. */
         public Builder setPreference(
             PaymentMethodConfigurationUpdateParams.Satispay.DisplayPreference.Preference
+                preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Scalapay {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Scalapay(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationUpdateParams.Scalapay build() {
+        return new PaymentMethodConfigurationUpdateParams.Scalapay(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationUpdateParams.Scalapay.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationUpdateParams.Scalapay#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationUpdateParams.Scalapay#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationUpdateParams.Scalapay.DisplayPreference build() {
+          return new PaymentMethodConfigurationUpdateParams.Scalapay.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.Scalapay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.Scalapay.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationUpdateParams.Scalapay.DisplayPreference.Preference
                 preference) {
           this.preference = preference;
           return this;

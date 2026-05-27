@@ -38,7 +38,9 @@ public class PersonalizationDesign extends ApiResource
     implements HasId, MetadataStore<PersonalizationDesign> {
   /**
    * The file for the card logo to use with physical bundles that support card logos. Must have a
-   * {@code purpose} value of {@code issuing_logo}.
+   * {@code purpose} value of {@code issuing_logo}. Image must be in PNG format with dimensions of
+   * 1000px by 200px. It must be a binary (black and white) image containing a black logo on a white
+   * background. We don't accept grayscale.
    */
   @SerializedName("card_logo")
   @Getter(lombok.AccessLevel.NONE)

@@ -52,10 +52,6 @@ public class LicenseFee extends StripeObject implements HasId {
   @SerializedName("id")
   String id;
 
-  /** The ID of the license fee's most recently created version. */
-  @SerializedName("latest_version")
-  String latestVersion;
-
   /**
    * A Licensed Item represents a billable item whose pricing is based on license fees. You can use
    * license fees to specify the pricing and create subscriptions to these items.
@@ -104,21 +100,6 @@ public class LicenseFee extends StripeObject implements HasId {
   /** The service cycle configuration for this License Fee. */
   @SerializedName("service_cycle")
   ServiceCycle serviceCycle;
-
-  /**
-   * The interval for assessing service.
-   *
-   * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
-   */
-  @SerializedName("service_interval")
-  String serviceInterval;
-
-  /**
-   * The length of the interval for assessing service. For example, set this to 3 and {@code
-   * service_interval} to {@code "month"} to specify quarterly service.
-   */
-  @SerializedName("service_interval_count")
-  Long serviceIntervalCount;
 
   /**
    * The tax behavior for Stripe Tax — whether the license fee price includes or excludes tax.

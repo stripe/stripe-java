@@ -682,6 +682,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @SerializedName("revolut")
     Revolut revolut;
 
+    @SerializedName("scalapay")
+    Scalapay scalapay;
+
     @SerializedName("sofort")
     Sofort sofort;
 
@@ -1122,6 +1125,15 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Revolut extends StripeObject {}
+
+    /**
+     * For more details about Scalapay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Scalapay extends StripeObject {}
 
     /**
      * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API

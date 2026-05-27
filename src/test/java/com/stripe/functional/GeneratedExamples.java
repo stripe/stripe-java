@@ -25620,7 +25620,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.billing.LicenseFee>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.billing.license_fee\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"licensed_item\":{\"object\":\"v2.billing.licensed_item\",\"created\":\"1970-01-12T21:42:34.472Z\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"livemode\":true},\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"service_interval\":\"month\",\"service_interval_count\":1375336415,\"tax_behavior\":\"exclusive\",\"tiers\":[{}]}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.billing.license_fee\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"licensed_item\":{\"object\":\"v2.billing.licensed_item\",\"created\":\"1970-01-12T21:42:34.472Z\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"livemode\":true},\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"tax_behavior\":\"exclusive\",\"tiers\":[{}]}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.LicenseFeeListParams params =
@@ -25648,7 +25648,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.LicenseFee.class,
-        "{\"object\":\"v2.billing.license_fee\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"licensed_item\":{\"object\":\"v2.billing.licensed_item\",\"created\":\"1970-01-12T21:42:34.472Z\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"livemode\":true},\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"service_interval\":\"month\",\"service_interval_count\":1375336415,\"tax_behavior\":\"exclusive\",\"tiers\":[{}]}");
+        "{\"object\":\"v2.billing.license_fee\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"licensed_item\":{\"object\":\"v2.billing.licensed_item\",\"created\":\"1970-01-12T21:42:34.472Z\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"livemode\":true},\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"tax_behavior\":\"exclusive\",\"tiers\":[{}]}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.LicenseFeeCreateParams params =
@@ -25683,7 +25683,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.LicenseFee.class,
-        "{\"object\":\"v2.billing.license_fee\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"licensed_item\":{\"object\":\"v2.billing.licensed_item\",\"created\":\"1970-01-12T21:42:34.472Z\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"livemode\":true},\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"service_interval\":\"month\",\"service_interval_count\":1375336415,\"tax_behavior\":\"exclusive\",\"tiers\":[{}]}");
+        "{\"object\":\"v2.billing.license_fee\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"licensed_item\":{\"object\":\"v2.billing.licensed_item\",\"created\":\"1970-01-12T21:42:34.472Z\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"livemode\":true},\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"tax_behavior\":\"exclusive\",\"tiers\":[{}]}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.billing.LicenseFee licenseFee =
@@ -25706,7 +25706,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.LicenseFee.class,
-        "{\"object\":\"v2.billing.license_fee\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"licensed_item\":{\"object\":\"v2.billing.licensed_item\",\"created\":\"1970-01-12T21:42:34.472Z\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"livemode\":true},\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"service_interval\":\"month\",\"service_interval_count\":1375336415,\"tax_behavior\":\"exclusive\",\"tiers\":[{}]}");
+        "{\"object\":\"v2.billing.license_fee\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"licensed_item\":{\"object\":\"v2.billing.licensed_item\",\"created\":\"1970-01-12T21:42:34.472Z\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"livemode\":true},\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"tax_behavior\":\"exclusive\",\"tiers\":[{}]}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.LicenseFeeUpdateParams params =
@@ -26219,7 +26219,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.billing.PricingPlan>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.billing.pricing_plan\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"livemode\":true,\"tax_behavior\":\"exclusive\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.billing.pricing_plan\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"livemode\":true,\"tax_behavior\":\"exclusive\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.PricingPlanListParams params =
@@ -26245,7 +26245,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.PricingPlan.class,
-        "{\"object\":\"v2.billing.pricing_plan\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"livemode\":true,\"tax_behavior\":\"exclusive\"}");
+        "{\"object\":\"v2.billing.pricing_plan\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"livemode\":true,\"tax_behavior\":\"exclusive\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.PricingPlanCreateParams params =
@@ -26276,7 +26276,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.PricingPlan.class,
-        "{\"object\":\"v2.billing.pricing_plan\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"livemode\":true,\"tax_behavior\":\"exclusive\"}");
+        "{\"object\":\"v2.billing.pricing_plan\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"livemode\":true,\"tax_behavior\":\"exclusive\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.billing.PricingPlan pricingPlan =
@@ -26299,7 +26299,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.PricingPlan.class,
-        "{\"object\":\"v2.billing.pricing_plan\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"livemode\":true,\"tax_behavior\":\"exclusive\"}");
+        "{\"object\":\"v2.billing.pricing_plan\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"livemode\":true,\"tax_behavior\":\"exclusive\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.PricingPlanUpdateParams params =
@@ -26718,7 +26718,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.billing.RateCard>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.billing.rate_card\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"service_interval\":\"month\",\"service_interval_count\":1375336415,\"tax_behavior\":\"exclusive\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.billing.rate_card\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"tax_behavior\":\"exclusive\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.RateCardListParams params =
@@ -26744,7 +26744,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.RateCard.class,
-        "{\"object\":\"v2.billing.rate_card\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"service_interval\":\"month\",\"service_interval_count\":1375336415,\"tax_behavior\":\"exclusive\"}");
+        "{\"object\":\"v2.billing.rate_card\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"tax_behavior\":\"exclusive\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.RateCardCreateParams params =
@@ -26777,7 +26777,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.RateCard.class,
-        "{\"object\":\"v2.billing.rate_card\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"service_interval\":\"month\",\"service_interval_count\":1375336415,\"tax_behavior\":\"exclusive\"}");
+        "{\"object\":\"v2.billing.rate_card\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"tax_behavior\":\"exclusive\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.billing.RateCard rateCard =
@@ -26800,7 +26800,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.RateCard.class,
-        "{\"object\":\"v2.billing.rate_card\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"latest_version\":\"latest_version\",\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"service_interval\":\"month\",\"service_interval_count\":1375336415,\"tax_behavior\":\"exclusive\"}");
+        "{\"object\":\"v2.billing.rate_card\",\"active\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"display_name\":\"display_name\",\"id\":\"obj_123\",\"live_version\":\"live_version\",\"livemode\":true,\"service_cycle\":{\"interval\":\"month\",\"interval_count\":797691627},\"tax_behavior\":\"exclusive\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.RateCardUpdateParams params =
@@ -28103,7 +28103,7 @@ class GeneratedExamples extends BaseStripeTest {
                         com.stripe.param.v2.core.BatchJobCreateParams.Endpoint.HttpMethod.DELETE)
                     .setPath(
                         com.stripe.param.v2.core.BatchJobCreateParams.Endpoint.Path
-                            .V1_SUBSCRIPTION_SCHEDULE_CREATE)
+                            .V1_PRODUCT_CREATE)
                     .build())
             .putMetadata("key", "metadata")
             .setSkipValidation(true)
@@ -29221,6 +29221,25 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/iam/activity_logs",
         params.toMap(),
         null);
+  }
+
+  @Test
+  public void testV2IamActivityLogGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/iam/activity_logs/id_123",
+        null,
+        null,
+        com.stripe.model.v2.iam.ActivityLog.class,
+        "{\"object\":\"v2.iam.activity_log\",\"actor\":{\"type\":\"api_key\"},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"details\":{\"type\":\"api_key\"},\"id\":\"obj_123\",\"livemode\":true,\"type\":\"api_key_created\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.iam.ActivityLog activityLog =
+        client.v2().iam().activityLogs().retrieve("id_123");
+    assertNotNull(activityLog);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/iam/activity_logs/id_123", null, null);
   }
 
   @Test
@@ -31650,7 +31669,7 @@ class GeneratedExamples extends BaseStripeTest {
     com.stripe.param.v2.testhelpers.FinancialAddressCreditParams params =
         com.stripe.param.v2.testhelpers.FinancialAddressCreditParams.builder()
             .setAmount(new com.stripe.v2.Amount(96, "USD"))
-            .setNetwork(com.stripe.param.v2.testhelpers.FinancialAddressCreditParams.Network.FPS)
+            .setNetwork(com.stripe.param.v2.testhelpers.FinancialAddressCreditParams.Network.WIRE)
             .build();
 
     com.stripe.model.v2.FinancialAddressCreditSimulation financialAddressCreditSimulation =

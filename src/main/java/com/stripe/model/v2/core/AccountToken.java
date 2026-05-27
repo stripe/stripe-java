@@ -10,8 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Account tokens are single-use tokens which tokenize company/individual/business information, and
- * are used for creating or updating an Account.
+ * Account tokens are single-use tokens which tokenize an account's contact_email, display_name,
+ * contact_phone, and identity.
  */
 @Getter
 @Setter

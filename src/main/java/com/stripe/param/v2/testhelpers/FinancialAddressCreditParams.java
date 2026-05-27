@@ -124,6 +124,9 @@ public class FinancialAddressCreditParams extends ApiRequestParams {
     @SerializedName("acss")
     ACSS("acss"),
 
+    @SerializedName("chaps")
+    CHAPS("chaps"),
+
     @SerializedName("fps")
     FPS("fps"),
 

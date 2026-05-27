@@ -2,6 +2,7 @@
 package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Refund;
 import com.stripe.model.StripeCollection;
@@ -254,5 +255,49 @@ public final class RefundService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, Refund.class);
+  }
+  /** Serializes a Refund create request into a batch job JSONL line. */
+  public String serializeBatchCreate(RefundCreateParams params) throws StripeException {
+    return serializeBatchCreate(params, (RequestOptions) null);
+  }
+  /** Serializes a Refund create request into a batch job JSONL line. */
+  public String serializeBatchCreate(RefundCreateParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes a Refund cancel request into a batch job JSONL line. */
+  public String serializeBatchCancel(String refund, RefundCancelParams params)
+      throws StripeException {
+    return serializeBatchCancel(refund, params, (RequestOptions) null);
+  }
+  /** Serializes a Refund cancel request into a batch job JSONL line. */
+  public String serializeBatchCancel(
+      String refund, RefundCancelParams params, RequestOptions options) throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("refund", refund);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
 }

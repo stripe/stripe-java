@@ -93,7 +93,7 @@ public class MetricQueryResult extends StripeObject implements HasId {
       @SerializedName("currency")
       String currency;
 
-      /** The Gen6 ID of this metric. */
+      /** The ID of this metric. */
       @SerializedName("metric")
       String metric;
 

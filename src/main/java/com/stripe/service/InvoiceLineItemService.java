@@ -2,6 +2,7 @@
 package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.InvoiceLineItem;
 import com.stripe.model.StripeCollection;
@@ -119,5 +120,32 @@ public final class InvoiceLineItemService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, InvoiceLineItem.class);
+  }
+  /** Serializes an InvoiceLineItem update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(
+      String invoice, String lineItemId, InvoiceLineItemUpdateParams params)
+      throws StripeException {
+    return serializeBatchUpdate(invoice, lineItemId, params, (RequestOptions) null);
+  }
+  /** Serializes an InvoiceLineItem update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(
+      String invoice, String lineItemId, InvoiceLineItemUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("invoice", invoice);
+    pathParams.put("line_item_id", lineItemId);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
 }

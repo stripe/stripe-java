@@ -866,7 +866,7 @@ public class Account extends ApiResource implements HasId {
        * The underlying cause of the Account being inactive.
        *
        * <p>One of {@code access_denied}, {@code access_expired}, {@code account_closed}, {@code
-       * account_unavailable}, or {@code unspecified}.
+       * account_unavailable}, {@code institution_requirement}, or {@code unspecified}.
        */
       @SerializedName("cause")
       String cause;

@@ -895,6 +895,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class NextAction extends StripeObject {
+    @SerializedName("blik_authorize")
+    BlikAuthorize blikAuthorize;
+
     @SerializedName("cashapp_handle_redirect_or_display_qr_code")
     CashappHandleRedirectOrDisplayQrCode cashappHandleRedirectOrDisplayQrCode;
 
@@ -926,6 +929,15 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
     @SerializedName("verify_with_microdeposits")
     VerifyWithMicrodeposits verifyWithMicrodeposits;
+
+    /**
+     * For more details about BlikAuthorize, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BlikAuthorize extends StripeObject {}
 
     /**
      * For more details about CashappHandleRedirectOrDisplayQrCode, please refer to the <a
@@ -1130,6 +1142,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("bacs_debit")
     BacsDebit bacsDebit;
 
+    @SerializedName("bizum")
+    Bizum bizum;
+
     @SerializedName("card")
     Card card;
 
@@ -1268,6 +1283,15 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         String referencePrefix;
       }
     }
+
+    /**
+     * For more details about Bizum, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bizum extends StripeObject {}
 
     /**
      * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
@@ -1842,6 +1866,14 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class FrMealVoucher extends StripeObject {
+        /**
+         * Whether meal voucher benefit is enabled for this setup intent.
+         *
+         * <p>One of {@code if_payment_method_is_eligible}, or {@code never}.
+         */
+        @SerializedName("enabled")
+        String enabled;
+
         /** The 14-digit SIRET of the meal voucher acceptor. */
         @SerializedName("siret")
         String siret;

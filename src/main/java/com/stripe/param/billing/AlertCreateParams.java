@@ -1849,6 +1849,9 @@ public class AlertCreateParams extends ApiRequestParams {
     }
 
     public enum GroupBy implements ApiRequestParams.EnumParam {
+      @SerializedName("billing_cadence")
+      BILLING_CADENCE("billing_cadence"),
+
       @SerializedName("pricing_plan_subscription")
       PRICING_PLAN_SUBSCRIPTION("pricing_plan_subscription");
 

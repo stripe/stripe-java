@@ -2,6 +2,7 @@
 package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Product;
 import com.stripe.model.StripeCollection;
@@ -204,6 +205,71 @@ public final class ProductService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, new TypeToken<StripeSearchResult<Product>>() {}.getType());
+  }
+  /** Serializes a Product delete request into a batch job JSONL line. */
+  public String serializeBatchDelete(String id) throws StripeException {
+    return serializeBatchDelete(id, (RequestOptions) null);
+  }
+  /** Serializes a Product delete request into a batch job JSONL line. */
+  public String serializeBatchDelete(String id, RequestOptions options) throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("id", id);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes a Product update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(String id, ProductUpdateParams params) throws StripeException {
+    return serializeBatchUpdate(id, params, (RequestOptions) null);
+  }
+  /** Serializes a Product update request into a batch job JSONL line. */
+  public String serializeBatchUpdate(String id, ProductUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("id", id);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes a Product create request into a batch job JSONL line. */
+  public String serializeBatchCreate(ProductCreateParams params) throws StripeException {
+    return serializeBatchCreate(params, (RequestOptions) null);
+  }
+  /** Serializes a Product create request into a batch job JSONL line. */
+  public String serializeBatchCreate(ProductCreateParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
 
   public com.stripe.service.ProductFeatureService features() {

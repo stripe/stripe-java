@@ -2,6 +2,7 @@
 package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.InvoiceRenderingTemplate;
 import com.stripe.model.StripeCollection;
@@ -183,5 +184,55 @@ public final class InvoiceRenderingTemplateService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, InvoiceRenderingTemplate.class);
+  }
+  /** Serializes an InvoiceRenderingTemplate archive request into a batch job JSONL line. */
+  public String serializeBatchArchive(String template, InvoiceRenderingTemplateArchiveParams params)
+      throws StripeException {
+    return serializeBatchArchive(template, params, (RequestOptions) null);
+  }
+  /** Serializes an InvoiceRenderingTemplate archive request into a batch job JSONL line. */
+  public String serializeBatchArchive(
+      String template, InvoiceRenderingTemplateArchiveParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("template", template);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes an InvoiceRenderingTemplate unarchive request into a batch job JSONL line. */
+  public String serializeBatchUnarchive(
+      String template, InvoiceRenderingTemplateUnarchiveParams params) throws StripeException {
+    return serializeBatchUnarchive(template, params, (RequestOptions) null);
+  }
+  /** Serializes an InvoiceRenderingTemplate unarchive request into a batch job JSONL line. */
+  public String serializeBatchUnarchive(
+      String template, InvoiceRenderingTemplateUnarchiveParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("template", template);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
 }

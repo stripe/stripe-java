@@ -18,6 +18,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   @SerializedName("allocated_funds")
   AllocatedFunds allocatedFunds;
 
+  /**
+   * The list of payment method types allowed for use with this payment. Stripe automatically
+   * returns compatible payment methods from this list in the {@code payment_method_types} field of
+   * the response, based on the other PaymentIntent parameters, such as {@code currency}, {@code
+   * amount}, and {@code customer}.
+   */
+  @SerializedName("allowed_payment_method_types")
+  List<PaymentIntentConfirmParams.AllowedPaymentMethodType> allowedPaymentMethodTypes;
+
   /** Provides industry-specific information about the amount. */
   @SerializedName("amount_details")
   Object amountDetails;
@@ -96,9 +105,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
   /**
    * Set to {@code true} to indicate that the customer isn't in your checkout flow during this
-   * payment attempt and can't authenticate. Use this parameter in scenarios where you collect card
-   * details and <a href="https://docs.stripe.com/payments/cards/charging-saved-cards">charge them
-   * later</a>.
+   * payment attempt and can't authenticate. Use this parameter in scenarios where you collect
+   * payment method details and <a
+   * href="https://docs.stripe.com/payments/save-during-payment">charge them later</a>.
    */
   @SerializedName("off_session")
   Object offSession;
@@ -203,6 +212,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
   private PaymentIntentConfirmParams(
       AllocatedFunds allocatedFunds,
+      List<PaymentIntentConfirmParams.AllowedPaymentMethodType> allowedPaymentMethodTypes,
       Object amountDetails,
       Long amountToConfirm,
       Object applicationFeeAmount,
@@ -229,6 +239,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Object shipping,
       Boolean useStripeSdk) {
     this.allocatedFunds = allocatedFunds;
+    this.allowedPaymentMethodTypes = allowedPaymentMethodTypes;
     this.amountDetails = amountDetails;
     this.amountToConfirm = amountToConfirm;
     this.applicationFeeAmount = applicationFeeAmount;
@@ -262,6 +273,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
   public static class Builder {
     private AllocatedFunds allocatedFunds;
+
+    private List<PaymentIntentConfirmParams.AllowedPaymentMethodType> allowedPaymentMethodTypes;
 
     private Object amountDetails;
 
@@ -317,6 +330,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     public PaymentIntentConfirmParams build() {
       return new PaymentIntentConfirmParams(
           this.allocatedFunds,
+          this.allowedPaymentMethodTypes,
           this.amountDetails,
           this.amountToConfirm,
           this.applicationFeeAmount,
@@ -347,6 +361,34 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     /** Allocated Funds configuration for this PaymentIntent. */
     public Builder setAllocatedFunds(PaymentIntentConfirmParams.AllocatedFunds allocatedFunds) {
       this.allocatedFunds = allocatedFunds;
+      return this;
+    }
+
+    /**
+     * Add an element to `allowedPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link PaymentIntentConfirmParams#allowedPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllowedPaymentMethodType(
+        PaymentIntentConfirmParams.AllowedPaymentMethodType element) {
+      if (this.allowedPaymentMethodTypes == null) {
+        this.allowedPaymentMethodTypes = new ArrayList<>();
+      }
+      this.allowedPaymentMethodTypes.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `allowedPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link PaymentIntentConfirmParams#allowedPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllAllowedPaymentMethodType(
+        List<PaymentIntentConfirmParams.AllowedPaymentMethodType> elements) {
+      if (this.allowedPaymentMethodTypes == null) {
+        this.allowedPaymentMethodTypes = new ArrayList<>();
+      }
+      this.allowedPaymentMethodTypes.addAll(elements);
       return this;
     }
 
@@ -557,8 +599,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     /**
      * Set to {@code true} to indicate that the customer isn't in your checkout flow during this
      * payment attempt and can't authenticate. Use this parameter in scenarios where you collect
-     * card details and <a href="https://docs.stripe.com/payments/cards/charging-saved-cards">charge
-     * them later</a>.
+     * payment method details and <a
+     * href="https://docs.stripe.com/payments/save-during-payment">charge them later</a>.
      */
     public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;
@@ -568,8 +610,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     /**
      * Set to {@code true} to indicate that the customer isn't in your checkout flow during this
      * payment attempt and can't authenticate. Use this parameter in scenarios where you collect
-     * card details and <a href="https://docs.stripe.com/payments/cards/charging-saved-cards">charge
-     * them later</a>.
+     * payment method details and <a
+     * href="https://docs.stripe.com/payments/save-during-payment">charge them later</a>.
      */
     public Builder setOffSession(PaymentIntentConfirmParams.OffSession offSession) {
       this.offSession = offSession;
@@ -16314,6 +16356,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     BillingDetails billingDetails;
 
     /**
+     * If this is a {@code bizum} PaymentMethod, this hash contains details about the Bizum payment
+     * method.
+     */
+    @SerializedName("bizum")
+    Bizum bizum;
+
+    /**
      * If this is a {@code blik} PaymentMethod, this hash contains details about the BLIK payment
      * method.
      */
@@ -16449,7 +16498,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     /**
      * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
-     * method.
+     * method (Link is also known as Onelink in the UK).
      */
     @SerializedName("link")
     Link link;
@@ -16611,6 +16660,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Satispay satispay;
 
     /**
+     * If this is a Scalapay PaymentMethod, this hash contains details about the Scalapay payment
+     * method.
+     */
+    @SerializedName("scalapay")
+    Scalapay scalapay;
+
+    /**
      * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA
      * debit bank account.
      */
@@ -16708,6 +16764,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Bancontact bancontact,
         Billie billie,
         BillingDetails billingDetails,
+        Bizum bizum,
         Blik blik,
         Boleto boleto,
         Cashapp cashapp,
@@ -16750,6 +16807,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         RevolutPay revolutPay,
         SamsungPay samsungPay,
         Satispay satispay,
+        Scalapay scalapay,
         SepaDebit sepaDebit,
         String sharedPaymentGrantedToken,
         Shopeepay shopeepay,
@@ -16775,6 +16833,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.bancontact = bancontact;
       this.billie = billie;
       this.billingDetails = billingDetails;
+      this.bizum = bizum;
       this.blik = blik;
       this.boleto = boleto;
       this.cashapp = cashapp;
@@ -16817,6 +16876,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.revolutPay = revolutPay;
       this.samsungPay = samsungPay;
       this.satispay = satispay;
+      this.scalapay = scalapay;
       this.sepaDebit = sepaDebit;
       this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
       this.shopeepay = shopeepay;
@@ -16860,6 +16920,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private Billie billie;
 
       private BillingDetails billingDetails;
+
+      private Bizum bizum;
 
       private Blik blik;
 
@@ -16945,6 +17007,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Satispay satispay;
 
+      private Scalapay scalapay;
+
       private SepaDebit sepaDebit;
 
       private String sharedPaymentGrantedToken;
@@ -16986,6 +17050,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.bancontact,
             this.billie,
             this.billingDetails,
+            this.bizum,
             this.blik,
             this.boleto,
             this.cashapp,
@@ -17028,6 +17093,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.revolutPay,
             this.samsungPay,
             this.satispay,
+            this.scalapay,
             this.sepaDebit,
             this.sharedPaymentGrantedToken,
             this.shopeepay,
@@ -17157,6 +17223,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       public Builder setBillingDetails(
           PaymentIntentConfirmParams.PaymentMethodData.BillingDetails billingDetails) {
         this.billingDetails = billingDetails;
+        return this;
+      }
+
+      /**
+       * If this is a {@code bizum} PaymentMethod, this hash contains details about the Bizum
+       * payment method.
+       */
+      public Builder setBizum(PaymentIntentConfirmParams.PaymentMethodData.Bizum bizum) {
+        this.bizum = bizum;
         return this;
       }
 
@@ -17354,7 +17429,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       /**
        * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
-       * method.
+       * method (Link is also known as Onelink in the UK).
        */
       public Builder setLink(PaymentIntentConfirmParams.PaymentMethodData.Link link) {
         this.link = link;
@@ -17582,6 +17657,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setSatispay(PaymentIntentConfirmParams.PaymentMethodData.Satispay satispay) {
         this.satispay = satispay;
+        return this;
+      }
+
+      /**
+       * If this is a Scalapay PaymentMethod, this hash contains details about the Scalapay payment
+       * method.
+       */
+      public Builder setScalapay(PaymentIntentConfirmParams.PaymentMethodData.Scalapay scalapay) {
+        this.scalapay = scalapay;
         return this;
       }
 
@@ -18706,6 +18790,64 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.state = state;
             return this;
           }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bizum {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Bizum(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodData.Bizum build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Bizum(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Bizum#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Bizum#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
@@ -21939,6 +22081,64 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Scalapay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Scalapay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodData.Scalapay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Scalapay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Scalapay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Scalapay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -22975,6 +23175,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("billie")
       BILLIE("billie"),
 
+      @SerializedName("bizum")
+      BIZUM("bizum"),
+
       @SerializedName("blik")
       BLIK("blik"),
 
@@ -23088,6 +23291,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       @SerializedName("satispay")
       SATISPAY("satispay"),
+
+      @SerializedName("scalapay")
+      SCALAPAY("scalapay"),
 
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
@@ -23205,6 +23411,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Object billie;
 
     /**
+     * If this is a {@code bizum} PaymentMethod, this sub-hash contains details about the Bizum
+     * payment method options.
+     */
+    @SerializedName("bizum")
+    Object bizum;
+
+    /**
      * If this is a {@code blik} PaymentMethod, this sub-hash contains details about the BLIK
      * payment method options.
      */
@@ -23272,6 +23485,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      */
     @SerializedName("fpx")
     Object fpx;
+
+    /**
+     * If this is a {@code gift_card} PaymentMethod, this sub-hash contains details about the gift
+     * card payment method options.
+     */
+    @SerializedName("gift_card")
+    Object giftCard;
 
     /**
      * If this is a {@code giropay} PaymentMethod, this sub-hash contains details about the Giropay
@@ -23345,7 +23565,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     /**
      * If this is a {@code link} PaymentMethod, this sub-hash contains details about the Link
-     * payment method options.
+     * payment method options (Link is also known as Onelink in the UK).
      */
     @SerializedName("link")
     Object link;
@@ -23491,6 +23711,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Object satispay;
 
     /**
+     * If this is a {@code scalapay} PaymentMethod, this sub-hash contains details about the
+     * ScalaPay payment method options.
+     */
+    @SerializedName("scalapay")
+    Object scalapay;
+
+    /**
      * If this is a {@code sepa_debit} PaymentIntent, this sub-hash contains details about the SEPA
      * Debit payment method options.
      */
@@ -23571,6 +23798,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Object bacsDebit,
         Object bancontact,
         Object billie,
+        Object bizum,
         Object blik,
         Object boleto,
         Object card,
@@ -23581,6 +23809,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Object eps,
         Map<String, Object> extraParams,
         Object fpx,
+        Object giftCard,
         Object giropay,
         Object gopay,
         Object grabpay,
@@ -23612,6 +23841,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Object revolutPay,
         Object samsungPay,
         Object satispay,
+        Object scalapay,
         Object sepaDebit,
         Object shopeepay,
         Object sofort,
@@ -23632,6 +23862,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
       this.billie = billie;
+      this.bizum = bizum;
       this.blik = blik;
       this.boleto = boleto;
       this.card = card;
@@ -23642,6 +23873,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.eps = eps;
       this.extraParams = extraParams;
       this.fpx = fpx;
+      this.giftCard = giftCard;
       this.giropay = giropay;
       this.gopay = gopay;
       this.grabpay = grabpay;
@@ -23673,6 +23905,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.revolutPay = revolutPay;
       this.samsungPay = samsungPay;
       this.satispay = satispay;
+      this.scalapay = scalapay;
       this.sepaDebit = sepaDebit;
       this.shopeepay = shopeepay;
       this.sofort = sofort;
@@ -23710,6 +23943,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Object billie;
 
+      private Object bizum;
+
       private Object blik;
 
       private Object boleto;
@@ -23729,6 +23964,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       private Object fpx;
+
+      private Object giftCard;
 
       private Object giropay;
 
@@ -23792,6 +24029,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Object satispay;
 
+      private Object scalapay;
+
       private Object sepaDebit;
 
       private Object shopeepay;
@@ -23825,6 +24064,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.bacsDebit,
             this.bancontact,
             this.billie,
+            this.bizum,
             this.blik,
             this.boleto,
             this.card,
@@ -23835,6 +24075,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.eps,
             this.extraParams,
             this.fpx,
+            this.giftCard,
             this.giropay,
             this.gopay,
             this.grabpay,
@@ -23866,6 +24107,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.revolutPay,
             this.samsungPay,
             this.satispay,
+            this.scalapay,
             this.sepaDebit,
             this.shopeepay,
             this.sofort,
@@ -24065,6 +24307,24 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       /**
+       * If this is a {@code bizum} PaymentMethod, this sub-hash contains details about the Bizum
+       * payment method options.
+       */
+      public Builder setBizum(PaymentIntentConfirmParams.PaymentMethodOptions.Bizum bizum) {
+        this.bizum = bizum;
+        return this;
+      }
+
+      /**
+       * If this is a {@code bizum} PaymentMethod, this sub-hash contains details about the Bizum
+       * payment method options.
+       */
+      public Builder setBizum(EmptyParam bizum) {
+        this.bizum = bizum;
+        return this;
+      }
+
+      /**
        * If this is a {@code blik} PaymentMethod, this sub-hash contains details about the BLIK
        * payment method options.
        */
@@ -24246,6 +24506,25 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setFpx(EmptyParam fpx) {
         this.fpx = fpx;
+        return this;
+      }
+
+      /**
+       * If this is a {@code gift_card} PaymentMethod, this sub-hash contains details about the gift
+       * card payment method options.
+       */
+      public Builder setGiftCard(
+          PaymentIntentConfirmParams.PaymentMethodOptions.GiftCard giftCard) {
+        this.giftCard = giftCard;
+        return this;
+      }
+
+      /**
+       * If this is a {@code gift_card} PaymentMethod, this sub-hash contains details about the gift
+       * card payment method options.
+       */
+      public Builder setGiftCard(EmptyParam giftCard) {
+        this.giftCard = giftCard;
         return this;
       }
 
@@ -24434,7 +24713,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       /**
        * If this is a {@code link} PaymentMethod, this sub-hash contains details about the Link
-       * payment method options.
+       * payment method options (Link is also known as Onelink in the UK).
        */
       public Builder setLink(PaymentIntentConfirmParams.PaymentMethodOptions.Link link) {
         this.link = link;
@@ -24443,7 +24722,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       /**
        * If this is a {@code link} PaymentMethod, this sub-hash contains details about the Link
-       * payment method options.
+       * payment method options (Link is also known as Onelink in the UK).
        */
       public Builder setLink(EmptyParam link) {
         this.link = link;
@@ -24817,6 +25096,25 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setSatispay(EmptyParam satispay) {
         this.satispay = satispay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code scalapay} PaymentMethod, this sub-hash contains details about the
+       * ScalaPay payment method options.
+       */
+      public Builder setScalapay(
+          PaymentIntentConfirmParams.PaymentMethodOptions.Scalapay scalapay) {
+        this.scalapay = scalapay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code scalapay} PaymentMethod, this sub-hash contains details about the
+       * ScalaPay payment method options.
+       */
+      public Builder setScalapay(EmptyParam scalapay) {
+        this.scalapay = scalapay;
         return this;
       }
 
@@ -27170,6 +27468,64 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         CaptureMethod(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bizum {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Bizum(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Bizum build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Bizum(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Bizum#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Bizum#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
@@ -33016,6 +33372,64 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         SetupFutureUsage(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class GiftCard {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private GiftCard(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodOptions.GiftCard build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.GiftCard(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.GiftCard#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.GiftCard#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
@@ -46333,6 +46747,124 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Scalapay {
+      /**
+       * Controls when the funds are captured from the customer's account.
+       *
+       * <p>If provided, this parameter overrides the behavior of the top-level <a
+       * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+       * for this payment method type when finalizing the payment with this payment method type.
+       *
+       * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty value
+       * for this parameter unsets the stored value for this payment method type.
+       */
+      @SerializedName("capture_method")
+      ApiRequestParams.EnumParam captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Scalapay(ApiRequestParams.EnumParam captureMethod, Map<String, Object> extraParams) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private ApiRequestParams.EnumParam captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Scalapay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Scalapay(
+              this.captureMethod, this.extraParams);
+        }
+
+        /**
+         * Controls when the funds are captured from the customer's account.
+         *
+         * <p>If provided, this parameter overrides the behavior of the top-level <a
+         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+         * for this payment method type when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter unsets the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Scalapay.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Controls when the funds are captured from the customer's account.
+         *
+         * <p>If provided, this parameter overrides the behavior of the top-level <a
+         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+         * for this payment method type when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter unsets the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(EmptyParam captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Scalapay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Scalapay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -47509,7 +48041,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
         @SerializedName("none")
-        NONE("none");
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -49546,6 +50081,201 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
   }
 
+  public enum AllowedPaymentMethodType implements ApiRequestParams.EnumParam {
+    @SerializedName("acss_debit")
+    ACSS_DEBIT("acss_debit"),
+
+    @SerializedName("affirm")
+    AFFIRM("affirm"),
+
+    @SerializedName("afterpay_clearpay")
+    AFTERPAY_CLEARPAY("afterpay_clearpay"),
+
+    @SerializedName("alipay")
+    ALIPAY("alipay"),
+
+    @SerializedName("alma")
+    ALMA("alma"),
+
+    @SerializedName("amazon_pay")
+    AMAZON_PAY("amazon_pay"),
+
+    @SerializedName("au_becs_debit")
+    AU_BECS_DEBIT("au_becs_debit"),
+
+    @SerializedName("bacs_debit")
+    BACS_DEBIT("bacs_debit"),
+
+    @SerializedName("bancontact")
+    BANCONTACT("bancontact"),
+
+    @SerializedName("billie")
+    BILLIE("billie"),
+
+    @SerializedName("bizum")
+    BIZUM("bizum"),
+
+    @SerializedName("blik")
+    BLIK("blik"),
+
+    @SerializedName("boleto")
+    BOLETO("boleto"),
+
+    @SerializedName("card")
+    CARD("card"),
+
+    @SerializedName("cashapp")
+    CASHAPP("cashapp"),
+
+    @SerializedName("crypto")
+    CRYPTO("crypto"),
+
+    @SerializedName("customer_balance")
+    CUSTOMER_BALANCE("customer_balance"),
+
+    @SerializedName("eps")
+    EPS("eps"),
+
+    @SerializedName("fpx")
+    FPX("fpx"),
+
+    @SerializedName("gift_card")
+    GIFT_CARD("gift_card"),
+
+    @SerializedName("giropay")
+    GIROPAY("giropay"),
+
+    @SerializedName("gopay")
+    GOPAY("gopay"),
+
+    @SerializedName("grabpay")
+    GRABPAY("grabpay"),
+
+    @SerializedName("id_bank_transfer")
+    ID_BANK_TRANSFER("id_bank_transfer"),
+
+    @SerializedName("ideal")
+    IDEAL("ideal"),
+
+    @SerializedName("kakao_pay")
+    KAKAO_PAY("kakao_pay"),
+
+    @SerializedName("klarna")
+    KLARNA("klarna"),
+
+    @SerializedName("konbini")
+    KONBINI("konbini"),
+
+    @SerializedName("kr_card")
+    KR_CARD("kr_card"),
+
+    @SerializedName("link")
+    LINK("link"),
+
+    @SerializedName("mb_way")
+    MB_WAY("mb_way"),
+
+    @SerializedName("mobilepay")
+    MOBILEPAY("mobilepay"),
+
+    @SerializedName("multibanco")
+    MULTIBANCO("multibanco"),
+
+    @SerializedName("naver_pay")
+    NAVER_PAY("naver_pay"),
+
+    @SerializedName("nz_bank_account")
+    NZ_BANK_ACCOUNT("nz_bank_account"),
+
+    @SerializedName("oxxo")
+    OXXO("oxxo"),
+
+    @SerializedName("p24")
+    P24("p24"),
+
+    @SerializedName("pay_by_bank")
+    PAY_BY_BANK("pay_by_bank"),
+
+    @SerializedName("payco")
+    PAYCO("payco"),
+
+    @SerializedName("paynow")
+    PAYNOW("paynow"),
+
+    @SerializedName("paypal")
+    PAYPAL("paypal"),
+
+    @SerializedName("paypay")
+    PAYPAY("paypay"),
+
+    @SerializedName("payto")
+    PAYTO("payto"),
+
+    @SerializedName("pix")
+    PIX("pix"),
+
+    @SerializedName("promptpay")
+    PROMPTPAY("promptpay"),
+
+    @SerializedName("qris")
+    QRIS("qris"),
+
+    @SerializedName("rechnung")
+    RECHNUNG("rechnung"),
+
+    @SerializedName("revolut_pay")
+    REVOLUT_PAY("revolut_pay"),
+
+    @SerializedName("samsung_pay")
+    SAMSUNG_PAY("samsung_pay"),
+
+    @SerializedName("satispay")
+    SATISPAY("satispay"),
+
+    @SerializedName("scalapay")
+    SCALAPAY("scalapay"),
+
+    @SerializedName("sepa_debit")
+    SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("shopeepay")
+    SHOPEEPAY("shopeepay"),
+
+    @SerializedName("sofort")
+    SOFORT("sofort"),
+
+    @SerializedName("stripe_balance")
+    STRIPE_BALANCE("stripe_balance"),
+
+    @SerializedName("sunbit")
+    SUNBIT("sunbit"),
+
+    @SerializedName("swish")
+    SWISH("swish"),
+
+    @SerializedName("twint")
+    TWINT("twint"),
+
+    @SerializedName("upi")
+    UPI("upi"),
+
+    @SerializedName("us_bank_account")
+    US_BANK_ACCOUNT("us_bank_account"),
+
+    @SerializedName("wechat_pay")
+    WECHAT_PAY("wechat_pay"),
+
+    @SerializedName("zip")
+    ZIP("zip");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    AllowedPaymentMethodType(String value) {
+      this.value = value;
+    }
+  }
+
   public enum CaptureMethod implements ApiRequestParams.EnumParam {
     @SerializedName("automatic")
     AUTOMATIC("automatic"),
@@ -49594,6 +50324,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     @SerializedName("billie")
     BILLIE("billie"),
+
+    @SerializedName("bizum")
+    BIZUM("bizum"),
 
     @SerializedName("blik")
     BLIK("blik"),
@@ -49708,6 +50441,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     @SerializedName("satispay")
     SATISPAY("satispay"),
+
+    @SerializedName("scalapay")
+    SCALAPAY("scalapay"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),

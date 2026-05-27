@@ -39,6 +39,9 @@ public final class V2CoreHealthTrafficVolumeDropResolvedEvent extends Event {
       /** The total volume of payment requests within the latest observation time window. */
       @SerializedName("actual_traffic")
       Long actualTraffic;
+      /** The canonical path. */
+      @SerializedName("canonical_path")
+      String canonicalPath;
       /** The expected volume of payment requests within the latest observation time window. */
       @SerializedName("expected_traffic")
       Long expectedTraffic;

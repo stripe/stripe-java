@@ -983,6 +983,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String billiePayments;
 
     /**
+     * The status of the Bizum capability of the account, or whether the account can directly
+     * process Bizum payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("bizum_payments")
+    String bizumPayments;
+
+    /**
      * The status of the blik payments capability of the account, or whether the account can
      * directly process blik charges.
      *
@@ -1393,6 +1402,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("satispay_payments")
     String satispayPayments;
+
+    /**
+     * The status of the Scalapay capability of the account, or whether the account can directly
+     * process Scalapay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("scalapay_payments")
+    String scalapayPayments;
 
     /**
      * The status of the SEPA customer_balance payments (EUR currency) capability of the account, or

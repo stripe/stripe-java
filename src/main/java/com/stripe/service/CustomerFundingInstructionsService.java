@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec
 package com.stripe.service;
 
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.FundingInstructions;
 import com.stripe.net.ApiRequest;
@@ -46,5 +47,30 @@ public final class CustomerFundingInstructionsService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, FundingInstructions.class);
+  }
+  /** Serializes a CustomerFundingInstructions create request into a batch job JSONL line. */
+  public String serializeBatchCreateFundingInstructions(
+      String customer, CustomerFundingInstructionsCreateParams params) throws StripeException {
+    return serializeBatchCreateFundingInstructions(customer, params, (RequestOptions) null);
+  }
+  /** Serializes a CustomerFundingInstructions create request into a batch job JSONL line. */
+  public String serializeBatchCreateFundingInstructions(
+      String customer, CustomerFundingInstructionsCreateParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("customer", customer);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
 }

@@ -651,7 +651,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2026_03_25_DAHLIA("2026-03-25.dahlia"),
 
     @SerializedName("2026-04-22.dahlia")
-    VERSION_2026_04_22_DAHLIA("2026-04-22.dahlia");
+    VERSION_2026_04_22_DAHLIA("2026-04-22.dahlia"),
+
+    @SerializedName("2026-05-27.dahlia")
+    VERSION_2026_05_27_DAHLIA("2026-05-27.dahlia");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
@@ -1564,6 +1567,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("billing.alert.recovered")
     BILLING__ALERT__RECOVERED("billing.alert.recovered"),
+
+    @SerializedName("payment_intent.expired")
+    PAYMENT_INTENT__EXPIRED("payment_intent.expired"),
 
     @SerializedName("billing.credit_balance_transaction.created")
     BILLING__CREDIT_BALANCE_TRANSACTION__CREATED("billing.credit_balance_transaction.created"),

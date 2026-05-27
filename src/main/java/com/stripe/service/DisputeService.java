@@ -2,6 +2,7 @@
 package com.stripe.service;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Dispute;
 import com.stripe.model.StripeCollection;
@@ -181,5 +182,29 @@ public final class DisputeService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, Dispute.class);
+  }
+  /** Serializes a Dispute close request into a batch job JSONL line. */
+  public String serializeBatchClose(String dispute, DisputeCloseParams params)
+      throws StripeException {
+    return serializeBatchClose(dispute, params, (RequestOptions) null);
+  }
+  /** Serializes a Dispute close request into a batch job JSONL line. */
+  public String serializeBatchClose(
+      String dispute, DisputeCloseParams params, RequestOptions options) throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("dispute", dispute);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
 }

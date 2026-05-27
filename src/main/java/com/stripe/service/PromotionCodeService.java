@@ -162,18 +162,18 @@ public final class PromotionCodeService extends ApiService {
   /** Serializes a PromotionCode create request into a batch job JSONL line. */
   public String serializeBatchCreate(PromotionCodeCreateParams params, RequestOptions options)
       throws StripeException {
-    String itemId = java.util.UUID.randomUUID().toString();
+    String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
-    java.util.Map<String, Object> item = new java.util.LinkedHashMap<>();
-    item.put("id", itemId);
-    item.put("params", (params != null) ? params.toMap() : null);
-    item.put("stripe_version", stripeVersion);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
     if (stripeContext != null) {
-      item.put("context", stripeContext);
+      requestBody.put("context", stripeContext);
     }
-    return ApiResource.GSON.toJson(item);
+    return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a PromotionCode update request into a batch job JSONL line. */
   public String serializeBatchUpdate(String promotionCode, PromotionCodeUpdateParams params)
@@ -184,20 +184,20 @@ public final class PromotionCodeService extends ApiService {
   public String serializeBatchUpdate(
       String promotionCode, PromotionCodeUpdateParams params, RequestOptions options)
       throws StripeException {
-    String itemId = java.util.UUID.randomUUID().toString();
+    String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
     pathParams.put("promotion_code", promotionCode);
-    java.util.Map<String, Object> item = new java.util.LinkedHashMap<>();
-    item.put("id", itemId);
-    item.put("path_params", pathParams);
-    item.put("params", (params != null) ? params.toMap() : null);
-    item.put("stripe_version", stripeVersion);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
     if (stripeContext != null) {
-      item.put("context", stripeContext);
+      requestBody.put("context", stripeContext);
     }
-    return ApiResource.GSON.toJson(item);
+    return ApiResource.GSON.toJson(requestBody);
   }
 }

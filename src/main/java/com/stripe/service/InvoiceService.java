@@ -807,6 +807,29 @@ public final class InvoiceService extends ApiService {
             options);
     return this.request(request, Invoice.class);
   }
+  /** Serializes an Invoice delete request into a batch job JSONL line. */
+  public String serializeBatchDelete(String invoice) throws StripeException {
+    return serializeBatchDelete(invoice, (RequestOptions) null);
+  }
+  /** Serializes an Invoice delete request into a batch job JSONL line. */
+  public String serializeBatchDelete(String invoice, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("invoice", invoice);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
   /** Serializes an Invoice update request into a batch job JSONL line. */
   public String serializeBatchUpdate(String invoice, InvoiceUpdateParams params)
       throws StripeException {
@@ -815,21 +838,115 @@ public final class InvoiceService extends ApiService {
   /** Serializes an Invoice update request into a batch job JSONL line. */
   public String serializeBatchUpdate(
       String invoice, InvoiceUpdateParams params, RequestOptions options) throws StripeException {
-    String itemId = java.util.UUID.randomUUID().toString();
+    String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
     pathParams.put("invoice", invoice);
-    java.util.Map<String, Object> item = new java.util.LinkedHashMap<>();
-    item.put("id", itemId);
-    item.put("path_params", pathParams);
-    item.put("params", (params != null) ? params.toMap() : null);
-    item.put("stripe_version", stripeVersion);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
     if (stripeContext != null) {
-      item.put("context", stripeContext);
+      requestBody.put("context", stripeContext);
     }
-    return ApiResource.GSON.toJson(item);
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes an Invoice create request into a batch job JSONL line. */
+  public String serializeBatchCreate(InvoiceCreateParams params) throws StripeException {
+    return serializeBatchCreate(params, (RequestOptions) null);
+  }
+  /** Serializes an Invoice create request into a batch job JSONL line. */
+  public String serializeBatchCreate(InvoiceCreateParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes an Invoice add_lines request into a batch job JSONL line. */
+  public String serializeBatchAddLines(String invoice, InvoiceAddLinesParams params)
+      throws StripeException {
+    return serializeBatchAddLines(invoice, params, (RequestOptions) null);
+  }
+  /** Serializes an Invoice add_lines request into a batch job JSONL line. */
+  public String serializeBatchAddLines(
+      String invoice, InvoiceAddLinesParams params, RequestOptions options) throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("invoice", invoice);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes an Invoice finalize_invoice request into a batch job JSONL line. */
+  public String serializeBatchFinalizeInvoice(String invoice, InvoiceFinalizeInvoiceParams params)
+      throws StripeException {
+    return serializeBatchFinalizeInvoice(invoice, params, (RequestOptions) null);
+  }
+  /** Serializes an Invoice finalize_invoice request into a batch job JSONL line. */
+  public String serializeBatchFinalizeInvoice(
+      String invoice, InvoiceFinalizeInvoiceParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("invoice", invoice);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes an Invoice mark_uncollectible request into a batch job JSONL line. */
+  public String serializeBatchMarkUncollectible(
+      String invoice, InvoiceMarkUncollectibleParams params) throws StripeException {
+    return serializeBatchMarkUncollectible(invoice, params, (RequestOptions) null);
+  }
+  /** Serializes an Invoice mark_uncollectible request into a batch job JSONL line. */
+  public String serializeBatchMarkUncollectible(
+      String invoice, InvoiceMarkUncollectibleParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("invoice", invoice);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes an Invoice pay request into a batch job JSONL line. */
   public String serializeBatchPay(String invoice, InvoicePayParams params) throws StripeException {
@@ -838,21 +955,142 @@ public final class InvoiceService extends ApiService {
   /** Serializes an Invoice pay request into a batch job JSONL line. */
   public String serializeBatchPay(String invoice, InvoicePayParams params, RequestOptions options)
       throws StripeException {
-    String itemId = java.util.UUID.randomUUID().toString();
+    String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
     pathParams.put("invoice", invoice);
-    java.util.Map<String, Object> item = new java.util.LinkedHashMap<>();
-    item.put("id", itemId);
-    item.put("path_params", pathParams);
-    item.put("params", (params != null) ? params.toMap() : null);
-    item.put("stripe_version", stripeVersion);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
     if (stripeContext != null) {
-      item.put("context", stripeContext);
+      requestBody.put("context", stripeContext);
     }
-    return ApiResource.GSON.toJson(item);
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes an Invoice remove_lines request into a batch job JSONL line. */
+  public String serializeBatchRemoveLines(String invoice, InvoiceRemoveLinesParams params)
+      throws StripeException {
+    return serializeBatchRemoveLines(invoice, params, (RequestOptions) null);
+  }
+  /** Serializes an Invoice remove_lines request into a batch job JSONL line. */
+  public String serializeBatchRemoveLines(
+      String invoice, InvoiceRemoveLinesParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("invoice", invoice);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes an Invoice send_invoice request into a batch job JSONL line. */
+  public String serializeBatchSendInvoice(String invoice, InvoiceSendInvoiceParams params)
+      throws StripeException {
+    return serializeBatchSendInvoice(invoice, params, (RequestOptions) null);
+  }
+  /** Serializes an Invoice send_invoice request into a batch job JSONL line. */
+  public String serializeBatchSendInvoice(
+      String invoice, InvoiceSendInvoiceParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("invoice", invoice);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes an Invoice update_lines request into a batch job JSONL line. */
+  public String serializeBatchUpdateLines(String invoice, InvoiceUpdateLinesParams params)
+      throws StripeException {
+    return serializeBatchUpdateLines(invoice, params, (RequestOptions) null);
+  }
+  /** Serializes an Invoice update_lines request into a batch job JSONL line. */
+  public String serializeBatchUpdateLines(
+      String invoice, InvoiceUpdateLinesParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("invoice", invoice);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes an Invoice void_invoice request into a batch job JSONL line. */
+  public String serializeBatchVoidInvoice(String invoice, InvoiceVoidInvoiceParams params)
+      throws StripeException {
+    return serializeBatchVoidInvoice(invoice, params, (RequestOptions) null);
+  }
+  /** Serializes an Invoice void_invoice request into a batch job JSONL line. */
+  public String serializeBatchVoidInvoice(
+      String invoice, InvoiceVoidInvoiceParams params, RequestOptions options)
+      throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
+    pathParams.put("invoice", invoice);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
+  }
+  /** Serializes an Invoice create_preview request into a batch job JSONL line. */
+  public String serializeBatchCreatePreview(InvoiceCreatePreviewParams params)
+      throws StripeException {
+    return serializeBatchCreatePreview(params, (RequestOptions) null);
+  }
+  /** Serializes an Invoice create_preview request into a batch job JSONL line. */
+  public String serializeBatchCreatePreview(
+      InvoiceCreatePreviewParams params, RequestOptions options) throws StripeException {
+    String requestId = java.util.UUID.randomUUID().toString();
+    String stripeVersion = Stripe.API_VERSION;
+    String stripeContext = (options != null) ? options.getStripeContext() : null;
+
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
+    if (stripeContext != null) {
+      requestBody.put("context", stripeContext);
+    }
+    return ApiResource.GSON.toJson(requestBody);
   }
 
   public com.stripe.service.InvoiceLineItemService lineItems() {

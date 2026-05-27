@@ -646,9 +646,11 @@ public final class PaymentIntentService extends ApiService {
    * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
    * declines. After it’s captured, a PaymentIntent can no longer be incremented.
    *
-   * <p>Learn more about <a
-   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
-   * authorizations</a>.
+   * <p>Learn more about incremental authorizations with <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">in-person
+   * payments</a> and <a
+   * href="https://stripe.com/docs/payments/incremental-authorization?platform=web&ui=elements">online
+   * payments</a>.
    */
   public PaymentIntent incrementAuthorization(
       String intent, PaymentIntentIncrementAuthorizationParams params) throws StripeException {
@@ -677,9 +679,11 @@ public final class PaymentIntentService extends ApiService {
    * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
    * declines. After it’s captured, a PaymentIntent can no longer be incremented.
    *
-   * <p>Learn more about <a
-   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
-   * authorizations</a>.
+   * <p>Learn more about incremental authorizations with <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">in-person
+   * payments</a> and <a
+   * href="https://stripe.com/docs/payments/incremental-authorization?platform=web&ui=elements">online
+   * payments</a>.
    */
   public PaymentIntent incrementAuthorization(
       String intent, PaymentIntentIncrementAuthorizationParams params, RequestOptions options)
