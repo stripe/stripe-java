@@ -11,6 +11,7 @@ import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentMethod;
 import com.stripe.model.Refund;
 import com.stripe.model.SetupIntent;
+import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -66,8 +67,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
    *
    * <p>One of {@code bbpos_chipper2x}, {@code bbpos_wisepad3}, {@code bbpos_wisepos_e}, {@code
    * mobile_phone_reader}, {@code simulated_stripe_s700}, {@code simulated_stripe_s710}, {@code
-   * simulated_wisepos_e}, {@code stripe_m2}, {@code stripe_s700}, {@code stripe_s710}, or {@code
-   * verifone_P400}.
+   * simulated_verifone_m425}, {@code simulated_verifone_p630}, {@code simulated_verifone_ux700},
+   * {@code simulated_verifone_v660p}, {@code simulated_wisepos_e}, {@code stripe_m2}, {@code
+   * stripe_s700}, {@code stripe_s710}, {@code verifone_P400}, {@code verifone_m425}, {@code
+   * verifone_p630}, {@code verifone_ux700}, or {@code verifone_v660p}.
    */
   @SerializedName("device_type")
   String deviceType;
@@ -807,6 +810,18 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Action extends StripeObject {
+    /**
+     * The reader action failed due to an <a href="https://docs.stripe.com/api/errors">API
+     * error</a>. Only present when {@code status} is {@code failed} and the underlying failure was
+     * an API error. Avoid parsing the {@code message} field for programmatic logic; use {@code
+     * type} or {@code code} instead. The {@code message} field is for display to humans only and
+     * may be updated at anytime. Requires <a
+     * href="https://docs.stripe.com/terminal/readers/stripe-reader-s700-s710#reader-software-version">reader
+     * version</a> 2.42 or later. Readers on older versions always return null.
+     */
+    @SerializedName("api_error")
+    StripeError apiError;
+
     /** Represents a reader action to collect customer inputs. */
     @SerializedName("collect_inputs")
     CollectInputs collectInputs;
@@ -826,6 +841,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     /** Detailed failure message, only set if status is {@code failed}. */
     @SerializedName("failure_message")
     String failureMessage;
+
+    /** Represents a reader action to print content. */
+    @SerializedName("print_content")
+    PrintContent printContent;
 
     /** Represents a reader action to process a payment intent. */
     @SerializedName("process_payment_intent")
@@ -855,8 +874,8 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
      * Type of action performed by the reader.
      *
      * <p>One of {@code collect_inputs}, {@code collect_payment_method}, {@code
-     * confirm_payment_intent}, {@code process_payment_intent}, {@code process_setup_intent}, {@code
-     * refund_payment}, or {@code set_reader_display}.
+     * confirm_payment_intent}, {@code print_content}, {@code process_payment_intent}, {@code
+     * process_setup_intent}, {@code refund_payment}, or {@code set_reader_display}.
      */
     @SerializedName("type")
     String type;
@@ -1198,6 +1217,46 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
          */
         @SerializedName("return_url")
         String returnUrl;
+      }
+    }
+
+    /** Represents a reader action to print content. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PrintContent extends StripeObject {
+      /** Metadata of an uploaded file. */
+      @SerializedName("image")
+      Image image;
+
+      /**
+       * The type of content to print. Currently supports {@code image}.
+       *
+       * <p>Equal to {@code image}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Metadata of an uploaded file. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Image extends StripeObject {
+        /** Creation time of the object (in seconds since the Unix epoch). */
+        @SerializedName("created_at")
+        Long createdAt;
+
+        /** The original name of the uploaded file (e.g. {@code receipt.png}). */
+        @SerializedName("filename")
+        String filename;
+
+        /** The size (in bytes) of the uploaded file. */
+        @SerializedName("size")
+        Long size;
+
+        /** The format of the uploaded file. */
+        @SerializedName("type")
+        String type;
       }
     }
 

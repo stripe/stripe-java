@@ -212,7 +212,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
       /**
        * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
        *
-       * <p>Equal to {@code fps}.
+       * <p>One of {@code chaps}, or {@code fps}.
        */
       @SerializedName("network")
       String network;

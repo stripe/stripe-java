@@ -300,6 +300,9 @@ public class Mandate extends ApiResource implements HasId {
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    @SerializedName("twint")
+    Twint twint;
+
     /**
      * This mandate corresponds with a specific payment method type. The {@code
      * payment_method_details} includes an additional hash with the same name and contains mandate
@@ -666,6 +669,15 @@ public class Mandate extends ApiResource implements HasId {
       @SerializedName("url")
       String url;
     }
+
+    /**
+     * For more details about Twint, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Twint extends StripeObject {}
 
     /**
      * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API

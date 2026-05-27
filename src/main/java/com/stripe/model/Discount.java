@@ -22,7 +22,7 @@ import lombok.Setter;
 public class Discount extends StripeObject implements HasId {
   /**
    * The Checkout session that this coupon is applied to, if it is applied to a particular session
-   * in payment mode. Will not be present for subscription mode.
+   * in payment mode. Not present for subscription mode.
    */
   @SerializedName("checkout_session")
   String checkoutSession;
@@ -49,8 +49,8 @@ public class Discount extends StripeObject implements HasId {
   Long end;
 
   /**
-   * The ID of the discount object. Discounts cannot be fetched by ID. Use {@code
-   * expand[]=discounts} in API calls to expand discount IDs in an array.
+   * The ID of the discount object. Discounts can't be fetched by ID. Use {@code expand[]=discounts}
+   * in API calls to expand discount IDs in an array.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

@@ -65,7 +65,10 @@ public class Settlement extends StripeObject implements HasId {
   @SerializedName("net_total_amount")
   Long netTotalAmount;
 
-  /** The card network for this settlement report. One of [&quot;visa&quot;, &quot;maestro&quot;] */
+  /**
+   * The card network for this settlement report. One of [&quot;visa&quot;, &quot;maestro&quot;,
+   * &quot;mastercard&quot;]
+   */
   @SerializedName("network")
   String network;
 

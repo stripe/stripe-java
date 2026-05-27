@@ -171,6 +171,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   @SerializedName("payment_method_collection")
   PaymentMethodCollection paymentMethodCollection;
 
+  @SerializedName("payment_method_options")
+  PaymentMethodOptions paymentMethodOptions;
+
   /**
    * The list of payment method types that customers can use. If no value is passed, Stripe will
    * dynamically show relevant payment methods from your <a
@@ -256,6 +259,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       List<PaymentLinkCreateParams.OptionalItem> optionalItems,
       PaymentIntentData paymentIntentData,
       PaymentMethodCollection paymentMethodCollection,
+      PaymentMethodOptions paymentMethodOptions,
       List<PaymentLinkCreateParams.PaymentMethodType> paymentMethodTypes,
       PhoneNumberCollection phoneNumberCollection,
       Restrictions restrictions,
@@ -288,6 +292,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     this.optionalItems = optionalItems;
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodCollection = paymentMethodCollection;
+    this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
     this.phoneNumberCollection = phoneNumberCollection;
     this.restrictions = restrictions;
@@ -350,6 +355,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     private PaymentMethodCollection paymentMethodCollection;
 
+    private PaymentMethodOptions paymentMethodOptions;
+
     private List<PaymentLinkCreateParams.PaymentMethodType> paymentMethodTypes;
 
     private PhoneNumberCollection phoneNumberCollection;
@@ -394,6 +401,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           this.optionalItems,
           this.paymentIntentData,
           this.paymentMethodCollection,
+          this.paymentMethodOptions,
           this.paymentMethodTypes,
           this.phoneNumberCollection,
           this.restrictions,
@@ -703,6 +711,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     public Builder setPaymentMethodCollection(
         PaymentLinkCreateParams.PaymentMethodCollection paymentMethodCollection) {
       this.paymentMethodCollection = paymentMethodCollection;
+      return this;
+    }
+
+    public Builder setPaymentMethodOptions(
+        PaymentLinkCreateParams.PaymentMethodOptions paymentMethodOptions) {
+      this.paymentMethodOptions = paymentMethodOptions;
       return this;
     }
 
@@ -1325,7 +1339,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * If set to {@code auto}, enables the collection of customer consent for promotional
      * communications. The Checkout Session will determine whether to display an option to opt into
      * promotional communication from the merchant depending on the customer's locale. Only
-     * available to US merchants.
+     * available to US merchants and US customers.
      */
     @SerializedName("promotions")
     Promotions promotions;
@@ -1413,7 +1427,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
        * If set to {@code auto}, enables the collection of customer consent for promotional
        * communications. The Checkout Session will determine whether to display an option to opt
        * into promotional communication from the merchant depending on the customer's locale. Only
-       * available to US merchants.
+       * available to US merchants and US customers.
        */
       public Builder setPromotions(
           PaymentLinkCreateParams.ConsentCollection.Promotions promotions) {
@@ -5314,6 +5328,287 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodOptions {
+    /** Configuration for {@code card} payment methods. */
+    @SerializedName("card")
+    Card card;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private PaymentMethodOptions(Card card, Map<String, Object> extraParams) {
+      this.card = card;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Card card;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkCreateParams.PaymentMethodOptions build() {
+        return new PaymentLinkCreateParams.PaymentMethodOptions(this.card, this.extraParams);
+      }
+
+      /** Configuration for {@code card} payment methods. */
+      public Builder setCard(PaymentLinkCreateParams.PaymentMethodOptions.Card card) {
+        this.card = card;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkCreateParams.PaymentMethodOptions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkCreateParams.PaymentMethodOptions#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Restrictions to apply to the card payment method. For example, you can block specific card
+       * brands.
+       */
+      @SerializedName("restrictions")
+      Restrictions restrictions;
+
+      private Card(Map<String, Object> extraParams, Restrictions restrictions) {
+        this.extraParams = extraParams;
+        this.restrictions = restrictions;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Restrictions restrictions;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkCreateParams.PaymentMethodOptions.Card build() {
+          return new PaymentLinkCreateParams.PaymentMethodOptions.Card(
+              this.extraParams, this.restrictions);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkCreateParams.PaymentMethodOptions.Card#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkCreateParams.PaymentMethodOptions.Card#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Restrictions to apply to the card payment method. For example, you can block specific
+         * card brands.
+         */
+        public Builder setRestrictions(
+            PaymentLinkCreateParams.PaymentMethodOptions.Card.Restrictions restrictions) {
+          this.restrictions = restrictions;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Restrictions {
+        /**
+         * The card brands to block. If a customer enters or selects a card belonging to a blocked
+         * brand, they can't complete the payment.
+         */
+        @SerializedName("brands_blocked")
+        List<PaymentLinkCreateParams.PaymentMethodOptions.Card.Restrictions.BrandsBlocked>
+            brandsBlocked;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Restrictions(
+            List<PaymentLinkCreateParams.PaymentMethodOptions.Card.Restrictions.BrandsBlocked>
+                brandsBlocked,
+            Map<String, Object> extraParams) {
+          this.brandsBlocked = brandsBlocked;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private List<PaymentLinkCreateParams.PaymentMethodOptions.Card.Restrictions.BrandsBlocked>
+              brandsBlocked;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentLinkCreateParams.PaymentMethodOptions.Card.Restrictions build() {
+            return new PaymentLinkCreateParams.PaymentMethodOptions.Card.Restrictions(
+                this.brandsBlocked, this.extraParams);
+          }
+
+          /**
+           * Add an element to `brandsBlocked` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * PaymentLinkCreateParams.PaymentMethodOptions.Card.Restrictions#brandsBlocked} for the
+           * field documentation.
+           */
+          public Builder addBrandsBlocked(
+              PaymentLinkCreateParams.PaymentMethodOptions.Card.Restrictions.BrandsBlocked
+                  element) {
+            if (this.brandsBlocked == null) {
+              this.brandsBlocked = new ArrayList<>();
+            }
+            this.brandsBlocked.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `brandsBlocked` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * PaymentLinkCreateParams.PaymentMethodOptions.Card.Restrictions#brandsBlocked} for the
+           * field documentation.
+           */
+          public Builder addAllBrandsBlocked(
+              List<PaymentLinkCreateParams.PaymentMethodOptions.Card.Restrictions.BrandsBlocked>
+                  elements) {
+            if (this.brandsBlocked == null) {
+              this.brandsBlocked = new ArrayList<>();
+            }
+            this.brandsBlocked.addAll(elements);
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentLinkCreateParams.PaymentMethodOptions.Card.Restrictions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentLinkCreateParams.PaymentMethodOptions.Card.Restrictions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        public enum BrandsBlocked implements ApiRequestParams.EnumParam {
+          @SerializedName("american_express")
+          AMERICAN_EXPRESS("american_express"),
+
+          @SerializedName("discover_global_network")
+          DISCOVER_GLOBAL_NETWORK("discover_global_network"),
+
+          @SerializedName("mastercard")
+          MASTERCARD("mastercard"),
+
+          @SerializedName("visa")
+          VISA("visa");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          BrandsBlocked(String value) {
+            this.value = value;
+          }
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PhoneNumberCollection {
     /** <strong>Required.</strong> Set to {@code true} to enable phone number collection. */
     @SerializedName("enabled")
@@ -7242,6 +7537,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     @SerializedName("billie")
     BILLIE("billie"),
+
+    @SerializedName("bizum")
+    BIZUM("bizum"),
 
     @SerializedName("blik")
     BLIK("blik"),

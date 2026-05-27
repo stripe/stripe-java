@@ -83,7 +83,9 @@ public class PayoutCreateParams extends ApiRequestParams {
    * A string that displays on the recipient's bank or card statement (up to 22 characters). A
    * {@code statement_descriptor} that's longer than 22 characters return an error. Most banks
    * truncate this information and display it inconsistently. Some banks might not display it at
-   * all.
+   * all. For US ACH payouts, this maps to the ACH Company Entry Description field, which the NACHA
+   * standard limits to 10 characters. Stripe truncates descriptors longer than 10 characters for US
+   * ACH payouts.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -296,7 +298,9 @@ public class PayoutCreateParams extends ApiRequestParams {
      * A string that displays on the recipient's bank or card statement (up to 22 characters). A
      * {@code statement_descriptor} that's longer than 22 characters return an error. Most banks
      * truncate this information and display it inconsistently. Some banks might not display it at
-     * all.
+     * all. For US ACH payouts, this maps to the ACH Company Entry Description field, which the
+     * NACHA standard limits to 10 characters. Stripe truncates descriptors longer than 10
+     * characters for US ACH payouts.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;

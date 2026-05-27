@@ -357,21 +357,21 @@ public final class AccountService extends ApiService {
   /** Serializes an Account update request into a batch job JSONL line. */
   public String serializeBatchUpdate(
       String account, AccountUpdateParams params, RequestOptions options) throws StripeException {
-    String itemId = java.util.UUID.randomUUID().toString();
+    String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
     pathParams.put("account", account);
-    java.util.Map<String, Object> item = new java.util.LinkedHashMap<>();
-    item.put("id", itemId);
-    item.put("path_params", pathParams);
-    item.put("params", (params != null) ? params.toMap() : null);
-    item.put("stripe_version", stripeVersion);
+    java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
+    requestBody.put("id", requestId);
+    requestBody.put("path_params", pathParams);
+    requestBody.put("params", (params != null) ? params.toMap() : null);
+    requestBody.put("stripe_version", stripeVersion);
     if (stripeContext != null) {
-      item.put("context", stripeContext);
+      requestBody.put("context", stripeContext);
     }
-    return ApiResource.GSON.toJson(item);
+    return ApiResource.GSON.toJson(requestBody);
   }
 
   public com.stripe.service.AccountCapabilityService capabilities() {

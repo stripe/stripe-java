@@ -113,10 +113,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
   /**
    * The client secret of your Checkout Session. Applies to Checkout Sessions with {@code ui_mode:
-   * embedded} or {@code ui_mode: custom}. For {@code ui_mode: embedded}, the client secret is to be
-   * used when initializing Stripe.js embedded checkout. For {@code ui_mode: custom}, use the client
-   * secret with <a href="https://docs.stripe.com/js/custom_checkout/init">initCheckout</a> on your
-   * front end.
+   * embedded_page} or {@code ui_mode: elements}. For {@code ui_mode: embedded_page}, the client
+   * secret is to be used when initializing Stripe.js embedded checkout. For {@code ui_mode:
+   * elements}, use the client secret with <a
+   * href="https://docs.stripe.com/js/custom_checkout/init">initCheckout</a> on your front end.
    */
   @SerializedName("client_secret")
   String clientSecret;
@@ -391,7 +391,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   String recoveredFrom;
 
   /**
-   * This parameter applies to {@code ui_mode: embedded}. Learn more about the <a
+   * This parameter applies to {@code ui_mode: embedded_page}. Learn more about the <a
    * href="https://docs.stripe.com/payments/checkout/custom-success-page?payment-ui=embedded-form">redirect
    * behavior</a> of embedded sessions. Defaults to {@code always}.
    *
@@ -401,9 +401,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   String redirectOnCompletion;
 
   /**
-   * Applies to Checkout Sessions with {@code ui_mode: embedded} or {@code ui_mode: custom}. The URL
-   * to redirect your customer back to after they authenticate or cancel their payment on the
-   * payment method's app or site.
+   * Applies to Checkout Sessions with {@code ui_mode: embedded_page} or {@code ui_mode: elements}.
+   * The URL to redirect your customer back to after they authenticate or cancel their payment on
+   * the payment method's app or site.
    */
   @SerializedName("return_url")
   String returnUrl;
@@ -488,8 +488,8 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   String uiMode;
 
   /**
-   * The URL to the Checkout Session. Applies to Checkout Sessions with {@code ui_mode: hosted}.
-   * Redirect customers to this URL to take them to Checkout. If you’re using <a
+   * The URL to the Checkout Session. Applies to Checkout Sessions with {@code ui_mode:
+   * hosted_page}. Redirect customers to this URL to take them to Checkout. If you’re using <a
    * href="https://docs.stripe.com/payments/checkout/custom-domains">Custom Domains</a>, the URL
    * will use your subdomain. Otherwise, it’ll use {@code checkout.stripe.com.} This value is only
    * present when the session is active.
@@ -1276,7 +1276,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
      * If set to {@code auto}, enables the collection of customer consent for promotional
      * communications. The Checkout Session will determine whether to display an option to opt into
      * promotional communication from the merchant depending on the customer's locale. Only
-     * available to US merchants.
+     * available to US merchants and US customers.
      *
      * <p>One of {@code auto}, or {@code none}.
      */
@@ -2165,6 +2165,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("satispay")
     Satispay satispay;
 
+    @SerializedName("scalapay")
+    Scalapay scalapay;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -2802,8 +2805,8 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @EqualsAndHashCode(callSuper = false)
       public static class Restrictions extends StripeObject {
         /**
-         * Specify the card brands to block in the Checkout Session. If a customer enters or selects
-         * a card belonging to a blocked brand, they can't complete the Session.
+         * The card brands to block. If a customer enters or selects a card belonging to a blocked
+         * brand, they can't complete the payment.
          */
         @SerializedName("brands_blocked")
         List<String> brandsBlocked;
@@ -3906,6 +3909,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
 
     /**
+     * For more details about Scalapay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Scalapay extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+    }
+
+    /**
      * For more details about SepaDebit, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -4042,7 +4062,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * with regional legislation and network rules, such as <a
        * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
-       * <p>Equal to {@code none}.
+       * <p>One of {@code none}, or {@code off_session}.
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;

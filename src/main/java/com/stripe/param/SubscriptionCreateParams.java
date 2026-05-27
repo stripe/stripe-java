@@ -214,37 +214,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Object onBehalfOf;
 
   /**
-   * Only applies to subscriptions with {@code collection_method=charge_automatically}.
-   *
-   * <p>Use {@code allow_incomplete} to create Subscriptions with {@code status=incomplete} if the
-   * first invoice can't be paid. Creating Subscriptions with this status allows you to manage
-   * scenarios where additional customer actions are needed to pay a subscription's invoice. For
-   * example, SCA regulation may require 3DS authentication to complete payment. See the <a
-   * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA Migration
-   * Guide</a> for Billing to learn more. This is the default behavior.
-   *
-   * <p>Use {@code default_incomplete} to create Subscriptions with {@code status=incomplete} when
-   * the first invoice requires payment, otherwise start as active. Subscriptions transition to
-   * {@code status=active} when successfully confirming the PaymentIntent on the first invoice. This
-   * allows simpler management of scenarios where additional customer actions are needed to pay a
-   * subscription’s invoice, such as failed payments, <a
-   * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA
-   * regulation</a>, or collecting a mandate for a bank debit payment method. If the PaymentIntent
-   * is not confirmed within 23 hours Subscriptions transition to {@code status=incomplete_expired},
-   * which is a terminal state.
-   *
-   * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
-   * subscription's first invoice can't be paid. For example, if a payment method requires 3DS
-   * authentication due to SCA regulation and further customer action is needed, this parameter
-   * doesn't create a Subscription and returns an error instead. This was the default behavior for
-   * API versions prior to 2019-03-14. See the <a
-   * href="https://docs.stripe.com/upgrades#2019-03-14">changelog</a> to learn more.
-   *
-   * <p>{@code pending_if_incomplete} is only used with updates and cannot be passed when creating a
-   * Subscription.
-   *
-   * <p>Subscriptions with {@code collection_method=send_invoice} are automatically activated
-   * regardless of the first Invoice status.
+   * Controls how Stripe handles the first invoice when payment is required and {@code
+   * collection_method=charge_automatically}. Subscriptions with {@code
+   * collection_method=send_invoice} are automatically activated regardless of the first Invoice
+   * status.
    */
   @SerializedName("payment_behavior")
   PaymentBehavior paymentBehavior;
@@ -1021,37 +994,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Only applies to subscriptions with {@code collection_method=charge_automatically}.
-     *
-     * <p>Use {@code allow_incomplete} to create Subscriptions with {@code status=incomplete} if the
-     * first invoice can't be paid. Creating Subscriptions with this status allows you to manage
-     * scenarios where additional customer actions are needed to pay a subscription's invoice. For
-     * example, SCA regulation may require 3DS authentication to complete payment. See the <a
-     * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA Migration
-     * Guide</a> for Billing to learn more. This is the default behavior.
-     *
-     * <p>Use {@code default_incomplete} to create Subscriptions with {@code status=incomplete} when
-     * the first invoice requires payment, otherwise start as active. Subscriptions transition to
-     * {@code status=active} when successfully confirming the PaymentIntent on the first invoice.
-     * This allows simpler management of scenarios where additional customer actions are needed to
-     * pay a subscription’s invoice, such as failed payments, <a
-     * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA
-     * regulation</a>, or collecting a mandate for a bank debit payment method. If the PaymentIntent
-     * is not confirmed within 23 hours Subscriptions transition to {@code
-     * status=incomplete_expired}, which is a terminal state.
-     *
-     * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
-     * subscription's first invoice can't be paid. For example, if a payment method requires 3DS
-     * authentication due to SCA regulation and further customer action is needed, this parameter
-     * doesn't create a Subscription and returns an error instead. This was the default behavior for
-     * API versions prior to 2019-03-14. See the <a
-     * href="https://docs.stripe.com/upgrades#2019-03-14">changelog</a> to learn more.
-     *
-     * <p>{@code pending_if_incomplete} is only used with updates and cannot be passed when creating
-     * a Subscription.
-     *
-     * <p>Subscriptions with {@code collection_method=send_invoice} are automatically activated
-     * regardless of the first Invoice status.
+     * Controls how Stripe handles the first invoice when payment is required and {@code
+     * collection_method=charge_automatically}. Subscriptions with {@code
+     * collection_method=send_invoice} are automatically activated regardless of the first Invoice
+     * status.
      */
     public Builder setPaymentBehavior(SubscriptionCreateParams.PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;
@@ -1173,6 +1119,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class AddInvoiceItem {
+    /**
+     * Controls whether discounts apply to this invoice item. Defaults to true if no value is
+     * provided.
+     */
+    @SerializedName("discountable")
+    Boolean discountable;
+
     /** The coupons to redeem into discounts for the item. */
     @SerializedName("discounts")
     List<SubscriptionCreateParams.AddInvoiceItem.Discount> discounts;
@@ -1226,6 +1179,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     Object taxRates;
 
     private AddInvoiceItem(
+        Boolean discountable,
         List<SubscriptionCreateParams.AddInvoiceItem.Discount> discounts,
         Map<String, Object> extraParams,
         Map<String, String> metadata,
@@ -1234,6 +1188,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         PriceData priceData,
         Long quantity,
         Object taxRates) {
+      this.discountable = discountable;
       this.discounts = discounts;
       this.extraParams = extraParams;
       this.metadata = metadata;
@@ -1249,6 +1204,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Boolean discountable;
+
       private List<SubscriptionCreateParams.AddInvoiceItem.Discount> discounts;
 
       private Map<String, Object> extraParams;
@@ -1268,6 +1225,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionCreateParams.AddInvoiceItem build() {
         return new SubscriptionCreateParams.AddInvoiceItem(
+            this.discountable,
             this.discounts,
             this.extraParams,
             this.metadata,
@@ -1276,6 +1234,15 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             this.priceData,
             this.quantity,
             this.taxRates);
+      }
+
+      /**
+       * Controls whether discounts apply to this invoice item. Defaults to true if no value is
+       * provided.
+       */
+      public Builder setDiscountable(Boolean discountable) {
+        this.discountable = discountable;
+        return this;
       }
 
       /**
@@ -8608,6 +8575,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("swish")
       SWISH("swish"),
 
+      @SerializedName("twint")
+      TWINT("twint"),
+
       @SerializedName("upi")
       UPI("upi"),
 
@@ -9180,6 +9150,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   public enum CancelAt implements ApiRequestParams.EnumParam {
+    @SerializedName("max_billed_until")
+    MAX_BILLED_UNTIL("max_billed_until"),
+
     @SerializedName("max_period_end")
     MAX_PERIOD_END("max_period_end"),
 

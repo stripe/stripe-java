@@ -77,6 +77,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("billing_details")
   BillingDetails billingDetails;
 
+  @SerializedName("bizum")
+  Bizum bizum;
+
   @SerializedName("blik")
   Blik blik;
 
@@ -258,6 +261,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("satispay")
   Satispay satispay;
 
+  @SerializedName("scalapay")
+  Scalapay scalapay;
+
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
@@ -289,17 +295,17 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>One of {@code acss_debit}, {@code affirm}, {@code afterpay_clearpay}, {@code alipay}, {@code
    * alma}, {@code amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact},
-   * {@code billie}, {@code blik}, {@code boleto}, {@code card}, {@code card_present}, {@code
-   * cashapp}, {@code crypto}, {@code custom}, {@code customer_balance}, {@code eps}, {@code fpx},
-   * {@code giropay}, {@code gopay}, {@code grabpay}, {@code id_bank_transfer}, {@code ideal},
-   * {@code interac_present}, {@code kakao_pay}, {@code klarna}, {@code konbini}, {@code kr_card},
-   * {@code link}, {@code mb_way}, {@code mobilepay}, {@code multibanco}, {@code naver_pay}, {@code
-   * nz_bank_account}, {@code oxxo}, {@code p24}, {@code pay_by_bank}, {@code payco}, {@code
-   * paynow}, {@code paypal}, {@code paypay}, {@code payto}, {@code pix}, {@code promptpay}, {@code
-   * qris}, {@code rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code satispay}, {@code
-   * sepa_debit}, {@code shopeepay}, {@code sofort}, {@code stripe_balance}, {@code sunbit}, {@code
-   * swish}, {@code twint}, {@code upi}, {@code us_bank_account}, {@code wechat_pay}, or {@code
-   * zip}.
+   * {@code billie}, {@code bizum}, {@code blik}, {@code boleto}, {@code card}, {@code
+   * card_present}, {@code cashapp}, {@code crypto}, {@code custom}, {@code customer_balance},
+   * {@code eps}, {@code fpx}, {@code giropay}, {@code gopay}, {@code grabpay}, {@code
+   * id_bank_transfer}, {@code ideal}, {@code interac_present}, {@code kakao_pay}, {@code klarna},
+   * {@code konbini}, {@code kr_card}, {@code link}, {@code mb_way}, {@code mobilepay}, {@code
+   * multibanco}, {@code naver_pay}, {@code nz_bank_account}, {@code oxxo}, {@code p24}, {@code
+   * pay_by_bank}, {@code payco}, {@code paynow}, {@code paypal}, {@code paypay}, {@code payto},
+   * {@code pix}, {@code promptpay}, {@code qris}, {@code rechnung}, {@code revolut_pay}, {@code
+   * samsung_pay}, {@code satispay}, {@code scalapay}, {@code sepa_debit}, {@code shopeepay}, {@code
+   * sofort}, {@code stripe_balance}, {@code sunbit}, {@code swish}, {@code twint}, {@code upi},
+   * {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -928,6 +934,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("tax_id")
     String taxId;
   }
+
+  /**
+   * For more details about Bizum, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Bizum extends StripeObject {}
 
   /**
    * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
@@ -2572,6 +2587,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static class Satispay extends StripeObject {}
 
   /**
+   * For more details about Scalapay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Scalapay extends StripeObject {}
+
+  /**
    * For more details about SepaDebit, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -2890,6 +2914,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(bancontact, responseGetter);
     trySetResponseGetter(billie, responseGetter);
     trySetResponseGetter(billingDetails, responseGetter);
+    trySetResponseGetter(bizum, responseGetter);
     trySetResponseGetter(blik, responseGetter);
     trySetResponseGetter(boleto, responseGetter);
     trySetResponseGetter(card, responseGetter);
@@ -2934,6 +2959,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(revolutPay, responseGetter);
     trySetResponseGetter(samsungPay, responseGetter);
     trySetResponseGetter(satispay, responseGetter);
+    trySetResponseGetter(scalapay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
     trySetResponseGetter(shopeepay, responseGetter);
     trySetResponseGetter(sofort, responseGetter);

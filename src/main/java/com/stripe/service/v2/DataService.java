@@ -4,8 +4,8 @@ package com.stripe.service.v2;
 import com.stripe.net.ApiService;
 import com.stripe.net.StripeResponseGetter;
 
-public final class DatumService extends ApiService {
-  public DatumService(StripeResponseGetter responseGetter) {
+public final class DataService extends ApiService {
+  public DataService(StripeResponseGetter responseGetter) {
     super(responseGetter);
   }
 

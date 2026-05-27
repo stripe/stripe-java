@@ -2186,6 +2186,13 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class AddInvoiceItem {
+      /**
+       * Controls whether discounts apply to this invoice item. Defaults to true if no value is
+       * provided.
+       */
+      @SerializedName("discountable")
+      Boolean discountable;
+
       /** The coupons to redeem into discounts for the item. */
       @SerializedName("discounts")
       List<SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem.Discount> discounts;
@@ -2239,6 +2246,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       Object taxRates;
 
       private AddInvoiceItem(
+          Boolean discountable,
           List<SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem.Discount> discounts,
           Map<String, Object> extraParams,
           Map<String, String> metadata,
@@ -2247,6 +2255,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           PriceData priceData,
           Long quantity,
           Object taxRates) {
+        this.discountable = discountable;
         this.discounts = discounts;
         this.extraParams = extraParams;
         this.metadata = metadata;
@@ -2262,6 +2271,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Boolean discountable;
+
         private List<SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem.Discount> discounts;
 
         private Map<String, Object> extraParams;
@@ -2281,6 +2292,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem build() {
           return new SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem(
+              this.discountable,
               this.discounts,
               this.extraParams,
               this.metadata,
@@ -2289,6 +2301,15 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
               this.priceData,
               this.quantity,
               this.taxRates);
+        }
+
+        /**
+         * Controls whether discounts apply to this invoice item. Defaults to true if no value is
+         * provided.
+         */
+        public Builder setDiscountable(Boolean discountable) {
+          this.discountable = discountable;
+          return this;
         }
 
         /**

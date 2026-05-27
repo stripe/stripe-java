@@ -82,6 +82,7 @@ public class StripeError extends StripeObject {
    * payment_method_configuration_failures}, {@code payment_method_currency_mismatch}, {@code
    * payment_method_customer_decline}, {@code payment_method_invalid_parameter}, {@code
    * payment_method_invalid_parameter_testmode}, {@code payment_method_microdeposit_failed}, {@code
+   * payment_method_microdeposit_processing_error}, {@code
    * payment_method_microdeposit_verification_amounts_invalid}, {@code
    * payment_method_microdeposit_verification_amounts_mismatch}, {@code
    * payment_method_microdeposit_verification_attempts_exceeded}, {@code
@@ -101,10 +102,10 @@ public class StripeError extends StripeObject {
    * {@code setup_intent_authentication_failure}, {@code setup_intent_invalid_parameter}, {@code
    * setup_intent_mandate_invalid}, {@code setup_intent_mobile_wallet_unsupported}, {@code
    * setup_intent_setup_attempt_expired}, {@code setup_intent_unexpected_state}, {@code
-   * shipping_address_invalid}, {@code shipping_calculation_failed}, {@code sku_inactive}, {@code
-   * state_unsupported}, {@code status_transition_invalid}, {@code storer_capability_missing},
-   * {@code storer_capability_not_active}, {@code stripe_tax_inactive}, {@code tax_id_invalid},
-   * {@code tax_id_prohibited}, {@code taxes_calculation_failed}, {@code
+   * shipping_address_invalid}, {@code shipping_calculation_failed}, {@code siret_invalid}, {@code
+   * sku_inactive}, {@code state_unsupported}, {@code status_transition_invalid}, {@code
+   * storer_capability_missing}, {@code storer_capability_not_active}, {@code stripe_tax_inactive},
+   * {@code tax_id_invalid}, {@code tax_id_prohibited}, {@code taxes_calculation_failed}, {@code
    * terminal_location_country_unsupported}, {@code terminal_reader_busy}, {@code
    * terminal_reader_collected_data_invalid}, {@code terminal_reader_hardware_fault}, {@code
    * terminal_reader_invalid_location_for_activation}, {@code
