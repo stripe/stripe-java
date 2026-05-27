@@ -14,6 +14,7 @@ import com.stripe.param.SubscriptionCancelParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.stripe.param.SubscriptionListParams;
 import com.stripe.param.SubscriptionMigrateParams;
+import com.stripe.param.SubscriptionPauseParams;
 import com.stripe.param.SubscriptionResumeParams;
 import com.stripe.param.SubscriptionRetrieveParams;
 import com.stripe.param.SubscriptionSearchParams;
@@ -375,6 +376,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("status")
   String status;
 
+  /** Describes changes to the subscription's status. */
+  @SerializedName("status_details")
+  StatusDetails statusDetails;
+
   /** ID of the test clock this subscription belongs to. */
   @SerializedName("test_clock")
   @Getter(lombok.AccessLevel.NONE)
@@ -609,8 +614,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
-   * subscription. After it’s canceled, you can no longer update the subscription or its <a
-   * href="https://stripe.com/metadata">metadata</a>.
+   * subscription. After it’s canceled, the subscription is largely immutable. You can still update
+   * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
    * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
@@ -631,8 +636,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
-   * subscription. After it’s canceled, you can no longer update the subscription or its <a
-   * href="https://stripe.com/metadata">metadata</a>.
+   * subscription. After it’s canceled, the subscription is largely immutable. You can still update
+   * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
    * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
@@ -653,8 +658,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
-   * subscription. After it’s canceled, you can no longer update the subscription or its <a
-   * href="https://stripe.com/metadata">metadata</a>.
+   * subscription. After it’s canceled, the subscription is largely immutable. You can still update
+   * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
    * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
@@ -679,8 +684,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
-   * subscription. After it’s canceled, you can no longer update the subscription or its <a
-   * href="https://stripe.com/metadata">metadata</a>.
+   * subscription. After it’s canceled, the subscription is largely immutable. You can still update
+   * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
    * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
@@ -701,8 +706,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
-   * subscription. After it’s canceled, you can no longer update the subscription or its <a
-   * href="https://stripe.com/metadata">metadata</a>.
+   * subscription. After it’s canceled, the subscription is largely immutable. You can still update
+   * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
    * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
    * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
@@ -920,13 +925,86 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause() throws StripeException {
+    return pause((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(RequestOptions options) throws StripeException {
+    return pause((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(Map<String, Object> params) throws StripeException {
+    return pause(params, (RequestOptions) null);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscriptions/%s/pause", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Subscription.class);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(SubscriptionPauseParams params) throws StripeException {
+    return pause(params, (RequestOptions) null);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(SubscriptionPauseParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscriptions/%s/pause", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Subscription.class);
+  }
+
+  /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
-   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
-   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
-   * send_invoice} subscriptions are not supported.
+   * and creating prorations. Resume is only available for subscriptions that use {@code
+   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
+   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
+   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
+   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
+   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
+   * subscription stays {@code paused}. Learn more about <a
+   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
+   * subscriptions</a>.
    */
   public Subscription resume() throws StripeException {
     return resume((Map<String, Object>) null, (RequestOptions) null);
@@ -934,12 +1012,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
-   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
-   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
-   * send_invoice} subscriptions are not supported.
+   * and creating prorations. Resume is only available for subscriptions that use {@code
+   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
+   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
+   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
+   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
+   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
+   * subscription stays {@code paused}. Learn more about <a
+   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
+   * subscriptions</a>.
    */
   public Subscription resume(RequestOptions options) throws StripeException {
     return resume((Map<String, Object>) null, options);
@@ -947,12 +1028,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
-   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
-   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
-   * send_invoice} subscriptions are not supported.
+   * and creating prorations. Resume is only available for subscriptions that use {@code
+   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
+   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
+   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
+   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
+   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
+   * subscription stays {@code paused}. Learn more about <a
+   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
+   * subscriptions</a>.
    */
   public Subscription resume(Map<String, Object> params) throws StripeException {
     return resume(params, (RequestOptions) null);
@@ -960,12 +1044,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
-   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
-   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
-   * send_invoice} subscriptions are not supported.
+   * and creating prorations. Resume is only available for subscriptions that use {@code
+   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
+   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
+   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
+   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
+   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
+   * subscription stays {@code paused}. Learn more about <a
+   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
+   * subscriptions</a>.
    */
   public Subscription resume(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -978,12 +1065,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
-   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
-   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
-   * send_invoice} subscriptions are not supported.
+   * and creating prorations. Resume is only available for subscriptions that use {@code
+   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
+   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
+   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
+   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
+   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
+   * subscription stays {@code paused}. Learn more about <a
+   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
+   * subscriptions</a>.
    */
   public Subscription resume(SubscriptionResumeParams params) throws StripeException {
     return resume(params, (RequestOptions) null);
@@ -991,12 +1081,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. If no resumption invoice is generated, the subscription becomes {@code
-   * active} immediately. If a resumption invoice is generated, the subscription remains {@code
-   * paused} until the invoice is paid or marked uncollectible. If the invoice isn’t paid by the
-   * expiration date, it is voided and the subscription remains {@code paused}. You can only resume
-   * subscriptions with {@code collection_method} set to {@code charge_automatically}. {@code
-   * send_invoice} subscriptions are not supported.
+   * and creating prorations. Resume is only available for subscriptions that use {@code
+   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
+   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
+   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
+   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
+   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
+   * subscription stays {@code paused}. Learn more about <a
+   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
+   * subscriptions</a>.
    */
   public Subscription resume(SubscriptionResumeParams params, RequestOptions options)
       throws StripeException {
@@ -2433,11 +2526,33 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     Long billingCycleAnchor;
 
     /**
+     * The pending subscription-level discount that will be applied when the pending update is
+     * applied.
+     */
+    @SerializedName("discount")
+    Discount discount;
+
+    /**
+     * The discounts that will be applied to the subscription when the pending update is applied.
+     * Use {@code expand[]=discounts} to expand each discount.
+     */
+    @SerializedName("discounts")
+    List<ExpandableField<Discount>> discounts;
+
+    /**
      * The point after which the changes reflected by this update will be discarded and no longer
      * applied.
      */
     @SerializedName("expires_at")
     Long expiresAt;
+
+    /**
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
 
     /** The number of iterations of prebilling to apply. */
     @SerializedName("prebilling_iterations")
@@ -2466,6 +2581,47 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("trial_from_plan")
     Boolean trialFromPlan;
+
+    /** Get IDs of expandable {@code discounts} object list. */
+    public List<String> getDiscounts() {
+      return (this.discounts != null)
+          ? this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList())
+          : null;
+    }
+
+    public void setDiscounts(List<String> ids) {
+      if (ids == null) {
+        this.discounts = null;
+        return;
+      }
+      if (this.discounts != null
+          && this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+        // noop if the ids are equal to what are already present
+        return;
+      }
+      this.discounts =
+          (ids != null)
+              ? ids.stream()
+                  .map(id -> new ExpandableField<Discount>(id, null))
+                  .collect(Collectors.toList())
+              : null;
+    }
+
+    /** Get expanded {@code discounts}. */
+    public List<Discount> getDiscountObjects() {
+      return (this.discounts != null)
+          ? this.discounts.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+          : null;
+    }
+
+    public void setDiscountObjects(List<Discount> objs) {
+      this.discounts =
+          objs != null
+              ? objs.stream()
+                  .map(x -> new ExpandableField<Discount>(x.getId(), x))
+                  .collect(Collectors.toList())
+              : null;
+    }
   }
 
   /** Prebilling stores the time period and invoice for a Subscription billed in advance. */
@@ -2526,6 +2682,55 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     /** Currency used for customer payments. */
     @SerializedName("presentment_currency")
     String presentmentCurrency;
+  }
+
+  /** Describes changes to the subscription's status. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusDetails extends StripeObject {
+    /** Indicates when and why the subscription transitioned to the paused status. */
+    @SerializedName("paused")
+    Paused paused;
+
+    /** Indicates when and why the subscription transitioned to the paused status. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paused extends StripeObject {
+      /** Information on the {@code type=subscription} pause. */
+      @SerializedName("subscription")
+      InnerSubscription subscription;
+
+      /**
+       * Unix timestamp in seconds of when the subscription status transitioned to {@code paused}.
+       */
+      @SerializedName("transitioned_at")
+      Long transitionedAt;
+
+      /**
+       * The type of pause.
+       *
+       * <p>Equal to {@code subscription}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Information on the {@code type=subscription} pause. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class InnerSubscription extends StripeObject {
+        /**
+         * The reason that the subscription was paused.
+         *
+         * <p>One of {@code pause_requested}, {@code system}, or {@code
+         * trial_end_without_payment_method}.
+         */
+        @SerializedName("type")
+        String type;
+      }
+    }
   }
 
   /**
@@ -2629,6 +2834,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     trySetResponseGetter(prebilling, responseGetter);
     trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(schedule, responseGetter);
+    trySetResponseGetter(statusDetails, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
     trySetResponseGetter(transferData, responseGetter);
     trySetResponseGetter(trialSettings, responseGetter);

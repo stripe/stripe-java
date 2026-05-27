@@ -8965,6 +8965,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class AddInvoiceItem {
+        /**
+         * Controls whether discounts apply to this invoice item. Defaults to true if no value is
+         * provided.
+         */
+        @SerializedName("discountable")
+        Boolean discountable;
+
         /** The coupons to redeem into discounts for the item. */
         @SerializedName("discounts")
         List<InvoiceCreatePreviewParams.ScheduleDetails.Phase.AddInvoiceItem.Discount> discounts;
@@ -9019,6 +9026,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         Object taxRates;
 
         private AddInvoiceItem(
+            Boolean discountable,
             List<InvoiceCreatePreviewParams.ScheduleDetails.Phase.AddInvoiceItem.Discount>
                 discounts,
             Map<String, Object> extraParams,
@@ -9028,6 +9036,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             PriceData priceData,
             Long quantity,
             Object taxRates) {
+          this.discountable = discountable;
           this.discounts = discounts;
           this.extraParams = extraParams;
           this.metadata = metadata;
@@ -9043,6 +9052,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Boolean discountable;
+
           private List<InvoiceCreatePreviewParams.ScheduleDetails.Phase.AddInvoiceItem.Discount>
               discounts;
 
@@ -9063,6 +9074,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceCreatePreviewParams.ScheduleDetails.Phase.AddInvoiceItem build() {
             return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.AddInvoiceItem(
+                this.discountable,
                 this.discounts,
                 this.extraParams,
                 this.metadata,
@@ -9071,6 +9083,15 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                 this.priceData,
                 this.quantity,
                 this.taxRates);
+          }
+
+          /**
+           * Controls whether discounts apply to this invoice item. Defaults to true if no value is
+           * provided.
+           */
+          public Builder setDiscountable(Boolean discountable) {
+            this.discountable = discountable;
+            return this;
           }
 
           /**
@@ -16161,6 +16182,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     public enum CancelAt implements ApiRequestParams.EnumParam {
+      @SerializedName("max_billed_until")
+      MAX_BILLED_UNTIL("max_billed_until"),
+
       @SerializedName("max_period_end")
       MAX_PERIOD_END("max_period_end"),
 

@@ -44,4 +44,15 @@ public final class ActivityLogService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<ActivityLog>>() {}.getType());
   }
+  /** Retrieve an activity log. */
+  public ActivityLog retrieve(String id) throws StripeException {
+    return retrieve(id, (RequestOptions) null);
+  }
+  /** Retrieve an activity log. */
+  public ActivityLog retrieve(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v2/iam/activity_logs/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+    return this.request(request, ActivityLog.class);
+  }
 }

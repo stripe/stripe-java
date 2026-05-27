@@ -14,6 +14,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentMethodConfigurationListParams extends ApiRequestParams {
+  /** Whether the configuration is active. */
+  @SerializedName("active")
+  Boolean active;
+
   /** The Connect application to filter by. */
   @SerializedName("application")
   Object application;
@@ -57,12 +61,14 @@ public class PaymentMethodConfigurationListParams extends ApiRequestParams {
   String startingAfter;
 
   private PaymentMethodConfigurationListParams(
+      Boolean active,
       Object application,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
       String startingAfter) {
+    this.active = active;
     this.application = application;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -76,6 +82,8 @@ public class PaymentMethodConfigurationListParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Boolean active;
+
     private Object application;
 
     private String endingBefore;
@@ -91,12 +99,19 @@ public class PaymentMethodConfigurationListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentMethodConfigurationListParams build() {
       return new PaymentMethodConfigurationListParams(
+          this.active,
           this.application,
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
           this.startingAfter);
+    }
+
+    /** Whether the configuration is active. */
+    public Builder setActive(Boolean active) {
+      this.active = active;
+      return this;
     }
 
     /** The Connect application to filter by. */

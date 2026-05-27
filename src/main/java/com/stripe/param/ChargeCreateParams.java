@@ -1059,6 +1059,10 @@ public class ChargeCreateParams extends ApiRequestParams {
     @SerializedName("amount")
     Long amount;
 
+    /** An arbitrary string attached to the transfer. Often useful for displaying to users. */
+    @SerializedName("description")
+    String description;
+
     /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
     @SerializedName("destination")
     String destination;
@@ -1072,8 +1076,10 @@ public class ChargeCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private TransferData(Long amount, String destination, Map<String, Object> extraParams) {
+    private TransferData(
+        Long amount, String description, String destination, Map<String, Object> extraParams) {
       this.amount = amount;
+      this.description = description;
       this.destination = destination;
       this.extraParams = extraParams;
     }
@@ -1085,13 +1091,16 @@ public class ChargeCreateParams extends ApiRequestParams {
     public static class Builder {
       private Long amount;
 
+      private String description;
+
       private String destination;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public ChargeCreateParams.TransferData build() {
-        return new ChargeCreateParams.TransferData(this.amount, this.destination, this.extraParams);
+        return new ChargeCreateParams.TransferData(
+            this.amount, this.description, this.destination, this.extraParams);
       }
 
       /**
@@ -1100,6 +1109,12 @@ public class ChargeCreateParams extends ApiRequestParams {
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;
+        return this;
+      }
+
+      /** An arbitrary string attached to the transfer. Often useful for displaying to users. */
+      public Builder setDescription(String description) {
+        this.description = description;
         return this;
       }
 

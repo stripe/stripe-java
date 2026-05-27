@@ -25666,7 +25666,7 @@ class GeneratedExamples extends BaseStripeTest {
                         com.stripe.param.v2.core.BatchJobCreateParams.Endpoint.HttpMethod.DELETE)
                     .setPath(
                         com.stripe.param.v2.core.BatchJobCreateParams.Endpoint.Path
-                            .V1_SUBSCRIPTION_SCHEDULE_CREATE)
+                            .V1_SUBSCRIPTION_UPDATE)
                     .build())
             .putMetadata("key", "metadata")
             .setSkipValidation(true)
@@ -26512,6 +26512,25 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/iam/activity_logs",
         params.toMap(),
         null);
+  }
+
+  @Test
+  public void testV2IamActivityLogGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/iam/activity_logs/id_123",
+        null,
+        null,
+        com.stripe.model.v2.iam.ActivityLog.class,
+        "{\"object\":\"v2.iam.activity_log\",\"actor\":{\"type\":\"api_key\"},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"details\":{\"type\":\"api_key\"},\"id\":\"obj_123\",\"livemode\":true,\"type\":\"api_key_created\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.iam.ActivityLog activityLog =
+        client.v2().iam().activityLogs().retrieve("id_123");
+    assertNotNull(activityLog);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/iam/activity_logs/id_123", null, null);
   }
 
   @Test
@@ -27798,7 +27817,7 @@ class GeneratedExamples extends BaseStripeTest {
     com.stripe.param.v2.testhelpers.FinancialAddressCreditParams params =
         com.stripe.param.v2.testhelpers.FinancialAddressCreditParams.builder()
             .setAmount(new com.stripe.v2.Amount(96, "USD"))
-            .setNetwork(com.stripe.param.v2.testhelpers.FinancialAddressCreditParams.Network.RTP)
+            .setNetwork(com.stripe.param.v2.testhelpers.FinancialAddressCreditParams.Network.ACH)
             .build();
 
     com.stripe.model.v2.FinancialAddressCreditSimulation financialAddressCreditSimulation =

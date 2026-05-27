@@ -621,6 +621,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     BillingDetails billingDetails;
 
     /**
+     * If this is a {@code bizum} PaymentMethod, this hash contains details about the Bizum payment
+     * method.
+     */
+    @SerializedName("bizum")
+    Bizum bizum;
+
+    /**
      * If this is a {@code blik} PaymentMethod, this hash contains details about the BLIK payment
      * method.
      */
@@ -749,7 +756,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     /**
      * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
-     * method.
+     * method (Link is also known as Onelink in the UK).
      */
     @SerializedName("link")
     Link link;
@@ -911,6 +918,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     Satispay satispay;
 
     /**
+     * If this is a Scalapay PaymentMethod, this hash contains details about the Scalapay payment
+     * method.
+     */
+    @SerializedName("scalapay")
+    Scalapay scalapay;
+
+    /**
      * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA
      * debit bank account.
      */
@@ -1008,6 +1022,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Bancontact bancontact,
         Billie billie,
         BillingDetails billingDetails,
+        Bizum bizum,
         Blik blik,
         Boleto boleto,
         Cashapp cashapp,
@@ -1049,6 +1064,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         RevolutPay revolutPay,
         SamsungPay samsungPay,
         Satispay satispay,
+        Scalapay scalapay,
         SepaDebit sepaDebit,
         Object sharedPaymentGrantedToken,
         Shopeepay shopeepay,
@@ -1074,6 +1090,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.bancontact = bancontact;
       this.billie = billie;
       this.billingDetails = billingDetails;
+      this.bizum = bizum;
       this.blik = blik;
       this.boleto = boleto;
       this.cashapp = cashapp;
@@ -1115,6 +1132,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.revolutPay = revolutPay;
       this.samsungPay = samsungPay;
       this.satispay = satispay;
+      this.scalapay = scalapay;
       this.sepaDebit = sepaDebit;
       this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
       this.shopeepay = shopeepay;
@@ -1158,6 +1176,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private Billie billie;
 
       private BillingDetails billingDetails;
+
+      private Bizum bizum;
 
       private Blik blik;
 
@@ -1241,6 +1261,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private Satispay satispay;
 
+      private Scalapay scalapay;
+
       private SepaDebit sepaDebit;
 
       private Object sharedPaymentGrantedToken;
@@ -1282,6 +1304,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.bancontact,
             this.billie,
             this.billingDetails,
+            this.bizum,
             this.blik,
             this.boleto,
             this.cashapp,
@@ -1323,6 +1346,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.revolutPay,
             this.samsungPay,
             this.satispay,
+            this.scalapay,
             this.sepaDebit,
             this.sharedPaymentGrantedToken,
             this.shopeepay,
@@ -1449,6 +1473,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public Builder setBillingDetails(
           SetupIntentUpdateParams.PaymentMethodData.BillingDetails billingDetails) {
         this.billingDetails = billingDetails;
+        return this;
+      }
+
+      /**
+       * If this is a {@code bizum} PaymentMethod, this hash contains details about the Bizum
+       * payment method.
+       */
+      public Builder setBizum(SetupIntentUpdateParams.PaymentMethodData.Bizum bizum) {
+        this.bizum = bizum;
         return this;
       }
 
@@ -1637,7 +1670,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       /**
        * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
-       * method.
+       * method (Link is also known as Onelink in the UK).
        */
       public Builder setLink(SetupIntentUpdateParams.PaymentMethodData.Link link) {
         this.link = link;
@@ -1861,6 +1894,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setSatispay(SetupIntentUpdateParams.PaymentMethodData.Satispay satispay) {
         this.satispay = satispay;
+        return this;
+      }
+
+      /**
+       * If this is a Scalapay PaymentMethod, this hash contains details about the Scalapay payment
+       * method.
+       */
+      public Builder setScalapay(SetupIntentUpdateParams.PaymentMethodData.Scalapay scalapay) {
+        this.scalapay = scalapay;
         return this;
       }
 
@@ -3078,6 +3120,64 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.state = state;
             return this;
           }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bizum {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Bizum(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Bizum build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Bizum(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Bizum#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Bizum#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
@@ -6309,6 +6409,64 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Scalapay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Scalapay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Scalapay build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Scalapay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Scalapay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Scalapay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7383,6 +7541,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("billie")
       BILLIE("billie"),
 
+      @SerializedName("bizum")
+      BIZUM("bizum"),
+
       @SerializedName("blik")
       BLIK("blik"),
 
@@ -7494,6 +7655,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("satispay")
       SATISPAY("satispay"),
 
+      @SerializedName("scalapay")
+      SCALAPAY("scalapay"),
+
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
 
@@ -7560,6 +7724,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     @SerializedName("bacs_debit")
     BacsDebit bacsDebit;
 
+    /**
+     * If this is a {@code bizum} SetupIntent, this sub-hash contains details about the Bizum
+     * payment method options.
+     */
+    @SerializedName("bizum")
+    Bizum bizum;
+
     /** Configuration for any card setup attempted on this SetupIntent. */
     @SerializedName("card")
     Card card;
@@ -7589,7 +7760,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     /**
      * If this is a {@code link} PaymentMethod, this sub-hash contains details about the Link
-     * payment method options.
+     * payment method options (Link is also known as Onelink in the UK).
      */
     @SerializedName("link")
     Link link;
@@ -7640,6 +7811,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         AcssDebit acssDebit,
         AmazonPay amazonPay,
         BacsDebit bacsDebit,
+        Bizum bizum,
         Card card,
         CardPresent cardPresent,
         Map<String, Object> extraParams,
@@ -7654,6 +7826,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.acssDebit = acssDebit;
       this.amazonPay = amazonPay;
       this.bacsDebit = bacsDebit;
+      this.bizum = bizum;
       this.card = card;
       this.cardPresent = cardPresent;
       this.extraParams = extraParams;
@@ -7677,6 +7850,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private AmazonPay amazonPay;
 
       private BacsDebit bacsDebit;
+
+      private Bizum bizum;
 
       private Card card;
 
@@ -7706,6 +7881,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.acssDebit,
             this.amazonPay,
             this.bacsDebit,
+            this.bizum,
             this.card,
             this.cardPresent,
             this.extraParams,
@@ -7746,6 +7922,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public Builder setBacsDebit(
           SetupIntentUpdateParams.PaymentMethodOptions.BacsDebit bacsDebit) {
         this.bacsDebit = bacsDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code bizum} SetupIntent, this sub-hash contains details about the Bizum
+       * payment method options.
+       */
+      public Builder setBizum(SetupIntentUpdateParams.PaymentMethodOptions.Bizum bizum) {
+        this.bizum = bizum;
         return this;
       }
 
@@ -7803,7 +7988,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       /**
        * If this is a {@code link} PaymentMethod, this sub-hash contains details about the Link
-       * payment method options.
+       * payment method options (Link is also known as Onelink in the UK).
        */
       public Builder setLink(SetupIntentUpdateParams.PaymentMethodOptions.Link link) {
         this.link = link;
@@ -8490,6 +8675,64 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.referencePrefix = referencePrefix;
             return this;
           }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bizum {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Bizum(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodOptions.Bizum build() {
+          return new SetupIntentUpdateParams.PaymentMethodOptions.Bizum(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodOptions.Bizum#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodOptions.Bizum#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
@@ -12975,6 +13218,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     @SerializedName("billie")
     BILLIE("billie"),
 
+    @SerializedName("bizum")
+    BIZUM("bizum"),
+
     @SerializedName("blik")
     BLIK("blik"),
 
@@ -13085,6 +13331,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("satispay")
     SATISPAY("satispay"),
+
+    @SerializedName("scalapay")
+    SCALAPAY("scalapay"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),

@@ -14,7 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * The product catalog import object tracks the long-running background process that handles
+ * The ProductCatalogImport object tracks the long-running background process that handles
  * uploading, processing and validation.
  */
 @Getter

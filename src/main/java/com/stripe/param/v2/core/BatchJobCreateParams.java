@@ -275,17 +275,11 @@ public class BatchJobCreateParams extends ApiRequestParams {
       @SerializedName("/v1/accounts/:account")
       V1_ACCOUNT_UPDATE("/v1/accounts/:account"),
 
-      @SerializedName("/v1/credit_notes")
-      V1_CREDIT_NOTE_CREATE("/v1/credit_notes"),
+      @SerializedName("/v1/coupons")
+      V1_COUPON_CREATE("/v1/coupons"),
 
       @SerializedName("/v1/customers/:customer")
       V1_CUSTOMER_UPDATE("/v1/customers/:customer"),
-
-      @SerializedName("/v1/invoices/:invoice")
-      V1_INVOICE_UPDATE("/v1/invoices/:invoice"),
-
-      @SerializedName("/v1/invoices/:invoice/pay")
-      V1_INVOICE_PAY("/v1/invoices/:invoice/pay"),
 
       @SerializedName("/v1/promotion_codes")
       V1_PROMOTION_CODE_CREATE("/v1/promotion_codes"),
@@ -296,17 +290,11 @@ public class BatchJobCreateParams extends ApiRequestParams {
       @SerializedName("/v1/subscriptions/:subscription_exposed_id")
       V1_SUBSCRIPTION_UPDATE("/v1/subscriptions/:subscription_exposed_id"),
 
+      @SerializedName("/v1/subscriptions/:subscription_exposed_id")
+      V1_SUBSCRIPTION_CANCEL("/v1/subscriptions/:subscription_exposed_id"),
+
       @SerializedName("/v1/subscriptions/:subscription/migrate")
-      V1_SUBSCRIPTION_MIGRATE("/v1/subscriptions/:subscription/migrate"),
-
-      @SerializedName("/v1/subscription_schedules")
-      V1_SUBSCRIPTION_SCHEDULE_CREATE("/v1/subscription_schedules"),
-
-      @SerializedName("/v1/subscription_schedules/:schedule")
-      V1_SUBSCRIPTION_SCHEDULE_UPDATE("/v1/subscription_schedules/:schedule"),
-
-      @SerializedName("/v1/subscription_schedules/:schedule/cancel")
-      V1_SUBSCRIPTION_SCHEDULE_CANCEL("/v1/subscription_schedules/:schedule/cancel");
+      V1_SUBSCRIPTION_MIGRATE("/v1/subscriptions/:subscription/migrate");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

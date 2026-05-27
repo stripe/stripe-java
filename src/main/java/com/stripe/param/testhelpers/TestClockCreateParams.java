@@ -13,6 +13,13 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class TestClockCreateParams extends ApiRequestParams {
+  /**
+   * Existing customer this test clock will be attached to. Once attached, customers can't be
+   * removed from a test clock.
+   */
+  @SerializedName("customer")
+  String customer;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -35,7 +42,12 @@ public class TestClockCreateParams extends ApiRequestParams {
   String name;
 
   private TestClockCreateParams(
-      List<String> expand, Map<String, Object> extraParams, Long frozenTime, String name) {
+      String customer,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Long frozenTime,
+      String name) {
+    this.customer = customer;
     this.expand = expand;
     this.extraParams = extraParams;
     this.frozenTime = frozenTime;
@@ -47,6 +59,8 @@ public class TestClockCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String customer;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -57,7 +71,17 @@ public class TestClockCreateParams extends ApiRequestParams {
 
     /** Finalize and obtain parameter instance from this builder. */
     public TestClockCreateParams build() {
-      return new TestClockCreateParams(this.expand, this.extraParams, this.frozenTime, this.name);
+      return new TestClockCreateParams(
+          this.customer, this.expand, this.extraParams, this.frozenTime, this.name);
+    }
+
+    /**
+     * Existing customer this test clock will be attached to. Once attached, customers can't be
+     * removed from a test clock.
+     */
+    public Builder setCustomer(String customer) {
+      this.customer = customer;
+      return this;
     }
 
     /**

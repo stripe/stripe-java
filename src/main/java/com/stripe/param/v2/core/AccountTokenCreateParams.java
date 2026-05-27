@@ -16,10 +16,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class AccountTokenCreateParams extends ApiRequestParams {
-  /**
-   * The default contact email address for the Account. Required when configuring the account as a
-   * merchant or recipient.
-   */
+  /** The primary contact email address for the Account. */
   @SerializedName("contact_email")
   String contactEmail;
 
@@ -81,10 +78,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           this.contactEmail, this.contactPhone, this.displayName, this.extraParams, this.identity);
     }
 
-    /**
-     * The default contact email address for the Account. Required when configuring the account as a
-     * merchant or recipient.
-     */
+    /** The primary contact email address for the Account. */
     public Builder setContactEmail(String contactEmail) {
       this.contactEmail = contactEmail;
       return this;
@@ -1670,10 +1664,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
         @SerializedName("proof_of_address")
         ProofOfAddress proofOfAddress;
 
-        /**
-         * One or more documents showing the company’s proof of registration with the national
-         * business registry.
-         */
+        /** One or more documents that demonstrate proof of ultimate beneficial ownership. */
         @SerializedName("proof_of_registration")
         ProofOfRegistration proofOfRegistration;
 
@@ -1856,10 +1847,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /**
-           * One or more documents showing the company’s proof of registration with the national
-           * business registry.
-           */
+          /** One or more documents that demonstrate proof of ultimate beneficial ownership. */
           public Builder setProofOfRegistration(
               AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfRegistration
                   proofOfRegistration) {
@@ -3093,6 +3081,10 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("files")
           List<String> files;
 
+          /** Person that is signing the document. */
+          @SerializedName("signer")
+          Signer signer;
+
           /**
            * <strong>Required.</strong> The format of the document. Currently supports {@code files}
            * only.
@@ -3101,9 +3093,10 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           Type type;
 
           private ProofOfRegistration(
-              Map<String, Object> extraParams, List<String> files, Type type) {
+              Map<String, Object> extraParams, List<String> files, Signer signer, Type type) {
             this.extraParams = extraParams;
             this.files = files;
+            this.signer = signer;
             this.type = type;
           }
 
@@ -3116,13 +3109,15 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
             private List<String> files;
 
+            private Signer signer;
+
             private Type type;
 
             /** Finalize and obtain parameter instance from this builder. */
             public AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfRegistration
                 build() {
               return new AccountTokenCreateParams.Identity.BusinessDetails.Documents
-                  .ProofOfRegistration(this.extraParams, this.files, this.type);
+                  .ProofOfRegistration(this.extraParams, this.files, this.signer, this.type);
             }
 
             /**
@@ -3183,6 +3178,15 @@ public class AccountTokenCreateParams extends ApiRequestParams {
               return this;
             }
 
+            /** Person that is signing the document. */
+            public Builder setSigner(
+                AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfRegistration
+                        .Signer
+                    signer) {
+              this.signer = signer;
+              return this;
+            }
+
             /**
              * <strong>Required.</strong> The format of the document. Currently supports {@code
              * files} only.
@@ -3192,6 +3196,83 @@ public class AccountTokenCreateParams extends ApiRequestParams {
                     type) {
               this.type = type;
               return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Signer {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> Person signing the document. */
+            @SerializedName("person")
+            String person;
+
+            private Signer(Map<String, Object> extraParams, String person) {
+              this.extraParams = extraParams;
+              this.person = person;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private String person;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfRegistration
+                      .Signer
+                  build() {
+                return new AccountTokenCreateParams.Identity.BusinessDetails.Documents
+                    .ProofOfRegistration.Signer(this.extraParams, this.person);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfRegistration.Signer#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfRegistration.Signer#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> Person signing the document. */
+              public Builder setPerson(String person) {
+                this.person = person;
+                return this;
+              }
             }
           }
 
@@ -3229,6 +3310,10 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("files")
           List<String> files;
 
+          /** Person that is signing the document. */
+          @SerializedName("signer")
+          Signer signer;
+
           /**
            * <strong>Required.</strong> The format of the document. Currently supports {@code files}
            * only.
@@ -3237,9 +3322,10 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           Type type;
 
           private ProofOfUltimateBeneficialOwnership(
-              Map<String, Object> extraParams, List<String> files, Type type) {
+              Map<String, Object> extraParams, List<String> files, Signer signer, Type type) {
             this.extraParams = extraParams;
             this.files = files;
+            this.signer = signer;
             this.type = type;
           }
 
@@ -3252,6 +3338,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
             private List<String> files;
 
+            private Signer signer;
+
             private Type type;
 
             /** Finalize and obtain parameter instance from this builder. */
@@ -3259,7 +3347,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
                     .ProofOfUltimateBeneficialOwnership
                 build() {
               return new AccountTokenCreateParams.Identity.BusinessDetails.Documents
-                  .ProofOfUltimateBeneficialOwnership(this.extraParams, this.files, this.type);
+                  .ProofOfUltimateBeneficialOwnership(
+                  this.extraParams, this.files, this.signer, this.type);
             }
 
             /**
@@ -3320,6 +3409,15 @@ public class AccountTokenCreateParams extends ApiRequestParams {
               return this;
             }
 
+            /** Person that is signing the document. */
+            public Builder setSigner(
+                AccountTokenCreateParams.Identity.BusinessDetails.Documents
+                        .ProofOfUltimateBeneficialOwnership.Signer
+                    signer) {
+              this.signer = signer;
+              return this;
+            }
+
             /**
              * <strong>Required.</strong> The format of the document. Currently supports {@code
              * files} only.
@@ -3330,6 +3428,83 @@ public class AccountTokenCreateParams extends ApiRequestParams {
                     type) {
               this.type = type;
               return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Signer {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> Person signing the document. */
+            @SerializedName("person")
+            String person;
+
+            private Signer(Map<String, Object> extraParams, String person) {
+              this.extraParams = extraParams;
+              this.person = person;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private String person;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountTokenCreateParams.Identity.BusinessDetails.Documents
+                      .ProofOfUltimateBeneficialOwnership.Signer
+                  build() {
+                return new AccountTokenCreateParams.Identity.BusinessDetails.Documents
+                    .ProofOfUltimateBeneficialOwnership.Signer(this.extraParams, this.person);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfUltimateBeneficialOwnership.Signer#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfUltimateBeneficialOwnership.Signer#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> Person signing the document. */
+              public Builder setPerson(String person) {
+                this.person = person;
+                return this;
+              }
             }
           }
 
@@ -4770,7 +4945,11 @@ public class AccountTokenCreateParams extends ApiRequestParams {
       @SerializedName("documents")
       Documents documents;
 
-      /** The individual's email address. */
+      /**
+       * The individual's email address. You can only set this field when the Account is configured
+       * as a {@code merchant} or {@code recipient}. Use {@code contact_email} as the primary
+       * contact email for this Account.
+       */
       @SerializedName("email")
       String email;
 
@@ -5020,7 +5199,11 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The individual's email address. */
+        /**
+         * The individual's email address. You can only set this field when the Account is
+         * configured as a {@code merchant} or {@code recipient}. Use {@code contact_email} as the
+         * primary contact email for this Account.
+         */
         public Builder setEmail(String email) {
           this.email = email;
           return this;

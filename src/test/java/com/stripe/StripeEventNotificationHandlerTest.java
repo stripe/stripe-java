@@ -1,3 +1,4 @@
+// File copied from our code generator; changes here will be overwritten.
 package com.stripe;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

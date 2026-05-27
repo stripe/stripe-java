@@ -96,6 +96,10 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @SerializedName("amount_paid")
   Long amountPaid;
 
+  /** Amount, in cents (or local equivalent), that was paid on the invoice outside of Stripe. */
+  @SerializedName("amount_paid_off_stripe")
+  Long amountPaidOffStripe;
+
   /** The difference between amount_due and amount_paid, in cents (or local equivalent). */
   @SerializedName("amount_remaining")
   Long amountRemaining;

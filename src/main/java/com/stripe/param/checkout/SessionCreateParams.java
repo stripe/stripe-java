@@ -24,7 +24,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * Configure actions after a Checkout Session has expired. You can't set this parameter if {@code
-   * ui_mode} is {@code custom}.
+   * ui_mode} is {@code elements}.
    */
   @SerializedName("after_expiration")
   AfterExpiration afterExpiration;
@@ -49,7 +49,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * The branding settings for the Checkout Session. This parameter is not allowed if ui_mode is
-   * {@code custom}.
+   * {@code elements}.
    */
   @SerializedName("branding_settings")
   BrandingSettings brandingSettings;
@@ -57,7 +57,7 @@ public class SessionCreateParams extends ApiRequestParams {
   /**
    * If set, Checkout displays a back button and customers will be directed to this URL if they
    * decide to cancel payment and return to your website. This parameter is not allowed if ui_mode
-   * is {@code embedded} or {@code custom}.
+   * is {@code embedded_page} or {@code elements}.
    */
   @SerializedName("cancel_url")
   String cancelUrl;
@@ -289,7 +289,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * Where the user is coming from. This informs the optimizations that are applied to the session.
-   * You can't set this parameter if {@code ui_mode} is {@code custom}.
+   * You can't set this parameter if {@code ui_mode} is {@code elements}.
    */
   @SerializedName("origin_context")
   OriginContext originContext;
@@ -372,7 +372,7 @@ public class SessionCreateParams extends ApiRequestParams {
   PhoneNumberCollection phoneNumberCollection;
 
   /**
-   * This parameter applies to {@code ui_mode: embedded}. Learn more about the <a
+   * This parameter applies to {@code ui_mode: embedded_page}. Learn more about the <a
    * href="https://docs.stripe.com/payments/checkout/custom-success-page?payment-ui=embedded-form">redirect
    * behavior</a> of embedded sessions. Defaults to {@code always}.
    */
@@ -382,7 +382,8 @@ public class SessionCreateParams extends ApiRequestParams {
   /**
    * The URL to redirect your customer back to after they authenticate or cancel their payment on
    * the payment method's app or site. This parameter is required if {@code ui_mode} is {@code
-   * embedded} or {@code custom} and redirect-based payment methods are enabled on the session.
+   * embedded_page} or {@code elements} and redirect-based payment methods are enabled on the
+   * session.
    */
   @SerializedName("return_url")
   String returnUrl;
@@ -415,7 +416,7 @@ public class SessionCreateParams extends ApiRequestParams {
    * Describes the type of transaction being performed by Checkout in order to customize relevant
    * text on the page, such as the submit button. {@code submit_type} can only be specified on
    * Checkout Sessions in {@code payment} or {@code subscription} mode. If blank or {@code auto},
-   * {@code pay} is used. You can't set this parameter if {@code ui_mode} is {@code custom}.
+   * {@code pay} is used. You can't set this parameter if {@code ui_mode} is {@code elements}.
    */
   @SerializedName("submit_type")
   SubmitType submitType;
@@ -429,7 +430,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * The URL to which Stripe should send customers when payment or setup is complete. This parameter
-   * is not allowed if ui_mode is {@code embedded} or {@code custom}. If you'd like to use
+   * is not allowed if ui_mode is {@code embedded_page} or {@code elements}. If you'd like to use
    * information from the successful Checkout Session on your page, read the guide on <a
    * href="https://docs.stripe.com/payments/checkout/custom-success-page">customizing your success
    * page</a>.
@@ -441,7 +442,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("tax_id_collection")
   TaxIdCollection taxIdCollection;
 
-  /** The UI mode of the Session. Defaults to {@code hosted}. */
+  /** The UI mode of the Session. Defaults to {@code hosted_page}. */
   @SerializedName("ui_mode")
   UiMode uiMode;
 
@@ -733,7 +734,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * Configure actions after a Checkout Session has expired. You can't set this parameter if
-     * {@code ui_mode} is {@code custom}.
+     * {@code ui_mode} is {@code elements}.
      */
     public Builder setAfterExpiration(SessionCreateParams.AfterExpiration afterExpiration) {
       this.afterExpiration = afterExpiration;
@@ -767,7 +768,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The branding settings for the Checkout Session. This parameter is not allowed if ui_mode is
-     * {@code custom}.
+     * {@code elements}.
      */
     public Builder setBrandingSettings(SessionCreateParams.BrandingSettings brandingSettings) {
       this.brandingSettings = brandingSettings;
@@ -777,7 +778,7 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * If set, Checkout displays a back button and customers will be directed to this URL if they
      * decide to cancel payment and return to your website. This parameter is not allowed if ui_mode
-     * is {@code embedded} or {@code custom}.
+     * is {@code embedded_page} or {@code elements}.
      */
     public Builder setCancelUrl(String cancelUrl) {
       this.cancelUrl = cancelUrl;
@@ -1174,7 +1175,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * Where the user is coming from. This informs the optimizations that are applied to the
-     * session. You can't set this parameter if {@code ui_mode} is {@code custom}.
+     * session. You can't set this parameter if {@code ui_mode} is {@code elements}.
      */
     public Builder setOriginContext(SessionCreateParams.OriginContext originContext) {
       this.originContext = originContext;
@@ -1284,7 +1285,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * This parameter applies to {@code ui_mode: embedded}. Learn more about the <a
+     * This parameter applies to {@code ui_mode: embedded_page}. Learn more about the <a
      * href="https://docs.stripe.com/payments/checkout/custom-success-page?payment-ui=embedded-form">redirect
      * behavior</a> of embedded sessions. Defaults to {@code always}.
      */
@@ -1297,7 +1298,8 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * The URL to redirect your customer back to after they authenticate or cancel their payment on
      * the payment method's app or site. This parameter is required if {@code ui_mode} is {@code
-     * embedded} or {@code custom} and redirect-based payment methods are enabled on the session.
+     * embedded_page} or {@code elements} and redirect-based payment methods are enabled on the
+     * session.
      */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
@@ -1362,7 +1364,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * Describes the type of transaction being performed by Checkout in order to customize relevant
      * text on the page, such as the submit button. {@code submit_type} can only be specified on
      * Checkout Sessions in {@code payment} or {@code subscription} mode. If blank or {@code auto},
-     * {@code pay} is used. You can't set this parameter if {@code ui_mode} is {@code custom}.
+     * {@code pay} is used. You can't set this parameter if {@code ui_mode} is {@code elements}.
      */
     public Builder setSubmitType(SessionCreateParams.SubmitType submitType) {
       this.submitType = submitType;
@@ -1380,10 +1382,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The URL to which Stripe should send customers when payment or setup is complete. This
-     * parameter is not allowed if ui_mode is {@code embedded} or {@code custom}. If you'd like to
-     * use information from the successful Checkout Session on your page, read the guide on <a
-     * href="https://docs.stripe.com/payments/checkout/custom-success-page">customizing your success
-     * page</a>.
+     * parameter is not allowed if ui_mode is {@code embedded_page} or {@code elements}. If you'd
+     * like to use information from the successful Checkout Session on your page, read the guide on
+     * <a href="https://docs.stripe.com/payments/checkout/custom-success-page">customizing your
+     * success page</a>.
      */
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;
@@ -1396,7 +1398,7 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The UI mode of the Session. Defaults to {@code hosted}. */
+    /** The UI mode of the Session. Defaults to {@code hosted_page}. */
     public Builder setUiMode(SessionCreateParams.UiMode uiMode) {
       this.uiMode = uiMode;
       return this;
@@ -2472,7 +2474,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * If set to {@code auto}, enables the collection of customer consent for promotional
      * communications. The Checkout Session will determine whether to display an option to opt into
      * promotional communication from the merchant depending on the customer's locale. Only
-     * available to US merchants.
+     * available to US merchants and US customers.
      */
     @SerializedName("promotions")
     Promotions promotions;
@@ -2559,7 +2561,7 @@ public class SessionCreateParams extends ApiRequestParams {
        * If set to {@code auto}, enables the collection of customer consent for promotional
        * communications. The Checkout Session will determine whether to display an option to opt
        * into promotional communication from the merchant depending on the customer's locale. Only
-       * available to US merchants.
+       * available to US merchants and US customers.
        */
       public Builder setPromotions(SessionCreateParams.ConsentCollection.Promotions promotions) {
         this.promotions = promotions;
@@ -7687,7 +7689,7 @@ public class SessionCreateParams extends ApiRequestParams {
   public static class PaymentMethodOptions {
     /**
      * contains details about the ACSS Debit payment method options. You can't set this parameter if
-     * {@code ui_mode} is {@code custom}.
+     * {@code ui_mode} is {@code elements}.
      */
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
@@ -7801,7 +7803,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("kr_card")
     KrCard krCard;
 
-    /** contains details about the Link payment method options. */
+    /**
+     * contains details about the Link payment method options (Link is also known as Onelink in the
+     * UK).
+     */
     @SerializedName("link")
     Link link;
 
@@ -7860,6 +7865,10 @@ public class SessionCreateParams extends ApiRequestParams {
     /** contains details about the Satispay payment method options. */
     @SerializedName("satispay")
     Satispay satispay;
+
+    /** contains details about the Scalapay payment method options. */
+    @SerializedName("scalapay")
+    Scalapay scalapay;
 
     /** contains details about the Sepa Debit payment method options. */
     @SerializedName("sepa_debit")
@@ -7932,6 +7941,7 @@ public class SessionCreateParams extends ApiRequestParams {
         RevolutPay revolutPay,
         SamsungPay samsungPay,
         Satispay satispay,
+        Scalapay scalapay,
         SepaDebit sepaDebit,
         Sofort sofort,
         Swish swish,
@@ -7981,6 +7991,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.revolutPay = revolutPay;
       this.samsungPay = samsungPay;
       this.satispay = satispay;
+      this.scalapay = scalapay;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.swish = swish;
@@ -8079,6 +8090,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Satispay satispay;
 
+      private Scalapay scalapay;
+
       private SepaDebit sepaDebit;
 
       private Sofort sofort;
@@ -8138,6 +8151,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.revolutPay,
             this.samsungPay,
             this.satispay,
+            this.scalapay,
             this.sepaDebit,
             this.sofort,
             this.swish,
@@ -8149,7 +8163,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * contains details about the ACSS Debit payment method options. You can't set this parameter
-       * if {@code ui_mode} is {@code custom}.
+       * if {@code ui_mode} is {@code elements}.
        */
       public Builder setAcssDebit(SessionCreateParams.PaymentMethodOptions.AcssDebit acssDebit) {
         this.acssDebit = acssDebit;
@@ -8336,7 +8350,10 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** contains details about the Link payment method options. */
+      /**
+       * contains details about the Link payment method options (Link is also known as Onelink in
+       * the UK).
+       */
       public Builder setLink(SessionCreateParams.PaymentMethodOptions.Link link) {
         this.link = link;
         return this;
@@ -8423,6 +8440,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Satispay payment method options. */
       public Builder setSatispay(SessionCreateParams.PaymentMethodOptions.Satispay satispay) {
         this.satispay = satispay;
+        return this;
+      }
+
+      /** contains details about the Scalapay payment method options. */
+      public Builder setScalapay(SessionCreateParams.PaymentMethodOptions.Scalapay scalapay) {
+        this.scalapay = scalapay;
         return this;
       }
 
@@ -11037,8 +11060,8 @@ public class SessionCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Restrictions {
         /**
-         * Specify the card brands to block in the Checkout Session. If a customer enters or selects
-         * a card belonging to a blocked brand, they can't complete the Session.
+         * The card brands to block. If a customer enters or selects a card belonging to a blocked
+         * brand, they can't complete the payment.
          */
         @SerializedName("brands_blocked")
         List<SessionCreateParams.PaymentMethodOptions.Card.Restrictions.BrandsBlocked>
@@ -16533,6 +16556,91 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Scalapay {
+      /** Controls when the funds will be captured from the customer's account. */
+      @SerializedName("capture_method")
+      CaptureMethod captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Scalapay(CaptureMethod captureMethod, Map<String, Object> extraParams) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private CaptureMethod captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Scalapay build() {
+          return new SessionCreateParams.PaymentMethodOptions.Scalapay(
+              this.captureMethod, this.extraParams);
+        }
+
+        /** Controls when the funds will be captured from the customer's account. */
+        public Builder setCaptureMethod(
+            SessionCreateParams.PaymentMethodOptions.Scalapay.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Scalapay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Scalapay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -17102,7 +17210,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
         @SerializedName("none")
-        NONE("none");
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -20525,7 +20636,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * A future timestamp to anchor the subscription's billing cycle for new subscriptions. You
-     * can't set this parameter if {@code ui_mode} is {@code custom}.
+     * can't set this parameter if {@code ui_mode} is {@code elements}.
      */
     @SerializedName("billing_cycle_anchor")
     Long billingCycleAnchor;
@@ -20719,7 +20830,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * A future timestamp to anchor the subscription's billing cycle for new subscriptions. You
-       * can't set this parameter if {@code ui_mode} is {@code custom}.
+       * can't set this parameter if {@code ui_mode} is {@code elements}.
        */
       public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
@@ -21812,7 +21923,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** contains details about the Link wallet options. */
+    /** contains details about the Link wallet options (Link is also known as Onelink in the UK). */
     @SerializedName("link")
     Link link;
 
@@ -21861,7 +21972,9 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** contains details about the Link wallet options. */
+      /**
+       * contains details about the Link wallet options (Link is also known as Onelink in the UK).
+       */
       public Builder setLink(SessionCreateParams.WalletOptions.Link link) {
         this.link = link;
         return this;
@@ -22024,6 +22137,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("billie")
     BILLIE("billie"),
 
+    @SerializedName("bizum")
+    BIZUM("bizum"),
+
     @SerializedName("blik")
     BLIK("blik"),
 
@@ -22131,6 +22247,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("satispay")
     SATISPAY("satispay"),
+
+    @SerializedName("scalapay")
+    SCALAPAY("scalapay"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
@@ -22381,6 +22500,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("billie")
     BILLIE("billie"),
 
+    @SerializedName("bizum")
+    BIZUM("bizum"),
+
     @SerializedName("blik")
     BLIK("blik"),
 
@@ -22491,6 +22613,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("satispay")
     SATISPAY("satispay"),
+
+    @SerializedName("scalapay")
+    SCALAPAY("scalapay"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),

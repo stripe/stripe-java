@@ -137,8 +137,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   Object description;
 
   /**
-   * The coupons to redeem into discounts for the subscription. If not specified or empty, inherits
-   * the discount from the subscription's customer.
+   * The coupons to redeem into discounts for the subscription. A populated array overwrites the
+   * existing discounts on the subscription. If not specified or empty array, it leaves the
+   * subscription's discounts unchanged. If empty string, it clears the subscription's discounts.
    */
   @SerializedName("discounts")
   Object discounts;
@@ -194,32 +195,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   Object pauseCollection;
 
   /**
-   * Use {@code allow_incomplete} to transition the subscription to {@code status=past_due} if a
-   * payment is required but cannot be paid. This allows you to manage scenarios where additional
-   * user actions are needed to pay a subscription's invoice. For example, SCA regulation may
-   * require 3DS authentication to complete payment. See the <a
-   * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA Migration
-   * Guide</a> for Billing to learn more. This is the default behavior.
-   *
-   * <p>Use {@code default_incomplete} to transition the subscription to {@code status=past_due}
-   * when payment is required and await explicit confirmation of the invoice's payment intent. This
-   * allows simpler management of scenarios where additional user actions are needed to pay a
-   * subscription’s invoice. Such as failed payments, <a
-   * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA
-   * regulation</a>, or collecting a mandate for a bank debit payment method.
-   *
-   * <p>Use {@code pending_if_incomplete} to update the subscription using <a
-   * href="https://docs.stripe.com/billing/subscriptions/pending-updates">pending updates</a>. When
-   * you use {@code pending_if_incomplete} you can only pass the parameters <a
-   * href="https://docs.stripe.com/billing/pending-updates-reference#supported-attributes">supported
-   * by pending updates</a>.
-   *
-   * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
-   * subscription's invoice cannot be paid. For example, if a payment method requires 3DS
-   * authentication due to SCA regulation and further user action is needed, this parameter does not
-   * update the subscription and returns an error instead. This was the default behavior for API
-   * versions prior to 2019-03-14. See the <a
-   * href="https://docs.stripe.com/changelog/2019-03-14">changelog</a> to learn more.
+   * Controls how Stripe handles payment when a subscription update requires payment and {@code
+   * collection_method=charge_automatically}.
    */
   @SerializedName("payment_behavior")
   PaymentBehavior paymentBehavior;
@@ -830,8 +807,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The coupons to redeem into discounts for the subscription. If not specified or empty,
-     * inherits the discount from the subscription's customer.
+     * The coupons to redeem into discounts for the subscription. A populated array overwrites the
+     * existing discounts on the subscription. If not specified or empty array, it leaves the
+     * subscription's discounts unchanged. If empty string, it clears the subscription's discounts.
      */
     public Builder setDiscounts(EmptyParam discounts) {
       this.discounts = discounts;
@@ -839,8 +817,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The coupons to redeem into discounts for the subscription. If not specified or empty,
-     * inherits the discount from the subscription's customer.
+     * The coupons to redeem into discounts for the subscription. A populated array overwrites the
+     * existing discounts on the subscription. If not specified or empty array, it leaves the
+     * subscription's discounts unchanged. If empty string, it clears the subscription's discounts.
      */
     public Builder setDiscounts(List<SubscriptionUpdateParams.Discount> discounts) {
       this.discounts = discounts;
@@ -1025,32 +1004,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Use {@code allow_incomplete} to transition the subscription to {@code status=past_due} if a
-     * payment is required but cannot be paid. This allows you to manage scenarios where additional
-     * user actions are needed to pay a subscription's invoice. For example, SCA regulation may
-     * require 3DS authentication to complete payment. See the <a
-     * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA Migration
-     * Guide</a> for Billing to learn more. This is the default behavior.
-     *
-     * <p>Use {@code default_incomplete} to transition the subscription to {@code status=past_due}
-     * when payment is required and await explicit confirmation of the invoice's payment intent.
-     * This allows simpler management of scenarios where additional user actions are needed to pay a
-     * subscription’s invoice. Such as failed payments, <a
-     * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA
-     * regulation</a>, or collecting a mandate for a bank debit payment method.
-     *
-     * <p>Use {@code pending_if_incomplete} to update the subscription using <a
-     * href="https://docs.stripe.com/billing/subscriptions/pending-updates">pending updates</a>.
-     * When you use {@code pending_if_incomplete} you can only pass the parameters <a
-     * href="https://docs.stripe.com/billing/pending-updates-reference#supported-attributes">supported
-     * by pending updates</a>.
-     *
-     * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
-     * subscription's invoice cannot be paid. For example, if a payment method requires 3DS
-     * authentication due to SCA regulation and further user action is needed, this parameter does
-     * not update the subscription and returns an error instead. This was the default behavior for
-     * API versions prior to 2019-03-14. See the <a
-     * href="https://docs.stripe.com/changelog/2019-03-14">changelog</a> to learn more.
+     * Controls how Stripe handles payment when a subscription update requires payment and {@code
+     * collection_method=charge_automatically}.
      */
     public Builder setPaymentBehavior(SubscriptionUpdateParams.PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;
@@ -1184,6 +1139,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class AddInvoiceItem {
+    /**
+     * Controls whether discounts apply to this invoice item. Defaults to true if no value is
+     * provided.
+     */
+    @SerializedName("discountable")
+    Boolean discountable;
+
     /** The coupons to redeem into discounts for the item. */
     @SerializedName("discounts")
     List<SubscriptionUpdateParams.AddInvoiceItem.Discount> discounts;
@@ -1237,6 +1199,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Object taxRates;
 
     private AddInvoiceItem(
+        Boolean discountable,
         List<SubscriptionUpdateParams.AddInvoiceItem.Discount> discounts,
         Map<String, Object> extraParams,
         Map<String, String> metadata,
@@ -1245,6 +1208,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         PriceData priceData,
         Long quantity,
         Object taxRates) {
+      this.discountable = discountable;
       this.discounts = discounts;
       this.extraParams = extraParams;
       this.metadata = metadata;
@@ -1260,6 +1224,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Boolean discountable;
+
       private List<SubscriptionUpdateParams.AddInvoiceItem.Discount> discounts;
 
       private Map<String, Object> extraParams;
@@ -1279,6 +1245,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionUpdateParams.AddInvoiceItem build() {
         return new SubscriptionUpdateParams.AddInvoiceItem(
+            this.discountable,
             this.discounts,
             this.extraParams,
             this.metadata,
@@ -1287,6 +1254,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             this.priceData,
             this.quantity,
             this.taxRates);
+      }
+
+      /**
+       * Controls whether discounts apply to this invoice item. Defaults to true if no value is
+       * provided.
+       */
+      public Builder setDiscountable(Boolean discountable) {
+        this.discountable = discountable;
+        return this;
       }
 
       /**
@@ -8735,6 +8711,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @SerializedName("swish")
       SWISH("swish"),
 
+      @SerializedName("twint")
+      TWINT("twint"),
+
       @SerializedName("upi")
       UPI("upi"),
 
@@ -9328,6 +9307,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   }
 
   public enum CancelAt implements ApiRequestParams.EnumParam {
+    @SerializedName("max_billed_until")
+    MAX_BILLED_UNTIL("max_billed_until"),
+
     @SerializedName("max_period_end")
     MAX_PERIOD_END("max_period_end"),
 
