@@ -1426,6 +1426,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("billie_payments")
     BilliePayments billiePayments;
 
+    /** The bizum_payments capability. */
+    @SerializedName("bizum_payments")
+    BizumPayments bizumPayments;
+
     /** The blik_payments capability. */
     @SerializedName("blik_payments")
     BlikPayments blikPayments;
@@ -1591,6 +1595,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("satispay_payments")
     SatispayPayments satispayPayments;
 
+    /** The scalapay_payments capability. */
+    @SerializedName("scalapay_payments")
+    ScalapayPayments scalapayPayments;
+
     /** The sepa_bank_transfer_payments capability. */
     @SerializedName("sepa_bank_transfer_payments")
     SepaBankTransferPayments sepaBankTransferPayments;
@@ -1659,6 +1667,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         BancontactPayments bancontactPayments,
         BankTransferPayments bankTransferPayments,
         BilliePayments billiePayments,
+        BizumPayments bizumPayments,
         BlikPayments blikPayments,
         BoletoPayments boletoPayments,
         CardIssuing cardIssuing,
@@ -1699,6 +1708,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         RevolutPayPayments revolutPayPayments,
         SamsungPayPayments samsungPayPayments,
         SatispayPayments satispayPayments,
+        ScalapayPayments scalapayPayments,
         SepaBankTransferPayments sepaBankTransferPayments,
         SepaDebitPayments sepaDebitPayments,
         SofortPayments sofortPayments,
@@ -1724,6 +1734,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.bancontactPayments = bancontactPayments;
       this.bankTransferPayments = bankTransferPayments;
       this.billiePayments = billiePayments;
+      this.bizumPayments = bizumPayments;
       this.blikPayments = blikPayments;
       this.boletoPayments = boletoPayments;
       this.cardIssuing = cardIssuing;
@@ -1764,6 +1775,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.revolutPayPayments = revolutPayPayments;
       this.samsungPayPayments = samsungPayPayments;
       this.satispayPayments = satispayPayments;
+      this.scalapayPayments = scalapayPayments;
       this.sepaBankTransferPayments = sepaBankTransferPayments;
       this.sepaDebitPayments = sepaDebitPayments;
       this.sofortPayments = sofortPayments;
@@ -1806,6 +1818,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       private BankTransferPayments bankTransferPayments;
 
       private BilliePayments billiePayments;
+
+      private BizumPayments bizumPayments;
 
       private BlikPayments blikPayments;
 
@@ -1887,6 +1901,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private SatispayPayments satispayPayments;
 
+      private ScalapayPayments scalapayPayments;
+
       private SepaBankTransferPayments sepaBankTransferPayments;
 
       private SepaDebitPayments sepaDebitPayments;
@@ -1929,6 +1945,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.bancontactPayments,
             this.bankTransferPayments,
             this.billiePayments,
+            this.bizumPayments,
             this.blikPayments,
             this.boletoPayments,
             this.cardIssuing,
@@ -1969,6 +1986,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.revolutPayPayments,
             this.samsungPayPayments,
             this.satispayPayments,
+            this.scalapayPayments,
             this.sepaBankTransferPayments,
             this.sepaDebitPayments,
             this.sofortPayments,
@@ -2058,6 +2076,13 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setBilliePayments(
           AccountUpdateParams.Capabilities.BilliePayments billiePayments) {
         this.billiePayments = billiePayments;
+        return this;
+      }
+
+      /** The bizum_payments capability. */
+      public Builder setBizumPayments(
+          AccountUpdateParams.Capabilities.BizumPayments bizumPayments) {
+        this.bizumPayments = bizumPayments;
         return this;
       }
 
@@ -2348,6 +2373,13 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setSatispayPayments(
           AccountUpdateParams.Capabilities.SatispayPayments satispayPayments) {
         this.satispayPayments = satispayPayments;
+        return this;
+      }
+
+      /** The scalapay_payments capability. */
+      public Builder setScalapayPayments(
+          AccountUpdateParams.Capabilities.ScalapayPayments scalapayPayments) {
+        this.scalapayPayments = scalapayPayments;
         return this;
       }
 
@@ -3305,6 +3337,86 @@ public class AccountUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountUpdateParams.Capabilities.BilliePayments#extraParams} for the
          * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BizumPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private BizumPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.BizumPayments build() {
+          return new AccountUpdateParams.Capabilities.BizumPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.BizumPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.BizumPayments#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -6420,6 +6532,86 @@ public class AccountUpdateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountUpdateParams.Capabilities.SatispayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ScalapayPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private ScalapayPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.ScalapayPayments build() {
+          return new AccountUpdateParams.Capabilities.ScalapayPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.ScalapayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.ScalapayPayments#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {

@@ -89,8 +89,20 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("tipping")
   Tipping tipping;
 
+  @SerializedName("verifone_m425")
+  VerifoneM425 verifoneM425;
+
   @SerializedName("verifone_p400")
   VerifoneP400 verifoneP400;
+
+  @SerializedName("verifone_p630")
+  VerifoneP630 verifoneP630;
+
+  @SerializedName("verifone_ux700")
+  VerifoneUx700 verifoneUx700;
+
+  @SerializedName("verifone_v660p")
+  VerifoneV660p verifoneV660p;
 
   @SerializedName("wifi")
   Wifi wifi;
@@ -1022,6 +1034,39 @@ public class Configuration extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about VerifoneM425, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class VerifoneM425 extends StripeObject {
+    /** A File ID representing an image to display on the reader. */
+    @SerializedName("splashscreen")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<File> splashscreen;
+
+    /** Get ID of expandable {@code splashscreen} object. */
+    public String getSplashscreen() {
+      return (this.splashscreen != null) ? this.splashscreen.getId() : null;
+    }
+
+    public void setSplashscreen(String id) {
+      this.splashscreen = ApiResource.setExpandableFieldId(id, this.splashscreen);
+    }
+
+    /** Get expanded {@code splashscreen}. */
+    public File getSplashscreenObject() {
+      return (this.splashscreen != null) ? this.splashscreen.getExpanded() : null;
+    }
+
+    public void setSplashscreenObject(File expandableObject) {
+      this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  /**
    * For more details about VerifoneP400, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1029,6 +1074,105 @@ public class Configuration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class VerifoneP400 extends StripeObject {
+    /** A File ID representing an image to display on the reader. */
+    @SerializedName("splashscreen")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<File> splashscreen;
+
+    /** Get ID of expandable {@code splashscreen} object. */
+    public String getSplashscreen() {
+      return (this.splashscreen != null) ? this.splashscreen.getId() : null;
+    }
+
+    public void setSplashscreen(String id) {
+      this.splashscreen = ApiResource.setExpandableFieldId(id, this.splashscreen);
+    }
+
+    /** Get expanded {@code splashscreen}. */
+    public File getSplashscreenObject() {
+      return (this.splashscreen != null) ? this.splashscreen.getExpanded() : null;
+    }
+
+    public void setSplashscreenObject(File expandableObject) {
+      this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  /**
+   * For more details about VerifoneP630, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class VerifoneP630 extends StripeObject {
+    /** A File ID representing an image to display on the reader. */
+    @SerializedName("splashscreen")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<File> splashscreen;
+
+    /** Get ID of expandable {@code splashscreen} object. */
+    public String getSplashscreen() {
+      return (this.splashscreen != null) ? this.splashscreen.getId() : null;
+    }
+
+    public void setSplashscreen(String id) {
+      this.splashscreen = ApiResource.setExpandableFieldId(id, this.splashscreen);
+    }
+
+    /** Get expanded {@code splashscreen}. */
+    public File getSplashscreenObject() {
+      return (this.splashscreen != null) ? this.splashscreen.getExpanded() : null;
+    }
+
+    public void setSplashscreenObject(File expandableObject) {
+      this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  /**
+   * For more details about VerifoneUx700, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class VerifoneUx700 extends StripeObject {
+    /** A File ID representing an image to display on the reader. */
+    @SerializedName("splashscreen")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<File> splashscreen;
+
+    /** Get ID of expandable {@code splashscreen} object. */
+    public String getSplashscreen() {
+      return (this.splashscreen != null) ? this.splashscreen.getId() : null;
+    }
+
+    public void setSplashscreen(String id) {
+      this.splashscreen = ApiResource.setExpandableFieldId(id, this.splashscreen);
+    }
+
+    /** Get expanded {@code splashscreen}. */
+    public File getSplashscreenObject() {
+      return (this.splashscreen != null) ? this.splashscreen.getExpanded() : null;
+    }
+
+    public void setSplashscreenObject(File expandableObject) {
+      this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  /**
+   * For more details about VerifoneV660p, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class VerifoneV660p extends StripeObject {
     /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
@@ -1163,7 +1307,11 @@ public class Configuration extends ApiResource implements HasId {
     trySetResponseGetter(stripeS700, responseGetter);
     trySetResponseGetter(stripeS710, responseGetter);
     trySetResponseGetter(tipping, responseGetter);
+    trySetResponseGetter(verifoneM425, responseGetter);
     trySetResponseGetter(verifoneP400, responseGetter);
+    trySetResponseGetter(verifoneP630, responseGetter);
+    trySetResponseGetter(verifoneUx700, responseGetter);
+    trySetResponseGetter(verifoneV660p, responseGetter);
     trySetResponseGetter(wifi, responseGetter);
   }
 }

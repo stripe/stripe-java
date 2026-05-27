@@ -17,6 +17,10 @@ public class EventDestinationCreateParams extends ApiRequestParams {
   @SerializedName("amazon_eventbridge")
   AmazonEventbridge amazonEventbridge;
 
+  /** Azure Event Grid configuration. */
+  @SerializedName("azure_event_grid")
+  AzureEventGrid azureEventGrid;
+
   /** An optional description of what the event destination is used for. */
   @SerializedName("description")
   String description;
@@ -75,6 +79,7 @@ public class EventDestinationCreateParams extends ApiRequestParams {
 
   private EventDestinationCreateParams(
       AmazonEventbridge amazonEventbridge,
+      AzureEventGrid azureEventGrid,
       String description,
       List<String> enabledEvents,
       EventPayload eventPayload,
@@ -87,6 +92,7 @@ public class EventDestinationCreateParams extends ApiRequestParams {
       Type type,
       WebhookEndpoint webhookEndpoint) {
     this.amazonEventbridge = amazonEventbridge;
+    this.azureEventGrid = azureEventGrid;
     this.description = description;
     this.enabledEvents = enabledEvents;
     this.eventPayload = eventPayload;
@@ -106,6 +112,8 @@ public class EventDestinationCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private AmazonEventbridge amazonEventbridge;
+
+    private AzureEventGrid azureEventGrid;
 
     private String description;
 
@@ -133,6 +141,7 @@ public class EventDestinationCreateParams extends ApiRequestParams {
     public EventDestinationCreateParams build() {
       return new EventDestinationCreateParams(
           this.amazonEventbridge,
+          this.azureEventGrid,
           this.description,
           this.enabledEvents,
           this.eventPayload,
@@ -150,6 +159,12 @@ public class EventDestinationCreateParams extends ApiRequestParams {
     public Builder setAmazonEventbridge(
         EventDestinationCreateParams.AmazonEventbridge amazonEventbridge) {
       this.amazonEventbridge = amazonEventbridge;
+      return this;
+    }
+
+    /** Azure Event Grid configuration. */
+    public Builder setAzureEventGrid(EventDestinationCreateParams.AzureEventGrid azureEventGrid) {
+      this.azureEventGrid = azureEventGrid;
       return this;
     }
 
@@ -408,6 +423,110 @@ public class EventDestinationCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class AzureEventGrid {
+    /** <strong>Required.</strong> The Azure region. */
+    @SerializedName("azure_region")
+    String azureRegion;
+
+    /** <strong>Required.</strong> The name of the Azure resource group. */
+    @SerializedName("azure_resource_group_name")
+    String azureResourceGroupName;
+
+    /** <strong>Required.</strong> The Azure subscription ID. */
+    @SerializedName("azure_subscription_id")
+    String azureSubscriptionId;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AzureEventGrid(
+        String azureRegion,
+        String azureResourceGroupName,
+        String azureSubscriptionId,
+        Map<String, Object> extraParams) {
+      this.azureRegion = azureRegion;
+      this.azureResourceGroupName = azureResourceGroupName;
+      this.azureSubscriptionId = azureSubscriptionId;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String azureRegion;
+
+      private String azureResourceGroupName;
+
+      private String azureSubscriptionId;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public EventDestinationCreateParams.AzureEventGrid build() {
+        return new EventDestinationCreateParams.AzureEventGrid(
+            this.azureRegion,
+            this.azureResourceGroupName,
+            this.azureSubscriptionId,
+            this.extraParams);
+      }
+
+      /** <strong>Required.</strong> The Azure region. */
+      public Builder setAzureRegion(String azureRegion) {
+        this.azureRegion = azureRegion;
+        return this;
+      }
+
+      /** <strong>Required.</strong> The name of the Azure resource group. */
+      public Builder setAzureResourceGroupName(String azureResourceGroupName) {
+        this.azureResourceGroupName = azureResourceGroupName;
+        return this;
+      }
+
+      /** <strong>Required.</strong> The Azure subscription ID. */
+      public Builder setAzureSubscriptionId(String azureSubscriptionId) {
+        this.azureSubscriptionId = azureSubscriptionId;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * EventDestinationCreateParams.AzureEventGrid#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link EventDestinationCreateParams.AzureEventGrid#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class WebhookEndpoint {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -509,6 +628,9 @@ public class EventDestinationCreateParams extends ApiRequestParams {
   public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("amazon_eventbridge")
     AMAZON_EVENTBRIDGE("amazon_eventbridge"),
+
+    @SerializedName("azure_event_grid")
+    AZURE_EVENT_GRID("azure_event_grid"),
 
     @SerializedName("webhook_endpoint")
     WEBHOOK_ENDPOINT("webhook_endpoint");

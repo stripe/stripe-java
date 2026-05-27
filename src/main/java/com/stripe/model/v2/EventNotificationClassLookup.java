@@ -23,6 +23,19 @@ public final class EventNotificationClassLookup {
         "v1.billing.meter.no_meter_found",
         com.stripe.events.V1BillingMeterNoMeterFoundEventNotification.class);
     eventClassLookup.put(
+        "v2.commerce.product_catalog.imports.failed",
+        com.stripe.events.V2CommerceProductCatalogImportsFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.commerce.product_catalog.imports.processing",
+        com.stripe.events.V2CommerceProductCatalogImportsProcessingEventNotification.class);
+    eventClassLookup.put(
+        "v2.commerce.product_catalog.imports.succeeded",
+        com.stripe.events.V2CommerceProductCatalogImportsSucceededEventNotification.class);
+    eventClassLookup.put(
+        "v2.commerce.product_catalog.imports.succeeded_with_errors",
+        com.stripe.events.V2CommerceProductCatalogImportsSucceededWithErrorsEventNotification
+            .class);
+    eventClassLookup.put(
         "v2.core.account.closed", com.stripe.events.V2CoreAccountClosedEventNotification.class);
     eventClassLookup.put(
         "v2.core.account.created", com.stripe.events.V2CoreAccountCreatedEventNotification.class);
