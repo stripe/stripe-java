@@ -18,6 +18,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.delegatedcheckout.RequestedSessionConfirmParams;
 import com.stripe.param.delegatedcheckout.RequestedSessionCreateParams;
 import com.stripe.param.delegatedcheckout.RequestedSessionExpireParams;
+import com.stripe.param.delegatedcheckout.RequestedSessionListOrdersParams;
 import com.stripe.param.delegatedcheckout.RequestedSessionRetrieveParams;
 import com.stripe.param.delegatedcheckout.RequestedSessionUpdateParams;
 import java.math.BigDecimal;
@@ -320,6 +321,52 @@ public class RequestedSession extends ApiResource
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, RequestedSession.class);
+  }
+
+  /** Lists orders for a delegated checkout requested session. */
+  public OrderCollection listOrders() throws StripeException {
+    return listOrders((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Lists orders for a delegated checkout requested session. */
+  public OrderCollection listOrders(Map<String, Object> params) throws StripeException {
+    return listOrders(params, (RequestOptions) null);
+  }
+
+  /** Lists orders for a delegated checkout requested session. */
+  public OrderCollection listOrders(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/delegated_checkout/requested_sessions/%s/orders",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getResponseGetter().request(request, OrderCollection.class);
+  }
+
+  /** Lists orders for a delegated checkout requested session. */
+  public OrderCollection listOrders(RequestedSessionListOrdersParams params)
+      throws StripeException {
+    return listOrders(params, (RequestOptions) null);
+  }
+
+  /** Lists orders for a delegated checkout requested session. */
+  public OrderCollection listOrders(RequestedSessionListOrdersParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/delegated_checkout/requested_sessions/%s/orders",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, OrderCollection.class);
   }
 
   /** Retrieves a requested session. */

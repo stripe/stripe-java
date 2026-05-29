@@ -32,8 +32,8 @@ public class PaymentLocation extends ApiResource implements HasId {
   BusinessRegistration businessRegistration;
 
   /**
-   * The capability settings for the location. Only applicable for locations with requested Payment
-   * Location Capabilities.
+   * The capability settings for the location. Only applicable for locations with requested payment
+   * location capabilities.
    */
   @SerializedName("capability_settings")
   CapabilitySettings capabilitySettings;

@@ -27,7 +27,7 @@ public class PaymentLocationCapabilityUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> The location for which the capability enables functionality. */
+  /** <strong>Required.</strong> The location that the capability enables functionality for. */
   @SerializedName("location")
   Object location;
 
@@ -117,13 +117,13 @@ public class PaymentLocationCapabilityUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The location for which the capability enables functionality. */
+    /** <strong>Required.</strong> The location that the capability enables functionality for. */
     public Builder setLocation(String location) {
       this.location = location;
       return this;
     }
 
-    /** <strong>Required.</strong> The location for which the capability enables functionality. */
+    /** <strong>Required.</strong> The location that the capability enables functionality for. */
     public Builder setLocation(EmptyParam location) {
       this.location = location;
       return this;

@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.delegatedcheckout;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentLocationListParams extends ApiRequestParams {
+public class RequestedSessionListOrdersParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -51,7 +51,7 @@ public class PaymentLocationListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  private PaymentLocationListParams(
+  private RequestedSessionListOrdersParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -80,8 +80,8 @@ public class PaymentLocationListParams extends ApiRequestParams {
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentLocationListParams build() {
-      return new PaymentLocationListParams(
+    public RequestedSessionListOrdersParams build() {
+      return new RequestedSessionListOrdersParams(
           this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
     }
 
@@ -99,7 +99,7 @@ public class PaymentLocationListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentLocationListParams#expand} for the field documentation.
+     * RequestedSessionListOrdersParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -112,7 +112,7 @@ public class PaymentLocationListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentLocationListParams#expand} for the field documentation.
+     * RequestedSessionListOrdersParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -125,7 +125,7 @@ public class PaymentLocationListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentLocationListParams#extraParams} for the field documentation.
+     * RequestedSessionListOrdersParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -138,7 +138,7 @@ public class PaymentLocationListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentLocationListParams#extraParams} for the field documentation.
+     * See {@link RequestedSessionListOrdersParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {

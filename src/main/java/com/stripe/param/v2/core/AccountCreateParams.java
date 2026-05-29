@@ -14150,13 +14150,19 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName("losses_collector")
       LossesCollector lossesCollector;
 
+      /** A value indicating the party responsible for collecting requirements on this account. */
+      @SerializedName("requirements_collector")
+      RequirementsCollector requirementsCollector;
+
       private Responsibilities(
           Map<String, Object> extraParams,
           FeesCollector feesCollector,
-          LossesCollector lossesCollector) {
+          LossesCollector lossesCollector,
+          RequirementsCollector requirementsCollector) {
         this.extraParams = extraParams;
         this.feesCollector = feesCollector;
         this.lossesCollector = lossesCollector;
+        this.requirementsCollector = requirementsCollector;
       }
 
       public static Builder builder() {
@@ -14170,10 +14176,15 @@ public class AccountCreateParams extends ApiRequestParams {
 
         private LossesCollector lossesCollector;
 
+        private RequirementsCollector requirementsCollector;
+
         /** Finalize and obtain parameter instance from this builder. */
         public AccountCreateParams.Defaults.Responsibilities build() {
           return new AccountCreateParams.Defaults.Responsibilities(
-              this.extraParams, this.feesCollector, this.lossesCollector);
+              this.extraParams,
+              this.feesCollector,
+              this.lossesCollector,
+              this.requirementsCollector);
         }
 
         /**
@@ -14223,6 +14234,14 @@ public class AccountCreateParams extends ApiRequestParams {
           this.lossesCollector = lossesCollector;
           return this;
         }
+
+        /** A value indicating the party responsible for collecting requirements on this account. */
+        public Builder setRequirementsCollector(
+            AccountCreateParams.Defaults.Responsibilities.RequirementsCollector
+                requirementsCollector) {
+          this.requirementsCollector = requirementsCollector;
+          return this;
+        }
       }
 
       public enum FeesCollector implements ApiRequestParams.EnumParam {
@@ -14257,6 +14276,21 @@ public class AccountCreateParams extends ApiRequestParams {
         private final String value;
 
         LossesCollector(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequirementsCollector implements ApiRequestParams.EnumParam {
+        @SerializedName("application")
+        APPLICATION("application"),
+
+        @SerializedName("stripe")
+        STRIPE("stripe");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequirementsCollector(String value) {
           this.value = value;
         }
       }

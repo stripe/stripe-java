@@ -29819,6 +29819,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class AccountFunding {
             /**
+             * The category of digital asset being acquired through this account funding
+             * transaction.
+             */
+            @SerializedName("digital_asset_category")
+            DigitalAssetCategory digitalAssetCategory;
+
+            /**
              * Map of extra parameters for custom features not available in this client library. The
              * content in this map is not serialized under this field's {@code @SerializedName}
              * value. Instead, each key/value pair is serialized as if the key is a root-level field
@@ -29837,7 +29844,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             Wallet wallet;
 
             private AccountFunding(
-                Map<String, Object> extraParams, Object liquidAsset, Wallet wallet) {
+                DigitalAssetCategory digitalAssetCategory,
+                Map<String, Object> extraParams,
+                Object liquidAsset,
+                Wallet wallet) {
+              this.digitalAssetCategory = digitalAssetCategory;
               this.extraParams = extraParams;
               this.liquidAsset = liquidAsset;
               this.wallet = wallet;
@@ -29848,6 +29859,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             }
 
             public static class Builder {
+              private DigitalAssetCategory digitalAssetCategory;
+
               private Map<String, Object> extraParams;
 
               private Object liquidAsset;
@@ -29859,7 +29872,20 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                       .MoneyServices.AccountFunding
                   build() {
                 return new PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails
-                    .MoneyServices.AccountFunding(this.extraParams, this.liquidAsset, this.wallet);
+                    .MoneyServices.AccountFunding(
+                    this.digitalAssetCategory, this.extraParams, this.liquidAsset, this.wallet);
+              }
+
+              /**
+               * The category of digital asset being acquired through this account funding
+               * transaction.
+               */
+              public Builder setDigitalAssetCategory(
+                  PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices
+                          .AccountFunding.DigitalAssetCategory
+                      digitalAssetCategory) {
+                this.digitalAssetCategory = digitalAssetCategory;
+                return this;
               }
 
               /**
@@ -30426,6 +30452,27 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                     }
                   }
                 }
+              }
+            }
+
+            public enum DigitalAssetCategory implements ApiRequestParams.EnumParam {
+              @SerializedName("blockchain_native")
+              BLOCKCHAIN_NATIVE("blockchain_native"),
+
+              @SerializedName("nft")
+              NFT("nft"),
+
+              @SerializedName("other_non_fiat")
+              OTHER_NON_FIAT("other_non_fiat"),
+
+              @SerializedName("stablecoin")
+              STABLECOIN("stablecoin");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              DigitalAssetCategory(String value) {
+                this.value = value;
               }
             }
           }
@@ -31823,6 +31870,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class AccountFunding {
             /**
+             * The category of digital asset being acquired through this account funding
+             * transaction.
+             */
+            @SerializedName("digital_asset_category")
+            DigitalAssetCategory digitalAssetCategory;
+
+            /**
              * Map of extra parameters for custom features not available in this client library. The
              * content in this map is not serialized under this field's {@code @SerializedName}
              * value. Instead, each key/value pair is serialized as if the key is a root-level field
@@ -31841,7 +31895,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             Wallet wallet;
 
             private AccountFunding(
-                Map<String, Object> extraParams, Object liquidAsset, Wallet wallet) {
+                DigitalAssetCategory digitalAssetCategory,
+                Map<String, Object> extraParams,
+                Object liquidAsset,
+                Wallet wallet) {
+              this.digitalAssetCategory = digitalAssetCategory;
               this.extraParams = extraParams;
               this.liquidAsset = liquidAsset;
               this.wallet = wallet;
@@ -31852,6 +31910,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             }
 
             public static class Builder {
+              private DigitalAssetCategory digitalAssetCategory;
+
               private Map<String, Object> extraParams;
 
               private Object liquidAsset;
@@ -31863,7 +31923,20 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                       .MoneyServices.AccountFunding
                   build() {
                 return new PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails
-                    .MoneyServices.AccountFunding(this.extraParams, this.liquidAsset, this.wallet);
+                    .MoneyServices.AccountFunding(
+                    this.digitalAssetCategory, this.extraParams, this.liquidAsset, this.wallet);
+              }
+
+              /**
+               * The category of digital asset being acquired through this account funding
+               * transaction.
+               */
+              public Builder setDigitalAssetCategory(
+                  PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails
+                          .MoneyServices.AccountFunding.DigitalAssetCategory
+                      digitalAssetCategory) {
+                this.digitalAssetCategory = digitalAssetCategory;
+                return this;
               }
 
               /**
@@ -32431,6 +32504,27 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                     }
                   }
                 }
+              }
+            }
+
+            public enum DigitalAssetCategory implements ApiRequestParams.EnumParam {
+              @SerializedName("blockchain_native")
+              BLOCKCHAIN_NATIVE("blockchain_native"),
+
+              @SerializedName("nft")
+              NFT("nft"),
+
+              @SerializedName("other_non_fiat")
+              OTHER_NON_FIAT("other_non_fiat"),
+
+              @SerializedName("stablecoin")
+              STABLECOIN("stablecoin");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              DigitalAssetCategory(String value) {
+                this.value = value;
               }
             }
           }
@@ -50174,15 +50268,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Payment-level details for the orchestrated payment. */
-    @SerializedName("payment_details")
-    PaymentDetails paymentDetails;
+    /** Merchant-provided reference for this payment, used for reconciliation. */
+    @SerializedName("payment_reference")
+    String paymentReference;
 
     private PaymentsOrchestration(
-        Boolean enabled, Map<String, Object> extraParams, PaymentDetails paymentDetails) {
+        Boolean enabled, Map<String, Object> extraParams, String paymentReference) {
       this.enabled = enabled;
       this.extraParams = extraParams;
-      this.paymentDetails = paymentDetails;
+      this.paymentReference = paymentReference;
     }
 
     public static Builder builder() {
@@ -50194,12 +50288,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private PaymentDetails paymentDetails;
+      private String paymentReference;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentCreateParams.PaymentsOrchestration build() {
         return new PaymentIntentCreateParams.PaymentsOrchestration(
-            this.enabled, this.extraParams, this.paymentDetails);
+            this.enabled, this.extraParams, this.paymentReference);
       }
 
       /** <strong>Required.</strong> Whether this feature is enabled. */
@@ -50235,85 +50329,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Payment-level details for the orchestrated payment. */
-      public Builder setPaymentDetails(
-          PaymentIntentCreateParams.PaymentsOrchestration.PaymentDetails paymentDetails) {
-        this.paymentDetails = paymentDetails;
-        return this;
-      }
-    }
-
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
-    public static class PaymentDetails {
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
       /** Merchant-provided reference for this payment, used for reconciliation. */
-      @SerializedName("reference")
-      String reference;
-
-      private PaymentDetails(Map<String, Object> extraParams, String reference) {
-        this.extraParams = extraParams;
-        this.reference = reference;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Map<String, Object> extraParams;
-
-        private String reference;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public PaymentIntentCreateParams.PaymentsOrchestration.PaymentDetails build() {
-          return new PaymentIntentCreateParams.PaymentsOrchestration.PaymentDetails(
-              this.extraParams, this.reference);
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link
-         * PaymentIntentCreateParams.PaymentsOrchestration.PaymentDetails#extraParams} for the field
-         * documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link
-         * PaymentIntentCreateParams.PaymentsOrchestration.PaymentDetails#extraParams} for the field
-         * documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** Merchant-provided reference for this payment, used for reconciliation. */
-        public Builder setReference(String reference) {
-          this.reference = reference;
-          return this;
-        }
+      public Builder setPaymentReference(String paymentReference) {
+        this.paymentReference = paymentReference;
+        return this;
       }
     }
   }

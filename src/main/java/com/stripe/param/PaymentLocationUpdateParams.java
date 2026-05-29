@@ -40,9 +40,9 @@ public class PaymentLocationUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Pass true when updating location fields that will trigger onboarding review for any of the
-   * location's active location capabilities. If this parameter is not set to true, updates that
-   * would trigger onboarding review will fail. Only applicable for locations with active location
+   * Pass true when updating location fields that trigger onboarding review for any of the
+   * location's active location capabilities. If this parameter isn't set to true, updates that
+   * would trigger onboarding review fail. Only applicable for locations with active location
    * capabilities.
    */
   @SerializedName("onboarding_data_update_acknowledged")
@@ -169,9 +169,9 @@ public class PaymentLocationUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Pass true when updating location fields that will trigger onboarding review for any of the
-     * location's active location capabilities. If this parameter is not set to true, updates that
-     * would trigger onboarding review will fail. Only applicable for locations with active location
+     * Pass true when updating location fields that trigger onboarding review for any of the
+     * location's active location capabilities. If this parameter isn't set to true, updates that
+     * would trigger onboarding review fail. Only applicable for locations with active location
      * capabilities.
      */
     public Builder setOnboardingDataUpdateAcknowledged(Boolean onboardingDataUpdateAcknowledged) {
