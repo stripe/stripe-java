@@ -29577,14 +29577,17 @@ class GeneratedExamples extends BaseStripeTest {
         "{\"object\":\"v2.data.reporting.query_run\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"sql\":\"sql\",\"status\":\"failed\",\"status_details\":{\"key\":{}}}");
     StripeClient client = new StripeClient(networkSpy);
 
+    com.stripe.param.v2.data.reporting.QueryRunRetrieveParams params =
+        com.stripe.param.v2.data.reporting.QueryRunRetrieveParams.builder().build();
+
     com.stripe.model.v2.data.reporting.QueryRun queryRun =
-        client.v2().data().reporting().queryRuns().retrieve("id_123");
+        client.v2().data().reporting().queryRuns().retrieve("id_123", params);
     assertNotNull(queryRun);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         "/v2/data/reporting/query_runs/id_123",
-        null,
+        params.toMap(),
         null);
   }
 
@@ -32026,14 +32029,17 @@ class GeneratedExamples extends BaseStripeTest {
         "{\"object\":\"v2.reporting.report_run\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"report\":\"report\",\"report_name\":\"report_name\",\"report_parameters\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"status\":\"failed\",\"status_details\":{\"key\":{}}}");
     StripeClient client = new StripeClient(networkSpy);
 
+    com.stripe.param.v2.reporting.ReportRunRetrieveParams params =
+        com.stripe.param.v2.reporting.ReportRunRetrieveParams.builder().build();
+
     com.stripe.model.v2.reporting.ReportRun reportRun =
-        client.v2().reporting().reportRuns().retrieve("id_123");
+        client.v2().reporting().reportRuns().retrieve("id_123", params);
     assertNotNull(reportRun);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         "/v2/reporting/report_runs/id_123",
-        null,
+        params.toMap(),
         null);
   }
 

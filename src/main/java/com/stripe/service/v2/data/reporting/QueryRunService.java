@@ -11,6 +11,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.data.reporting.QueryRunCreateParams;
+import com.stripe.param.v2.data.reporting.QueryRunRetrieveParams;
 
 public final class QueryRunService extends ApiService {
   public QueryRunService(StripeResponseGetter responseGetter) {
@@ -44,17 +45,37 @@ public final class QueryRunService extends ApiService {
    * Fetches the current state and details of a previously created {@code QueryRun}. If the {@code
    * QueryRun} has succeeded, the endpoint will provide details for how to retrieve the results.
    */
-  public QueryRun retrieve(String id) throws StripeException {
-    return retrieve(id, (RequestOptions) null);
+  public QueryRun retrieve(String id, QueryRunRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Fetches the current state and details of a previously created {@code QueryRun}. If the {@code
    * QueryRun} has succeeded, the endpoint will provide details for how to retrieve the results.
    */
   public QueryRun retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (QueryRunRetrieveParams) null, options);
+  }
+  /**
+   * Fetches the current state and details of a previously created {@code QueryRun}. If the {@code
+   * QueryRun} has succeeded, the endpoint will provide details for how to retrieve the results.
+   */
+  public QueryRun retrieve(String id) throws StripeException {
+    return retrieve(id, (QueryRunRetrieveParams) null, (RequestOptions) null);
+  }
+  /**
+   * Fetches the current state and details of a previously created {@code QueryRun}. If the {@code
+   * QueryRun} has succeeded, the endpoint will provide details for how to retrieve the results.
+   */
+  public QueryRun retrieve(String id, QueryRunRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String path = String.format("/v2/data/reporting/query_runs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return this.request(request, QueryRun.class);
   }
 }

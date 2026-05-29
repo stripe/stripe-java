@@ -7,6 +7,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -122,6 +123,10 @@ public class ReportRun extends StripeObject implements HasId {
       @SerializedName("download_url")
       DownloadUrl downloadUrl;
 
+      /** The columns of the schema. */
+      @SerializedName("schema")
+      List<ReportRun.Result.File.Schema> schema;
+
       /** The total size of the file in bytes. */
       @SerializedName("size")
       @JsonAdapter(StringInt64TypeAdapter.class)
@@ -139,6 +144,28 @@ public class ReportRun extends StripeObject implements HasId {
         /** The URL that can be used for accessing the file. */
         @SerializedName("url")
         String url;
+      }
+
+      /**
+       * For more details about Schema, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Schema extends StripeObject {
+        /** The name of the column. */
+        @SerializedName("name")
+        String name;
+
+        /**
+         * The type of the column.
+         *
+         * <p>One of {@code boolean}, {@code double}, {@code bigint}, {@code varchar}, or {@code
+         * timestamp}.
+         */
+        @SerializedName("type")
+        String type;
       }
     }
   }
