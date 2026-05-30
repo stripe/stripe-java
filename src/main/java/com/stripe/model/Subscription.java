@@ -2117,6 +2117,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       UsBankAccount usBankAccount;
 
       /**
+       * This sub-hash contains details about the WeChat Pay payment method options to pass to
+       * invoices created by the subscription.
+       */
+      @SerializedName("wechat_pay")
+      WechatPay wechatPay;
+
+      /**
        * For more details about AcssDebit, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
        */
@@ -2597,6 +2604,30 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             String institution;
           }
         }
+      }
+
+      /**
+       * For more details about WechatPay, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class WechatPay extends StripeObject {
+        /**
+         * The app ID registered with WeChat Pay. Only required when client is {@code ios} or {@code
+         * android}.
+         */
+        @SerializedName("app_id")
+        String appId;
+
+        /**
+         * The client type that the end customer will pay from.
+         *
+         * <p>One of {@code android}, {@code ios}, {@code mobile_web}, or {@code web}.
+         */
+        @SerializedName("client")
+        String client;
       }
     }
   }

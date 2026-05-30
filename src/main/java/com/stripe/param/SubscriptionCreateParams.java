@@ -6404,6 +6404,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("us_bank_account")
       Object usBankAccount;
 
+      /**
+       * This sub-hash contains details about the WeChat Pay payment method options to pass to the
+       * invoice’s PaymentIntent.
+       */
+      @SerializedName("wechat_pay")
+      Object wechatPay;
+
       private PaymentMethodOptions(
           Object acssDebit,
           Object bancontact,
@@ -6419,7 +6426,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           Object pix,
           Object sepaDebit,
           Object upi,
-          Object usBankAccount) {
+          Object usBankAccount,
+          Object wechatPay) {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
         this.bizum = bizum;
@@ -6435,6 +6443,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         this.sepaDebit = sepaDebit;
         this.upi = upi;
         this.usBankAccount = usBankAccount;
+        this.wechatPay = wechatPay;
       }
 
       public static Builder builder() {
@@ -6472,6 +6481,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
         private Object usBankAccount;
 
+        private Object wechatPay;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions build() {
           return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions(
@@ -6489,7 +6500,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
               this.pix,
               this.sepaDebit,
               this.upi,
-              this.usBankAccount);
+              this.usBankAccount,
+              this.wechatPay);
         }
 
         /**
@@ -6788,6 +6800,25 @@ public class SubscriptionCreateParams extends ApiRequestParams {
          */
         public Builder setUsBankAccount(EmptyParam usBankAccount) {
           this.usBankAccount = usBankAccount;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the WeChat Pay payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setWechatPay(
+            SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.WechatPay wechatPay) {
+          this.wechatPay = wechatPay;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the WeChat Pay payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setWechatPay(EmptyParam wechatPay) {
+          this.wechatPay = wechatPay;
           return this;
         }
       }
@@ -9571,6 +9602,123 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           private final String value;
 
           VerificationMethod(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class WechatPay {
+        /**
+         * The app ID registered with WeChat Pay. Only required when client is {@code ios} or {@code
+         * android}.
+         */
+        @SerializedName("app_id")
+        String appId;
+
+        /** The client type that the end customer will pay from. */
+        @SerializedName("client")
+        Client client;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private WechatPay(String appId, Client client, Map<String, Object> extraParams) {
+          this.appId = appId;
+          this.client = client;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String appId;
+
+          private Client client;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.WechatPay build() {
+            return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.WechatPay(
+                this.appId, this.client, this.extraParams);
+          }
+
+          /**
+           * The app ID registered with WeChat Pay. Only required when client is {@code ios} or
+           * {@code android}.
+           */
+          public Builder setAppId(String appId) {
+            this.appId = appId;
+            return this;
+          }
+
+          /** The client type that the end customer will pay from. */
+          public Builder setClient(
+              SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.WechatPay.Client
+                  client) {
+            this.client = client;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.WechatPay#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.WechatPay#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        public enum Client implements ApiRequestParams.EnumParam {
+          @SerializedName("android")
+          ANDROID("android"),
+
+          @SerializedName("ios")
+          IOS("ios"),
+
+          @SerializedName("mobile_web")
+          MOBILE_WEB("mobile_web"),
+
+          @SerializedName("web")
+          WEB("web");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Client(String value) {
             this.value = value;
           }
         }
