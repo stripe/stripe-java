@@ -29093,7 +29093,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         new TypeToken<
             com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.FeeBatch>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.core.fee_batch\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"collected_by\":{\"type\":\"application\"},\"collection_records\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"type\":\"money_management_transaction\"}],\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"billed\",\"status_transitions\":{}}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.core.fee_batch\",\"amount\":{\"currency\":\"usd\",\"value\":\"value\"},\"collected_by\":{\"type\":\"application\"},\"collection_records\":[{\"amount\":{\"currency\":\"usd\",\"value\":\"value\"},\"type\":\"money_management_transaction\"}],\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"billed\",\"status_transitions\":{}}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.FeeBatchListParams params =
@@ -29119,7 +29119,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.FeeBatch.class,
-        "{\"object\":\"v2.core.fee_batch\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"collected_by\":{\"type\":\"application\"},\"collection_records\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"type\":\"money_management_transaction\"}],\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"billed\",\"status_transitions\":{}}");
+        "{\"object\":\"v2.core.fee_batch\",\"amount\":{\"currency\":\"usd\",\"value\":\"value\"},\"collected_by\":{\"type\":\"application\"},\"collection_records\":[{\"amount\":{\"currency\":\"usd\",\"value\":\"value\"},\"type\":\"money_management_transaction\"}],\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"billed\",\"status_transitions\":{}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.FeeBatch feeBatch = client.v2().core().feeBatches().retrieve("id_123");
@@ -29138,7 +29138,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         new TypeToken<
             com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.FeeEntry>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.core.fee_entry\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"charged_by\":{\"type\":\"application\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"incurred_by\":{\"id\":\"obj_123\",\"type\":\"type\"},\"livemode\":true,\"reason\":\"reprice\",\"type\":\"application_fee\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.core.fee_entry\",\"amount\":{\"currency\":\"usd\",\"value\":\"value\"},\"charged_by\":{\"type\":\"application\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"incurred_by\":{\"id\":\"obj_123\",\"type\":\"type\"},\"livemode\":true,\"reason\":\"reprice\",\"type\":\"application_fee\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.FeeEntryListParams params =
@@ -29164,7 +29164,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.FeeEntry.class,
-        "{\"object\":\"v2.core.fee_entry\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"charged_by\":{\"type\":\"application\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"incurred_by\":{\"id\":\"obj_123\",\"type\":\"type\"},\"livemode\":true,\"reason\":\"reprice\",\"type\":\"application_fee\"}");
+        "{\"object\":\"v2.core.fee_entry\",\"amount\":{\"currency\":\"usd\",\"value\":\"value\"},\"charged_by\":{\"type\":\"application\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"incurred_by\":{\"id\":\"obj_123\",\"type\":\"type\"},\"livemode\":true,\"reason\":\"reprice\",\"type\":\"application_fee\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.FeeEntry feeEntry = client.v2().core().feeEntries().retrieve("id_123");
@@ -32040,6 +32040,59 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.GET,
         "/v2/reporting/report_runs/id_123",
         params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2SignalsAccountSignalGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/signals/account_signals",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.signals.AccountSignal>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.signals.account_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"type\":\"fraudulent_merchant\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.signals.AccountSignalListParams params =
+        com.stripe.param.v2.signals.AccountSignalListParams.builder()
+            .addType(com.stripe.param.v2.signals.AccountSignalListParams.Type.FRAUDULENT_MERCHANT)
+            .build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.signals.AccountSignal>
+        stripeCollection = client.v2().signals().accountSignals().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/signals/account_signals",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2SignalsAccountSignalGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/signals/account_signals/id_123",
+        null,
+        null,
+        com.stripe.model.v2.signals.AccountSignal.class,
+        "{\"object\":\"v2.signals.account_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"type\":\"fraudulent_merchant\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.signals.AccountSignal accountSignal =
+        client.v2().signals().accountSignals().retrieve("id_123");
+    assertNotNull(accountSignal);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/signals/account_signals/id_123",
+        null,
         null);
   }
 

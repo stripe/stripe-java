@@ -411,6 +411,7 @@ import com.stripe.events.V2ReportingReportRunFailedEventNotification;
 import com.stripe.events.V2ReportingReportRunSucceededEventNotification;
 import com.stripe.events.V2ReportingReportRunUpdatedEventNotification;
 import com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEventNotification;
+import com.stripe.events.V2SignalsAccountSignalMerchantDelinquencyReadyEventNotification;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.v2.core.EventNotification;
 import java.util.ArrayList;
@@ -2985,6 +2986,12 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV2SignalsAccountSignalFraudulentMerchantReady(
       Callback<V2SignalsAccountSignalFraudulentMerchantReadyEventNotification> callback) {
     this.register("v2.signals.account_signal.fraudulent_merchant_ready", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2SignalsAccountSignalMerchantDelinquencyReady(
+      Callback<V2SignalsAccountSignalMerchantDelinquencyReadyEventNotification> callback) {
+    this.register("v2.signals.account_signal.merchant_delinquency_ready", callback);
     return this;
   }
   // notification-handler-methods: The end of the section generated from our OpenAPI spec

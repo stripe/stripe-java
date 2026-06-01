@@ -2,9 +2,18 @@
 package com.stripe.model.delegatedcheckout;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiRequest;
+import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.delegatedcheckout.OrderRetrieveParams;
 import java.util.List;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Order extends StripeObject implements HasId {
+public class Order extends ApiResource implements HasId {
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -68,6 +77,42 @@ public class Order extends StripeObject implements HasId {
   /** The totals for this order. */
   @SerializedName("totals")
   Totals totals;
+
+  /** Retrieves a delegated checkout order. */
+  public static Order retrieve(String orderId) throws StripeException {
+    return retrieve(orderId, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a delegated checkout order. */
+  public static Order retrieve(String orderId, RequestOptions options) throws StripeException {
+    return retrieve(orderId, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a delegated checkout order. */
+  public static Order retrieve(String orderId, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/delegated_checkout/orders/%s", ApiResource.urlEncodeId(orderId));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, Order.class);
+  }
+
+  /** Retrieves a delegated checkout order. */
+  public static Order retrieve(String orderId, OrderRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/delegated_checkout/orders/%s", ApiResource.urlEncodeId(orderId));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, Order.class);
+  }
 
   /**
    * For more details about LineItem, please refer to the <a href="https://docs.stripe.com/api">API
@@ -198,5 +243,12 @@ public class Order extends StripeObject implements HasId {
     /** The total amount for the order. */
     @SerializedName("total")
     Long total;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(latestOrderEvent, responseGetter);
+    trySetResponseGetter(totals, responseGetter);
   }
 }

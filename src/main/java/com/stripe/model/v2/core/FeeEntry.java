@@ -4,7 +4,6 @@ package com.stripe.model.v2.core;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.v2.Amount;
 import java.time.Instant;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -75,6 +74,26 @@ public class FeeEntry extends StripeObject implements HasId {
    */
   @SerializedName("type")
   String type;
+
+  /** The fee amount. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Amount extends StripeObject {
+    /**
+     * A lowercase alpha3 currency code like &quot;usd&quot; For the taxonomy label choice, see
+     * SECURE_FRAMEWORKS-2849.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * In major units like &quot;1.23&quot; for 1.23 USD For the taxonomy label choice, see
+     * SECURE_FRAMEWORKS-2849.
+     */
+    @SerializedName("value")
+    String value;
+  }
 
   /** The entity that assessed this fee. */
   @Getter
@@ -166,5 +185,25 @@ public class FeeEntry extends StripeObject implements HasId {
     /** The tax amount calculated for this fee. */
     @SerializedName("amount")
     Amount amount;
+
+    /** The tax amount calculated for this fee. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Amount extends StripeObject {
+      /**
+       * A lowercase alpha3 currency code like &quot;usd&quot; For the taxonomy label choice, see
+       * SECURE_FRAMEWORKS-2849.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * In major units like &quot;1.23&quot; for 1.23 USD For the taxonomy label choice, see
+       * SECURE_FRAMEWORKS-2849.
+       */
+      @SerializedName("value")
+      String value;
+    }
   }
 }

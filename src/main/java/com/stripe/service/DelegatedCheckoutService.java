@@ -9,6 +9,10 @@ public final class DelegatedCheckoutService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.delegatedcheckout.OrderService orders() {
+    return new com.stripe.service.delegatedcheckout.OrderService(this.getResponseGetter());
+  }
+
   public com.stripe.service.delegatedcheckout.RequestedSessionService requestedSessions() {
     return new com.stripe.service.delegatedcheckout.RequestedSessionService(
         this.getResponseGetter());
