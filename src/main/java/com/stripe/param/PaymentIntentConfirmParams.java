@@ -15898,7 +15898,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       public enum TransactionType implements ApiRequestParams.EnumParam {
         @SerializedName("account_funding")
-        ACCOUNT_FUNDING("account_funding");
+        ACCOUNT_FUNDING("account_funding"),
+
+        @SerializedName("debt_repayment")
+        DEBT_REPAYMENT("debt_repayment");
 
         @Getter(onMethod_ = {@Override})
         private final String value;

@@ -5005,7 +5005,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /**
        * The type of money services transaction.
        *
-       * <p>Equal to {@code account_funding}.
+       * <p>One of {@code account_funding}, or {@code debt_repayment}.
        */
       @SerializedName("transaction_type")
       String transactionType;
