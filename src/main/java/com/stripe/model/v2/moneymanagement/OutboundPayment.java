@@ -262,10 +262,10 @@ public class OutboundPayment extends StripeObject implements HasId {
        * Open Enum. The {@code failed} status reason.
        *
        * <p>One of {@code paper_check_attachment_too_large}, {@code paper_check_expired}, {@code
-       * paper_check_undeliverable}, {@code payout_method_declined}, {@code
-       * payout_method_does_not_exist}, {@code payout_method_expired}, {@code
-       * payout_method_unsupported}, {@code payout_method_usage_frequency_limit_exceeded}, or {@code
-       * unknown_failure}.
+       * paper_check_undeliverable}, {@code payout_method_amount_limit_exceeded}, {@code
+       * payout_method_declined}, {@code payout_method_does_not_exist}, {@code
+       * payout_method_expired}, {@code payout_method_unsupported}, {@code
+       * payout_method_usage_frequency_limit_exceeded}, or {@code unknown_failure}.
        */
       @SerializedName("reason")
       String reason;

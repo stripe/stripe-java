@@ -1107,7 +1107,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     /**
      * The surcharge provider used for this session.
      *
-     * <p>One of {@code interpayments}, or {@code yeeld}.
+     * <p>One of {@code interpayments}, {@code proserv}, or {@code yeeld}.
      */
     @SerializedName("provider")
     String provider;
