@@ -25,6 +25,7 @@ com.stripe.model.testhelpers
 com.stripe.model.treasury
 com.stripe.model.v2
 com.stripe.model.v2.billing
+com.stripe.model.v2.commerce
 com.stripe.model.v2.core
 com.stripe.net
 com.stripe.param
@@ -47,6 +48,7 @@ com.stripe.param.terminal
 com.stripe.param.testhelpers
 com.stripe.param.treasury
 com.stripe.param.v2.billing
+com.stripe.param.v2.commerce.productcatalog
 com.stripe.param.v2.core
 com.stripe.param.v2.core.accounts
 com.stripe.service
@@ -72,6 +74,8 @@ com.stripe.service.testhelpers.treasury
 com.stripe.service.treasury
 com.stripe.service.v2
 com.stripe.service.v2.billing
+com.stripe.service.v2.commerce
+com.stripe.service.v2.commerce.productcatalog
 com.stripe.service.v2.core
 com.stripe.service.v2.core.accounts
 com.stripe.util
