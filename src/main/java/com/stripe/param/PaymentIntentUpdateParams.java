@@ -34448,12 +34448,21 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         @SerializedName("networks")
         List<PaymentIntentUpdateParams.PaymentMethodOptions.Crypto.DepositOptions.Network> networks;
 
+        /**
+         * If true, provisions a permanent per-customer deposit address reused across
+         * PaymentIntents.
+         */
+        @SerializedName("static_address")
+        Boolean staticAddress;
+
         private DepositOptions(
             Map<String, Object> extraParams,
             List<PaymentIntentUpdateParams.PaymentMethodOptions.Crypto.DepositOptions.Network>
-                networks) {
+                networks,
+            Boolean staticAddress) {
           this.extraParams = extraParams;
           this.networks = networks;
+          this.staticAddress = staticAddress;
         }
 
         public static Builder builder() {
@@ -34466,10 +34475,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           private List<PaymentIntentUpdateParams.PaymentMethodOptions.Crypto.DepositOptions.Network>
               networks;
 
+          private Boolean staticAddress;
+
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentIntentUpdateParams.PaymentMethodOptions.Crypto.DepositOptions build() {
             return new PaymentIntentUpdateParams.PaymentMethodOptions.Crypto.DepositOptions(
-                this.extraParams, this.networks);
+                this.extraParams, this.networks, this.staticAddress);
           }
 
           /**
@@ -34531,6 +34542,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.networks = new ArrayList<>();
             }
             this.networks.addAll(elements);
+            return this;
+          }
+
+          /**
+           * If true, provisions a permanent per-customer deposit address reused across
+           * PaymentIntents.
+           */
+          public Builder setStaticAddress(Boolean staticAddress) {
+            this.staticAddress = staticAddress;
             return this;
           }
         }

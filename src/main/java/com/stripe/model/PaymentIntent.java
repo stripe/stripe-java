@@ -6547,6 +6547,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
          */
         @SerializedName("networks")
         List<String> networks;
+
+        /**
+         * If true, provisions a permanent per-customer deposit address reused across
+         * PaymentIntents.
+         */
+        @SerializedName("static_address")
+        Boolean staticAddress;
       }
     }
 
