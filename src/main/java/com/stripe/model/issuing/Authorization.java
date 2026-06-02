@@ -1417,6 +1417,23 @@ public class Authorization extends ApiResource
     NetworkData networkData;
 
     /**
+     * The decision made during token provisioning.
+     *
+     * <p>One of {@code approve}, {@code approve_pending_id_and_v}, or {@code decline}.
+     */
+    @SerializedName("provisioning_decision")
+    String provisioningDecision;
+
+    /**
+     * The type of the token, indicating how it is used.
+     *
+     * <p>One of {@code card_on_file}, {@code cloud_based}, {@code commerce_platform}, {@code
+     * commercial_virtual_account}, {@code secure_element}, or {@code static_credential}.
+     */
+    @SerializedName("token_type")
+    String tokenType;
+
+    /**
      * For more details about NetworkData, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1527,6 +1544,15 @@ public class Authorization extends ApiResource
         /** A unique reference ID from the network to represent the card account number. */
         @SerializedName("card_reference_id")
         String cardReferenceId;
+
+        /**
+         * Stripe's recommendation to the network for this token activation request, derived from
+         * the same risk signals used for the activation decision.
+         *
+         * <p>One of {@code approve}, {@code decline}, or {@code recommend_id_and_v}.
+         */
+        @SerializedName("token_decision_recommendation")
+        String tokenDecisionRecommendation;
 
         /** The network-unique identifier for the token. */
         @SerializedName("token_reference_id")
