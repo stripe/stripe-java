@@ -4,6 +4,7 @@ package com.stripe.model.v2.core;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
 import java.time.Instant;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -81,47 +82,7 @@ public class FeeBatch extends StripeObject implements HasId {
   public static class Adjustments extends StripeObject {
     /** The amount of tax adjusted for this batch. */
     @SerializedName("tax_adjustment")
-    TaxAdjustment taxAdjustment;
-
-    /** The amount of tax adjusted for this batch. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class TaxAdjustment extends StripeObject {
-      /**
-       * A lowercase alpha3 currency code like &quot;usd&quot; For the taxonomy label choice, see
-       * SECURE_FRAMEWORKS-2849.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * In major units like &quot;1.23&quot; for 1.23 USD For the taxonomy label choice, see
-       * SECURE_FRAMEWORKS-2849.
-       */
-      @SerializedName("value")
-      String value;
-    }
-  }
-
-  /** The total fee amount billed in this batch. */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Amount extends StripeObject {
-    /**
-     * A lowercase alpha3 currency code like &quot;usd&quot; For the taxonomy label choice, see
-     * SECURE_FRAMEWORKS-2849.
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /**
-     * In major units like &quot;1.23&quot; for 1.23 USD For the taxonomy label choice, see
-     * SECURE_FRAMEWORKS-2849.
-     */
-    @SerializedName("value")
-    String value;
+    Amount taxAdjustment;
   }
 
   /** The entity that collected this batch. */
@@ -179,26 +140,6 @@ public class FeeBatch extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
-    /** The fee amount collected via this record. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Amount extends StripeObject {
-      /**
-       * A lowercase alpha3 currency code like &quot;usd&quot; For the taxonomy label choice, see
-       * SECURE_FRAMEWORKS-2849.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * In major units like &quot;1.23&quot; for 1.23 USD For the taxonomy label choice, see
-       * SECURE_FRAMEWORKS-2849.
-       */
-      @SerializedName("value")
-      String value;
-    }
-
     /** The tax amount collected via this record. */
     @Getter
     @Setter
@@ -207,26 +148,6 @@ public class FeeBatch extends StripeObject implements HasId {
       /** The tax amount collected via this record. */
       @SerializedName("amount")
       Amount amount;
-
-      /** The tax amount collected via this record. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Amount extends StripeObject {
-        /**
-         * A lowercase alpha3 currency code like &quot;usd&quot; For the taxonomy label choice, see
-         * SECURE_FRAMEWORKS-2849.
-         */
-        @SerializedName("currency")
-        String currency;
-
-        /**
-         * In major units like &quot;1.23&quot; for 1.23 USD For the taxonomy label choice, see
-         * SECURE_FRAMEWORKS-2849.
-         */
-        @SerializedName("value")
-        String value;
-      }
     }
   }
 
@@ -248,25 +169,5 @@ public class FeeBatch extends StripeObject implements HasId {
     /** The tax amount included in this batch. */
     @SerializedName("amount")
     Amount amount;
-
-    /** The tax amount included in this batch. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Amount extends StripeObject {
-      /**
-       * A lowercase alpha3 currency code like &quot;usd&quot; For the taxonomy label choice, see
-       * SECURE_FRAMEWORKS-2849.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * In major units like &quot;1.23&quot; for 1.23 USD For the taxonomy label choice, see
-       * SECURE_FRAMEWORKS-2849.
-       */
-      @SerializedName("value")
-      String value;
-    }
   }
 }
