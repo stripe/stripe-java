@@ -53,6 +53,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("address_kanji")
   AddressKanji addressKanji;
 
+  @SerializedName("birth_address")
+  Address birthAddress;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -1164,6 +1167,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     trySetResponseGetter(address, responseGetter);
     trySetResponseGetter(addressKana, responseGetter);
     trySetResponseGetter(addressKanji, responseGetter);
+    trySetResponseGetter(birthAddress, responseGetter);
     trySetResponseGetter(dob, responseGetter);
     trySetResponseGetter(futureRequirements, responseGetter);
     trySetResponseGetter(registeredAddress, responseGetter);

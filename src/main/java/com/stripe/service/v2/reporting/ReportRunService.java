@@ -12,6 +12,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.reporting.ReportRunCreateParams;
+import com.stripe.param.v2.reporting.ReportRunRetrieveParams;
 
 public final class ReportRunService extends ApiService {
   public ReportRunService(StripeResponseGetter responseGetter) {
@@ -49,17 +50,37 @@ public final class ReportRunService extends ApiService {
    * Fetches the current state and details of a previously created {@code ReportRun}. If the {@code
    * ReportRun} has succeeded, the endpoint will provide details for how to retrieve the results.
    */
-  public ReportRun retrieve(String id) throws StripeException {
-    return retrieve(id, (RequestOptions) null);
+  public ReportRun retrieve(String id, ReportRunRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Fetches the current state and details of a previously created {@code ReportRun}. If the {@code
    * ReportRun} has succeeded, the endpoint will provide details for how to retrieve the results.
    */
   public ReportRun retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ReportRunRetrieveParams) null, options);
+  }
+  /**
+   * Fetches the current state and details of a previously created {@code ReportRun}. If the {@code
+   * ReportRun} has succeeded, the endpoint will provide details for how to retrieve the results.
+   */
+  public ReportRun retrieve(String id) throws StripeException {
+    return retrieve(id, (ReportRunRetrieveParams) null, (RequestOptions) null);
+  }
+  /**
+   * Fetches the current state and details of a previously created {@code ReportRun}. If the {@code
+   * ReportRun} has succeeded, the endpoint will provide details for how to retrieve the results.
+   */
+  public ReportRun retrieve(String id, ReportRunRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String path = String.format("/v2/reporting/report_runs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return this.request(request, ReportRun.class);
   }
 }

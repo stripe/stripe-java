@@ -162,4 +162,9 @@ public final class RequestedSessionService extends ApiService {
             options);
     return this.request(request, RequestedSession.class);
   }
+
+  public com.stripe.service.delegatedcheckout.RequestedSessionOrderService orders() {
+    return new com.stripe.service.delegatedcheckout.RequestedSessionOrderService(
+        this.getResponseGetter());
+  }
 }

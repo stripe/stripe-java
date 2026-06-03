@@ -53,7 +53,8 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
 
   /**
    * The description that appears on the receiving end for an OutboundTransfer (for example, on a
-   * bank statement). Must be between 3 and 22 characters long, and not contain profanity.
+   * bank statement). Must be between 3 and 22 characters long for most destinations (500 for
+   * FinancialAccount destinations), and not contain profanity.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -210,7 +211,8 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
 
     /**
      * The description that appears on the receiving end for an OutboundTransfer (for example, on a
-     * bank statement). Must be between 3 and 22 characters long, and not contain profanity.
+     * bank statement). Must be between 3 and 22 characters long for most destinations (500 for
+     * FinancialAccount destinations), and not contain profanity.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;

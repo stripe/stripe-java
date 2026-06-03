@@ -4,8 +4,8 @@ package com.stripe.service.v2;
 import com.stripe.net.ApiService;
 import com.stripe.net.StripeResponseGetter;
 
-public final class PaymentService extends ApiService {
-  public PaymentService(StripeResponseGetter responseGetter) {
+public final class PaymentsService extends ApiService {
+  public PaymentsService(StripeResponseGetter responseGetter) {
     super(responseGetter);
   }
 

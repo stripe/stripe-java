@@ -111,6 +111,10 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.billing.collection_setting_version",
         com.stripe.model.v2.billing.CollectionSettingVersion.class);
+    classLookup.put("v2.billing.contract", com.stripe.model.v2.billing.Contract.class);
+    classLookup.put(
+        "v2.billing.contract_license_pricing_quantity_change",
+        com.stripe.model.v2.billing.ContractLicensePricingQuantityChange.class);
     classLookup.put(
         "v2.billing.custom_pricing_unit", com.stripe.model.v2.billing.CustomPricingUnit.class);
     classLookup.put("v2.billing.intent", com.stripe.model.v2.billing.Intent.class);
@@ -258,6 +262,8 @@ public final class EventDataClassLookup {
 
     classLookup.put("v2.reporting.report", com.stripe.model.v2.reporting.Report.class);
     classLookup.put("v2.reporting.report_run", com.stripe.model.v2.reporting.ReportRun.class);
+
+    classLookup.put("v2.signals.account_signal", com.stripe.model.v2.signals.AccountSignal.class);
 
     classLookup.put("v2.tax.manual_rule", com.stripe.model.v2.tax.ManualRule.class);
 
@@ -1258,5 +1264,8 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.signals.account_signal.fraudulent_merchant_ready",
         com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEvent.class);
+    eventClassLookup.put(
+        "v2.signals.account_signal.merchant_delinquency_ready",
+        com.stripe.events.V2SignalsAccountSignalMerchantDelinquencyReadyEvent.class);
   }
 }
