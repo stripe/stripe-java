@@ -6016,20 +6016,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
       /**
-       * Controls when funds are captured from the customer's account when {@code capture_method} is
-       * {@code automatic_delayed}.
-       *
-       * <p>If omitted, funds are captured before the authorization expires.
-       *
-       * <p>One of {@code auth_expiry}, {@code end_of_day}, or {@code target_delay}.
-       */
-      @SerializedName("capture_by")
-      String captureBy;
-
-      @SerializedName("capture_delay")
-      CaptureDelay captureDelay;
-
-      /**
        * Controls when the funds will be captured from the customer's account.
        *
        * <p>Equal to {@code manual}.
@@ -6192,33 +6178,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
       @SerializedName("statement_details")
       StatementDetails statementDetails;
-
-      /**
-       * For more details about CaptureDelay, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class CaptureDelay extends StripeObject {
-        /**
-         * The number of days to delay the capture of the funds.
-         *
-         * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and
-         * {@code capture_by} is {@code target_delay}.
-         */
-        @SerializedName("days")
-        Long days;
-
-        /**
-         * The number of hours to delay the capture of the funds.
-         *
-         * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and
-         * {@code capture_by} is {@code target_delay}.
-         */
-        @SerializedName("hours")
-        Long hours;
-      }
 
       /**
        * For more details about Installments, please refer to the <a
@@ -6432,20 +6391,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent extends StripeObject {
       /**
-       * Controls when funds are captured from the customer's account when {@code capture_method} is
-       * {@code automatic_delayed}.
-       *
-       * <p>If omitted, funds are captured before the authorization expires.
-       *
-       * <p>One of {@code auth_expiry}, {@code end_of_day}, or {@code target_delay}.
-       */
-      @SerializedName("capture_by")
-      String captureBy;
-
-      @SerializedName("capture_delay")
-      CaptureDelay captureDelay;
-
-      /**
        * Controls when the funds will be captured from the customer's account.
        *
        * <p>One of {@code manual}, or {@code manual_preferred}.
@@ -6484,33 +6429,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
       @SerializedName("routing")
       Routing routing;
-
-      /**
-       * For more details about CaptureDelay, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class CaptureDelay extends StripeObject {
-        /**
-         * The number of days to delay the capture of the funds.
-         *
-         * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and
-         * {@code capture_by} is {@code target_delay}.
-         */
-        @SerializedName("days")
-        Long days;
-
-        /**
-         * The number of hours to delay the capture of the funds.
-         *
-         * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and
-         * {@code capture_by} is {@code target_delay}.
-         */
-        @SerializedName("hours")
-        Long hours;
-      }
 
       /**
        * For more details about Routing, please refer to the <a

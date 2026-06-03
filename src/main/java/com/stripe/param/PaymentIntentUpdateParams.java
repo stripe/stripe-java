@@ -29622,25 +29622,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Card {
       /**
-       * Controls when funds are captured from the customer's account when {@code capture_method} is
-       * {@code automatic_delayed}.
-       *
-       * <p>If omitted, funds are captured before the authorization expires.
-       */
-      @SerializedName("capture_by")
-      CaptureBy captureBy;
-
-      /**
-       * The number of days or hours to delay the capture of the funds. You can set both days and
-       * hours as long as the total delay does not exceed 30 days.
-       *
-       * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and {@code
-       * capture_by} is {@code target_delay}.
-       */
-      @SerializedName("capture_delay")
-      CaptureDelay captureDelay;
-
-      /**
        * Controls when the funds are captured from the customer's account.
        *
        * <p>If provided, this parameter overrides the behavior of the top-level <a
@@ -29834,8 +29815,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       ThreeDSecure threeDSecure;
 
       private Card(
-          CaptureBy captureBy,
-          CaptureDelay captureDelay,
           ApiRequestParams.EnumParam captureMethod,
           Object cvcToken,
           Map<String, Object> extraParams,
@@ -29858,8 +29837,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           Object statementDescriptorSuffixKanji,
           Object statementDetails,
           ThreeDSecure threeDSecure) {
-        this.captureBy = captureBy;
-        this.captureDelay = captureDelay;
         this.captureMethod = captureMethod;
         this.cvcToken = cvcToken;
         this.extraParams = extraParams;
@@ -29889,10 +29866,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private CaptureBy captureBy;
-
-        private CaptureDelay captureDelay;
-
         private ApiRequestParams.EnumParam captureMethod;
 
         private Object cvcToken;
@@ -29940,8 +29913,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.Card build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.Card(
-              this.captureBy,
-              this.captureDelay,
               this.captureMethod,
               this.cvcToken,
               this.extraParams,
@@ -29964,31 +29935,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.statementDescriptorSuffixKanji,
               this.statementDetails,
               this.threeDSecure);
-        }
-
-        /**
-         * Controls when funds are captured from the customer's account when {@code capture_method}
-         * is {@code automatic_delayed}.
-         *
-         * <p>If omitted, funds are captured before the authorization expires.
-         */
-        public Builder setCaptureBy(
-            PaymentIntentUpdateParams.PaymentMethodOptions.Card.CaptureBy captureBy) {
-          this.captureBy = captureBy;
-          return this;
-        }
-
-        /**
-         * The number of days or hours to delay the capture of the funds. You can set both days and
-         * hours as long as the total delay does not exceed 30 days.
-         *
-         * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and
-         * {@code capture_by} is {@code target_delay}.
-         */
-        public Builder setCaptureDelay(
-            PaymentIntentUpdateParams.PaymentMethodOptions.Card.CaptureDelay captureDelay) {
-          this.captureDelay = captureDelay;
-          return this;
         }
 
         /**
@@ -30356,90 +30302,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             PaymentIntentUpdateParams.PaymentMethodOptions.Card.ThreeDSecure threeDSecure) {
           this.threeDSecure = threeDSecure;
           return this;
-        }
-      }
-
-      @Getter
-      @EqualsAndHashCode(callSuper = false)
-      public static class CaptureDelay {
-        @SerializedName("days")
-        Long days;
-
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        @SerializedName("hours")
-        Long hours;
-
-        private CaptureDelay(Long days, Map<String, Object> extraParams, Long hours) {
-          this.days = days;
-          this.extraParams = extraParams;
-          this.hours = hours;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Long days;
-
-          private Map<String, Object> extraParams;
-
-          private Long hours;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public PaymentIntentUpdateParams.PaymentMethodOptions.Card.CaptureDelay build() {
-            return new PaymentIntentUpdateParams.PaymentMethodOptions.Card.CaptureDelay(
-                this.days, this.extraParams, this.hours);
-          }
-
-          public Builder setDays(Long days) {
-            this.days = days;
-            return this;
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * PaymentIntentUpdateParams.PaymentMethodOptions.Card.CaptureDelay#extraParams} for the
-           * field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * PaymentIntentUpdateParams.PaymentMethodOptions.Card.CaptureDelay#extraParams} for the
-           * field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          public Builder setHours(Long hours) {
-            this.hours = hours;
-            return this;
-          }
         }
       }
 
@@ -32806,24 +32668,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         }
       }
 
-      public enum CaptureBy implements ApiRequestParams.EnumParam {
-        @SerializedName("auth_expiry")
-        AUTH_EXPIRY("auth_expiry"),
-
-        @SerializedName("end_of_day")
-        END_OF_DAY("end_of_day"),
-
-        @SerializedName("target_delay")
-        TARGET_DELAY("target_delay");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        CaptureBy(String value) {
-          this.value = value;
-        }
-      }
-
       public enum CaptureMethod implements ApiRequestParams.EnumParam {
         @SerializedName("manual")
         MANUAL("manual");
@@ -33030,25 +32874,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent {
       /**
-       * Controls when funds are captured from the customer's account when {@code capture_method} is
-       * {@code automatic_delayed}.
-       *
-       * <p>If omitted, funds are captured before the authorization expires.
-       */
-      @SerializedName("capture_by")
-      CaptureBy captureBy;
-
-      /**
-       * The number of days or hours to delay the capture of the funds. You can set both days and
-       * hours as long as the total delay does not exceed 30 days.
-       *
-       * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and {@code
-       * capture_by} is {@code target_delay}.
-       */
-      @SerializedName("capture_delay")
-      CaptureDelay captureDelay;
-
-      /**
        * Controls when the funds are captured from the customer's account.
        *
        * <p>If provided, this parameter overrides the behavior of the top-level <a
@@ -33109,8 +32934,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Routing routing;
 
       private CardPresent(
-          CaptureBy captureBy,
-          CaptureDelay captureDelay,
           CaptureMethod captureMethod,
           Map<String, Object> extraParams,
           PaymentDetails paymentDetails,
@@ -33118,8 +32941,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           Boolean requestIncrementalAuthorizationSupport,
           RequestReauthorization requestReauthorization,
           Routing routing) {
-        this.captureBy = captureBy;
-        this.captureDelay = captureDelay;
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.paymentDetails = paymentDetails;
@@ -33134,10 +32955,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private CaptureBy captureBy;
-
-        private CaptureDelay captureDelay;
-
         private CaptureMethod captureMethod;
 
         private Map<String, Object> extraParams;
@@ -33155,8 +32972,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent(
-              this.captureBy,
-              this.captureDelay,
               this.captureMethod,
               this.extraParams,
               this.paymentDetails,
@@ -33164,31 +32979,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.requestIncrementalAuthorizationSupport,
               this.requestReauthorization,
               this.routing);
-        }
-
-        /**
-         * Controls when funds are captured from the customer's account when {@code capture_method}
-         * is {@code automatic_delayed}.
-         *
-         * <p>If omitted, funds are captured before the authorization expires.
-         */
-        public Builder setCaptureBy(
-            PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.CaptureBy captureBy) {
-          this.captureBy = captureBy;
-          return this;
-        }
-
-        /**
-         * The number of days or hours to delay the capture of the funds. You can set both days and
-         * hours as long as the total delay does not exceed 30 days.
-         *
-         * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and
-         * {@code capture_by} is {@code target_delay}.
-         */
-        public Builder setCaptureDelay(
-            PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.CaptureDelay captureDelay) {
-          this.captureDelay = captureDelay;
-          return this;
         }
 
         /**
@@ -33288,90 +33078,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.Routing routing) {
           this.routing = routing;
           return this;
-        }
-      }
-
-      @Getter
-      @EqualsAndHashCode(callSuper = false)
-      public static class CaptureDelay {
-        @SerializedName("days")
-        Long days;
-
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        @SerializedName("hours")
-        Long hours;
-
-        private CaptureDelay(Long days, Map<String, Object> extraParams, Long hours) {
-          this.days = days;
-          this.extraParams = extraParams;
-          this.hours = hours;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Long days;
-
-          private Map<String, Object> extraParams;
-
-          private Long hours;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.CaptureDelay build() {
-            return new PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.CaptureDelay(
-                this.days, this.extraParams, this.hours);
-          }
-
-          public Builder setDays(Long days) {
-            this.days = days;
-            return this;
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.CaptureDelay#extraParams}
-           * for the field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.CaptureDelay#extraParams}
-           * for the field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          public Builder setHours(Long hours) {
-            this.hours = hours;
-            return this;
-          }
         }
       }
 
@@ -34309,24 +34015,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           RequestedPriority(String value) {
             this.value = value;
           }
-        }
-      }
-
-      public enum CaptureBy implements ApiRequestParams.EnumParam {
-        @SerializedName("auth_expiry")
-        AUTH_EXPIRY("auth_expiry"),
-
-        @SerializedName("end_of_day")
-        END_OF_DAY("end_of_day"),
-
-        @SerializedName("target_delay")
-        TARGET_DELAY("target_delay");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        CaptureBy(String value) {
-          this.value = value;
         }
       }
 
