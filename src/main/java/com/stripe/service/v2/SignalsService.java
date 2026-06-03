@@ -4,8 +4,8 @@ package com.stripe.service.v2;
 import com.stripe.net.ApiService;
 import com.stripe.net.StripeResponseGetter;
 
-public final class SignalService extends ApiService {
-  public SignalService(StripeResponseGetter responseGetter) {
+public final class SignalsService extends ApiService {
+  public SignalsService(StripeResponseGetter responseGetter) {
     super(responseGetter);
   }
 
