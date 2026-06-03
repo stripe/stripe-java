@@ -24991,46 +24991,46 @@ class GeneratedExamples extends BaseStripeTest {
                             .build())
                     .putMetadata("key", "metadata")
                     .addOverride(
-                        com.stripe.param.v2.billing.ContractCreateParams.ContractLine.Override
+                        com.stripe.param.v2.billing.ContractCreateParams.ContractLine.Overrides
                             .builder()
                             .setEndsAt(
                                 com.stripe.param.v2.billing.ContractCreateParams.ContractLine
-                                    .Override.EndsAt.builder()
+                                    .Overrides.EndsAt.builder()
                                     .setTimestamp(Instant.parse("1970-01-01T15:18:46.294Z"))
                                     .build())
                             .setServiceAction(
                                 com.stripe.param.v2.billing.ContractCreateParams.ContractLine
-                                    .Override.ServiceAction.builder()
+                                    .Overrides.ServiceAction.builder()
                                     .setAdd(
                                         com.stripe.param.v2.billing.ContractCreateParams
-                                            .ContractLine.Override.ServiceAction.Add.builder()
+                                            .ContractLine.Overrides.ServiceAction.Add.builder()
                                             .setCreditGrant(
                                                 com.stripe.param.v2.billing.ContractCreateParams
-                                                    .ContractLine.Override.ServiceAction.Add
+                                                    .ContractLine.Overrides.ServiceAction.Add
                                                     .CreditGrant.builder()
                                                     .setAmount(
                                                         com.stripe.param.v2.billing
                                                             .ContractCreateParams.ContractLine
-                                                            .Override.ServiceAction.Add.CreditGrant
+                                                            .Overrides.ServiceAction.Add.CreditGrant
                                                             .Amount.builder()
                                                             .setMonetary(
                                                                 new com.stripe.v2.Amount(63, "USD"))
                                                             .setType(
                                                                 com.stripe.param.v2.billing
                                                                     .ContractCreateParams
-                                                                    .ContractLine.Override
+                                                                    .ContractLine.Overrides
                                                                     .ServiceAction.Add.CreditGrant
                                                                     .Amount.Type.MONETARY)
                                                             .build())
                                                     .setApplicabilityConfig(
                                                         com.stripe.param.v2.billing
                                                             .ContractCreateParams.ContractLine
-                                                            .Override.ServiceAction.Add.CreditGrant
+                                                            .Overrides.ServiceAction.Add.CreditGrant
                                                             .ApplicabilityConfig.builder()
                                                             .setScope(
                                                                 com.stripe.param.v2.billing
                                                                     .ContractCreateParams
-                                                                    .ContractLine.Override
+                                                                    .ContractLine.Overrides
                                                                     .ServiceAction.Add.CreditGrant
                                                                     .ApplicabilityConfig.Scope
                                                                     .builder()
@@ -25039,7 +25039,7 @@ class GeneratedExamples extends BaseStripeTest {
                                                                     .setPriceType(
                                                                         com.stripe.param.v2.billing
                                                                             .ContractCreateParams
-                                                                            .ContractLine.Override
+                                                                            .ContractLine.Overrides
                                                                             .ServiceAction.Add
                                                                             .CreditGrant
                                                                             .ApplicabilityConfig
@@ -25050,17 +25050,17 @@ class GeneratedExamples extends BaseStripeTest {
                                                     .setCategory(
                                                         com.stripe.param.v2.billing
                                                             .ContractCreateParams.ContractLine
-                                                            .Override.ServiceAction.Add.CreditGrant
+                                                            .Overrides.ServiceAction.Add.CreditGrant
                                                             .Category.PAID)
                                                     .setExpiryConfig(
                                                         com.stripe.param.v2.billing
                                                             .ContractCreateParams.ContractLine
-                                                            .Override.ServiceAction.Add.CreditGrant
+                                                            .Overrides.ServiceAction.Add.CreditGrant
                                                             .ExpiryConfig.builder()
                                                             .setType(
                                                                 com.stripe.param.v2.billing
                                                                     .ContractCreateParams
-                                                                    .ContractLine.Override
+                                                                    .ContractLine.Overrides
                                                                     .ServiceAction.Add.CreditGrant
                                                                     .ExpiryConfig.Type
                                                                     .END_OF_SERVICE_PERIOD)
@@ -25070,32 +25070,32 @@ class GeneratedExamples extends BaseStripeTest {
                                                     .build())
                                             .setServiceInterval(
                                                 com.stripe.param.v2.billing.ContractCreateParams
-                                                    .ContractLine.Override.ServiceAction.Add
+                                                    .ContractLine.Overrides.ServiceAction.Add
                                                     .ServiceInterval.MONTH)
                                             .setServiceIntervalCount(1375336415L)
                                             .setType(
                                                 com.stripe.param.v2.billing.ContractCreateParams
-                                                    .ContractLine.Override.ServiceAction.Add.Type
+                                                    .ContractLine.Overrides.ServiceAction.Add.Type
                                                     .CREDIT_GRANT)
                                             .build())
                                     .setReplace(
                                         com.stripe.param.v2.billing.ContractCreateParams
-                                            .ContractLine.Override.ServiceAction.Replace.builder()
+                                            .ContractLine.Overrides.ServiceAction.Replace.builder()
                                             .setCreditGrant(
                                                 com.stripe.param.v2.billing.ContractCreateParams
-                                                    .ContractLine.Override.ServiceAction.Replace
+                                                    .ContractLine.Overrides.ServiceAction.Replace
                                                     .CreditGrant.builder()
                                                     .setAmount(
                                                         com.stripe.param.v2.billing
                                                             .ContractCreateParams.ContractLine
-                                                            .Override.ServiceAction.Replace
+                                                            .Overrides.ServiceAction.Replace
                                                             .CreditGrant.Amount.builder()
                                                             .setMonetary(
                                                                 new com.stripe.v2.Amount(63, "USD"))
                                                             .setType(
                                                                 com.stripe.param.v2.billing
                                                                     .ContractCreateParams
-                                                                    .ContractLine.Override
+                                                                    .ContractLine.Overrides
                                                                     .ServiceAction.Replace
                                                                     .CreditGrant.Amount.Type
                                                                     .MONETARY)
@@ -25103,13 +25103,13 @@ class GeneratedExamples extends BaseStripeTest {
                                                     .setApplicabilityConfig(
                                                         com.stripe.param.v2.billing
                                                             .ContractCreateParams.ContractLine
-                                                            .Override.ServiceAction.Replace
+                                                            .Overrides.ServiceAction.Replace
                                                             .CreditGrant.ApplicabilityConfig
                                                             .builder()
                                                             .setScope(
                                                                 com.stripe.param.v2.billing
                                                                     .ContractCreateParams
-                                                                    .ContractLine.Override
+                                                                    .ContractLine.Overrides
                                                                     .ServiceAction.Replace
                                                                     .CreditGrant.ApplicabilityConfig
                                                                     .Scope.builder()
@@ -25118,7 +25118,7 @@ class GeneratedExamples extends BaseStripeTest {
                                                                     .setPriceType(
                                                                         com.stripe.param.v2.billing
                                                                             .ContractCreateParams
-                                                                            .ContractLine.Override
+                                                                            .ContractLine.Overrides
                                                                             .ServiceAction.Replace
                                                                             .CreditGrant
                                                                             .ApplicabilityConfig
@@ -25129,17 +25129,17 @@ class GeneratedExamples extends BaseStripeTest {
                                                     .setCategory(
                                                         com.stripe.param.v2.billing
                                                             .ContractCreateParams.ContractLine
-                                                            .Override.ServiceAction.Replace
+                                                            .Overrides.ServiceAction.Replace
                                                             .CreditGrant.Category.PAID)
                                                     .setExpiryConfig(
                                                         com.stripe.param.v2.billing
                                                             .ContractCreateParams.ContractLine
-                                                            .Override.ServiceAction.Replace
+                                                            .Overrides.ServiceAction.Replace
                                                             .CreditGrant.ExpiryConfig.builder()
                                                             .setType(
                                                                 com.stripe.param.v2.billing
                                                                     .ContractCreateParams
-                                                                    .ContractLine.Override
+                                                                    .ContractLine.Overrides
                                                                     .ServiceAction.Replace
                                                                     .CreditGrant.ExpiryConfig.Type
                                                                     .END_OF_SERVICE_PERIOD)
@@ -25151,26 +25151,26 @@ class GeneratedExamples extends BaseStripeTest {
                                             .setLookupKey("lookup_key")
                                             .setServiceInterval(
                                                 com.stripe.param.v2.billing.ContractCreateParams
-                                                    .ContractLine.Override.ServiceAction.Replace
+                                                    .ContractLine.Overrides.ServiceAction.Replace
                                                     .ServiceInterval.MONTH)
                                             .setServiceIntervalCount(1375336415L)
                                             .setType(
                                                 com.stripe.param.v2.billing.ContractCreateParams
-                                                    .ContractLine.Override.ServiceAction.Replace
+                                                    .ContractLine.Overrides.ServiceAction.Replace
                                                     .Type.CREDIT_GRANT)
                                             .build())
                                     .setType(
                                         com.stripe.param.v2.billing.ContractCreateParams
-                                            .ContractLine.Override.ServiceAction.Type.ADD)
+                                            .ContractLine.Overrides.ServiceAction.Type.ADD)
                                     .build())
                             .setStartsAt(
                                 com.stripe.param.v2.billing.ContractCreateParams.ContractLine
-                                    .Override.StartsAt.builder()
+                                    .Overrides.StartsAt.builder()
                                     .setTimestamp(Instant.parse("1970-01-01T15:18:46.294Z"))
                                     .build())
                             .setType(
                                 com.stripe.param.v2.billing.ContractCreateParams.ContractLine
-                                    .Override.Type.SERVICE_ACTION)
+                                    .Overrides.Type.SERVICE_ACTION)
                             .build())
                     .setPricing(
                         com.stripe.param.v2.billing.ContractCreateParams.ContractLine.Pricing
