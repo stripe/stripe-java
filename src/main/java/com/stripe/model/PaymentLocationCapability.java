@@ -19,13 +19,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A Payment Location Capability represents a capability for a Stripe account at a Payment Location.
+ * A {@code payment_location} capability represents a capability for a Stripe account at a payment
+ * location.
  */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentLocationCapability extends ApiResource implements HasId {
-  /** The account for which the capability enables functionality. */
+  /** The account that the capability enables functionality for. */
   @SerializedName("account")
   String account;
 
@@ -44,7 +45,7 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** The payment location for which the capability enables functionality. */
+  /** The payment location that the capability enables functionality for. */
   @SerializedName("location")
   String location;
 
@@ -60,7 +61,7 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
   @SerializedName("requested")
   Boolean requested;
 
-  /** Time at which the capability was requested. Measured in seconds since the Unix epoch. */
+  /** Time when the capability was requested. Measured in seconds since the Unix epoch. */
   @SerializedName("requested_at")
   Long requestedAt;
 
@@ -75,13 +76,13 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
   @SerializedName("status")
   String status;
 
-  /** Returns a list of {@code PaymentLocationCapability} objects associated with the location. */
+  /** List all payment location capabilities associated with the payment location. */
   public static PaymentLocationCapabilityCollection list(Map<String, Object> params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of {@code PaymentLocationCapability} objects associated with the location. */
+  /** List all payment location capabilities associated with the payment location. */
   public static PaymentLocationCapabilityCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = "/v1/payment_location_capabilities";
@@ -90,13 +91,13 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, PaymentLocationCapabilityCollection.class);
   }
 
-  /** Returns a list of {@code PaymentLocationCapability} objects associated with the location. */
+  /** List all payment location capabilities associated with the payment location. */
   public static PaymentLocationCapabilityCollection list(PaymentLocationCapabilityListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of {@code PaymentLocationCapability} objects associated with the location. */
+  /** List all payment location capabilities associated with the payment location. */
   public static PaymentLocationCapabilityCollection list(
       PaymentLocationCapabilityListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/payment_location_capabilities";
@@ -111,18 +112,18 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, PaymentLocationCapabilityCollection.class);
   }
 
-  /** Retrieves information about the specified Payment Location Capability. */
+  /** Retrieves a {@code payment_location} capability. */
   public static PaymentLocationCapability retrieve(String capability) throws StripeException {
     return retrieve(capability, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves information about the specified Payment Location Capability. */
+  /** Retrieves a {@code payment_location} capability. */
   public static PaymentLocationCapability retrieve(String capability, RequestOptions options)
       throws StripeException {
     return retrieve(capability, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves information about the specified Payment Location Capability. */
+  /** Retrieves a {@code payment_location} capability. */
   public static PaymentLocationCapability retrieve(
       String capability, Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -133,7 +134,7 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, PaymentLocationCapability.class);
   }
 
-  /** Retrieves information about the specified Payment Location Capability. */
+  /** Retrieves a {@code payment_location} capability. */
   public static PaymentLocationCapability retrieve(
       String capability, PaymentLocationCapabilityRetrieveParams params, RequestOptions options)
       throws StripeException {
@@ -151,7 +152,7 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
   }
 
   /**
-   * Updates a specified Payment Location Capability. Request or remove a payment location
+   * Updates a {@code payment_location} capability. Request or remove a {@code payment_location}
    * capability by updating its {@code requested} parameter.
    */
   public PaymentLocationCapability update(Map<String, Object> params) throws StripeException {
@@ -159,7 +160,7 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
   }
 
   /**
-   * Updates a specified Payment Location Capability. Request or remove a payment location
+   * Updates a {@code payment_location} capability. Request or remove a {@code payment_location}
    * capability by updating its {@code requested} parameter.
    */
   public PaymentLocationCapability update(Map<String, Object> params, RequestOptions options)
@@ -173,7 +174,7 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
   }
 
   /**
-   * Updates a specified Payment Location Capability. Request or remove a payment location
+   * Updates a {@code payment_location} capability. Request or remove a {@code payment_location}
    * capability by updating its {@code requested} parameter.
    */
   public PaymentLocationCapability update(PaymentLocationCapabilityUpdateParams params)
@@ -182,7 +183,7 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
   }
 
   /**
-   * Updates a specified Payment Location Capability. Request or remove a payment location
+   * Updates a {@code payment_location} capability. Request or remove a {@code payment_location}
    * capability by updating its {@code requested} parameter.
    */
   public PaymentLocationCapability update(

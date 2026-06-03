@@ -1163,5 +1163,8 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.signals.account_signal.fraudulent_merchant_ready",
         com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEventNotification.class);
+    eventClassLookup.put(
+        "v2.signals.account_signal.merchant_delinquency_ready",
+        com.stripe.events.V2SignalsAccountSignalMerchantDelinquencyReadyEventNotification.class);
   }
 }

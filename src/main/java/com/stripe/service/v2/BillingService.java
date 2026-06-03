@@ -21,6 +21,10 @@ public final class BillingService extends ApiService {
     return new com.stripe.service.v2.billing.CollectionSettingService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.billing.ContractService contracts() {
+    return new com.stripe.service.v2.billing.ContractService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.billing.CustomPricingUnitService customPricingUnits() {
     return new com.stripe.service.v2.billing.CustomPricingUnitService(this.getResponseGetter());
   }

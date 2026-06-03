@@ -21,12 +21,12 @@ public final class PaymentLocationCapabilityService extends ApiService {
     super(responseGetter);
   }
 
-  /** Returns a list of {@code PaymentLocationCapability} objects associated with the location. */
+  /** List all payment location capabilities associated with the payment location. */
   public StripeCollection<PaymentLocationCapability> list(
       PaymentLocationCapabilityListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** Returns a list of {@code PaymentLocationCapability} objects associated with the location. */
+  /** List all payment location capabilities associated with the payment location. */
   public StripeCollection<PaymentLocationCapability> list(
       PaymentLocationCapabilityListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/payment_location_capabilities";
@@ -40,12 +40,12 @@ public final class PaymentLocationCapabilityService extends ApiService {
     return this.request(
         request, new TypeToken<StripeCollection<PaymentLocationCapability>>() {}.getType());
   }
-  /** Retrieves information about the specified Payment Location Capability. */
+  /** Retrieves a {@code payment_location} capability. */
   public PaymentLocationCapability retrieve(
       String capability, PaymentLocationCapabilityRetrieveParams params) throws StripeException {
     return retrieve(capability, params, (RequestOptions) null);
   }
-  /** Retrieves information about the specified Payment Location Capability. */
+  /** Retrieves a {@code payment_location} capability. */
   public PaymentLocationCapability retrieve(
       String capability, PaymentLocationCapabilityRetrieveParams params, RequestOptions options)
       throws StripeException {
@@ -61,7 +61,7 @@ public final class PaymentLocationCapabilityService extends ApiService {
     return this.request(request, PaymentLocationCapability.class);
   }
   /**
-   * Updates a specified Payment Location Capability. Request or remove a payment location
+   * Updates a {@code payment_location} capability. Request or remove a {@code payment_location}
    * capability by updating its {@code requested} parameter.
    */
   public PaymentLocationCapability update(
@@ -69,7 +69,7 @@ public final class PaymentLocationCapabilityService extends ApiService {
     return update(capability, params, (RequestOptions) null);
   }
   /**
-   * Updates a specified Payment Location Capability. Request or remove a payment location
+   * Updates a {@code payment_location} capability. Request or remove a {@code payment_location}
    * capability by updating its {@code requested} parameter.
    */
   public PaymentLocationCapability update(

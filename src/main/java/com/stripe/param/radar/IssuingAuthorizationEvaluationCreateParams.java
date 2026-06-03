@@ -617,7 +617,7 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The last 4 digits of the card number. */
+    /** <strong>Required.</strong> The last 4 digits of the card number. */
     @SerializedName("last4")
     String last4;
 
@@ -732,7 +732,7 @@ public class IssuingAuthorizationEvaluationCreateParams extends ApiRequestParams
         return this;
       }
 
-      /** The last 4 digits of the card number. */
+      /** <strong>Required.</strong> The last 4 digits of the card number. */
       public Builder setLast4(String last4) {
         this.last4 = last4;
         return this;

@@ -15898,7 +15898,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       public enum TransactionType implements ApiRequestParams.EnumParam {
         @SerializedName("account_funding")
-        ACCOUNT_FUNDING("account_funding");
+        ACCOUNT_FUNDING("account_funding"),
+
+        @SerializedName("debt_repayment")
+        DEBT_REPAYMENT("debt_repayment");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -29342,6 +29345,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class AccountFunding {
             /**
+             * The category of digital asset being acquired through this account funding
+             * transaction.
+             */
+            @SerializedName("digital_asset_category")
+            DigitalAssetCategory digitalAssetCategory;
+
+            /**
              * Map of extra parameters for custom features not available in this client library. The
              * content in this map is not serialized under this field's {@code @SerializedName}
              * value. Instead, each key/value pair is serialized as if the key is a root-level field
@@ -29360,7 +29370,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             Wallet wallet;
 
             private AccountFunding(
-                Map<String, Object> extraParams, Object liquidAsset, Wallet wallet) {
+                DigitalAssetCategory digitalAssetCategory,
+                Map<String, Object> extraParams,
+                Object liquidAsset,
+                Wallet wallet) {
+              this.digitalAssetCategory = digitalAssetCategory;
               this.extraParams = extraParams;
               this.liquidAsset = liquidAsset;
               this.wallet = wallet;
@@ -29371,6 +29385,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             }
 
             public static class Builder {
+              private DigitalAssetCategory digitalAssetCategory;
+
               private Map<String, Object> extraParams;
 
               private Object liquidAsset;
@@ -29382,7 +29398,20 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
                       .MoneyServices.AccountFunding
                   build() {
                 return new PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails
-                    .MoneyServices.AccountFunding(this.extraParams, this.liquidAsset, this.wallet);
+                    .MoneyServices.AccountFunding(
+                    this.digitalAssetCategory, this.extraParams, this.liquidAsset, this.wallet);
+              }
+
+              /**
+               * The category of digital asset being acquired through this account funding
+               * transaction.
+               */
+              public Builder setDigitalAssetCategory(
+                  PaymentIntentConfirmParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices
+                          .AccountFunding.DigitalAssetCategory
+                      digitalAssetCategory) {
+                this.digitalAssetCategory = digitalAssetCategory;
+                return this;
               }
 
               /**
@@ -29949,6 +29978,27 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
                     }
                   }
                 }
+              }
+            }
+
+            public enum DigitalAssetCategory implements ApiRequestParams.EnumParam {
+              @SerializedName("blockchain_native")
+              BLOCKCHAIN_NATIVE("blockchain_native"),
+
+              @SerializedName("nft")
+              NFT("nft"),
+
+              @SerializedName("other_non_fiat")
+              OTHER_NON_FIAT("other_non_fiat"),
+
+              @SerializedName("stablecoin")
+              STABLECOIN("stablecoin");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              DigitalAssetCategory(String value) {
+                this.value = value;
               }
             }
           }
@@ -31347,6 +31397,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class AccountFunding {
             /**
+             * The category of digital asset being acquired through this account funding
+             * transaction.
+             */
+            @SerializedName("digital_asset_category")
+            DigitalAssetCategory digitalAssetCategory;
+
+            /**
              * Map of extra parameters for custom features not available in this client library. The
              * content in this map is not serialized under this field's {@code @SerializedName}
              * value. Instead, each key/value pair is serialized as if the key is a root-level field
@@ -31365,7 +31422,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             Wallet wallet;
 
             private AccountFunding(
-                Map<String, Object> extraParams, Object liquidAsset, Wallet wallet) {
+                DigitalAssetCategory digitalAssetCategory,
+                Map<String, Object> extraParams,
+                Object liquidAsset,
+                Wallet wallet) {
+              this.digitalAssetCategory = digitalAssetCategory;
               this.extraParams = extraParams;
               this.liquidAsset = liquidAsset;
               this.wallet = wallet;
@@ -31376,6 +31437,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             }
 
             public static class Builder {
+              private DigitalAssetCategory digitalAssetCategory;
+
               private Map<String, Object> extraParams;
 
               private Object liquidAsset;
@@ -31388,7 +31451,19 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
                   build() {
                 return new PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent
                     .PaymentDetails.MoneyServices.AccountFunding(
-                    this.extraParams, this.liquidAsset, this.wallet);
+                    this.digitalAssetCategory, this.extraParams, this.liquidAsset, this.wallet);
+              }
+
+              /**
+               * The category of digital asset being acquired through this account funding
+               * transaction.
+               */
+              public Builder setDigitalAssetCategory(
+                  PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.PaymentDetails
+                          .MoneyServices.AccountFunding.DigitalAssetCategory
+                      digitalAssetCategory) {
+                this.digitalAssetCategory = digitalAssetCategory;
+                return this;
               }
 
               /**
@@ -31959,6 +32034,27 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
                 }
               }
             }
+
+            public enum DigitalAssetCategory implements ApiRequestParams.EnumParam {
+              @SerializedName("blockchain_native")
+              BLOCKCHAIN_NATIVE("blockchain_native"),
+
+              @SerializedName("nft")
+              NFT("nft"),
+
+              @SerializedName("other_non_fiat")
+              OTHER_NON_FIAT("other_non_fiat"),
+
+              @SerializedName("stablecoin")
+              STABLECOIN("stablecoin");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              DigitalAssetCategory(String value) {
+                this.value = value;
+              }
+            }
           }
         }
       }
@@ -32486,12 +32582,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         List<PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions.Network>
             networks;
 
+        /**
+         * If true, provisions a permanent per-customer deposit address reused across
+         * PaymentIntents.
+         */
+        @SerializedName("static_address")
+        Boolean staticAddress;
+
         private DepositOptions(
             Map<String, Object> extraParams,
             List<PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions.Network>
-                networks) {
+                networks,
+            Boolean staticAddress) {
           this.extraParams = extraParams;
           this.networks = networks;
+          this.staticAddress = staticAddress;
         }
 
         public static Builder builder() {
@@ -32505,10 +32610,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
                   PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions.Network>
               networks;
 
+          private Boolean staticAddress;
+
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions build() {
             return new PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.DepositOptions(
-                this.extraParams, this.networks);
+                this.extraParams, this.networks, this.staticAddress);
           }
 
           /**
@@ -32570,6 +32677,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.networks = new ArrayList<>();
             }
             this.networks.addAll(elements);
+            return this;
+          }
+
+          /**
+           * If true, provisions a permanent per-customer deposit address reused across
+           * PaymentIntents.
+           */
+          public Builder setStaticAddress(Boolean staticAddress) {
+            this.staticAddress = staticAddress;
             return this;
           }
         }
