@@ -15,3 +15,6 @@ indent_size = 2
 [*.json]
 indent_style = space
 indent_size = 2
+
+[CHANGELOG.md]
+trim_trailing_whitespace = false
