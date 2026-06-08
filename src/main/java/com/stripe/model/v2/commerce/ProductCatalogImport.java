@@ -28,7 +28,7 @@ public class ProductCatalogImport extends StripeObject implements HasId {
   /**
    * The type of feed data being imported into the product catalog.
    *
-   * <p>One of {@code inventory}, {@code pricing}, or {@code product}.
+   * <p>One of {@code inventory}, {@code pricing}, {@code product}, or {@code promotion}.
    */
   @SerializedName("feed_type")
   String feedType;
