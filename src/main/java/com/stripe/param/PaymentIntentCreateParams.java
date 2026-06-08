@@ -4369,7 +4369,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** <strong>Required.</strong> The 14-digit SIRET of the meal voucher acceptor. */
+        /** The 14-digit SIRET of the meal voucher acceptor. */
         @SerializedName("siret")
         String siret;
 
@@ -4433,7 +4433,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> The 14-digit SIRET of the meal voucher acceptor. */
+          /** The 14-digit SIRET of the meal voucher acceptor. */
           public Builder setSiret(String siret) {
             this.siret = siret;
             return this;
@@ -28390,6 +28390,25 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Card {
       /**
+       * Controls when funds are captured from the customer's account when {@code capture_method} is
+       * {@code automatic_delayed}.
+       *
+       * <p>If omitted, funds are captured before the authorization expires.
+       */
+      @SerializedName("capture_by")
+      CaptureBy captureBy;
+
+      /**
+       * The number of days or hours to delay the capture of the funds. You can set both days and
+       * hours as long as the total delay does not exceed 30 days.
+       *
+       * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and {@code
+       * capture_by} is {@code target_delay}.
+       */
+      @SerializedName("capture_delay")
+      CaptureDelay captureDelay;
+
+      /**
        * Controls when the funds are captured from the customer's account.
        *
        * <p>If provided, this parameter overrides the behavior of the top-level <a
@@ -28583,6 +28602,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       ThreeDSecure threeDSecure;
 
       private Card(
+          CaptureBy captureBy,
+          CaptureDelay captureDelay,
           ApiRequestParams.EnumParam captureMethod,
           String cvcToken,
           Map<String, Object> extraParams,
@@ -28605,6 +28626,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           Object statementDescriptorSuffixKanji,
           Object statementDetails,
           ThreeDSecure threeDSecure) {
+        this.captureBy = captureBy;
+        this.captureDelay = captureDelay;
         this.captureMethod = captureMethod;
         this.cvcToken = cvcToken;
         this.extraParams = extraParams;
@@ -28634,6 +28657,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private CaptureBy captureBy;
+
+        private CaptureDelay captureDelay;
+
         private ApiRequestParams.EnumParam captureMethod;
 
         private String cvcToken;
@@ -28681,6 +28708,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.Card build() {
           return new PaymentIntentCreateParams.PaymentMethodOptions.Card(
+              this.captureBy,
+              this.captureDelay,
               this.captureMethod,
               this.cvcToken,
               this.extraParams,
@@ -28703,6 +28732,31 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.statementDescriptorSuffixKanji,
               this.statementDetails,
               this.threeDSecure);
+        }
+
+        /**
+         * Controls when funds are captured from the customer's account when {@code capture_method}
+         * is {@code automatic_delayed}.
+         *
+         * <p>If omitted, funds are captured before the authorization expires.
+         */
+        public Builder setCaptureBy(
+            PaymentIntentCreateParams.PaymentMethodOptions.Card.CaptureBy captureBy) {
+          this.captureBy = captureBy;
+          return this;
+        }
+
+        /**
+         * The number of days or hours to delay the capture of the funds. You can set both days and
+         * hours as long as the total delay does not exceed 30 days.
+         *
+         * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and
+         * {@code capture_by} is {@code target_delay}.
+         */
+        public Builder setCaptureDelay(
+            PaymentIntentCreateParams.PaymentMethodOptions.Card.CaptureDelay captureDelay) {
+          this.captureDelay = captureDelay;
+          return this;
         }
 
         /**
@@ -29060,6 +29114,90 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             PaymentIntentCreateParams.PaymentMethodOptions.Card.ThreeDSecure threeDSecure) {
           this.threeDSecure = threeDSecure;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CaptureDelay {
+        @SerializedName("days")
+        Long days;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        @SerializedName("hours")
+        Long hours;
+
+        private CaptureDelay(Long days, Map<String, Object> extraParams, Long hours) {
+          this.days = days;
+          this.extraParams = extraParams;
+          this.hours = hours;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long days;
+
+          private Map<String, Object> extraParams;
+
+          private Long hours;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentCreateParams.PaymentMethodOptions.Card.CaptureDelay build() {
+            return new PaymentIntentCreateParams.PaymentMethodOptions.Card.CaptureDelay(
+                this.days, this.extraParams, this.hours);
+          }
+
+          public Builder setDays(Long days) {
+            this.days = days;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.Card.CaptureDelay#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.Card.CaptureDelay#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          public Builder setHours(Long hours) {
+            this.hours = hours;
+            return this;
+          }
         }
       }
 
@@ -29838,10 +29976,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
-            /** Details for a liquid asset (crypto or security) funding transaction. */
-            @SerializedName("liquid_asset")
-            Object liquidAsset;
-
             /** Details for a wallet funding transaction. */
             @SerializedName("wallet")
             Wallet wallet;
@@ -29849,11 +29983,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             private AccountFunding(
                 DigitalAssetCategory digitalAssetCategory,
                 Map<String, Object> extraParams,
-                Object liquidAsset,
                 Wallet wallet) {
               this.digitalAssetCategory = digitalAssetCategory;
               this.extraParams = extraParams;
-              this.liquidAsset = liquidAsset;
               this.wallet = wallet;
             }
 
@@ -29866,8 +29998,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
               private Map<String, Object> extraParams;
 
-              private Object liquidAsset;
-
               private Wallet wallet;
 
               /** Finalize and obtain parameter instance from this builder. */
@@ -29876,7 +30006,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                   build() {
                 return new PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails
                     .MoneyServices.AccountFunding(
-                    this.digitalAssetCategory, this.extraParams, this.liquidAsset, this.wallet);
+                    this.digitalAssetCategory, this.extraParams, this.wallet);
               }
 
               /**
@@ -29921,21 +30051,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** Details for a liquid asset (crypto or security) funding transaction. */
-              public Builder setLiquidAsset(
-                  PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices
-                          .AccountFunding.LiquidAsset
-                      liquidAsset) {
-                this.liquidAsset = liquidAsset;
-                return this;
-              }
-
-              /** Details for a liquid asset (crypto or security) funding transaction. */
-              public Builder setLiquidAsset(EmptyParam liquidAsset) {
-                this.liquidAsset = liquidAsset;
-                return this;
-              }
-
               /** Details for a wallet funding transaction. */
               public Builder setWallet(
                   PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices
@@ -29943,260 +30058,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                       wallet) {
                 this.wallet = wallet;
                 return this;
-              }
-            }
-
-            @Getter
-            @EqualsAndHashCode(callSuper = false)
-            public static class LiquidAsset {
-              /** Details for a cryptocurrency liquid asset funding transaction. */
-              @SerializedName("crypto")
-              Crypto crypto;
-
-              /**
-               * Map of extra parameters for custom features not available in this client library.
-               * The content in this map is not serialized under this field's
-               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
-               * key is a root-level field (serialized) name in this param object. Effectively, this
-               * map is flattened to its parent instance.
-               */
-              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-              Map<String, Object> extraParams;
-
-              /** Details for a security liquid asset funding transaction. */
-              @SerializedName("security")
-              Security security;
-
-              private LiquidAsset(
-                  Crypto crypto, Map<String, Object> extraParams, Security security) {
-                this.crypto = crypto;
-                this.extraParams = extraParams;
-                this.security = security;
-              }
-
-              public static Builder builder() {
-                return new Builder();
-              }
-
-              public static class Builder {
-                private Crypto crypto;
-
-                private Map<String, Object> extraParams;
-
-                private Security security;
-
-                /** Finalize and obtain parameter instance from this builder. */
-                public PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails
-                        .MoneyServices.AccountFunding.LiquidAsset
-                    build() {
-                  return new PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails
-                      .MoneyServices.AccountFunding.LiquidAsset(
-                      this.crypto, this.extraParams, this.security);
-                }
-
-                /** Details for a cryptocurrency liquid asset funding transaction. */
-                public Builder setCrypto(
-                    PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices
-                            .AccountFunding.LiquidAsset.Crypto
-                        crypto) {
-                  this.crypto = crypto;
-                  return this;
-                }
-
-                /**
-                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
-                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-                 * original map. See {@link
-                 * PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices.AccountFunding.LiquidAsset#extraParams}
-                 * for the field documentation.
-                 */
-                public Builder putExtraParam(String key, Object value) {
-                  if (this.extraParams == null) {
-                    this.extraParams = new HashMap<>();
-                  }
-                  this.extraParams.put(key, value);
-                  return this;
-                }
-
-                /**
-                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
-                 * the original map. See {@link
-                 * PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices.AccountFunding.LiquidAsset#extraParams}
-                 * for the field documentation.
-                 */
-                public Builder putAllExtraParam(Map<String, Object> map) {
-                  if (this.extraParams == null) {
-                    this.extraParams = new HashMap<>();
-                  }
-                  this.extraParams.putAll(map);
-                  return this;
-                }
-
-                /** Details for a security liquid asset funding transaction. */
-                public Builder setSecurity(
-                    PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices
-                            .AccountFunding.LiquidAsset.Security
-                        security) {
-                  this.security = security;
-                  return this;
-                }
-              }
-
-              @Getter
-              @EqualsAndHashCode(callSuper = false)
-              public static class Crypto {
-                /** The cryptocurrency currency code (e.g. BTC, ETH). */
-                @SerializedName("currency_code")
-                String currencyCode;
-
-                /**
-                 * Map of extra parameters for custom features not available in this client library.
-                 * The content in this map is not serialized under this field's
-                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
-                 * the key is a root-level field (serialized) name in this param object.
-                 * Effectively, this map is flattened to its parent instance.
-                 */
-                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-                Map<String, Object> extraParams;
-
-                private Crypto(String currencyCode, Map<String, Object> extraParams) {
-                  this.currencyCode = currencyCode;
-                  this.extraParams = extraParams;
-                }
-
-                public static Builder builder() {
-                  return new Builder();
-                }
-
-                public static class Builder {
-                  private String currencyCode;
-
-                  private Map<String, Object> extraParams;
-
-                  /** Finalize and obtain parameter instance from this builder. */
-                  public PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails
-                          .MoneyServices.AccountFunding.LiquidAsset.Crypto
-                      build() {
-                    return new PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails
-                        .MoneyServices.AccountFunding.LiquidAsset.Crypto(
-                        this.currencyCode, this.extraParams);
-                  }
-
-                  /** The cryptocurrency currency code (e.g. BTC, ETH). */
-                  public Builder setCurrencyCode(String currencyCode) {
-                    this.currencyCode = currencyCode;
-                    return this;
-                  }
-
-                  /**
-                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
-                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-                   * original map. See {@link
-                   * PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices.AccountFunding.LiquidAsset.Crypto#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putExtraParam(String key, Object value) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.put(key, value);
-                    return this;
-                  }
-
-                  /**
-                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
-                   * the original map. See {@link
-                   * PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices.AccountFunding.LiquidAsset.Crypto#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putAllExtraParam(Map<String, Object> map) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.putAll(map);
-                    return this;
-                  }
-                }
-              }
-
-              @Getter
-              @EqualsAndHashCode(callSuper = false)
-              public static class Security {
-                /**
-                 * Map of extra parameters for custom features not available in this client library.
-                 * The content in this map is not serialized under this field's
-                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
-                 * the key is a root-level field (serialized) name in this param object.
-                 * Effectively, this map is flattened to its parent instance.
-                 */
-                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-                Map<String, Object> extraParams;
-
-                /** The security's ticker symbol (e.g. AAPL). */
-                @SerializedName("ticker_symbol")
-                String tickerSymbol;
-
-                private Security(Map<String, Object> extraParams, String tickerSymbol) {
-                  this.extraParams = extraParams;
-                  this.tickerSymbol = tickerSymbol;
-                }
-
-                public static Builder builder() {
-                  return new Builder();
-                }
-
-                public static class Builder {
-                  private Map<String, Object> extraParams;
-
-                  private String tickerSymbol;
-
-                  /** Finalize and obtain parameter instance from this builder. */
-                  public PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails
-                          .MoneyServices.AccountFunding.LiquidAsset.Security
-                      build() {
-                    return new PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails
-                        .MoneyServices.AccountFunding.LiquidAsset.Security(
-                        this.extraParams, this.tickerSymbol);
-                  }
-
-                  /**
-                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
-                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-                   * original map. See {@link
-                   * PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices.AccountFunding.LiquidAsset.Security#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putExtraParam(String key, Object value) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.put(key, value);
-                    return this;
-                  }
-
-                  /**
-                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
-                   * the original map. See {@link
-                   * PaymentIntentCreateParams.PaymentMethodOptions.Card.PaymentDetails.MoneyServices.AccountFunding.LiquidAsset.Security#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putAllExtraParam(Map<String, Object> map) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.putAll(map);
-                    return this;
-                  }
-
-                  /** The security's ticker symbol (e.g. AAPL). */
-                  public Builder setTickerSymbol(String tickerSymbol) {
-                    this.tickerSymbol = tickerSymbol;
-                    return this;
-                  }
-                }
               }
             }
 
@@ -31300,6 +31161,24 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         }
       }
 
+      public enum CaptureBy implements ApiRequestParams.EnumParam {
+        @SerializedName("auth_expiry")
+        AUTH_EXPIRY("auth_expiry"),
+
+        @SerializedName("end_of_day")
+        END_OF_DAY("end_of_day"),
+
+        @SerializedName("target_delay")
+        TARGET_DELAY("target_delay");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureBy(String value) {
+          this.value = value;
+        }
+      }
+
       public enum CaptureMethod implements ApiRequestParams.EnumParam {
         @SerializedName("manual")
         MANUAL("manual");
@@ -31506,6 +31385,25 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent {
       /**
+       * Controls when funds are captured from the customer's account when {@code capture_method} is
+       * {@code automatic_delayed}.
+       *
+       * <p>If omitted, funds are captured before the authorization expires.
+       */
+      @SerializedName("capture_by")
+      CaptureBy captureBy;
+
+      /**
+       * The number of days or hours to delay the capture of the funds. You can set both days and
+       * hours as long as the total delay does not exceed 30 days.
+       *
+       * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and {@code
+       * capture_by} is {@code target_delay}.
+       */
+      @SerializedName("capture_delay")
+      CaptureDelay captureDelay;
+
+      /**
        * Controls when the funds are captured from the customer's account.
        *
        * <p>If provided, this parameter overrides the behavior of the top-level <a
@@ -31551,6 +31449,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Boolean requestIncrementalAuthorizationSupport;
 
       /**
+       * Request ability to make <a href="https://docs.stripe.com/payments/multicapture">multiple
+       * captures</a> for this PaymentIntent.
+       */
+      @SerializedName("request_multicapture")
+      RequestMulticapture requestMulticapture;
+
+      /**
        * Request ability to <a
        * href="https://docs.stripe.com/payments/reauthorization">reauthorize</a> for this
        * PaymentIntent.
@@ -31566,18 +31471,24 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Routing routing;
 
       private CardPresent(
+          CaptureBy captureBy,
+          CaptureDelay captureDelay,
           CaptureMethod captureMethod,
           Map<String, Object> extraParams,
           PaymentDetails paymentDetails,
           Boolean requestExtendedAuthorization,
           Boolean requestIncrementalAuthorizationSupport,
+          RequestMulticapture requestMulticapture,
           RequestReauthorization requestReauthorization,
           Routing routing) {
+        this.captureBy = captureBy;
+        this.captureDelay = captureDelay;
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.paymentDetails = paymentDetails;
         this.requestExtendedAuthorization = requestExtendedAuthorization;
         this.requestIncrementalAuthorizationSupport = requestIncrementalAuthorizationSupport;
+        this.requestMulticapture = requestMulticapture;
         this.requestReauthorization = requestReauthorization;
         this.routing = routing;
       }
@@ -31587,6 +31498,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private CaptureBy captureBy;
+
+        private CaptureDelay captureDelay;
+
         private CaptureMethod captureMethod;
 
         private Map<String, Object> extraParams;
@@ -31597,6 +31512,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Boolean requestIncrementalAuthorizationSupport;
 
+        private RequestMulticapture requestMulticapture;
+
         private RequestReauthorization requestReauthorization;
 
         private Routing routing;
@@ -31604,13 +31521,41 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.CardPresent build() {
           return new PaymentIntentCreateParams.PaymentMethodOptions.CardPresent(
+              this.captureBy,
+              this.captureDelay,
               this.captureMethod,
               this.extraParams,
               this.paymentDetails,
               this.requestExtendedAuthorization,
               this.requestIncrementalAuthorizationSupport,
+              this.requestMulticapture,
               this.requestReauthorization,
               this.routing);
+        }
+
+        /**
+         * Controls when funds are captured from the customer's account when {@code capture_method}
+         * is {@code automatic_delayed}.
+         *
+         * <p>If omitted, funds are captured before the authorization expires.
+         */
+        public Builder setCaptureBy(
+            PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.CaptureBy captureBy) {
+          this.captureBy = captureBy;
+          return this;
+        }
+
+        /**
+         * The number of days or hours to delay the capture of the funds. You can set both days and
+         * hours as long as the total delay does not exceed 30 days.
+         *
+         * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and
+         * {@code capture_by} is {@code target_delay}.
+         */
+        public Builder setCaptureDelay(
+            PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.CaptureDelay captureDelay) {
+          this.captureDelay = captureDelay;
+          return this;
         }
 
         /**
@@ -31691,6 +31636,17 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         }
 
         /**
+         * Request ability to make <a href="https://docs.stripe.com/payments/multicapture">multiple
+         * captures</a> for this PaymentIntent.
+         */
+        public Builder setRequestMulticapture(
+            PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.RequestMulticapture
+                requestMulticapture) {
+          this.requestMulticapture = requestMulticapture;
+          return this;
+        }
+
+        /**
          * Request ability to <a
          * href="https://docs.stripe.com/payments/reauthorization">reauthorize</a> for this
          * PaymentIntent.
@@ -31710,6 +31666,90 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.Routing routing) {
           this.routing = routing;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CaptureDelay {
+        @SerializedName("days")
+        Long days;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        @SerializedName("hours")
+        Long hours;
+
+        private CaptureDelay(Long days, Map<String, Object> extraParams, Long hours) {
+          this.days = days;
+          this.extraParams = extraParams;
+          this.hours = hours;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long days;
+
+          private Map<String, Object> extraParams;
+
+          private Long hours;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.CaptureDelay build() {
+            return new PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.CaptureDelay(
+                this.days, this.extraParams, this.hours);
+          }
+
+          public Builder setDays(Long days) {
+            this.days = days;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.CaptureDelay#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.CaptureDelay#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          public Builder setHours(Long hours) {
+            this.hours = hours;
+            return this;
+          }
         }
       }
 
@@ -31889,10 +31929,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
-            /** Details for a liquid asset (crypto or security) funding transaction. */
-            @SerializedName("liquid_asset")
-            Object liquidAsset;
-
             /** Details for a wallet funding transaction. */
             @SerializedName("wallet")
             Wallet wallet;
@@ -31900,11 +31936,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             private AccountFunding(
                 DigitalAssetCategory digitalAssetCategory,
                 Map<String, Object> extraParams,
-                Object liquidAsset,
                 Wallet wallet) {
               this.digitalAssetCategory = digitalAssetCategory;
               this.extraParams = extraParams;
-              this.liquidAsset = liquidAsset;
               this.wallet = wallet;
             }
 
@@ -31917,8 +31951,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
               private Map<String, Object> extraParams;
 
-              private Object liquidAsset;
-
               private Wallet wallet;
 
               /** Finalize and obtain parameter instance from this builder. */
@@ -31927,7 +31959,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                   build() {
                 return new PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails
                     .MoneyServices.AccountFunding(
-                    this.digitalAssetCategory, this.extraParams, this.liquidAsset, this.wallet);
+                    this.digitalAssetCategory, this.extraParams, this.wallet);
               }
 
               /**
@@ -31972,21 +32004,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** Details for a liquid asset (crypto or security) funding transaction. */
-              public Builder setLiquidAsset(
-                  PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails
-                          .MoneyServices.AccountFunding.LiquidAsset
-                      liquidAsset) {
-                this.liquidAsset = liquidAsset;
-                return this;
-              }
-
-              /** Details for a liquid asset (crypto or security) funding transaction. */
-              public Builder setLiquidAsset(EmptyParam liquidAsset) {
-                this.liquidAsset = liquidAsset;
-                return this;
-              }
-
               /** Details for a wallet funding transaction. */
               public Builder setWallet(
                   PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails
@@ -31994,260 +32011,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                       wallet) {
                 this.wallet = wallet;
                 return this;
-              }
-            }
-
-            @Getter
-            @EqualsAndHashCode(callSuper = false)
-            public static class LiquidAsset {
-              /** Details for a cryptocurrency liquid asset funding transaction. */
-              @SerializedName("crypto")
-              Crypto crypto;
-
-              /**
-               * Map of extra parameters for custom features not available in this client library.
-               * The content in this map is not serialized under this field's
-               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
-               * key is a root-level field (serialized) name in this param object. Effectively, this
-               * map is flattened to its parent instance.
-               */
-              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-              Map<String, Object> extraParams;
-
-              /** Details for a security liquid asset funding transaction. */
-              @SerializedName("security")
-              Security security;
-
-              private LiquidAsset(
-                  Crypto crypto, Map<String, Object> extraParams, Security security) {
-                this.crypto = crypto;
-                this.extraParams = extraParams;
-                this.security = security;
-              }
-
-              public static Builder builder() {
-                return new Builder();
-              }
-
-              public static class Builder {
-                private Crypto crypto;
-
-                private Map<String, Object> extraParams;
-
-                private Security security;
-
-                /** Finalize and obtain parameter instance from this builder. */
-                public PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails
-                        .MoneyServices.AccountFunding.LiquidAsset
-                    build() {
-                  return new PaymentIntentCreateParams.PaymentMethodOptions.CardPresent
-                      .PaymentDetails.MoneyServices.AccountFunding.LiquidAsset(
-                      this.crypto, this.extraParams, this.security);
-                }
-
-                /** Details for a cryptocurrency liquid asset funding transaction. */
-                public Builder setCrypto(
-                    PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails
-                            .MoneyServices.AccountFunding.LiquidAsset.Crypto
-                        crypto) {
-                  this.crypto = crypto;
-                  return this;
-                }
-
-                /**
-                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
-                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-                 * original map. See {@link
-                 * PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails.MoneyServices.AccountFunding.LiquidAsset#extraParams}
-                 * for the field documentation.
-                 */
-                public Builder putExtraParam(String key, Object value) {
-                  if (this.extraParams == null) {
-                    this.extraParams = new HashMap<>();
-                  }
-                  this.extraParams.put(key, value);
-                  return this;
-                }
-
-                /**
-                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
-                 * the original map. See {@link
-                 * PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails.MoneyServices.AccountFunding.LiquidAsset#extraParams}
-                 * for the field documentation.
-                 */
-                public Builder putAllExtraParam(Map<String, Object> map) {
-                  if (this.extraParams == null) {
-                    this.extraParams = new HashMap<>();
-                  }
-                  this.extraParams.putAll(map);
-                  return this;
-                }
-
-                /** Details for a security liquid asset funding transaction. */
-                public Builder setSecurity(
-                    PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails
-                            .MoneyServices.AccountFunding.LiquidAsset.Security
-                        security) {
-                  this.security = security;
-                  return this;
-                }
-              }
-
-              @Getter
-              @EqualsAndHashCode(callSuper = false)
-              public static class Crypto {
-                /** The cryptocurrency currency code (e.g. BTC, ETH). */
-                @SerializedName("currency_code")
-                String currencyCode;
-
-                /**
-                 * Map of extra parameters for custom features not available in this client library.
-                 * The content in this map is not serialized under this field's
-                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
-                 * the key is a root-level field (serialized) name in this param object.
-                 * Effectively, this map is flattened to its parent instance.
-                 */
-                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-                Map<String, Object> extraParams;
-
-                private Crypto(String currencyCode, Map<String, Object> extraParams) {
-                  this.currencyCode = currencyCode;
-                  this.extraParams = extraParams;
-                }
-
-                public static Builder builder() {
-                  return new Builder();
-                }
-
-                public static class Builder {
-                  private String currencyCode;
-
-                  private Map<String, Object> extraParams;
-
-                  /** Finalize and obtain parameter instance from this builder. */
-                  public PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails
-                          .MoneyServices.AccountFunding.LiquidAsset.Crypto
-                      build() {
-                    return new PaymentIntentCreateParams.PaymentMethodOptions.CardPresent
-                        .PaymentDetails.MoneyServices.AccountFunding.LiquidAsset.Crypto(
-                        this.currencyCode, this.extraParams);
-                  }
-
-                  /** The cryptocurrency currency code (e.g. BTC, ETH). */
-                  public Builder setCurrencyCode(String currencyCode) {
-                    this.currencyCode = currencyCode;
-                    return this;
-                  }
-
-                  /**
-                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
-                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-                   * original map. See {@link
-                   * PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails.MoneyServices.AccountFunding.LiquidAsset.Crypto#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putExtraParam(String key, Object value) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.put(key, value);
-                    return this;
-                  }
-
-                  /**
-                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
-                   * the original map. See {@link
-                   * PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails.MoneyServices.AccountFunding.LiquidAsset.Crypto#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putAllExtraParam(Map<String, Object> map) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.putAll(map);
-                    return this;
-                  }
-                }
-              }
-
-              @Getter
-              @EqualsAndHashCode(callSuper = false)
-              public static class Security {
-                /**
-                 * Map of extra parameters for custom features not available in this client library.
-                 * The content in this map is not serialized under this field's
-                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
-                 * the key is a root-level field (serialized) name in this param object.
-                 * Effectively, this map is flattened to its parent instance.
-                 */
-                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-                Map<String, Object> extraParams;
-
-                /** The security's ticker symbol (e.g. AAPL). */
-                @SerializedName("ticker_symbol")
-                String tickerSymbol;
-
-                private Security(Map<String, Object> extraParams, String tickerSymbol) {
-                  this.extraParams = extraParams;
-                  this.tickerSymbol = tickerSymbol;
-                }
-
-                public static Builder builder() {
-                  return new Builder();
-                }
-
-                public static class Builder {
-                  private Map<String, Object> extraParams;
-
-                  private String tickerSymbol;
-
-                  /** Finalize and obtain parameter instance from this builder. */
-                  public PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails
-                          .MoneyServices.AccountFunding.LiquidAsset.Security
-                      build() {
-                    return new PaymentIntentCreateParams.PaymentMethodOptions.CardPresent
-                        .PaymentDetails.MoneyServices.AccountFunding.LiquidAsset.Security(
-                        this.extraParams, this.tickerSymbol);
-                  }
-
-                  /**
-                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
-                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-                   * original map. See {@link
-                   * PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails.MoneyServices.AccountFunding.LiquidAsset.Security#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putExtraParam(String key, Object value) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.put(key, value);
-                    return this;
-                  }
-
-                  /**
-                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
-                   * the original map. See {@link
-                   * PaymentIntentCreateParams.PaymentMethodOptions.CardPresent.PaymentDetails.MoneyServices.AccountFunding.LiquidAsset.Security#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putAllExtraParam(Map<String, Object> map) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.putAll(map);
-                    return this;
-                  }
-
-                  /** The security's ticker symbol (e.g. AAPL). */
-                  public Builder setTickerSymbol(String tickerSymbol) {
-                    this.tickerSymbol = tickerSymbol;
-                    return this;
-                  }
-                }
               }
             }
 
@@ -32626,6 +32389,24 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         }
       }
 
+      public enum CaptureBy implements ApiRequestParams.EnumParam {
+        @SerializedName("auth_expiry")
+        AUTH_EXPIRY("auth_expiry"),
+
+        @SerializedName("end_of_day")
+        END_OF_DAY("end_of_day"),
+
+        @SerializedName("target_delay")
+        TARGET_DELAY("target_delay");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureBy(String value) {
+          this.value = value;
+        }
+      }
+
       public enum CaptureMethod implements ApiRequestParams.EnumParam {
         @SerializedName("manual")
         MANUAL("manual"),
@@ -32637,6 +32418,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         private final String value;
 
         CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestMulticapture implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestMulticapture(String value) {
           this.value = value;
         }
       }
@@ -33187,7 +32983,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         DEFAULT("default"),
 
         @SerializedName("deposit")
-        DEPOSIT("deposit");
+        DEPOSIT("deposit"),
+
+        @SerializedName("transaction_verification")
+        TRANSACTION_VERIFICATION("transaction_verification");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -33977,8 +33776,33 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private GiftCard(Map<String, Object> extraParams) {
+      /**
+       * Set to {@code yes} to ignore the application fee on the PaymentIntent when redeeming this
+       * gift card.
+       */
+      @SerializedName("ignore_application_fee")
+      IgnoreApplicationFee ignoreApplicationFee;
+
+      /**
+       * Set to {@code yes} to ignore transfer data on the PaymentIntent when redeeming this gift
+       * card.
+       */
+      @SerializedName("ignore_transfer_data")
+      IgnoreTransferData ignoreTransferData;
+
+      /** Request partial authorization on this PaymentIntent. */
+      @SerializedName("request_partial_authorization")
+      RequestPartialAuthorization requestPartialAuthorization;
+
+      private GiftCard(
+          Map<String, Object> extraParams,
+          IgnoreApplicationFee ignoreApplicationFee,
+          IgnoreTransferData ignoreTransferData,
+          RequestPartialAuthorization requestPartialAuthorization) {
         this.extraParams = extraParams;
+        this.ignoreApplicationFee = ignoreApplicationFee;
+        this.ignoreTransferData = ignoreTransferData;
+        this.requestPartialAuthorization = requestPartialAuthorization;
       }
 
       public static Builder builder() {
@@ -33988,9 +33812,19 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private IgnoreApplicationFee ignoreApplicationFee;
+
+        private IgnoreTransferData ignoreTransferData;
+
+        private RequestPartialAuthorization requestPartialAuthorization;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.GiftCard build() {
-          return new PaymentIntentCreateParams.PaymentMethodOptions.GiftCard(this.extraParams);
+          return new PaymentIntentCreateParams.PaymentMethodOptions.GiftCard(
+              this.extraParams,
+              this.ignoreApplicationFee,
+              this.ignoreTransferData,
+              this.requestPartialAuthorization);
         }
 
         /**
@@ -34019,6 +33853,75 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+
+        /**
+         * Set to {@code yes} to ignore the application fee on the PaymentIntent when redeeming this
+         * gift card.
+         */
+        public Builder setIgnoreApplicationFee(
+            PaymentIntentCreateParams.PaymentMethodOptions.GiftCard.IgnoreApplicationFee
+                ignoreApplicationFee) {
+          this.ignoreApplicationFee = ignoreApplicationFee;
+          return this;
+        }
+
+        /**
+         * Set to {@code yes} to ignore transfer data on the PaymentIntent when redeeming this gift
+         * card.
+         */
+        public Builder setIgnoreTransferData(
+            PaymentIntentCreateParams.PaymentMethodOptions.GiftCard.IgnoreTransferData
+                ignoreTransferData) {
+          this.ignoreTransferData = ignoreTransferData;
+          return this;
+        }
+
+        /** Request partial authorization on this PaymentIntent. */
+        public Builder setRequestPartialAuthorization(
+            PaymentIntentCreateParams.PaymentMethodOptions.GiftCard.RequestPartialAuthorization
+                requestPartialAuthorization) {
+          this.requestPartialAuthorization = requestPartialAuthorization;
+          return this;
+        }
+      }
+
+      public enum IgnoreApplicationFee implements ApiRequestParams.EnumParam {
+        @SerializedName("yes")
+        YES("yes");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        IgnoreApplicationFee(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum IgnoreTransferData implements ApiRequestParams.EnumParam {
+        @SerializedName("yes")
+        YES("yes");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        IgnoreTransferData(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum RequestPartialAuthorization implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestPartialAuthorization(String value) {
+          this.value = value;
         }
       }
     }

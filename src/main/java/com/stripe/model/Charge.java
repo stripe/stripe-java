@@ -2092,9 +2092,25 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Benefits extends StripeObject {
+        @SerializedName("fr_meal_voucher")
+        FrMealVoucher frMealVoucher;
+
         /** Issuer of the benefit card utilized on this payment. */
         @SerializedName("issuer")
         String issuer;
+
+        /**
+         * For more details about FrMealVoucher, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class FrMealVoucher extends StripeObject {
+          /** The 14-digit SIRET of the meal voucher acceptor used for this charge. */
+          @SerializedName("siret")
+          String siret;
+        }
       }
 
       /**
@@ -2686,6 +2702,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("location")
       String location;
 
+      @SerializedName("multicapture")
+      Multicapture multicapture;
+
       /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
        * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
@@ -2755,6 +2774,23 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
       @SerializedName("wallet")
       Wallet wallet;
+
+      /**
+       * For more details about Multicapture, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Multicapture extends StripeObject {
+        /**
+         * Indicates whether or not multiple captures are supported.
+         *
+         * <p>One of {@code available}, or {@code unavailable}.
+         */
+        @SerializedName("status")
+        String status;
+      }
 
       /**
        * For more details about Offline, please refer to the <a

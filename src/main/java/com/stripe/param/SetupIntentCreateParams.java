@@ -13879,7 +13879,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** <strong>Required.</strong> The 14-digit SIRET of the meal voucher acceptor. */
+        /** The 14-digit SIRET of the meal voucher acceptor. */
         @SerializedName("siret")
         String siret;
 
@@ -13941,7 +13941,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> The 14-digit SIRET of the meal voucher acceptor. */
+          /** The 14-digit SIRET of the meal voucher acceptor. */
           public Builder setSiret(String siret) {
             this.siret = siret;
             return this;

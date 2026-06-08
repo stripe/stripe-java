@@ -240,6 +240,13 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class ClientDeviceMetadataDetails {
       /**
+       * Raw client metadata fallback when Stripe.js is blocked. Required unless radar_session is
+       * provided.
+       */
+      @SerializedName("data")
+      Data data;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -248,13 +255,13 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * <strong>Required.</strong> ID for the Radar Session associated with the account evaluation.
-       */
+      /** ID for the Radar Session. Required unless data is provided. */
       @SerializedName("radar_session")
       String radarSession;
 
-      private ClientDeviceMetadataDetails(Map<String, Object> extraParams, String radarSession) {
+      private ClientDeviceMetadataDetails(
+          Data data, Map<String, Object> extraParams, String radarSession) {
+        this.data = data;
         this.extraParams = extraParams;
         this.radarSession = radarSession;
       }
@@ -264,6 +271,8 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Data data;
+
         private Map<String, Object> extraParams;
 
         private String radarSession;
@@ -271,7 +280,17 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AccountEvaluationCreateParams.LoginInitiated.ClientDeviceMetadataDetails build() {
           return new AccountEvaluationCreateParams.LoginInitiated.ClientDeviceMetadataDetails(
-              this.extraParams, this.radarSession);
+              this.data, this.extraParams, this.radarSession);
+        }
+
+        /**
+         * Raw client metadata fallback when Stripe.js is blocked. Required unless radar_session is
+         * provided.
+         */
+        public Builder setData(
+            AccountEvaluationCreateParams.LoginInitiated.ClientDeviceMetadataDetails.Data data) {
+          this.data = data;
+          return this;
         }
 
         /**
@@ -304,13 +323,119 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * <strong>Required.</strong> ID for the Radar Session associated with the account
-         * evaluation.
-         */
+        /** ID for the Radar Session. Required unless data is provided. */
         public Builder setRadarSession(String radarSession) {
           this.radarSession = radarSession;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Data {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> The end user's IP address. Used for proxy detection and
+         * IP-clustering signals.
+         */
+        @SerializedName("ip")
+        String ip;
+
+        /** The referring URL of the login or registration page. */
+        @SerializedName("referrer")
+        String referrer;
+
+        /** The User-Agent HTTP header. */
+        @SerializedName("user_agent")
+        String userAgent;
+
+        private Data(
+            Map<String, Object> extraParams, String ip, String referrer, String userAgent) {
+          this.extraParams = extraParams;
+          this.ip = ip;
+          this.referrer = referrer;
+          this.userAgent = userAgent;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String ip;
+
+          private String referrer;
+
+          private String userAgent;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountEvaluationCreateParams.LoginInitiated.ClientDeviceMetadataDetails.Data
+              build() {
+            return new AccountEvaluationCreateParams.LoginInitiated.ClientDeviceMetadataDetails
+                .Data(this.extraParams, this.ip, this.referrer, this.userAgent);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountEvaluationCreateParams.LoginInitiated.ClientDeviceMetadataDetails.Data#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountEvaluationCreateParams.LoginInitiated.ClientDeviceMetadataDetails.Data#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The end user's IP address. Used for proxy detection and
+           * IP-clustering signals.
+           */
+          public Builder setIp(String ip) {
+            this.ip = ip;
+            return this;
+          }
+
+          /** The referring URL of the login or registration page. */
+          public Builder setReferrer(String referrer) {
+            this.referrer = referrer;
+            return this;
+          }
+
+          /** The User-Agent HTTP header. */
+          public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+          }
         }
       }
     }
@@ -424,6 +549,13 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class ClientDeviceMetadataDetails {
       /**
+       * Raw client metadata fallback when Stripe.js is blocked. Required unless radar_session is
+       * provided.
+       */
+      @SerializedName("data")
+      Data data;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -432,13 +564,13 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * <strong>Required.</strong> ID for the Radar Session associated with the account evaluation.
-       */
+      /** ID for the Radar Session. Required unless data is provided. */
       @SerializedName("radar_session")
       String radarSession;
 
-      private ClientDeviceMetadataDetails(Map<String, Object> extraParams, String radarSession) {
+      private ClientDeviceMetadataDetails(
+          Data data, Map<String, Object> extraParams, String radarSession) {
+        this.data = data;
         this.extraParams = extraParams;
         this.radarSession = radarSession;
       }
@@ -448,6 +580,8 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Data data;
+
         private Map<String, Object> extraParams;
 
         private String radarSession;
@@ -456,7 +590,18 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
         public AccountEvaluationCreateParams.RegistrationInitiated.ClientDeviceMetadataDetails
             build() {
           return new AccountEvaluationCreateParams.RegistrationInitiated
-              .ClientDeviceMetadataDetails(this.extraParams, this.radarSession);
+              .ClientDeviceMetadataDetails(this.data, this.extraParams, this.radarSession);
+        }
+
+        /**
+         * Raw client metadata fallback when Stripe.js is blocked. Required unless radar_session is
+         * provided.
+         */
+        public Builder setData(
+            AccountEvaluationCreateParams.RegistrationInitiated.ClientDeviceMetadataDetails.Data
+                data) {
+          this.data = data;
+          return this;
         }
 
         /**
@@ -489,13 +634,121 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * <strong>Required.</strong> ID for the Radar Session associated with the account
-         * evaluation.
-         */
+        /** ID for the Radar Session. Required unless data is provided. */
         public Builder setRadarSession(String radarSession) {
           this.radarSession = radarSession;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Data {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> The end user's IP address. Used for proxy detection and
+         * IP-clustering signals.
+         */
+        @SerializedName("ip")
+        String ip;
+
+        /** The referring URL of the login or registration page. */
+        @SerializedName("referrer")
+        String referrer;
+
+        /** The User-Agent HTTP header. */
+        @SerializedName("user_agent")
+        String userAgent;
+
+        private Data(
+            Map<String, Object> extraParams, String ip, String referrer, String userAgent) {
+          this.extraParams = extraParams;
+          this.ip = ip;
+          this.referrer = referrer;
+          this.userAgent = userAgent;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String ip;
+
+          private String referrer;
+
+          private String userAgent;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountEvaluationCreateParams.RegistrationInitiated.ClientDeviceMetadataDetails
+                  .Data
+              build() {
+            return new AccountEvaluationCreateParams.RegistrationInitiated
+                .ClientDeviceMetadataDetails.Data(
+                this.extraParams, this.ip, this.referrer, this.userAgent);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountEvaluationCreateParams.RegistrationInitiated.ClientDeviceMetadataDetails.Data#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountEvaluationCreateParams.RegistrationInitiated.ClientDeviceMetadataDetails.Data#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The end user's IP address. Used for proxy detection and
+           * IP-clustering signals.
+           */
+          public Builder setIp(String ip) {
+            this.ip = ip;
+            return this;
+          }
+
+          /** The referring URL of the login or registration page. */
+          public Builder setReferrer(String referrer) {
+            this.referrer = referrer;
+            return this;
+          }
+
+          /** The User-Agent HTTP header. */
+          public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+          }
         }
       }
     }

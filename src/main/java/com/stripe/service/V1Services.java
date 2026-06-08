@@ -153,6 +153,14 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.FxQuoteService(this.getResponseGetter());
   }
 
+  public com.stripe.service.GiftCardOperationService giftCardOperations() {
+    return new com.stripe.service.GiftCardOperationService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.GiftCardService giftCards() {
+    return new com.stripe.service.GiftCardService(this.getResponseGetter());
+  }
+
   public com.stripe.service.IdentityService identity() {
     return new com.stripe.service.IdentityService(this.getResponseGetter());
   }
@@ -323,6 +331,10 @@ public final class V1Services extends ApiService {
 
   public com.stripe.service.TaxCodeService taxCodes() {
     return new com.stripe.service.TaxCodeService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.TaxFundService taxFunds() {
+    return new com.stripe.service.TaxFundService(this.getResponseGetter());
   }
 
   public com.stripe.service.TaxIdService taxIds() {

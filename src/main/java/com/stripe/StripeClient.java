@@ -601,6 +601,29 @@ public class StripeClient {
   }
 
   /**
+   * @deprecated StripeClient.giftCardOperations() is deprecated, use
+   *     StripeClient.v1().giftCardOperations() instead. All functionality under it has been copied
+   *     over to StripeClient.v1().giftCardOperations(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.GiftCardOperationService giftCardOperations() {
+    return new com.stripe.service.GiftCardOperationService(this.getResponseGetter());
+  }
+
+  /**
+   * @deprecated StripeClient.giftCards() is deprecated, use StripeClient.v1().giftCards() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().giftCards(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.GiftCardService giftCards() {
+    return new com.stripe.service.GiftCardService(this.getResponseGetter());
+  }
+
+  /**
    * @deprecated StripeClient.identity() is deprecated, use StripeClient.v1().identity() instead.
    *     All functionality under it has been copied over to StripeClient.v1().identity(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
@@ -1093,6 +1116,17 @@ public class StripeClient {
   @Deprecated
   public com.stripe.service.TaxCodeService taxCodes() {
     return new com.stripe.service.TaxCodeService(this.getResponseGetter());
+  }
+
+  /**
+   * @deprecated StripeClient.taxFunds() is deprecated, use StripeClient.v1().taxFunds() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().taxFunds(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.TaxFundService taxFunds() {
+    return new com.stripe.service.TaxFundService(this.getResponseGetter());
   }
 
   /**

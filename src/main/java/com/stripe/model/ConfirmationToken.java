@@ -1090,6 +1090,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
             @SerializedName("location")
             String location;
 
+            @SerializedName("multicapture")
+            Multicapture multicapture;
+
             /**
              * Identifies which network this charge was processed on. Can be {@code amex}, {@code
              * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code
@@ -1161,6 +1164,23 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
             @SerializedName("wallet")
             Wallet wallet;
+
+            /**
+             * For more details about Multicapture, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Multicapture extends StripeObject {
+              /**
+               * Indicates whether or not multiple captures are supported.
+               *
+               * <p>One of {@code available}, or {@code unavailable}.
+               */
+              @SerializedName("status")
+              String status;
+            }
 
             /**
              * For more details about Offline, please refer to the <a

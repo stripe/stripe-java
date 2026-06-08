@@ -25,6 +25,7 @@ import com.stripe.param.PaymentIntentReauthorizeParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
 import com.stripe.param.PaymentIntentSearchParams;
 import com.stripe.param.PaymentIntentTriggerActionParams;
+import com.stripe.param.PaymentIntentUpdateCryptoRefundAddressParams;
 import com.stripe.param.PaymentIntentUpdateParams;
 import com.stripe.param.PaymentIntentVerifyMicrodepositsParams;
 
@@ -763,6 +764,31 @@ public final class PaymentIntentService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/payment_intents/%s/reauthorize", ApiResource.urlEncodeId(intent));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, PaymentIntent.class);
+  }
+  /**
+   * Updates the refund address for a static crypto deposit PaymentIntent on the specified network.
+   */
+  public PaymentIntent updateCryptoRefundAddress(
+      String intent, PaymentIntentUpdateCryptoRefundAddressParams params) throws StripeException {
+    return updateCryptoRefundAddress(intent, params, (RequestOptions) null);
+  }
+  /**
+   * Updates the refund address for a static crypto deposit PaymentIntent on the specified network.
+   */
+  public PaymentIntent updateCryptoRefundAddress(
+      String intent, PaymentIntentUpdateCryptoRefundAddressParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_intents/%s/update_crypto_refund_address", ApiResource.urlEncodeId(intent));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

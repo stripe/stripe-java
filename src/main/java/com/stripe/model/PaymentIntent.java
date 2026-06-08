@@ -22,6 +22,7 @@ import com.stripe.param.PaymentIntentRetrieveParams;
 import com.stripe.param.PaymentIntentSearchParams;
 import com.stripe.param.PaymentIntentSimulateCryptoDepositParams;
 import com.stripe.param.PaymentIntentTriggerActionParams;
+import com.stripe.param.PaymentIntentUpdateCryptoRefundAddressParams;
 import com.stripe.param.PaymentIntentUpdateParams;
 import com.stripe.param.PaymentIntentVerifyMicrodepositsParams;
 import java.util.List;
@@ -253,6 +254,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   ExpandableField<Charge> latestCharge;
 
   /**
+   * ID of the latest <a href="https://docs.stripe.com/api/payment-attempt-record">Payment Attempt
+   * Record object</a> created by this PaymentIntent. This property is {@code null} until
+   * PaymentIntent confirmation is attempted.
+   */
+  @SerializedName("latest_payment_attempt_record")
+  String latestPaymentAttemptRecord;
+
+  /**
    * If the object exists in live mode, the value is {@code true}. If the object exists in test
    * mode, the value is {@code false}.
    */
@@ -328,6 +337,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
+
+  /**
+   * ID of the <a href="https://docs.stripe.com/api/payment-record">Payment Record object</a>
+   * created by this PaymentIntent.
+   */
+  @SerializedName("payment_record")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentRecord> paymentRecord;
 
   /**
    * When you enable this parameter, this PaymentIntent will route your payment to processors that
@@ -540,6 +558,25 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public void setPaymentMethodObject(PaymentMethod expandableObject) {
     this.paymentMethod =
         new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code paymentRecord} object. */
+  public String getPaymentRecord() {
+    return (this.paymentRecord != null) ? this.paymentRecord.getId() : null;
+  }
+
+  public void setPaymentRecord(String id) {
+    this.paymentRecord = ApiResource.setExpandableFieldId(id, this.paymentRecord);
+  }
+
+  /** Get expanded {@code paymentRecord}. */
+  public PaymentRecord getPaymentRecordObject() {
+    return (this.paymentRecord != null) ? this.paymentRecord.getExpanded() : null;
+  }
+
+  public void setPaymentRecordObject(PaymentRecord expandableObject) {
+    this.paymentRecord =
+        new ExpandableField<PaymentRecord>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code review} object. */
@@ -1808,6 +1845,57 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     return getResponseGetter().request(request, PaymentIntent.class);
   }
 
+  /**
+   * Updates the refund address for a static crypto deposit PaymentIntent on the specified network.
+   */
+  public PaymentIntent updateCryptoRefundAddress(Map<String, Object> params)
+      throws StripeException {
+    return updateCryptoRefundAddress(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the refund address for a static crypto deposit PaymentIntent on the specified network.
+   */
+  public PaymentIntent updateCryptoRefundAddress(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_intents/%s/update_crypto_refund_address",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, PaymentIntent.class);
+  }
+
+  /**
+   * Updates the refund address for a static crypto deposit PaymentIntent on the specified network.
+   */
+  public PaymentIntent updateCryptoRefundAddress(
+      PaymentIntentUpdateCryptoRefundAddressParams params) throws StripeException {
+    return updateCryptoRefundAddress(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the refund address for a static crypto deposit PaymentIntent on the specified network.
+   */
+  public PaymentIntent updateCryptoRefundAddress(
+      PaymentIntentUpdateCryptoRefundAddressParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_intents/%s/update_crypto_refund_address",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, PaymentIntent.class);
+  }
+
   /** Verifies microdeposits on a PaymentIntent object. */
   public PaymentIntent verifyMicrodeposits() throws StripeException {
     return verifyMicrodeposits((Map<String, Object>) null, (RequestOptions) null);
@@ -1882,13 +1970,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("overcapture")
     Overcapture overcapture;
 
-    @SerializedName("reauthorization")
-    Reauthorization reauthorization;
-
-    /** Timestamp at which the reauthorization window closes. */
-    @SerializedName("reauthorize_before")
-    Long reauthorizeBefore;
-
     /**
      * For more details about DecrementalAuthorization, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
@@ -1954,23 +2035,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
       /**
        * Indicates whether overcapture is supported.
-       *
-       * <p>One of {@code available}, or {@code unavailable}.
-       */
-      @SerializedName("status")
-      String status;
-    }
-
-    /**
-     * For more details about Reauthorization, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Reauthorization extends StripeObject {
-      /**
-       * Indicates whether the feature is supported.
        *
        * <p>One of {@code available}, or {@code unavailable}.
        */
@@ -2574,6 +2638,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           @SerializedName("address")
           String address;
 
+          /** The wallet address that should receive refunds for deposits on this network. */
+          @SerializedName("refund_address")
+          String refundAddress;
+
           /** The token currencies supported on this network. */
           @SerializedName("supported_tokens")
           List<PaymentIntent.NextAction.CryptoDisplayDetails.DepositAddresses.Base.SupportedToken>
@@ -2616,6 +2684,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           @SerializedName("address")
           String address;
 
+          /** The wallet address that should receive refunds for deposits on this network. */
+          @SerializedName("refund_address")
+          String refundAddress;
+
           /** The token currencies supported on this network. */
           @SerializedName("supported_tokens")
           List<PaymentIntent.NextAction.CryptoDisplayDetails.DepositAddresses.Solana.SupportedToken>
@@ -2657,6 +2729,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           /** Address of the deposit address. */
           @SerializedName("address")
           String address;
+
+          /** The wallet address that should receive refunds for deposits on this network. */
+          @SerializedName("refund_address")
+          String refundAddress;
 
           /** The token currencies supported on this network. */
           @SerializedName("supported_tokens")
@@ -3521,6 +3597,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("flight_data")
     List<PaymentIntent.PaymentDetails.FlightDatum> flightData;
+
+    /** The Payment Location associated with this PaymentIntent. */
+    @SerializedName("location")
+    String location;
 
     @SerializedName("lodging_data")
     List<PaymentIntent.PaymentDetails.LodgingDatum> lodgingData;
@@ -6016,6 +6096,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
       /**
+       * Controls when funds are captured from the customer's account when {@code capture_method} is
+       * {@code automatic_delayed}.
+       *
+       * <p>If omitted, funds are captured before the authorization expires.
+       *
+       * <p>One of {@code auth_expiry}, {@code end_of_day}, or {@code target_delay}.
+       */
+      @SerializedName("capture_by")
+      String captureBy;
+
+      @SerializedName("capture_delay")
+      CaptureDelay captureDelay;
+
+      /**
        * Controls when the funds will be captured from the customer's account.
        *
        * <p>Equal to {@code manual}.
@@ -6178,6 +6272,33 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
       @SerializedName("statement_details")
       StatementDetails statementDetails;
+
+      /**
+       * For more details about CaptureDelay, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CaptureDelay extends StripeObject {
+        /**
+         * The number of days to delay the capture of the funds.
+         *
+         * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and
+         * {@code capture_by} is {@code target_delay}.
+         */
+        @SerializedName("days")
+        Long days;
+
+        /**
+         * The number of hours to delay the capture of the funds.
+         *
+         * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and
+         * {@code capture_by} is {@code target_delay}.
+         */
+        @SerializedName("hours")
+        Long hours;
+      }
 
       /**
        * For more details about Installments, please refer to the <a
@@ -6391,6 +6512,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent extends StripeObject {
       /**
+       * Controls when funds are captured from the customer's account when {@code capture_method} is
+       * {@code automatic_delayed}.
+       *
+       * <p>If omitted, funds are captured before the authorization expires.
+       *
+       * <p>One of {@code auth_expiry}, {@code end_of_day}, or {@code target_delay}.
+       */
+      @SerializedName("capture_by")
+      String captureBy;
+
+      @SerializedName("capture_delay")
+      CaptureDelay captureDelay;
+
+      /**
        * Controls when the funds will be captured from the customer's account.
        *
        * <p>One of {@code manual}, or {@code manual_preferred}.
@@ -6418,6 +6553,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       Boolean requestIncrementalAuthorizationSupport;
 
       /**
+       * Request ability to make <a href="https://docs.stripe.com/payments/multicapture">multiple
+       * captures</a> for this PaymentIntent.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_multicapture")
+      String requestMulticapture;
+
+      /**
        * Request ability to <a
        * href="https://docs.stripe.com/payments/reauthorization">reauthorize</a> for this
        * PaymentIntent.
@@ -6429,6 +6573,33 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
       @SerializedName("routing")
       Routing routing;
+
+      /**
+       * For more details about CaptureDelay, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CaptureDelay extends StripeObject {
+        /**
+         * The number of days to delay the capture of the funds.
+         *
+         * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and
+         * {@code capture_by} is {@code target_delay}.
+         */
+        @SerializedName("days")
+        Long days;
+
+        /**
+         * The number of hours to delay the capture of the funds.
+         *
+         * <p>You can only set this if {@code capture_method} is {@code automatic_delayed} and
+         * {@code capture_by} is {@code target_delay}.
+         */
+        @SerializedName("hours")
+        Long hours;
+      }
 
       /**
        * For more details about Routing, please refer to the <a
@@ -6503,7 +6674,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /**
        * The mode of the crypto payment.
        *
-       * <p>One of {@code default}, or {@code deposit}.
+       * <p>One of {@code default}, {@code deposit}, or {@code transaction_verification}.
        */
       @SerializedName("mode")
       String mode;
@@ -8816,6 +8987,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(paymentMethod, responseGetter);
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
+    trySetResponseGetter(paymentRecord, responseGetter);
     trySetResponseGetter(paymentsOrchestration, responseGetter);
     trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(processing, responseGetter);
