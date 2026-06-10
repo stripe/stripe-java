@@ -56,6 +56,16 @@ public class TransactionLineItem extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
+  /**
+   * The address of the location where this line item's event or service takes place. Depending on
+   * the <a href="https://stripe.com/tax/tax-codes">tax code</a>, providing a performance location
+   * is required, optional, or not supported. Use this to provide the address inline without
+   * pre-creating a <a href="https://stripe.com/api/tax/location">TaxLocation</a> object. Can't be
+   * used with {@code performance_location}.
+   */
+  @SerializedName("performance_location_details")
+  PerformanceLocationDetails performanceLocationDetails;
+
   /** The ID of an existing <a href="https://docs.stripe.com/api/products/object">Product</a>. */
   @SerializedName("product")
   String product;
@@ -97,6 +107,57 @@ public class TransactionLineItem extends StripeObject implements HasId {
    */
   @SerializedName("type")
   String type;
+
+  /**
+   * For more details about PerformanceLocationDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PerformanceLocationDetails extends StripeObject {
+    @SerializedName("address")
+    Address address;
+
+    /**
+     * For more details about Address, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Address extends StripeObject {
+      /** City, district, suburb, town, or village. */
+      @SerializedName("city")
+      String city;
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      String country;
+
+      /** Address line 1, such as the street, PO Box, or company name. */
+      @SerializedName("line1")
+      String line1;
+
+      /** Address line 2, such as the apartment, suite, unit, or building. */
+      @SerializedName("line2")
+      String line2;
+
+      /** ZIP or postal code. */
+      @SerializedName("postal_code")
+      String postalCode;
+
+      /**
+       * State/province as an <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>
+       * subdivision code, without country prefix, such as &quot;NY&quot; or &quot;TX&quot;.
+       */
+      @SerializedName("state")
+      String state;
+    }
+  }
 
   /**
    * For more details about Reversal, please refer to the <a href="https://docs.stripe.com/api">API

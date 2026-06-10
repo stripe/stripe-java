@@ -1820,7 +1820,10 @@ public class ContractUpdateParams extends ApiRequestParams {
       @SerializedName("overwrite_price")
       OverwritePrice overwritePrice;
 
-      /** <strong>Required.</strong> The priority for the pricing override. */
+      /**
+       * <strong>Required.</strong> The priority for the pricing override. The highest priority is 0
+       * and the lowest is 100.
+       */
       @SerializedName("priority")
       Long priority;
 
@@ -1945,7 +1948,10 @@ public class ContractUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> The priority for the pricing override. */
+        /**
+         * <strong>Required.</strong> The priority for the pricing override. The highest priority is
+         * 0 and the lowest is 100.
+         */
         public Builder setPriority(Long priority) {
           this.priority = priority;
           return this;

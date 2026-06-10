@@ -55,6 +55,8 @@ public final class EventDataClassLookup {
     classLookup.put("fr_meal_vouchers_onboarding", com.stripe.model.FrMealVouchersOnboarding.class);
     classLookup.put("funding_instructions", com.stripe.model.FundingInstructions.class);
     classLookup.put("fx_quote", com.stripe.model.FxQuote.class);
+    classLookup.put("gift_card", com.stripe.model.GiftCard.class);
+    classLookup.put("gift_card_operation", com.stripe.model.GiftCardOperation.class);
     classLookup.put("invoice", com.stripe.model.Invoice.class);
     classLookup.put("invoice_payment", com.stripe.model.InvoicePayment.class);
     classLookup.put("invoice_rendering_template", com.stripe.model.InvoiceRenderingTemplate.class);
@@ -110,6 +112,7 @@ public final class EventDataClassLookup {
     classLookup.put("subscription_schedule", com.stripe.model.SubscriptionSchedule.class);
     classLookup.put("tax_code", com.stripe.model.TaxCode.class);
     classLookup.put("tax_deducted_at_source", com.stripe.model.TaxDeductedAtSource.class);
+    classLookup.put("tax_fund", com.stripe.model.TaxFund.class);
     classLookup.put("tax_id", com.stripe.model.TaxId.class);
     classLookup.put("tax_rate", com.stripe.model.TaxRate.class);
     classLookup.put("token", com.stripe.model.Token.class);

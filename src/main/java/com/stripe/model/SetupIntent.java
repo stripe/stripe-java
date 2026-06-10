@@ -1847,6 +1847,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("benefit")
     Benefit benefit;
 
+    /** The Payment Location associated with this SetupIntent. */
+    @SerializedName("location")
+    String location;
+
     /**
      * For more details about Benefit, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>

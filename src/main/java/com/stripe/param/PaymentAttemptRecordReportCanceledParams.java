@@ -44,17 +44,23 @@ public class PaymentAttemptRecordReportCanceledParams extends ApiRequestParams {
   @SerializedName("payment_evaluations")
   List<String> paymentEvaluations;
 
+  /** The reason the payment attempt was canceled. */
+  @SerializedName("reason")
+  Reason reason;
+
   private PaymentAttemptRecordReportCanceledParams(
       Long canceledAt,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
-      List<String> paymentEvaluations) {
+      List<String> paymentEvaluations,
+      Reason reason) {
     this.canceledAt = canceledAt;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.paymentEvaluations = paymentEvaluations;
+    this.reason = reason;
   }
 
   public static Builder builder() {
@@ -72,10 +78,17 @@ public class PaymentAttemptRecordReportCanceledParams extends ApiRequestParams {
 
     private List<String> paymentEvaluations;
 
+    private Reason reason;
+
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentAttemptRecordReportCanceledParams build() {
       return new PaymentAttemptRecordReportCanceledParams(
-          this.canceledAt, this.expand, this.extraParams, this.metadata, this.paymentEvaluations);
+          this.canceledAt,
+          this.expand,
+          this.extraParams,
+          this.metadata,
+          this.paymentEvaluations,
+          this.reason);
     }
 
     /** When the reported payment was canceled. Measured in seconds since the Unix epoch. */
@@ -211,6 +224,24 @@ public class PaymentAttemptRecordReportCanceledParams extends ApiRequestParams {
       }
       this.paymentEvaluations.addAll(elements);
       return this;
+    }
+
+    /** The reason the payment attempt was canceled. */
+    public Builder setReason(PaymentAttemptRecordReportCanceledParams.Reason reason) {
+      this.reason = reason;
+      return this;
+    }
+  }
+
+  public enum Reason implements ApiRequestParams.EnumParam {
+    @SerializedName("blocked_for_fraud")
+    BLOCKED_FOR_FRAUD("blocked_for_fraud");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Reason(String value) {
+      this.value = value;
     }
   }
 }

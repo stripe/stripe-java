@@ -123,6 +123,10 @@ public class Dispute extends ApiResource
   @SerializedName("object")
   String object;
 
+  /** Provisional credit details for this dispute. */
+  @SerializedName("provisional_credit")
+  ProvisionalCredit provisionalCredit;
+
   /**
    * Current status of the dispute.
    *
@@ -1266,6 +1270,40 @@ public class Dispute extends ApiResource
   }
 
   /**
+   * For more details about ProvisionalCredit, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ProvisionalCredit extends StripeObject {
+    /** The time by which the platform must grant a provisional credit to the consumer. */
+    @SerializedName("grant_deadline")
+    Long grantDeadline;
+
+    /** The time at which the platform reported granting the provisional credit. */
+    @SerializedName("granted_at")
+    Long grantedAt;
+
+    /** The earliest time after which the platform can revoke the provisional credit. */
+    @SerializedName("revocable_after")
+    Long revocableAfter;
+
+    /** The time at which the platform reported revoking the provisional credit. */
+    @SerializedName("revoked_at")
+    Long revokedAt;
+
+    /**
+     * The status of the provisional credit obligation.
+     *
+     * <p>One of {@code delinquent}, {@code granted}, {@code not_required}, {@code permanent},
+     * {@code required}, {@code revocable}, {@code revocation_notice_period}, or {@code revoked}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about Treasury, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -1515,6 +1553,7 @@ public class Dispute extends ApiResource
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(evidence, responseGetter);
     trySetResponseGetter(networkLifecycle, responseGetter);
+    trySetResponseGetter(provisionalCredit, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
     trySetResponseGetter(treasury, responseGetter);
   }

@@ -47,17 +47,23 @@ public class DisputeUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  /** Provisional credit information for this dispute. */
+  @SerializedName("provisional_credit")
+  ProvisionalCredit provisionalCredit;
+
   private DisputeUpdateParams(
       Long amount,
       Evidence evidence,
       List<String> expand,
       Map<String, Object> extraParams,
-      Object metadata) {
+      Object metadata,
+      ProvisionalCredit provisionalCredit) {
     this.amount = amount;
     this.evidence = evidence;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.provisionalCredit = provisionalCredit;
   }
 
   public static Builder builder() {
@@ -75,10 +81,17 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private ProvisionalCredit provisionalCredit;
+
     /** Finalize and obtain parameter instance from this builder. */
     public DisputeUpdateParams build() {
       return new DisputeUpdateParams(
-          this.amount, this.evidence, this.expand, this.extraParams, this.metadata);
+          this.amount,
+          this.evidence,
+          this.expand,
+          this.extraParams,
+          this.metadata,
+          this.provisionalCredit);
     }
 
     /**
@@ -195,6 +208,12 @@ public class DisputeUpdateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /** Provisional credit information for this dispute. */
+    public Builder setProvisionalCredit(DisputeUpdateParams.ProvisionalCredit provisionalCredit) {
+      this.provisionalCredit = provisionalCredit;
       return this;
     }
   }
@@ -1977,6 +1996,89 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
       Reason(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ProvisionalCredit {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The time at which the platform granted the provisional credit to their user. */
+    @SerializedName("granted_at")
+    Long grantedAt;
+
+    /** The time at which the platform revoked the provisional credit from their user. */
+    @SerializedName("revoked_at")
+    Long revokedAt;
+
+    private ProvisionalCredit(Map<String, Object> extraParams, Long grantedAt, Long revokedAt) {
+      this.extraParams = extraParams;
+      this.grantedAt = grantedAt;
+      this.revokedAt = revokedAt;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Long grantedAt;
+
+      private Long revokedAt;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public DisputeUpdateParams.ProvisionalCredit build() {
+        return new DisputeUpdateParams.ProvisionalCredit(
+            this.extraParams, this.grantedAt, this.revokedAt);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * DisputeUpdateParams.ProvisionalCredit#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link DisputeUpdateParams.ProvisionalCredit#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The time at which the platform granted the provisional credit to their user. */
+      public Builder setGrantedAt(Long grantedAt) {
+        this.grantedAt = grantedAt;
+        return this;
+      }
+
+      /** The time at which the platform revoked the provisional credit from their user. */
+      public Builder setRevokedAt(Long revokedAt) {
+        this.revokedAt = revokedAt;
+        return this;
       }
     }
   }

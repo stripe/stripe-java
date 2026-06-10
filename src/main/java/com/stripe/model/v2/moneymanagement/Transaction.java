@@ -52,7 +52,8 @@ public class Transaction extends StripeObject implements HasId {
    * received_debit}, {@code received_debit_reversal}, {@code refund}, {@code refund_failure},
    * {@code risk_reserved_funds}, {@code stripe_balance_payment_debit}, {@code
    * stripe_balance_payment_debit_reversal}, {@code stripe_fee}, {@code stripe_fee_tax}, {@code
-   * tax_withholding}, {@code transfer_reversal}, or {@code unreconciled_customer_funds}.
+   * tax_fund}, {@code tax_withholding}, {@code transfer_reversal}, or {@code
+   * unreconciled_customer_funds}.
    */
   @SerializedName("category")
   String category;
@@ -231,6 +232,10 @@ public class Transaction extends StripeObject implements HasId {
     @SerializedName("reserve_release")
     String reserveRelease;
 
+    /** If applicable, the ID of the TaxFund that created this Transaction. */
+    @SerializedName("tax_fund")
+    String taxFund;
+
     /** If applicable, the ID of the Topup that created this Transaction. */
     @SerializedName("topup")
     String topup;
@@ -283,11 +288,12 @@ public class Transaction extends StripeObject implements HasId {
      * charge}, {@code currency_conversion}, {@code debit_dispute}, {@code dispute}, {@code
      * fee_transaction}, {@code inbound_transfer}, {@code outbound_payment}, {@code
      * outbound_transfer}, {@code payout}, {@code received_credit}, {@code received_debit}, {@code
-     * refund}, {@code reserve_hold}, {@code reserve_release}, {@code topup}, {@code transfer},
-     * {@code transfer_reversal}, {@code treasury_credit_reversal}, {@code treasury_debit_reversal},
-     * {@code treasury_inbound_transfer}, {@code treasury_issuing_authorization}, {@code
-     * treasury_other}, {@code treasury_outbound_payment}, {@code treasury_outbound_transfer},
-     * {@code treasury_received_credit}, or {@code treasury_received_debit}.
+     * refund}, {@code reserve_hold}, {@code reserve_release}, {@code tax_fund}, {@code topup},
+     * {@code transfer}, {@code transfer_reversal}, {@code treasury_credit_reversal}, {@code
+     * treasury_debit_reversal}, {@code treasury_inbound_transfer}, {@code
+     * treasury_issuing_authorization}, {@code treasury_other}, {@code treasury_outbound_payment},
+     * {@code treasury_outbound_transfer}, {@code treasury_received_credit}, or {@code
+     * treasury_received_debit}.
      */
     @SerializedName("type")
     String type;

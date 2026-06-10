@@ -2003,6 +2003,9 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("location")
       String location;
 
+      @SerializedName("multicapture")
+      Multicapture multicapture;
+
       /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
        * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
@@ -2072,6 +2075,23 @@ public class PaymentRecord extends ApiResource implements HasId {
 
       @SerializedName("wallet")
       Wallet wallet;
+
+      /**
+       * For more details about Multicapture, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Multicapture extends StripeObject {
+        /**
+         * Indicates whether or not multiple captures are supported.
+         *
+         * <p>One of {@code available}, or {@code unavailable}.
+         */
+        @SerializedName("status")
+        String status;
+      }
 
       /**
        * For more details about Offline, please refer to the <a
@@ -3927,10 +3947,22 @@ public class PaymentRecord extends ApiResource implements HasId {
     @SerializedName("custom")
     Custom custom;
 
+    /** Represents the Fiserv ValueLink gift card processor. */
+    @SerializedName("fiserv_valuelink")
+    FiservValuelink fiservValuelink;
+
+    /** Represents the Givex gift card processor. */
+    @SerializedName("givex")
+    Givex givex;
+
+    /** Represents the SVS gift card processor. */
+    @SerializedName("svs")
+    Svs svs;
+
     /**
      * The processor used for this payment attempt.
      *
-     * <p>Equal to {@code custom}.
+     * <p>One of {@code custom}, {@code fiserv_valuelink}, {@code givex}, or {@code svs}.
      */
     @SerializedName("type")
     String type;
@@ -3943,6 +3975,45 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Custom extends StripeObject {
+      /**
+       * An opaque string for manual reconciliation of this payment, for example a check number or a
+       * payment processor ID.
+       */
+      @SerializedName("payment_reference")
+      String paymentReference;
+    }
+
+    /** Represents the Fiserv ValueLink gift card processor. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FiservValuelink extends StripeObject {
+      /**
+       * An opaque string for manual reconciliation of this payment, for example a check number or a
+       * payment processor ID.
+       */
+      @SerializedName("payment_reference")
+      String paymentReference;
+    }
+
+    /** Represents the Givex gift card processor. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Givex extends StripeObject {
+      /**
+       * An opaque string for manual reconciliation of this payment, for example a check number or a
+       * payment processor ID.
+       */
+      @SerializedName("payment_reference")
+      String paymentReference;
+    }
+
+    /** Represents the SVS gift card processor. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Svs extends StripeObject {
       /**
        * An opaque string for manual reconciliation of this payment, for example a check number or a
        * payment processor ID.

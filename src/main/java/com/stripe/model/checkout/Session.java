@@ -1685,6 +1685,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("link")
       Link link;
 
+      @SerializedName("pix")
+      Pix pix;
+
       @SerializedName("sepa_debit")
       SepaDebit sepaDebit;
 
@@ -1760,9 +1763,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
          *
          * <p>One of {@code accel}, {@code amex}, {@code carnet}, {@code cartes_bancaires}, {@code
          * conecs}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code elo}, {@code
-         * girocard}, {@code interac}, {@code jcb}, {@code link}, {@code maestro}, {@code
-         * mastercard}, {@code nyce}, {@code pulse}, {@code rupay}, {@code star}, {@code unionpay},
-         * {@code unknown}, or {@code visa}.
+         * girocard}, {@code interac}, {@code jaywan}, {@code jcb}, {@code link}, {@code maestro},
+         * {@code mastercard}, {@code nyce}, {@code pulse}, {@code rupay}, {@code star}, {@code
+         * unionpay}, {@code unknown}, or {@code visa}.
          */
         @SerializedName("brand")
         String brand;
@@ -1843,6 +1846,22 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @EqualsAndHashCode(callSuper = false)
       public static class Link extends StripeObject {
         /** Unique, encrypted bank account identifier. */
+        @SerializedName("fingerprint")
+        String fingerprint;
+      }
+
+      /**
+       * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Pix extends StripeObject {
+        /**
+         * Uniquely identifies this particular Pix account. You can use this attribute to check
+         * whether two Pix accounts are the same.
+         */
         @SerializedName("fingerprint")
         String fingerprint;
       }

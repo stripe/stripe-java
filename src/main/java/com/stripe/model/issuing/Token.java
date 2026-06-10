@@ -380,8 +380,7 @@ public class Token extends ApiResource implements HasId {
       String cardReferenceId;
 
       /**
-       * Stripe's recommendation to the network for this token activation request, derived from the
-       * same risk signals used for the activation decision.
+       * The network's recommendation to Stripe for this token activation request.
        *
        * <p>One of {@code approve}, {@code decline}, or {@code recommend_id_and_v}.
        */

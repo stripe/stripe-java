@@ -61,7 +61,7 @@ public class InboundTransfer extends StripeObject implements HasId {
 
   /**
    * A hosted transaction receipt URL that is provided when money movement is considered regulated
-   * under Stripe’s money transmission licenses.
+   * under Stripe's money transmission licenses.
    */
   @SerializedName("receipt_url")
   String receiptUrl;

@@ -3,6 +3,7 @@ package com.stripe.service.v2.core.vault;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.BlockedByStripeException;
+import com.stripe.exception.CannotProceedException;
 import com.stripe.exception.ControlledByDashboardException;
 import com.stripe.exception.InvalidPaymentMethodException;
 import com.stripe.exception.QuotaExceededException;
@@ -132,7 +133,8 @@ public final class UsBankAccountService extends ApiService {
    * Stripe. Archived USBankAccount objects cannot be used as outbound destinations and will not
    * appear in the outbound destination list.
    */
-  public UsBankAccount archive(String id) throws StripeException, ControlledByDashboardException {
+  public UsBankAccount archive(String id)
+      throws StripeException, CannotProceedException, ControlledByDashboardException {
     return archive(id, (RequestOptions) null);
   }
   /**
@@ -141,7 +143,7 @@ public final class UsBankAccountService extends ApiService {
    * appear in the outbound destination list.
    */
   public UsBankAccount archive(String id, RequestOptions options)
-      throws StripeException, ControlledByDashboardException {
+      throws StripeException, CannotProceedException, ControlledByDashboardException {
     String path =
         String.format("/v2/core/vault/us_bank_accounts/%s/archive", ApiResource.urlEncodeId(id));
     ApiRequest request =
