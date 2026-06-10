@@ -4912,8 +4912,8 @@ public class ContractCreateParams extends ApiRequestParams {
     OverwritePrice overwritePrice;
 
     /**
-     * <strong>Required.</strong> The priority of this override relative to others. Lower number =
-     * higher priority.
+     * <strong>Required.</strong> The priority of this override relative to others. The highest
+     * priority is 0 and the lowest is 100.
      */
     @SerializedName("priority")
     Long priority;
@@ -5034,8 +5034,8 @@ public class ContractCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> The priority of this override relative to others. Lower number =
-       * higher priority.
+       * <strong>Required.</strong> The priority of this override relative to others. The highest
+       * priority is 0 and the lowest is 100.
        */
       public Builder setPriority(Long priority) {
         this.priority = priority;

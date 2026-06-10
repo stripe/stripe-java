@@ -6068,7 +6068,7 @@ public class Account extends StripeObject implements HasId {
       String feesCollector;
 
       /**
-       * A value indicating responsibility for collecting requirements on this account.
+       * A value indicating the responsibility for losses on this account.
        *
        * <p>One of {@code application}, or {@code stripe}.
        */
