@@ -1961,6 +1961,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("decremental_authorization")
     DecrementalAuthorization decrementalAuthorization;
 
+    @SerializedName("forced_capture")
+    ForcedCapture forcedCapture;
+
     @SerializedName("incremental_authorization")
     IncrementalAuthorization incrementalAuthorization;
 
@@ -1980,6 +1983,27 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     public static class DecrementalAuthorization extends StripeObject {
       /**
        * Indicates whether the feature is supported.
+       *
+       * <p>One of {@code available}, or {@code unavailable}.
+       */
+      @SerializedName("status")
+      String status;
+    }
+
+    /**
+     * For more details about ForcedCapture, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ForcedCapture extends StripeObject {
+      /** Timestamp at which the forced capture window expires. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * Indicates whether forced capture is supported.
        *
        * <p>One of {@code available}, or {@code unavailable}.
        */
@@ -5082,6 +5106,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("account_funding")
       AccountFunding accountFunding;
 
+      /** ID of the Account representing the beneficiary in this account funding transaction. */
+      @SerializedName("beneficiary_account")
+      String beneficiaryAccount;
+
+      @SerializedName("beneficiary_details")
+      BeneficiaryDetails beneficiaryDetails;
+
       /**
        * The type of money services transaction.
        *
@@ -5098,105 +5129,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class AccountFunding extends StripeObject {
-        /** ID of the Account representing the beneficiary in this account funding transaction. */
-        @SerializedName("beneficiary_account")
-        String beneficiaryAccount;
-
-        @SerializedName("beneficiary_details")
-        BeneficiaryDetails beneficiaryDetails;
-
         /** ID of the Account representing the sender in this account funding transaction. */
         @SerializedName("sender_account")
         String senderAccount;
 
         @SerializedName("sender_details")
         SenderDetails senderDetails;
-
-        /**
-         * For more details about BeneficiaryDetails, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class BeneficiaryDetails extends StripeObject {
-          @SerializedName("address")
-          com.stripe.model.PaymentIntent.PaymentDetails.MoneyServices.AccountFunding
-                  .BeneficiaryDetails.Address
-              address;
-
-          @SerializedName("date_of_birth")
-          DateOfBirth dateOfBirth;
-
-          /** Email address. */
-          @SerializedName("email")
-          String email;
-
-          /** Full name. */
-          @SerializedName("name")
-          String name;
-
-          /** Phone number. */
-          @SerializedName("phone")
-          String phone;
-
-          /**
-           * For more details about Address, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Address extends StripeObject {
-            /** City, district, suburb, town, or village. */
-            @SerializedName("city")
-            String city;
-
-            /**
-             * Two-letter country code (<a
-             * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
-             */
-            @SerializedName("country")
-            String country;
-
-            /** Address line 1 (e.g., street, PO Box, or company name). */
-            @SerializedName("line1")
-            String line1;
-
-            /** Address line 2 (e.g., apartment, suite, unit, or building). */
-            @SerializedName("line2")
-            String line2;
-
-            /** ZIP or postal code. */
-            @SerializedName("postal_code")
-            String postalCode;
-
-            /** State, county, province, or region. */
-            @SerializedName("state")
-            String state;
-          }
-
-          /**
-           * For more details about DateOfBirth, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class DateOfBirth extends StripeObject {
-            /** Day of birth, between 1 and 31. */
-            @SerializedName("day")
-            Long day;
-
-            /** Month of birth, between 1 and 12. */
-            @SerializedName("month")
-            Long month;
-
-            /** Four-digit year of birth. */
-            @SerializedName("year")
-            Long year;
-          }
-        }
 
         /**
          * For more details about SenderDetails, please refer to the <a
@@ -5282,6 +5220,91 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             @SerializedName("year")
             Long year;
           }
+        }
+      }
+
+      /**
+       * For more details about BeneficiaryDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BeneficiaryDetails extends StripeObject {
+        @SerializedName("address")
+        com.stripe.model.PaymentIntent.PaymentDetails.MoneyServices.BeneficiaryDetails.Address
+            address;
+
+        @SerializedName("date_of_birth")
+        DateOfBirth dateOfBirth;
+
+        /** Email address. */
+        @SerializedName("email")
+        String email;
+
+        /** Full name. */
+        @SerializedName("name")
+        String name;
+
+        /** Phone number. */
+        @SerializedName("phone")
+        String phone;
+
+        /**
+         * For more details about Address, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Address extends StripeObject {
+          /** City, district, suburb, town, or village. */
+          @SerializedName("city")
+          String city;
+
+          /**
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
+           */
+          @SerializedName("country")
+          String country;
+
+          /** Address line 1 (e.g., street, PO Box, or company name). */
+          @SerializedName("line1")
+          String line1;
+
+          /** Address line 2 (e.g., apartment, suite, unit, or building). */
+          @SerializedName("line2")
+          String line2;
+
+          /** ZIP or postal code. */
+          @SerializedName("postal_code")
+          String postalCode;
+
+          /** State, county, province, or region. */
+          @SerializedName("state")
+          String state;
+        }
+
+        /**
+         * For more details about DateOfBirth, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class DateOfBirth extends StripeObject {
+          /** Day of birth, between 1 and 31. */
+          @SerializedName("day")
+          Long day;
+
+          /** Month of birth, between 1 and 12. */
+          @SerializedName("month")
+          Long month;
+
+          /** Four-digit year of birth. */
+          @SerializedName("year")
+          Long year;
         }
       }
     }
@@ -6112,7 +6135,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /**
        * Controls when the funds will be captured from the customer's account.
        *
-       * <p>Equal to {@code manual}.
+       * <p>One of {@code automatic_delayed}, or {@code manual}.
        */
       @SerializedName("capture_method")
       String captureMethod;
@@ -6528,7 +6551,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /**
        * Controls when the funds will be captured from the customer's account.
        *
-       * <p>One of {@code manual}, or {@code manual_preferred}.
+       * <p>One of {@code automatic_delayed}, {@code manual}, or {@code manual_preferred}.
        */
       @SerializedName("capture_method")
       String captureMethod;
@@ -8182,6 +8205,30 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("capture_method")
       String captureMethod;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
     }
 
     /**
