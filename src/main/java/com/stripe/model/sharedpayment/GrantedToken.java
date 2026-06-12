@@ -1204,10 +1204,6 @@ public class GrantedToken extends ApiResource implements HasId {
       @SerializedName("fingerprint")
       String fingerprint;
 
-      /** The first six digits of the gift card number. */
-      @SerializedName("first6")
-      String first6;
-
       /** The last four digits of the gift card number. */
       @SerializedName("last4")
       String last4;
