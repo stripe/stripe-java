@@ -87,6 +87,9 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("livemode")
   Boolean livemode;
 
+  @SerializedName("managed_payments")
+  ManagedPayments managedPayments;
+
   /**
    * A list of up to 15 marketing features for this product. These are displayed in <a
    * href="https://docs.stripe.com/payments/checkout/pricing-table">pricing tables</a>.
@@ -539,6 +542,56 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   }
 
   /**
+   * For more details about ManagedPayments, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManagedPayments extends StripeObject {
+    /**
+     * Whether this product is eligible for use with Managed Payments. Possible values are {@code
+     * eligible} and {@code ineligible}.
+     *
+     * <p>One of {@code eligible}, or {@code ineligible}.
+     */
+    @SerializedName("eligibility")
+    String eligibility;
+
+    /**
+     * The reasons this product is ineligible for use with Managed Payments, if any. This field
+     * isn't present if the product is eligible.
+     */
+    @SerializedName("ineligibility_reasons")
+    List<Product.ManagedPayments.IneligibilityReason> ineligibilityReasons;
+
+    /**
+     * For more details about IneligibilityReason, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class IneligibilityReason extends StripeObject {
+      /**
+       * A code identifying the reason this product can't be used with Managed Payments. Additional
+       * values might be added as Managed Payments evolves its eligibility criteria.
+       *
+       * <p>One of {@code ineligible_tax_code}, or {@code no_tax_code_specified}.
+       */
+      @SerializedName("code")
+      String code;
+
+      /**
+       * A human-readable description of the reason this product can't be used with Managed
+       * Payments.
+       */
+      @SerializedName("message")
+      String message;
+    }
+  }
+
+  /**
    * For more details about MarketingFeature, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -595,6 +648,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(defaultPrice, responseGetter);
     trySetResponseGetter(identifiers, responseGetter);
+    trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(packageDimensions, responseGetter);
     trySetResponseGetter(taxCode, responseGetter);
     trySetResponseGetter(taxDetails, responseGetter);

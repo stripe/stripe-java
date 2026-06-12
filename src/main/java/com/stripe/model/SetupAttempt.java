@@ -339,9 +339,6 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
 
-    @SerializedName("satispay")
-    Satispay satispay;
-
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -1039,15 +1036,6 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class RevolutPay extends StripeObject {}
-
-    /**
-     * For more details about Satispay, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Satispay extends StripeObject {}
 
     /**
      * For more details about SepaDebit, please refer to the <a
