@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec
 package com.stripe.model.v2.core;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeObject;
 import com.stripe.v2.Amount;
 import java.math.BigDecimal;
@@ -241,6 +243,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class ChargeCard extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -258,6 +267,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.CardCreator.Capabilities.Commercial.Celtic.ChargeCard
                           .StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -295,6 +342,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class SpendCard extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -312,6 +366,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.CardCreator.Capabilities.Commercial.Celtic.SpendCard
                           .StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -367,6 +459,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class ChargeCard extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -384,6 +483,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.CardCreator.Capabilities.Commercial.CrossRiverBank
                           .ChargeCard.StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -421,6 +558,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class PrepaidCard extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -438,6 +582,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.CardCreator.Capabilities.Commercial.CrossRiverBank
                           .PrepaidCard.StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -475,6 +657,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class SpendCard extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -492,6 +681,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.CardCreator.Capabilities.Commercial.CrossRiverBank
                           .SpendCard.StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -539,6 +766,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class ChargeCard extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -556,6 +790,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.CardCreator.Capabilities.Commercial.FifthThird
                           .ChargeCard.StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -609,6 +881,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class PrepaidCard extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -626,6 +905,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.CardCreator.Capabilities.Commercial.Lead.PrepaidCard
                           .StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -677,6 +994,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class ChargeCard extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -694,6 +1018,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.CardCreator.Capabilities.Commercial.Stripe.ChargeCard
                           .StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -731,6 +1093,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class PrepaidCard extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -748,6 +1117,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.CardCreator.Capabilities.Commercial.Stripe.PrepaidCard
                           .StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -813,6 +1220,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class RevolvingCreditCard extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -830,6 +1244,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.CardCreator.Capabilities.Consumer.Celtic
                           .RevolvingCreditCard.StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -877,6 +1329,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class PrepaidCard extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -894,6 +1353,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.CardCreator.Capabilities.Consumer.CrossRiverBank
                           .PrepaidCard.StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -945,6 +1442,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class DebitCard extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -962,6 +1466,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.CardCreator.Capabilities.Consumer.Lead.DebitCard
                           .StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -999,6 +1541,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class PrepaidCard extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -1016,6 +1565,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.CardCreator.Capabilities.Consumer.Lead.PrepaidCard
                           .StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -1269,6 +1856,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class AutomaticIndirectTax extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -1283,6 +1877,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Customer.Capabilities.AutomaticIndirectTax.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -1673,6 +2304,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class AchDebitPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -1687,6 +2325,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.AchDebitPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -1724,6 +2399,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class AcssDebitPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -1738,6 +2420,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.AcssDebitPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -1775,6 +2494,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class AffirmPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -1789,6 +2515,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.AffirmPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -1826,6 +2589,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class AfterpayClearpayPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -1840,6 +2610,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.AfterpayClearpayPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -1877,6 +2684,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class AlmaPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -1890,6 +2704,43 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.AlmaPayments.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -1927,6 +2778,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class AmazonPayPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -1941,6 +2799,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.AmazonPayPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -1978,6 +2873,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class AuBecsDebitPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -1992,6 +2894,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.AuBecsDebitPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2029,6 +2968,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class BacsDebitPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2043,6 +2989,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.BacsDebitPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2080,6 +3063,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class BancontactPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2094,6 +3084,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.BancontactPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2131,6 +3158,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class BlikPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2144,6 +3178,43 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.BlikPayments.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2181,6 +3252,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class BoletoPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2195,6 +3273,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.BoletoPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2232,6 +3347,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class CardPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2245,6 +3367,43 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.CardPayments.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2282,6 +3441,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class CartesBancairesPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2296,6 +3462,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.CartesBancairesPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2333,6 +3536,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class CashappPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2347,6 +3557,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.CashappPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2384,6 +3631,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class EpsPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2397,6 +3651,43 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.EpsPayments.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2434,6 +3725,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class FpxPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2447,6 +3745,43 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.FpxPayments.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2484,6 +3819,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class GbBankTransferPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2498,6 +3840,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.GbBankTransferPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2535,6 +3914,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class GrabpayPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2549,6 +3935,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.GrabpayPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2586,6 +4009,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class IdealPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2600,6 +4030,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.IdealPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2637,6 +4104,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class JcbPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2650,6 +4124,43 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.JcbPayments.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2687,6 +4198,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class JpBankTransferPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2701,6 +4219,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.JpBankTransferPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2738,6 +4293,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class KakaoPayPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2752,6 +4314,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.KakaoPayPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2789,6 +4388,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class KlarnaPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2803,6 +4409,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.KlarnaPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2840,6 +4483,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class KonbiniPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2854,6 +4504,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.KonbiniPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2891,6 +4578,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class KrCardPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2905,6 +4599,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.KrCardPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2942,6 +4673,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class LinkPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -2955,6 +4693,43 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.LinkPayments.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -2992,6 +4767,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class MobilepayPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3006,6 +4788,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.MobilepayPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3043,6 +4862,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class MultibancoPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3057,6 +4883,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.MultibancoPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3094,6 +4957,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class MxBankTransferPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3108,6 +4978,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.MxBankTransferPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3145,6 +5052,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class NaverPayPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3159,6 +5073,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.NaverPayPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3196,6 +5147,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class OxxoPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3209,6 +5167,43 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.OxxoPayments.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3246,6 +5241,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class P24Payments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3259,6 +5261,43 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.P24Payments.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3296,6 +5335,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class PayByBankPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3310,6 +5356,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.PayByBankPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3347,6 +5430,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class PaycoPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3361,6 +5451,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.PaycoPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3398,6 +5525,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class PaynowPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3412,6 +5546,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.PaynowPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3449,6 +5620,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class PromptpayPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3463,6 +5641,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.PromptpayPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3500,6 +5715,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class RevolutPayPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3514,6 +5736,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.RevolutPayPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3551,6 +5810,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class SamsungPayPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3565,6 +5831,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.SamsungPayPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3602,6 +5905,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class SepaBankTransferPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3616,6 +5926,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.SepaBankTransferPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3653,6 +6000,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class SepaDebitPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3667,6 +6021,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.SepaDebitPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3713,6 +6104,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class Payouts extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -3728,6 +6126,44 @@ public class Account extends StripeObject implements HasId {
             @SerializedName("status_details")
             List<Account.Configuration.Merchant.Capabilities.StripeBalance.Payouts.StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -3766,6 +6202,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class SwishPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3780,6 +6223,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.SwishPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3817,6 +6297,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class TwintPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3831,6 +6318,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.TwintPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3868,6 +6392,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class UsBankTransferPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3882,6 +6413,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.UsBankTransferPayments.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -3919,6 +6487,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class ZipPayments extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -3932,6 +6507,43 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.ZipPayments.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -4353,6 +6965,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class Instant extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -4368,6 +6987,44 @@ public class Account extends StripeObject implements HasId {
             @SerializedName("status_details")
             List<Account.Configuration.Recipient.Capabilities.BankAccounts.Instant.StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -4408,6 +7065,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class Local extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -4423,6 +7087,44 @@ public class Account extends StripeObject implements HasId {
             @SerializedName("status_details")
             List<Account.Configuration.Recipient.Capabilities.BankAccounts.Local.StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -4460,6 +7162,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class Wire extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -4475,6 +7184,44 @@ public class Account extends StripeObject implements HasId {
             @SerializedName("status_details")
             List<Account.Configuration.Recipient.Capabilities.BankAccounts.Wire.StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -4513,6 +7260,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class Cards extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -4526,6 +7280,43 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Recipient.Capabilities.Cards.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -4563,6 +7354,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class CryptoWallets extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -4577,6 +7375,43 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("status_details")
           List<Account.Configuration.Recipient.Capabilities.CryptoWallets.StatusDetail>
               statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -4614,6 +7449,13 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class PaperChecks extends StripeObject {
           /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
            * The status of the Capability.
            *
            * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
@@ -4627,6 +7469,43 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Recipient.Capabilities.PaperChecks.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -4679,6 +7558,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class Payouts extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -4694,6 +7580,44 @@ public class Account extends StripeObject implements HasId {
             @SerializedName("status_details")
             List<Account.Configuration.Recipient.Capabilities.StripeBalance.Payouts.StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -4733,6 +7657,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class StripeTransfers extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -4750,6 +7681,44 @@ public class Account extends StripeObject implements HasId {
                     Account.Configuration.Recipient.Capabilities.StripeBalance.StripeTransfers
                         .StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -4980,6 +7949,13 @@ public class Account extends StripeObject implements HasId {
             @EqualsAndHashCode(callSuper = false)
             public static class Usd extends StripeObject {
               /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
                * The status of the Capability.
                *
                * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -4997,6 +7973,44 @@ public class Account extends StripeObject implements HasId {
                       Account.Configuration.Storer.Capabilities.Consumer.HoldsCurrencies.Usd
                           .StatusDetail>
                   statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
 
               /**
                * For more details about StatusDetail, please refer to the <a
@@ -5055,6 +8069,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class BankAccounts extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5072,6 +8093,44 @@ public class Account extends StripeObject implements HasId {
                     Account.Configuration.Storer.Capabilities.FinancialAddresses.BankAccounts
                         .StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5109,6 +8168,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class CryptoWallets extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5126,6 +8192,44 @@ public class Account extends StripeObject implements HasId {
                     Account.Configuration.Storer.Capabilities.FinancialAddresses.CryptoWallets
                         .StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5185,6 +8289,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class Eur extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5200,6 +8311,44 @@ public class Account extends StripeObject implements HasId {
             @SerializedName("status_details")
             List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Eur.StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5237,6 +8386,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class Gbp extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5252,6 +8408,44 @@ public class Account extends StripeObject implements HasId {
             @SerializedName("status_details")
             List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Gbp.StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5289,6 +8483,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class Usd extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5304,6 +8505,44 @@ public class Account extends StripeObject implements HasId {
             @SerializedName("status_details")
             List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Usd.StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5341,6 +8580,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class Usdc extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5356,6 +8602,44 @@ public class Account extends StripeObject implements HasId {
             @SerializedName("status_details")
             List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Usdc.StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5407,6 +8691,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class BankAccounts extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5424,6 +8715,44 @@ public class Account extends StripeObject implements HasId {
                     Account.Configuration.Storer.Capabilities.InboundTransfers.BankAccounts
                         .StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5499,6 +8828,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class BankAccounts extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5516,6 +8852,44 @@ public class Account extends StripeObject implements HasId {
                     Account.Configuration.Storer.Capabilities.OutboundPayments.BankAccounts
                         .StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5553,6 +8927,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class Cards extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5568,6 +8949,44 @@ public class Account extends StripeObject implements HasId {
             @SerializedName("status_details")
             List<Account.Configuration.Storer.Capabilities.OutboundPayments.Cards.StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5607,6 +9026,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class CryptoWallets extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5624,6 +9050,44 @@ public class Account extends StripeObject implements HasId {
                     Account.Configuration.Storer.Capabilities.OutboundPayments.CryptoWallets
                         .StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5664,6 +9128,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class FinancialAccounts extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5681,6 +9152,44 @@ public class Account extends StripeObject implements HasId {
                     Account.Configuration.Storer.Capabilities.OutboundPayments.FinancialAccounts
                         .StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5718,6 +9227,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class PaperChecks extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5735,6 +9251,44 @@ public class Account extends StripeObject implements HasId {
                     Account.Configuration.Storer.Capabilities.OutboundPayments.PaperChecks
                         .StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5802,6 +9356,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class BankAccounts extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5819,6 +9380,44 @@ public class Account extends StripeObject implements HasId {
                     Account.Configuration.Storer.Capabilities.OutboundTransfers.BankAccounts
                         .StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5858,6 +9457,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class CryptoWallets extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5875,6 +9481,44 @@ public class Account extends StripeObject implements HasId {
                     Account.Configuration.Storer.Capabilities.OutboundTransfers.CryptoWallets
                         .StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a
@@ -5915,6 +9559,13 @@ public class Account extends StripeObject implements HasId {
           @EqualsAndHashCode(callSuper = false)
           public static class FinancialAccounts extends StripeObject {
             /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
              * The status of the Capability.
              *
              * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
@@ -5932,6 +9583,44 @@ public class Account extends StripeObject implements HasId {
                     Account.Configuration.Storer.Capabilities.OutboundTransfers.FinancialAccounts
                         .StatusDetail>
                 statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
 
             /**
              * For more details about StatusDetail, please refer to the <a

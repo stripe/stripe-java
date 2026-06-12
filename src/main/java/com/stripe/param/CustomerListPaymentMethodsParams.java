@@ -414,6 +414,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("swish")
     SWISH("swish"),
 
+    @SerializedName("tamara")
+    TAMARA("tamara"),
+
     @SerializedName("twint")
     TWINT("twint"),
 

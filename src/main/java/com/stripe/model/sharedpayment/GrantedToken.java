@@ -344,6 +344,9 @@ public class GrantedToken extends ApiResource implements HasId {
     @SerializedName("swish")
     Swish swish;
 
+    @SerializedName("tamara")
+    Tamara tamara;
+
     @SerializedName("twint")
     Twint twint;
 
@@ -364,8 +367,8 @@ public class GrantedToken extends ApiResource implements HasId {
      * paypal}, {@code paypay}, {@code payto}, {@code pix}, {@code promptpay}, {@code qris}, {@code
      * rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code satispay}, {@code scalapay},
      * {@code sepa_debit}, {@code shopeepay}, {@code sofort}, {@code stripe_balance}, {@code
-     * sunbit}, {@code swish}, {@code twint}, {@code upi}, {@code us_bank_account}, {@code
-     * wechat_pay}, or {@code zip}.
+     * sunbit}, {@code swish}, {@code tamara}, {@code twint}, {@code upi}, {@code us_bank_account},
+     * {@code wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -1992,6 +1995,15 @@ public class GrantedToken extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Swish extends StripeObject {}
+
+    /**
+     * For more details about Tamara, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Tamara extends StripeObject {}
 
     /**
      * For more details about Twint, please refer to the <a href="https://docs.stripe.com/api">API
