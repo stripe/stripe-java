@@ -49422,6 +49422,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("app_id")
       String appId;
 
+      /**
+       * The unique buyer ID for the app ID registered with WeChat Pay. Only required when client is
+       * mini_program.
+       */
+      @SerializedName("buyer_id")
+      String buyerId;
+
       /** The client type that the end customer will pay from. */
       @SerializedName("client")
       Client client;
@@ -49463,10 +49470,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private WechatPay(
           String appId,
+          String buyerId,
           Client client,
           Map<String, Object> extraParams,
           SetupFutureUsage setupFutureUsage) {
         this.appId = appId;
+        this.buyerId = buyerId;
         this.client = client;
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
@@ -49479,6 +49488,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       public static class Builder {
         private String appId;
 
+        private String buyerId;
+
         private Client client;
 
         private Map<String, Object> extraParams;
@@ -49488,12 +49499,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.WechatPay build() {
           return new PaymentIntentCreateParams.PaymentMethodOptions.WechatPay(
-              this.appId, this.client, this.extraParams, this.setupFutureUsage);
+              this.appId, this.buyerId, this.client, this.extraParams, this.setupFutureUsage);
         }
 
         /** The app ID registered with WeChat Pay. Only required when client is ios or android. */
         public Builder setAppId(String appId) {
           this.appId = appId;
+          return this;
+        }
+
+        /**
+         * The unique buyer ID for the app ID registered with WeChat Pay. Only required when client
+         * is mini_program.
+         */
+        public Builder setBuyerId(String buyerId) {
+          this.buyerId = buyerId;
           return this;
         }
 
@@ -49570,6 +49590,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         @SerializedName("ios")
         IOS("ios"),
+
+        @SerializedName("mini_program")
+        MINI_PROGRAM("mini_program"),
 
         @SerializedName("web")
         WEB("web");

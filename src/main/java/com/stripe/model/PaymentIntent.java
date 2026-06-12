@@ -2478,6 +2478,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("wechat_pay_display_qr_code")
     WechatPayDisplayQrCode wechatPayDisplayQrCode;
 
+    @SerializedName("wechat_pay_handle_app_redirect")
+    WechatPayHandleAppRedirect wechatPayHandleAppRedirect;
+
     @SerializedName("wechat_pay_redirect_to_android_app")
     WechatPayRedirectToAndroidApp wechatPayRedirectToAndroidApp;
 
@@ -3625,6 +3628,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** The image_url_svg string used to render QR code. */
       @SerializedName("image_url_svg")
       String imageUrlSvg;
+    }
+
+    /**
+     * For more details about WechatPayHandleAppRedirect, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class WechatPayHandleAppRedirect extends StripeObject {
+      /** Session ID of the WeChat Pay signing session. */
+      @SerializedName("session_id")
+      String sessionId;
     }
 
     /**
@@ -8785,9 +8801,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String appId;
 
       /**
+       * The unique buyer ID for the app ID registered with WeChat Pay. Only required when client is
+       * mini_program.
+       */
+      @SerializedName("buyer_id")
+      String buyerId;
+
+      /**
        * The client type that the end customer will pay from
        *
-       * <p>One of {@code android}, {@code ios}, or {@code web}.
+       * <p>One of {@code android}, {@code ios}, {@code mini_program}, or {@code web}.
        */
       @SerializedName("client")
       String client;
