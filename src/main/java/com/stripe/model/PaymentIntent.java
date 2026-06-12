@@ -5258,13 +5258,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           @SerializedName("email")
           String email;
 
-          /** Full name. */
-          @SerializedName("name")
-          String name;
+          /** Given name (first name). */
+          @SerializedName("given_name")
+          String givenName;
 
           /** Phone number. */
           @SerializedName("phone")
           String phone;
+
+          /** Surname (last name). */
+          @SerializedName("surname")
+          String surname;
 
           /**
            * For more details about Address, please refer to the <a
@@ -5344,13 +5348,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("email")
         String email;
 
-        /** Full name. */
-        @SerializedName("name")
-        String name;
+        /** Given name (first name). */
+        @SerializedName("given_name")
+        String givenName;
 
         /** Phone number. */
         @SerializedName("phone")
         String phone;
+
+        /** Surname (last name). */
+        @SerializedName("surname")
+        String surname;
 
         /**
          * For more details about Address, please refer to the <a

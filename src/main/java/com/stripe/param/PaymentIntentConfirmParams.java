@@ -14824,10 +14824,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("account_funding")
       Object accountFunding;
 
-      /** ID of the Account representing the beneficiary in this account funding transaction. */
-      @SerializedName("beneficiary_account")
-      String beneficiaryAccount;
-
       /** Inline identity details for the beneficiary of this transaction. */
       @SerializedName("beneficiary_details")
       Object beneficiaryDetails;
@@ -14847,12 +14843,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private MoneyServices(
           Object accountFunding,
-          String beneficiaryAccount,
           Object beneficiaryDetails,
           Map<String, Object> extraParams,
           ApiRequestParams.EnumParam transactionType) {
         this.accountFunding = accountFunding;
-        this.beneficiaryAccount = beneficiaryAccount;
         this.beneficiaryDetails = beneficiaryDetails;
         this.extraParams = extraParams;
         this.transactionType = transactionType;
@@ -14865,8 +14859,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       public static class Builder {
         private Object accountFunding;
 
-        private String beneficiaryAccount;
-
         private Object beneficiaryDetails;
 
         private Map<String, Object> extraParams;
@@ -14876,11 +14868,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentConfirmParams.PaymentDetails.MoneyServices build() {
           return new PaymentIntentConfirmParams.PaymentDetails.MoneyServices(
-              this.accountFunding,
-              this.beneficiaryAccount,
-              this.beneficiaryDetails,
-              this.extraParams,
-              this.transactionType);
+              this.accountFunding, this.beneficiaryDetails, this.extraParams, this.transactionType);
         }
 
         /** Account funding transaction details including sender information. */
@@ -14893,12 +14881,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         /** Account funding transaction details including sender information. */
         public Builder setAccountFunding(EmptyParam accountFunding) {
           this.accountFunding = accountFunding;
-          return this;
-        }
-
-        /** ID of the Account representing the beneficiary in this account funding transaction. */
-        public Builder setBeneficiaryAccount(String beneficiaryAccount) {
-          this.beneficiaryAccount = beneficiaryAccount;
           return this;
         }
 
@@ -14972,18 +14954,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** ID of the Account representing the sender in this account funding transaction. */
-        @SerializedName("sender_account")
-        String senderAccount;
-
         /** Inline identity details for the sender of this account funding transaction. */
         @SerializedName("sender_details")
         Object senderDetails;
 
-        private AccountFunding(
-            Map<String, Object> extraParams, String senderAccount, Object senderDetails) {
+        private AccountFunding(Map<String, Object> extraParams, Object senderDetails) {
           this.extraParams = extraParams;
-          this.senderAccount = senderAccount;
           this.senderDetails = senderDetails;
         }
 
@@ -14994,14 +14970,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private String senderAccount;
-
           private Object senderDetails;
 
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentIntentConfirmParams.PaymentDetails.MoneyServices.AccountFunding build() {
             return new PaymentIntentConfirmParams.PaymentDetails.MoneyServices.AccountFunding(
-                this.extraParams, this.senderAccount, this.senderDetails);
+                this.extraParams, this.senderDetails);
           }
 
           /**
@@ -15031,12 +15005,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
-            return this;
-          }
-
-          /** ID of the Account representing the sender in this account funding transaction. */
-          public Builder setSenderAccount(String senderAccount) {
-            this.senderAccount = senderAccount;
             return this;
           }
 
@@ -15080,27 +15048,33 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** Full name. */
-          @SerializedName("name")
-          String name;
+          /** Given (first) name. */
+          @SerializedName("given_name")
+          String givenName;
 
           /** Phone number. */
           @SerializedName("phone")
           String phone;
+
+          /** Surname (family name). */
+          @SerializedName("surname")
+          String surname;
 
           private SenderDetails(
               Address address,
               DateOfBirth dateOfBirth,
               String email,
               Map<String, Object> extraParams,
-              String name,
-              String phone) {
+              String givenName,
+              String phone,
+              String surname) {
             this.address = address;
             this.dateOfBirth = dateOfBirth;
             this.email = email;
             this.extraParams = extraParams;
-            this.name = name;
+            this.givenName = givenName;
             this.phone = phone;
+            this.surname = surname;
           }
 
           public static Builder builder() {
@@ -15116,9 +15090,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
             private Map<String, Object> extraParams;
 
-            private String name;
+            private String givenName;
 
             private String phone;
+
+            private String surname;
 
             /** Finalize and obtain parameter instance from this builder. */
             public PaymentIntentConfirmParams.PaymentDetails.MoneyServices.AccountFunding
@@ -15130,8 +15106,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
                   this.dateOfBirth,
                   this.email,
                   this.extraParams,
-                  this.name,
-                  this.phone);
+                  this.givenName,
+                  this.phone,
+                  this.surname);
             }
 
             /** Address. */
@@ -15188,15 +15165,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               return this;
             }
 
-            /** Full name. */
-            public Builder setName(String name) {
-              this.name = name;
+            /** Given (first) name. */
+            public Builder setGivenName(String givenName) {
+              this.givenName = givenName;
               return this;
             }
 
             /** Phone number. */
             public Builder setPhone(String phone) {
               this.phone = phone;
+              return this;
+            }
+
+            /** Surname (family name). */
+            public Builder setSurname(String surname) {
+              this.surname = surname;
               return this;
             }
           }
@@ -15477,6 +15460,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class BeneficiaryDetails {
+        /**
+         * An opaque identifier for the beneficiary's account (e.g. bank account number, card
+         * first6+last4, or other unique identifier).
+         */
+        @SerializedName("account_reference")
+        String accountReference;
+
         /** Address. */
         @SerializedName("address")
         Address address;
@@ -15499,27 +15489,35 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Full name. */
-        @SerializedName("name")
-        String name;
+        /** Given (first) name. */
+        @SerializedName("given_name")
+        String givenName;
 
         /** Phone number. */
         @SerializedName("phone")
         String phone;
 
+        /** Surname (family name). */
+        @SerializedName("surname")
+        String surname;
+
         private BeneficiaryDetails(
+            String accountReference,
             Address address,
             DateOfBirth dateOfBirth,
             String email,
             Map<String, Object> extraParams,
-            String name,
-            String phone) {
+            String givenName,
+            String phone,
+            String surname) {
+          this.accountReference = accountReference;
           this.address = address;
           this.dateOfBirth = dateOfBirth;
           this.email = email;
           this.extraParams = extraParams;
-          this.name = name;
+          this.givenName = givenName;
           this.phone = phone;
+          this.surname = surname;
         }
 
         public static Builder builder() {
@@ -15527,6 +15525,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private String accountReference;
+
           private Address address;
 
           private DateOfBirth dateOfBirth;
@@ -15535,20 +15535,33 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
-          private String name;
+          private String givenName;
 
           private String phone;
+
+          private String surname;
 
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentIntentConfirmParams.PaymentDetails.MoneyServices.BeneficiaryDetails
               build() {
             return new PaymentIntentConfirmParams.PaymentDetails.MoneyServices.BeneficiaryDetails(
+                this.accountReference,
                 this.address,
                 this.dateOfBirth,
                 this.email,
                 this.extraParams,
-                this.name,
-                this.phone);
+                this.givenName,
+                this.phone,
+                this.surname);
+          }
+
+          /**
+           * An opaque identifier for the beneficiary's account (e.g. bank account number, card
+           * first6+last4, or other unique identifier).
+           */
+          public Builder setAccountReference(String accountReference) {
+            this.accountReference = accountReference;
+            return this;
           }
 
           /** Address. */
@@ -15603,15 +15616,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             return this;
           }
 
-          /** Full name. */
-          public Builder setName(String name) {
-            this.name = name;
+          /** Given (first) name. */
+          public Builder setGivenName(String givenName) {
+            this.givenName = givenName;
             return this;
           }
 
           /** Phone number. */
           public Builder setPhone(String phone) {
             this.phone = phone;
+            return this;
+          }
+
+          /** Surname (family name). */
+          public Builder setSurname(String surname) {
+            this.surname = surname;
             return this;
           }
         }
