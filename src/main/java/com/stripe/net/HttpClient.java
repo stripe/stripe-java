@@ -7,6 +7,7 @@ import com.stripe.exception.StripeException;
 import java.io.InputStream;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
+import java.security.MessageDigest;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +26,53 @@ public abstract class HttpClient {
 
   /** A value indicating whether the client should sleep between automatic request retries. */
   boolean networkRetriesSleep = true;
+
+  static String UNAME_HASH = computeUnameHash();
+
+  private static String computeUnameHash() {
+    String uname = "";
+    try {
+      uname =
+          (System.getProperty("os.name", "")
+                  + " "
+                  + System.getProperty("os.version", "")
+                  + " "
+                  + System.getProperty("os.arch", "")
+                  + " "
+                  + System.getProperty("java.version", "")
+                  + " "
+                  + System.getProperty("java.vendor", "")
+                  + " "
+                  + System.getProperty("java.vm.name", "")
+                  + " "
+                  + getHostname())
+              .trim();
+    } catch (Exception e) {
+      // fall through with empty string
+    }
+    if (uname.isEmpty()) {
+      return "";
+    }
+    try {
+      MessageDigest md = MessageDigest.getInstance("MD5");
+      byte[] hashBytes = md.digest(uname.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+      StringBuilder sb = new StringBuilder();
+      for (byte b : hashBytes) {
+        sb.append(String.format("%02x", b));
+      }
+      return sb.toString();
+    } catch (Exception e) {
+      return "";
+    }
+  }
+
+  private static String getHostname() {
+    try {
+      return java.net.InetAddress.getLocalHost().getHostName();
+    } catch (Exception e) {
+      return "";
+    }
+  }
 
   /** Initializes a new instance of the {@link HttpClient} class. */
   protected HttpClient() {}
@@ -226,6 +274,10 @@ public abstract class HttpClient {
 
     if (!aiAgent.isEmpty()) {
       propertyMap.put("ai_agent", aiAgent);
+    }
+
+    if (!UNAME_HASH.isEmpty()) {
+      propertyMap.put("source", UNAME_HASH);
     }
 
     return ApiResource.INTERNAL_GSON.toJson(propertyMap);
