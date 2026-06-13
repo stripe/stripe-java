@@ -239,6 +239,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("invoice_creation")
   InvoiceCreation invoiceCreation;
 
+  /** A list of items the customer will purchase. */
+  @SerializedName("items")
+  List<SessionCreateParams.Item> items;
+
   /**
    * A list of items the customer is purchasing. Use this parameter to pass one-time or recurring <a
    * href="https://docs.stripe.com/api/prices">Prices</a>. The parameter is required for {@code
@@ -511,6 +515,7 @@ public class SessionCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String integrationIdentifier,
       InvoiceCreation invoiceCreation,
+      List<SessionCreateParams.Item> items,
       List<SessionCreateParams.LineItem> lineItems,
       Locale locale,
       ManagedPayments managedPayments,
@@ -567,6 +572,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.integrationIdentifier = integrationIdentifier;
     this.invoiceCreation = invoiceCreation;
+    this.items = items;
     this.lineItems = lineItems;
     this.locale = locale;
     this.managedPayments = managedPayments;
@@ -658,6 +664,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private InvoiceCreation invoiceCreation;
 
+    private List<SessionCreateParams.Item> items;
+
     private List<SessionCreateParams.LineItem> lineItems;
 
     private Locale locale;
@@ -745,6 +753,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams,
           this.integrationIdentifier,
           this.invoiceCreation,
+          this.items,
           this.lineItems,
           this.locale,
           this.managedPayments,
@@ -1172,6 +1181,32 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Generate a post-purchase Invoice for one-time payments. */
     public Builder setInvoiceCreation(SessionCreateParams.InvoiceCreation invoiceCreation) {
       this.invoiceCreation = invoiceCreation;
+      return this;
+    }
+
+    /**
+     * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#items} for the field documentation.
+     */
+    public Builder addItem(SessionCreateParams.Item element) {
+      if (this.items == null) {
+        this.items = new ArrayList<>();
+      }
+      this.items.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `items` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#items} for the field documentation.
+     */
+    public Builder addAllItem(List<SessionCreateParams.Item> elements) {
+      if (this.items == null) {
+        this.items = new ArrayList<>();
+      }
+      this.items.addAll(elements);
       return this;
     }
 
@@ -5955,6 +5990,87 @@ public class SessionCreateParams extends ApiRequestParams {
             this.value = value;
           }
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Item {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The type of item. */
+    @SerializedName("type")
+    Type type;
+
+    private Item(Map<String, Object> extraParams, Type type) {
+      this.extraParams = extraParams;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.Item build() {
+        return new SessionCreateParams.Item(this.extraParams, this.type);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.Item#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.Item#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The type of item. */
+      public Builder setType(SessionCreateParams.Item.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("subscription")
+      SUBSCRIPTION("subscription");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
       }
     }
   }

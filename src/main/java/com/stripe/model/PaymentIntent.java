@@ -1961,6 +1961,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("decremental_authorization")
     DecrementalAuthorization decrementalAuthorization;
 
+    @SerializedName("forced_capture")
+    ForcedCapture forcedCapture;
+
     @SerializedName("incremental_authorization")
     IncrementalAuthorization incrementalAuthorization;
 
@@ -1980,6 +1983,27 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     public static class DecrementalAuthorization extends StripeObject {
       /**
        * Indicates whether the feature is supported.
+       *
+       * <p>One of {@code available}, or {@code unavailable}.
+       */
+      @SerializedName("status")
+      String status;
+    }
+
+    /**
+     * For more details about ForcedCapture, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ForcedCapture extends StripeObject {
+      /** Timestamp at which the forced capture window expires. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * Indicates whether forced capture is supported.
        *
        * <p>One of {@code available}, or {@code unavailable}.
        */
@@ -2454,6 +2478,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("wechat_pay_display_qr_code")
     WechatPayDisplayQrCode wechatPayDisplayQrCode;
 
+    @SerializedName("wechat_pay_handle_app_redirect")
+    WechatPayHandleAppRedirect wechatPayHandleAppRedirect;
+
     @SerializedName("wechat_pay_redirect_to_android_app")
     WechatPayRedirectToAndroidApp wechatPayRedirectToAndroidApp;
 
@@ -2620,6 +2647,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("base")
         Base base;
 
+        @SerializedName("ethereum")
+        Ethereum ethereum;
+
+        @SerializedName("polygon")
+        Polygon polygon;
+
         @SerializedName("solana")
         Solana solana;
 
@@ -2663,9 +2696,105 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             String tokenContractAddress;
 
             /**
-             * The supported token currency. Supported token currencies include: {@code usdc}.
+             * The supported token currency.
              *
-             * <p>Equal to {@code usdc}.
+             * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
+             */
+            @SerializedName("token_currency")
+            String tokenCurrency;
+          }
+        }
+
+        /**
+         * For more details about Ethereum, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Ethereum extends StripeObject {
+          /** Address of the deposit address. */
+          @SerializedName("address")
+          String address;
+
+          /** The wallet address that should receive refunds for deposits on this network. */
+          @SerializedName("refund_address")
+          String refundAddress;
+
+          /** The token currencies supported on this network. */
+          @SerializedName("supported_tokens")
+          List<
+                  PaymentIntent.NextAction.CryptoDisplayDetails.DepositAddresses.Ethereum
+                      .SupportedToken>
+              supportedTokens;
+
+          /**
+           * For more details about SupportedToken, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class SupportedToken extends StripeObject {
+            /**
+             * The on-chain contract address for the supported token currency on this specific
+             * network.
+             */
+            @SerializedName("token_contract_address")
+            String tokenContractAddress;
+
+            /**
+             * The supported token currency.
+             *
+             * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
+             */
+            @SerializedName("token_currency")
+            String tokenCurrency;
+          }
+        }
+
+        /**
+         * For more details about Polygon, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Polygon extends StripeObject {
+          /** Address of the deposit address. */
+          @SerializedName("address")
+          String address;
+
+          /** The wallet address that should receive refunds for deposits on this network. */
+          @SerializedName("refund_address")
+          String refundAddress;
+
+          /** The token currencies supported on this network. */
+          @SerializedName("supported_tokens")
+          List<
+                  PaymentIntent.NextAction.CryptoDisplayDetails.DepositAddresses.Polygon
+                      .SupportedToken>
+              supportedTokens;
+
+          /**
+           * For more details about SupportedToken, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class SupportedToken extends StripeObject {
+            /**
+             * The on-chain contract address for the supported token currency on this specific
+             * network.
+             */
+            @SerializedName("token_contract_address")
+            String tokenContractAddress;
+
+            /**
+             * The supported token currency.
+             *
+             * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
              */
             @SerializedName("token_currency")
             String tokenCurrency;
@@ -2709,9 +2838,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             String tokenContractAddress;
 
             /**
-             * The supported token currency. Supported token currencies include: {@code usdc}.
+             * The supported token currency.
              *
-             * <p>Equal to {@code usdc}.
+             * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
              */
             @SerializedName("token_currency")
             String tokenCurrency;
@@ -2755,9 +2884,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             String tokenContractAddress;
 
             /**
-             * The supported token currency. Supported token currencies include: {@code usdc}.
+             * The supported token currency.
              *
-             * <p>Equal to {@code usdc}.
+             * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
              */
             @SerializedName("token_currency")
             String tokenCurrency;
@@ -3499,6 +3628,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** The image_url_svg string used to render QR code. */
       @SerializedName("image_url_svg")
       String imageUrlSvg;
+    }
+
+    /**
+     * For more details about WechatPayHandleAppRedirect, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class WechatPayHandleAppRedirect extends StripeObject {
+      /** Session ID of the WeChat Pay signing session. */
+      @SerializedName("session_id")
+      String sessionId;
     }
 
     /**
@@ -5082,6 +5224,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("account_funding")
       AccountFunding accountFunding;
 
+      /** ID of the Account representing the beneficiary in this account funding transaction. */
+      @SerializedName("beneficiary_account")
+      String beneficiaryAccount;
+
+      @SerializedName("beneficiary_details")
+      BeneficiaryDetails beneficiaryDetails;
+
       /**
        * The type of money services transaction.
        *
@@ -5098,13 +5247,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class AccountFunding extends StripeObject {
-        /** ID of the Account representing the beneficiary in this account funding transaction. */
-        @SerializedName("beneficiary_account")
-        String beneficiaryAccount;
-
-        @SerializedName("beneficiary_details")
-        BeneficiaryDetails beneficiaryDetails;
-
         /** ID of the Account representing the sender in this account funding transaction. */
         @SerializedName("sender_account")
         String senderAccount;
@@ -5113,16 +5255,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         SenderDetails senderDetails;
 
         /**
-         * For more details about BeneficiaryDetails, please refer to the <a
+         * For more details about SenderDetails, please refer to the <a
          * href="https://docs.stripe.com/api">API Reference.</a>
          */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class BeneficiaryDetails extends StripeObject {
+        public static class SenderDetails extends StripeObject {
           @SerializedName("address")
-          com.stripe.model.PaymentIntent.PaymentDetails.MoneyServices.AccountFunding
-                  .BeneficiaryDetails.Address
+          com.stripe.model.PaymentIntent.PaymentDetails.MoneyServices.AccountFunding.SenderDetails
+                  .Address
               address;
 
           @SerializedName("date_of_birth")
@@ -5132,13 +5274,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           @SerializedName("email")
           String email;
 
-          /** Full name. */
-          @SerializedName("name")
-          String name;
+          /** Given name (first name). */
+          @SerializedName("given_name")
+          String givenName;
 
           /** Phone number. */
           @SerializedName("phone")
           String phone;
+
+          /** Surname (last name). */
+          @SerializedName("surname")
+          String surname;
 
           /**
            * For more details about Address, please refer to the <a
@@ -5197,91 +5343,94 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             Long year;
           }
         }
+      }
+
+      /**
+       * For more details about BeneficiaryDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BeneficiaryDetails extends StripeObject {
+        @SerializedName("address")
+        com.stripe.model.PaymentIntent.PaymentDetails.MoneyServices.BeneficiaryDetails.Address
+            address;
+
+        @SerializedName("date_of_birth")
+        DateOfBirth dateOfBirth;
+
+        /** Email address. */
+        @SerializedName("email")
+        String email;
+
+        /** Given name (first name). */
+        @SerializedName("given_name")
+        String givenName;
+
+        /** Phone number. */
+        @SerializedName("phone")
+        String phone;
+
+        /** Surname (last name). */
+        @SerializedName("surname")
+        String surname;
 
         /**
-         * For more details about SenderDetails, please refer to the <a
+         * For more details about Address, please refer to the <a
          * href="https://docs.stripe.com/api">API Reference.</a>
          */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class SenderDetails extends StripeObject {
-          @SerializedName("address")
-          com.stripe.model.PaymentIntent.PaymentDetails.MoneyServices.AccountFunding.SenderDetails
-                  .Address
-              address;
-
-          @SerializedName("date_of_birth")
-          DateOfBirth dateOfBirth;
-
-          /** Email address. */
-          @SerializedName("email")
-          String email;
-
-          /** Full name. */
-          @SerializedName("name")
-          String name;
-
-          /** Phone number. */
-          @SerializedName("phone")
-          String phone;
+        public static class Address extends StripeObject {
+          /** City, district, suburb, town, or village. */
+          @SerializedName("city")
+          String city;
 
           /**
-           * For more details about Address, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
            */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Address extends StripeObject {
-            /** City, district, suburb, town, or village. */
-            @SerializedName("city")
-            String city;
+          @SerializedName("country")
+          String country;
 
-            /**
-             * Two-letter country code (<a
-             * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
-             */
-            @SerializedName("country")
-            String country;
+          /** Address line 1 (e.g., street, PO Box, or company name). */
+          @SerializedName("line1")
+          String line1;
 
-            /** Address line 1 (e.g., street, PO Box, or company name). */
-            @SerializedName("line1")
-            String line1;
+          /** Address line 2 (e.g., apartment, suite, unit, or building). */
+          @SerializedName("line2")
+          String line2;
 
-            /** Address line 2 (e.g., apartment, suite, unit, or building). */
-            @SerializedName("line2")
-            String line2;
+          /** ZIP or postal code. */
+          @SerializedName("postal_code")
+          String postalCode;
 
-            /** ZIP or postal code. */
-            @SerializedName("postal_code")
-            String postalCode;
+          /** State, county, province, or region. */
+          @SerializedName("state")
+          String state;
+        }
 
-            /** State, county, province, or region. */
-            @SerializedName("state")
-            String state;
-          }
+        /**
+         * For more details about DateOfBirth, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class DateOfBirth extends StripeObject {
+          /** Day of birth, between 1 and 31. */
+          @SerializedName("day")
+          Long day;
 
-          /**
-           * For more details about DateOfBirth, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class DateOfBirth extends StripeObject {
-            /** Day of birth, between 1 and 31. */
-            @SerializedName("day")
-            Long day;
+          /** Month of birth, between 1 and 12. */
+          @SerializedName("month")
+          Long month;
 
-            /** Month of birth, between 1 and 12. */
-            @SerializedName("month")
-            Long month;
-
-            /** Four-digit year of birth. */
-            @SerializedName("year")
-            Long year;
-          }
+          /** Four-digit year of birth. */
+          @SerializedName("year")
+          Long year;
         }
       }
     }
@@ -6112,7 +6261,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /**
        * Controls when the funds will be captured from the customer's account.
        *
-       * <p>Equal to {@code manual}.
+       * <p>One of {@code automatic_delayed}, or {@code manual}.
        */
       @SerializedName("capture_method")
       String captureMethod;
@@ -6528,7 +6677,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /**
        * Controls when the funds will be captured from the customer's account.
        *
-       * <p>One of {@code manual}, or {@code manual_preferred}.
+       * <p>One of {@code automatic_delayed}, {@code manual}, or {@code manual_preferred}.
        */
       @SerializedName("capture_method")
       String captureMethod;
@@ -8652,9 +8801,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String appId;
 
       /**
+       * The unique buyer ID for the app ID registered with WeChat Pay. Only required when client is
+       * mini_program.
+       */
+      @SerializedName("buyer_id")
+      String buyerId;
+
+      /**
        * The client type that the end customer will pay from
        *
-       * <p>One of {@code android}, {@code ios}, or {@code web}.
+       * <p>One of {@code android}, {@code ios}, {@code mini_program}, or {@code web}.
        */
       @SerializedName("client")
       String client;

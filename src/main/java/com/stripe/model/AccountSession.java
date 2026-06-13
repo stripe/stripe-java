@@ -499,6 +499,14 @@ public class AccountSession extends ApiResource {
         Boolean billManagement;
 
         /**
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. This is {@code false} by default.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
          * Whether to enable the send money feature that grants access to bill creation and payment.
          */
         @SerializedName("send_money")

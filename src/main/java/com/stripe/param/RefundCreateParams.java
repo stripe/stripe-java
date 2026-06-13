@@ -65,6 +65,10 @@ public class RefundCreateParams extends ApiRequestParams {
   @SerializedName("origin")
   Origin origin;
 
+  /** The identifier of the PaymentAttemptRecord to refund. */
+  @SerializedName("payment_attempt_record")
+  String paymentAttemptRecord;
+
   /** The identifier of the PaymentIntent to refund. */
   @SerializedName("payment_intent")
   String paymentIntent;
@@ -108,6 +112,7 @@ public class RefundCreateParams extends ApiRequestParams {
       String instructionsEmail,
       Object metadata,
       Origin origin,
+      String paymentAttemptRecord,
       String paymentIntent,
       Reason reason,
       Boolean refundApplicationFee,
@@ -121,6 +126,7 @@ public class RefundCreateParams extends ApiRequestParams {
     this.instructionsEmail = instructionsEmail;
     this.metadata = metadata;
     this.origin = origin;
+    this.paymentAttemptRecord = paymentAttemptRecord;
     this.paymentIntent = paymentIntent;
     this.reason = reason;
     this.refundApplicationFee = refundApplicationFee;
@@ -150,6 +156,8 @@ public class RefundCreateParams extends ApiRequestParams {
 
     private Origin origin;
 
+    private String paymentAttemptRecord;
+
     private String paymentIntent;
 
     private Reason reason;
@@ -170,6 +178,7 @@ public class RefundCreateParams extends ApiRequestParams {
           this.instructionsEmail,
           this.metadata,
           this.origin,
+          this.paymentAttemptRecord,
           this.paymentIntent,
           this.reason,
           this.refundApplicationFee,
@@ -317,6 +326,12 @@ public class RefundCreateParams extends ApiRequestParams {
     /** Origin of the refund. */
     public Builder setOrigin(RefundCreateParams.Origin origin) {
       this.origin = origin;
+      return this;
+    }
+
+    /** The identifier of the PaymentAttemptRecord to refund. */
+    public Builder setPaymentAttemptRecord(String paymentAttemptRecord) {
+      this.paymentAttemptRecord = paymentAttemptRecord;
       return this;
     }
 

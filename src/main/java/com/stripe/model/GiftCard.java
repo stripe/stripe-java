@@ -42,6 +42,13 @@ public class GiftCard extends ApiResource implements HasId {
   @SerializedName("exp_year")
   Long expYear;
 
+  /**
+   * Uniquely identifies this particular gift card number. You can use this attribute to check
+   * whether two gift cards are the same.
+   */
+  @SerializedName("fingerprint")
+  String fingerprint;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

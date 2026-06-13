@@ -1759,18 +1759,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @EqualsAndHashCode(callSuper = false)
       public static class Card extends StripeObject {
         /**
-         * The brand of the card, accounting for customer's brand choice on dual-branded cards.
-         *
-         * <p>One of {@code accel}, {@code amex}, {@code carnet}, {@code cartes_bancaires}, {@code
-         * conecs}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code elo}, {@code
-         * girocard}, {@code interac}, {@code jaywan}, {@code jcb}, {@code link}, {@code maestro},
-         * {@code mastercard}, {@code nyce}, {@code pulse}, {@code rupay}, {@code star}, {@code
-         * unionpay}, {@code unknown}, or {@code visa}.
-         */
-        @SerializedName("brand")
-        String brand;
-
-        /**
          * Two-letter ISO code representing the country of the card. You could use this attribute to
          * get a sense of the international breakdown of cards you've collected.
          */

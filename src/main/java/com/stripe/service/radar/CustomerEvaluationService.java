@@ -11,6 +11,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.radar.CustomerEvaluationCreateParams;
+import com.stripe.param.radar.CustomerEvaluationRetrieveParams;
 import com.stripe.param.radar.CustomerEvaluationUpdateParams;
 
 public final class CustomerEvaluationService extends ApiService {
@@ -18,6 +19,37 @@ public final class CustomerEvaluationService extends ApiService {
     super(responseGetter);
   }
 
+  /** Retrieves an {@code CustomerEvaluation} object. */
+  public CustomerEvaluation retrieve(
+      String customerEvaluation, CustomerEvaluationRetrieveParams params) throws StripeException {
+    return retrieve(customerEvaluation, params, (RequestOptions) null);
+  }
+  /** Retrieves an {@code CustomerEvaluation} object. */
+  public CustomerEvaluation retrieve(String customerEvaluation, RequestOptions options)
+      throws StripeException {
+    return retrieve(customerEvaluation, (CustomerEvaluationRetrieveParams) null, options);
+  }
+  /** Retrieves an {@code CustomerEvaluation} object. */
+  public CustomerEvaluation retrieve(String customerEvaluation) throws StripeException {
+    return retrieve(
+        customerEvaluation, (CustomerEvaluationRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves an {@code CustomerEvaluation} object. */
+  public CustomerEvaluation retrieve(
+      String customerEvaluation, CustomerEvaluationRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/radar/customer_evaluations/%s", ApiResource.urlEncodeId(customerEvaluation));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, CustomerEvaluation.class);
+  }
   /** Creates a new {@code CustomerEvaluation} object. */
   public CustomerEvaluation create(CustomerEvaluationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
