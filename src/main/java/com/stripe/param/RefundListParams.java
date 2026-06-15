@@ -50,9 +50,17 @@ public class RefundListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  /** Only return refunds for the PaymentAttemptRecord specified by this ID. */
+  @SerializedName("payment_attempt_record")
+  String paymentAttemptRecord;
+
   /** Only return refunds for the PaymentIntent specified by this ID. */
   @SerializedName("payment_intent")
   String paymentIntent;
+
+  /** Only return refunds for the PaymentRecord specified by this ID. */
+  @SerializedName("payment_record")
+  String paymentRecord;
 
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
@@ -70,7 +78,9 @@ public class RefundListParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
+      String paymentAttemptRecord,
       String paymentIntent,
+      String paymentRecord,
       String startingAfter) {
     this.charge = charge;
     this.created = created;
@@ -78,7 +88,9 @@ public class RefundListParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.paymentAttemptRecord = paymentAttemptRecord;
     this.paymentIntent = paymentIntent;
+    this.paymentRecord = paymentRecord;
     this.startingAfter = startingAfter;
   }
 
@@ -99,7 +111,11 @@ public class RefundListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private String paymentAttemptRecord;
+
     private String paymentIntent;
+
+    private String paymentRecord;
 
     private String startingAfter;
 
@@ -112,7 +128,9 @@ public class RefundListParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.limit,
+          this.paymentAttemptRecord,
           this.paymentIntent,
+          this.paymentRecord,
           this.startingAfter);
     }
 
@@ -206,9 +224,21 @@ public class RefundListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Only return refunds for the PaymentAttemptRecord specified by this ID. */
+    public Builder setPaymentAttemptRecord(String paymentAttemptRecord) {
+      this.paymentAttemptRecord = paymentAttemptRecord;
+      return this;
+    }
+
     /** Only return refunds for the PaymentIntent specified by this ID. */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
+      return this;
+    }
+
+    /** Only return refunds for the PaymentRecord specified by this ID. */
+    public Builder setPaymentRecord(String paymentRecord) {
+      this.paymentRecord = paymentRecord;
       return this;
     }
 
