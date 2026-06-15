@@ -2080,11 +2080,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @EqualsAndHashCode(callSuper = false)
       public static class AccountFunding extends StripeObject {
         /**
-         * The transaction type of the card transaction. One of {@code account_funding} or {@code
-         * purchase}.
+         * Indicates whether or not this charge is a funding transaction.
+         *
+         * <p>One of {@code disabled}, or {@code enabled}.
          */
-        @SerializedName("processed_transaction_type")
-        String processedTransactionType;
+        @SerializedName("status")
+        String status;
       }
 
       /**

@@ -609,6 +609,9 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
   }
 
   public enum Outcome implements ApiRequestParams.EnumParam {
+    @SerializedName("failed")
+    FAILED("failed"),
+
     @SerializedName("refunded")
     REFUNDED("refunded");
 
