@@ -6852,6 +6852,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
 
+      @SerializedName("transaction_verification_options")
+      TransactionVerificationOptions transactionVerificationOptions;
+
       /**
        * For more details about DepositOptions, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
@@ -6874,6 +6877,28 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
          */
         @SerializedName("static_address")
         Boolean staticAddress;
+      }
+
+      /**
+       * For more details about TransactionVerificationOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class TransactionVerificationOptions extends StripeObject {
+        /**
+         * The network on which the transaction was submitted.
+         *
+         * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, or {@code
+         * tempo}.
+         */
+        @SerializedName("network")
+        String network;
+
+        /** The hash of the onchain transaction to verify. */
+        @SerializedName("transaction_hash")
+        String transactionHash;
       }
     }
 
