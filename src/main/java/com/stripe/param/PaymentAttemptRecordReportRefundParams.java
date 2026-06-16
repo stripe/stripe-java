@@ -56,6 +56,10 @@ public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
   @SerializedName("processor_details")
   ProcessorDetails processorDetails;
 
+  /** A key to group refunds together. */
+  @SerializedName("refund_group")
+  String refundGroup;
+
   /** Information about the payment attempt refund. */
   @SerializedName("refunded")
   Refunded refunded;
@@ -68,6 +72,7 @@ public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
       Object metadata,
       Outcome outcome,
       ProcessorDetails processorDetails,
+      String refundGroup,
       Refunded refunded) {
     this.amount = amount;
     this.expand = expand;
@@ -76,6 +81,7 @@ public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
     this.metadata = metadata;
     this.outcome = outcome;
     this.processorDetails = processorDetails;
+    this.refundGroup = refundGroup;
     this.refunded = refunded;
   }
 
@@ -98,6 +104,8 @@ public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
 
     private ProcessorDetails processorDetails;
 
+    private String refundGroup;
+
     private Refunded refunded;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -110,6 +118,7 @@ public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
           this.metadata,
           this.outcome,
           this.processorDetails,
+          this.refundGroup,
           this.refunded);
     }
 
@@ -241,6 +250,12 @@ public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
     public Builder setProcessorDetails(
         PaymentAttemptRecordReportRefundParams.ProcessorDetails processorDetails) {
       this.processorDetails = processorDetails;
+      return this;
+    }
+
+    /** A key to group refunds together. */
+    public Builder setRefundGroup(String refundGroup) {
+      this.refundGroup = refundGroup;
       return this;
     }
 
