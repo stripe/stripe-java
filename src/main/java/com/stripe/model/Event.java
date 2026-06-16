@@ -113,14 +113,15 @@ public class Event extends ApiResource implements HasId {
    * account.external_account.updated}, {@code account.updated}, {@code account_notice.created},
    * {@code account_notice.updated}, {@code application_fee.created}, {@code
    * application_fee.refund.updated}, {@code application_fee.refunded}, {@code balance.available},
-   * {@code balance_settings.updated}, {@code billing.alert.triggered}, {@code
-   * billing.credit_grant.created}, {@code billing_portal.configuration.created}, {@code
-   * billing_portal.configuration.updated}, {@code billing_portal.session.created}, {@code
-   * capability.updated}, {@code capital.financing_offer.accepted}, {@code
-   * capital.financing_offer.accepted_other_offer}, {@code capital.financing_offer.canceled}, {@code
-   * capital.financing_offer.created}, {@code capital.financing_offer.expired}, {@code
-   * capital.financing_offer.fully_repaid}, {@code capital.financing_offer.paid_out}, {@code
-   * capital.financing_offer.rejected}, {@code capital.financing_offer.replacement_created}, {@code
+   * {@code balance_settings.updated}, {@code billing.alert.recovered}, {@code
+   * billing.alert.triggered}, {@code billing.credit_grant.created}, {@code
+   * billing_portal.configuration.created}, {@code billing_portal.configuration.updated}, {@code
+   * billing_portal.session.created}, {@code capability.updated}, {@code
+   * capital.financing_offer.accepted}, {@code capital.financing_offer.accepted_other_offer}, {@code
+   * capital.financing_offer.canceled}, {@code capital.financing_offer.created}, {@code
+   * capital.financing_offer.expired}, {@code capital.financing_offer.fully_repaid}, {@code
+   * capital.financing_offer.paid_out}, {@code capital.financing_offer.rejected}, {@code
+   * capital.financing_offer.replacement_created}, {@code
    * capital.financing_summary.line_of_credit_update}, {@code
    * capital.financing_transaction.created}, {@code cash_balance.funds_available}, {@code
    * charge.captured}, {@code charge.dispute.closed}, {@code charge.dispute.created}, {@code
@@ -184,8 +185,8 @@ public class Event extends ApiResource implements HasId {
    * {@code issuing_transaction.created}, {@code
    * issuing_transaction.purchase_details_receipt_updated}, {@code issuing_transaction.updated},
    * {@code mandate.updated}, {@code payment_intent.amount_capturable_updated}, {@code
-   * payment_intent.canceled}, {@code payment_intent.created}, {@code
-   * payment_intent.partially_funded}, {@code payment_intent.payment_failed}, {@code
+   * payment_intent.canceled}, {@code payment_intent.created}, {@code payment_intent.expired},
+   * {@code payment_intent.partially_funded}, {@code payment_intent.payment_failed}, {@code
    * payment_intent.processing}, {@code payment_intent.requires_action}, {@code
    * payment_intent.succeeded}, {@code payment_link.created}, {@code payment_link.updated}, {@code
    * payment_method.attached}, {@code payment_method.automatically_updated}, {@code
@@ -242,7 +243,6 @@ public class Event extends ApiResource implements HasId {
    * treasury.outbound_transfer.tracking_details_updated}, {@code treasury.received_credit.created},
    * {@code treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, {@code
    * treasury.received_debit.created}, {@code invoice_payment.detached}, {@code
-   * billing.alert.recovered}, {@code payment_intent.expired}, {@code
    * billing.credit_balance_transaction.created}, {@code billing.credit_grant.updated}, {@code
    * billing.meter.created}, {@code billing.meter.deactivated}, {@code billing.meter.reactivated},
    * or {@code billing.meter.updated}.

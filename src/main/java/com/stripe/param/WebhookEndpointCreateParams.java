@@ -1565,12 +1565,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("invoice_payment.detached")
     INVOICE_PAYMENT__DETACHED("invoice_payment.detached"),
 
-    @SerializedName("billing.alert.recovered")
-    BILLING__ALERT__RECOVERED("billing.alert.recovered"),
-
-    @SerializedName("payment_intent.expired")
-    PAYMENT_INTENT__EXPIRED("payment_intent.expired"),
-
     @SerializedName("billing.credit_balance_transaction.created")
     BILLING__CREDIT_BALANCE_TRANSACTION__CREATED("billing.credit_balance_transaction.created"),
 
