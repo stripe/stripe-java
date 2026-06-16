@@ -663,17 +663,24 @@ public class Authorization extends ApiResource
     String accountType;
 
     /**
-     * The remaining balance in the cardholder's account after the authorization, in the smallest
-     * currency unit.
+     * The available balance or credit limit in the cardholder's account after the authorization, in
+     * the smallest currency unit.
      */
-    @SerializedName("amount")
-    Long amount;
+    @SerializedName("available_balance")
+    Long availableBalance;
 
     /**
-     * The currency of the remaining balance in the cardholder's account after the authorization.
+     * The currency of the remaining balances in the cardholder's account after the authorization.
      */
     @SerializedName("currency")
     String currency;
+
+    /**
+     * The current ledger balance or remaining credit amount in the cardholder's account after the
+     * authorization, in the smallest currency unit.
+     */
+    @SerializedName("current_balance")
+    Long currentBalance;
   }
 
   /**
