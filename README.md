@@ -346,6 +346,9 @@ New features and bug fixes are released on the latest major version of the Strip
 
 ## Development
 
+> [!WARNING]
+> External contributions to this repo from first-time contributors are currently on hiatus. If you'd like to see a change made to the package, please open an issue.
+
 [Contribution guidelines for this project](CONTRIBUTING.md)
 
 JDK 17 is required to build the Stripe Java library. By default, tests use the same Java runtime as the build.
