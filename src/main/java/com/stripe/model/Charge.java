@@ -1343,6 +1343,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("swish")
     Swish swish;
 
+    @SerializedName("tamara")
+    Tamara tamara;
+
     @SerializedName("twint")
     Twint twint;
 
@@ -2077,11 +2080,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @EqualsAndHashCode(callSuper = false)
       public static class AccountFunding extends StripeObject {
         /**
-         * The transaction type of the card transaction. One of {@code account_funding} or {@code
-         * purchase}.
+         * Indicates whether or not this charge is a funding transaction.
+         *
+         * <p>One of {@code disabled}, or {@code enabled}.
          */
-        @SerializedName("processed_transaction_type")
-        String processedTransactionType;
+        @SerializedName("status")
+        String status;
       }
 
       /**
@@ -4454,6 +4458,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** The last four digits of the Swish account phone number. */
       @SerializedName("verified_phone_last4")
       String verifiedPhoneLast4;
+    }
+
+    /**
+     * For more details about Tamara, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Tamara extends StripeObject {
+      /** The Tamara transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**

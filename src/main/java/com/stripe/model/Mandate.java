@@ -261,6 +261,9 @@ public class Mandate extends ApiResource implements HasId {
     @SerializedName("bacs_debit")
     BacsDebit bacsDebit;
 
+    @SerializedName("blik")
+    Blik blik;
+
     @SerializedName("card")
     Card card;
 
@@ -418,6 +421,27 @@ public class Mandate extends ApiResource implements HasId {
       /** The URL that will contain the mandate that the customer has signed. */
       @SerializedName("url")
       String url;
+    }
+
+    /**
+     * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Blik extends StripeObject {
+      /** Date at which the mandate expires. */
+      @SerializedName("expires_after")
+      Long expiresAfter;
+
+      /**
+       * Type of the mandate.
+       *
+       * <p>One of {@code off_session}, or {@code on_session}.
+       */
+      @SerializedName("type")
+      String type;
     }
 
     /**

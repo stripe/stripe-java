@@ -179,6 +179,12 @@ public class PaymentIntentSimulateCryptoDepositParams extends ApiRequestParams {
     @SerializedName("base")
     BASE("base"),
 
+    @SerializedName("ethereum")
+    ETHEREUM("ethereum"),
+
+    @SerializedName("polygon")
+    POLYGON("polygon"),
+
     @SerializedName("solana")
     SOLANA("solana"),
 
@@ -195,7 +201,13 @@ public class PaymentIntentSimulateCryptoDepositParams extends ApiRequestParams {
 
   public enum TokenCurrency implements ApiRequestParams.EnumParam {
     @SerializedName("usdc")
-    USDC("usdc");
+    USDC("usdc"),
+
+    @SerializedName("usdg")
+    USDG("usdg"),
+
+    @SerializedName("usdp")
+    USDP("usdp");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

@@ -15371,6 +15371,13 @@ public class OrderUpdateParams extends ApiRequestParams {
           @SerializedName("app_id")
           Object appId;
 
+          /**
+           * The unique buyer ID for the app ID registered with WeChat Pay. Only required when
+           * client is mini_program.
+           */
+          @SerializedName("buyer_id")
+          Object buyerId;
+
           /** The client type that the end customer will pay from. */
           @SerializedName("client")
           Client client;
@@ -15414,10 +15421,12 @@ public class OrderUpdateParams extends ApiRequestParams {
 
           private WechatPay(
               Object appId,
+              Object buyerId,
               Client client,
               Map<String, Object> extraParams,
               SetupFutureUsage setupFutureUsage) {
             this.appId = appId;
+            this.buyerId = buyerId;
             this.client = client;
             this.extraParams = extraParams;
             this.setupFutureUsage = setupFutureUsage;
@@ -15430,6 +15439,8 @@ public class OrderUpdateParams extends ApiRequestParams {
           public static class Builder {
             private Object appId;
 
+            private Object buyerId;
+
             private Client client;
 
             private Map<String, Object> extraParams;
@@ -15439,7 +15450,7 @@ public class OrderUpdateParams extends ApiRequestParams {
             /** Finalize and obtain parameter instance from this builder. */
             public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.WechatPay build() {
               return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.WechatPay(
-                  this.appId, this.client, this.extraParams, this.setupFutureUsage);
+                  this.appId, this.buyerId, this.client, this.extraParams, this.setupFutureUsage);
             }
 
             /**
@@ -15455,6 +15466,24 @@ public class OrderUpdateParams extends ApiRequestParams {
              */
             public Builder setAppId(EmptyParam appId) {
               this.appId = appId;
+              return this;
+            }
+
+            /**
+             * The unique buyer ID for the app ID registered with WeChat Pay. Only required when
+             * client is mini_program.
+             */
+            public Builder setBuyerId(String buyerId) {
+              this.buyerId = buyerId;
+              return this;
+            }
+
+            /**
+             * The unique buyer ID for the app ID registered with WeChat Pay. Only required when
+             * client is mini_program.
+             */
+            public Builder setBuyerId(EmptyParam buyerId) {
+              this.buyerId = buyerId;
               return this;
             }
 
@@ -15533,6 +15562,9 @@ public class OrderUpdateParams extends ApiRequestParams {
 
             @SerializedName("ios")
             IOS("ios"),
+
+            @SerializedName("mini_program")
+            MINI_PROGRAM("mini_program"),
 
             @SerializedName("web")
             WEB("web");

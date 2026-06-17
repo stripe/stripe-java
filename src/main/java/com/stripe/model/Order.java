@@ -1525,9 +1525,16 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String appId;
 
           /**
+           * The unique buyer ID for the app ID registered with WeChat Pay. Only required when
+           * client is mini_program.
+           */
+          @SerializedName("buyer_id")
+          String buyerId;
+
+          /**
            * The client type that the end customer will pay from
            *
-           * <p>One of {@code android}, {@code ios}, or {@code web}.
+           * <p>One of {@code android}, {@code ios}, {@code mini_program}, or {@code web}.
            */
           @SerializedName("client")
           String client;

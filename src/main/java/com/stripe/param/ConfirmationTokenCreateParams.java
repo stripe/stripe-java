@@ -654,6 +654,13 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     Swish swish;
 
     /**
+     * If this is a {@code tamara} PaymentMethod, this hash contains details about the Tamara
+     * payment method.
+     */
+    @SerializedName("tamara")
+    Tamara tamara;
+
+    /**
      * If this is a TWINT PaymentMethod, this hash contains details about the TWINT payment method.
      */
     @SerializedName("twint")
@@ -759,6 +766,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
         StripeBalance stripeBalance,
         Sunbit sunbit,
         Swish swish,
+        Tamara tamara,
         Twint twint,
         Type type,
         Upi upi,
@@ -828,6 +836,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       this.stripeBalance = stripeBalance;
       this.sunbit = sunbit;
       this.swish = swish;
+      this.tamara = tamara;
       this.twint = twint;
       this.type = type;
       this.upi = upi;
@@ -967,6 +976,8 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
       private Swish swish;
 
+      private Tamara tamara;
+
       private Twint twint;
 
       private Type type;
@@ -1045,6 +1056,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
             this.stripeBalance,
             this.sunbit,
             this.swish,
+            this.tamara,
             this.twint,
             this.type,
             this.upi,
@@ -1676,6 +1688,15 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
        */
       public Builder setSwish(ConfirmationTokenCreateParams.PaymentMethodData.Swish swish) {
         this.swish = swish;
+        return this;
+      }
+
+      /**
+       * If this is a {@code tamara} PaymentMethod, this hash contains details about the Tamara
+       * payment method.
+       */
+      public Builder setTamara(ConfirmationTokenCreateParams.PaymentMethodData.Tamara tamara) {
+        this.tamara = tamara;
         return this;
       }
 
@@ -6532,6 +6553,64 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Tamara {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Tamara(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ConfirmationTokenCreateParams.PaymentMethodData.Tamara build() {
+          return new ConfirmationTokenCreateParams.PaymentMethodData.Tamara(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfirmationTokenCreateParams.PaymentMethodData.Tamara#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfirmationTokenCreateParams.PaymentMethodData.Tamara#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Twint {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7283,6 +7362,9 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
       @SerializedName("swish")
       SWISH("swish"),
+
+      @SerializedName("tamara")
+      TAMARA("tamara"),
 
       @SerializedName("twint")
       TWINT("twint"),

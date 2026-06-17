@@ -930,6 +930,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("verify_with_microdeposits")
     VerifyWithMicrodeposits verifyWithMicrodeposits;
 
+    @SerializedName("wechat_pay_handle_app_redirect")
+    WechatPayHandleAppRedirect wechatPayHandleAppRedirect;
+
     /**
      * For more details about BlikAuthorize, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
@@ -1104,6 +1107,19 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
        */
       @SerializedName("microdeposit_type")
       String microdepositType;
+    }
+
+    /**
+     * For more details about WechatPayHandleAppRedirect, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class WechatPayHandleAppRedirect extends StripeObject {
+      /** Session ID of the WeChat Pay signing session. */
+      @SerializedName("session_id")
+      String sessionId;
     }
   }
 

@@ -949,6 +949,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @SerializedName("swish")
     Swish swish;
 
+    @SerializedName("tamara")
+    Tamara tamara;
+
     @SerializedName("twint")
     Twint twint;
 
@@ -3799,6 +3802,19 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** The last four digits of the Swish account phone number. */
       @SerializedName("verified_phone_last4")
       String verifiedPhoneLast4;
+    }
+
+    /**
+     * For more details about Tamara, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Tamara extends StripeObject {
+      /** The Tamara transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**

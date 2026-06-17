@@ -35,6 +35,10 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Information about the refund failure. */
+  @SerializedName("failed")
+  Failed failed;
+
   /** When the reported refund was initiated. Measured in seconds since the Unix epoch. */
   @SerializedName("initiated_at")
   Long initiatedAt;
@@ -56,6 +60,10 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
   @SerializedName("processor_details")
   ProcessorDetails processorDetails;
 
+  /** A key to group refunds together. */
+  @SerializedName("refund_group")
+  String refundGroup;
+
   /** Information about the payment attempt refund. */
   @SerializedName("refunded")
   Refunded refunded;
@@ -64,18 +72,22 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       Amount amount,
       List<String> expand,
       Map<String, Object> extraParams,
+      Failed failed,
       Long initiatedAt,
       Object metadata,
       Outcome outcome,
       ProcessorDetails processorDetails,
+      String refundGroup,
       Refunded refunded) {
     this.amount = amount;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.failed = failed;
     this.initiatedAt = initiatedAt;
     this.metadata = metadata;
     this.outcome = outcome;
     this.processorDetails = processorDetails;
+    this.refundGroup = refundGroup;
     this.refunded = refunded;
   }
 
@@ -90,6 +102,8 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Failed failed;
+
     private Long initiatedAt;
 
     private Object metadata;
@@ -97,6 +111,8 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     private Outcome outcome;
 
     private ProcessorDetails processorDetails;
+
+    private String refundGroup;
 
     private Refunded refunded;
 
@@ -106,10 +122,12 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
           this.amount,
           this.expand,
           this.extraParams,
+          this.failed,
           this.initiatedAt,
           this.metadata,
           this.outcome,
           this.processorDetails,
+          this.refundGroup,
           this.refunded);
     }
 
@@ -172,6 +190,12 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Information about the refund failure. */
+    public Builder setFailed(PaymentRecordReportRefundParams.Failed failed) {
+      this.failed = failed;
       return this;
     }
 
@@ -241,6 +265,12 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
     public Builder setProcessorDetails(
         PaymentRecordReportRefundParams.ProcessorDetails processorDetails) {
       this.processorDetails = processorDetails;
+      return this;
+    }
+
+    /** A key to group refunds together. */
+    public Builder setRefundGroup(String refundGroup) {
+      this.refundGroup = refundGroup;
       return this;
     }
 
@@ -346,6 +376,129 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       public Builder setValue(Long value) {
         this.value = value;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Failed {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** When the reported refund failed. Measured in seconds since the Unix epoch. */
+    @SerializedName("failed_at")
+    Long failedAt;
+
+    /**
+     * Provides the reason for the refund failure. Possible values are: {@code lost_or_stolen_card},
+     * {@code expired_or_canceled_card}, {@code charge_for_pending_refund_disputed}, {@code
+     * insufficient_funds}, {@code declined}, {@code merchant_request}, or {@code unknown}.
+     */
+    @SerializedName("failure_reason")
+    FailureReason failureReason;
+
+    private Failed(Map<String, Object> extraParams, Long failedAt, FailureReason failureReason) {
+      this.extraParams = extraParams;
+      this.failedAt = failedAt;
+      this.failureReason = failureReason;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Long failedAt;
+
+      private FailureReason failureReason;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentRecordReportRefundParams.Failed build() {
+        return new PaymentRecordReportRefundParams.Failed(
+            this.extraParams, this.failedAt, this.failureReason);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentRecordReportRefundParams.Failed#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentRecordReportRefundParams.Failed#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** When the reported refund failed. Measured in seconds since the Unix epoch. */
+      public Builder setFailedAt(Long failedAt) {
+        this.failedAt = failedAt;
+        return this;
+      }
+
+      /**
+       * Provides the reason for the refund failure. Possible values are: {@code
+       * lost_or_stolen_card}, {@code expired_or_canceled_card}, {@code
+       * charge_for_pending_refund_disputed}, {@code insufficient_funds}, {@code declined}, {@code
+       * merchant_request}, or {@code unknown}.
+       */
+      public Builder setFailureReason(
+          PaymentRecordReportRefundParams.Failed.FailureReason failureReason) {
+        this.failureReason = failureReason;
+        return this;
+      }
+    }
+
+    public enum FailureReason implements ApiRequestParams.EnumParam {
+      @SerializedName("charge_for_pending_refund_disputed")
+      CHARGE_FOR_PENDING_REFUND_DISPUTED("charge_for_pending_refund_disputed"),
+
+      @SerializedName("declined")
+      DECLINED("declined"),
+
+      @SerializedName("expired_or_canceled_card")
+      EXPIRED_OR_CANCELED_CARD("expired_or_canceled_card"),
+
+      @SerializedName("insufficient_funds")
+      INSUFFICIENT_FUNDS("insufficient_funds"),
+
+      @SerializedName("lost_or_stolen_card")
+      LOST_OR_STOLEN_CARD("lost_or_stolen_card"),
+
+      @SerializedName("merchant_request")
+      MERCHANT_REQUEST("merchant_request"),
+
+      @SerializedName("unknown")
+      UNKNOWN("unknown");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      FailureReason(String value) {
+        this.value = value;
       }
     }
   }
@@ -609,6 +762,9 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
   }
 
   public enum Outcome implements ApiRequestParams.EnumParam {
+    @SerializedName("failed")
+    FAILED("failed"),
+
     @SerializedName("refunded")
     REFUNDED("refunded");
 

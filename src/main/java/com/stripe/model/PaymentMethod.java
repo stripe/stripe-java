@@ -290,6 +290,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("swish")
   Swish swish;
 
+  @SerializedName("tamara")
+  Tamara tamara;
+
   @SerializedName("twint")
   Twint twint;
 
@@ -308,8 +311,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * {@code pay_by_bank}, {@code payco}, {@code paynow}, {@code paypal}, {@code paypay}, {@code
    * payto}, {@code pix}, {@code promptpay}, {@code qris}, {@code rechnung}, {@code revolut_pay},
    * {@code samsung_pay}, {@code satispay}, {@code scalapay}, {@code sepa_debit}, {@code shopeepay},
-   * {@code sofort}, {@code stripe_balance}, {@code sunbit}, {@code swish}, {@code twint}, {@code
-   * upi}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+   * {@code sofort}, {@code stripe_balance}, {@code sunbit}, {@code swish}, {@code tamara}, {@code
+   * twint}, {@code upi}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -2130,10 +2133,6 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("fingerprint")
     String fingerprint;
 
-    /** The first six digits of the gift card number. */
-    @SerializedName("first6")
-    String first6;
-
     /** The last four digits of the gift card number. */
     @SerializedName("last4")
     String last4;
@@ -2938,6 +2937,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static class Swish extends StripeObject {}
 
   /**
+   * For more details about Tamara, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Tamara extends StripeObject {}
+
+  /**
    * For more details about Twint, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -3162,6 +3170,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(stripeBalance, responseGetter);
     trySetResponseGetter(sunbit, responseGetter);
     trySetResponseGetter(swish, responseGetter);
+    trySetResponseGetter(tamara, responseGetter);
     trySetResponseGetter(twint, responseGetter);
     trySetResponseGetter(upi, responseGetter);
     trySetResponseGetter(usBankAccount, responseGetter);
