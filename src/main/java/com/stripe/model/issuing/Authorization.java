@@ -121,10 +121,6 @@ public class Authorization extends ApiResource
   @SerializedName("currency")
   String currency;
 
-  /** Enriched merchant data for this authorization. */
-  @SerializedName("enriched_merchant_data")
-  EnrichedMerchantData enrichedMerchantData;
-
   /** Fleet-specific information for authorizations using Fleet cards. */
   @SerializedName("fleet")
   Fleet fleet;
@@ -667,24 +663,17 @@ public class Authorization extends ApiResource
     String accountType;
 
     /**
-     * The available balance or credit limit in the cardholder's account after the authorization, in
-     * the smallest currency unit.
+     * The remaining balance in the cardholder's account after the authorization, in the smallest
+     * currency unit.
      */
-    @SerializedName("available_balance")
-    Long availableBalance;
+    @SerializedName("amount")
+    Long amount;
 
     /**
-     * The currency of the remaining balances in the cardholder's account after the authorization.
+     * The currency of the remaining balance in the cardholder's account after the authorization.
      */
     @SerializedName("currency")
     String currency;
-
-    /**
-     * The current ledger balance or remaining credit amount in the cardholder's account after the
-     * authorization, in the smallest currency unit.
-     */
-    @SerializedName("current_balance")
-    Long currentBalance;
   }
 
   /**
@@ -854,308 +843,6 @@ public class Authorization extends ApiResource
         /** The fee type. */
         @SerializedName("type")
         String type;
-      }
-    }
-  }
-
-  /**
-   * For more details about EnrichedMerchantData, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class EnrichedMerchantData extends StripeObject {
-    /**
-     * Additional details about the seller (grocery store, e-commerce website, and so on) where the
-     * card authorization happened.
-     */
-    @SerializedName("merchant")
-    Merchant merchant;
-
-    /** An array of third parties involved in the card authorization, when applicable. */
-    @SerializedName("third_parties")
-    List<Authorization.EnrichedMerchantData.ThirdParty> thirdParties;
-
-    /**
-     * For more details about Merchant, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Merchant extends StripeObject {
-      @SerializedName("data_sources")
-      List<String> dataSources;
-
-      @SerializedName("industry")
-      Industry industry;
-
-      /** Location data of the seller. */
-      @SerializedName("location")
-      Location location;
-
-      /** Image link to the seller's logo. */
-      @SerializedName("logo")
-      String logo;
-
-      /** The name of the seller. */
-      @SerializedName("name")
-      String name;
-
-      /** Phone number of the seller. */
-      @SerializedName("phone")
-      String phone;
-
-      /** If {@code spade} is a data source, this hash contains details provided by Spade. */
-      @SerializedName("spade")
-      Spade spade;
-
-      /** URL of the seller's website. */
-      @SerializedName("url")
-      String url;
-
-      /**
-       * For more details about Industry, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Industry extends StripeObject {
-        /**
-         * Most specific value of the seller's category.
-         *
-         * <p>One of {@code accessories}, {@code accounting_and_bookkeeping}, {@code acupuncture},
-         * {@code administrative_services}, {@code adult_entertainment}, {@code adult_retail},
-         * {@code advertising_and_marketing}, {@code advertising_technology}, {@code
-         * agricultural_technology}, {@code agriculture_and_forestry}, {@code
-         * airlines_and_aviation}, {@code alternative_medicine}, {@code alternative_rentals}, {@code
-         * anesthesiologists}, {@code antiques}, {@code aquatic_transportation}, {@code
-         * arcades_and_amusement_parks}, {@code art_dealers_and_galleries}, {@code
-         * arts_and_hobbies}, {@code atms}, {@code auctions}, {@code auto_parts_and_supplies},
-         * {@code auto_smog_checks}, {@code auto_tires}, {@code auto_transmission}, {@code
-         * automotive_dealerships}, {@code automotive_retail}, {@code automotive_services}, {@code
-         * bakeries}, {@code banking_and_finance}, {@code bars}, {@code beauty_spas_and_salons},
-         * {@code beer_wine_and_spirits}, {@code benefits}, {@code bicycles}, {@code
-         * billiards_and_pool}, {@code biotechnology}, {@code blood_banks_and_centers}, {@code
-         * boat_dealers}, {@code bookstores}, {@code bowling}, {@code
-         * breweries_distilleries_and_wineries}, {@code business_brokers_and_franchises}, {@code
-         * business_services}, {@code butchers}, {@code buy_now_pay_later}, {@code cafes}, {@code
-         * candy_shops}, {@code cannabis_dispensary}, {@code car_appraisers}, {@code
-         * car_wash_and_detail}, {@code cardiologists}, {@code cards_and_stationery}, {@code
-         * casinos_and_gambling}, {@code catering}, {@code charity}, {@code childcare}, {@code
-         * children_s_clothing}, {@code children_s_retail}, {@code chiropractors}, {@code
-         * circuses_and_carnivals}, {@code cleaning}, {@code clothing_and_accessories}, {@code
-         * clothing_services}, {@code commercial_supplies}, {@code communication_software}, {@code
-         * computers_and_electronics}, {@code construction_and_home_improvement}, {@code
-         * construction_supplies}, {@code contractors}, {@code convenience_stores}, {@code
-         * cosmetics}, {@code costumes}, {@code counseling_and_therapy}, {@code couriers}, {@code
-         * coworking_spaces}, {@code creative}, {@code creative_software}, {@code credit_reporting},
-         * {@code crm}, {@code crowdfunding}, {@code cryptocurrency}, {@code
-         * dance_halls_and_saloons}, {@code delivery_services}, {@code dentists}, {@code
-         * department_stores}, {@code dermatologists}, {@code design_technology}, {@code
-         * developer_tools}, {@code digital_money_movement}, {@code discount_stores}, {@code
-         * education}, {@code educational_technology}, {@code electric_vehicle_charging}, {@code
-         * emergency_services}, {@code employment_services}, {@code enterprise_software}, {@code
-         * entertainment}, {@code ents}, {@code environmental_technology}, {@code
-         * equipment_rentals}, {@code events_and_event_planning}, {@code eyewear}, {@code
-         * fairgrounds_and_rodeos}, {@code family_medicine}, {@code fast_food}, {@code fertility},
-         * {@code financial_management_software}, {@code financial_planning_and_investments}, {@code
-         * financial_technology}, {@code fishmongers}, {@code flea_markets}, {@code fleet}, {@code
-         * florists}, {@code food_and_drink}, {@code food_delivery_services}, {@code food_trucks},
-         * {@code fuel_dealers}, {@code funeral_services}, {@code furniture}, {@code gas_stations},
-         * {@code gastroenterologists}, {@code general_goods}, {@code general_surgery}, {@code
-         * gift_and_novelty}, {@code government}, {@code grocery_delivery_services}, {@code
-         * gyms_health_and_fitness_centers}, {@code hair_removal}, {@code hair_salons_and_barbers},
-         * {@code hardware}, {@code hardware_and_home_improvement}, {@code
-         * hospitals_clinics_and_medical_centers}, {@code household_services}, {@code hr_platform},
-         * {@code immigration}, {@code import_and_export}, {@code industrial_and_energy}, {@code
-         * inflight_internet_and_entertainment}, {@code insurance}, {@code internal_medicine},
-         * {@code internet}, {@code jewelry_and_watches}, {@code landmarks}, {@code
-         * laundry_and_garment_services}, {@code lawn_and_garden}, {@code legal_services}, {@code
-         * legal_technology}, {@code lending}, {@code lingerie}, {@code lodging}, {@code luggage},
-         * {@code maintenance_and_repair}, {@code manicures_and_pedicures}, {@code manufacturing},
-         * {@code marina}, {@code marine_supplies}, {@code marketing_software}, {@code
-         * massage_clinics_and_therapists}, {@code media}, {@code medical_and_healthcare_services},
-         * {@code medical_supplies_and_labs}, {@code men_s_clothing}, {@code
-         * mental_health_professionals}, {@code mobile_applications}, {@code
-         * motorcycle_moped_and_scooter_repair}, {@code museums}, {@code musical_instruments},
-         * {@code neurologists}, {@code news_and_magazines}, {@code newsstands}, {@code
-         * nutritionists}, {@code obstetricians_and_gynecologists}, {@code office_supplies}, {@code
-         * oil_and_gas}, {@code oncologists}, {@code online_marketplace}, {@code ophthalmologists},
-         * {@code optometrists}, {@code organizations}, {@code orthopedic_surgeons}, {@code other},
-         * {@code outlets}, {@code packaging}, {@code paper}, {@code parking}, {@code
-         * parks_and_outdoors}, {@code party_centers}, {@code pathologists}, {@code pawn_shops},
-         * {@code pediatricians}, {@code pet_grooming}, {@code pet_services}, {@code pets}, {@code
-         * pharmacies}, {@code photography}, {@code physical_therapy}, {@code piercings}, {@code
-         * plastic_surgeons}, {@code podiatrists}, {@code pregnancy_and_sexual_health}, {@code
-         * professional_services}, {@code property_management}, {@code psychiatrists}, {@code
-         * psychics_and_astrologers}, {@code psychologists}, {@code public_services}, {@code
-         * public_transportation}, {@code publishing_software}, {@code radiologists}, {@code rails},
-         * {@code real_estate}, {@code recreation}, {@code religious}, {@code renewable_energy},
-         * {@code respiratory}, {@code restaurants}, {@code retail}, {@code ride_shares}, {@code
-         * sales_enablement_software}, {@code security_and_privacy}, {@code security_and_safety},
-         * {@code services}, {@code shipping_and_freight}, {@code shoes}, {@code skin_care}, {@code
-         * social_clubs}, {@code software}, {@code software_engineering}, {@code spas}, {@code
-         * specialist_physicans}, {@code specialty_clothing_and_accessories}, {@code
-         * specialty_foods}, {@code specialty_groceries}, {@code specialty_retail}, {@code
-         * sporting_goods}, {@code storage}, {@code streaming_services}, {@code
-         * supermarkets_and_grocery_stores}, {@code swimwear}, {@code tailors}, {@code
-         * tanning_salons}, {@code tattoos}, {@code taxes}, {@code taxi_and_limousines}, {@code
-         * technology}, {@code telecommunications}, {@code television}, {@code textiles}, {@code
-         * theater_and_cinema}, {@code tickets_and_reservations}, {@code
-         * tobacco_smoke_and_vape_shops}, {@code tolls_and_fees}, {@code
-         * tourist_information_and_services}, {@code towing_and_roadside_assistance}, {@code
-         * toy_stores}, {@code transportation}, {@code travel}, {@code travel_services}, {@code
-         * travel_software}, {@code urologists}, {@code utilities}, {@code vehicle_rentals}, {@code
-         * vending_machine}, {@code venues}, {@code veterinarians}, {@code video_games}, {@code
-         * vintage_and_thrift}, {@code warehouses_and_wholesale_stores}, {@code
-         * water_and_waste_management_services}, {@code web_infrastructure}, {@code
-         * wedding_and_bridal}, {@code women_s_clothing}, or {@code zoos_and_aquariums}.
-         */
-        @SerializedName("id")
-        String id;
-
-        /** Increasingly specific textual representations of the seller's category. */
-        @SerializedName("names")
-        List<String> names;
-      }
-
-      /**
-       * For more details about Location, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Location extends StripeObject {
-        /** Address details of the seller. */
-        @SerializedName("address")
-        Address address;
-
-        /** Coordinates of the seller. */
-        @SerializedName("coordinates")
-        Coordinates coordinates;
-
-        /**
-         * For more details about Address, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Address extends StripeObject {
-          /** City, district, suburb, town, or village. */
-          @SerializedName("city")
-          String city;
-
-          /**
-           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-           * 3166-1 alpha-2</a>).
-           */
-          @SerializedName("country")
-          String country;
-
-          /** Address line 1, such as the street, PO Box, or company name. */
-          @SerializedName("line1")
-          String line1;
-
-          /** Address line 2, such as the apartment, suite, unit, or building. */
-          @SerializedName("line2")
-          String line2;
-
-          /** ZIP or postal code. */
-          @SerializedName("postal_code")
-          String postalCode;
-
-          /**
-           * State, county, province, or region (<a
-           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
-           */
-          @SerializedName("state")
-          String state;
-        }
-
-        /**
-         * For more details about Coordinates, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Coordinates extends StripeObject {
-          /** Latitude of the seller's location. */
-          @SerializedName("latitude")
-          BigDecimal latitude;
-
-          /** Longitude of the seller's location. */
-          @SerializedName("longitude")
-          BigDecimal longitude;
-        }
-      }
-
-      /**
-       * For more details about Spade, please refer to the <a href="https://docs.stripe.com/api">API
-       * Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Spade extends StripeObject {
-        /** Unified identifier for the seller. */
-        @SerializedName("counterparty_id")
-        String counterpartyId;
-
-        /** Unified identifier for the seller's location. */
-        @SerializedName("location_id")
-        String locationId;
-      }
-    }
-
-    /**
-     * For more details about ThirdParty, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class ThirdParty extends StripeObject {
-      @SerializedName("data_sources")
-      List<String> dataSources;
-
-      /** Image link to the third party's logo. */
-      @SerializedName("logo")
-      String logo;
-
-      /** Name of the third party. */
-      @SerializedName("name")
-      String name;
-
-      /** If {@code spade} is a data source, this hash contains details provided by Spade. */
-      @SerializedName("spade")
-      Spade spade;
-
-      /**
-       * Category of the third party.
-       *
-       * <p>One of {@code buy_now_pay_later}, {@code delivery_service}, {@code marketplace}, {@code
-       * other}, {@code payment_processor}, or {@code platform}.
-       */
-      @SerializedName("type")
-      String type;
-
-      /**
-       * For more details about Spade, please refer to the <a href="https://docs.stripe.com/api">API
-       * Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Spade extends StripeObject {
-        /** Unified identifier for the third party. */
-        @SerializedName("third_party_id")
-        String thirdPartyId;
       }
     }
   }
@@ -2407,7 +2094,6 @@ public class Authorization extends ApiResource
     trySetResponseGetter(balanceResponse, responseGetter);
     trySetResponseGetter(card, responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
-    trySetResponseGetter(enrichedMerchantData, responseGetter);
     trySetResponseGetter(fleet, responseGetter);
     trySetResponseGetter(fuel, responseGetter);
     trySetResponseGetter(merchantData, responseGetter);
