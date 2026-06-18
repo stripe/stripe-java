@@ -16,6 +16,7 @@ import com.stripe.param.issuing.CreditUnderwritingRecordCreateFromApplicationPar
 import com.stripe.param.issuing.CreditUnderwritingRecordCreateFromProactiveReviewParams;
 import com.stripe.param.issuing.CreditUnderwritingRecordListParams;
 import com.stripe.param.issuing.CreditUnderwritingRecordReportDecisionParams;
+import com.stripe.param.issuing.CreditUnderwritingRecordReportOfferAcceptanceParams;
 import com.stripe.param.issuing.CreditUnderwritingRecordRetrieveParams;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +71,10 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
    */
   @SerializedName("decision_deadline")
   Long decisionDeadline;
+
+  /** Time at which the decision deadline was last updated. */
+  @SerializedName("decision_deadline_updated_at")
+  Long decisionDeadlineUpdatedAt;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -352,6 +357,78 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
     String path =
         String.format(
             "/v1/issuing/credit_underwriting_records/%s/report_decision",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, CreditUnderwritingRecord.class);
+  }
+
+  /**
+   * Update a {@code CreditUnderwritingRecord} object to report that a credit offer has been
+   * accepted.
+   */
+  public CreditUnderwritingRecord reportOfferAcceptance() throws StripeException {
+    return reportOfferAcceptance((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Update a {@code CreditUnderwritingRecord} object to report that a credit offer has been
+   * accepted.
+   */
+  public CreditUnderwritingRecord reportOfferAcceptance(RequestOptions options)
+      throws StripeException {
+    return reportOfferAcceptance((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Update a {@code CreditUnderwritingRecord} object to report that a credit offer has been
+   * accepted.
+   */
+  public CreditUnderwritingRecord reportOfferAcceptance(Map<String, Object> params)
+      throws StripeException {
+    return reportOfferAcceptance(params, (RequestOptions) null);
+  }
+
+  /**
+   * Update a {@code CreditUnderwritingRecord} object to report that a credit offer has been
+   * accepted.
+   */
+  public CreditUnderwritingRecord reportOfferAcceptance(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/issuing/credit_underwriting_records/%s/report_offer_acceptance",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, CreditUnderwritingRecord.class);
+  }
+
+  /**
+   * Update a {@code CreditUnderwritingRecord} object to report that a credit offer has been
+   * accepted.
+   */
+  public CreditUnderwritingRecord reportOfferAcceptance(
+      CreditUnderwritingRecordReportOfferAcceptanceParams params) throws StripeException {
+    return reportOfferAcceptance(params, (RequestOptions) null);
+  }
+
+  /**
+   * Update a {@code CreditUnderwritingRecord} object to report that a credit offer has been
+   * accepted.
+   */
+  public CreditUnderwritingRecord reportOfferAcceptance(
+      CreditUnderwritingRecordReportOfferAcceptanceParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/issuing/credit_underwriting_records/%s/report_offer_acceptance",
             ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
