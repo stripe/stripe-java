@@ -3,6 +3,7 @@ package com.stripe.service.v2.billing;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
+import com.stripe.model.v2.DeletedObject;
 import com.stripe.model.v2.StripeCollection;
 import com.stripe.model.v2.billing.Contract;
 import com.stripe.net.ApiRequest;
@@ -65,6 +66,17 @@ public final class ContractService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, Contract.class);
+  }
+  /** Delete a draft Contract object by ID. */
+  public DeletedObject delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
+  }
+  /** Delete a draft Contract object by ID. */
+  public DeletedObject delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v2/billing/contracts/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
+    return this.request(request, DeletedObject.class);
   }
   /** Retrieve a Contract object by ID. */
   public Contract retrieve(String id, ContractRetrieveParams params) throws StripeException {
@@ -167,8 +179,8 @@ public final class ContractService extends ApiService {
     return this.request(request, Contract.class);
   }
 
-  public com.stripe.service.v2.billing.contracts.LicensePricingService licensePricing() {
-    return new com.stripe.service.v2.billing.contracts.LicensePricingService(
+  public com.stripe.service.v2.billing.contracts.PricingLinesService pricingLines() {
+    return new com.stripe.service.v2.billing.contracts.PricingLinesService(
         this.getResponseGetter());
   }
 }

@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.v2.billing.contracts.licensepricing;
+package com.stripe.param.v2.billing.contracts.pricinglines;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class QuantityChangeListQuantityChangesParams extends ApiRequestParams {
+public class QuantityChangeListContractPricingLineQuantityChangesParams extends ApiRequestParams {
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -24,7 +24,8 @@ public class QuantityChangeListQuantityChangesParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  private QuantityChangeListQuantityChangesParams(Map<String, Object> extraParams, Long limit) {
+  private QuantityChangeListContractPricingLineQuantityChangesParams(
+      Map<String, Object> extraParams, Long limit) {
     this.extraParams = extraParams;
     this.limit = limit;
   }
@@ -39,14 +40,16 @@ public class QuantityChangeListQuantityChangesParams extends ApiRequestParams {
     private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public QuantityChangeListQuantityChangesParams build() {
-      return new QuantityChangeListQuantityChangesParams(this.extraParams, this.limit);
+    public QuantityChangeListContractPricingLineQuantityChangesParams build() {
+      return new QuantityChangeListContractPricingLineQuantityChangesParams(
+          this.extraParams, this.limit);
     }
 
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * QuantityChangeListQuantityChangesParams#extraParams} for the field documentation.
+     * QuantityChangeListContractPricingLineQuantityChangesParams#extraParams} for the field
+     * documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -59,7 +62,8 @@ public class QuantityChangeListQuantityChangesParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link QuantityChangeListQuantityChangesParams#extraParams} for the field documentation.
+     * See {@link QuantityChangeListContractPricingLineQuantityChangesParams#extraParams} for the
+     * field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {

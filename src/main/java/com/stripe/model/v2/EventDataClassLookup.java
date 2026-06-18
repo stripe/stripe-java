@@ -113,8 +113,8 @@ public final class EventDataClassLookup {
         com.stripe.model.v2.billing.CollectionSettingVersion.class);
     classLookup.put("v2.billing.contract", com.stripe.model.v2.billing.Contract.class);
     classLookup.put(
-        "v2.billing.contract_license_pricing_quantity_change",
-        com.stripe.model.v2.billing.ContractLicensePricingQuantityChange.class);
+        "v2.billing.contract_pricing_line_quantity_change",
+        com.stripe.model.v2.billing.ContractPricingLineQuantityChange.class);
     classLookup.put(
         "v2.billing.custom_pricing_unit", com.stripe.model.v2.billing.CustomPricingUnit.class);
     classLookup.put("v2.billing.intent", com.stripe.model.v2.billing.Intent.class);

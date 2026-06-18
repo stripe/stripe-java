@@ -29,10 +29,6 @@ public class ContractUpdateParams extends ApiRequestParams {
   @SerializedName("include")
   List<ContractUpdateParams.Include> include;
 
-  /** Schema-only: License quantity actions (implementation to follow). */
-  @SerializedName("license_quantity_actions")
-  List<ContractUpdateParams.LicenseQuantityAction> licenseQuantityActions;
-
   /** Pricing line actions to apply. */
   @SerializedName("pricing_line_actions")
   List<ContractUpdateParams.PricingLineAction> pricingLineActions;
@@ -44,12 +40,10 @@ public class ContractUpdateParams extends ApiRequestParams {
   private ContractUpdateParams(
       Map<String, Object> extraParams,
       List<ContractUpdateParams.Include> include,
-      List<ContractUpdateParams.LicenseQuantityAction> licenseQuantityActions,
       List<ContractUpdateParams.PricingLineAction> pricingLineActions,
       List<ContractUpdateParams.PricingOverrideAction> pricingOverrideActions) {
     this.extraParams = extraParams;
     this.include = include;
-    this.licenseQuantityActions = licenseQuantityActions;
     this.pricingLineActions = pricingLineActions;
     this.pricingOverrideActions = pricingOverrideActions;
   }
@@ -63,8 +57,6 @@ public class ContractUpdateParams extends ApiRequestParams {
 
     private List<ContractUpdateParams.Include> include;
 
-    private List<ContractUpdateParams.LicenseQuantityAction> licenseQuantityActions;
-
     private List<ContractUpdateParams.PricingLineAction> pricingLineActions;
 
     private List<ContractUpdateParams.PricingOverrideAction> pricingOverrideActions;
@@ -72,11 +64,7 @@ public class ContractUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ContractUpdateParams build() {
       return new ContractUpdateParams(
-          this.extraParams,
-          this.include,
-          this.licenseQuantityActions,
-          this.pricingLineActions,
-          this.pricingOverrideActions);
+          this.extraParams, this.include, this.pricingLineActions, this.pricingOverrideActions);
     }
 
     /**
@@ -132,33 +120,6 @@ public class ContractUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `licenseQuantityActions` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link ContractUpdateParams#licenseQuantityActions} for the field documentation.
-     */
-    public Builder addLicenseQuantityAction(ContractUpdateParams.LicenseQuantityAction element) {
-      if (this.licenseQuantityActions == null) {
-        this.licenseQuantityActions = new ArrayList<>();
-      }
-      this.licenseQuantityActions.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `licenseQuantityActions` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link ContractUpdateParams#licenseQuantityActions} for the field documentation.
-     */
-    public Builder addAllLicenseQuantityAction(
-        List<ContractUpdateParams.LicenseQuantityAction> elements) {
-      if (this.licenseQuantityActions == null) {
-        this.licenseQuantityActions = new ArrayList<>();
-      }
-      this.licenseQuantityActions.addAll(elements);
-      return this;
-    }
-
-    /**
      * Add an element to `pricingLineActions` list. A list is initialized for the first `add/addAll`
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * ContractUpdateParams#pricingLineActions} for the field documentation.
@@ -209,407 +170,6 @@ public class ContractUpdateParams extends ApiRequestParams {
       }
       this.pricingOverrideActions.addAll(elements);
       return this;
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
-  public static class LicenseQuantityAction {
-    /** <strong>Required.</strong> The effective at for the license quantity action. */
-    @SerializedName("effective_at")
-    EffectiveAt effectiveAt;
-
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /** The ID of the license pricing. */
-    @SerializedName("license_pricing_id")
-    Object licensePricingId;
-
-    /** The lookup key for the license pricing. */
-    @SerializedName("license_pricing_lookup_key")
-    Object licensePricingLookupKey;
-
-    /** <strong>Required.</strong> The type of the license pricing. */
-    @SerializedName("license_pricing_type")
-    LicensePricingType licensePricingType;
-
-    /** The pricing line ID for the license quantity action. */
-    @SerializedName("pricing_line")
-    Object pricingLine;
-
-    /** The pricing line lookup key for the license quantity action. */
-    @SerializedName("pricing_line_lookup_key")
-    Object pricingLineLookupKey;
-
-    /** The set quantity for the license quantity action. */
-    @SerializedName("set")
-    Set set;
-
-    /** <strong>Required.</strong> The type of the license quantity action. */
-    @SerializedName("type")
-    Type type;
-
-    private LicenseQuantityAction(
-        EffectiveAt effectiveAt,
-        Map<String, Object> extraParams,
-        Object licensePricingId,
-        Object licensePricingLookupKey,
-        LicensePricingType licensePricingType,
-        Object pricingLine,
-        Object pricingLineLookupKey,
-        Set set,
-        Type type) {
-      this.effectiveAt = effectiveAt;
-      this.extraParams = extraParams;
-      this.licensePricingId = licensePricingId;
-      this.licensePricingLookupKey = licensePricingLookupKey;
-      this.licensePricingType = licensePricingType;
-      this.pricingLine = pricingLine;
-      this.pricingLineLookupKey = pricingLineLookupKey;
-      this.set = set;
-      this.type = type;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private EffectiveAt effectiveAt;
-
-      private Map<String, Object> extraParams;
-
-      private Object licensePricingId;
-
-      private Object licensePricingLookupKey;
-
-      private LicensePricingType licensePricingType;
-
-      private Object pricingLine;
-
-      private Object pricingLineLookupKey;
-
-      private Set set;
-
-      private Type type;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public ContractUpdateParams.LicenseQuantityAction build() {
-        return new ContractUpdateParams.LicenseQuantityAction(
-            this.effectiveAt,
-            this.extraParams,
-            this.licensePricingId,
-            this.licensePricingLookupKey,
-            this.licensePricingType,
-            this.pricingLine,
-            this.pricingLineLookupKey,
-            this.set,
-            this.type);
-      }
-
-      /** <strong>Required.</strong> The effective at for the license quantity action. */
-      public Builder setEffectiveAt(
-          ContractUpdateParams.LicenseQuantityAction.EffectiveAt effectiveAt) {
-        this.effectiveAt = effectiveAt;
-        return this;
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * ContractUpdateParams.LicenseQuantityAction#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link ContractUpdateParams.LicenseQuantityAction#extraParams} for the field
-       * documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /** The ID of the license pricing. */
-      public Builder setLicensePricingId(String licensePricingId) {
-        this.licensePricingId = licensePricingId;
-        return this;
-      }
-
-      /** The ID of the license pricing. */
-      public Builder setLicensePricingId(EmptyParam licensePricingId) {
-        this.licensePricingId = licensePricingId;
-        return this;
-      }
-
-      /** The lookup key for the license pricing. */
-      public Builder setLicensePricingLookupKey(String licensePricingLookupKey) {
-        this.licensePricingLookupKey = licensePricingLookupKey;
-        return this;
-      }
-
-      /** The lookup key for the license pricing. */
-      public Builder setLicensePricingLookupKey(EmptyParam licensePricingLookupKey) {
-        this.licensePricingLookupKey = licensePricingLookupKey;
-        return this;
-      }
-
-      /** <strong>Required.</strong> The type of the license pricing. */
-      public Builder setLicensePricingType(
-          ContractUpdateParams.LicenseQuantityAction.LicensePricingType licensePricingType) {
-        this.licensePricingType = licensePricingType;
-        return this;
-      }
-
-      /** The pricing line ID for the license quantity action. */
-      public Builder setPricingLine(String pricingLine) {
-        this.pricingLine = pricingLine;
-        return this;
-      }
-
-      /** The pricing line ID for the license quantity action. */
-      public Builder setPricingLine(EmptyParam pricingLine) {
-        this.pricingLine = pricingLine;
-        return this;
-      }
-
-      /** The pricing line lookup key for the license quantity action. */
-      public Builder setPricingLineLookupKey(String pricingLineLookupKey) {
-        this.pricingLineLookupKey = pricingLineLookupKey;
-        return this;
-      }
-
-      /** The pricing line lookup key for the license quantity action. */
-      public Builder setPricingLineLookupKey(EmptyParam pricingLineLookupKey) {
-        this.pricingLineLookupKey = pricingLineLookupKey;
-        return this;
-      }
-
-      /** The set quantity for the license quantity action. */
-      public Builder setSet(ContractUpdateParams.LicenseQuantityAction.Set set) {
-        this.set = set;
-        return this;
-      }
-
-      /** <strong>Required.</strong> The type of the license quantity action. */
-      public Builder setType(ContractUpdateParams.LicenseQuantityAction.Type type) {
-        this.type = type;
-        return this;
-      }
-    }
-
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
-    public static class EffectiveAt {
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** The timestamp for the effective at. */
-      @SerializedName("timestamp")
-      Instant timestamp;
-
-      /** <strong>Required.</strong> The type of the effective at. */
-      @SerializedName("type")
-      Type type;
-
-      private EffectiveAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
-        this.extraParams = extraParams;
-        this.timestamp = timestamp;
-        this.type = type;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Map<String, Object> extraParams;
-
-        private Instant timestamp;
-
-        private Type type;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public ContractUpdateParams.LicenseQuantityAction.EffectiveAt build() {
-          return new ContractUpdateParams.LicenseQuantityAction.EffectiveAt(
-              this.extraParams, this.timestamp, this.type);
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ContractUpdateParams.LicenseQuantityAction.EffectiveAt#extraParams} for
-         * the field documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ContractUpdateParams.LicenseQuantityAction.EffectiveAt#extraParams} for
-         * the field documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** The timestamp for the effective at. */
-        public Builder setTimestamp(Instant timestamp) {
-          this.timestamp = timestamp;
-          return this;
-        }
-
-        /** <strong>Required.</strong> The type of the effective at. */
-        public Builder setType(ContractUpdateParams.LicenseQuantityAction.EffectiveAt.Type type) {
-          this.type = type;
-          return this;
-        }
-      }
-
-      public enum Type implements ApiRequestParams.EnumParam {
-        @SerializedName("timestamp")
-        TIMESTAMP("timestamp");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        Type(String value) {
-          this.value = value;
-        }
-      }
-    }
-
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Set {
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** <strong>Required.</strong> The quantity to set. */
-      @SerializedName("quantity")
-      Long quantity;
-
-      private Set(Map<String, Object> extraParams, Long quantity) {
-        this.extraParams = extraParams;
-        this.quantity = quantity;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Map<String, Object> extraParams;
-
-        private Long quantity;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public ContractUpdateParams.LicenseQuantityAction.Set build() {
-          return new ContractUpdateParams.LicenseQuantityAction.Set(
-              this.extraParams, this.quantity);
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ContractUpdateParams.LicenseQuantityAction.Set#extraParams} for the field
-         * documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ContractUpdateParams.LicenseQuantityAction.Set#extraParams} for the field
-         * documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** <strong>Required.</strong> The quantity to set. */
-        public Builder setQuantity(Long quantity) {
-          this.quantity = quantity;
-          return this;
-        }
-      }
-    }
-
-    public enum LicensePricingType implements ApiRequestParams.EnumParam {
-      @SerializedName("license_fee")
-      LICENSE_FEE("license_fee"),
-
-      @SerializedName("price")
-      PRICE("price");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      LicensePricingType(String value) {
-        this.value = value;
-      }
-    }
-
-    public enum Type implements ApiRequestParams.EnumParam {
-      @SerializedName("set")
-      SET("set");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Type(String value) {
-        this.value = value;
-      }
     }
   }
 
@@ -1087,14 +647,30 @@ public class ContractUpdateParams extends ApiRequestParams {
           @SerializedName("price")
           Object price;
 
-          /** The quantity for the price. Only applicable for licensed prices. */
-          @SerializedName("quantity")
-          Long quantity;
+          /** Pricing overrides embedded directly on this pricing line. */
+          @SerializedName("pricing_overrides")
+          List<ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride>
+              pricingOverrides;
 
-          private PriceDetails(Map<String, Object> extraParams, Object price, Long quantity) {
+          /**
+           * Quantity changes for the pricing line. For now, at most one entry is allowed. A
+           * quantity change clears all future quantity changes on this pricing line.
+           */
+          @SerializedName("quantity_changes")
+          List<ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.QuantityChange>
+              quantityChanges;
+
+          private PriceDetails(
+              Map<String, Object> extraParams,
+              Object price,
+              List<ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride>
+                  pricingOverrides,
+              List<ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.QuantityChange>
+                  quantityChanges) {
             this.extraParams = extraParams;
             this.price = price;
-            this.quantity = quantity;
+            this.pricingOverrides = pricingOverrides;
+            this.quantityChanges = quantityChanges;
           }
 
           public static Builder builder() {
@@ -1106,12 +682,18 @@ public class ContractUpdateParams extends ApiRequestParams {
 
             private Object price;
 
-            private Long quantity;
+            private List<
+                    ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride>
+                pricingOverrides;
+
+            private List<
+                    ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.QuantityChange>
+                quantityChanges;
 
             /** Finalize and obtain parameter instance from this builder. */
             public ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails build() {
               return new ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails(
-                  this.extraParams, this.price, this.quantity);
+                  this.extraParams, this.price, this.pricingOverrides, this.quantityChanges);
             }
 
             /**
@@ -1156,10 +738,1105 @@ public class ContractUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** The quantity for the price. Only applicable for licensed prices. */
-            public Builder setQuantity(Long quantity) {
-              this.quantity = quantity;
+            /**
+             * Add an element to `pricingOverrides` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails#pricingOverrides} for
+             * the field documentation.
+             */
+            public Builder addPricingOverride(
+                ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride
+                    element) {
+              if (this.pricingOverrides == null) {
+                this.pricingOverrides = new ArrayList<>();
+              }
+              this.pricingOverrides.add(element);
               return this;
+            }
+
+            /**
+             * Add all elements to `pricingOverrides` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails#pricingOverrides} for
+             * the field documentation.
+             */
+            public Builder addAllPricingOverride(
+                List<
+                        ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                            .PricingOverride>
+                    elements) {
+              if (this.pricingOverrides == null) {
+                this.pricingOverrides = new ArrayList<>();
+              }
+              this.pricingOverrides.addAll(elements);
+              return this;
+            }
+
+            /**
+             * Add an element to `quantityChanges` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails#quantityChanges} for
+             * the field documentation.
+             */
+            public Builder addQuantityChange(
+                ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.QuantityChange
+                    element) {
+              if (this.quantityChanges == null) {
+                this.quantityChanges = new ArrayList<>();
+              }
+              this.quantityChanges.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `quantityChanges` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails#quantityChanges} for
+             * the field documentation.
+             */
+            public Builder addAllQuantityChange(
+                List<ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.QuantityChange>
+                    elements) {
+              if (this.quantityChanges == null) {
+                this.quantityChanges = new ArrayList<>();
+              }
+              this.quantityChanges.addAll(elements);
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class PricingOverride {
+            /** When the override ends. Defaults to the pricing line's end if not specified. */
+            @SerializedName("ends_at")
+            EndsAt endsAt;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** A user-provided lookup key to reference this override. */
+            @SerializedName("lookup_key")
+            Object lookupKey;
+
+            /** Set of key-value pairs that you can attach to an object. */
+            @SerializedName("metadata")
+            Map<String, String> metadata;
+
+            /**
+             * Parameters for the overwrite_price override. Required if {@code type} is {@code
+             * overwrite_price}.
+             */
+            @SerializedName("overwrite_price")
+            OverwritePrice overwritePrice;
+
+            /**
+             * The priority of this override relative to others. 0 is highest, 100 is lowest.
+             * Defaults to 50.
+             */
+            @SerializedName("priority")
+            Long priority;
+
+            /** When the override starts. Defaults to the pricing line's start if not specified. */
+            @SerializedName("starts_at")
+            StartsAt startsAt;
+
+            /**
+             * <strong>Required.</strong> The type of override. Currently only {@code
+             * overwrite_price} is supported.
+             */
+            @SerializedName("type")
+            Type type;
+
+            private PricingOverride(
+                EndsAt endsAt,
+                Map<String, Object> extraParams,
+                Object lookupKey,
+                Map<String, String> metadata,
+                OverwritePrice overwritePrice,
+                Long priority,
+                StartsAt startsAt,
+                Type type) {
+              this.endsAt = endsAt;
+              this.extraParams = extraParams;
+              this.lookupKey = lookupKey;
+              this.metadata = metadata;
+              this.overwritePrice = overwritePrice;
+              this.priority = priority;
+              this.startsAt = startsAt;
+              this.type = type;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private EndsAt endsAt;
+
+              private Map<String, Object> extraParams;
+
+              private Object lookupKey;
+
+              private Map<String, String> metadata;
+
+              private OverwritePrice overwritePrice;
+
+              private Long priority;
+
+              private StartsAt startsAt;
+
+              private Type type;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride
+                  build() {
+                return new ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                    .PricingOverride(
+                    this.endsAt,
+                    this.extraParams,
+                    this.lookupKey,
+                    this.metadata,
+                    this.overwritePrice,
+                    this.priority,
+                    this.startsAt,
+                    this.type);
+              }
+
+              /** When the override ends. Defaults to the pricing line's end if not specified. */
+              public Builder setEndsAt(
+                  ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride
+                          .EndsAt
+                      endsAt) {
+                this.endsAt = endsAt;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** A user-provided lookup key to reference this override. */
+              public Builder setLookupKey(String lookupKey) {
+                this.lookupKey = lookupKey;
+                return this;
+              }
+
+              /** A user-provided lookup key to reference this override. */
+              public Builder setLookupKey(EmptyParam lookupKey) {
+                this.lookupKey = lookupKey;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `metadata` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride#metadata}
+               * for the field documentation.
+               */
+              public Builder putMetadata(String key, String value) {
+                if (this.metadata == null) {
+                  this.metadata = new HashMap<>();
+                }
+                this.metadata.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride#metadata}
+               * for the field documentation.
+               */
+              public Builder putAllMetadata(Map<String, String> map) {
+                if (this.metadata == null) {
+                  this.metadata = new HashMap<>();
+                }
+                this.metadata.putAll(map);
+                return this;
+              }
+
+              /**
+               * Parameters for the overwrite_price override. Required if {@code type} is {@code
+               * overwrite_price}.
+               */
+              public Builder setOverwritePrice(
+                  ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride
+                          .OverwritePrice
+                      overwritePrice) {
+                this.overwritePrice = overwritePrice;
+                return this;
+              }
+
+              /**
+               * The priority of this override relative to others. 0 is highest, 100 is lowest.
+               * Defaults to 50.
+               */
+              public Builder setPriority(Long priority) {
+                this.priority = priority;
+                return this;
+              }
+
+              /**
+               * When the override starts. Defaults to the pricing line's start if not specified.
+               */
+              public Builder setStartsAt(
+                  ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride
+                          .StartsAt
+                      startsAt) {
+                this.startsAt = startsAt;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The type of override. Currently only {@code
+               * overwrite_price} is supported.
+               */
+              public Builder setType(
+                  ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride
+                          .Type
+                      type) {
+                this.type = type;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class EndsAt {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * The timestamp when the item ends. Required if {@code type} is {@code timestamp}.
+               */
+              @SerializedName("timestamp")
+              Instant timestamp;
+
+              /** <strong>Required.</strong> The type of the ends_at. */
+              @SerializedName("type")
+              Type type;
+
+              private EndsAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
+                this.extraParams = extraParams;
+                this.timestamp = timestamp;
+                this.type = type;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Instant timestamp;
+
+                private Type type;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                        .PricingOverride.EndsAt
+                    build() {
+                  return new ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                      .PricingOverride.EndsAt(this.extraParams, this.timestamp, this.type);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.EndsAt#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.EndsAt#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * The timestamp when the item ends. Required if {@code type} is {@code timestamp}.
+                 */
+                public Builder setTimestamp(Instant timestamp) {
+                  this.timestamp = timestamp;
+                  return this;
+                }
+
+                /** <strong>Required.</strong> The type of the ends_at. */
+                public Builder setType(
+                    ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride
+                            .EndsAt.Type
+                        type) {
+                  this.type = type;
+                  return this;
+                }
+              }
+
+              public enum Type implements ApiRequestParams.EnumParam {
+                @SerializedName("contract_end")
+                CONTRACT_END("contract_end"),
+
+                @SerializedName("timestamp")
+                TIMESTAMP("timestamp");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                Type(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class OverwritePrice {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** Defines whether the tiered price should be graduated or volume-based. */
+              @SerializedName("tiering_mode")
+              TieringMode tieringMode;
+
+              /** Each element represents a pricing tier. */
+              @SerializedName("tiers")
+              List<
+                      ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                          .PricingOverride.OverwritePrice.Tier>
+                  tiers;
+
+              /**
+               * The per-unit amount to be charged, represented as a decimal string in minor
+               * currency units.
+               */
+              @SerializedName("unit_amount")
+              Object unitAmount;
+
+              private OverwritePrice(
+                  Map<String, Object> extraParams,
+                  TieringMode tieringMode,
+                  List<
+                          ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                              .PricingOverride.OverwritePrice.Tier>
+                      tiers,
+                  Object unitAmount) {
+                this.extraParams = extraParams;
+                this.tieringMode = tieringMode;
+                this.tiers = tiers;
+                this.unitAmount = unitAmount;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private TieringMode tieringMode;
+
+                private List<
+                        ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                            .PricingOverride.OverwritePrice.Tier>
+                    tiers;
+
+                private Object unitAmount;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                        .PricingOverride.OverwritePrice
+                    build() {
+                  return new ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                      .PricingOverride.OverwritePrice(
+                      this.extraParams, this.tieringMode, this.tiers, this.unitAmount);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.OverwritePrice#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.OverwritePrice#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** Defines whether the tiered price should be graduated or volume-based. */
+                public Builder setTieringMode(
+                    ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride
+                            .OverwritePrice.TieringMode
+                        tieringMode) {
+                  this.tieringMode = tieringMode;
+                  return this;
+                }
+
+                /**
+                 * Add an element to `tiers` list. A list is initialized for the first `add/addAll`
+                 * call, and subsequent calls adds additional elements to the original list. See
+                 * {@link
+                 * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.OverwritePrice#tiers}
+                 * for the field documentation.
+                 */
+                public Builder addTier(
+                    ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride
+                            .OverwritePrice.Tier
+                        element) {
+                  if (this.tiers == null) {
+                    this.tiers = new ArrayList<>();
+                  }
+                  this.tiers.add(element);
+                  return this;
+                }
+
+                /**
+                 * Add all elements to `tiers` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.OverwritePrice#tiers}
+                 * for the field documentation.
+                 */
+                public Builder addAllTier(
+                    List<
+                            ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                                .PricingOverride.OverwritePrice.Tier>
+                        elements) {
+                  if (this.tiers == null) {
+                    this.tiers = new ArrayList<>();
+                  }
+                  this.tiers.addAll(elements);
+                  return this;
+                }
+
+                /**
+                 * The per-unit amount to be charged, represented as a decimal string in minor
+                 * currency units.
+                 */
+                public Builder setUnitAmount(String unitAmount) {
+                  this.unitAmount = unitAmount;
+                  return this;
+                }
+
+                /**
+                 * The per-unit amount to be charged, represented as a decimal string in minor
+                 * currency units.
+                 */
+                public Builder setUnitAmount(EmptyParam unitAmount) {
+                  this.unitAmount = unitAmount;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Tier {
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /**
+                 * Price for the entire tier, represented as a decimal string in minor currency
+                 * units.
+                 */
+                @SerializedName("flat_amount")
+                Object flatAmount;
+
+                /**
+                 * Per-unit price for units included in this tier, represented as a decimal string
+                 * in minor currency units.
+                 */
+                @SerializedName("unit_amount")
+                Object unitAmount;
+
+                /** Up to and including this quantity will be contained in the tier. */
+                @SerializedName("up_to_decimal")
+                Object upToDecimal;
+
+                /** No upper bound to this tier. */
+                @SerializedName("up_to_inf")
+                UpToInf upToInf;
+
+                private Tier(
+                    Map<String, Object> extraParams,
+                    Object flatAmount,
+                    Object unitAmount,
+                    Object upToDecimal,
+                    UpToInf upToInf) {
+                  this.extraParams = extraParams;
+                  this.flatAmount = flatAmount;
+                  this.unitAmount = unitAmount;
+                  this.upToDecimal = upToDecimal;
+                  this.upToInf = upToInf;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Map<String, Object> extraParams;
+
+                  private Object flatAmount;
+
+                  private Object unitAmount;
+
+                  private Object upToDecimal;
+
+                  private UpToInf upToInf;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                          .PricingOverride.OverwritePrice.Tier
+                      build() {
+                    return new ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                        .PricingOverride.OverwritePrice.Tier(
+                        this.extraParams,
+                        this.flatAmount,
+                        this.unitAmount,
+                        this.upToDecimal,
+                        this.upToInf);
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.OverwritePrice.Tier#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.OverwritePrice.Tier#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /**
+                   * Price for the entire tier, represented as a decimal string in minor currency
+                   * units.
+                   */
+                  public Builder setFlatAmount(String flatAmount) {
+                    this.flatAmount = flatAmount;
+                    return this;
+                  }
+
+                  /**
+                   * Price for the entire tier, represented as a decimal string in minor currency
+                   * units.
+                   */
+                  public Builder setFlatAmount(EmptyParam flatAmount) {
+                    this.flatAmount = flatAmount;
+                    return this;
+                  }
+
+                  /**
+                   * Per-unit price for units included in this tier, represented as a decimal string
+                   * in minor currency units.
+                   */
+                  public Builder setUnitAmount(String unitAmount) {
+                    this.unitAmount = unitAmount;
+                    return this;
+                  }
+
+                  /**
+                   * Per-unit price for units included in this tier, represented as a decimal string
+                   * in minor currency units.
+                   */
+                  public Builder setUnitAmount(EmptyParam unitAmount) {
+                    this.unitAmount = unitAmount;
+                    return this;
+                  }
+
+                  /** Up to and including this quantity will be contained in the tier. */
+                  public Builder setUpToDecimal(BigDecimal upToDecimal) {
+                    this.upToDecimal = upToDecimal;
+                    return this;
+                  }
+
+                  /** Up to and including this quantity will be contained in the tier. */
+                  public Builder setUpToDecimal(EmptyParam upToDecimal) {
+                    this.upToDecimal = upToDecimal;
+                    return this;
+                  }
+
+                  /** No upper bound to this tier. */
+                  public Builder setUpToInf(
+                      ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                              .PricingOverride.OverwritePrice.Tier.UpToInf
+                          upToInf) {
+                    this.upToInf = upToInf;
+                    return this;
+                  }
+                }
+
+                public enum UpToInf implements ApiRequestParams.EnumParam {
+                  @SerializedName("inf")
+                  INF("inf");
+
+                  @Getter(onMethod_ = {@Override})
+                  private final String value;
+
+                  UpToInf(String value) {
+                    this.value = value;
+                  }
+                }
+              }
+
+              public enum TieringMode implements ApiRequestParams.EnumParam {
+                @SerializedName("graduated")
+                GRADUATED("graduated"),
+
+                @SerializedName("volume")
+                VOLUME("volume");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                TieringMode(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StartsAt {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * The timestamp when the item starts. Required if {@code type} is {@code timestamp}.
+               */
+              @SerializedName("timestamp")
+              Instant timestamp;
+
+              /** <strong>Required.</strong> The type of the starts_at. */
+              @SerializedName("type")
+              Type type;
+
+              private StartsAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
+                this.extraParams = extraParams;
+                this.timestamp = timestamp;
+                this.type = type;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Instant timestamp;
+
+                private Type type;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                        .PricingOverride.StartsAt
+                    build() {
+                  return new ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                      .PricingOverride.StartsAt(this.extraParams, this.timestamp, this.type);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.StartsAt#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.StartsAt#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * The timestamp when the item starts. Required if {@code type} is {@code
+                 * timestamp}.
+                 */
+                public Builder setTimestamp(Instant timestamp) {
+                  this.timestamp = timestamp;
+                  return this;
+                }
+
+                /** <strong>Required.</strong> The type of the starts_at. */
+                public Builder setType(
+                    ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride
+                            .StartsAt.Type
+                        type) {
+                  this.type = type;
+                  return this;
+                }
+              }
+
+              public enum Type implements ApiRequestParams.EnumParam {
+                @SerializedName("contract_start")
+                CONTRACT_START("contract_start"),
+
+                @SerializedName("timestamp")
+                TIMESTAMP("timestamp");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                Type(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            public enum Type implements ApiRequestParams.EnumParam {
+              @SerializedName("overwrite_price")
+              OVERWRITE_PRICE("overwrite_price");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Type(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class QuantityChange {
+            /** <strong>Required.</strong> When this quantity change takes effect. */
+            @SerializedName("effective_at")
+            EffectiveAt effectiveAt;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> The quantity to set. */
+            @SerializedName("set")
+            Object set;
+
+            private QuantityChange(
+                EffectiveAt effectiveAt, Map<String, Object> extraParams, Object set) {
+              this.effectiveAt = effectiveAt;
+              this.extraParams = extraParams;
+              this.set = set;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private EffectiveAt effectiveAt;
+
+              private Map<String, Object> extraParams;
+
+              private Object set;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.QuantityChange
+                  build() {
+                return new ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                    .QuantityChange(this.effectiveAt, this.extraParams, this.set);
+              }
+
+              /** <strong>Required.</strong> When this quantity change takes effect. */
+              public Builder setEffectiveAt(
+                  ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.QuantityChange
+                          .EffectiveAt
+                      effectiveAt) {
+                this.effectiveAt = effectiveAt;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.QuantityChange#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.QuantityChange#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> The quantity to set. */
+              public Builder setSet(BigDecimal set) {
+                this.set = set;
+                return this;
+              }
+
+              /** <strong>Required.</strong> The quantity to set. */
+              public Builder setSet(EmptyParam set) {
+                this.set = set;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class EffectiveAt {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** The timestamp for the effective at. */
+              @SerializedName("timestamp")
+              Instant timestamp;
+
+              /** <strong>Required.</strong> The type of the effective at. */
+              @SerializedName("type")
+              Type type;
+
+              private EffectiveAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
+                this.extraParams = extraParams;
+                this.timestamp = timestamp;
+                this.type = type;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Instant timestamp;
+
+                private Type type;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                        .QuantityChange.EffectiveAt
+                    build() {
+                  return new ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
+                      .QuantityChange.EffectiveAt(this.extraParams, this.timestamp, this.type);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.QuantityChange.EffectiveAt#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.QuantityChange.EffectiveAt#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** The timestamp for the effective at. */
+                public Builder setTimestamp(Instant timestamp) {
+                  this.timestamp = timestamp;
+                  return this;
+                }
+
+                /** <strong>Required.</strong> The type of the effective at. */
+                public Builder setType(
+                    ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.QuantityChange
+                            .EffectiveAt.Type
+                        type) {
+                  this.type = type;
+                  return this;
+                }
+              }
+
+              public enum Type implements ApiRequestParams.EnumParam {
+                @SerializedName("timestamp")
+                TIMESTAMP("timestamp");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                Type(String value) {
+                  this.value = value;
+                }
+              }
             }
           }
         }
@@ -1376,14 +2053,24 @@ public class ContractUpdateParams extends ApiRequestParams {
       @SerializedName("id")
       Object id;
 
+      /** Pricing updates for the pricing line (quantity changes and pricing override actions). */
+      @SerializedName("pricing")
+      Pricing pricing;
+
       /** The updated start time for the pricing line. */
       @SerializedName("starts_at")
       StartsAt startsAt;
 
-      private Update(EndsAt endsAt, Map<String, Object> extraParams, Object id, StartsAt startsAt) {
+      private Update(
+          EndsAt endsAt,
+          Map<String, Object> extraParams,
+          Object id,
+          Pricing pricing,
+          StartsAt startsAt) {
         this.endsAt = endsAt;
         this.extraParams = extraParams;
         this.id = id;
+        this.pricing = pricing;
         this.startsAt = startsAt;
       }
 
@@ -1398,12 +2085,14 @@ public class ContractUpdateParams extends ApiRequestParams {
 
         private Object id;
 
+        private Pricing pricing;
+
         private StartsAt startsAt;
 
         /** Finalize and obtain parameter instance from this builder. */
         public ContractUpdateParams.PricingLineAction.Update build() {
           return new ContractUpdateParams.PricingLineAction.Update(
-              this.endsAt, this.extraParams, this.id, this.startsAt);
+              this.endsAt, this.extraParams, this.id, this.pricing, this.startsAt);
         }
 
         /** The updated end time for the pricing line. */
@@ -1449,6 +2138,12 @@ public class ContractUpdateParams extends ApiRequestParams {
         /** <strong>Required.</strong> The ID of the pricing line. */
         public Builder setId(EmptyParam id) {
           this.id = id;
+          return this;
+        }
+
+        /** Pricing updates for the pricing line (quantity changes and pricing override actions). */
+        public Builder setPricing(ContractUpdateParams.PricingLineAction.Update.Pricing pricing) {
+          this.pricing = pricing;
           return this;
         }
 
@@ -1557,6 +2252,1923 @@ public class ContractUpdateParams extends ApiRequestParams {
 
           Type(String value) {
             this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Pricing {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** V1 price details. Present when the pricing line type is {@code price}. */
+        @SerializedName("price_details")
+        PriceDetails priceDetails;
+
+        private Pricing(Map<String, Object> extraParams, PriceDetails priceDetails) {
+          this.extraParams = extraParams;
+          this.priceDetails = priceDetails;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PriceDetails priceDetails;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public ContractUpdateParams.PricingLineAction.Update.Pricing build() {
+            return new ContractUpdateParams.PricingLineAction.Update.Pricing(
+                this.extraParams, this.priceDetails);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link ContractUpdateParams.PricingLineAction.Update.Pricing#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link ContractUpdateParams.PricingLineAction.Update.Pricing#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** V1 price details. Present when the pricing line type is {@code price}. */
+          public Builder setPriceDetails(
+              ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails priceDetails) {
+            this.priceDetails = priceDetails;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PriceDetails {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Pricing override actions to apply to the overrides embedded on this pricing line. */
+          @SerializedName("pricing_override_actions")
+          List<
+                  ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                      .PricingOverrideAction>
+              pricingOverrideActions;
+
+          /**
+           * Quantity changes for the pricing line. Setting this clears all future quantity changes.
+           */
+          @SerializedName("quantity_changes")
+          List<ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.QuantityChange>
+              quantityChanges;
+
+          private PriceDetails(
+              Map<String, Object> extraParams,
+              List<
+                      ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                          .PricingOverrideAction>
+                  pricingOverrideActions,
+              List<
+                      ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                          .QuantityChange>
+                  quantityChanges) {
+            this.extraParams = extraParams;
+            this.pricingOverrideActions = pricingOverrideActions;
+            this.quantityChanges = quantityChanges;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private List<
+                    ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                        .PricingOverrideAction>
+                pricingOverrideActions;
+
+            private List<
+                    ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                        .QuantityChange>
+                quantityChanges;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails build() {
+              return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails(
+                  this.extraParams, this.pricingOverrideActions, this.quantityChanges);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails#extraParams} for
+             * the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Add an element to `pricingOverrideActions` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails#pricingOverrideActions}
+             * for the field documentation.
+             */
+            public Builder addPricingOverrideAction(
+                ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                        .PricingOverrideAction
+                    element) {
+              if (this.pricingOverrideActions == null) {
+                this.pricingOverrideActions = new ArrayList<>();
+              }
+              this.pricingOverrideActions.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `pricingOverrideActions` list. A list is initialized for the
+             * first `add/addAll` call, and subsequent calls adds additional elements to the
+             * original list. See {@link
+             * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails#pricingOverrideActions}
+             * for the field documentation.
+             */
+            public Builder addAllPricingOverrideAction(
+                List<
+                        ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                            .PricingOverrideAction>
+                    elements) {
+              if (this.pricingOverrideActions == null) {
+                this.pricingOverrideActions = new ArrayList<>();
+              }
+              this.pricingOverrideActions.addAll(elements);
+              return this;
+            }
+
+            /**
+             * Add an element to `quantityChanges` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails#quantityChanges}
+             * for the field documentation.
+             */
+            public Builder addQuantityChange(
+                ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.QuantityChange
+                    element) {
+              if (this.quantityChanges == null) {
+                this.quantityChanges = new ArrayList<>();
+              }
+              this.quantityChanges.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `quantityChanges` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails#quantityChanges}
+             * for the field documentation.
+             */
+            public Builder addAllQuantityChange(
+                List<
+                        ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                            .QuantityChange>
+                    elements) {
+              if (this.quantityChanges == null) {
+                this.quantityChanges = new ArrayList<>();
+              }
+              this.quantityChanges.addAll(elements);
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class PricingOverrideAction {
+            /** Parameters for adding a pricing line override. */
+            @SerializedName("add")
+            Add add;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Parameters for removing a pricing line override. */
+            @SerializedName("remove")
+            Remove remove;
+
+            /** <strong>Required.</strong> The type of pricing line override action. */
+            @SerializedName("type")
+            Type type;
+
+            /** Parameters for updating a pricing line override. */
+            @SerializedName("update")
+            InnerUpdate update;
+
+            private PricingOverrideAction(
+                Add add,
+                Map<String, Object> extraParams,
+                Remove remove,
+                Type type,
+                InnerUpdate update) {
+              this.add = add;
+              this.extraParams = extraParams;
+              this.remove = remove;
+              this.type = type;
+              this.update = update;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Add add;
+
+              private Map<String, Object> extraParams;
+
+              private Remove remove;
+
+              private Type type;
+
+              private InnerUpdate update;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                      .PricingOverrideAction
+                  build() {
+                return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                    .PricingOverrideAction(
+                    this.add, this.extraParams, this.remove, this.type, this.update);
+              }
+
+              /** Parameters for adding a pricing line override. */
+              public Builder setAdd(
+                  ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                          .PricingOverrideAction.Add
+                      add) {
+                this.add = add;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Parameters for removing a pricing line override. */
+              public Builder setRemove(
+                  ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                          .PricingOverrideAction.Remove
+                      remove) {
+                this.remove = remove;
+                return this;
+              }
+
+              /** <strong>Required.</strong> The type of pricing line override action. */
+              public Builder setType(
+                  ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                          .PricingOverrideAction.Type
+                      type) {
+                this.type = type;
+                return this;
+              }
+
+              /** Parameters for updating a pricing line override. */
+              public Builder setUpdate(
+                  ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                          .PricingOverrideAction.InnerUpdate
+                      update) {
+                this.update = update;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Add {
+              /** <strong>Required.</strong> The end time for the override. */
+              @SerializedName("ends_at")
+              EndsAt endsAt;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** A lookup key for the override. */
+              @SerializedName("lookup_key")
+              Object lookupKey;
+
+              /** Set of key-value pairs that you can attach to an object. */
+              @SerializedName("metadata")
+              Map<String, String> metadata;
+
+              /**
+               * Parameters for an overwrite_price override. Required if {@code type} is {@code
+               * overwrite_price}.
+               */
+              @SerializedName("overwrite_price")
+              OverwritePrice overwritePrice;
+
+              /**
+               * The priority of this override relative to others. 0 is highest, 100 is lowest.
+               * Defaults to 50.
+               */
+              @SerializedName("priority")
+              Long priority;
+
+              /** <strong>Required.</strong> The start time for the override. */
+              @SerializedName("starts_at")
+              StartsAt startsAt;
+
+              /** <strong>Required.</strong> The type of override to add. */
+              @SerializedName("type")
+              Type type;
+
+              private Add(
+                  EndsAt endsAt,
+                  Map<String, Object> extraParams,
+                  Object lookupKey,
+                  Map<String, String> metadata,
+                  OverwritePrice overwritePrice,
+                  Long priority,
+                  StartsAt startsAt,
+                  Type type) {
+                this.endsAt = endsAt;
+                this.extraParams = extraParams;
+                this.lookupKey = lookupKey;
+                this.metadata = metadata;
+                this.overwritePrice = overwritePrice;
+                this.priority = priority;
+                this.startsAt = startsAt;
+                this.type = type;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private EndsAt endsAt;
+
+                private Map<String, Object> extraParams;
+
+                private Object lookupKey;
+
+                private Map<String, String> metadata;
+
+                private OverwritePrice overwritePrice;
+
+                private Long priority;
+
+                private StartsAt startsAt;
+
+                private Type type;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                        .PricingOverrideAction.Add
+                    build() {
+                  return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                      .PricingOverrideAction.Add(
+                      this.endsAt,
+                      this.extraParams,
+                      this.lookupKey,
+                      this.metadata,
+                      this.overwritePrice,
+                      this.priority,
+                      this.startsAt,
+                      this.type);
+                }
+
+                /** <strong>Required.</strong> The end time for the override. */
+                public Builder setEndsAt(
+                    ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                            .PricingOverrideAction.Add.EndsAt
+                        endsAt) {
+                  this.endsAt = endsAt;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** A lookup key for the override. */
+                public Builder setLookupKey(String lookupKey) {
+                  this.lookupKey = lookupKey;
+                  return this;
+                }
+
+                /** A lookup key for the override. */
+                public Builder setLookupKey(EmptyParam lookupKey) {
+                  this.lookupKey = lookupKey;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `metadata` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add#metadata}
+                 * for the field documentation.
+                 */
+                public Builder putMetadata(String key, String value) {
+                  if (this.metadata == null) {
+                    this.metadata = new HashMap<>();
+                  }
+                  this.metadata.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add#metadata}
+                 * for the field documentation.
+                 */
+                public Builder putAllMetadata(Map<String, String> map) {
+                  if (this.metadata == null) {
+                    this.metadata = new HashMap<>();
+                  }
+                  this.metadata.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * Parameters for an overwrite_price override. Required if {@code type} is {@code
+                 * overwrite_price}.
+                 */
+                public Builder setOverwritePrice(
+                    ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                            .PricingOverrideAction.Add.OverwritePrice
+                        overwritePrice) {
+                  this.overwritePrice = overwritePrice;
+                  return this;
+                }
+
+                /**
+                 * The priority of this override relative to others. 0 is highest, 100 is lowest.
+                 * Defaults to 50.
+                 */
+                public Builder setPriority(Long priority) {
+                  this.priority = priority;
+                  return this;
+                }
+
+                /** <strong>Required.</strong> The start time for the override. */
+                public Builder setStartsAt(
+                    ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                            .PricingOverrideAction.Add.StartsAt
+                        startsAt) {
+                  this.startsAt = startsAt;
+                  return this;
+                }
+
+                /** <strong>Required.</strong> The type of override to add. */
+                public Builder setType(
+                    ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                            .PricingOverrideAction.Add.Type
+                        type) {
+                  this.type = type;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class EndsAt {
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The timestamp when the item ends. */
+                @SerializedName("timestamp")
+                Instant timestamp;
+
+                /** <strong>Required.</strong> The type of end time to apply. */
+                @SerializedName("type")
+                Type type;
+
+                private EndsAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
+                  this.extraParams = extraParams;
+                  this.timestamp = timestamp;
+                  this.type = type;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Map<String, Object> extraParams;
+
+                  private Instant timestamp;
+
+                  private Type type;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                          .PricingOverrideAction.Add.EndsAt
+                      build() {
+                    return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                        .PricingOverrideAction.Add.EndsAt(
+                        this.extraParams, this.timestamp, this.type);
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.EndsAt#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.EndsAt#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The timestamp when the item ends. */
+                  public Builder setTimestamp(Instant timestamp) {
+                    this.timestamp = timestamp;
+                    return this;
+                  }
+
+                  /** <strong>Required.</strong> The type of end time to apply. */
+                  public Builder setType(
+                      ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                              .PricingOverrideAction.Add.EndsAt.Type
+                          type) {
+                    this.type = type;
+                    return this;
+                  }
+                }
+
+                public enum Type implements ApiRequestParams.EnumParam {
+                  @SerializedName("billing_period_end")
+                  BILLING_PERIOD_END("billing_period_end"),
+
+                  @SerializedName("timestamp")
+                  TIMESTAMP("timestamp");
+
+                  @Getter(onMethod_ = {@Override})
+                  private final String value;
+
+                  Type(String value) {
+                    this.value = value;
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class OverwritePrice {
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** Defines whether the tiered price should be graduated or volume-based. */
+                @SerializedName("tiering_mode")
+                TieringMode tieringMode;
+
+                /** Each element represents a pricing tier. */
+                @SerializedName("tiers")
+                List<
+                        ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                            .PricingOverrideAction.Add.OverwritePrice.Tier>
+                    tiers;
+
+                /**
+                 * The per-unit amount to be charged, represented as a decimal string in minor
+                 * currency units.
+                 */
+                @SerializedName("unit_amount")
+                Object unitAmount;
+
+                private OverwritePrice(
+                    Map<String, Object> extraParams,
+                    TieringMode tieringMode,
+                    List<
+                            ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                                .PricingOverrideAction.Add.OverwritePrice.Tier>
+                        tiers,
+                    Object unitAmount) {
+                  this.extraParams = extraParams;
+                  this.tieringMode = tieringMode;
+                  this.tiers = tiers;
+                  this.unitAmount = unitAmount;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Map<String, Object> extraParams;
+
+                  private TieringMode tieringMode;
+
+                  private List<
+                          ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                              .PricingOverrideAction.Add.OverwritePrice.Tier>
+                      tiers;
+
+                  private Object unitAmount;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                          .PricingOverrideAction.Add.OverwritePrice
+                      build() {
+                    return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                        .PricingOverrideAction.Add.OverwritePrice(
+                        this.extraParams, this.tieringMode, this.tiers, this.unitAmount);
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.OverwritePrice#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.OverwritePrice#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** Defines whether the tiered price should be graduated or volume-based. */
+                  public Builder setTieringMode(
+                      ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                              .PricingOverrideAction.Add.OverwritePrice.TieringMode
+                          tieringMode) {
+                    this.tieringMode = tieringMode;
+                    return this;
+                  }
+
+                  /**
+                   * Add an element to `tiers` list. A list is initialized for the first
+                   * `add/addAll` call, and subsequent calls adds additional elements to the
+                   * original list. See {@link
+                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.OverwritePrice#tiers}
+                   * for the field documentation.
+                   */
+                  public Builder addTier(
+                      ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                              .PricingOverrideAction.Add.OverwritePrice.Tier
+                          element) {
+                    if (this.tiers == null) {
+                      this.tiers = new ArrayList<>();
+                    }
+                    this.tiers.add(element);
+                    return this;
+                  }
+
+                  /**
+                   * Add all elements to `tiers` list. A list is initialized for the first
+                   * `add/addAll` call, and subsequent calls adds additional elements to the
+                   * original list. See {@link
+                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.OverwritePrice#tiers}
+                   * for the field documentation.
+                   */
+                  public Builder addAllTier(
+                      List<
+                              ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                                  .PricingOverrideAction.Add.OverwritePrice.Tier>
+                          elements) {
+                    if (this.tiers == null) {
+                      this.tiers = new ArrayList<>();
+                    }
+                    this.tiers.addAll(elements);
+                    return this;
+                  }
+
+                  /**
+                   * The per-unit amount to be charged, represented as a decimal string in minor
+                   * currency units.
+                   */
+                  public Builder setUnitAmount(String unitAmount) {
+                    this.unitAmount = unitAmount;
+                    return this;
+                  }
+
+                  /**
+                   * The per-unit amount to be charged, represented as a decimal string in minor
+                   * currency units.
+                   */
+                  public Builder setUnitAmount(EmptyParam unitAmount) {
+                    this.unitAmount = unitAmount;
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Tier {
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /**
+                   * Price for the entire tier, represented as a decimal string in minor currency
+                   * units.
+                   */
+                  @SerializedName("flat_amount")
+                  Object flatAmount;
+
+                  /**
+                   * Per-unit price for units included in this tier, represented as a decimal string
+                   * in minor currency units.
+                   */
+                  @SerializedName("unit_amount")
+                  Object unitAmount;
+
+                  /** Up to and including this quantity will be contained in the tier. */
+                  @SerializedName("up_to_decimal")
+                  Object upToDecimal;
+
+                  /** No upper bound to this tier. */
+                  @SerializedName("up_to_inf")
+                  UpToInf upToInf;
+
+                  private Tier(
+                      Map<String, Object> extraParams,
+                      Object flatAmount,
+                      Object unitAmount,
+                      Object upToDecimal,
+                      UpToInf upToInf) {
+                    this.extraParams = extraParams;
+                    this.flatAmount = flatAmount;
+                    this.unitAmount = unitAmount;
+                    this.upToDecimal = upToDecimal;
+                    this.upToInf = upToInf;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Map<String, Object> extraParams;
+
+                    private Object flatAmount;
+
+                    private Object unitAmount;
+
+                    private Object upToDecimal;
+
+                    private UpToInf upToInf;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                            .PricingOverrideAction.Add.OverwritePrice.Tier
+                        build() {
+                      return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                          .PricingOverrideAction.Add.OverwritePrice.Tier(
+                          this.extraParams,
+                          this.flatAmount,
+                          this.unitAmount,
+                          this.upToDecimal,
+                          this.upToInf);
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.OverwritePrice.Tier#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.OverwritePrice.Tier#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /**
+                     * Price for the entire tier, represented as a decimal string in minor currency
+                     * units.
+                     */
+                    public Builder setFlatAmount(String flatAmount) {
+                      this.flatAmount = flatAmount;
+                      return this;
+                    }
+
+                    /**
+                     * Price for the entire tier, represented as a decimal string in minor currency
+                     * units.
+                     */
+                    public Builder setFlatAmount(EmptyParam flatAmount) {
+                      this.flatAmount = flatAmount;
+                      return this;
+                    }
+
+                    /**
+                     * Per-unit price for units included in this tier, represented as a decimal
+                     * string in minor currency units.
+                     */
+                    public Builder setUnitAmount(String unitAmount) {
+                      this.unitAmount = unitAmount;
+                      return this;
+                    }
+
+                    /**
+                     * Per-unit price for units included in this tier, represented as a decimal
+                     * string in minor currency units.
+                     */
+                    public Builder setUnitAmount(EmptyParam unitAmount) {
+                      this.unitAmount = unitAmount;
+                      return this;
+                    }
+
+                    /** Up to and including this quantity will be contained in the tier. */
+                    public Builder setUpToDecimal(BigDecimal upToDecimal) {
+                      this.upToDecimal = upToDecimal;
+                      return this;
+                    }
+
+                    /** Up to and including this quantity will be contained in the tier. */
+                    public Builder setUpToDecimal(EmptyParam upToDecimal) {
+                      this.upToDecimal = upToDecimal;
+                      return this;
+                    }
+
+                    /** No upper bound to this tier. */
+                    public Builder setUpToInf(
+                        ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                                .PricingOverrideAction.Add.OverwritePrice.Tier.UpToInf
+                            upToInf) {
+                      this.upToInf = upToInf;
+                      return this;
+                    }
+                  }
+
+                  public enum UpToInf implements ApiRequestParams.EnumParam {
+                    @SerializedName("inf")
+                    INF("inf");
+
+                    @Getter(onMethod_ = {@Override})
+                    private final String value;
+
+                    UpToInf(String value) {
+                      this.value = value;
+                    }
+                  }
+                }
+
+                public enum TieringMode implements ApiRequestParams.EnumParam {
+                  @SerializedName("graduated")
+                  GRADUATED("graduated"),
+
+                  @SerializedName("volume")
+                  VOLUME("volume");
+
+                  @Getter(onMethod_ = {@Override})
+                  private final String value;
+
+                  TieringMode(String value) {
+                    this.value = value;
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StartsAt {
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The timestamp when the item starts. */
+                @SerializedName("timestamp")
+                Instant timestamp;
+
+                /** <strong>Required.</strong> The type of start time to apply. */
+                @SerializedName("type")
+                Type type;
+
+                private StartsAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
+                  this.extraParams = extraParams;
+                  this.timestamp = timestamp;
+                  this.type = type;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Map<String, Object> extraParams;
+
+                  private Instant timestamp;
+
+                  private Type type;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                          .PricingOverrideAction.Add.StartsAt
+                      build() {
+                    return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                        .PricingOverrideAction.Add.StartsAt(
+                        this.extraParams, this.timestamp, this.type);
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.StartsAt#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.StartsAt#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The timestamp when the item starts. */
+                  public Builder setTimestamp(Instant timestamp) {
+                    this.timestamp = timestamp;
+                    return this;
+                  }
+
+                  /** <strong>Required.</strong> The type of start time to apply. */
+                  public Builder setType(
+                      ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                              .PricingOverrideAction.Add.StartsAt.Type
+                          type) {
+                    this.type = type;
+                    return this;
+                  }
+                }
+
+                public enum Type implements ApiRequestParams.EnumParam {
+                  @SerializedName("billing_period_start")
+                  BILLING_PERIOD_START("billing_period_start"),
+
+                  @SerializedName("timestamp")
+                  TIMESTAMP("timestamp");
+
+                  @Getter(onMethod_ = {@Override})
+                  private final String value;
+
+                  Type(String value) {
+                    this.value = value;
+                  }
+                }
+              }
+
+              public enum Type implements ApiRequestParams.EnumParam {
+                @SerializedName("overwrite_price")
+                OVERWRITE_PRICE("overwrite_price");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                Type(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class InnerUpdate {
+              /** The updated end time for the override. */
+              @SerializedName("ends_at")
+              EndsAt endsAt;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** The ID of the pricing line override to update. */
+              @SerializedName("id")
+              Object id;
+
+              /** A lookup key for the override to update. */
+              @SerializedName("lookup_key")
+              Object lookupKey;
+
+              /** Set of key-value pairs that you can attach to an object. */
+              @SerializedName("metadata")
+              Map<String, String> metadata;
+
+              /** The updated start time for the override. */
+              @SerializedName("starts_at")
+              StartsAt startsAt;
+
+              private InnerUpdate(
+                  EndsAt endsAt,
+                  Map<String, Object> extraParams,
+                  Object id,
+                  Object lookupKey,
+                  Map<String, String> metadata,
+                  StartsAt startsAt) {
+                this.endsAt = endsAt;
+                this.extraParams = extraParams;
+                this.id = id;
+                this.lookupKey = lookupKey;
+                this.metadata = metadata;
+                this.startsAt = startsAt;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private EndsAt endsAt;
+
+                private Map<String, Object> extraParams;
+
+                private Object id;
+
+                private Object lookupKey;
+
+                private Map<String, String> metadata;
+
+                private StartsAt startsAt;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                        .PricingOverrideAction.InnerUpdate
+                    build() {
+                  return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                      .PricingOverrideAction.InnerUpdate(
+                      this.endsAt,
+                      this.extraParams,
+                      this.id,
+                      this.lookupKey,
+                      this.metadata,
+                      this.startsAt);
+                }
+
+                /** The updated end time for the override. */
+                public Builder setEndsAt(
+                    ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                            .PricingOverrideAction.InnerUpdate.EndsAt
+                        endsAt) {
+                  this.endsAt = endsAt;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.InnerUpdate#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.InnerUpdate#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** The ID of the pricing line override to update. */
+                public Builder setId(String id) {
+                  this.id = id;
+                  return this;
+                }
+
+                /** The ID of the pricing line override to update. */
+                public Builder setId(EmptyParam id) {
+                  this.id = id;
+                  return this;
+                }
+
+                /** A lookup key for the override to update. */
+                public Builder setLookupKey(String lookupKey) {
+                  this.lookupKey = lookupKey;
+                  return this;
+                }
+
+                /** A lookup key for the override to update. */
+                public Builder setLookupKey(EmptyParam lookupKey) {
+                  this.lookupKey = lookupKey;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `metadata` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.InnerUpdate#metadata}
+                 * for the field documentation.
+                 */
+                public Builder putMetadata(String key, String value) {
+                  if (this.metadata == null) {
+                    this.metadata = new HashMap<>();
+                  }
+                  this.metadata.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.InnerUpdate#metadata}
+                 * for the field documentation.
+                 */
+                public Builder putAllMetadata(Map<String, String> map) {
+                  if (this.metadata == null) {
+                    this.metadata = new HashMap<>();
+                  }
+                  this.metadata.putAll(map);
+                  return this;
+                }
+
+                /** The updated start time for the override. */
+                public Builder setStartsAt(
+                    ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                            .PricingOverrideAction.InnerUpdate.StartsAt
+                        startsAt) {
+                  this.startsAt = startsAt;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class EndsAt {
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The timestamp when the item ends. */
+                @SerializedName("timestamp")
+                Instant timestamp;
+
+                /** <strong>Required.</strong> The type of end time to apply. */
+                @SerializedName("type")
+                Type type;
+
+                private EndsAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
+                  this.extraParams = extraParams;
+                  this.timestamp = timestamp;
+                  this.type = type;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Map<String, Object> extraParams;
+
+                  private Instant timestamp;
+
+                  private Type type;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                          .PricingOverrideAction.InnerUpdate.EndsAt
+                      build() {
+                    return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                        .PricingOverrideAction.InnerUpdate.EndsAt(
+                        this.extraParams, this.timestamp, this.type);
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.InnerUpdate.EndsAt#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.InnerUpdate.EndsAt#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The timestamp when the item ends. */
+                  public Builder setTimestamp(Instant timestamp) {
+                    this.timestamp = timestamp;
+                    return this;
+                  }
+
+                  /** <strong>Required.</strong> The type of end time to apply. */
+                  public Builder setType(
+                      ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                              .PricingOverrideAction.InnerUpdate.EndsAt.Type
+                          type) {
+                    this.type = type;
+                    return this;
+                  }
+                }
+
+                public enum Type implements ApiRequestParams.EnumParam {
+                  @SerializedName("billing_period_end")
+                  BILLING_PERIOD_END("billing_period_end"),
+
+                  @SerializedName("timestamp")
+                  TIMESTAMP("timestamp");
+
+                  @Getter(onMethod_ = {@Override})
+                  private final String value;
+
+                  Type(String value) {
+                    this.value = value;
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StartsAt {
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The timestamp when the item starts. */
+                @SerializedName("timestamp")
+                Instant timestamp;
+
+                /** <strong>Required.</strong> The type of start time to apply. */
+                @SerializedName("type")
+                Type type;
+
+                private StartsAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
+                  this.extraParams = extraParams;
+                  this.timestamp = timestamp;
+                  this.type = type;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Map<String, Object> extraParams;
+
+                  private Instant timestamp;
+
+                  private Type type;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                          .PricingOverrideAction.InnerUpdate.StartsAt
+                      build() {
+                    return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                        .PricingOverrideAction.InnerUpdate.StartsAt(
+                        this.extraParams, this.timestamp, this.type);
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.InnerUpdate.StartsAt#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.InnerUpdate.StartsAt#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The timestamp when the item starts. */
+                  public Builder setTimestamp(Instant timestamp) {
+                    this.timestamp = timestamp;
+                    return this;
+                  }
+
+                  /** <strong>Required.</strong> The type of start time to apply. */
+                  public Builder setType(
+                      ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                              .PricingOverrideAction.InnerUpdate.StartsAt.Type
+                          type) {
+                    this.type = type;
+                    return this;
+                  }
+                }
+
+                public enum Type implements ApiRequestParams.EnumParam {
+                  @SerializedName("billing_period_start")
+                  BILLING_PERIOD_START("billing_period_start"),
+
+                  @SerializedName("timestamp")
+                  TIMESTAMP("timestamp");
+
+                  @Getter(onMethod_ = {@Override})
+                  private final String value;
+
+                  Type(String value) {
+                    this.value = value;
+                  }
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Remove {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** The ID of the pricing line override to remove. */
+              @SerializedName("id")
+              Object id;
+
+              /** A lookup key for the override to remove. */
+              @SerializedName("lookup_key")
+              Object lookupKey;
+
+              private Remove(Map<String, Object> extraParams, Object id, Object lookupKey) {
+                this.extraParams = extraParams;
+                this.id = id;
+                this.lookupKey = lookupKey;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Object id;
+
+                private Object lookupKey;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                        .PricingOverrideAction.Remove
+                    build() {
+                  return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                      .PricingOverrideAction.Remove(this.extraParams, this.id, this.lookupKey);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Remove#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Remove#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** The ID of the pricing line override to remove. */
+                public Builder setId(String id) {
+                  this.id = id;
+                  return this;
+                }
+
+                /** The ID of the pricing line override to remove. */
+                public Builder setId(EmptyParam id) {
+                  this.id = id;
+                  return this;
+                }
+
+                /** A lookup key for the override to remove. */
+                public Builder setLookupKey(String lookupKey) {
+                  this.lookupKey = lookupKey;
+                  return this;
+                }
+
+                /** A lookup key for the override to remove. */
+                public Builder setLookupKey(EmptyParam lookupKey) {
+                  this.lookupKey = lookupKey;
+                  return this;
+                }
+              }
+            }
+
+            public enum Type implements ApiRequestParams.EnumParam {
+              @SerializedName("add")
+              ADD("add"),
+
+              @SerializedName("remove")
+              REMOVE("remove"),
+
+              @SerializedName("update")
+              UPDATE("update");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Type(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class QuantityChange {
+            /** <strong>Required.</strong> When this quantity change takes effect. */
+            @SerializedName("effective_at")
+            EffectiveAt effectiveAt;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> The quantity to set. */
+            @SerializedName("set")
+            Object set;
+
+            private QuantityChange(
+                EffectiveAt effectiveAt, Map<String, Object> extraParams, Object set) {
+              this.effectiveAt = effectiveAt;
+              this.extraParams = extraParams;
+              this.set = set;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private EffectiveAt effectiveAt;
+
+              private Map<String, Object> extraParams;
+
+              private Object set;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                      .QuantityChange
+                  build() {
+                return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                    .QuantityChange(this.effectiveAt, this.extraParams, this.set);
+              }
+
+              /** <strong>Required.</strong> When this quantity change takes effect. */
+              public Builder setEffectiveAt(
+                  ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.QuantityChange
+                          .EffectiveAt
+                      effectiveAt) {
+                this.effectiveAt = effectiveAt;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.QuantityChange#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.QuantityChange#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> The quantity to set. */
+              public Builder setSet(BigDecimal set) {
+                this.set = set;
+                return this;
+              }
+
+              /** <strong>Required.</strong> The quantity to set. */
+              public Builder setSet(EmptyParam set) {
+                this.set = set;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class EffectiveAt {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** The timestamp for the effective at. */
+              @SerializedName("timestamp")
+              Instant timestamp;
+
+              /** <strong>Required.</strong> The type of the effective at. */
+              @SerializedName("type")
+              Type type;
+
+              private EffectiveAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
+                this.extraParams = extraParams;
+                this.timestamp = timestamp;
+                this.type = type;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Instant timestamp;
+
+                private Type type;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                        .QuantityChange.EffectiveAt
+                    build() {
+                  return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                      .QuantityChange.EffectiveAt(this.extraParams, this.timestamp, this.type);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.QuantityChange.EffectiveAt#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.QuantityChange.EffectiveAt#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** The timestamp for the effective at. */
+                public Builder setTimestamp(Instant timestamp) {
+                  this.timestamp = timestamp;
+                  return this;
+                }
+
+                /** <strong>Required.</strong> The type of the effective at. */
+                public Builder setType(
+                    ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
+                            .QuantityChange.EffectiveAt.Type
+                        type) {
+                  this.type = type;
+                  return this;
+                }
+              }
+
+              public enum Type implements ApiRequestParams.EnumParam {
+                @SerializedName("timestamp")
+                TIMESTAMP("timestamp");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                Type(String value) {
+                  this.value = value;
+                }
+              }
+            }
           }
         }
       }
@@ -2778,10 +5390,6 @@ public class ContractUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** <strong>Required.</strong> The ID of the V1 price to overwrite. */
-        @SerializedName("price")
-        Object price;
-
         /** Defines whether the tiered price should be graduated or volume-based. */
         @SerializedName("tiering_mode")
         TieringMode tieringMode;
@@ -2799,12 +5407,10 @@ public class ContractUpdateParams extends ApiRequestParams {
 
         private OverwritePrice(
             Map<String, Object> extraParams,
-            Object price,
             TieringMode tieringMode,
             List<ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice.Tier> tiers,
             Object unitAmount) {
           this.extraParams = extraParams;
-          this.price = price;
           this.tieringMode = tieringMode;
           this.tiers = tiers;
           this.unitAmount = unitAmount;
@@ -2817,8 +5423,6 @@ public class ContractUpdateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private Object price;
-
           private TieringMode tieringMode;
 
           private List<ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice.Tier> tiers;
@@ -2828,7 +5432,7 @@ public class ContractUpdateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice build() {
             return new ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice(
-                this.extraParams, this.price, this.tieringMode, this.tiers, this.unitAmount);
+                this.extraParams, this.tieringMode, this.tiers, this.unitAmount);
           }
 
           /**
@@ -2858,18 +5462,6 @@ public class ContractUpdateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
-            return this;
-          }
-
-          /** <strong>Required.</strong> The ID of the V1 price to overwrite. */
-          public Builder setPrice(String price) {
-            this.price = price;
-            return this;
-          }
-
-          /** <strong>Required.</strong> The ID of the V1 price to overwrite. */
-          public Builder setPrice(EmptyParam price) {
-            this.price = price;
             return this;
           }
 
@@ -3218,10 +5810,7 @@ public class ContractUpdateParams extends ApiRequestParams {
 
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("multiplier")
-        MULTIPLIER("multiplier"),
-
-        @SerializedName("overwrite_price")
-        OVERWRITE_PRICE("overwrite_price");
+        MULTIPLIER("multiplier");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -3638,12 +6227,6 @@ public class ContractUpdateParams extends ApiRequestParams {
   }
 
   public enum Include implements ApiRequestParams.EnumParam {
-    @SerializedName("contract_line_details")
-    CONTRACT_LINE_DETAILS("contract_line_details"),
-
-    @SerializedName("license_quantities")
-    LICENSE_QUANTITIES("license_quantities"),
-
     @SerializedName("one_time_fees")
     ONE_TIME_FEES("one_time_fees"),
 
