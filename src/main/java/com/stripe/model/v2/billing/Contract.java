@@ -19,6 +19,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Contract extends StripeObject implements HasId {
+  /** The billing cycle anchor for the contract. */
+  @SerializedName("billing_cycle_anchor")
+  BillingCycleAnchor billingCycleAnchor;
+
   /** The billing settings for the contract. */
   @SerializedName("billing_settings")
   BillingSettings billingSettings;
@@ -96,6 +100,16 @@ public class Contract extends StripeObject implements HasId {
   /** Information about the contract status transitions. */
   @SerializedName("status_details")
   StatusDetails statusDetails;
+
+  /** The billing cycle anchor for the contract. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingCycleAnchor extends StripeObject {
+    /** The billing cycle anchor as a UTC timestamp. */
+    @SerializedName("timestamp")
+    Instant timestamp;
+  }
 
   /** The billing settings for the contract. */
   @Getter

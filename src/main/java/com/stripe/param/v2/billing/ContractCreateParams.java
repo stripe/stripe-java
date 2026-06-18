@@ -17,6 +17,14 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class ContractCreateParams extends ApiRequestParams {
+  /**
+   * The billing cycle anchor for the contract. If not provided, defaults to the pricing line start
+   * time. It is only at the top-level of the contract with no option to override at the pricing
+   * line level.
+   */
+  @SerializedName("billing_cycle_anchor")
+  BillingCycleAnchor billingCycleAnchor;
+
   /** The billing settings for the contract. */
   @SerializedName("billing_settings")
   BillingSettings billingSettings;
@@ -62,6 +70,7 @@ public class ContractCreateParams extends ApiRequestParams {
   List<ContractCreateParams.PricingOverride> pricingOverrides;
 
   private ContractCreateParams(
+      BillingCycleAnchor billingCycleAnchor,
       BillingSettings billingSettings,
       String contractNumber,
       String currency,
@@ -71,6 +80,7 @@ public class ContractCreateParams extends ApiRequestParams {
       List<ContractCreateParams.OneTimeFee> oneTimeFees,
       List<ContractCreateParams.PricingLine> pricingLines,
       List<ContractCreateParams.PricingOverride> pricingOverrides) {
+    this.billingCycleAnchor = billingCycleAnchor;
     this.billingSettings = billingSettings;
     this.contractNumber = contractNumber;
     this.currency = currency;
@@ -87,6 +97,8 @@ public class ContractCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private BillingCycleAnchor billingCycleAnchor;
+
     private BillingSettings billingSettings;
 
     private String contractNumber;
@@ -108,6 +120,7 @@ public class ContractCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ContractCreateParams build() {
       return new ContractCreateParams(
+          this.billingCycleAnchor,
           this.billingSettings,
           this.contractNumber,
           this.currency,
@@ -117,6 +130,17 @@ public class ContractCreateParams extends ApiRequestParams {
           this.oneTimeFees,
           this.pricingLines,
           this.pricingOverrides);
+    }
+
+    /**
+     * The billing cycle anchor for the contract. If not provided, defaults to the pricing line
+     * start time. It is only at the top-level of the contract with no option to override at the
+     * pricing line level.
+     */
+    public Builder setBillingCycleAnchor(
+        ContractCreateParams.BillingCycleAnchor billingCycleAnchor) {
+      this.billingCycleAnchor = billingCycleAnchor;
+      return this;
     }
 
     /** The billing settings for the contract. */
@@ -291,6 +315,254 @@ public class ContractCreateParams extends ApiRequestParams {
       }
       this.pricingOverrides.addAll(elements);
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingCycleAnchor {
+    /** Configuration for determining the billing cycle anchor by calendar fields. */
+    @SerializedName("config")
+    Config config;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** A specific timestamp to use as the billing cycle anchor. */
+    @SerializedName("timestamp")
+    Instant timestamp;
+
+    /** <strong>Required.</strong> The type of billing cycle anchor. */
+    @SerializedName("type")
+    Type type;
+
+    private BillingCycleAnchor(
+        Config config, Map<String, Object> extraParams, Instant timestamp, Type type) {
+      this.config = config;
+      this.extraParams = extraParams;
+      this.timestamp = timestamp;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Config config;
+
+      private Map<String, Object> extraParams;
+
+      private Instant timestamp;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ContractCreateParams.BillingCycleAnchor build() {
+        return new ContractCreateParams.BillingCycleAnchor(
+            this.config, this.extraParams, this.timestamp, this.type);
+      }
+
+      /** Configuration for determining the billing cycle anchor by calendar fields. */
+      public Builder setConfig(ContractCreateParams.BillingCycleAnchor.Config config) {
+        this.config = config;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ContractCreateParams.BillingCycleAnchor#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ContractCreateParams.BillingCycleAnchor#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** A specific timestamp to use as the billing cycle anchor. */
+      public Builder setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp;
+        return this;
+      }
+
+      /** <strong>Required.</strong> The type of billing cycle anchor. */
+      public Builder setType(ContractCreateParams.BillingCycleAnchor.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Config {
+      /** <strong>Required.</strong> Day of month (1-31). */
+      @SerializedName("day_of_month")
+      Long dayOfMonth;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Hour of day in UTC (0-23). */
+      @SerializedName("hour")
+      Long hour;
+
+      /** Minute of hour (0-59). */
+      @SerializedName("minute")
+      Long minute;
+
+      /** Month of year (1-12). */
+      @SerializedName("month_of_year")
+      Long monthOfYear;
+
+      /** Second of minute (0-59). */
+      @SerializedName("second")
+      Long second;
+
+      private Config(
+          Long dayOfMonth,
+          Map<String, Object> extraParams,
+          Long hour,
+          Long minute,
+          Long monthOfYear,
+          Long second) {
+        this.dayOfMonth = dayOfMonth;
+        this.extraParams = extraParams;
+        this.hour = hour;
+        this.minute = minute;
+        this.monthOfYear = monthOfYear;
+        this.second = second;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long dayOfMonth;
+
+        private Map<String, Object> extraParams;
+
+        private Long hour;
+
+        private Long minute;
+
+        private Long monthOfYear;
+
+        private Long second;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ContractCreateParams.BillingCycleAnchor.Config build() {
+          return new ContractCreateParams.BillingCycleAnchor.Config(
+              this.dayOfMonth,
+              this.extraParams,
+              this.hour,
+              this.minute,
+              this.monthOfYear,
+              this.second);
+        }
+
+        /** <strong>Required.</strong> Day of month (1-31). */
+        public Builder setDayOfMonth(Long dayOfMonth) {
+          this.dayOfMonth = dayOfMonth;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ContractCreateParams.BillingCycleAnchor.Config#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ContractCreateParams.BillingCycleAnchor.Config#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Hour of day in UTC (0-23). */
+        public Builder setHour(Long hour) {
+          this.hour = hour;
+          return this;
+        }
+
+        /** Minute of hour (0-59). */
+        public Builder setMinute(Long minute) {
+          this.minute = minute;
+          return this;
+        }
+
+        /** Month of year (1-12). */
+        public Builder setMonthOfYear(Long monthOfYear) {
+          this.monthOfYear = monthOfYear;
+          return this;
+        }
+
+        /** Second of minute (0-59). */
+        public Builder setSecond(Long second) {
+          this.second = second;
+          return this;
+        }
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("config")
+      CONFIG("config"),
+
+      @SerializedName("timestamp")
+      TIMESTAMP("timestamp");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
+      }
     }
   }
 
