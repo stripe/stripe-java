@@ -283,6 +283,13 @@ public class ReceivedDebit extends StripeObject implements HasId {
     Failed failed;
 
     /**
+     * Information that elaborates on the {@code returned} status of a ReceivedDebit. It is only
+     * present when the ReceivedDebit status is {@code returned}.
+     */
+    @SerializedName("returned")
+    Returned returned;
+
+    /**
      * Information that elaborates on the {@code failed} status of a ReceivedDebit. It is only
      * present when the ReceivedDebit status is {@code failed}.
      */
@@ -293,8 +300,25 @@ public class ReceivedDebit extends StripeObject implements HasId {
       /**
        * Open Enum. The reason for the failure of the ReceivedDebit.
        *
-       * <p>One of {@code financial_address_inactive}, {@code insufficient_funds}, or {@code
-       * stripe_rejected}.
+       * <p>One of {@code capability_inactive}, {@code financial_address_inactive}, {@code
+       * insufficient_funds}, or {@code stripe_rejected}.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
+
+    /**
+     * Information that elaborates on the {@code returned} status of a ReceivedDebit. It is only
+     * present when the ReceivedDebit status is {@code returned}.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Returned extends StripeObject {
+      /**
+       * Open Enum. The reason the ReceivedDebit was returned.
+       *
+       * <p>Equal to {@code originator_initiated}.
        */
       @SerializedName("reason")
       String reason;
@@ -320,6 +344,14 @@ public class ReceivedDebit extends StripeObject implements HasId {
      */
     @SerializedName("failed_at")
     Instant failedAt;
+
+    /**
+     * The time when the ReceivedDebit was marked as {@code returned}. Represented as a RFC 3339
+     * date &amp; time UTC value in millisecond precision, for example: {@code
+     * 2022-09-18T13:22:18.123Z}.
+     */
+    @SerializedName("returned_at")
+    Instant returnedAt;
 
     /**
      * The time when the ReceivedDebit was marked as {@code succeeded}. Represented as a RFC 3339

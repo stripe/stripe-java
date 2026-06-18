@@ -6,6 +6,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.v2.Amount;
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -120,7 +121,10 @@ public class OutboundTransfer extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
-  /** Status details for an OutboundTransfer in a {@code failed} or {@code returned} state. */
+  /**
+   * Status details for an OutboundTransfer in a {@code processing}, {@code failed}, or {@code
+   * returned} state.
+   */
   @SerializedName("status_details")
   StatusDetails statusDetails;
 
@@ -167,7 +171,10 @@ public class OutboundTransfer extends StripeObject implements HasId {
     String financialAccount;
   }
 
-  /** Status details for an OutboundTransfer in a {@code failed} or {@code returned} state. */
+  /**
+   * Status details for an OutboundTransfer in a {@code processing}, {@code failed}, or {@code
+   * returned} state.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -175,6 +182,10 @@ public class OutboundTransfer extends StripeObject implements HasId {
     /** The {@code failed} status reason. */
     @SerializedName("failed")
     Failed failed;
+
+    /** The {@code processing} status details. */
+    @SerializedName("processing")
+    Processing processing;
 
     /** The {@code returned} status reason. */
     @SerializedName("returned")
@@ -188,10 +199,25 @@ public class OutboundTransfer extends StripeObject implements HasId {
       /**
        * Open Enum. The {@code failed} status reason.
        *
-       * <p>One of {@code payout_method_amount_limit_exceeded}, {@code payout_method_declined},
-       * {@code payout_method_does_not_exist}, {@code payout_method_expired}, {@code
-       * payout_method_unsupported}, {@code payout_method_usage_frequency_limit_exceeded}, or {@code
-       * unknown_failure}.
+       * <p>One of {@code fx_rate_drift_exceeded_after_review}, {@code
+       * payout_method_amount_limit_exceeded}, {@code payout_method_declined}, {@code
+       * payout_method_does_not_exist}, {@code payout_method_expired}, {@code
+       * payout_method_unsupported}, {@code payout_method_usage_frequency_limit_exceeded}, {@code
+       * review_rejected}, or {@code unknown_failure}.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
+
+    /** The {@code processing} status details. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Processing extends StripeObject {
+      /**
+       * Open Enum. The {@code processing} status reason.
+       *
+       * <p>Equal to {@code under_review}.
        */
       @SerializedName("reason")
       String reason;
@@ -266,6 +292,30 @@ public class OutboundTransfer extends StripeObject implements HasId {
     /** The payout method which the OutboundTransfer uses to send payout. */
     @SerializedName("payout_method")
     String payoutMethod;
+
+    /** Payout method options for the OutboundTransfer. */
+    @SerializedName("payout_method_options")
+    PayoutMethodOptions payoutMethodOptions;
+
+    /** Payout method options for the OutboundTransfer. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PayoutMethodOptions extends StripeObject {
+      /** Options for bank account payout methods. */
+      @SerializedName("bank_account")
+      BankAccount bankAccount;
+
+      /** Options for bank account payout methods. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BankAccount extends StripeObject {
+        /** The preferred networks to use for this OutboundTransfer. */
+        @SerializedName("preferred_networks")
+        List<String> preferredNetworks;
+      }
+    }
   }
 
   /**

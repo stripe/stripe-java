@@ -154,19 +154,19 @@ public class Account extends StripeObject implements HasId {
     Merchant merchant;
 
     /**
+     * The Money Manager Configuration allows the Account to store and move funds using
+     * FinancialAccounts.
+     */
+    @SerializedName("money_manager")
+    MoneyManager moneyManager;
+
+    /**
      * The Recipient Configuration allows the Account to receive funds. Utilize this configuration
      * if the Account will not be the Merchant of Record, like with Separate Charges &amp;
      * Transfers, or Destination Charges without on_behalf_of set.
      */
     @SerializedName("recipient")
     Recipient recipient;
-
-    /**
-     * The Storer Configuration allows the Account to store and move funds using stored-value
-     * FinancialAccounts.
-     */
-    @SerializedName("storer")
-    Storer storer;
 
     /** The CardCreator Configuration allows the Account to create and issue cards to users. */
     @Getter
@@ -2281,6 +2281,10 @@ public class Account extends StripeObject implements HasId {
         /** Capabilities that enable the merchant to manage their Stripe Balance (/v1/balance). */
         @SerializedName("stripe_balance")
         StripeBalance stripeBalance;
+
+        /** Allow the merchant to process Sunbit payments. */
+        @SerializedName("sunbit_payments")
+        SunbitPayments sunbitPayments;
 
         /** Allow the merchant to process Swish payments. */
         @SerializedName("swish_payments")
@@ -6196,6 +6200,101 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
+        /** Allow the merchant to process Sunbit payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SunbitPayments extends StripeObject {
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<Account.Configuration.Merchant.Capabilities.SunbitPayments.StatusDetail>
+              statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+             * requirements_pending_verification}, {@code restricted_other}, {@code
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
+        }
+
         /** Allow the merchant to process Swish payments. */
         @Getter
         @Setter
@@ -6879,6 +6978,3169 @@ public class Account extends StripeObject implements HasId {
     }
 
     /**
+     * The Money Manager Configuration allows the Account to store and move funds using
+     * FinancialAccounts.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MoneyManager extends StripeObject {
+      /**
+       * Indicates whether the money manager configuration is active. You cannot deactivate (or
+       * reactivate) the money manager configuration by updating this property.
+       */
+      @SerializedName("applied")
+      Boolean applied;
+
+      /** Capabilities that have been requested on the Money Manager Configuration. */
+      @SerializedName("capabilities")
+      Capabilities capabilities;
+
+      /** List of high-risk activities the business is involved in. */
+      @SerializedName("high_risk_activities")
+      List<String> highRiskActivities;
+
+      /** Description of the high-risk activities the business offers. */
+      @SerializedName("high_risk_activities_description")
+      String highRiskActivitiesDescription;
+
+      /** Description of the money services offered by the business. */
+      @SerializedName("money_services_description")
+      String moneyServicesDescription;
+
+      /** Indicates whether the business operates in any prohibited countries. */
+      @SerializedName("operates_in_prohibited_countries")
+      Boolean operatesInProhibitedCountries;
+
+      /** Does the business participate in any regulated activity. */
+      @SerializedName("participates_in_regulated_activity")
+      Boolean participatesInRegulatedActivity;
+
+      /**
+       * Primary purpose of the stored funds.
+       *
+       * <p>One of {@code charitable_donations}, {@code ecommerce_retail_payments}, {@code
+       * investment_purposes}, {@code other}, {@code payments_to_friends_or_family_abroad}, {@code
+       * payroll}, {@code personal_or_living_expenses}, {@code protect_wealth}, {@code
+       * purchase_goods_and_services}, {@code receive_payments_for_goods_and_services}, {@code
+       * tax_optimization}, {@code third_party_money_transmission}, or {@code treasury_management}.
+       */
+      @SerializedName("purpose_of_funds")
+      String purposeOfFunds;
+
+      /** Description of the purpose of the stored funds. */
+      @SerializedName("purpose_of_funds_description")
+      String purposeOfFundsDescription;
+
+      /** Details of the regulated activity if the business participates in one. */
+      @SerializedName("regulated_activity")
+      RegulatedActivity regulatedActivity;
+
+      /**
+       * The source of funds for the business, e.g. profits, income, venture capital, etc.
+       *
+       * <p>One of {@code business_loans}, {@code grants}, {@code inter_company_funds}, {@code
+       * investment_proceeds}, {@code legal_settlement}, {@code owners_capital}, {@code
+       * pension_retirement}, {@code sales_of_assets}, {@code sales_of_goods_and_services}, {@code
+       * tax_refund}, {@code third_party_funds}, or {@code treasury_reserves}.
+       */
+      @SerializedName("source_of_funds")
+      String sourceOfFunds;
+
+      /** Description of the source of funds for the business' account. */
+      @SerializedName("source_of_funds_description")
+      String sourceOfFundsDescription;
+
+      /** Capabilities that have been requested on the Money Manager Configuration. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Capabilities extends StripeObject {
+        /** Can send or receive business storage-type funds on Stripe. */
+        @SerializedName("business_storage")
+        BusinessStorage businessStorage;
+
+        /** Can send or receive consumer storage-type funds on Stripe. */
+        @SerializedName("consumer_storage")
+        ConsumerStorage consumerStorage;
+
+        /** Hash containing capabilities related to InboundTransfers. */
+        @SerializedName("inbound_transfers")
+        InboundTransfers inboundTransfers;
+
+        /**
+         * Hash containing capabilities related to <a
+         * href="https://stripe.com/api/treasury/outbound_payments?api-version=preview">OutboundPayments</a>.
+         */
+        @SerializedName("outbound_payments")
+        OutboundPayments outboundPayments;
+
+        /**
+         * Hash containing capabilities related to <a
+         * href="https://stripe.com/api/treasury/outbound_transfers?api-version=preview">OutboundTransfers</a>.
+         */
+        @SerializedName("outbound_transfers")
+        OutboundTransfers outboundTransfers;
+
+        /** Hash containing capabilities related to ReceivedCredits. */
+        @SerializedName("received_credits")
+        ReceivedCredits receivedCredits;
+
+        /** Hash containing capabilities related to ReceivedDebits. */
+        @SerializedName("received_debits")
+        ReceivedDebits receivedDebits;
+
+        /** Can send or receive business storage-type funds on Stripe. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BusinessStorage extends StripeObject {
+          /** Can receive business storage-type funds on Stripe. */
+          @SerializedName("inbound")
+          Inbound inbound;
+
+          /** Can send business storage-type funds on Stripe. */
+          @SerializedName("outbound")
+          Outbound outbound;
+
+          /** Can receive business storage-type funds on Stripe. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Inbound extends StripeObject {
+            /** Can receive business storage-type funds on Stripe in AUD. */
+            @SerializedName("aud")
+            Aud aud;
+
+            /** Can receive business storage-type funds on Stripe in CAD. */
+            @SerializedName("cad")
+            Cad cad;
+
+            /** Can receive business storage-type funds on Stripe in EUR. */
+            @SerializedName("eur")
+            Eur eur;
+
+            /** Can receive business storage-type funds on Stripe in GBP. */
+            @SerializedName("gbp")
+            Gbp gbp;
+
+            /** Can receive business storage-type funds on Stripe in USD. */
+            @SerializedName("usd")
+            Usd usd;
+
+            /** Can receive business storage-type funds on Stripe in USDC. */
+            @SerializedName("usdc")
+            Usdc usdc;
+
+            /** Can receive business storage-type funds on Stripe in AUD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Aud extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Aud
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can receive business storage-type funds on Stripe in CAD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Cad extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Cad
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can receive business storage-type funds on Stripe in EUR. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Eur extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Eur
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can receive business storage-type funds on Stripe in GBP. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Gbp extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Gbp
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can receive business storage-type funds on Stripe in USD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Usd extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Usd
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can receive business storage-type funds on Stripe in USDC. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Usdc extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Usdc
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+          }
+
+          /** Can send business storage-type funds on Stripe. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Outbound extends StripeObject {
+            /** Can send business storage-type funds on Stripe in AUD. */
+            @SerializedName("aud")
+            Aud aud;
+
+            /** Can send business storage-type funds on Stripe in CAD. */
+            @SerializedName("cad")
+            Cad cad;
+
+            /** Can send business storage-type funds on Stripe in EUR. */
+            @SerializedName("eur")
+            Eur eur;
+
+            /** Can send business storage-type funds on Stripe in GBP. */
+            @SerializedName("gbp")
+            Gbp gbp;
+
+            /** Can send business storage-type funds on Stripe in USD. */
+            @SerializedName("usd")
+            Usd usd;
+
+            /** Can send business storage-type funds on Stripe in USDC. */
+            @SerializedName("usdc")
+            Usdc usdc;
+
+            /** Can send business storage-type funds on Stripe in AUD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Aud extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Aud
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can send business storage-type funds on Stripe in CAD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Cad extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Cad
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can send business storage-type funds on Stripe in EUR. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Eur extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Eur
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can send business storage-type funds on Stripe in GBP. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Gbp extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Gbp
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can send business storage-type funds on Stripe in USD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Usd extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Usd
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can send business storage-type funds on Stripe in USDC. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Usdc extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Usdc
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+          }
+        }
+
+        /** Can send or receive consumer storage-type funds on Stripe. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ConsumerStorage extends StripeObject {
+          /** Can receive consumer storage-type funds on Stripe. */
+          @SerializedName("inbound")
+          Inbound inbound;
+
+          /** Can send consumer storage-type funds on Stripe. */
+          @SerializedName("outbound")
+          Outbound outbound;
+
+          /** Can receive consumer storage-type funds on Stripe. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Inbound extends StripeObject {
+            /** Can receive consumer storage-type funds on Stripe in USD. */
+            @SerializedName("usd")
+            Usd usd;
+
+            /** Can receive consumer storage-type funds on Stripe in USDC. */
+            @SerializedName("usdc")
+            Usdc usdc;
+
+            /** Can receive consumer storage-type funds on Stripe in USD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Usd extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.ConsumerStorage.Inbound.Usd
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can receive consumer storage-type funds on Stripe in USDC. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Usdc extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.ConsumerStorage.Inbound.Usdc
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+          }
+
+          /** Can send consumer storage-type funds on Stripe. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Outbound extends StripeObject {
+            /** Can send consumer storage-type funds on Stripe in USD. */
+            @SerializedName("usd")
+            Usd usd;
+
+            /** Can send consumer storage-type funds on Stripe in USDC. */
+            @SerializedName("usdc")
+            Usdc usdc;
+
+            /** Can send consumer storage-type funds on Stripe in USD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Usd extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.ConsumerStorage.Outbound.Usd
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can send consumer storage-type funds on Stripe in USDC. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Usdc extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.ConsumerStorage.Outbound.Usdc
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+          }
+        }
+
+        /** Hash containing capabilities related to InboundTransfers. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class InboundTransfers extends StripeObject {
+          /**
+           * Can pull funds into a FinancialAccount from an external bank account owned by the user.
+           */
+          @SerializedName("bank_accounts")
+          BankAccounts bankAccounts;
+
+          /**
+           * Can pull funds into a FinancialAccount from an external bank account owned by the user.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class BankAccounts extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.InboundTransfers.BankAccounts
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+        }
+
+        /**
+         * Hash containing capabilities related to <a
+         * href="https://stripe.com/api/treasury/outbound_payments?api-version=preview">OutboundPayments</a>.
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class OutboundPayments extends StripeObject {
+          /**
+           * Can send funds from a FinancialAccount to a bank account owned by a different entity.
+           */
+          @SerializedName("bank_accounts")
+          BankAccounts bankAccounts;
+
+          /** Can send funds from a FinancialAccount to a debit card owned by a different entity. */
+          @SerializedName("cards")
+          Cards cards;
+
+          /**
+           * Can send funds from a FinancialAccount to a crypto wallet owned by a different entity.
+           */
+          @SerializedName("crypto_wallets")
+          CryptoWallets cryptoWallets;
+
+          /**
+           * Can send funds from a FinancialAccount to a FinancialAccount owned by a different
+           * entity.
+           */
+          @SerializedName("financial_accounts")
+          FinancialAccounts financialAccounts;
+
+          /** Can send funds from a FinancialAccount to someone else via paper check. */
+          @SerializedName("paper_checks")
+          PaperChecks paperChecks;
+
+          /**
+           * Can send funds from a FinancialAccount to a bank account owned by a different entity.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class BankAccounts extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.OutboundPayments.BankAccounts
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /** Can send funds from a FinancialAccount to a debit card owned by a different entity. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Cards extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.OutboundPayments.Cards
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Can send funds from a FinancialAccount to a crypto wallet owned by a different entity.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class CryptoWallets extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.OutboundPayments.CryptoWallets
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Can send funds from a FinancialAccount to a FinancialAccount owned by a different
+           * entity.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class FinancialAccounts extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.OutboundPayments
+                        .FinancialAccounts.StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /** Can send funds from a FinancialAccount to someone else via paper check. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class PaperChecks extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.OutboundPayments.PaperChecks
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+        }
+
+        /**
+         * Hash containing capabilities related to <a
+         * href="https://stripe.com/api/treasury/outbound_transfers?api-version=preview">OutboundTransfers</a>.
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class OutboundTransfers extends StripeObject {
+          /**
+           * Can send funds from a FinancialAccount to a bank account belonging to the same user.
+           */
+          @SerializedName("bank_accounts")
+          BankAccounts bankAccounts;
+
+          /**
+           * Can send funds from a FinancialAccount to a crypto wallet belonging to the same user.
+           */
+          @SerializedName("crypto_wallets")
+          CryptoWallets cryptoWallets;
+
+          /**
+           * Can send funds from a FinancialAccount to another FinancialAccount belonging to the
+           * same user.
+           */
+          @SerializedName("financial_accounts")
+          FinancialAccounts financialAccounts;
+
+          /**
+           * Can send funds from a FinancialAccount to a bank account belonging to the same user.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class BankAccounts extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.OutboundTransfers.BankAccounts
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Can send funds from a FinancialAccount to a crypto wallet belonging to the same user.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class CryptoWallets extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.OutboundTransfers.CryptoWallets
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Can send funds from a FinancialAccount to another FinancialAccount belonging to the
+           * same user.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class FinancialAccounts extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.OutboundTransfers
+                        .FinancialAccounts.StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+        }
+
+        /** Hash containing capabilities related to ReceivedCredits. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ReceivedCredits extends StripeObject {
+          /**
+           * Can receive credits to a bank-account like financial address to credit a
+           * FinancialAccount.
+           */
+          @SerializedName("bank_accounts")
+          BankAccounts bankAccounts;
+
+          /**
+           * Can receive credits to a crypto wallet like financial address to credit a
+           * FinancialAccount.
+           */
+          @SerializedName("crypto_wallets")
+          CryptoWallets cryptoWallets;
+
+          /**
+           * Can receive credits to a bank-account like financial address to credit a
+           * FinancialAccount.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class BankAccounts extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.ReceivedCredits.BankAccounts
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Can receive credits to a crypto wallet like financial address to credit a
+           * FinancialAccount.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class CryptoWallets extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.ReceivedCredits.CryptoWallets
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+        }
+
+        /** Hash containing capabilities related to ReceivedDebits. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ReceivedDebits extends StripeObject {
+          /** Can receive debits to a FinancialAccount from a bank account. */
+          @SerializedName("bank_accounts")
+          BankAccounts bankAccounts;
+
+          /** Can receive debits to a FinancialAccount from a bank account. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class BankAccounts extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.ReceivedDebits.BankAccounts
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+        }
+      }
+
+      /** Details of the regulated activity if the business participates in one. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RegulatedActivity extends StripeObject {
+        /**
+         * A detailed description of the regulated activities the business is licensed to conduct.
+         */
+        @SerializedName("description")
+        String description;
+
+        /**
+         * The license number or registration number assigned by the business's primary regulator.
+         */
+        @SerializedName("license_number")
+        String licenseNumber;
+
+        /**
+         * The country of the primary regulatory authority that oversees the business's regulated
+         * activities.
+         */
+        @SerializedName("primary_regulatory_authority_country")
+        String primaryRegulatoryAuthorityCountry;
+
+        /**
+         * The name of the primary regulatory authority that oversees the business's regulated
+         * activities.
+         */
+        @SerializedName("primary_regulatory_authority_name")
+        String primaryRegulatoryAuthorityName;
+      }
+    }
+
+    /**
      * The Recipient Configuration allows the Account to receive funds. Utilize this configuration
      * if the Account will not be the Merchant of Record, like with Separate Charges &amp;
      * Transfers, or Destination Charges without on_behalf_of set.
@@ -6938,6 +10200,41 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class BankAccounts extends StripeObject {
           /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over ACH
+           * rails.
+           */
+          @SerializedName("ach")
+          Ach ach;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over BECS
+           * rails.
+           */
+          @SerializedName("becs")
+          Becs becs;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over EFT
+           * rails.
+           */
+          @SerializedName("eft")
+          Eft eft;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over Fedwire
+           * or CHIPS.
+           */
+          @SerializedName("fedwire")
+          Fedwire fedwire;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over FPS
+           * rails.
+           */
+          @SerializedName("fps")
+          Fps fps;
+
+          /**
            * Enables this Account to receive OutboundPayments to linked bank accounts over real time
            * rails.
            */
@@ -6952,9 +10249,543 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("local")
           Local local;
 
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over NPP (real
+           * time) rails.
+           */
+          @SerializedName("npp")
+          Npp npp;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over RTP
+           * rails.
+           */
+          @SerializedName("rtp")
+          Rtp rtp;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over SEPA
+           * credit rails.
+           */
+          @SerializedName("sepa_credit")
+          SepaCredit sepaCredit;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over SEPA
+           * instant (real time) rails.
+           */
+          @SerializedName("sepa_instant")
+          SepaInstant sepaInstant;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over SWIFT.
+           */
+          @SerializedName("swift")
+          Swift swift;
+
           /** Enables this Account to receive OutboundPayments to linked bank accounts over wire. */
           @SerializedName("wire")
           Wire wire;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over ACH
+           * rails.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Ach extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Ach.StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over BECS
+           * rails.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Becs extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Becs.StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over EFT
+           * rails.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Eft extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Eft.StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over Fedwire
+           * or CHIPS.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Fedwire extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Fedwire.StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over FPS
+           * rails.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Fps extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Fps.StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
 
           /**
            * Enables this Account to receive OutboundPayments to linked bank accounts over real time
@@ -7086,6 +10917,505 @@ public class Account extends StripeObject implements HasId {
              */
             @SerializedName("status_details")
             List<Account.Configuration.Recipient.Capabilities.BankAccounts.Local.StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over NPP (real
+           * time) rails.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Npp extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Npp.StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over RTP
+           * rails.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Rtp extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Rtp.StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over SEPA
+           * credit rails.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class SepaCredit extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.SepaCredit.StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over SEPA
+           * instant (real time) rails.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class SepaInstant extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.SepaInstant.StatusDetail>
+                statusDetails;
+
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Protections extends StripeObject {
+              /** Protection details for PSP migration. */
+              @SerializedName("psp_migration")
+              PspMigration pspMigration;
+
+              /** Protection details for PSP migration. */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class PspMigration extends StripeObject {
+                /** The time until which the protection will expire, as a Unix timestamp. */
+                @SerializedName("expires_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long expiresAt;
+
+                /** The time at which the protection was requested, as a Unix timestamp. */
+                @SerializedName("requested_at")
+                @JsonAdapter(StringInt64TypeAdapter.class)
+                Long requestedAt;
+
+                /**
+                 * The current status of the protection.
+                 *
+                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                 * inactive}.
+                 */
+                @SerializedName("status")
+                String status;
+              }
+            }
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over SWIFT.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Swift extends StripeObject {
+            /**
+             * Protections applied to this capability, keyed by protection type (e.g.
+             * &quot;psp_migration&quot;).
+             */
+            @SerializedName("protections")
+            Protections protections;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Swift.StatusDetail>
                 statusDetails;
 
             /**
@@ -7815,1877 +12145,6 @@ public class Account extends StripeObject implements HasId {
         String type;
       }
     }
-
-    /**
-     * The Storer Configuration allows the Account to store and move funds using stored-value
-     * FinancialAccounts.
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Storer extends StripeObject {
-      /**
-       * Indicates whether the storer configuration is active. You cannot deactivate (or reactivate)
-       * the storer configuration by updating this property.
-       */
-      @SerializedName("applied")
-      Boolean applied;
-
-      /** Capabilities that have been requested on the Storer Configuration. */
-      @SerializedName("capabilities")
-      Capabilities capabilities;
-
-      /** List of high-risk activities the business is involved in. */
-      @SerializedName("high_risk_activities")
-      List<String> highRiskActivities;
-
-      /** Description of the high-risk activities the business offers. */
-      @SerializedName("high_risk_activities_description")
-      String highRiskActivitiesDescription;
-
-      /** Description of the money services offered by the business. */
-      @SerializedName("money_services_description")
-      String moneyServicesDescription;
-
-      /** Indicates whether the business operates in any prohibited countries. */
-      @SerializedName("operates_in_prohibited_countries")
-      Boolean operatesInProhibitedCountries;
-
-      /** Does the business participate in any regulated activity. */
-      @SerializedName("participates_in_regulated_activity")
-      Boolean participatesInRegulatedActivity;
-
-      /**
-       * Primary purpose of the stored funds.
-       *
-       * <p>One of {@code charitable_donations}, {@code ecommerce_retail_payments}, {@code
-       * investment_purposes}, {@code other}, {@code payments_to_friends_or_family_abroad}, {@code
-       * payroll}, {@code personal_or_living_expenses}, {@code protect_wealth}, {@code
-       * purchase_goods_and_services}, {@code receive_payments_for_goods_and_services}, {@code
-       * tax_optimization}, {@code third_party_money_transmission}, or {@code treasury_management}.
-       */
-      @SerializedName("purpose_of_funds")
-      String purposeOfFunds;
-
-      /** Description of the purpose of the stored funds. */
-      @SerializedName("purpose_of_funds_description")
-      String purposeOfFundsDescription;
-
-      /** Details of the regulated activity if the business participates in one. */
-      @SerializedName("regulated_activity")
-      RegulatedActivity regulatedActivity;
-
-      /**
-       * The source of funds for the business, e.g. profits, income, venture capital, etc.
-       *
-       * <p>One of {@code business_loans}, {@code grants}, {@code inter_company_funds}, {@code
-       * investment_proceeds}, {@code legal_settlement}, {@code owners_capital}, {@code
-       * pension_retirement}, {@code sales_of_assets}, {@code sales_of_goods_and_services}, {@code
-       * tax_refund}, {@code third_party_funds}, or {@code treasury_reserves}.
-       */
-      @SerializedName("source_of_funds")
-      String sourceOfFunds;
-
-      /** Description of the source of funds for the business' account. */
-      @SerializedName("source_of_funds_description")
-      String sourceOfFundsDescription;
-
-      /** Capabilities that have been requested on the Storer Configuration. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Capabilities extends StripeObject {
-        /** Hash containing capabilities related to consumer financial accounts. */
-        @SerializedName("consumer")
-        Consumer consumer;
-
-        /** Can provision a financial address to credit/debit a FinancialAccount. */
-        @SerializedName("financial_addresses")
-        FinancialAddresses financialAddresses;
-
-        /** Can hold storage-type funds on Stripe. */
-        @SerializedName("holds_currencies")
-        HoldsCurrencies holdsCurrencies;
-
-        /** Hash containing capabilities related to InboundTransfers. */
-        @SerializedName("inbound_transfers")
-        InboundTransfers inboundTransfers;
-
-        /**
-         * Hash containing capabilities related to <a
-         * href="https://stripe.com/api/treasury/outbound_payments?api-version=preview">OutboundPayments</a>.
-         */
-        @SerializedName("outbound_payments")
-        OutboundPayments outboundPayments;
-
-        /**
-         * Hash containing capabilities related to <a
-         * href="https://stripe.com/api/treasury/outbound_transfers?api-version=preview">OutboundTransfers</a>.
-         */
-        @SerializedName("outbound_transfers")
-        OutboundTransfers outboundTransfers;
-
-        /** Hash containing capabilities related to consumer financial accounts. */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Consumer extends StripeObject {
-          /** Can hold storage-type funds on Stripe consumer FAs in USD. */
-          @SerializedName("holds_currencies")
-          HoldsCurrencies holdsCurrencies;
-
-          /** Can hold storage-type funds on Stripe consumer FAs in USD. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class HoldsCurrencies extends StripeObject {
-            /** Can hold storage-type funds on Stripe consumer FAs in USD. */
-            @SerializedName("usd")
-            Usd usd;
-
-            /** Can hold storage-type funds on Stripe consumer FAs in USD. */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Usd extends StripeObject {
-              /**
-               * Protections applied to this capability, keyed by protection type (e.g.
-               * &quot;psp_migration&quot;).
-               */
-              @SerializedName("protections")
-              Protections protections;
-
-              /**
-               * The status of the Capability.
-               *
-               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-               * unsupported}.
-               */
-              @SerializedName("status")
-              String status;
-
-              /**
-               * Additional details about the capability's status. This value is empty when {@code
-               * status} is {@code active}.
-               */
-              @SerializedName("status_details")
-              List<
-                      Account.Configuration.Storer.Capabilities.Consumer.HoldsCurrencies.Usd
-                          .StatusDetail>
-                  statusDetails;
-
-              /**
-               * Protections applied to this capability, keyed by protection type (e.g.
-               * &quot;psp_migration&quot;).
-               */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class Protections extends StripeObject {
-                /** Protection details for PSP migration. */
-                @SerializedName("psp_migration")
-                PspMigration pspMigration;
-
-                /** Protection details for PSP migration. */
-                @Getter
-                @Setter
-                @EqualsAndHashCode(callSuper = false)
-                public static class PspMigration extends StripeObject {
-                  /** The time until which the protection will expire, as a Unix timestamp. */
-                  @SerializedName("expires_at")
-                  @JsonAdapter(StringInt64TypeAdapter.class)
-                  Long expiresAt;
-
-                  /** The time at which the protection was requested, as a Unix timestamp. */
-                  @SerializedName("requested_at")
-                  @JsonAdapter(StringInt64TypeAdapter.class)
-                  Long requestedAt;
-
-                  /**
-                   * The current status of the protection.
-                   *
-                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                   * inactive}.
-                   */
-                  @SerializedName("status")
-                  String status;
-                }
-              }
-
-              /**
-               * For more details about StatusDetail, please refer to the <a
-               * href="https://docs.stripe.com/api">API Reference.</a>
-               */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class StatusDetail extends StripeObject {
-                /**
-                 * Machine-readable code explaining the reason for the Capability to be in its
-                 * current status.
-                 *
-                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-                 * requirements_pending_verification}, {@code restricted_other}, {@code
-                 * unsupported_business}, {@code unsupported_country}, or {@code
-                 * unsupported_entity_type}.
-                 */
-                @SerializedName("code")
-                String code;
-
-                /**
-                 * Machine-readable code explaining how to make the Capability active.
-                 *
-                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-                 */
-                @SerializedName("resolution")
-                String resolution;
-              }
-            }
-          }
-        }
-
-        /** Can provision a financial address to credit/debit a FinancialAccount. */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class FinancialAddresses extends StripeObject {
-          /**
-           * Can provision a bank-account like financial address (VBAN) to credit/debit a
-           * FinancialAccount.
-           */
-          @SerializedName("bank_accounts")
-          BankAccounts bankAccounts;
-
-          /** Can provision a crypto wallet like financial address to credit a FinancialAccount. */
-          @SerializedName("crypto_wallets")
-          CryptoWallets cryptoWallets;
-
-          /**
-           * Can provision a bank-account like financial address (VBAN) to credit/debit a
-           * FinancialAccount.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class BankAccounts extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.FinancialAddresses.BankAccounts
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /** Can provision a crypto wallet like financial address to credit a FinancialAccount. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class CryptoWallets extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.FinancialAddresses.CryptoWallets
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-        }
-
-        /** Can hold storage-type funds on Stripe. */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class HoldsCurrencies extends StripeObject {
-          /** Can hold storage-type funds on Stripe in EUR. */
-          @SerializedName("eur")
-          Eur eur;
-
-          /** Can hold storage-type funds on Stripe in GBP. */
-          @SerializedName("gbp")
-          Gbp gbp;
-
-          /** Can hold storage-type funds on Stripe in USD. */
-          @SerializedName("usd")
-          Usd usd;
-
-          /** Can hold storage-type funds on Stripe in USDC. */
-          @SerializedName("usdc")
-          Usdc usdc;
-
-          /** Can hold storage-type funds on Stripe in EUR. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Eur extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Eur.StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /** Can hold storage-type funds on Stripe in GBP. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Gbp extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Gbp.StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /** Can hold storage-type funds on Stripe in USD. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Usd extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Usd.StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /** Can hold storage-type funds on Stripe in USDC. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Usdc extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Usdc.StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-        }
-
-        /** Hash containing capabilities related to InboundTransfers. */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class InboundTransfers extends StripeObject {
-          /**
-           * Can pull funds into a FinancialAccount from an external bank account owned by the user.
-           */
-          @SerializedName("bank_accounts")
-          BankAccounts bankAccounts;
-
-          /**
-           * Can pull funds into a FinancialAccount from an external bank account owned by the user.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class BankAccounts extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.InboundTransfers.BankAccounts
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-        }
-
-        /**
-         * Hash containing capabilities related to <a
-         * href="https://stripe.com/api/treasury/outbound_payments?api-version=preview">OutboundPayments</a>.
-         */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class OutboundPayments extends StripeObject {
-          /**
-           * Can send funds from a FinancialAccount to a bank account owned by a different entity.
-           */
-          @SerializedName("bank_accounts")
-          BankAccounts bankAccounts;
-
-          /** Can send funds from a FinancialAccount to a debit card owned by a different entity. */
-          @SerializedName("cards")
-          Cards cards;
-
-          /**
-           * Can send funds from a FinancialAccount to a crypto wallet owned by a different entity.
-           */
-          @SerializedName("crypto_wallets")
-          CryptoWallets cryptoWallets;
-
-          /**
-           * Can send funds from a FinancialAccount to a FinancialAccount owned by a different
-           * entity.
-           */
-          @SerializedName("financial_accounts")
-          FinancialAccounts financialAccounts;
-
-          /** Can send funds from a FinancialAccount to someone else via paper check. */
-          @SerializedName("paper_checks")
-          PaperChecks paperChecks;
-
-          /**
-           * Can send funds from a FinancialAccount to a bank account owned by a different entity.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class BankAccounts extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.OutboundPayments.BankAccounts
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /** Can send funds from a FinancialAccount to a debit card owned by a different entity. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Cards extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<Account.Configuration.Storer.Capabilities.OutboundPayments.Cards.StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /**
-           * Can send funds from a FinancialAccount to a crypto wallet owned by a different entity.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class CryptoWallets extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.OutboundPayments.CryptoWallets
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /**
-           * Can send funds from a FinancialAccount to a FinancialAccount owned by a different
-           * entity.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class FinancialAccounts extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.OutboundPayments.FinancialAccounts
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /** Can send funds from a FinancialAccount to someone else via paper check. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class PaperChecks extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.OutboundPayments.PaperChecks
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-        }
-
-        /**
-         * Hash containing capabilities related to <a
-         * href="https://stripe.com/api/treasury/outbound_transfers?api-version=preview">OutboundTransfers</a>.
-         */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class OutboundTransfers extends StripeObject {
-          /**
-           * Can send funds from a FinancialAccount to a bank account belonging to the same user.
-           */
-          @SerializedName("bank_accounts")
-          BankAccounts bankAccounts;
-
-          /**
-           * Can send funds from a FinancialAccount to a crypto wallet belonging to the same user.
-           */
-          @SerializedName("crypto_wallets")
-          CryptoWallets cryptoWallets;
-
-          /**
-           * Can send funds from a FinancialAccount to another FinancialAccount belonging to the
-           * same user.
-           */
-          @SerializedName("financial_accounts")
-          FinancialAccounts financialAccounts;
-
-          /**
-           * Can send funds from a FinancialAccount to a bank account belonging to the same user.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class BankAccounts extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.OutboundTransfers.BankAccounts
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /**
-           * Can send funds from a FinancialAccount to a crypto wallet belonging to the same user.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class CryptoWallets extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.OutboundTransfers.CryptoWallets
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /**
-           * Can send funds from a FinancialAccount to another FinancialAccount belonging to the
-           * same user.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class FinancialAccounts extends StripeObject {
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @SerializedName("protections")
-            Protections protections;
-
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.OutboundTransfers.FinancialAccounts
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * Protections applied to this capability, keyed by protection type (e.g.
-             * &quot;psp_migration&quot;).
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class Protections extends StripeObject {
-              /** Protection details for PSP migration. */
-              @SerializedName("psp_migration")
-              PspMigration pspMigration;
-
-              /** Protection details for PSP migration. */
-              @Getter
-              @Setter
-              @EqualsAndHashCode(callSuper = false)
-              public static class PspMigration extends StripeObject {
-                /** The time until which the protection will expire, as a Unix timestamp. */
-                @SerializedName("expires_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long expiresAt;
-
-                /** The time at which the protection was requested, as a Unix timestamp. */
-                @SerializedName("requested_at")
-                @JsonAdapter(StringInt64TypeAdapter.class)
-                Long requestedAt;
-
-                /**
-                 * The current status of the protection.
-                 *
-                 * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
-                 * inactive}.
-                 */
-                @SerializedName("status")
-                String status;
-              }
-            }
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-        }
-      }
-
-      /** Details of the regulated activity if the business participates in one. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class RegulatedActivity extends StripeObject {
-        /**
-         * A detailed description of the regulated activities the business is licensed to conduct.
-         */
-        @SerializedName("description")
-        String description;
-
-        /**
-         * The license number or registration number assigned by the business's primary regulator.
-         */
-        @SerializedName("license_number")
-        String licenseNumber;
-
-        /**
-         * The country of the primary regulatory authority that oversees the business's regulated
-         * activities.
-         */
-        @SerializedName("primary_regulatory_authority_country")
-        String primaryRegulatoryAuthorityCountry;
-
-        /**
-         * The name of the primary regulatory authority that oversees the business's regulated
-         * activities.
-         */
-        @SerializedName("primary_regulatory_authority_name")
-        String primaryRegulatoryAuthorityName;
-      }
-    }
   }
 
   /** Default values for settings shared across Account configurations. */
@@ -9949,9 +12408,16 @@ public class Account extends StripeObject implements HasId {
            * <p>One of {@code ach_debit_payments}, {@code acss_debit_payments}, {@code
            * affirm_payments}, {@code afterpay_clearpay_payments}, {@code alma_payments}, {@code
            * amazon_pay_payments}, {@code automatic_indirect_tax}, {@code au_becs_debit_payments},
-           * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code
-           * bank_accounts.instant}, {@code bank_accounts.local}, {@code bank_accounts.wire}, {@code
-           * blik_payments}, {@code boleto_payments}, {@code cards}, {@code card_payments}, {@code
+           * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.ach},
+           * {@code bank_accounts.becs}, {@code bank_accounts.eft}, {@code bank_accounts.fedwire},
+           * {@code bank_accounts.fps}, {@code bank_accounts.instant}, {@code bank_accounts.local},
+           * {@code bank_accounts.npp}, {@code bank_accounts.rtp}, {@code
+           * bank_accounts.sepa_credit}, {@code bank_accounts.sepa_instant}, {@code
+           * bank_accounts.swift}, {@code bank_accounts.wire}, {@code blik_payments}, {@code
+           * boleto_payments}, {@code business_storage.inbound.eur}, {@code
+           * business_storage.inbound.gbp}, {@code business_storage.inbound.usd}, {@code
+           * business_storage.outbound.eur}, {@code business_storage.outbound.gbp}, {@code
+           * business_storage.outbound.usd}, {@code cards}, {@code card_payments}, {@code
            * cartes_bancaires_payments}, {@code cashapp_payments}, {@code
            * commercial.celtic.charge_card}, {@code commercial.celtic.spend_card}, {@code
            * commercial.cross_river_bank.charge_card}, {@code
@@ -9960,21 +12426,24 @@ public class Account extends StripeObject implements HasId {
            * {@code commercial.lead.prepaid_card}, {@code commercial.stripe.charge_card}, {@code
            * commercial.stripe.prepaid_card}, {@code consumer.celtic.revolving_credit_card}, {@code
            * consumer.cross_river_bank.prepaid_card}, {@code consumer.holds_currencies.usd}, {@code
-           * consumer.lead.debit_card}, {@code consumer.lead.prepaid_card}, {@code crypto_wallets},
-           * {@code eps_payments}, {@code financial_addresses.bank_accounts}, {@code fpx_payments},
-           * {@code gb_bank_transfer_payments}, {@code grabpay_payments}, {@code
-           * holds_currencies.eur}, {@code holds_currencies.gbp}, {@code holds_currencies.usd},
-           * {@code ideal_payments}, {@code inbound_transfers.financial_accounts}, {@code
-           * jcb_payments}, {@code jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code
-           * klarna_payments}, {@code konbini_payments}, {@code kr_card_payments}, {@code
-           * link_payments}, {@code mobilepay_payments}, {@code multibanco_payments}, {@code
-           * mx_bank_transfer_payments}, {@code naver_pay_payments}, {@code
-           * outbound_payments.bank_accounts}, {@code outbound_payments.cards}, {@code
-           * outbound_payments.financial_accounts}, {@code outbound_payments.paper_checks}, {@code
-           * outbound_transfers.bank_accounts}, {@code outbound_transfers.financial_accounts},
-           * {@code oxxo_payments}, {@code p24_payments}, {@code paper_checks}, {@code
-           * payco_payments}, {@code paynow_payments}, {@code pay_by_bank_payments}, {@code
-           * promptpay_payments}, {@code revolut_pay_payments}, {@code samsung_pay_payments}, {@code
+           * consumer.lead.debit_card}, {@code consumer.lead.prepaid_card}, {@code
+           * consumer_storage.inbound.usd}, {@code consumer_storage.outbound.usd}, {@code
+           * crypto_wallets}, {@code eps_payments}, {@code financial_addresses.bank_accounts},
+           * {@code fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments},
+           * {@code holds_currencies.eur}, {@code holds_currencies.gbp}, {@code
+           * holds_currencies.usd}, {@code ideal_payments}, {@code
+           * inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
+           * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
+           * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
+           * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},
+           * {@code naver_pay_payments}, {@code outbound_payments.bank_accounts}, {@code
+           * outbound_payments.cards}, {@code outbound_payments.financial_accounts}, {@code
+           * outbound_payments.paper_checks}, {@code outbound_transfers.bank_accounts}, {@code
+           * outbound_transfers.financial_accounts}, {@code oxxo_payments}, {@code p24_payments},
+           * {@code paper_checks}, {@code payco_payments}, {@code paynow_payments}, {@code
+           * pay_by_bank_payments}, {@code promptpay_payments}, {@code
+           * received_credits.bank_accounts}, {@code received_debits.bank_accounts}, {@code
+           * revolut_pay_payments}, {@code samsung_pay_payments}, {@code
            * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
            * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
            * swish_payments}, {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code
@@ -9986,8 +12455,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The configuration which specifies the Capability which will be restricted.
            *
-           * <p>One of {@code card_creator}, {@code customer}, {@code merchant}, {@code recipient},
-           * or {@code storer}.
+           * <p>One of {@code card_creator}, {@code customer}, {@code merchant}, {@code
+           * money_manager}, {@code recipient}, or {@code storer}.
            */
           @SerializedName("configuration")
           String configuration;
@@ -10320,6 +12789,10 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("card_creator")
         CardCreator cardCreator;
 
+        /** Details on the Account's acceptance of Consumer-specific terms of service. */
+        @SerializedName("consumer_money_manager")
+        ConsumerMoneyManager consumerMoneyManager;
+
         /**
          * Details on the Account's acceptance of Consumer-privacy-disclosures-specific terms of
          * service.
@@ -10327,17 +12800,13 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("consumer_privacy_disclosures")
         ConsumerPrivacyDisclosures consumerPrivacyDisclosures;
 
-        /** Details on the Account's acceptance of Consumer-storer-specific terms of service. */
-        @SerializedName("consumer_storer")
-        ConsumerStorer consumerStorer;
-
-        /** Details on the Account's acceptance of Crypto-storer-specific terms of service. */
-        @SerializedName("crypto_storer")
-        CryptoStorer cryptoStorer;
+        /** Details on the Account's acceptance of Crypto-specific terms of service. */
+        @SerializedName("crypto_money_manager")
+        CryptoMoneyManager cryptoMoneyManager;
 
         /** Details on the Account's acceptance of Treasury-specific terms of service. */
-        @SerializedName("storer")
-        Storer storer;
+        @SerializedName("money_manager")
+        MoneyManager moneyManager;
 
         /** Details on the Account's acceptance of Issuing-specific terms of service. */
         @Getter
@@ -12159,6 +14628,33 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
+        /** Details on the Account's acceptance of Consumer-specific terms of service. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ConsumerMoneyManager extends StripeObject {
+          /**
+           * The time when the Account's representative accepted the terms of service. Represented
+           * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+           * 2022-09-18T13:22:18.123Z.
+           */
+          @SerializedName("date")
+          java.time.Instant date;
+
+          /**
+           * The IP address from which the Account's representative accepted the terms of service.
+           */
+          @SerializedName("ip")
+          String ip;
+
+          /**
+           * The user agent of the browser from which the Account's representative accepted the
+           * terms of service.
+           */
+          @SerializedName("user_agent")
+          String userAgent;
+        }
+
         /**
          * Details on the Account's acceptance of Consumer-privacy-disclosures-specific terms of
          * service.
@@ -12189,38 +14685,11 @@ public class Account extends StripeObject implements HasId {
           String userAgent;
         }
 
-        /** Details on the Account's acceptance of Consumer-storer-specific terms of service. */
+        /** Details on the Account's acceptance of Crypto-specific terms of service. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class ConsumerStorer extends StripeObject {
-          /**
-           * The time when the Account's representative accepted the terms of service. Represented
-           * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
-           * 2022-09-18T13:22:18.123Z.
-           */
-          @SerializedName("date")
-          java.time.Instant date;
-
-          /**
-           * The IP address from which the Account's representative accepted the terms of service.
-           */
-          @SerializedName("ip")
-          String ip;
-
-          /**
-           * The user agent of the browser from which the Account's representative accepted the
-           * terms of service.
-           */
-          @SerializedName("user_agent")
-          String userAgent;
-        }
-
-        /** Details on the Account's acceptance of Crypto-storer-specific terms of service. */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class CryptoStorer extends StripeObject {
+        public static class CryptoMoneyManager extends StripeObject {
           /**
            * The time when the Account's representative accepted the terms of service. Represented
            * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
@@ -12278,7 +14747,7 @@ public class Account extends StripeObject implements HasId {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Storer extends StripeObject {
+        public static class MoneyManager extends StripeObject {
           /**
            * The time when the Account's representative accepted the terms of service. Represented
            * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
@@ -13889,9 +16358,16 @@ public class Account extends StripeObject implements HasId {
            * <p>One of {@code ach_debit_payments}, {@code acss_debit_payments}, {@code
            * affirm_payments}, {@code afterpay_clearpay_payments}, {@code alma_payments}, {@code
            * amazon_pay_payments}, {@code automatic_indirect_tax}, {@code au_becs_debit_payments},
-           * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code
-           * bank_accounts.instant}, {@code bank_accounts.local}, {@code bank_accounts.wire}, {@code
-           * blik_payments}, {@code boleto_payments}, {@code cards}, {@code card_payments}, {@code
+           * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.ach},
+           * {@code bank_accounts.becs}, {@code bank_accounts.eft}, {@code bank_accounts.fedwire},
+           * {@code bank_accounts.fps}, {@code bank_accounts.instant}, {@code bank_accounts.local},
+           * {@code bank_accounts.npp}, {@code bank_accounts.rtp}, {@code
+           * bank_accounts.sepa_credit}, {@code bank_accounts.sepa_instant}, {@code
+           * bank_accounts.swift}, {@code bank_accounts.wire}, {@code blik_payments}, {@code
+           * boleto_payments}, {@code business_storage.inbound.eur}, {@code
+           * business_storage.inbound.gbp}, {@code business_storage.inbound.usd}, {@code
+           * business_storage.outbound.eur}, {@code business_storage.outbound.gbp}, {@code
+           * business_storage.outbound.usd}, {@code cards}, {@code card_payments}, {@code
            * cartes_bancaires_payments}, {@code cashapp_payments}, {@code
            * commercial.celtic.charge_card}, {@code commercial.celtic.spend_card}, {@code
            * commercial.cross_river_bank.charge_card}, {@code
@@ -13900,21 +16376,24 @@ public class Account extends StripeObject implements HasId {
            * {@code commercial.lead.prepaid_card}, {@code commercial.stripe.charge_card}, {@code
            * commercial.stripe.prepaid_card}, {@code consumer.celtic.revolving_credit_card}, {@code
            * consumer.cross_river_bank.prepaid_card}, {@code consumer.holds_currencies.usd}, {@code
-           * consumer.lead.debit_card}, {@code consumer.lead.prepaid_card}, {@code crypto_wallets},
-           * {@code eps_payments}, {@code financial_addresses.bank_accounts}, {@code fpx_payments},
-           * {@code gb_bank_transfer_payments}, {@code grabpay_payments}, {@code
-           * holds_currencies.eur}, {@code holds_currencies.gbp}, {@code holds_currencies.usd},
-           * {@code ideal_payments}, {@code inbound_transfers.financial_accounts}, {@code
-           * jcb_payments}, {@code jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code
-           * klarna_payments}, {@code konbini_payments}, {@code kr_card_payments}, {@code
-           * link_payments}, {@code mobilepay_payments}, {@code multibanco_payments}, {@code
-           * mx_bank_transfer_payments}, {@code naver_pay_payments}, {@code
-           * outbound_payments.bank_accounts}, {@code outbound_payments.cards}, {@code
-           * outbound_payments.financial_accounts}, {@code outbound_payments.paper_checks}, {@code
-           * outbound_transfers.bank_accounts}, {@code outbound_transfers.financial_accounts},
-           * {@code oxxo_payments}, {@code p24_payments}, {@code paper_checks}, {@code
-           * payco_payments}, {@code paynow_payments}, {@code pay_by_bank_payments}, {@code
-           * promptpay_payments}, {@code revolut_pay_payments}, {@code samsung_pay_payments}, {@code
+           * consumer.lead.debit_card}, {@code consumer.lead.prepaid_card}, {@code
+           * consumer_storage.inbound.usd}, {@code consumer_storage.outbound.usd}, {@code
+           * crypto_wallets}, {@code eps_payments}, {@code financial_addresses.bank_accounts},
+           * {@code fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments},
+           * {@code holds_currencies.eur}, {@code holds_currencies.gbp}, {@code
+           * holds_currencies.usd}, {@code ideal_payments}, {@code
+           * inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
+           * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
+           * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
+           * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},
+           * {@code naver_pay_payments}, {@code outbound_payments.bank_accounts}, {@code
+           * outbound_payments.cards}, {@code outbound_payments.financial_accounts}, {@code
+           * outbound_payments.paper_checks}, {@code outbound_transfers.bank_accounts}, {@code
+           * outbound_transfers.financial_accounts}, {@code oxxo_payments}, {@code p24_payments},
+           * {@code paper_checks}, {@code payco_payments}, {@code paynow_payments}, {@code
+           * pay_by_bank_payments}, {@code promptpay_payments}, {@code
+           * received_credits.bank_accounts}, {@code received_debits.bank_accounts}, {@code
+           * revolut_pay_payments}, {@code samsung_pay_payments}, {@code
            * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
            * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
            * swish_payments}, {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code
@@ -13926,8 +16405,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The configuration which specifies the Capability which will be restricted.
            *
-           * <p>One of {@code card_creator}, {@code customer}, {@code merchant}, {@code recipient},
-           * or {@code storer}.
+           * <p>One of {@code card_creator}, {@code customer}, {@code merchant}, {@code
+           * money_manager}, {@code recipient}, or {@code storer}.
            */
           @SerializedName("configuration")
           String configuration;

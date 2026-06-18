@@ -33,10 +33,6 @@ public class BatchJob extends StripeObject implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** The maximum requests per second defined for the {@code batch_job}. */
-  @SerializedName("maximum_rps")
-  Long maximumRps;
-
   /** The metadata of the {@code batch_job}. */
   @SerializedName("metadata")
   Map<String, String> metadata;

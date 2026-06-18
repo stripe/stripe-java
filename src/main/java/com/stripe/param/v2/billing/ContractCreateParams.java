@@ -5158,7 +5158,7 @@ public class ContractCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Multiplier {
-      /** <strong>Required.</strong> Criteria determining which rates the multiplier applies to. */
+      /** Criteria determining which rates the multiplier applies to. */
       @SerializedName("criteria")
       List<ContractCreateParams.PricingOverride.Multiplier.Criterion> criteria;
 

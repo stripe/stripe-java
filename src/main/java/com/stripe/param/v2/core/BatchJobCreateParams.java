@@ -24,14 +24,7 @@ public class BatchJobCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * Optional field that allows the user to control how fast they want this batch job to run. Gives
-   * them a control over the number of webhooks they receive.
-   */
-  @SerializedName("maximum_rps")
-  Long maximumRps;
-
-  /** <strong>Required.</strong> The metadata of the {@code batch_job}. */
+  /** The metadata of the {@code batch_job}. */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -46,13 +39,11 @@ public class BatchJobCreateParams extends ApiRequestParams {
   private BatchJobCreateParams(
       Endpoint endpoint,
       Map<String, Object> extraParams,
-      Long maximumRps,
       Map<String, String> metadata,
       NotificationSuppression notificationSuppression,
       Boolean skipValidation) {
     this.endpoint = endpoint;
     this.extraParams = extraParams;
-    this.maximumRps = maximumRps;
     this.metadata = metadata;
     this.notificationSuppression = notificationSuppression;
     this.skipValidation = skipValidation;
@@ -67,8 +58,6 @@ public class BatchJobCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Long maximumRps;
-
     private Map<String, String> metadata;
 
     private NotificationSuppression notificationSuppression;
@@ -80,7 +69,6 @@ public class BatchJobCreateParams extends ApiRequestParams {
       return new BatchJobCreateParams(
           this.endpoint,
           this.extraParams,
-          this.maximumRps,
           this.metadata,
           this.notificationSuppression,
           this.skipValidation);
@@ -115,15 +103,6 @@ public class BatchJobCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /**
-     * Optional field that allows the user to control how fast they want this batch job to run.
-     * Gives them a control over the number of webhooks they receive.
-     */
-    public Builder setMaximumRps(Long maximumRps) {
-      this.maximumRps = maximumRps;
       return this;
     }
 

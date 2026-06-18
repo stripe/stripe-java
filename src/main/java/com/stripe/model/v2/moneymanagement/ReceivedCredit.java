@@ -410,6 +410,10 @@ public class ReceivedCredit extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount extends StripeObject {
+      /** The name of the account holder that sent the payment. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
       /** The bank name the transfer was received from. */
       @SerializedName("bank_name")
       String bankName;

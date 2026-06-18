@@ -828,11 +828,11 @@ public class AccountTokenCreateParams extends ApiRequestParams {
         CardCreator cardCreator;
 
         /**
-         * Details on the Account's acceptance of Crypto-storer-specific terms of service; IP, date,
-         * and User Agent are expanded by Stripe.
+         * Details on the Account's acceptance of Crypto-specific terms of service; IP, date, and
+         * User Agent are expanded by Stripe.
          */
-        @SerializedName("crypto_storer")
-        CryptoStorer cryptoStorer;
+        @SerializedName("crypto_money_manager")
+        CryptoMoneyManager cryptoMoneyManager;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -848,20 +848,20 @@ public class AccountTokenCreateParams extends ApiRequestParams {
          * Details on the Account's acceptance of Treasury-specific terms of service; IP, date, and
          * User Agent are expanded by Stripe.
          */
-        @SerializedName("storer")
-        Storer storer;
+        @SerializedName("money_manager")
+        MoneyManager moneyManager;
 
         private TermsOfService(
             Account account,
             CardCreator cardCreator,
-            CryptoStorer cryptoStorer,
+            CryptoMoneyManager cryptoMoneyManager,
             Map<String, Object> extraParams,
-            Storer storer) {
+            MoneyManager moneyManager) {
           this.account = account;
           this.cardCreator = cardCreator;
-          this.cryptoStorer = cryptoStorer;
+          this.cryptoMoneyManager = cryptoMoneyManager;
           this.extraParams = extraParams;
-          this.storer = storer;
+          this.moneyManager = moneyManager;
         }
 
         public static Builder builder() {
@@ -873,16 +873,20 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           private CardCreator cardCreator;
 
-          private CryptoStorer cryptoStorer;
+          private CryptoMoneyManager cryptoMoneyManager;
 
           private Map<String, Object> extraParams;
 
-          private Storer storer;
+          private MoneyManager moneyManager;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountTokenCreateParams.Identity.Attestations.TermsOfService build() {
             return new AccountTokenCreateParams.Identity.Attestations.TermsOfService(
-                this.account, this.cardCreator, this.cryptoStorer, this.extraParams, this.storer);
+                this.account,
+                this.cardCreator,
+                this.cryptoMoneyManager,
+                this.extraParams,
+                this.moneyManager);
           }
 
           /**
@@ -904,13 +908,13 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Details on the Account's acceptance of Crypto-storer-specific terms of service; IP,
-           * date, and User Agent are expanded by Stripe.
+           * Details on the Account's acceptance of Crypto-specific terms of service; IP, date, and
+           * User Agent are expanded by Stripe.
            */
-          public Builder setCryptoStorer(
-              AccountTokenCreateParams.Identity.Attestations.TermsOfService.CryptoStorer
-                  cryptoStorer) {
-            this.cryptoStorer = cryptoStorer;
+          public Builder setCryptoMoneyManager(
+              AccountTokenCreateParams.Identity.Attestations.TermsOfService.CryptoMoneyManager
+                  cryptoMoneyManager) {
+            this.cryptoMoneyManager = cryptoMoneyManager;
             return this;
           }
 
@@ -948,9 +952,10 @@ public class AccountTokenCreateParams extends ApiRequestParams {
            * Details on the Account's acceptance of Treasury-specific terms of service; IP, date,
            * and User Agent are expanded by Stripe.
            */
-          public Builder setStorer(
-              AccountTokenCreateParams.Identity.Attestations.TermsOfService.Storer storer) {
-            this.storer = storer;
+          public Builder setMoneyManager(
+              AccountTokenCreateParams.Identity.Attestations.TermsOfService.MoneyManager
+                  moneyManager) {
+            this.moneyManager = moneyManager;
             return this;
           }
         }
@@ -3017,7 +3022,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
         @Getter
         @EqualsAndHashCode(callSuper = false)
-        public static class CryptoStorer {
+        public static class CryptoMoneyManager {
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -3032,7 +3037,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("shown_and_accepted")
           Boolean shownAndAccepted;
 
-          private CryptoStorer(Map<String, Object> extraParams, Boolean shownAndAccepted) {
+          private CryptoMoneyManager(Map<String, Object> extraParams, Boolean shownAndAccepted) {
             this.extraParams = extraParams;
             this.shownAndAccepted = shownAndAccepted;
           }
@@ -3047,17 +3052,17 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             private Boolean shownAndAccepted;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public AccountTokenCreateParams.Identity.Attestations.TermsOfService.CryptoStorer
+            public AccountTokenCreateParams.Identity.Attestations.TermsOfService.CryptoMoneyManager
                 build() {
-              return new AccountTokenCreateParams.Identity.Attestations.TermsOfService.CryptoStorer(
-                  this.extraParams, this.shownAndAccepted);
+              return new AccountTokenCreateParams.Identity.Attestations.TermsOfService
+                  .CryptoMoneyManager(this.extraParams, this.shownAndAccepted);
             }
 
             /**
              * Add a key/value pair to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * AccountTokenCreateParams.Identity.Attestations.TermsOfService.CryptoStorer#extraParams}
+             * AccountTokenCreateParams.Identity.Attestations.TermsOfService.CryptoMoneyManager#extraParams}
              * for the field documentation.
              */
             public Builder putExtraParam(String key, Object value) {
@@ -3072,7 +3077,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
              * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * AccountTokenCreateParams.Identity.Attestations.TermsOfService.CryptoStorer#extraParams}
+             * AccountTokenCreateParams.Identity.Attestations.TermsOfService.CryptoMoneyManager#extraParams}
              * for the field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
@@ -3093,7 +3098,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
         @Getter
         @EqualsAndHashCode(callSuper = false)
-        public static class Storer {
+        public static class MoneyManager {
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -3108,7 +3113,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("shown_and_accepted")
           Boolean shownAndAccepted;
 
-          private Storer(Map<String, Object> extraParams, Boolean shownAndAccepted) {
+          private MoneyManager(Map<String, Object> extraParams, Boolean shownAndAccepted) {
             this.extraParams = extraParams;
             this.shownAndAccepted = shownAndAccepted;
           }
@@ -3123,8 +3128,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             private Boolean shownAndAccepted;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public AccountTokenCreateParams.Identity.Attestations.TermsOfService.Storer build() {
-              return new AccountTokenCreateParams.Identity.Attestations.TermsOfService.Storer(
+            public AccountTokenCreateParams.Identity.Attestations.TermsOfService.MoneyManager
+                build() {
+              return new AccountTokenCreateParams.Identity.Attestations.TermsOfService.MoneyManager(
                   this.extraParams, this.shownAndAccepted);
             }
 
@@ -3132,8 +3138,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
              * Add a key/value pair to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * AccountTokenCreateParams.Identity.Attestations.TermsOfService.Storer#extraParams} for
-             * the field documentation.
+             * AccountTokenCreateParams.Identity.Attestations.TermsOfService.MoneyManager#extraParams}
+             * for the field documentation.
              */
             public Builder putExtraParam(String key, Object value) {
               if (this.extraParams == null) {
@@ -3147,8 +3153,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
              * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * AccountTokenCreateParams.Identity.Attestations.TermsOfService.Storer#extraParams} for
-             * the field documentation.
+             * AccountTokenCreateParams.Identity.Attestations.TermsOfService.MoneyManager#extraParams}
+             * for the field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
               if (this.extraParams == null) {
