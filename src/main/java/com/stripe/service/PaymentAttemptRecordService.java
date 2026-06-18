@@ -16,6 +16,7 @@ import com.stripe.param.PaymentAttemptRecordListParams;
 import com.stripe.param.PaymentAttemptRecordReportAuthenticatedParams;
 import com.stripe.param.PaymentAttemptRecordReportAuthorizedParams;
 import com.stripe.param.PaymentAttemptRecordReportCanceledParams;
+import com.stripe.param.PaymentAttemptRecordReportEarlyFraudWarningParams;
 import com.stripe.param.PaymentAttemptRecordReportFailedParams;
 import com.stripe.param.PaymentAttemptRecordReportGuaranteedParams;
 import com.stripe.param.PaymentAttemptRecordReportInformationalParams;
@@ -178,6 +179,31 @@ public final class PaymentAttemptRecordService extends ApiService {
     String path =
         String.format(
             "/v1/payment_attempt_records/%s/report_canceled",
+            ApiResource.urlEncodeId(paymentAttemptRecord));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, PaymentAttemptRecord.class);
+  }
+  /** Report that the specified Payment Attempt Record received an early fraud warning. */
+  public PaymentAttemptRecord reportEarlyFraudWarning(
+      String paymentAttemptRecord, PaymentAttemptRecordReportEarlyFraudWarningParams params)
+      throws StripeException {
+    return reportEarlyFraudWarning(paymentAttemptRecord, params, (RequestOptions) null);
+  }
+  /** Report that the specified Payment Attempt Record received an early fraud warning. */
+  public PaymentAttemptRecord reportEarlyFraudWarning(
+      String paymentAttemptRecord,
+      PaymentAttemptRecordReportEarlyFraudWarningParams params,
+      RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_attempt_records/%s/report_early_fraud_warning",
             ApiResource.urlEncodeId(paymentAttemptRecord));
     ApiRequest request =
         new ApiRequest(

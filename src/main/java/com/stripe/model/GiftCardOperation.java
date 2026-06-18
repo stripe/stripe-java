@@ -87,6 +87,10 @@ public class GiftCardOperation extends ApiResource implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
+  /** ID of the location that this transaction's reader is assigned to. */
+  @SerializedName("location")
+  String location;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -98,6 +102,10 @@ public class GiftCardOperation extends ApiResource implements HasId {
   /** The connected account whose credentials were used to perform this operation. */
   @SerializedName("on_behalf_of")
   String onBehalfOf;
+
+  /** ID of the reader this transaction was made on. */
+  @SerializedName("reader")
+  String reader;
 
   /** Details about a gift card reload operation. */
   @SerializedName("reload")

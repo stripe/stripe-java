@@ -11,6 +11,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.DisputeCloseParams;
+import com.stripe.param.issuing.DisputeProvisionalCreditParams;
 import com.stripe.param.issuing.DisputeSimulateNetworkLifecycleDisputeResponseParams;
 import com.stripe.param.issuing.DisputeSimulateNetworkLifecyclePreArbitrationResponseParams;
 import com.stripe.param.issuing.DisputeSimulateNetworkLifecyclePreArbitrationSubmissionParams;
@@ -30,6 +31,52 @@ public final class DisputeService extends ApiService {
     String path =
         String.format(
             "/v1/test_helpers/issuing/disputes/%s/close", ApiResource.urlEncodeId(dispute));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Dispute.class);
+  }
+  /**
+   * Test helper: overrides the {@code grant_deadline} and {@code revocable_after} timestamps on a
+   * test-mode Issuing dispute’s provisional credit, allowing tests to simulate timer-driven status
+   * transitions without waiting for real regulatory deadlines to pass.
+   */
+  public Dispute provisionalCredit(String dispute, DisputeProvisionalCreditParams params)
+      throws StripeException {
+    return provisionalCredit(dispute, params, (RequestOptions) null);
+  }
+  /**
+   * Test helper: overrides the {@code grant_deadline} and {@code revocable_after} timestamps on a
+   * test-mode Issuing dispute’s provisional credit, allowing tests to simulate timer-driven status
+   * transitions without waiting for real regulatory deadlines to pass.
+   */
+  public Dispute provisionalCredit(String dispute, RequestOptions options) throws StripeException {
+    return provisionalCredit(dispute, (DisputeProvisionalCreditParams) null, options);
+  }
+  /**
+   * Test helper: overrides the {@code grant_deadline} and {@code revocable_after} timestamps on a
+   * test-mode Issuing dispute’s provisional credit, allowing tests to simulate timer-driven status
+   * transitions without waiting for real regulatory deadlines to pass.
+   */
+  public Dispute provisionalCredit(String dispute) throws StripeException {
+    return provisionalCredit(dispute, (DisputeProvisionalCreditParams) null, (RequestOptions) null);
+  }
+  /**
+   * Test helper: overrides the {@code grant_deadline} and {@code revocable_after} timestamps on a
+   * test-mode Issuing dispute’s provisional credit, allowing tests to simulate timer-driven status
+   * transitions without waiting for real regulatory deadlines to pass.
+   */
+  public Dispute provisionalCredit(
+      String dispute, DisputeProvisionalCreditParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/test_helpers/issuing/disputes/%s/provisional_credit",
+            ApiResource.urlEncodeId(dispute));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

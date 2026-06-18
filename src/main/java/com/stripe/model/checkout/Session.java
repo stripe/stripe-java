@@ -280,6 +280,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("invoice_creation")
   InvoiceCreation invoiceCreation;
 
+  /** The items to be purchased by the customer. */
+  @SerializedName("items")
+  List<Session.Item> items;
+
   /** The line items purchased by the customer. */
   @SerializedName("line_items")
   LineItemCollection lineItems;
@@ -2472,6 +2476,27 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         String template;
       }
     }
+  }
+
+  /**
+   * For more details about Item, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Item extends StripeObject {
+    /** The key of the item. Guaranteed to be a unique ID within this checkout session's items. */
+    @SerializedName("key")
+    String key;
+
+    /**
+     * The type of the item.
+     *
+     * <p>Equal to {@code subscription}.
+     */
+    @SerializedName("type")
+    String type;
   }
 
   /**

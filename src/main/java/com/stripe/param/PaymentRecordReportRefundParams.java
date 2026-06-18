@@ -52,7 +52,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
-  /** <strong>Required.</strong> The outcome of the reported refund. */
+  /** The outcome of the reported refund. */
   @SerializedName("outcome")
   Outcome outcome;
 
@@ -255,7 +255,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The outcome of the reported refund. */
+    /** The outcome of the reported refund. */
     public Builder setOutcome(PaymentRecordReportRefundParams.Outcome outcome) {
       this.outcome = outcome;
       return this;

@@ -191,6 +191,22 @@ public class AccountSession extends ApiResource {
     @SerializedName("financial_account_transactions")
     FinancialAccountTransactions financialAccountTransactions;
 
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/financial-accounts/">financial
+     * accounts</a> embedded component.
+     */
+    @SerializedName("financial_accounts")
+    FinancialAccounts financialAccounts;
+
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/financial-accounts-transactions/">financial
+     * accounts transactions</a> embedded component.
+     */
+    @SerializedName("financial_accounts_transactions")
+    FinancialAccountsTransactions financialAccountsTransactions;
+
     @SerializedName("instant_payouts_promotion")
     InstantPayoutsPromotion instantPayoutsPromotion;
 
@@ -239,6 +255,14 @@ public class AccountSession extends ApiResource {
 
     @SerializedName("payouts_list")
     PayoutsList payoutsList;
+
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/recipients-list/">recipients
+     * list</a> embedded component.
+     */
+    @SerializedName("recipients_list")
+    RecipientsList recipientsList;
 
     @SerializedName("tax_registrations")
     TaxRegistrations taxRegistrations;
@@ -796,6 +820,120 @@ public class AccountSession extends ApiResource {
     }
 
     /**
+     * For more details about FinancialAccounts, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FinancialAccounts extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /** Whether to allow bill management features. */
+        @SerializedName("bill_management")
+        Boolean billManagement;
+
+        /** Whether to allow card management features. */
+        @SerializedName("card_management")
+        Boolean cardManagement;
+
+        /**
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. This is {@code false} by default.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
+         * Whether to allow payout schedule to be changed. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
+         */
+        @SerializedName("edit_payout_schedule")
+        Boolean editPayoutSchedule;
+
+        /**
+         * Whether to enable the send money feature that grants access to the v2
+         * CreateOutboundPayment API.
+         */
+        @SerializedName("send_money")
+        Boolean sendMoney;
+      }
+    }
+
+    /**
+     * For more details about FinancialAccountsTransactions, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FinancialAccountsTransactions extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /**
+         * Whether to allow capturing and cancelling payment intents. This is {@code true} by
+         * default.
+         */
+        @SerializedName("capture_payments")
+        Boolean capturePayments;
+
+        /** Whether to allow card management features. */
+        @SerializedName("card_management")
+        Boolean cardManagement;
+
+        /** Whether to allow card spend dispute management features. */
+        @SerializedName("card_spend_dispute_management")
+        Boolean cardSpendDisputeManagement;
+
+        /**
+         * Whether connected accounts can manage destination charges that are created on behalf of
+         * them. This is {@code false} by default.
+         */
+        @SerializedName("destination_on_behalf_of_charge_management")
+        Boolean destinationOnBehalfOfChargeManagement;
+
+        /**
+         * Whether responding to disputes is enabled, including submitting evidence and accepting
+         * disputes. This is {@code true} by default.
+         */
+        @SerializedName("dispute_management")
+        Boolean disputeManagement;
+
+        /** Whether sending refunds is enabled. This is {@code true} by default. */
+        @SerializedName("refund_management")
+        Boolean refundManagement;
+      }
+    }
+
+    /**
      * For more details about InstantPayoutsPromotion, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1317,6 +1455,43 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
+    }
+
+    /**
+     * For more details about RecipientsList, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RecipientsList extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /**
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. This is {@code false} by default.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /** Whether to allow sending money. */
+        @SerializedName("send_money")
+        Boolean sendMoney;
+      }
     }
 
     /**
