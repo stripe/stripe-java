@@ -45,7 +45,7 @@ public class PaymentRecordSearchParams extends ApiRequestParams {
    * <strong>Required.</strong> The search query string. See <a
    * href="https://docs.stripe.com/search#search-query-language">search query language</a> and the
    * list of supported <a
-   * href="https://docs.stripe.com/search#query-fields-for-payment-records">query fields for payment
+   * href="https://docs.stripe.com/search#query-fields-for-paymentrecords">query fields for payment
    * records</a>.
    */
   @SerializedName("query")
@@ -156,7 +156,7 @@ public class PaymentRecordSearchParams extends ApiRequestParams {
      * <strong>Required.</strong> The search query string. See <a
      * href="https://docs.stripe.com/search#search-query-language">search query language</a> and the
      * list of supported <a
-     * href="https://docs.stripe.com/search#query-fields-for-payment-records">query fields for
+     * href="https://docs.stripe.com/search#query-fields-for-paymentrecords">query fields for
      * payment records</a>.
      */
     public Builder setQuery(String query) {
