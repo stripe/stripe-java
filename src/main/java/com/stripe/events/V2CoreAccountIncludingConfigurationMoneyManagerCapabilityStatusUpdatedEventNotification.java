@@ -9,7 +9,8 @@ import com.stripe.model.v2.core.EventNotification;
 import lombok.Getter;
 
 @Getter
-public final class V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpdatedEventNotification
+public final
+class V2CoreAccountIncludingConfigurationMoneyManagerCapabilityStatusUpdatedEventNotification
     extends EventNotification {
   @SerializedName("related_object")
 
@@ -22,9 +23,9 @@ public final class V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpda
   }
   /** Retrieve the corresponding full event from the Stripe API. */
   @Override
-  public V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpdatedEvent fetchEvent()
+  public V2CoreAccountIncludingConfigurationMoneyManagerCapabilityStatusUpdatedEvent fetchEvent()
       throws StripeException {
-    return (V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpdatedEvent)
+    return (V2CoreAccountIncludingConfigurationMoneyManagerCapabilityStatusUpdatedEvent)
         super.fetchEvent();
   }
 }

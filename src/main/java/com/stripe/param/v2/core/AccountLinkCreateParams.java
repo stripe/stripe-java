@@ -517,6 +517,9 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         @SerializedName("merchant")
         MERCHANT("merchant"),
 
+        @SerializedName("money_manager")
+        MONEY_MANAGER("money_manager"),
+
         @SerializedName("recipient")
         RECIPIENT("recipient"),
 
@@ -844,6 +847,9 @@ public class AccountLinkCreateParams extends ApiRequestParams {
 
         @SerializedName("merchant")
         MERCHANT("merchant"),
+
+        @SerializedName("money_manager")
+        MONEY_MANAGER("money_manager"),
 
         @SerializedName("recipient")
         RECIPIENT("recipient"),

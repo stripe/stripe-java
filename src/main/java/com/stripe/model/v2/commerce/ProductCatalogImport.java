@@ -28,7 +28,7 @@ public class ProductCatalogImport extends StripeObject implements HasId {
   /**
    * The type of feed data being imported into the product catalog.
    *
-   * <p>One of {@code inventory}, {@code pricing}, or {@code product}.
+   * <p>One of {@code inventory}, {@code pricing}, {@code product}, or {@code promotion}.
    */
   @SerializedName("feed_type")
   String feedType;
@@ -48,6 +48,14 @@ public class ProductCatalogImport extends StripeObject implements HasId {
   /** Additional information about the object in a structured format. */
   @SerializedName("metadata")
   Map<String, String> metadata;
+
+  /**
+   * The import strategy for handling existing catalog data.
+   *
+   * <p>One of {@code replace}, or {@code upsert}.
+   */
+  @SerializedName("mode")
+  String mode;
 
   /**
    * String representing the object's type. Objects of the same type share the same value of the

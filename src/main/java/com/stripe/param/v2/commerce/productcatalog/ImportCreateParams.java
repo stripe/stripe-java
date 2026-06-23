@@ -131,7 +131,10 @@ public class ImportCreateParams extends ApiRequestParams {
     PRICING("pricing"),
 
     @SerializedName("product")
-    PRODUCT("product");
+    PRODUCT("product"),
+
+    @SerializedName("promotion")
+    PROMOTION("promotion");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

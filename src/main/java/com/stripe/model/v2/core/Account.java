@@ -149,19 +149,19 @@ public class Account extends StripeObject implements HasId {
     Merchant merchant;
 
     /**
+     * The Money Manager Configuration allows the Account to store and move funds using
+     * FinancialAccounts.
+     */
+    @SerializedName("money_manager")
+    MoneyManager moneyManager;
+
+    /**
      * The Recipient Configuration allows the Account to receive funds. Utilize this configuration
      * if the Account will not be the Merchant of Record, like with Separate Charges &amp;
      * Transfers, or Destination Charges without on_behalf_of set.
      */
     @SerializedName("recipient")
     Recipient recipient;
-
-    /**
-     * The Storer Configuration allows the Account to store and move funds using stored-value
-     * FinancialAccounts.
-     */
-    @SerializedName("storer")
-    Storer storer;
 
     /**
      * The Customer Configuration allows the Account to be used in inbound payment flows (i.e.
@@ -762,6 +762,10 @@ public class Account extends StripeObject implements HasId {
         /** Capabilities that enable the merchant to manage their Stripe Balance (/v1/balance). */
         @SerializedName("stripe_balance")
         StripeBalance stripeBalance;
+
+        /** Allow the merchant to process Sunbit payments. */
+        @SerializedName("sunbit_payments")
+        SunbitPayments sunbitPayments;
 
         /** Allow the merchant to process Swish payments. */
         @SerializedName("swish_payments")
@@ -2872,6 +2876,57 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
+        /** Allow the merchant to process Sunbit payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SunbitPayments extends StripeObject {
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<Account.Configuration.Merchant.Capabilities.SunbitPayments.StatusDetail>
+              statusDetails;
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+             * requirements_pending_verification}, {@code restricted_other}, {@code
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
+        }
+
         /** Allow the merchant to process Swish payments. */
         @Getter
         @Setter
@@ -3379,6 +3434,1198 @@ public class Account extends StripeObject implements HasId {
     }
 
     /**
+     * The Money Manager Configuration allows the Account to store and move funds using
+     * FinancialAccounts.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MoneyManager extends StripeObject {
+      /**
+       * Indicates whether the money manager configuration is active. You cannot deactivate (or
+       * reactivate) the money manager configuration by updating this property.
+       */
+      @SerializedName("applied")
+      Boolean applied;
+
+      /** Capabilities that have been requested on the Money Manager Configuration. */
+      @SerializedName("capabilities")
+      Capabilities capabilities;
+
+      /** Capabilities that have been requested on the Money Manager Configuration. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Capabilities extends StripeObject {
+        /** Can send or receive business storage-type funds on Stripe. */
+        @SerializedName("business_storage")
+        BusinessStorage businessStorage;
+
+        /** Hash containing capabilities related to InboundTransfers. */
+        @SerializedName("inbound_transfers")
+        InboundTransfers inboundTransfers;
+
+        /**
+         * Hash containing capabilities related to <a
+         * href="https://stripe.com/api/treasury/outbound_payments?api-version=preview">OutboundPayments</a>.
+         */
+        @SerializedName("outbound_payments")
+        OutboundPayments outboundPayments;
+
+        /**
+         * Hash containing capabilities related to <a
+         * href="https://stripe.com/api/treasury/outbound_transfers?api-version=preview">OutboundTransfers</a>.
+         */
+        @SerializedName("outbound_transfers")
+        OutboundTransfers outboundTransfers;
+
+        /** Hash containing capabilities related to ReceivedCredits. */
+        @SerializedName("received_credits")
+        ReceivedCredits receivedCredits;
+
+        /** Hash containing capabilities related to ReceivedDebits. */
+        @SerializedName("received_debits")
+        ReceivedDebits receivedDebits;
+
+        /** Can send or receive business storage-type funds on Stripe. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BusinessStorage extends StripeObject {
+          /** Can receive business storage-type funds on Stripe. */
+          @SerializedName("inbound")
+          Inbound inbound;
+
+          /** Can send business storage-type funds on Stripe. */
+          @SerializedName("outbound")
+          Outbound outbound;
+
+          /** Can receive business storage-type funds on Stripe. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Inbound extends StripeObject {
+            /** Can receive business storage-type funds on Stripe in AUD. */
+            @SerializedName("aud")
+            Aud aud;
+
+            /** Can receive business storage-type funds on Stripe in CAD. */
+            @SerializedName("cad")
+            Cad cad;
+
+            /** Can receive business storage-type funds on Stripe in EUR. */
+            @SerializedName("eur")
+            Eur eur;
+
+            /** Can receive business storage-type funds on Stripe in GBP. */
+            @SerializedName("gbp")
+            Gbp gbp;
+
+            /** Can receive business storage-type funds on Stripe in USD. */
+            @SerializedName("usd")
+            Usd usd;
+
+            /** Can receive business storage-type funds on Stripe in AUD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Aud extends StripeObject {
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Aud
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can receive business storage-type funds on Stripe in CAD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Cad extends StripeObject {
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Cad
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can receive business storage-type funds on Stripe in EUR. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Eur extends StripeObject {
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Eur
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can receive business storage-type funds on Stripe in GBP. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Gbp extends StripeObject {
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Gbp
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can receive business storage-type funds on Stripe in USD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Usd extends StripeObject {
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Usd
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+          }
+
+          /** Can send business storage-type funds on Stripe. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Outbound extends StripeObject {
+            /** Can send business storage-type funds on Stripe in AUD. */
+            @SerializedName("aud")
+            Aud aud;
+
+            /** Can send business storage-type funds on Stripe in CAD. */
+            @SerializedName("cad")
+            Cad cad;
+
+            /** Can send business storage-type funds on Stripe in EUR. */
+            @SerializedName("eur")
+            Eur eur;
+
+            /** Can send business storage-type funds on Stripe in GBP. */
+            @SerializedName("gbp")
+            Gbp gbp;
+
+            /** Can send business storage-type funds on Stripe in USD. */
+            @SerializedName("usd")
+            Usd usd;
+
+            /** Can send business storage-type funds on Stripe in AUD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Aud extends StripeObject {
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Aud
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can send business storage-type funds on Stripe in CAD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Cad extends StripeObject {
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Cad
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can send business storage-type funds on Stripe in EUR. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Eur extends StripeObject {
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Eur
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can send business storage-type funds on Stripe in GBP. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Gbp extends StripeObject {
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Gbp
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can send business storage-type funds on Stripe in USD. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Usd extends StripeObject {
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Usd
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+          }
+        }
+
+        /** Hash containing capabilities related to InboundTransfers. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class InboundTransfers extends StripeObject {
+          /**
+           * Can pull funds into a FinancialAccount from an external bank account owned by the user.
+           */
+          @SerializedName("bank_accounts")
+          BankAccounts bankAccounts;
+
+          /**
+           * Can pull funds into a FinancialAccount from an external bank account owned by the user.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class BankAccounts extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.InboundTransfers.BankAccounts
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+        }
+
+        /**
+         * Hash containing capabilities related to <a
+         * href="https://stripe.com/api/treasury/outbound_payments?api-version=preview">OutboundPayments</a>.
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class OutboundPayments extends StripeObject {
+          /**
+           * Can send funds from a FinancialAccount to a bank account owned by a different entity.
+           */
+          @SerializedName("bank_accounts")
+          BankAccounts bankAccounts;
+
+          /** Can send funds from a FinancialAccount to a debit card owned by a different entity. */
+          @SerializedName("cards")
+          Cards cards;
+
+          /**
+           * Can send funds from a FinancialAccount to a FinancialAccount owned by a different
+           * entity.
+           */
+          @SerializedName("financial_accounts")
+          FinancialAccounts financialAccounts;
+
+          /**
+           * Can send funds from a FinancialAccount to a bank account owned by a different entity.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class BankAccounts extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.OutboundPayments.BankAccounts
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /** Can send funds from a FinancialAccount to a debit card owned by a different entity. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Cards extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.OutboundPayments.Cards
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Can send funds from a FinancialAccount to a FinancialAccount owned by a different
+           * entity.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class FinancialAccounts extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.OutboundPayments
+                        .FinancialAccounts.StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+        }
+
+        /**
+         * Hash containing capabilities related to <a
+         * href="https://stripe.com/api/treasury/outbound_transfers?api-version=preview">OutboundTransfers</a>.
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class OutboundTransfers extends StripeObject {
+          /**
+           * Can send funds from a FinancialAccount to a bank account belonging to the same user.
+           */
+          @SerializedName("bank_accounts")
+          BankAccounts bankAccounts;
+
+          /**
+           * Can send funds from a FinancialAccount to another FinancialAccount belonging to the
+           * same user.
+           */
+          @SerializedName("financial_accounts")
+          FinancialAccounts financialAccounts;
+
+          /**
+           * Can send funds from a FinancialAccount to a bank account belonging to the same user.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class BankAccounts extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.OutboundTransfers.BankAccounts
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Can send funds from a FinancialAccount to another FinancialAccount belonging to the
+           * same user.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class FinancialAccounts extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.OutboundTransfers
+                        .FinancialAccounts.StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+        }
+
+        /** Hash containing capabilities related to ReceivedCredits. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ReceivedCredits extends StripeObject {
+          /**
+           * Can receive credits to a bank-account like financial address to credit a
+           * FinancialAccount.
+           */
+          @SerializedName("bank_accounts")
+          BankAccounts bankAccounts;
+
+          /**
+           * Can receive credits to a bank-account like financial address to credit a
+           * FinancialAccount.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class BankAccounts extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.ReceivedCredits.BankAccounts
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+        }
+
+        /** Hash containing capabilities related to ReceivedDebits. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ReceivedDebits extends StripeObject {
+          /** Can receive debits to a FinancialAccount from a bank account. */
+          @SerializedName("bank_accounts")
+          BankAccounts bankAccounts;
+
+          /** Can receive debits to a FinancialAccount from a bank account. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class BankAccounts extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.MoneyManager.Capabilities.ReceivedDebits.BankAccounts
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+        }
+      }
+    }
+
+    /**
      * The Recipient Configuration allows the Account to receive funds. Utilize this configuration
      * if the Account will not be the Merchant of Record, like with Separate Charges &amp;
      * Transfers, or Destination Charges without on_behalf_of set.
@@ -3786,696 +5033,6 @@ public class Account extends StripeObject implements HasId {
         String type;
       }
     }
-
-    /**
-     * The Storer Configuration allows the Account to store and move funds using stored-value
-     * FinancialAccounts.
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Storer extends StripeObject {
-      /**
-       * Indicates whether the storer configuration is active. You cannot deactivate (or reactivate)
-       * the storer configuration by updating this property.
-       */
-      @SerializedName("applied")
-      Boolean applied;
-
-      /** Capabilities that have been requested on the Storer Configuration. */
-      @SerializedName("capabilities")
-      Capabilities capabilities;
-
-      /** Capabilities that have been requested on the Storer Configuration. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Capabilities extends StripeObject {
-        /** Can provision a financial address to credit/debit a FinancialAccount. */
-        @SerializedName("financial_addresses")
-        FinancialAddresses financialAddresses;
-
-        /** Can hold storage-type funds on Stripe. */
-        @SerializedName("holds_currencies")
-        HoldsCurrencies holdsCurrencies;
-
-        /** Hash containing capabilities related to InboundTransfers. */
-        @SerializedName("inbound_transfers")
-        InboundTransfers inboundTransfers;
-
-        /**
-         * Hash containing capabilities related to <a
-         * href="https://stripe.com/api/treasury/outbound_payments?api-version=preview">OutboundPayments</a>.
-         */
-        @SerializedName("outbound_payments")
-        OutboundPayments outboundPayments;
-
-        /**
-         * Hash containing capabilities related to <a
-         * href="https://stripe.com/api/treasury/outbound_transfers?api-version=preview">OutboundTransfers</a>.
-         */
-        @SerializedName("outbound_transfers")
-        OutboundTransfers outboundTransfers;
-
-        /** Can provision a financial address to credit/debit a FinancialAccount. */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class FinancialAddresses extends StripeObject {
-          /**
-           * Can provision a bank-account like financial address (VBAN) to credit/debit a
-           * FinancialAccount.
-           */
-          @SerializedName("bank_accounts")
-          BankAccounts bankAccounts;
-
-          /**
-           * Can provision a bank-account like financial address (VBAN) to credit/debit a
-           * FinancialAccount.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class BankAccounts extends StripeObject {
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.FinancialAddresses.BankAccounts
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-        }
-
-        /** Can hold storage-type funds on Stripe. */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class HoldsCurrencies extends StripeObject {
-          /** Can hold storage-type funds on Stripe in EUR. */
-          @SerializedName("eur")
-          Eur eur;
-
-          /** Can hold storage-type funds on Stripe in GBP. */
-          @SerializedName("gbp")
-          Gbp gbp;
-
-          /** Can hold storage-type funds on Stripe in USD. */
-          @SerializedName("usd")
-          Usd usd;
-
-          /** Can hold storage-type funds on Stripe in EUR. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Eur extends StripeObject {
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Eur.StatusDetail>
-                statusDetails;
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /** Can hold storage-type funds on Stripe in GBP. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Gbp extends StripeObject {
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Gbp.StatusDetail>
-                statusDetails;
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /** Can hold storage-type funds on Stripe in USD. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Usd extends StripeObject {
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Usd.StatusDetail>
-                statusDetails;
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-        }
-
-        /** Hash containing capabilities related to InboundTransfers. */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class InboundTransfers extends StripeObject {
-          /**
-           * Can pull funds into a FinancialAccount from an external bank account owned by the user.
-           */
-          @SerializedName("bank_accounts")
-          BankAccounts bankAccounts;
-
-          /**
-           * Can pull funds into a FinancialAccount from an external bank account owned by the user.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class BankAccounts extends StripeObject {
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.InboundTransfers.BankAccounts
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-        }
-
-        /**
-         * Hash containing capabilities related to <a
-         * href="https://stripe.com/api/treasury/outbound_payments?api-version=preview">OutboundPayments</a>.
-         */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class OutboundPayments extends StripeObject {
-          /**
-           * Can send funds from a FinancialAccount to a bank account owned by a different entity.
-           */
-          @SerializedName("bank_accounts")
-          BankAccounts bankAccounts;
-
-          /** Can send funds from a FinancialAccount to a debit card owned by a different entity. */
-          @SerializedName("cards")
-          Cards cards;
-
-          /**
-           * Can send funds from a FinancialAccount to a FinancialAccount owned by a different
-           * entity.
-           */
-          @SerializedName("financial_accounts")
-          FinancialAccounts financialAccounts;
-
-          /**
-           * Can send funds from a FinancialAccount to a bank account owned by a different entity.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class BankAccounts extends StripeObject {
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.OutboundPayments.BankAccounts
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /** Can send funds from a FinancialAccount to a debit card owned by a different entity. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Cards extends StripeObject {
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<Account.Configuration.Storer.Capabilities.OutboundPayments.Cards.StatusDetail>
-                statusDetails;
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /**
-           * Can send funds from a FinancialAccount to a FinancialAccount owned by a different
-           * entity.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class FinancialAccounts extends StripeObject {
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.OutboundPayments.FinancialAccounts
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-        }
-
-        /**
-         * Hash containing capabilities related to <a
-         * href="https://stripe.com/api/treasury/outbound_transfers?api-version=preview">OutboundTransfers</a>.
-         */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class OutboundTransfers extends StripeObject {
-          /**
-           * Can send funds from a FinancialAccount to a bank account belonging to the same user.
-           */
-          @SerializedName("bank_accounts")
-          BankAccounts bankAccounts;
-
-          /**
-           * Can send funds from a FinancialAccount to another FinancialAccount belonging to the
-           * same user.
-           */
-          @SerializedName("financial_accounts")
-          FinancialAccounts financialAccounts;
-
-          /**
-           * Can send funds from a FinancialAccount to a bank account belonging to the same user.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class BankAccounts extends StripeObject {
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.OutboundTransfers.BankAccounts
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-
-          /**
-           * Can send funds from a FinancialAccount to another FinancialAccount belonging to the
-           * same user.
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class FinancialAccounts extends StripeObject {
-            /**
-             * The status of the Capability.
-             *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
-             */
-            @SerializedName("status")
-            String status;
-
-            /**
-             * Additional details about the capability's status. This value is empty when {@code
-             * status} is {@code active}.
-             */
-            @SerializedName("status_details")
-            List<
-                    Account.Configuration.Storer.Capabilities.OutboundTransfers.FinancialAccounts
-                        .StatusDetail>
-                statusDetails;
-
-            /**
-             * For more details about StatusDetail, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class StatusDetail extends StripeObject {
-              /**
-               * Machine-readable code explaining the reason for the Capability to be in its current
-               * status.
-               *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
-               */
-              @SerializedName("code")
-              String code;
-
-              /**
-               * Machine-readable code explaining how to make the Capability active.
-               *
-               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
-               */
-              @SerializedName("resolution")
-              String resolution;
-            }
-          }
-        }
-      }
-    }
   }
 
   /** Default values for settings shared across Account configurations. */
@@ -4547,7 +5104,7 @@ public class Account extends StripeObject implements HasId {
       String feesCollector;
 
       /**
-       * A value indicating responsibility for collecting requirements on this account.
+       * A value indicating the responsibility for losses on this account.
        *
        * <p>One of {@code application}, or {@code stripe}.
        */
@@ -4741,25 +5298,28 @@ public class Account extends StripeObject implements HasId {
            * amazon_pay_payments}, {@code automatic_indirect_tax}, {@code au_becs_debit_payments},
            * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.local},
            * {@code bank_accounts.wire}, {@code blik_payments}, {@code boleto_payments}, {@code
-           * cards}, {@code card_payments}, {@code cartes_bancaires_payments}, {@code
-           * cashapp_payments}, {@code eps_payments}, {@code financial_addresses.bank_accounts},
-           * {@code fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments},
-           * {@code holds_currencies.eur}, {@code holds_currencies.gbp}, {@code
-           * holds_currencies.usd}, {@code ideal_payments}, {@code
-           * inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
-           * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
-           * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
-           * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},
-           * {@code naver_pay_payments}, {@code outbound_payments.bank_accounts}, {@code
-           * outbound_payments.cards}, {@code outbound_payments.financial_accounts}, {@code
-           * outbound_transfers.bank_accounts}, {@code outbound_transfers.financial_accounts},
-           * {@code oxxo_payments}, {@code p24_payments}, {@code payco_payments}, {@code
-           * paynow_payments}, {@code pay_by_bank_payments}, {@code promptpay_payments}, {@code
-           * revolut_pay_payments}, {@code samsung_pay_payments}, {@code
-           * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
-           * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
-           * swish_payments}, {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code
-           * zip_payments}.
+           * business_storage.inbound.eur}, {@code business_storage.inbound.gbp}, {@code
+           * business_storage.inbound.usd}, {@code business_storage.outbound.eur}, {@code
+           * business_storage.outbound.gbp}, {@code business_storage.outbound.usd}, {@code cards},
+           * {@code card_payments}, {@code cartes_bancaires_payments}, {@code cashapp_payments},
+           * {@code eps_payments}, {@code financial_addresses.bank_accounts}, {@code fpx_payments},
+           * {@code gb_bank_transfer_payments}, {@code grabpay_payments}, {@code
+           * holds_currencies.eur}, {@code holds_currencies.gbp}, {@code holds_currencies.usd},
+           * {@code ideal_payments}, {@code inbound_transfers.financial_accounts}, {@code
+           * jcb_payments}, {@code jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code
+           * klarna_payments}, {@code konbini_payments}, {@code kr_card_payments}, {@code
+           * link_payments}, {@code mobilepay_payments}, {@code multibanco_payments}, {@code
+           * mx_bank_transfer_payments}, {@code naver_pay_payments}, {@code
+           * outbound_payments.bank_accounts}, {@code outbound_payments.cards}, {@code
+           * outbound_payments.financial_accounts}, {@code outbound_transfers.bank_accounts}, {@code
+           * outbound_transfers.financial_accounts}, {@code oxxo_payments}, {@code p24_payments},
+           * {@code payco_payments}, {@code paynow_payments}, {@code pay_by_bank_payments}, {@code
+           * promptpay_payments}, {@code received_credits.bank_accounts}, {@code
+           * received_debits.bank_accounts}, {@code revolut_pay_payments}, {@code
+           * samsung_pay_payments}, {@code sepa_bank_transfer_payments}, {@code
+           * sepa_debit_payments}, {@code stripe_balance.payouts}, {@code
+           * stripe_balance.stripe_transfers}, {@code swish_payments}, {@code twint_payments},
+           * {@code us_bank_transfer_payments}, or {@code zip_payments}.
            */
           @SerializedName("capability")
           String capability;
@@ -4767,7 +5327,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The configuration which specifies the Capability which will be restricted.
            *
-           * <p>One of {@code customer}, {@code merchant}, {@code recipient}, or {@code storer}.
+           * <p>One of {@code customer}, {@code merchant}, {@code money_manager}, {@code recipient},
+           * or {@code storer}.
            */
           @SerializedName("configuration")
           String configuration;
@@ -5097,8 +5658,8 @@ public class Account extends StripeObject implements HasId {
         InnerAccount account;
 
         /** Details on the Account's acceptance of Treasury-specific terms of service. */
-        @SerializedName("storer")
-        Storer storer;
+        @SerializedName("money_manager")
+        MoneyManager moneyManager;
 
         /**
          * Details on the Account's acceptance of the <a
@@ -5135,7 +5696,7 @@ public class Account extends StripeObject implements HasId {
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Storer extends StripeObject {
+        public static class MoneyManager extends StripeObject {
           /**
            * The time when the Account's representative accepted the terms of service. Represented
            * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
@@ -6732,25 +7293,28 @@ public class Account extends StripeObject implements HasId {
            * amazon_pay_payments}, {@code automatic_indirect_tax}, {@code au_becs_debit_payments},
            * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.local},
            * {@code bank_accounts.wire}, {@code blik_payments}, {@code boleto_payments}, {@code
-           * cards}, {@code card_payments}, {@code cartes_bancaires_payments}, {@code
-           * cashapp_payments}, {@code eps_payments}, {@code financial_addresses.bank_accounts},
-           * {@code fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments},
-           * {@code holds_currencies.eur}, {@code holds_currencies.gbp}, {@code
-           * holds_currencies.usd}, {@code ideal_payments}, {@code
-           * inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
-           * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
-           * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
-           * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},
-           * {@code naver_pay_payments}, {@code outbound_payments.bank_accounts}, {@code
-           * outbound_payments.cards}, {@code outbound_payments.financial_accounts}, {@code
-           * outbound_transfers.bank_accounts}, {@code outbound_transfers.financial_accounts},
-           * {@code oxxo_payments}, {@code p24_payments}, {@code payco_payments}, {@code
-           * paynow_payments}, {@code pay_by_bank_payments}, {@code promptpay_payments}, {@code
-           * revolut_pay_payments}, {@code samsung_pay_payments}, {@code
-           * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
-           * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
-           * swish_payments}, {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code
-           * zip_payments}.
+           * business_storage.inbound.eur}, {@code business_storage.inbound.gbp}, {@code
+           * business_storage.inbound.usd}, {@code business_storage.outbound.eur}, {@code
+           * business_storage.outbound.gbp}, {@code business_storage.outbound.usd}, {@code cards},
+           * {@code card_payments}, {@code cartes_bancaires_payments}, {@code cashapp_payments},
+           * {@code eps_payments}, {@code financial_addresses.bank_accounts}, {@code fpx_payments},
+           * {@code gb_bank_transfer_payments}, {@code grabpay_payments}, {@code
+           * holds_currencies.eur}, {@code holds_currencies.gbp}, {@code holds_currencies.usd},
+           * {@code ideal_payments}, {@code inbound_transfers.financial_accounts}, {@code
+           * jcb_payments}, {@code jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code
+           * klarna_payments}, {@code konbini_payments}, {@code kr_card_payments}, {@code
+           * link_payments}, {@code mobilepay_payments}, {@code multibanco_payments}, {@code
+           * mx_bank_transfer_payments}, {@code naver_pay_payments}, {@code
+           * outbound_payments.bank_accounts}, {@code outbound_payments.cards}, {@code
+           * outbound_payments.financial_accounts}, {@code outbound_transfers.bank_accounts}, {@code
+           * outbound_transfers.financial_accounts}, {@code oxxo_payments}, {@code p24_payments},
+           * {@code payco_payments}, {@code paynow_payments}, {@code pay_by_bank_payments}, {@code
+           * promptpay_payments}, {@code received_credits.bank_accounts}, {@code
+           * received_debits.bank_accounts}, {@code revolut_pay_payments}, {@code
+           * samsung_pay_payments}, {@code sepa_bank_transfer_payments}, {@code
+           * sepa_debit_payments}, {@code stripe_balance.payouts}, {@code
+           * stripe_balance.stripe_transfers}, {@code swish_payments}, {@code twint_payments},
+           * {@code us_bank_transfer_payments}, or {@code zip_payments}.
            */
           @SerializedName("capability")
           String capability;
@@ -6758,7 +7322,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The configuration which specifies the Capability which will be restricted.
            *
-           * <p>One of {@code customer}, {@code merchant}, {@code recipient}, or {@code storer}.
+           * <p>One of {@code customer}, {@code merchant}, {@code money_manager}, {@code recipient},
+           * or {@code storer}.
            */
           @SerializedName("configuration")
           String configuration;
