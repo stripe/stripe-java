@@ -1,10 +1,9 @@
 // File generated from our OpenAPI spec
 package com.stripe.param.v2.billing;
 
-import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.v2.Amount;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -569,9 +568,23 @@ public class ContractCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class BillingSettings {
-    /** Billing settings details for the contract. */
-    @SerializedName("contract_billing_details")
-    ContractBillingDetails contractBillingDetails;
+    /** The bill settings details configures invoice and tax settings for the contract. */
+    @SerializedName("bill_settings_details")
+    BillSettingsDetails billSettingsDetails;
+
+    /**
+     * <strong>Required.</strong> The billing profile details configures who is charged for the
+     * contract.
+     */
+    @SerializedName("billing_profile_details")
+    BillingProfileDetails billingProfileDetails;
+
+    /**
+     * <strong>Required.</strong> The collection settings details configures how payments are
+     * collected on the contract.
+     */
+    @SerializedName("collection_settings_details")
+    CollectionSettingsDetails collectionSettingsDetails;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -583,8 +596,13 @@ public class ContractCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     private BillingSettings(
-        ContractBillingDetails contractBillingDetails, Map<String, Object> extraParams) {
-      this.contractBillingDetails = contractBillingDetails;
+        BillSettingsDetails billSettingsDetails,
+        BillingProfileDetails billingProfileDetails,
+        CollectionSettingsDetails collectionSettingsDetails,
+        Map<String, Object> extraParams) {
+      this.billSettingsDetails = billSettingsDetails;
+      this.billingProfileDetails = billingProfileDetails;
+      this.collectionSettingsDetails = collectionSettingsDetails;
       this.extraParams = extraParams;
     }
 
@@ -593,20 +611,48 @@ public class ContractCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private ContractBillingDetails contractBillingDetails;
+      private BillSettingsDetails billSettingsDetails;
+
+      private BillingProfileDetails billingProfileDetails;
+
+      private CollectionSettingsDetails collectionSettingsDetails;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public ContractCreateParams.BillingSettings build() {
         return new ContractCreateParams.BillingSettings(
-            this.contractBillingDetails, this.extraParams);
+            this.billSettingsDetails,
+            this.billingProfileDetails,
+            this.collectionSettingsDetails,
+            this.extraParams);
       }
 
-      /** Billing settings details for the contract. */
-      public Builder setContractBillingDetails(
-          ContractCreateParams.BillingSettings.ContractBillingDetails contractBillingDetails) {
-        this.contractBillingDetails = contractBillingDetails;
+      /** The bill settings details configures invoice and tax settings for the contract. */
+      public Builder setBillSettingsDetails(
+          ContractCreateParams.BillingSettings.BillSettingsDetails billSettingsDetails) {
+        this.billSettingsDetails = billSettingsDetails;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The billing profile details configures who is charged for the
+       * contract.
+       */
+      public Builder setBillingProfileDetails(
+          ContractCreateParams.BillingSettings.BillingProfileDetails billingProfileDetails) {
+        this.billingProfileDetails = billingProfileDetails;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The collection settings details configures how payments are
+       * collected on the contract.
+       */
+      public Builder setCollectionSettingsDetails(
+          ContractCreateParams.BillingSettings.CollectionSettingsDetails
+              collectionSettingsDetails) {
+        this.collectionSettingsDetails = collectionSettingsDetails;
         return this;
       }
 
@@ -639,18 +685,10 @@ public class ContractCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
-    public static class ContractBillingDetails {
-      /** The bill settings details. */
-      @SerializedName("bill_settings_details")
-      BillSettingsDetails billSettingsDetails;
-
-      /** <strong>Required.</strong> The billing profile details. */
-      @SerializedName("billing_profile_details")
-      BillingProfileDetails billingProfileDetails;
-
-      /** <strong>Required.</strong> The collection settings details. */
-      @SerializedName("collection_settings_details")
-      CollectionSettingsDetails collectionSettingsDetails;
+    public static class BillSettingsDetails {
+      /** Calculation settings. */
+      @SerializedName("calculation")
+      Calculation calculation;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -661,14 +699,462 @@ public class ContractCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private ContractBillingDetails(
-          BillSettingsDetails billSettingsDetails,
-          BillingProfileDetails billingProfileDetails,
-          CollectionSettingsDetails collectionSettingsDetails,
-          Map<String, Object> extraParams) {
-        this.billSettingsDetails = billSettingsDetails;
-        this.billingProfileDetails = billingProfileDetails;
-        this.collectionSettingsDetails = collectionSettingsDetails;
+      /** Invoice settings. */
+      @SerializedName("invoice")
+      Invoice invoice;
+
+      private BillSettingsDetails(
+          Calculation calculation, Map<String, Object> extraParams, Invoice invoice) {
+        this.calculation = calculation;
+        this.extraParams = extraParams;
+        this.invoice = invoice;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Calculation calculation;
+
+        private Map<String, Object> extraParams;
+
+        private Invoice invoice;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ContractCreateParams.BillingSettings.BillSettingsDetails build() {
+          return new ContractCreateParams.BillingSettings.BillSettingsDetails(
+              this.calculation, this.extraParams, this.invoice);
+        }
+
+        /** Calculation settings. */
+        public Builder setCalculation(
+            ContractCreateParams.BillingSettings.BillSettingsDetails.Calculation calculation) {
+          this.calculation = calculation;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ContractCreateParams.BillingSettings.BillSettingsDetails#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ContractCreateParams.BillingSettings.BillSettingsDetails#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Invoice settings. */
+        public Builder setInvoice(
+            ContractCreateParams.BillingSettings.BillSettingsDetails.Invoice invoice) {
+          this.invoice = invoice;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Calculation {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Tax calculation settings. */
+        @SerializedName("tax")
+        Tax tax;
+
+        private Calculation(Map<String, Object> extraParams, Tax tax) {
+          this.extraParams = extraParams;
+          this.tax = tax;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Tax tax;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public ContractCreateParams.BillingSettings.BillSettingsDetails.Calculation build() {
+            return new ContractCreateParams.BillingSettings.BillSettingsDetails.Calculation(
+                this.extraParams, this.tax);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ContractCreateParams.BillingSettings.BillSettingsDetails.Calculation#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ContractCreateParams.BillingSettings.BillSettingsDetails.Calculation#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Tax calculation settings. */
+          public Builder setTax(
+              ContractCreateParams.BillingSettings.BillSettingsDetails.Calculation.Tax tax) {
+            this.tax = tax;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Tax {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** <strong>Required.</strong> The type of tax calculation. */
+          @SerializedName("type")
+          Type type;
+
+          private Tax(Map<String, Object> extraParams, Type type) {
+            this.extraParams = extraParams;
+            this.type = type;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Type type;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public ContractCreateParams.BillingSettings.BillSettingsDetails.Calculation.Tax
+                build() {
+              return new ContractCreateParams.BillingSettings.BillSettingsDetails.Calculation.Tax(
+                  this.extraParams, this.type);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ContractCreateParams.BillingSettings.BillSettingsDetails.Calculation.Tax#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ContractCreateParams.BillingSettings.BillSettingsDetails.Calculation.Tax#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** <strong>Required.</strong> The type of tax calculation. */
+            public Builder setType(
+                ContractCreateParams.BillingSettings.BillSettingsDetails.Calculation.Tax.Type
+                    type) {
+              this.type = type;
+              return this;
+            }
+          }
+
+          public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("automatic")
+            AUTOMATIC("automatic"),
+
+            @SerializedName("manual")
+            MANUAL("manual");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Type(String value) {
+              this.value = value;
+            }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Invoice {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The number of time units before the invoice is past due. */
+        @SerializedName("time_until_due")
+        TimeUntilDue timeUntilDue;
+
+        private Invoice(Map<String, Object> extraParams, TimeUntilDue timeUntilDue) {
+          this.extraParams = extraParams;
+          this.timeUntilDue = timeUntilDue;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private TimeUntilDue timeUntilDue;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public ContractCreateParams.BillingSettings.BillSettingsDetails.Invoice build() {
+            return new ContractCreateParams.BillingSettings.BillSettingsDetails.Invoice(
+                this.extraParams, this.timeUntilDue);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ContractCreateParams.BillingSettings.BillSettingsDetails.Invoice#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ContractCreateParams.BillingSettings.BillSettingsDetails.Invoice#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The number of time units before the invoice is past due. */
+          public Builder setTimeUntilDue(
+              ContractCreateParams.BillingSettings.BillSettingsDetails.Invoice.TimeUntilDue
+                  timeUntilDue) {
+            this.timeUntilDue = timeUntilDue;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class TimeUntilDue {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** <strong>Required.</strong> The interval unit. */
+          @SerializedName("interval")
+          Interval interval;
+
+          /** <strong>Required.</strong> The number of intervals. */
+          @SerializedName("interval_count")
+          Long intervalCount;
+
+          private TimeUntilDue(
+              Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+            this.extraParams = extraParams;
+            this.interval = interval;
+            this.intervalCount = intervalCount;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Interval interval;
+
+            private Long intervalCount;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public ContractCreateParams.BillingSettings.BillSettingsDetails.Invoice.TimeUntilDue
+                build() {
+              return new ContractCreateParams.BillingSettings.BillSettingsDetails.Invoice
+                  .TimeUntilDue(this.extraParams, this.interval, this.intervalCount);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ContractCreateParams.BillingSettings.BillSettingsDetails.Invoice.TimeUntilDue#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ContractCreateParams.BillingSettings.BillSettingsDetails.Invoice.TimeUntilDue#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** <strong>Required.</strong> The interval unit. */
+            public Builder setInterval(
+                ContractCreateParams.BillingSettings.BillSettingsDetails.Invoice.TimeUntilDue
+                        .Interval
+                    interval) {
+              this.interval = interval;
+              return this;
+            }
+
+            /** <strong>Required.</strong> The number of intervals. */
+            public Builder setIntervalCount(Long intervalCount) {
+              this.intervalCount = intervalCount;
+              return this;
+            }
+          }
+
+          public enum Interval implements ApiRequestParams.EnumParam {
+            @SerializedName("day")
+            DAY("day"),
+
+            @SerializedName("month")
+            MONTH("month"),
+
+            @SerializedName("week")
+            WEEK("week"),
+
+            @SerializedName("year")
+            YEAR("year");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Interval(String value) {
+              this.value = value;
+            }
+          }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingProfileDetails {
+      /** <strong>Required.</strong> The customer who pays for the contract invoice. */
+      @SerializedName("customer")
+      String customer;
+
+      /** The default payment method for the contract. */
+      @SerializedName("default_payment_method")
+      String defaultPaymentMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private BillingProfileDetails(
+          String customer, String defaultPaymentMethod, Map<String, Object> extraParams) {
+        this.customer = customer;
+        this.defaultPaymentMethod = defaultPaymentMethod;
         this.extraParams = extraParams;
       }
 
@@ -677,51 +1163,34 @@ public class ContractCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private BillSettingsDetails billSettingsDetails;
+        private String customer;
 
-        private BillingProfileDetails billingProfileDetails;
-
-        private CollectionSettingsDetails collectionSettingsDetails;
+        private String defaultPaymentMethod;
 
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public ContractCreateParams.BillingSettings.ContractBillingDetails build() {
-          return new ContractCreateParams.BillingSettings.ContractBillingDetails(
-              this.billSettingsDetails,
-              this.billingProfileDetails,
-              this.collectionSettingsDetails,
-              this.extraParams);
+        public ContractCreateParams.BillingSettings.BillingProfileDetails build() {
+          return new ContractCreateParams.BillingSettings.BillingProfileDetails(
+              this.customer, this.defaultPaymentMethod, this.extraParams);
         }
 
-        /** The bill settings details. */
-        public Builder setBillSettingsDetails(
-            ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails
-                billSettingsDetails) {
-          this.billSettingsDetails = billSettingsDetails;
+        /** <strong>Required.</strong> The customer who pays for the contract invoice. */
+        public Builder setCustomer(String customer) {
+          this.customer = customer;
           return this;
         }
 
-        /** <strong>Required.</strong> The billing profile details. */
-        public Builder setBillingProfileDetails(
-            ContractCreateParams.BillingSettings.ContractBillingDetails.BillingProfileDetails
-                billingProfileDetails) {
-          this.billingProfileDetails = billingProfileDetails;
-          return this;
-        }
-
-        /** <strong>Required.</strong> The collection settings details. */
-        public Builder setCollectionSettingsDetails(
-            ContractCreateParams.BillingSettings.ContractBillingDetails.CollectionSettingsDetails
-                collectionSettingsDetails) {
-          this.collectionSettingsDetails = collectionSettingsDetails;
+        /** The default payment method for the contract. */
+        public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
+          this.defaultPaymentMethod = defaultPaymentMethod;
           return this;
         }
 
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ContractCreateParams.BillingSettings.ContractBillingDetails#extraParams}
+         * map. See {@link ContractCreateParams.BillingSettings.BillingProfileDetails#extraParams}
          * for the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -735,7 +1204,7 @@ public class ContractCreateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ContractCreateParams.BillingSettings.ContractBillingDetails#extraParams}
+         * map. See {@link ContractCreateParams.BillingSettings.BillingProfileDetails#extraParams}
          * for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -746,673 +1215,111 @@ public class ContractCreateParams extends ApiRequestParams {
           return this;
         }
       }
-
-      @Getter
-      @EqualsAndHashCode(callSuper = false)
-      public static class BillSettingsDetails {
-        /** Calculation settings. */
-        @SerializedName("calculation")
-        Calculation calculation;
-
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        /** Invoice settings. */
-        @SerializedName("invoice")
-        Invoice invoice;
-
-        private BillSettingsDetails(
-            Calculation calculation, Map<String, Object> extraParams, Invoice invoice) {
-          this.calculation = calculation;
-          this.extraParams = extraParams;
-          this.invoice = invoice;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Calculation calculation;
-
-          private Map<String, Object> extraParams;
-
-          private Invoice invoice;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails
-              build() {
-            return new ContractCreateParams.BillingSettings.ContractBillingDetails
-                .BillSettingsDetails(this.calculation, this.extraParams, this.invoice);
-          }
-
-          /** Calculation settings. */
-          public Builder setCalculation(
-              ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails
-                      .Calculation
-                  calculation) {
-            this.calculation = calculation;
-            return this;
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails#extraParams}
-           * for the field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails#extraParams}
-           * for the field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /** Invoice settings. */
-          public Builder setInvoice(
-              ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails
-                      .Invoice
-                  invoice) {
-            this.invoice = invoice;
-            return this;
-          }
-        }
-
-        @Getter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Calculation {
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
-
-          /** Tax calculation settings. */
-          @SerializedName("tax")
-          Tax tax;
-
-          private Calculation(Map<String, Object> extraParams, Tax tax) {
-            this.extraParams = extraParams;
-            this.tax = tax;
-          }
-
-          public static Builder builder() {
-            return new Builder();
-          }
-
-          public static class Builder {
-            private Map<String, Object> extraParams;
-
-            private Tax tax;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails
-                    .Calculation
-                build() {
-              return new ContractCreateParams.BillingSettings.ContractBillingDetails
-                  .BillSettingsDetails.Calculation(this.extraParams, this.tax);
-            }
-
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails.Calculation#extraParams}
-             * for the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
-
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails.Calculation#extraParams}
-             * for the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-
-            /** Tax calculation settings. */
-            public Builder setTax(
-                ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails
-                        .Calculation.Tax
-                    tax) {
-              this.tax = tax;
-              return this;
-            }
-          }
-
-          @Getter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Tax {
-            /**
-             * Map of extra parameters for custom features not available in this client library. The
-             * content in this map is not serialized under this field's {@code @SerializedName}
-             * value. Instead, each key/value pair is serialized as if the key is a root-level field
-             * (serialized) name in this param object. Effectively, this map is flattened to its
-             * parent instance.
-             */
-            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-            Map<String, Object> extraParams;
-
-            /** <strong>Required.</strong> The type of tax calculation. */
-            @SerializedName("type")
-            Type type;
-
-            private Tax(Map<String, Object> extraParams, Type type) {
-              this.extraParams = extraParams;
-              this.type = type;
-            }
-
-            public static Builder builder() {
-              return new Builder();
-            }
-
-            public static class Builder {
-              private Map<String, Object> extraParams;
-
-              private Type type;
-
-              /** Finalize and obtain parameter instance from this builder. */
-              public ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails
-                      .Calculation.Tax
-                  build() {
-                return new ContractCreateParams.BillingSettings.ContractBillingDetails
-                    .BillSettingsDetails.Calculation.Tax(this.extraParams, this.type);
-              }
-
-              /**
-               * Add a key/value pair to `extraParams` map. A map is initialized for the first
-               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-               * original map. See {@link
-               * ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails.Calculation.Tax#extraParams}
-               * for the field documentation.
-               */
-              public Builder putExtraParam(String key, Object value) {
-                if (this.extraParams == null) {
-                  this.extraParams = new HashMap<>();
-                }
-                this.extraParams.put(key, value);
-                return this;
-              }
-
-              /**
-               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
-               * original map. See {@link
-               * ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails.Calculation.Tax#extraParams}
-               * for the field documentation.
-               */
-              public Builder putAllExtraParam(Map<String, Object> map) {
-                if (this.extraParams == null) {
-                  this.extraParams = new HashMap<>();
-                }
-                this.extraParams.putAll(map);
-                return this;
-              }
-
-              /** <strong>Required.</strong> The type of tax calculation. */
-              public Builder setType(
-                  ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails
-                          .Calculation.Tax.Type
-                      type) {
-                this.type = type;
-                return this;
-              }
-            }
-
-            public enum Type implements ApiRequestParams.EnumParam {
-              @SerializedName("automatic")
-              AUTOMATIC("automatic"),
-
-              @SerializedName("manual")
-              MANUAL("manual");
-
-              @Getter(onMethod_ = {@Override})
-              private final String value;
-
-              Type(String value) {
-                this.value = value;
-              }
-            }
-          }
-        }
-
-        @Getter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Invoice {
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
-
-          /** The number of time units before the invoice is past due. */
-          @SerializedName("time_until_due")
-          TimeUntilDue timeUntilDue;
-
-          private Invoice(Map<String, Object> extraParams, TimeUntilDue timeUntilDue) {
-            this.extraParams = extraParams;
-            this.timeUntilDue = timeUntilDue;
-          }
-
-          public static Builder builder() {
-            return new Builder();
-          }
-
-          public static class Builder {
-            private Map<String, Object> extraParams;
-
-            private TimeUntilDue timeUntilDue;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails
-                    .Invoice
-                build() {
-              return new ContractCreateParams.BillingSettings.ContractBillingDetails
-                  .BillSettingsDetails.Invoice(this.extraParams, this.timeUntilDue);
-            }
-
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails.Invoice#extraParams}
-             * for the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
-
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails.Invoice#extraParams}
-             * for the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-
-            /** The number of time units before the invoice is past due. */
-            public Builder setTimeUntilDue(
-                ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails
-                        .Invoice.TimeUntilDue
-                    timeUntilDue) {
-              this.timeUntilDue = timeUntilDue;
-              return this;
-            }
-          }
-
-          @Getter
-          @EqualsAndHashCode(callSuper = false)
-          public static class TimeUntilDue {
-            /**
-             * Map of extra parameters for custom features not available in this client library. The
-             * content in this map is not serialized under this field's {@code @SerializedName}
-             * value. Instead, each key/value pair is serialized as if the key is a root-level field
-             * (serialized) name in this param object. Effectively, this map is flattened to its
-             * parent instance.
-             */
-            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-            Map<String, Object> extraParams;
-
-            /** <strong>Required.</strong> The interval unit. */
-            @SerializedName("interval")
-            Interval interval;
-
-            /** <strong>Required.</strong> The number of intervals. */
-            @SerializedName("interval_count")
-            Long intervalCount;
-
-            private TimeUntilDue(
-                Map<String, Object> extraParams, Interval interval, Long intervalCount) {
-              this.extraParams = extraParams;
-              this.interval = interval;
-              this.intervalCount = intervalCount;
-            }
-
-            public static Builder builder() {
-              return new Builder();
-            }
-
-            public static class Builder {
-              private Map<String, Object> extraParams;
-
-              private Interval interval;
-
-              private Long intervalCount;
-
-              /** Finalize and obtain parameter instance from this builder. */
-              public ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails
-                      .Invoice.TimeUntilDue
-                  build() {
-                return new ContractCreateParams.BillingSettings.ContractBillingDetails
-                    .BillSettingsDetails.Invoice.TimeUntilDue(
-                    this.extraParams, this.interval, this.intervalCount);
-              }
-
-              /**
-               * Add a key/value pair to `extraParams` map. A map is initialized for the first
-               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-               * original map. See {@link
-               * ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails.Invoice.TimeUntilDue#extraParams}
-               * for the field documentation.
-               */
-              public Builder putExtraParam(String key, Object value) {
-                if (this.extraParams == null) {
-                  this.extraParams = new HashMap<>();
-                }
-                this.extraParams.put(key, value);
-                return this;
-              }
-
-              /**
-               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
-               * original map. See {@link
-               * ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails.Invoice.TimeUntilDue#extraParams}
-               * for the field documentation.
-               */
-              public Builder putAllExtraParam(Map<String, Object> map) {
-                if (this.extraParams == null) {
-                  this.extraParams = new HashMap<>();
-                }
-                this.extraParams.putAll(map);
-                return this;
-              }
-
-              /** <strong>Required.</strong> The interval unit. */
-              public Builder setInterval(
-                  ContractCreateParams.BillingSettings.ContractBillingDetails.BillSettingsDetails
-                          .Invoice.TimeUntilDue.Interval
-                      interval) {
-                this.interval = interval;
-                return this;
-              }
-
-              /** <strong>Required.</strong> The number of intervals. */
-              public Builder setIntervalCount(Long intervalCount) {
-                this.intervalCount = intervalCount;
-                return this;
-              }
-            }
-
-            public enum Interval implements ApiRequestParams.EnumParam {
-              @SerializedName("day")
-              DAY("day"),
-
-              @SerializedName("month")
-              MONTH("month"),
-
-              @SerializedName("week")
-              WEEK("week"),
-
-              @SerializedName("year")
-              YEAR("year");
-
-              @Getter(onMethod_ = {@Override})
-              private final String value;
-
-              Interval(String value) {
-                this.value = value;
-              }
-            }
-          }
-        }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CollectionSettingsDetails {
+      /** <strong>Required.</strong> The collection method. */
+      @SerializedName("collection_method")
+      CollectionMethod collectionMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The payment method configuration. */
+      @SerializedName("payment_method_configuration")
+      String paymentMethodConfiguration;
+
+      private CollectionSettingsDetails(
+          CollectionMethod collectionMethod,
+          Map<String, Object> extraParams,
+          String paymentMethodConfiguration) {
+        this.collectionMethod = collectionMethod;
+        this.extraParams = extraParams;
+        this.paymentMethodConfiguration = paymentMethodConfiguration;
       }
 
-      @Getter
-      @EqualsAndHashCode(callSuper = false)
-      public static class BillingProfileDetails {
-        /** <strong>Required.</strong> The customer who pays for the contract invoice. */
-        @SerializedName("customer")
-        String customer;
-
-        /** The default payment method for the contract. */
-        @SerializedName("default_payment_method")
-        String defaultPaymentMethod;
-
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        private BillingProfileDetails(
-            String customer, String defaultPaymentMethod, Map<String, Object> extraParams) {
-          this.customer = customer;
-          this.defaultPaymentMethod = defaultPaymentMethod;
-          this.extraParams = extraParams;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private String customer;
-
-          private String defaultPaymentMethod;
-
-          private Map<String, Object> extraParams;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public ContractCreateParams.BillingSettings.ContractBillingDetails.BillingProfileDetails
-              build() {
-            return new ContractCreateParams.BillingSettings.ContractBillingDetails
-                .BillingProfileDetails(this.customer, this.defaultPaymentMethod, this.extraParams);
-          }
-
-          /** <strong>Required.</strong> The customer who pays for the contract invoice. */
-          public Builder setCustomer(String customer) {
-            this.customer = customer;
-            return this;
-          }
-
-          /** The default payment method for the contract. */
-          public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
-            this.defaultPaymentMethod = defaultPaymentMethod;
-            return this;
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * ContractCreateParams.BillingSettings.ContractBillingDetails.BillingProfileDetails#extraParams}
-           * for the field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * ContractCreateParams.BillingSettings.ContractBillingDetails.BillingProfileDetails#extraParams}
-           * for the field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-        }
+      public static Builder builder() {
+        return new Builder();
       }
 
-      @Getter
-      @EqualsAndHashCode(callSuper = false)
-      public static class CollectionSettingsDetails {
+      public static class Builder {
+        private CollectionMethod collectionMethod;
+
+        private Map<String, Object> extraParams;
+
+        private String paymentMethodConfiguration;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ContractCreateParams.BillingSettings.CollectionSettingsDetails build() {
+          return new ContractCreateParams.BillingSettings.CollectionSettingsDetails(
+              this.collectionMethod, this.extraParams, this.paymentMethodConfiguration);
+        }
+
         /** <strong>Required.</strong> The collection method. */
-        @SerializedName("collection_method")
-        CollectionMethod collectionMethod;
+        public Builder setCollectionMethod(
+            ContractCreateParams.BillingSettings.CollectionSettingsDetails.CollectionMethod
+                collectionMethod) {
+          this.collectionMethod = collectionMethod;
+          return this;
+        }
 
         /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * ContractCreateParams.BillingSettings.CollectionSettingsDetails#extraParams} for the field
+         * documentation.
          */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * ContractCreateParams.BillingSettings.CollectionSettingsDetails#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
 
         /** The payment method configuration. */
-        @SerializedName("payment_method_configuration")
-        String paymentMethodConfiguration;
-
-        private CollectionSettingsDetails(
-            CollectionMethod collectionMethod,
-            Map<String, Object> extraParams,
-            String paymentMethodConfiguration) {
-          this.collectionMethod = collectionMethod;
-          this.extraParams = extraParams;
+        public Builder setPaymentMethodConfiguration(String paymentMethodConfiguration) {
           this.paymentMethodConfiguration = paymentMethodConfiguration;
+          return this;
         }
+      }
 
-        public static Builder builder() {
-          return new Builder();
-        }
+      public enum CollectionMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("charge_automatically")
+        CHARGE_AUTOMATICALLY("charge_automatically"),
 
-        public static class Builder {
-          private CollectionMethod collectionMethod;
+        @SerializedName("send_invoice")
+        SEND_INVOICE("send_invoice");
 
-          private Map<String, Object> extraParams;
+        @Getter(onMethod_ = {@Override})
+        private final String value;
 
-          private String paymentMethodConfiguration;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public ContractCreateParams.BillingSettings.ContractBillingDetails
-                  .CollectionSettingsDetails
-              build() {
-            return new ContractCreateParams.BillingSettings.ContractBillingDetails
-                .CollectionSettingsDetails(
-                this.collectionMethod, this.extraParams, this.paymentMethodConfiguration);
-          }
-
-          /** <strong>Required.</strong> The collection method. */
-          public Builder setCollectionMethod(
-              ContractCreateParams.BillingSettings.ContractBillingDetails.CollectionSettingsDetails
-                      .CollectionMethod
-                  collectionMethod) {
-            this.collectionMethod = collectionMethod;
-            return this;
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * ContractCreateParams.BillingSettings.ContractBillingDetails.CollectionSettingsDetails#extraParams}
-           * for the field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * ContractCreateParams.BillingSettings.ContractBillingDetails.CollectionSettingsDetails#extraParams}
-           * for the field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /** The payment method configuration. */
-          public Builder setPaymentMethodConfiguration(String paymentMethodConfiguration) {
-            this.paymentMethodConfiguration = paymentMethodConfiguration;
-            return this;
-          }
-        }
-
-        public enum CollectionMethod implements ApiRequestParams.EnumParam {
-          @SerializedName("charge_automatically")
-          CHARGE_AUTOMATICALLY("charge_automatically"),
-
-          @SerializedName("send_invoice")
-          SEND_INVOICE("send_invoice");
-
-          @Getter(onMethod_ = {@Override})
-          private final String value;
-
-          CollectionMethod(String value) {
-            this.value = value;
-          }
+        CollectionMethod(String value) {
+          this.value = value;
         }
       }
     }
@@ -1421,16 +1328,13 @@ public class ContractCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class OneTimeFee {
-    /**
-     * <strong>Required.</strong> The bill schedule for the fee. Each entry produces an individual
-     * invoice item billed at {@code bill_at}.
-     */
-    @SerializedName("bill_schedule")
-    List<ContractCreateParams.OneTimeFee.BillSchedule> billSchedule;
+    /** <strong>Required.</strong> The amount to bill. */
+    @SerializedName("amount")
+    Amount amount;
 
-    /** <strong>Required.</strong> The type of billable item that this fee references. */
-    @SerializedName("billable_item_type")
-    BillableItemType billableItemType;
+    /** <strong>Required.</strong> When this fee should be billed. */
+    @SerializedName("bill_at")
+    BillAt billAt;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1441,22 +1345,25 @@ public class ContractCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * Details for a product billable target. Required when {@code billable_item_type} is {@code
-     * product}.
-     */
-    @SerializedName("product_details")
-    ProductDetails productDetails;
+    /** A user-provided lookup key. */
+    @SerializedName("lookup_key")
+    String lookupKey;
+
+    /** <strong>Required.</strong> The ID of the v1 Product for this fee. */
+    @SerializedName("product")
+    String product;
 
     private OneTimeFee(
-        List<ContractCreateParams.OneTimeFee.BillSchedule> billSchedule,
-        BillableItemType billableItemType,
+        Amount amount,
+        BillAt billAt,
         Map<String, Object> extraParams,
-        ProductDetails productDetails) {
-      this.billSchedule = billSchedule;
-      this.billableItemType = billableItemType;
+        String lookupKey,
+        String product) {
+      this.amount = amount;
+      this.billAt = billAt;
       this.extraParams = extraParams;
-      this.productDetails = productDetails;
+      this.lookupKey = lookupKey;
+      this.product = product;
     }
 
     public static Builder builder() {
@@ -1464,51 +1371,31 @@ public class ContractCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private List<ContractCreateParams.OneTimeFee.BillSchedule> billSchedule;
+      private Amount amount;
 
-      private BillableItemType billableItemType;
+      private BillAt billAt;
 
       private Map<String, Object> extraParams;
 
-      private ProductDetails productDetails;
+      private String lookupKey;
+
+      private String product;
 
       /** Finalize and obtain parameter instance from this builder. */
       public ContractCreateParams.OneTimeFee build() {
         return new ContractCreateParams.OneTimeFee(
-            this.billSchedule, this.billableItemType, this.extraParams, this.productDetails);
+            this.amount, this.billAt, this.extraParams, this.lookupKey, this.product);
       }
 
-      /**
-       * Add an element to `billSchedule` list. A list is initialized for the first `add/addAll`
-       * call, and subsequent calls adds additional elements to the original list. See {@link
-       * ContractCreateParams.OneTimeFee#billSchedule} for the field documentation.
-       */
-      public Builder addBillSchedule(ContractCreateParams.OneTimeFee.BillSchedule element) {
-        if (this.billSchedule == null) {
-          this.billSchedule = new ArrayList<>();
-        }
-        this.billSchedule.add(element);
+      /** <strong>Required.</strong> The amount to bill. */
+      public Builder setAmount(Amount amount) {
+        this.amount = amount;
         return this;
       }
 
-      /**
-       * Add all elements to `billSchedule` list. A list is initialized for the first `add/addAll`
-       * call, and subsequent calls adds additional elements to the original list. See {@link
-       * ContractCreateParams.OneTimeFee#billSchedule} for the field documentation.
-       */
-      public Builder addAllBillSchedule(
-          List<ContractCreateParams.OneTimeFee.BillSchedule> elements) {
-        if (this.billSchedule == null) {
-          this.billSchedule = new ArrayList<>();
-        }
-        this.billSchedule.addAll(elements);
-        return this;
-      }
-
-      /** <strong>Required.</strong> The type of billable item that this fee references. */
-      public Builder setBillableItemType(
-          ContractCreateParams.OneTimeFee.BillableItemType billableItemType) {
-        this.billableItemType = billableItemType;
+      /** <strong>Required.</strong> When this fee should be billed. */
+      public Builder setBillAt(ContractCreateParams.OneTimeFee.BillAt billAt) {
+        this.billAt = billAt;
         return this;
       }
 
@@ -1538,24 +1425,22 @@ public class ContractCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Details for a product billable target. Required when {@code billable_item_type} is {@code
-       * product}.
-       */
-      public Builder setProductDetails(
-          ContractCreateParams.OneTimeFee.ProductDetails productDetails) {
-        this.productDetails = productDetails;
+      /** A user-provided lookup key. */
+      public Builder setLookupKey(String lookupKey) {
+        this.lookupKey = lookupKey;
+        return this;
+      }
+
+      /** <strong>Required.</strong> The ID of the v1 Product for this fee. */
+      public Builder setProduct(String product) {
+        this.product = product;
         return this;
       }
     }
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
-    public static class BillSchedule {
-      /** <strong>Required.</strong> When this entry should be billed. */
-      @SerializedName("bill_at")
-      BillAt billAt;
-
+    public static class BillAt {
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1566,17 +1451,20 @@ public class ContractCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> The amount to bill for this entry, in the smallest currency
-       * unit.
+       * The timestamp at which the entry should be billed. Required if {@code type} is {@code
+       * timestamp}.
        */
-      @SerializedName("value")
-      @JsonAdapter(StringInt64TypeAdapter.class)
-      Long value;
+      @SerializedName("timestamp")
+      Instant timestamp;
 
-      private BillSchedule(BillAt billAt, Map<String, Object> extraParams, Long value) {
-        this.billAt = billAt;
+      /** <strong>Required.</strong> The type of the bill_at. */
+      @SerializedName("type")
+      Type type;
+
+      private BillAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
         this.extraParams = extraParams;
-        this.value = value;
+        this.timestamp = timestamp;
+        this.type = type;
       }
 
       public static Builder builder() {
@@ -1584,28 +1472,22 @@ public class ContractCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private BillAt billAt;
-
         private Map<String, Object> extraParams;
 
-        private Long value;
+        private Instant timestamp;
+
+        private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public ContractCreateParams.OneTimeFee.BillSchedule build() {
-          return new ContractCreateParams.OneTimeFee.BillSchedule(
-              this.billAt, this.extraParams, this.value);
-        }
-
-        /** <strong>Required.</strong> When this entry should be billed. */
-        public Builder setBillAt(ContractCreateParams.OneTimeFee.BillSchedule.BillAt billAt) {
-          this.billAt = billAt;
-          return this;
+        public ContractCreateParams.OneTimeFee.BillAt build() {
+          return new ContractCreateParams.OneTimeFee.BillAt(
+              this.extraParams, this.timestamp, this.type);
         }
 
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ContractCreateParams.OneTimeFee.BillSchedule#extraParams} for the field
+         * map. See {@link ContractCreateParams.OneTimeFee.BillAt#extraParams} for the field
          * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -1619,7 +1501,7 @@ public class ContractCreateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ContractCreateParams.OneTimeFee.BillSchedule#extraParams} for the field
+         * map. See {@link ContractCreateParams.OneTimeFee.BillAt#extraParams} for the field
          * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -1631,203 +1513,34 @@ public class ContractCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The amount to bill for this entry, in the smallest currency
-         * unit.
+         * The timestamp at which the entry should be billed. Required if {@code type} is {@code
+         * timestamp}.
          */
-        public Builder setValue(Long value) {
-          this.value = value;
+        public Builder setTimestamp(Instant timestamp) {
+          this.timestamp = timestamp;
           return this;
         }
-      }
-
-      @Getter
-      @EqualsAndHashCode(callSuper = false)
-      public static class BillAt {
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        /**
-         * The datetime at which the entry should be billed. Required if {@code type} is {@code
-         * datetime}.
-         */
-        @SerializedName("timestamp")
-        Instant timestamp;
 
         /** <strong>Required.</strong> The type of the bill_at. */
-        @SerializedName("type")
-        Type type;
-
-        private BillAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
-          this.extraParams = extraParams;
-          this.timestamp = timestamp;
+        public Builder setType(ContractCreateParams.OneTimeFee.BillAt.Type type) {
           this.type = type;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Map<String, Object> extraParams;
-
-          private Instant timestamp;
-
-          private Type type;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public ContractCreateParams.OneTimeFee.BillSchedule.BillAt build() {
-            return new ContractCreateParams.OneTimeFee.BillSchedule.BillAt(
-                this.extraParams, this.timestamp, this.type);
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link ContractCreateParams.OneTimeFee.BillSchedule.BillAt#extraParams} for
-           * the field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link ContractCreateParams.OneTimeFee.BillSchedule.BillAt#extraParams} for
-           * the field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /**
-           * The datetime at which the entry should be billed. Required if {@code type} is {@code
-           * datetime}.
-           */
-          public Builder setTimestamp(Instant timestamp) {
-            this.timestamp = timestamp;
-            return this;
-          }
-
-          /** <strong>Required.</strong> The type of the bill_at. */
-          public Builder setType(ContractCreateParams.OneTimeFee.BillSchedule.BillAt.Type type) {
-            this.type = type;
-            return this;
-          }
-        }
-
-        public enum Type implements ApiRequestParams.EnumParam {
-          @SerializedName("contract_start")
-          CONTRACT_START("contract_start"),
-
-          @SerializedName("datetime")
-          DATETIME("datetime");
-
-          @Getter(onMethod_ = {@Override})
-          private final String value;
-
-          Type(String value) {
-            this.value = value;
-          }
-        }
-      }
-    }
-
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
-    public static class ProductDetails {
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** <strong>Required.</strong> The ID of the v1 Product. */
-      @SerializedName("product")
-      String product;
-
-      private ProductDetails(Map<String, Object> extraParams, String product) {
-        this.extraParams = extraParams;
-        this.product = product;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Map<String, Object> extraParams;
-
-        private String product;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public ContractCreateParams.OneTimeFee.ProductDetails build() {
-          return new ContractCreateParams.OneTimeFee.ProductDetails(this.extraParams, this.product);
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ContractCreateParams.OneTimeFee.ProductDetails#extraParams} for the field
-         * documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ContractCreateParams.OneTimeFee.ProductDetails#extraParams} for the field
-         * documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** <strong>Required.</strong> The ID of the v1 Product. */
-        public Builder setProduct(String product) {
-          this.product = product;
           return this;
         }
       }
-    }
 
-    public enum BillableItemType implements ApiRequestParams.EnumParam {
-      @SerializedName("product")
-      PRODUCT("product");
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("now")
+        NOW("now"),
 
-      @Getter(onMethod_ = {@Override})
-      private final String value;
+        @SerializedName("timestamp")
+        TIMESTAMP("timestamp");
 
-      BillableItemType(String value) {
-        this.value = value;
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
   }
@@ -3782,19 +3495,6 @@ public class ContractCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Criterion {
-        /** <strong>Required.</strong> Filter by billable item IDs. */
-        @SerializedName("billable_item_ids")
-        List<String> billableItemIds;
-
-        /** <strong>Required.</strong> Filter by billable item lookup keys. */
-        @SerializedName("billable_item_lookup_keys")
-        List<String> billableItemLookupKeys;
-
-        /** <strong>Required.</strong> Filter by billable item type. */
-        @SerializedName("billable_item_types")
-        List<ContractCreateParams.PricingOverride.Multiplier.Criterion.BillableItemType>
-            billableItemTypes;
-
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -3805,17 +3505,13 @@ public class ContractCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** <strong>Required.</strong> Filter by metadata conditions. */
-        @SerializedName("metadata_conditions")
-        List<ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition>
-            metadataConditions;
+        /** Filter by pricing line IDs. */
+        @SerializedName("pricing_line_ids")
+        List<String> pricingLineIds;
 
-        /**
-         * <strong>Required.</strong> Filter by rate card IDs. Only applicable for {@code
-         * multiplier} overrides.
-         */
-        @SerializedName("rate_card_ids")
-        List<String> rateCardIds;
+        /** Filter by pricing line lookup keys. */
+        @SerializedName("pricing_line_lookup_keys")
+        List<String> pricingLineLookupKeys;
 
         /**
          * <strong>Required.</strong> Whether to include or exclude items matching these criteria.
@@ -3824,21 +3520,13 @@ public class ContractCreateParams extends ApiRequestParams {
         Type type;
 
         private Criterion(
-            List<String> billableItemIds,
-            List<String> billableItemLookupKeys,
-            List<ContractCreateParams.PricingOverride.Multiplier.Criterion.BillableItemType>
-                billableItemTypes,
             Map<String, Object> extraParams,
-            List<ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition>
-                metadataConditions,
-            List<String> rateCardIds,
+            List<String> pricingLineIds,
+            List<String> pricingLineLookupKeys,
             Type type) {
-          this.billableItemIds = billableItemIds;
-          this.billableItemLookupKeys = billableItemLookupKeys;
-          this.billableItemTypes = billableItemTypes;
           this.extraParams = extraParams;
-          this.metadataConditions = metadataConditions;
-          this.rateCardIds = rateCardIds;
+          this.pricingLineIds = pricingLineIds;
+          this.pricingLineLookupKeys = pricingLineLookupKeys;
           this.type = type;
         }
 
@@ -3847,121 +3535,18 @@ public class ContractCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private List<String> billableItemIds;
-
-          private List<String> billableItemLookupKeys;
-
-          private List<ContractCreateParams.PricingOverride.Multiplier.Criterion.BillableItemType>
-              billableItemTypes;
-
           private Map<String, Object> extraParams;
 
-          private List<ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition>
-              metadataConditions;
+          private List<String> pricingLineIds;
 
-          private List<String> rateCardIds;
+          private List<String> pricingLineLookupKeys;
 
           private Type type;
 
           /** Finalize and obtain parameter instance from this builder. */
           public ContractCreateParams.PricingOverride.Multiplier.Criterion build() {
             return new ContractCreateParams.PricingOverride.Multiplier.Criterion(
-                this.billableItemIds,
-                this.billableItemLookupKeys,
-                this.billableItemTypes,
-                this.extraParams,
-                this.metadataConditions,
-                this.rateCardIds,
-                this.type);
-          }
-
-          /**
-           * Add an element to `billableItemIds` list. A list is initialized for the first
-           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-           * See {@link ContractCreateParams.PricingOverride.Multiplier.Criterion#billableItemIds}
-           * for the field documentation.
-           */
-          public Builder addBillableItemId(String element) {
-            if (this.billableItemIds == null) {
-              this.billableItemIds = new ArrayList<>();
-            }
-            this.billableItemIds.add(element);
-            return this;
-          }
-
-          /**
-           * Add all elements to `billableItemIds` list. A list is initialized for the first
-           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-           * See {@link ContractCreateParams.PricingOverride.Multiplier.Criterion#billableItemIds}
-           * for the field documentation.
-           */
-          public Builder addAllBillableItemId(List<String> elements) {
-            if (this.billableItemIds == null) {
-              this.billableItemIds = new ArrayList<>();
-            }
-            this.billableItemIds.addAll(elements);
-            return this;
-          }
-
-          /**
-           * Add an element to `billableItemLookupKeys` list. A list is initialized for the first
-           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-           * See {@link
-           * ContractCreateParams.PricingOverride.Multiplier.Criterion#billableItemLookupKeys} for
-           * the field documentation.
-           */
-          public Builder addBillableItemLookupKey(String element) {
-            if (this.billableItemLookupKeys == null) {
-              this.billableItemLookupKeys = new ArrayList<>();
-            }
-            this.billableItemLookupKeys.add(element);
-            return this;
-          }
-
-          /**
-           * Add all elements to `billableItemLookupKeys` list. A list is initialized for the first
-           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-           * See {@link
-           * ContractCreateParams.PricingOverride.Multiplier.Criterion#billableItemLookupKeys} for
-           * the field documentation.
-           */
-          public Builder addAllBillableItemLookupKey(List<String> elements) {
-            if (this.billableItemLookupKeys == null) {
-              this.billableItemLookupKeys = new ArrayList<>();
-            }
-            this.billableItemLookupKeys.addAll(elements);
-            return this;
-          }
-
-          /**
-           * Add an element to `billableItemTypes` list. A list is initialized for the first
-           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-           * See {@link ContractCreateParams.PricingOverride.Multiplier.Criterion#billableItemTypes}
-           * for the field documentation.
-           */
-          public Builder addBillableItemType(
-              ContractCreateParams.PricingOverride.Multiplier.Criterion.BillableItemType element) {
-            if (this.billableItemTypes == null) {
-              this.billableItemTypes = new ArrayList<>();
-            }
-            this.billableItemTypes.add(element);
-            return this;
-          }
-
-          /**
-           * Add all elements to `billableItemTypes` list. A list is initialized for the first
-           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-           * See {@link ContractCreateParams.PricingOverride.Multiplier.Criterion#billableItemTypes}
-           * for the field documentation.
-           */
-          public Builder addAllBillableItemType(
-              List<ContractCreateParams.PricingOverride.Multiplier.Criterion.BillableItemType>
-                  elements) {
-            if (this.billableItemTypes == null) {
-              this.billableItemTypes = new ArrayList<>();
-            }
-            this.billableItemTypes.addAll(elements);
-            return this;
+                this.extraParams, this.pricingLineIds, this.pricingLineLookupKeys, this.type);
           }
 
           /**
@@ -3993,63 +3578,60 @@ public class ContractCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Add an element to `metadataConditions` list. A list is initialized for the first
+           * Add an element to `pricingLineIds` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link ContractCreateParams.PricingOverride.Multiplier.Criterion#pricingLineIds}
+           * for the field documentation.
+           */
+          public Builder addPricingLineId(String element) {
+            if (this.pricingLineIds == null) {
+              this.pricingLineIds = new ArrayList<>();
+            }
+            this.pricingLineIds.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `pricingLineIds` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link ContractCreateParams.PricingOverride.Multiplier.Criterion#pricingLineIds}
+           * for the field documentation.
+           */
+          public Builder addAllPricingLineId(List<String> elements) {
+            if (this.pricingLineIds == null) {
+              this.pricingLineIds = new ArrayList<>();
+            }
+            this.pricingLineIds.addAll(elements);
+            return this;
+          }
+
+          /**
+           * Add an element to `pricingLineLookupKeys` list. A list is initialized for the first
            * `add/addAll` call, and subsequent calls adds additional elements to the original list.
            * See {@link
-           * ContractCreateParams.PricingOverride.Multiplier.Criterion#metadataConditions} for the
-           * field documentation.
-           */
-          public Builder addMetadataCondition(
-              ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition element) {
-            if (this.metadataConditions == null) {
-              this.metadataConditions = new ArrayList<>();
-            }
-            this.metadataConditions.add(element);
-            return this;
-          }
-
-          /**
-           * Add all elements to `metadataConditions` list. A list is initialized for the first
-           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-           * See {@link
-           * ContractCreateParams.PricingOverride.Multiplier.Criterion#metadataConditions} for the
-           * field documentation.
-           */
-          public Builder addAllMetadataCondition(
-              List<ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition>
-                  elements) {
-            if (this.metadataConditions == null) {
-              this.metadataConditions = new ArrayList<>();
-            }
-            this.metadataConditions.addAll(elements);
-            return this;
-          }
-
-          /**
-           * Add an element to `rateCardIds` list. A list is initialized for the first `add/addAll`
-           * call, and subsequent calls adds additional elements to the original list. See {@link
-           * ContractCreateParams.PricingOverride.Multiplier.Criterion#rateCardIds} for the field
-           * documentation.
-           */
-          public Builder addRateCardId(String element) {
-            if (this.rateCardIds == null) {
-              this.rateCardIds = new ArrayList<>();
-            }
-            this.rateCardIds.add(element);
-            return this;
-          }
-
-          /**
-           * Add all elements to `rateCardIds` list. A list is initialized for the first
-           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-           * See {@link ContractCreateParams.PricingOverride.Multiplier.Criterion#rateCardIds} for
+           * ContractCreateParams.PricingOverride.Multiplier.Criterion#pricingLineLookupKeys} for
            * the field documentation.
            */
-          public Builder addAllRateCardId(List<String> elements) {
-            if (this.rateCardIds == null) {
-              this.rateCardIds = new ArrayList<>();
+          public Builder addPricingLineLookupKey(String element) {
+            if (this.pricingLineLookupKeys == null) {
+              this.pricingLineLookupKeys = new ArrayList<>();
             }
-            this.rateCardIds.addAll(elements);
+            this.pricingLineLookupKeys.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `pricingLineLookupKeys` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * ContractCreateParams.PricingOverride.Multiplier.Criterion#pricingLineLookupKeys} for
+           * the field documentation.
+           */
+          public Builder addAllPricingLineLookupKey(List<String> elements) {
+            if (this.pricingLineLookupKeys == null) {
+              this.pricingLineLookupKeys = new ArrayList<>();
+            }
+            this.pricingLineLookupKeys.addAll(elements);
             return this;
           }
 
@@ -4060,224 +3642,6 @@ public class ContractCreateParams extends ApiRequestParams {
               ContractCreateParams.PricingOverride.Multiplier.Criterion.Type type) {
             this.type = type;
             return this;
-          }
-        }
-
-        @Getter
-        @EqualsAndHashCode(callSuper = false)
-        public static class MetadataCondition {
-          /** <strong>Required.</strong> All of these key-value conditions must match. */
-          @SerializedName("all_of")
-          List<ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition.AllOf>
-              allOf;
-
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
-
-          private MetadataCondition(
-              List<
-                      ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition
-                          .AllOf>
-                  allOf,
-              Map<String, Object> extraParams) {
-            this.allOf = allOf;
-            this.extraParams = extraParams;
-          }
-
-          public static Builder builder() {
-            return new Builder();
-          }
-
-          public static class Builder {
-            private List<
-                    ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition
-                        .AllOf>
-                allOf;
-
-            private Map<String, Object> extraParams;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition
-                build() {
-              return new ContractCreateParams.PricingOverride.Multiplier.Criterion
-                  .MetadataCondition(this.allOf, this.extraParams);
-            }
-
-            /**
-             * Add an element to `allOf` list. A list is initialized for the first `add/addAll`
-             * call, and subsequent calls adds additional elements to the original list. See {@link
-             * ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition#allOf}
-             * for the field documentation.
-             */
-            public Builder addAllOf(
-                ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition.AllOf
-                    element) {
-              if (this.allOf == null) {
-                this.allOf = new ArrayList<>();
-              }
-              this.allOf.add(element);
-              return this;
-            }
-
-            /**
-             * Add all elements to `allOf` list. A list is initialized for the first `add/addAll`
-             * call, and subsequent calls adds additional elements to the original list. See {@link
-             * ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition#allOf}
-             * for the field documentation.
-             */
-            public Builder addAllAllOf(
-                List<
-                        ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition
-                            .AllOf>
-                    elements) {
-              if (this.allOf == null) {
-                this.allOf = new ArrayList<>();
-              }
-              this.allOf.addAll(elements);
-              return this;
-            }
-
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition#extraParams}
-             * for the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
-
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition#extraParams}
-             * for the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-          }
-
-          @Getter
-          @EqualsAndHashCode(callSuper = false)
-          public static class AllOf {
-            /**
-             * Map of extra parameters for custom features not available in this client library. The
-             * content in this map is not serialized under this field's {@code @SerializedName}
-             * value. Instead, each key/value pair is serialized as if the key is a root-level field
-             * (serialized) name in this param object. Effectively, this map is flattened to its
-             * parent instance.
-             */
-            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-            Map<String, Object> extraParams;
-
-            /** <strong>Required.</strong> The metadata key. */
-            @SerializedName("key")
-            String key;
-
-            /** <strong>Required.</strong> The metadata value. */
-            @SerializedName("value")
-            String value;
-
-            private AllOf(Map<String, Object> extraParams, String key, String value) {
-              this.extraParams = extraParams;
-              this.key = key;
-              this.value = value;
-            }
-
-            public static Builder builder() {
-              return new Builder();
-            }
-
-            public static class Builder {
-              private Map<String, Object> extraParams;
-
-              private String key;
-
-              private String value;
-
-              /** Finalize and obtain parameter instance from this builder. */
-              public ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition
-                      .AllOf
-                  build() {
-                return new ContractCreateParams.PricingOverride.Multiplier.Criterion
-                    .MetadataCondition.AllOf(this.extraParams, this.key, this.value);
-              }
-
-              /**
-               * Add a key/value pair to `extraParams` map. A map is initialized for the first
-               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-               * original map. See {@link
-               * ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition.AllOf#extraParams}
-               * for the field documentation.
-               */
-              public Builder putExtraParam(String key, Object value) {
-                if (this.extraParams == null) {
-                  this.extraParams = new HashMap<>();
-                }
-                this.extraParams.put(key, value);
-                return this;
-              }
-
-              /**
-               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
-               * original map. See {@link
-               * ContractCreateParams.PricingOverride.Multiplier.Criterion.MetadataCondition.AllOf#extraParams}
-               * for the field documentation.
-               */
-              public Builder putAllExtraParam(Map<String, Object> map) {
-                if (this.extraParams == null) {
-                  this.extraParams = new HashMap<>();
-                }
-                this.extraParams.putAll(map);
-                return this;
-              }
-
-              /** <strong>Required.</strong> The metadata key. */
-              public Builder setKey(String key) {
-                this.key = key;
-                return this;
-              }
-
-              /** <strong>Required.</strong> The metadata value. */
-              public Builder setValue(String value) {
-                this.value = value;
-                return this;
-              }
-            }
-          }
-        }
-
-        public enum BillableItemType implements ApiRequestParams.EnumParam {
-          @SerializedName("licensed")
-          LICENSED("licensed"),
-
-          @SerializedName("metered")
-          METERED("metered");
-
-          @Getter(onMethod_ = {@Override})
-          private final String value;
-
-          BillableItemType(String value) {
-            this.value = value;
           }
         }
 
@@ -4412,6 +3776,9 @@ public class ContractCreateParams extends ApiRequestParams {
   }
 
   public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("billing_settings")
+    BILLING_SETTINGS("billing_settings"),
+
     @SerializedName("one_time_fees")
     ONE_TIME_FEES("one_time_fees"),
 

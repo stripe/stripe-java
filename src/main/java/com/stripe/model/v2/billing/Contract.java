@@ -1,11 +1,10 @@
 // File generated from our OpenAPI spec
 package com.stripe.model.v2.billing;
 
-import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
-import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
@@ -116,124 +115,114 @@ public class Contract extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BillingSettings extends StripeObject {
-    /** Billing settings details for the contract. */
-    @SerializedName("contract_billing_details")
-    ContractBillingDetails contractBillingDetails;
+    /** The bill settings details configures invoice and tax settings for the contract. */
+    @SerializedName("bill_settings_details")
+    BillSettingsDetails billSettingsDetails;
 
-    /** Billing settings details for the contract. */
+    /** The billing profile details configures who is charged for the contract. */
+    @SerializedName("billing_profile_details")
+    BillingProfileDetails billingProfileDetails;
+
+    /** The collection settings details configures how payments are collected on the contract. */
+    @SerializedName("collection_settings_details")
+    CollectionSettingsDetails collectionSettingsDetails;
+
+    /** The bill settings details configures invoice and tax settings for the contract. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ContractBillingDetails extends StripeObject {
-      /** The bill settings details. */
-      @SerializedName("bill_settings_details")
-      BillSettingsDetails billSettingsDetails;
+    public static class BillSettingsDetails extends StripeObject {
+      /** Calculation settings. */
+      @SerializedName("calculation")
+      Calculation calculation;
 
-      /** The billing profile details. */
-      @SerializedName("billing_profile_details")
-      BillingProfileDetails billingProfileDetails;
+      /** Invoice settings. */
+      @SerializedName("invoice")
+      Invoice invoice;
 
-      /** The collection settings details. */
-      @SerializedName("collection_settings_details")
-      CollectionSettingsDetails collectionSettingsDetails;
-
-      /** The bill settings details. */
+      /** Calculation settings. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class BillSettingsDetails extends StripeObject {
-        /** Calculation settings. */
-        @SerializedName("calculation")
-        Calculation calculation;
+      public static class Calculation extends StripeObject {
+        /** Tax calculation settings. */
+        @SerializedName("tax")
+        Tax tax;
 
-        /** Invoice settings. */
-        @SerializedName("invoice")
-        Invoice invoice;
-
-        /** Calculation settings. */
+        /** Tax calculation settings. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Calculation extends StripeObject {
-          /** Tax calculation settings. */
-          @SerializedName("tax")
-          Tax tax;
-
-          /** Tax calculation settings. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Tax extends StripeObject {
-            /**
-             * The type of tax calculation.
-             *
-             * <p>One of {@code automatic}, or {@code manual}.
-             */
-            @SerializedName("type")
-            String type;
-          }
+        public static class Tax extends StripeObject {
+          /**
+           * The type of tax calculation.
+           *
+           * <p>One of {@code automatic}, or {@code manual}.
+           */
+          @SerializedName("type")
+          String type;
         }
+      }
 
-        /** Invoice settings. */
+      /** Invoice settings. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Invoice extends StripeObject {
+        /** The number of time units before the invoice is past due. */
+        @SerializedName("time_until_due")
+        TimeUntilDue timeUntilDue;
+
+        /** The number of time units before the invoice is past due. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Invoice extends StripeObject {
-          /** The number of time units before the invoice is past due. */
-          @SerializedName("time_until_due")
-          TimeUntilDue timeUntilDue;
+        public static class TimeUntilDue extends StripeObject {
+          /**
+           * The interval unit.
+           *
+           * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+           */
+          @SerializedName("interval")
+          String interval;
 
-          /** The number of time units before the invoice is past due. */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class TimeUntilDue extends StripeObject {
-            /**
-             * The interval unit.
-             *
-             * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
-             */
-            @SerializedName("interval")
-            String interval;
-
-            /** The number of intervals. */
-            @SerializedName("interval_count")
-            Long intervalCount;
-          }
+          /** The number of intervals. */
+          @SerializedName("interval_count")
+          Long intervalCount;
         }
       }
+    }
 
-      /** The billing profile details. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class BillingProfileDetails extends StripeObject {
-        /** The customer who pays for the contract invoice. */
-        @SerializedName("customer")
-        String customer;
+    /** The billing profile details configures who is charged for the contract. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingProfileDetails extends StripeObject {
+      /** The customer who pays for the contract invoice. */
+      @SerializedName("customer")
+      String customer;
 
-        /** The default payment method for the contract. */
-        @SerializedName("default_payment_method")
-        String defaultPaymentMethod;
-      }
+      /** The default payment method for the contract. */
+      @SerializedName("default_payment_method")
+      String defaultPaymentMethod;
+    }
 
-      /** The collection settings details. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class CollectionSettingsDetails extends StripeObject {
-        /**
-         * The collection method.
-         *
-         * <p>One of {@code charge_automatically}, or {@code send_invoice}.
-         */
-        @SerializedName("collection_method")
-        String collectionMethod;
+    /** The collection settings details configures how payments are collected on the contract. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CollectionSettingsDetails extends StripeObject {
+      /**
+       * The collection method.
+       *
+       * <p>One of {@code charge_automatically}, or {@code send_invoice}.
+       */
+      @SerializedName("collection_method")
+      String collectionMethod;
 
-        /** The payment method configuration. */
-        @SerializedName("payment_method_configuration")
-        String paymentMethodConfiguration;
-      }
+      /** The payment method configuration. */
+      @SerializedName("payment_method_configuration")
+      String paymentMethodConfiguration;
     }
   }
 
@@ -257,17 +246,13 @@ public class Contract extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Data extends StripeObject implements HasId {
-      /** The resolved bill schedule for the fee. */
-      @SerializedName("bill_schedule")
-      List<Contract.OneTimeFees.Data.BillSchedule> billSchedule;
+      /** The amount billed for this fee. */
+      @SerializedName("amount")
+      Amount amount;
 
-      /**
-       * The type of billable item that this fee references.
-       *
-       * <p>Equal to {@code product}.
-       */
-      @SerializedName("billable_item_type")
-      String billableItemType;
+      /** When this fee will be billed. Always contains a concrete timestamp. */
+      @SerializedName("bill_at")
+      BillAt billAt;
 
       /** The ID of the one-time fee. */
       @Getter(onMethod_ = {@Override})
@@ -278,63 +263,18 @@ public class Contract extends StripeObject implements HasId {
       @SerializedName("lookup_key")
       String lookupKey;
 
-      /**
-       * Details for a product billable target. Set when {@code billable_item_type} is {@code
-       * product}.
-       */
-      @SerializedName("product_details")
-      ProductDetails productDetails;
+      /** The ID of the v1 Product for this fee. */
+      @SerializedName("product")
+      String product;
 
-      /**
-       * For more details about BillSchedule, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** When this fee will be billed. Always contains a concrete timestamp. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class BillSchedule extends StripeObject {
-        /** When this entry will be billed. */
-        @SerializedName("bill_at")
-        BillAt billAt;
-
-        /** The amount to bill for this entry, in the smallest currency unit. */
-        @SerializedName("value")
-        @JsonAdapter(StringInt64TypeAdapter.class)
-        Long value;
-
-        /** When this entry will be billed. */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class BillAt extends StripeObject {
-          /**
-           * The datetime at which the entry will be billed. Set when {@code type} is {@code
-           * datetime}.
-           */
-          @SerializedName("timestamp")
-          Instant timestamp;
-
-          /**
-           * The type of the bill_at.
-           *
-           * <p>One of {@code contract_start}, or {@code datetime}.
-           */
-          @SerializedName("type")
-          String type;
-        }
-      }
-
-      /**
-       * Details for a product billable target. Set when {@code billable_item_type} is {@code
-       * product}.
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class ProductDetails extends StripeObject {
-        /** The ID of the v1 Product. */
-        @SerializedName("product")
-        String product;
+      public static class BillAt extends StripeObject {
+        /** The timestamp at which the fee will be billed. */
+        @SerializedName("timestamp")
+        Instant timestamp;
       }
     }
   }
@@ -659,26 +599,13 @@ public class Contract extends StripeObject implements HasId {
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Criterion extends StripeObject {
-          /** Filter by billable item IDs. */
-          @SerializedName("billable_item_ids")
-          List<String> billableItemIds;
+          /** Filter by pricing line IDs. */
+          @SerializedName("pricing_line_ids")
+          List<String> pricingLineIds;
 
-          /** Filter by billable item lookup keys. */
-          @SerializedName("billable_item_lookup_keys")
-          List<String> billableItemLookupKeys;
-
-          /** Filter by billable item type. */
-          @SerializedName("billable_item_types")
-          List<String> billableItemTypes;
-
-          /** Filter by metadata conditions. */
-          @SerializedName("metadata_conditions")
-          List<Contract.PricingOverrides.Data.Multiplier.Criterion.MetadataCondition>
-              metadataConditions;
-
-          /** Filter by rate card IDs. Only applicable for {@code multiplier} overrides. */
-          @SerializedName("rate_card_ids")
-          List<String> rateCardIds;
+          /** Filter by pricing line lookup keys. */
+          @SerializedName("pricing_line_lookup_keys")
+          List<String> pricingLineLookupKeys;
 
           /**
            * Whether to include or exclude items matching these criteria.
@@ -687,36 +614,6 @@ public class Contract extends StripeObject implements HasId {
            */
           @SerializedName("type")
           String type;
-
-          /**
-           * For more details about MetadataCondition, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class MetadataCondition extends StripeObject {
-            /** All of these key-value conditions must match. */
-            @SerializedName("all_of")
-            List<Contract.PricingOverrides.Data.Multiplier.Criterion.MetadataCondition.AllOf> allOf;
-
-            /**
-             * For more details about AllOf, please refer to the <a
-             * href="https://docs.stripe.com/api">API Reference.</a>
-             */
-            @Getter
-            @Setter
-            @EqualsAndHashCode(callSuper = false)
-            public static class AllOf extends StripeObject {
-              /** The metadata key. */
-              @SerializedName("key")
-              String key;
-
-              /** The metadata value. */
-              @SerializedName("value")
-              String value;
-            }
-          }
         }
       }
 

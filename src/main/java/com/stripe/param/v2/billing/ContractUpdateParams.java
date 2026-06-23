@@ -4817,19 +4817,6 @@ public class ContractUpdateParams extends ApiRequestParams {
         @Getter
         @EqualsAndHashCode(callSuper = false)
         public static class Criterion {
-          /** <strong>Required.</strong> Filter by billable item IDs. */
-          @SerializedName("billable_item_ids")
-          List<String> billableItemIds;
-
-          /** <strong>Required.</strong> Filter by billable item lookup keys. */
-          @SerializedName("billable_item_lookup_keys")
-          List<String> billableItemLookupKeys;
-
-          /** <strong>Required.</strong> Filter by billable item type. */
-          @SerializedName("billable_item_types")
-          List<ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion.BillableItemType>
-              billableItemTypes;
-
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -4840,19 +4827,13 @@ public class ContractUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** <strong>Required.</strong> Filter by metadata conditions. */
-          @SerializedName("metadata_conditions")
-          List<
-                  ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                      .MetadataCondition>
-              metadataConditions;
+          /** Filter by pricing line IDs. */
+          @SerializedName("pricing_line_ids")
+          List<String> pricingLineIds;
 
-          /**
-           * <strong>Required.</strong> Filter by rate card IDs. Only applicable for {@code
-           * multiplier} overrides.
-           */
-          @SerializedName("rate_card_ids")
-          List<String> rateCardIds;
+          /** Filter by pricing line lookup keys. */
+          @SerializedName("pricing_line_lookup_keys")
+          List<String> pricingLineLookupKeys;
 
           /**
            * <strong>Required.</strong> Whether to include or exclude items matching these criteria.
@@ -4861,25 +4842,13 @@ public class ContractUpdateParams extends ApiRequestParams {
           Type type;
 
           private Criterion(
-              List<String> billableItemIds,
-              List<String> billableItemLookupKeys,
-              List<
-                      ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                          .BillableItemType>
-                  billableItemTypes,
               Map<String, Object> extraParams,
-              List<
-                      ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                          .MetadataCondition>
-                  metadataConditions,
-              List<String> rateCardIds,
+              List<String> pricingLineIds,
+              List<String> pricingLineLookupKeys,
               Type type) {
-            this.billableItemIds = billableItemIds;
-            this.billableItemLookupKeys = billableItemLookupKeys;
-            this.billableItemTypes = billableItemTypes;
             this.extraParams = extraParams;
-            this.metadataConditions = metadataConditions;
-            this.rateCardIds = rateCardIds;
+            this.pricingLineIds = pricingLineIds;
+            this.pricingLineLookupKeys = pricingLineLookupKeys;
             this.type = type;
           }
 
@@ -4888,132 +4857,18 @@ public class ContractUpdateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private List<String> billableItemIds;
-
-            private List<String> billableItemLookupKeys;
-
-            private List<
-                    ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                        .BillableItemType>
-                billableItemTypes;
-
             private Map<String, Object> extraParams;
 
-            private List<
-                    ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                        .MetadataCondition>
-                metadataConditions;
+            private List<String> pricingLineIds;
 
-            private List<String> rateCardIds;
+            private List<String> pricingLineLookupKeys;
 
             private Type type;
 
             /** Finalize and obtain parameter instance from this builder. */
             public ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion build() {
               return new ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion(
-                  this.billableItemIds,
-                  this.billableItemLookupKeys,
-                  this.billableItemTypes,
-                  this.extraParams,
-                  this.metadataConditions,
-                  this.rateCardIds,
-                  this.type);
-            }
-
-            /**
-             * Add an element to `billableItemIds` list. A list is initialized for the first
-             * `add/addAll` call, and subsequent calls adds additional elements to the original
-             * list. See {@link
-             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#billableItemIds}
-             * for the field documentation.
-             */
-            public Builder addBillableItemId(String element) {
-              if (this.billableItemIds == null) {
-                this.billableItemIds = new ArrayList<>();
-              }
-              this.billableItemIds.add(element);
-              return this;
-            }
-
-            /**
-             * Add all elements to `billableItemIds` list. A list is initialized for the first
-             * `add/addAll` call, and subsequent calls adds additional elements to the original
-             * list. See {@link
-             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#billableItemIds}
-             * for the field documentation.
-             */
-            public Builder addAllBillableItemId(List<String> elements) {
-              if (this.billableItemIds == null) {
-                this.billableItemIds = new ArrayList<>();
-              }
-              this.billableItemIds.addAll(elements);
-              return this;
-            }
-
-            /**
-             * Add an element to `billableItemLookupKeys` list. A list is initialized for the first
-             * `add/addAll` call, and subsequent calls adds additional elements to the original
-             * list. See {@link
-             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#billableItemLookupKeys}
-             * for the field documentation.
-             */
-            public Builder addBillableItemLookupKey(String element) {
-              if (this.billableItemLookupKeys == null) {
-                this.billableItemLookupKeys = new ArrayList<>();
-              }
-              this.billableItemLookupKeys.add(element);
-              return this;
-            }
-
-            /**
-             * Add all elements to `billableItemLookupKeys` list. A list is initialized for the
-             * first `add/addAll` call, and subsequent calls adds additional elements to the
-             * original list. See {@link
-             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#billableItemLookupKeys}
-             * for the field documentation.
-             */
-            public Builder addAllBillableItemLookupKey(List<String> elements) {
-              if (this.billableItemLookupKeys == null) {
-                this.billableItemLookupKeys = new ArrayList<>();
-              }
-              this.billableItemLookupKeys.addAll(elements);
-              return this;
-            }
-
-            /**
-             * Add an element to `billableItemTypes` list. A list is initialized for the first
-             * `add/addAll` call, and subsequent calls adds additional elements to the original
-             * list. See {@link
-             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#billableItemTypes}
-             * for the field documentation.
-             */
-            public Builder addBillableItemType(
-                ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion.BillableItemType
-                    element) {
-              if (this.billableItemTypes == null) {
-                this.billableItemTypes = new ArrayList<>();
-              }
-              this.billableItemTypes.add(element);
-              return this;
-            }
-
-            /**
-             * Add all elements to `billableItemTypes` list. A list is initialized for the first
-             * `add/addAll` call, and subsequent calls adds additional elements to the original
-             * list. See {@link
-             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#billableItemTypes}
-             * for the field documentation.
-             */
-            public Builder addAllBillableItemType(
-                List<
-                        ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                            .BillableItemType>
-                    elements) {
-              if (this.billableItemTypes == null) {
-                this.billableItemTypes = new ArrayList<>();
-              }
-              this.billableItemTypes.addAll(elements);
-              return this;
+                  this.extraParams, this.pricingLineIds, this.pricingLineLookupKeys, this.type);
             }
 
             /**
@@ -5047,69 +4902,62 @@ public class ContractUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Add an element to `metadataConditions` list. A list is initialized for the first
+             * Add an element to `pricingLineIds` list. A list is initialized for the first
              * `add/addAll` call, and subsequent calls adds additional elements to the original
              * list. See {@link
-             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#metadataConditions}
+             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#pricingLineIds}
              * for the field documentation.
              */
-            public Builder addMetadataCondition(
-                ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                        .MetadataCondition
-                    element) {
-              if (this.metadataConditions == null) {
-                this.metadataConditions = new ArrayList<>();
+            public Builder addPricingLineId(String element) {
+              if (this.pricingLineIds == null) {
+                this.pricingLineIds = new ArrayList<>();
               }
-              this.metadataConditions.add(element);
+              this.pricingLineIds.add(element);
               return this;
             }
 
             /**
-             * Add all elements to `metadataConditions` list. A list is initialized for the first
+             * Add all elements to `pricingLineIds` list. A list is initialized for the first
              * `add/addAll` call, and subsequent calls adds additional elements to the original
              * list. See {@link
-             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#metadataConditions}
+             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#pricingLineIds}
              * for the field documentation.
              */
-            public Builder addAllMetadataCondition(
-                List<
-                        ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                            .MetadataCondition>
-                    elements) {
-              if (this.metadataConditions == null) {
-                this.metadataConditions = new ArrayList<>();
+            public Builder addAllPricingLineId(List<String> elements) {
+              if (this.pricingLineIds == null) {
+                this.pricingLineIds = new ArrayList<>();
               }
-              this.metadataConditions.addAll(elements);
+              this.pricingLineIds.addAll(elements);
               return this;
             }
 
             /**
-             * Add an element to `rateCardIds` list. A list is initialized for the first
+             * Add an element to `pricingLineLookupKeys` list. A list is initialized for the first
              * `add/addAll` call, and subsequent calls adds additional elements to the original
              * list. See {@link
-             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#rateCardIds} for
-             * the field documentation.
+             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#pricingLineLookupKeys}
+             * for the field documentation.
              */
-            public Builder addRateCardId(String element) {
-              if (this.rateCardIds == null) {
-                this.rateCardIds = new ArrayList<>();
+            public Builder addPricingLineLookupKey(String element) {
+              if (this.pricingLineLookupKeys == null) {
+                this.pricingLineLookupKeys = new ArrayList<>();
               }
-              this.rateCardIds.add(element);
+              this.pricingLineLookupKeys.add(element);
               return this;
             }
 
             /**
-             * Add all elements to `rateCardIds` list. A list is initialized for the first
+             * Add all elements to `pricingLineLookupKeys` list. A list is initialized for the first
              * `add/addAll` call, and subsequent calls adds additional elements to the original
              * list. See {@link
-             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#rateCardIds} for
-             * the field documentation.
+             * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion#pricingLineLookupKeys}
+             * for the field documentation.
              */
-            public Builder addAllRateCardId(List<String> elements) {
-              if (this.rateCardIds == null) {
-                this.rateCardIds = new ArrayList<>();
+            public Builder addAllPricingLineLookupKey(List<String> elements) {
+              if (this.pricingLineLookupKeys == null) {
+                this.pricingLineLookupKeys = new ArrayList<>();
               }
-              this.rateCardIds.addAll(elements);
+              this.pricingLineLookupKeys.addAll(elements);
               return this;
             }
 
@@ -5121,242 +4969,6 @@ public class ContractUpdateParams extends ApiRequestParams {
                 ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion.Type type) {
               this.type = type;
               return this;
-            }
-          }
-
-          @Getter
-          @EqualsAndHashCode(callSuper = false)
-          public static class MetadataCondition {
-            /** <strong>Required.</strong> All of these key-value conditions must match. */
-            @SerializedName("all_of")
-            List<
-                    ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                        .MetadataCondition.AllOf>
-                allOf;
-
-            /**
-             * Map of extra parameters for custom features not available in this client library. The
-             * content in this map is not serialized under this field's {@code @SerializedName}
-             * value. Instead, each key/value pair is serialized as if the key is a root-level field
-             * (serialized) name in this param object. Effectively, this map is flattened to its
-             * parent instance.
-             */
-            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-            Map<String, Object> extraParams;
-
-            private MetadataCondition(
-                List<
-                        ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                            .MetadataCondition.AllOf>
-                    allOf,
-                Map<String, Object> extraParams) {
-              this.allOf = allOf;
-              this.extraParams = extraParams;
-            }
-
-            public static Builder builder() {
-              return new Builder();
-            }
-
-            public static class Builder {
-              private List<
-                      ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                          .MetadataCondition.AllOf>
-                  allOf;
-
-              private Map<String, Object> extraParams;
-
-              /** Finalize and obtain parameter instance from this builder. */
-              public ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                      .MetadataCondition
-                  build() {
-                return new ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                    .MetadataCondition(this.allOf, this.extraParams);
-              }
-
-              /**
-               * Add an element to `allOf` list. A list is initialized for the first `add/addAll`
-               * call, and subsequent calls adds additional elements to the original list. See
-               * {@link
-               * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion.MetadataCondition#allOf}
-               * for the field documentation.
-               */
-              public Builder addAllOf(
-                  ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                          .MetadataCondition.AllOf
-                      element) {
-                if (this.allOf == null) {
-                  this.allOf = new ArrayList<>();
-                }
-                this.allOf.add(element);
-                return this;
-              }
-
-              /**
-               * Add all elements to `allOf` list. A list is initialized for the first `add/addAll`
-               * call, and subsequent calls adds additional elements to the original list. See
-               * {@link
-               * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion.MetadataCondition#allOf}
-               * for the field documentation.
-               */
-              public Builder addAllAllOf(
-                  List<
-                          ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                              .MetadataCondition.AllOf>
-                      elements) {
-                if (this.allOf == null) {
-                  this.allOf = new ArrayList<>();
-                }
-                this.allOf.addAll(elements);
-                return this;
-              }
-
-              /**
-               * Add a key/value pair to `extraParams` map. A map is initialized for the first
-               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-               * original map. See {@link
-               * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion.MetadataCondition#extraParams}
-               * for the field documentation.
-               */
-              public Builder putExtraParam(String key, Object value) {
-                if (this.extraParams == null) {
-                  this.extraParams = new HashMap<>();
-                }
-                this.extraParams.put(key, value);
-                return this;
-              }
-
-              /**
-               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
-               * original map. See {@link
-               * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion.MetadataCondition#extraParams}
-               * for the field documentation.
-               */
-              public Builder putAllExtraParam(Map<String, Object> map) {
-                if (this.extraParams == null) {
-                  this.extraParams = new HashMap<>();
-                }
-                this.extraParams.putAll(map);
-                return this;
-              }
-            }
-
-            @Getter
-            @EqualsAndHashCode(callSuper = false)
-            public static class AllOf {
-              /**
-               * Map of extra parameters for custom features not available in this client library.
-               * The content in this map is not serialized under this field's
-               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
-               * key is a root-level field (serialized) name in this param object. Effectively, this
-               * map is flattened to its parent instance.
-               */
-              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-              Map<String, Object> extraParams;
-
-              /** <strong>Required.</strong> The metadata key. */
-              @SerializedName("key")
-              Object key;
-
-              /** <strong>Required.</strong> The metadata value. */
-              @SerializedName("value")
-              Object value;
-
-              private AllOf(Map<String, Object> extraParams, Object key, Object value) {
-                this.extraParams = extraParams;
-                this.key = key;
-                this.value = value;
-              }
-
-              public static Builder builder() {
-                return new Builder();
-              }
-
-              public static class Builder {
-                private Map<String, Object> extraParams;
-
-                private Object key;
-
-                private Object value;
-
-                /** Finalize and obtain parameter instance from this builder. */
-                public ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                        .MetadataCondition.AllOf
-                    build() {
-                  return new ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion
-                      .MetadataCondition.AllOf(this.extraParams, this.key, this.value);
-                }
-
-                /**
-                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
-                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-                 * original map. See {@link
-                 * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion.MetadataCondition.AllOf#extraParams}
-                 * for the field documentation.
-                 */
-                public Builder putExtraParam(String key, Object value) {
-                  if (this.extraParams == null) {
-                    this.extraParams = new HashMap<>();
-                  }
-                  this.extraParams.put(key, value);
-                  return this;
-                }
-
-                /**
-                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
-                 * the original map. See {@link
-                 * ContractUpdateParams.PricingOverrideAction.Add.Multiplier.Criterion.MetadataCondition.AllOf#extraParams}
-                 * for the field documentation.
-                 */
-                public Builder putAllExtraParam(Map<String, Object> map) {
-                  if (this.extraParams == null) {
-                    this.extraParams = new HashMap<>();
-                  }
-                  this.extraParams.putAll(map);
-                  return this;
-                }
-
-                /** <strong>Required.</strong> The metadata key. */
-                public Builder setKey(String key) {
-                  this.key = key;
-                  return this;
-                }
-
-                /** <strong>Required.</strong> The metadata key. */
-                public Builder setKey(EmptyParam key) {
-                  this.key = key;
-                  return this;
-                }
-
-                /** <strong>Required.</strong> The metadata value. */
-                public Builder setValue(String value) {
-                  this.value = value;
-                  return this;
-                }
-
-                /** <strong>Required.</strong> The metadata value. */
-                public Builder setValue(EmptyParam value) {
-                  this.value = value;
-                  return this;
-                }
-              }
-            }
-          }
-
-          public enum BillableItemType implements ApiRequestParams.EnumParam {
-            @SerializedName("licensed")
-            LICENSED("licensed"),
-
-            @SerializedName("metered")
-            METERED("metered");
-
-            @Getter(onMethod_ = {@Override})
-            private final String value;
-
-            BillableItemType(String value) {
-              this.value = value;
             }
           }
 
@@ -6227,6 +5839,9 @@ public class ContractUpdateParams extends ApiRequestParams {
   }
 
   public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("billing_settings")
+    BILLING_SETTINGS("billing_settings"),
+
     @SerializedName("one_time_fees")
     ONE_TIME_FEES("one_time_fees"),
 
