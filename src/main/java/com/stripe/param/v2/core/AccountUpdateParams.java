@@ -2485,6 +2485,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("sepa_debit_payments")
         SepaDebitPayments sepaDebitPayments;
 
+        /** Allow the merchant to process Sunbit payments. */
+        @SerializedName("sunbit_payments")
+        SunbitPayments sunbitPayments;
+
         /** Allow the merchant to process Swish payments. */
         @SerializedName("swish_payments")
         SwishPayments swishPayments;
@@ -2543,6 +2547,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             SamsungPayPayments samsungPayPayments,
             SepaBankTransferPayments sepaBankTransferPayments,
             SepaDebitPayments sepaDebitPayments,
+            SunbitPayments sunbitPayments,
             SwishPayments swishPayments,
             TwintPayments twintPayments,
             UsBankTransferPayments usBankTransferPayments,
@@ -2588,6 +2593,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           this.samsungPayPayments = samsungPayPayments;
           this.sepaBankTransferPayments = sepaBankTransferPayments;
           this.sepaDebitPayments = sepaDebitPayments;
+          this.sunbitPayments = sunbitPayments;
           this.swishPayments = swishPayments;
           this.twintPayments = twintPayments;
           this.usBankTransferPayments = usBankTransferPayments;
@@ -2681,6 +2687,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private SepaDebitPayments sepaDebitPayments;
 
+          private SunbitPayments sunbitPayments;
+
           private SwishPayments swishPayments;
 
           private TwintPayments twintPayments;
@@ -2733,6 +2741,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                 this.samsungPayPayments,
                 this.sepaBankTransferPayments,
                 this.sepaDebitPayments,
+                this.sunbitPayments,
                 this.swishPayments,
                 this.twintPayments,
                 this.usBankTransferPayments,
@@ -3073,6 +3082,14 @@ public class AccountUpdateParams extends ApiRequestParams {
               AccountUpdateParams.Configuration.Merchant.Capabilities.SepaDebitPayments
                   sepaDebitPayments) {
             this.sepaDebitPayments = sepaDebitPayments;
+            return this;
+          }
+
+          /** Allow the merchant to process Sunbit payments. */
+          public Builder setSunbitPayments(
+              AccountUpdateParams.Configuration.Merchant.Capabilities.SunbitPayments
+                  sunbitPayments) {
+            this.sunbitPayments = sunbitPayments;
             return this;
           }
 
@@ -6346,6 +6363,87 @@ public class AccountUpdateParams extends ApiRequestParams {
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
              * AccountUpdateParams.Configuration.Merchant.Capabilities.SepaDebitPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * To request a new Capability for an account, pass true. There can be a delay before
+             * the requested Capability becomes active.
+             */
+            public Builder setRequested(Boolean requested) {
+              this.requested = requested;
+              return this;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SunbitPayments {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * To request a new Capability for an account, pass true. There can be a delay before the
+           * requested Capability becomes active.
+           */
+          @SerializedName("requested")
+          Boolean requested;
+
+          private SunbitPayments(Map<String, Object> extraParams, Boolean requested) {
+            this.extraParams = extraParams;
+            this.requested = requested;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Boolean requested;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountUpdateParams.Configuration.Merchant.Capabilities.SunbitPayments build() {
+              return new AccountUpdateParams.Configuration.Merchant.Capabilities.SunbitPayments(
+                  this.extraParams, this.requested);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.Capabilities.SunbitPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.Capabilities.SunbitPayments#extraParams}
              * for the field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
@@ -9958,9 +10056,9 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("account")
         Account account;
 
-        /** Details on the Account's acceptance of Crypto-storer-specific terms of service. */
-        @SerializedName("crypto_storer")
-        CryptoStorer cryptoStorer;
+        /** Details on the Account's acceptance of Crypto-specific terms of service. */
+        @SerializedName("crypto_money_manager")
+        CryptoMoneyManager cryptoMoneyManager;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -9973,18 +10071,18 @@ public class AccountUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /** Details on the Account's acceptance of Treasury-specific terms of service. */
-        @SerializedName("storer")
-        Storer storer;
+        @SerializedName("money_manager")
+        MoneyManager moneyManager;
 
         private TermsOfService(
             Account account,
-            CryptoStorer cryptoStorer,
+            CryptoMoneyManager cryptoMoneyManager,
             Map<String, Object> extraParams,
-            Storer storer) {
+            MoneyManager moneyManager) {
           this.account = account;
-          this.cryptoStorer = cryptoStorer;
+          this.cryptoMoneyManager = cryptoMoneyManager;
           this.extraParams = extraParams;
-          this.storer = storer;
+          this.moneyManager = moneyManager;
         }
 
         public static Builder builder() {
@@ -9994,16 +10092,16 @@ public class AccountUpdateParams extends ApiRequestParams {
         public static class Builder {
           private Account account;
 
-          private CryptoStorer cryptoStorer;
+          private CryptoMoneyManager cryptoMoneyManager;
 
           private Map<String, Object> extraParams;
 
-          private Storer storer;
+          private MoneyManager moneyManager;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountUpdateParams.Identity.Attestations.TermsOfService build() {
             return new AccountUpdateParams.Identity.Attestations.TermsOfService(
-                this.account, this.cryptoStorer, this.extraParams, this.storer);
+                this.account, this.cryptoMoneyManager, this.extraParams, this.moneyManager);
           }
 
           /**
@@ -10017,10 +10115,11 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Details on the Account's acceptance of Crypto-storer-specific terms of service. */
-          public Builder setCryptoStorer(
-              AccountUpdateParams.Identity.Attestations.TermsOfService.CryptoStorer cryptoStorer) {
-            this.cryptoStorer = cryptoStorer;
+          /** Details on the Account's acceptance of Crypto-specific terms of service. */
+          public Builder setCryptoMoneyManager(
+              AccountUpdateParams.Identity.Attestations.TermsOfService.CryptoMoneyManager
+                  cryptoMoneyManager) {
+            this.cryptoMoneyManager = cryptoMoneyManager;
             return this;
           }
 
@@ -10053,9 +10152,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /** Details on the Account's acceptance of Treasury-specific terms of service. */
-          public Builder setStorer(
-              AccountUpdateParams.Identity.Attestations.TermsOfService.Storer storer) {
-            this.storer = storer;
+          public Builder setMoneyManager(
+              AccountUpdateParams.Identity.Attestations.TermsOfService.MoneyManager moneyManager) {
+            this.moneyManager = moneyManager;
             return this;
           }
         }
@@ -10199,7 +10298,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         @Getter
         @EqualsAndHashCode(callSuper = false)
-        public static class CryptoStorer {
+        public static class CryptoMoneyManager {
           /**
            * The time when the Account's representative accepted the terms of service. Represented
            * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
@@ -10231,7 +10330,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("user_agent")
           Object userAgent;
 
-          private CryptoStorer(
+          private CryptoMoneyManager(
               Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
             this.date = date;
             this.extraParams = extraParams;
@@ -10253,9 +10352,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             private Object userAgent;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public AccountUpdateParams.Identity.Attestations.TermsOfService.CryptoStorer build() {
-              return new AccountUpdateParams.Identity.Attestations.TermsOfService.CryptoStorer(
-                  this.date, this.extraParams, this.ip, this.userAgent);
+            public AccountUpdateParams.Identity.Attestations.TermsOfService.CryptoMoneyManager
+                build() {
+              return new AccountUpdateParams.Identity.Attestations.TermsOfService
+                  .CryptoMoneyManager(this.date, this.extraParams, this.ip, this.userAgent);
             }
 
             /**
@@ -10272,7 +10372,7 @@ public class AccountUpdateParams extends ApiRequestParams {
              * Add a key/value pair to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * AccountUpdateParams.Identity.Attestations.TermsOfService.CryptoStorer#extraParams}
+             * AccountUpdateParams.Identity.Attestations.TermsOfService.CryptoMoneyManager#extraParams}
              * for the field documentation.
              */
             public Builder putExtraParam(String key, Object value) {
@@ -10287,7 +10387,7 @@ public class AccountUpdateParams extends ApiRequestParams {
              * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * AccountUpdateParams.Identity.Attestations.TermsOfService.CryptoStorer#extraParams}
+             * AccountUpdateParams.Identity.Attestations.TermsOfService.CryptoMoneyManager#extraParams}
              * for the field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
@@ -10336,7 +10436,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         @Getter
         @EqualsAndHashCode(callSuper = false)
-        public static class Storer {
+        public static class MoneyManager {
           /**
            * The time when the Account's representative accepted the terms of service. Represented
            * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
@@ -10368,7 +10468,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("user_agent")
           Object userAgent;
 
-          private Storer(
+          private MoneyManager(
               Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
             this.date = date;
             this.extraParams = extraParams;
@@ -10390,8 +10490,8 @@ public class AccountUpdateParams extends ApiRequestParams {
             private Object userAgent;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public AccountUpdateParams.Identity.Attestations.TermsOfService.Storer build() {
-              return new AccountUpdateParams.Identity.Attestations.TermsOfService.Storer(
+            public AccountUpdateParams.Identity.Attestations.TermsOfService.MoneyManager build() {
+              return new AccountUpdateParams.Identity.Attestations.TermsOfService.MoneyManager(
                   this.date, this.extraParams, this.ip, this.userAgent);
             }
 
@@ -10409,8 +10509,8 @@ public class AccountUpdateParams extends ApiRequestParams {
              * Add a key/value pair to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * AccountUpdateParams.Identity.Attestations.TermsOfService.Storer#extraParams} for the
-             * field documentation.
+             * AccountUpdateParams.Identity.Attestations.TermsOfService.MoneyManager#extraParams}
+             * for the field documentation.
              */
             public Builder putExtraParam(String key, Object value) {
               if (this.extraParams == null) {
@@ -10424,8 +10524,8 @@ public class AccountUpdateParams extends ApiRequestParams {
              * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * AccountUpdateParams.Identity.Attestations.TermsOfService.Storer#extraParams} for the
-             * field documentation.
+             * AccountUpdateParams.Identity.Attestations.TermsOfService.MoneyManager#extraParams}
+             * for the field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
               if (this.extraParams == null) {

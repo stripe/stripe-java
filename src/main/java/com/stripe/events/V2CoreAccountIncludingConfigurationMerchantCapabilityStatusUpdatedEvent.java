@@ -35,8 +35,8 @@ public final class V2CoreAccountIncludingConfigurationMerchantCapabilityStatusUp
      * oxxo_payments}, {@code p24_payments}, {@code payco_payments}, {@code paynow_payments}, {@code
      * stripe_balance.payouts}, {@code pay_by_bank_payments}, {@code promptpay_payments}, {@code
      * revolut_pay_payments}, {@code samsung_pay_payments}, {@code sepa_bank_transfer_payments},
-     * {@code sepa_debit_payments}, {@code swish_payments}, {@code twint_payments}, {@code
-     * us_bank_transfer_payments}, or {@code zip_payments}.
+     * {@code sepa_debit_payments}, {@code sunbit_payments}, {@code swish_payments}, {@code
+     * twint_payments}, {@code us_bank_transfer_payments}, or {@code zip_payments}.
      */
     @SerializedName("updated_capability")
     String updatedCapability;

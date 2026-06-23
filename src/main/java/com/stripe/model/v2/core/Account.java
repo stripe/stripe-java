@@ -752,6 +752,10 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("stripe_balance")
         StripeBalance stripeBalance;
 
+        /** Allow the merchant to process Sunbit payments. */
+        @SerializedName("sunbit_payments")
+        SunbitPayments sunbitPayments;
+
         /** Allow the merchant to process Swish payments. */
         @SerializedName("swish_payments")
         SwishPayments swishPayments;
@@ -2861,6 +2865,57 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
+        /** Allow the merchant to process Sunbit payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SunbitPayments extends StripeObject {
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<Account.Configuration.Merchant.Capabilities.SunbitPayments.StatusDetail>
+              statusDetails;
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+             * requirements_pending_verification}, {@code restricted_other}, {@code
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
+        }
+
         /** Allow the merchant to process Swish payments. */
         @Getter
         @Setter
@@ -3555,7 +3610,7 @@ public class Account extends StripeObject implements HasId {
       String feesCollector;
 
       /**
-       * A value indicating responsibility for collecting requirements on this account.
+       * A value indicating the responsibility for losses on this account.
        *
        * <p>One of {@code application}, or {@code stripe}.
        */

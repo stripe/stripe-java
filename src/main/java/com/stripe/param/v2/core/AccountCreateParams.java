@@ -2172,6 +2172,10 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName("sepa_debit_payments")
         SepaDebitPayments sepaDebitPayments;
 
+        /** Allow the merchant to process Sunbit payments. */
+        @SerializedName("sunbit_payments")
+        SunbitPayments sunbitPayments;
+
         /** Allow the merchant to process Swish payments. */
         @SerializedName("swish_payments")
         SwishPayments swishPayments;
@@ -2230,6 +2234,7 @@ public class AccountCreateParams extends ApiRequestParams {
             SamsungPayPayments samsungPayPayments,
             SepaBankTransferPayments sepaBankTransferPayments,
             SepaDebitPayments sepaDebitPayments,
+            SunbitPayments sunbitPayments,
             SwishPayments swishPayments,
             TwintPayments twintPayments,
             UsBankTransferPayments usBankTransferPayments,
@@ -2275,6 +2280,7 @@ public class AccountCreateParams extends ApiRequestParams {
           this.samsungPayPayments = samsungPayPayments;
           this.sepaBankTransferPayments = sepaBankTransferPayments;
           this.sepaDebitPayments = sepaDebitPayments;
+          this.sunbitPayments = sunbitPayments;
           this.swishPayments = swishPayments;
           this.twintPayments = twintPayments;
           this.usBankTransferPayments = usBankTransferPayments;
@@ -2368,6 +2374,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           private SepaDebitPayments sepaDebitPayments;
 
+          private SunbitPayments sunbitPayments;
+
           private SwishPayments swishPayments;
 
           private TwintPayments twintPayments;
@@ -2420,6 +2428,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 this.samsungPayPayments,
                 this.sepaBankTransferPayments,
                 this.sepaDebitPayments,
+                this.sunbitPayments,
                 this.swishPayments,
                 this.twintPayments,
                 this.usBankTransferPayments,
@@ -2760,6 +2769,14 @@ public class AccountCreateParams extends ApiRequestParams {
               AccountCreateParams.Configuration.Merchant.Capabilities.SepaDebitPayments
                   sepaDebitPayments) {
             this.sepaDebitPayments = sepaDebitPayments;
+            return this;
+          }
+
+          /** Allow the merchant to process Sunbit payments. */
+          public Builder setSunbitPayments(
+              AccountCreateParams.Configuration.Merchant.Capabilities.SunbitPayments
+                  sunbitPayments) {
+            this.sunbitPayments = sunbitPayments;
             return this;
           }
 
@@ -6033,6 +6050,87 @@ public class AccountCreateParams extends ApiRequestParams {
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
              * AccountCreateParams.Configuration.Merchant.Capabilities.SepaDebitPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            public Builder setRequested(Boolean requested) {
+              this.requested = requested;
+              return this;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SunbitPayments {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> To request a new Capability for an account, pass true. There
+           * can be a delay before the requested Capability becomes active.
+           */
+          @SerializedName("requested")
+          Boolean requested;
+
+          private SunbitPayments(Map<String, Object> extraParams, Boolean requested) {
+            this.extraParams = extraParams;
+            this.requested = requested;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Boolean requested;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Configuration.Merchant.Capabilities.SunbitPayments build() {
+              return new AccountCreateParams.Configuration.Merchant.Capabilities.SunbitPayments(
+                  this.extraParams, this.requested);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Merchant.Capabilities.SunbitPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Merchant.Capabilities.SunbitPayments#extraParams}
              * for the field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
