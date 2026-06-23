@@ -1,0 +1,20 @@
+{
+  "runtime": {
+    "minVersion": "17.0.0",
+    "commands": [
+      {
+        "name": "java",
+        "versionFlag": "-version",
+        "versionPattern": "version \"(\\d+)[\\.\\d]*\""
+      }
+    ]
+  },
+  "recipes": {
+    "format": {
+      "commands": [
+        "./gradlew spotlessApply"
+      ],
+      "sourceHash": "sha256:a79a53141c6b06cbec1f43e0d27dd1f25492efef1a31efb2d493daa279ad9db6"
+    }
+  }
+}

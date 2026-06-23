@@ -1,0 +1,6 @@
+# Build artifacts
+bin/
+build/
+.gradle/
+*.class
+out/
