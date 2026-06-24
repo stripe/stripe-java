@@ -1520,7 +1520,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class WechatPay extends StripeObject {
-          /** The app ID registered with WeChat Pay. Only required when client is ios or android. */
+          /**
+           * The app ID registered with WeChat Pay. Only required when client is ios, android, or
+           * mini_program.
+           */
           @SerializedName("app_id")
           String appId;
 

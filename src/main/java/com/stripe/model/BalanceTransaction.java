@@ -128,13 +128,13 @@ public class BalanceTransaction extends ApiResource implements HasId {
   String status;
 
   /**
-   * Transaction type: {@code adjustment}, {@code advance}, {@code advance_funding}, {@code
-   * anticipation_repayment}, {@code application_fee}, {@code application_fee_refund}, {@code
-   * charge}, {@code climate_order_purchase}, {@code climate_order_refund}, {@code
-   * connect_collection_transfer}, {@code contribution}, {@code inbound_transfer}, {@code
-   * inbound_transfer_reversal}, {@code issuing_authorization_hold}, {@code
-   * issuing_authorization_release}, {@code issuing_dispute}, {@code issuing_transaction}, {@code
-   * obligation_outbound}, {@code obligation_reversal_inbound}, {@code payment}, {@code
+   * Transaction type: {@code tax_fund}, {@code adjustment}, {@code advance}, {@code
+   * advance_funding}, {@code anticipation_repayment}, {@code application_fee}, {@code
+   * application_fee_refund}, {@code charge}, {@code climate_order_purchase}, {@code
+   * climate_order_refund}, {@code connect_collection_transfer}, {@code contribution}, {@code
+   * inbound_transfer}, {@code inbound_transfer_reversal}, {@code issuing_authorization_hold},
+   * {@code issuing_authorization_release}, {@code issuing_dispute}, {@code issuing_transaction},
+   * {@code obligation_outbound}, {@code obligation_reversal_inbound}, {@code payment}, {@code
    * payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
    * payment_network_reserve_release}, {@code payment_refund}, {@code payment_reversal}, {@code
    * payment_unreconciled}, {@code payout}, {@code payout_cancel}, {@code payout_failure}, {@code
@@ -162,8 +162,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * refund_failure}, {@code reserve_hold}, {@code reserve_release}, {@code reserve_transaction},
    * {@code reserved_funds}, {@code stripe_balance_payment_debit}, {@code
    * stripe_balance_payment_debit_reversal}, {@code stripe_fee}, {@code stripe_fx_fee}, {@code
-   * tax_fee}, {@code topup}, {@code topup_reversal}, {@code transfer}, {@code transfer_cancel},
-   * {@code transfer_failure}, or {@code transfer_refund}.
+   * tax_fee}, {@code tax_fund}, {@code topup}, {@code topup_reversal}, {@code transfer}, {@code
+   * transfer_cancel}, {@code transfer_failure}, or {@code transfer_refund}.
    */
   @SerializedName("type")
   String type;
@@ -188,11 +188,11 @@ public class BalanceTransaction extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
-   * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
+   * Returns a list of transactions that have contributed to the Stripe account balance (for
+   * example, charges, transfers, and so on). The transactions return in sorted order, with the most
    * recent transactions appearing first.
    *
-   * <p>Note that this endpoint was previously called “Balance history” and used the path {@code
+   * <p>The previous name of this endpoint was “Balance history,” and it used the path {@code
    * /v1/balance/history}.
    */
   public static BalanceTransactionCollection list(Map<String, Object> params)
@@ -201,11 +201,11 @@ public class BalanceTransaction extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
-   * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
+   * Returns a list of transactions that have contributed to the Stripe account balance (for
+   * example, charges, transfers, and so on). The transactions return in sorted order, with the most
    * recent transactions appearing first.
    *
-   * <p>Note that this endpoint was previously called “Balance history” and used the path {@code
+   * <p>The previous name of this endpoint was “Balance history,” and it used the path {@code
    * /v1/balance/history}.
    */
   public static BalanceTransactionCollection list(
@@ -217,11 +217,11 @@ public class BalanceTransaction extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
-   * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
+   * Returns a list of transactions that have contributed to the Stripe account balance (for
+   * example, charges, transfers, and so on). The transactions return in sorted order, with the most
    * recent transactions appearing first.
    *
-   * <p>Note that this endpoint was previously called “Balance history” and used the path {@code
+   * <p>The previous name of this endpoint was “Balance history,” and it used the path {@code
    * /v1/balance/history}.
    */
   public static BalanceTransactionCollection list(BalanceTransactionListParams params)
@@ -230,11 +230,11 @@ public class BalanceTransaction extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
-   * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
+   * Returns a list of transactions that have contributed to the Stripe account balance (for
+   * example, charges, transfers, and so on). The transactions return in sorted order, with the most
    * recent transactions appearing first.
    *
-   * <p>Note that this endpoint was previously called “Balance history” and used the path {@code
+   * <p>The previous name of this endpoint was “Balance history,” and it used the path {@code
    * /v1/balance/history}.
    */
   public static BalanceTransactionCollection list(

@@ -843,8 +843,40 @@ public class Account extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusDetails extends StripeObject {
+    @SerializedName("active")
+    Active active;
+
     @SerializedName("inactive")
     Inactive inactive;
+
+    /**
+     * For more details about Active, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Active extends StripeObject {
+      /**
+       * The action (if any) to proactively relink the Account.
+       *
+       * <p>One of {@code none}, or {@code relink_required}.
+       */
+      @SerializedName("action")
+      String action;
+
+      /**
+       * The underlying cause of the Account becoming inactive.
+       *
+       * <p>One of {@code access_expired}, {@code institution_requirement}, or {@code unspecified}.
+       */
+      @SerializedName("cause")
+      String cause;
+
+      /** When the Account is expected to become inactive, if applicable. */
+      @SerializedName("expected_deactivation_date")
+      Long expectedDeactivationDate;
+    }
 
     /**
      * For more details about Inactive, please refer to the <a
@@ -866,7 +898,7 @@ public class Account extends ApiResource implements HasId {
        * The underlying cause of the Account being inactive.
        *
        * <p>One of {@code access_denied}, {@code access_expired}, {@code account_closed}, {@code
-       * account_unavailable}, or {@code unspecified}.
+       * account_unavailable}, {@code institution_requirement}, or {@code unspecified}.
        */
       @SerializedName("cause")
       String cause;

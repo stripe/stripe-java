@@ -108,6 +108,10 @@ public class Dispute extends ApiResource
   @SerializedName("object")
   String object;
 
+  /** Redaction status of this dispute. If the dispute is not redacted, this field will be null. */
+  @SerializedName("redaction")
+  Redaction redaction;
+
   /**
    * Current status of the dispute.
    *
@@ -995,6 +999,23 @@ public class Dispute extends ApiResource
   }
 
   /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about Treasury, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -1021,6 +1042,7 @@ public class Dispute extends ApiResource
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(evidence, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(transaction, responseGetter);
     trySetResponseGetter(treasury, responseGetter);
   }

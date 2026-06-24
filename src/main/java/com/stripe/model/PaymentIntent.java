@@ -322,6 +322,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("receipt_email")
   String receiptEmail;
 
+  /**
+   * Redaction status of this PaymentIntent. If the PaymentIntent isn't redacted, this field is
+   * null.
+   */
+  @SerializedName("redaction")
+  Redaction redaction;
+
   /** ID of the review associated with this PaymentIntent, if any. */
   @SerializedName("review")
   @Getter(lombok.AccessLevel.NONE)
@@ -4661,6 +4668,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("stripe_balance")
     StripeBalance stripeBalance;
 
+    @SerializedName("sunbit")
+    Sunbit sunbit;
+
     @SerializedName("swish")
     Swish swish;
 
@@ -7109,6 +7119,30 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("capture_method")
       String captureMethod;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
     }
 
     /**
@@ -7292,6 +7326,47 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
        * <p>One of {@code none}, or {@code off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    /**
+     * For more details about Sunbit, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sunbit extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
@@ -7558,7 +7633,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class WechatPay extends StripeObject {
-      /** The app ID registered with WeChat Pay. Only required when client is ios or android. */
+      /**
+       * The app ID registered with WeChat Pay. Only required when client is ios, android, or
+       * mini_program.
+       */
       @SerializedName("app_id")
       String appId;
 
@@ -7701,6 +7779,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about TransferData, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -7806,6 +7901,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(processing, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(review, responseGetter);
     trySetResponseGetter(shipping, responseGetter);
     trySetResponseGetter(source, responseGetter);

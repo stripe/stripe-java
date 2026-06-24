@@ -56,7 +56,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
   @SerializedName("processor_details")
   ProcessorDetails processorDetails;
 
-  /** <strong>Required.</strong> Information about the payment attempt refund. */
+  /** Information about the payment attempt refund. */
   @SerializedName("refunded")
   Refunded refunded;
 
@@ -244,7 +244,7 @@ public class PaymentRecordReportRefundParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> Information about the payment attempt refund. */
+    /** Information about the payment attempt refund. */
     public Builder setRefunded(PaymentRecordReportRefundParams.Refunded refunded) {
       this.refunded = refunded;
       return this;

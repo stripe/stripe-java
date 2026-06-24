@@ -1145,6 +1145,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Bizum extends StripeObject {
+      /** A unique identifier for the buyer as determined by the local payment processor. */
+      @SerializedName("buyer_id")
+      String buyerId;
+
       /** The Bizum transaction ID associated with this payment. */
       @SerializedName("transaction_id")
       String transactionId;
@@ -1297,13 +1301,6 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
        */
       @SerializedName("network_transaction_id")
       String networkTransactionId;
-
-      /**
-       * The transaction type that was passed for an off-session, Merchant-Initiated transaction,
-       * one of {@code recurring} or {@code unscheduled}.
-       */
-      @SerializedName("stored_credential_usage")
-      String storedCredentialUsage;
 
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
@@ -1866,8 +1863,8 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, or {@code
-       * tempo}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui}, or
+       * {@code tempo}.
        */
       @SerializedName("network")
       String network;
@@ -1875,7 +1872,8 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /**
        * The token currency that the transaction was sent with.
        *
-       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, or {@code usdt}.
+       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, {@code usdsui},
+       * or {@code usdt}.
        */
       @SerializedName("token_currency")
       String tokenCurrency;

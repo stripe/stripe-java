@@ -122,6 +122,17 @@ public class FinancingSummary extends ApiResource {
     @SerializedName("current_repayment_interval")
     CurrentRepaymentInterval currentRepaymentInterval;
 
+    /**
+     * The type of disclaimer to use for a financing offer in user-facing surfaces. The
+     * corresponding disclaimer text to use for each disclaimer_variant value can be found in the <a
+     * href="https://docs.stripe.com/capital/regulatory-compliance">regulatory compliance docs</a>.
+     *
+     * <p>One of {@code celtic_us_loan}, {@code fundbox_au_financing}, {@code youlend_de_financing},
+     * {@code youlend_fr_financing}, {@code youlend_uk_mca}, or {@code youlend_us_mca}.
+     */
+    @SerializedName("disclaimer_variant")
+    String disclaimerVariant;
+
     /** Fixed fee amount, in minor units. For example, 100 USD is represented as 10000. */
     @SerializedName("fee_amount")
     Long feeAmount;

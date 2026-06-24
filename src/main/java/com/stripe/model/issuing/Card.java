@@ -160,6 +160,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PersonalizationDesign> personalizationDesign;
 
+  /** Redaction status of this card. If not null, this card is associated to a redaction job. */
+  @SerializedName("redaction")
+  Redaction redaction;
+
   /** The latest card that replaces this card, if any. */
   @SerializedName("replaced_by")
   @Getter(lombok.AccessLevel.NONE)
@@ -479,6 +483,23 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       @SerializedName("payment_count")
       Long paymentCount;
     }
+  }
+
+  /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
   }
 
   /**
@@ -1129,6 +1150,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     trySetResponseGetter(latestFraudWarning, responseGetter);
     trySetResponseGetter(lifecycleControls, responseGetter);
     trySetResponseGetter(personalizationDesign, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(replacedBy, responseGetter);
     trySetResponseGetter(replacementFor, responseGetter);
     trySetResponseGetter(shipping, responseGetter);

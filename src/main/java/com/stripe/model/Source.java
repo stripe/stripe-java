@@ -175,6 +175,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @SerializedName("receiver")
   Receiver receiver;
 
+  /** Redaction status of this source. If not null, this source is associated to a redaction job. */
+  @SerializedName("redaction")
+  Redaction redaction;
+
   @SerializedName("redirect")
   Redirect redirect;
 
@@ -1169,6 +1173,23 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   }
 
   /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about Redirect, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -1493,6 +1514,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     trySetResponseGetter(p24, responseGetter);
     trySetResponseGetter(paypal, responseGetter);
     trySetResponseGetter(receiver, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(redirect, responseGetter);
     trySetResponseGetter(sepaCreditTransfer, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);

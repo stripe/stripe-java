@@ -196,6 +196,13 @@ public class Authorization extends ApiResource
   PendingRequest pendingRequest;
 
   /**
+   * Redaction status of this authorization. If the authorization is not redacted, this field will
+   * be null.
+   */
+  @SerializedName("redaction")
+  Redaction redaction;
+
+  /**
    * History of every time a {@code pending_request} authorization was approved/declined, either by
    * you directly or by Stripe (e.g. based on your spending_controls). If the merchant changes the
    * authorization by performing an incremental authorization, you can look at this field to see the
@@ -1044,6 +1051,23 @@ public class Authorization extends ApiResource
   }
 
   /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about RequestHistory, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1649,6 +1673,7 @@ public class Authorization extends ApiResource
     trySetResponseGetter(merchantData, responseGetter);
     trySetResponseGetter(networkData, responseGetter);
     trySetResponseGetter(pendingRequest, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(token, responseGetter);
     trySetResponseGetter(treasury, responseGetter);
     trySetResponseGetter(verificationData, responseGetter);

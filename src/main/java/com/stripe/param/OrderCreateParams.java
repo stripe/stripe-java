@@ -13850,7 +13850,10 @@ public class OrderCreateParams extends ApiRequestParams {
         @Getter
         @EqualsAndHashCode(callSuper = false)
         public static class WechatPay {
-          /** The app ID registered with WeChat Pay. Only required when client is ios or android. */
+          /**
+           * The app ID registered with WeChat Pay. Only required when client is ios, android, or
+           * mini_program.
+           */
           @SerializedName("app_id")
           String appId;
 
@@ -13926,7 +13929,8 @@ public class OrderCreateParams extends ApiRequestParams {
             }
 
             /**
-             * The app ID registered with WeChat Pay. Only required when client is ios or android.
+             * The app ID registered with WeChat Pay. Only required when client is ios, android, or
+             * mini_program.
              */
             public Builder setAppId(String appId) {
               this.appId = appId;

@@ -201,6 +201,12 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   List<String> preferredLocales;
 
   /**
+   * Redaction status of this customer. If not null, this customer is associated to a redaction job.
+   */
+  @SerializedName("redaction")
+  Redaction redaction;
+
+  /**
    * Mailing and shipping address for the customer. Appears on invoices emailed to this customer.
    */
   @SerializedName("shipping")
@@ -961,6 +967,23 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   }
 
   /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -1084,6 +1107,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     trySetResponseGetter(defaultSource, responseGetter);
     trySetResponseGetter(discount, responseGetter);
     trySetResponseGetter(invoiceSettings, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(shipping, responseGetter);
     trySetResponseGetter(sources, responseGetter);
     trySetResponseGetter(subscriptions, responseGetter);

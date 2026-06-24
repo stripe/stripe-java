@@ -9,6 +9,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.radar.ValueListItemCreateParams;
 import com.stripe.param.radar.ValueListItemListParams;
 import com.stripe.param.radar.ValueListItemRetrieveParams;
@@ -59,6 +60,10 @@ public class ValueListItem extends ApiResource implements HasId {
    */
   @SerializedName("object")
   String object;
+
+  /** Redaction status of this item. If not null, this item is associated to a redaction job. */
+  @SerializedName("redaction")
+  DeletedValueListItem.Redaction redaction;
 
   /** The value of the item. */
   @SerializedName("value")
@@ -215,5 +220,11 @@ public class ValueListItem extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, ValueListItem.class);
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
   }
 }
