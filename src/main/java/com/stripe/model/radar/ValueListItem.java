@@ -4,6 +4,7 @@ package com.stripe.model.radar;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -63,7 +64,7 @@ public class ValueListItem extends ApiResource implements HasId {
 
   /** Redaction status of this item. If not null, this item is associated to a redaction job. */
   @SerializedName("redaction")
-  DeletedValueListItem.Redaction redaction;
+  Redaction redaction;
 
   /** The value of the item. */
   @SerializedName("value")
@@ -220,6 +221,23 @@ public class ValueListItem extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, ValueListItem.class);
+  }
+
+  /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
   }
 
   @Override
