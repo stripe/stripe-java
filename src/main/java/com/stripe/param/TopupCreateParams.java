@@ -53,6 +53,17 @@ public class TopupCreateParams extends ApiRequestParams {
   Object metadata;
 
   /**
+   * The ID of a PaymentMethod representing the payment method to be used for the top-up. A
+   * PaymentMethod of type {@code us_bank_account} can be used.
+   */
+  @SerializedName("payment_method")
+  String paymentMethod;
+
+  /** Payment method-specific configuration for this top-up. */
+  @SerializedName("payment_method_options")
+  PaymentMethodOptions paymentMethodOptions;
+
+  /**
    * The ID of a source to transfer funds from. For most users, this should be left unspecified
    * which will use the bank account that was set up in the dashboard for the specified currency. In
    * test mode, this can be a test bank token (see <a
@@ -79,6 +90,8 @@ public class TopupCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
+      String paymentMethod,
+      PaymentMethodOptions paymentMethodOptions,
       String source,
       String statementDescriptor,
       String transferGroup) {
@@ -88,6 +101,8 @@ public class TopupCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.paymentMethod = paymentMethod;
+    this.paymentMethodOptions = paymentMethodOptions;
     this.source = source;
     this.statementDescriptor = statementDescriptor;
     this.transferGroup = transferGroup;
@@ -110,6 +125,10 @@ public class TopupCreateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private String paymentMethod;
+
+    private PaymentMethodOptions paymentMethodOptions;
+
     private String source;
 
     private String statementDescriptor;
@@ -125,6 +144,8 @@ public class TopupCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.metadata,
+          this.paymentMethod,
+          this.paymentMethodOptions,
           this.source,
           this.statementDescriptor,
           this.transferGroup);
@@ -255,6 +276,22 @@ public class TopupCreateParams extends ApiRequestParams {
     }
 
     /**
+     * The ID of a PaymentMethod representing the payment method to be used for the top-up. A
+     * PaymentMethod of type {@code us_bank_account} can be used.
+     */
+    public Builder setPaymentMethod(String paymentMethod) {
+      this.paymentMethod = paymentMethod;
+      return this;
+    }
+
+    /** Payment method-specific configuration for this top-up. */
+    public Builder setPaymentMethodOptions(
+        TopupCreateParams.PaymentMethodOptions paymentMethodOptions) {
+      this.paymentMethodOptions = paymentMethodOptions;
+      return this;
+    }
+
+    /**
      * The ID of a source to transfer funds from. For most users, this should be left unspecified
      * which will use the bank account that was set up in the dashboard for the specified currency.
      * In test mode, this can be a test bank token (see <a
@@ -278,6 +315,159 @@ public class TopupCreateParams extends ApiRequestParams {
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodOptions {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    @SerializedName("us_bank_account")
+    UsBankAccount usBankAccount;
+
+    private PaymentMethodOptions(Map<String, Object> extraParams, UsBankAccount usBankAccount) {
+      this.extraParams = extraParams;
+      this.usBankAccount = usBankAccount;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private UsBankAccount usBankAccount;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public TopupCreateParams.PaymentMethodOptions build() {
+        return new TopupCreateParams.PaymentMethodOptions(this.extraParams, this.usBankAccount);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * TopupCreateParams.PaymentMethodOptions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link TopupCreateParams.PaymentMethodOptions#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      public Builder setUsBankAccount(
+          TopupCreateParams.PaymentMethodOptions.UsBankAccount usBankAccount) {
+        this.usBankAccount = usBankAccount;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsBankAccount {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> */
+      @SerializedName("network")
+      Network network;
+
+      private UsBankAccount(Map<String, Object> extraParams, Network network) {
+        this.extraParams = extraParams;
+        this.network = network;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Network network;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public TopupCreateParams.PaymentMethodOptions.UsBankAccount build() {
+          return new TopupCreateParams.PaymentMethodOptions.UsBankAccount(
+              this.extraParams, this.network);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link TopupCreateParams.PaymentMethodOptions.UsBankAccount#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link TopupCreateParams.PaymentMethodOptions.UsBankAccount#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> */
+        public Builder setNetwork(
+            TopupCreateParams.PaymentMethodOptions.UsBankAccount.Network network) {
+          this.network = network;
+          return this;
+        }
+      }
+
+      public enum Network implements ApiRequestParams.EnumParam {
+        @SerializedName("ach")
+        ACH("ach");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Network(String value) {
+          this.value = value;
+        }
+      }
     }
   }
 }

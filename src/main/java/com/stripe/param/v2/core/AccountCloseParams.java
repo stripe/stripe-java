@@ -114,8 +114,8 @@ public class AccountCloseParams extends ApiRequestParams {
     @SerializedName("recipient")
     RECIPIENT("recipient"),
 
-    @SerializedName("storer")
-    STORER("storer");
+    @SerializedName("money_manager")
+    MONEY_MANAGER("money_manager");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

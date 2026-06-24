@@ -152,6 +152,13 @@ public class Transaction extends ApiResource
   PurchaseDetails purchaseDetails;
 
   /**
+   * Redaction status of this transaction. If the transaction is not redacted, this field will be
+   * null.
+   */
+  @SerializedName("redaction")
+  Redaction redaction;
+
+  /**
    * The ID of the <a href="https://docs.stripe.com/api/issuing/settlements">settlement</a> to which
    * this transaction belongs.
    */
@@ -890,6 +897,23 @@ public class Transaction extends ApiResource
   }
 
   /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about Treasury, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -1060,6 +1084,7 @@ public class Transaction extends ApiResource
     trySetResponseGetter(merchantData, responseGetter);
     trySetResponseGetter(networkData, responseGetter);
     trySetResponseGetter(purchaseDetails, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(settlement, responseGetter);
     trySetResponseGetter(token, responseGetter);
     trySetResponseGetter(treasury, responseGetter);

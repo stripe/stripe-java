@@ -860,7 +860,7 @@ public class VerificationSession extends ApiResource
     /**
      * Indicates whether this object and its related objects have been redacted or not.
      *
-     * <p>One of {@code processing}, or {@code redacted}.
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
      */
     @SerializedName("status")
     String status;

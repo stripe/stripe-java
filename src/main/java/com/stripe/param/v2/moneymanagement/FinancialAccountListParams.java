@@ -3,7 +3,9 @@ package com.stripe.param.v2.moneymanagement;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,16 +27,19 @@ public class FinancialAccountListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * The status of the FinancialAccount to filter by. By default, closed FinancialAccounts are not
+   * Filter for FinancialAccount {@code status}. By default, closed FinancialAccounts are not
    * returned.
    */
-  @SerializedName("status")
-  Status status;
+  @SerializedName("statuses")
+  List<FinancialAccountListParams.Status> statuses;
 
-  private FinancialAccountListParams(Map<String, Object> extraParams, Long limit, Status status) {
+  private FinancialAccountListParams(
+      Map<String, Object> extraParams,
+      Long limit,
+      List<FinancialAccountListParams.Status> statuses) {
     this.extraParams = extraParams;
     this.limit = limit;
-    this.status = status;
+    this.statuses = statuses;
   }
 
   public static Builder builder() {
@@ -46,11 +51,11 @@ public class FinancialAccountListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private Status status;
+    private List<FinancialAccountListParams.Status> statuses;
 
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAccountListParams build() {
-      return new FinancialAccountListParams(this.extraParams, this.limit, this.status);
+      return new FinancialAccountListParams(this.extraParams, this.limit, this.statuses);
     }
 
     /**
@@ -86,11 +91,28 @@ public class FinancialAccountListParams extends ApiRequestParams {
     }
 
     /**
-     * The status of the FinancialAccount to filter by. By default, closed FinancialAccounts are not
-     * returned.
+     * Add an element to `statuses` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * FinancialAccountListParams#statuses} for the field documentation.
      */
-    public Builder setStatus(FinancialAccountListParams.Status status) {
-      this.status = status;
+    public Builder addStatus(FinancialAccountListParams.Status element) {
+      if (this.statuses == null) {
+        this.statuses = new ArrayList<>();
+      }
+      this.statuses.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `statuses` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * FinancialAccountListParams#statuses} for the field documentation.
+     */
+    public Builder addAllStatus(List<FinancialAccountListParams.Status> elements) {
+      if (this.statuses == null) {
+        this.statuses = new ArrayList<>();
+      }
+      this.statuses.addAll(elements);
       return this;
     }
   }

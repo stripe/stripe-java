@@ -50,6 +50,17 @@ public class FinancingOffer extends ApiResource implements HasId {
   @SerializedName("created")
   Long created;
 
+  /**
+   * The type of disclaimer to use for a financing offer in user-facing surfaces. The corresponding
+   * disclaimer text to use for each disclaimer_variant value can be found in the <a
+   * href="https://docs.stripe.com/capital/marketing">marketing docs</a>.
+   *
+   * <p>One of {@code celtic_us_loan}, {@code fundbox_au_financing}, {@code youlend_de_financing},
+   * {@code youlend_fr_financing}, {@code youlend_uk_mca}, or {@code youlend_us_mca}.
+   */
+  @SerializedName("disclaimer_variant")
+  String disclaimerVariant;
+
   /** Time at which the offer expires. Given in seconds since unix epoch. */
   @SerializedName("expires_after")
   BigDecimal expiresAfter;

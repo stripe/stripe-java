@@ -165,8 +165,8 @@ public class ReceivedDebit extends StripeObject implements HasId {
       /**
        * Open Enum. The reason for the failure of the ReceivedDebit.
        *
-       * <p>One of {@code financial_address_inactive}, {@code insufficient_funds}, or {@code
-       * stripe_rejected}.
+       * <p>One of {@code capability_inactive}, {@code financial_address_inactive}, {@code
+       * insufficient_funds}, or {@code stripe_rejected}.
        */
       @SerializedName("reason")
       String reason;

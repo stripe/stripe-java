@@ -156,19 +156,19 @@ public final class EventDataClassLookup {
         "v2.core.account[configuration.merchant].updated",
         com.stripe.events.V2CoreAccountIncludingConfigurationMerchantUpdatedEvent.class);
     eventClassLookup.put(
+        "v2.core.account[configuration.money_manager].capability_status_updated",
+        com.stripe.events
+            .V2CoreAccountIncludingConfigurationMoneyManagerCapabilityStatusUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.account[configuration.money_manager].updated",
+        com.stripe.events.V2CoreAccountIncludingConfigurationMoneyManagerUpdatedEvent.class);
+    eventClassLookup.put(
         "v2.core.account[configuration.recipient].capability_status_updated",
         com.stripe.events.V2CoreAccountIncludingConfigurationRecipientCapabilityStatusUpdatedEvent
             .class);
     eventClassLookup.put(
         "v2.core.account[configuration.recipient].updated",
         com.stripe.events.V2CoreAccountIncludingConfigurationRecipientUpdatedEvent.class);
-    eventClassLookup.put(
-        "v2.core.account[configuration.storer].capability_status_updated",
-        com.stripe.events.V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpdatedEvent
-            .class);
-    eventClassLookup.put(
-        "v2.core.account[configuration.storer].updated",
-        com.stripe.events.V2CoreAccountIncludingConfigurationStorerUpdatedEvent.class);
     eventClassLookup.put(
         "v2.core.account[defaults].updated",
         com.stripe.events.V2CoreAccountIncludingDefaultsUpdatedEvent.class);
@@ -285,6 +285,9 @@ public final class EventDataClassLookup {
         "v2.money_management.outbound_payment.returned",
         com.stripe.events.V2MoneyManagementOutboundPaymentReturnedEvent.class);
     eventClassLookup.put(
+        "v2.money_management.outbound_payment.under_review",
+        com.stripe.events.V2MoneyManagementOutboundPaymentUnderReviewEvent.class);
+    eventClassLookup.put(
         "v2.money_management.outbound_payment.updated",
         com.stripe.events.V2MoneyManagementOutboundPaymentUpdatedEvent.class);
     eventClassLookup.put(
@@ -302,6 +305,9 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.money_management.outbound_transfer.returned",
         com.stripe.events.V2MoneyManagementOutboundTransferReturnedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.outbound_transfer.under_review",
+        com.stripe.events.V2MoneyManagementOutboundTransferUnderReviewEvent.class);
     eventClassLookup.put(
         "v2.money_management.outbound_transfer.updated",
         com.stripe.events.V2MoneyManagementOutboundTransferUpdatedEvent.class);

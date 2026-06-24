@@ -315,6 +315,12 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    * <p>You may issue multiple credit notes for an invoice. Each credit note may increment the
    * invoice’s {@code pre_payment_credit_notes_amount}, {@code post_payment_credit_notes_amount}, or
    * both, depending on the invoice’s {@code amount_remaining} at the time of credit note creation.
+   *
+   * <p>For invoices that also have refunds created through the <a
+   * href="https://stripe.com/docs/api/refunds">Refund API</a>, the credit note API subtracts those
+   * refund amounts from the maximum creditable amount. This prevents the combined credit notes and
+   * refunds from exceeding the invoice amount. If you use both, ensure the combined total does not
+   * exceed the invoice’s paid amount.
    */
   public static CreditNote create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -344,6 +350,12 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    * <p>You may issue multiple credit notes for an invoice. Each credit note may increment the
    * invoice’s {@code pre_payment_credit_notes_amount}, {@code post_payment_credit_notes_amount}, or
    * both, depending on the invoice’s {@code amount_remaining} at the time of credit note creation.
+   *
+   * <p>For invoices that also have refunds created through the <a
+   * href="https://stripe.com/docs/api/refunds">Refund API</a>, the credit note API subtracts those
+   * refund amounts from the maximum creditable amount. This prevents the combined credit notes and
+   * refunds from exceeding the invoice amount. If you use both, ensure the combined total does not
+   * exceed the invoice’s paid amount.
    */
   public static CreditNote create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -377,6 +389,12 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    * <p>You may issue multiple credit notes for an invoice. Each credit note may increment the
    * invoice’s {@code pre_payment_credit_notes_amount}, {@code post_payment_credit_notes_amount}, or
    * both, depending on the invoice’s {@code amount_remaining} at the time of credit note creation.
+   *
+   * <p>For invoices that also have refunds created through the <a
+   * href="https://stripe.com/docs/api/refunds">Refund API</a>, the credit note API subtracts those
+   * refund amounts from the maximum creditable amount. This prevents the combined credit notes and
+   * refunds from exceeding the invoice amount. If you use both, ensure the combined total does not
+   * exceed the invoice’s paid amount.
    */
   public static CreditNote create(CreditNoteCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -406,6 +424,12 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    * <p>You may issue multiple credit notes for an invoice. Each credit note may increment the
    * invoice’s {@code pre_payment_credit_notes_amount}, {@code post_payment_credit_notes_amount}, or
    * both, depending on the invoice’s {@code amount_remaining} at the time of credit note creation.
+   *
+   * <p>For invoices that also have refunds created through the <a
+   * href="https://stripe.com/docs/api/refunds">Refund API</a>, the credit note API subtracts those
+   * refund amounts from the maximum creditable amount. This prevents the combined credit notes and
+   * refunds from exceeding the invoice amount. If you use both, ensure the combined total does not
+   * exceed the invoice’s paid amount.
    */
   public static CreditNote create(CreditNoteCreateParams params, RequestOptions options)
       throws StripeException {

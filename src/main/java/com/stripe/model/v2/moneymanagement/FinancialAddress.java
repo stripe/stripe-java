@@ -201,6 +201,10 @@ public class FinancialAddress extends StripeObject implements HasId {
       @SerializedName("bank_name")
       String bankName;
 
+      /** The BIC of the bank or financial institution. */
+      @SerializedName("bic")
+      String bic;
+
       /**
        * The last four digits of the US Bank Account number. This will always be returned. To view
        * the full account number when retrieving or listing FinancialAddresses, use the {@code
@@ -212,10 +216,6 @@ public class FinancialAddress extends StripeObject implements HasId {
       /** The routing number of the US Bank Account. */
       @SerializedName("routing_number")
       String routingNumber;
-
-      /** The swift code of the bank or financial institution. */
-      @SerializedName("swift_code")
-      String swiftCode;
 
       /** The address of the account holder. */
       @Getter

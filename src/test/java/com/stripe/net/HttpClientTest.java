@@ -1,6 +1,7 @@
 package com.stripe.net;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -293,6 +294,33 @@ public class HttpClientTest extends BaseStripeTest {
       assertTrue(!parsed.has("platform"));
     } finally {
       Stripe.enableTelemetry = originalTelemetry;
+    }
+  }
+
+  @Test
+  public void testBuildXStripeClientUserAgentStringIncludesSource() {
+    String json = HttpClient.buildXStripeClientUserAgentString("");
+    com.google.gson.JsonObject parsed =
+        com.google.gson.JsonParser.parseString(json).getAsJsonObject();
+    // "source" should be present and be a 32-character lowercase MD5 hex digest
+    assertTrue(parsed.has("source"), "Expected 'source' field in X-Stripe-Client-User-Agent");
+    String source = parsed.get("source").getAsString();
+    assertTrue(
+        source.matches("[0-9a-f]{32}"),
+        "Expected 'source' to be a 32-character lowercase hex string, got: " + source);
+  }
+
+  @Test
+  public void testBuildXStripeClientUserAgentStringOmitsSourceWhenEmpty() throws Exception {
+    String savedHash = HttpClient.UNAME_HASH;
+    try {
+      HttpClient.UNAME_HASH = "";
+      String userAgentString = HttpClient.buildXStripeClientUserAgentString("");
+      com.google.gson.JsonObject userAgent =
+          com.google.gson.JsonParser.parseString(userAgentString).getAsJsonObject();
+      assertFalse(userAgent.has("source"));
+    } finally {
+      HttpClient.UNAME_HASH = savedHash;
     }
   }
 }

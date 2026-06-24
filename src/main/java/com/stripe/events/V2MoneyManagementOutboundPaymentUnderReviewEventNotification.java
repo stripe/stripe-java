@@ -3,13 +3,13 @@ package com.stripe.events;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.model.v2.core.Account;
 import com.stripe.model.v2.core.Event.RelatedObject;
 import com.stripe.model.v2.core.EventNotification;
+import com.stripe.model.v2.moneymanagement.OutboundPayment;
 import lombok.Getter;
 
 @Getter
-public final class V2CoreAccountIncludingConfigurationStorerUpdatedEventNotification
+public final class V2MoneyManagementOutboundPaymentUnderReviewEventNotification
     extends EventNotification {
   @SerializedName("related_object")
 
@@ -17,12 +17,12 @@ public final class V2CoreAccountIncludingConfigurationStorerUpdatedEventNotifica
   RelatedObject relatedObject;
 
   /** Retrieves the related object from the API. Make an API request on every call. */
-  public Account fetchRelatedObject() throws StripeException {
-    return (Account) super.fetchRelatedObject(this.relatedObject);
+  public OutboundPayment fetchRelatedObject() throws StripeException {
+    return (OutboundPayment) super.fetchRelatedObject(this.relatedObject);
   }
   /** Retrieve the corresponding full event from the Stripe API. */
   @Override
-  public V2CoreAccountIncludingConfigurationStorerUpdatedEvent fetchEvent() throws StripeException {
-    return (V2CoreAccountIncludingConfigurationStorerUpdatedEvent) super.fetchEvent();
+  public V2MoneyManagementOutboundPaymentUnderReviewEvent fetchEvent() throws StripeException {
+    return (V2MoneyManagementOutboundPaymentUnderReviewEvent) super.fetchEvent();
   }
 }

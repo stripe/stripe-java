@@ -132,7 +132,10 @@ public class OutboundPayment extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
-  /** Status details for an OutboundPayment in a {@code failed} or {@code returned} state. */
+  /**
+   * Status details for an OutboundPayment in a {@code processing}, {@code failed}, or {@code
+   * returned} state.
+   */
   @SerializedName("status_details")
   StatusDetails statusDetails;
 
@@ -195,7 +198,10 @@ public class OutboundPayment extends StripeObject implements HasId {
     String setting;
   }
 
-  /** Status details for an OutboundPayment in a {@code failed} or {@code returned} state. */
+  /**
+   * Status details for an OutboundPayment in a {@code processing}, {@code failed}, or {@code
+   * returned} state.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -203,6 +209,10 @@ public class OutboundPayment extends StripeObject implements HasId {
     /** The {@code failed} status reason. */
     @SerializedName("failed")
     Failed failed;
+
+    /** The {@code processing} status details. */
+    @SerializedName("processing")
+    Processing processing;
 
     /** The {@code returned} status reason. */
     @SerializedName("returned")
@@ -216,9 +226,25 @@ public class OutboundPayment extends StripeObject implements HasId {
       /**
        * Open Enum. The {@code failed} status reason.
        *
-       * <p>One of {@code payout_method_declined}, {@code payout_method_does_not_exist}, {@code
-       * payout_method_expired}, {@code payout_method_unsupported}, {@code
-       * payout_method_usage_frequency_limit_exceeded}, or {@code unknown_failure}.
+       * <p>One of {@code fx_rate_drift_exceeded_after_review}, {@code
+       * payout_method_amount_limit_exceeded}, {@code payout_method_declined}, {@code
+       * payout_method_does_not_exist}, {@code payout_method_expired}, {@code
+       * payout_method_unsupported}, {@code payout_method_usage_frequency_limit_exceeded}, {@code
+       * review_rejected}, or {@code unknown_failure}.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
+
+    /** The {@code processing} status details. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Processing extends StripeObject {
+      /**
+       * Open Enum. The {@code processing} status reason.
+       *
+       * <p>Equal to {@code under_review}.
        */
       @SerializedName("reason")
       String reason;

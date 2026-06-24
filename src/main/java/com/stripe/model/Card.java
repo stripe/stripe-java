@@ -242,6 +242,10 @@ public class Card extends ApiResource
   @SerializedName("object")
   String object;
 
+  /** Redaction status of this card. If not null, this card is associated to a redaction job. */
+  @SerializedName("redaction")
+  Redaction redaction;
+
   /**
    * Status of a card based on the card issuer.
    *
@@ -527,5 +531,22 @@ public class Card extends ApiResource
      */
     @SerializedName("preferred")
     String preferred;
+  }
+
+  /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
   }
 }

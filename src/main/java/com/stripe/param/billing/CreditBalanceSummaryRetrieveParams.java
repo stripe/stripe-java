@@ -265,7 +265,7 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
 
       /**
        * A list of prices that the credit grant can apply to. We currently only support the {@code
-       * metered} prices. Cannot be used in combination with {@code price_type}.
+       * metered} prices. Cannot be used in combination with {@code price_type}. Limit 20 prices.
        */
       @SerializedName("prices")
       List<CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.Price> prices;

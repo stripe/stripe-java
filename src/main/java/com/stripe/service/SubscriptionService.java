@@ -40,7 +40,7 @@ public final class SubscriptionService extends ApiService {
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
-   * set to true.
+   * set to false.
    *
    * <p>By default, upon subscription cancellation, Stripe stops automatic collection of all
    * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
@@ -62,7 +62,7 @@ public final class SubscriptionService extends ApiService {
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
-   * set to true.
+   * set to false.
    *
    * <p>By default, upon subscription cancellation, Stripe stops automatic collection of all
    * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
@@ -84,7 +84,7 @@ public final class SubscriptionService extends ApiService {
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
-   * set to true.
+   * set to false.
    *
    * <p>By default, upon subscription cancellation, Stripe stops automatic collection of all
    * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
@@ -105,7 +105,7 @@ public final class SubscriptionService extends ApiService {
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
-   * set to true.
+   * set to false.
    *
    * <p>By default, upon subscription cancellation, Stripe stops automatic collection of all
    * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
