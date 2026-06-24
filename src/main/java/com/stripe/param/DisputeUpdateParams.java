@@ -1086,6 +1086,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Evidence provided for Mastercard compliance evidence submission. */
+      @SerializedName("mastercard_compliance")
+      MastercardCompliance mastercardCompliance;
+
       /** Evidence provided for Visa Compelling Evidence 3.0 evidence submission. */
       @SerializedName("visa_compelling_evidence_3")
       VisaCompellingEvidence3 visaCompellingEvidence3;
@@ -1096,9 +1100,11 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
       private EnhancedEvidence(
           Map<String, Object> extraParams,
+          MastercardCompliance mastercardCompliance,
           VisaCompellingEvidence3 visaCompellingEvidence3,
           VisaCompliance visaCompliance) {
         this.extraParams = extraParams;
+        this.mastercardCompliance = mastercardCompliance;
         this.visaCompellingEvidence3 = visaCompellingEvidence3;
         this.visaCompliance = visaCompliance;
       }
@@ -1110,6 +1116,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private MastercardCompliance mastercardCompliance;
+
         private VisaCompellingEvidence3 visaCompellingEvidence3;
 
         private VisaCompliance visaCompliance;
@@ -1117,7 +1125,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public DisputeUpdateParams.Evidence.EnhancedEvidence build() {
           return new DisputeUpdateParams.Evidence.EnhancedEvidence(
-              this.extraParams, this.visaCompellingEvidence3, this.visaCompliance);
+              this.extraParams,
+              this.mastercardCompliance,
+              this.visaCompellingEvidence3,
+              this.visaCompliance);
         }
 
         /**
@@ -1148,6 +1159,14 @@ public class DisputeUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Evidence provided for Mastercard compliance evidence submission. */
+        public Builder setMastercardCompliance(
+            DisputeUpdateParams.Evidence.EnhancedEvidence.MastercardCompliance
+                mastercardCompliance) {
+          this.mastercardCompliance = mastercardCompliance;
+          return this;
+        }
+
         /** Evidence provided for Visa Compelling Evidence 3.0 evidence submission. */
         public Builder setVisaCompellingEvidence3(
             DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
@@ -1161,6 +1180,87 @@ public class DisputeUpdateParams extends ApiRequestParams {
             DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompliance visaCompliance) {
           this.visaCompliance = visaCompliance;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MastercardCompliance {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * A field acknowledging the fee incurred when countering a Mastercard compliance dispute.
+         * If this field is set to true, evidence can be submitted for the compliance dispute.
+         */
+        @SerializedName("fee_acknowledged")
+        Boolean feeAcknowledged;
+
+        private MastercardCompliance(Map<String, Object> extraParams, Boolean feeAcknowledged) {
+          this.extraParams = extraParams;
+          this.feeAcknowledged = feeAcknowledged;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Boolean feeAcknowledged;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public DisputeUpdateParams.Evidence.EnhancedEvidence.MastercardCompliance build() {
+            return new DisputeUpdateParams.Evidence.EnhancedEvidence.MastercardCompliance(
+                this.extraParams, this.feeAcknowledged);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * DisputeUpdateParams.Evidence.EnhancedEvidence.MastercardCompliance#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * DisputeUpdateParams.Evidence.EnhancedEvidence.MastercardCompliance#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * A field acknowledging the fee incurred when countering a Mastercard compliance dispute.
+           * If this field is set to true, evidence can be submitted for the compliance dispute.
+           */
+          public Builder setFeeAcknowledged(Boolean feeAcknowledged) {
+            this.feeAcknowledged = feeAcknowledged;
+            return this;
+          }
         }
       }
 

@@ -119,6 +119,9 @@ public class Account extends ApiResource implements HasId {
   @SerializedName("status")
   String status;
 
+  @SerializedName("status_details")
+  StatusDetails statusDetails;
+
   /**
    * If {@code category} is {@code cash}, one of:
    *
@@ -767,6 +770,47 @@ public class Account extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about StatusDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusDetails extends StripeObject {
+    @SerializedName("active")
+    Active active;
+
+    /**
+     * For more details about Active, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Active extends StripeObject {
+      /**
+       * The action (if any) to proactively relink the Account.
+       *
+       * <p>One of {@code none}, or {@code relink_required}.
+       */
+      @SerializedName("action")
+      String action;
+
+      /**
+       * The underlying cause of the Account becoming inactive.
+       *
+       * <p>One of {@code access_expired}, {@code institution_requirement}, or {@code unspecified}.
+       */
+      @SerializedName("cause")
+      String cause;
+
+      /** When the Account is expected to become inactive, if applicable. */
+      @SerializedName("expected_deactivation_date")
+      Long expectedDeactivationDate;
+    }
+  }
+
+  /**
    * For more details about TransactionRefresh, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -810,6 +854,7 @@ public class Account extends ApiResource implements HasId {
     trySetResponseGetter(balanceRefresh, responseGetter);
     trySetResponseGetter(ownership, responseGetter);
     trySetResponseGetter(ownershipRefresh, responseGetter);
+    trySetResponseGetter(statusDetails, responseGetter);
     trySetResponseGetter(transactionRefresh, responseGetter);
   }
 }

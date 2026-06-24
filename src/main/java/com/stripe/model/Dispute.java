@@ -778,11 +778,30 @@ public class Dispute extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class EnhancedEvidence extends StripeObject {
+      @SerializedName("mastercard_compliance")
+      MastercardCompliance mastercardCompliance;
+
       @SerializedName("visa_compelling_evidence_3")
       VisaCompellingEvidence3 visaCompellingEvidence3;
 
       @SerializedName("visa_compliance")
       VisaCompliance visaCompliance;
+
+      /**
+       * For more details about MastercardCompliance, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MastercardCompliance extends StripeObject {
+        /**
+         * A field acknowledging the fee incurred when countering a Mastercard compliance dispute.
+         * If this field is set to true, evidence can be submitted for the compliance dispute.
+         */
+        @SerializedName("fee_acknowledged")
+        Boolean feeAcknowledged;
+      }
 
       /**
        * For more details about VisaCompellingEvidence3, please refer to the <a
@@ -1058,11 +1077,31 @@ public class Dispute extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class EnhancedEligibility extends StripeObject {
+      @SerializedName("mastercard_compliance")
+      MastercardCompliance mastercardCompliance;
+
       @SerializedName("visa_compelling_evidence_3")
       VisaCompellingEvidence3 visaCompellingEvidence3;
 
       @SerializedName("visa_compliance")
       VisaCompliance visaCompliance;
+
+      /**
+       * For more details about MastercardCompliance, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MastercardCompliance extends StripeObject {
+        /**
+         * Mastercard compliance eligibility status.
+         *
+         * <p>One of {@code fee_acknowledged}, or {@code requires_fee_acknowledgement}.
+         */
+        @SerializedName("status")
+        String status;
+      }
 
       /**
        * For more details about VisaCompellingEvidence3, please refer to the <a

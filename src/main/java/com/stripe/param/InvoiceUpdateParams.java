@@ -4369,6 +4369,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("revolut_pay")
       REVOLUT_PAY("revolut_pay"),
 
+      @SerializedName("satispay")
+      SATISPAY("satispay"),
+
       @SerializedName("sepa_credit_transfer")
       SEPA_CREDIT_TRANSFER("sepa_credit_transfer"),
 

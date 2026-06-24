@@ -3189,6 +3189,14 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName("account_tax_ids")
     Object accountTaxIds;
 
+    /** A list of up to 4 custom fields to be displayed on the invoice. */
+    @SerializedName("custom_fields")
+    Object customFields;
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    @SerializedName("description")
+    String description;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -3198,6 +3206,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Footer to be displayed on the invoice. */
+    @SerializedName("footer")
+    String footer;
+
     /**
      * The connected account that issues the invoice. The invoice is presented with the branding and
      * support information of the specified account.
@@ -3205,9 +3217,18 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName("issuer")
     Issuer issuer;
 
-    private InvoiceSettings(Object accountTaxIds, Map<String, Object> extraParams, Issuer issuer) {
+    private InvoiceSettings(
+        Object accountTaxIds,
+        Object customFields,
+        String description,
+        Map<String, Object> extraParams,
+        String footer,
+        Issuer issuer) {
       this.accountTaxIds = accountTaxIds;
+      this.customFields = customFields;
+      this.description = description;
       this.extraParams = extraParams;
+      this.footer = footer;
       this.issuer = issuer;
     }
 
@@ -3218,14 +3239,25 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     public static class Builder {
       private Object accountTaxIds;
 
+      private Object customFields;
+
+      private String description;
+
       private Map<String, Object> extraParams;
+
+      private String footer;
 
       private Issuer issuer;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionCreateParams.InvoiceSettings build() {
         return new SubscriptionCreateParams.InvoiceSettings(
-            this.accountTaxIds, this.extraParams, this.issuer);
+            this.accountTaxIds,
+            this.customFields,
+            this.description,
+            this.extraParams,
+            this.footer,
+            this.issuer);
       }
 
       /**
@@ -3275,6 +3307,56 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       /**
+       * Add an element to `customFields` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * SubscriptionCreateParams.InvoiceSettings#customFields} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addCustomField(SubscriptionCreateParams.InvoiceSettings.CustomField element) {
+        if (this.customFields == null || this.customFields instanceof EmptyParam) {
+          this.customFields = new ArrayList<SubscriptionCreateParams.InvoiceSettings.CustomField>();
+        }
+        ((List<SubscriptionCreateParams.InvoiceSettings.CustomField>) this.customFields)
+            .add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `customFields` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * SubscriptionCreateParams.InvoiceSettings#customFields} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllCustomField(
+          List<SubscriptionCreateParams.InvoiceSettings.CustomField> elements) {
+        if (this.customFields == null || this.customFields instanceof EmptyParam) {
+          this.customFields = new ArrayList<SubscriptionCreateParams.InvoiceSettings.CustomField>();
+        }
+        ((List<SubscriptionCreateParams.InvoiceSettings.CustomField>) this.customFields)
+            .addAll(elements);
+        return this;
+      }
+
+      /** A list of up to 4 custom fields to be displayed on the invoice. */
+      public Builder setCustomFields(EmptyParam customFields) {
+        this.customFields = customFields;
+        return this;
+      }
+
+      /** A list of up to 4 custom fields to be displayed on the invoice. */
+      public Builder setCustomFields(
+          List<SubscriptionCreateParams.InvoiceSettings.CustomField> customFields) {
+        this.customFields = customFields;
+        return this;
+      }
+
+      /** An arbitrary string attached to the object. Often useful for displaying to users. */
+      public Builder setDescription(String description) {
+        this.description = description;
+        return this;
+      }
+
+      /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
        * SubscriptionCreateParams.InvoiceSettings#extraParams} for the field documentation.
@@ -3301,6 +3383,12 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Footer to be displayed on the invoice. */
+      public Builder setFooter(String footer) {
+        this.footer = footer;
+        return this;
+      }
+
       /**
        * The connected account that issues the invoice. The invoice is presented with the branding
        * and support information of the specified account.
@@ -3308,6 +3396,100 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       public Builder setIssuer(SubscriptionCreateParams.InvoiceSettings.Issuer issuer) {
         this.issuer = issuer;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomField {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> The name of the custom field. This may be up to 40 characters.
+       */
+      @SerializedName("name")
+      String name;
+
+      /**
+       * <strong>Required.</strong> The value of the custom field. This may be up to 140 characters.
+       */
+      @SerializedName("value")
+      String value;
+
+      private CustomField(Map<String, Object> extraParams, String name, String value) {
+        this.extraParams = extraParams;
+        this.name = name;
+        this.value = value;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String name;
+
+        private String value;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionCreateParams.InvoiceSettings.CustomField build() {
+          return new SubscriptionCreateParams.InvoiceSettings.CustomField(
+              this.extraParams, this.name, this.value);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.InvoiceSettings.CustomField#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.InvoiceSettings.CustomField#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The name of the custom field. This may be up to 40 characters.
+         */
+        public Builder setName(String name) {
+          this.name = name;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The value of the custom field. This may be up to 140
+         * characters.
+         */
+        public Builder setValue(String value) {
+          this.value = value;
+          return this;
+        }
       }
     }
 
@@ -7202,6 +7384,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       @SerializedName("revolut_pay")
       REVOLUT_PAY("revolut_pay"),
+
+      @SerializedName("satispay")
+      SATISPAY("satispay"),
 
       @SerializedName("sepa_credit_transfer")
       SEPA_CREDIT_TRANSFER("sepa_credit_transfer"),

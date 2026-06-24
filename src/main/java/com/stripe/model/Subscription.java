@@ -609,7 +609,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
-   * set to true.
+   * set to false.
    *
    * <p>By default, upon subscription cancellation, Stripe stops automatic collection of all
    * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
@@ -631,7 +631,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
-   * set to true.
+   * set to false.
    *
    * <p>By default, upon subscription cancellation, Stripe stops automatic collection of all
    * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
@@ -653,7 +653,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
-   * set to true.
+   * set to false.
    *
    * <p>By default, upon subscription cancellation, Stripe stops automatic collection of all
    * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
@@ -679,7 +679,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
-   * set to true.
+   * set to false.
    *
    * <p>By default, upon subscription cancellation, Stripe stops automatic collection of all
    * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
@@ -701,7 +701,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
-   * set to true.
+   * set to false.
    *
    * <p>By default, upon subscription cancellation, Stripe stops automatic collection of all
    * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
@@ -1665,6 +1665,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @SerializedName("account_tax_ids")
     List<ExpandableField<TaxId>> accountTaxIds;
 
+    /** A list of up to 4 custom fields to be displayed on the invoice. */
+    @SerializedName("custom_fields")
+    List<Subscription.InvoiceSettings.CustomField> customFields;
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    @SerializedName("description")
+    String description;
+
+    /** Footer to be displayed on the invoice. */
+    @SerializedName("footer")
+    String footer;
+
     @SerializedName("issuer")
     Issuer issuer;
 
@@ -1710,6 +1722,23 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
                   .map(x -> new ExpandableField<TaxId>(x.getId(), x))
                   .collect(Collectors.toList())
               : null;
+    }
+
+    /**
+     * For more details about CustomField, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomField extends StripeObject {
+      /** The name of the custom field. */
+      @SerializedName("name")
+      String name;
+
+      /** The value of the custom field. */
+      @SerializedName("value")
+      String value;
     }
 
     /**

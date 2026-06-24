@@ -171,6 +171,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   @SerializedName("payment_method_collection")
   PaymentMethodCollection paymentMethodCollection;
 
+  /** Payment-method-specific configuration. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
 
@@ -714,6 +715,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Payment-method-specific configuration. */
     public Builder setPaymentMethodOptions(
         PaymentLinkCreateParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;

@@ -466,7 +466,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
     Long quantity;
 
     /**
-     * A list of up to 10 tax amounts for the credit note line item. Not valid when {@code
+     * A list of up to 20 tax amounts for the credit note line item. Not valid when {@code
      * tax_rates} is used or if invoice is set up with {@code automatic_tax[enabled]=true}.
      */
     @SerializedName("tax_amounts")
@@ -685,7 +685,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A list of up to 10 tax amounts for the credit note line item. Not valid when {@code
+       * A list of up to 20 tax amounts for the credit note line item. Not valid when {@code
        * tax_rates} is used or if invoice is set up with {@code automatic_tax[enabled]=true}.
        */
       public Builder setTaxAmounts(EmptyParam taxAmounts) {
@@ -694,7 +694,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A list of up to 10 tax amounts for the credit note line item. Not valid when {@code
+       * A list of up to 20 tax amounts for the credit note line item. Not valid when {@code
        * tax_rates} is used or if invoice is set up with {@code automatic_tax[enabled]=true}.
        */
       public Builder setTaxAmounts(List<CreditNoteCreateParams.Line.TaxAmount> taxAmounts) {

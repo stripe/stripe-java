@@ -8213,7 +8213,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Subscription item to update. */
+      /**
+       * Subscription item to update. If you omit {@code id}, the API adds a new subscription item
+       * rather than updating the existing one. See <a
+       * href="https://docs.stripe.com/billing/subscriptions/change-price#changing">Changing a
+       * subscription's price</a>.
+       */
       @SerializedName("id")
       String id;
 
@@ -8445,7 +8450,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           return this;
         }
 
-        /** Subscription item to update. */
+        /**
+         * Subscription item to update. If you omit {@code id}, the API adds a new subscription item
+         * rather than updating the existing one. See <a
+         * href="https://docs.stripe.com/billing/subscriptions/change-price#changing">Changing a
+         * subscription's price</a>.
+         */
         public Builder setId(String id) {
           this.id = id;
           return this;

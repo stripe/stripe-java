@@ -682,7 +682,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Bizum extends StripeObject {}
+    public static class Bizum extends StripeObject {
+      /** A unique identifier for the buyer as determined by the local payment processor. */
+      @SerializedName("buyer_id")
+      String buyerId;
+    }
 
     /**
      * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
@@ -691,7 +695,11 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Blik extends StripeObject {}
+    public static class Blik extends StripeObject {
+      /** A unique and immutable identifier assigned by BLIK to every buyer. */
+      @SerializedName("buyer_id")
+      String buyerId;
+    }
 
     /**
      * For more details about Boleto, please refer to the <a href="https://docs.stripe.com/api">API
@@ -2148,7 +2156,14 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Pix extends StripeObject {}
+    public static class Pix extends StripeObject {
+      /**
+       * Uniquely identifies this particular Pix account. You can use this attribute to check
+       * whether two Pix accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+    }
 
     /**
      * For more details about Promptpay, please refer to the <a

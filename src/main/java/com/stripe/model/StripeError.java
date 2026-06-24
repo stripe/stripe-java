@@ -31,23 +31,27 @@ public class StripeError extends StripeObject {
    * {@code account_invalid}, {@code account_number_invalid}, {@code
    * account_token_required_for_v2_account}, {@code acss_debit_session_incomplete}, {@code
    * action_blocked}, {@code alipay_upgrade_required}, {@code amount_too_large}, {@code
-   * amount_too_small}, {@code api_key_expired}, {@code application_fees_not_allowed}, {@code
-   * approval_required}, {@code authentication_required}, {@code balance_insufficient}, {@code
-   * balance_invalid_parameter}, {@code bank_account_bad_routing_numbers}, {@code
-   * bank_account_declined}, {@code bank_account_exists}, {@code bank_account_restricted}, {@code
-   * bank_account_unusable}, {@code bank_account_unverified}, {@code
-   * bank_account_verification_failed}, {@code billing_invalid_mandate}, {@code
-   * bitcoin_upgrade_required}, {@code capture_charge_authorization_expired}, {@code
-   * capture_unauthorized_payment}, {@code card_decline_rate_limit_exceeded}, {@code card_declined},
-   * {@code cardholder_phone_number_required}, {@code charge_already_captured}, {@code
+   * amount_too_small}, {@code anomalous_money_movement_request}, {@code api_key_expired}, {@code
+   * application_fees_not_allowed}, {@code approval_required}, {@code authentication_required},
+   * {@code balance_insufficient}, {@code balance_invalid_parameter}, {@code
+   * bank_account_bad_routing_numbers}, {@code bank_account_declined}, {@code bank_account_exists},
+   * {@code bank_account_restricted}, {@code bank_account_unusable}, {@code
+   * bank_account_unverified}, {@code bank_account_verification_failed}, {@code
+   * billing_invalid_mandate}, {@code bitcoin_upgrade_required}, {@code
+   * capture_charge_authorization_expired}, {@code capture_unauthorized_payment}, {@code
+   * card_decline_rate_limit_exceeded}, {@code card_declined}, {@code
+   * cardholder_phone_number_required}, {@code charge_already_captured}, {@code
    * charge_already_refunded}, {@code charge_disputed}, {@code charge_exceeds_source_limit}, {@code
    * charge_exceeds_transaction_limit}, {@code charge_expired_for_capture}, {@code
    * charge_invalid_parameter}, {@code charge_not_refundable}, {@code clearing_code_unsupported},
    * {@code country_code_invalid}, {@code country_unsupported}, {@code coupon_expired}, {@code
    * customer_max_payment_methods}, {@code customer_max_subscriptions}, {@code
    * customer_session_expired}, {@code customer_tax_location_invalid}, {@code debit_not_authorized},
-   * {@code email_invalid}, {@code expired_card}, {@code financial_connections_account_inactive},
-   * {@code financial_connections_account_pending_account_numbers}, {@code
+   * {@code email_invalid}, {@code expired_card}, {@code failed_tax_calculation}, {@code
+   * financial_account_balance_does_not_support_currency}, {@code
+   * financial_account_capability_not_enabled}, {@code financial_account_capability_restricted},
+   * {@code financial_connections_account_inactive}, {@code
+   * financial_connections_account_pending_account_numbers}, {@code
    * financial_connections_account_unavailable_account_numbers}, {@code
    * financial_connections_no_successful_transaction_refresh}, {@code forwarding_api_inactive},
    * {@code forwarding_api_invalid_parameter}, {@code forwarding_api_retryable_upstream_error},

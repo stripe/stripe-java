@@ -7,6 +7,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -91,6 +92,10 @@ public class Hold extends StripeObject implements HasId {
   @SerializedName("reason")
   String reason;
 
+  /** List of ReserveReleases and the amounts released from this ReserveHold. */
+  @SerializedName("release_details")
+  List<Hold.ReleaseDetail> releaseDetails;
+
   @SerializedName("release_schedule")
   ReleaseSchedule releaseSchedule;
 
@@ -147,6 +152,27 @@ public class Hold extends StripeObject implements HasId {
 
   public void setSourceChargeObject(Charge expandableObject) {
     this.sourceCharge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * For more details about ReleaseDetail, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReleaseDetail extends StripeObject {
+    /**
+     * The amount released by the ReserveRelease from this ReserveHold. A positive integer
+     * representing how much is released in the <a
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
+     */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The ReserveRelease which released funds from this ReserveHold (e.g., resrel_123). */
+    @SerializedName("reserve_release")
+    String reserveRelease;
   }
 
   /**

@@ -262,8 +262,6 @@ public class SessionCreateParams extends ApiRequestParams {
    *
    * <p>If a <a href="https://docs.stripe.com/api/customers">Customer</a> is created or provided,
    * the names can be saved to the Customer object as well.
-   *
-   * <p>You can't set this parameter if {@code ui_mode} is {@code custom}.
    */
   @SerializedName("name_collection")
   NameCollection nameCollection;
@@ -1139,8 +1137,6 @@ public class SessionCreateParams extends ApiRequestParams {
      *
      * <p>If a <a href="https://docs.stripe.com/api/customers">Customer</a> is created or provided,
      * the names can be saved to the Customer object as well.
-     *
-     * <p>You can't set this parameter if {@code ui_mode} is {@code custom}.
      */
     public Builder setNameCollection(SessionCreateParams.NameCollection nameCollection) {
       this.nameCollection = nameCollection;
@@ -7475,6 +7471,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("sofort")
     Sofort sofort;
 
+    /** contains details about the Sunbit payment method options. */
+    @SerializedName("sunbit")
+    Sunbit sunbit;
+
     /** contains details about the Swish payment method options. */
     @SerializedName("swish")
     Swish swish;
@@ -7540,6 +7540,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Scalapay scalapay,
         SepaDebit sepaDebit,
         Sofort sofort,
+        Sunbit sunbit,
         Swish swish,
         Twint twint,
         Upi upi,
@@ -7589,6 +7590,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.scalapay = scalapay;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
+      this.sunbit = sunbit;
       this.swish = swish;
       this.twint = twint;
       this.upi = upi;
@@ -7689,6 +7691,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Sofort sofort;
 
+      private Sunbit sunbit;
+
       private Swish swish;
 
       private Twint twint;
@@ -7746,6 +7750,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.scalapay,
             this.sepaDebit,
             this.sofort,
+            this.sunbit,
             this.swish,
             this.twint,
             this.upi,
@@ -8044,6 +8049,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Sofort payment method options. */
       public Builder setSofort(SessionCreateParams.PaymentMethodOptions.Sofort sofort) {
         this.sofort = sofort;
+        return this;
+      }
+
+      /** contains details about the Sunbit payment method options. */
+      public Builder setSunbit(SessionCreateParams.PaymentMethodOptions.Sunbit sunbit) {
+        this.sunbit = sunbit;
         return this;
       }
 
@@ -16316,6 +16327,157 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Sunbit {
+      /** Controls when the funds will be captured from the customer's account. */
+      @SerializedName("capture_method")
+      CaptureMethod captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Sunbit(
+          CaptureMethod captureMethod,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private CaptureMethod captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Sunbit build() {
+          return new SessionCreateParams.PaymentMethodOptions.Sunbit(
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
+        }
+
+        /** Controls when the funds will be captured from the customer's account. */
+        public Builder setCaptureMethod(
+            SessionCreateParams.PaymentMethodOptions.Sunbit.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Sunbit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Sunbit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.Sunbit.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Swish {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -19662,6 +19824,13 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("billing_cycle_anchor")
     Long billingCycleAnchor;
 
+    /**
+     * Configures when the subscription schedule's billing cycle anchors to a specific day of the
+     * week or month.
+     */
+    @SerializedName("billing_cycle_anchor_config")
+    BillingCycleAnchorConfig billingCycleAnchorConfig;
+
     /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
     @SerializedName("billing_mode")
     BillingMode billingMode;
@@ -19751,6 +19920,7 @@ public class SessionCreateParams extends ApiRequestParams {
     private SubscriptionData(
         BigDecimal applicationFeePercent,
         Long billingCycleAnchor,
+        BillingCycleAnchorConfig billingCycleAnchorConfig,
         BillingMode billingMode,
         List<String> defaultTaxRates,
         String description,
@@ -19766,6 +19936,7 @@ public class SessionCreateParams extends ApiRequestParams {
         TrialSettings trialSettings) {
       this.applicationFeePercent = applicationFeePercent;
       this.billingCycleAnchor = billingCycleAnchor;
+      this.billingCycleAnchorConfig = billingCycleAnchorConfig;
       this.billingMode = billingMode;
       this.defaultTaxRates = defaultTaxRates;
       this.description = description;
@@ -19789,6 +19960,8 @@ public class SessionCreateParams extends ApiRequestParams {
       private BigDecimal applicationFeePercent;
 
       private Long billingCycleAnchor;
+
+      private BillingCycleAnchorConfig billingCycleAnchorConfig;
 
       private BillingMode billingMode;
 
@@ -19821,6 +19994,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return new SessionCreateParams.SubscriptionData(
             this.applicationFeePercent,
             this.billingCycleAnchor,
+            this.billingCycleAnchorConfig,
             this.billingMode,
             this.defaultTaxRates,
             this.description,
@@ -19855,6 +20029,16 @@ public class SessionCreateParams extends ApiRequestParams {
        */
       public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
+        return this;
+      }
+
+      /**
+       * Configures when the subscription schedule's billing cycle anchors to a specific day of the
+       * week or month.
+       */
+      public Builder setBillingCycleAnchorConfig(
+          SessionCreateParams.SubscriptionData.BillingCycleAnchorConfig billingCycleAnchorConfig) {
+        this.billingCycleAnchorConfig = billingCycleAnchorConfig;
         return this;
       }
 
@@ -20020,6 +20204,143 @@ public class SessionCreateParams extends ApiRequestParams {
           SessionCreateParams.SubscriptionData.TrialSettings trialSettings) {
         this.trialSettings = trialSettings;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingCycleAnchorConfig {
+      /**
+       * <strong>Required.</strong> The day of the month the anchor should be. Ranges from 1 to 31.
+       */
+      @SerializedName("day_of_month")
+      Long dayOfMonth;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+      @SerializedName("hour")
+      Long hour;
+
+      /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+      @SerializedName("minute")
+      Long minute;
+
+      /** The month to start full cycle periods. Ranges from 1 to 12. */
+      @SerializedName("month")
+      Long month;
+
+      /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+      @SerializedName("second")
+      Long second;
+
+      private BillingCycleAnchorConfig(
+          Long dayOfMonth,
+          Map<String, Object> extraParams,
+          Long hour,
+          Long minute,
+          Long month,
+          Long second) {
+        this.dayOfMonth = dayOfMonth;
+        this.extraParams = extraParams;
+        this.hour = hour;
+        this.minute = minute;
+        this.month = month;
+        this.second = second;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long dayOfMonth;
+
+        private Map<String, Object> extraParams;
+
+        private Long hour;
+
+        private Long minute;
+
+        private Long month;
+
+        private Long second;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.SubscriptionData.BillingCycleAnchorConfig build() {
+          return new SessionCreateParams.SubscriptionData.BillingCycleAnchorConfig(
+              this.dayOfMonth, this.extraParams, this.hour, this.minute, this.month, this.second);
+        }
+
+        /**
+         * <strong>Required.</strong> The day of the month the anchor should be. Ranges from 1 to
+         * 31.
+         */
+        public Builder setDayOfMonth(Long dayOfMonth) {
+          this.dayOfMonth = dayOfMonth;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SessionCreateParams.SubscriptionData.BillingCycleAnchorConfig#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SessionCreateParams.SubscriptionData.BillingCycleAnchorConfig#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+        public Builder setHour(Long hour) {
+          this.hour = hour;
+          return this;
+        }
+
+        /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+        public Builder setMinute(Long minute) {
+          this.minute = minute;
+          return this;
+        }
+
+        /** The month to start full cycle periods. Ranges from 1 to 12. */
+        public Builder setMonth(Long month) {
+          this.month = month;
+          return this;
+        }
+
+        /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+        public Builder setSecond(Long second) {
+          this.second = second;
+          return this;
+        }
       }
     }
 

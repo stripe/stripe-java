@@ -584,8 +584,8 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     Sofort sofort;
 
     /**
-     * If this is a Sunbit PaymentMethod, this hash contains details about the Sunbit payment
-     * method.
+     * If this is a {@code sunbit} PaymentMethod, this hash contains details about the Sunbit
+     * payment method.
      */
     @SerializedName("sunbit")
     Sunbit sunbit;
@@ -1481,8 +1481,8 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a Sunbit PaymentMethod, this hash contains details about the Sunbit payment
-       * method.
+       * If this is a {@code sunbit} PaymentMethod, this hash contains details about the Sunbit
+       * payment method.
        */
       public Builder setSunbit(ConfirmationTokenCreateParams.PaymentMethodData.Sunbit sunbit) {
         this.sunbit = sunbit;

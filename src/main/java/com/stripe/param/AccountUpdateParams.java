@@ -9748,7 +9748,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("company_license")
     CompanyLicense companyLicense;
 
-    /** One or more documents showing the company's Memorandum of Association. */
+    /**
+     * One or more documents showing the company's governing document (for example, a memorandum of
+     * association, constitution, or articles of association).
+     */
     @SerializedName("company_memorandum_of_association")
     CompanyMemorandumOfAssociation companyMemorandumOfAssociation;
 
@@ -9878,7 +9881,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** One or more documents showing the company's Memorandum of Association. */
+      /**
+       * One or more documents showing the company's governing document (for example, a memorandum
+       * of association, constitution, or articles of association).
+       */
       public Builder setCompanyMemorandumOfAssociation(
           AccountUpdateParams.Documents.CompanyMemorandumOfAssociation
               companyMemorandumOfAssociation) {

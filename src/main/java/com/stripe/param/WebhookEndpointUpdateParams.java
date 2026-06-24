@@ -302,8 +302,26 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("billing.alert.triggered")
     BILLING__ALERT__TRIGGERED("billing.alert.triggered"),
 
+    @SerializedName("billing.credit_balance_transaction.created")
+    BILLING__CREDIT_BALANCE_TRANSACTION__CREATED("billing.credit_balance_transaction.created"),
+
     @SerializedName("billing.credit_grant.created")
     BILLING__CREDIT_GRANT__CREATED("billing.credit_grant.created"),
+
+    @SerializedName("billing.credit_grant.updated")
+    BILLING__CREDIT_GRANT__UPDATED("billing.credit_grant.updated"),
+
+    @SerializedName("billing.meter.created")
+    BILLING__METER__CREATED("billing.meter.created"),
+
+    @SerializedName("billing.meter.deactivated")
+    BILLING__METER__DEACTIVATED("billing.meter.deactivated"),
+
+    @SerializedName("billing.meter.reactivated")
+    BILLING__METER__REACTIVATED("billing.meter.reactivated"),
+
+    @SerializedName("billing.meter.updated")
+    BILLING__METER__UPDATED("billing.meter.updated"),
 
     @SerializedName("billing_portal.configuration.created")
     BILLING_PORTAL__CONFIGURATION__CREATED("billing_portal.configuration.created"),
@@ -1039,25 +1057,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     TREASURY__RECEIVED_CREDIT__SUCCEEDED("treasury.received_credit.succeeded"),
 
     @SerializedName("treasury.received_debit.created")
-    TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created"),
-
-    @SerializedName("billing.credit_balance_transaction.created")
-    BILLING__CREDIT_BALANCE_TRANSACTION__CREATED("billing.credit_balance_transaction.created"),
-
-    @SerializedName("billing.credit_grant.updated")
-    BILLING__CREDIT_GRANT__UPDATED("billing.credit_grant.updated"),
-
-    @SerializedName("billing.meter.created")
-    BILLING__METER__CREATED("billing.meter.created"),
-
-    @SerializedName("billing.meter.deactivated")
-    BILLING__METER__DEACTIVATED("billing.meter.deactivated"),
-
-    @SerializedName("billing.meter.reactivated")
-    BILLING__METER__REACTIVATED("billing.meter.reactivated"),
-
-    @SerializedName("billing.meter.updated")
-    BILLING__METER__UPDATED("billing.meter.updated");
+    TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
