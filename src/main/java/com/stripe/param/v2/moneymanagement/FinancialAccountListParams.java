@@ -31,11 +31,11 @@ public class FinancialAccountListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * The status of the FinancialAccount to filter by. By default, closed FinancialAccounts are not
+   * Filter for FinancialAccount {@code status}. By default, closed FinancialAccounts are not
    * returned.
    */
-  @SerializedName("status")
-  Status status;
+  @SerializedName("statuses")
+  List<FinancialAccountListParams.Status> statuses;
 
   /**
    * Filter for FinancialAccount {@code type}. By default, FinancialAccounts of any {@code type} are
@@ -48,12 +48,12 @@ public class FinancialAccountListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       List<FinancialAccountListParams.Include> include,
       Long limit,
-      Status status,
+      List<FinancialAccountListParams.Status> statuses,
       List<FinancialAccountListParams.Type> types) {
     this.extraParams = extraParams;
     this.include = include;
     this.limit = limit;
-    this.status = status;
+    this.statuses = statuses;
     this.types = types;
   }
 
@@ -68,14 +68,14 @@ public class FinancialAccountListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private Status status;
+    private List<FinancialAccountListParams.Status> statuses;
 
     private List<FinancialAccountListParams.Type> types;
 
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAccountListParams build() {
       return new FinancialAccountListParams(
-          this.extraParams, this.include, this.limit, this.status, this.types);
+          this.extraParams, this.include, this.limit, this.statuses, this.types);
     }
 
     /**
@@ -137,11 +137,28 @@ public class FinancialAccountListParams extends ApiRequestParams {
     }
 
     /**
-     * The status of the FinancialAccount to filter by. By default, closed FinancialAccounts are not
-     * returned.
+     * Add an element to `statuses` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * FinancialAccountListParams#statuses} for the field documentation.
      */
-    public Builder setStatus(FinancialAccountListParams.Status status) {
-      this.status = status;
+    public Builder addStatus(FinancialAccountListParams.Status element) {
+      if (this.statuses == null) {
+        this.statuses = new ArrayList<>();
+      }
+      this.statuses.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `statuses` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * FinancialAccountListParams#statuses} for the field documentation.
+     */
+    public Builder addAllStatus(List<FinancialAccountListParams.Status> elements) {
+      if (this.statuses == null) {
+        this.statuses = new ArrayList<>();
+      }
+      this.statuses.addAll(elements);
       return this;
     }
 

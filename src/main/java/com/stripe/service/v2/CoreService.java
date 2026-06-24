@@ -57,6 +57,10 @@ public final class CoreService extends ApiService {
     return new com.stripe.service.v2.core.FeeEntryService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.core.HealthService health() {
+    return new com.stripe.service.v2.core.HealthService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.core.VaultService vault() {
     return new com.stripe.service.v2.core.VaultService(this.getResponseGetter());
   }

@@ -24951,7 +24951,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.billing.Contract>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.billing.contract\",\"contract_line_details\":[{\"contract_line\":\"contract_line\",\"contract_line_value_details\":{\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"overrides\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"type\":\"service_action\"}],\"pricing\":{},\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"}}],\"contract_number\":\"contract_number\",\"contract_value_details\":{\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"customer\":\"customer\",\"id\":\"obj_123\",\"license_quantities\":[{\"license_pricing_id\":\"license_pricing_id\",\"license_pricing_type\":\"price\",\"pricing_line\":\"pricing_line\",\"quantity\":1285004149}],\"livemode\":true,\"pricing_lines\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"pricing\":{\"type\":\"price\"},\"pricing_line\":\"pricing_line\",\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"}}],\"pricing_overrides\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"pricing_override\":\"pricing_override\",\"priority\":1165461084,\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"type\":\"multiplier\"}],\"status\":\"draft\",\"status_details\":{}}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.billing.contract\",\"contract_number\":\"contract_number\",\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"draft\",\"status_details\":{}}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.ContractListParams params =
@@ -24977,238 +24977,13 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.Contract.class,
-        "{\"object\":\"v2.billing.contract\",\"contract_line_details\":[{\"contract_line\":\"contract_line\",\"contract_line_value_details\":{\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"overrides\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"type\":\"service_action\"}],\"pricing\":{},\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"}}],\"contract_number\":\"contract_number\",\"contract_value_details\":{\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"customer\":\"customer\",\"id\":\"obj_123\",\"license_quantities\":[{\"license_pricing_id\":\"license_pricing_id\",\"license_pricing_type\":\"price\",\"pricing_line\":\"pricing_line\",\"quantity\":1285004149}],\"livemode\":true,\"pricing_lines\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"pricing\":{\"type\":\"price\"},\"pricing_line\":\"pricing_line\",\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"}}],\"pricing_overrides\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"pricing_override\":\"pricing_override\",\"priority\":1165461084,\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"type\":\"multiplier\"}],\"status\":\"draft\",\"status_details\":{}}");
+        "{\"object\":\"v2.billing.contract\",\"contract_number\":\"contract_number\",\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"draft\",\"status_details\":{}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.ContractCreateParams params =
         com.stripe.param.v2.billing.ContractCreateParams.builder()
-            .addContractLine(
-                com.stripe.param.v2.billing.ContractCreateParams.ContractLine.builder()
-                    .setEndsAt(
-                        com.stripe.param.v2.billing.ContractCreateParams.ContractLine.EndsAt
-                            .builder()
-                            .setTimestamp(Instant.parse("1970-01-01T15:18:46.294Z"))
-                            .build())
-                    .putMetadata("key", "metadata")
-                    .addOverride(
-                        com.stripe.param.v2.billing.ContractCreateParams.ContractLine.Overrides
-                            .builder()
-                            .setEndsAt(
-                                com.stripe.param.v2.billing.ContractCreateParams.ContractLine
-                                    .Overrides.EndsAt.builder()
-                                    .setTimestamp(Instant.parse("1970-01-01T15:18:46.294Z"))
-                                    .build())
-                            .setServiceAction(
-                                com.stripe.param.v2.billing.ContractCreateParams.ContractLine
-                                    .Overrides.ServiceAction.builder()
-                                    .setAdd(
-                                        com.stripe.param.v2.billing.ContractCreateParams
-                                            .ContractLine.Overrides.ServiceAction.Add.builder()
-                                            .setCreditGrant(
-                                                com.stripe.param.v2.billing.ContractCreateParams
-                                                    .ContractLine.Overrides.ServiceAction.Add
-                                                    .CreditGrant.builder()
-                                                    .setAmount(
-                                                        com.stripe.param.v2.billing
-                                                            .ContractCreateParams.ContractLine
-                                                            .Overrides.ServiceAction.Add.CreditGrant
-                                                            .Amount.builder()
-                                                            .setMonetary(
-                                                                new com.stripe.v2.Amount(63, "USD"))
-                                                            .setType(
-                                                                com.stripe.param.v2.billing
-                                                                    .ContractCreateParams
-                                                                    .ContractLine.Overrides
-                                                                    .ServiceAction.Add.CreditGrant
-                                                                    .Amount.Type.MONETARY)
-                                                            .build())
-                                                    .setApplicabilityConfig(
-                                                        com.stripe.param.v2.billing
-                                                            .ContractCreateParams.ContractLine
-                                                            .Overrides.ServiceAction.Add.CreditGrant
-                                                            .ApplicabilityConfig.builder()
-                                                            .setScope(
-                                                                com.stripe.param.v2.billing
-                                                                    .ContractCreateParams
-                                                                    .ContractLine.Overrides
-                                                                    .ServiceAction.Add.CreditGrant
-                                                                    .ApplicabilityConfig.Scope
-                                                                    .builder()
-                                                                    .addBillableItem(
-                                                                        "billable_items")
-                                                                    .setPriceType(
-                                                                        com.stripe.param.v2.billing
-                                                                            .ContractCreateParams
-                                                                            .ContractLine.Overrides
-                                                                            .ServiceAction.Add
-                                                                            .CreditGrant
-                                                                            .ApplicabilityConfig
-                                                                            .Scope.PriceType
-                                                                            .METERED)
-                                                                    .build())
-                                                            .build())
-                                                    .setCategory(
-                                                        com.stripe.param.v2.billing
-                                                            .ContractCreateParams.ContractLine
-                                                            .Overrides.ServiceAction.Add.CreditGrant
-                                                            .Category.PAID)
-                                                    .setExpiryConfig(
-                                                        com.stripe.param.v2.billing
-                                                            .ContractCreateParams.ContractLine
-                                                            .Overrides.ServiceAction.Add.CreditGrant
-                                                            .ExpiryConfig.builder()
-                                                            .setType(
-                                                                com.stripe.param.v2.billing
-                                                                    .ContractCreateParams
-                                                                    .ContractLine.Overrides
-                                                                    .ServiceAction.Add.CreditGrant
-                                                                    .ExpiryConfig.Type
-                                                                    .END_OF_SERVICE_PERIOD)
-                                                            .build())
-                                                    .setName("name")
-                                                    .setPriority(1165461084L)
-                                                    .build())
-                                            .setServiceInterval(
-                                                com.stripe.param.v2.billing.ContractCreateParams
-                                                    .ContractLine.Overrides.ServiceAction.Add
-                                                    .ServiceInterval.MONTH)
-                                            .setServiceIntervalCount(1375336415L)
-                                            .setType(
-                                                com.stripe.param.v2.billing.ContractCreateParams
-                                                    .ContractLine.Overrides.ServiceAction.Add.Type
-                                                    .CREDIT_GRANT)
-                                            .build())
-                                    .setReplace(
-                                        com.stripe.param.v2.billing.ContractCreateParams
-                                            .ContractLine.Overrides.ServiceAction.Replace.builder()
-                                            .setCreditGrant(
-                                                com.stripe.param.v2.billing.ContractCreateParams
-                                                    .ContractLine.Overrides.ServiceAction.Replace
-                                                    .CreditGrant.builder()
-                                                    .setAmount(
-                                                        com.stripe.param.v2.billing
-                                                            .ContractCreateParams.ContractLine
-                                                            .Overrides.ServiceAction.Replace
-                                                            .CreditGrant.Amount.builder()
-                                                            .setMonetary(
-                                                                new com.stripe.v2.Amount(63, "USD"))
-                                                            .setType(
-                                                                com.stripe.param.v2.billing
-                                                                    .ContractCreateParams
-                                                                    .ContractLine.Overrides
-                                                                    .ServiceAction.Replace
-                                                                    .CreditGrant.Amount.Type
-                                                                    .MONETARY)
-                                                            .build())
-                                                    .setApplicabilityConfig(
-                                                        com.stripe.param.v2.billing
-                                                            .ContractCreateParams.ContractLine
-                                                            .Overrides.ServiceAction.Replace
-                                                            .CreditGrant.ApplicabilityConfig
-                                                            .builder()
-                                                            .setScope(
-                                                                com.stripe.param.v2.billing
-                                                                    .ContractCreateParams
-                                                                    .ContractLine.Overrides
-                                                                    .ServiceAction.Replace
-                                                                    .CreditGrant.ApplicabilityConfig
-                                                                    .Scope.builder()
-                                                                    .addBillableItem(
-                                                                        "billable_items")
-                                                                    .setPriceType(
-                                                                        com.stripe.param.v2.billing
-                                                                            .ContractCreateParams
-                                                                            .ContractLine.Overrides
-                                                                            .ServiceAction.Replace
-                                                                            .CreditGrant
-                                                                            .ApplicabilityConfig
-                                                                            .Scope.PriceType
-                                                                            .METERED)
-                                                                    .build())
-                                                            .build())
-                                                    .setCategory(
-                                                        com.stripe.param.v2.billing
-                                                            .ContractCreateParams.ContractLine
-                                                            .Overrides.ServiceAction.Replace
-                                                            .CreditGrant.Category.PAID)
-                                                    .setExpiryConfig(
-                                                        com.stripe.param.v2.billing
-                                                            .ContractCreateParams.ContractLine
-                                                            .Overrides.ServiceAction.Replace
-                                                            .CreditGrant.ExpiryConfig.builder()
-                                                            .setType(
-                                                                com.stripe.param.v2.billing
-                                                                    .ContractCreateParams
-                                                                    .ContractLine.Overrides
-                                                                    .ServiceAction.Replace
-                                                                    .CreditGrant.ExpiryConfig.Type
-                                                                    .END_OF_SERVICE_PERIOD)
-                                                            .build())
-                                                    .setName("name")
-                                                    .setPriority(1165461084L)
-                                                    .build())
-                                            .setId("obj_123")
-                                            .setLookupKey("lookup_key")
-                                            .setServiceInterval(
-                                                com.stripe.param.v2.billing.ContractCreateParams
-                                                    .ContractLine.Overrides.ServiceAction.Replace
-                                                    .ServiceInterval.MONTH)
-                                            .setServiceIntervalCount(1375336415L)
-                                            .setType(
-                                                com.stripe.param.v2.billing.ContractCreateParams
-                                                    .ContractLine.Overrides.ServiceAction.Replace
-                                                    .Type.CREDIT_GRANT)
-                                            .build())
-                                    .setType(
-                                        com.stripe.param.v2.billing.ContractCreateParams
-                                            .ContractLine.Overrides.ServiceAction.Type.ADD)
-                                    .build())
-                            .setStartsAt(
-                                com.stripe.param.v2.billing.ContractCreateParams.ContractLine
-                                    .Overrides.StartsAt.builder()
-                                    .setTimestamp(Instant.parse("1970-01-01T15:18:46.294Z"))
-                                    .build())
-                            .setType(
-                                com.stripe.param.v2.billing.ContractCreateParams.ContractLine
-                                    .Overrides.Type.SERVICE_ACTION)
-                            .build())
-                    .setPricing(
-                        com.stripe.param.v2.billing.ContractCreateParams.ContractLine.Pricing
-                            .builder()
-                            .build())
-                    .setStartsAt(
-                        com.stripe.param.v2.billing.ContractCreateParams.ContractLine.StartsAt
-                            .builder()
-                            .setTimestamp(Instant.parse("1970-01-01T15:18:46.294Z"))
-                            .build())
-                    .build())
             .setContractNumber("contract_number")
             .setCurrency("usd")
-            .addLicenseQuantityAction(
-                com.stripe.param.v2.billing.ContractCreateParams.LicenseQuantityAction.builder()
-                    .setEffectiveAt(
-                        com.stripe.param.v2.billing.ContractCreateParams.LicenseQuantityAction
-                            .EffectiveAt.builder()
-                            .setTimestamp(Instant.parse("1970-01-01T15:18:46.294Z"))
-                            .setType(
-                                com.stripe.param.v2.billing.ContractCreateParams
-                                    .LicenseQuantityAction.EffectiveAt.Type.TIMESTAMP)
-                            .build())
-                    .setLicensePricingId("license_pricing_id")
-                    .setLicensePricingLookupKey("license_pricing_lookup_key")
-                    .setLicensePricingType(
-                        com.stripe.param.v2.billing.ContractCreateParams.LicenseQuantityAction
-                            .LicensePricingType.PRICE)
-                    .setPricingLine("pricing_line")
-                    .setSet(
-                        com.stripe.param.v2.billing.ContractCreateParams.LicenseQuantityAction.Set
-                            .builder()
-                            .setQuantity(1285004149L)
-                            .build())
-                    .setType(
-                        com.stripe.param.v2.billing.ContractCreateParams.LicenseQuantityAction.Type
-                            .SET)
-                    .build())
             .addPricingLine(
                 com.stripe.param.v2.billing.ContractCreateParams.PricingLine.builder()
                     .setEndsAt(
@@ -25228,7 +25003,87 @@ class GeneratedExamples extends BaseStripeTest {
                                 com.stripe.param.v2.billing.ContractCreateParams.PricingLine.Pricing
                                     .PriceDetails.builder()
                                     .setPrice("price")
-                                    .setQuantity(1285004149L)
+                                    .addPricingOverride(
+                                        com.stripe.param.v2.billing.ContractCreateParams.PricingLine
+                                            .Pricing.PriceDetails.PricingOverride.builder()
+                                            .setEndsAt(
+                                                com.stripe.param.v2.billing.ContractCreateParams
+                                                    .PricingLine.Pricing.PriceDetails
+                                                    .PricingOverride.EndsAt.builder()
+                                                    .setTimestamp(
+                                                        Instant.parse("1970-01-01T15:18:46.294Z"))
+                                                    .setType(
+                                                        com.stripe.param.v2.billing
+                                                            .ContractCreateParams.PricingLine
+                                                            .Pricing.PriceDetails.PricingOverride
+                                                            .EndsAt.Type.CONTRACT_END)
+                                                    .build())
+                                            .setLookupKey("lookup_key")
+                                            .putMetadata("key", "metadata")
+                                            .setOverwritePrice(
+                                                com.stripe.param.v2.billing.ContractCreateParams
+                                                    .PricingLine.Pricing.PriceDetails
+                                                    .PricingOverride.OverwritePrice.builder()
+                                                    .setTieringMode(
+                                                        com.stripe.param.v2.billing
+                                                            .ContractCreateParams.PricingLine
+                                                            .Pricing.PriceDetails.PricingOverride
+                                                            .OverwritePrice.TieringMode.GRADUATED)
+                                                    .addTier(
+                                                        com.stripe.param.v2.billing
+                                                            .ContractCreateParams.PricingLine
+                                                            .Pricing.PriceDetails.PricingOverride
+                                                            .OverwritePrice.Tier.builder()
+                                                            .setFlatAmount("flat_amount")
+                                                            .setUnitAmount("unit_amount")
+                                                            .setUpToDecimal(
+                                                                new BigDecimal(
+                                                                    "1387931359.3333333"))
+                                                            .setUpToInf(
+                                                                com.stripe.param.v2.billing
+                                                                    .ContractCreateParams
+                                                                    .PricingLine.Pricing
+                                                                    .PriceDetails.PricingOverride
+                                                                    .OverwritePrice.Tier.UpToInf
+                                                                    .INF)
+                                                            .build())
+                                                    .setUnitAmount("unit_amount")
+                                                    .build())
+                                            .setPriority(1165461084L)
+                                            .setStartsAt(
+                                                com.stripe.param.v2.billing.ContractCreateParams
+                                                    .PricingLine.Pricing.PriceDetails
+                                                    .PricingOverride.StartsAt.builder()
+                                                    .setTimestamp(
+                                                        Instant.parse("1970-01-01T15:18:46.294Z"))
+                                                    .setType(
+                                                        com.stripe.param.v2.billing
+                                                            .ContractCreateParams.PricingLine
+                                                            .Pricing.PriceDetails.PricingOverride
+                                                            .StartsAt.Type.CONTRACT_START)
+                                                    .build())
+                                            .setType(
+                                                com.stripe.param.v2.billing.ContractCreateParams
+                                                    .PricingLine.Pricing.PriceDetails
+                                                    .PricingOverride.Type.OVERWRITE_PRICE)
+                                            .build())
+                                    .addQuantityChange(
+                                        com.stripe.param.v2.billing.ContractCreateParams.PricingLine
+                                            .Pricing.PriceDetails.QuantityChange.builder()
+                                            .setEffectiveAt(
+                                                com.stripe.param.v2.billing.ContractCreateParams
+                                                    .PricingLine.Pricing.PriceDetails.QuantityChange
+                                                    .EffectiveAt.builder()
+                                                    .setTimestamp(
+                                                        Instant.parse("1970-01-01T15:18:46.294Z"))
+                                                    .setType(
+                                                        com.stripe.param.v2.billing
+                                                            .ContractCreateParams.PricingLine
+                                                            .Pricing.PriceDetails.QuantityChange
+                                                            .EffectiveAt.Type.TIMESTAMP)
+                                                    .build())
+                                            .setSet(new BigDecimal("75841.33333333333"))
+                                            .build())
                                     .build())
                             .setType(
                                 com.stripe.param.v2.billing.ContractCreateParams.PricingLine.Pricing
@@ -25242,80 +25097,6 @@ class GeneratedExamples extends BaseStripeTest {
                                 com.stripe.param.v2.billing.ContractCreateParams.PricingLine
                                     .StartsAt.Type.CONTRACT_START)
                             .build())
-                    .build())
-            .addPricingOverride(
-                com.stripe.param.v2.billing.ContractCreateParams.PricingOverride.builder()
-                    .setEndsAt(
-                        com.stripe.param.v2.billing.ContractCreateParams.PricingOverride.EndsAt
-                            .builder()
-                            .setTimestamp(Instant.parse("1970-01-01T15:18:46.294Z"))
-                            .setType(
-                                com.stripe.param.v2.billing.ContractCreateParams.PricingOverride
-                                    .EndsAt.Type.CONTRACT_END)
-                            .build())
-                    .setLookupKey("lookup_key")
-                    .setMultiplier(
-                        com.stripe.param.v2.billing.ContractCreateParams.PricingOverride.Multiplier
-                            .builder()
-                            .addCriterion(
-                                com.stripe.param.v2.billing.ContractCreateParams.PricingOverride
-                                    .Multiplier.Criterion.builder()
-                                    .addBillableItemId("billable_item_ids")
-                                    .addBillableItemLookupKey("billable_item_lookup_keys")
-                                    .addBillableItemType(
-                                        com.stripe.param.v2.billing.ContractCreateParams
-                                            .PricingOverride.Multiplier.Criterion.BillableItemType
-                                            .METERED)
-                                    .addMetadataCondition(
-                                        com.stripe.param.v2.billing.ContractCreateParams
-                                            .PricingOverride.Multiplier.Criterion.MetadataCondition
-                                            .builder()
-                                            .addAllOf(
-                                                com.stripe.param.v2.billing.ContractCreateParams
-                                                    .PricingOverride.Multiplier.Criterion
-                                                    .MetadataCondition.AllOf.builder()
-                                                    .setKey("key")
-                                                    .setValue("value")
-                                                    .build())
-                                            .build())
-                                    .addRateCardId("rate_card_ids")
-                                    .setType(
-                                        com.stripe.param.v2.billing.ContractCreateParams
-                                            .PricingOverride.Multiplier.Criterion.Type.EXCLUDE)
-                                    .build())
-                            .setFactor("factor")
-                            .build())
-                    .setOverwritePrice(
-                        com.stripe.param.v2.billing.ContractCreateParams.PricingOverride
-                            .OverwritePrice.builder()
-                            .setPrice("price")
-                            .setTieringMode(
-                                com.stripe.param.v2.billing.ContractCreateParams.PricingOverride
-                                    .OverwritePrice.TieringMode.GRADUATED)
-                            .addTier(
-                                com.stripe.param.v2.billing.ContractCreateParams.PricingOverride
-                                    .OverwritePrice.Tier.builder()
-                                    .setFlatAmount("flat_amount")
-                                    .setUnitAmount("unit_amount")
-                                    .setUpToDecimal(new BigDecimal("1387931359.3333333"))
-                                    .setUpToInf(
-                                        com.stripe.param.v2.billing.ContractCreateParams
-                                            .PricingOverride.OverwritePrice.Tier.UpToInf.INF)
-                                    .build())
-                            .setUnitAmount("unit_amount")
-                            .build())
-                    .setPriority(1165461084L)
-                    .setStartsAt(
-                        com.stripe.param.v2.billing.ContractCreateParams.PricingOverride.StartsAt
-                            .builder()
-                            .setTimestamp(Instant.parse("1970-01-01T15:18:46.294Z"))
-                            .setType(
-                                com.stripe.param.v2.billing.ContractCreateParams.PricingOverride
-                                    .StartsAt.Type.CONTRACT_START)
-                            .build())
-                    .setType(
-                        com.stripe.param.v2.billing.ContractCreateParams.PricingOverride.Type
-                            .MULTIPLIER)
                     .build())
             .build();
 
@@ -25331,6 +25112,29 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2BillingContractDeleteServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.DELETE,
+        "/v2/billing/contracts/id_123",
+        null,
+        null,
+        com.stripe.model.v2.DeletedObject.class,
+        "{\"id\":\"abc_123\",\"object\":\"some.object.tag\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.DeletedObject deletedObject =
+        client.v2().billing().contracts().delete("id_123");
+    assertNotNull(deletedObject);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.DELETE,
+        "/v2/billing/contracts/id_123",
+        null,
+        null);
+  }
+
+  @Test
   public void testV2BillingContractGet2Services() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -25339,7 +25143,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.Contract.class,
-        "{\"object\":\"v2.billing.contract\",\"contract_line_details\":[{\"contract_line\":\"contract_line\",\"contract_line_value_details\":{\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"overrides\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"type\":\"service_action\"}],\"pricing\":{},\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"}}],\"contract_number\":\"contract_number\",\"contract_value_details\":{\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"customer\":\"customer\",\"id\":\"obj_123\",\"license_quantities\":[{\"license_pricing_id\":\"license_pricing_id\",\"license_pricing_type\":\"price\",\"pricing_line\":\"pricing_line\",\"quantity\":1285004149}],\"livemode\":true,\"pricing_lines\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"pricing\":{\"type\":\"price\"},\"pricing_line\":\"pricing_line\",\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"}}],\"pricing_overrides\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"pricing_override\":\"pricing_override\",\"priority\":1165461084,\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"type\":\"multiplier\"}],\"status\":\"draft\",\"status_details\":{}}");
+        "{\"object\":\"v2.billing.contract\",\"contract_number\":\"contract_number\",\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"draft\",\"status_details\":{}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.ContractRetrieveParams params =
@@ -25365,7 +25169,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.Contract.class,
-        "{\"object\":\"v2.billing.contract\",\"contract_line_details\":[{\"contract_line\":\"contract_line\",\"contract_line_value_details\":{\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"overrides\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"type\":\"service_action\"}],\"pricing\":{},\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"}}],\"contract_number\":\"contract_number\",\"contract_value_details\":{\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"customer\":\"customer\",\"id\":\"obj_123\",\"license_quantities\":[{\"license_pricing_id\":\"license_pricing_id\",\"license_pricing_type\":\"price\",\"pricing_line\":\"pricing_line\",\"quantity\":1285004149}],\"livemode\":true,\"pricing_lines\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"pricing\":{\"type\":\"price\"},\"pricing_line\":\"pricing_line\",\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"}}],\"pricing_overrides\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"pricing_override\":\"pricing_override\",\"priority\":1165461084,\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"type\":\"multiplier\"}],\"status\":\"draft\",\"status_details\":{}}");
+        "{\"object\":\"v2.billing.contract\",\"contract_number\":\"contract_number\",\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"draft\",\"status_details\":{}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.ContractUpdateParams params =
@@ -25391,7 +25195,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.Contract.class,
-        "{\"object\":\"v2.billing.contract\",\"contract_line_details\":[{\"contract_line\":\"contract_line\",\"contract_line_value_details\":{\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"overrides\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"type\":\"service_action\"}],\"pricing\":{},\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"}}],\"contract_number\":\"contract_number\",\"contract_value_details\":{\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"customer\":\"customer\",\"id\":\"obj_123\",\"license_quantities\":[{\"license_pricing_id\":\"license_pricing_id\",\"license_pricing_type\":\"price\",\"pricing_line\":\"pricing_line\",\"quantity\":1285004149}],\"livemode\":true,\"pricing_lines\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"pricing\":{\"type\":\"price\"},\"pricing_line\":\"pricing_line\",\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"}}],\"pricing_overrides\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"pricing_override\":\"pricing_override\",\"priority\":1165461084,\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"type\":\"multiplier\"}],\"status\":\"draft\",\"status_details\":{}}");
+        "{\"object\":\"v2.billing.contract\",\"contract_number\":\"contract_number\",\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"draft\",\"status_details\":{}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.ContractActivateParams params =
@@ -25417,7 +25221,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.Contract.class,
-        "{\"object\":\"v2.billing.contract\",\"contract_line_details\":[{\"contract_line\":\"contract_line\",\"contract_line_value_details\":{\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"overrides\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"type\":\"service_action\"}],\"pricing\":{},\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"}}],\"contract_number\":\"contract_number\",\"contract_value_details\":{\"total\":\"total\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"customer\":\"customer\",\"id\":\"obj_123\",\"license_quantities\":[{\"license_pricing_id\":\"license_pricing_id\",\"license_pricing_type\":\"price\",\"pricing_line\":\"pricing_line\",\"quantity\":1285004149}],\"livemode\":true,\"pricing_lines\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"pricing\":{\"type\":\"price\"},\"pricing_line\":\"pricing_line\",\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"}}],\"pricing_overrides\":[{\"ends_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"pricing_override\":\"pricing_override\",\"priority\":1165461084,\"starts_at\":{\"timestamp\":\"1970-01-01T15:18:46.294Z\"},\"type\":\"multiplier\"}],\"status\":\"draft\",\"status_details\":{}}");
+        "{\"object\":\"v2.billing.contract\",\"contract_number\":\"contract_number\",\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"draft\",\"status_details\":{}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.ContractCancelParams params =
@@ -25435,41 +25239,42 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2BillingContractsLicensePricingQuantityChangeGetServices()
-      throws StripeException {
+  public void testV2BillingContractsPricingLinesQuantityChangeGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
-        "/v2/billing/contracts/contract_id_123/license_pricing/license_pricing_id_123/quantity_changes",
+        "/v2/billing/contracts/contract_id_123/pricing_lines/pricing_line_id_123/quantity_changes",
         null,
         null,
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
-                com.stripe.model.v2.billing.ContractLicensePricingQuantityChange>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.billing.contract_license_pricing_quantity_change\",\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"license_pricing_id\":\"license_pricing_id\",\"license_pricing_type\":\"price\",\"livemode\":true,\"pricing_line\":\"pricing_line\",\"quantity\":1285004149}],\"next_page_url\":null,\"previous_page_url\":null}");
+                com.stripe.model.v2.billing.ContractPricingLineQuantityChange>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.billing.contract_pricing_line_quantity_change\",\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"livemode\":true,\"pricing\":{\"type\":\"price\"},\"pricing_line\":\"pricing_line\",\"quantity\":\"856669432.6666666\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.billing.contracts.licensepricing.QuantityChangeListQuantityChangesParams
+    com.stripe.param.v2.billing.contracts.pricinglines
+            .QuantityChangeListContractPricingLineQuantityChangesParams
         params =
-            com.stripe.param.v2.billing.contracts.licensepricing
-                .QuantityChangeListQuantityChangesParams.builder()
+            com.stripe.param.v2.billing.contracts.pricinglines
+                .QuantityChangeListContractPricingLineQuantityChangesParams.builder()
                 .build();
 
     com.stripe.model.v2.StripeCollection<
-            com.stripe.model.v2.billing.ContractLicensePricingQuantityChange>
+            com.stripe.model.v2.billing.ContractPricingLineQuantityChange>
         stripeCollection =
             client
                 .v2()
                 .billing()
                 .contracts()
-                .licensePricing()
+                .pricingLines()
                 .quantityChanges()
-                .listQuantityChanges("contract_id_123", "license_pricing_id_123", params);
+                .listContractPricingLineQuantityChanges(
+                    "contract_id_123", "pricing_line_id_123", params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
-        "/v2/billing/contracts/contract_id_123/license_pricing/license_pricing_id_123/quantity_changes",
+        "/v2/billing/contracts/contract_id_123/pricing_lines/pricing_line_id_123/quantity_changes",
         params.toMap(),
         null);
   }
@@ -27931,7 +27736,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.commerce.ProductCatalogImport>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.commerce.product_catalog_import\",\"created\":\"1970-01-12T21:42:34.472Z\",\"feed_type\":\"pricing\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"status\":\"awaiting_upload\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.commerce.product_catalog_import\",\"created\":\"1970-01-12T21:42:34.472Z\",\"feed_type\":\"pricing\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"mode\":\"upsert\",\"status\":\"awaiting_upload\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.commerce.productcatalog.ImportListParams params =
@@ -27957,7 +27762,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.commerce.ProductCatalogImport.class,
-        "{\"object\":\"v2.commerce.product_catalog_import\",\"created\":\"1970-01-12T21:42:34.472Z\",\"feed_type\":\"pricing\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"status\":\"awaiting_upload\"}");
+        "{\"object\":\"v2.commerce.product_catalog_import\",\"created\":\"1970-01-12T21:42:34.472Z\",\"feed_type\":\"pricing\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"mode\":\"upsert\",\"status\":\"awaiting_upload\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.commerce.productcatalog.ImportCreateParams params =
@@ -27988,7 +27793,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.commerce.ProductCatalogImport.class,
-        "{\"object\":\"v2.commerce.product_catalog_import\",\"created\":\"1970-01-12T21:42:34.472Z\",\"feed_type\":\"pricing\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"status\":\"awaiting_upload\"}");
+        "{\"object\":\"v2.commerce.product_catalog_import\",\"created\":\"1970-01-12T21:42:34.472Z\",\"feed_type\":\"pricing\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"mode\":\"upsert\",\"status\":\"awaiting_upload\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.commerce.ProductCatalogImport productCatalogImport =
@@ -28362,7 +28167,7 @@ class GeneratedExamples extends BaseStripeTest {
                                     .build())
                             .addConfiguration(
                                 com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                    .AccountOnboarding.Configuration.STORER)
+                                    .AccountOnboarding.Configuration.MERCHANT)
                             .setRefreshUrl("refresh_url")
                             .setReturnUrl("return_url")
                             .build())
@@ -28382,7 +28187,7 @@ class GeneratedExamples extends BaseStripeTest {
                                     .build())
                             .addConfiguration(
                                 com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                    .AccountUpdate.Configuration.STORER)
+                                    .AccountUpdate.Configuration.MERCHANT)
                             .setRefreshUrl("refresh_url")
                             .setReturnUrl("return_url")
                             .build())
@@ -28626,7 +28431,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.BatchJob.class,
-        "{\"object\":\"v2.core.batch_job\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"maximum_rps\":1686015830,\"metadata\":{\"key\":\"metadata\"},\"skip_validation\":true,\"status\":\"batch_failed\"}");
+        "{\"object\":\"v2.core.batch_job\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"skip_validation\":true,\"status\":\"batch_failed\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.BatchJobCreateParams params =
@@ -28639,7 +28444,6 @@ class GeneratedExamples extends BaseStripeTest {
                         com.stripe.param.v2.core.BatchJobCreateParams.Endpoint.Path
                             .V1_PRODUCT_CREATE)
                     .build())
-            .putMetadata("key", "metadata")
             .setSkipValidation(true)
             .build();
 
@@ -28662,7 +28466,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.BatchJob.class,
-        "{\"object\":\"v2.core.batch_job\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"maximum_rps\":1686015830,\"metadata\":{\"key\":\"metadata\"},\"skip_validation\":true,\"status\":\"batch_failed\"}");
+        "{\"object\":\"v2.core.batch_job\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"skip_validation\":true,\"status\":\"batch_failed\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.BatchJob batchJob = client.v2().core().batchJobs().retrieve("id_123");
@@ -28680,7 +28484,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.BatchJob.class,
-        "{\"object\":\"v2.core.batch_job\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"maximum_rps\":1686015830,\"metadata\":{\"key\":\"metadata\"},\"skip_validation\":true,\"status\":\"batch_failed\"}");
+        "{\"object\":\"v2.core.batch_job\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"skip_validation\":true,\"status\":\"batch_failed\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.BatchJob batchJob = client.v2().core().batchJobs().cancel("id_123");
@@ -29171,6 +28975,85 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(feeEntry);
     verifyRequest(
         BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/fee_entries/id_123", null, null);
+  }
+
+  @Test
+  public void testV2CoreHealthAlertGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/health/alerts",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.core.health.Alert>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.core.health.alert\",\"created\":\"1970-01-12T21:42:34.472Z\",\"documentation_links\":[{\"label\":\"label\",\"url\":\"url\"}],\"grouping_key\":\"grouping_key\",\"grouping_type\":\"incident\",\"id\":\"obj_123\",\"livemode\":true,\"severity\":\"non_critical\",\"started_at\":\"1970-01-19T03:34:50.959Z\",\"status\":\"open\",\"summary\":\"summary\",\"type\":\"api_error\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.health.AlertListParams params =
+        com.stripe.param.v2.core.health.AlertListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.health.Alert> stripeCollection =
+        client.v2().core().health().alerts().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/health/alerts",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreHealthAlertGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/health/alerts/id_123",
+        null,
+        null,
+        com.stripe.model.v2.core.health.Alert.class,
+        "{\"object\":\"v2.core.health.alert\",\"created\":\"1970-01-12T21:42:34.472Z\",\"documentation_links\":[{\"label\":\"label\",\"url\":\"url\"}],\"grouping_key\":\"grouping_key\",\"grouping_type\":\"incident\",\"id\":\"obj_123\",\"livemode\":true,\"severity\":\"non_critical\",\"started_at\":\"1970-01-19T03:34:50.959Z\",\"status\":\"open\",\"summary\":\"summary\",\"type\":\"api_error\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.core.health.Alert alert =
+        client.v2().core().health().alerts().retrieve("id_123");
+    assertNotNull(alert);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/health/alerts/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2CoreHealthAlertsHistoryGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/health/alerts/id_123/history",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.core.health.AlertHistoryEntry>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.core.health.alert_history_entry\",\"at\":\"1970-01-01T00:00:03.123Z\",\"id\":\"obj_123\",\"livemode\":true,\"transition\":\"impact_updated\",\"type\":\"api_error\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.health.alerts.HistoryListParams params =
+        com.stripe.param.v2.core.health.alerts.HistoryListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.health.AlertHistoryEntry>
+        stripeCollection = client.v2().core().health().alerts().history().list("id_123", params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/health/alerts/id_123/history",
+        params.toMap(),
+        null);
   }
 
   @Test
@@ -30560,6 +30443,41 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.To.builder()
                     .setCurrency("usd")
                     .setPayoutMethod("payout_method")
+                    .setPayoutMethodOptions(
+                        com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.To
+                            .PayoutMethodOptions.builder()
+                            .setBankAccount(
+                                com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.To
+                                    .PayoutMethodOptions.BankAccount.builder()
+                                    .setPreferredNetworkOptions(
+                                        com.stripe.param.v2.moneymanagement
+                                            .OutboundPaymentCreateParams.To.PayoutMethodOptions
+                                            .BankAccount.PreferredNetworkOptions.builder()
+                                            .setAch(
+                                                com.stripe.param.v2.moneymanagement
+                                                    .OutboundPaymentCreateParams.To
+                                                    .PayoutMethodOptions.BankAccount
+                                                    .PreferredNetworkOptions.Ach.builder()
+                                                    .setSubmission(
+                                                        com.stripe.param.v2.moneymanagement
+                                                            .OutboundPaymentCreateParams.To
+                                                            .PayoutMethodOptions.BankAccount
+                                                            .PreferredNetworkOptions.Ach.Submission
+                                                            .NEXT_DAY)
+                                                    .setTransactionPurpose(
+                                                        com.stripe.param.v2.moneymanagement
+                                                            .OutboundPaymentCreateParams.To
+                                                            .PayoutMethodOptions.BankAccount
+                                                            .PreferredNetworkOptions.Ach
+                                                            .TransactionPurpose.PAYROLL)
+                                                    .build())
+                                            .build())
+                                    .addPreferredNetwork(
+                                        com.stripe.param.v2.moneymanagement
+                                            .OutboundPaymentCreateParams.To.PayoutMethodOptions
+                                            .BankAccount.PreferredNetwork.SEPA_CREDIT)
+                                    .build())
+                            .build())
                     .setRecipient("recipient")
                     .build())
             .build();
@@ -30861,6 +30779,18 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.v2.moneymanagement.OutboundTransferCreateParams.To.builder()
                     .setCurrency("usd")
                     .setPayoutMethod("payout_method")
+                    .setPayoutMethodOptions(
+                        com.stripe.param.v2.moneymanagement.OutboundTransferCreateParams.To
+                            .PayoutMethodOptions.builder()
+                            .setBankAccount(
+                                com.stripe.param.v2.moneymanagement.OutboundTransferCreateParams.To
+                                    .PayoutMethodOptions.BankAccount.builder()
+                                    .addPreferredNetwork(
+                                        com.stripe.param.v2.moneymanagement
+                                            .OutboundTransferCreateParams.To.PayoutMethodOptions
+                                            .BankAccount.PreferredNetwork.SEPA_CREDIT)
+                                    .build())
+                            .build())
                     .build())
             .build();
 
@@ -30917,6 +30847,180 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         "/v2/money_management/outbound_transfers/id_123/cancel",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementPayoutIntentGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/payout_intents",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.moneymanagement.PayoutIntent>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"latest_payout\":{\"type\":\"outbound_payment\"},\"livemode\":true,\"status\":\"canceled\",\"to\":{}}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.PayoutIntentListParams params =
+        com.stripe.param.v2.moneymanagement.PayoutIntentListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.moneymanagement.PayoutIntent>
+        stripeCollection = client.v2().moneyManagement().payoutIntents().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/payout_intents",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementPayoutIntentPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/payout_intents",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.PayoutIntent.class,
+        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"latest_payout\":{\"type\":\"outbound_payment\"},\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.PayoutIntentCreateParams params =
+        com.stripe.param.v2.moneymanagement.PayoutIntentCreateParams.builder()
+            .setAmount(new com.stripe.v2.Amount(96, "USD"))
+            .setFrom(
+                com.stripe.param.v2.moneymanagement.PayoutIntentCreateParams.From.builder()
+                    .setCurrency("usd")
+                    .setFinancialAccount("financial_account")
+                    .build())
+            .setTo(
+                com.stripe.param.v2.moneymanagement.PayoutIntentCreateParams.To.builder()
+                    .setCurrency("usd")
+                    .setPayoutMethod("payout_method")
+                    .setPayoutMethodOptions(
+                        com.stripe.param.v2.moneymanagement.PayoutIntentCreateParams.To
+                            .PayoutMethodOptions.builder()
+                            .setBankAccount(
+                                com.stripe.param.v2.moneymanagement.PayoutIntentCreateParams.To
+                                    .PayoutMethodOptions.BankAccount.builder()
+                                    .setPreferredNetworkOptions(
+                                        com.stripe.param.v2.moneymanagement.PayoutIntentCreateParams
+                                            .To.PayoutMethodOptions.BankAccount
+                                            .PreferredNetworkOptions.builder()
+                                            .setAch(
+                                                com.stripe.param.v2.moneymanagement
+                                                    .PayoutIntentCreateParams.To.PayoutMethodOptions
+                                                    .BankAccount.PreferredNetworkOptions.Ach
+                                                    .builder()
+                                                    .setSubmission(
+                                                        com.stripe.param.v2.moneymanagement
+                                                            .PayoutIntentCreateParams.To
+                                                            .PayoutMethodOptions.BankAccount
+                                                            .PreferredNetworkOptions.Ach.Submission
+                                                            .NEXT_DAY)
+                                                    .setTransactionPurpose(
+                                                        com.stripe.param.v2.moneymanagement
+                                                            .PayoutIntentCreateParams.To
+                                                            .PayoutMethodOptions.BankAccount
+                                                            .PreferredNetworkOptions.Ach
+                                                            .TransactionPurpose.PAYROLL)
+                                                    .build())
+                                            .build())
+                                    .addPreferredNetwork(
+                                        com.stripe.param.v2.moneymanagement.PayoutIntentCreateParams
+                                            .To.PayoutMethodOptions.BankAccount.PreferredNetwork
+                                            .SEPA_CREDIT)
+                                    .build())
+                            .build())
+                    .setRecipient("recipient")
+                    .build())
+            .build();
+
+    com.stripe.model.v2.moneymanagement.PayoutIntent payoutIntent =
+        client.v2().moneyManagement().payoutIntents().create(params);
+    assertNotNull(payoutIntent);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/payout_intents",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementPayoutIntentGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/payout_intents/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.PayoutIntent.class,
+        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"latest_payout\":{\"type\":\"outbound_payment\"},\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.PayoutIntent payoutIntent =
+        client.v2().moneyManagement().payoutIntents().retrieve("id_123");
+    assertNotNull(payoutIntent);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/payout_intents/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementPayoutIntentPost2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/payout_intents/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.PayoutIntent.class,
+        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"latest_payout\":{\"type\":\"outbound_payment\"},\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.PayoutIntentUpdateParams params =
+        com.stripe.param.v2.moneymanagement.PayoutIntentUpdateParams.builder().build();
+
+    com.stripe.model.v2.moneymanagement.PayoutIntent payoutIntent =
+        client.v2().moneyManagement().payoutIntents().update("id_123", params);
+    assertNotNull(payoutIntent);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/payout_intents/id_123",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementPayoutIntentPost3Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/payout_intents/id_123/cancel",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.PayoutIntent.class,
+        "{\"object\":\"v2.money_management.payout_intent\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"currency\":\"usd\",\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"latest_payout\":{\"type\":\"outbound_payment\"},\"livemode\":true,\"status\":\"canceled\",\"to\":{}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.PayoutIntent payoutIntent =
+        client.v2().moneyManagement().payoutIntents().cancel("id_123");
+    assertNotNull(payoutIntent);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/payout_intents/id_123/cancel",
         null,
         null);
   }
@@ -31219,6 +31323,44 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v2/money_management/recipient_verifications/id_123/acknowledge",
         null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementTestHelpersFinancialAddressPostServices()
+      throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/test_helpers/financial_addresses/id_123/debit",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.FinancialAddressDebitSimulation.class,
+        "{\"object\":\"v2.money_management.financial_address_debit_simulation\",\"livemode\":true,\"status\":\"status\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.testhelpers.FinancialAddressDebitParams params =
+        com.stripe.param.v2.moneymanagement.testhelpers.FinancialAddressDebitParams.builder()
+            .setAmount(new com.stripe.v2.Amount(96, "USD"))
+            .setNetwork(
+                com.stripe.param.v2.moneymanagement.testhelpers.FinancialAddressDebitParams.Network
+                    .ACH)
+            .build();
+
+    com.stripe.model.v2.moneymanagement.FinancialAddressDebitSimulation
+        financialAddressDebitSimulation =
+            client
+                .v2()
+                .moneyManagement()
+                .testHelpers()
+                .financialAddresses()
+                .debit("id_123", params);
+    assertNotNull(financialAddressDebitSimulation);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/test_helpers/financial_addresses/id_123/debit",
+        params.toMap(),
         null);
   }
 
@@ -32451,18 +32593,18 @@ class GeneratedExamples extends BaseStripeTest {
     stubRequestReturnError(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_setup_intents",
+        "/v2/core/vault/us_bank_accounts/id_123/confirm_microdeposits",
         null,
         null,
         "{\"error\":{\"type\":\"controlled_by_alternate_resource\",\"code\":\"payout_method_cannot_be_archived\"}}",
         400);
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.moneymanagement.OutboundSetupIntentCreateParams params =
-        com.stripe.param.v2.moneymanagement.OutboundSetupIntentCreateParams.builder().build();
+    com.stripe.param.v2.core.vault.UsBankAccountConfirmMicrodepositsParams params =
+        com.stripe.param.v2.core.vault.UsBankAccountConfirmMicrodepositsParams.builder().build();
 
     try {
-      client.v2().moneyManagement().outboundSetupIntents().create(params);
+      client.v2().core().vault().usBankAccounts().confirmMicrodeposits("id_123", params);
     } catch (ControlledByAlternateResourceException e) {
 
     }
@@ -32470,7 +32612,7 @@ class GeneratedExamples extends BaseStripeTest {
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_setup_intents",
+        "/v2/core/vault/us_bank_accounts/id_123/confirm_microdeposits",
         params.toMap(),
         null);
   }

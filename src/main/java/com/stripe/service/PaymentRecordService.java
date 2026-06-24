@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec
 package com.stripe.service;
 
+import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentRecord;
+import com.stripe.model.StripeSearchResult;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -18,6 +20,7 @@ import com.stripe.param.PaymentRecordReportPaymentAttemptParams;
 import com.stripe.param.PaymentRecordReportPaymentParams;
 import com.stripe.param.PaymentRecordReportRefundParams;
 import com.stripe.param.PaymentRecordRetrieveParams;
+import com.stripe.param.PaymentRecordSearchParams;
 
 public final class PaymentRecordService extends ApiService {
   public PaymentRecordService(StripeResponseGetter responseGetter) {
@@ -50,6 +53,38 @@ public final class PaymentRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, PaymentRecord.class);
+  }
+  /**
+   * Search for PaymentRecords you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public StripeSearchResult<PaymentRecord> search(PaymentRecordSearchParams params)
+      throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+  /**
+   * Search for PaymentRecords you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public StripeSearchResult<PaymentRecord> search(
+      PaymentRecordSearchParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/payment_records/search";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, new TypeToken<StripeSearchResult<PaymentRecord>>() {}.getType());
   }
   /**
    * Report a new payment attempt on the specified Payment Record. A new payment attempt can only be

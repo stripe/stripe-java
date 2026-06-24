@@ -730,6 +730,13 @@ public class Transaction extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class NetworkData extends StripeObject {
     /**
+     * The network-provided acquirer reference number for this transaction, if available. Use this
+     * value for downstream operational workflows such as filing disputes with the card network.
+     */
+    @SerializedName("acquirer_reference_number")
+    String acquirerReferenceNumber;
+
+    /**
      * A code created by Stripe which is shared with the merchant to validate the authorization.
      * This field will be populated if the authorization message was approved. The code typically
      * starts with the letter &quot;S&quot;, followed by a six-digit number. For example,

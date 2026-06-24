@@ -6,6 +6,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.v2.Amount;
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -139,7 +140,10 @@ public class OutboundPayment extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
-  /** Status details for an OutboundPayment in a {@code failed} or {@code returned} state. */
+  /**
+   * Status details for an OutboundPayment in a {@code processing}, {@code failed}, or {@code
+   * returned} state.
+   */
   @SerializedName("status_details")
   StatusDetails statusDetails;
 
@@ -192,6 +196,10 @@ public class OutboundPayment extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class PaperCheck extends StripeObject {
+      /** The ID of a file to include as an attachment with the paper check. */
+      @SerializedName("attachment")
+      String attachment;
+
       /** Memo printed on the memo field of the check. */
       @SerializedName("memo")
       String memo;
@@ -240,7 +248,10 @@ public class OutboundPayment extends StripeObject implements HasId {
     String setting;
   }
 
-  /** Status details for an OutboundPayment in a {@code failed} or {@code returned} state. */
+  /**
+   * Status details for an OutboundPayment in a {@code processing}, {@code failed}, or {@code
+   * returned} state.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -248,6 +259,10 @@ public class OutboundPayment extends StripeObject implements HasId {
     /** The {@code failed} status reason. */
     @SerializedName("failed")
     Failed failed;
+
+    /** The {@code processing} status details. */
+    @SerializedName("processing")
+    Processing processing;
 
     /** The {@code returned} status reason. */
     @SerializedName("returned")
@@ -261,11 +276,27 @@ public class OutboundPayment extends StripeObject implements HasId {
       /**
        * Open Enum. The {@code failed} status reason.
        *
-       * <p>One of {@code paper_check_attachment_too_large}, {@code paper_check_expired}, {@code
+       * <p>One of {@code fx_rate_drift_exceeded_after_review}, {@code
+       * paper_check_attachment_too_large}, {@code paper_check_expired}, {@code
        * paper_check_undeliverable}, {@code payout_method_amount_limit_exceeded}, {@code
        * payout_method_declined}, {@code payout_method_does_not_exist}, {@code
        * payout_method_expired}, {@code payout_method_unsupported}, {@code
-       * payout_method_usage_frequency_limit_exceeded}, or {@code unknown_failure}.
+       * payout_method_usage_frequency_limit_exceeded}, {@code review_rejected}, or {@code
+       * unknown_failure}.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
+
+    /** The {@code processing} status details. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Processing extends StripeObject {
+      /**
+       * Open Enum. The {@code processing} status reason.
+       *
+       * <p>Equal to {@code under_review}.
        */
       @SerializedName("reason")
       String reason;
@@ -341,9 +372,69 @@ public class OutboundPayment extends StripeObject implements HasId {
     @SerializedName("payout_method")
     String payoutMethod;
 
+    /** Payout method options for the OutboundPayment. */
+    @SerializedName("payout_method_options")
+    PayoutMethodOptions payoutMethodOptions;
+
     /** To which account the OutboundPayment is sent. */
     @SerializedName("recipient")
     String recipient;
+
+    /** Payout method options for the OutboundPayment. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PayoutMethodOptions extends StripeObject {
+      /** Options for bank account payout methods. */
+      @SerializedName("bank_account")
+      BankAccount bankAccount;
+
+      /** Options for bank account payout methods. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BankAccount extends StripeObject {
+        /** Per-network configuration options. */
+        @SerializedName("preferred_network_options")
+        PreferredNetworkOptions preferredNetworkOptions;
+
+        /** The preferred networks to use for this OutboundPayment. */
+        @SerializedName("preferred_networks")
+        List<String> preferredNetworks;
+
+        /** Per-network configuration options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PreferredNetworkOptions extends StripeObject {
+          /** ACH-specific network options. */
+          @SerializedName("ach")
+          Ach ach;
+
+          /** ACH-specific network options. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Ach extends StripeObject {
+            /**
+             * Open Enum. ACH submission timing.
+             *
+             * <p>One of {@code next_day}, or {@code same_day}.
+             */
+            @SerializedName("submission")
+            String submission;
+
+            /**
+             * The transaction purpose for this ACH payment.
+             *
+             * <p>Equal to {@code payroll}.
+             */
+            @SerializedName("transaction_purpose")
+            String transactionPurpose;
+          }
+        }
+      }
+    }
   }
 
   /**

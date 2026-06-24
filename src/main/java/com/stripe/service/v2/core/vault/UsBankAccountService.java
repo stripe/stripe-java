@@ -4,6 +4,7 @@ package com.stripe.service.v2.core.vault;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.BlockedByStripeException;
 import com.stripe.exception.CannotProceedException;
+import com.stripe.exception.ControlledByAlternateResourceException;
 import com.stripe.exception.ControlledByDashboardException;
 import com.stripe.exception.InvalidPaymentMethodException;
 import com.stripe.exception.QuotaExceededException;
@@ -156,7 +157,8 @@ public final class UsBankAccountService extends ApiService {
    * and eligible to transfer funds with.
    */
   public UsBankAccount confirmMicrodeposits(
-      String id, UsBankAccountConfirmMicrodepositsParams params) throws StripeException {
+      String id, UsBankAccountConfirmMicrodepositsParams params)
+      throws StripeException, ControlledByAlternateResourceException {
     return confirmMicrodeposits(id, params, (RequestOptions) null);
   }
   /**
@@ -165,7 +167,7 @@ public final class UsBankAccountService extends ApiService {
    * and eligible to transfer funds with.
    */
   public UsBankAccount confirmMicrodeposits(String id, RequestOptions options)
-      throws StripeException {
+      throws StripeException, ControlledByAlternateResourceException {
     return confirmMicrodeposits(id, (UsBankAccountConfirmMicrodepositsParams) null, options);
   }
   /**
@@ -173,7 +175,8 @@ public final class UsBankAccountService extends ApiService {
    * Microdeposits request. Once you correctly confirm this, this US Bank Account will be verified
    * and eligible to transfer funds with.
    */
-  public UsBankAccount confirmMicrodeposits(String id) throws StripeException {
+  public UsBankAccount confirmMicrodeposits(String id)
+      throws StripeException, ControlledByAlternateResourceException {
     return confirmMicrodeposits(
         id, (UsBankAccountConfirmMicrodepositsParams) null, (RequestOptions) null);
   }
@@ -184,7 +187,7 @@ public final class UsBankAccountService extends ApiService {
    */
   public UsBankAccount confirmMicrodeposits(
       String id, UsBankAccountConfirmMicrodepositsParams params, RequestOptions options)
-      throws StripeException {
+      throws StripeException, ControlledByAlternateResourceException {
     String path =
         String.format(
             "/v2/core/vault/us_bank_accounts/%s/confirm_microdeposits",
@@ -203,7 +206,8 @@ public final class UsBankAccountService extends ApiService {
    * This will start the verification process and you must Confirm Microdeposits to successfully
    * verify your US Bank Account.
    */
-  public UsBankAccount sendMicrodeposits(String id) throws StripeException {
+  public UsBankAccount sendMicrodeposits(String id)
+      throws StripeException, ControlledByAlternateResourceException {
     return sendMicrodeposits(id, (RequestOptions) null);
   }
   /**
@@ -211,7 +215,8 @@ public final class UsBankAccountService extends ApiService {
    * This will start the verification process and you must Confirm Microdeposits to successfully
    * verify your US Bank Account.
    */
-  public UsBankAccount sendMicrodeposits(String id, RequestOptions options) throws StripeException {
+  public UsBankAccount sendMicrodeposits(String id, RequestOptions options)
+      throws StripeException, ControlledByAlternateResourceException {
     String path =
         String.format(
             "/v2/core/vault/us_bank_accounts/%s/send_microdeposits", ApiResource.urlEncodeId(id));

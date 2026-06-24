@@ -54,6 +54,10 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
   @SerializedName("merchant_data")
   MerchantData merchantData;
 
+  /** Details about the transaction, such as processing dates, set by the card network. */
+  @SerializedName("network_data")
+  NetworkData networkData;
+
   /** Additional purchase information that is optionally provided by the merchant. */
   @SerializedName("purchase_details")
   PurchaseDetails purchaseDetails;
@@ -65,6 +69,7 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       MerchantData merchantData,
+      NetworkData networkData,
       PurchaseDetails purchaseDetails) {
     this.amount = amount;
     this.card = card;
@@ -72,6 +77,7 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.merchantData = merchantData;
+    this.networkData = networkData;
     this.purchaseDetails = purchaseDetails;
   }
 
@@ -92,6 +98,8 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
 
     private MerchantData merchantData;
 
+    private NetworkData networkData;
+
     private PurchaseDetails purchaseDetails;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -103,6 +111,7 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.merchantData,
+          this.networkData,
           this.purchaseDetails);
     }
 
@@ -191,6 +200,12 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
      */
     public Builder setMerchantData(TransactionCreateForceCaptureParams.MerchantData merchantData) {
       this.merchantData = merchantData;
+      return this;
+    }
+
+    /** Details about the transaction, such as processing dates, set by the card network. */
+    public Builder setNetworkData(TransactionCreateForceCaptureParams.NetworkData networkData) {
+      this.networkData = networkData;
       return this;
     }
 
@@ -1362,6 +1377,87 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
 
       Category(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NetworkData {
+    /**
+     * Optional. A test value to populate network_data.acquirer_reference_number on the resulting
+     * Issuing Transaction. Must contain only digits and be at most 23 characters long. This value
+     * is intended only for integration validation in testmode and does not need to correspond to a
+     * real network-assigned acquirer reference number.
+     */
+    @SerializedName("acquirer_reference_number")
+    String acquirerReferenceNumber;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private NetworkData(String acquirerReferenceNumber, Map<String, Object> extraParams) {
+      this.acquirerReferenceNumber = acquirerReferenceNumber;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String acquirerReferenceNumber;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public TransactionCreateForceCaptureParams.NetworkData build() {
+        return new TransactionCreateForceCaptureParams.NetworkData(
+            this.acquirerReferenceNumber, this.extraParams);
+      }
+
+      /**
+       * Optional. A test value to populate network_data.acquirer_reference_number on the resulting
+       * Issuing Transaction. Must contain only digits and be at most 23 characters long. This value
+       * is intended only for integration validation in testmode and does not need to correspond to
+       * a real network-assigned acquirer reference number.
+       */
+      public Builder setAcquirerReferenceNumber(String acquirerReferenceNumber) {
+        this.acquirerReferenceNumber = acquirerReferenceNumber;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * TransactionCreateForceCaptureParams.NetworkData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link TransactionCreateForceCaptureParams.NetworkData#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }

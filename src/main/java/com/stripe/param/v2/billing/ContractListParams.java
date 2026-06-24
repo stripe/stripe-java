@@ -3,7 +3,9 @@ package com.stripe.param.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,13 +26,22 @@ public class ContractListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Additional fields to include in the response. */
+  @SerializedName("include")
+  List<ContractListParams.Include> include;
+
   /** The limit for the number of results per page. */
   @SerializedName("limit")
   Long limit;
 
-  private ContractListParams(String customer, Map<String, Object> extraParams, Long limit) {
+  private ContractListParams(
+      String customer,
+      Map<String, Object> extraParams,
+      List<ContractListParams.Include> include,
+      Long limit) {
     this.customer = customer;
     this.extraParams = extraParams;
+    this.include = include;
     this.limit = limit;
   }
 
@@ -43,11 +54,13 @@ public class ContractListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private List<ContractListParams.Include> include;
+
     private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ContractListParams build() {
-      return new ContractListParams(this.customer, this.extraParams, this.limit);
+      return new ContractListParams(this.customer, this.extraParams, this.include, this.limit);
     }
 
     /** Filter by customer ID. */
@@ -82,10 +95,57 @@ public class ContractListParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Add an element to `include` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ContractListParams#include} for the field documentation.
+     */
+    public Builder addInclude(ContractListParams.Include element) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `include` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * ContractListParams#include} for the field documentation.
+     */
+    public Builder addAllInclude(List<ContractListParams.Include> elements) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.addAll(elements);
+      return this;
+    }
+
     /** The limit for the number of results per page. */
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
+    }
+  }
+
+  public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("billing_settings")
+    BILLING_SETTINGS("billing_settings"),
+
+    @SerializedName("one_time_fees")
+    ONE_TIME_FEES("one_time_fees"),
+
+    @SerializedName("pricing_lines")
+    PRICING_LINES("pricing_lines"),
+
+    @SerializedName("pricing_overrides")
+    PRICING_OVERRIDES("pricing_overrides");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Include(String value) {
+      this.value = value;
     }
   }
 }

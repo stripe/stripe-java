@@ -378,6 +378,10 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     @SerializedName("tax")
     Object tax;
 
+    /** Contains information about the tip portion of the amount. */
+    @SerializedName("tip")
+    Object tip;
+
     private AmountDetails(
         Object discountAmount,
         Boolean enforceArithmeticValidation,
@@ -385,7 +389,8 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
         Object lineItems,
         Object shipping,
         Object surcharge,
-        Object tax) {
+        Object tax,
+        Object tip) {
       this.discountAmount = discountAmount;
       this.enforceArithmeticValidation = enforceArithmeticValidation;
       this.extraParams = extraParams;
@@ -393,6 +398,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       this.shipping = shipping;
       this.surcharge = surcharge;
       this.tax = tax;
+      this.tip = tip;
     }
 
     public static Builder builder() {
@@ -414,6 +420,8 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
       private Object tax;
 
+      private Object tip;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentIncrementAuthorizationParams.AmountDetails build() {
         return new PaymentIntentIncrementAuthorizationParams.AmountDetails(
@@ -423,7 +431,8 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
             this.lineItems,
             this.shipping,
             this.surcharge,
-            this.tax);
+            this.tax,
+            this.tip);
       }
 
       /**
@@ -587,6 +596,18 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       /** Contains information about the tax portion of the amount. */
       public Builder setTax(EmptyParam tax) {
         this.tax = tax;
+        return this;
+      }
+
+      /** Contains information about the tip portion of the amount. */
+      public Builder setTip(PaymentIntentIncrementAuthorizationParams.AmountDetails.Tip tip) {
+        this.tip = tip;
+        return this;
+      }
+
+      /** Contains information about the tip portion of the amount. */
+      public Builder setTip(EmptyParam tip) {
+        this.tip = tip;
         return this;
       }
     }
@@ -2141,6 +2162,84 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
          */
         public Builder setTotalTaxAmount(Long totalTaxAmount) {
           this.totalTaxAmount = totalTaxAmount;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Tip {
+      /** Portion of the amount that corresponds to a tip. */
+      @SerializedName("amount")
+      Object amount;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Tip(Object amount, Map<String, Object> extraParams) {
+        this.amount = amount;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object amount;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentIncrementAuthorizationParams.AmountDetails.Tip build() {
+          return new PaymentIntentIncrementAuthorizationParams.AmountDetails.Tip(
+              this.amount, this.extraParams);
+        }
+
+        /** Portion of the amount that corresponds to a tip. */
+        public Builder setAmount(Long amount) {
+          this.amount = amount;
+          return this;
+        }
+
+        /** Portion of the amount that corresponds to a tip. */
+        public Builder setAmount(EmptyParam amount) {
+          this.amount = amount;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentIncrementAuthorizationParams.AmountDetails.Tip#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentIncrementAuthorizationParams.AmountDetails.Tip#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
           return this;
         }
       }

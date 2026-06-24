@@ -100,11 +100,8 @@ public class ContractRetrieveParams extends ApiRequestParams {
   }
 
   public enum Include implements ApiRequestParams.EnumParam {
-    @SerializedName("contract_line_details")
-    CONTRACT_LINE_DETAILS("contract_line_details"),
-
-    @SerializedName("license_quantities")
-    LICENSE_QUANTITIES("license_quantities"),
+    @SerializedName("billing_settings")
+    BILLING_SETTINGS("billing_settings"),
 
     @SerializedName("one_time_fees")
     ONE_TIME_FEES("one_time_fees"),

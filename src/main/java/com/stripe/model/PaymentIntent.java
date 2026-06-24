@@ -5224,7 +5224,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("account_funding")
       AccountFunding accountFunding;
 
-      /** ID of the Account representing the beneficiary in this account funding transaction. */
       @SerializedName("beneficiary_account")
       String beneficiaryAccount;
 
@@ -5247,7 +5246,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class AccountFunding extends StripeObject {
-        /** ID of the Account representing the sender in this account funding transaction. */
         @SerializedName("sender_account")
         String senderAccount;
 

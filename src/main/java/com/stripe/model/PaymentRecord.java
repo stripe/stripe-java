@@ -17,6 +17,7 @@ import com.stripe.param.PaymentRecordReportPaymentAttemptParams;
 import com.stripe.param.PaymentRecordReportPaymentParams;
 import com.stripe.param.PaymentRecordReportRefundParams;
 import com.stripe.param.PaymentRecordRetrieveParams;
+import com.stripe.param.PaymentRecordSearchParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -538,6 +539,70 @@ public class PaymentRecord extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /**
+   * Search for PaymentRecords you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static PaymentRecordSearchResult search(Map<String, Object> params)
+      throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for PaymentRecords you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static PaymentRecordSearchResult search(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/payment_records/search";
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, PaymentRecordSearchResult.class);
+  }
+
+  /**
+   * Search for PaymentRecords you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static PaymentRecordSearchResult search(PaymentRecordSearchParams params)
+      throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for PaymentRecords you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static PaymentRecordSearchResult search(
+      PaymentRecordSearchParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/payment_records/search";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, PaymentRecordSearchResult.class);
   }
 
   /** A representation of an amount of money, consisting of an amount and a currency. */
@@ -2402,6 +2467,20 @@ public class PaymentRecord extends ApiResource implements HasId {
       /** The last four digits of the gift card number. */
       @SerializedName("last4")
       String last4;
+
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
 
       /** The transaction ID from the gift card processor. */
       @SerializedName("transaction_id")

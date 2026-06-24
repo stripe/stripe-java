@@ -694,6 +694,15 @@ public final class EventNotificationClassLookup {
         com.stripe.events.V2CoreAccountIncludingConfigurationMerchantUpdatedEventNotification
             .class);
     eventClassLookup.put(
+        "v2.core.account[configuration.money_manager].capability_status_updated",
+        com.stripe.events
+            .V2CoreAccountIncludingConfigurationMoneyManagerCapabilityStatusUpdatedEventNotification
+            .class);
+    eventClassLookup.put(
+        "v2.core.account[configuration.money_manager].updated",
+        com.stripe.events.V2CoreAccountIncludingConfigurationMoneyManagerUpdatedEventNotification
+            .class);
+    eventClassLookup.put(
         "v2.core.account[configuration.recipient].capability_status_updated",
         com.stripe.events
             .V2CoreAccountIncludingConfigurationRecipientCapabilityStatusUpdatedEventNotification
@@ -702,14 +711,6 @@ public final class EventNotificationClassLookup {
         "v2.core.account[configuration.recipient].updated",
         com.stripe.events.V2CoreAccountIncludingConfigurationRecipientUpdatedEventNotification
             .class);
-    eventClassLookup.put(
-        "v2.core.account[configuration.storer].capability_status_updated",
-        com.stripe.events
-            .V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpdatedEventNotification
-            .class);
-    eventClassLookup.put(
-        "v2.core.account[configuration.storer].updated",
-        com.stripe.events.V2CoreAccountIncludingConfigurationStorerUpdatedEventNotification.class);
     eventClassLookup.put(
         "v2.core.account[defaults].updated",
         com.stripe.events.V2CoreAccountIncludingDefaultsUpdatedEventNotification.class);
@@ -948,6 +949,15 @@ public final class EventNotificationClassLookup {
         "v2.money_management.adjustment.created",
         com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification.class);
     eventClassLookup.put(
+        "v2.money_management.debit_dispute.failed",
+        com.stripe.events.V2MoneyManagementDebitDisputeFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.debit_dispute.submitted",
+        com.stripe.events.V2MoneyManagementDebitDisputeSubmittedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.debit_dispute.succeeded",
+        com.stripe.events.V2MoneyManagementDebitDisputeSucceededEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.financial_account.created",
         com.stripe.events.V2MoneyManagementFinancialAccountCreatedEventNotification.class);
     eventClassLookup.put(
@@ -1002,6 +1012,9 @@ public final class EventNotificationClassLookup {
         "v2.money_management.outbound_payment.returned",
         com.stripe.events.V2MoneyManagementOutboundPaymentReturnedEventNotification.class);
     eventClassLookup.put(
+        "v2.money_management.outbound_payment.under_review",
+        com.stripe.events.V2MoneyManagementOutboundPaymentUnderReviewEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.outbound_payment.updated",
         com.stripe.events.V2MoneyManagementOutboundPaymentUpdatedEventNotification.class);
     eventClassLookup.put(
@@ -1019,6 +1032,9 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.money_management.outbound_transfer.returned",
         com.stripe.events.V2MoneyManagementOutboundTransferReturnedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.outbound_transfer.under_review",
+        com.stripe.events.V2MoneyManagementOutboundTransferUnderReviewEventNotification.class);
     eventClassLookup.put(
         "v2.money_management.outbound_transfer.updated",
         com.stripe.events.V2MoneyManagementOutboundTransferUpdatedEventNotification.class);

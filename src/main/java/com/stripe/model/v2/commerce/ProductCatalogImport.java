@@ -50,6 +50,14 @@ public class ProductCatalogImport extends StripeObject implements HasId {
   Map<String, String> metadata;
 
   /**
+   * The import strategy for handling existing catalog data.
+   *
+   * <p>One of {@code replace}, or {@code upsert}.
+   */
+  @SerializedName("mode")
+  String mode;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *

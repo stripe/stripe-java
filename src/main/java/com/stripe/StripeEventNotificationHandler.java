@@ -257,10 +257,10 @@ import com.stripe.events.V2CoreAccountIncludingConfigurationCustomerCapabilitySt
 import com.stripe.events.V2CoreAccountIncludingConfigurationCustomerUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingConfigurationMerchantCapabilityStatusUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingConfigurationMerchantUpdatedEventNotification;
+import com.stripe.events.V2CoreAccountIncludingConfigurationMoneyManagerCapabilityStatusUpdatedEventNotification;
+import com.stripe.events.V2CoreAccountIncludingConfigurationMoneyManagerUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingConfigurationRecipientCapabilityStatusUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingConfigurationRecipientUpdatedEventNotification;
-import com.stripe.events.V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpdatedEventNotification;
-import com.stripe.events.V2CoreAccountIncludingConfigurationStorerUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingDefaultsUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingFutureRequirementsUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingIdentityUpdatedEventNotification;
@@ -341,6 +341,9 @@ import com.stripe.events.V2IamStripeAccessGrantRemovedEventNotification;
 import com.stripe.events.V2IamStripeAccessGrantRequestedEventNotification;
 import com.stripe.events.V2IamStripeAccessGrantUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification;
+import com.stripe.events.V2MoneyManagementDebitDisputeFailedEventNotification;
+import com.stripe.events.V2MoneyManagementDebitDisputeSubmittedEventNotification;
+import com.stripe.events.V2MoneyManagementDebitDisputeSucceededEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountStatementCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountStatementRestatedEventNotification;
@@ -358,12 +361,14 @@ import com.stripe.events.V2MoneyManagementOutboundPaymentCreatedEventNotificatio
 import com.stripe.events.V2MoneyManagementOutboundPaymentFailedEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundPaymentPostedEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundPaymentReturnedEventNotification;
+import com.stripe.events.V2MoneyManagementOutboundPaymentUnderReviewEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundPaymentUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundTransferCanceledEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundTransferCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundTransferFailedEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundTransferPostedEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundTransferReturnedEventNotification;
+import com.stripe.events.V2MoneyManagementOutboundTransferUnderReviewEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundTransferUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementPayoutMethodCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementPayoutMethodUpdatedEventNotification;
@@ -2066,6 +2071,22 @@ public class StripeEventNotificationHandler {
   }
 
   public StripeEventNotificationHandler
+      onV2CoreAccountIncludingConfigurationMoneyManagerCapabilityStatusUpdated(
+          Callback<
+                  V2CoreAccountIncludingConfigurationMoneyManagerCapabilityStatusUpdatedEventNotification>
+              callback) {
+    this.register(
+        "v2.core.account[configuration.money_manager].capability_status_updated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreAccountIncludingConfigurationMoneyManagerUpdated(
+      Callback<V2CoreAccountIncludingConfigurationMoneyManagerUpdatedEventNotification> callback) {
+    this.register("v2.core.account[configuration.money_manager].updated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler
       onV2CoreAccountIncludingConfigurationRecipientCapabilityStatusUpdated(
           Callback<
                   V2CoreAccountIncludingConfigurationRecipientCapabilityStatusUpdatedEventNotification>
@@ -2077,21 +2098,6 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV2CoreAccountIncludingConfigurationRecipientUpdated(
       Callback<V2CoreAccountIncludingConfigurationRecipientUpdatedEventNotification> callback) {
     this.register("v2.core.account[configuration.recipient].updated", callback);
-    return this;
-  }
-
-  public StripeEventNotificationHandler
-      onV2CoreAccountIncludingConfigurationStorerCapabilityStatusUpdated(
-          Callback<
-                  V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpdatedEventNotification>
-              callback) {
-    this.register("v2.core.account[configuration.storer].capability_status_updated", callback);
-    return this;
-  }
-
-  public StripeEventNotificationHandler onV2CoreAccountIncludingConfigurationStorerUpdated(
-      Callback<V2CoreAccountIncludingConfigurationStorerUpdatedEventNotification> callback) {
-    this.register("v2.core.account[configuration.storer].updated", callback);
     return this;
   }
 
@@ -2569,6 +2575,24 @@ public class StripeEventNotificationHandler {
     return this;
   }
 
+  public StripeEventNotificationHandler onV2MoneyManagementDebitDisputeFailed(
+      Callback<V2MoneyManagementDebitDisputeFailedEventNotification> callback) {
+    this.register("v2.money_management.debit_dispute.failed", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2MoneyManagementDebitDisputeSubmitted(
+      Callback<V2MoneyManagementDebitDisputeSubmittedEventNotification> callback) {
+    this.register("v2.money_management.debit_dispute.submitted", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2MoneyManagementDebitDisputeSucceeded(
+      Callback<V2MoneyManagementDebitDisputeSucceededEventNotification> callback) {
+    this.register("v2.money_management.debit_dispute.succeeded", callback);
+    return this;
+  }
+
   public StripeEventNotificationHandler onV2MoneyManagementFinancialAccountCreated(
       Callback<V2MoneyManagementFinancialAccountCreatedEventNotification> callback) {
     this.register("v2.money_management.financial_account.created", callback);
@@ -2671,6 +2695,12 @@ public class StripeEventNotificationHandler {
     return this;
   }
 
+  public StripeEventNotificationHandler onV2MoneyManagementOutboundPaymentUnderReview(
+      Callback<V2MoneyManagementOutboundPaymentUnderReviewEventNotification> callback) {
+    this.register("v2.money_management.outbound_payment.under_review", callback);
+    return this;
+  }
+
   public StripeEventNotificationHandler onV2MoneyManagementOutboundPaymentUpdated(
       Callback<V2MoneyManagementOutboundPaymentUpdatedEventNotification> callback) {
     this.register("v2.money_management.outbound_payment.updated", callback);
@@ -2704,6 +2734,12 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV2MoneyManagementOutboundTransferReturned(
       Callback<V2MoneyManagementOutboundTransferReturnedEventNotification> callback) {
     this.register("v2.money_management.outbound_transfer.returned", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2MoneyManagementOutboundTransferUnderReview(
+      Callback<V2MoneyManagementOutboundTransferUnderReviewEventNotification> callback) {
+    this.register("v2.money_management.outbound_transfer.under_review", callback);
     return this;
   }
 
