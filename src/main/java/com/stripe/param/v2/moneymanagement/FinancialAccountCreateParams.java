@@ -278,6 +278,9 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("credit")
+    CREDIT("credit"),
+
     @SerializedName("storage")
     STORAGE("storage");
 

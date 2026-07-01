@@ -223,6 +223,9 @@ public class FinancialAccountListParams extends ApiRequestParams {
     @SerializedName("accrued_fees")
     ACCRUED_FEES("accrued_fees"),
 
+    @SerializedName("credit")
+    CREDIT("credit"),
+
     @SerializedName("multiprocessor_settlement")
     MULTIPROCESSOR_SETTLEMENT("multiprocessor_settlement"),
 

@@ -99,19 +99,20 @@ public class TransactionEntry extends StripeObject implements HasId {
      * currency_conversion}, {@code debit_dispute}, {@code dispute}, {@code dispute_reversal},
      * {@code financing_paydown}, {@code financing_paydown_reversal}, {@code inbound_payment},
      * {@code inbound_payment_failure}, {@code inbound_transfer}, {@code inbound_transfer_reversal},
-     * {@code india_mdr_processing_fee}, {@code issuing_dispute}, {@code
-     * issuing_dispute_fraud_liability_debit}, {@code issuing_dispute_provisional_credit}, {@code
-     * issuing_dispute_provisional_credit_reversal}, {@code minimum_balance_hold}, {@code
-     * network_cost}, {@code obligation}, {@code outbound_payment}, {@code
-     * outbound_payment_reversal}, {@code outbound_transfer}, {@code outbound_transfer_reversal},
-     * {@code partial_capture_reversal}, {@code payment_method_passthrough_fee}, {@code
-     * payment_network_reserved_funds}, {@code platform_earning}, {@code platform_earning_refund},
-     * {@code platform_fee}, {@code received_credit}, {@code received_credit_reversal}, {@code
-     * received_debit}, {@code received_debit_reversal}, {@code refund}, {@code refund_failure},
-     * {@code risk_reserved_funds}, {@code stripe_balance_payment_debit}, {@code
-     * stripe_balance_payment_debit_reversal}, {@code stripe_fee}, {@code stripe_fee_tax}, {@code
-     * tax_fund}, {@code tax_withholding}, {@code transfer_reversal}, or {@code
-     * unreconciled_customer_funds}.
+     * {@code india_mdr_processing_fee}, {@code issuing_authorization}, {@code issuing_dispute},
+     * {@code issuing_dispute_fraud_liability_debit}, {@code issuing_dispute_provisional_credit},
+     * {@code issuing_dispute_provisional_credit_reversal}, {@code issuing_transaction}, {@code
+     * minimum_balance_hold}, {@code network_cost}, {@code obligation}, {@code outbound_payment},
+     * {@code outbound_payment_reversal}, {@code outbound_transfer}, {@code
+     * outbound_transfer_reversal}, {@code partial_capture_reversal}, {@code
+     * payment_method_passthrough_fee}, {@code payment_network_reserved_funds}, {@code
+     * platform_earning}, {@code platform_earning_refund}, {@code platform_fee}, {@code
+     * platform_funded_credit_transaction}, {@code received_credit}, {@code
+     * received_credit_reversal}, {@code received_debit}, {@code received_debit_reversal}, {@code
+     * refund}, {@code refund_failure}, {@code risk_reserved_funds}, {@code
+     * stripe_balance_payment_debit}, {@code stripe_balance_payment_debit_reversal}, {@code
+     * stripe_fee}, {@code stripe_fee_tax}, {@code tax_fund}, {@code tax_withholding}, {@code
+     * transfer_reversal}, or {@code unreconciled_customer_funds}.
      */
     @SerializedName("category")
     String category;
@@ -129,6 +130,10 @@ public class TransactionEntry extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Flow extends StripeObject {
+      /** If applicable, the connected account associated with this Transaction's flow. */
+      @SerializedName("account")
+      String account;
+
       /** If applicable, the ID of the Adjustment that created this Transaction. */
       @SerializedName("adjustment")
       String adjustment;
@@ -167,6 +172,18 @@ public class TransactionEntry extends StripeObject implements HasId {
       /** If applicable, the ID of the InboundTransfer that created this Transaction. */
       @SerializedName("inbound_transfer")
       String inboundTransfer;
+
+      /** If applicable, the ID of the Issuing authorization that created this Transaction. */
+      @SerializedName("issuing_authorization")
+      String issuingAuthorization;
+
+      /** If applicable, the ID of the Issuing dispute that created this Transaction. */
+      @SerializedName("issuing_dispute")
+      String issuingDispute;
+
+      /** If applicable, the ID of the Issuing transaction that created this Transaction. */
+      @SerializedName("issuing_transaction")
+      String issuingTransaction;
 
       /** If applicable, the ID of the OutboundPayment that created this Transaction. */
       @SerializedName("outbound_payment")
@@ -256,7 +273,8 @@ public class TransactionEntry extends StripeObject implements HasId {
        *
        * <p>One of {@code adjustment}, {@code application_fee}, {@code application_fee_refund},
        * {@code charge}, {@code currency_conversion}, {@code debit_dispute}, {@code dispute}, {@code
-       * fee_transaction}, {@code inbound_transfer}, {@code outbound_payment}, {@code
+       * fee_transaction}, {@code inbound_transfer}, {@code issuing_authorization}, {@code
+       * issuing_dispute}, {@code issuing_transaction}, {@code outbound_payment}, {@code
        * outbound_transfer}, {@code payout}, {@code received_credit}, {@code received_debit}, {@code
        * refund}, {@code reserve_hold}, {@code reserve_release}, {@code tax_fund}, {@code topup},
        * {@code transfer}, {@code transfer_reversal}, {@code treasury_credit_reversal}, {@code
