@@ -3,7 +3,10 @@ package com.stripe.param.v2.iam;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,6 +14,14 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class ApiKeyCreateParams extends ApiRequestParams {
+  /** List of connect permissions for this API key. */
+  @SerializedName("connect_permissions")
+  List<String> connectPermissions;
+
+  /** Timestamp at which the key expires. If not provided, the key never expires. */
+  @SerializedName("expires_at")
+  Instant expiresAt;
+
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -28,6 +39,10 @@ public class ApiKeyCreateParams extends ApiRequestParams {
   @SerializedName("note")
   String note;
 
+  /** List of permissions for this API key. */
+  @SerializedName("permissions")
+  List<String> permissions;
+
   /**
    * Public key for encrypting the API key secret. This must a PEM-formatted RSA key suitable for
    * encryption, &gt;= 2048 bits. A public key is required when creating secret keys. Publishable
@@ -41,10 +56,20 @@ public class ApiKeyCreateParams extends ApiRequestParams {
   Type type;
 
   private ApiKeyCreateParams(
-      Map<String, Object> extraParams, String name, String note, PublicKey publicKey, Type type) {
+      List<String> connectPermissions,
+      Instant expiresAt,
+      Map<String, Object> extraParams,
+      String name,
+      String note,
+      List<String> permissions,
+      PublicKey publicKey,
+      Type type) {
+    this.connectPermissions = connectPermissions;
+    this.expiresAt = expiresAt;
     this.extraParams = extraParams;
     this.name = name;
     this.note = note;
+    this.permissions = permissions;
     this.publicKey = publicKey;
     this.type = type;
   }
@@ -54,11 +79,17 @@ public class ApiKeyCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private List<String> connectPermissions;
+
+    private Instant expiresAt;
+
     private Map<String, Object> extraParams;
 
     private String name;
 
     private String note;
+
+    private List<String> permissions;
 
     private PublicKey publicKey;
 
@@ -67,7 +98,46 @@ public class ApiKeyCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ApiKeyCreateParams build() {
       return new ApiKeyCreateParams(
-          this.extraParams, this.name, this.note, this.publicKey, this.type);
+          this.connectPermissions,
+          this.expiresAt,
+          this.extraParams,
+          this.name,
+          this.note,
+          this.permissions,
+          this.publicKey,
+          this.type);
+    }
+
+    /**
+     * Add an element to `connectPermissions` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * ApiKeyCreateParams#connectPermissions} for the field documentation.
+     */
+    public Builder addConnectPermission(String element) {
+      if (this.connectPermissions == null) {
+        this.connectPermissions = new ArrayList<>();
+      }
+      this.connectPermissions.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `connectPermissions` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link ApiKeyCreateParams#connectPermissions} for the field documentation.
+     */
+    public Builder addAllConnectPermission(List<String> elements) {
+      if (this.connectPermissions == null) {
+        this.connectPermissions = new ArrayList<>();
+      }
+      this.connectPermissions.addAll(elements);
+      return this;
+    }
+
+    /** Timestamp at which the key expires. If not provided, the key never expires. */
+    public Builder setExpiresAt(Instant expiresAt) {
+      this.expiresAt = expiresAt;
+      return this;
     }
 
     /**
@@ -105,6 +175,32 @@ public class ApiKeyCreateParams extends ApiRequestParams {
     /** Note or description for the API key. */
     public Builder setNote(String note) {
       this.note = note;
+      return this;
+    }
+
+    /**
+     * Add an element to `permissions` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * ApiKeyCreateParams#permissions} for the field documentation.
+     */
+    public Builder addPermission(String element) {
+      if (this.permissions == null) {
+        this.permissions = new ArrayList<>();
+      }
+      this.permissions.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `permissions` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * ApiKeyCreateParams#permissions} for the field documentation.
+     */
+    public Builder addAllPermission(List<String> elements) {
+      if (this.permissions == null) {
+        this.permissions = new ArrayList<>();
+      }
+      this.permissions.addAll(elements);
       return this;
     }
 

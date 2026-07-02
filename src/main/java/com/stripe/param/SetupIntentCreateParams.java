@@ -1607,8 +1607,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     StripeBalance stripeBalance;
 
     /**
-     * If this is a Sunbit PaymentMethod, this hash contains details about the Sunbit payment
-     * method.
+     * If this is a {@code sunbit} PaymentMethod, this hash contains details about the Sunbit
+     * payment method.
      */
     @SerializedName("sunbit")
     Sunbit sunbit;
@@ -2626,8 +2626,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a Sunbit PaymentMethod, this hash contains details about the Sunbit payment
-       * method.
+       * If this is a {@code sunbit} PaymentMethod, this hash contains details about the Sunbit
+       * payment method.
        */
       public Builder setSunbit(SetupIntentCreateParams.PaymentMethodData.Sunbit sunbit) {
         this.sunbit = sunbit;

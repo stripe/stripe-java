@@ -106,6 +106,13 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("preferred_locales")
   List<String> preferredLocales;
 
+  /**
+   * Redaction status of this cardholder. If the cardholder is not redacted, this field will be
+   * null.
+   */
+  @SerializedName("redaction")
+  Redaction redaction;
+
   @SerializedName("requirements")
   Requirements requirements;
 
@@ -501,6 +508,23 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   }
 
   /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about Requirements, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -632,6 +656,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     trySetResponseGetter(billing, responseGetter);
     trySetResponseGetter(company, responseGetter);
     trySetResponseGetter(individual, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(requirements, responseGetter);
     trySetResponseGetter(spendingControls, responseGetter);
   }

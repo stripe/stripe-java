@@ -4,7 +4,9 @@ package com.stripe.param.v2.iam;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,6 +14,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class ApiKeyUpdateParams extends ApiRequestParams {
+  /** List of connect permissions for this API key. */
+  @SerializedName("connect_permissions")
+  List<String> connectPermissions;
+
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -29,10 +35,21 @@ public class ApiKeyUpdateParams extends ApiRequestParams {
   @SerializedName("note")
   Object note;
 
-  private ApiKeyUpdateParams(Map<String, Object> extraParams, Object name, Object note) {
+  /** List of permissions for this API key. */
+  @SerializedName("permissions")
+  List<String> permissions;
+
+  private ApiKeyUpdateParams(
+      List<String> connectPermissions,
+      Map<String, Object> extraParams,
+      Object name,
+      Object note,
+      List<String> permissions) {
+    this.connectPermissions = connectPermissions;
     this.extraParams = extraParams;
     this.name = name;
     this.note = note;
+    this.permissions = permissions;
   }
 
   public static Builder builder() {
@@ -40,15 +57,46 @@ public class ApiKeyUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private List<String> connectPermissions;
+
     private Map<String, Object> extraParams;
 
     private Object name;
 
     private Object note;
 
+    private List<String> permissions;
+
     /** Finalize and obtain parameter instance from this builder. */
     public ApiKeyUpdateParams build() {
-      return new ApiKeyUpdateParams(this.extraParams, this.name, this.note);
+      return new ApiKeyUpdateParams(
+          this.connectPermissions, this.extraParams, this.name, this.note, this.permissions);
+    }
+
+    /**
+     * Add an element to `connectPermissions` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * ApiKeyUpdateParams#connectPermissions} for the field documentation.
+     */
+    public Builder addConnectPermission(String element) {
+      if (this.connectPermissions == null) {
+        this.connectPermissions = new ArrayList<>();
+      }
+      this.connectPermissions.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `connectPermissions` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link ApiKeyUpdateParams#connectPermissions} for the field documentation.
+     */
+    public Builder addAllConnectPermission(List<String> elements) {
+      if (this.connectPermissions == null) {
+        this.connectPermissions = new ArrayList<>();
+      }
+      this.connectPermissions.addAll(elements);
+      return this;
     }
 
     /**
@@ -98,6 +146,32 @@ public class ApiKeyUpdateParams extends ApiRequestParams {
     /** Note or description to set for the API key. If blank, the field is left unchanged. */
     public Builder setNote(EmptyParam note) {
       this.note = note;
+      return this;
+    }
+
+    /**
+     * Add an element to `permissions` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * ApiKeyUpdateParams#permissions} for the field documentation.
+     */
+    public Builder addPermission(String element) {
+      if (this.permissions == null) {
+        this.permissions = new ArrayList<>();
+      }
+      this.permissions.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `permissions` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * ApiKeyUpdateParams#permissions} for the field documentation.
+     */
+    public Builder addAllPermission(List<String> elements) {
+      if (this.permissions == null) {
+        this.permissions = new ArrayList<>();
+      }
+      this.permissions.addAll(elements);
       return this;
     }
   }

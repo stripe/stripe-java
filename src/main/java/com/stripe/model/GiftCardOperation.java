@@ -17,7 +17,7 @@ import lombok.Setter;
 
 /**
  * A GiftCardOperation represents an operation performed on a third-party gift card, such as
- * activation, deactivation, reload, cashout, balance check, or void.
+ * activation, reload, cashout, balance check, or void.
  */
 @Getter
 @Setter
@@ -50,10 +50,6 @@ public class GiftCardOperation extends ApiResource implements HasId {
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
-
-  /** Details about a gift card deactivation operation. */
-  @SerializedName("deactivation")
-  Deactivation deactivation;
 
   /**
    * The failure code of the operation. Only present if the status is failed.
@@ -127,7 +123,7 @@ public class GiftCardOperation extends ApiResource implements HasId {
    * The type of operation performed.
    *
    * <p>One of {@code activation}, {@code activation_void}, {@code balance_check}, {@code cashout},
-   * {@code cashout_void}, {@code deactivation}, {@code reload}, or {@code reload_void}.
+   * {@code cashout_void}, {@code reload}, or {@code reload_void}.
    */
   @SerializedName("type")
   String type;
@@ -314,12 +310,6 @@ public class GiftCardOperation extends ApiResource implements HasId {
     }
   }
 
-  /** Details about a gift card deactivation operation. */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Deactivation extends StripeObject {}
-
   /** Details about a gift card reload operation. */
   @Getter
   @Setter
@@ -398,7 +388,6 @@ public class GiftCardOperation extends ApiResource implements HasId {
     trySetResponseGetter(balanceCheck, responseGetter);
     trySetResponseGetter(cashout, responseGetter);
     trySetResponseGetter(cashoutVoid, responseGetter);
-    trySetResponseGetter(deactivation, responseGetter);
     trySetResponseGetter(giftCard, responseGetter);
     trySetResponseGetter(reload, responseGetter);
     trySetResponseGetter(reloadVoid, responseGetter);

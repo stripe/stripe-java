@@ -31,7 +31,7 @@ public class SubscriptionPauseParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Determines how to handle debits and credits when pausing. The default is {@code
+   * Determines how to handle debits and credits when pausing. Defaults to {@code
    * pending_invoice_item}.
    */
   @SerializedName("invoicing_behavior")
@@ -134,7 +134,7 @@ public class SubscriptionPauseParams extends ApiRequestParams {
     }
 
     /**
-     * Determines how to handle debits and credits when pausing. The default is {@code
+     * Determines how to handle debits and credits when pausing. Defaults to {@code
      * pending_invoice_item}.
      */
     public Builder setInvoicingBehavior(

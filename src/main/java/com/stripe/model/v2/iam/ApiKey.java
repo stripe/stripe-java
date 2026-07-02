@@ -15,6 +15,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ApiKey extends StripeObject implements HasId {
+  /** List of connect permissions for this API key. */
+  @SerializedName("connect_permissions")
+  List<String> connectPermissions;
+
   /** Timestamp when the API key was created. */
   @SerializedName("created")
   Instant created;
@@ -66,6 +70,10 @@ public class ApiKey extends StripeObject implements HasId {
    */
   @SerializedName("object")
   String object;
+
+  /** List of permissions for this API key. */
+  @SerializedName("permissions")
+  List<String> permissions;
 
   /** Token set for a publishable key. */
   @SerializedName("publishable_key")

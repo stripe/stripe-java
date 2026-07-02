@@ -21,11 +21,11 @@ public final class BalanceTransactionService extends ApiService {
   }
 
   /**
-   * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
-   * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
+   * Returns a list of transactions that have contributed to the Stripe account balance (for
+   * example, charges, transfers, and so on). The transactions return in sorted order, with the most
    * recent transactions appearing first.
    *
-   * <p>Note that this endpoint was previously called “Balance history” and used the path {@code
+   * <p>The previous name of this endpoint was “Balance history,” and it used the path {@code
    * /v1/balance/history}.
    */
   public StripeCollection<BalanceTransaction> list(BalanceTransactionListParams params)
@@ -33,33 +33,33 @@ public final class BalanceTransactionService extends ApiService {
     return list(params, (RequestOptions) null);
   }
   /**
-   * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
-   * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
+   * Returns a list of transactions that have contributed to the Stripe account balance (for
+   * example, charges, transfers, and so on). The transactions return in sorted order, with the most
    * recent transactions appearing first.
    *
-   * <p>Note that this endpoint was previously called “Balance history” and used the path {@code
+   * <p>The previous name of this endpoint was “Balance history,” and it used the path {@code
    * /v1/balance/history}.
    */
   public StripeCollection<BalanceTransaction> list(RequestOptions options) throws StripeException {
     return list((BalanceTransactionListParams) null, options);
   }
   /**
-   * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
-   * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
+   * Returns a list of transactions that have contributed to the Stripe account balance (for
+   * example, charges, transfers, and so on). The transactions return in sorted order, with the most
    * recent transactions appearing first.
    *
-   * <p>Note that this endpoint was previously called “Balance history” and used the path {@code
+   * <p>The previous name of this endpoint was “Balance history,” and it used the path {@code
    * /v1/balance/history}.
    */
   public StripeCollection<BalanceTransaction> list() throws StripeException {
     return list((BalanceTransactionListParams) null, (RequestOptions) null);
   }
   /**
-   * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
-   * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
+   * Returns a list of transactions that have contributed to the Stripe account balance (for
+   * example, charges, transfers, and so on). The transactions return in sorted order, with the most
    * recent transactions appearing first.
    *
-   * <p>Note that this endpoint was previously called “Balance history” and used the path {@code
+   * <p>The previous name of this endpoint was “Balance history,” and it used the path {@code
    * /v1/balance/history}.
    */
   public StripeCollection<BalanceTransaction> list(

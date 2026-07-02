@@ -166,6 +166,13 @@ public class Authorization extends ApiResource
   Long merchantAmount;
 
   /**
+   * The exchange rate used by the network to convert the {@code merchant_amount} to {@code amount}.
+   * The {@code merchant_amount} multiplied with this rate will equal to the {@code amount}.
+   */
+  @SerializedName("merchant_amount_exchange_rate")
+  BigDecimal merchantAmountExchangeRate;
+
+  /**
    * The local currency that was presented to the cardholder for the authorization. This currency
    * can be different from the cardholder currency and the {@code currency} field on this
    * authorization. Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO
@@ -205,6 +212,13 @@ public class Authorization extends ApiResource
    */
   @SerializedName("pending_request")
   PendingRequest pendingRequest;
+
+  /**
+   * Redaction status of this authorization. If the authorization is not redacted, this field will
+   * be null.
+   */
+  @SerializedName("redaction")
+  Redaction redaction;
 
   /**
    * History of every time a {@code pending_request} authorization was approved/declined, either by
@@ -1584,6 +1598,23 @@ public class Authorization extends ApiResource
   }
 
   /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about RequestHistory, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1782,6 +1813,10 @@ public class Authorization extends ApiResource
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Device extends StripeObject {
+        /** An identifier for the device used during wallet provisioning. */
+        @SerializedName("device_id")
+        String deviceId;
+
         /** The IP address of the device at provisioning time. */
         @SerializedName("ip_address")
         String ipAddress;
@@ -2413,6 +2448,7 @@ public class Authorization extends ApiResource
     trySetResponseGetter(merchantData, responseGetter);
     trySetResponseGetter(networkData, responseGetter);
     trySetResponseGetter(pendingRequest, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(token, responseGetter);
     trySetResponseGetter(tokenDetails, responseGetter);
     trySetResponseGetter(treasury, responseGetter);

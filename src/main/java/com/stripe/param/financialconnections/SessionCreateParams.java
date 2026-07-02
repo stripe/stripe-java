@@ -3,6 +3,7 @@ package com.stripe.param.financialconnections;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -712,9 +713,12 @@ public class SessionCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Limits {
-    /** <strong>Required.</strong> The number of accounts that can be linked in this Session. */
+    /**
+     * <strong>Required.</strong> The number of accounts that can be linked in this Session. Pass an
+     * empty value to allow any number of accounts.
+     */
     @SerializedName("accounts")
-    Long accounts;
+    Object accounts;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -725,7 +729,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private Limits(Long accounts, Map<String, Object> extraParams) {
+    private Limits(Object accounts, Map<String, Object> extraParams) {
       this.accounts = accounts;
       this.extraParams = extraParams;
     }
@@ -735,7 +739,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Long accounts;
+      private Object accounts;
 
       private Map<String, Object> extraParams;
 
@@ -744,8 +748,20 @@ public class SessionCreateParams extends ApiRequestParams {
         return new SessionCreateParams.Limits(this.accounts, this.extraParams);
       }
 
-      /** <strong>Required.</strong> The number of accounts that can be linked in this Session. */
+      /**
+       * <strong>Required.</strong> The number of accounts that can be linked in this Session. Pass
+       * an empty value to allow any number of accounts.
+       */
       public Builder setAccounts(Long accounts) {
+        this.accounts = accounts;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The number of accounts that can be linked in this Session. Pass
+       * an empty value to allow any number of accounts.
+       */
+      public Builder setAccounts(EmptyParam accounts) {
         this.accounts = accounts;
         return this;
       }

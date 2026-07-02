@@ -60,6 +60,13 @@ public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
   @SerializedName("processor_details")
   ProcessorDetails processorDetails;
 
+  /**
+   * The reason for the refund. One of {@code duplicate}, {@code fraudulent}, or {@code
+   * requested_by_customer}.
+   */
+  @SerializedName("reason")
+  Reason reason;
+
   /** A key to group refunds together. */
   @SerializedName("refund_group")
   String refundGroup;
@@ -77,6 +84,7 @@ public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
       Object metadata,
       Outcome outcome,
       ProcessorDetails processorDetails,
+      Reason reason,
       String refundGroup,
       Refunded refunded) {
     this.amount = amount;
@@ -87,6 +95,7 @@ public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
     this.metadata = metadata;
     this.outcome = outcome;
     this.processorDetails = processorDetails;
+    this.reason = reason;
     this.refundGroup = refundGroup;
     this.refunded = refunded;
   }
@@ -112,6 +121,8 @@ public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
 
     private ProcessorDetails processorDetails;
 
+    private Reason reason;
+
     private String refundGroup;
 
     private Refunded refunded;
@@ -127,6 +138,7 @@ public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
           this.metadata,
           this.outcome,
           this.processorDetails,
+          this.reason,
           this.refundGroup,
           this.refunded);
     }
@@ -265,6 +277,15 @@ public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
     public Builder setProcessorDetails(
         PaymentAttemptRecordReportRefundParams.ProcessorDetails processorDetails) {
       this.processorDetails = processorDetails;
+      return this;
+    }
+
+    /**
+     * The reason for the refund. One of {@code duplicate}, {@code fraudulent}, or {@code
+     * requested_by_customer}.
+     */
+    public Builder setReason(PaymentAttemptRecordReportRefundParams.Reason reason) {
+      this.reason = reason;
       return this;
     }
 
@@ -779,6 +800,24 @@ public class PaymentAttemptRecordReportRefundParams extends ApiRequestParams {
     private final String value;
 
     Outcome(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Reason implements ApiRequestParams.EnumParam {
+    @SerializedName("duplicate")
+    DUPLICATE("duplicate"),
+
+    @SerializedName("fraudulent")
+    FRAUDULENT("fraudulent"),
+
+    @SerializedName("requested_by_customer")
+    REQUESTED_BY_CUSTOMER("requested_by_customer");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Reason(String value) {
       this.value = value;
     }
   }

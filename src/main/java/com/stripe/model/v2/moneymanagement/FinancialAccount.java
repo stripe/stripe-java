@@ -47,6 +47,13 @@ public class FinancialAccount extends StripeObject implements HasId {
   Instant created;
 
   /**
+   * If this is a {@code credit} FinancialAccount, this hash includes details specific to {@code
+   * credit} FinancialAccounts.
+   */
+  @SerializedName("credit")
+  Credit credit;
+
+  /**
    * A descriptive name for the FinancialAccount, up to 50 characters long. This name will be used
    * in the Stripe Dashboard and embedded components.
    */
@@ -132,8 +139,8 @@ public class FinancialAccount extends StripeObject implements HasId {
    * name matching this value. It contains additional information specific to the FinancialAccount
    * type.
    *
-   * <p>One of {@code accrued_fees}, {@code multiprocessor_settlement}, {@code other}, {@code
-   * payments}, or {@code storage}.
+   * <p>One of {@code accrued_fees}, {@code credit}, {@code multiprocessor_settlement}, {@code
+   * other}, {@code payments}, or {@code storage}.
    */
   @SerializedName("type")
   String type;
@@ -179,6 +186,51 @@ public class FinancialAccount extends StripeObject implements HasId {
     /** Balance of funds that are being used for a pending outbound money movement. */
     @SerializedName("outbound_pending")
     Map<String, Amount> outboundPending;
+  }
+
+  /**
+   * If this is a {@code credit} FinancialAccount, this hash includes details specific to {@code
+   * credit} FinancialAccounts.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Credit extends StripeObject {
+    /** Details about how this credit FinancialAccount is funded. */
+    @SerializedName("funded_by")
+    FundedBy fundedBy;
+
+    /** The currencies supported by this credit FinancialAccount. */
+    @SerializedName("supported_currencies")
+    List<String> supportedCurrencies;
+
+    /** Details about how this credit FinancialAccount is funded. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FundedBy extends StripeObject {
+      /** Details for platform-funded credit FinancialAccounts. */
+      @SerializedName("platform")
+      Platform platform;
+
+      /**
+       * The type of funding source for this credit FinancialAccount.
+       *
+       * <p>One of {@code platform}, or {@code stripe}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Details for platform-funded credit FinancialAccounts. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Platform extends StripeObject {
+        /** The platform FinancialAccount used to fund this credit FinancialAccount. */
+        @SerializedName("financial_account")
+        String financialAccount;
+      }
+    }
   }
 
   /**

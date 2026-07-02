@@ -93,6 +93,10 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.CreditNoteService(this.getResponseGetter());
   }
 
+  public com.stripe.service.CryptoService crypto() {
+    return new com.stripe.service.CryptoService(this.getResponseGetter());
+  }
+
   public com.stripe.service.CustomerSessionService customerSessions() {
     return new com.stripe.service.CustomerSessionService(this.getResponseGetter());
   }

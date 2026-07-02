@@ -176,7 +176,7 @@ public class PayoutIntent extends StripeObject implements HasId {
        * Open Enum. The reason for the failure.
        *
        * <p>One of {@code account_not_configured_as_recipient}, {@code
-       * currency_not_supported_for_financial_account_balance}, {@code
+       * currency_not_supported_for_financial_account_balance}, {@code currency_required}, {@code
        * feature_not_active_for_recipient}, {@code fx_rate_drift_exceeded_after_review}, {@code
        * insufficient_funds}, {@code payout_method_account_type_incorrect}, {@code
        * payout_method_amount_limit_exceeded}, {@code payout_method_canceled_by_customer}, {@code
