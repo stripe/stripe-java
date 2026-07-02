@@ -227,6 +227,12 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
+  /**
+   * Redaction status of this SetupIntent. If the SetupIntent isn't redacted, this field is null.
+   */
+  @SerializedName("redaction")
+  Redaction redaction;
+
   @SerializedName("setup_details")
   SetupDetails setupDetails;
 
@@ -1853,6 +1859,23 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about SetupDetails, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1916,6 +1939,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     trySetResponseGetter(paymentMethod, responseGetter);
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(setupDetails, responseGetter);
     trySetResponseGetter(singleUseMandate, responseGetter);
   }

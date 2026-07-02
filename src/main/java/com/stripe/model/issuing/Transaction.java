@@ -123,6 +123,13 @@ public class Transaction extends ApiResource
   @SerializedName("merchant_amount")
   Long merchantAmount;
 
+  /**
+   * The exchange rate used by the network to convert the {@code merchant_amount} to {@code amount}.
+   * The {@code merchant_amount} multiplied with this rate will equal to the {@code amount}.
+   */
+  @SerializedName("merchant_amount_exchange_rate")
+  BigDecimal merchantAmountExchangeRate;
+
   /** The currency with which the merchant is taking payment. */
   @SerializedName("merchant_currency")
   String merchantCurrency;
@@ -154,6 +161,13 @@ public class Transaction extends ApiResource
   /** Additional purchase information that is optionally provided by the merchant. */
   @SerializedName("purchase_details")
   PurchaseDetails purchaseDetails;
+
+  /**
+   * Redaction status of this transaction. If the transaction is not redacted, this field will be
+   * null.
+   */
+  @SerializedName("redaction")
+  Redaction redaction;
 
   /**
    * The ID of the <a href="https://docs.stripe.com/api/issuing/settlements">settlement</a> to which
@@ -1087,6 +1101,23 @@ public class Transaction extends ApiResource
   }
 
   /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about Treasury, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -1257,6 +1288,7 @@ public class Transaction extends ApiResource
     trySetResponseGetter(merchantData, responseGetter);
     trySetResponseGetter(networkData, responseGetter);
     trySetResponseGetter(purchaseDetails, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(settlement, responseGetter);
     trySetResponseGetter(token, responseGetter);
     trySetResponseGetter(treasury, responseGetter);

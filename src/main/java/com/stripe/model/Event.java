@@ -114,14 +114,16 @@ public class Event extends ApiResource implements HasId {
    * {@code account_notice.updated}, {@code application_fee.created}, {@code
    * application_fee.refund.updated}, {@code application_fee.refunded}, {@code balance.available},
    * {@code balance_settings.updated}, {@code billing.alert.recovered}, {@code
-   * billing.alert.triggered}, {@code billing.credit_grant.created}, {@code
-   * billing_portal.configuration.created}, {@code billing_portal.configuration.updated}, {@code
-   * billing_portal.session.created}, {@code capability.updated}, {@code
-   * capital.financing_offer.accepted}, {@code capital.financing_offer.accepted_other_offer}, {@code
-   * capital.financing_offer.canceled}, {@code capital.financing_offer.created}, {@code
-   * capital.financing_offer.expired}, {@code capital.financing_offer.fully_repaid}, {@code
-   * capital.financing_offer.paid_out}, {@code capital.financing_offer.rejected}, {@code
-   * capital.financing_offer.replacement_created}, {@code
+   * billing.alert.triggered}, {@code billing.credit_balance_transaction.created}, {@code
+   * billing.credit_grant.created}, {@code billing.credit_grant.updated}, {@code
+   * billing.meter.created}, {@code billing.meter.deactivated}, {@code billing.meter.reactivated},
+   * {@code billing.meter.updated}, {@code billing_portal.configuration.created}, {@code
+   * billing_portal.configuration.updated}, {@code billing_portal.session.created}, {@code
+   * capability.updated}, {@code capital.financing_offer.accepted}, {@code
+   * capital.financing_offer.accepted_other_offer}, {@code capital.financing_offer.canceled}, {@code
+   * capital.financing_offer.created}, {@code capital.financing_offer.expired}, {@code
+   * capital.financing_offer.fully_repaid}, {@code capital.financing_offer.paid_out}, {@code
+   * capital.financing_offer.rejected}, {@code capital.financing_offer.replacement_created}, {@code
    * capital.financing_summary.line_of_credit_update}, {@code
    * capital.financing_transaction.created}, {@code cash_balance.funds_available}, {@code
    * charge.captured}, {@code charge.dispute.closed}, {@code charge.dispute.created}, {@code
@@ -169,12 +171,12 @@ public class Event extends ApiResource implements HasId {
    * {@code invoice.payment_attempt_required}, {@code invoice.payment_failed}, {@code
    * invoice.payment_succeeded}, {@code invoice.sent}, {@code invoice.upcoming}, {@code
    * invoice.updated}, {@code invoice.voided}, {@code invoice.will_be_due}, {@code
-   * invoice_payment.paid}, {@code invoiceitem.created}, {@code invoiceitem.deleted}, {@code
-   * issuing_authorization.created}, {@code issuing_authorization.request}, {@code
-   * issuing_authorization.updated}, {@code issuing_card.created}, {@code issuing_card.updated},
-   * {@code issuing_cardholder.created}, {@code issuing_cardholder.updated}, {@code
-   * issuing_dispute.closed}, {@code issuing_dispute.created}, {@code
-   * issuing_dispute.funds_reinstated}, {@code issuing_dispute.funds_rescinded}, {@code
+   * invoice_payment.detached}, {@code invoice_payment.paid}, {@code invoiceitem.created}, {@code
+   * invoiceitem.deleted}, {@code issuing_authorization.created}, {@code
+   * issuing_authorization.request}, {@code issuing_authorization.updated}, {@code
+   * issuing_card.created}, {@code issuing_card.updated}, {@code issuing_cardholder.created}, {@code
+   * issuing_cardholder.updated}, {@code issuing_dispute.closed}, {@code issuing_dispute.created},
+   * {@code issuing_dispute.funds_reinstated}, {@code issuing_dispute.funds_rescinded}, {@code
    * issuing_dispute.submitted}, {@code issuing_dispute.updated}, {@code
    * issuing_dispute_settlement_detail.created}, {@code issuing_dispute_settlement_detail.updated},
    * {@code issuing_fraud_liability_debit.created}, {@code
@@ -241,11 +243,8 @@ public class Event extends ApiResource implements HasId {
    * treasury.outbound_transfer.failed}, {@code treasury.outbound_transfer.posted}, {@code
    * treasury.outbound_transfer.returned}, {@code
    * treasury.outbound_transfer.tracking_details_updated}, {@code treasury.received_credit.created},
-   * {@code treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, {@code
-   * treasury.received_debit.created}, {@code invoice_payment.detached}, {@code
-   * billing.credit_balance_transaction.created}, {@code billing.credit_grant.updated}, {@code
-   * billing.meter.created}, {@code billing.meter.deactivated}, {@code billing.meter.reactivated},
-   * or {@code billing.meter.updated}.
+   * {@code treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, or {@code
+   * treasury.received_debit.created}.
    */
   @SerializedName("type")
   String type;

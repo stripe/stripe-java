@@ -262,6 +262,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @SerializedName("receipt_url")
   String receiptUrl;
 
+  /** Redaction status of this charge. If not null, this charge is associated to a redaction job. */
+  @SerializedName("redaction")
+  Redaction redaction;
+
   /**
    * Whether the charge has been fully refunded. If the charge is only partially refunded, this
    * attribute will still be false.
@@ -1846,6 +1850,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Bizum extends StripeObject {
+      /** A unique identifier for the buyer as determined by the local payment processor. */
+      @SerializedName("buyer_id")
+      String buyerId;
+
       /** The Bizum transaction ID associated with this payment. */
       @SerializedName("transaction_id")
       String transactionId;
@@ -1941,6 +1949,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("description")
       String description;
+
+      /**
+       * The Electronic Commerce Indicator (ECI) returned by the card network in the authorization
+       * response. Indicates the level of authentication used. Only populated for Visa and
+       * Mastercard transactions. The response value is the source of truth; it may differ from the
+       * request value if the network downgraded the transaction.
+       */
+      @SerializedName("electronic_commerce_indicator")
+      String electronicCommerceIndicator;
 
       /** Two-digit number representing the card's expiration month. */
       @SerializedName("exp_month")
@@ -2066,6 +2083,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;
+
+      /**
+       * Transaction Link ID (TLID) is a unique identifier for a transaction. This is used by some
+       * card networks, such as Mastercard, for transaction linking, in addition to Network
+       * Transaction IDs. This value will be present if it is returned by the financial network in
+       * the authorization response, and null otherwise.
+       */
+      @SerializedName("transaction_link_id")
+      String transactionLinkId;
 
       /** If this Card is part of a card wallet, this contains the details of the card wallet. */
       @SerializedName("wallet")
@@ -2950,6 +2976,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Crypto extends StripeObject {
+      /** The amount received for the crypto payment. */
+      @SerializedName("amount_received")
+      Long amountReceived;
+
+      /** The amount requested for the crypto payment. */
+      @SerializedName("amount_requested")
+      Long amountRequested;
+
       /** The wallet address of the customer. */
       @SerializedName("buyer_address")
       String buyerAddress;
@@ -2957,8 +2991,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, or {@code
-       * tempo}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui}, or
+       * {@code tempo}.
        */
       @SerializedName("network")
       String network;
@@ -2966,7 +3000,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The token currency that the transaction was sent with.
        *
-       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, or {@code usdt}.
+       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, {@code usdsui},
+       * or {@code usdt}.
        */
       @SerializedName("token_currency")
       String tokenCurrency;
@@ -3073,6 +3108,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** The expiration year of the gift card. */
       @SerializedName("exp_year")
       Long expYear;
+
+      /**
+       * Uniquely identifies this particular gift card number. You can use this attribute to check
+       * whether two transactions were made using the same gift card.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
 
       /** The first six digits of the gift card number. */
       @SerializedName("first6")
@@ -4069,6 +4111,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("bank_transaction_id")
       String bankTransactionId;
 
+      /**
+       * Uniquely identifies this particular Pix account. You can use this attribute to check
+       * whether two Pix accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
       /** ID of the multi use Mandate generated by the PaymentIntent. */
       @SerializedName("mandate")
       String mandate;
@@ -4681,6 +4730,23 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about TransferData, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -4741,6 +4807,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     trySetResponseGetter(paymentMethodDetails, responseGetter);
     trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(radarOptions, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(refunds, responseGetter);
     trySetResponseGetter(review, responseGetter);
     trySetResponseGetter(shipping, responseGetter);

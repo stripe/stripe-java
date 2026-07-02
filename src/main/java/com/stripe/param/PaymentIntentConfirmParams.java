@@ -16808,8 +16808,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     StripeBalance stripeBalance;
 
     /**
-     * If this is a Sunbit PaymentMethod, this hash contains details about the Sunbit payment
-     * method.
+     * If this is a {@code sunbit} PaymentMethod, this hash contains details about the Sunbit
+     * payment method.
      */
     @SerializedName("sunbit")
     Sunbit sunbit;
@@ -17836,8 +17836,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a Sunbit PaymentMethod, this hash contains details about the Sunbit payment
-       * method.
+       * If this is a {@code sunbit} PaymentMethod, this hash contains details about the Sunbit
+       * payment method.
        */
       public Builder setSunbit(PaymentIntentConfirmParams.PaymentMethodData.Sunbit sunbit) {
         this.sunbit = sunbit;
@@ -23940,6 +23940,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Object stripeBalance;
 
     /**
+     * If this is a {@code sunbit} PaymentMethod, this sub-hash contains details about the Sunbit
+     * payment method options.
+     */
+    @SerializedName("sunbit")
+    Object sunbit;
+
+    /**
      * If this is a {@code Swish} PaymentMethod, this sub-hash contains details about the Swish
      * payment method options.
      */
@@ -24040,6 +24047,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Object shopeepay,
         Object sofort,
         Object stripeBalance,
+        Object sunbit,
         Object swish,
         Object twint,
         Object upi,
@@ -24104,6 +24112,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.shopeepay = shopeepay;
       this.sofort = sofort;
       this.stripeBalance = stripeBalance;
+      this.sunbit = sunbit;
       this.swish = swish;
       this.twint = twint;
       this.upi = upi;
@@ -24233,6 +24242,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Object stripeBalance;
 
+      private Object sunbit;
+
       private Object swish;
 
       private Object twint;
@@ -24306,6 +24317,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.shopeepay,
             this.sofort,
             this.stripeBalance,
+            this.sunbit,
             this.swish,
             this.twint,
             this.upi,
@@ -25384,6 +25396,24 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setStripeBalance(EmptyParam stripeBalance) {
         this.stripeBalance = stripeBalance;
+        return this;
+      }
+
+      /**
+       * If this is a {@code sunbit} PaymentMethod, this sub-hash contains details about the Sunbit
+       * payment method options.
+       */
+      public Builder setSunbit(PaymentIntentConfirmParams.PaymentMethodOptions.Sunbit sunbit) {
+        this.sunbit = sunbit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code sunbit} PaymentMethod, this sub-hash contains details about the Sunbit
+       * payment method options.
+       */
+      public Builder setSunbit(EmptyParam sunbit) {
+        this.sunbit = sunbit;
         return this;
       }
 
@@ -31851,6 +31881,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Crypto {
+      /** Controls how crypto funding amounts are reconciled for this PaymentIntent. */
+      @SerializedName("amount_reconciliation")
+      AmountReconciliation amountReconciliation;
+
       /** Specific configuration for this PaymentIntent when the mode is {@code deposit}. */
       @SerializedName("deposit_options")
       DepositOptions depositOptions;
@@ -31902,11 +31936,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       TransactionVerificationOptions transactionVerificationOptions;
 
       private Crypto(
+          AmountReconciliation amountReconciliation,
           DepositOptions depositOptions,
           Map<String, Object> extraParams,
           Mode mode,
           SetupFutureUsage setupFutureUsage,
           TransactionVerificationOptions transactionVerificationOptions) {
+        this.amountReconciliation = amountReconciliation;
         this.depositOptions = depositOptions;
         this.extraParams = extraParams;
         this.mode = mode;
@@ -31919,6 +31955,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private AmountReconciliation amountReconciliation;
+
         private DepositOptions depositOptions;
 
         private Map<String, Object> extraParams;
@@ -31932,11 +31970,20 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentConfirmParams.PaymentMethodOptions.Crypto build() {
           return new PaymentIntentConfirmParams.PaymentMethodOptions.Crypto(
+              this.amountReconciliation,
               this.depositOptions,
               this.extraParams,
               this.mode,
               this.setupFutureUsage,
               this.transactionVerificationOptions);
+        }
+
+        /** Controls how crypto funding amounts are reconciled for this PaymentIntent. */
+        public Builder setAmountReconciliation(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.AmountReconciliation
+                amountReconciliation) {
+          this.amountReconciliation = amountReconciliation;
+          return this;
         }
 
         /** Specific configuration for this PaymentIntent when the mode is {@code deposit}. */
@@ -32020,6 +32067,105 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
                 transactionVerificationOptions) {
           this.transactionVerificationOptions = transactionVerificationOptions;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AmountReconciliation {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> Controls how crypto funding amounts are reconciled for the
+         * PaymentIntent.
+         */
+        @SerializedName("type")
+        Type type;
+
+        private AmountReconciliation(Map<String, Object> extraParams, Type type) {
+          this.extraParams = extraParams;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.AmountReconciliation
+              build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.AmountReconciliation(
+                this.extraParams, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.AmountReconciliation#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.AmountReconciliation#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Controls how crypto funding amounts are reconciled for the
+           * PaymentIntent.
+           */
+          public Builder setType(
+              PaymentIntentConfirmParams.PaymentMethodOptions.Crypto.AmountReconciliation.Type
+                  type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("accept_partial_funding")
+          ACCEPT_PARTIAL_FUNDING("accept_partial_funding"),
+
+          @SerializedName("exact")
+          EXACT("exact");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -46464,9 +46610,35 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Satispay(ApiRequestParams.EnumParam captureMethod, Map<String, Object> extraParams) {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      private Satispay(
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          ApiRequestParams.EnumParam setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
       }
 
       public static Builder builder() {
@@ -46478,10 +46650,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentConfirmParams.PaymentMethodOptions.Satispay build() {
           return new PaymentIntentConfirmParams.PaymentMethodOptions.Satispay(
-              this.captureMethod, this.extraParams);
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -46542,6 +46716,58 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Satispay.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
       }
 
       public enum CaptureMethod implements ApiRequestParams.EnumParam {
@@ -46552,6 +46778,24 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private final String value;
 
         CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session"),
+
+        @SerializedName("on_session")
+        ON_SESSION("on_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
           this.value = value;
         }
       }
@@ -47572,6 +47816,191 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         @SerializedName("off_session")
         OFF_SESSION("off_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sunbit {
+      /**
+       * Controls when the funds are captured from the customer's account.
+       *
+       * <p>If provided, this parameter overrides the behavior of the top-level <a
+       * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+       * for this payment method type when finalizing the payment with this payment method type.
+       *
+       * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty value
+       * for this parameter unsets the stored value for this payment method type.
+       */
+      @SerializedName("capture_method")
+      ApiRequestParams.EnumParam captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Sunbit(
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private ApiRequestParams.EnumParam captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Sunbit build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Sunbit(
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Controls when the funds are captured from the customer's account.
+         *
+         * <p>If provided, this parameter overrides the behavior of the top-level <a
+         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+         * for this payment method type when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter unsets the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Sunbit.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Controls when the funds are captured from the customer's account.
+         *
+         * <p>If provided, this parameter overrides the behavior of the top-level <a
+         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+         * for this payment method type when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter unsets the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(EmptyParam captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Sunbit#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Sunbit#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Sunbit.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -49206,7 +49635,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class WechatPay {
-      /** The app ID registered with WeChat Pay. Only required when client is ios or android. */
+      /**
+       * The app ID registered with WeChat Pay. Only required when client is ios, android, or
+       * mini_program.
+       */
       @SerializedName("app_id")
       String appId;
 
@@ -49290,7 +49722,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.appId, this.buyerId, this.client, this.extraParams, this.setupFutureUsage);
         }
 
-        /** The app ID registered with WeChat Pay. Only required when client is ios or android. */
+        /**
+         * The app ID registered with WeChat Pay. Only required when client is ios, android, or
+         * mini_program.
+         */
         public Builder setAppId(String appId) {
           this.appId = appId;
           return this;

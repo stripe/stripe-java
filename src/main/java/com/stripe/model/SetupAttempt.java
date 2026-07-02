@@ -339,6 +339,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
 
+    @SerializedName("satispay")
+    Satispay satispay;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -1026,7 +1029,14 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Pix extends StripeObject {}
+    public static class Pix extends StripeObject {
+      /**
+       * Uniquely identifies this particular Pix account. You can use this attribute to check
+       * whether two Pix accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+    }
 
     /**
      * For more details about RevolutPay, please refer to the <a
@@ -1036,6 +1046,15 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class RevolutPay extends StripeObject {}
+
+    /**
+     * For more details about Satispay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Satispay extends StripeObject {}
 
     /**
      * For more details about SepaDebit, please refer to the <a

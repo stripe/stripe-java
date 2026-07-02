@@ -217,8 +217,32 @@ public class Authorization extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusDetails extends StripeObject {
+    @SerializedName("active")
+    Active active;
+
     @SerializedName("inactive")
     Inactive inactive;
+
+    /**
+     * For more details about Active, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Active extends StripeObject {
+      /**
+       * The action (if any) to proactively relink the Authorization.
+       *
+       * <p>One of {@code none}, or {@code relink_required}.
+       */
+      @SerializedName("action")
+      String action;
+
+      /** When the Authorization is expected to become inactive, if applicable. */
+      @SerializedName("expected_deactivation_date")
+      Long expectedDeactivationDate;
+    }
 
     /**
      * For more details about Inactive, please refer to the <a

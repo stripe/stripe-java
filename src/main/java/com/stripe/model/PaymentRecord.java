@@ -1553,6 +1553,10 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Bizum extends StripeObject {
+      /** A unique identifier for the buyer as determined by the local payment processor. */
+      @SerializedName("buyer_id")
+      String buyerId;
+
       /** The Bizum transaction ID associated with this payment. */
       @SerializedName("transaction_id")
       String transactionId;
@@ -1705,13 +1709,6 @@ public class PaymentRecord extends ApiResource implements HasId {
        */
       @SerializedName("network_transaction_id")
       String networkTransactionId;
-
-      /**
-       * The transaction type that was passed for an off-session, Merchant-Initiated transaction,
-       * one of {@code recurring} or {@code unscheduled}.
-       */
-      @SerializedName("stored_credential_usage")
-      String storedCredentialUsage;
 
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
@@ -2315,6 +2312,14 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Crypto extends StripeObject {
+      /** The amount received for the crypto payment. */
+      @SerializedName("amount_received")
+      Long amountReceived;
+
+      /** The amount requested for the crypto payment. */
+      @SerializedName("amount_requested")
+      Long amountRequested;
+
       /** The wallet address of the customer. */
       @SerializedName("buyer_address")
       String buyerAddress;
@@ -2322,8 +2327,8 @@ public class PaymentRecord extends ApiResource implements HasId {
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, or {@code
-       * tempo}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, {@code solana}, {@code sui}, or
+       * {@code tempo}.
        */
       @SerializedName("network")
       String network;
@@ -2331,7 +2336,8 @@ public class PaymentRecord extends ApiResource implements HasId {
       /**
        * The token currency that the transaction was sent with.
        *
-       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, or {@code usdt}.
+       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, {@code usdsui},
+       * or {@code usdt}.
        */
       @SerializedName("token_currency")
       String tokenCurrency;
@@ -2459,6 +2465,13 @@ public class PaymentRecord extends ApiResource implements HasId {
       /** The expiration year of the gift card. */
       @SerializedName("exp_year")
       Long expYear;
+
+      /**
+       * Uniquely identifies this particular gift card number. You can use this attribute to check
+       * whether two transactions were made using the same gift card.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
 
       /** The first six digits of the gift card number. */
       @SerializedName("first6")

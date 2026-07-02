@@ -148,21 +148,27 @@ public class TaxFund extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Context extends StripeObject {
+    /** The Checkout Session associated with this sweep, if any. */
     @SerializedName("checkout_session")
     String checkoutSession;
 
+    /** The Credit Note associated with this sweep, if any. */
     @SerializedName("credit_note")
     String creditNote;
 
+    /** The Invoice associated with this sweep, if any. */
     @SerializedName("invoice")
     String invoice;
 
+    /** The PaymentIntent associated with this sweep, if any. */
     @SerializedName("payment_intent")
     String paymentIntent;
 
+    /** The Refund associated with this sweep, if any. */
     @SerializedName("refund")
     String refund;
 
+    /** The Tax Transaction associated with this sweep, if any. */
     @SerializedName("tax_transaction")
     String taxTransaction;
   }
@@ -180,6 +186,10 @@ public class TaxFund extends ApiResource implements HasId {
     @SerializedName("tax_fund_account")
     TaxFundAccount taxFundAccount;
 
+    /**
+     * The type of account funds moved to or from. Either {@code payments_balance} or {@code
+     * tax_fund_account}.
+     */
     @SerializedName("type")
     String type;
 
@@ -188,6 +198,7 @@ public class TaxFund extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class PaymentsBalance extends StripeObject {
+      /** The balance transaction on the payments balance side of the sweep. */
       @SerializedName("balance_transaction")
       @Getter(lombok.AccessLevel.NONE)
       @Setter(lombok.AccessLevel.NONE)
@@ -218,9 +229,11 @@ public class TaxFund extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class TaxFundAccount extends StripeObject {
+      /** The tax fund financial account involved in the sweep. */
       @SerializedName("financial_account")
       String financialAccount;
 
+      /** The financial account transaction on the tax fund account side of the sweep. */
       @SerializedName("transaction")
       String transaction;
     }
@@ -239,6 +252,10 @@ public class TaxFund extends ApiResource implements HasId {
     @SerializedName("tax_fund_account")
     TaxFundAccount taxFundAccount;
 
+    /**
+     * The type of account funds moved to or from. Either {@code payments_balance} or {@code
+     * tax_fund_account}.
+     */
     @SerializedName("type")
     String type;
 
@@ -247,6 +264,7 @@ public class TaxFund extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class PaymentsBalance extends StripeObject {
+      /** The balance transaction on the payments balance side of the sweep. */
       @SerializedName("balance_transaction")
       @Getter(lombok.AccessLevel.NONE)
       @Setter(lombok.AccessLevel.NONE)
@@ -277,9 +295,11 @@ public class TaxFund extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class TaxFundAccount extends StripeObject {
+      /** The tax fund financial account involved in the sweep. */
       @SerializedName("financial_account")
       String financialAccount;
 
+      /** The financial account transaction on the tax fund account side of the sweep. */
       @SerializedName("transaction")
       String transaction;
     }
@@ -290,11 +310,13 @@ public class TaxFund extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Trigger extends StripeObject {
+    /** The balance transaction on the payments balance that triggered the sweep. */
     @SerializedName("balance_transaction")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<BalanceTransaction> balanceTransaction;
 
+    /** The type of event that triggered the sweep. Always {@code balance_transaction}. */
     @SerializedName("type")
     String type;
 

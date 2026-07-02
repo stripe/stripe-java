@@ -161,6 +161,13 @@ public final class EventDataClassLookup {
     classLookup.put("climate.product", com.stripe.model.climate.Product.class);
     classLookup.put("climate.supplier", com.stripe.model.climate.Supplier.class);
 
+    classLookup.put("crypto.consumer_wallet", com.stripe.model.crypto.CustomerConsumerWallet.class);
+    classLookup.put("crypto.customer", com.stripe.model.crypto.Customer.class);
+    classLookup.put("crypto.onramp_session", com.stripe.model.crypto.OnrampSession.class);
+    classLookup.put(
+        "crypto.onramp_transaction_limits", com.stripe.model.crypto.OnrampTransactionLimits.class);
+    classLookup.put("crypto.payment_token", com.stripe.model.crypto.CustomerPaymentToken.class);
+
     classLookup.put("delegated_checkout.order", com.stripe.model.delegatedcheckout.Order.class);
     classLookup.put(
         "delegated_checkout.order_event", com.stripe.model.delegatedcheckout.OrderEvent.class);

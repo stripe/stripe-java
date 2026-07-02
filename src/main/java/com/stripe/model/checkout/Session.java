@@ -15,11 +15,11 @@ import com.stripe.model.MetadataStore;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentLink;
 import com.stripe.model.PaymentRecord;
+import com.stripe.model.Price;
 import com.stripe.model.PromotionCode;
 import com.stripe.model.SetupIntent;
 import com.stripe.model.ShippingRate;
 import com.stripe.model.StripeObject;
-import com.stripe.model.Subscription;
 import com.stripe.model.TaxRate;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -441,6 +441,13 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   String recoveredFrom;
 
   /**
+   * The redaction status of the Checkout Session. If the Session is not redacted, this field is
+   * null.
+   */
+  @SerializedName("redaction")
+  Redaction redaction;
+
+  /**
    * This parameter applies to {@code ui_mode: embedded_page}. Learn more about the <a
    * href="https://docs.stripe.com/payments/checkout/custom-success-page?payment-ui=embedded-form">redirect
    * behavior</a> of embedded sessions. Defaults to {@code always}.
@@ -513,7 +520,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Subscription> subscription;
+  ExpandableField<com.stripe.model.Subscription> subscription;
 
   /**
    * The URL the customer will be directed to after the payment or subscription creation is
@@ -674,13 +681,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /** Get expanded {@code subscription}. */
-  public Subscription getSubscriptionObject() {
+  public com.stripe.model.Subscription getSubscriptionObject() {
     return (this.subscription != null) ? this.subscription.getExpanded() : null;
   }
 
-  public void setSubscriptionObject(Subscription expandableObject) {
+  public void setSubscriptionObject(com.stripe.model.Subscription expandableObject) {
     this.subscription =
-        new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
+        new ExpandableField<com.stripe.model.Subscription>(
+            expandableObject.getId(), expandableObject);
   }
 
   /**
@@ -2494,6 +2502,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("key")
     String key;
 
+    /** Details on the subscription for this item. */
+    @SerializedName("subscription")
+    com.stripe.model.checkout.Session.Item.Subscription subscription;
+
     /**
      * The type of the item.
      *
@@ -2501,6 +2513,165 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
      */
     @SerializedName("type")
     String type;
+
+    /**
+     * For more details about Subscription, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Subscription extends StripeObject {
+      /** The description for the subscription. */
+      @SerializedName("description")
+      String description;
+
+      /** The items in the subscription. */
+      @SerializedName("items")
+      List<Session.Item.Subscription.InnerItem> items;
+
+      /** Set of key-value pairs attached to the subscription. */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      /** Specifies an interval for how often to bill for any pending invoice items. */
+      @SerializedName("pending_invoice_item_interval")
+      PendingInvoiceItemInterval pendingInvoiceItemInterval;
+
+      /**
+       * Determines how to handle prorations when the subscription is updated.
+       *
+       * <p>One of {@code create_prorations}, or {@code none}.
+       */
+      @SerializedName("proration_behavior")
+      String prorationBehavior;
+
+      /** The ID of the <a href="https://docs.stripe.com/api/subscriptions">Subscription</a>. */
+      @SerializedName("subscription")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<com.stripe.model.Subscription> subscription;
+
+      /** The Unix timestamp marking when the trial period ends. */
+      @SerializedName("trial_end")
+      Long trialEnd;
+
+      /** The number of trial period days before the customer is charged for the first time. */
+      @SerializedName("trial_period_days")
+      Long trialPeriodDays;
+
+      /** Settings related to subscription trials. */
+      @SerializedName("trial_settings")
+      TrialSettings trialSettings;
+
+      /** Get ID of expandable {@code subscription} object. */
+      public String getSubscription() {
+        return (this.subscription != null) ? this.subscription.getId() : null;
+      }
+
+      public void setSubscription(String id) {
+        this.subscription = ApiResource.setExpandableFieldId(id, this.subscription);
+      }
+
+      /** Get expanded {@code subscription}. */
+      public com.stripe.model.Subscription getSubscriptionObject() {
+        return (this.subscription != null) ? this.subscription.getExpanded() : null;
+      }
+
+      public void setSubscriptionObject(com.stripe.model.Subscription expandableObject) {
+        this.subscription =
+            new ExpandableField<com.stripe.model.Subscription>(
+                expandableObject.getId(), expandableObject);
+      }
+
+      /**
+       * For more details about InnerItem, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class InnerItem extends StripeObject {
+        /** The price for this subscription item. */
+        @SerializedName("price")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<Price> price;
+
+        /** The quantity for this subscription item. */
+        @SerializedName("quantity")
+        Long quantity;
+
+        /** Get ID of expandable {@code price} object. */
+        public String getPrice() {
+          return (this.price != null) ? this.price.getId() : null;
+        }
+
+        public void setPrice(String id) {
+          this.price = ApiResource.setExpandableFieldId(id, this.price);
+        }
+
+        /** Get expanded {@code price}. */
+        public Price getPriceObject() {
+          return (this.price != null) ? this.price.getExpanded() : null;
+        }
+
+        public void setPriceObject(Price expandableObject) {
+          this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
+        }
+      }
+
+      /**
+       * For more details about PendingInvoiceItemInterval, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PendingInvoiceItemInterval extends StripeObject {
+        /**
+         * Specifies invoicing frequency. Either {@code day}, {@code week}, {@code month} or {@code
+         * year}.
+         *
+         * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+         */
+        @SerializedName("interval")
+        String interval;
+
+        /**
+         * The number of intervals between invoices. For example, {@code interval=month} and {@code
+         * interval_count=3} bills every 3 months. Maximum of one year interval allowed (1 year, 12
+         * months, or 52 weeks).
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+      }
+
+      /** Configures how this subscription behaves during the trial period. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class TrialSettings extends StripeObject {
+        /** Defines how a subscription behaves when a free trial ends. */
+        @SerializedName("end_behavior")
+        EndBehavior endBehavior;
+
+        /** Defines how a subscription behaves when a free trial ends. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class EndBehavior extends StripeObject {
+          /**
+           * Indicates how the subscription should change when the trial ends if the user did not
+           * provide a payment method.
+           *
+           * <p>One of {@code cancel}, {@code create_invoice}, or {@code pause}.
+           */
+          @SerializedName("missing_payment_method")
+          String missingPaymentMethod;
+        }
+      }
+    }
   }
 
   /**
@@ -2771,6 +2942,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("sofort")
     Sofort sofort;
 
+    @SerializedName("sunbit")
+    Sunbit sunbit;
+
     @SerializedName("swish")
     Swish swish;
 
@@ -2782,6 +2956,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
+
+    @SerializedName("wechat_pay")
+    WechatPay wechatPay;
 
     /**
      * For more details about AcssDebit, please refer to the <a
@@ -4638,6 +4815,47 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
 
     /**
+     * For more details about Sunbit, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sunbit extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    /**
      * For more details about Swish, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -4875,6 +5093,51 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         }
       }
     }
+
+    /**
+     * For more details about WechatPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class WechatPay extends StripeObject {
+      /** The app ID registered with WeChat Pay. Only required when client is iOS or Android. */
+      @SerializedName("app_id")
+      String appId;
+
+      /**
+       * The client type that the end customer will pay from
+       *
+       * <p>One of {@code android}, {@code ios}, or {@code web}.
+       */
+      @SerializedName("client")
+      String client;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
   }
 
   /**
@@ -4992,6 +5255,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     /** Currency presented to the customer during payment. */
     @SerializedName("presentment_currency")
     String presentmentCurrency;
+  }
+
+  /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
   }
 
   /**
@@ -5389,6 +5669,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(permissions, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
     trySetResponseGetter(presentmentDetails, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(savedPaymentMethodOptions, responseGetter);
     trySetResponseGetter(setupIntent, responseGetter);
     trySetResponseGetter(shippingAddressCollection, responseGetter);

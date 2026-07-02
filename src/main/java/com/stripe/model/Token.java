@@ -91,6 +91,10 @@ public class Token extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /** Redaction status of this token. If not null, this token is associated to a redaction job. */
+  @SerializedName("redaction")
+  Redaction redaction;
+
   /** Type of the token: {@code account}, {@code bank_account}, {@code card}, or {@code pii}. */
   @SerializedName("type")
   String type;
@@ -195,10 +199,28 @@ public class Token extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Token.class);
   }
 
+  /**
+   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, {@code redacted}, or {@code validated}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(bankAccount, responseGetter);
     trySetResponseGetter(card, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
   }
 }

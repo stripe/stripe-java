@@ -279,6 +279,10 @@ public class Token extends ApiResource implements HasId {
       @SerializedName("device_fingerprint")
       String deviceFingerprint;
 
+      /** An identifier for the device used during wallet provisioning. */
+      @SerializedName("device_id")
+      String deviceId;
+
       /** The IP address of the device at provisioning time. */
       @SerializedName("ip_address")
       String ipAddress;
