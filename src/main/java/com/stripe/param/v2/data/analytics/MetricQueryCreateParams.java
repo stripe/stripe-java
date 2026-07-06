@@ -306,11 +306,19 @@ public class MetricQueryCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The ID for this metric, e.g. metric_61Sud3n5oAGVCWiSr5. */
+    /**
+     * The ID for this metric (for example, {@code metric_61Sud3n5oAGVCWiSr5}). For the full list of
+     * supported metrics, see <a
+     * href="https://docs.stripe.com/data/analytics/supported-metrics">Supported metrics</a>.
+     */
     @SerializedName("id")
     String id;
 
-    /** The common name for this metric, e.g. revenue.mrr. */
+    /**
+     * The common name for this metric (for example, {@code revenue.mrr}). For the full list of
+     * supported metric names, see <a
+     * href="https://docs.stripe.com/data/analytics/supported-metrics">Supported metrics</a>.
+     */
     @SerializedName("name")
     String name;
 
@@ -362,13 +370,21 @@ public class MetricQueryCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID for this metric, e.g. metric_61Sud3n5oAGVCWiSr5. */
+      /**
+       * The ID for this metric (for example, {@code metric_61Sud3n5oAGVCWiSr5}). For the full list
+       * of supported metrics, see <a
+       * href="https://docs.stripe.com/data/analytics/supported-metrics">Supported metrics</a>.
+       */
       public Builder setId(String id) {
         this.id = id;
         return this;
       }
 
-      /** The common name for this metric, e.g. revenue.mrr. */
+      /**
+       * The common name for this metric (for example, {@code revenue.mrr}). For the full list of
+       * supported metric names, see <a
+       * href="https://docs.stripe.com/data/analytics/supported-metrics">Supported metrics</a>.
+       */
       public Builder setName(String name) {
         this.name = name;
         return this;

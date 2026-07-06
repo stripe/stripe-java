@@ -96,9 +96,9 @@ public class Contract extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
-  /** Information about the contract status transitions. */
-  @SerializedName("status_details")
-  StatusDetails statusDetails;
+  /** Historical timestamps of when the contract transitioned into each status. */
+  @SerializedName("status_transitions")
+  StatusTransitions statusTransitions;
 
   /** The billing cycle anchor for the contract. */
   @Getter
@@ -629,37 +629,21 @@ public class Contract extends StripeObject implements HasId {
     }
   }
 
-  /** Information about the contract status transitions. */
+  /** Historical timestamps of when the contract transitioned into each status. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class StatusDetails extends StripeObject {
-    /** Details of the active contract status. */
-    @SerializedName("active")
-    Active active;
+  public static class StatusTransitions extends StripeObject {
+    /** The timestamp when the contract was activated. */
+    @SerializedName("activated_at")
+    Instant activatedAt;
 
-    /** Details of the canceled contract status. */
-    @SerializedName("canceled")
-    Canceled canceled;
+    /** The timestamp when the contract was canceled. */
+    @SerializedName("canceled_at")
+    Instant canceledAt;
 
-    /** Details of the active contract status. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Active extends StripeObject {
-      /** The timestamp when the contract was activated. */
-      @SerializedName("activated_at")
-      Instant activatedAt;
-    }
-
-    /** Details of the canceled contract status. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Canceled extends StripeObject {
-      /** The timestamp when the contract was canceled. */
-      @SerializedName("canceled_at")
-      Instant canceledAt;
-    }
+    /** The timestamp when the contract ended. */
+    @SerializedName("ended_at")
+    Instant endedAt;
   }
 }

@@ -538,6 +538,21 @@ public final class EventNotificationClassLookup {
         "v2.billing.cadence.created",
         com.stripe.events.V2BillingCadenceCreatedEventNotification.class);
     eventClassLookup.put(
+        "v2.billing.contract.activated",
+        com.stripe.events.V2BillingContractActivatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.billing.contract.canceled",
+        com.stripe.events.V2BillingContractCanceledEventNotification.class);
+    eventClassLookup.put(
+        "v2.billing.contract.created",
+        com.stripe.events.V2BillingContractCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.billing.contract.ended",
+        com.stripe.events.V2BillingContractEndedEventNotification.class);
+    eventClassLookup.put(
+        "v2.billing.contract.updated",
+        com.stripe.events.V2BillingContractUpdatedEventNotification.class);
+    eventClassLookup.put(
         "v2.billing.license_fee.created",
         com.stripe.events.V2BillingLicenseFeeCreatedEventNotification.class);
     eventClassLookup.put(

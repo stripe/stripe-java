@@ -210,6 +210,11 @@ import com.stripe.events.V1TransferUpdatedEventNotification;
 import com.stripe.events.V2BillingCadenceBilledEventNotification;
 import com.stripe.events.V2BillingCadenceCanceledEventNotification;
 import com.stripe.events.V2BillingCadenceCreatedEventNotification;
+import com.stripe.events.V2BillingContractActivatedEventNotification;
+import com.stripe.events.V2BillingContractCanceledEventNotification;
+import com.stripe.events.V2BillingContractCreatedEventNotification;
+import com.stripe.events.V2BillingContractEndedEventNotification;
+import com.stripe.events.V2BillingContractUpdatedEventNotification;
 import com.stripe.events.V2BillingLicenseFeeCreatedEventNotification;
 import com.stripe.events.V2BillingLicenseFeeUpdatedEventNotification;
 import com.stripe.events.V2BillingLicenseFeeVersionCreatedEventNotification;
@@ -1762,6 +1767,36 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV2BillingCadenceCreated(
       Callback<V2BillingCadenceCreatedEventNotification> callback) {
     this.register("v2.billing.cadence.created", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2BillingContractActivated(
+      Callback<V2BillingContractActivatedEventNotification> callback) {
+    this.register("v2.billing.contract.activated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2BillingContractCanceled(
+      Callback<V2BillingContractCanceledEventNotification> callback) {
+    this.register("v2.billing.contract.canceled", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2BillingContractCreated(
+      Callback<V2BillingContractCreatedEventNotification> callback) {
+    this.register("v2.billing.contract.created", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2BillingContractEnded(
+      Callback<V2BillingContractEndedEventNotification> callback) {
+    this.register("v2.billing.contract.ended", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2BillingContractUpdated(
+      Callback<V2BillingContractUpdatedEventNotification> callback) {
+    this.register("v2.billing.contract.updated", callback);
     return this;
   }
 
