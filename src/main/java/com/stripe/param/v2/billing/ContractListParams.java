@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class ContractListParams extends ApiRequestParams {
-  /** Filter by customer ID. */
+  /** Filter by customer id. */
   @SerializedName("customer")
   String customer;
 
@@ -63,7 +63,7 @@ public class ContractListParams extends ApiRequestParams {
       return new ContractListParams(this.customer, this.extraParams, this.include, this.limit);
     }
 
-    /** Filter by customer ID. */
+    /** Filter by customer id. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;

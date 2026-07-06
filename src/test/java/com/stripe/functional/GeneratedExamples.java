@@ -24992,7 +24992,7 @@ class GeneratedExamples extends BaseStripeTest {
                             .setTimestamp(Instant.parse("1970-01-01T15:18:46.294Z"))
                             .setType(
                                 com.stripe.param.v2.billing.ContractCreateParams.PricingLine.EndsAt
-                                    .Type.CONTRACT_END)
+                                    .Type.TIMESTAMP)
                             .build())
                     .setLookupKey("lookup_key")
                     .putMetadata("key", "metadata")
@@ -25016,7 +25016,7 @@ class GeneratedExamples extends BaseStripeTest {
                                                         com.stripe.param.v2.billing
                                                             .ContractCreateParams.PricingLine
                                                             .Pricing.PriceDetails.PricingOverride
-                                                            .EndsAt.Type.CONTRACT_END)
+                                                            .EndsAt.Type.TIMESTAMP)
                                                     .build())
                                             .setLookupKey("lookup_key")
                                             .putMetadata("key", "metadata")
@@ -25060,7 +25060,7 @@ class GeneratedExamples extends BaseStripeTest {
                                                         com.stripe.param.v2.billing
                                                             .ContractCreateParams.PricingLine
                                                             .Pricing.PriceDetails.PricingOverride
-                                                            .StartsAt.Type.CONTRACT_START)
+                                                            .StartsAt.Type.TIMESTAMP)
                                                     .build())
                                             .setType(
                                                 com.stripe.param.v2.billing.ContractCreateParams
@@ -25095,7 +25095,7 @@ class GeneratedExamples extends BaseStripeTest {
                             .setTimestamp(Instant.parse("1970-01-01T15:18:46.294Z"))
                             .setType(
                                 com.stripe.param.v2.billing.ContractCreateParams.PricingLine
-                                    .StartsAt.Type.CONTRACT_START)
+                                    .StartsAt.Type.TIMESTAMP)
                             .build())
                     .build())
             .build();

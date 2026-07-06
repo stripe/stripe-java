@@ -952,7 +952,7 @@ public class ContractCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The number of time units before the invoice is past due. */
+        /** How long the customer has to pay the invoice before it's past due. */
         @SerializedName("time_until_due")
         TimeUntilDue timeUntilDue;
 
@@ -1006,7 +1006,7 @@ public class ContractCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The number of time units before the invoice is past due. */
+          /** How long the customer has to pay the invoice before it's past due. */
           public Builder setTimeUntilDue(
               ContractCreateParams.BillingSettings.BillSettingsDetails.Invoice.TimeUntilDue
                   timeUntilDue) {
@@ -1220,7 +1220,7 @@ public class ContractCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class CollectionSettingsDetails {
-      /** <strong>Required.</strong> The collection method. */
+      /** <strong>Required.</strong> How payment is collected for the contract. */
       @SerializedName("collection_method")
       CollectionMethod collectionMethod;
 
@@ -1263,7 +1263,7 @@ public class ContractCreateParams extends ApiRequestParams {
               this.collectionMethod, this.extraParams, this.paymentMethodConfiguration);
         }
 
-        /** <strong>Required.</strong> The collection method. */
+        /** <strong>Required.</strong> How payment is collected for the contract. */
         public Builder setCollectionMethod(
             ContractCreateParams.BillingSettings.CollectionSettingsDetails.CollectionMethod
                 collectionMethod) {
@@ -1349,7 +1349,7 @@ public class ContractCreateParams extends ApiRequestParams {
     @SerializedName("lookup_key")
     String lookupKey;
 
-    /** <strong>Required.</strong> The ID of the v1 Product for this fee. */
+    /** <strong>Required.</strong> The id of the product for this fee. */
     @SerializedName("product")
     String product;
 
@@ -1431,7 +1431,7 @@ public class ContractCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The ID of the v1 Product for this fee. */
+      /** <strong>Required.</strong> The id of the product for this fee. */
       public Builder setProduct(String product) {
         this.product = product;
         return this;
@@ -1782,9 +1782,6 @@ public class ContractCreateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
-        @SerializedName("contract_end")
-        CONTRACT_END("contract_end"),
-
         @SerializedName("timestamp")
         TIMESTAMP("timestamp");
 
@@ -1895,7 +1892,7 @@ public class ContractCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** <strong>Required.</strong> The ID of the V1 price. */
+        /** <strong>Required.</strong> The id of the price. */
         @SerializedName("price")
         String price;
 
@@ -1906,7 +1903,7 @@ public class ContractCreateParams extends ApiRequestParams {
 
         /**
          * Quantity changes for the pricing line. For now, at most one entry is allowed. A quantity
-         * change clears all future quantity changes on this pricing line.
+         * change clears all future quantity changes on this pricing line. Defaults to 1.
          */
         @SerializedName("quantity_changes")
         List<ContractCreateParams.PricingLine.Pricing.PriceDetails.QuantityChange> quantityChanges;
@@ -1973,7 +1970,7 @@ public class ContractCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> The ID of the V1 price. */
+          /** <strong>Required.</strong> The id of the price. */
           public Builder setPrice(String price) {
             this.price = price;
             return this;
@@ -2084,10 +2081,7 @@ public class ContractCreateParams extends ApiRequestParams {
           @SerializedName("starts_at")
           StartsAt startsAt;
 
-          /**
-           * <strong>Required.</strong> The type of override. Currently only {@code overwrite_price}
-           * is supported.
-           */
+          /** <strong>Required.</strong> The type of override. */
           @SerializedName("type")
           Type type;
 
@@ -2246,10 +2240,7 @@ public class ContractCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /**
-             * <strong>Required.</strong> The type of override. Currently only {@code
-             * overwrite_price} is supported.
-             */
+            /** <strong>Required.</strong> The type of override. */
             public Builder setType(
                 ContractCreateParams.PricingLine.Pricing.PriceDetails.PricingOverride.Type type) {
               this.type = type;
@@ -2350,9 +2341,6 @@ public class ContractCreateParams extends ApiRequestParams {
             }
 
             public enum Type implements ApiRequestParams.EnumParam {
-              @SerializedName("contract_end")
-              CONTRACT_END("contract_end"),
-
               @SerializedName("timestamp")
               TIMESTAMP("timestamp");
 
@@ -2785,9 +2773,6 @@ public class ContractCreateParams extends ApiRequestParams {
             }
 
             public enum Type implements ApiRequestParams.EnumParam {
-              @SerializedName("contract_start")
-              CONTRACT_START("contract_start"),
-
               @SerializedName("timestamp")
               TIMESTAMP("timestamp");
 
@@ -3108,9 +3093,6 @@ public class ContractCreateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
-        @SerializedName("contract_start")
-        CONTRACT_START("contract_start"),
-
         @SerializedName("timestamp")
         TIMESTAMP("timestamp");
 
@@ -3144,13 +3126,16 @@ public class ContractCreateParams extends ApiRequestParams {
     @SerializedName("lookup_key")
     String lookupKey;
 
-    /** Parameters for a multiplier override. Required if {@code type} is {@code multiplier}. */
-    @SerializedName("multiplier")
-    Multiplier multiplier;
+    /**
+     * Parameters for a multiply_pricing override. Required if {@code type} is {@code
+     * multiply_pricing}.
+     */
+    @SerializedName("multiply_pricing")
+    MultiplyPricing multiplyPricing;
 
     /**
-     * <strong>Required.</strong> The priority of this override relative to others. The highest
-     * priority is 0 and the lowest is 100.
+     * The priority of this override relative to others. The highest priority is 0 and the lowest is
+     * 100.
      */
     @SerializedName("priority")
     Long priority;
@@ -3167,14 +3152,14 @@ public class ContractCreateParams extends ApiRequestParams {
         EndsAt endsAt,
         Map<String, Object> extraParams,
         String lookupKey,
-        Multiplier multiplier,
+        MultiplyPricing multiplyPricing,
         Long priority,
         StartsAt startsAt,
         Type type) {
       this.endsAt = endsAt;
       this.extraParams = extraParams;
       this.lookupKey = lookupKey;
-      this.multiplier = multiplier;
+      this.multiplyPricing = multiplyPricing;
       this.priority = priority;
       this.startsAt = startsAt;
       this.type = type;
@@ -3191,7 +3176,7 @@ public class ContractCreateParams extends ApiRequestParams {
 
       private String lookupKey;
 
-      private Multiplier multiplier;
+      private MultiplyPricing multiplyPricing;
 
       private Long priority;
 
@@ -3205,7 +3190,7 @@ public class ContractCreateParams extends ApiRequestParams {
             this.endsAt,
             this.extraParams,
             this.lookupKey,
-            this.multiplier,
+            this.multiplyPricing,
             this.priority,
             this.startsAt,
             this.type);
@@ -3249,15 +3234,19 @@ public class ContractCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Parameters for a multiplier override. Required if {@code type} is {@code multiplier}. */
-      public Builder setMultiplier(ContractCreateParams.PricingOverride.Multiplier multiplier) {
-        this.multiplier = multiplier;
+      /**
+       * Parameters for a multiply_pricing override. Required if {@code type} is {@code
+       * multiply_pricing}.
+       */
+      public Builder setMultiplyPricing(
+          ContractCreateParams.PricingOverride.MultiplyPricing multiplyPricing) {
+        this.multiplyPricing = multiplyPricing;
         return this;
       }
 
       /**
-       * <strong>Required.</strong> The priority of this override relative to others. The highest
-       * priority is 0 and the lowest is 100.
+       * The priority of this override relative to others. The highest priority is 0 and the lowest
+       * is 100.
        */
       public Builder setPriority(Long priority) {
         this.priority = priority;
@@ -3362,9 +3351,6 @@ public class ContractCreateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
-        @SerializedName("contract_end")
-        CONTRACT_END("contract_end"),
-
         @SerializedName("timestamp")
         TIMESTAMP("timestamp");
 
@@ -3379,10 +3365,10 @@ public class ContractCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
-    public static class Multiplier {
-      /** Criteria determining which rates the multiplier applies to. */
+    public static class MultiplyPricing {
+      /** Criteria determining which rates the multiply_pricing override applies to. */
       @SerializedName("criteria")
-      List<ContractCreateParams.PricingOverride.Multiplier.Criterion> criteria;
+      List<ContractCreateParams.PricingOverride.MultiplyPricing.Criterion> criteria;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3394,14 +3380,14 @@ public class ContractCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> The multiplier factor, represented as a decimal string. e.g.
-       * &quot;0.8&quot; for a 20% reduction.
+       * <strong>Required.</strong> The multiply_pricing factor, represented as a decimal string.
+       * e.g. &quot;0.8&quot; for a 20% reduction.
        */
       @SerializedName("factor")
       String factor;
 
-      private Multiplier(
-          List<ContractCreateParams.PricingOverride.Multiplier.Criterion> criteria,
+      private MultiplyPricing(
+          List<ContractCreateParams.PricingOverride.MultiplyPricing.Criterion> criteria,
           Map<String, Object> extraParams,
           String factor) {
         this.criteria = criteria;
@@ -3414,25 +3400,26 @@ public class ContractCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private List<ContractCreateParams.PricingOverride.Multiplier.Criterion> criteria;
+        private List<ContractCreateParams.PricingOverride.MultiplyPricing.Criterion> criteria;
 
         private Map<String, Object> extraParams;
 
         private String factor;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public ContractCreateParams.PricingOverride.Multiplier build() {
-          return new ContractCreateParams.PricingOverride.Multiplier(
+        public ContractCreateParams.PricingOverride.MultiplyPricing build() {
+          return new ContractCreateParams.PricingOverride.MultiplyPricing(
               this.criteria, this.extraParams, this.factor);
         }
 
         /**
          * Add an element to `criteria` list. A list is initialized for the first `add/addAll` call,
          * and subsequent calls adds additional elements to the original list. See {@link
-         * ContractCreateParams.PricingOverride.Multiplier#criteria} for the field documentation.
+         * ContractCreateParams.PricingOverride.MultiplyPricing#criteria} for the field
+         * documentation.
          */
         public Builder addCriterion(
-            ContractCreateParams.PricingOverride.Multiplier.Criterion element) {
+            ContractCreateParams.PricingOverride.MultiplyPricing.Criterion element) {
           if (this.criteria == null) {
             this.criteria = new ArrayList<>();
           }
@@ -3443,10 +3430,11 @@ public class ContractCreateParams extends ApiRequestParams {
         /**
          * Add all elements to `criteria` list. A list is initialized for the first `add/addAll`
          * call, and subsequent calls adds additional elements to the original list. See {@link
-         * ContractCreateParams.PricingOverride.Multiplier#criteria} for the field documentation.
+         * ContractCreateParams.PricingOverride.MultiplyPricing#criteria} for the field
+         * documentation.
          */
         public Builder addAllCriterion(
-            List<ContractCreateParams.PricingOverride.Multiplier.Criterion> elements) {
+            List<ContractCreateParams.PricingOverride.MultiplyPricing.Criterion> elements) {
           if (this.criteria == null) {
             this.criteria = new ArrayList<>();
           }
@@ -3457,7 +3445,7 @@ public class ContractCreateParams extends ApiRequestParams {
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ContractCreateParams.PricingOverride.Multiplier#extraParams} for the
+         * map. See {@link ContractCreateParams.PricingOverride.MultiplyPricing#extraParams} for the
          * field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -3471,7 +3459,7 @@ public class ContractCreateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ContractCreateParams.PricingOverride.Multiplier#extraParams} for the
+         * map. See {@link ContractCreateParams.PricingOverride.MultiplyPricing#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -3483,8 +3471,8 @@ public class ContractCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The multiplier factor, represented as a decimal string. e.g.
-         * &quot;0.8&quot; for a 20% reduction.
+         * <strong>Required.</strong> The multiply_pricing factor, represented as a decimal string.
+         * e.g. &quot;0.8&quot; for a 20% reduction.
          */
         public Builder setFactor(String factor) {
           this.factor = factor;
@@ -3544,16 +3532,17 @@ public class ContractCreateParams extends ApiRequestParams {
           private Type type;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public ContractCreateParams.PricingOverride.Multiplier.Criterion build() {
-            return new ContractCreateParams.PricingOverride.Multiplier.Criterion(
+          public ContractCreateParams.PricingOverride.MultiplyPricing.Criterion build() {
+            return new ContractCreateParams.PricingOverride.MultiplyPricing.Criterion(
                 this.extraParams, this.pricingLineIds, this.pricingLineLookupKeys, this.type);
           }
 
           /**
            * Add a key/value pair to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link ContractCreateParams.PricingOverride.Multiplier.Criterion#extraParams}
-           * for the field documentation.
+           * map. See {@link
+           * ContractCreateParams.PricingOverride.MultiplyPricing.Criterion#extraParams} for the
+           * field documentation.
            */
           public Builder putExtraParam(String key, Object value) {
             if (this.extraParams == null) {
@@ -3566,8 +3555,9 @@ public class ContractCreateParams extends ApiRequestParams {
           /**
            * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link ContractCreateParams.PricingOverride.Multiplier.Criterion#extraParams}
-           * for the field documentation.
+           * map. See {@link
+           * ContractCreateParams.PricingOverride.MultiplyPricing.Criterion#extraParams} for the
+           * field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
             if (this.extraParams == null) {
@@ -3580,8 +3570,9 @@ public class ContractCreateParams extends ApiRequestParams {
           /**
            * Add an element to `pricingLineIds` list. A list is initialized for the first
            * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-           * See {@link ContractCreateParams.PricingOverride.Multiplier.Criterion#pricingLineIds}
-           * for the field documentation.
+           * See {@link
+           * ContractCreateParams.PricingOverride.MultiplyPricing.Criterion#pricingLineIds} for the
+           * field documentation.
            */
           public Builder addPricingLineId(String element) {
             if (this.pricingLineIds == null) {
@@ -3594,8 +3585,9 @@ public class ContractCreateParams extends ApiRequestParams {
           /**
            * Add all elements to `pricingLineIds` list. A list is initialized for the first
            * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-           * See {@link ContractCreateParams.PricingOverride.Multiplier.Criterion#pricingLineIds}
-           * for the field documentation.
+           * See {@link
+           * ContractCreateParams.PricingOverride.MultiplyPricing.Criterion#pricingLineIds} for the
+           * field documentation.
            */
           public Builder addAllPricingLineId(List<String> elements) {
             if (this.pricingLineIds == null) {
@@ -3609,8 +3601,8 @@ public class ContractCreateParams extends ApiRequestParams {
            * Add an element to `pricingLineLookupKeys` list. A list is initialized for the first
            * `add/addAll` call, and subsequent calls adds additional elements to the original list.
            * See {@link
-           * ContractCreateParams.PricingOverride.Multiplier.Criterion#pricingLineLookupKeys} for
-           * the field documentation.
+           * ContractCreateParams.PricingOverride.MultiplyPricing.Criterion#pricingLineLookupKeys}
+           * for the field documentation.
            */
           public Builder addPricingLineLookupKey(String element) {
             if (this.pricingLineLookupKeys == null) {
@@ -3624,8 +3616,8 @@ public class ContractCreateParams extends ApiRequestParams {
            * Add all elements to `pricingLineLookupKeys` list. A list is initialized for the first
            * `add/addAll` call, and subsequent calls adds additional elements to the original list.
            * See {@link
-           * ContractCreateParams.PricingOverride.Multiplier.Criterion#pricingLineLookupKeys} for
-           * the field documentation.
+           * ContractCreateParams.PricingOverride.MultiplyPricing.Criterion#pricingLineLookupKeys}
+           * for the field documentation.
            */
           public Builder addAllPricingLineLookupKey(List<String> elements) {
             if (this.pricingLineLookupKeys == null) {
@@ -3639,7 +3631,7 @@ public class ContractCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> Whether to include or exclude items matching these criteria.
            */
           public Builder setType(
-              ContractCreateParams.PricingOverride.Multiplier.Criterion.Type type) {
+              ContractCreateParams.PricingOverride.MultiplyPricing.Criterion.Type type) {
             this.type = type;
             return this;
           }
@@ -3747,9 +3739,6 @@ public class ContractCreateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
-        @SerializedName("contract_start")
-        CONTRACT_START("contract_start"),
-
         @SerializedName("timestamp")
         TIMESTAMP("timestamp");
 
@@ -3763,8 +3752,8 @@ public class ContractCreateParams extends ApiRequestParams {
     }
 
     public enum Type implements ApiRequestParams.EnumParam {
-      @SerializedName("multiplier")
-      MULTIPLIER("multiplier");
+      @SerializedName("multiply_pricing")
+      MULTIPLY_PRICING("multiply_pricing");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

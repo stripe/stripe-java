@@ -13,16 +13,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** Main Contract resource representing a comprehensive billing agreement. */
+/** Contract resource representing a comprehensive sales agreement. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Contract extends StripeObject implements HasId {
-  /** The billing cycle anchor for the contract. */
+  /** The billing cycle anchor. */
   @SerializedName("billing_cycle_anchor")
   BillingCycleAnchor billingCycleAnchor;
 
-  /** The billing settings for the contract. */
+  /** The billing settings. */
   @SerializedName("billing_settings")
   BillingSettings billingSettings;
 
@@ -30,19 +30,19 @@ public class Contract extends StripeObject implements HasId {
   @SerializedName("contract_number")
   String contractNumber;
 
-  /** Timestamp of when the object was created. */
+  /** Timestamp of when the contract was created. */
   @SerializedName("created")
   Instant created;
 
-  /** The currency of the contract. */
+  /** The currency. */
   @SerializedName("currency")
   String currency;
 
-  /** The ID of the customer associated with the contract. */
+  /** The customer id. */
   @SerializedName("customer")
   String customer;
 
-  /** The ID of the contract object. */
+  /** The contract id. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -54,7 +54,7 @@ public class Contract extends StripeObject implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** Set of key-value pairs that you can attach to an object. */
+  /** Set of key-value pairs. */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -68,22 +68,22 @@ public class Contract extends StripeObject implements HasId {
   String object;
 
   /**
-   * The one-time fees of the contract. Only populated when {@code one_time_fees} is passed in the
-   * {@code include} parameter.
+   * The one-time fees. Only populated when {@code one_time_fees} is passed in the {@code include}
+   * parameter.
    */
   @SerializedName("one_time_fees")
   OneTimeFees oneTimeFees;
 
   /**
-   * The pricing lines of the contract. Only populated when {@code pricing_lines} is passed in the
-   * {@code include} parameter.
+   * The pricing lines. Only populated when {@code pricing_lines} is passed in the {@code include}
+   * parameter.
    */
   @SerializedName("pricing_lines")
   PricingLines pricingLines;
 
   /**
-   * The pricing overrides of the contract. Only populated when {@code pricing_overrides} is passed
-   * in the {@code include} parameter.
+   * The pricing overrides. Only populated when {@code pricing_overrides} is passed in the {@code
+   * include} parameter.
    */
   @SerializedName("pricing_overrides")
   PricingOverrides pricingOverrides;
@@ -100,7 +100,7 @@ public class Contract extends StripeObject implements HasId {
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
-  /** The billing cycle anchor for the contract. */
+  /** The billing cycle anchor. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -110,7 +110,7 @@ public class Contract extends StripeObject implements HasId {
     Instant timestamp;
   }
 
-  /** The billing settings for the contract. */
+  /** The billing settings. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -227,8 +227,8 @@ public class Contract extends StripeObject implements HasId {
   }
 
   /**
-   * The one-time fees of the contract. Only populated when {@code one_time_fees} is passed in the
-   * {@code include} parameter.
+   * The one-time fees. Only populated when {@code one_time_fees} is passed in the {@code include}
+   * parameter.
    */
   @Getter
   @Setter
@@ -254,7 +254,7 @@ public class Contract extends StripeObject implements HasId {
       @SerializedName("bill_at")
       BillAt billAt;
 
-      /** The ID of the one-time fee. */
+      /** The id of the one-time fee. */
       @Getter(onMethod_ = {@Override})
       @SerializedName("id")
       String id;
@@ -263,7 +263,7 @@ public class Contract extends StripeObject implements HasId {
       @SerializedName("lookup_key")
       String lookupKey;
 
-      /** The ID of the v1 Product for this fee. */
+      /** The id of the product for this fee. */
       @SerializedName("product")
       String product;
 
@@ -280,8 +280,8 @@ public class Contract extends StripeObject implements HasId {
   }
 
   /**
-   * The pricing lines of the contract. Only populated when {@code pricing_lines} is passed in the
-   * {@code include} parameter.
+   * The pricing lines. Only populated when {@code pricing_lines} is passed in the {@code include}
+   * parameter.
    */
   @Getter
   @Setter
@@ -299,11 +299,11 @@ public class Contract extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Data extends StripeObject implements HasId {
-      /** Resolved timestamp when the pricing line ends. */
+      /** Timestamp when the pricing line ends. */
       @SerializedName("ends_at")
       EndsAt endsAt;
 
-      /** The ID of the pricing line. */
+      /** The id of the pricing line. */
       @Getter(onMethod_ = {@Override})
       @SerializedName("id")
       String id;
@@ -312,7 +312,7 @@ public class Contract extends StripeObject implements HasId {
       @SerializedName("lookup_key")
       String lookupKey;
 
-      /** Set of key-value pairs that you can attach to an object. */
+      /** Set of key-value pairs. */
       @SerializedName("metadata")
       Map<String, String> metadata;
 
@@ -320,11 +320,11 @@ public class Contract extends StripeObject implements HasId {
       @SerializedName("pricing")
       Pricing pricing;
 
-      /** Resolved timestamp when the pricing line starts. */
+      /** Timestamp when the pricing line starts. */
       @SerializedName("starts_at")
       StartsAt startsAt;
 
-      /** Resolved timestamp when the pricing line ends. */
+      /** Timestamp when the pricing line ends. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -384,10 +384,15 @@ public class Contract extends StripeObject implements HasId {
             @Getter
             @Setter
             @EqualsAndHashCode(callSuper = false)
-            public static class InnerData extends StripeObject {
-              /** Resolved timestamp when this override ends. */
+            public static class InnerData extends StripeObject implements HasId {
+              /** Timestamp when this override ends. */
               @SerializedName("ends_at")
               EndsAt endsAt;
+
+              /** The ID of the pricing override. */
+              @Getter(onMethod_ = {@Override})
+              @SerializedName("id")
+              String id;
 
               /** The user-provided lookup key for this override. */
               @SerializedName("lookup_key")
@@ -397,11 +402,13 @@ public class Contract extends StripeObject implements HasId {
               @SerializedName("overwrite_price")
               OverwritePrice overwritePrice;
 
-              /** The ID of the pricing line override. */
-              @SerializedName("pricing_override")
-              String pricingOverride;
+              /**
+               * The priority of this override relative to others. Lower number = higher priority.
+               */
+              @SerializedName("priority")
+              Long priority;
 
-              /** Resolved timestamp when this override starts. */
+              /** Timestamp when this override starts. */
               @SerializedName("starts_at")
               StartsAt startsAt;
 
@@ -413,7 +420,7 @@ public class Contract extends StripeObject implements HasId {
               @SerializedName("type")
               String type;
 
-              /** Resolved timestamp when this override ends. */
+              /** Timestamp when this override ends. */
               @Getter
               @Setter
               @EqualsAndHashCode(callSuper = false)
@@ -486,7 +493,7 @@ public class Contract extends StripeObject implements HasId {
                 }
               }
 
-              /** Resolved timestamp when this override starts. */
+              /** Timestamp when this override starts. */
               @Getter
               @Setter
               @EqualsAndHashCode(callSuper = false)
@@ -500,7 +507,7 @@ public class Contract extends StripeObject implements HasId {
         }
       }
 
-      /** Resolved timestamp when the pricing line starts. */
+      /** Timestamp when the pricing line starts. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -513,8 +520,8 @@ public class Contract extends StripeObject implements HasId {
   }
 
   /**
-   * The pricing overrides of the contract. Only populated when {@code pricing_overrides} is passed
-   * in the {@code include} parameter.
+   * The pricing overrides. Only populated when {@code pricing_overrides} is passed in the {@code
+   * include} parameter.
    */
   @Getter
   @Setter
@@ -545,9 +552,9 @@ public class Contract extends StripeObject implements HasId {
       @SerializedName("lookup_key")
       String lookupKey;
 
-      /** Details for a multiplier override. */
-      @SerializedName("multiplier")
-      Multiplier multiplier;
+      /** Details for a multiply_pricing override. */
+      @SerializedName("multiply_pricing")
+      MultiplyPricing multiplyPricing;
 
       /** The priority of this override relative to others. Lower number = higher priority. */
       @SerializedName("priority")
@@ -560,7 +567,7 @@ public class Contract extends StripeObject implements HasId {
       /**
        * The type of pricing override.
        *
-       * <p>Equal to {@code multiplier}.
+       * <p>Equal to {@code multiply_pricing}.
        */
       @SerializedName("type")
       String type;
@@ -575,18 +582,18 @@ public class Contract extends StripeObject implements HasId {
         Instant timestamp;
       }
 
-      /** Details for a multiplier override. */
+      /** Details for a multiply_pricing override. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Multiplier extends StripeObject {
-        /** Criteria determining which rates the multiplier applies to. */
+      public static class MultiplyPricing extends StripeObject {
+        /** Criteria determining which rates the multiply_pricing override applies to. */
         @SerializedName("criteria")
-        List<Contract.PricingOverrides.Data.Multiplier.Criterion> criteria;
+        List<Contract.PricingOverrides.Data.MultiplyPricing.Criterion> criteria;
 
         /**
-         * The multiplier factor, represented as a decimal string. e.g. &quot;0.8&quot; for a 20%
-         * reduction.
+         * The multiply_pricing factor, represented as a decimal string. e.g. &quot;0.8&quot; for a
+         * 20% reduction.
          */
         @SerializedName("factor")
         String factor;

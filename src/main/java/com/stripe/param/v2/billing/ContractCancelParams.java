@@ -166,7 +166,7 @@ public class ContractCancelParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The ID of the pricing line. */
+    /** The id of the pricing line. */
     @SerializedName("id")
     String id;
 
@@ -237,7 +237,7 @@ public class ContractCancelParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the pricing line. */
+      /** The id of the pricing line. */
       public Builder setId(String id) {
         this.id = id;
         return this;

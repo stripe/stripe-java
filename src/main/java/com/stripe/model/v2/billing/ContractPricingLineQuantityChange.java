@@ -25,7 +25,7 @@ public class ContractPricingLineQuantityChange extends StripeObject implements H
   @SerializedName("effective_at")
   Instant effectiveAt;
 
-  /** The ID of the quantity change object. */
+  /** The id of the quantity change object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -50,7 +50,7 @@ public class ContractPricingLineQuantityChange extends StripeObject implements H
   @SerializedName("pricing")
   Pricing pricing;
 
-  /** The ID of the pricing line associated with this quantity change. */
+  /** The id of the pricing line associated with this quantity change. */
   @SerializedName("pricing_line")
   String pricingLine;
 

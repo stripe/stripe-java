@@ -25,19 +25,19 @@ public final class ContractService extends ApiService {
     super(responseGetter);
   }
 
-  /** List Contract objects with pagination. */
+  /** List contracts. */
   public StripeCollection<Contract> list(ContractListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** List Contract objects with pagination. */
+  /** List contracts. */
   public StripeCollection<Contract> list(RequestOptions options) throws StripeException {
     return list((ContractListParams) null, options);
   }
-  /** List Contract objects with pagination. */
+  /** List contracts. */
   public StripeCollection<Contract> list() throws StripeException {
     return list((ContractListParams) null, (RequestOptions) null);
   }
-  /** List Contract objects with pagination. */
+  /** List contracts. */
   public StripeCollection<Contract> list(ContractListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/billing/contracts";
@@ -50,11 +50,11 @@ public final class ContractService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<Contract>>() {}.getType());
   }
-  /** Create a Contract object. */
+  /** Create a draft contract. */
   public Contract create(ContractCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Create a Contract object. */
+  /** Create a draft contract. */
   public Contract create(ContractCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/billing/contracts";
@@ -67,30 +67,30 @@ public final class ContractService extends ApiService {
             options);
     return this.request(request, Contract.class);
   }
-  /** Delete a draft Contract object by ID. */
+  /** Delete a draft contract. */
   public DeletedObject delete(String id) throws StripeException {
     return delete(id, (RequestOptions) null);
   }
-  /** Delete a draft Contract object by ID. */
+  /** Delete a draft contract. */
   public DeletedObject delete(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/billing/contracts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, DeletedObject.class);
   }
-  /** Retrieve a Contract object by ID. */
+  /** Retrieve a contract. */
   public Contract retrieve(String id, ContractRetrieveParams params) throws StripeException {
     return retrieve(id, params, (RequestOptions) null);
   }
-  /** Retrieve a Contract object by ID. */
+  /** Retrieve a contract. */
   public Contract retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (ContractRetrieveParams) null, options);
   }
-  /** Retrieve a Contract object by ID. */
+  /** Retrieve a contract. */
   public Contract retrieve(String id) throws StripeException {
     return retrieve(id, (ContractRetrieveParams) null, (RequestOptions) null);
   }
-  /** Retrieve a Contract object by ID. */
+  /** Retrieve a contract. */
   public Contract retrieve(String id, ContractRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/billing/contracts/%s", ApiResource.urlEncodeId(id));
@@ -103,19 +103,19 @@ public final class ContractService extends ApiService {
             options);
     return this.request(request, Contract.class);
   }
-  /** Update a Contract object by ID. */
+  /** Update a draft or active contract. */
   public Contract update(String id, ContractUpdateParams params) throws StripeException {
     return update(id, params, (RequestOptions) null);
   }
-  /** Update a Contract object by ID. */
+  /** Update a draft or active contract. */
   public Contract update(String id, RequestOptions options) throws StripeException {
     return update(id, (ContractUpdateParams) null, options);
   }
-  /** Update a Contract object by ID. */
+  /** Update a draft or active contract. */
   public Contract update(String id) throws StripeException {
     return update(id, (ContractUpdateParams) null, (RequestOptions) null);
   }
-  /** Update a Contract object by ID. */
+  /** Update a draft or active contract. */
   public Contract update(String id, ContractUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/billing/contracts/%s", ApiResource.urlEncodeId(id));
@@ -128,19 +128,19 @@ public final class ContractService extends ApiService {
             options);
     return this.request(request, Contract.class);
   }
-  /** Activate a Draft Contract object by ID. */
+  /** Activate a draft contract. */
   public Contract activate(String id, ContractActivateParams params) throws StripeException {
     return activate(id, params, (RequestOptions) null);
   }
-  /** Activate a Draft Contract object by ID. */
+  /** Activate a draft contract. */
   public Contract activate(String id, RequestOptions options) throws StripeException {
     return activate(id, (ContractActivateParams) null, options);
   }
-  /** Activate a Draft Contract object by ID. */
+  /** Activate a draft contract. */
   public Contract activate(String id) throws StripeException {
     return activate(id, (ContractActivateParams) null, (RequestOptions) null);
   }
-  /** Activate a Draft Contract object by ID. */
+  /** Activate a draft contract. */
   public Contract activate(String id, ContractActivateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/billing/contracts/%s/activate", ApiResource.urlEncodeId(id));
@@ -153,19 +153,19 @@ public final class ContractService extends ApiService {
             options);
     return this.request(request, Contract.class);
   }
-  /** Cancel a Contract object by ID. */
+  /** Cancel an active contract. */
   public Contract cancel(String id, ContractCancelParams params) throws StripeException {
     return cancel(id, params, (RequestOptions) null);
   }
-  /** Cancel a Contract object by ID. */
+  /** Cancel an active contract. */
   public Contract cancel(String id, RequestOptions options) throws StripeException {
     return cancel(id, (ContractCancelParams) null, options);
   }
-  /** Cancel a Contract object by ID. */
+  /** Cancel an active contract. */
   public Contract cancel(String id) throws StripeException {
     return cancel(id, (ContractCancelParams) null, (RequestOptions) null);
   }
-  /** Cancel a Contract object by ID. */
+  /** Cancel an active contract. */
   public Contract cancel(String id, ContractCancelParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/billing/contracts/%s/cancel", ApiResource.urlEncodeId(id));
