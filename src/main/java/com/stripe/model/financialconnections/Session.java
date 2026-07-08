@@ -302,6 +302,15 @@ public class Session extends ApiResource implements HasId {
     /** Stripe ID of the institution with which the customer should be directed to log in. */
     @SerializedName("institution")
     String institution;
+
+    /**
+     * Whether the Session should require that linked accounts support payments and retrieve account
+     * numbers before completion.
+     *
+     * <p>One of {@code all}, {@code at_least_one}, or {@code none}.
+     */
+    @SerializedName("require_payment_method_support")
+    String requirePaymentMethodSupport;
   }
 
   /**

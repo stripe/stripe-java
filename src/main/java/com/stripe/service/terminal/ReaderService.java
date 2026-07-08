@@ -12,7 +12,10 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.terminal.ReaderActivateGiftCardParams;
 import com.stripe.param.terminal.ReaderCancelActionParams;
+import com.stripe.param.terminal.ReaderCashoutGiftCardParams;
+import com.stripe.param.terminal.ReaderCheckGiftCardBalanceParams;
 import com.stripe.param.terminal.ReaderCollectInputsParams;
 import com.stripe.param.terminal.ReaderCollectPaymentMethodParams;
 import com.stripe.param.terminal.ReaderConfirmPaymentIntentParams;
@@ -21,6 +24,7 @@ import com.stripe.param.terminal.ReaderListParams;
 import com.stripe.param.terminal.ReaderProcessPaymentIntentParams;
 import com.stripe.param.terminal.ReaderProcessSetupIntentParams;
 import com.stripe.param.terminal.ReaderRefundPaymentParams;
+import com.stripe.param.terminal.ReaderReloadGiftCardParams;
 import com.stripe.param.terminal.ReaderRetrieveParams;
 import com.stripe.param.terminal.ReaderSetReaderDisplayParams;
 import com.stripe.param.terminal.ReaderUpdateParams;
@@ -144,6 +148,27 @@ public final class ReaderService extends ApiService {
             options);
     return this.request(request, Reader.class);
   }
+  /** Initiates a gift card activation flow on a Reader and optionally sets its balance. */
+  public Reader activateGiftCard(String reader, ReaderActivateGiftCardParams params)
+      throws StripeException {
+    return activateGiftCard(reader, params, (RequestOptions) null);
+  }
+  /** Initiates a gift card activation flow on a Reader and optionally sets its balance. */
+  public Reader activateGiftCard(
+      String reader, ReaderActivateGiftCardParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/activate_gift_card", ApiResource.urlEncodeId(reader));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Reader.class);
+  }
   /**
    * Cancels the current reader action. See <a
    * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
@@ -178,6 +203,47 @@ public final class ReaderService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(reader));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Reader.class);
+  }
+  /** Initiates a gift card cashout flow on a Reader. A cashout sets the gift card balance to 0. */
+  public Reader cashoutGiftCard(String reader, ReaderCashoutGiftCardParams params)
+      throws StripeException {
+    return cashoutGiftCard(reader, params, (RequestOptions) null);
+  }
+  /** Initiates a gift card cashout flow on a Reader. A cashout sets the gift card balance to 0. */
+  public Reader cashoutGiftCard(
+      String reader, ReaderCashoutGiftCardParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/terminal/readers/%s/cashout_gift_card", ApiResource.urlEncodeId(reader));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Reader.class);
+  }
+  /** Initiates a gift card balance check flow on a Reader. */
+  public Reader checkGiftCardBalance(String reader, ReaderCheckGiftCardBalanceParams params)
+      throws StripeException {
+    return checkGiftCardBalance(reader, params, (RequestOptions) null);
+  }
+  /** Initiates a gift card balance check flow on a Reader. */
+  public Reader checkGiftCardBalance(
+      String reader, ReaderCheckGiftCardBalanceParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/check_gift_card_balance", ApiResource.urlEncodeId(reader));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -368,6 +434,30 @@ public final class ReaderService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/terminal/readers/%s/refund_payment", ApiResource.urlEncodeId(reader));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Reader.class);
+  }
+  /**
+   * Initiates a gift card reload flow on a Reader by adding the specified amount to its balance.
+   */
+  public Reader reloadGiftCard(String reader, ReaderReloadGiftCardParams params)
+      throws StripeException {
+    return reloadGiftCard(reader, params, (RequestOptions) null);
+  }
+  /**
+   * Initiates a gift card reload flow on a Reader by adding the specified amount to its balance.
+   */
+  public Reader reloadGiftCard(
+      String reader, ReaderReloadGiftCardParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/terminal/readers/%s/reload_gift_card", ApiResource.urlEncodeId(reader));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

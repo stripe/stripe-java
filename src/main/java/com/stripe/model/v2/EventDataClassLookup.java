@@ -699,6 +699,16 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.billing.cadence.created", com.stripe.events.V2BillingCadenceCreatedEvent.class);
     eventClassLookup.put(
+        "v2.billing.contract.activated", com.stripe.events.V2BillingContractActivatedEvent.class);
+    eventClassLookup.put(
+        "v2.billing.contract.canceled", com.stripe.events.V2BillingContractCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.billing.contract.created", com.stripe.events.V2BillingContractCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.billing.contract.ended", com.stripe.events.V2BillingContractEndedEvent.class);
+    eventClassLookup.put(
+        "v2.billing.contract.updated", com.stripe.events.V2BillingContractUpdatedEvent.class);
+    eventClassLookup.put(
         "v2.billing.license_fee.created", com.stripe.events.V2BillingLicenseFeeCreatedEvent.class);
     eventClassLookup.put(
         "v2.billing.license_fee.updated", com.stripe.events.V2BillingLicenseFeeUpdatedEvent.class);

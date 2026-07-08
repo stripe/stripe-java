@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class ContractListParams extends ApiRequestParams {
-  /** Filter by customer ID. */
+  /** Filter by customer id. */
   @SerializedName("customer")
   String customer;
 
@@ -63,7 +63,7 @@ public class ContractListParams extends ApiRequestParams {
       return new ContractListParams(this.customer, this.extraParams, this.include, this.limit);
     }
 
-    /** Filter by customer ID. */
+    /** Filter by customer id. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
@@ -131,9 +131,6 @@ public class ContractListParams extends ApiRequestParams {
   public enum Include implements ApiRequestParams.EnumParam {
     @SerializedName("billing_settings")
     BILLING_SETTINGS("billing_settings"),
-
-    @SerializedName("one_time_fees")
-    ONE_TIME_FEES("one_time_fees"),
 
     @SerializedName("pricing_lines")
     PRICING_LINES("pricing_lines"),

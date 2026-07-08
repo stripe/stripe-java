@@ -139,6 +139,13 @@ public class StripeError extends StripeObject {
   String docUrl;
 
   /**
+   * A GiftCardOperation represents an operation performed on a third-party gift card, such as
+   * activation, reload, cashout, balance check, or void.
+   */
+  @SerializedName("gift_card_operation")
+  GiftCardOperation giftCardOperation;
+
+  /**
    * A human-readable message providing more details about the error. For card errors, these
    * messages can be shown to your users.
    */

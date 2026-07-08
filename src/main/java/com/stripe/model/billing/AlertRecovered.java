@@ -12,6 +12,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class AlertRecovered extends StripeObject {
+  /** The aggregation period for which this alert recovered. */
+  @SerializedName("aggregation_period")
+  AggregationPeriod aggregationPeriod;
+
   /**
    * A billing alert is a resource that notifies you when a certain usage threshold on a meter is
    * crossed. For example, you might create a billing alert to notify you when a certain user made
@@ -58,4 +62,21 @@ public class AlertRecovered extends StripeObject {
   /** The value at which the alert recovered. */
   @SerializedName("value")
   BigDecimal value;
+
+  /**
+   * For more details about AggregationPeriod, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AggregationPeriod extends StripeObject {
+    /** End time of the aggregation period. */
+    @SerializedName("ends_at")
+    Long endsAt;
+
+    /** Start time of the aggregation period. */
+    @SerializedName("starts_at")
+    Long startsAt;
+  }
 }

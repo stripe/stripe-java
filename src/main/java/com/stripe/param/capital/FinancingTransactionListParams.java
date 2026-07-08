@@ -14,7 +14,7 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class FinancingTransactionListParams extends ApiRequestParams {
   /**
-   * For transactions of type {@code paydown} and reason {@code automatic_withholding} only, only
+   * For transactions of type {@code payment} and reason {@code automatic_withholding} only, only
    * returns transactions that were created as a result of this charge.
    */
   @SerializedName("charge")
@@ -67,7 +67,7 @@ public class FinancingTransactionListParams extends ApiRequestParams {
   String startingAfter;
 
   /**
-   * For transactions of type {@code paydown} and reason {@code automatic_withholding} only, only
+   * For transactions of type {@code payment} and reason {@code automatic_withholding} only, only
    * returns transactions that were created as a result of this Treasury Transaction.
    */
   @SerializedName("treasury_transaction")
@@ -132,7 +132,7 @@ public class FinancingTransactionListParams extends ApiRequestParams {
     }
 
     /**
-     * For transactions of type {@code paydown} and reason {@code automatic_withholding} only, only
+     * For transactions of type {@code payment} and reason {@code automatic_withholding} only, only
      * returns transactions that were created as a result of this charge.
      */
     public Builder setCharge(String charge) {
@@ -238,7 +238,7 @@ public class FinancingTransactionListParams extends ApiRequestParams {
     }
 
     /**
-     * For transactions of type {@code paydown} and reason {@code automatic_withholding} only, only
+     * For transactions of type {@code payment} and reason {@code automatic_withholding} only, only
      * returns transactions that were created as a result of this Treasury Transaction.
      */
     public Builder setTreasuryTransaction(String treasuryTransaction) {

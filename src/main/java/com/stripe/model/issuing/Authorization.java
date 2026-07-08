@@ -238,6 +238,10 @@ public class Authorization extends ApiResource
   @SerializedName("status")
   String status;
 
+  /** Details about the cardholder verification outcome at the terminal. */
+  @SerializedName("terminal_data")
+  TerminalData terminalData;
+
   /**
    * <a href="https://docs.stripe.com/api/issuing/tokens/object">Token</a> object used for this
    * authorization. If a network token was not used for this authorization, this field will be null.
@@ -1497,12 +1501,20 @@ public class Authorization extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class NetworkData extends StripeObject {
+    /** Country code of the acquirer assigned by the card network. */
+    @SerializedName("acquiring_institution_country")
+    String acquiringInstitutionCountry;
+
     /**
      * Identifier assigned to the acquirer by the card network. Sometimes this value is not provided
      * by the network; in this case, the value will be {@code null}.
      */
     @SerializedName("acquiring_institution_id")
     String acquiringInstitutionId;
+
+    /** Identifier assigned by the acquirer to track all messages related to this transaction. */
+    @SerializedName("retrieval_reference_number")
+    String retrievalReferenceNumber;
 
     /**
      * The System Trace Audit Number (STAN) is a 6-digit identifier assigned by the acquirer. Prefer
@@ -1682,6 +1694,10 @@ public class Authorization extends ApiResource
     @SerializedName("merchant_currency")
     String merchantCurrency;
 
+    /** Details about the authorization request, such as identifiers, set by the card network. */
+    @SerializedName("network_data")
+    NetworkData networkData;
+
     /**
      * The card network's estimate of the likelihood that an authorization is fraudulent. Takes on
      * values between 1 and 99.
@@ -1735,6 +1751,61 @@ public class Authorization extends ApiResource
       @SerializedName("cashback_amount")
       Long cashbackAmount;
     }
+
+    /**
+     * For more details about NetworkData, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NetworkData extends StripeObject {
+      /** Mastercard identifier for each authorization request. */
+      @SerializedName("trace_id")
+      TraceId traceId;
+
+      /**
+       * For more details about TraceId, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class TraceId extends StripeObject {
+        /**
+         * The unique reference number within the specified financial network on the specified
+         * network date.
+         */
+        @SerializedName("banknet_reference_number")
+        String banknetReferenceNumber;
+
+        /** The identifier of the program or service. */
+        @SerializedName("financial_network_code")
+        String financialNetworkCode;
+
+        /** The card network's record date for this authorization. */
+        @SerializedName("network_date")
+        String networkDate;
+      }
+    }
+  }
+
+  /**
+   * For more details about TerminalData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TerminalData extends StripeObject {
+    /**
+     * The method used to confirm the cardholder's identity.
+     *
+     * <p>One of {@code failed}, {@code none}, {@code pin}, {@code pin_and_signature}, {@code
+     * signature}, or {@code unknown}.
+     */
+    @SerializedName("cardholder_verification_result")
+    String cardholderVerificationResult;
   }
 
   /**
@@ -2449,6 +2520,7 @@ public class Authorization extends ApiResource
     trySetResponseGetter(networkData, responseGetter);
     trySetResponseGetter(pendingRequest, responseGetter);
     trySetResponseGetter(redaction, responseGetter);
+    trySetResponseGetter(terminalData, responseGetter);
     trySetResponseGetter(token, responseGetter);
     trySetResponseGetter(tokenDetails, responseGetter);
     trySetResponseGetter(treasury, responseGetter);

@@ -23800,10 +23800,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
 
-    /**
-     * A future timestamp to anchor the subscription's billing cycle for new subscriptions. You
-     * can't set this parameter if {@code ui_mode} is {@code elements}.
-     */
+    /** A future timestamp to anchor the subscription's billing cycle for new subscriptions. */
     @SerializedName("billing_cycle_anchor")
     Long billingCycleAnchor;
 
@@ -24006,10 +24003,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * A future timestamp to anchor the subscription's billing cycle for new subscriptions. You
-       * can't set this parameter if {@code ui_mode} is {@code elements}.
-       */
+      /** A future timestamp to anchor the subscription's billing cycle for new subscriptions. */
       public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
         return this;

@@ -159,6 +159,10 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** The gift card brand to use in the transaction. */
+    @SerializedName("gift_card_brand")
+    GiftCardBrand giftCardBrand;
+
     /**
      * The URL to redirect your customer back to after they authenticate or cancel their payment on
      * the payment method's app or site. If you'd prefer to redirect to a mobile application, you
@@ -179,12 +183,14 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
         AllowRedisplay allowRedisplay,
         Boolean enableCustomerCancellation,
         Map<String, Object> extraParams,
+        GiftCardBrand giftCardBrand,
         String returnUrl,
         Boolean skipTipping,
         Tipping tipping) {
       this.allowRedisplay = allowRedisplay;
       this.enableCustomerCancellation = enableCustomerCancellation;
       this.extraParams = extraParams;
+      this.giftCardBrand = giftCardBrand;
       this.returnUrl = returnUrl;
       this.skipTipping = skipTipping;
       this.tipping = tipping;
@@ -201,6 +207,8 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private GiftCardBrand giftCardBrand;
+
       private String returnUrl;
 
       private Boolean skipTipping;
@@ -213,6 +221,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
             this.allowRedisplay,
             this.enableCustomerCancellation,
             this.extraParams,
+            this.giftCardBrand,
             this.returnUrl,
             this.skipTipping,
             this.tipping);
@@ -259,6 +268,13 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The gift card brand to use in the transaction. */
+      public Builder setGiftCardBrand(
+          ReaderProcessPaymentIntentParams.ProcessConfig.GiftCardBrand giftCardBrand) {
+        this.giftCardBrand = giftCardBrand;
         return this;
       }
 
@@ -379,6 +395,24 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       private final String value;
 
       AllowRedisplay(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum GiftCardBrand implements ApiRequestParams.EnumParam {
+      @SerializedName("fiserv_valuelink")
+      FISERV_VALUELINK("fiserv_valuelink"),
+
+      @SerializedName("givex")
+      GIVEX("givex"),
+
+      @SerializedName("svs")
+      SVS("svs");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      GiftCardBrand(String value) {
         this.value = value;
       }
     }

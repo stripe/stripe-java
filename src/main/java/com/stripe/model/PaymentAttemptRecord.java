@@ -1269,9 +1269,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class Card extends StripeObject {
           /**
-           * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
-           * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
-           * unionpay}, {@code visa} or {@code unknown}.
+           * Card brand. Can be {@code American Express}, {@code Cartes Bancaires}, {@code Diners
+           * Club}, {@code Discover}, {@code Eftpos Australia}, {@code Girocard}, {@code JCB},
+           * {@code MasterCard}, {@code UnionPay}, {@code Visa}, or {@code Unknown}.
            */
           @SerializedName("brand")
           String brand;
@@ -2426,10 +2426,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /**
        * The customer's bank. Can be one of {@code affin_bank}, {@code agrobank}, {@code
        * alliance_bank}, {@code ambank}, {@code bank_islam}, {@code bank_muamalat}, {@code
-       * bank_rakyat}, {@code bsn}, {@code cimb}, {@code hong_leong_bank}, {@code hsbc}, {@code
-       * kfh}, {@code maybank2u}, {@code ocbc}, {@code public_bank}, {@code rhb}, {@code
-       * standard_chartered}, {@code uob}, {@code deutsche_bank}, {@code maybank2e}, {@code
-       * pb_enterprise}, or {@code bank_of_china}.
+       * bnp_paribas}, {@code bank_rakyat}, {@code bsn}, {@code cimb}, {@code citibank}, {@code
+       * hong_leong_bank}, {@code hsbc}, {@code kfh}, {@code maybank2u}, {@code ocbc}, {@code
+       * public_bank}, {@code rhb}, {@code standard_chartered}, {@code uob}, {@code deutsche_bank},
+       * {@code maybank2e}, {@code mbsb_bank}, {@code pb_enterprise}, or {@code bank_of_china}.
        */
       @SerializedName("bank")
       String bank;

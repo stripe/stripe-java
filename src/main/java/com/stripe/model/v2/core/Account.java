@@ -116,6 +116,10 @@ public class Account extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
+  /** The network object related to this Account. */
+  @SerializedName("related_network_object")
+  RelatedNetworkObject relatedNetworkObject;
+
   /**
    * Information about the active requirements for the Account, including what information needs to
    * be collected, and by when.
@@ -12127,19 +12131,19 @@ public class Account extends StripeObject implements HasId {
          * mg_bank_account}, {@code mk_bank_account}, {@code mn_bank_account}, {@code
          * mo_bank_account}, {@code mt_bank_account}, {@code mu_bank_account}, {@code
          * mx_bank_account}, {@code my_bank_account}, {@code mz_bank_account}, {@code
-         * na_bank_account}, {@code ne_bank_account}, {@code ng_bank_account}, {@code
-         * ni_bank_account}, {@code nl_bank_account}, {@code no_bank_account}, {@code
-         * nz_bank_account}, {@code om_bank_account}, {@code pa_bank_account}, {@code
-         * pe_bank_account}, {@code ph_bank_account}, {@code pk_bank_account}, {@code
-         * pl_bank_account}, {@code pt_bank_account}, {@code py_bank_account}, {@code
-         * qa_bank_account}, {@code ro_bank_account}, {@code rs_bank_account}, {@code
-         * rw_bank_account}, {@code sa_bank_account}, {@code se_bank_account}, {@code
-         * sg_bank_account}, {@code si_bank_account}, {@code sk_bank_account}, {@code
-         * sm_bank_account}, {@code sn_bank_account}, {@code sv_bank_account}, {@code
-         * th_bank_account}, {@code tn_bank_account}, {@code tr_bank_account}, {@code
-         * tt_bank_account}, {@code tw_bank_account}, {@code tz_bank_account}, {@code
-         * us_bank_account}, {@code uy_bank_account}, {@code uz_bank_account}, {@code
-         * vn_bank_account}, or {@code za_bank_account}.
+         * na_bank_account}, {@code network_business_profile_wallet}, {@code ne_bank_account},
+         * {@code ng_bank_account}, {@code ni_bank_account}, {@code nl_bank_account}, {@code
+         * no_bank_account}, {@code nz_bank_account}, {@code om_bank_account}, {@code
+         * pa_bank_account}, {@code pe_bank_account}, {@code ph_bank_account}, {@code
+         * pk_bank_account}, {@code pl_bank_account}, {@code pt_bank_account}, {@code
+         * py_bank_account}, {@code qa_bank_account}, {@code ro_bank_account}, {@code
+         * rs_bank_account}, {@code rw_bank_account}, {@code sa_bank_account}, {@code
+         * se_bank_account}, {@code sg_bank_account}, {@code si_bank_account}, {@code
+         * sk_bank_account}, {@code sm_bank_account}, {@code sn_bank_account}, {@code
+         * sv_bank_account}, {@code th_bank_account}, {@code tn_bank_account}, {@code
+         * tr_bank_account}, {@code tt_bank_account}, {@code tw_bank_account}, {@code
+         * tz_bank_account}, {@code us_bank_account}, {@code uy_bank_account}, {@code
+         * uz_bank_account}, {@code vn_bank_account}, or {@code za_bank_account}.
          */
         @SerializedName("type")
         String type;
@@ -16185,6 +16189,24 @@ public class Account extends StripeObject implements HasId {
         }
       }
     }
+  }
+
+  /** The network object related to this Account. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RelatedNetworkObject extends StripeObject {
+    /** The ID of the network business profile associated with this Account. */
+    @SerializedName("network_business_profile")
+    String networkBusinessProfile;
+
+    /**
+     * Closed Enum. The type of related network object.
+     *
+     * <p>One of {@code link}, or {@code network_business_profile}.
+     */
+    @SerializedName("type")
+    String type;
   }
 
   /**
