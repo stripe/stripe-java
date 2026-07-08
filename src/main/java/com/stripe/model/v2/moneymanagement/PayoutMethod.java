@@ -55,6 +55,10 @@ public class PayoutMethod extends StripeObject implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
+  /** The PayoutMethodNetworkBusinessProfileWallet object details. */
+  @SerializedName("network_business_profile_wallet")
+  NetworkBusinessProfileWallet networkBusinessProfileWallet;
+
   /**
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
@@ -74,7 +78,8 @@ public class PayoutMethod extends StripeObject implements HasId {
   /**
    * Closed Enum. The type of payout method.
    *
-   * <p>One of {@code bank_account}, {@code card}, or {@code crypto_wallet}.
+   * <p>One of {@code bank_account}, {@code card}, {@code crypto_wallet}, or {@code
+   * network_business_profile_wallet}.
    */
   @SerializedName("type")
   String type;
@@ -234,6 +239,16 @@ public class PayoutMethod extends StripeObject implements HasId {
      */
     @SerializedName("network")
     String network;
+  }
+
+  /** The PayoutMethodNetworkBusinessProfileWallet object details. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NetworkBusinessProfileWallet extends StripeObject {
+    /** The Network ID of the Stripe profile. */
+    @SerializedName("network_business_profile")
+    String networkBusinessProfile;
   }
 
   /**

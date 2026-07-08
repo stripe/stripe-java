@@ -124,10 +124,18 @@ public class ReceivedCredit extends StripeObject implements HasId {
   StripeBalancePayment stripeBalancePayment;
 
   /**
+   * This object stores details about the Stripe network transfer that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code stripe_network_transfer}.
+   */
+  @SerializedName("stripe_network_transfer")
+  StripeNetworkTransfer stripeNetworkTransfer;
+
+  /**
    * Open Enum. The type of flow that caused the ReceivedCredit.
    *
    * <p>One of {@code balance_transfer}, {@code bank_transfer}, {@code card_spend}, {@code
-   * crypto_wallet_transfer}, {@code external_credit}, or {@code stripe_balance_payment}.
+   * crypto_wallet_transfer}, {@code external_credit}, {@code stripe_balance_payment}, or {@code
+   * stripe_network_transfer}.
    */
   @SerializedName("type")
   String type;
@@ -634,5 +642,36 @@ public class ReceivedCredit extends StripeObject implements HasId {
     /** Statement descriptor for the Stripe Balance Payment. */
     @SerializedName("statement_descriptor")
     String statementDescriptor;
+  }
+
+  /**
+   * This object stores details about the Stripe network transfer that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code stripe_network_transfer}.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StripeNetworkTransfer extends StripeObject {
+    /** Information about the sender of the network transfer. */
+    @SerializedName("from")
+    From from;
+
+    /** Information about the sender of the network transfer. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class From extends StripeObject {
+      /** The network ID of the sender. */
+      @SerializedName("network_business_profile")
+      String networkBusinessProfile;
+
+      /**
+       * Open Enum. The type of the sender.
+       *
+       * <p>Equal to {@code network_business_profile}.
+       */
+      @SerializedName("type")
+      String type;
+    }
   }
 }

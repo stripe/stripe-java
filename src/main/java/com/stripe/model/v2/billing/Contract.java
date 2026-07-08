@@ -4,7 +4,6 @@ package com.stripe.model.v2.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.v2.Amount;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
@@ -66,13 +65,6 @@ public class Contract extends StripeObject implements HasId {
    */
   @SerializedName("object")
   String object;
-
-  /**
-   * The one-time fees. Only populated when {@code one_time_fees} is passed in the {@code include}
-   * parameter.
-   */
-  @SerializedName("one_time_fees")
-  OneTimeFees oneTimeFees;
 
   /**
    * The pricing lines. Only populated when {@code pricing_lines} is passed in the {@code include}
@@ -223,59 +215,6 @@ public class Contract extends StripeObject implements HasId {
       /** The payment method configuration. */
       @SerializedName("payment_method_configuration")
       String paymentMethodConfiguration;
-    }
-  }
-
-  /**
-   * The one-time fees. Only populated when {@code one_time_fees} is passed in the {@code include}
-   * parameter.
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class OneTimeFees extends StripeObject {
-    /** The one-time fees for this page. */
-    @SerializedName("data")
-    List<Contract.OneTimeFees.Data> data;
-
-    /**
-     * For more details about Data, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Data extends StripeObject implements HasId {
-      /** The amount billed for this fee. */
-      @SerializedName("amount")
-      Amount amount;
-
-      /** When this fee will be billed. Always contains a concrete timestamp. */
-      @SerializedName("bill_at")
-      BillAt billAt;
-
-      /** The id of the one-time fee. */
-      @Getter(onMethod_ = {@Override})
-      @SerializedName("id")
-      String id;
-
-      /** The user-provided lookup key. */
-      @SerializedName("lookup_key")
-      String lookupKey;
-
-      /** The id of the product for this fee. */
-      @SerializedName("product")
-      String product;
-
-      /** When this fee will be billed. Always contains a concrete timestamp. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class BillAt extends StripeObject {
-        /** The timestamp at which the fee will be billed. */
-        @SerializedName("timestamp")
-        Instant timestamp;
-      }
     }
   }
 
@@ -436,61 +375,11 @@ public class Contract extends StripeObject implements HasId {
               @EqualsAndHashCode(callSuper = false)
               public static class OverwritePrice extends StripeObject {
                 /**
-                 * Defines whether the tiered price should be graduated or volume-based.
-                 *
-                 * <p>One of {@code graduated}, or {@code volume}.
-                 */
-                @SerializedName("tiering_mode")
-                String tieringMode;
-
-                /** Each element represents a pricing tier. */
-                @SerializedName("tiers")
-                List<
-                        Contract.PricingLines.Data.Pricing.PriceDetails.PricingOverrides.InnerData
-                            .OverwritePrice.Tier>
-                    tiers;
-
-                /**
                  * The per-unit amount to be charged, represented as a decimal string in minor
                  * currency units.
                  */
                 @SerializedName("unit_amount")
                 String unitAmount;
-
-                /**
-                 * For more details about Tier, please refer to the <a
-                 * href="https://docs.stripe.com/api">API Reference.</a>
-                 */
-                @Getter
-                @Setter
-                @EqualsAndHashCode(callSuper = false)
-                public static class Tier extends StripeObject {
-                  /**
-                   * Price for the entire tier, represented as a decimal string in minor currency
-                   * units.
-                   */
-                  @SerializedName("flat_amount")
-                  String flatAmount;
-
-                  /**
-                   * Per-unit price for units included in this tier, represented as a decimal string
-                   * in minor currency units.
-                   */
-                  @SerializedName("unit_amount")
-                  String unitAmount;
-
-                  /** Up to and including this quantity will be contained in the tier. */
-                  @SerializedName("up_to_decimal")
-                  BigDecimal upToDecimal;
-
-                  /**
-                   * No upper bound to this tier.
-                   *
-                   * <p>Equal to {@code inf}.
-                   */
-                  @SerializedName("up_to_inf")
-                  String upToInf;
-                }
               }
 
               /** Timestamp when this override starts. */

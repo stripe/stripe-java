@@ -706,7 +706,10 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
       CARD("card"),
 
       @SerializedName("crypto_wallet")
-      CRYPTO_WALLET("crypto_wallet");
+      CRYPTO_WALLET("crypto_wallet"),
+
+      @SerializedName("network_business_profile_wallet")
+      NETWORK_BUSINESS_PROFILE_WALLET("network_business_profile_wallet");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

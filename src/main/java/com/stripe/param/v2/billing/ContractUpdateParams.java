@@ -1153,17 +1153,6 @@ public class ContractUpdateParams extends ApiRequestParams {
               @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
               Map<String, Object> extraParams;
 
-              /** Defines whether the tiered price should be graduated or volume-based. */
-              @SerializedName("tiering_mode")
-              TieringMode tieringMode;
-
-              /** Each element represents a pricing tier. */
-              @SerializedName("tiers")
-              List<
-                      ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
-                          .PricingOverride.OverwritePrice.Tier>
-                  tiers;
-
               /**
                * The per-unit amount to be charged, represented as a decimal string in minor
                * currency units.
@@ -1171,17 +1160,8 @@ public class ContractUpdateParams extends ApiRequestParams {
               @SerializedName("unit_amount")
               Object unitAmount;
 
-              private OverwritePrice(
-                  Map<String, Object> extraParams,
-                  TieringMode tieringMode,
-                  List<
-                          ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
-                              .PricingOverride.OverwritePrice.Tier>
-                      tiers,
-                  Object unitAmount) {
+              private OverwritePrice(Map<String, Object> extraParams, Object unitAmount) {
                 this.extraParams = extraParams;
-                this.tieringMode = tieringMode;
-                this.tiers = tiers;
                 this.unitAmount = unitAmount;
               }
 
@@ -1192,13 +1172,6 @@ public class ContractUpdateParams extends ApiRequestParams {
               public static class Builder {
                 private Map<String, Object> extraParams;
 
-                private TieringMode tieringMode;
-
-                private List<
-                        ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
-                            .PricingOverride.OverwritePrice.Tier>
-                    tiers;
-
                 private Object unitAmount;
 
                 /** Finalize and obtain parameter instance from this builder. */
@@ -1206,8 +1179,7 @@ public class ContractUpdateParams extends ApiRequestParams {
                         .PricingOverride.OverwritePrice
                     build() {
                   return new ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
-                      .PricingOverride.OverwritePrice(
-                      this.extraParams, this.tieringMode, this.tiers, this.unitAmount);
+                      .PricingOverride.OverwritePrice(this.extraParams, this.unitAmount);
                 }
 
                 /**
@@ -1240,52 +1212,6 @@ public class ContractUpdateParams extends ApiRequestParams {
                   return this;
                 }
 
-                /** Defines whether the tiered price should be graduated or volume-based. */
-                public Builder setTieringMode(
-                    ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride
-                            .OverwritePrice.TieringMode
-                        tieringMode) {
-                  this.tieringMode = tieringMode;
-                  return this;
-                }
-
-                /**
-                 * Add an element to `tiers` list. A list is initialized for the first `add/addAll`
-                 * call, and subsequent calls adds additional elements to the original list. See
-                 * {@link
-                 * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.OverwritePrice#tiers}
-                 * for the field documentation.
-                 */
-                public Builder addTier(
-                    ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride
-                            .OverwritePrice.Tier
-                        element) {
-                  if (this.tiers == null) {
-                    this.tiers = new ArrayList<>();
-                  }
-                  this.tiers.add(element);
-                  return this;
-                }
-
-                /**
-                 * Add all elements to `tiers` list. A list is initialized for the first
-                 * `add/addAll` call, and subsequent calls adds additional elements to the original
-                 * list. See {@link
-                 * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.OverwritePrice#tiers}
-                 * for the field documentation.
-                 */
-                public Builder addAllTier(
-                    List<
-                            ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
-                                .PricingOverride.OverwritePrice.Tier>
-                        elements) {
-                  if (this.tiers == null) {
-                    this.tiers = new ArrayList<>();
-                  }
-                  this.tiers.addAll(elements);
-                  return this;
-                }
-
                 /**
                  * The per-unit amount to be charged, represented as a decimal string in minor
                  * currency units.
@@ -1302,198 +1228,6 @@ public class ContractUpdateParams extends ApiRequestParams {
                 public Builder setUnitAmount(EmptyParam unitAmount) {
                   this.unitAmount = unitAmount;
                   return this;
-                }
-              }
-
-              @Getter
-              @EqualsAndHashCode(callSuper = false)
-              public static class Tier {
-                /**
-                 * Map of extra parameters for custom features not available in this client library.
-                 * The content in this map is not serialized under this field's
-                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
-                 * the key is a root-level field (serialized) name in this param object.
-                 * Effectively, this map is flattened to its parent instance.
-                 */
-                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-                Map<String, Object> extraParams;
-
-                /**
-                 * Price for the entire tier, represented as a decimal string in minor currency
-                 * units.
-                 */
-                @SerializedName("flat_amount")
-                Object flatAmount;
-
-                /**
-                 * Per-unit price for units included in this tier, represented as a decimal string
-                 * in minor currency units.
-                 */
-                @SerializedName("unit_amount")
-                Object unitAmount;
-
-                /** Up to and including this quantity will be contained in the tier. */
-                @SerializedName("up_to_decimal")
-                Object upToDecimal;
-
-                /** No upper bound to this tier. */
-                @SerializedName("up_to_inf")
-                UpToInf upToInf;
-
-                private Tier(
-                    Map<String, Object> extraParams,
-                    Object flatAmount,
-                    Object unitAmount,
-                    Object upToDecimal,
-                    UpToInf upToInf) {
-                  this.extraParams = extraParams;
-                  this.flatAmount = flatAmount;
-                  this.unitAmount = unitAmount;
-                  this.upToDecimal = upToDecimal;
-                  this.upToInf = upToInf;
-                }
-
-                public static Builder builder() {
-                  return new Builder();
-                }
-
-                public static class Builder {
-                  private Map<String, Object> extraParams;
-
-                  private Object flatAmount;
-
-                  private Object unitAmount;
-
-                  private Object upToDecimal;
-
-                  private UpToInf upToInf;
-
-                  /** Finalize and obtain parameter instance from this builder. */
-                  public ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
-                          .PricingOverride.OverwritePrice.Tier
-                      build() {
-                    return new ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
-                        .PricingOverride.OverwritePrice.Tier(
-                        this.extraParams,
-                        this.flatAmount,
-                        this.unitAmount,
-                        this.upToDecimal,
-                        this.upToInf);
-                  }
-
-                  /**
-                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
-                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-                   * original map. See {@link
-                   * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.OverwritePrice.Tier#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putExtraParam(String key, Object value) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.put(key, value);
-                    return this;
-                  }
-
-                  /**
-                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
-                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
-                   * the original map. See {@link
-                   * ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails.PricingOverride.OverwritePrice.Tier#extraParams}
-                   * for the field documentation.
-                   */
-                  public Builder putAllExtraParam(Map<String, Object> map) {
-                    if (this.extraParams == null) {
-                      this.extraParams = new HashMap<>();
-                    }
-                    this.extraParams.putAll(map);
-                    return this;
-                  }
-
-                  /**
-                   * Price for the entire tier, represented as a decimal string in minor currency
-                   * units.
-                   */
-                  public Builder setFlatAmount(String flatAmount) {
-                    this.flatAmount = flatAmount;
-                    return this;
-                  }
-
-                  /**
-                   * Price for the entire tier, represented as a decimal string in minor currency
-                   * units.
-                   */
-                  public Builder setFlatAmount(EmptyParam flatAmount) {
-                    this.flatAmount = flatAmount;
-                    return this;
-                  }
-
-                  /**
-                   * Per-unit price for units included in this tier, represented as a decimal string
-                   * in minor currency units.
-                   */
-                  public Builder setUnitAmount(String unitAmount) {
-                    this.unitAmount = unitAmount;
-                    return this;
-                  }
-
-                  /**
-                   * Per-unit price for units included in this tier, represented as a decimal string
-                   * in minor currency units.
-                   */
-                  public Builder setUnitAmount(EmptyParam unitAmount) {
-                    this.unitAmount = unitAmount;
-                    return this;
-                  }
-
-                  /** Up to and including this quantity will be contained in the tier. */
-                  public Builder setUpToDecimal(BigDecimal upToDecimal) {
-                    this.upToDecimal = upToDecimal;
-                    return this;
-                  }
-
-                  /** Up to and including this quantity will be contained in the tier. */
-                  public Builder setUpToDecimal(EmptyParam upToDecimal) {
-                    this.upToDecimal = upToDecimal;
-                    return this;
-                  }
-
-                  /** No upper bound to this tier. */
-                  public Builder setUpToInf(
-                      ContractUpdateParams.PricingLineAction.Add.Pricing.PriceDetails
-                              .PricingOverride.OverwritePrice.Tier.UpToInf
-                          upToInf) {
-                    this.upToInf = upToInf;
-                    return this;
-                  }
-                }
-
-                public enum UpToInf implements ApiRequestParams.EnumParam {
-                  @SerializedName("inf")
-                  INF("inf");
-
-                  @Getter(onMethod_ = {@Override})
-                  private final String value;
-
-                  UpToInf(String value) {
-                    this.value = value;
-                  }
-                }
-              }
-
-              public enum TieringMode implements ApiRequestParams.EnumParam {
-                @SerializedName("graduated")
-                GRADUATED("graduated"),
-
-                @SerializedName("volume")
-                VOLUME("volume");
-
-                @Getter(onMethod_ = {@Override})
-                private final String value;
-
-                TieringMode(String value) {
-                  this.value = value;
                 }
               }
             }
@@ -2953,17 +2687,6 @@ public class ContractUpdateParams extends ApiRequestParams {
                 @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
                 Map<String, Object> extraParams;
 
-                /** Defines whether the tiered price should be graduated or volume-based. */
-                @SerializedName("tiering_mode")
-                TieringMode tieringMode;
-
-                /** Each element represents a pricing tier. */
-                @SerializedName("tiers")
-                List<
-                        ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
-                            .PricingOverrideAction.Add.OverwritePrice.Tier>
-                    tiers;
-
                 /**
                  * The per-unit amount to be charged, represented as a decimal string in minor
                  * currency units.
@@ -2971,17 +2694,8 @@ public class ContractUpdateParams extends ApiRequestParams {
                 @SerializedName("unit_amount")
                 Object unitAmount;
 
-                private OverwritePrice(
-                    Map<String, Object> extraParams,
-                    TieringMode tieringMode,
-                    List<
-                            ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
-                                .PricingOverrideAction.Add.OverwritePrice.Tier>
-                        tiers,
-                    Object unitAmount) {
+                private OverwritePrice(Map<String, Object> extraParams, Object unitAmount) {
                   this.extraParams = extraParams;
-                  this.tieringMode = tieringMode;
-                  this.tiers = tiers;
                   this.unitAmount = unitAmount;
                 }
 
@@ -2992,13 +2706,6 @@ public class ContractUpdateParams extends ApiRequestParams {
                 public static class Builder {
                   private Map<String, Object> extraParams;
 
-                  private TieringMode tieringMode;
-
-                  private List<
-                          ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
-                              .PricingOverrideAction.Add.OverwritePrice.Tier>
-                      tiers;
-
                   private Object unitAmount;
 
                   /** Finalize and obtain parameter instance from this builder. */
@@ -3007,7 +2714,7 @@ public class ContractUpdateParams extends ApiRequestParams {
                       build() {
                     return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
                         .PricingOverrideAction.Add.OverwritePrice(
-                        this.extraParams, this.tieringMode, this.tiers, this.unitAmount);
+                        this.extraParams, this.unitAmount);
                   }
 
                   /**
@@ -3040,52 +2747,6 @@ public class ContractUpdateParams extends ApiRequestParams {
                     return this;
                   }
 
-                  /** Defines whether the tiered price should be graduated or volume-based. */
-                  public Builder setTieringMode(
-                      ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
-                              .PricingOverrideAction.Add.OverwritePrice.TieringMode
-                          tieringMode) {
-                    this.tieringMode = tieringMode;
-                    return this;
-                  }
-
-                  /**
-                   * Add an element to `tiers` list. A list is initialized for the first
-                   * `add/addAll` call, and subsequent calls adds additional elements to the
-                   * original list. See {@link
-                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.OverwritePrice#tiers}
-                   * for the field documentation.
-                   */
-                  public Builder addTier(
-                      ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
-                              .PricingOverrideAction.Add.OverwritePrice.Tier
-                          element) {
-                    if (this.tiers == null) {
-                      this.tiers = new ArrayList<>();
-                    }
-                    this.tiers.add(element);
-                    return this;
-                  }
-
-                  /**
-                   * Add all elements to `tiers` list. A list is initialized for the first
-                   * `add/addAll` call, and subsequent calls adds additional elements to the
-                   * original list. See {@link
-                   * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.OverwritePrice#tiers}
-                   * for the field documentation.
-                   */
-                  public Builder addAllTier(
-                      List<
-                              ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
-                                  .PricingOverrideAction.Add.OverwritePrice.Tier>
-                          elements) {
-                    if (this.tiers == null) {
-                      this.tiers = new ArrayList<>();
-                    }
-                    this.tiers.addAll(elements);
-                    return this;
-                  }
-
                   /**
                    * The per-unit amount to be charged, represented as a decimal string in minor
                    * currency units.
@@ -3102,198 +2763,6 @@ public class ContractUpdateParams extends ApiRequestParams {
                   public Builder setUnitAmount(EmptyParam unitAmount) {
                     this.unitAmount = unitAmount;
                     return this;
-                  }
-                }
-
-                @Getter
-                @EqualsAndHashCode(callSuper = false)
-                public static class Tier {
-                  /**
-                   * Map of extra parameters for custom features not available in this client
-                   * library. The content in this map is not serialized under this field's
-                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
-                   * the key is a root-level field (serialized) name in this param object.
-                   * Effectively, this map is flattened to its parent instance.
-                   */
-                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-                  Map<String, Object> extraParams;
-
-                  /**
-                   * Price for the entire tier, represented as a decimal string in minor currency
-                   * units.
-                   */
-                  @SerializedName("flat_amount")
-                  Object flatAmount;
-
-                  /**
-                   * Per-unit price for units included in this tier, represented as a decimal string
-                   * in minor currency units.
-                   */
-                  @SerializedName("unit_amount")
-                  Object unitAmount;
-
-                  /** Up to and including this quantity will be contained in the tier. */
-                  @SerializedName("up_to_decimal")
-                  Object upToDecimal;
-
-                  /** No upper bound to this tier. */
-                  @SerializedName("up_to_inf")
-                  UpToInf upToInf;
-
-                  private Tier(
-                      Map<String, Object> extraParams,
-                      Object flatAmount,
-                      Object unitAmount,
-                      Object upToDecimal,
-                      UpToInf upToInf) {
-                    this.extraParams = extraParams;
-                    this.flatAmount = flatAmount;
-                    this.unitAmount = unitAmount;
-                    this.upToDecimal = upToDecimal;
-                    this.upToInf = upToInf;
-                  }
-
-                  public static Builder builder() {
-                    return new Builder();
-                  }
-
-                  public static class Builder {
-                    private Map<String, Object> extraParams;
-
-                    private Object flatAmount;
-
-                    private Object unitAmount;
-
-                    private Object upToDecimal;
-
-                    private UpToInf upToInf;
-
-                    /** Finalize and obtain parameter instance from this builder. */
-                    public ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
-                            .PricingOverrideAction.Add.OverwritePrice.Tier
-                        build() {
-                      return new ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
-                          .PricingOverrideAction.Add.OverwritePrice.Tier(
-                          this.extraParams,
-                          this.flatAmount,
-                          this.unitAmount,
-                          this.upToDecimal,
-                          this.upToInf);
-                    }
-
-                    /**
-                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
-                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-                     * original map. See {@link
-                     * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.OverwritePrice.Tier#extraParams}
-                     * for the field documentation.
-                     */
-                    public Builder putExtraParam(String key, Object value) {
-                      if (this.extraParams == null) {
-                        this.extraParams = new HashMap<>();
-                      }
-                      this.extraParams.put(key, value);
-                      return this;
-                    }
-
-                    /**
-                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
-                     * the first `put/putAll` call, and subsequent calls add additional key/value
-                     * pairs to the original map. See {@link
-                     * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.Add.OverwritePrice.Tier#extraParams}
-                     * for the field documentation.
-                     */
-                    public Builder putAllExtraParam(Map<String, Object> map) {
-                      if (this.extraParams == null) {
-                        this.extraParams = new HashMap<>();
-                      }
-                      this.extraParams.putAll(map);
-                      return this;
-                    }
-
-                    /**
-                     * Price for the entire tier, represented as a decimal string in minor currency
-                     * units.
-                     */
-                    public Builder setFlatAmount(String flatAmount) {
-                      this.flatAmount = flatAmount;
-                      return this;
-                    }
-
-                    /**
-                     * Price for the entire tier, represented as a decimal string in minor currency
-                     * units.
-                     */
-                    public Builder setFlatAmount(EmptyParam flatAmount) {
-                      this.flatAmount = flatAmount;
-                      return this;
-                    }
-
-                    /**
-                     * Per-unit price for units included in this tier, represented as a decimal
-                     * string in minor currency units.
-                     */
-                    public Builder setUnitAmount(String unitAmount) {
-                      this.unitAmount = unitAmount;
-                      return this;
-                    }
-
-                    /**
-                     * Per-unit price for units included in this tier, represented as a decimal
-                     * string in minor currency units.
-                     */
-                    public Builder setUnitAmount(EmptyParam unitAmount) {
-                      this.unitAmount = unitAmount;
-                      return this;
-                    }
-
-                    /** Up to and including this quantity will be contained in the tier. */
-                    public Builder setUpToDecimal(BigDecimal upToDecimal) {
-                      this.upToDecimal = upToDecimal;
-                      return this;
-                    }
-
-                    /** Up to and including this quantity will be contained in the tier. */
-                    public Builder setUpToDecimal(EmptyParam upToDecimal) {
-                      this.upToDecimal = upToDecimal;
-                      return this;
-                    }
-
-                    /** No upper bound to this tier. */
-                    public Builder setUpToInf(
-                        ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
-                                .PricingOverrideAction.Add.OverwritePrice.Tier.UpToInf
-                            upToInf) {
-                      this.upToInf = upToInf;
-                      return this;
-                    }
-                  }
-
-                  public enum UpToInf implements ApiRequestParams.EnumParam {
-                    @SerializedName("inf")
-                    INF("inf");
-
-                    @Getter(onMethod_ = {@Override})
-                    private final String value;
-
-                    UpToInf(String value) {
-                      this.value = value;
-                    }
-                  }
-                }
-
-                public enum TieringMode implements ApiRequestParams.EnumParam {
-                  @SerializedName("graduated")
-                  GRADUATED("graduated"),
-
-                  @SerializedName("volume")
-                  VOLUME("volume");
-
-                  @Getter(onMethod_ = {@Override})
-                  private final String value;
-
-                  TieringMode(String value) {
-                    this.value = value;
                   }
                 }
               }
@@ -4965,14 +4434,6 @@ public class ContractUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Defines whether the tiered price should be graduated or volume-based. */
-        @SerializedName("tiering_mode")
-        TieringMode tieringMode;
-
-        /** <strong>Required.</strong> Each element represents a pricing tier. */
-        @SerializedName("tiers")
-        List<ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice.Tier> tiers;
-
         /**
          * The per-unit amount to be charged, represented as a decimal string in minor currency
          * units.
@@ -4980,14 +4441,8 @@ public class ContractUpdateParams extends ApiRequestParams {
         @SerializedName("unit_amount")
         Object unitAmount;
 
-        private OverwritePrice(
-            Map<String, Object> extraParams,
-            TieringMode tieringMode,
-            List<ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice.Tier> tiers,
-            Object unitAmount) {
+        private OverwritePrice(Map<String, Object> extraParams, Object unitAmount) {
           this.extraParams = extraParams;
-          this.tieringMode = tieringMode;
-          this.tiers = tiers;
           this.unitAmount = unitAmount;
         }
 
@@ -4998,16 +4453,12 @@ public class ContractUpdateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private TieringMode tieringMode;
-
-          private List<ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice.Tier> tiers;
-
           private Object unitAmount;
 
           /** Finalize and obtain parameter instance from this builder. */
           public ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice build() {
             return new ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice(
-                this.extraParams, this.tieringMode, this.tiers, this.unitAmount);
+                this.extraParams, this.unitAmount);
           }
 
           /**
@@ -5040,44 +4491,6 @@ public class ContractUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Defines whether the tiered price should be graduated or volume-based. */
-          public Builder setTieringMode(
-              ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice.TieringMode
-                  tieringMode) {
-            this.tieringMode = tieringMode;
-            return this;
-          }
-
-          /**
-           * Add an element to `tiers` list. A list is initialized for the first `add/addAll` call,
-           * and subsequent calls adds additional elements to the original list. See {@link
-           * ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice#tiers} for the field
-           * documentation.
-           */
-          public Builder addTier(
-              ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice.Tier element) {
-            if (this.tiers == null) {
-              this.tiers = new ArrayList<>();
-            }
-            this.tiers.add(element);
-            return this;
-          }
-
-          /**
-           * Add all elements to `tiers` list. A list is initialized for the first `add/addAll`
-           * call, and subsequent calls adds additional elements to the original list. See {@link
-           * ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice#tiers} for the field
-           * documentation.
-           */
-          public Builder addAllTier(
-              List<ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice.Tier> elements) {
-            if (this.tiers == null) {
-              this.tiers = new ArrayList<>();
-            }
-            this.tiers.addAll(elements);
-            return this;
-          }
-
           /**
            * The per-unit amount to be charged, represented as a decimal string in minor currency
            * units.
@@ -5094,189 +4507,6 @@ public class ContractUpdateParams extends ApiRequestParams {
           public Builder setUnitAmount(EmptyParam unitAmount) {
             this.unitAmount = unitAmount;
             return this;
-          }
-        }
-
-        @Getter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Tier {
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
-
-          /** Price for the entire tier, represented as a decimal string in minor currency units. */
-          @SerializedName("flat_amount")
-          Object flatAmount;
-
-          /**
-           * Per-unit price for units included in this tier, represented as a decimal string in
-           * minor currency units.
-           */
-          @SerializedName("unit_amount")
-          Object unitAmount;
-
-          /** Up to and including this quantity will be contained in the tier. */
-          @SerializedName("up_to_decimal")
-          Object upToDecimal;
-
-          /** No upper bound to this tier. */
-          @SerializedName("up_to_inf")
-          UpToInf upToInf;
-
-          private Tier(
-              Map<String, Object> extraParams,
-              Object flatAmount,
-              Object unitAmount,
-              Object upToDecimal,
-              UpToInf upToInf) {
-            this.extraParams = extraParams;
-            this.flatAmount = flatAmount;
-            this.unitAmount = unitAmount;
-            this.upToDecimal = upToDecimal;
-            this.upToInf = upToInf;
-          }
-
-          public static Builder builder() {
-            return new Builder();
-          }
-
-          public static class Builder {
-            private Map<String, Object> extraParams;
-
-            private Object flatAmount;
-
-            private Object unitAmount;
-
-            private Object upToDecimal;
-
-            private UpToInf upToInf;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice.Tier build() {
-              return new ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice.Tier(
-                  this.extraParams,
-                  this.flatAmount,
-                  this.unitAmount,
-                  this.upToDecimal,
-                  this.upToInf);
-            }
-
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice.Tier#extraParams} for
-             * the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
-
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice.Tier#extraParams} for
-             * the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-
-            /**
-             * Price for the entire tier, represented as a decimal string in minor currency units.
-             */
-            public Builder setFlatAmount(String flatAmount) {
-              this.flatAmount = flatAmount;
-              return this;
-            }
-
-            /**
-             * Price for the entire tier, represented as a decimal string in minor currency units.
-             */
-            public Builder setFlatAmount(EmptyParam flatAmount) {
-              this.flatAmount = flatAmount;
-              return this;
-            }
-
-            /**
-             * Per-unit price for units included in this tier, represented as a decimal string in
-             * minor currency units.
-             */
-            public Builder setUnitAmount(String unitAmount) {
-              this.unitAmount = unitAmount;
-              return this;
-            }
-
-            /**
-             * Per-unit price for units included in this tier, represented as a decimal string in
-             * minor currency units.
-             */
-            public Builder setUnitAmount(EmptyParam unitAmount) {
-              this.unitAmount = unitAmount;
-              return this;
-            }
-
-            /** Up to and including this quantity will be contained in the tier. */
-            public Builder setUpToDecimal(BigDecimal upToDecimal) {
-              this.upToDecimal = upToDecimal;
-              return this;
-            }
-
-            /** Up to and including this quantity will be contained in the tier. */
-            public Builder setUpToDecimal(EmptyParam upToDecimal) {
-              this.upToDecimal = upToDecimal;
-              return this;
-            }
-
-            /** No upper bound to this tier. */
-            public Builder setUpToInf(
-                ContractUpdateParams.PricingOverrideAction.Add.OverwritePrice.Tier.UpToInf
-                    upToInf) {
-              this.upToInf = upToInf;
-              return this;
-            }
-          }
-
-          public enum UpToInf implements ApiRequestParams.EnumParam {
-            @SerializedName("inf")
-            INF("inf");
-
-            @Getter(onMethod_ = {@Override})
-            private final String value;
-
-            UpToInf(String value) {
-              this.value = value;
-            }
-          }
-        }
-
-        public enum TieringMode implements ApiRequestParams.EnumParam {
-          @SerializedName("graduated")
-          GRADUATED("graduated"),
-
-          @SerializedName("volume")
-          VOLUME("volume");
-
-          @Getter(onMethod_ = {@Override})
-          private final String value;
-
-          TieringMode(String value) {
-            this.value = value;
           }
         }
       }
@@ -5795,9 +5025,6 @@ public class ContractUpdateParams extends ApiRequestParams {
   public enum Include implements ApiRequestParams.EnumParam {
     @SerializedName("billing_settings")
     BILLING_SETTINGS("billing_settings"),
-
-    @SerializedName("one_time_fees")
-    ONE_TIME_FEES("one_time_fees"),
 
     @SerializedName("pricing_lines")
     PRICING_LINES("pricing_lines"),

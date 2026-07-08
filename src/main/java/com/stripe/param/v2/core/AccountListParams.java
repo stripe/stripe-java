@@ -39,15 +39,24 @@ public class AccountListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  /**
+   * Filter by the network object related to the account. If omitted, returns all Accounts
+   * regardless of the network object they have.
+   */
+  @SerializedName("related_network_object")
+  String relatedNetworkObject;
+
   private AccountListParams(
       List<AccountListParams.AppliedConfiguration> appliedConfigurations,
       Boolean closed,
       Map<String, Object> extraParams,
-      Long limit) {
+      Long limit,
+      String relatedNetworkObject) {
     this.appliedConfigurations = appliedConfigurations;
     this.closed = closed;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.relatedNetworkObject = relatedNetworkObject;
   }
 
   public static Builder builder() {
@@ -63,10 +72,16 @@ public class AccountListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private String relatedNetworkObject;
+
     /** Finalize and obtain parameter instance from this builder. */
     public AccountListParams build() {
       return new AccountListParams(
-          this.appliedConfigurations, this.closed, this.extraParams, this.limit);
+          this.appliedConfigurations,
+          this.closed,
+          this.extraParams,
+          this.limit,
+          this.relatedNetworkObject);
     }
 
     /**
@@ -134,6 +149,15 @@ public class AccountListParams extends ApiRequestParams {
     /** The upper limit on the number of accounts returned by the List Account request. */
     public Builder setLimit(Long limit) {
       this.limit = limit;
+      return this;
+    }
+
+    /**
+     * Filter by the network object related to the account. If omitted, returns all Accounts
+     * regardless of the network object they have.
+     */
+    public Builder setRelatedNetworkObject(String relatedNetworkObject) {
+      this.relatedNetworkObject = relatedNetworkObject;
       return this;
     }
   }
