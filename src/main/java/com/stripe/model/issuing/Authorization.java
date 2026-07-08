@@ -1694,6 +1694,10 @@ public class Authorization extends ApiResource
     @SerializedName("merchant_currency")
     String merchantCurrency;
 
+    /** Details about the authorization request, such as identifiers, set by the card network. */
+    @SerializedName("network_data")
+    NetworkData networkData;
+
     /**
      * The card network's estimate of the likelihood that an authorization is fraudulent. Takes on
      * values between 1 and 99.
@@ -1746,6 +1750,43 @@ public class Authorization extends ApiResource
       /** The amount of cash requested by the cardholder. */
       @SerializedName("cashback_amount")
       Long cashbackAmount;
+    }
+
+    /**
+     * For more details about NetworkData, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NetworkData extends StripeObject {
+      /** Mastercard identifier for each authorization request. */
+      @SerializedName("trace_id")
+      TraceId traceId;
+
+      /**
+       * For more details about TraceId, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class TraceId extends StripeObject {
+        /**
+         * The unique reference number within the specified financial network on the specified
+         * network date.
+         */
+        @SerializedName("banknet_reference_number")
+        String banknetReferenceNumber;
+
+        /** The identifier of the program or service. */
+        @SerializedName("financial_network_code")
+        String financialNetworkCode;
+
+        /** The card network's record date for this authorization. */
+        @SerializedName("network_date")
+        String networkDate;
+      }
     }
   }
 

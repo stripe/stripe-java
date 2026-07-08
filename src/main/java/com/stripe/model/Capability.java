@@ -189,8 +189,8 @@ public class Capability extends ApiResource implements HasId {
     String disabledReason;
 
     /**
-     * Details about validation and verification failures for {@code due} requirements that must be
-     * resolved.
+     * Fields that are {@code currently_due} and need to be collected again because validation or
+     * verification failed.
      */
     @SerializedName("errors")
     List<Capability.FutureRequirements.Errors> errors;
@@ -416,8 +416,8 @@ public class Capability extends ApiResource implements HasId {
     String disabledReason;
 
     /**
-     * Details about validation and verification failures for {@code due} requirements that must be
-     * resolved.
+     * Fields that are {@code currently_due} and need to be collected again because validation or
+     * verification failed.
      */
     @SerializedName("errors")
     List<Capability.Requirements.Errors> errors;

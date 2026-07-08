@@ -254,9 +254,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
-   * information during account onboarding. You can prefill any information on the account.
+   * href="https://stripe.com/connect/marketplace/tasks/create#prefill-account-information">can
+   * prefill that information</a> when creating the account. Connect Onboarding won’t ask for the
+   * prefilled information during account onboarding. You can prefill any information on the
+   * account.
    */
   public static Account create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -268,9 +269,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
-   * information during account onboarding. You can prefill any information on the account.
+   * href="https://stripe.com/connect/marketplace/tasks/create#prefill-account-information">can
+   * prefill that information</a> when creating the account. Connect Onboarding won’t ask for the
+   * prefilled information during account onboarding. You can prefill any information on the
+   * account.
    */
   public static Account create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -286,9 +288,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
-   * information during account onboarding. You can prefill any information on the account.
+   * href="https://stripe.com/connect/marketplace/tasks/create#prefill-account-information">can
+   * prefill that information</a> when creating the account. Connect Onboarding won’t ask for the
+   * prefilled information during account onboarding. You can prefill any information on the
+   * account.
    */
   public static Account create(AccountCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -300,9 +303,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
-   * information during account onboarding. You can prefill any information on the account.
+   * href="https://stripe.com/connect/marketplace/tasks/create#prefill-account-information">can
+   * prefill that information</a> when creating the account. Connect Onboarding won’t ask for the
+   * prefilled information during account onboarding. You can prefill any information on the
+   * account.
    */
   public static Account create(AccountCreateParams params, RequestOptions options)
       throws StripeException {
@@ -1597,6 +1601,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("address_kanji")
     AddressKanji addressKanji;
 
+    @SerializedName("administrative_address")
+    Address administrativeAddress;
+
     /**
      * Whether the company's directors have been provided. This Boolean will be {@code true} if
      * you've manually indicated that all directors are provided via <a
@@ -1696,6 +1703,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /** The company's phone number (used for verification). */
     @SerializedName("phone")
     String phone;
+
+    @SerializedName("principal_place_of_business")
+    Address principalPlaceOfBusiness;
 
     @SerializedName("registration_date")
     RegistrationDate registrationDate;
@@ -2212,8 +2222,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String disabledReason;
 
     /**
-     * Details about validation and verification failures for {@code due} requirements that must be
-     * resolved.
+     * Fields that are {@code currently_due} and need to be collected again because validation or
+     * verification failed.
      */
     @SerializedName("errors")
     List<Account.FutureRequirements.Errors> errors;
@@ -2419,8 +2429,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String disabledReason;
 
     /**
-     * Details about validation and verification failures for {@code due} requirements that must be
-     * resolved.
+     * Fields that are {@code currently_due} and need to be collected again because validation or
+     * verification failed.
      */
     @SerializedName("errors")
     List<Account.Requirements.Errors> errors;

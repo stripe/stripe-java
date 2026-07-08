@@ -330,6 +330,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("paypal")
     Paypal paypal;
 
+    @SerializedName("paypay")
+    Paypay paypay;
+
     @SerializedName("payto")
     Payto payto;
 
@@ -1012,6 +1015,15 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paypal extends StripeObject {}
+
+    /**
+     * For more details about Paypay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypay extends StripeObject {}
 
     /**
      * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API

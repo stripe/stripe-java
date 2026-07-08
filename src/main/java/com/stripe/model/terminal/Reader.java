@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import com.stripe.model.ExpandableField;
+import com.stripe.model.GiftCard;
+import com.stripe.model.GiftCardOperation;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.PaymentIntent;
@@ -19,7 +21,10 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.terminal.ReaderActivateGiftCardParams;
 import com.stripe.param.terminal.ReaderCancelActionParams;
+import com.stripe.param.terminal.ReaderCashoutGiftCardParams;
+import com.stripe.param.terminal.ReaderCheckGiftCardBalanceParams;
 import com.stripe.param.terminal.ReaderCollectInputsParams;
 import com.stripe.param.terminal.ReaderCollectPaymentMethodParams;
 import com.stripe.param.terminal.ReaderConfirmPaymentIntentParams;
@@ -29,6 +34,7 @@ import com.stripe.param.terminal.ReaderPresentPaymentMethodParams;
 import com.stripe.param.terminal.ReaderProcessPaymentIntentParams;
 import com.stripe.param.terminal.ReaderProcessSetupIntentParams;
 import com.stripe.param.terminal.ReaderRefundPaymentParams;
+import com.stripe.param.terminal.ReaderReloadGiftCardParams;
 import com.stripe.param.terminal.ReaderRetrieveParams;
 import com.stripe.param.terminal.ReaderSetReaderDisplayParams;
 import com.stripe.param.terminal.ReaderSucceedInputCollectionParams;
@@ -157,6 +163,44 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     this.location = new ExpandableField<Location>(expandableObject.getId(), expandableObject);
   }
 
+  /** Initiates a gift card activation flow on a Reader and optionally sets its balance. */
+  public Reader activateGiftCard(Map<String, Object> params) throws StripeException {
+    return activateGiftCard(params, (RequestOptions) null);
+  }
+
+  /** Initiates a gift card activation flow on a Reader and optionally sets its balance. */
+  public Reader activateGiftCard(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/activate_gift_card", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
+  /** Initiates a gift card activation flow on a Reader and optionally sets its balance. */
+  public Reader activateGiftCard(ReaderActivateGiftCardParams params) throws StripeException {
+    return activateGiftCard(params, (RequestOptions) null);
+  }
+
+  /** Initiates a gift card activation flow on a Reader and optionally sets its balance. */
+  public Reader activateGiftCard(ReaderActivateGiftCardParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/activate_gift_card", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
   /**
    * Cancels the current reader action. See <a
    * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
@@ -218,6 +262,85 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     String path =
         String.format(
             "/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
+  /** Initiates a gift card cashout flow on a Reader. A cashout sets the gift card balance to 0. */
+  public Reader cashoutGiftCard(Map<String, Object> params) throws StripeException {
+    return cashoutGiftCard(params, (RequestOptions) null);
+  }
+
+  /** Initiates a gift card cashout flow on a Reader. A cashout sets the gift card balance to 0. */
+  public Reader cashoutGiftCard(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/cashout_gift_card", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
+  /** Initiates a gift card cashout flow on a Reader. A cashout sets the gift card balance to 0. */
+  public Reader cashoutGiftCard(ReaderCashoutGiftCardParams params) throws StripeException {
+    return cashoutGiftCard(params, (RequestOptions) null);
+  }
+
+  /** Initiates a gift card cashout flow on a Reader. A cashout sets the gift card balance to 0. */
+  public Reader cashoutGiftCard(ReaderCashoutGiftCardParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/cashout_gift_card", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
+  /** Initiates a gift card balance check flow on a Reader. */
+  public Reader checkGiftCardBalance(Map<String, Object> params) throws StripeException {
+    return checkGiftCardBalance(params, (RequestOptions) null);
+  }
+
+  /** Initiates a gift card balance check flow on a Reader. */
+  public Reader checkGiftCardBalance(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/check_gift_card_balance",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
+  /** Initiates a gift card balance check flow on a Reader. */
+  public Reader checkGiftCardBalance(ReaderCheckGiftCardBalanceParams params)
+      throws StripeException {
+    return checkGiftCardBalance(params, (RequestOptions) null);
+  }
+
+  /** Initiates a gift card balance check flow on a Reader. */
+  public Reader checkGiftCardBalance(
+      ReaderCheckGiftCardBalanceParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/check_gift_card_balance",
+            ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -675,6 +798,52 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getResponseGetter().request(request, Reader.class);
   }
 
+  /**
+   * Initiates a gift card reload flow on a Reader by adding the specified amount to its balance.
+   */
+  public Reader reloadGiftCard(Map<String, Object> params) throws StripeException {
+    return reloadGiftCard(params, (RequestOptions) null);
+  }
+
+  /**
+   * Initiates a gift card reload flow on a Reader by adding the specified amount to its balance.
+   */
+  public Reader reloadGiftCard(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/reload_gift_card", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
+  /**
+   * Initiates a gift card reload flow on a Reader by adding the specified amount to its balance.
+   */
+  public Reader reloadGiftCard(ReaderReloadGiftCardParams params) throws StripeException {
+    return reloadGiftCard(params, (RequestOptions) null);
+  }
+
+  /**
+   * Initiates a gift card reload flow on a Reader by adding the specified amount to its balance.
+   */
+  public Reader reloadGiftCard(ReaderReloadGiftCardParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/reload_gift_card", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
   /** Retrieves a {@code Reader} object. */
   public static Reader retrieve(String reader) throws StripeException {
     return retrieve(reader, (Map<String, Object>) null, (RequestOptions) null);
@@ -810,6 +979,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Action extends StripeObject {
+    /** Represents a reader action to activate a gift card. */
+    @SerializedName("activate_gift_card")
+    ActivateGiftCard activateGiftCard;
+
     /**
      * The reader action failed due to an <a href="https://docs.stripe.com/api/errors">API
      * error</a>. Only present when {@code status} is {@code failed} and the underlying failure was
@@ -822,6 +995,14 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @SerializedName("api_error")
     StripeError apiError;
 
+    /** Represents a reader action to cash out a gift card. */
+    @SerializedName("cashout_gift_card")
+    CashoutGiftCard cashoutGiftCard;
+
+    /** Represents a reader action to check a gift card balance. */
+    @SerializedName("check_gift_card_balance")
+    CheckGiftCardBalance checkGiftCardBalance;
+
     /** Represents a reader action to collect customer inputs. */
     @SerializedName("collect_inputs")
     CollectInputs collectInputs;
@@ -833,6 +1014,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     /** Represents a reader action to confirm a payment. */
     @SerializedName("confirm_payment_intent")
     ConfirmPaymentIntent confirmPaymentIntent;
+
+    /** Represents a reader action to deactivate a gift card. */
+    @SerializedName("deactivate_gift_card")
+    DeactivateGiftCard deactivateGiftCard;
 
     /** Failure code, only set if status is {@code failed}. */
     @SerializedName("failure_code")
@@ -858,6 +1043,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @SerializedName("refund_payment")
     RefundPayment refundPayment;
 
+    /** Represents a reader action to reload a gift card. */
+    @SerializedName("reload_gift_card")
+    ReloadGiftCard reloadGiftCard;
+
     /** Represents a reader action to set the reader display. */
     @SerializedName("set_reader_display")
     SetReaderDisplay setReaderDisplay;
@@ -873,12 +1062,179 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     /**
      * Type of action performed by the reader.
      *
-     * <p>One of {@code collect_inputs}, {@code collect_payment_method}, {@code
-     * confirm_payment_intent}, {@code print_content}, {@code process_payment_intent}, {@code
-     * process_setup_intent}, {@code refund_payment}, or {@code set_reader_display}.
+     * <p>One of {@code activate_gift_card}, {@code cashout_gift_card}, {@code
+     * check_gift_card_balance}, {@code collect_inputs}, {@code collect_payment_method}, {@code
+     * confirm_payment_intent}, {@code deactivate_gift_card}, {@code print_content}, {@code
+     * process_payment_intent}, {@code process_setup_intent}, {@code refund_payment}, {@code
+     * reload_gift_card}, or {@code set_reader_display}.
      */
     @SerializedName("type")
     String type;
+
+    /** Represents a reader action to activate a gift card. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ActivateGiftCard extends StripeObject {
+      /** The gift card used in this reader action. */
+      @SerializedName("gift_card")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<GiftCard> giftCard;
+
+      /** The GiftCardOperation created for this reader action. */
+      @SerializedName("gift_card_operation")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<GiftCardOperation> giftCardOperation;
+
+      /** Get ID of expandable {@code giftCard} object. */
+      public String getGiftCard() {
+        return (this.giftCard != null) ? this.giftCard.getId() : null;
+      }
+
+      public void setGiftCard(String id) {
+        this.giftCard = ApiResource.setExpandableFieldId(id, this.giftCard);
+      }
+
+      /** Get expanded {@code giftCard}. */
+      public GiftCard getGiftCardObject() {
+        return (this.giftCard != null) ? this.giftCard.getExpanded() : null;
+      }
+
+      public void setGiftCardObject(GiftCard expandableObject) {
+        this.giftCard = new ExpandableField<GiftCard>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code giftCardOperation} object. */
+      public String getGiftCardOperation() {
+        return (this.giftCardOperation != null) ? this.giftCardOperation.getId() : null;
+      }
+
+      public void setGiftCardOperation(String id) {
+        this.giftCardOperation = ApiResource.setExpandableFieldId(id, this.giftCardOperation);
+      }
+
+      /** Get expanded {@code giftCardOperation}. */
+      public GiftCardOperation getGiftCardOperationObject() {
+        return (this.giftCardOperation != null) ? this.giftCardOperation.getExpanded() : null;
+      }
+
+      public void setGiftCardOperationObject(GiftCardOperation expandableObject) {
+        this.giftCardOperation =
+            new ExpandableField<GiftCardOperation>(expandableObject.getId(), expandableObject);
+      }
+    }
+
+    /** Represents a reader action to cash out a gift card. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CashoutGiftCard extends StripeObject {
+      /** The gift card used in this reader action. */
+      @SerializedName("gift_card")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<GiftCard> giftCard;
+
+      /** The GiftCardOperation created for this reader action. */
+      @SerializedName("gift_card_operation")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<GiftCardOperation> giftCardOperation;
+
+      /** Get ID of expandable {@code giftCard} object. */
+      public String getGiftCard() {
+        return (this.giftCard != null) ? this.giftCard.getId() : null;
+      }
+
+      public void setGiftCard(String id) {
+        this.giftCard = ApiResource.setExpandableFieldId(id, this.giftCard);
+      }
+
+      /** Get expanded {@code giftCard}. */
+      public GiftCard getGiftCardObject() {
+        return (this.giftCard != null) ? this.giftCard.getExpanded() : null;
+      }
+
+      public void setGiftCardObject(GiftCard expandableObject) {
+        this.giftCard = new ExpandableField<GiftCard>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code giftCardOperation} object. */
+      public String getGiftCardOperation() {
+        return (this.giftCardOperation != null) ? this.giftCardOperation.getId() : null;
+      }
+
+      public void setGiftCardOperation(String id) {
+        this.giftCardOperation = ApiResource.setExpandableFieldId(id, this.giftCardOperation);
+      }
+
+      /** Get expanded {@code giftCardOperation}. */
+      public GiftCardOperation getGiftCardOperationObject() {
+        return (this.giftCardOperation != null) ? this.giftCardOperation.getExpanded() : null;
+      }
+
+      public void setGiftCardOperationObject(GiftCardOperation expandableObject) {
+        this.giftCardOperation =
+            new ExpandableField<GiftCardOperation>(expandableObject.getId(), expandableObject);
+      }
+    }
+
+    /** Represents a reader action to check a gift card balance. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CheckGiftCardBalance extends StripeObject {
+      /** The gift card used in this reader action. */
+      @SerializedName("gift_card")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<GiftCard> giftCard;
+
+      /** The GiftCardOperation created for this reader action. */
+      @SerializedName("gift_card_operation")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<GiftCardOperation> giftCardOperation;
+
+      /** Get ID of expandable {@code giftCard} object. */
+      public String getGiftCard() {
+        return (this.giftCard != null) ? this.giftCard.getId() : null;
+      }
+
+      public void setGiftCard(String id) {
+        this.giftCard = ApiResource.setExpandableFieldId(id, this.giftCard);
+      }
+
+      /** Get expanded {@code giftCard}. */
+      public GiftCard getGiftCardObject() {
+        return (this.giftCard != null) ? this.giftCard.getExpanded() : null;
+      }
+
+      public void setGiftCardObject(GiftCard expandableObject) {
+        this.giftCard = new ExpandableField<GiftCard>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code giftCardOperation} object. */
+      public String getGiftCardOperation() {
+        return (this.giftCardOperation != null) ? this.giftCardOperation.getId() : null;
+      }
+
+      public void setGiftCardOperation(String id) {
+        this.giftCardOperation = ApiResource.setExpandableFieldId(id, this.giftCardOperation);
+      }
+
+      /** Get expanded {@code giftCardOperation}. */
+      public GiftCardOperation getGiftCardOperationObject() {
+        return (this.giftCardOperation != null) ? this.giftCardOperation.getExpanded() : null;
+      }
+
+      public void setGiftCardOperationObject(GiftCardOperation expandableObject) {
+        this.giftCardOperation =
+            new ExpandableField<GiftCardOperation>(expandableObject.getId(), expandableObject);
+      }
+    }
 
     /** Represents a reader action to collect customer inputs. */
     @Getter
@@ -1220,6 +1576,61 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       }
     }
 
+    /** Represents a reader action to deactivate a gift card. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DeactivateGiftCard extends StripeObject {
+      /** The gift card used in this reader action. */
+      @SerializedName("gift_card")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<GiftCard> giftCard;
+
+      /** The GiftCardOperation created for this reader action. */
+      @SerializedName("gift_card_operation")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<GiftCardOperation> giftCardOperation;
+
+      /** Get ID of expandable {@code giftCard} object. */
+      public String getGiftCard() {
+        return (this.giftCard != null) ? this.giftCard.getId() : null;
+      }
+
+      public void setGiftCard(String id) {
+        this.giftCard = ApiResource.setExpandableFieldId(id, this.giftCard);
+      }
+
+      /** Get expanded {@code giftCard}. */
+      public GiftCard getGiftCardObject() {
+        return (this.giftCard != null) ? this.giftCard.getExpanded() : null;
+      }
+
+      public void setGiftCardObject(GiftCard expandableObject) {
+        this.giftCard = new ExpandableField<GiftCard>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code giftCardOperation} object. */
+      public String getGiftCardOperation() {
+        return (this.giftCardOperation != null) ? this.giftCardOperation.getId() : null;
+      }
+
+      public void setGiftCardOperation(String id) {
+        this.giftCardOperation = ApiResource.setExpandableFieldId(id, this.giftCardOperation);
+      }
+
+      /** Get expanded {@code giftCardOperation}. */
+      public GiftCardOperation getGiftCardOperationObject() {
+        return (this.giftCardOperation != null) ? this.giftCardOperation.getExpanded() : null;
+      }
+
+      public void setGiftCardOperationObject(GiftCardOperation expandableObject) {
+        this.giftCardOperation =
+            new ExpandableField<GiftCardOperation>(expandableObject.getId(), expandableObject);
+      }
+    }
+
     /** Represents a reader action to print content. */
     @Getter
     @Setter
@@ -1524,6 +1935,61 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         /** Enable customer-initiated cancellation when refunding this payment. */
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
+      }
+    }
+
+    /** Represents a reader action to reload a gift card. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ReloadGiftCard extends StripeObject {
+      /** The gift card used in this reader action. */
+      @SerializedName("gift_card")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<GiftCard> giftCard;
+
+      /** The GiftCardOperation created for this reader action. */
+      @SerializedName("gift_card_operation")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<GiftCardOperation> giftCardOperation;
+
+      /** Get ID of expandable {@code giftCard} object. */
+      public String getGiftCard() {
+        return (this.giftCard != null) ? this.giftCard.getId() : null;
+      }
+
+      public void setGiftCard(String id) {
+        this.giftCard = ApiResource.setExpandableFieldId(id, this.giftCard);
+      }
+
+      /** Get expanded {@code giftCard}. */
+      public GiftCard getGiftCardObject() {
+        return (this.giftCard != null) ? this.giftCard.getExpanded() : null;
+      }
+
+      public void setGiftCardObject(GiftCard expandableObject) {
+        this.giftCard = new ExpandableField<GiftCard>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code giftCardOperation} object. */
+      public String getGiftCardOperation() {
+        return (this.giftCardOperation != null) ? this.giftCardOperation.getId() : null;
+      }
+
+      public void setGiftCardOperation(String id) {
+        this.giftCardOperation = ApiResource.setExpandableFieldId(id, this.giftCardOperation);
+      }
+
+      /** Get expanded {@code giftCardOperation}. */
+      public GiftCardOperation getGiftCardOperationObject() {
+        return (this.giftCardOperation != null) ? this.giftCardOperation.getExpanded() : null;
+      }
+
+      public void setGiftCardOperationObject(GiftCardOperation expandableObject) {
+        this.giftCardOperation =
+            new ExpandableField<GiftCardOperation>(expandableObject.getId(), expandableObject);
       }
     }
 

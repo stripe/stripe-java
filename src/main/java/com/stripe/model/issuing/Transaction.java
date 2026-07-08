@@ -755,6 +755,20 @@ public class Transaction extends ApiResource
     String acquirerReferenceNumber;
 
     /**
+     * The two-letter country code of the acquirer (<a
+     * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+     */
+    @SerializedName("acquiring_institution_country")
+    String acquiringInstitutionCountry;
+
+    /**
+     * Identifier assigned to the acquirer by the card network. Sometimes this value is not provided
+     * by the network; in this case, the value will be null.
+     */
+    @SerializedName("acquiring_institution_id")
+    String acquiringInstitutionId;
+
+    /**
      * A code created by Stripe which is shared with the merchant to validate the authorization.
      * This field will be populated if the authorization message was approved. The code typically
      * starts with the letter &quot;S&quot;, followed by a six-digit number. For example,
@@ -772,12 +786,53 @@ public class Transaction extends ApiResource
     @SerializedName("processing_date")
     String processingDate;
 
+    /** Identifier assigned by the acquirer to track all messages related to this transaction. */
+    @SerializedName("retrieval_reference_number")
+    String retrievalReferenceNumber;
+
+    /**
+     * The card network over which Stripe received the transaction. This field may differ from the
+     * associated card’s primary network.
+     *
+     * <p>One of {@code cirrus}, {@code interlink}, {@code maestro}, {@code mastercard}, {@code
+     * other}, {@code plus}, or {@code visa}.
+     */
+    @SerializedName("routed_network")
+    String routedNetwork;
+
+    @SerializedName("trace_id")
+    TraceId traceId;
+
     /**
      * Unique identifier for the authorization assigned by the card network used to match subsequent
      * messages, disputes, and transactions.
      */
     @SerializedName("transaction_id")
     String transactionId;
+
+    /**
+     * For more details about TraceId, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TraceId extends StripeObject {
+      /**
+       * The unique reference number within the specified financial network on the specified network
+       * date.
+       */
+      @SerializedName("banknet_reference_number")
+      String banknetReferenceNumber;
+
+      /** The identifier of the program or service. */
+      @SerializedName("financial_network_code")
+      String financialNetworkCode;
+
+      /** The card network's record date for this transaction. */
+      @SerializedName("network_date")
+      String networkDate;
+    }
   }
 
   /**

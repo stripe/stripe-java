@@ -489,8 +489,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     List<String> currentlyDue;
 
     /**
-     * Details about validation and verification failures for {@code due} requirements that must be
-     * resolved.
+     * Fields that are {@code currently_due} and need to be collected again because validation or
+     * verification failed.
      */
     @SerializedName("errors")
     List<Person.FutureRequirements.Errors> errors;
@@ -711,8 +711,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     List<String> currentlyDue;
 
     /**
-     * Details about validation and verification failures for {@code due} requirements that must be
-     * resolved.
+     * Fields that are {@code currently_due} and need to be collected again because validation or
+     * verification failed.
      */
     @SerializedName("errors")
     List<Person.Requirements.Errors> errors;

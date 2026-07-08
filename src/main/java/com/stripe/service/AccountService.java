@@ -264,9 +264,10 @@ public final class AccountService extends ApiService {
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
-   * information during account onboarding. You can prefill any information on the account.
+   * href="https://stripe.com/connect/marketplace/tasks/create#prefill-account-information">can
+   * prefill that information</a> when creating the account. Connect Onboarding won’t ask for the
+   * prefilled information during account onboarding. You can prefill any information on the
+   * account.
    */
   public Account create(AccountCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -277,9 +278,10 @@ public final class AccountService extends ApiService {
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
-   * information during account onboarding. You can prefill any information on the account.
+   * href="https://stripe.com/connect/marketplace/tasks/create#prefill-account-information">can
+   * prefill that information</a> when creating the account. Connect Onboarding won’t ask for the
+   * prefilled information during account onboarding. You can prefill any information on the
+   * account.
    */
   public Account create(RequestOptions options) throws StripeException {
     return create((AccountCreateParams) null, options);
@@ -290,9 +292,10 @@ public final class AccountService extends ApiService {
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
-   * information during account onboarding. You can prefill any information on the account.
+   * href="https://stripe.com/connect/marketplace/tasks/create#prefill-account-information">can
+   * prefill that information</a> when creating the account. Connect Onboarding won’t ask for the
+   * prefilled information during account onboarding. You can prefill any information on the
+   * account.
    */
   public Account create() throws StripeException {
     return create((AccountCreateParams) null, (RequestOptions) null);
@@ -303,9 +306,10 @@ public final class AccountService extends ApiService {
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
-   * information during account onboarding. You can prefill any information on the account.
+   * href="https://stripe.com/connect/marketplace/tasks/create#prefill-account-information">can
+   * prefill that information</a> when creating the account. Connect Onboarding won’t ask for the
+   * prefilled information during account onboarding. You can prefill any information on the
+   * account.
    */
   public Account create(AccountCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/accounts";

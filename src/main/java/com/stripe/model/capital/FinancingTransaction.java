@@ -188,7 +188,7 @@ public class FinancingTransaction extends ApiResource implements HasId {
 
     /**
      * The linked payment for the transaction. This field only applies to financing transactions of
-     * type {@code paydown} and reason {@code automatic_withholding}.
+     * type {@code payment} and reason {@code automatic_withholding}.
      */
     @SerializedName("linked_payment")
     String linkedPayment;

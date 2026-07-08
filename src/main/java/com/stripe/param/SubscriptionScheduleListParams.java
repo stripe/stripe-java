@@ -25,7 +25,10 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   @SerializedName("created")
   Object created;
 
-  /** Only return subscription schedules for the given customer. */
+  /**
+   * Only return subscription schedules for the given customer. The response will not include
+   * subscription schedules for customers with a test clock attached if this parameter is not set.
+   */
   @SerializedName("customer")
   String customer;
 
@@ -188,7 +191,10 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return subscription schedules for the given customer. */
+    /**
+     * Only return subscription schedules for the given customer. The response will not include
+     * subscription schedules for customers with a test clock attached if this parameter is not set.
+     */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;

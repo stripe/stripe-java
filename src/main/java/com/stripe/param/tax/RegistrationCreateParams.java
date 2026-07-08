@@ -17155,6 +17155,12 @@ public class RegistrationCreateParams extends ApiRequestParams {
         @SerializedName("luxury_tax")
         LUXURY_TAX("luxury_tax"),
 
+        @SerializedName("mass_transit_parking_tax")
+        MASS_TRANSIT_PARKING_TAX("mass_transit_parking_tax"),
+
+        @SerializedName("parking_tax")
+        PARKING_TAX("parking_tax"),
+
         @SerializedName("resort_tax")
         RESORT_TAX("resort_tax"),
 

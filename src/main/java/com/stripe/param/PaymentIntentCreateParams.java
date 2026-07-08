@@ -45279,9 +45279,35 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Paypay(ApiRequestParams.EnumParam captureMethod, Map<String, Object> extraParams) {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      private Paypay(
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          ApiRequestParams.EnumParam setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
       }
 
       public static Builder builder() {
@@ -45293,10 +45319,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.Paypay build() {
           return new PaymentIntentCreateParams.PaymentMethodOptions.Paypay(
-              this.captureMethod, this.extraParams);
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -45357,6 +45385,58 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentCreateParams.PaymentMethodOptions.Paypay.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
       }
 
       public enum CaptureMethod implements ApiRequestParams.EnumParam {
@@ -45367,6 +45447,24 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         private final String value;
 
         CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session"),
+
+        @SerializedName("on_session")
+        ON_SESSION("on_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
           this.value = value;
         }
       }
@@ -51271,8 +51369,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("blik")
     BLIK("blik"),
 
+    @SerializedName("boku_promptpay")
+    BOKU_PROMPTPAY("boku_promptpay"),
+
     @SerializedName("boleto")
     BOLETO("boleto"),
+
+    @SerializedName("capchase_pay")
+    CAPCHASE_PAY("capchase_pay"),
 
     @SerializedName("card")
     CARD("card"),
@@ -51280,17 +51384,44 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("cashapp")
     CASHAPP("cashapp"),
 
+    @SerializedName("check_scan")
+    CHECK_SCAN("check_scan"),
+
+    @SerializedName("click_to_pay")
+    CLICK_TO_PAY("click_to_pay"),
+
     @SerializedName("crypto")
     CRYPTO("crypto"),
 
     @SerializedName("customer_balance")
     CUSTOMER_BALANCE("customer_balance"),
 
+    @SerializedName("demo_pay")
+    DEMO_PAY("demo_pay"),
+
+    @SerializedName("duitnow")
+    DUITNOW("duitnow"),
+
+    @SerializedName("dummy_auth_push")
+    DUMMY_AUTH_PUSH("dummy_auth_push"),
+
+    @SerializedName("dummy_passthrough_card")
+    DUMMY_PASSTHROUGH_CARD("dummy_passthrough_card"),
+
+    @SerializedName("edenred")
+    EDENRED("edenred"),
+
     @SerializedName("eps")
     EPS("eps"),
 
     @SerializedName("fpx")
     FPX("fpx"),
+
+    @SerializedName("gcash")
+    GCASH("gcash"),
+
+    @SerializedName("getbalance")
+    GETBALANCE("getbalance"),
 
     @SerializedName("gift_card")
     GIFT_CARD("gift_card"),
@@ -51316,11 +51447,20 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("klarna")
     KLARNA("klarna"),
 
+    @SerializedName("knet")
+    KNET("knet"),
+
     @SerializedName("konbini")
     KONBINI("konbini"),
 
     @SerializedName("kr_card")
     KR_CARD("kr_card"),
+
+    @SerializedName("kr_market")
+    KR_MARKET("kr_market"),
+
+    @SerializedName("kriya")
+    KRIYA("kriya"),
 
     @SerializedName("link")
     LINK("link"),
@@ -51331,20 +51471,53 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),
 
+    @SerializedName("momo")
+    MOMO("momo"),
+
+    @SerializedName("mondu")
+    MONDU("mondu"),
+
     @SerializedName("multibanco")
     MULTIBANCO("multibanco"),
 
     @SerializedName("naver_pay")
     NAVER_PAY("naver_pay"),
 
+    @SerializedName("netbanking")
+    NETBANKING("netbanking"),
+
+    @SerializedName("ng_bank")
+    NG_BANK("ng_bank"),
+
+    @SerializedName("ng_bank_transfer")
+    NG_BANK_TRANSFER("ng_bank_transfer"),
+
+    @SerializedName("ng_card")
+    NG_CARD("ng_card"),
+
+    @SerializedName("ng_market")
+    NG_MARKET("ng_market"),
+
+    @SerializedName("ng_ussd")
+    NG_USSD("ng_ussd"),
+
+    @SerializedName("ng_wallet")
+    NG_WALLET("ng_wallet"),
+
     @SerializedName("nz_bank_account")
     NZ_BANK_ACCOUNT("nz_bank_account"),
+
+    @SerializedName("octopus")
+    OCTOPUS("octopus"),
 
     @SerializedName("oxxo")
     OXXO("oxxo"),
 
     @SerializedName("p24")
     P24("p24"),
+
+    @SerializedName("paper_check")
+    PAPER_CHECK("paper_check"),
 
     @SerializedName("pay_by_bank")
     PAY_BY_BANK("pay_by_bank"),
@@ -51391,11 +51564,20 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
 
+    @SerializedName("sequra")
+    SEQURA("sequra"),
+
+    @SerializedName("shop_pay")
+    SHOP_PAY("shop_pay"),
+
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),
 
     @SerializedName("sofort")
     SOFORT("sofort"),
+
+    @SerializedName("south_korea_market")
+    SOUTH_KOREA_MARKET("south_korea_market"),
 
     @SerializedName("stripe_balance")
     STRIPE_BALANCE("stripe_balance"),
@@ -51409,6 +51591,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("tamara")
     TAMARA("tamara"),
 
+    @SerializedName("test_pay")
+    TEST_PAY("test_pay"),
+
+    @SerializedName("truemoney")
+    TRUEMONEY("truemoney"),
+
     @SerializedName("twint")
     TWINT("twint"),
 
@@ -51418,8 +51606,17 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),
 
+    @SerializedName("us_cash_voucher")
+    US_CASH_VOUCHER("us_cash_voucher"),
+
+    @SerializedName("vipps")
+    VIPPS("vipps"),
+
     @SerializedName("wechat_pay")
     WECHAT_PAY("wechat_pay"),
+
+    @SerializedName("wero")
+    WERO("wero"),
 
     @SerializedName("zip")
     ZIP("zip");
