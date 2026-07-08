@@ -178,6 +178,10 @@ public class Transaction extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Settlement> settlement;
 
+  /** Details about the transaction for settlement reconciliation. */
+  @SerializedName("settlement_details")
+  SettlementDetails settlementDetails;
+
   /**
    * <a href="https://docs.stripe.com/api/issuing/tokens/object">Token</a> object used for this
    * transaction. If a network token was not used for this transaction, this field will be null.
@@ -1118,6 +1122,31 @@ public class Transaction extends ApiResource
   }
 
   /**
+   * For more details about SettlementDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SettlementDetails extends StripeObject {
+    /** {@code merchant_amount} in the settlement currency. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** Settlement currency. */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * Exchange rate used by the network to convert the {@code merchant_amount} to {@code
+     * settlement_details.amount}. The {@code merchant_amount} multiplied with this rate will equal
+     * to the {@code settlement_details.amount}.
+     */
+    @SerializedName("exchange_rate")
+    BigDecimal exchangeRate;
+  }
+
+  /**
    * For more details about Treasury, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -1290,6 +1319,7 @@ public class Transaction extends ApiResource
     trySetResponseGetter(purchaseDetails, responseGetter);
     trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(settlement, responseGetter);
+    trySetResponseGetter(settlementDetails, responseGetter);
     trySetResponseGetter(token, responseGetter);
     trySetResponseGetter(treasury, responseGetter);
   }
