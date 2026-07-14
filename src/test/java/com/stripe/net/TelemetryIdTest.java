@@ -19,6 +19,7 @@ public class TelemetryIdTest extends BaseStripeTest {
   @BeforeEach
   public void setUp() {
     TelemetryId.reset();
+    TelemetryId.configDirOverride = tempDir;
   }
 
   @AfterEach
@@ -43,76 +44,63 @@ public class TelemetryIdTest extends BaseStripeTest {
   }
 
   @Test
-  public void testGetReturnsNewValueAfterReset() {
-    // Because get() generates a file, we need to control the config dir to ensure
-    // a fresh UUID is generated. We reset the cache to force re-read from disk (or re-generate).
+  public void testGetPersistsToFile() throws IOException {
+    String id = TelemetryId.get();
+    assertNotNull(id);
+
+    // Verify the ID was written to the expected file path
+    Path filePath = tempDir.resolve("telemetry_id");
+    assertTrue(Files.exists(filePath), "Expected telemetry_id file to be created");
+    String content = new String(Files.readAllBytes(filePath), "UTF-8").trim();
+    assertEquals(id, content);
+  }
+
+  @Test
+  public void testGetReturnsPersistedValueAfterReset() throws IOException {
+    // After reset, calling get() again reads from the same file on disk, so it returns same value
     String id1 = TelemetryId.get();
     assertNotNull(id1);
-    // After reset, calling get() again reads from the same file on disk, so it returns same value
     TelemetryId.reset();
+    TelemetryId.configDirOverride = tempDir;
     String id2 = TelemetryId.get();
     assertEquals(id1, id2, "Expected same ID after reset (reads from persisted file)");
   }
 
   @Test
   public void testReadsExistingIdFromFile() throws IOException {
+    // Pre-populate the file to simulate a previous run having written an ID
     String existingId = "abcdef1234567890abcdef1234567890";
     Path filePath = tempDir.resolve("telemetry_id");
     Files.write(filePath, existingId.getBytes("UTF-8"));
 
-    String content = new String(Files.readAllBytes(filePath), "UTF-8").trim();
-    assertEquals(existingId, content);
+    String id = TelemetryId.get();
+    assertEquals(existingId, id);
   }
 
   @Test
-  public void testGetConfigDirWindows() {
-    // Simulate Windows by checking the logic path; we test the non-Windows path here
-    // since we can't reliably set os.name system property in a running JVM without hacks.
-    // Instead, verify the returned path is non-null on the current platform.
+  public void testGetConfigDirReturnsPathContainingStripe() {
+    // On any supported platform, the config dir should contain "stripe" (or "Stripe" on Windows)
     Path configDir = TelemetryId.getConfigDir();
-    // On any supported platform with a home dir, configDir should be non-null
-    // (unless APPDATA is missing on Windows or home is missing on Unix)
-    // Just verify the method doesn't throw
-    // configDir may be null only if home/APPDATA is missing
     assertTrue(
-        configDir == null || configDir.toString().contains("stripe"),
-        "Config dir should be null or contain 'stripe' (or 'Stripe' on Windows)");
+        configDir == null || configDir.toString().toLowerCase().contains("stripe"),
+        "Config dir should be null or contain 'stripe'");
   }
 
   @Test
-  public void testGetConfigDirWithXdgConfigHome() {
-    // We can't easily override env vars, but we can verify getConfigDir() returns a valid path
+  public void testGetConfigDirReturnsNonNull() {
+    // On a normal dev machine with a home dir, this should always be non-null
     Path configDir = TelemetryId.getConfigDir();
     assertNotNull(configDir, "getConfigDir() should return non-null when home dir is available");
   }
 
   @Test
-  public void testCreatesFileAndDirectoryIfMissing() throws IOException {
-    // Create a subdirectory under tempDir to use as a config dir
-    Path configDir = tempDir.resolve("stripe-config");
-    Path filePath = configDir.resolve("telemetry_id");
+  public void testCreatesDirectoryIfMissing() {
+    // Verify that get() creates intermediate directories when the config dir doesn't exist yet
+    Path nestedDir = tempDir.resolve("nested").resolve("config");
+    TelemetryId.configDirOverride = nestedDir;
 
-    // Ensure directory doesn't exist yet
-    assertTrue(!Files.exists(configDir));
-
-    // Manually simulate what resolve() does
-    Files.createDirectories(configDir);
-    String newId = "aabbccddeeff00112233445566778899";
-    Files.write(filePath, newId.getBytes("UTF-8"));
-
-    assertTrue(Files.exists(filePath));
-    String content = new String(Files.readAllBytes(filePath), "UTF-8").trim();
-    assertEquals(newId, content);
-  }
-
-  @Test
-  public void testGetReturnsNullSafely() {
-    // When called after reset with a valid environment, should not throw
-    TelemetryId.reset();
     String id = TelemetryId.get();
-    // id may be null (if file I/O fails) or a valid hex string
-    assertTrue(
-        id == null || id.matches("[0-9a-f]{32}"),
-        "Expected null or a valid 32-char hex string, got: " + id);
+    assertNotNull(id);
+    assertTrue(Files.exists(nestedDir.resolve("telemetry_id")));
   }
 }

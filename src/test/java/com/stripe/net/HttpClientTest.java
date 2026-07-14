@@ -15,12 +15,16 @@ import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.StripeException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
+import java.nio.file.Path;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.mockito.Mockito;
 
 public class HttpClientTest extends BaseStripeTest {
+  @TempDir Path tempDir;
+
   private HttpClient client;
 
   private StripeRequest request;
@@ -303,6 +307,7 @@ public class HttpClientTest extends BaseStripeTest {
     try {
       Stripe.enableTelemetry = true;
       TelemetryId.reset();
+      TelemetryId.configDirOverride = tempDir;
       String json = HttpClient.buildXStripeClientUserAgentString("");
       com.google.gson.JsonObject parsed =
           com.google.gson.JsonParser.parseString(json).getAsJsonObject();

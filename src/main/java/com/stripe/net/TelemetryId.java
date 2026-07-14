@@ -10,6 +10,9 @@ final class TelemetryId {
   private static volatile String cachedId;
   private static volatile boolean loaded = false;
 
+  // Visible for testing: when non-null, overrides getConfigDir() result.
+  static volatile Path configDirOverride;
+
   private TelemetryId() {}
 
   static String get() {
@@ -46,8 +49,12 @@ final class TelemetryId {
     return Paths.get(home, ".config", "stripe");
   }
 
+  /**
+   * Returns the telemetry ID unless something goes wrong with the file I/O (can't read/write
+   * directory, for example)
+   */
   private static String resolve() {
-    Path configDir = getConfigDir();
+    Path configDir = configDirOverride != null ? configDirOverride : getConfigDir();
     if (configDir == null) {
       return null;
     }
@@ -80,6 +87,7 @@ final class TelemetryId {
     synchronized (TelemetryId.class) {
       cachedId = null;
       loaded = false;
+      configDirOverride = null;
     }
   }
 }
