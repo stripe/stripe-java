@@ -9920,6 +9920,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("affirm")
       AFFIRM("affirm"),
 
+      @SerializedName("alipay")
+      ALIPAY("alipay"),
+
       @SerializedName("amazon_pay")
       AMAZON_PAY("amazon_pay"),
 
@@ -10042,6 +10045,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
+
+      @SerializedName("sequra")
+      SEQURA("sequra"),
 
       @SerializedName("sofort")
       SOFORT("sofort"),

@@ -21,7 +21,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   /**
    * The default URL to redirect customers to when they click on the portal's link to return to your
    * website. This can be <a
-   * href="https://docs.stripe.com/api/customer_portal/sessions/create#create_portal_session-return_url">overriden</a>
+   * href="https://docs.stripe.com/api/customer_portal/sessions/create#create_portal_session-return_url">overridden</a>
    * when creating the session.
    */
   @SerializedName("default_return_url")
@@ -127,7 +127,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     /**
      * The default URL to redirect customers to when they click on the portal's link to return to
      * your website. This can be <a
-     * href="https://docs.stripe.com/api/customer_portal/sessions/create#create_portal_session-return_url">overriden</a>
+     * href="https://docs.stripe.com/api/customer_portal/sessions/create#create_portal_session-return_url">overridden</a>
      * when creating the session.
      */
     public Builder setDefaultReturnUrl(String defaultReturnUrl) {
@@ -138,7 +138,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     /**
      * The default URL to redirect customers to when they click on the portal's link to return to
      * your website. This can be <a
-     * href="https://docs.stripe.com/api/customer_portal/sessions/create#create_portal_session-return_url">overriden</a>
+     * href="https://docs.stripe.com/api/customer_portal/sessions/create#create_portal_session-return_url">overridden</a>
      * when creating the session.
      */
     public Builder setDefaultReturnUrl(EmptyParam defaultReturnUrl) {

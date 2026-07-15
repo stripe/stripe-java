@@ -508,6 +508,10 @@ public class TokenCreateParams extends ApiRequestParams {
        * The business ID number of the company, as appropriate for the company’s country. (Examples
        * are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in
        * the UK.)
+       *
+       * <p>Changing this value requires that the account re-accept the <a
+       * href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+       * service</a>.
        */
       @SerializedName("tax_id")
       String taxId;
@@ -899,6 +903,10 @@ public class TokenCreateParams extends ApiRequestParams {
          * The business ID number of the company, as appropriate for the company’s country.
          * (Examples are an Employer ID Number in the U.S., a Business Number in Canada, or a
          * Company Number in the UK.)
+         *
+         * <p>Changing this value requires that the account re-accept the <a
+         * href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+         * service</a>.
          */
         public Builder setTaxId(String taxId) {
           this.taxId = taxId;
@@ -5131,6 +5139,10 @@ public class TokenCreateParams extends ApiRequestParams {
      * number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you
      * can also provide a <a href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII
      * token provided by Stripe.js</a>.
+     *
+     * <p>Changing this value for the account's representative requires that the account re-accept
+     * the <a href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+     * service</a>.
      */
     @SerializedName("id_number")
     String idNumber;
@@ -5141,6 +5153,10 @@ public class TokenCreateParams extends ApiRequestParams {
      * card. Instead of the number itself, you can also provide a <a
      * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token provided by
      * Stripe.js</a>.
+     *
+     * <p>Changing this value for the account's representative requires that the account re-accept
+     * the <a href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+     * service</a>.
      */
     @SerializedName("id_number_secondary")
     String idNumberSecondary;
@@ -5206,7 +5222,13 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName("self_reported_monthly_housing_payment")
     SelfReportedMonthlyHousingPayment selfReportedMonthlyHousingPayment;
 
-    /** The last four digits of the person's Social Security number (U.S. only). */
+    /**
+     * The last four digits of the person's Social Security number (U.S. only).
+     *
+     * <p>Changing this value for the account's representative requires that the account re-accept
+     * the <a href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+     * service</a>.
+     */
     @SerializedName("ssn_last_4")
     String ssnLast4;
 
@@ -5543,6 +5565,10 @@ public class TokenCreateParams extends ApiRequestParams {
        * you can also provide a <a
        * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token provided by
        * Stripe.js</a>.
+       *
+       * <p>Changing this value for the account's representative requires that the account re-accept
+       * the <a href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+       * service</a>.
        */
       public Builder setIdNumber(String idNumber) {
         this.idNumber = idNumber;
@@ -5555,6 +5581,10 @@ public class TokenCreateParams extends ApiRequestParams {
        * of an ID card. Instead of the number itself, you can also provide a <a
        * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token provided by
        * Stripe.js</a>.
+       *
+       * <p>Changing this value for the account's representative requires that the account re-accept
+       * the <a href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+       * service</a>.
        */
       public Builder setIdNumberSecondary(String idNumberSecondary) {
         this.idNumberSecondary = idNumberSecondary;
@@ -5690,7 +5720,13 @@ public class TokenCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The last four digits of the person's Social Security number (U.S. only). */
+      /**
+       * The last four digits of the person's Social Security number (U.S. only).
+       *
+       * <p>Changing this value for the account's representative requires that the account re-accept
+       * the <a href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+       * service</a>.
+       */
       public Builder setSsnLast4(String ssnLast4) {
         this.ssnLast4 = ssnLast4;
         return this;

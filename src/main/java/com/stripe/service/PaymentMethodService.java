@@ -325,30 +325,30 @@ public final class PaymentMethodService extends ApiService {
     return this.request(request, PaymentMethodBalance.class);
   }
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(String paymentMethod, PaymentMethodDetachParams params)
       throws StripeException {
     return detach(paymentMethod, params, (RequestOptions) null);
   }
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(String paymentMethod, RequestOptions options) throws StripeException {
     return detach(paymentMethod, (PaymentMethodDetachParams) null, options);
   }
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(String paymentMethod) throws StripeException {
     return detach(paymentMethod, (PaymentMethodDetachParams) null, (RequestOptions) null);
   }
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(
       String paymentMethod, PaymentMethodDetachParams params, RequestOptions options)

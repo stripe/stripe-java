@@ -73,6 +73,10 @@ public class RefundCreateParams extends ApiRequestParams {
   @SerializedName("payment_intent")
   String paymentIntent;
 
+  /** The identifier of the PaymentRecord to refund. */
+  @SerializedName("payment_record")
+  String paymentRecord;
+
   /**
    * String indicating the reason for the refund. If set, possible values are {@code duplicate},
    * {@code fraudulent}, and {@code requested_by_customer}. If you believe the charge to be
@@ -114,6 +118,7 @@ public class RefundCreateParams extends ApiRequestParams {
       Origin origin,
       String paymentAttemptRecord,
       String paymentIntent,
+      String paymentRecord,
       Reason reason,
       Boolean refundApplicationFee,
       Boolean reverseTransfer) {
@@ -128,6 +133,7 @@ public class RefundCreateParams extends ApiRequestParams {
     this.origin = origin;
     this.paymentAttemptRecord = paymentAttemptRecord;
     this.paymentIntent = paymentIntent;
+    this.paymentRecord = paymentRecord;
     this.reason = reason;
     this.refundApplicationFee = refundApplicationFee;
     this.reverseTransfer = reverseTransfer;
@@ -160,6 +166,8 @@ public class RefundCreateParams extends ApiRequestParams {
 
     private String paymentIntent;
 
+    private String paymentRecord;
+
     private Reason reason;
 
     private Boolean refundApplicationFee;
@@ -180,6 +188,7 @@ public class RefundCreateParams extends ApiRequestParams {
           this.origin,
           this.paymentAttemptRecord,
           this.paymentIntent,
+          this.paymentRecord,
           this.reason,
           this.refundApplicationFee,
           this.reverseTransfer);
@@ -338,6 +347,12 @@ public class RefundCreateParams extends ApiRequestParams {
     /** The identifier of the PaymentIntent to refund. */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
+      return this;
+    }
+
+    /** The identifier of the PaymentRecord to refund. */
+    public Builder setPaymentRecord(String paymentRecord) {
+      this.paymentRecord = paymentRecord;
       return this;
     }
 

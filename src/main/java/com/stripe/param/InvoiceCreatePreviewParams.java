@@ -11389,8 +11389,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       TrialContinuation trialContinuation;
 
       /**
-       * Sets the phase to trialing from the start date to this date. Must be before the phase end
-       * date, can not be combined with {@code trial}
+       * Sets the phase to trialing from the start date to this date. Must be within the phase. When
+       * previewing an update, if combined with {@code trial=true}, it must match the phase end
+       * date.
        */
       @SerializedName("trial_end")
       Object trialEnd;
@@ -12004,8 +12005,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * Sets the phase to trialing from the start date to this date. Must be before the phase end
-         * date, can not be combined with {@code trial}
+         * Sets the phase to trialing from the start date to this date. Must be within the phase.
+         * When previewing an update, if combined with {@code trial=true}, it must match the phase
+         * end date.
          */
         public Builder setTrialEnd(Long trialEnd) {
           this.trialEnd = trialEnd;
@@ -12013,8 +12015,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * Sets the phase to trialing from the start date to this date. Must be before the phase end
-         * date, can not be combined with {@code trial}
+         * Sets the phase to trialing from the start date to this date. Must be within the phase.
+         * When previewing an update, if combined with {@code trial=true}, it must match the phase
+         * end date.
          */
         public Builder setTrialEnd(
             InvoiceCreatePreviewParams.ScheduleDetails.Phase.TrialEnd trialEnd) {

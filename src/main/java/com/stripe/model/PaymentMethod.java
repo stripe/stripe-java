@@ -620,32 +620,32 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach() throws StripeException {
     return detach((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(RequestOptions options) throws StripeException {
     return detach((Map<String, Object>) null, options);
   }
 
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(Map<String, Object> params) throws StripeException {
     return detach(params, (RequestOptions) null);
   }
 
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -657,16 +657,16 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(PaymentMethodDetachParams params) throws StripeException {
     return detach(params, (RequestOptions) null);
   }
 
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(PaymentMethodDetachParams params, RequestOptions options)
       throws StripeException {

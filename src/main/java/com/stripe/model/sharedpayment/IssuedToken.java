@@ -255,10 +255,17 @@ public class IssuedToken extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class NextAction extends StripeObject {
     /**
+     * Contains details for handling the next action by redirecting the customer. Present when
+     * {@code next_action.type} is {@code redirect_to_url}.
+     */
+    @SerializedName("redirect_to_url")
+    RedirectToUrl redirectToUrl;
+
+    /**
      * Specifies the type of next action required. Determines which child attribute contains action
      * details.
      *
-     * <p>Equal to {@code use_stripe_sdk}.
+     * <p>One of {@code redirect_to_url}, or {@code use_stripe_sdk}.
      */
     @SerializedName("type")
     String type;
@@ -269,6 +276,26 @@ public class IssuedToken extends ApiResource implements HasId {
      */
     @SerializedName("use_stripe_sdk")
     UseStripeSdk useStripeSdk;
+
+    /**
+     * For more details about RedirectToUrl, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RedirectToUrl extends StripeObject {
+      /**
+       * If the customer does not exit their browser while authenticating, they will be redirected
+       * to this specified URL after completion.
+       */
+      @SerializedName("return_url")
+      String returnUrl;
+
+      /** The URL you must redirect your customer to in order to authenticate the payment. */
+      @SerializedName("url")
+      String url;
+    }
 
     /**
      * For more details about UseStripeSdk, please refer to the <a

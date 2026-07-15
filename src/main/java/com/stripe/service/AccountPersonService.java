@@ -25,7 +25,7 @@ public final class AccountPersonService extends ApiService {
   /**
    * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
    * relationship for an account can be deleted through the API, except if the person is the {@code
-   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
+   * representative}. If your integration is using the {@code executive} parameter, you cannot
    * delete the only verified {@code executive} on file.
    */
   public Person delete(String account, String person) throws StripeException {
@@ -34,7 +34,7 @@ public final class AccountPersonService extends ApiService {
   /**
    * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
    * relationship for an account can be deleted through the API, except if the person is the {@code
-   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
+   * representative}. If your integration is using the {@code executive} parameter, you cannot
    * delete the only verified {@code executive} on file.
    */
   public Person delete(String account, String person, RequestOptions options)

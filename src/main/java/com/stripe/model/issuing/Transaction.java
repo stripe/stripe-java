@@ -800,6 +800,7 @@ public class Transaction extends ApiResource
     @SerializedName("routed_network")
     String routedNetwork;
 
+    /** Mastercard identifier assigned by the card network for the transaction. */
     @SerializedName("trace_id")
     TraceId traceId;
 
@@ -962,7 +963,7 @@ public class Transaction extends ApiResource
         @EqualsAndHashCode(callSuper = false)
         public static class Fuel extends StripeObject {
           /**
-           * Gross fuel amount that should equal Fuel Volume multipled by Fuel Unit Cost, inclusive
+           * Gross fuel amount that should equal Fuel Volume multiplied by Fuel Unit Cost, inclusive
            * of taxes.
            */
           @SerializedName("gross_amount_decimal")
