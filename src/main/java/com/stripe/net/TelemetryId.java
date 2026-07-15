@@ -41,7 +41,8 @@ final class TelemetryId {
       }
       return Paths.get(appData, "Stripe");
     }
-    String xdg = xdgConfigHomeOverride != null ? xdgConfigHomeOverride : System.getenv("XDG_CONFIG_HOME");
+    String xdg =
+        xdgConfigHomeOverride != null ? xdgConfigHomeOverride : System.getenv("XDG_CONFIG_HOME");
     if (xdg != null && !xdg.isEmpty()) {
       return Paths.get(xdg, "stripe");
     }
