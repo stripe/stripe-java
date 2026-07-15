@@ -92,6 +92,7 @@ jobs:
           architecture: x64
 
       - name: Set Test Java Runtime Environment variable
+        shell: bash
         run: echo "JAVA_TEST_HOME=${{ steps.setup-test-jre.outputs.path }}" >> $GITHUB_ENV
 
       # our gradle version wants java 17, so any other test version needs a separate setup
@@ -107,6 +108,7 @@ jobs:
         run: sed -e '/--add-exports/ s/^#*/#/' -i gradle.properties
 
       - name: Display version
+        shell: bash
         run: |
           ./gradlew --version
           echo "JAVA_TEST_HOME=$JAVA_TEST_HOME"
