@@ -13,6 +13,9 @@ final class TelemetryId {
   // Visible for testing: when non-null, overrides getConfigDir() result.
   static volatile Path configDirOverride;
 
+  // Visible for testing: overrides System.getenv("XDG_CONFIG_HOME") when non-null.
+  static volatile String xdgConfigHomeOverride;
+
   private TelemetryId() {}
 
   static String get() {
@@ -38,7 +41,7 @@ final class TelemetryId {
       }
       return Paths.get(appData, "Stripe");
     }
-    String xdg = System.getenv("XDG_CONFIG_HOME");
+    String xdg = xdgConfigHomeOverride != null ? xdgConfigHomeOverride : System.getenv("XDG_CONFIG_HOME");
     if (xdg != null && !xdg.isEmpty()) {
       return Paths.get(xdg, "stripe");
     }
@@ -88,6 +91,7 @@ final class TelemetryId {
       cachedId = null;
       loaded = false;
       configDirOverride = null;
+      xdgConfigHomeOverride = null;
     }
   }
 }

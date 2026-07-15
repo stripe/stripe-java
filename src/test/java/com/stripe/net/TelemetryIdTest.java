@@ -2,15 +2,19 @@ package com.stripe.net;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.io.TempDir;
 
 public class TelemetryIdTest extends BaseStripeTest {
@@ -102,5 +106,52 @@ public class TelemetryIdTest extends BaseStripeTest {
     String id = TelemetryId.get();
     assertNotNull(id);
     assertTrue(Files.exists(nestedDir.resolve("telemetry_id")));
+  }
+
+  @Test
+  public void testGetReturnsNullWhenWriteFails() throws IOException {
+    // Place a regular file at the path where the config directory should be.
+    // Files.createDirectories will fail because a file already occupies that path,
+    // causing resolve() to catch the IOException and return null.
+    Path blockerFile = tempDir.resolve("blocker");
+    Files.write(blockerFile, new byte[0]);
+    // Set the override to a subdirectory of the blocker file — impossible to create
+    TelemetryId.configDirOverride = blockerFile.resolve("stripe");
+
+    String id = TelemetryId.get();
+    assertNull(id, "Expected get() to return null when the config directory cannot be created");
+  }
+
+  @Test
+  @DisabledOnOs(OS.WINDOWS)
+  public void testGetConfigDirFallsBackToHomeConfig() {
+    // Force the XDG override to empty so the fallback branch is always exercised,
+    // even if the real XDG_CONFIG_HOME is set in the environment.
+    TelemetryId.xdgConfigHomeOverride = "";
+
+    Path configDir = TelemetryId.getConfigDir();
+    assertNotNull(configDir, "getConfigDir() should return non-null on a system with a home dir");
+
+    String home = System.getProperty("user.home");
+    assertTrue(
+        configDir.startsWith(home),
+        "Config dir should be rooted under user.home when XDG_CONFIG_HOME is not set");
+    assertTrue(
+        configDir.toString().endsWith(".config/stripe"),
+        "Config dir should end with .config/stripe when XDG_CONFIG_HOME is not set, got: "
+            + configDir);
+  }
+
+  @Test
+  @DisabledOnOs(OS.WINDOWS)
+  public void testGetConfigDirRespectsXdgConfigHome() {
+    TelemetryId.xdgConfigHomeOverride = "/custom/config";
+
+    Path configDir = TelemetryId.getConfigDir();
+    assertNotNull(configDir);
+    assertEquals(
+        Paths.get("/custom/config", "stripe"),
+        configDir,
+        "getConfigDir() should use XDG_CONFIG_HOME when set");
   }
 }
