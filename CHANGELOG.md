@@ -162,6 +162,9 @@ This release changes the pinned API version to 2026-06-24.preview.
   * Add support for event notification `V2MoneyManagementOutboundTransferUnderReviewEvent` with related object `v2.moneymanagement.OutboundTransfer`
   * ⚠️ Remove support for event notifications `V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpdatedEvent` and `V2CoreAccountIncludingConfigurationStorerUpdatedEvent` with related object `v2.core.Account`
 
+## 33.1.1 - 2026-07-15
+* [#2244](https://github.com/stripe/stripe-java/pull/2244) Replace source hash with Telemetry UUID
+
 ## 33.1.0 - 2026-06-24
 This release changes the pinned API version to 2026-06-24.dahlia.
 
