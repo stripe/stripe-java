@@ -19,12 +19,18 @@ public final class AccountSignalService extends ApiService {
     super(responseGetter);
   }
 
-  /** Lists AccountSignals for a given account or customer, filtered by signal type. */
+  /**
+   * Lists the latest AccountSignals for a given account or customer, filtered by signal type. Note
+   * that this endpoint returns only the latest signal for each requested signal type.
+   */
   public StripeCollection<AccountSignal> list(AccountSignalListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** Lists AccountSignals for a given account or customer, filtered by signal type. */
+  /**
+   * Lists the latest AccountSignals for a given account or customer, filtered by signal type. Note
+   * that this endpoint returns only the latest signal for each requested signal type.
+   */
   public StripeCollection<AccountSignal> list(
       AccountSignalListParams params, RequestOptions options) throws StripeException {
     String path = "/v2/signals/account_signals";

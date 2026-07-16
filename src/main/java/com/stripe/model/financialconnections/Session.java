@@ -358,7 +358,15 @@ public class Session extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ManualEntry extends StripeObject {}
+  public static class ManualEntry extends StripeObject {
+    /**
+     * Controls how manual entry of bank account details is presented to the user.
+     *
+     * <p>One of {@code automatic}, {@code custom}, or {@code disabled}.
+     */
+    @SerializedName("mode")
+    String mode;
+  }
 
   /**
    * For more details about RelinkOptions, please refer to the <a

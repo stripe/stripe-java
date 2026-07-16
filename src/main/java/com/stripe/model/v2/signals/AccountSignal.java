@@ -11,7 +11,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** An automatically evaluated signal on a v2 account. */
+/**
+ * An automatically evaluated signal on an account. Each Account Signal object corresponds to
+ * exactly one signal type, indicated by type. Only the type-specific field is populated; other
+ * type-specific payload fields are null. If an account has multiple signals, Stripe creates
+ * separate account signal objects.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

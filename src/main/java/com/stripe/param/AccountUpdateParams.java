@@ -9355,6 +9355,10 @@ public class AccountUpdateParams extends ApiRequestParams {
      * The business ID number of the company, as appropriate for the company’s country. (Examples
      * are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in
      * the UK.)
+     *
+     * <p>Changing this value requires that the account re-accept the <a
+     * href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+     * service</a>.
      */
     @SerializedName("tax_id")
     Object taxId;
@@ -9774,6 +9778,10 @@ public class AccountUpdateParams extends ApiRequestParams {
        * The business ID number of the company, as appropriate for the company’s country. (Examples
        * are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in
        * the UK.)
+       *
+       * <p>Changing this value requires that the account re-accept the <a
+       * href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+       * service</a>.
        */
       public Builder setTaxId(String taxId) {
         this.taxId = taxId;
@@ -9784,6 +9792,10 @@ public class AccountUpdateParams extends ApiRequestParams {
        * The business ID number of the company, as appropriate for the company’s country. (Examples
        * are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in
        * the UK.)
+       *
+       * <p>Changing this value requires that the account re-accept the <a
+       * href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+       * service</a>.
        */
       public Builder setTaxId(EmptyParam taxId) {
         this.taxId = taxId;

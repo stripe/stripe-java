@@ -12,6 +12,7 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.PaymentRecordCreateParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptCanceledParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptFailedParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptGuaranteedParams;
@@ -85,6 +86,24 @@ public final class PaymentRecordService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, new TypeToken<StripeSearchResult<PaymentRecord>>() {}.getType());
+  }
+  /** Report that the most recent payment attempt on the specified Payment Record was disputed. */
+  public PaymentRecord create(String id, PaymentRecordCreateParams params) throws StripeException {
+    return create(id, params, (RequestOptions) null);
+  }
+  /** Report that the most recent payment attempt on the specified Payment Record was disputed. */
+  public PaymentRecord create(String id, PaymentRecordCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/payment_records/%s/report_dispute", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, PaymentRecord.class);
   }
   /**
    * Report a new payment attempt on the specified Payment Record. A new payment attempt can only be

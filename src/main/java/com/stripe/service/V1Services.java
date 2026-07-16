@@ -149,10 +149,6 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.ForwardingService(this.getResponseGetter());
   }
 
-  public com.stripe.service.FrMealVouchersOnboardingService frMealVouchersOnboardings() {
-    return new com.stripe.service.FrMealVouchersOnboardingService(this.getResponseGetter());
-  }
-
   public com.stripe.service.FxQuoteService fxQuotes() {
     return new com.stripe.service.FxQuoteService(this.getResponseGetter());
   }
