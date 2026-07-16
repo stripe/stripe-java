@@ -50,9 +50,9 @@ jobs:
         run: ./gradlew assemble javadoc
 
   test:
-    name: Test
+    name: Test (${{ matrix.java-version }}, ${{ matrix.os }})
 
-    runs-on: "ubuntu-24.04"
+    runs-on: ${{ matrix.os }}
 
     permissions:
       contents: read
@@ -60,7 +60,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # We test Stripe SDK against Java LTS versions(8, 11, 17, 21) and currently supported non-LTS versions.
+        os:
+          - "ubuntu-24.04"
+        # We test Stripe SDK against Java LTS versions(8, 11, 17, 21, 25) and currently supported non-LTS versions.
         # https://www.oracle.com/java/technologies/java-se-support-roadmap.html
         # https://endoflife.date/oracle-jdk
         java-version:
@@ -73,6 +75,10 @@ jobs:
           # non-LTS versions
           # we should periodically add the latest non-LTS version here to test against
           - "26"
+        include:
+          - os: windows-latest
+            # use any modern-ish version
+            java-version: "25"
 
     steps:
       - uses: extractions/setup-just@v2
@@ -86,12 +92,15 @@ jobs:
           architecture: x64
 
       - name: Set Test Java Runtime Environment variable
+        shell: bash
         run: echo "JAVA_TEST_HOME=${{ steps.setup-test-jre.outputs.path }}" >> $GITHUB_ENV
 
-      - name: Setup Java
+      # our gradle version wants java 17, so any other test version needs a separate setup
+      - name: Setup Gradle JDK
+        if: ${{ matrix.java-version != '17' }}
         uses: actions/setup-java@v1
         with:
-          java-version: "17" # always use 17 LTS for building
+          java-version: "17"
           architecture: x64
 
       - name: Tweak gradle.properties for Java 1.8
@@ -99,6 +108,7 @@ jobs:
         run: sed -e '/--add-exports/ s/^#*/#/' -i gradle.properties
 
       - name: Display version
+        shell: bash
         run: |
           ./gradlew --version
           echo "JAVA_TEST_HOME=$JAVA_TEST_HOME"
