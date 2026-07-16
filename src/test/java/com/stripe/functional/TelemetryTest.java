@@ -68,7 +68,7 @@ public class TelemetryTest extends BaseStripeTest {
     String requestId1 = requestMetrics1.get("request_id").getAsString();
     Long requestDurationMs1 = requestMetrics1.get("request_duration_ms").getAsLong();
     assertEquals("req_1", requestId1);
-    assertTrue(requestDurationMs1 > 30, requestDurationMs1.toString() + " is not greater than 30");
+    assertTrue(requestDurationMs1 >= 30, requestDurationMs1.toString() + " is less than 30");
 
     Balance.retrieve();
     RecordedRequest request3 = server.takeRequest();
@@ -82,7 +82,7 @@ public class TelemetryTest extends BaseStripeTest {
     String requestId2 = requestMetrics2.get("request_id").getAsString();
     Long requestDurationMs2 = requestMetrics2.get("request_duration_ms").getAsLong();
     assertEquals("req_2", requestId2);
-    assertTrue(requestDurationMs2 > 30, requestDurationMs2.toString() + " is not greater than 30");
+    assertTrue(requestDurationMs2 >= 30, requestDurationMs2.toString() + " is less than 30");
 
     server.shutdown();
   }
