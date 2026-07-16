@@ -15,12 +15,16 @@ import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.StripeException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
+import java.nio.file.Path;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.mockito.Mockito;
 
 public class HttpClientTest extends BaseStripeTest {
+  @TempDir Path tempDir;
+
   private HttpClient client;
 
   private StripeRequest request;
@@ -298,29 +302,39 @@ public class HttpClientTest extends BaseStripeTest {
   }
 
   @Test
-  public void testBuildXStripeClientUserAgentStringIncludesSource() {
-    String json = HttpClient.buildXStripeClientUserAgentString("");
-    com.google.gson.JsonObject parsed =
-        com.google.gson.JsonParser.parseString(json).getAsJsonObject();
-    // "source" should be present and be a 32-character lowercase MD5 hex digest
-    assertTrue(parsed.has("source"), "Expected 'source' field in X-Stripe-Client-User-Agent");
-    String source = parsed.get("source").getAsString();
-    assertTrue(
-        source.matches("[0-9a-f]{32}"),
-        "Expected 'source' to be a 32-character lowercase hex string, got: " + source);
+  public void testBuildXStripeClientUserAgentStringIncludesTelemetryId() {
+    boolean originalTelemetry = Stripe.enableTelemetry;
+    try {
+      Stripe.enableTelemetry = true;
+      TelemetryId.reset();
+      TelemetryId.configDirOverride = tempDir;
+      String json = HttpClient.buildXStripeClientUserAgentString("");
+      com.google.gson.JsonObject parsed =
+          com.google.gson.JsonParser.parseString(json).getAsJsonObject();
+      assertTrue(
+          parsed.has("telemetry_id"),
+          "Expected 'telemetry_id' field in X-Stripe-Client-User-Agent");
+      String telemetryId = parsed.get("telemetry_id").getAsString();
+      assertTrue(
+          telemetryId.matches("[0-9a-f]{32}"),
+          "Expected 'telemetry_id' to be a 32-character lowercase hex string, got: " + telemetryId);
+    } finally {
+      Stripe.enableTelemetry = originalTelemetry;
+      TelemetryId.reset();
+    }
   }
 
   @Test
-  public void testBuildXStripeClientUserAgentStringOmitsSourceWhenEmpty() throws Exception {
-    String savedHash = HttpClient.UNAME_HASH;
+  public void testBuildXStripeClientUserAgentStringOmitsTelemetryIdWhenDisabled() {
+    boolean originalTelemetry = Stripe.enableTelemetry;
     try {
-      HttpClient.UNAME_HASH = "";
+      Stripe.enableTelemetry = false;
       String userAgentString = HttpClient.buildXStripeClientUserAgentString("");
       com.google.gson.JsonObject userAgent =
           com.google.gson.JsonParser.parseString(userAgentString).getAsJsonObject();
-      assertFalse(userAgent.has("source"));
+      assertFalse(userAgent.has("telemetry_id"));
     } finally {
-      HttpClient.UNAME_HASH = savedHash;
+      Stripe.enableTelemetry = originalTelemetry;
     }
   }
 }
