@@ -223,7 +223,10 @@ public class AccountSignalListParams extends ApiRequestParams {
     FRAUDULENT_MERCHANT("fraudulent_merchant"),
 
     @SerializedName("merchant_delinquency")
-    MERCHANT_DELINQUENCY("merchant_delinquency");
+    MERCHANT_DELINQUENCY("merchant_delinquency"),
+
+    @SerializedName("payment_delinquency_exposure")
+    PAYMENT_DELINQUENCY_EXPOSURE("payment_delinquency_exposure");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

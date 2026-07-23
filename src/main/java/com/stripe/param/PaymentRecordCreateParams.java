@@ -21,7 +21,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
   @SerializedName("amount")
   Amount amount;
 
-  /** <strong>Required.</strong> Information about the dispute closing. */
+  /** Information about the dispute closing. */
   @SerializedName("closed")
   Closed closed;
 
@@ -38,7 +38,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> Information about the dispute funding event. */
+  /** Information about the dispute funding event. */
   @SerializedName("funded")
   Funded funded;
 
@@ -130,7 +130,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> Information about the dispute closing. */
+    /** Information about the dispute closing. */
     public Builder setClosed(PaymentRecordCreateParams.Closed closed) {
       this.closed = closed;
       return this;
@@ -188,7 +188,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> Information about the dispute funding event. */
+    /** Information about the dispute funding event. */
     public Builder setFunded(PaymentRecordCreateParams.Funded funded) {
       this.funded = funded;
       return this;

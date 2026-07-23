@@ -454,6 +454,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),
 
+    @SerializedName("vipps")
+    VIPPS("vipps"),
+
     @SerializedName("wechat_pay")
     WECHAT_PAY("wechat_pay"),
 

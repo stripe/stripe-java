@@ -327,8 +327,7 @@ public final class AccountService extends ApiService {
    * flagged as suspicious.
    *
    * <p>Only accounts where your platform is liable for negative account balances, which includes
-   * Custom and Express accounts, can be rejected. Test-mode accounts can be rejected at any time.
-   * Live-mode accounts can only be rejected after all balances are zero.
+   * Custom and Express accounts, can be rejected.
    */
   public Account reject(String account, AccountRejectParams params) throws StripeException {
     return reject(account, params, (RequestOptions) null);
@@ -338,8 +337,7 @@ public final class AccountService extends ApiService {
    * flagged as suspicious.
    *
    * <p>Only accounts where your platform is liable for negative account balances, which includes
-   * Custom and Express accounts, can be rejected. Test-mode accounts can be rejected at any time.
-   * Live-mode accounts can only be rejected after all balances are zero.
+   * Custom and Express accounts, can be rejected.
    */
   public Account reject(String account, AccountRejectParams params, RequestOptions options)
       throws StripeException {

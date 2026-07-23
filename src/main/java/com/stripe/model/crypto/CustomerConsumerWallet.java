@@ -38,7 +38,8 @@ public class CustomerConsumerWallet extends ApiResource implements HasId {
    * The blockchain network for this wallet
    *
    * <p>One of {@code aptos}, {@code avalanche}, {@code base}, {@code bitcoin}, {@code ethereum},
-   * {@code optimism}, {@code polygon}, {@code solana}, {@code stellar}, or {@code worldchain}.
+   * {@code optimism}, {@code polygon}, {@code solana}, {@code stellar}, {@code sui}, or {@code
+   * worldchain}.
    */
   @SerializedName("network")
   String network;

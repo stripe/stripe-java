@@ -165,4 +165,8 @@ public final class AlertService extends ApiService {
             options);
     return this.request(request, Alert.class);
   }
+
+  public com.stripe.service.billing.AlertNotificationService notifications() {
+    return new com.stripe.service.billing.AlertNotificationService(this.getResponseGetter());
+  }
 }

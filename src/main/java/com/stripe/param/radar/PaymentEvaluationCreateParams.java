@@ -1046,6 +1046,10 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
       @SerializedName("billing_details")
       BillingDetails billingDetails;
 
+      /** Masked PAN card details to use as an alternative to a payment_method token. */
+      @SerializedName("card")
+      Card card;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1060,8 +1064,12 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
       String paymentMethod;
 
       private PaymentMethodDetails(
-          BillingDetails billingDetails, Map<String, Object> extraParams, String paymentMethod) {
+          BillingDetails billingDetails,
+          Card card,
+          Map<String, Object> extraParams,
+          String paymentMethod) {
         this.billingDetails = billingDetails;
+        this.card = card;
         this.extraParams = extraParams;
         this.paymentMethod = paymentMethod;
       }
@@ -1073,6 +1081,8 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
       public static class Builder {
         private BillingDetails billingDetails;
 
+        private Card card;
+
         private Map<String, Object> extraParams;
 
         private String paymentMethod;
@@ -1080,7 +1090,7 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentEvaluationCreateParams.PaymentDetails.PaymentMethodDetails build() {
           return new PaymentEvaluationCreateParams.PaymentDetails.PaymentMethodDetails(
-              this.billingDetails, this.extraParams, this.paymentMethod);
+              this.billingDetails, this.card, this.extraParams, this.paymentMethod);
         }
 
         /** Billing information associated with the payment evaluation. */
@@ -1088,6 +1098,13 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
             PaymentEvaluationCreateParams.PaymentDetails.PaymentMethodDetails.BillingDetails
                 billingDetails) {
           this.billingDetails = billingDetails;
+          return this;
+        }
+
+        /** Masked PAN card details to use as an alternative to a payment_method token. */
+        public Builder setCard(
+            PaymentEvaluationCreateParams.PaymentDetails.PaymentMethodDetails.Card card) {
+          this.card = card;
           return this;
         }
 
@@ -1415,6 +1432,129 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
               this.state = state;
               return this;
             }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Card {
+        /** <strong>Required.</strong> Two-digit number representing the card's expiration month. */
+        @SerializedName("exp_month")
+        Long expMonth;
+
+        /** <strong>Required.</strong> Four-digit number representing the card's expiration year. */
+        @SerializedName("exp_year")
+        Long expYear;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> First six digits of the card number. */
+        @SerializedName("first6")
+        String first6;
+
+        /** <strong>Required.</strong> Last four digits of the card number. */
+        @SerializedName("last4")
+        String last4;
+
+        private Card(
+            Long expMonth,
+            Long expYear,
+            Map<String, Object> extraParams,
+            String first6,
+            String last4) {
+          this.expMonth = expMonth;
+          this.expYear = expYear;
+          this.extraParams = extraParams;
+          this.first6 = first6;
+          this.last4 = last4;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long expMonth;
+
+          private Long expYear;
+
+          private Map<String, Object> extraParams;
+
+          private String first6;
+
+          private String last4;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentEvaluationCreateParams.PaymentDetails.PaymentMethodDetails.Card build() {
+            return new PaymentEvaluationCreateParams.PaymentDetails.PaymentMethodDetails.Card(
+                this.expMonth, this.expYear, this.extraParams, this.first6, this.last4);
+          }
+
+          /**
+           * <strong>Required.</strong> Two-digit number representing the card's expiration month.
+           */
+          public Builder setExpMonth(Long expMonth) {
+            this.expMonth = expMonth;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Four-digit number representing the card's expiration year.
+           */
+          public Builder setExpYear(Long expYear) {
+            this.expYear = expYear;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentEvaluationCreateParams.PaymentDetails.PaymentMethodDetails.Card#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentEvaluationCreateParams.PaymentDetails.PaymentMethodDetails.Card#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> First six digits of the card number. */
+          public Builder setFirst6(String first6) {
+            this.first6 = first6;
+            return this;
+          }
+
+          /** <strong>Required.</strong> Last four digits of the card number. */
+          public Builder setLast4(String last4) {
+            this.last4 = last4;
+            return this;
           }
         }
       }

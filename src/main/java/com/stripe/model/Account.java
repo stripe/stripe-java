@@ -506,8 +506,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * flagged as suspicious.
    *
    * <p>Only accounts where your platform is liable for negative account balances, which includes
-   * Custom and Express accounts, can be rejected. Test-mode accounts can be rejected at any time.
-   * Live-mode accounts can only be rejected after all balances are zero.
+   * Custom and Express accounts, can be rejected.
    */
   public Account reject(Map<String, Object> params) throws StripeException {
     return reject(params, (RequestOptions) null);
@@ -518,8 +517,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * flagged as suspicious.
    *
    * <p>Only accounts where your platform is liable for negative account balances, which includes
-   * Custom and Express accounts, can be rejected. Test-mode accounts can be rejected at any time.
-   * Live-mode accounts can only be rejected after all balances are zero.
+   * Custom and Express accounts, can be rejected.
    */
   public Account reject(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(this.getId()));
@@ -533,8 +531,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * flagged as suspicious.
    *
    * <p>Only accounts where your platform is liable for negative account balances, which includes
-   * Custom and Express accounts, can be rejected. Test-mode accounts can be rejected at any time.
-   * Live-mode accounts can only be rejected after all balances are zero.
+   * Custom and Express accounts, can be rejected.
    */
   public Account reject(AccountRejectParams params) throws StripeException {
     return reject(params, (RequestOptions) null);
@@ -545,8 +542,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * flagged as suspicious.
    *
    * <p>Only accounts where your platform is liable for negative account balances, which includes
-   * Custom and Express accounts, can be rejected. Test-mode accounts can be rejected at any time.
-   * Live-mode accounts can only be rejected after all balances are zero.
+   * Custom and Express accounts, can be rejected.
    */
   public Account reject(AccountRejectParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(this.getId()));
@@ -2310,7 +2306,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * invalid_url_website_incomplete_return_policy}, {@code
        * invalid_url_website_incomplete_terms_and_conditions}, {@code
        * invalid_url_website_incomplete_under_construction}, {@code invalid_url_website_other},
-       * {@code invalid_value_other}, {@code unsupported_business_type}, {@code
+       * {@code invalid_value_other}, {@code partner_disabled_dispute_rate}, {@code
+       * partner_disabled_responsibilities}, {@code partner_disabled_restricted_business}, {@code
+       * partner_disabled_suspected_fraud}, {@code unsupported_business_type}, {@code
        * verification_data_not_found}, {@code verification_directors_mismatch}, {@code
        * verification_document_address_mismatch}, {@code verification_document_address_missing},
        * {@code verification_document_corrupt}, {@code verification_document_country_not_supported},
@@ -2516,7 +2514,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * invalid_url_website_incomplete_return_policy}, {@code
        * invalid_url_website_incomplete_terms_and_conditions}, {@code
        * invalid_url_website_incomplete_under_construction}, {@code invalid_url_website_other},
-       * {@code invalid_value_other}, {@code unsupported_business_type}, {@code
+       * {@code invalid_value_other}, {@code partner_disabled_dispute_rate}, {@code
+       * partner_disabled_responsibilities}, {@code partner_disabled_restricted_business}, {@code
+       * partner_disabled_suspected_fraud}, {@code unsupported_business_type}, {@code
        * verification_data_not_found}, {@code verification_directors_mismatch}, {@code
        * verification_document_address_mismatch}, {@code verification_document_address_missing},
        * {@code verification_document_corrupt}, {@code verification_document_country_not_supported},

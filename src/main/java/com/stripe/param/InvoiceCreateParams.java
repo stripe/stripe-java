@@ -5360,6 +5360,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("link")
       LINK("link"),
 
+      @SerializedName("mb_way")
+      MB_WAY("mb_way"),
+
       @SerializedName("momo")
       MOMO("momo"),
 

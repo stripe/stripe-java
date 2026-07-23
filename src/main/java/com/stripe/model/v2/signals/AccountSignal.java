@@ -61,7 +61,8 @@ public class AccountSignal extends StripeObject implements HasId {
   /**
    * The type of signal.
    *
-   * <p>One of {@code fraudulent_merchant}, or {@code merchant_delinquency}.
+   * <p>One of {@code fraudulent_merchant}, {@code merchant_delinquency}, or {@code
+   * payment_delinquency_exposure}.
    */
   @SerializedName("type")
   String type;
