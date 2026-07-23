@@ -1,5 +1,33 @@
 # Changelog
 
+## 33.2.0-alpha.5 - 2026-07-22
+* [#2253](https://github.com/stripe/stripe-java/pull/2253) Update generated code for private-preview
+  * Add support for new resources `billing.AlertNotification` and `crypto.DepositAddress`
+  * Add support for `create`, `list`, and `retrieve` methods on resource `crypto.DepositAddress`
+  * Add support for `list` method on resource `billing.AlertNotification`
+  * Add support for `vipps` on `ConfirmationToken.payment_method_preview`, `ConfirmationTokenCreateParams.payment_method_data`, `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, `PaymentMethodConfiguration`, `PaymentMethodCreateParams`, `PaymentMethod`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentCreateParams.payment_method_data`, and `SetupIntentUpdateParams.payment_method_data`
+  * Add support for new value `vipps` on enums `ConfirmationTokenCreateParams.payment_method_data.type`, `PaymentIntentConfirmParams.payment_method_data.type`, `PaymentIntentCreateParams.payment_method_data.type`, `PaymentIntentUpdateParams.payment_method_data.type`, `SetupIntentConfirmParams.payment_method_data.type`, `SetupIntentCreateParams.payment_method_data.type`, and `SetupIntentUpdateParams.payment_method_data.type`
+  * Add support for new value `sui` on enums `crypto.OnrampSessionCreateParams.destinationNetwork`, `crypto.OnrampSessionListParams.destinationNetwork`, and `crypto.OnrampTransactionLimitsRetrieveParams.destinationNetwork`
+  * Add support for new value `sui` on enum `crypto.OnrampSessionCreateParams.destinationNetworks`
+  * Add support for `sui` on `crypto.OnrampSession.transaction_details.wallet_addresses`
+  * Add support for new value `vipps` on enums `CustomerListPaymentMethodsParams.type`, `PaymentMethodCreateParams.type`, and `PaymentMethodListParams.type`
+  * Add support for `useStripeSdk` on `delegatedcheckout.RequestedSessionConfirmParams`
+  * Add support for new value `mb_way` on enums `InvoiceCreateParams.payment_settings.paymentMethodTypes`, `InvoiceUpdateParams.payment_settings.paymentMethodTypes`, `SubscriptionCreateParams.payment_settings.paymentMethodTypes`, and `SubscriptionUpdateParams.payment_settings.paymentMethodTypes`
+  * Add support for `evCharging` on `PaymentIntentAmountDetailsLineItem.payment_method_options.card`, `PaymentIntentCaptureParams.amount_details.line_items[].payment_method_options.card`, `PaymentIntentConfirmParams.amount_details.line_items[].payment_method_options.card`, `PaymentIntentCreateParams.amount_details.line_items[].payment_method_options.card`, `PaymentIntentDecrementAuthorizationParams.amount_details.line_items[].payment_method_options.card`, `PaymentIntentIncrementAuthorizationParams.amount_details.line_items[].payment_method_options.card`, and `PaymentIntentUpdateParams.amount_details.line_items[].payment_method_options.card`
+  * Add support for new values `ev_battery_exchanges`, `ev_charging_fee`, `evc_level_1`, `evc_level_2`, `evc_level_3`, `evc_level_4`, and `evc_level_5` on enums `PaymentIntentCaptureParams.amount_details.line_items[].payment_method_options.card.fleet_data.productType`, `PaymentIntentConfirmParams.amount_details.line_items[].payment_method_options.card.fleet_data.productType`, `PaymentIntentCreateParams.amount_details.line_items[].payment_method_options.card.fleet_data.productType`, `PaymentIntentDecrementAuthorizationParams.amount_details.line_items[].payment_method_options.card.fleet_data.productType`, `PaymentIntentIncrementAuthorizationParams.amount_details.line_items[].payment_method_options.card.fleet_data.productType`, and `PaymentIntentUpdateParams.amount_details.line_items[].payment_method_options.card.fleet_data.productType`
+  * Add support for new value `vipps` on enums `PaymentIntentConfirmParams.excludedPaymentMethodTypes`, `PaymentIntentCreateParams.excludedPaymentMethodTypes`, `PaymentIntentUpdateParams.excludedPaymentMethodTypes`, `SetupIntentCreateParams.excludedPaymentMethodTypes`, and `SetupIntentUpdateParams.excludedPaymentMethodTypes`
+  * Add support for `taxItems` on `PaymentIntent.payment_details.car_rental_data[].total.tax`, `PaymentIntent.payment_details.flight_data[].total.tax`, and `PaymentIntent.payment_details.lodging_data[].total.tax`
+  * ⚠️ Remove support for `taxes` on `PaymentIntent.payment_details.car_rental_data[].total.tax`, `PaymentIntent.payment_details.flight_data[].total.tax`, and `PaymentIntent.payment_details.lodging_data[].total.tax`
+  * Change `PaymentRecordCreateParams.closed` to be optional
+  * Change `PaymentRecordCreateParams.funded` to be optional
+  * Add support for `card` on `radar.PaymentEvaluationCreateParams.payment_details.payment_method_details`
+  * ⚠️ Remove support for `acssDebit`, `afterpayClearpay`, `alipay`, `alma`, `amazonPay`, `auBecsDebit`, `bacsDebit`, `bancontact`, `billie`, `bizum`, `blik`, `boleto`, `cardPresent`, `cashapp`, `crypto`, `customerBalance`, `eps`, `fpx`, `giftCard`, `giropay`, `gopay`, `grabpay`, `idBankTransfer`, `ideal`, `interacPresent`, `kakaoPay`, `konbini`, `krCard`, `mbWay`, `mobilepay`, `multibanco`, `naverPay`, `nzBankAccount`, `oxxo`, `p24`, `payByBank`, `payco`, `paynow`, `paypal`, `paypay`, `payto`, `pix`, `promptpay`, `qris`, `rechnung`, `revolutPay`, `samsungPay`, `satispay`, `scalapay`, `sepaDebit`, `shopeepay`, `sofort`, `stripeBalance`, `sunbit`, `swish`, `tamara`, `twint`, `upi`, `usBankAccount`, `wechatPay`, and `zip` on `sharedpayment.GrantedToken.payment_method_details`
+  * Add support for `spendCard` on `v2.core.Account.configuration.card_creator.capabilities.commercial.stripe`, `v2.core.AccountCreateParams.configuration.card_creator.capabilities.commercial.stripe`, and `v2.core.AccountUpdateParams.configuration.card_creator.capabilities.commercial.stripe`
+  * Add support for new value `payment_delinquency_exposure` on enum `v2.signals.AccountSignalListParams.type`
+  * Add support for new value `commercial.stripe.spend_card` on enum `EventsV2CoreAccountIncludingConfigurationCardCreatorCapabilityStatusUpdatedEvent.updatedCapability`
+
+* [#2250](https://github.com/stripe/stripe-java/pull/2250) Fix flakey testTelemetryEnabled test
+
 ## 33.2.0-alpha.4 - 2026-07-16
 * [#2247](https://github.com/stripe/stripe-java/pull/2247) Update generated code for private-preview
   * ⚠️ Remove support for resource `FrMealVouchersOnboarding`

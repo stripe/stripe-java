@@ -124,6 +124,7 @@ public final class EventDataClassLookup {
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);
 
     classLookup.put("billing.alert", com.stripe.model.billing.Alert.class);
+    classLookup.put("billing.alert_notification", com.stripe.model.billing.AlertNotification.class);
     classLookup.put("billing.alert_recovered", com.stripe.model.billing.AlertRecovered.class);
     classLookup.put("billing.alert_triggered", com.stripe.model.billing.AlertTriggered.class);
     classLookup.put(
@@ -162,6 +163,7 @@ public final class EventDataClassLookup {
 
     classLookup.put("crypto.consumer_wallet", com.stripe.model.crypto.CustomerConsumerWallet.class);
     classLookup.put("crypto.customer", com.stripe.model.crypto.Customer.class);
+    classLookup.put("crypto.deposit_address", com.stripe.model.crypto.DepositAddress.class);
     classLookup.put("crypto.onramp_session", com.stripe.model.crypto.OnrampSession.class);
     classLookup.put(
         "crypto.onramp_transaction_limits", com.stripe.model.crypto.OnrampTransactionLimits.class);

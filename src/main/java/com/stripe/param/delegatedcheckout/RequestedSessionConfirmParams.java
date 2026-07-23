@@ -54,6 +54,10 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
   @SerializedName("risk_details")
   RiskDetails riskDetails;
 
+  /** Set to true when using Stripe.js, iOS, or Android client-side SDKs to handle next actions. */
+  @SerializedName("use_stripe_sdk")
+  Boolean useStripeSdk;
+
   private RequestedSessionConfirmParams(
       AffiliateAttribution affiliateAttribution,
       BuyerConsents buyerConsents,
@@ -62,7 +66,8 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
       Object metadata,
       String paymentMethod,
       String returnUrl,
-      RiskDetails riskDetails) {
+      RiskDetails riskDetails,
+      Boolean useStripeSdk) {
     this.affiliateAttribution = affiliateAttribution;
     this.buyerConsents = buyerConsents;
     this.expand = expand;
@@ -71,6 +76,7 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
     this.paymentMethod = paymentMethod;
     this.returnUrl = returnUrl;
     this.riskDetails = riskDetails;
+    this.useStripeSdk = useStripeSdk;
   }
 
   public static Builder builder() {
@@ -94,6 +100,8 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
 
     private RiskDetails riskDetails;
 
+    private Boolean useStripeSdk;
+
     /** Finalize and obtain parameter instance from this builder. */
     public RequestedSessionConfirmParams build() {
       return new RequestedSessionConfirmParams(
@@ -104,7 +112,8 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
           this.metadata,
           this.paymentMethod,
           this.returnUrl,
-          this.riskDetails);
+          this.riskDetails,
+          this.useStripeSdk);
     }
 
     /** Affiliate attribution data associated with this requested session. */
@@ -230,6 +239,14 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
     /** Risk details/signals associated with the requested session. */
     public Builder setRiskDetails(RequestedSessionConfirmParams.RiskDetails riskDetails) {
       this.riskDetails = riskDetails;
+      return this;
+    }
+
+    /**
+     * Set to true when using Stripe.js, iOS, or Android client-side SDKs to handle next actions.
+     */
+    public Builder setUseStripeSdk(Boolean useStripeSdk) {
+      this.useStripeSdk = useStripeSdk;
       return this;
     }
   }

@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.crypto;
+package com.stripe.param.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -12,20 +12,25 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class OnrampSessionListParams extends ApiRequestParams {
-  /** Only return onramp sessions that were created during the given date interval. */
-  @SerializedName("created")
-  Object created;
+public class AlertNotificationListParams extends ApiRequestParams {
+  /** Filter results to only include triggered or recovered notifications. */
+  @SerializedName("action")
+  Action action;
 
-  /** The destination cryptocurrency to filter by. */
-  @SerializedName("destination_currency")
-  DestinationCurrency destinationCurrency;
+  /** Filter results to only include notifications for the given billing cadence. */
+  @SerializedName("cadence")
+  String cadence;
 
-  /** The destination blockchain network to filter by. */
-  @SerializedName("destination_network")
-  DestinationNetwork destinationNetwork;
+  /** <strong>Required.</strong> The customer to list notifications for. */
+  @SerializedName("customer")
+  String customer;
 
-  /** An object ID cursor for use in pagination. */
+  /**
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
+   */
   @SerializedName("ending_before")
   String endingBefore;
 
@@ -42,40 +47,57 @@ public class OnrampSessionListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** A limit ranging from 1 to 100 (defaults to 10). */
+  /**
+   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+   * default is 10.
+   */
   @SerializedName("limit")
   Long limit;
 
-  /** An object ID cursor for use in pagination. */
+  /** Filter results to only include notifications for the given meter. */
+  @SerializedName("meter")
+  String meter;
+
+  /** Filter results according to when the notification was sent. */
+  @SerializedName("notified_at")
+  Object notifiedAt;
+
+  /**
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
+   */
   @SerializedName("starting_after")
   String startingAfter;
 
-  /**
-   * The status of the Onramp Session. One of = {@code {initialized, rejected, requires_payment,
-   * fulfillment_processing, fulfillment_complete}}
-   */
-  @SerializedName("status")
-  Status status;
+  /** Filter results to only include notifications for the given subscription. */
+  @SerializedName("subscription")
+  String subscription;
 
-  private OnrampSessionListParams(
-      Object created,
-      DestinationCurrency destinationCurrency,
-      DestinationNetwork destinationNetwork,
+  private AlertNotificationListParams(
+      Action action,
+      String cadence,
+      String customer,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
+      String meter,
+      Object notifiedAt,
       String startingAfter,
-      Status status) {
-    this.created = created;
-    this.destinationCurrency = destinationCurrency;
-    this.destinationNetwork = destinationNetwork;
+      String subscription) {
+    this.action = action;
+    this.cadence = cadence;
+    this.customer = customer;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.meter = meter;
+    this.notifiedAt = notifiedAt;
     this.startingAfter = startingAfter;
-    this.status = status;
+    this.subscription = subscription;
   }
 
   public static Builder builder() {
@@ -83,11 +105,11 @@ public class OnrampSessionListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Object created;
+    private Action action;
 
-    private DestinationCurrency destinationCurrency;
+    private String cadence;
 
-    private DestinationNetwork destinationNetwork;
+    private String customer;
 
     private String endingBefore;
 
@@ -97,51 +119,54 @@ public class OnrampSessionListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private String meter;
+
+    private Object notifiedAt;
+
     private String startingAfter;
 
-    private Status status;
+    private String subscription;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public OnrampSessionListParams build() {
-      return new OnrampSessionListParams(
-          this.created,
-          this.destinationCurrency,
-          this.destinationNetwork,
+    public AlertNotificationListParams build() {
+      return new AlertNotificationListParams(
+          this.action,
+          this.cadence,
+          this.customer,
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
+          this.meter,
+          this.notifiedAt,
           this.startingAfter,
-          this.status);
+          this.subscription);
     }
 
-    /** Only return onramp sessions that were created during the given date interval. */
-    public Builder setCreated(OnrampSessionListParams.Created created) {
-      this.created = created;
+    /** Filter results to only include triggered or recovered notifications. */
+    public Builder setAction(AlertNotificationListParams.Action action) {
+      this.action = action;
       return this;
     }
 
-    /** Only return onramp sessions that were created during the given date interval. */
-    public Builder setCreated(Long created) {
-      this.created = created;
+    /** Filter results to only include notifications for the given billing cadence. */
+    public Builder setCadence(String cadence) {
+      this.cadence = cadence;
       return this;
     }
 
-    /** The destination cryptocurrency to filter by. */
-    public Builder setDestinationCurrency(
-        OnrampSessionListParams.DestinationCurrency destinationCurrency) {
-      this.destinationCurrency = destinationCurrency;
+    /** <strong>Required.</strong> The customer to list notifications for. */
+    public Builder setCustomer(String customer) {
+      this.customer = customer;
       return this;
     }
 
-    /** The destination blockchain network to filter by. */
-    public Builder setDestinationNetwork(
-        OnrampSessionListParams.DestinationNetwork destinationNetwork) {
-      this.destinationNetwork = destinationNetwork;
-      return this;
-    }
-
-    /** An object ID cursor for use in pagination. */
+    /**
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
+     */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
       return this;
@@ -150,7 +175,7 @@ public class OnrampSessionListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * OnrampSessionListParams#expand} for the field documentation.
+     * AlertNotificationListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -163,7 +188,7 @@ public class OnrampSessionListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * OnrampSessionListParams#expand} for the field documentation.
+     * AlertNotificationListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -176,7 +201,7 @@ public class OnrampSessionListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * OnrampSessionListParams#extraParams} for the field documentation.
+     * AlertNotificationListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -189,7 +214,7 @@ public class OnrampSessionListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link OnrampSessionListParams#extraParams} for the field documentation.
+     * See {@link AlertNotificationListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -199,31 +224,54 @@ public class OnrampSessionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** A limit ranging from 1 to 100 (defaults to 10). */
+    /**
+     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+     * default is 10.
+     */
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }
 
-    /** An object ID cursor for use in pagination. */
+    /** Filter results to only include notifications for the given meter. */
+    public Builder setMeter(String meter) {
+      this.meter = meter;
+      return this;
+    }
+
+    /** Filter results according to when the notification was sent. */
+    public Builder setNotifiedAt(AlertNotificationListParams.NotifiedAt notifiedAt) {
+      this.notifiedAt = notifiedAt;
+      return this;
+    }
+
+    /** Filter results according to when the notification was sent. */
+    public Builder setNotifiedAt(Long notifiedAt) {
+      this.notifiedAt = notifiedAt;
+      return this;
+    }
+
+    /**
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
+     */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
       return this;
     }
 
-    /**
-     * The status of the Onramp Session. One of = {@code {initialized, rejected, requires_payment,
-     * fulfillment_processing, fulfillment_complete}}
-     */
-    public Builder setStatus(OnrampSessionListParams.Status status) {
-      this.status = status;
+    /** Filter results to only include notifications for the given subscription. */
+    public Builder setSubscription(String subscription) {
+      this.subscription = subscription;
       return this;
     }
   }
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class Created {
+  public static class NotifiedAt {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -249,7 +297,7 @@ public class OnrampSessionListParams extends ApiRequestParams {
     @SerializedName("lte")
     Long lte;
 
-    private Created(Map<String, Object> extraParams, Long gt, Long gte, Long lt, Long lte) {
+    private NotifiedAt(Map<String, Object> extraParams, Long gt, Long gte, Long lt, Long lte) {
       this.extraParams = extraParams;
       this.gt = gt;
       this.gte = gte;
@@ -273,15 +321,15 @@ public class OnrampSessionListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public OnrampSessionListParams.Created build() {
-        return new OnrampSessionListParams.Created(
+      public AlertNotificationListParams.NotifiedAt build() {
+        return new AlertNotificationListParams.NotifiedAt(
             this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * OnrampSessionListParams.Created#extraParams} for the field documentation.
+       * AlertNotificationListParams.NotifiedAt#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -294,7 +342,7 @@ public class OnrampSessionListParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link OnrampSessionListParams.Created#extraParams} for the field documentation.
+       * See {@link AlertNotificationListParams.NotifiedAt#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -330,98 +378,17 @@ public class OnrampSessionListParams extends ApiRequestParams {
     }
   }
 
-  public enum DestinationCurrency implements ApiRequestParams.EnumParam {
-    @SerializedName("avax")
-    AVAX("avax"),
+  public enum Action implements ApiRequestParams.EnumParam {
+    @SerializedName("recovered")
+    RECOVERED("recovered"),
 
-    @SerializedName("btc")
-    BTC("btc"),
-
-    @SerializedName("eth")
-    ETH("eth"),
-
-    @SerializedName("matic")
-    MATIC("matic"),
-
-    @SerializedName("sol")
-    SOL("sol"),
-
-    @SerializedName("usdc")
-    USDC("usdc"),
-
-    @SerializedName("wld")
-    WLD("wld"),
-
-    @SerializedName("xlm")
-    XLM("xlm");
+    @SerializedName("triggered")
+    TRIGGERED("triggered");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
 
-    DestinationCurrency(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum DestinationNetwork implements ApiRequestParams.EnumParam {
-    @SerializedName("avalanche")
-    AVALANCHE("avalanche"),
-
-    @SerializedName("base")
-    BASE("base"),
-
-    @SerializedName("bitcoin")
-    BITCOIN("bitcoin"),
-
-    @SerializedName("ethereum")
-    ETHEREUM("ethereum"),
-
-    @SerializedName("optimism")
-    OPTIMISM("optimism"),
-
-    @SerializedName("polygon")
-    POLYGON("polygon"),
-
-    @SerializedName("solana")
-    SOLANA("solana"),
-
-    @SerializedName("stellar")
-    STELLAR("stellar"),
-
-    @SerializedName("sui")
-    SUI("sui"),
-
-    @SerializedName("worldchain")
-    WORLDCHAIN("worldchain");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    DestinationNetwork(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum Status implements ApiRequestParams.EnumParam {
-    @SerializedName("fulfillment_complete")
-    FULFILLMENT_COMPLETE("fulfillment_complete"),
-
-    @SerializedName("fulfillment_processing")
-    FULFILLMENT_PROCESSING("fulfillment_processing"),
-
-    @SerializedName("initialized")
-    INITIALIZED("initialized"),
-
-    @SerializedName("rejected")
-    REJECTED("rejected"),
-
-    @SerializedName("requires_payment")
-    REQUIRES_PAYMENT("requires_payment");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Status(String value) {
+    Action(String value) {
       this.value = value;
     }
   }

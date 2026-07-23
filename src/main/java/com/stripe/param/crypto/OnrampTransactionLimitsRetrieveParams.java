@@ -194,6 +194,9 @@ public class OnrampTransactionLimitsRetrieveParams extends ApiRequestParams {
     @SerializedName("stellar")
     STELLAR("stellar"),
 
+    @SerializedName("sui")
+    SUI("sui"),
+
     @SerializedName("worldchain")
     WORLDCHAIN("worldchain");
 

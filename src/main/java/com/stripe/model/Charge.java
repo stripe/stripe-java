@@ -1623,9 +1623,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @EqualsAndHashCode(callSuper = false)
         public static class Card extends StripeObject {
           /**
-           * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
-           * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
-           * unionpay}, {@code visa} or {@code unknown}.
+           * Card brand. Can be {@code American Express}, {@code Cartes Bancaires}, {@code Diners
+           * Club}, {@code Discover}, {@code Eftpos Australia}, {@code Girocard}, {@code JCB},
+           * {@code MasterCard}, {@code UnionPay}, {@code Visa}, or {@code Unknown}.
            */
           @SerializedName("brand")
           String brand;
@@ -2401,8 +2401,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         /**
          * Indicates the outcome of 3D Secure authentication.
          *
-         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code exempted}, {@code
-         * failed}, {@code not_supported}, or {@code processing_error}.
+         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code data_share_only},
+         * {@code exempted}, {@code failed}, {@code not_supported}, or {@code processing_error}.
          */
         @SerializedName("result")
         String result;
@@ -4201,9 +4201,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @EqualsAndHashCode(callSuper = false)
         public static class Card extends StripeObject {
           /**
-           * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
-           * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
-           * unionpay}, {@code visa} or {@code unknown}.
+           * Card brand. Can be {@code American Express}, {@code Cartes Bancaires}, {@code Diners
+           * Club}, {@code Discover}, {@code Eftpos Australia}, {@code Girocard}, {@code JCB},
+           * {@code MasterCard}, {@code UnionPay}, {@code Visa}, or {@code Unknown}.
            */
           @SerializedName("brand")
           String brand;

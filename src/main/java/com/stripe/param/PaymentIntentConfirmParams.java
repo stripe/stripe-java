@@ -141,10 +141,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   PaymentMethodOptions paymentMethodOptions;
 
   /**
-   * The list of payment method types (for example, a card) that this PaymentIntent can use. Use
-   * {@code automatic_payment_methods} to manage payment methods from the <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>. A list of
-   * valid payment method types can be found <a
+   * The list of payment method types (for example, a card) that this PaymentIntent can use. If you
+   * don't provide this, Stripe will dynamically show relevant payment methods from your <a
+   * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>. A
+   * list of valid payment method types can be found <a
    * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-type">here</a>.
    */
   @SerializedName("payment_method_types")
@@ -1565,6 +1565,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           @SerializedName("commodity_code")
           String commodityCode;
 
+          /** EV charging data for this line item. */
+          @SerializedName("ev_charging")
+          EvCharging evCharging;
+
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1579,8 +1583,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           @SerializedName("fleet_data")
           FleetData fleetData;
 
-          private Card(String commodityCode, Map<String, Object> extraParams, FleetData fleetData) {
+          private Card(
+              String commodityCode,
+              EvCharging evCharging,
+              Map<String, Object> extraParams,
+              FleetData fleetData) {
             this.commodityCode = commodityCode;
+            this.evCharging = evCharging;
             this.extraParams = extraParams;
             this.fleetData = fleetData;
           }
@@ -1592,6 +1601,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           public static class Builder {
             private String commodityCode;
 
+            private EvCharging evCharging;
+
             private Map<String, Object> extraParams;
 
             private FleetData fleetData;
@@ -1600,7 +1611,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             public PaymentIntentConfirmParams.AmountDetails.LineItem.PaymentMethodOptions.Card
                 build() {
               return new PaymentIntentConfirmParams.AmountDetails.LineItem.PaymentMethodOptions
-                  .Card(this.commodityCode, this.extraParams, this.fleetData);
+                  .Card(this.commodityCode, this.evCharging, this.extraParams, this.fleetData);
             }
 
             /**
@@ -1609,6 +1620,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
              */
             public Builder setCommodityCode(String commodityCode) {
               this.commodityCode = commodityCode;
+              return this;
+            }
+
+            /** EV charging data for this line item. */
+            public Builder setEvCharging(
+                PaymentIntentConfirmParams.AmountDetails.LineItem.PaymentMethodOptions.Card
+                        .EvCharging
+                    evCharging) {
+              this.evCharging = evCharging;
               return this;
             }
 
@@ -1649,6 +1669,268 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
                     fleetData) {
               this.fleetData = fleetData;
               return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class EvCharging {
+            /** The carbon footprint avoided by the charging session, in grams of CO2. */
+            @SerializedName("carbon_footprint_avoided_grams_co2")
+            Long carbonFootprintAvoidedGramsCo2;
+
+            /**
+             * <strong>Required.</strong> The time the charging session ended, measured in seconds
+             * since the Unix epoch.
+             */
+            @SerializedName("charging_ended_at")
+            Long chargingEndedAt;
+
+            /**
+             * <strong>Required.</strong> The power output capacity of the charging station, in
+             * kilowatts (kW).
+             */
+            @SerializedName("charging_power_output_capacity_kw")
+            Long chargingPowerOutputCapacityKw;
+
+            /**
+             * <strong>Required.</strong> The time the charging session started, measured in seconds
+             * since the Unix epoch.
+             */
+            @SerializedName("charging_started_at")
+            Long chargingStartedAt;
+
+            /** <strong>Required.</strong> The type of connector used for the charging session. */
+            @SerializedName("connector_type")
+            ConnectorType connectorType;
+
+            /**
+             * The estimated distance in kilometers or miles added to the vehicle during the
+             * charging session.
+             */
+            @SerializedName("estimated_range_added")
+            Long estimatedRangeAdded;
+
+            /**
+             * The estimated distance in kilometers or miles remaining in the vehicle after the
+             * charging session.
+             */
+            @SerializedName("estimated_range_left")
+            Long estimatedRangeLeft;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> The maximum power dispensed during the charging session,
+             * in kilowatts (kW).
+             */
+            @SerializedName("maximum_power_dispensed_kw")
+            Long maximumPowerDispensedKw;
+
+            private EvCharging(
+                Long carbonFootprintAvoidedGramsCo2,
+                Long chargingEndedAt,
+                Long chargingPowerOutputCapacityKw,
+                Long chargingStartedAt,
+                ConnectorType connectorType,
+                Long estimatedRangeAdded,
+                Long estimatedRangeLeft,
+                Map<String, Object> extraParams,
+                Long maximumPowerDispensedKw) {
+              this.carbonFootprintAvoidedGramsCo2 = carbonFootprintAvoidedGramsCo2;
+              this.chargingEndedAt = chargingEndedAt;
+              this.chargingPowerOutputCapacityKw = chargingPowerOutputCapacityKw;
+              this.chargingStartedAt = chargingStartedAt;
+              this.connectorType = connectorType;
+              this.estimatedRangeAdded = estimatedRangeAdded;
+              this.estimatedRangeLeft = estimatedRangeLeft;
+              this.extraParams = extraParams;
+              this.maximumPowerDispensedKw = maximumPowerDispensedKw;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Long carbonFootprintAvoidedGramsCo2;
+
+              private Long chargingEndedAt;
+
+              private Long chargingPowerOutputCapacityKw;
+
+              private Long chargingStartedAt;
+
+              private ConnectorType connectorType;
+
+              private Long estimatedRangeAdded;
+
+              private Long estimatedRangeLeft;
+
+              private Map<String, Object> extraParams;
+
+              private Long maximumPowerDispensedKw;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public PaymentIntentConfirmParams.AmountDetails.LineItem.PaymentMethodOptions.Card
+                      .EvCharging
+                  build() {
+                return new PaymentIntentConfirmParams.AmountDetails.LineItem.PaymentMethodOptions
+                    .Card.EvCharging(
+                    this.carbonFootprintAvoidedGramsCo2,
+                    this.chargingEndedAt,
+                    this.chargingPowerOutputCapacityKw,
+                    this.chargingStartedAt,
+                    this.connectorType,
+                    this.estimatedRangeAdded,
+                    this.estimatedRangeLeft,
+                    this.extraParams,
+                    this.maximumPowerDispensedKw);
+              }
+
+              /** The carbon footprint avoided by the charging session, in grams of CO2. */
+              public Builder setCarbonFootprintAvoidedGramsCo2(
+                  Long carbonFootprintAvoidedGramsCo2) {
+                this.carbonFootprintAvoidedGramsCo2 = carbonFootprintAvoidedGramsCo2;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The time the charging session ended, measured in seconds
+               * since the Unix epoch.
+               */
+              public Builder setChargingEndedAt(Long chargingEndedAt) {
+                this.chargingEndedAt = chargingEndedAt;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The power output capacity of the charging station, in
+               * kilowatts (kW).
+               */
+              public Builder setChargingPowerOutputCapacityKw(Long chargingPowerOutputCapacityKw) {
+                this.chargingPowerOutputCapacityKw = chargingPowerOutputCapacityKw;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The time the charging session started, measured in
+               * seconds since the Unix epoch.
+               */
+              public Builder setChargingStartedAt(Long chargingStartedAt) {
+                this.chargingStartedAt = chargingStartedAt;
+                return this;
+              }
+
+              /** <strong>Required.</strong> The type of connector used for the charging session. */
+              public Builder setConnectorType(
+                  PaymentIntentConfirmParams.AmountDetails.LineItem.PaymentMethodOptions.Card
+                          .EvCharging.ConnectorType
+                      connectorType) {
+                this.connectorType = connectorType;
+                return this;
+              }
+
+              /**
+               * The estimated distance in kilometers or miles added to the vehicle during the
+               * charging session.
+               */
+              public Builder setEstimatedRangeAdded(Long estimatedRangeAdded) {
+                this.estimatedRangeAdded = estimatedRangeAdded;
+                return this;
+              }
+
+              /**
+               * The estimated distance in kilometers or miles remaining in the vehicle after the
+               * charging session.
+               */
+              public Builder setEstimatedRangeLeft(Long estimatedRangeLeft) {
+                this.estimatedRangeLeft = estimatedRangeLeft;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentConfirmParams.AmountDetails.LineItem.PaymentMethodOptions.Card.EvCharging#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentConfirmParams.AmountDetails.LineItem.PaymentMethodOptions.Card.EvCharging#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The maximum power dispensed during the charging session,
+               * in kilowatts (kW).
+               */
+              public Builder setMaximumPowerDispensedKw(Long maximumPowerDispensedKw) {
+                this.maximumPowerDispensedKw = maximumPowerDispensedKw;
+                return this;
+              }
+            }
+
+            public enum ConnectorType implements ApiRequestParams.EnumParam {
+              @SerializedName("ac_gb_t")
+              AC_GB_T("ac_gb_t"),
+
+              @SerializedName("ac_j1772")
+              AC_J1772("ac_j1772"),
+
+              @SerializedName("ac_mennekes")
+              AC_MENNEKES("ac_mennekes"),
+
+              @SerializedName("dc_ccs1")
+              DC_CCS1("dc_ccs1"),
+
+              @SerializedName("dc_ccs2")
+              DC_CCS2("dc_ccs2"),
+
+              @SerializedName("dc_chademo")
+              DC_CHADEMO("dc_chademo"),
+
+              @SerializedName("dc_gb_t")
+              DC_GB_T("dc_gb_t"),
+
+              @SerializedName("dc_mcs")
+              DC_MCS("dc_mcs"),
+
+              @SerializedName("nacs")
+              NACS("nacs");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              ConnectorType(String value) {
+                this.value = value;
+              }
             }
           }
 
@@ -1771,6 +2053,27 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
               @SerializedName("deli")
               DELI("deli"),
+
+              @SerializedName("ev_battery_exchanges")
+              EV_BATTERY_EXCHANGES("ev_battery_exchanges"),
+
+              @SerializedName("ev_charging_fee")
+              EV_CHARGING_FEE("ev_charging_fee"),
+
+              @SerializedName("evc_level_1")
+              EVC_LEVEL_1("evc_level_1"),
+
+              @SerializedName("evc_level_2")
+              EVC_LEVEL_2("evc_level_2"),
+
+              @SerializedName("evc_level_3")
+              EVC_LEVEL_3("evc_level_3"),
+
+              @SerializedName("evc_level_4")
+              EVC_LEVEL_4("evc_level_4"),
+
+              @SerializedName("evc_level_5")
+              EVC_LEVEL_5("evc_level_5"),
 
               @SerializedName("food_service")
               FOOD_SERVICE("food_service"),
@@ -16857,6 +17160,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     UsBankAccount usBankAccount;
 
     /**
+     * If this is a {@code vipps} PaymentMethod, this hash contains details about the Vipps payment
+     * method.
+     */
+    @SerializedName("vipps")
+    Vipps vipps;
+
+    /**
      * If this is an {@code wechat_pay} PaymentMethod, this hash contains details about the
      * wechat_pay payment method.
      */
@@ -16939,6 +17249,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Type type,
         Upi upi,
         UsBankAccount usBankAccount,
+        Vipps vipps,
         WechatPay wechatPay,
         Zip zip) {
       this.acssDebit = acssDebit;
@@ -17009,6 +17320,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.type = type;
       this.upi = upi;
       this.usBankAccount = usBankAccount;
+      this.vipps = vipps;
       this.wechatPay = wechatPay;
       this.zip = zip;
     }
@@ -17154,6 +17466,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private UsBankAccount usBankAccount;
 
+      private Vipps vipps;
+
       private WechatPay wechatPay;
 
       private Zip zip;
@@ -17229,6 +17543,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.type,
             this.upi,
             this.usBankAccount,
+            this.vipps,
             this.wechatPay,
             this.zip);
       }
@@ -17897,6 +18212,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       public Builder setUsBankAccount(
           PaymentIntentConfirmParams.PaymentMethodData.UsBankAccount usBankAccount) {
         this.usBankAccount = usBankAccount;
+        return this;
+      }
+
+      /**
+       * If this is a {@code vipps} PaymentMethod, this hash contains details about the Vipps
+       * payment method.
+       */
+      public Builder setVipps(PaymentIntentConfirmParams.PaymentMethodData.Vipps vipps) {
+        this.vipps = vipps;
         return this;
       }
 
@@ -23203,6 +23527,64 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Vipps {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Vipps(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodData.Vipps build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Vipps(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Vipps#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Vipps#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class WechatPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -23515,6 +23897,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       @SerializedName("us_bank_account")
       US_BANK_ACCOUNT("us_bank_account"),
+
+      @SerializedName("vipps")
+      VIPPS("vipps"),
 
       @SerializedName("wechat_pay")
       WECHAT_PAY("wechat_pay"),
@@ -23975,6 +24360,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Object usBankAccount;
 
     /**
+     * If this is a {@code Vipps} PaymentMethod, this sub-hash contains details about the Vipps
+     * payment method options.
+     */
+    @SerializedName("vipps")
+    Object vipps;
+
+    /**
      * If this is a {@code wechat_pay} PaymentMethod, this sub-hash contains details about the
      * WeChat Pay payment method options.
      */
@@ -24052,6 +24444,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Object twint,
         Object upi,
         Object usBankAccount,
+        Object vipps,
         Object wechatPay,
         Object zip) {
       this.acssDebit = acssDebit;
@@ -24117,6 +24510,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.twint = twint;
       this.upi = upi;
       this.usBankAccount = usBankAccount;
+      this.vipps = vipps;
       this.wechatPay = wechatPay;
       this.zip = zip;
     }
@@ -24252,6 +24646,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Object usBankAccount;
 
+      private Object vipps;
+
       private Object wechatPay;
 
       private Object zip;
@@ -24322,6 +24718,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.twint,
             this.upi,
             this.usBankAccount,
+            this.vipps,
             this.wechatPay,
             this.zip);
       }
@@ -25487,6 +25884,24 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setUsBankAccount(EmptyParam usBankAccount) {
         this.usBankAccount = usBankAccount;
+        return this;
+      }
+
+      /**
+       * If this is a {@code Vipps} PaymentMethod, this sub-hash contains details about the Vipps
+       * payment method options.
+       */
+      public Builder setVipps(PaymentIntentConfirmParams.PaymentMethodOptions.Vipps vipps) {
+        this.vipps = vipps;
+        return this;
+      }
+
+      /**
+       * If this is a {@code Vipps} PaymentMethod, this sub-hash contains details about the Vipps
+       * payment method options.
+       */
+      public Builder setVipps(EmptyParam vipps) {
+        this.vipps = vipps;
         return this;
       }
 
@@ -49732,6 +50147,479 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Vipps {
+      /**
+       * Controls when the funds are captured from the customer's account.
+       *
+       * <p>If provided, this parameter overrides the behavior of the top-level <a
+       * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+       * for this payment method type when finalizing the payment with this payment method type.
+       *
+       * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty value
+       * for this parameter unsets the stored value for this payment method type.
+       */
+      @SerializedName("capture_method")
+      ApiRequestParams.EnumParam captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Payment details for payment method specific funding transaction fields. */
+      @SerializedName("payment_details")
+      PaymentDetails paymentDetails;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If you've already set {@code setup_future_usage} and you're performing a request using a
+       * publishable key, you can only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Vipps(
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          PaymentDetails paymentDetails,
+          SetupFutureUsage setupFutureUsage) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+        this.paymentDetails = paymentDetails;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private ApiRequestParams.EnumParam captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        private PaymentDetails paymentDetails;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Vipps build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Vipps(
+              this.captureMethod, this.extraParams, this.paymentDetails, this.setupFutureUsage);
+        }
+
+        /**
+         * Controls when the funds are captured from the customer's account.
+         *
+         * <p>If provided, this parameter overrides the behavior of the top-level <a
+         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+         * for this payment method type when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter unsets the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Controls when the funds are captured from the customer's account.
+         *
+         * <p>If provided, this parameter overrides the behavior of the top-level <a
+         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+         * for this payment method type when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter unsets the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(EmptyParam captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Vipps#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Vipps#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Payment details for payment method specific funding transaction fields. */
+        public Builder setPaymentDetails(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails paymentDetails) {
+          this.paymentDetails = paymentDetails;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If you've already set {@code setup_future_usage} and you're performing a request using
+         * a publishable key, you can only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PaymentDetails {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Money services details for payment method specific funding fields. */
+        @SerializedName("money_services")
+        MoneyServices moneyServices;
+
+        private PaymentDetails(Map<String, Object> extraParams, MoneyServices moneyServices) {
+          this.extraParams = extraParams;
+          this.moneyServices = moneyServices;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private MoneyServices moneyServices;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails(
+                this.extraParams, this.moneyServices);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Money services details for payment method specific funding fields. */
+          public Builder setMoneyServices(
+              PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails.MoneyServices
+                  moneyServices) {
+            this.moneyServices = moneyServices;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MoneyServices {
+          /** Payment method specific account funding transaction details. */
+          @SerializedName("account_funding")
+          AccountFunding accountFunding;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private MoneyServices(AccountFunding accountFunding, Map<String, Object> extraParams) {
+            this.accountFunding = accountFunding;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private AccountFunding accountFunding;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails
+                    .MoneyServices
+                build() {
+              return new PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails
+                  .MoneyServices(this.accountFunding, this.extraParams);
+            }
+
+            /** Payment method specific account funding transaction details. */
+            public Builder setAccountFunding(
+                PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails.MoneyServices
+                        .AccountFunding
+                    accountFunding) {
+              this.accountFunding = accountFunding;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails.MoneyServices#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails.MoneyServices#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class AccountFunding {
+            /**
+             * The category of digital asset being acquired through this account funding
+             * transaction.
+             */
+            @SerializedName("digital_asset_category")
+            DigitalAssetCategory digitalAssetCategory;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            private AccountFunding(
+                DigitalAssetCategory digitalAssetCategory, Map<String, Object> extraParams) {
+              this.digitalAssetCategory = digitalAssetCategory;
+              this.extraParams = extraParams;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private DigitalAssetCategory digitalAssetCategory;
+
+              private Map<String, Object> extraParams;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails
+                      .MoneyServices.AccountFunding
+                  build() {
+                return new PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails
+                    .MoneyServices.AccountFunding(this.digitalAssetCategory, this.extraParams);
+              }
+
+              /**
+               * The category of digital asset being acquired through this account funding
+               * transaction.
+               */
+              public Builder setDigitalAssetCategory(
+                  PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails.MoneyServices
+                          .AccountFunding.DigitalAssetCategory
+                      digitalAssetCategory) {
+                this.digitalAssetCategory = digitalAssetCategory;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails.MoneyServices.AccountFunding#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentConfirmParams.PaymentMethodOptions.Vipps.PaymentDetails.MoneyServices.AccountFunding#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+            }
+
+            public enum DigitalAssetCategory implements ApiRequestParams.EnumParam {
+              @SerializedName("blockchain_native")
+              BLOCKCHAIN_NATIVE("blockchain_native"),
+
+              @SerializedName("nft")
+              NFT("nft"),
+
+              @SerializedName("other_non_fiat")
+              OTHER_NON_FIAT("other_non_fiat"),
+
+              @SerializedName("stablecoin")
+              STABLECOIN("stablecoin");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              DigitalAssetCategory(String value) {
+                this.value = value;
+              }
+            }
+          }
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class WechatPay {
       /**
        * The app ID registered with WeChat Pay. Only required when client is ios, android, or
@@ -50944,6 +51832,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account"),
+
+    @SerializedName("vipps")
+    VIPPS("vipps"),
 
     @SerializedName("wechat_pay")
     WECHAT_PAY("wechat_pay"),

@@ -414,7 +414,8 @@ public class OnrampSession extends ApiResource implements HasId {
      * destination_networks} is set, it must be a value in that array.
      *
      * <p>One of {@code avalanche}, {@code base}, {@code bitcoin}, {@code ethereum}, {@code
-     * optimism}, {@code polygon}, {@code solana}, {@code stellar}, or {@code worldchain}.
+     * optimism}, {@code polygon}, {@code solana}, {@code stellar}, {@code sui}, or {@code
+     * worldchain}.
      */
     @SerializedName("destination_network")
     String destinationNetwork;
@@ -538,6 +539,10 @@ public class OnrampSession extends ApiResource implements HasId {
       /** A stellar address. */
       @SerializedName("stellar")
       String stellar;
+
+      /** A Sui address. */
+      @SerializedName("sui")
+      String sui;
 
       /** A worldchain address. */
       @SerializedName("worldchain")

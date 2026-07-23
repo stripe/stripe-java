@@ -787,6 +787,9 @@ public class OnrampSessionCreateParams extends ApiRequestParams {
     @SerializedName("stellar")
     STELLAR("stellar"),
 
+    @SerializedName("sui")
+    SUI("sui"),
+
     @SerializedName("worldchain")
     WORLDCHAIN("worldchain");
 

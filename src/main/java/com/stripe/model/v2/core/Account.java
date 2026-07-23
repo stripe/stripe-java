@@ -992,6 +992,10 @@ public class Account extends StripeObject implements HasId {
             @SerializedName("prepaid_card")
             PrepaidCard prepaidCard;
 
+            /** Can create commercial issuing spend cards with Stripe as BIN sponsor. */
+            @SerializedName("spend_card")
+            SpendCard spendCard;
+
             /** Can create commercial issuing charge cards with Stripe as BIN sponsor. */
             @Getter
             @Setter
@@ -1119,6 +1123,105 @@ public class Account extends StripeObject implements HasId {
               @SerializedName("status_details")
               List<
                       Account.Configuration.CardCreator.Capabilities.Commercial.Stripe.PrepaidCard
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections extends StripeObject {
+                /** Protection details for PSP migration. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                /** Protection details for PSP migration. */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration extends StripeObject {
+                  /** The time until which the protection will expire, as a Unix timestamp. */
+                  @SerializedName("expires_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long expiresAt;
+
+                  /** The time at which the protection was requested, as a Unix timestamp. */
+                  @SerializedName("requested_at")
+                  @JsonAdapter(StringInt64TypeAdapter.class)
+                  Long requestedAt;
+
+                  /**
+                   * The current status of the protection.
+                   *
+                   * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code
+                   * inactive}.
+                   */
+                  @SerializedName("status")
+                  String status;
+                }
+              }
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can create commercial issuing spend cards with Stripe as BIN sponsor. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class SpendCard extends StripeObject {
+              /**
+               * Protections applied to this capability, keyed by protection type (e.g.
+               * &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details about the capability's status. This value is empty when {@code
+               * status} is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.CardCreator.Capabilities.Commercial.Stripe.SpendCard
                           .StatusDetail>
                   statusDetails;
 
@@ -12428,15 +12531,15 @@ public class Account extends StripeObject implements HasId {
            * commercial.cross_river_bank.prepaid_card}, {@code
            * commercial.cross_river_bank.spend_card}, {@code commercial.fifth_third.charge_card},
            * {@code commercial.lead.prepaid_card}, {@code commercial.stripe.charge_card}, {@code
-           * commercial.stripe.prepaid_card}, {@code consumer.celtic.revolving_credit_card}, {@code
-           * consumer.cross_river_bank.prepaid_card}, {@code consumer.holds_currencies.usd}, {@code
-           * consumer.lead.debit_card}, {@code consumer.lead.prepaid_card}, {@code
-           * consumer_storage.inbound.usd}, {@code consumer_storage.outbound.usd}, {@code
-           * crypto_wallets}, {@code eps_payments}, {@code financial_addresses.bank_accounts},
-           * {@code fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments},
-           * {@code holds_currencies.eur}, {@code holds_currencies.gbp}, {@code
-           * holds_currencies.usd}, {@code ideal_payments}, {@code
-           * inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
+           * commercial.stripe.prepaid_card}, {@code commercial.stripe.spend_card}, {@code
+           * consumer.celtic.revolving_credit_card}, {@code consumer.cross_river_bank.prepaid_card},
+           * {@code consumer.holds_currencies.usd}, {@code consumer.lead.debit_card}, {@code
+           * consumer.lead.prepaid_card}, {@code consumer_storage.inbound.usd}, {@code
+           * consumer_storage.outbound.usd}, {@code crypto_wallets}, {@code eps_payments}, {@code
+           * financial_addresses.bank_accounts}, {@code fpx_payments}, {@code
+           * gb_bank_transfer_payments}, {@code grabpay_payments}, {@code holds_currencies.eur},
+           * {@code holds_currencies.gbp}, {@code holds_currencies.usd}, {@code ideal_payments},
+           * {@code inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
            * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
            * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
            * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},
@@ -16396,15 +16499,15 @@ public class Account extends StripeObject implements HasId {
            * commercial.cross_river_bank.prepaid_card}, {@code
            * commercial.cross_river_bank.spend_card}, {@code commercial.fifth_third.charge_card},
            * {@code commercial.lead.prepaid_card}, {@code commercial.stripe.charge_card}, {@code
-           * commercial.stripe.prepaid_card}, {@code consumer.celtic.revolving_credit_card}, {@code
-           * consumer.cross_river_bank.prepaid_card}, {@code consumer.holds_currencies.usd}, {@code
-           * consumer.lead.debit_card}, {@code consumer.lead.prepaid_card}, {@code
-           * consumer_storage.inbound.usd}, {@code consumer_storage.outbound.usd}, {@code
-           * crypto_wallets}, {@code eps_payments}, {@code financial_addresses.bank_accounts},
-           * {@code fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments},
-           * {@code holds_currencies.eur}, {@code holds_currencies.gbp}, {@code
-           * holds_currencies.usd}, {@code ideal_payments}, {@code
-           * inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
+           * commercial.stripe.prepaid_card}, {@code commercial.stripe.spend_card}, {@code
+           * consumer.celtic.revolving_credit_card}, {@code consumer.cross_river_bank.prepaid_card},
+           * {@code consumer.holds_currencies.usd}, {@code consumer.lead.debit_card}, {@code
+           * consumer.lead.prepaid_card}, {@code consumer_storage.inbound.usd}, {@code
+           * consumer_storage.outbound.usd}, {@code crypto_wallets}, {@code eps_payments}, {@code
+           * financial_addresses.bank_accounts}, {@code fpx_payments}, {@code
+           * gb_bank_transfer_payments}, {@code grabpay_payments}, {@code holds_currencies.eur},
+           * {@code holds_currencies.gbp}, {@code holds_currencies.usd}, {@code ideal_payments},
+           * {@code inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
            * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
            * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
            * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},

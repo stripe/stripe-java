@@ -4307,17 +4307,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           Boolean taxExemptIndicator;
 
           /** Tax details. */
-          @SerializedName("taxes")
-          List<PaymentIntent.PaymentDetails.CarRentalDatum.Total.Tax.InnerTax> taxes;
+          @SerializedName("tax_items")
+          List<PaymentIntent.PaymentDetails.CarRentalDatum.Total.Tax.TaxItem> taxItems;
 
           /**
-           * For more details about InnerTax, please refer to the <a
+           * For more details about TaxItem, please refer to the <a
            * href="https://docs.stripe.com/api">API Reference.</a>
            */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class InnerTax extends StripeObject {
+          public static class TaxItem extends StripeObject {
             /** Tax amount. */
             @SerializedName("amount")
             Long amount;
@@ -4875,17 +4875,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @EqualsAndHashCode(callSuper = false)
         public static class Tax extends StripeObject {
           /** Tax details. */
-          @SerializedName("taxes")
-          List<PaymentIntent.PaymentDetails.FlightDatum.Total.Tax.InnerTax> taxes;
+          @SerializedName("tax_items")
+          List<PaymentIntent.PaymentDetails.FlightDatum.Total.Tax.TaxItem> taxItems;
 
           /**
-           * For more details about InnerTax, please refer to the <a
+           * For more details about TaxItem, please refer to the <a
            * href="https://docs.stripe.com/api">API Reference.</a>
            */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class InnerTax extends StripeObject {
+          public static class TaxItem extends StripeObject {
             /** Tax amount. */
             @SerializedName("amount")
             Long amount;
@@ -5193,17 +5193,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           Boolean taxExemptIndicator;
 
           /** Tax details. */
-          @SerializedName("taxes")
-          List<PaymentIntent.PaymentDetails.LodgingDatum.Total.Tax.InnerTax> taxes;
+          @SerializedName("tax_items")
+          List<PaymentIntent.PaymentDetails.LodgingDatum.Total.Tax.TaxItem> taxItems;
 
           /**
-           * For more details about InnerTax, please refer to the <a
+           * For more details about TaxItem, please refer to the <a
            * href="https://docs.stripe.com/api">API Reference.</a>
            */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class InnerTax extends StripeObject {
+          public static class TaxItem extends StripeObject {
             /** Tax amount in cents. */
             @SerializedName("amount")
             Long amount;
@@ -5721,6 +5721,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
+
+    @SerializedName("vipps")
+    Vipps vipps;
 
     @SerializedName("wechat_pay")
     WechatPay wechatPay;
@@ -8975,6 +8978,93 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
          */
         @SerializedName("collection_method")
         String collectionMethod;
+      }
+    }
+
+    /**
+     * For more details about Vipps, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Vipps extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
+      @SerializedName("payment_details")
+      PaymentDetails paymentDetails;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+
+      /**
+       * For more details about PaymentDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PaymentDetails extends StripeObject {
+        @SerializedName("money_services")
+        MoneyServices moneyServices;
+
+        /**
+         * For more details about MoneyServices, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MoneyServices extends StripeObject {
+          @SerializedName("account_funding")
+          AccountFunding accountFunding;
+
+          /**
+           * For more details about AccountFunding, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class AccountFunding extends StripeObject {
+            /**
+             * The category of digital asset being acquired through this account funding
+             * transaction.
+             *
+             * <p>One of {@code blockchain_native}, {@code nft}, {@code other_non_fiat}, or {@code
+             * stablecoin}.
+             */
+            @SerializedName("digital_asset_category")
+            String digitalAssetCategory;
+          }
+        }
       }
     }
 

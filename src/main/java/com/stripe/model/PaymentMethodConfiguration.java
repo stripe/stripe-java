@@ -275,6 +275,9 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   @SerializedName("us_bank_account")
   UsBankAccount usBankAccount;
 
+  @SerializedName("vipps")
+  Vipps vipps;
+
   @SerializedName("wechat_pay")
   WechatPay wechatPay;
 
@@ -3547,6 +3550,57 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about Vipps, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Vipps extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
+  /**
    * For more details about WechatPay, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -3712,6 +3766,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     trySetResponseGetter(twint, responseGetter);
     trySetResponseGetter(upi, responseGetter);
     trySetResponseGetter(usBankAccount, responseGetter);
+    trySetResponseGetter(vipps, responseGetter);
     trySetResponseGetter(wechatPay, responseGetter);
     trySetResponseGetter(zip, responseGetter);
   }
