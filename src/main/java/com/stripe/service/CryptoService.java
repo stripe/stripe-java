@@ -13,6 +13,10 @@ public final class CryptoService extends ApiService {
     return new com.stripe.service.crypto.CustomerService(this.getResponseGetter());
   }
 
+  public com.stripe.service.crypto.DepositAddressService depositAddresses() {
+    return new com.stripe.service.crypto.DepositAddressService(this.getResponseGetter());
+  }
+
   public com.stripe.service.crypto.OnrampSessionService onrampSessions() {
     return new com.stripe.service.crypto.OnrampSessionService(this.getResponseGetter());
   }

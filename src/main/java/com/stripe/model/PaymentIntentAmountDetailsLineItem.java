@@ -166,8 +166,58 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
       @SerializedName("commodity_code")
       String commodityCode;
 
+      @SerializedName("ev_charging")
+      EvCharging evCharging;
+
       @SerializedName("fleet_data")
       FleetData fleetData;
+
+      /**
+       * For more details about EvCharging, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EvCharging extends StripeObject {
+        /** The carbon footprint avoided by the charging session, in grams of CO2. */
+        @SerializedName("carbon_footprint_avoided_grams_co2")
+        Long carbonFootprintAvoidedGramsCo2;
+
+        /** The time the charging session ended, measured in seconds since the Unix epoch. */
+        @SerializedName("charging_ended_at")
+        Long chargingEndedAt;
+
+        /** The power output capacity of the charging station, in kilowatts (kW). */
+        @SerializedName("charging_power_output_capacity_kw")
+        Long chargingPowerOutputCapacityKw;
+
+        /** The time the charging session started, measured in seconds since the Unix epoch. */
+        @SerializedName("charging_started_at")
+        Long chargingStartedAt;
+
+        /** The type of connector used for the charging session. */
+        @SerializedName("connector_type")
+        String connectorType;
+
+        /**
+         * The estimated distance in kilometers or miles added to the vehicle during the charging
+         * session.
+         */
+        @SerializedName("estimated_range_added")
+        Long estimatedRangeAdded;
+
+        /**
+         * The estimated distance in kilometers or miles remaining in the vehicle after the charging
+         * session.
+         */
+        @SerializedName("estimated_range_left")
+        Long estimatedRangeLeft;
+
+        /** The maximum power dispensed during the charging session, in kilowatts (kW). */
+        @SerializedName("maximum_power_dispensed_kw")
+        Long maximumPowerDispensedKw;
+      }
 
       /**
        * For more details about FleetData, please refer to the <a

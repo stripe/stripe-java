@@ -1065,6 +1065,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           @SerializedName("commodity_code")
           String commodityCode;
 
+          /** EV charging data for this line item. */
+          @SerializedName("ev_charging")
+          EvCharging evCharging;
+
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1079,8 +1083,13 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           @SerializedName("fleet_data")
           FleetData fleetData;
 
-          private Card(String commodityCode, Map<String, Object> extraParams, FleetData fleetData) {
+          private Card(
+              String commodityCode,
+              EvCharging evCharging,
+              Map<String, Object> extraParams,
+              FleetData fleetData) {
             this.commodityCode = commodityCode;
+            this.evCharging = evCharging;
             this.extraParams = extraParams;
             this.fleetData = fleetData;
           }
@@ -1092,6 +1101,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           public static class Builder {
             private String commodityCode;
 
+            private EvCharging evCharging;
+
             private Map<String, Object> extraParams;
 
             private FleetData fleetData;
@@ -1100,7 +1111,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
             public PaymentIntentCaptureParams.AmountDetails.LineItem.PaymentMethodOptions.Card
                 build() {
               return new PaymentIntentCaptureParams.AmountDetails.LineItem.PaymentMethodOptions
-                  .Card(this.commodityCode, this.extraParams, this.fleetData);
+                  .Card(this.commodityCode, this.evCharging, this.extraParams, this.fleetData);
             }
 
             /**
@@ -1109,6 +1120,15 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
              */
             public Builder setCommodityCode(String commodityCode) {
               this.commodityCode = commodityCode;
+              return this;
+            }
+
+            /** EV charging data for this line item. */
+            public Builder setEvCharging(
+                PaymentIntentCaptureParams.AmountDetails.LineItem.PaymentMethodOptions.Card
+                        .EvCharging
+                    evCharging) {
+              this.evCharging = evCharging;
               return this;
             }
 
@@ -1149,6 +1169,268 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
                     fleetData) {
               this.fleetData = fleetData;
               return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class EvCharging {
+            /** The carbon footprint avoided by the charging session, in grams of CO2. */
+            @SerializedName("carbon_footprint_avoided_grams_co2")
+            Long carbonFootprintAvoidedGramsCo2;
+
+            /**
+             * <strong>Required.</strong> The time the charging session ended, measured in seconds
+             * since the Unix epoch.
+             */
+            @SerializedName("charging_ended_at")
+            Long chargingEndedAt;
+
+            /**
+             * <strong>Required.</strong> The power output capacity of the charging station, in
+             * kilowatts (kW).
+             */
+            @SerializedName("charging_power_output_capacity_kw")
+            Long chargingPowerOutputCapacityKw;
+
+            /**
+             * <strong>Required.</strong> The time the charging session started, measured in seconds
+             * since the Unix epoch.
+             */
+            @SerializedName("charging_started_at")
+            Long chargingStartedAt;
+
+            /** <strong>Required.</strong> The type of connector used for the charging session. */
+            @SerializedName("connector_type")
+            ConnectorType connectorType;
+
+            /**
+             * The estimated distance in kilometers or miles added to the vehicle during the
+             * charging session.
+             */
+            @SerializedName("estimated_range_added")
+            Long estimatedRangeAdded;
+
+            /**
+             * The estimated distance in kilometers or miles remaining in the vehicle after the
+             * charging session.
+             */
+            @SerializedName("estimated_range_left")
+            Long estimatedRangeLeft;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> The maximum power dispensed during the charging session,
+             * in kilowatts (kW).
+             */
+            @SerializedName("maximum_power_dispensed_kw")
+            Long maximumPowerDispensedKw;
+
+            private EvCharging(
+                Long carbonFootprintAvoidedGramsCo2,
+                Long chargingEndedAt,
+                Long chargingPowerOutputCapacityKw,
+                Long chargingStartedAt,
+                ConnectorType connectorType,
+                Long estimatedRangeAdded,
+                Long estimatedRangeLeft,
+                Map<String, Object> extraParams,
+                Long maximumPowerDispensedKw) {
+              this.carbonFootprintAvoidedGramsCo2 = carbonFootprintAvoidedGramsCo2;
+              this.chargingEndedAt = chargingEndedAt;
+              this.chargingPowerOutputCapacityKw = chargingPowerOutputCapacityKw;
+              this.chargingStartedAt = chargingStartedAt;
+              this.connectorType = connectorType;
+              this.estimatedRangeAdded = estimatedRangeAdded;
+              this.estimatedRangeLeft = estimatedRangeLeft;
+              this.extraParams = extraParams;
+              this.maximumPowerDispensedKw = maximumPowerDispensedKw;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Long carbonFootprintAvoidedGramsCo2;
+
+              private Long chargingEndedAt;
+
+              private Long chargingPowerOutputCapacityKw;
+
+              private Long chargingStartedAt;
+
+              private ConnectorType connectorType;
+
+              private Long estimatedRangeAdded;
+
+              private Long estimatedRangeLeft;
+
+              private Map<String, Object> extraParams;
+
+              private Long maximumPowerDispensedKw;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public PaymentIntentCaptureParams.AmountDetails.LineItem.PaymentMethodOptions.Card
+                      .EvCharging
+                  build() {
+                return new PaymentIntentCaptureParams.AmountDetails.LineItem.PaymentMethodOptions
+                    .Card.EvCharging(
+                    this.carbonFootprintAvoidedGramsCo2,
+                    this.chargingEndedAt,
+                    this.chargingPowerOutputCapacityKw,
+                    this.chargingStartedAt,
+                    this.connectorType,
+                    this.estimatedRangeAdded,
+                    this.estimatedRangeLeft,
+                    this.extraParams,
+                    this.maximumPowerDispensedKw);
+              }
+
+              /** The carbon footprint avoided by the charging session, in grams of CO2. */
+              public Builder setCarbonFootprintAvoidedGramsCo2(
+                  Long carbonFootprintAvoidedGramsCo2) {
+                this.carbonFootprintAvoidedGramsCo2 = carbonFootprintAvoidedGramsCo2;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The time the charging session ended, measured in seconds
+               * since the Unix epoch.
+               */
+              public Builder setChargingEndedAt(Long chargingEndedAt) {
+                this.chargingEndedAt = chargingEndedAt;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The power output capacity of the charging station, in
+               * kilowatts (kW).
+               */
+              public Builder setChargingPowerOutputCapacityKw(Long chargingPowerOutputCapacityKw) {
+                this.chargingPowerOutputCapacityKw = chargingPowerOutputCapacityKw;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The time the charging session started, measured in
+               * seconds since the Unix epoch.
+               */
+              public Builder setChargingStartedAt(Long chargingStartedAt) {
+                this.chargingStartedAt = chargingStartedAt;
+                return this;
+              }
+
+              /** <strong>Required.</strong> The type of connector used for the charging session. */
+              public Builder setConnectorType(
+                  PaymentIntentCaptureParams.AmountDetails.LineItem.PaymentMethodOptions.Card
+                          .EvCharging.ConnectorType
+                      connectorType) {
+                this.connectorType = connectorType;
+                return this;
+              }
+
+              /**
+               * The estimated distance in kilometers or miles added to the vehicle during the
+               * charging session.
+               */
+              public Builder setEstimatedRangeAdded(Long estimatedRangeAdded) {
+                this.estimatedRangeAdded = estimatedRangeAdded;
+                return this;
+              }
+
+              /**
+               * The estimated distance in kilometers or miles remaining in the vehicle after the
+               * charging session.
+               */
+              public Builder setEstimatedRangeLeft(Long estimatedRangeLeft) {
+                this.estimatedRangeLeft = estimatedRangeLeft;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentCaptureParams.AmountDetails.LineItem.PaymentMethodOptions.Card.EvCharging#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * PaymentIntentCaptureParams.AmountDetails.LineItem.PaymentMethodOptions.Card.EvCharging#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> The maximum power dispensed during the charging session,
+               * in kilowatts (kW).
+               */
+              public Builder setMaximumPowerDispensedKw(Long maximumPowerDispensedKw) {
+                this.maximumPowerDispensedKw = maximumPowerDispensedKw;
+                return this;
+              }
+            }
+
+            public enum ConnectorType implements ApiRequestParams.EnumParam {
+              @SerializedName("ac_gb_t")
+              AC_GB_T("ac_gb_t"),
+
+              @SerializedName("ac_j1772")
+              AC_J1772("ac_j1772"),
+
+              @SerializedName("ac_mennekes")
+              AC_MENNEKES("ac_mennekes"),
+
+              @SerializedName("dc_ccs1")
+              DC_CCS1("dc_ccs1"),
+
+              @SerializedName("dc_ccs2")
+              DC_CCS2("dc_ccs2"),
+
+              @SerializedName("dc_chademo")
+              DC_CHADEMO("dc_chademo"),
+
+              @SerializedName("dc_gb_t")
+              DC_GB_T("dc_gb_t"),
+
+              @SerializedName("dc_mcs")
+              DC_MCS("dc_mcs"),
+
+              @SerializedName("nacs")
+              NACS("nacs");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              ConnectorType(String value) {
+                this.value = value;
+              }
             }
           }
 
@@ -1271,6 +1553,27 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
               @SerializedName("deli")
               DELI("deli"),
+
+              @SerializedName("ev_battery_exchanges")
+              EV_BATTERY_EXCHANGES("ev_battery_exchanges"),
+
+              @SerializedName("ev_charging_fee")
+              EV_CHARGING_FEE("ev_charging_fee"),
+
+              @SerializedName("evc_level_1")
+              EVC_LEVEL_1("evc_level_1"),
+
+              @SerializedName("evc_level_2")
+              EVC_LEVEL_2("evc_level_2"),
+
+              @SerializedName("evc_level_3")
+              EVC_LEVEL_3("evc_level_3"),
+
+              @SerializedName("evc_level_4")
+              EVC_LEVEL_4("evc_level_4"),
+
+              @SerializedName("evc_level_5")
+              EVC_LEVEL_5("evc_level_5"),
 
               @SerializedName("food_service")
               FOOD_SERVICE("food_service"),

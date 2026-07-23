@@ -494,7 +494,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code satispay}, {@code scalapay},
      * {@code sepa_debit}, {@code shopeepay}, {@code sofort}, {@code stripe_balance}, {@code
      * sunbit}, {@code swish}, {@code tamara}, {@code twint}, {@code upi}, {@code us_bank_account},
-     * {@code wechat_pay}, or {@code zip}.
+     * {@code vipps}, {@code wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -504,6 +504,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
+
+    @SerializedName("vipps")
+    Vipps vipps;
 
     @SerializedName("wechat_pay")
     WechatPay wechatPay;
@@ -2759,6 +2762,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
         }
       }
     }
+
+    /**
+     * For more details about Vipps, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Vipps extends StripeObject {}
 
     /**
      * For more details about WechatPay, please refer to the <a

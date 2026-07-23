@@ -578,7 +578,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
        * invalid_url_website_incomplete_return_policy}, {@code
        * invalid_url_website_incomplete_terms_and_conditions}, {@code
        * invalid_url_website_incomplete_under_construction}, {@code invalid_url_website_other},
-       * {@code invalid_value_other}, {@code unsupported_business_type}, {@code
+       * {@code invalid_value_other}, {@code partner_disabled_dispute_rate}, {@code
+       * partner_disabled_responsibilities}, {@code partner_disabled_restricted_business}, {@code
+       * partner_disabled_suspected_fraud}, {@code unsupported_business_type}, {@code
        * verification_data_not_found}, {@code verification_directors_mismatch}, {@code
        * verification_document_address_mismatch}, {@code verification_document_address_missing},
        * {@code verification_document_corrupt}, {@code verification_document_country_not_supported},
@@ -798,7 +800,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
        * invalid_url_website_incomplete_return_policy}, {@code
        * invalid_url_website_incomplete_terms_and_conditions}, {@code
        * invalid_url_website_incomplete_under_construction}, {@code invalid_url_website_other},
-       * {@code invalid_value_other}, {@code unsupported_business_type}, {@code
+       * {@code invalid_value_other}, {@code partner_disabled_dispute_rate}, {@code
+       * partner_disabled_responsibilities}, {@code partner_disabled_restricted_business}, {@code
+       * partner_disabled_suspected_fraud}, {@code unsupported_business_type}, {@code
        * verification_data_not_found}, {@code verification_directors_mismatch}, {@code
        * verification_document_address_mismatch}, {@code verification_document_address_missing},
        * {@code verification_document_corrupt}, {@code verification_document_country_not_supported},
