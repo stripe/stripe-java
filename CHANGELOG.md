@@ -1,5 +1,9 @@
 # Changelog
 
+## 33.2.0-alpha.6 - 2026-07-22
+* [#2254](https://github.com/stripe/stripe-java/pull/2254) Remove unnecessary logging from EventDataObjectDeserializer.java
+  * Deserializing an event webhook will no longer print `Stripe API version:...` to stdout.
+
 ## 33.2.0-alpha.5 - 2026-07-22
 * [#2253](https://github.com/stripe/stripe-java/pull/2253) Update generated code for private-preview
   * Add support for new resources `billing.AlertNotification` and `crypto.DepositAddress`
