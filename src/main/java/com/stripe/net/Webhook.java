@@ -69,6 +69,8 @@ public final class Webhook {
   public static Event constructEvent(
       String payload, String sigHeader, String secret, long tolerance, Clock clock)
       throws SignatureVerificationException {
+    Signature.verifyHeader(payload, sigHeader, secret, tolerance, clock);
+
     Event event =
         StripeObject.deserializeStripeObject(
             payload, Event.class, ApiResource.getGlobalResponseGetter());
@@ -79,7 +81,6 @@ public final class Webhook {
               + " Use StripeClient.parseEventNotification instead.");
     }
 
-    Signature.verifyHeader(payload, sigHeader, secret, tolerance, clock);
     // StripeObjects source their raw JSON object from their last response, but constructed webhooks
     // don't have that
     // in order to make the raw object available on parsed events, we fake the response.

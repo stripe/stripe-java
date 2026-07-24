@@ -1,7 +1,9 @@
 package com.stripe;
 
+import com.google.gson.JsonObject;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Event;
 import com.stripe.model.StripeObject;
 import com.stripe.model.v2.core.EventNotification;
 import com.stripe.net.*;
@@ -115,6 +117,63 @@ public class StripeClient {
     com.stripe.model.Event event = Webhook.constructEvent(payload, sigHeader, secret, tolerance);
     event.setResponseGetter(this.getResponseGetter());
     return event;
+  }
+
+  /**
+   * Constructs an Event from an <a
+   * href="https://docs.stripe.com/event-destinations/eventbridge">AWS EventBridge</a> or <a
+   * href="https://docs.stripe.com/event-destinations/eventgrid">Azure Event Grid</a> payload.
+   *
+   * @param payload the JSON payload from AWS EventBridge or Azure Event Grid.
+   * @return the Event instance extracted from the cloud provider envelope.
+   * @throws IllegalArgumentException if the payload format is not recognized, or if you pass a raw
+   *     Stripe Event instead of a cloud provider envelope.
+   */
+  public com.stripe.model.Event constructEventFromCloudProvider(String payload) {
+    JsonObject inner = extractFromCloudProviderEnvelope(payload);
+    Event event =
+        (Event)
+            StripeObject.deserializeStripeObject(
+                inner, (java.lang.reflect.Type) Event.class, ApiResource.getGlobalResponseGetter());
+
+    if ("v2.core.event".equals(event.getObject())) {
+      throw new IllegalArgumentException(
+          "It looks like this cloud event contains a thin event notification. Use parseEventNotificationFromCloudProvider instead.");
+    }
+
+    event.setResponseGetter(this.getResponseGetter());
+    return event;
+  }
+
+  /**
+   * Parses an EventNotification from an <a
+   * href="https://docs.stripe.com/event-destinations/eventbridge">AWS EventBridge</a> or <a
+   * href="https://docs.stripe.com/event-destinations/eventgrid">Azure Event Grid</a> payload.
+   *
+   * @param payload the JSON payload from AWS EventBridge or Azure Event Grid.
+   * @return the EventNotification instance extracted from the cloud provider envelope.
+   * @throws IllegalArgumentException if the payload format is not recognized.
+   */
+  public EventNotification parseEventNotificationFromCloudProvider(String payload) {
+    return EventNotification.fromJson(extractFromCloudProviderEnvelope(payload).toString(), this);
+  }
+
+  private static JsonObject extractFromCloudProviderEnvelope(String payload) {
+    JsonObject jsonObject = ApiResource.GSON.fromJson(payload, JsonObject.class);
+
+    if (jsonObject.has("detail")) {
+      return jsonObject.get("detail").getAsJsonObject();
+    } else if (jsonObject.has("specversion")) {
+      return jsonObject.get("data").getAsJsonObject();
+    } else if (jsonObject.has("id")
+        && jsonObject.get("id").isJsonPrimitive()
+        && jsonObject.get("id").getAsString().startsWith("evt_")) {
+      throw new IllegalArgumentException(
+          "It looks like you passed a Stripe Event directly. Use constructEvent instead to parse a webhook payload with signature verification.");
+    } else {
+      throw new IllegalArgumentException(
+          "Unrecognized cloud event format. The payload must be an AWS EventBridge or Azure Event Grid event envelope.");
+    }
   }
 
   // The beginning of the section generated from our OpenAPI spec

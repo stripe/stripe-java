@@ -95,8 +95,7 @@ public abstract class EventNotification {
 
     if (jsonObject.has("object") && "event".equals(jsonObject.get("object").getAsString())) {
       throw new IllegalArgumentException(
-          "You passed a webhook payload to StripeClient.parseEventNotification, which expects an event notification."
-              + " Use StripeClient.constructEvent instead.");
+          "You passed a webhook payload to a method that expects an event notification. Use the corresponding constructEvent method instead.");
     }
 
     Class<? extends EventNotification> cls =
