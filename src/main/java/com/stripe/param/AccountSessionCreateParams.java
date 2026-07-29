@@ -1631,17 +1631,26 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName("refund_management")
         Boolean refundManagement;
 
+        /**
+         * Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults to
+         * the value of {@code dispute_management}.
+         */
+        @SerializedName("smart_disputes_management")
+        Boolean smartDisputesManagement;
+
         private Features(
             Boolean capturePayments,
             Boolean destinationOnBehalfOfChargeManagement,
             Boolean disputeManagement,
             Map<String, Object> extraParams,
-            Boolean refundManagement) {
+            Boolean refundManagement,
+            Boolean smartDisputesManagement) {
           this.capturePayments = capturePayments;
           this.destinationOnBehalfOfChargeManagement = destinationOnBehalfOfChargeManagement;
           this.disputeManagement = disputeManagement;
           this.extraParams = extraParams;
           this.refundManagement = refundManagement;
+          this.smartDisputesManagement = smartDisputesManagement;
         }
 
         public static Builder builder() {
@@ -1659,6 +1668,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
           private Boolean refundManagement;
 
+          private Boolean smartDisputesManagement;
+
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.DisputesList.Features build() {
             return new AccountSessionCreateParams.Components.DisputesList.Features(
@@ -1666,7 +1677,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
                 this.destinationOnBehalfOfChargeManagement,
                 this.disputeManagement,
                 this.extraParams,
-                this.refundManagement);
+                this.refundManagement,
+                this.smartDisputesManagement);
           }
 
           /**
@@ -1730,6 +1742,15 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Whether sending refunds is enabled. This is {@code true} by default. */
           public Builder setRefundManagement(Boolean refundManagement) {
             this.refundManagement = refundManagement;
+            return this;
+          }
+
+          /**
+           * Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults
+           * to the value of {@code dispute_management}.
+           */
+          public Builder setSmartDisputesManagement(Boolean smartDisputesManagement) {
+            this.smartDisputesManagement = smartDisputesManagement;
             return this;
           }
         }
@@ -3274,17 +3295,26 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName("refund_management")
         Boolean refundManagement;
 
+        /**
+         * Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults to
+         * the value of {@code dispute_management}.
+         */
+        @SerializedName("smart_disputes_management")
+        Boolean smartDisputesManagement;
+
         private Features(
             Boolean capturePayments,
             Boolean destinationOnBehalfOfChargeManagement,
             Boolean disputeManagement,
             Map<String, Object> extraParams,
-            Boolean refundManagement) {
+            Boolean refundManagement,
+            Boolean smartDisputesManagement) {
           this.capturePayments = capturePayments;
           this.destinationOnBehalfOfChargeManagement = destinationOnBehalfOfChargeManagement;
           this.disputeManagement = disputeManagement;
           this.extraParams = extraParams;
           this.refundManagement = refundManagement;
+          this.smartDisputesManagement = smartDisputesManagement;
         }
 
         public static Builder builder() {
@@ -3302,6 +3332,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
           private Boolean refundManagement;
 
+          private Boolean smartDisputesManagement;
+
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.PaymentDetails.Features build() {
             return new AccountSessionCreateParams.Components.PaymentDetails.Features(
@@ -3309,7 +3341,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
                 this.destinationOnBehalfOfChargeManagement,
                 this.disputeManagement,
                 this.extraParams,
-                this.refundManagement);
+                this.refundManagement,
+                this.smartDisputesManagement);
           }
 
           /**
@@ -3373,6 +3406,15 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Whether sending refunds is enabled. This is {@code true} by default. */
           public Builder setRefundManagement(Boolean refundManagement) {
             this.refundManagement = refundManagement;
+            return this;
+          }
+
+          /**
+           * Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults
+           * to the value of {@code dispute_management}.
+           */
+          public Builder setSmartDisputesManagement(Boolean smartDisputesManagement) {
+            this.smartDisputesManagement = smartDisputesManagement;
             return this;
           }
         }
@@ -3495,15 +3537,24 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName("refund_management")
         Boolean refundManagement;
 
+        /**
+         * Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults to
+         * the value of {@code dispute_management}.
+         */
+        @SerializedName("smart_disputes_management")
+        Boolean smartDisputesManagement;
+
         private Features(
             Boolean destinationOnBehalfOfChargeManagement,
             Boolean disputeManagement,
             Map<String, Object> extraParams,
-            Boolean refundManagement) {
+            Boolean refundManagement,
+            Boolean smartDisputesManagement) {
           this.destinationOnBehalfOfChargeManagement = destinationOnBehalfOfChargeManagement;
           this.disputeManagement = disputeManagement;
           this.extraParams = extraParams;
           this.refundManagement = refundManagement;
+          this.smartDisputesManagement = smartDisputesManagement;
         }
 
         public static Builder builder() {
@@ -3519,13 +3570,16 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
           private Boolean refundManagement;
 
+          private Boolean smartDisputesManagement;
+
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.PaymentDisputes.Features build() {
             return new AccountSessionCreateParams.Components.PaymentDisputes.Features(
                 this.destinationOnBehalfOfChargeManagement,
                 this.disputeManagement,
                 this.extraParams,
-                this.refundManagement);
+                this.refundManagement,
+                this.smartDisputesManagement);
           }
 
           /**
@@ -3580,6 +3634,15 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Whether sending refunds is enabled. This is {@code true} by default. */
           public Builder setRefundManagement(Boolean refundManagement) {
             this.refundManagement = refundManagement;
+            return this;
+          }
+
+          /**
+           * Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults
+           * to the value of {@code dispute_management}.
+           */
+          public Builder setSmartDisputesManagement(Boolean smartDisputesManagement) {
+            this.smartDisputesManagement = smartDisputesManagement;
             return this;
           }
         }
@@ -3709,17 +3772,26 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName("refund_management")
         Boolean refundManagement;
 
+        /**
+         * Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults to
+         * the value of {@code dispute_management}.
+         */
+        @SerializedName("smart_disputes_management")
+        Boolean smartDisputesManagement;
+
         private Features(
             Boolean capturePayments,
             Boolean destinationOnBehalfOfChargeManagement,
             Boolean disputeManagement,
             Map<String, Object> extraParams,
-            Boolean refundManagement) {
+            Boolean refundManagement,
+            Boolean smartDisputesManagement) {
           this.capturePayments = capturePayments;
           this.destinationOnBehalfOfChargeManagement = destinationOnBehalfOfChargeManagement;
           this.disputeManagement = disputeManagement;
           this.extraParams = extraParams;
           this.refundManagement = refundManagement;
+          this.smartDisputesManagement = smartDisputesManagement;
         }
 
         public static Builder builder() {
@@ -3737,6 +3809,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
           private Boolean refundManagement;
 
+          private Boolean smartDisputesManagement;
+
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.Payments.Features build() {
             return new AccountSessionCreateParams.Components.Payments.Features(
@@ -3744,7 +3818,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
                 this.destinationOnBehalfOfChargeManagement,
                 this.disputeManagement,
                 this.extraParams,
-                this.refundManagement);
+                this.refundManagement,
+                this.smartDisputesManagement);
           }
 
           /**
@@ -3806,6 +3881,15 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Whether sending refunds is enabled. This is {@code true} by default. */
           public Builder setRefundManagement(Boolean refundManagement) {
             this.refundManagement = refundManagement;
+            return this;
+          }
+
+          /**
+           * Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults
+           * to the value of {@code dispute_management}.
+           */
+          public Builder setSmartDisputesManagement(Boolean smartDisputesManagement) {
+            this.smartDisputesManagement = smartDisputesManagement;
             return this;
           }
         }

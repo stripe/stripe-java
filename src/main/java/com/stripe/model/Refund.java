@@ -57,6 +57,16 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @SerializedName("currency")
   String currency;
 
+  /** ID of the customer of this refund. */
+  @SerializedName("customer")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Customer> customer;
+
+  /** ID of the account of this refund. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * An arbitrary string attached to the object. You can use this for displaying to users (available
    * on non-card refunds only).
@@ -121,6 +131,12 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentIntent> paymentIntent;
+
+  /** ID of the payment method associated with this refund. */
+  @SerializedName("payment_method")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentMethod> paymentMethod;
 
   /**
    * Provides the reason for why the refund is pending. Possible values are: {@code processing},
@@ -212,6 +228,24 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
   }
 
+  /** Get ID of expandable {@code customer} object. */
+  public String getCustomer() {
+    return (this.customer != null) ? this.customer.getId() : null;
+  }
+
+  public void setCustomer(String id) {
+    this.customer = ApiResource.setExpandableFieldId(id, this.customer);
+  }
+
+  /** Get expanded {@code customer}. */
+  public Customer getCustomerObject() {
+    return (this.customer != null) ? this.customer.getExpanded() : null;
+  }
+
+  public void setCustomerObject(Customer expandableObject) {
+    this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
   /** Get ID of expandable {@code failureBalanceTransaction} object. */
   public String getFailureBalanceTransaction() {
     return (this.failureBalanceTransaction != null) ? this.failureBalanceTransaction.getId() : null;
@@ -251,6 +285,25 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   public void setPaymentIntentObject(PaymentIntent expandableObject) {
     this.paymentIntent =
         new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code paymentMethod} object. */
+  public String getPaymentMethod() {
+    return (this.paymentMethod != null) ? this.paymentMethod.getId() : null;
+  }
+
+  public void setPaymentMethod(String id) {
+    this.paymentMethod = ApiResource.setExpandableFieldId(id, this.paymentMethod);
+  }
+
+  /** Get expanded {@code paymentMethod}. */
+  public PaymentMethod getPaymentMethodObject() {
+    return (this.paymentMethod != null) ? this.paymentMethod.getExpanded() : null;
+  }
+
+  public void setPaymentMethodObject(PaymentMethod expandableObject) {
+    this.paymentMethod =
+        new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code sourceTransferReversal} object. */
@@ -1348,10 +1401,12 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(balanceTransaction, responseGetter);
     trySetResponseGetter(charge, responseGetter);
+    trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(destinationDetails, responseGetter);
     trySetResponseGetter(failureBalanceTransaction, responseGetter);
     trySetResponseGetter(nextAction, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
+    trySetResponseGetter(paymentMethod, responseGetter);
     trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(sourceTransferReversal, responseGetter);
     trySetResponseGetter(transferReversal, responseGetter);

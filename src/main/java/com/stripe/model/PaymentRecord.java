@@ -9,6 +9,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.PaymentRecordListParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptCanceledParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptFailedParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptGuaranteedParams;
@@ -137,6 +138,41 @@ public class PaymentRecord extends ApiResource implements HasId {
   /** Shipping information for this payment. */
   @SerializedName("shipping_details")
   ShippingDetails shippingDetails;
+
+  /** List all the Payment Records for a given merchant. */
+  public static PaymentRecordCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** List all the Payment Records for a given merchant. */
+  public static PaymentRecordCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/payment_records";
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, PaymentRecordCollection.class);
+  }
+
+  /** List all the Payment Records for a given merchant. */
+  public static PaymentRecordCollection list(PaymentRecordListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** List all the Payment Records for a given merchant. */
+  public static PaymentRecordCollection list(PaymentRecordListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/payment_records";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, PaymentRecordCollection.class);
+  }
 
   /**
    * Report a new Payment Record. You may report a Payment Record as it is initialized and later
@@ -1141,9 +1177,9 @@ public class PaymentRecord extends ApiResource implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class Card extends StripeObject {
           /**
-           * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
-           * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
-           * unionpay}, {@code visa} or {@code unknown}.
+           * Card brand. Can be {@code American Express}, {@code Cartes Bancaires}, {@code Diners
+           * Club}, {@code Discover}, {@code Eftpos Australia}, {@code Girocard}, {@code JCB},
+           * {@code MasterCard}, {@code UnionPay}, {@code Visa}, or {@code Unknown}.
            */
           @SerializedName("brand")
           String brand;
@@ -1724,8 +1760,8 @@ public class PaymentRecord extends ApiResource implements HasId {
         /**
          * Indicates the outcome of 3D Secure authentication.
          *
-         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code exempted}, {@code
-         * failed}, {@code not_supported}, or {@code processing_error}.
+         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code data_share_only},
+         * {@code exempted}, {@code failed}, {@code not_supported}, or {@code processing_error}.
          */
         @SerializedName("result")
         String result;
@@ -2234,10 +2270,10 @@ public class PaymentRecord extends ApiResource implements HasId {
       /**
        * The customer's bank. Can be one of {@code affin_bank}, {@code agrobank}, {@code
        * alliance_bank}, {@code ambank}, {@code bank_islam}, {@code bank_muamalat}, {@code
-       * bank_rakyat}, {@code bsn}, {@code cimb}, {@code hong_leong_bank}, {@code hsbc}, {@code
-       * kfh}, {@code maybank2u}, {@code ocbc}, {@code public_bank}, {@code rhb}, {@code
-       * standard_chartered}, {@code uob}, {@code deutsche_bank}, {@code maybank2e}, {@code
-       * pb_enterprise}, or {@code bank_of_china}.
+       * bnp_paribas}, {@code bank_rakyat}, {@code bsn}, {@code cimb}, {@code citibank}, {@code
+       * hong_leong_bank}, {@code hsbc}, {@code kfh}, {@code maybank2u}, {@code ocbc}, {@code
+       * public_bank}, {@code rhb}, {@code standard_chartered}, {@code uob}, {@code deutsche_bank},
+       * {@code maybank2e}, {@code mbsb_bank}, {@code pb_enterprise}, or {@code bank_of_china}.
        */
       @SerializedName("bank")
       String bank;

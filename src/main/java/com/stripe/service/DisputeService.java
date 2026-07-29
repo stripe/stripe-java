@@ -135,7 +135,7 @@ public final class DisputeService extends ApiService {
   }
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
+   * essentially dismissing the dispute (accepting it), acknowledging it as lost.
    *
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
@@ -145,7 +145,7 @@ public final class DisputeService extends ApiService {
   }
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
+   * essentially dismissing the dispute (accepting it), acknowledging it as lost.
    *
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
@@ -155,7 +155,7 @@ public final class DisputeService extends ApiService {
   }
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
+   * essentially dismissing the dispute (accepting it), acknowledging it as lost.
    *
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
@@ -165,7 +165,7 @@ public final class DisputeService extends ApiService {
   }
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
+   * essentially dismissing the dispute (accepting it), acknowledging it as lost.
    *
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.

@@ -59,9 +59,11 @@ public class CalculationCreateParams extends ApiRequestParams {
   ShippingCost shippingCost;
 
   /**
-   * Timestamp of date at which the tax rules and rates in effect applies for the calculation.
-   * Measured in seconds since the Unix epoch. Can be up to 48 hours in the past, and up to 48 hours
-   * in the future.
+   * The calculation uses the tax rules and rates that are in effect at this timestamp. You can use
+   * a date up to 31 days in the past or up to 31 days in the future. If you use a future date,
+   * Stripe doesn't guarantee that the expected tax rules and rate being used match the actual rules
+   * and rate that will be in effect on that date. We deploy tax changes before their effective
+   * date, but not within a fixed window.
    */
   @SerializedName("tax_date")
   Long taxDate;
@@ -240,9 +242,11 @@ public class CalculationCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Timestamp of date at which the tax rules and rates in effect applies for the calculation.
-     * Measured in seconds since the Unix epoch. Can be up to 48 hours in the past, and up to 48
-     * hours in the future.
+     * The calculation uses the tax rules and rates that are in effect at this timestamp. You can
+     * use a date up to 31 days in the past or up to 31 days in the future. If you use a future
+     * date, Stripe doesn't guarantee that the expected tax rules and rate being used match the
+     * actual rules and rate that will be in effect on that date. We deploy tax changes before their
+     * effective date, but not within a fixed window.
      */
     public Builder setTaxDate(Long taxDate) {
       this.taxDate = taxDate;
@@ -640,18 +644,19 @@ public class CalculationCreateParams extends ApiRequestParams {
        * cn_tin}, {@code co_nit}, {@code cr_tin}, {@code cv_nif}, {@code de_stn}, {@code do_rcn},
        * {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat}, {@code
        * eu_vat}, {@code fo_vat}, {@code gb_vat}, {@code ge_vat}, {@code gi_tin}, {@code gn_nif},
-       * {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code
-       * in_gst}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn},
-       * {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code kz_bin}, {@code
-       * la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat}, {@code md_vat},
-       * {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc}, {@code my_frp}, {@code
-       * my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec}, {@code np_pan},
-       * {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code pl_nip}, {@code
-       * py_ruc}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat},
-       * {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin}, {@code
-       * sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat},
-       * {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code
-       * uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code zw_tin}
+       * {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code ic_nif}, {@code id_npwp}, {@code
+       * il_vat}, {@code in_gst}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn},
+       * {@code jp_trn}, {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code
+       * kz_bin}, {@code la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat},
+       * {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc}, {@code
+       * my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec},
+       * {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code
+       * pl_nip}, {@code py_ruc}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp},
+       * {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code
+       * sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat},
+       * {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code
+       * uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or
+       * {@code zw_tin}
        */
       @SerializedName("type")
       Type type;
@@ -722,19 +727,19 @@ public class CalculationCreateParams extends ApiRequestParams {
          * cn_tin}, {@code co_nit}, {@code cr_tin}, {@code cv_nif}, {@code de_stn}, {@code do_rcn},
          * {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat},
          * {@code eu_vat}, {@code fo_vat}, {@code gb_vat}, {@code ge_vat}, {@code gi_tin}, {@code
-         * gn_nif}, {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code id_npwp}, {@code il_vat},
-         * {@code in_gst}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn}, {@code
-         * jp_trn}, {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code kz_bin},
-         * {@code la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat}, {@code
-         * md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc}, {@code my_frp},
-         * {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec}, {@code
-         * np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code pl_nip},
-         * {@code py_ruc}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code
-         * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code
-         * sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat},
-         * {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code
-         * uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin},
-         * or {@code zw_tin}
+         * gn_nif}, {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code ic_nif}, {@code id_npwp},
+         * {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code
+         * jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn},
+         * {@code kz_bin}, {@code la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code
+         * ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc},
+         * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code
+         * no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin},
+         * {@code pl_nip}, {@code py_ruc}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code
+         * ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code
+         * sn_ninea}, {@code sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code
+         * tr_tin}, {@code tw_vat}, {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein},
+         * {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code
+         * za_vat}, {@code zm_tin}, or {@code zw_tin}
          */
         public Builder setType(CalculationCreateParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
@@ -907,6 +912,9 @@ public class CalculationCreateParams extends ApiRequestParams {
 
         @SerializedName("hu_tin")
         HU_TIN("hu_tin"),
+
+        @SerializedName("ic_nif")
+        IC_NIF("ic_nif"),
 
         @SerializedName("id_npwp")
         ID_NPWP("id_npwp"),

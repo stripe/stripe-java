@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec
 package com.stripe.service;
 
+import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentRecord;
+import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -10,6 +12,7 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.PaymentRecordListParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptCanceledParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptFailedParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptGuaranteedParams;
@@ -24,6 +27,32 @@ public final class PaymentRecordService extends ApiService {
     super(responseGetter);
   }
 
+  /** List all the Payment Records for a given merchant. */
+  public StripeCollection<PaymentRecord> list(PaymentRecordListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** List all the Payment Records for a given merchant. */
+  public StripeCollection<PaymentRecord> list(RequestOptions options) throws StripeException {
+    return list((PaymentRecordListParams) null, options);
+  }
+  /** List all the Payment Records for a given merchant. */
+  public StripeCollection<PaymentRecord> list() throws StripeException {
+    return list((PaymentRecordListParams) null, (RequestOptions) null);
+  }
+  /** List all the Payment Records for a given merchant. */
+  public StripeCollection<PaymentRecord> list(
+      PaymentRecordListParams params, RequestOptions options) throws StripeException {
+    String path = "/v1/payment_records";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, new TypeToken<StripeCollection<PaymentRecord>>() {}.getType());
+  }
   /** Retrieves a Payment Record with the given ID. */
   public PaymentRecord retrieve(String id, PaymentRecordRetrieveParams params)
       throws StripeException {

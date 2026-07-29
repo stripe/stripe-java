@@ -135,11 +135,16 @@ public class Event extends ApiResource implements HasId {
    * financial_connections.account.account_numbers_updated}, {@code
    * financial_connections.account.created}, {@code financial_connections.account.deactivated},
    * {@code financial_connections.account.disconnected}, {@code
+   * financial_connections.account.expected_deactivation_date_updated}, {@code
    * financial_connections.account.reactivated}, {@code
    * financial_connections.account.refreshed_balance}, {@code
    * financial_connections.account.refreshed_ownership}, {@code
    * financial_connections.account.refreshed_transactions}, {@code
+   * financial_connections.account.supported_payment_method_types_updated}, {@code
    * financial_connections.account.upcoming_account_number_expiry}, {@code
+   * financial_connections.account.upcoming_deactivation}, {@code
+   * financial_connections.authorization.expected_deactivation_date_updated}, {@code
+   * financial_connections.authorization.upcoming_deactivation}, {@code
    * identity.verification_session.canceled}, {@code identity.verification_session.created}, {@code
    * identity.verification_session.processing}, {@code identity.verification_session.redacted},
    * {@code identity.verification_session.requires_input}, {@code
