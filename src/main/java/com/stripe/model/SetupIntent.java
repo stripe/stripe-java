@@ -55,6 +55,13 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class SetupIntent extends ApiResource implements HasId, MetadataStore<SetupIntent> {
+  /**
+   * The list of payment method types to allow for this SetupIntent. Stripe will only use methods in
+   * this list when determining the payment methods to offer.
+   */
+  @SerializedName("allowed_payment_method_types")
+  List<String> allowedPaymentMethodTypes;
+
   /** ID of the Connect application that created the SetupIntent. */
   @SerializedName("application")
   @Getter(lombok.AccessLevel.NONE)

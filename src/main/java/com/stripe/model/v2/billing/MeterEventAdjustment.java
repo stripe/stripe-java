@@ -52,7 +52,7 @@ public class MeterEventAdjustment extends StripeObject implements HasId {
   String object;
 
   /**
-   * Open Enum. The meter event adjustment’s status.
+   * Open Enum. The meter event adjustment's status.
    *
    * <p>One of {@code complete}, or {@code pending}.
    */

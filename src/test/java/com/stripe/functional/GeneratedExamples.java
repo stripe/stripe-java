@@ -27974,18 +27974,18 @@ class GeneratedExamples extends BaseStripeTest {
     stubRequestReturnError(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_setup_intents",
+        "/v2/core/vault/us_bank_accounts/id_123/confirm_microdeposits",
         null,
         null,
         "{\"error\":{\"type\":\"controlled_by_alternate_resource\",\"code\":\"payout_method_cannot_be_archived\"}}",
         400);
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.moneymanagement.OutboundSetupIntentCreateParams params =
-        com.stripe.param.v2.moneymanagement.OutboundSetupIntentCreateParams.builder().build();
+    com.stripe.param.v2.core.vault.UsBankAccountConfirmMicrodepositsParams params =
+        com.stripe.param.v2.core.vault.UsBankAccountConfirmMicrodepositsParams.builder().build();
 
     try {
-      client.v2().moneyManagement().outboundSetupIntents().create(params);
+      client.v2().core().vault().usBankAccounts().confirmMicrodeposits("id_123", params);
     } catch (ControlledByAlternateResourceException e) {
 
     }
@@ -27993,7 +27993,7 @@ class GeneratedExamples extends BaseStripeTest {
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_setup_intents",
+        "/v2/core/vault/us_bank_accounts/id_123/confirm_microdeposits",
         params.toMap(),
         null);
   }

@@ -3514,11 +3514,17 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       @SerializedName("bank_rakyat")
       BANK_RAKYAT("bank_rakyat"),
 
+      @SerializedName("bnp_paribas")
+      BNP_PARIBAS("bnp_paribas"),
+
       @SerializedName("bsn")
       BSN("bsn"),
 
       @SerializedName("cimb")
       CIMB("cimb"),
+
+      @SerializedName("citibank")
+      CITIBANK("citibank"),
 
       @SerializedName("deutsche_bank")
       DEUTSCHE_BANK("deutsche_bank"),
@@ -3537,6 +3543,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
       @SerializedName("maybank2u")
       MAYBANK2U("maybank2u"),
+
+      @SerializedName("mbsb_bank")
+      MBSB_BANK("mbsb_bank"),
 
       @SerializedName("ocbc")
       OCBC("ocbc"),

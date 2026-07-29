@@ -1920,7 +1920,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Gross fuel amount that should equal Fuel Volume multipled by Fuel Unit Cost, inclusive
+           * Gross fuel amount that should equal Fuel Volume multiplied by Fuel Unit Cost, inclusive
            * of taxes.
            */
           @SerializedName("gross_amount_decimal")
@@ -1979,7 +1979,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
             }
 
             /**
-             * Gross fuel amount that should equal Fuel Volume multipled by Fuel Unit Cost,
+             * Gross fuel amount that should equal Fuel Volume multiplied by Fuel Unit Cost,
              * inclusive of taxes.
              */
             public Builder setGrossAmountDecimal(BigDecimal grossAmountDecimal) {

@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.capital;
+package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -12,13 +12,14 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class FinancingTransactionListParams extends ApiRequestParams {
-  /**
-   * For transactions of type {@code payment} and reason {@code automatic_withholding} only, only
-   * returns transactions that were created as a result of this charge.
-   */
-  @SerializedName("charge")
-  String charge;
+public class PaymentRecordListParams extends ApiRequestParams {
+  /** Only return Payment Records that were created after this unix timestamp. */
+  @SerializedName("created_after")
+  Long createdAfter;
+
+  /** Only return Payment Records that were created before this unix timestamp. */
+  @SerializedName("created_before")
+  Long createdBefore;
 
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
@@ -42,20 +43,12 @@ public class FinancingTransactionListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Returns transactions that were created that apply to this financing offer ID. */
-  @SerializedName("financing_offer")
-  String financingOffer;
-
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
    * default is 10.
    */
   @SerializedName("limit")
   Long limit;
-
-  /** Only returns transactions that are responsible for reversing this financing transaction ID. */
-  @SerializedName("reversed_transaction")
-  String reversedTransaction;
 
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
@@ -66,32 +59,21 @@ public class FinancingTransactionListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /**
-   * For transactions of type {@code payment} and reason {@code automatic_withholding} only, only
-   * returns transactions that were created as a result of this Treasury Transaction.
-   */
-  @SerializedName("treasury_transaction")
-  String treasuryTransaction;
-
-  private FinancingTransactionListParams(
-      String charge,
+  private PaymentRecordListParams(
+      Long createdAfter,
+      Long createdBefore,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
-      String financingOffer,
       Long limit,
-      String reversedTransaction,
-      String startingAfter,
-      String treasuryTransaction) {
-    this.charge = charge;
+      String startingAfter) {
+    this.createdAfter = createdAfter;
+    this.createdBefore = createdBefore;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.financingOffer = financingOffer;
     this.limit = limit;
-    this.reversedTransaction = reversedTransaction;
     this.startingAfter = startingAfter;
-    this.treasuryTransaction = treasuryTransaction;
   }
 
   public static Builder builder() {
@@ -99,7 +81,9 @@ public class FinancingTransactionListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String charge;
+    private Long createdAfter;
+
+    private Long createdBefore;
 
     private String endingBefore;
 
@@ -107,36 +91,31 @@ public class FinancingTransactionListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private String financingOffer;
-
     private Long limit;
-
-    private String reversedTransaction;
 
     private String startingAfter;
 
-    private String treasuryTransaction;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public FinancingTransactionListParams build() {
-      return new FinancingTransactionListParams(
-          this.charge,
+    public PaymentRecordListParams build() {
+      return new PaymentRecordListParams(
+          this.createdAfter,
+          this.createdBefore,
           this.endingBefore,
           this.expand,
           this.extraParams,
-          this.financingOffer,
           this.limit,
-          this.reversedTransaction,
-          this.startingAfter,
-          this.treasuryTransaction);
+          this.startingAfter);
     }
 
-    /**
-     * For transactions of type {@code payment} and reason {@code automatic_withholding} only, only
-     * returns transactions that were created as a result of this charge.
-     */
-    public Builder setCharge(String charge) {
-      this.charge = charge;
+    /** Only return Payment Records that were created after this unix timestamp. */
+    public Builder setCreatedAfter(Long createdAfter) {
+      this.createdAfter = createdAfter;
+      return this;
+    }
+
+    /** Only return Payment Records that were created before this unix timestamp. */
+    public Builder setCreatedBefore(Long createdBefore) {
+      this.createdBefore = createdBefore;
       return this;
     }
 
@@ -154,7 +133,7 @@ public class FinancingTransactionListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * FinancingTransactionListParams#expand} for the field documentation.
+     * PaymentRecordListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -167,7 +146,7 @@ public class FinancingTransactionListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * FinancingTransactionListParams#expand} for the field documentation.
+     * PaymentRecordListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -180,7 +159,7 @@ public class FinancingTransactionListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * FinancingTransactionListParams#extraParams} for the field documentation.
+     * PaymentRecordListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -193,19 +172,13 @@ public class FinancingTransactionListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link FinancingTransactionListParams#extraParams} for the field documentation.
+     * See {@link PaymentRecordListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /** Returns transactions that were created that apply to this financing offer ID. */
-    public Builder setFinancingOffer(String financingOffer) {
-      this.financingOffer = financingOffer;
       return this;
     }
 
@@ -219,14 +192,6 @@ public class FinancingTransactionListParams extends ApiRequestParams {
     }
 
     /**
-     * Only returns transactions that are responsible for reversing this financing transaction ID.
-     */
-    public Builder setReversedTransaction(String reversedTransaction) {
-      this.reversedTransaction = reversedTransaction;
-      return this;
-    }
-
-    /**
      * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
      * place in the list. For instance, if you make a list request and receive 100 objects, ending
      * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
@@ -234,15 +199,6 @@ public class FinancingTransactionListParams extends ApiRequestParams {
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
-      return this;
-    }
-
-    /**
-     * For transactions of type {@code payment} and reason {@code automatic_withholding} only, only
-     * returns transactions that were created as a result of this Treasury Transaction.
-     */
-    public Builder setTreasuryTransaction(String treasuryTransaction) {
-      this.treasuryTransaction = treasuryTransaction;
       return this;
     }
   }

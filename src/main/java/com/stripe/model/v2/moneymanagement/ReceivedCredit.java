@@ -127,8 +127,8 @@ public class ReceivedCredit extends StripeObject implements HasId {
     String outboundTransfer;
 
     /** The ID of the payout object that originated the ReceivedCredit. */
-    @SerializedName("payout_v1")
-    String payoutV1;
+    @SerializedName("payout")
+    String payout;
 
     /** The ID of the v1 transfer object that originated the ReceivedCredit. */
     @SerializedName("transfer")
@@ -137,8 +137,8 @@ public class ReceivedCredit extends StripeObject implements HasId {
     /**
      * Open Enum. The type of Stripe Money Movement that originated the ReceivedCredit.
      *
-     * <p>One of {@code outbound_payment}, {@code outbound_transfer}, {@code transfer}, or {@code
-     * payout_v1}.
+     * <p>One of {@code outbound_payment}, {@code outbound_transfer}, {@code payout}, {@code
+     * transfer}, or {@code payout_v1}.
      */
     @SerializedName("type")
     String type;

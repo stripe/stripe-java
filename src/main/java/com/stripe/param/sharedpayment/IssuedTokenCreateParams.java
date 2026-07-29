@@ -66,6 +66,10 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
   @SerializedName("usage_limits")
   UsageLimits usageLimits;
 
+  /** Set to true when using Stripe.js, iOS, or Android client-side SDKs to handle next actions. */
+  @SerializedName("use_stripe_sdk")
+  Boolean useStripeSdk;
+
   private IssuedTokenCreateParams(
       List<String> expand,
       Map<String, Object> extraParams,
@@ -74,7 +78,8 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
       SellerDetails sellerDetails,
       SetupFutureUsage setupFutureUsage,
       Map<String, String> sharedMetadata,
-      UsageLimits usageLimits) {
+      UsageLimits usageLimits,
+      Boolean useStripeSdk) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.paymentMethod = paymentMethod;
@@ -83,6 +88,7 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
     this.setupFutureUsage = setupFutureUsage;
     this.sharedMetadata = sharedMetadata;
     this.usageLimits = usageLimits;
+    this.useStripeSdk = useStripeSdk;
   }
 
   public static Builder builder() {
@@ -106,6 +112,8 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
 
     private UsageLimits usageLimits;
 
+    private Boolean useStripeSdk;
+
     /** Finalize and obtain parameter instance from this builder. */
     public IssuedTokenCreateParams build() {
       return new IssuedTokenCreateParams(
@@ -116,7 +124,8 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
           this.sellerDetails,
           this.setupFutureUsage,
           this.sharedMetadata,
-          this.usageLimits);
+          this.usageLimits,
+          this.useStripeSdk);
     }
 
     /**
@@ -236,6 +245,14 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
     /** <strong>Required.</strong> Limits on how this SharedPaymentToken can be used. */
     public Builder setUsageLimits(IssuedTokenCreateParams.UsageLimits usageLimits) {
       this.usageLimits = usageLimits;
+      return this;
+    }
+
+    /**
+     * Set to true when using Stripe.js, iOS, or Android client-side SDKs to handle next actions.
+     */
+    public Builder setUseStripeSdk(Boolean useStripeSdk) {
+      this.useStripeSdk = useStripeSdk;
       return this;
     }
   }

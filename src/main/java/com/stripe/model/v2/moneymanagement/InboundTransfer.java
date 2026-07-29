@@ -70,7 +70,10 @@ public class InboundTransfer extends StripeObject implements HasId {
   @SerializedName("to")
   To to;
 
-  /** A list of history objects, representing changes in the state of the InboundTransfer. */
+  /**
+   * A list of history objects, representing changes in the state of the InboundTransfer. The most
+   * recent entry's type indicates the current status of the InboundTransfer.
+   */
   @SerializedName("transfer_history")
   List<InboundTransfer.TransferHistory> transferHistory;
 

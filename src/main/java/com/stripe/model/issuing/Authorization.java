@@ -1150,9 +1150,9 @@ public class Authorization extends ApiResource
      * card_expired}, {@code card_inactive}, {@code cardholder_blocked}, {@code
      * cardholder_inactive}, {@code cardholder_verification_required}, {@code
      * insecure_authorization_method}, {@code insufficient_funds}, {@code network_fallback}, {@code
-     * not_allowed}, {@code pin_blocked}, {@code spending_controls}, {@code suspected_fraud}, {@code
-     * verification_failed}, {@code webhook_approved}, {@code webhook_declined}, {@code
-     * webhook_error}, or {@code webhook_timeout}.
+     * not_allowed}, {@code pin_blocked}, {@code spending_controls}, {@code stripe_internal_error},
+     * {@code suspected_fraud}, {@code verification_failed}, {@code webhook_approved}, {@code
+     * webhook_declined}, {@code webhook_error}, or {@code webhook_timeout}.
      */
     @SerializedName("reason")
     String reason;

@@ -2907,6 +2907,12 @@ public class Registration extends ApiResource implements HasId {
       @SerializedName("luxury_tax")
       LuxuryTax luxuryTax;
 
+      @SerializedName("mass_transit_parking_tax")
+      MassTransitParkingTax massTransitParkingTax;
+
+      @SerializedName("parking_tax")
+      ParkingTax parkingTax;
+
       @SerializedName("resort_tax")
       ResortTax resortTax;
 
@@ -2928,8 +2934,9 @@ public class Registration extends ApiResource implements HasId {
        *
        * <p>One of {@code admissions_tax}, {@code attendance_tax}, {@code entertainment_tax}, {@code
        * gross_receipts_tax}, {@code hospitality_tax}, {@code local_amusement_tax}, {@code
-       * local_lease_tax}, {@code luxury_tax}, {@code resort_tax}, {@code state_communications_tax},
-       * {@code state_retail_delivery_fee}, {@code state_sales_tax}, or {@code tourism_tax}.
+       * local_lease_tax}, {@code luxury_tax}, {@code mass_transit_parking_tax}, {@code
+       * parking_tax}, {@code resort_tax}, {@code state_communications_tax}, {@code
+       * state_retail_delivery_fee}, {@code state_sales_tax}, or {@code tourism_tax}.
        */
       @SerializedName("type")
       String type;
@@ -3062,6 +3069,40 @@ public class Registration extends ApiResource implements HasId {
         /**
          * A <a
          * href="https://docs.stripe.com/tax/registering?type=luxury_tax#registration-types">jurisdiction
+         * code</a> representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+      }
+
+      /**
+       * For more details about MassTransitParkingTax, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MassTransitParkingTax extends StripeObject {
+        /**
+         * A <a
+         * href="https://docs.stripe.com/tax/registering?type=mass_transit_parking_tax#registration-types">jurisdiction
+         * code</a> representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+      }
+
+      /**
+       * For more details about ParkingTax, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ParkingTax extends StripeObject {
+        /**
+         * A <a
+         * href="https://docs.stripe.com/tax/registering?type=parking_tax#registration-types">jurisdiction
          * code</a> representing the local jurisdiction.
          */
         @SerializedName("jurisdiction")

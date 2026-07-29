@@ -564,32 +564,32 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach() throws StripeException {
     return detach((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(RequestOptions options) throws StripeException {
     return detach((Map<String, Object>) null, options);
   }
 
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(Map<String, Object> params) throws StripeException {
     return detach(params, (RequestOptions) null);
   }
 
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -601,16 +601,16 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(PaymentMethodDetachParams params) throws StripeException {
     return detach(params, (RequestOptions) null);
   }
 
   /**
-   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
-   * longer be used for a payment or re-attached to a Customer.
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
   public PaymentMethod detach(PaymentMethodDetachParams params, RequestOptions options)
       throws StripeException {
@@ -1975,10 +1975,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     /**
      * The customer's bank, if provided. Can be one of {@code affin_bank}, {@code agrobank}, {@code
      * alliance_bank}, {@code ambank}, {@code bank_islam}, {@code bank_muamalat}, {@code
-     * bank_rakyat}, {@code bsn}, {@code cimb}, {@code hong_leong_bank}, {@code hsbc}, {@code kfh},
-     * {@code maybank2u}, {@code ocbc}, {@code public_bank}, {@code rhb}, {@code
-     * standard_chartered}, {@code uob}, {@code deutsche_bank}, {@code maybank2e}, {@code
-     * pb_enterprise}, or {@code bank_of_china}.
+     * bnp_paribas}, {@code bank_rakyat}, {@code bsn}, {@code cimb}, {@code citibank}, {@code
+     * hong_leong_bank}, {@code hsbc}, {@code kfh}, {@code maybank2u}, {@code ocbc}, {@code
+     * public_bank}, {@code rhb}, {@code standard_chartered}, {@code uob}, {@code deutsche_bank},
+     * {@code maybank2e}, {@code mbsb_bank}, {@code pb_enterprise}, or {@code bank_of_china}.
      */
     @SerializedName("bank")
     String bank;

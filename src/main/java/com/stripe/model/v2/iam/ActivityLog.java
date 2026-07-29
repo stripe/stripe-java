@@ -230,6 +230,14 @@ public class ActivityLog extends StripeObject implements HasId {
       @SerializedName("old_roles")
       List<String> oldRoles;
 
+      /**
+       * Source of the role change.
+       *
+       * <p>One of {@code dashboard}, {@code scim}, or {@code sso}.
+       */
+      @SerializedName("source")
+      String source;
+
       /** Email address of the user whose roles were changed. */
       @SerializedName("user_email")
       String userEmail;

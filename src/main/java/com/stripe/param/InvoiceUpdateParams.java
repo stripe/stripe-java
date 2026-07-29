@@ -4981,6 +4981,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("affirm")
       AFFIRM("affirm"),
 
+      @SerializedName("alipay")
+      ALIPAY("alipay"),
+
       @SerializedName("amazon_pay")
       AMAZON_PAY("amazon_pay"),
 
@@ -5049,6 +5052,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       @SerializedName("link")
       LINK("link"),
+
+      @SerializedName("mb_way")
+      MB_WAY("mb_way"),
 
       @SerializedName("multibanco")
       MULTIBANCO("multibanco"),
