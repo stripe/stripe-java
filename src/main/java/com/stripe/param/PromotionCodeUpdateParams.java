@@ -205,7 +205,8 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
     /**
      * Promotion codes defined in each available currency option. Each key must be a three-letter <a
      * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a> and a <a
-     * href="https://stripe.com/docs/currencies">supported currency</a>.
+     * href="https://stripe.com/docs/currencies">supported currency</a>. Each currency must be
+     * different from the {@code minimum_amount_currency} set on the promotion code.
      */
     @SerializedName("currency_options")
     Map<String, PromotionCodeUpdateParams.Restrictions.CurrencyOption> currencyOptions;

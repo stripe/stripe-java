@@ -522,8 +522,8 @@ public class BankAccount extends ApiResource
     List<String> currentlyDue;
 
     /**
-     * Details about validation and verification failures for {@code due} requirements that must be
-     * resolved.
+     * Fields that are {@code currently_due} and need to be collected again because validation or
+     * verification failed.
      */
     @SerializedName("errors")
     List<BankAccount.FutureRequirements.Errors> errors;
@@ -651,8 +651,8 @@ public class BankAccount extends ApiResource
     List<String> currentlyDue;
 
     /**
-     * Details about validation and verification failures for {@code due} requirements that must be
-     * resolved.
+     * Fields that are {@code currently_due} and need to be collected again because validation or
+     * verification failed.
      */
     @SerializedName("errors")
     List<BankAccount.Requirements.Errors> errors;

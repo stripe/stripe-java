@@ -15743,6 +15743,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName("local_lease_tax")
       LocalLeaseTax localLeaseTax;
 
+      /** Options for the mass transit parking tax registration. */
+      @SerializedName("mass_transit_parking_tax")
+      MassTransitParkingTax massTransitParkingTax;
+
+      /** Options for the parking tax registration. */
+      @SerializedName("parking_tax")
+      ParkingTax parkingTax;
+
       /**
        * <strong>Required.</strong> Two-letter US state code (<a
        * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
@@ -15762,12 +15770,16 @@ public class RegistrationCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           LocalAmusementTax localAmusementTax,
           LocalLeaseTax localLeaseTax,
+          MassTransitParkingTax massTransitParkingTax,
+          ParkingTax parkingTax,
           String state,
           StateSalesTax stateSalesTax,
           Type type) {
         this.extraParams = extraParams;
         this.localAmusementTax = localAmusementTax;
         this.localLeaseTax = localLeaseTax;
+        this.massTransitParkingTax = massTransitParkingTax;
+        this.parkingTax = parkingTax;
         this.state = state;
         this.stateSalesTax = stateSalesTax;
         this.type = type;
@@ -15784,6 +15796,10 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
         private LocalLeaseTax localLeaseTax;
 
+        private MassTransitParkingTax massTransitParkingTax;
+
+        private ParkingTax parkingTax;
+
         private String state;
 
         private StateSalesTax stateSalesTax;
@@ -15796,6 +15812,8 @@ public class RegistrationCreateParams extends ApiRequestParams {
               this.extraParams,
               this.localAmusementTax,
               this.localLeaseTax,
+              this.massTransitParkingTax,
+              this.parkingTax,
               this.state,
               this.stateSalesTax,
               this.type);
@@ -15840,6 +15858,21 @@ public class RegistrationCreateParams extends ApiRequestParams {
         public Builder setLocalLeaseTax(
             RegistrationCreateParams.CountryOptions.Us.LocalLeaseTax localLeaseTax) {
           this.localLeaseTax = localLeaseTax;
+          return this;
+        }
+
+        /** Options for the mass transit parking tax registration. */
+        public Builder setMassTransitParkingTax(
+            RegistrationCreateParams.CountryOptions.Us.MassTransitParkingTax
+                massTransitParkingTax) {
+          this.massTransitParkingTax = massTransitParkingTax;
+          return this;
+        }
+
+        /** Options for the parking tax registration. */
+        public Builder setParkingTax(
+            RegistrationCreateParams.CountryOptions.Us.ParkingTax parkingTax) {
+          this.parkingTax = parkingTax;
           return this;
         }
 
@@ -16022,6 +16055,170 @@ public class RegistrationCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> A <a
            * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
            * representing the local jurisdiction. Supported FIPS codes are: {@code 14000} (Chicago).
+           */
+          public Builder setJurisdiction(String jurisdiction) {
+            this.jurisdiction = jurisdiction;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MassTransitParkingTax {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> A jurisdiction code representing the <a
+         * href="https://stripe.com/tax/registering?type=mass_transit_parking_tax#registration-types">local
+         * jurisdiction</a>.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+
+        private MassTransitParkingTax(Map<String, Object> extraParams, String jurisdiction) {
+          this.extraParams = extraParams;
+          this.jurisdiction = jurisdiction;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String jurisdiction;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Us.MassTransitParkingTax build() {
+            return new RegistrationCreateParams.CountryOptions.Us.MassTransitParkingTax(
+                this.extraParams, this.jurisdiction);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RegistrationCreateParams.CountryOptions.Us.MassTransitParkingTax#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RegistrationCreateParams.CountryOptions.Us.MassTransitParkingTax#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> A jurisdiction code representing the <a
+           * href="https://stripe.com/tax/registering?type=mass_transit_parking_tax#registration-types">local
+           * jurisdiction</a>.
+           */
+          public Builder setJurisdiction(String jurisdiction) {
+            this.jurisdiction = jurisdiction;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ParkingTax {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> A jurisdiction code representing the <a
+         * href="https://stripe.com/tax/registering?type=parking_tax#registration-types">local
+         * jurisdiction</a>.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+
+        private ParkingTax(Map<String, Object> extraParams, String jurisdiction) {
+          this.extraParams = extraParams;
+          this.jurisdiction = jurisdiction;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String jurisdiction;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Us.ParkingTax build() {
+            return new RegistrationCreateParams.CountryOptions.Us.ParkingTax(
+                this.extraParams, this.jurisdiction);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.ParkingTax#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Us.ParkingTax#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> A jurisdiction code representing the <a
+           * href="https://stripe.com/tax/registering?type=parking_tax#registration-types">local
+           * jurisdiction</a>.
            */
           public Builder setJurisdiction(String jurisdiction) {
             this.jurisdiction = jurisdiction;
@@ -16256,6 +16453,12 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
         @SerializedName("local_lease_tax")
         LOCAL_LEASE_TAX("local_lease_tax"),
+
+        @SerializedName("mass_transit_parking_tax")
+        MASS_TRANSIT_PARKING_TAX("mass_transit_parking_tax"),
+
+        @SerializedName("parking_tax")
+        PARKING_TAX("parking_tax"),
 
         @SerializedName("state_communications_tax")
         STATE_COMMUNICATIONS_TAX("state_communications_tax"),

@@ -391,7 +391,8 @@ public class Transaction extends ApiResource implements HasId {
        * {@code gn_nif}, {@code mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code
        * np_pan}, {@code tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code aw_tin},
        * {@code az_tin}, {@code bd_bin}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code
-       * la_tin}, {@code cm_niu}, {@code cv_nif}, {@code bf_ifu}, or {@code unknown}.
+       * la_tin}, {@code cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, or {@code
+       * unknown}.
        */
       @SerializedName("type")
       String type;
@@ -634,9 +635,9 @@ public class Transaction extends ApiResource implements HasId {
          * The tax type, such as {@code vat} or {@code sales_tax}.
          *
          * <p>One of {@code amusement_tax}, {@code communications_tax}, {@code gst}, {@code hst},
-         * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code
-         * retail_delivery_fee}, {@code rst}, {@code sales_tax}, {@code service_tax}, or {@code
-         * vat}.
+         * {@code igst}, {@code jct}, {@code lease_tax}, {@code mass_transit_parking_tax}, {@code
+         * parking_tax}, {@code pst}, {@code qst}, {@code retail_delivery_fee}, {@code rst}, {@code
+         * sales_tax}, {@code service_tax}, or {@code vat}.
          */
         @SerializedName("tax_type")
         String taxType;

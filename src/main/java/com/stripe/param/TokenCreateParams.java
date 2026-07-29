@@ -382,6 +382,9 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("address_kanji")
       AddressKanji addressKanji;
 
+      @SerializedName("administrative_address")
+      AdministrativeAddress administrativeAddress;
+
       /**
        * Whether the company's directors have been provided. Set this Boolean to {@code true} after
        * creating all the company's directors with <a href="https://stripe.com/api/persons">the
@@ -476,6 +479,9 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("phone")
       String phone;
 
+      @SerializedName("principal_place_of_business")
+      PrincipalPlaceOfBusiness principalPlaceOfBusiness;
+
       /** When the business was incorporated or registered. */
       @SerializedName("registration_date")
       Object registrationDate;
@@ -508,6 +514,10 @@ public class TokenCreateParams extends ApiRequestParams {
        * The business ID number of the company, as appropriate for the company’s country. (Examples
        * are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in
        * the UK.)
+       *
+       * <p>Changing this value requires that the account re-accept the <a
+       * href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+       * service</a>.
        */
       @SerializedName("tax_id")
       String taxId;
@@ -530,6 +540,7 @@ public class TokenCreateParams extends ApiRequestParams {
           Address address,
           AddressKana addressKana,
           AddressKanji addressKanji,
+          AdministrativeAddress administrativeAddress,
           Boolean directorsProvided,
           DirectorshipDeclaration directorshipDeclaration,
           Boolean executivesProvided,
@@ -544,6 +555,7 @@ public class TokenCreateParams extends ApiRequestParams {
           Boolean ownershipDeclarationShownAndSigned,
           ApiRequestParams.EnumParam ownershipExemptionReason,
           String phone,
+          PrincipalPlaceOfBusiness principalPlaceOfBusiness,
           Object registrationDate,
           String registrationNumber,
           RepresentativeDeclaration representativeDeclaration,
@@ -555,6 +567,7 @@ public class TokenCreateParams extends ApiRequestParams {
         this.address = address;
         this.addressKana = addressKana;
         this.addressKanji = addressKanji;
+        this.administrativeAddress = administrativeAddress;
         this.directorsProvided = directorsProvided;
         this.directorshipDeclaration = directorshipDeclaration;
         this.executivesProvided = executivesProvided;
@@ -569,6 +582,7 @@ public class TokenCreateParams extends ApiRequestParams {
         this.ownershipDeclarationShownAndSigned = ownershipDeclarationShownAndSigned;
         this.ownershipExemptionReason = ownershipExemptionReason;
         this.phone = phone;
+        this.principalPlaceOfBusiness = principalPlaceOfBusiness;
         this.registrationDate = registrationDate;
         this.registrationNumber = registrationNumber;
         this.representativeDeclaration = representativeDeclaration;
@@ -589,6 +603,8 @@ public class TokenCreateParams extends ApiRequestParams {
         private AddressKana addressKana;
 
         private AddressKanji addressKanji;
+
+        private AdministrativeAddress administrativeAddress;
 
         private Boolean directorsProvided;
 
@@ -618,6 +634,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
         private String phone;
 
+        private PrincipalPlaceOfBusiness principalPlaceOfBusiness;
+
         private Object registrationDate;
 
         private String registrationNumber;
@@ -640,6 +658,7 @@ public class TokenCreateParams extends ApiRequestParams {
               this.address,
               this.addressKana,
               this.addressKanji,
+              this.administrativeAddress,
               this.directorsProvided,
               this.directorshipDeclaration,
               this.executivesProvided,
@@ -654,6 +673,7 @@ public class TokenCreateParams extends ApiRequestParams {
               this.ownershipDeclarationShownAndSigned,
               this.ownershipExemptionReason,
               this.phone,
+              this.principalPlaceOfBusiness,
               this.registrationDate,
               this.registrationNumber,
               this.representativeDeclaration,
@@ -680,6 +700,12 @@ public class TokenCreateParams extends ApiRequestParams {
         public Builder setAddressKanji(
             TokenCreateParams.Account.Company.AddressKanji addressKanji) {
           this.addressKanji = addressKanji;
+          return this;
+        }
+
+        public Builder setAdministrativeAddress(
+            TokenCreateParams.Account.Company.AdministrativeAddress administrativeAddress) {
+          this.administrativeAddress = administrativeAddress;
           return this;
         }
 
@@ -841,6 +867,12 @@ public class TokenCreateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setPrincipalPlaceOfBusiness(
+            TokenCreateParams.Account.Company.PrincipalPlaceOfBusiness principalPlaceOfBusiness) {
+          this.principalPlaceOfBusiness = principalPlaceOfBusiness;
+          return this;
+        }
+
         /** When the business was incorporated or registered. */
         public Builder setRegistrationDate(
             TokenCreateParams.Account.Company.RegistrationDate registrationDate) {
@@ -899,6 +931,10 @@ public class TokenCreateParams extends ApiRequestParams {
          * The business ID number of the company, as appropriate for the company’s country.
          * (Examples are an Employer ID Number in the U.S., a Business Number in Canada, or a
          * Company Number in the UK.)
+         *
+         * <p>Changing this value requires that the account re-accept the <a
+         * href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+         * service</a>.
          */
         public Builder setTaxId(String taxId) {
           this.taxId = taxId;
@@ -1437,6 +1473,169 @@ public class TokenCreateParams extends ApiRequestParams {
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
+      public static class AdministrativeAddress {
+        /** City, district, suburb, town, or village. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Address line 1, such as the street, PO Box, or company name. */
+        @SerializedName("line1")
+        String line1;
+
+        /** Address line 2, such as the apartment, suite, unit, or building. */
+        @SerializedName("line2")
+        String line2;
+
+        /** ZIP or postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
+        @SerializedName("state")
+        String state;
+
+        private AdministrativeAddress(
+            String city,
+            String country,
+            Map<String, Object> extraParams,
+            String line1,
+            String line2,
+            String postalCode,
+            String state) {
+          this.city = city;
+          this.country = country;
+          this.extraParams = extraParams;
+          this.line1 = line1;
+          this.line2 = line2;
+          this.postalCode = postalCode;
+          this.state = state;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String city;
+
+          private String country;
+
+          private Map<String, Object> extraParams;
+
+          private String line1;
+
+          private String line2;
+
+          private String postalCode;
+
+          private String state;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public TokenCreateParams.Account.Company.AdministrativeAddress build() {
+            return new TokenCreateParams.Account.Company.AdministrativeAddress(
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state);
+          }
+
+          /** City, district, suburb, town, or village. */
+          public Builder setCity(String city) {
+            this.city = city;
+            return this;
+          }
+
+          /**
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
+           */
+          public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.AdministrativeAddress#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.AdministrativeAddress#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Address line 1, such as the street, PO Box, or company name. */
+          public Builder setLine1(String line1) {
+            this.line1 = line1;
+            return this;
+          }
+
+          /** Address line 2, such as the apartment, suite, unit, or building. */
+          public Builder setLine2(String line2) {
+            this.line2 = line2;
+            return this;
+          }
+
+          /** ZIP or postal code. */
+          public Builder setPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+            return this;
+          }
+
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
+          public Builder setState(String state) {
+            this.state = state;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DirectorshipDeclaration {
         /** The Unix timestamp marking when the directorship declaration attestation was made. */
         @SerializedName("date")
@@ -1636,6 +1835,169 @@ public class TokenCreateParams extends ApiRequestParams {
           /** The user agent of the browser from which the beneficial owner attestation was made. */
           public Builder setUserAgent(String userAgent) {
             this.userAgent = userAgent;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PrincipalPlaceOfBusiness {
+        /** City, district, suburb, town, or village. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Address line 1, such as the street, PO Box, or company name. */
+        @SerializedName("line1")
+        String line1;
+
+        /** Address line 2, such as the apartment, suite, unit, or building. */
+        @SerializedName("line2")
+        String line2;
+
+        /** ZIP or postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
+        @SerializedName("state")
+        String state;
+
+        private PrincipalPlaceOfBusiness(
+            String city,
+            String country,
+            Map<String, Object> extraParams,
+            String line1,
+            String line2,
+            String postalCode,
+            String state) {
+          this.city = city;
+          this.country = country;
+          this.extraParams = extraParams;
+          this.line1 = line1;
+          this.line2 = line2;
+          this.postalCode = postalCode;
+          this.state = state;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String city;
+
+          private String country;
+
+          private Map<String, Object> extraParams;
+
+          private String line1;
+
+          private String line2;
+
+          private String postalCode;
+
+          private String state;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public TokenCreateParams.Account.Company.PrincipalPlaceOfBusiness build() {
+            return new TokenCreateParams.Account.Company.PrincipalPlaceOfBusiness(
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state);
+          }
+
+          /** City, district, suburb, town, or village. */
+          public Builder setCity(String city) {
+            this.city = city;
+            return this;
+          }
+
+          /**
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
+           */
+          public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.PrincipalPlaceOfBusiness#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.PrincipalPlaceOfBusiness#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Address line 1, such as the street, PO Box, or company name. */
+          public Builder setLine1(String line1) {
+            this.line1 = line1;
+            return this;
+          }
+
+          /** Address line 2, such as the apartment, suite, unit, or building. */
+          public Builder setLine2(String line2) {
+            this.line2 = line2;
+            return this;
+          }
+
+          /** ZIP or postal code. */
+          public Builder setPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+            return this;
+          }
+
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
+          public Builder setState(String state) {
+            this.state = state;
             return this;
           }
         }
@@ -4712,6 +5074,10 @@ public class TokenCreateParams extends ApiRequestParams {
      * number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you
      * can also provide a <a href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII
      * token provided by Stripe.js</a>.
+     *
+     * <p>Changing this value for the account's representative requires that the account re-accept
+     * the <a href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+     * service</a>.
      */
     @SerializedName("id_number")
     String idNumber;
@@ -4722,6 +5088,10 @@ public class TokenCreateParams extends ApiRequestParams {
      * card. Instead of the number itself, you can also provide a <a
      * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token provided by
      * Stripe.js</a>.
+     *
+     * <p>Changing this value for the account's representative requires that the account re-accept
+     * the <a href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+     * service</a>.
      */
     @SerializedName("id_number_secondary")
     String idNumberSecondary;
@@ -4779,7 +5149,13 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName("relationship")
     Relationship relationship;
 
-    /** The last four digits of the person's Social Security number (U.S. only). */
+    /**
+     * The last four digits of the person's Social Security number (U.S. only).
+     *
+     * <p>Changing this value for the account's representative requires that the account re-accept
+     * the <a href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+     * service</a>.
+     */
     @SerializedName("ssn_last_4")
     String ssnLast4;
 
@@ -5095,6 +5471,10 @@ public class TokenCreateParams extends ApiRequestParams {
        * you can also provide a <a
        * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token provided by
        * Stripe.js</a>.
+       *
+       * <p>Changing this value for the account's representative requires that the account re-accept
+       * the <a href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+       * service</a>.
        */
       public Builder setIdNumber(String idNumber) {
         this.idNumber = idNumber;
@@ -5107,6 +5487,10 @@ public class TokenCreateParams extends ApiRequestParams {
        * of an ID card. Instead of the number itself, you can also provide a <a
        * href="https://docs.stripe.com/js/tokens/create_token?type=pii">PII token provided by
        * Stripe.js</a>.
+       *
+       * <p>Changing this value for the account's representative requires that the account re-accept
+       * the <a href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+       * service</a>.
        */
       public Builder setIdNumberSecondary(String idNumberSecondary) {
         this.idNumberSecondary = idNumberSecondary;
@@ -5227,7 +5611,13 @@ public class TokenCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The last four digits of the person's Social Security number (U.S. only). */
+      /**
+       * The last four digits of the person's Social Security number (U.S. only).
+       *
+       * <p>Changing this value for the account's representative requires that the account re-accept
+       * the <a href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+       * service</a>.
+       */
       public Builder setSsnLast4(String ssnLast4) {
         this.ssnLast4 = ssnLast4;
         return this;

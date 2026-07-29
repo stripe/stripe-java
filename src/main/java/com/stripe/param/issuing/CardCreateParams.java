@@ -664,6 +664,15 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("address_validation")
     AddressValidation addressValidation;
 
+    /**
+     * The name of the business at the shipping address, used on the shipping label to ensure
+     * delivery when the card is shipped to a cardholder's workplace. Allowed characters: {@code
+     * A-Z}, {@code a-z}, {@code 0-9}, {@code }, {@code .}, {@code -}. All other characters are
+     * stripped or ASCII-normalized when printed.
+     */
+    @SerializedName("business_name")
+    String businessName;
+
     /** Customs information for the shipment. */
     @SerializedName("customs")
     Customs customs;
@@ -700,6 +709,7 @@ public class CardCreateParams extends ApiRequestParams {
     private Shipping(
         Address address,
         AddressValidation addressValidation,
+        String businessName,
         Customs customs,
         Map<String, Object> extraParams,
         String name,
@@ -709,6 +719,7 @@ public class CardCreateParams extends ApiRequestParams {
         Type type) {
       this.address = address;
       this.addressValidation = addressValidation;
+      this.businessName = businessName;
       this.customs = customs;
       this.extraParams = extraParams;
       this.name = name;
@@ -726,6 +737,8 @@ public class CardCreateParams extends ApiRequestParams {
       private Address address;
 
       private AddressValidation addressValidation;
+
+      private String businessName;
 
       private Customs customs;
 
@@ -746,6 +759,7 @@ public class CardCreateParams extends ApiRequestParams {
         return new CardCreateParams.Shipping(
             this.address,
             this.addressValidation,
+            this.businessName,
             this.customs,
             this.extraParams,
             this.name,
@@ -765,6 +779,17 @@ public class CardCreateParams extends ApiRequestParams {
       public Builder setAddressValidation(
           CardCreateParams.Shipping.AddressValidation addressValidation) {
         this.addressValidation = addressValidation;
+        return this;
+      }
+
+      /**
+       * The name of the business at the shipping address, used on the shipping label to ensure
+       * delivery when the card is shipped to a cardholder's workplace. Allowed characters: {@code
+       * A-Z}, {@code a-z}, {@code 0-9}, {@code }, {@code .}, {@code -}. All other characters are
+       * stripped or ASCII-normalized when printed.
+       */
+      public Builder setBusinessName(String businessName) {
+        this.businessName = businessName;
         return this;
       }
 

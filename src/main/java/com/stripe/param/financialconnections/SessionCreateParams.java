@@ -3,6 +3,7 @@ package com.stripe.param.financialconnections;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +35,14 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("filters")
   Filters filters;
 
+  /** Settings for configuring Session-specific limits. */
+  @SerializedName("limits")
+  Limits limits;
+
+  /** Customize manual entry behavior. */
+  @SerializedName("manual_entry")
+  ManualEntry manualEntry;
+
   /**
    * <strong>Required.</strong> List of data features that you would like to request access to.
    *
@@ -59,6 +68,8 @@ public class SessionCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Filters filters,
+      Limits limits,
+      ManualEntry manualEntry,
       List<SessionCreateParams.Permission> permissions,
       List<SessionCreateParams.Prefetch> prefetch,
       String returnUrl) {
@@ -66,6 +77,8 @@ public class SessionCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.filters = filters;
+    this.limits = limits;
+    this.manualEntry = manualEntry;
     this.permissions = permissions;
     this.prefetch = prefetch;
     this.returnUrl = returnUrl;
@@ -84,6 +97,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private Filters filters;
 
+    private Limits limits;
+
+    private ManualEntry manualEntry;
+
     private List<SessionCreateParams.Permission> permissions;
 
     private List<SessionCreateParams.Prefetch> prefetch;
@@ -97,6 +114,8 @@ public class SessionCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.filters,
+          this.limits,
+          this.manualEntry,
           this.permissions,
           this.prefetch,
           this.returnUrl);
@@ -163,6 +182,18 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Filters to restrict the kinds of accounts to collect. */
     public Builder setFilters(SessionCreateParams.Filters filters) {
       this.filters = filters;
+      return this;
+    }
+
+    /** Settings for configuring Session-specific limits. */
+    public Builder setLimits(SessionCreateParams.Limits limits) {
+      this.limits = limits;
+      return this;
+    }
+
+    /** Customize manual entry behavior. */
+    public Builder setManualEntry(SessionCreateParams.ManualEntry manualEntry) {
+      this.manualEntry = manualEntry;
       return this;
     }
 
@@ -399,13 +430,22 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /**
+     * Whether the session should require payment method support and successful account number
+     * retrieval before completion.
+     */
+    @SerializedName("require_payment_method_support")
+    RequirePaymentMethodSupport requirePaymentMethodSupport;
+
     private Filters(
         List<SessionCreateParams.Filters.AccountSubcategory> accountSubcategories,
         List<String> countries,
-        Map<String, Object> extraParams) {
+        Map<String, Object> extraParams,
+        RequirePaymentMethodSupport requirePaymentMethodSupport) {
       this.accountSubcategories = accountSubcategories;
       this.countries = countries;
       this.extraParams = extraParams;
+      this.requirePaymentMethodSupport = requirePaymentMethodSupport;
     }
 
     public static Builder builder() {
@@ -419,10 +459,15 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private RequirePaymentMethodSupport requirePaymentMethodSupport;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.Filters build() {
         return new SessionCreateParams.Filters(
-            this.accountSubcategories, this.countries, this.extraParams);
+            this.accountSubcategories,
+            this.countries,
+            this.extraParams,
+            this.requirePaymentMethodSupport);
       }
 
       /**
@@ -503,6 +548,16 @@ public class SessionCreateParams extends ApiRequestParams {
         this.extraParams.putAll(map);
         return this;
       }
+
+      /**
+       * Whether the session should require payment method support and successful account number
+       * retrieval before completion.
+       */
+      public Builder setRequirePaymentMethodSupport(
+          SessionCreateParams.Filters.RequirePaymentMethodSupport requirePaymentMethodSupport) {
+        this.requirePaymentMethodSupport = requirePaymentMethodSupport;
+        return this;
+      }
     }
 
     public enum AccountSubcategory implements ApiRequestParams.EnumParam {
@@ -525,6 +580,192 @@ public class SessionCreateParams extends ApiRequestParams {
       private final String value;
 
       AccountSubcategory(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum RequirePaymentMethodSupport implements ApiRequestParams.EnumParam {
+      @SerializedName("all")
+      ALL("all"),
+
+      @SerializedName("at_least_one")
+      AT_LEAST_ONE("at_least_one"),
+
+      @SerializedName("none")
+      NONE("none");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      RequirePaymentMethodSupport(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Limits {
+    /**
+     * <strong>Required.</strong> The number of accounts that can be linked in this Session. Pass an
+     * empty value to allow any number of accounts.
+     */
+    @SerializedName("accounts")
+    Object accounts;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Limits(Object accounts, Map<String, Object> extraParams) {
+      this.accounts = accounts;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object accounts;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.Limits build() {
+        return new SessionCreateParams.Limits(this.accounts, this.extraParams);
+      }
+
+      /**
+       * <strong>Required.</strong> The number of accounts that can be linked in this Session. Pass
+       * an empty value to allow any number of accounts.
+       */
+      public Builder setAccounts(Long accounts) {
+        this.accounts = accounts;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The number of accounts that can be linked in this Session. Pass
+       * an empty value to allow any number of accounts.
+       */
+      public Builder setAccounts(EmptyParam accounts) {
+        this.accounts = accounts;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.Limits#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.Limits#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManualEntry {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** How manual entry should be handled. */
+    @SerializedName("mode")
+    Mode mode;
+
+    private ManualEntry(Map<String, Object> extraParams, Mode mode) {
+      this.extraParams = extraParams;
+      this.mode = mode;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Mode mode;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.ManualEntry build() {
+        return new SessionCreateParams.ManualEntry(this.extraParams, this.mode);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.ManualEntry#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.ManualEntry#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** How manual entry should be handled. */
+      public Builder setMode(SessionCreateParams.ManualEntry.Mode mode) {
+        this.mode = mode;
+        return this;
+      }
+    }
+
+    public enum Mode implements ApiRequestParams.EnumParam {
+      @SerializedName("automatic")
+      AUTOMATIC("automatic"),
+
+      @SerializedName("disabled")
+      DISABLED("disabled");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Mode(String value) {
         this.value = value;
       }
     }

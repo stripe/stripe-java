@@ -71,7 +71,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   /**
    * Indicate whether this subscription should cancel at the end of the current period ({@code
-   * current_period_end}). Defaults to {@code false}.
+   * current_period_end}).
    */
   @SerializedName("cancel_at_period_end")
   Boolean cancelAtPeriodEnd;
@@ -612,7 +612,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}.
+     * current_period_end}).
      */
     public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
       this.cancelAtPeriodEnd = cancelAtPeriodEnd;
@@ -7590,6 +7590,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @SerializedName("affirm")
       AFFIRM("affirm"),
 
+      @SerializedName("alipay")
+      ALIPAY("alipay"),
+
       @SerializedName("amazon_pay")
       AMAZON_PAY("amazon_pay"),
 
@@ -7652,6 +7655,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       @SerializedName("link")
       LINK("link"),
+
+      @SerializedName("mb_way")
+      MB_WAY("mb_way"),
 
       @SerializedName("multibanco")
       MULTIBANCO("multibanco"),
