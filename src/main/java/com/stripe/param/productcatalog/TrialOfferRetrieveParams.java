@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.productcatalog;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class AccountRejectParams extends ApiRequestParams {
+public class TrialOfferRetrieveParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -26,29 +26,9 @@ public class AccountRejectParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * Whether to pause payouts on the account as part of the rejection. Defaults to {@code pause}.
-   * Use {@code none} to leave payouts enabled.
-   */
-  @SerializedName("payouts_action")
-  PayoutsAction payoutsAction;
-
-  /**
-   * <strong>Required.</strong> The reason for rejecting the account. Can be {@code fraud}, {@code
-   * terms_of_service}, or {@code other}.
-   */
-  @SerializedName("reason")
-  String reason;
-
-  private AccountRejectParams(
-      List<String> expand,
-      Map<String, Object> extraParams,
-      PayoutsAction payoutsAction,
-      String reason) {
+  private TrialOfferRetrieveParams(List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
     this.extraParams = extraParams;
-    this.payoutsAction = payoutsAction;
-    this.reason = reason;
   }
 
   public static Builder builder() {
@@ -60,20 +40,15 @@ public class AccountRejectParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private PayoutsAction payoutsAction;
-
-    private String reason;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public AccountRejectParams build() {
-      return new AccountRejectParams(
-          this.expand, this.extraParams, this.payoutsAction, this.reason);
+    public TrialOfferRetrieveParams build() {
+      return new TrialOfferRetrieveParams(this.expand, this.extraParams);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * AccountRejectParams#expand} for the field documentation.
+     * TrialOfferRetrieveParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -86,7 +61,7 @@ public class AccountRejectParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * AccountRejectParams#expand} for the field documentation.
+     * TrialOfferRetrieveParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -99,7 +74,7 @@ public class AccountRejectParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * AccountRejectParams#extraParams} for the field documentation.
+     * TrialOfferRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -112,7 +87,7 @@ public class AccountRejectParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link AccountRejectParams#extraParams} for the field documentation.
+     * See {@link TrialOfferRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -120,39 +95,6 @@ public class AccountRejectParams extends ApiRequestParams {
       }
       this.extraParams.putAll(map);
       return this;
-    }
-
-    /**
-     * Whether to pause payouts on the account as part of the rejection. Defaults to {@code pause}.
-     * Use {@code none} to leave payouts enabled.
-     */
-    public Builder setPayoutsAction(AccountRejectParams.PayoutsAction payoutsAction) {
-      this.payoutsAction = payoutsAction;
-      return this;
-    }
-
-    /**
-     * <strong>Required.</strong> The reason for rejecting the account. Can be {@code fraud}, {@code
-     * terms_of_service}, or {@code other}.
-     */
-    public Builder setReason(String reason) {
-      this.reason = reason;
-      return this;
-    }
-  }
-
-  public enum PayoutsAction implements ApiRequestParams.EnumParam {
-    @SerializedName("none")
-    NONE("none"),
-
-    @SerializedName("pause")
-    PAUSE("pause");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    PayoutsAction(String value) {
-      this.value = value;
     }
   }
 }

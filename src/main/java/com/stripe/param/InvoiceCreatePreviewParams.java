@@ -1403,18 +1403,19 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        * cn_tin}, {@code co_nit}, {@code cr_tin}, {@code cv_nif}, {@code de_stn}, {@code do_rcn},
        * {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat}, {@code
        * eu_vat}, {@code fo_vat}, {@code gb_vat}, {@code ge_vat}, {@code gi_tin}, {@code gn_nif},
-       * {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code
-       * in_gst}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn},
-       * {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code kz_bin}, {@code
-       * la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat}, {@code md_vat},
-       * {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc}, {@code my_frp}, {@code
-       * my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec}, {@code np_pan},
-       * {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code pl_nip}, {@code
-       * py_ruc}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat},
-       * {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin}, {@code
-       * sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat},
-       * {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code
-       * uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code zw_tin}
+       * {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code ic_nif}, {@code id_npwp}, {@code
+       * il_vat}, {@code in_gst}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn},
+       * {@code jp_trn}, {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code
+       * kz_bin}, {@code la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat},
+       * {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc}, {@code
+       * my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec},
+       * {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code
+       * pl_nip}, {@code py_ruc}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp},
+       * {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code
+       * sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat},
+       * {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code
+       * uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or
+       * {@code zw_tin}
        */
       @SerializedName("type")
       Type type;
@@ -1485,19 +1486,19 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
          * cn_tin}, {@code co_nit}, {@code cr_tin}, {@code cv_nif}, {@code de_stn}, {@code do_rcn},
          * {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat},
          * {@code eu_vat}, {@code fo_vat}, {@code gb_vat}, {@code ge_vat}, {@code gi_tin}, {@code
-         * gn_nif}, {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code id_npwp}, {@code il_vat},
-         * {@code in_gst}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn}, {@code
-         * jp_trn}, {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code kz_bin},
-         * {@code la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat}, {@code
-         * md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc}, {@code my_frp},
-         * {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec}, {@code
-         * np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code pl_nip},
-         * {@code py_ruc}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code
-         * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code
-         * sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat},
-         * {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code
-         * uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin},
-         * or {@code zw_tin}
+         * gn_nif}, {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code ic_nif}, {@code id_npwp},
+         * {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code
+         * jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn},
+         * {@code kz_bin}, {@code la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code
+         * ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc},
+         * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code
+         * no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin},
+         * {@code pl_nip}, {@code py_ruc}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code
+         * ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code
+         * sn_ninea}, {@code sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code
+         * tr_tin}, {@code tw_vat}, {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein},
+         * {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code
+         * za_vat}, {@code zm_tin}, or {@code zw_tin}
          */
         public Builder setType(InvoiceCreatePreviewParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
@@ -1670,6 +1671,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         @SerializedName("hu_tin")
         HU_TIN("hu_tin"),
+
+        @SerializedName("ic_nif")
+        IC_NIF("ic_nif"),
 
         @SerializedName("id_npwp")
         ID_NPWP("id_npwp"),
@@ -8313,7 +8317,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       /**
        * The date at which this phase of the subscription schedule starts or {@code now}. Must be
-       * set on the first phase.
+       * set on the first phase. Prefer to specify {@code now} over an explicit timestamp when
+       * appropriate to avoid unexpected behavior due to request delays or clock skew resulting in
+       * the phase being slightly backdated or postdated.
        */
       @SerializedName("start_date")
       Object startDate;
@@ -8337,8 +8343,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       TrialContinuation trialContinuation;
 
       /**
-       * Sets the phase to trialing from the start date to this date. Must be before the phase end
-       * date, can not be combined with {@code trial}
+       * Sets the phase to trialing from the start date to this date. Must be within the phase. When
+       * previewing an update, if combined with {@code trial=true}, it must match the phase end
+       * date.
        */
       @SerializedName("trial_end")
       Object trialEnd;
@@ -8892,7 +8899,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         /**
          * The date at which this phase of the subscription schedule starts or {@code now}. Must be
-         * set on the first phase.
+         * set on the first phase. Prefer to specify {@code now} over an explicit timestamp when
+         * appropriate to avoid unexpected behavior due to request delays or clock skew resulting in
+         * the phase being slightly backdated or postdated.
          */
         public Builder setStartDate(Long startDate) {
           this.startDate = startDate;
@@ -8901,7 +8910,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         /**
          * The date at which this phase of the subscription schedule starts or {@code now}. Must be
-         * set on the first phase.
+         * set on the first phase. Prefer to specify {@code now} over an explicit timestamp when
+         * appropriate to avoid unexpected behavior due to request delays or clock skew resulting in
+         * the phase being slightly backdated or postdated.
          */
         public Builder setStartDate(
             InvoiceCreatePreviewParams.ScheduleDetails.Phase.StartDate startDate) {
@@ -8936,8 +8947,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * Sets the phase to trialing from the start date to this date. Must be before the phase end
-         * date, can not be combined with {@code trial}
+         * Sets the phase to trialing from the start date to this date. Must be within the phase.
+         * When previewing an update, if combined with {@code trial=true}, it must match the phase
+         * end date.
          */
         public Builder setTrialEnd(Long trialEnd) {
           this.trialEnd = trialEnd;
@@ -8945,8 +8957,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * Sets the phase to trialing from the start date to this date. Must be before the phase end
-         * date, can not be combined with {@code trial}
+         * Sets the phase to trialing from the start date to this date. Must be within the phase.
+         * When previewing an update, if combined with {@code trial=true}, it must match the phase
+         * end date.
          */
         public Builder setTrialEnd(
             InvoiceCreatePreviewParams.ScheduleDetails.Phase.TrialEnd trialEnd) {
@@ -13617,6 +13630,15 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     List<InvoiceCreatePreviewParams.SubscriptionDetails.Item> items;
 
     /**
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
+     */
+    @SerializedName("metadata")
+    Object metadata;
+
+    /**
      * Previews the invoice that would be generated when pausing the subscription. Passing an empty
      * hash won't preview pausing and instead returns the next invoice.
      *
@@ -13684,6 +13706,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         Object defaultTaxRates,
         Map<String, Object> extraParams,
         List<InvoiceCreatePreviewParams.SubscriptionDetails.Item> items,
+        Object metadata,
         Pause pause,
         Prebilling prebilling,
         ProrationBehavior prorationBehavior,
@@ -13700,6 +13723,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       this.defaultTaxRates = defaultTaxRates;
       this.extraParams = extraParams;
       this.items = items;
+      this.metadata = metadata;
       this.pause = pause;
       this.prebilling = prebilling;
       this.prorationBehavior = prorationBehavior;
@@ -13732,6 +13756,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       private List<InvoiceCreatePreviewParams.SubscriptionDetails.Item> items;
 
+      private Object metadata;
+
       private Pause pause;
 
       private Prebilling prebilling;
@@ -13758,6 +13784,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             this.defaultTaxRates,
             this.extraParams,
             this.items,
+            this.metadata,
             this.pause,
             this.prebilling,
             this.prorationBehavior,
@@ -13999,6 +14026,57 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           this.items = new ArrayList<>();
         }
         this.items.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceCreatePreviewParams.SubscriptionDetails#metadata} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
+        }
+        ((Map<String, String>) this.metadata).put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceCreatePreviewParams.SubscriptionDetails#metadata} for the field
+       * documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
+        }
+        ((Map<String, String>) this.metadata).putAll(map);
+        return this;
+      }
+
+      /**
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format. Individual keys can be unset by posting an empty value to them. All
+       * keys can be unset by posting an empty value to {@code metadata}.
+       */
+      public Builder setMetadata(EmptyParam metadata) {
+        this.metadata = metadata;
+        return this;
+      }
+
+      /**
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format. Individual keys can be unset by posting an empty value to them. All
+       * keys can be unset by posting an empty value to {@code metadata}.
+       */
+      public Builder setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
       }
 

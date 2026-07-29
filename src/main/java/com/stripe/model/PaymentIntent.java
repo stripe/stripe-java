@@ -47,6 +47,15 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class PaymentIntent extends ApiResource implements HasId, MetadataStore<PaymentIntent> {
   /**
+   * The list of payment method types allowed for use with this payment. Stripe automatically
+   * returns compatible payment methods from this list in the {@code payment_method_types} field of
+   * the response, based on the other PaymentIntent parameters, such as {@code currency}, {@code
+   * amount}, and {@code customer}.
+   */
+  @SerializedName("allowed_payment_method_types")
+  List<String> allowedPaymentMethodTypes;
+
+  /**
    * Amount intended to be collected by this PaymentIntent. A positive integer representing how much
    * to charge in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency
    * unit</a> (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The
@@ -3567,17 +3576,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           Boolean taxExemptIndicator;
 
           /** Tax details. */
-          @SerializedName("taxes")
-          List<PaymentIntent.PaymentDetails.CarRentalDatum.Total.Tax.InnerTax> taxes;
+          @SerializedName("tax_items")
+          List<PaymentIntent.PaymentDetails.CarRentalDatum.Total.Tax.TaxItem> taxItems;
 
           /**
-           * For more details about InnerTax, please refer to the <a
+           * For more details about TaxItem, please refer to the <a
            * href="https://docs.stripe.com/api">API Reference.</a>
            */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class InnerTax extends StripeObject {
+          public static class TaxItem extends StripeObject {
             /** Tax amount. */
             @SerializedName("amount")
             Long amount;
@@ -4059,17 +4068,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @EqualsAndHashCode(callSuper = false)
         public static class Tax extends StripeObject {
           /** Tax details. */
-          @SerializedName("taxes")
-          List<PaymentIntent.PaymentDetails.FlightDatum.Total.Tax.InnerTax> taxes;
+          @SerializedName("tax_items")
+          List<PaymentIntent.PaymentDetails.FlightDatum.Total.Tax.TaxItem> taxItems;
 
           /**
-           * For more details about InnerTax, please refer to the <a
+           * For more details about TaxItem, please refer to the <a
            * href="https://docs.stripe.com/api">API Reference.</a>
            */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class InnerTax extends StripeObject {
+          public static class TaxItem extends StripeObject {
             /** Tax amount. */
             @SerializedName("amount")
             Long amount;
@@ -4377,17 +4386,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           Boolean taxExemptIndicator;
 
           /** Tax details. */
-          @SerializedName("taxes")
-          List<PaymentIntent.PaymentDetails.LodgingDatum.Total.Tax.InnerTax> taxes;
+          @SerializedName("tax_items")
+          List<PaymentIntent.PaymentDetails.LodgingDatum.Total.Tax.TaxItem> taxItems;
 
           /**
-           * For more details about InnerTax, please refer to the <a
+           * For more details about TaxItem, please refer to the <a
            * href="https://docs.stripe.com/api">API Reference.</a>
            */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class InnerTax extends StripeObject {
+          public static class TaxItem extends StripeObject {
             /** Tax amount in cents. */
             @SerializedName("amount")
             Long amount;
@@ -6573,6 +6582,30 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("capture_method")
       String captureMethod;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
     }
 
     /**
@@ -7102,6 +7135,30 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("capture_method")
       String captureMethod;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
     }
 
     /**

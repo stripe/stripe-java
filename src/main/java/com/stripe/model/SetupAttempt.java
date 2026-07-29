@@ -668,8 +668,8 @@ public class SetupAttempt extends ApiResource implements HasId {
         /**
          * Indicates the outcome of 3D Secure authentication.
          *
-         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code exempted}, {@code
-         * failed}, {@code not_supported}, or {@code processing_error}.
+         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code data_share_only},
+         * {@code exempted}, {@code failed}, {@code not_supported}, or {@code processing_error}.
          */
         @SerializedName("result")
         String result;

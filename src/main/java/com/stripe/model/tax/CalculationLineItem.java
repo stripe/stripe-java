@@ -218,8 +218,9 @@ public class CalculationLineItem extends StripeObject implements HasId {
        * <p>One of {@code admissions_tax}, {@code amusement_tax}, {@code attendance_tax}, {@code
        * communications_tax}, {@code entertainment_tax}, {@code gross_receipts_tax}, {@code gst},
        * {@code hospitality_tax}, {@code hst}, {@code igst}, {@code jct}, {@code lease_tax}, {@code
-       * luxury_tax}, {@code pst}, {@code qst}, {@code resort_tax}, {@code retail_delivery_fee},
-       * {@code rst}, {@code sales_tax}, {@code service_tax}, {@code tourism_tax}, or {@code vat}.
+       * luxury_tax}, {@code mass_transit_parking_tax}, {@code parking_tax}, {@code pst}, {@code
+       * qst}, {@code resort_tax}, {@code retail_delivery_fee}, {@code rst}, {@code sales_tax},
+       * {@code service_tax}, {@code tourism_tax}, or {@code vat}.
        */
       @SerializedName("tax_type")
       String taxType;

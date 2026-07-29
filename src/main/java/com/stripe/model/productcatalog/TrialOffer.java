@@ -14,6 +14,8 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.productcatalog.TrialOfferCreateParams;
+import com.stripe.param.productcatalog.TrialOfferListParams;
+import com.stripe.param.productcatalog.TrialOfferRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -112,6 +114,74 @@ public class TrialOffer extends ApiResource implements HasId {
         new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, TrialOffer.class);
+  }
+
+  /** Returns a list of trial offers. */
+  public static TrialOfferCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of trial offers. */
+  public static TrialOfferCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/product_catalog/trial_offers";
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, TrialOfferCollection.class);
+  }
+
+  /** Returns a list of trial offers. */
+  public static TrialOfferCollection list(TrialOfferListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of trial offers. */
+  public static TrialOfferCollection list(TrialOfferListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/product_catalog/trial_offers";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, TrialOfferCollection.class);
+  }
+
+  /** Retrieves the trial offer with the given ID. */
+  public static TrialOffer retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the trial offer with the given ID. */
+  public static TrialOffer retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves the trial offer with the given ID. */
+  public static TrialOffer retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/product_catalog/trial_offers/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, TrialOffer.class);
+  }
+
+  /** Retrieves the trial offer with the given ID. */
+  public static TrialOffer retrieve(
+      String id, TrialOfferRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/product_catalog/trial_offers/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
             path,
             ApiRequestParams.paramsToMap(params),
             options);

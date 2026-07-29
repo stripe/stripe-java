@@ -15,6 +15,15 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class SetupIntentCreateParams extends ApiRequestParams {
   /**
+   * The list of payment method types to allow for this SetupIntent. Stripe will only use methods in
+   * this list when determining the payment methods to offer. A list of valid payment method types
+   * can be found <a
+   * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-type">here</a>.
+   */
+  @SerializedName("allowed_payment_method_types")
+  List<SetupIntentCreateParams.AllowedPaymentMethodType> allowedPaymentMethodTypes;
+
+  /**
    * If present, the SetupIntent's payment method will be attached to the in-context Stripe Account.
    *
    * <p>It can only be used for this Stripe Account’s own money movement flows like InboundTransfer
@@ -191,6 +200,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   Boolean useStripeSdk;
 
   private SetupIntentCreateParams(
+      List<SetupIntentCreateParams.AllowedPaymentMethodType> allowedPaymentMethodTypes,
       Boolean attachToSelf,
       AutomaticPaymentMethods automaticPaymentMethods,
       Boolean confirm,
@@ -214,6 +224,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       SingleUse singleUse,
       Usage usage,
       Boolean useStripeSdk) {
+    this.allowedPaymentMethodTypes = allowedPaymentMethodTypes;
     this.attachToSelf = attachToSelf;
     this.automaticPaymentMethods = automaticPaymentMethods;
     this.confirm = confirm;
@@ -244,6 +255,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private List<SetupIntentCreateParams.AllowedPaymentMethodType> allowedPaymentMethodTypes;
+
     private Boolean attachToSelf;
 
     private AutomaticPaymentMethods automaticPaymentMethods;
@@ -293,6 +306,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentCreateParams build() {
       return new SetupIntentCreateParams(
+          this.allowedPaymentMethodTypes,
           this.attachToSelf,
           this.automaticPaymentMethods,
           this.confirm,
@@ -316,6 +330,34 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           this.singleUse,
           this.usage,
           this.useStripeSdk);
+    }
+
+    /**
+     * Add an element to `allowedPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SetupIntentCreateParams#allowedPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllowedPaymentMethodType(
+        SetupIntentCreateParams.AllowedPaymentMethodType element) {
+      if (this.allowedPaymentMethodTypes == null) {
+        this.allowedPaymentMethodTypes = new ArrayList<>();
+      }
+      this.allowedPaymentMethodTypes.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `allowedPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SetupIntentCreateParams#allowedPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllAllowedPaymentMethodType(
+        List<SetupIntentCreateParams.AllowedPaymentMethodType> elements) {
+      if (this.allowedPaymentMethodTypes == null) {
+        this.allowedPaymentMethodTypes = new ArrayList<>();
+      }
+      this.allowedPaymentMethodTypes.addAll(elements);
+      return this;
     }
 
     /**
@@ -4312,11 +4354,17 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         @SerializedName("bank_rakyat")
         BANK_RAKYAT("bank_rakyat"),
 
+        @SerializedName("bnp_paribas")
+        BNP_PARIBAS("bnp_paribas"),
+
         @SerializedName("bsn")
         BSN("bsn"),
 
         @SerializedName("cimb")
         CIMB("cimb"),
+
+        @SerializedName("citibank")
+        CITIBANK("citibank"),
 
         @SerializedName("deutsche_bank")
         DEUTSCHE_BANK("deutsche_bank"),
@@ -4335,6 +4383,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
         @SerializedName("maybank2u")
         MAYBANK2U("maybank2u"),
+
+        @SerializedName("mbsb_bank")
+        MBSB_BANK("mbsb_bank"),
 
         @SerializedName("ocbc")
         OCBC("ocbc"),
@@ -13524,6 +13575,303 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         this.extraParams.putAll(map);
         return this;
       }
+    }
+  }
+
+  public enum AllowedPaymentMethodType implements ApiRequestParams.EnumParam {
+    @SerializedName("acss_debit")
+    ACSS_DEBIT("acss_debit"),
+
+    @SerializedName("affirm")
+    AFFIRM("affirm"),
+
+    @SerializedName("afterpay_clearpay")
+    AFTERPAY_CLEARPAY("afterpay_clearpay"),
+
+    @SerializedName("alipay")
+    ALIPAY("alipay"),
+
+    @SerializedName("alma")
+    ALMA("alma"),
+
+    @SerializedName("amazon_pay")
+    AMAZON_PAY("amazon_pay"),
+
+    @SerializedName("au_becs_debit")
+    AU_BECS_DEBIT("au_becs_debit"),
+
+    @SerializedName("bacs_debit")
+    BACS_DEBIT("bacs_debit"),
+
+    @SerializedName("bancontact")
+    BANCONTACT("bancontact"),
+
+    @SerializedName("billie")
+    BILLIE("billie"),
+
+    @SerializedName("bizum")
+    BIZUM("bizum"),
+
+    @SerializedName("blik")
+    BLIK("blik"),
+
+    @SerializedName("boku_promptpay")
+    BOKU_PROMPTPAY("boku_promptpay"),
+
+    @SerializedName("boleto")
+    BOLETO("boleto"),
+
+    @SerializedName("capchase_pay")
+    CAPCHASE_PAY("capchase_pay"),
+
+    @SerializedName("card")
+    CARD("card"),
+
+    @SerializedName("cashapp")
+    CASHAPP("cashapp"),
+
+    @SerializedName("check_scan")
+    CHECK_SCAN("check_scan"),
+
+    @SerializedName("click_to_pay")
+    CLICK_TO_PAY("click_to_pay"),
+
+    @SerializedName("crypto")
+    CRYPTO("crypto"),
+
+    @SerializedName("customer_balance")
+    CUSTOMER_BALANCE("customer_balance"),
+
+    @SerializedName("demo_pay")
+    DEMO_PAY("demo_pay"),
+
+    @SerializedName("duitnow")
+    DUITNOW("duitnow"),
+
+    @SerializedName("dummy_auth_push")
+    DUMMY_AUTH_PUSH("dummy_auth_push"),
+
+    @SerializedName("dummy_passthrough_card")
+    DUMMY_PASSTHROUGH_CARD("dummy_passthrough_card"),
+
+    @SerializedName("edenred")
+    EDENRED("edenred"),
+
+    @SerializedName("eps")
+    EPS("eps"),
+
+    @SerializedName("fpx")
+    FPX("fpx"),
+
+    @SerializedName("gcash")
+    GCASH("gcash"),
+
+    @SerializedName("getbalance")
+    GETBALANCE("getbalance"),
+
+    @SerializedName("gift_card")
+    GIFT_CARD("gift_card"),
+
+    @SerializedName("giropay")
+    GIROPAY("giropay"),
+
+    @SerializedName("gopay")
+    GOPAY("gopay"),
+
+    @SerializedName("grabpay")
+    GRABPAY("grabpay"),
+
+    @SerializedName("id_bank_transfer")
+    ID_BANK_TRANSFER("id_bank_transfer"),
+
+    @SerializedName("ideal")
+    IDEAL("ideal"),
+
+    @SerializedName("kakao_pay")
+    KAKAO_PAY("kakao_pay"),
+
+    @SerializedName("klarna")
+    KLARNA("klarna"),
+
+    @SerializedName("knet")
+    KNET("knet"),
+
+    @SerializedName("konbini")
+    KONBINI("konbini"),
+
+    @SerializedName("kr_card")
+    KR_CARD("kr_card"),
+
+    @SerializedName("kr_market")
+    KR_MARKET("kr_market"),
+
+    @SerializedName("kriya")
+    KRIYA("kriya"),
+
+    @SerializedName("link")
+    LINK("link"),
+
+    @SerializedName("mb_way")
+    MB_WAY("mb_way"),
+
+    @SerializedName("mobilepay")
+    MOBILEPAY("mobilepay"),
+
+    @SerializedName("momo")
+    MOMO("momo"),
+
+    @SerializedName("mondu")
+    MONDU("mondu"),
+
+    @SerializedName("multibanco")
+    MULTIBANCO("multibanco"),
+
+    @SerializedName("naver_pay")
+    NAVER_PAY("naver_pay"),
+
+    @SerializedName("netbanking")
+    NETBANKING("netbanking"),
+
+    @SerializedName("ng_bank")
+    NG_BANK("ng_bank"),
+
+    @SerializedName("ng_bank_transfer")
+    NG_BANK_TRANSFER("ng_bank_transfer"),
+
+    @SerializedName("ng_card")
+    NG_CARD("ng_card"),
+
+    @SerializedName("ng_market")
+    NG_MARKET("ng_market"),
+
+    @SerializedName("ng_ussd")
+    NG_USSD("ng_ussd"),
+
+    @SerializedName("ng_wallet")
+    NG_WALLET("ng_wallet"),
+
+    @SerializedName("nz_bank_account")
+    NZ_BANK_ACCOUNT("nz_bank_account"),
+
+    @SerializedName("octopus")
+    OCTOPUS("octopus"),
+
+    @SerializedName("oxxo")
+    OXXO("oxxo"),
+
+    @SerializedName("p24")
+    P24("p24"),
+
+    @SerializedName("paper_check")
+    PAPER_CHECK("paper_check"),
+
+    @SerializedName("pay_by_bank")
+    PAY_BY_BANK("pay_by_bank"),
+
+    @SerializedName("payco")
+    PAYCO("payco"),
+
+    @SerializedName("paynow")
+    PAYNOW("paynow"),
+
+    @SerializedName("paypal")
+    PAYPAL("paypal"),
+
+    @SerializedName("paypay")
+    PAYPAY("paypay"),
+
+    @SerializedName("payto")
+    PAYTO("payto"),
+
+    @SerializedName("pix")
+    PIX("pix"),
+
+    @SerializedName("promptpay")
+    PROMPTPAY("promptpay"),
+
+    @SerializedName("qris")
+    QRIS("qris"),
+
+    @SerializedName("rechnung")
+    RECHNUNG("rechnung"),
+
+    @SerializedName("revolut_pay")
+    REVOLUT_PAY("revolut_pay"),
+
+    @SerializedName("samsung_pay")
+    SAMSUNG_PAY("samsung_pay"),
+
+    @SerializedName("satispay")
+    SATISPAY("satispay"),
+
+    @SerializedName("scalapay")
+    SCALAPAY("scalapay"),
+
+    @SerializedName("sepa_debit")
+    SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
+
+    @SerializedName("shop_pay")
+    SHOP_PAY("shop_pay"),
+
+    @SerializedName("shopeepay")
+    SHOPEEPAY("shopeepay"),
+
+    @SerializedName("sofort")
+    SOFORT("sofort"),
+
+    @SerializedName("south_korea_market")
+    SOUTH_KOREA_MARKET("south_korea_market"),
+
+    @SerializedName("stripe_balance")
+    STRIPE_BALANCE("stripe_balance"),
+
+    @SerializedName("sunbit")
+    SUNBIT("sunbit"),
+
+    @SerializedName("swish")
+    SWISH("swish"),
+
+    @SerializedName("tamara")
+    TAMARA("tamara"),
+
+    @SerializedName("test_pay")
+    TEST_PAY("test_pay"),
+
+    @SerializedName("truemoney")
+    TRUEMONEY("truemoney"),
+
+    @SerializedName("twint")
+    TWINT("twint"),
+
+    @SerializedName("upi")
+    UPI("upi"),
+
+    @SerializedName("us_bank_account")
+    US_BANK_ACCOUNT("us_bank_account"),
+
+    @SerializedName("us_cash_voucher")
+    US_CASH_VOUCHER("us_cash_voucher"),
+
+    @SerializedName("vipps")
+    VIPPS("vipps"),
+
+    @SerializedName("wechat_pay")
+    WECHAT_PAY("wechat_pay"),
+
+    @SerializedName("wero")
+    WERO("wero"),
+
+    @SerializedName("zip")
+    ZIP("zip");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    AllowedPaymentMethodType(String value) {
+      this.value = value;
     }
   }
 

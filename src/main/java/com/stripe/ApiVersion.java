@@ -2,5 +2,5 @@
 package com.stripe;
 
 final class ApiVersion {
-  public static final String CURRENT = "2026-06-24.preview";
+  public static final String CURRENT = "2026-07-29.preview";
 }

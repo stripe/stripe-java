@@ -566,6 +566,10 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("financial_connections.account.disconnected")
     FINANCIAL_CONNECTIONS__ACCOUNT__DISCONNECTED("financial_connections.account.disconnected"),
 
+    @SerializedName("financial_connections.account.expected_deactivation_date_updated")
+    FINANCIAL_CONNECTIONS__ACCOUNT__EXPECTED_DEACTIVATION_DATE_UPDATED(
+        "financial_connections.account.expected_deactivation_date_updated"),
+
     @SerializedName("financial_connections.account.reactivated")
     FINANCIAL_CONNECTIONS__ACCOUNT__REACTIVATED("financial_connections.account.reactivated"),
 
@@ -585,9 +589,25 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     FINANCIAL_CONNECTIONS__ACCOUNT__REFRESHED_TRANSACTIONS(
         "financial_connections.account.refreshed_transactions"),
 
+    @SerializedName("financial_connections.account.supported_payment_method_types_updated")
+    FINANCIAL_CONNECTIONS__ACCOUNT__SUPPORTED_PAYMENT_METHOD_TYPES_UPDATED(
+        "financial_connections.account.supported_payment_method_types_updated"),
+
     @SerializedName("financial_connections.account.upcoming_account_number_expiry")
     FINANCIAL_CONNECTIONS__ACCOUNT__UPCOMING_ACCOUNT_NUMBER_EXPIRY(
         "financial_connections.account.upcoming_account_number_expiry"),
+
+    @SerializedName("financial_connections.account.upcoming_deactivation")
+    FINANCIAL_CONNECTIONS__ACCOUNT__UPCOMING_DEACTIVATION(
+        "financial_connections.account.upcoming_deactivation"),
+
+    @SerializedName("financial_connections.authorization.expected_deactivation_date_updated")
+    FINANCIAL_CONNECTIONS__AUTHORIZATION__EXPECTED_DEACTIVATION_DATE_UPDATED(
+        "financial_connections.authorization.expected_deactivation_date_updated"),
+
+    @SerializedName("financial_connections.authorization.upcoming_deactivation")
+    FINANCIAL_CONNECTIONS__AUTHORIZATION__UPCOMING_DEACTIVATION(
+        "financial_connections.authorization.upcoming_deactivation"),
 
     @SerializedName("financial_connections.session.updated")
     FINANCIAL_CONNECTIONS__SESSION__UPDATED("financial_connections.session.updated"),

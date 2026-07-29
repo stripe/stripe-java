@@ -18,6 +18,7 @@ import com.stripe.param.AccountListParams;
 import com.stripe.param.AccountRejectParams;
 import com.stripe.param.AccountRetrieveCurrentParams;
 import com.stripe.param.AccountRetrieveParams;
+import com.stripe.param.AccountUnrejectParams;
 import com.stripe.param.AccountUpdateParams;
 
 public final class AccountService extends ApiService {
@@ -264,9 +265,10 @@ public final class AccountService extends ApiService {
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
-   * information during account onboarding. You can prefill any information on the account.
+   * href="https://stripe.com/connect/marketplace/tasks/create#prefill-account-information">can
+   * prefill that information</a> when creating the account. Connect Onboarding won’t ask for the
+   * prefilled information during account onboarding. You can prefill any information on the
+   * account.
    */
   public Account create(AccountCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -277,9 +279,10 @@ public final class AccountService extends ApiService {
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
-   * information during account onboarding. You can prefill any information on the account.
+   * href="https://stripe.com/connect/marketplace/tasks/create#prefill-account-information">can
+   * prefill that information</a> when creating the account. Connect Onboarding won’t ask for the
+   * prefilled information during account onboarding. You can prefill any information on the
+   * account.
    */
   public Account create(RequestOptions options) throws StripeException {
     return create((AccountCreateParams) null, options);
@@ -290,9 +293,10 @@ public final class AccountService extends ApiService {
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
-   * information during account onboarding. You can prefill any information on the account.
+   * href="https://stripe.com/connect/marketplace/tasks/create#prefill-account-information">can
+   * prefill that information</a> when creating the account. Connect Onboarding won’t ask for the
+   * prefilled information during account onboarding. You can prefill any information on the
+   * account.
    */
   public Account create() throws StripeException {
     return create((AccountCreateParams) null, (RequestOptions) null);
@@ -303,9 +307,10 @@ public final class AccountService extends ApiService {
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>If you’ve already collected information for your connected accounts, you <a
-   * href="https://stripe.com/docs/connect/best-practices#onboarding">can prefill that
-   * information</a> when creating the account. Connect Onboarding won’t ask for the prefilled
-   * information during account onboarding. You can prefill any information on the account.
+   * href="https://stripe.com/connect/marketplace/tasks/create#prefill-account-information">can
+   * prefill that information</a> when creating the account. Connect Onboarding won’t ask for the
+   * prefilled information during account onboarding. You can prefill any information on the
+   * account.
    */
   public Account create(AccountCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/accounts";
@@ -323,8 +328,7 @@ public final class AccountService extends ApiService {
    * flagged as suspicious.
    *
    * <p>Only accounts where your platform is liable for negative account balances, which includes
-   * Custom and Express accounts, can be rejected. Test-mode accounts can be rejected at any time.
-   * Live-mode accounts can only be rejected after all balances are zero.
+   * Custom and Express accounts, can be rejected.
    */
   public Account reject(String account, AccountRejectParams params) throws StripeException {
     return reject(account, params, (RequestOptions) null);
@@ -334,12 +338,72 @@ public final class AccountService extends ApiService {
    * flagged as suspicious.
    *
    * <p>Only accounts where your platform is liable for negative account balances, which includes
-   * Custom and Express accounts, can be rejected. Test-mode accounts can be rejected at any time.
-   * Live-mode accounts can only be rejected after all balances are zero.
+   * Custom and Express accounts, can be rejected.
    */
   public Account reject(String account, AccountRejectParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(account));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Account.class);
+  }
+  /**
+   * With Connect, you can unreject accounts that you have previously rejected.
+   *
+   * <p>Only accounts that were rejected by your platform can be unrejected. This API cannot be used
+   * to unreject accounts that were rejected by Stripe.
+   *
+   * <p>Unreject will only enable charges and/or payouts if there are no other restrictions other
+   * than those placed by a previous rejection. If you have separately paused charges and/or payouts
+   * outside of rejection, those pauses will remain in place after unrejection.
+   */
+  public Account unreject(String account, AccountUnrejectParams params) throws StripeException {
+    return unreject(account, params, (RequestOptions) null);
+  }
+  /**
+   * With Connect, you can unreject accounts that you have previously rejected.
+   *
+   * <p>Only accounts that were rejected by your platform can be unrejected. This API cannot be used
+   * to unreject accounts that were rejected by Stripe.
+   *
+   * <p>Unreject will only enable charges and/or payouts if there are no other restrictions other
+   * than those placed by a previous rejection. If you have separately paused charges and/or payouts
+   * outside of rejection, those pauses will remain in place after unrejection.
+   */
+  public Account unreject(String account, RequestOptions options) throws StripeException {
+    return unreject(account, (AccountUnrejectParams) null, options);
+  }
+  /**
+   * With Connect, you can unreject accounts that you have previously rejected.
+   *
+   * <p>Only accounts that were rejected by your platform can be unrejected. This API cannot be used
+   * to unreject accounts that were rejected by Stripe.
+   *
+   * <p>Unreject will only enable charges and/or payouts if there are no other restrictions other
+   * than those placed by a previous rejection. If you have separately paused charges and/or payouts
+   * outside of rejection, those pauses will remain in place after unrejection.
+   */
+  public Account unreject(String account) throws StripeException {
+    return unreject(account, (AccountUnrejectParams) null, (RequestOptions) null);
+  }
+  /**
+   * With Connect, you can unreject accounts that you have previously rejected.
+   *
+   * <p>Only accounts that were rejected by your platform can be unrejected. This API cannot be used
+   * to unreject accounts that were rejected by Stripe.
+   *
+   * <p>Unreject will only enable charges and/or payouts if there are no other restrictions other
+   * than those placed by a previous rejection. If you have separately paused charges and/or payouts
+   * outside of rejection, those pauses will remain in place after unrejection.
+   */
+  public Account unreject(String account, AccountUnrejectParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/accounts/%s/unreject", ApiResource.urlEncodeId(account));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

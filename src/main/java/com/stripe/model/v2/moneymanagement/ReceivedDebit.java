@@ -115,11 +115,17 @@ public class ReceivedDebit extends StripeObject implements HasId {
     @SerializedName("statement_descriptor")
     String statementDescriptor;
 
-    /** The payment method used to originate the debit. */
+    /**
+     * Object containing details of the US Bank Account that originated the debit. Present when the
+     * debit was originated via ACH.
+     */
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
-    /** The payment method used to originate the debit. */
+    /**
+     * Object containing details of the US Bank Account that originated the debit. Present when the
+     * debit was originated via ACH.
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
