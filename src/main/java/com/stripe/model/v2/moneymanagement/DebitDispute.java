@@ -97,7 +97,7 @@ public class DebitDispute extends StripeObject implements HasId {
     /**
      * The bank network the dispute was originated on.
      *
-     * <p>Equal to {@code ach}.
+     * <p>One of {@code ach}, or {@code bacs}.
      */
     @SerializedName("network")
     String network;
@@ -105,7 +105,9 @@ public class DebitDispute extends StripeObject implements HasId {
     /**
      * The reason for the dispute.
      *
-     * <p>One of {@code incorrect_amount_or_date}, or {@code unauthorized}.
+     * <p>One of {@code beneficiary_unrecognized}, {@code incorrect_amount_or_date}, {@code
+     * mandate_canceled}, {@code mandate_canceled_by_stripe}, {@code no_advance_notice}, {@code
+     * originator_requested}, {@code signature_invalid}, or {@code unauthorized}.
      */
     @SerializedName("reason")
     String reason;

@@ -247,6 +247,9 @@ public final class EventDataClassLookup {
         "v2.money_management.received_debit",
         com.stripe.model.v2.moneymanagement.ReceivedDebit.class);
     classLookup.put(
+        "v2.money_management.received_debit_mandate",
+        com.stripe.model.v2.moneymanagement.ReceivedDebitMandate.class);
+    classLookup.put(
         "v2.money_management.recipient_verification",
         com.stripe.model.v2.moneymanagement.RecipientVerification.class);
     classLookup.put(
@@ -274,6 +277,12 @@ public final class EventDataClassLookup {
     classLookup.put("v2.reporting.report", com.stripe.model.v2.reporting.Report.class);
     classLookup.put("v2.reporting.report_run", com.stripe.model.v2.reporting.ReportRun.class);
 
+    classLookup.put("v2.risk.inquiry", com.stripe.model.v2.risk.Inquiry.class);
+
+    classLookup.put(
+        "v2.signals.account_activity", com.stripe.model.v2.signals.AccountActivity.class);
+    classLookup.put(
+        "v2.signals.account_evaluation", com.stripe.model.v2.signals.AccountEvaluation.class);
     classLookup.put("v2.signals.account_signal", com.stripe.model.v2.signals.AccountSignal.class);
 
     classLookup.put("v2.tax.manual_rule", com.stripe.model.v2.tax.ManualRule.class);
@@ -1185,17 +1194,38 @@ public final class EventDataClassLookup {
         "v2.money_management.received_debit.canceled",
         com.stripe.events.V2MoneyManagementReceivedDebitCanceledEvent.class);
     eventClassLookup.put(
+        "v2.money_management.received_debit.created",
+        com.stripe.events.V2MoneyManagementReceivedDebitCreatedEvent.class);
+    eventClassLookup.put(
         "v2.money_management.received_debit.failed",
         com.stripe.events.V2MoneyManagementReceivedDebitFailedEvent.class);
     eventClassLookup.put(
         "v2.money_management.received_debit.pending",
         com.stripe.events.V2MoneyManagementReceivedDebitPendingEvent.class);
     eventClassLookup.put(
+        "v2.money_management.received_debit.scheduled",
+        com.stripe.events.V2MoneyManagementReceivedDebitScheduledEvent.class);
+    eventClassLookup.put(
         "v2.money_management.received_debit.succeeded",
         com.stripe.events.V2MoneyManagementReceivedDebitSucceededEvent.class);
     eventClassLookup.put(
         "v2.money_management.received_debit.updated",
         com.stripe.events.V2MoneyManagementReceivedDebitUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.received_debit_mandate.canceled",
+        com.stripe.events.V2MoneyManagementReceivedDebitMandateCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.received_debit_mandate.created",
+        com.stripe.events.V2MoneyManagementReceivedDebitMandateCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.received_debit_mandate.expired",
+        com.stripe.events.V2MoneyManagementReceivedDebitMandateExpiredEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.received_debit_mandate.pending_cancellation",
+        com.stripe.events.V2MoneyManagementReceivedDebitMandatePendingCancellationEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.received_debit_mandate.updated",
+        com.stripe.events.V2MoneyManagementReceivedDebitMandateUpdatedEvent.class);
     eventClassLookup.put(
         "v2.money_management.recipient_verification.created",
         com.stripe.events.V2MoneyManagementRecipientVerificationCreatedEvent.class);
@@ -1298,10 +1328,19 @@ public final class EventDataClassLookup {
         "v2.reporting.report_run.updated",
         com.stripe.events.V2ReportingReportRunUpdatedEvent.class);
     eventClassLookup.put(
+        "v2.signals.account_evaluation.complete",
+        com.stripe.events.V2SignalsAccountEvaluationCompleteEvent.class);
+    eventClassLookup.put(
         "v2.signals.account_signal.fraudulent_merchant_ready",
         com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEvent.class);
     eventClassLookup.put(
+        "v2.signals.account_signal.fraudulent_website_ready",
+        com.stripe.events.V2SignalsAccountSignalFraudulentWebsiteReadyEvent.class);
+    eventClassLookup.put(
         "v2.signals.account_signal.merchant_delinquency_ready",
         com.stripe.events.V2SignalsAccountSignalMerchantDelinquencyReadyEvent.class);
+    eventClassLookup.put(
+        "v2.signals.account_signal.payment_delinquency_exposure_ready",
+        com.stripe.events.V2SignalsAccountSignalPaymentDelinquencyExposureReadyEvent.class);
   }
 }

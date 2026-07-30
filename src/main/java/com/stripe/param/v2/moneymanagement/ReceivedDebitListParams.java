@@ -24,9 +24,15 @@ public class ReceivedDebitListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  private ReceivedDebitListParams(Map<String, Object> extraParams, Long limit) {
+  /** Filter by the received debit mandate ID. */
+  @SerializedName("received_debit_mandate")
+  String receivedDebitMandate;
+
+  private ReceivedDebitListParams(
+      Map<String, Object> extraParams, Long limit, String receivedDebitMandate) {
     this.extraParams = extraParams;
     this.limit = limit;
+    this.receivedDebitMandate = receivedDebitMandate;
   }
 
   public static Builder builder() {
@@ -38,9 +44,11 @@ public class ReceivedDebitListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private String receivedDebitMandate;
+
     /** Finalize and obtain parameter instance from this builder. */
     public ReceivedDebitListParams build() {
-      return new ReceivedDebitListParams(this.extraParams, this.limit);
+      return new ReceivedDebitListParams(this.extraParams, this.limit, this.receivedDebitMandate);
     }
 
     /**
@@ -72,6 +80,12 @@ public class ReceivedDebitListParams extends ApiRequestParams {
     /** The page limit. */
     public Builder setLimit(Long limit) {
       this.limit = limit;
+      return this;
+    }
+
+    /** Filter by the received debit mandate ID. */
+    public Builder setReceivedDebitMandate(String receivedDebitMandate) {
+      this.receivedDebitMandate = receivedDebitMandate;
       return this;
     }
   }

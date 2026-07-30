@@ -143,6 +143,10 @@ public class Authorization extends ApiResource
   @SerializedName("fuel")
   Fuel fuel;
 
+  /** Details about the IIAS FSA/HSA healthcare amounts on this authorization. */
+  @SerializedName("healthcare")
+  Healthcare healthcare;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -1419,6 +1423,66 @@ public class Authorization extends ApiResource
   }
 
   /**
+   * For more details about Healthcare, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Healthcare extends StripeObject {
+    /**
+     * Clinic and urgent care sub-amount for Visa only. Null if the merchant did not include this
+     * amount.
+     */
+    @SerializedName("clinic_amount")
+    Long clinicAmount;
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /** Dental care sub-amount for Visa only. Null if the merchant did not include this amount. */
+    @SerializedName("dental_amount")
+    Long dentalAmount;
+
+    /** Prescription drug sub-amount. Null if the merchant did not include this amount. */
+    @SerializedName("prescription_amount")
+    Long prescriptionAmount;
+
+    /**
+     * The type of healthcare transaction. {@code medical} for FSA/HSA-eligible healthcare
+     * purchases; {@code transit_for_healthcare} for FSA/HSA-eligible transit for healthcare
+     * purchases.
+     *
+     * <p>One of {@code medical}, or {@code transit_for_healthcare}.
+     */
+    @SerializedName("purchase_type")
+    String purchaseType;
+
+    /** Total FSA/HSA-eligible amount in the smallest currency unit. */
+    @SerializedName("total_qualified_amount")
+    Long totalQualifiedAmount;
+
+    /**
+     * IIAS verification status from the merchant terminal. For Visa, this value will always be
+     * iias_verified.
+     *
+     * <p>One of {@code iias_merchant_exempt}, {@code iias_merchant_not_certified}, {@code
+     * iias_verified}, or {@code not_verified}.
+     */
+    @SerializedName("verification_status")
+    String verificationStatus;
+
+    /** Vision/optical sub-amount. Null if the merchant did not include this amount. */
+    @SerializedName("vision_amount")
+    Long visionAmount;
+  }
+
+  /**
    * For more details about MerchantData, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -2516,6 +2580,7 @@ public class Authorization extends ApiResource
     trySetResponseGetter(enrichedMerchantData, responseGetter);
     trySetResponseGetter(fleet, responseGetter);
     trySetResponseGetter(fuel, responseGetter);
+    trySetResponseGetter(healthcare, responseGetter);
     trySetResponseGetter(merchantData, responseGetter);
     trySetResponseGetter(networkData, responseGetter);
     trySetResponseGetter(pendingRequest, responseGetter);

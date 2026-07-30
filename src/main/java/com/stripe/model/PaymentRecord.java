@@ -10,6 +10,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentRecordCreateParams;
+import com.stripe.param.PaymentRecordListParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptCanceledParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptFailedParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptGuaranteedParams;
@@ -176,6 +177,41 @@ public class PaymentRecord extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /** List all the Payment Records for a given merchant. */
+  public static PaymentRecordCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** List all the Payment Records for a given merchant. */
+  public static PaymentRecordCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/payment_records";
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, PaymentRecordCollection.class);
+  }
+
+  /** List all the Payment Records for a given merchant. */
+  public static PaymentRecordCollection list(PaymentRecordListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** List all the Payment Records for a given merchant. */
+  public static PaymentRecordCollection list(PaymentRecordListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/payment_records";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, PaymentRecordCollection.class);
   }
 
   /**

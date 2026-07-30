@@ -37,6 +37,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @SerializedName("billing_address_collection")
   BillingAddressCollection billingAddressCollection;
 
+  /** Configure fields to gather active consent from customers. */
+  @SerializedName("consent_collection")
+  ConsentCollection consentCollection;
+
   /**
    * Collect additional information from your customer using custom fields. Up to 3 fields are
    * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
@@ -163,6 +167,14 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   Object shippingAddressCollection;
 
   /**
+   * The shipping rate options to apply to <a
+   * href="https://docs.stripe.com/api/checkout/sessions">checkout sessions</a> created by this
+   * payment link.
+   */
+  @SerializedName("shipping_options")
+  Object shippingOptions;
+
+  /**
    * Describes the type of transaction being performed in order to customize relevant text on the
    * page, such as the submit button. Changing this value will also affect the hostname in the <a
    * href="https://docs.stripe.com/api/payment_links/payment_links/object#url">url</a> property
@@ -188,6 +200,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       Boolean allowPromotionCodes,
       AutomaticTax automaticTax,
       BillingAddressCollection billingAddressCollection,
+      ConsentCollection consentCollection,
       Object customFields,
       CustomText customText,
       CustomerCreation customerCreation,
@@ -206,6 +219,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       PhoneNumberCollection phoneNumberCollection,
       Object restrictions,
       Object shippingAddressCollection,
+      Object shippingOptions,
       SubmitType submitType,
       SubscriptionData subscriptionData,
       TaxIdCollection taxIdCollection) {
@@ -214,6 +228,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     this.allowPromotionCodes = allowPromotionCodes;
     this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
+    this.consentCollection = consentCollection;
     this.customFields = customFields;
     this.customText = customText;
     this.customerCreation = customerCreation;
@@ -232,6 +247,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     this.phoneNumberCollection = phoneNumberCollection;
     this.restrictions = restrictions;
     this.shippingAddressCollection = shippingAddressCollection;
+    this.shippingOptions = shippingOptions;
     this.submitType = submitType;
     this.subscriptionData = subscriptionData;
     this.taxIdCollection = taxIdCollection;
@@ -251,6 +267,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     private AutomaticTax automaticTax;
 
     private BillingAddressCollection billingAddressCollection;
+
+    private ConsentCollection consentCollection;
 
     private Object customFields;
 
@@ -288,6 +306,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     private Object shippingAddressCollection;
 
+    private Object shippingOptions;
+
     private SubmitType submitType;
 
     private SubscriptionData subscriptionData;
@@ -302,6 +322,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           this.allowPromotionCodes,
           this.automaticTax,
           this.billingAddressCollection,
+          this.consentCollection,
           this.customFields,
           this.customText,
           this.customerCreation,
@@ -320,6 +341,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           this.phoneNumberCollection,
           this.restrictions,
           this.shippingAddressCollection,
+          this.shippingOptions,
           this.submitType,
           this.subscriptionData,
           this.taxIdCollection);
@@ -356,6 +378,13 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     public Builder setBillingAddressCollection(
         PaymentLinkUpdateParams.BillingAddressCollection billingAddressCollection) {
       this.billingAddressCollection = billingAddressCollection;
+      return this;
+    }
+
+    /** Configure fields to gather active consent from customers. */
+    public Builder setConsentCollection(
+        PaymentLinkUpdateParams.ConsentCollection consentCollection) {
+      this.consentCollection = consentCollection;
       return this;
     }
 
@@ -733,6 +762,55 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     /** Configuration for collecting the customer's shipping address. */
     public Builder setShippingAddressCollection(EmptyParam shippingAddressCollection) {
       this.shippingAddressCollection = shippingAddressCollection;
+      return this;
+    }
+
+    /**
+     * Add an element to `shippingOptions` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentLinkUpdateParams#shippingOptions} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addShippingOption(PaymentLinkUpdateParams.ShippingOption element) {
+      if (this.shippingOptions == null || this.shippingOptions instanceof EmptyParam) {
+        this.shippingOptions = new ArrayList<PaymentLinkUpdateParams.ShippingOption>();
+      }
+      ((List<PaymentLinkUpdateParams.ShippingOption>) this.shippingOptions).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `shippingOptions` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentLinkUpdateParams#shippingOptions} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllShippingOption(List<PaymentLinkUpdateParams.ShippingOption> elements) {
+      if (this.shippingOptions == null || this.shippingOptions instanceof EmptyParam) {
+        this.shippingOptions = new ArrayList<PaymentLinkUpdateParams.ShippingOption>();
+      }
+      ((List<PaymentLinkUpdateParams.ShippingOption>) this.shippingOptions).addAll(elements);
+      return this;
+    }
+
+    /**
+     * The shipping rate options to apply to <a
+     * href="https://docs.stripe.com/api/checkout/sessions">checkout sessions</a> created by this
+     * payment link.
+     */
+    public Builder setShippingOptions(EmptyParam shippingOptions) {
+      this.shippingOptions = shippingOptions;
+      return this;
+    }
+
+    /**
+     * The shipping rate options to apply to <a
+     * href="https://docs.stripe.com/api/checkout/sessions">checkout sessions</a> created by this
+     * payment link.
+     */
+    public Builder setShippingOptions(
+        List<PaymentLinkUpdateParams.ShippingOption> shippingOptions) {
+      this.shippingOptions = shippingOptions;
       return this;
     }
 
@@ -1269,6 +1347,269 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         Type(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ConsentCollection {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Determines the display of payment method reuse agreement text in the UI. If set to {@code
+     * hidden}, it will hide legal text related to the reuse of a payment method.
+     */
+    @SerializedName("payment_method_reuse_agreement")
+    PaymentMethodReuseAgreement paymentMethodReuseAgreement;
+
+    /**
+     * If set to {@code auto}, enables the collection of customer consent for promotional
+     * communications. The Checkout Session will determine whether to display an option to opt into
+     * promotional communication from the merchant depending on the customer's locale. Only
+     * available to US merchants and US customers.
+     */
+    @SerializedName("promotions")
+    Promotions promotions;
+
+    /**
+     * If set to {@code required}, it requires customers to check a terms of service checkbox before
+     * being able to pay. There must be a valid terms of service URL set in your <a
+     * href="https://dashboard.stripe.com/settings/public">Dashboard settings</a>.
+     */
+    @SerializedName("terms_of_service")
+    TermsOfService termsOfService;
+
+    private ConsentCollection(
+        Map<String, Object> extraParams,
+        PaymentMethodReuseAgreement paymentMethodReuseAgreement,
+        Promotions promotions,
+        TermsOfService termsOfService) {
+      this.extraParams = extraParams;
+      this.paymentMethodReuseAgreement = paymentMethodReuseAgreement;
+      this.promotions = promotions;
+      this.termsOfService = termsOfService;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private PaymentMethodReuseAgreement paymentMethodReuseAgreement;
+
+      private Promotions promotions;
+
+      private TermsOfService termsOfService;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkUpdateParams.ConsentCollection build() {
+        return new PaymentLinkUpdateParams.ConsentCollection(
+            this.extraParams,
+            this.paymentMethodReuseAgreement,
+            this.promotions,
+            this.termsOfService);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkUpdateParams.ConsentCollection#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkUpdateParams.ConsentCollection#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Determines the display of payment method reuse agreement text in the UI. If set to {@code
+       * hidden}, it will hide legal text related to the reuse of a payment method.
+       */
+      public Builder setPaymentMethodReuseAgreement(
+          PaymentLinkUpdateParams.ConsentCollection.PaymentMethodReuseAgreement
+              paymentMethodReuseAgreement) {
+        this.paymentMethodReuseAgreement = paymentMethodReuseAgreement;
+        return this;
+      }
+
+      /**
+       * If set to {@code auto}, enables the collection of customer consent for promotional
+       * communications. The Checkout Session will determine whether to display an option to opt
+       * into promotional communication from the merchant depending on the customer's locale. Only
+       * available to US merchants and US customers.
+       */
+      public Builder setPromotions(
+          PaymentLinkUpdateParams.ConsentCollection.Promotions promotions) {
+        this.promotions = promotions;
+        return this;
+      }
+
+      /**
+       * If set to {@code required}, it requires customers to check a terms of service checkbox
+       * before being able to pay. There must be a valid terms of service URL set in your <a
+       * href="https://dashboard.stripe.com/settings/public">Dashboard settings</a>.
+       */
+      public Builder setTermsOfService(
+          PaymentLinkUpdateParams.ConsentCollection.TermsOfService termsOfService) {
+        this.termsOfService = termsOfService;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentMethodReuseAgreement {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> Determines the position and visibility of the payment method
+       * reuse agreement in the UI. When set to {@code auto}, Stripe's defaults will be used. When
+       * set to {@code hidden}, the payment method reuse agreement text will always be hidden in the
+       * UI.
+       */
+      @SerializedName("position")
+      Position position;
+
+      private PaymentMethodReuseAgreement(Map<String, Object> extraParams, Position position) {
+        this.extraParams = extraParams;
+        this.position = position;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Position position;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkUpdateParams.ConsentCollection.PaymentMethodReuseAgreement build() {
+          return new PaymentLinkUpdateParams.ConsentCollection.PaymentMethodReuseAgreement(
+              this.extraParams, this.position);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentLinkUpdateParams.ConsentCollection.PaymentMethodReuseAgreement#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentLinkUpdateParams.ConsentCollection.PaymentMethodReuseAgreement#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Determines the position and visibility of the payment method
+         * reuse agreement in the UI. When set to {@code auto}, Stripe's defaults will be used. When
+         * set to {@code hidden}, the payment method reuse agreement text will always be hidden in
+         * the UI.
+         */
+        public Builder setPosition(
+            PaymentLinkUpdateParams.ConsentCollection.PaymentMethodReuseAgreement.Position
+                position) {
+          this.position = position;
+          return this;
+        }
+      }
+
+      public enum Position implements ApiRequestParams.EnumParam {
+        @SerializedName("auto")
+        AUTO("auto"),
+
+        @SerializedName("hidden")
+        HIDDEN("hidden");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Position(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    public enum Promotions implements ApiRequestParams.EnumParam {
+      @SerializedName("auto")
+      AUTO("auto"),
+
+      @SerializedName("none")
+      NONE("none");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Promotions(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum TermsOfService implements ApiRequestParams.EnumParam {
+      @SerializedName("none")
+      NONE("none"),
+
+      @SerializedName("required")
+      REQUIRED("required");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      TermsOfService(String value) {
+        this.value = value;
       }
     }
   }
@@ -4070,6 +4411,30 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     Object metadata;
 
     /**
+     * Indicates that you intend to <a
+     * href="https://docs.stripe.com/payments/payment-intents#future-usage">make future payments</a>
+     * with the payment method collected by this Checkout Session.
+     *
+     * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer that
+     * their payment details will be saved.
+     *
+     * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer that
+     * their payment details will be saved and used for future payments.
+     *
+     * <p>If a Customer has been provided or Checkout creates a new Customer,Checkout will attach
+     * the payment method to the Customer.
+     *
+     * <p>If Checkout does not create a Customer, the payment method is not attached to a Customer.
+     * To reuse the payment method, you can retrieve it from the Checkout Session's PaymentIntent.
+     *
+     * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
+     * dynamically optimize your payment flow and comply with regional legislation and network
+     * rules, such as SCA.
+     */
+    @SerializedName("setup_future_usage")
+    ApiRequestParams.EnumParam setupFutureUsage;
+
+    /**
      * Text that appears on the customer's statement as the statement descriptor for a non-card
      * charge. This value overrides the account's default statement descriptor. For information
      * about requirements, including the 22-character limit, see <a
@@ -4104,12 +4469,14 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         Object description,
         Map<String, Object> extraParams,
         Object metadata,
+        ApiRequestParams.EnumParam setupFutureUsage,
         Object statementDescriptor,
         Object statementDescriptorSuffix,
         Object transferGroup) {
       this.description = description;
       this.extraParams = extraParams;
       this.metadata = metadata;
+      this.setupFutureUsage = setupFutureUsage;
       this.statementDescriptor = statementDescriptor;
       this.statementDescriptorSuffix = statementDescriptorSuffix;
       this.transferGroup = transferGroup;
@@ -4126,6 +4493,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       private Object metadata;
 
+      private ApiRequestParams.EnumParam setupFutureUsage;
+
       private Object statementDescriptor;
 
       private Object statementDescriptorSuffix;
@@ -4138,6 +4507,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
             this.description,
             this.extraParams,
             this.metadata,
+            this.setupFutureUsage,
             this.statementDescriptor,
             this.statementDescriptorSuffix,
             this.transferGroup);
@@ -4233,6 +4603,61 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       }
 
       /**
+       * Indicates that you intend to <a
+       * href="https://docs.stripe.com/payments/payment-intents#future-usage">make future
+       * payments</a> with the payment method collected by this Checkout Session.
+       *
+       * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer
+       * that their payment details will be saved.
+       *
+       * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer
+       * that their payment details will be saved and used for future payments.
+       *
+       * <p>If a Customer has been provided or Checkout creates a new Customer,Checkout will attach
+       * the payment method to the Customer.
+       *
+       * <p>If Checkout does not create a Customer, the payment method is not attached to a
+       * Customer. To reuse the payment method, you can retrieve it from the Checkout Session's
+       * PaymentIntent.
+       *
+       * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as SCA.
+       */
+      public Builder setSetupFutureUsage(
+          PaymentLinkUpdateParams.PaymentIntentData.SetupFutureUsage setupFutureUsage) {
+        this.setupFutureUsage = setupFutureUsage;
+        return this;
+      }
+
+      /**
+       * Indicates that you intend to <a
+       * href="https://docs.stripe.com/payments/payment-intents#future-usage">make future
+       * payments</a> with the payment method collected by this Checkout Session.
+       *
+       * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer
+       * that their payment details will be saved.
+       *
+       * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer
+       * that their payment details will be saved and used for future payments.
+       *
+       * <p>If a Customer has been provided or Checkout creates a new Customer,Checkout will attach
+       * the payment method to the Customer.
+       *
+       * <p>If Checkout does not create a Customer, the payment method is not attached to a
+       * Customer. To reuse the payment method, you can retrieve it from the Checkout Session's
+       * PaymentIntent.
+       *
+       * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as SCA.
+       */
+      public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+        this.setupFutureUsage = setupFutureUsage;
+        return this;
+      }
+
+      /**
        * Text that appears on the customer's statement as the statement descriptor for a non-card
        * charge. This value overrides the account's default statement descriptor. For information
        * about requirements, including the 22-character limit, see <a
@@ -4304,6 +4729,21 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       public Builder setTransferGroup(EmptyParam transferGroup) {
         this.transferGroup = transferGroup;
         return this;
+      }
+    }
+
+    public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+      @SerializedName("off_session")
+      OFF_SESSION("off_session"),
+
+      @SerializedName("on_session")
+      ON_SESSION("on_session");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      SetupFutureUsage(String value) {
+        this.value = value;
       }
     }
   }
@@ -5674,6 +6114,81 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       AllowedCountry(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ShippingOption {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The ID of the Shipping Rate to use for this shipping option. */
+    @SerializedName("shipping_rate")
+    Object shippingRate;
+
+    private ShippingOption(Map<String, Object> extraParams, Object shippingRate) {
+      this.extraParams = extraParams;
+      this.shippingRate = shippingRate;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object shippingRate;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkUpdateParams.ShippingOption build() {
+        return new PaymentLinkUpdateParams.ShippingOption(this.extraParams, this.shippingRate);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkUpdateParams.ShippingOption#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkUpdateParams.ShippingOption#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The ID of the Shipping Rate to use for this shipping option. */
+      public Builder setShippingRate(String shippingRate) {
+        this.shippingRate = shippingRate;
+        return this;
+      }
+
+      /** The ID of the Shipping Rate to use for this shipping option. */
+      public Builder setShippingRate(EmptyParam shippingRate) {
+        this.shippingRate = shippingRate;
+        return this;
       }
     }
   }

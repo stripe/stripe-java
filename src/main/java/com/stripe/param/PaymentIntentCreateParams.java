@@ -8112,17 +8112,17 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           Boolean taxExemptIndicator;
 
           /** Array of tax details. */
-          @SerializedName("taxes")
-          List<PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax> taxes;
+          @SerializedName("tax_items")
+          List<PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem> taxItems;
 
           private Tax(
               Map<String, Object> extraParams,
               Boolean taxExemptIndicator,
-              List<PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax>
-                  taxes) {
+              List<PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem>
+                  taxItems) {
             this.extraParams = extraParams;
             this.taxExemptIndicator = taxExemptIndicator;
-            this.taxes = taxes;
+            this.taxItems = taxItems;
           }
 
           public static Builder builder() {
@@ -8134,13 +8134,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
             private Boolean taxExemptIndicator;
 
-            private List<PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax>
-                taxes;
+            private List<PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem>
+                taxItems;
 
             /** Finalize and obtain parameter instance from this builder. */
             public PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax build() {
               return new PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax(
-                  this.extraParams, this.taxExemptIndicator, this.taxes);
+                  this.extraParams, this.taxExemptIndicator, this.taxItems);
             }
 
             /**
@@ -8180,40 +8180,40 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             }
 
             /**
-             * Add an element to `taxes` list. A list is initialized for the first `add/addAll`
+             * Add an element to `taxItems` list. A list is initialized for the first `add/addAll`
              * call, and subsequent calls adds additional elements to the original list. See {@link
-             * PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax#taxes} for the field
-             * documentation.
+             * PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax#taxItems} for the
+             * field documentation.
              */
-            public Builder addTax(
-                PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax element) {
-              if (this.taxes == null) {
-                this.taxes = new ArrayList<>();
+            public Builder addTaxItem(
+                PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem element) {
+              if (this.taxItems == null) {
+                this.taxItems = new ArrayList<>();
               }
-              this.taxes.add(element);
+              this.taxItems.add(element);
               return this;
             }
 
             /**
-             * Add all elements to `taxes` list. A list is initialized for the first `add/addAll`
+             * Add all elements to `taxItems` list. A list is initialized for the first `add/addAll`
              * call, and subsequent calls adds additional elements to the original list. See {@link
-             * PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax#taxes} for the field
-             * documentation.
+             * PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax#taxItems} for the
+             * field documentation.
              */
-            public Builder addAllTax(
-                List<PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax>
+            public Builder addAllTaxItem(
+                List<PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem>
                     elements) {
-              if (this.taxes == null) {
-                this.taxes = new ArrayList<>();
+              if (this.taxItems == null) {
+                this.taxItems = new ArrayList<>();
               }
-              this.taxes.addAll(elements);
+              this.taxItems.addAll(elements);
               return this;
             }
           }
 
           @Getter
           @EqualsAndHashCode(callSuper = false)
-          public static class InnerTax {
+          public static class TaxItem {
             /** Tax amount. */
             @SerializedName("amount")
             Long amount;
@@ -8236,7 +8236,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             @SerializedName("type")
             String type;
 
-            private InnerTax(Long amount, Map<String, Object> extraParams, Long rate, String type) {
+            private TaxItem(Long amount, Map<String, Object> extraParams, Long rate, String type) {
               this.amount = amount;
               this.extraParams = extraParams;
               this.rate = rate;
@@ -8257,10 +8257,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               private String type;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax
+              public PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem
                   build() {
-                return new PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax
-                    .InnerTax(this.amount, this.extraParams, this.rate, this.type);
+                return new PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem(
+                    this.amount, this.extraParams, this.rate, this.type);
               }
 
               /** Tax amount. */
@@ -8273,7 +8273,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                * Add a key/value pair to `extraParams` map. A map is initialized for the first
                * `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax#extraParams}
+               * PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem#extraParams}
                * for the field documentation.
                */
               public Builder putExtraParam(String key, Object value) {
@@ -8288,7 +8288,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                * Add all map key/value pairs to `extraParams` map. A map is initialized for the
                * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax#extraParams}
+               * PaymentIntentCreateParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem#extraParams}
                * for the field documentation.
                */
               public Builder putAllExtraParam(Map<String, Object> map) {
@@ -12652,14 +12652,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /** Array of tax details. */
-          @SerializedName("taxes")
-          List<PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.InnerTax> taxes;
+          @SerializedName("tax_items")
+          List<PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.TaxItem> taxItems;
 
           private Tax(
               Map<String, Object> extraParams,
-              List<PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.InnerTax> taxes) {
+              List<PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.TaxItem>
+                  taxItems) {
             this.extraParams = extraParams;
-            this.taxes = taxes;
+            this.taxItems = taxItems;
           }
 
           public static Builder builder() {
@@ -12669,13 +12670,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           public static class Builder {
             private Map<String, Object> extraParams;
 
-            private List<PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.InnerTax>
-                taxes;
+            private List<PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.TaxItem>
+                taxItems;
 
             /** Finalize and obtain parameter instance from this builder. */
             public PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax build() {
               return new PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax(
-                  this.extraParams, this.taxes);
+                  this.extraParams, this.taxItems);
             }
 
             /**
@@ -12709,40 +12710,40 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             }
 
             /**
-             * Add an element to `taxes` list. A list is initialized for the first `add/addAll`
+             * Add an element to `taxItems` list. A list is initialized for the first `add/addAll`
              * call, and subsequent calls adds additional elements to the original list. See {@link
-             * PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax#taxes} for the field
+             * PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax#taxItems} for the field
              * documentation.
              */
-            public Builder addTax(
-                PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.InnerTax element) {
-              if (this.taxes == null) {
-                this.taxes = new ArrayList<>();
+            public Builder addTaxItem(
+                PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.TaxItem element) {
+              if (this.taxItems == null) {
+                this.taxItems = new ArrayList<>();
               }
-              this.taxes.add(element);
+              this.taxItems.add(element);
               return this;
             }
 
             /**
-             * Add all elements to `taxes` list. A list is initialized for the first `add/addAll`
+             * Add all elements to `taxItems` list. A list is initialized for the first `add/addAll`
              * call, and subsequent calls adds additional elements to the original list. See {@link
-             * PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax#taxes} for the field
+             * PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax#taxItems} for the field
              * documentation.
              */
-            public Builder addAllTax(
-                List<PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.InnerTax>
+            public Builder addAllTaxItem(
+                List<PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.TaxItem>
                     elements) {
-              if (this.taxes == null) {
-                this.taxes = new ArrayList<>();
+              if (this.taxItems == null) {
+                this.taxItems = new ArrayList<>();
               }
-              this.taxes.addAll(elements);
+              this.taxItems.addAll(elements);
               return this;
             }
           }
 
           @Getter
           @EqualsAndHashCode(callSuper = false)
-          public static class InnerTax {
+          public static class TaxItem {
             /** Tax amount. */
             @SerializedName("amount")
             Long amount;
@@ -12765,7 +12766,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             @SerializedName("type")
             String type;
 
-            private InnerTax(Long amount, Map<String, Object> extraParams, Long rate, String type) {
+            private TaxItem(Long amount, Map<String, Object> extraParams, Long rate, String type) {
               this.amount = amount;
               this.extraParams = extraParams;
               this.rate = rate;
@@ -12786,9 +12787,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               private String type;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.InnerTax
-                  build() {
-                return new PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.InnerTax(
+              public PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.TaxItem build() {
+                return new PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.TaxItem(
                     this.amount, this.extraParams, this.rate, this.type);
               }
 
@@ -12802,7 +12802,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                * Add a key/value pair to `extraParams` map. A map is initialized for the first
                * `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.InnerTax#extraParams}
+               * PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.TaxItem#extraParams}
                * for the field documentation.
                */
               public Builder putExtraParam(String key, Object value) {
@@ -12817,7 +12817,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                * Add all map key/value pairs to `extraParams` map. A map is initialized for the
                * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.InnerTax#extraParams}
+               * PaymentIntentCreateParams.PaymentDetails.FlightData.Total.Tax.TaxItem#extraParams}
                * for the field documentation.
                */
               public Builder putAllExtraParam(Map<String, Object> map) {
@@ -15518,16 +15518,17 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           Boolean taxExemptIndicator;
 
           /** Tax details. */
-          @SerializedName("taxes")
-          List<PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.InnerTax> taxes;
+          @SerializedName("tax_items")
+          List<PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.TaxItem> taxItems;
 
           private Tax(
               Map<String, Object> extraParams,
               Boolean taxExemptIndicator,
-              List<PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.InnerTax> taxes) {
+              List<PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.TaxItem>
+                  taxItems) {
             this.extraParams = extraParams;
             this.taxExemptIndicator = taxExemptIndicator;
-            this.taxes = taxes;
+            this.taxItems = taxItems;
           }
 
           public static Builder builder() {
@@ -15539,13 +15540,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
             private Boolean taxExemptIndicator;
 
-            private List<PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.InnerTax>
-                taxes;
+            private List<PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.TaxItem>
+                taxItems;
 
             /** Finalize and obtain parameter instance from this builder. */
             public PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax build() {
               return new PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax(
-                  this.extraParams, this.taxExemptIndicator, this.taxes);
+                  this.extraParams, this.taxExemptIndicator, this.taxItems);
             }
 
             /**
@@ -15585,40 +15586,40 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             }
 
             /**
-             * Add an element to `taxes` list. A list is initialized for the first `add/addAll`
+             * Add an element to `taxItems` list. A list is initialized for the first `add/addAll`
              * call, and subsequent calls adds additional elements to the original list. See {@link
-             * PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax#taxes} for the field
-             * documentation.
+             * PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax#taxItems} for the
+             * field documentation.
              */
-            public Builder addTax(
-                PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.InnerTax element) {
-              if (this.taxes == null) {
-                this.taxes = new ArrayList<>();
+            public Builder addTaxItem(
+                PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.TaxItem element) {
+              if (this.taxItems == null) {
+                this.taxItems = new ArrayList<>();
               }
-              this.taxes.add(element);
+              this.taxItems.add(element);
               return this;
             }
 
             /**
-             * Add all elements to `taxes` list. A list is initialized for the first `add/addAll`
+             * Add all elements to `taxItems` list. A list is initialized for the first `add/addAll`
              * call, and subsequent calls adds additional elements to the original list. See {@link
-             * PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax#taxes} for the field
-             * documentation.
+             * PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax#taxItems} for the
+             * field documentation.
              */
-            public Builder addAllTax(
-                List<PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.InnerTax>
+            public Builder addAllTaxItem(
+                List<PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.TaxItem>
                     elements) {
-              if (this.taxes == null) {
-                this.taxes = new ArrayList<>();
+              if (this.taxItems == null) {
+                this.taxItems = new ArrayList<>();
               }
-              this.taxes.addAll(elements);
+              this.taxItems.addAll(elements);
               return this;
             }
           }
 
           @Getter
           @EqualsAndHashCode(callSuper = false)
-          public static class InnerTax {
+          public static class TaxItem {
             /** Tax amount in cents. */
             @SerializedName("amount")
             Long amount;
@@ -15641,7 +15642,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             @SerializedName("type")
             String type;
 
-            private InnerTax(Long amount, Map<String, Object> extraParams, Long rate, String type) {
+            private TaxItem(Long amount, Map<String, Object> extraParams, Long rate, String type) {
               this.amount = amount;
               this.extraParams = extraParams;
               this.rate = rate;
@@ -15662,9 +15663,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               private String type;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.InnerTax
+              public PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.TaxItem
                   build() {
-                return new PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.InnerTax(
+                return new PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.TaxItem(
                     this.amount, this.extraParams, this.rate, this.type);
               }
 
@@ -15678,7 +15679,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                * Add a key/value pair to `extraParams` map. A map is initialized for the first
                * `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.InnerTax#extraParams}
+               * PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.TaxItem#extraParams}
                * for the field documentation.
                */
               public Builder putExtraParam(String key, Object value) {
@@ -15693,7 +15694,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                * Add all map key/value pairs to `extraParams` map. A map is initialized for the
                * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.InnerTax#extraParams}
+               * PaymentIntentCreateParams.PaymentDetails.LodgingData.Total.Tax.TaxItem#extraParams}
                * for the field documentation.
                */
               public Builder putAllExtraParam(Map<String, Object> map) {
@@ -20396,11 +20397,17 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("bank_rakyat")
         BANK_RAKYAT("bank_rakyat"),
 
+        @SerializedName("bnp_paribas")
+        BNP_PARIBAS("bnp_paribas"),
+
         @SerializedName("bsn")
         BSN("bsn"),
 
         @SerializedName("cimb")
         CIMB("cimb"),
+
+        @SerializedName("citibank")
+        CITIBANK("citibank"),
 
         @SerializedName("deutsche_bank")
         DEUTSCHE_BANK("deutsche_bank"),
@@ -20419,6 +20426,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         @SerializedName("maybank2u")
         MAYBANK2U("maybank2u"),
+
+        @SerializedName("mbsb_bank")
+        MBSB_BANK("mbsb_bank"),
 
         @SerializedName("ocbc")
         OCBC("ocbc"),
@@ -44687,9 +44697,35 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Payco(ApiRequestParams.EnumParam captureMethod, Map<String, Object> extraParams) {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Payco(
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
       }
 
       public static Builder builder() {
@@ -44701,10 +44737,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private SetupFutureUsage setupFutureUsage;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.Payco build() {
           return new PaymentIntentCreateParams.PaymentMethodOptions.Payco(
-              this.captureMethod, this.extraParams);
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -44765,6 +44803,33 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentCreateParams.PaymentMethodOptions.Payco.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
       }
 
       public enum CaptureMethod implements ApiRequestParams.EnumParam {
@@ -44775,6 +44840,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         private final String value;
 
         CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
           this.value = value;
         }
       }
@@ -47463,10 +47540,35 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
       private SamsungPay(
-          ApiRequestParams.EnumParam captureMethod, Map<String, Object> extraParams) {
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
       }
 
       public static Builder builder() {
@@ -47478,10 +47580,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private SetupFutureUsage setupFutureUsage;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.SamsungPay build() {
           return new PaymentIntentCreateParams.PaymentMethodOptions.SamsungPay(
-              this.captureMethod, this.extraParams);
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -47542,6 +47646,33 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentCreateParams.PaymentMethodOptions.SamsungPay.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
       }
 
       public enum CaptureMethod implements ApiRequestParams.EnumParam {
@@ -47552,6 +47683,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         private final String value;
 
         CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
           this.value = value;
         }
       }
@@ -51510,6 +51653,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * The referrer URL of the current checkout session. You can use this to supply session-level
+     * referrer data when a Radar Session isn't available or doesn't contain a referrer.
+     */
+    @SerializedName("referrer")
+    Object referrer;
+
+    /**
      * A <a href="https://docs.stripe.com/radar/radar-session">Radar Session</a> is a snapshot of
      * the browser metadata and device details that help Radar make more accurate predictions on
      * your payments.
@@ -51517,8 +51667,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("session")
     String session;
 
-    private RadarOptions(Map<String, Object> extraParams, String session) {
+    private RadarOptions(Map<String, Object> extraParams, Object referrer, String session) {
       this.extraParams = extraParams;
+      this.referrer = referrer;
       this.session = session;
     }
 
@@ -51529,11 +51680,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
+      private Object referrer;
+
       private String session;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentCreateParams.RadarOptions build() {
-        return new PaymentIntentCreateParams.RadarOptions(this.extraParams, this.session);
+        return new PaymentIntentCreateParams.RadarOptions(
+            this.extraParams, this.referrer, this.session);
       }
 
       /**
@@ -51559,6 +51713,24 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * The referrer URL of the current checkout session. You can use this to supply session-level
+       * referrer data when a Radar Session isn't available or doesn't contain a referrer.
+       */
+      public Builder setReferrer(String referrer) {
+        this.referrer = referrer;
+        return this;
+      }
+
+      /**
+       * The referrer URL of the current checkout session. You can use this to supply session-level
+       * referrer data when a Radar Session isn't available or doesn't contain a referrer.
+       */
+      public Builder setReferrer(EmptyParam referrer) {
+        this.referrer = referrer;
         return this;
       }
 

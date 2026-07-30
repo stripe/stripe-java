@@ -52,6 +52,10 @@ public class CardholderUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The cardholder's name. This will be printed on cards issued to them. */
+  @SerializedName("name")
+  Object name;
+
   /**
    * The cardholder's phone number. This is required for all cardholders who will be creating EU
    * cards. See the <a href="https://docs.stripe.com/issuing/3d-secure">3D Secure documentation</a>
@@ -89,6 +93,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Individual individual,
       Map<String, String> metadata,
+      Object name,
       Object phoneNumber,
       List<CardholderUpdateParams.PreferredLocale> preferredLocales,
       SpendingControls spendingControls,
@@ -100,6 +105,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.individual = individual;
     this.metadata = metadata;
+    this.name = name;
     this.phoneNumber = phoneNumber;
     this.preferredLocales = preferredLocales;
     this.spendingControls = spendingControls;
@@ -125,6 +131,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private Object name;
+
     private Object phoneNumber;
 
     private List<CardholderUpdateParams.PreferredLocale> preferredLocales;
@@ -143,6 +151,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.individual,
           this.metadata,
+          this.name,
           this.phoneNumber,
           this.preferredLocales,
           this.spendingControls,
@@ -254,6 +263,18 @@ public class CardholderUpdateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** The cardholder's name. This will be printed on cards issued to them. */
+    public Builder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /** The cardholder's name. This will be printed on cards issued to them. */
+    public Builder setName(EmptyParam name) {
+      this.name = name;
       return this;
     }
 

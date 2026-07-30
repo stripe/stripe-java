@@ -6481,17 +6481,17 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           Boolean taxExemptIndicator;
 
           /** Array of tax details. */
-          @SerializedName("taxes")
-          List<PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax> taxes;
+          @SerializedName("tax_items")
+          List<PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem> taxItems;
 
           private Tax(
               Map<String, Object> extraParams,
               Boolean taxExemptIndicator,
-              List<PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax>
-                  taxes) {
+              List<PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem>
+                  taxItems) {
             this.extraParams = extraParams;
             this.taxExemptIndicator = taxExemptIndicator;
-            this.taxes = taxes;
+            this.taxItems = taxItems;
           }
 
           public static Builder builder() {
@@ -6503,13 +6503,13 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
             private Boolean taxExemptIndicator;
 
-            private List<PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax>
-                taxes;
+            private List<PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem>
+                taxItems;
 
             /** Finalize and obtain parameter instance from this builder. */
             public PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax build() {
               return new PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax(
-                  this.extraParams, this.taxExemptIndicator, this.taxes);
+                  this.extraParams, this.taxExemptIndicator, this.taxItems);
             }
 
             /**
@@ -6549,41 +6549,40 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
             }
 
             /**
-             * Add an element to `taxes` list. A list is initialized for the first `add/addAll`
+             * Add an element to `taxItems` list. A list is initialized for the first `add/addAll`
              * call, and subsequent calls adds additional elements to the original list. See {@link
-             * PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax#taxes} for the
+             * PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax#taxItems} for the
              * field documentation.
              */
-            public Builder addTax(
-                PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax
-                    element) {
-              if (this.taxes == null) {
-                this.taxes = new ArrayList<>();
+            public Builder addTaxItem(
+                PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem element) {
+              if (this.taxItems == null) {
+                this.taxItems = new ArrayList<>();
               }
-              this.taxes.add(element);
+              this.taxItems.add(element);
               return this;
             }
 
             /**
-             * Add all elements to `taxes` list. A list is initialized for the first `add/addAll`
+             * Add all elements to `taxItems` list. A list is initialized for the first `add/addAll`
              * call, and subsequent calls adds additional elements to the original list. See {@link
-             * PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax#taxes} for the
+             * PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax#taxItems} for the
              * field documentation.
              */
-            public Builder addAllTax(
-                List<PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax>
+            public Builder addAllTaxItem(
+                List<PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem>
                     elements) {
-              if (this.taxes == null) {
-                this.taxes = new ArrayList<>();
+              if (this.taxItems == null) {
+                this.taxItems = new ArrayList<>();
               }
-              this.taxes.addAll(elements);
+              this.taxItems.addAll(elements);
               return this;
             }
           }
 
           @Getter
           @EqualsAndHashCode(callSuper = false)
-          public static class InnerTax {
+          public static class TaxItem {
             /** Tax amount. */
             @SerializedName("amount")
             Long amount;
@@ -6606,7 +6605,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
             @SerializedName("type")
             String type;
 
-            private InnerTax(Long amount, Map<String, Object> extraParams, Long rate, String type) {
+            private TaxItem(Long amount, Map<String, Object> extraParams, Long rate, String type) {
               this.amount = amount;
               this.extraParams = extraParams;
               this.rate = rate;
@@ -6627,10 +6626,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
               private String type;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax
+              public PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem
                   build() {
                 return new PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax
-                    .InnerTax(this.amount, this.extraParams, this.rate, this.type);
+                    .TaxItem(this.amount, this.extraParams, this.rate, this.type);
               }
 
               /** Tax amount. */
@@ -6643,7 +6642,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
                * Add a key/value pair to `extraParams` map. A map is initialized for the first
                * `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax#extraParams}
+               * PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem#extraParams}
                * for the field documentation.
                */
               public Builder putExtraParam(String key, Object value) {
@@ -6658,7 +6657,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
                * Add all map key/value pairs to `extraParams` map. A map is initialized for the
                * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.InnerTax#extraParams}
+               * PaymentIntentCaptureParams.PaymentDetails.CarRentalData.Total.Tax.TaxItem#extraParams}
                * for the field documentation.
                */
               public Builder putAllExtraParam(Map<String, Object> map) {
@@ -11028,14 +11027,15 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /** Array of tax details. */
-          @SerializedName("taxes")
-          List<PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.InnerTax> taxes;
+          @SerializedName("tax_items")
+          List<PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.TaxItem> taxItems;
 
           private Tax(
               Map<String, Object> extraParams,
-              List<PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.InnerTax> taxes) {
+              List<PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.TaxItem>
+                  taxItems) {
             this.extraParams = extraParams;
-            this.taxes = taxes;
+            this.taxItems = taxItems;
           }
 
           public static Builder builder() {
@@ -11045,13 +11045,13 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           public static class Builder {
             private Map<String, Object> extraParams;
 
-            private List<PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.InnerTax>
-                taxes;
+            private List<PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.TaxItem>
+                taxItems;
 
             /** Finalize and obtain parameter instance from this builder. */
             public PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax build() {
               return new PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax(
-                  this.extraParams, this.taxes);
+                  this.extraParams, this.taxItems);
             }
 
             /**
@@ -11085,40 +11085,40 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
             }
 
             /**
-             * Add an element to `taxes` list. A list is initialized for the first `add/addAll`
+             * Add an element to `taxItems` list. A list is initialized for the first `add/addAll`
              * call, and subsequent calls adds additional elements to the original list. See {@link
-             * PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax#taxes} for the field
-             * documentation.
+             * PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax#taxItems} for the
+             * field documentation.
              */
-            public Builder addTax(
-                PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.InnerTax element) {
-              if (this.taxes == null) {
-                this.taxes = new ArrayList<>();
+            public Builder addTaxItem(
+                PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.TaxItem element) {
+              if (this.taxItems == null) {
+                this.taxItems = new ArrayList<>();
               }
-              this.taxes.add(element);
+              this.taxItems.add(element);
               return this;
             }
 
             /**
-             * Add all elements to `taxes` list. A list is initialized for the first `add/addAll`
+             * Add all elements to `taxItems` list. A list is initialized for the first `add/addAll`
              * call, and subsequent calls adds additional elements to the original list. See {@link
-             * PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax#taxes} for the field
-             * documentation.
+             * PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax#taxItems} for the
+             * field documentation.
              */
-            public Builder addAllTax(
-                List<PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.InnerTax>
+            public Builder addAllTaxItem(
+                List<PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.TaxItem>
                     elements) {
-              if (this.taxes == null) {
-                this.taxes = new ArrayList<>();
+              if (this.taxItems == null) {
+                this.taxItems = new ArrayList<>();
               }
-              this.taxes.addAll(elements);
+              this.taxItems.addAll(elements);
               return this;
             }
           }
 
           @Getter
           @EqualsAndHashCode(callSuper = false)
-          public static class InnerTax {
+          public static class TaxItem {
             /** Tax amount. */
             @SerializedName("amount")
             Long amount;
@@ -11141,7 +11141,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
             @SerializedName("type")
             String type;
 
-            private InnerTax(Long amount, Map<String, Object> extraParams, Long rate, String type) {
+            private TaxItem(Long amount, Map<String, Object> extraParams, Long rate, String type) {
               this.amount = amount;
               this.extraParams = extraParams;
               this.rate = rate;
@@ -11162,9 +11162,9 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
               private String type;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.InnerTax
+              public PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.TaxItem
                   build() {
-                return new PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.InnerTax(
+                return new PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.TaxItem(
                     this.amount, this.extraParams, this.rate, this.type);
               }
 
@@ -11178,7 +11178,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
                * Add a key/value pair to `extraParams` map. A map is initialized for the first
                * `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.InnerTax#extraParams}
+               * PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.TaxItem#extraParams}
                * for the field documentation.
                */
               public Builder putExtraParam(String key, Object value) {
@@ -11193,7 +11193,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
                * Add all map key/value pairs to `extraParams` map. A map is initialized for the
                * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.InnerTax#extraParams}
+               * PaymentIntentCaptureParams.PaymentDetails.FlightData.Total.Tax.TaxItem#extraParams}
                * for the field documentation.
                */
               public Builder putAllExtraParam(Map<String, Object> map) {
@@ -13906,17 +13906,17 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           Boolean taxExemptIndicator;
 
           /** Tax details. */
-          @SerializedName("taxes")
-          List<PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.InnerTax> taxes;
+          @SerializedName("tax_items")
+          List<PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.TaxItem> taxItems;
 
           private Tax(
               Map<String, Object> extraParams,
               Boolean taxExemptIndicator,
-              List<PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.InnerTax>
-                  taxes) {
+              List<PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.TaxItem>
+                  taxItems) {
             this.extraParams = extraParams;
             this.taxExemptIndicator = taxExemptIndicator;
-            this.taxes = taxes;
+            this.taxItems = taxItems;
           }
 
           public static Builder builder() {
@@ -13928,13 +13928,13 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
             private Boolean taxExemptIndicator;
 
-            private List<PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.InnerTax>
-                taxes;
+            private List<PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.TaxItem>
+                taxItems;
 
             /** Finalize and obtain parameter instance from this builder. */
             public PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax build() {
               return new PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax(
-                  this.extraParams, this.taxExemptIndicator, this.taxes);
+                  this.extraParams, this.taxExemptIndicator, this.taxItems);
             }
 
             /**
@@ -13974,40 +13974,40 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
             }
 
             /**
-             * Add an element to `taxes` list. A list is initialized for the first `add/addAll`
+             * Add an element to `taxItems` list. A list is initialized for the first `add/addAll`
              * call, and subsequent calls adds additional elements to the original list. See {@link
-             * PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax#taxes} for the field
-             * documentation.
+             * PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax#taxItems} for the
+             * field documentation.
              */
-            public Builder addTax(
-                PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.InnerTax element) {
-              if (this.taxes == null) {
-                this.taxes = new ArrayList<>();
+            public Builder addTaxItem(
+                PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.TaxItem element) {
+              if (this.taxItems == null) {
+                this.taxItems = new ArrayList<>();
               }
-              this.taxes.add(element);
+              this.taxItems.add(element);
               return this;
             }
 
             /**
-             * Add all elements to `taxes` list. A list is initialized for the first `add/addAll`
+             * Add all elements to `taxItems` list. A list is initialized for the first `add/addAll`
              * call, and subsequent calls adds additional elements to the original list. See {@link
-             * PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax#taxes} for the field
-             * documentation.
+             * PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax#taxItems} for the
+             * field documentation.
              */
-            public Builder addAllTax(
-                List<PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.InnerTax>
+            public Builder addAllTaxItem(
+                List<PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.TaxItem>
                     elements) {
-              if (this.taxes == null) {
-                this.taxes = new ArrayList<>();
+              if (this.taxItems == null) {
+                this.taxItems = new ArrayList<>();
               }
-              this.taxes.addAll(elements);
+              this.taxItems.addAll(elements);
               return this;
             }
           }
 
           @Getter
           @EqualsAndHashCode(callSuper = false)
-          public static class InnerTax {
+          public static class TaxItem {
             /** Tax amount in cents. */
             @SerializedName("amount")
             Long amount;
@@ -14030,7 +14030,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
             @SerializedName("type")
             String type;
 
-            private InnerTax(Long amount, Map<String, Object> extraParams, Long rate, String type) {
+            private TaxItem(Long amount, Map<String, Object> extraParams, Long rate, String type) {
               this.amount = amount;
               this.extraParams = extraParams;
               this.rate = rate;
@@ -14051,9 +14051,9 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
               private String type;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.InnerTax
+              public PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.TaxItem
                   build() {
-                return new PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.InnerTax(
+                return new PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.TaxItem(
                     this.amount, this.extraParams, this.rate, this.type);
               }
 
@@ -14067,7 +14067,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
                * Add a key/value pair to `extraParams` map. A map is initialized for the first
                * `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.InnerTax#extraParams}
+               * PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.TaxItem#extraParams}
                * for the field documentation.
                */
               public Builder putExtraParam(String key, Object value) {
@@ -14082,7 +14082,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
                * Add all map key/value pairs to `extraParams` map. A map is initialized for the
                * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
-               * PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.InnerTax#extraParams}
+               * PaymentIntentCaptureParams.PaymentDetails.LodgingData.Total.Tax.TaxItem#extraParams}
                * for the field documentation.
                */
               public Builder putAllExtraParam(Map<String, Object> map) {

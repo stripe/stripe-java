@@ -180,7 +180,7 @@ public class GrantedToken extends ApiResource implements HasId {
      * name matching this value. It contains additional information specific to the PaymentMethod
      * type.
      *
-     * <p>One of {@code affirm}, {@code card}, {@code klarna}, {@code link}, or {@code shop_pay}.
+     * <p>One of {@code affirm}, {@code card}, {@code klarna}, or {@code link}.
      */
     @SerializedName("type")
     String type;

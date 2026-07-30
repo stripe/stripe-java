@@ -13,6 +13,11 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class DepositAddressCreateParams extends ApiRequestParams {
+  /**
+   * If set, this deposit address is scoped to a <a
+   * href="https://docs.stripe.com/api/customers/object">Customer</a> and can only receive funds
+   * from that customer. Otherwise, this deposit address can receive funds from any customer.
+   */
   @SerializedName("customer")
   String customer;
 
@@ -29,10 +34,15 @@ public class DepositAddressCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
+   */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** <strong>Required.</strong> */
+  /** <strong>Required.</strong> The blockchain network to generate a deposit address for. */
   @SerializedName("network")
   Network network;
 
@@ -70,6 +80,11 @@ public class DepositAddressCreateParams extends ApiRequestParams {
           this.customer, this.expand, this.extraParams, this.metadata, this.network);
     }
 
+    /**
+     * If set, this deposit address is scoped to a <a
+     * href="https://docs.stripe.com/api/customers/object">Customer</a> and can only receive funds
+     * from that customer. Otherwise, this deposit address can receive funds from any customer.
+     */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
@@ -153,7 +168,7 @@ public class DepositAddressCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> */
+    /** <strong>Required.</strong> The blockchain network to generate a deposit address for. */
     public Builder setNetwork(DepositAddressCreateParams.Network network) {
       this.network = network;
       return this;

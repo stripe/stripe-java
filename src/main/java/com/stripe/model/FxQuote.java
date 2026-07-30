@@ -20,9 +20,9 @@ import lombok.Setter;
 
 /**
  * The FX Quotes API provides three functions: - View Stripe's current exchange rate for any given
- * currency pair. - Extend quoted rates for a 1-hour period or a 24-hour period, minimizing
- * uncertainty from FX fluctuations. - Preview the FX fees Stripe will charge on your FX
- * transaction, allowing you to anticipate specific settlement amounts before payment costs.
+ * currency pair. - Extend quoted rates for up to a 24-hour period, minimizing uncertainty from FX
+ * fluctuations. - Preview the FX fees Stripe will charge on your FX transaction, allowing you to
+ * anticipate specific settlement amounts before payment costs.
  *
  * <p><a href="https://stripe.com/payments/currencies/localize-prices/fx-quotes-api">View the
  * docs</a>
@@ -41,9 +41,8 @@ public class FxQuote extends ApiResource implements HasId {
   String id;
 
   /**
-   * The duration the exchange rate quote remains valid from creation time. Allowed values are none,
-   * hour, and day. Note that for the test mode API available in alpha, you can request an extended
-   * quote, but it won't be usable for any transactions.
+   * The duration that the quote is locked for, from creation time. The quote will be usable for the
+   * duration specified.
    *
    * <p>One of {@code day}, {@code five_minutes}, {@code hour}, or {@code none}.
    */
@@ -126,16 +125,16 @@ public class FxQuote extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of FX quotes that have been issued. The FX quotes are returned in sorted order,
-   * with the most recent FX quotes appearing first.
+   * Returns a list of active FX quotes. The FX quotes are returned in sorted order, with the most
+   * recent FX quotes appearing first.
    */
   public static FxQuoteCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of FX quotes that have been issued. The FX quotes are returned in sorted order,
-   * with the most recent FX quotes appearing first.
+   * Returns a list of active FX quotes. The FX quotes are returned in sorted order, with the most
+   * recent FX quotes appearing first.
    */
   public static FxQuoteCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -146,16 +145,16 @@ public class FxQuote extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of FX quotes that have been issued. The FX quotes are returned in sorted order,
-   * with the most recent FX quotes appearing first.
+   * Returns a list of active FX quotes. The FX quotes are returned in sorted order, with the most
+   * recent FX quotes appearing first.
    */
   public static FxQuoteCollection list(FxQuoteListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of FX quotes that have been issued. The FX quotes are returned in sorted order,
-   * with the most recent FX quotes appearing first.
+   * Returns a list of active FX quotes. The FX quotes are returned in sorted order, with the most
+   * recent FX quotes appearing first.
    */
   public static FxQuoteCollection list(FxQuoteListParams params, RequestOptions options)
       throws StripeException {

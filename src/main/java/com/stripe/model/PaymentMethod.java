@@ -2135,7 +2135,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     /**
      * The brand of the gift card.
      *
-     * <p>One of {@code fiserv_valuelink}, {@code givex}, or {@code svs}.
+     * <p>Equal to {@code svs}.
      */
     @SerializedName("brand")
     String brand;

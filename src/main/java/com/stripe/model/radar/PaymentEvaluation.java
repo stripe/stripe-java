@@ -628,6 +628,10 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       @SerializedName("billing_details")
       BillingDetails billingDetails;
 
+      /** Card details associated with the payment evaluation. */
+      @SerializedName("card")
+      Card card;
+
       /** The payment method used in this payment evaluation. */
       @SerializedName("payment_method")
       @Getter(lombok.AccessLevel.NONE)
@@ -709,6 +713,28 @@ public class PaymentEvaluation extends ApiResource implements HasId {
           @SerializedName("state")
           String state;
         }
+      }
+
+      /** Card details attached to this payment evaluation. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Card extends StripeObject {
+        /** Two-digit number representing the card's expiration month. */
+        @SerializedName("exp_month")
+        Long expMonth;
+
+        /** Four-digit number representing the card's expiration year. */
+        @SerializedName("exp_year")
+        Long expYear;
+
+        /** First six digits of the card number. */
+        @SerializedName("first6")
+        String first6;
+
+        /** Last four digits of the card number. */
+        @SerializedName("last4")
+        String last4;
       }
     }
 

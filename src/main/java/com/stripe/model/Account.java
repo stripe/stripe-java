@@ -15,6 +15,7 @@ import com.stripe.param.AccountListParams;
 import com.stripe.param.AccountPersonsParams;
 import com.stripe.param.AccountRejectParams;
 import com.stripe.param.AccountRetrieveParams;
+import com.stripe.param.AccountUnrejectParams;
 import com.stripe.param.AccountUpdateParams;
 import java.util.List;
 import java.util.Map;
@@ -623,6 +624,104 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, Account.class);
+  }
+
+  /**
+   * With Connect, you can unreject accounts that you have previously rejected.
+   *
+   * <p>Only accounts that were rejected by your platform can be unrejected. This API cannot be used
+   * to unreject accounts that were rejected by Stripe.
+   *
+   * <p>Unreject will only enable charges and/or payouts if there are no other restrictions other
+   * than those placed by a previous rejection. If you have separately paused charges and/or payouts
+   * outside of rejection, those pauses will remain in place after unrejection.
+   */
+  public Account unreject() throws StripeException {
+    return unreject((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * With Connect, you can unreject accounts that you have previously rejected.
+   *
+   * <p>Only accounts that were rejected by your platform can be unrejected. This API cannot be used
+   * to unreject accounts that were rejected by Stripe.
+   *
+   * <p>Unreject will only enable charges and/or payouts if there are no other restrictions other
+   * than those placed by a previous rejection. If you have separately paused charges and/or payouts
+   * outside of rejection, those pauses will remain in place after unrejection.
+   */
+  public Account unreject(RequestOptions options) throws StripeException {
+    return unreject((Map<String, Object>) null, options);
+  }
+
+  /**
+   * With Connect, you can unreject accounts that you have previously rejected.
+   *
+   * <p>Only accounts that were rejected by your platform can be unrejected. This API cannot be used
+   * to unreject accounts that were rejected by Stripe.
+   *
+   * <p>Unreject will only enable charges and/or payouts if there are no other restrictions other
+   * than those placed by a previous rejection. If you have separately paused charges and/or payouts
+   * outside of rejection, those pauses will remain in place after unrejection.
+   */
+  public Account unreject(Map<String, Object> params) throws StripeException {
+    return unreject(params, (RequestOptions) null);
+  }
+
+  /**
+   * With Connect, you can unreject accounts that you have previously rejected.
+   *
+   * <p>Only accounts that were rejected by your platform can be unrejected. This API cannot be used
+   * to unreject accounts that were rejected by Stripe.
+   *
+   * <p>Unreject will only enable charges and/or payouts if there are no other restrictions other
+   * than those placed by a previous rejection. If you have separately paused charges and/or payouts
+   * outside of rejection, those pauses will remain in place after unrejection.
+   */
+  public Account unreject(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/accounts/%s/unreject", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Account.class);
+  }
+
+  /**
+   * With Connect, you can unreject accounts that you have previously rejected.
+   *
+   * <p>Only accounts that were rejected by your platform can be unrejected. This API cannot be used
+   * to unreject accounts that were rejected by Stripe.
+   *
+   * <p>Unreject will only enable charges and/or payouts if there are no other restrictions other
+   * than those placed by a previous rejection. If you have separately paused charges and/or payouts
+   * outside of rejection, those pauses will remain in place after unrejection.
+   */
+  public Account unreject(AccountUnrejectParams params) throws StripeException {
+    return unreject(params, (RequestOptions) null);
+  }
+
+  /**
+   * With Connect, you can unreject accounts that you have previously rejected.
+   *
+   * <p>Only accounts that were rejected by your platform can be unrejected. This API cannot be used
+   * to unreject accounts that were rejected by Stripe.
+   *
+   * <p>Unreject will only enable charges and/or payouts if there are no other restrictions other
+   * than those placed by a previous rejection. If you have separately paused charges and/or payouts
+   * outside of rejection, those pauses will remain in place after unrejection.
+   */
+  public Account unreject(AccountUnrejectParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/accounts/%s/unreject", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Account.class);
   }
 
   /**
@@ -2405,8 +2504,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
     /**
      * Fields that need to be resolved to keep the account enabled. If not resolved by {@code
-     * current_deadline}, these fields will appear in {@code past_due} as well, and the account is
-     * disabled.
+     * current_deadline}, these fields will appear in {@code past_due} as well, and the account will
+     * be disabled.
      */
     @SerializedName("currently_due")
     List<String> currentlyDue;

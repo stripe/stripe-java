@@ -545,7 +545,13 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
 
   public enum Signal implements ApiRequestParams.EnumParam {
     @SerializedName("fraudulent_website")
-    FRAUDULENT_WEBSITE("fraudulent_website");
+    FRAUDULENT_WEBSITE("fraudulent_website"),
+
+    @SerializedName("user_account_sharing")
+    USER_ACCOUNT_SHARING("user_account_sharing"),
+
+    @SerializedName("user_multi_accounting")
+    USER_MULTI_ACCOUNTING("user_multi_accounting");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

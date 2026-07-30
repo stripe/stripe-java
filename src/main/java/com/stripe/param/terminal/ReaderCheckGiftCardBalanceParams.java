@@ -127,12 +127,6 @@ public class ReaderCheckGiftCardBalanceParams extends ApiRequestParams {
   }
 
   public enum Brand implements ApiRequestParams.EnumParam {
-    @SerializedName("fiserv_valuelink")
-    FISERV_VALUELINK("fiserv_valuelink"),
-
-    @SerializedName("givex")
-    GIVEX("givex"),
-
     @SerializedName("svs")
     SVS("svs");
 

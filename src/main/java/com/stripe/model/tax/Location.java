@@ -42,6 +42,13 @@ public class Location extends ApiResource implements HasId {
   String id;
 
   /**
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value.
    *
    * <p>Equal to {@code tax.location}.

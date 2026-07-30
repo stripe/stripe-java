@@ -382,8 +382,15 @@ import com.stripe.events.V2MoneyManagementReceivedCreditFailedEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedCreditReturnedEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedCreditSucceededEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedDebitCanceledEventNotification;
+import com.stripe.events.V2MoneyManagementReceivedDebitCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedDebitFailedEventNotification;
+import com.stripe.events.V2MoneyManagementReceivedDebitMandateCanceledEventNotification;
+import com.stripe.events.V2MoneyManagementReceivedDebitMandateCreatedEventNotification;
+import com.stripe.events.V2MoneyManagementReceivedDebitMandateExpiredEventNotification;
+import com.stripe.events.V2MoneyManagementReceivedDebitMandatePendingCancellationEventNotification;
+import com.stripe.events.V2MoneyManagementReceivedDebitMandateUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedDebitPendingEventNotification;
+import com.stripe.events.V2MoneyManagementReceivedDebitScheduledEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedDebitSucceededEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedDebitUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementRecipientVerificationCreatedEventNotification;
@@ -420,8 +427,11 @@ import com.stripe.events.V2ReportingReportRunCreatedEventNotification;
 import com.stripe.events.V2ReportingReportRunFailedEventNotification;
 import com.stripe.events.V2ReportingReportRunSucceededEventNotification;
 import com.stripe.events.V2ReportingReportRunUpdatedEventNotification;
+import com.stripe.events.V2SignalsAccountEvaluationCompleteEventNotification;
 import com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEventNotification;
+import com.stripe.events.V2SignalsAccountSignalFraudulentWebsiteReadyEventNotification;
 import com.stripe.events.V2SignalsAccountSignalMerchantDelinquencyReadyEventNotification;
+import com.stripe.events.V2SignalsAccountSignalPaymentDelinquencyExposureReadyEventNotification;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.v2.core.EventNotification;
 import java.util.ArrayList;
@@ -2826,6 +2836,12 @@ public class StripeEventNotificationHandler {
     return this;
   }
 
+  public StripeEventNotificationHandler onV2MoneyManagementReceivedDebitCreated(
+      Callback<V2MoneyManagementReceivedDebitCreatedEventNotification> callback) {
+    this.register("v2.money_management.received_debit.created", callback);
+    return this;
+  }
+
   public StripeEventNotificationHandler onV2MoneyManagementReceivedDebitFailed(
       Callback<V2MoneyManagementReceivedDebitFailedEventNotification> callback) {
     this.register("v2.money_management.received_debit.failed", callback);
@@ -2838,6 +2854,12 @@ public class StripeEventNotificationHandler {
     return this;
   }
 
+  public StripeEventNotificationHandler onV2MoneyManagementReceivedDebitScheduled(
+      Callback<V2MoneyManagementReceivedDebitScheduledEventNotification> callback) {
+    this.register("v2.money_management.received_debit.scheduled", callback);
+    return this;
+  }
+
   public StripeEventNotificationHandler onV2MoneyManagementReceivedDebitSucceeded(
       Callback<V2MoneyManagementReceivedDebitSucceededEventNotification> callback) {
     this.register("v2.money_management.received_debit.succeeded", callback);
@@ -2847,6 +2869,37 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV2MoneyManagementReceivedDebitUpdated(
       Callback<V2MoneyManagementReceivedDebitUpdatedEventNotification> callback) {
     this.register("v2.money_management.received_debit.updated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2MoneyManagementReceivedDebitMandateCanceled(
+      Callback<V2MoneyManagementReceivedDebitMandateCanceledEventNotification> callback) {
+    this.register("v2.money_management.received_debit_mandate.canceled", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2MoneyManagementReceivedDebitMandateCreated(
+      Callback<V2MoneyManagementReceivedDebitMandateCreatedEventNotification> callback) {
+    this.register("v2.money_management.received_debit_mandate.created", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2MoneyManagementReceivedDebitMandateExpired(
+      Callback<V2MoneyManagementReceivedDebitMandateExpiredEventNotification> callback) {
+    this.register("v2.money_management.received_debit_mandate.expired", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2MoneyManagementReceivedDebitMandatePendingCancellation(
+      Callback<V2MoneyManagementReceivedDebitMandatePendingCancellationEventNotification>
+          callback) {
+    this.register("v2.money_management.received_debit_mandate.pending_cancellation", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2MoneyManagementReceivedDebitMandateUpdated(
+      Callback<V2MoneyManagementReceivedDebitMandateUpdatedEventNotification> callback) {
+    this.register("v2.money_management.received_debit_mandate.updated", callback);
     return this;
   }
 
@@ -3054,15 +3107,33 @@ public class StripeEventNotificationHandler {
     return this;
   }
 
+  public StripeEventNotificationHandler onV2SignalsAccountEvaluationComplete(
+      Callback<V2SignalsAccountEvaluationCompleteEventNotification> callback) {
+    this.register("v2.signals.account_evaluation.complete", callback);
+    return this;
+  }
+
   public StripeEventNotificationHandler onV2SignalsAccountSignalFraudulentMerchantReady(
       Callback<V2SignalsAccountSignalFraudulentMerchantReadyEventNotification> callback) {
     this.register("v2.signals.account_signal.fraudulent_merchant_ready", callback);
     return this;
   }
 
+  public StripeEventNotificationHandler onV2SignalsAccountSignalFraudulentWebsiteReady(
+      Callback<V2SignalsAccountSignalFraudulentWebsiteReadyEventNotification> callback) {
+    this.register("v2.signals.account_signal.fraudulent_website_ready", callback);
+    return this;
+  }
+
   public StripeEventNotificationHandler onV2SignalsAccountSignalMerchantDelinquencyReady(
       Callback<V2SignalsAccountSignalMerchantDelinquencyReadyEventNotification> callback) {
     this.register("v2.signals.account_signal.merchant_delinquency_ready", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2SignalsAccountSignalPaymentDelinquencyExposureReady(
+      Callback<V2SignalsAccountSignalPaymentDelinquencyExposureReadyEventNotification> callback) {
+    this.register("v2.signals.account_signal.payment_delinquency_exposure_ready", callback);
     return this;
   }
   // notification-handler-methods: The end of the section generated from our OpenAPI spec

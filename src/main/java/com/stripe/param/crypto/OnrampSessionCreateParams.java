@@ -790,6 +790,9 @@ public class OnrampSessionCreateParams extends ApiRequestParams {
     @SerializedName("sui")
     SUI("sui"),
 
+    @SerializedName("tempo")
+    TEMPO("tempo"),
+
     @SerializedName("worldchain")
     WORLDCHAIN("worldchain");
 

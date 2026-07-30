@@ -2143,6 +2143,10 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("card_payments")
       CardPayments cardPayments;
 
+      /** Settings for gross settlement. */
+      @SerializedName("gross_settlement")
+      GrossSettlement grossSettlement;
+
       /** Settings specific to Konbini payments on the account. */
       @SerializedName("konbini_payments")
       KonbiniPayments konbiniPayments;
@@ -6817,6 +6821,24 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("cvc_failure")
           Boolean cvcFailure;
         }
+      }
+
+      /** Settings for gross settlement. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class GrossSettlement extends StripeObject {
+        /** The ID of the payment method to use for gross settlement payouts. */
+        @SerializedName("payment_method")
+        String paymentMethod;
+
+        /**
+         * Whether to collect a payment method for gross settlement.
+         *
+         * <p>One of {@code always}, or {@code never}.
+         */
+        @SerializedName("payment_method_collection")
+        String paymentMethodCollection;
       }
 
       /** Settings specific to Konbini payments on the account. */
@@ -14884,6 +14906,10 @@ public class Account extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BusinessDetails extends StripeObject {
+      /** Additional addresses associated with the business. */
+      @SerializedName("additional_addresses")
+      List<Account.Identity.BusinessDetails.AdditionalAddress> additionalAddresses;
+
       /** The company’s primary address. */
       @SerializedName("address")
       Address address;
@@ -14957,6 +14983,54 @@ public class Account extends StripeObject implements HasId {
        */
       @SerializedName("structure")
       String structure;
+
+      /**
+       * For more details about AdditionalAddress, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AdditionalAddress extends StripeObject {
+        /** City, district, suburb, town, or village. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        @SerializedName("line1")
+        String line1;
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        @SerializedName("line2")
+        String line2;
+
+        /** ZIP or postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /**
+         * Purpose of additional address.
+         *
+         * <p>One of {@code administrative}, or {@code principal_place_of_business}.
+         */
+        @SerializedName("purpose")
+        String purpose;
+
+        /** State, county, province, or region. */
+        @SerializedName("state")
+        String state;
+
+        /** Town or district. */
+        @SerializedName("town")
+        String town;
+      }
 
       /** The company’s primary address. */
       @Getter

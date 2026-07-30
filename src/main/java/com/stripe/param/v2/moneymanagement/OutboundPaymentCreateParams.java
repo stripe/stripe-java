@@ -53,10 +53,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   @SerializedName("outbound_payment_quote")
   String outboundPaymentQuote;
 
-  /** The PayoutIntent ID that triggered this OutboundPayment. */
-  @SerializedName("payout_intent")
-  String payoutIntent;
-
   /** The purpose of the OutboundPayment. */
   @SerializedName("purpose")
   Purpose purpose;
@@ -92,7 +88,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       From from,
       Map<String, String> metadata,
       String outboundPaymentQuote,
-      String payoutIntent,
       Purpose purpose,
       RecipientNotification recipientNotification,
       String recipientVerification,
@@ -105,7 +100,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     this.from = from;
     this.metadata = metadata;
     this.outboundPaymentQuote = outboundPaymentQuote;
-    this.payoutIntent = payoutIntent;
     this.purpose = purpose;
     this.recipientNotification = recipientNotification;
     this.recipientVerification = recipientVerification;
@@ -132,8 +126,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
     private String outboundPaymentQuote;
 
-    private String payoutIntent;
-
     private Purpose purpose;
 
     private RecipientNotification recipientNotification;
@@ -154,7 +146,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
           this.from,
           this.metadata,
           this.outboundPaymentQuote,
-          this.payoutIntent,
           this.purpose,
           this.recipientNotification,
           this.recipientVerification,
@@ -250,12 +241,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
      */
     public Builder setOutboundPaymentQuote(String outboundPaymentQuote) {
       this.outboundPaymentQuote = outboundPaymentQuote;
-      return this;
-    }
-
-    /** The PayoutIntent ID that triggered this OutboundPayment. */
-    public Builder setPayoutIntent(String payoutIntent) {
-      this.payoutIntent = payoutIntent;
       return this;
     }
 

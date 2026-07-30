@@ -160,6 +160,20 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PersonalizationDesign> personalizationDesign;
 
+  /**
+   * The product code the card is currently enrolled under. {@code product_graduation_state}
+   * reflects any in-flight product graduation and whether the card network has confirmed it.
+   */
+  @SerializedName("product_code")
+  String productCode;
+
+  /**
+   * State of the product graduation request on this card. Only present when a product graduation
+   * has been requested.
+   */
+  @SerializedName("product_graduation_state")
+  ProductGraduationState productGraduationState;
+
   /** The program that this card belongs to — will not be nil. */
   @SerializedName("program")
   String program;
@@ -487,6 +501,28 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       @SerializedName("payment_count")
       Long paymentCount;
     }
+  }
+
+  /**
+   * For more details about ProductGraduationState, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ProductGraduationState extends StripeObject {
+    /**
+     * Status of the product graduation request. {@code pending} while awaiting card network
+     * confirmation, {@code succeeded} once confirmed, {@code failed} if rejected.
+     *
+     * <p>One of {@code failed}, {@code pending}, or {@code succeeded}.
+     */
+    @SerializedName("state")
+    String state;
+
+    /** The product code the card graduation is targeting. */
+    @SerializedName("target_product_code")
+    String targetProductCode;
   }
 
   /**
@@ -1169,6 +1205,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     trySetResponseGetter(latestFraudWarning, responseGetter);
     trySetResponseGetter(lifecycleControls, responseGetter);
     trySetResponseGetter(personalizationDesign, responseGetter);
+    trySetResponseGetter(productGraduationState, responseGetter);
     trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(replacedBy, responseGetter);
     trySetResponseGetter(replacementFor, responseGetter);

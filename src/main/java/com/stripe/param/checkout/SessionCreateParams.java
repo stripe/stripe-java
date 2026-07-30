@@ -7944,15 +7944,6 @@ public class SessionCreateParams extends ApiRequestParams {
     AdjustableQuantity adjustableQuantity;
 
     /**
-     * The <a href="https://docs.stripe.com/api/tax_rates">tax rates</a> that will be applied to
-     * this line item depending on the customer's billing/shipping address. We currently support the
-     * following countries: US, GB, AU, and all countries in the EU. You can't set this parameter if
-     * {@code ui_mode} is {@code custom}.
-     */
-    @SerializedName("dynamic_tax_rates")
-    List<String> dynamicTaxRates;
-
-    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -8001,7 +7992,6 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private LineItem(
         AdjustableQuantity adjustableQuantity,
-        List<String> dynamicTaxRates,
         Map<String, Object> extraParams,
         Map<String, String> metadata,
         String price,
@@ -8009,7 +7999,6 @@ public class SessionCreateParams extends ApiRequestParams {
         Long quantity,
         List<String> taxRates) {
       this.adjustableQuantity = adjustableQuantity;
-      this.dynamicTaxRates = dynamicTaxRates;
       this.extraParams = extraParams;
       this.metadata = metadata;
       this.price = price;
@@ -8024,8 +8013,6 @@ public class SessionCreateParams extends ApiRequestParams {
 
     public static class Builder {
       private AdjustableQuantity adjustableQuantity;
-
-      private List<String> dynamicTaxRates;
 
       private Map<String, Object> extraParams;
 
@@ -8043,7 +8030,6 @@ public class SessionCreateParams extends ApiRequestParams {
       public SessionCreateParams.LineItem build() {
         return new SessionCreateParams.LineItem(
             this.adjustableQuantity,
-            this.dynamicTaxRates,
             this.extraParams,
             this.metadata,
             this.price,
@@ -8059,32 +8045,6 @@ public class SessionCreateParams extends ApiRequestParams {
       public Builder setAdjustableQuantity(
           SessionCreateParams.LineItem.AdjustableQuantity adjustableQuantity) {
         this.adjustableQuantity = adjustableQuantity;
-        return this;
-      }
-
-      /**
-       * Add an element to `dynamicTaxRates` list. A list is initialized for the first `add/addAll`
-       * call, and subsequent calls adds additional elements to the original list. See {@link
-       * SessionCreateParams.LineItem#dynamicTaxRates} for the field documentation.
-       */
-      public Builder addDynamicTaxRate(String element) {
-        if (this.dynamicTaxRates == null) {
-          this.dynamicTaxRates = new ArrayList<>();
-        }
-        this.dynamicTaxRates.add(element);
-        return this;
-      }
-
-      /**
-       * Add all elements to `dynamicTaxRates` list. A list is initialized for the first
-       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link SessionCreateParams.LineItem#dynamicTaxRates} for the field documentation.
-       */
-      public Builder addAllDynamicTaxRate(List<String> elements) {
-        if (this.dynamicTaxRates == null) {
-          this.dynamicTaxRates = new ArrayList<>();
-        }
-        this.dynamicTaxRates.addAll(elements);
         return this;
       }
 
@@ -17683,9 +17643,35 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Payco(CaptureMethod captureMethod, Map<String, Object> extraParams) {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Payco(
+          CaptureMethod captureMethod,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
       }
 
       public static Builder builder() {
@@ -17697,10 +17683,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private SetupFutureUsage setupFutureUsage;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.Payco build() {
           return new SessionCreateParams.PaymentMethodOptions.Payco(
-              this.captureMethod, this.extraParams);
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
         }
 
         /** Controls when the funds will be captured from the customer's account. */
@@ -17737,6 +17725,32 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.Payco.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
       }
 
       public enum CaptureMethod implements ApiRequestParams.EnumParam {
@@ -17747,6 +17761,18 @@ public class SessionCreateParams extends ApiRequestParams {
         private final String value;
 
         CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
           this.value = value;
         }
       }
@@ -19415,9 +19441,35 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private SamsungPay(CaptureMethod captureMethod, Map<String, Object> extraParams) {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private SamsungPay(
+          CaptureMethod captureMethod,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
       }
 
       public static Builder builder() {
@@ -19429,10 +19481,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private SetupFutureUsage setupFutureUsage;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.SamsungPay build() {
           return new SessionCreateParams.PaymentMethodOptions.SamsungPay(
-              this.captureMethod, this.extraParams);
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
         }
 
         /** Controls when the funds will be captured from the customer's account. */
@@ -19469,6 +19523,32 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.SamsungPay.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
       }
 
       public enum CaptureMethod implements ApiRequestParams.EnumParam {
@@ -19479,6 +19559,18 @@ public class SessionCreateParams extends ApiRequestParams {
         private final String value;
 
         CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
           this.value = value;
         }
       }

@@ -22,29 +22,29 @@ public final class FxQuoteService extends ApiService {
   }
 
   /**
-   * Returns a list of FX quotes that have been issued. The FX quotes are returned in sorted order,
-   * with the most recent FX quotes appearing first.
+   * Returns a list of active FX quotes. The FX quotes are returned in sorted order, with the most
+   * recent FX quotes appearing first.
    */
   public StripeCollection<FxQuote> list(FxQuoteListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
   /**
-   * Returns a list of FX quotes that have been issued. The FX quotes are returned in sorted order,
-   * with the most recent FX quotes appearing first.
+   * Returns a list of active FX quotes. The FX quotes are returned in sorted order, with the most
+   * recent FX quotes appearing first.
    */
   public StripeCollection<FxQuote> list(RequestOptions options) throws StripeException {
     return list((FxQuoteListParams) null, options);
   }
   /**
-   * Returns a list of FX quotes that have been issued. The FX quotes are returned in sorted order,
-   * with the most recent FX quotes appearing first.
+   * Returns a list of active FX quotes. The FX quotes are returned in sorted order, with the most
+   * recent FX quotes appearing first.
    */
   public StripeCollection<FxQuote> list() throws StripeException {
     return list((FxQuoteListParams) null, (RequestOptions) null);
   }
   /**
-   * Returns a list of FX quotes that have been issued. The FX quotes are returned in sorted order,
-   * with the most recent FX quotes appearing first.
+   * Returns a list of active FX quotes. The FX quotes are returned in sorted order, with the most
+   * recent FX quotes appearing first.
    */
   public StripeCollection<FxQuote> list(FxQuoteListParams params, RequestOptions options)
       throws StripeException {

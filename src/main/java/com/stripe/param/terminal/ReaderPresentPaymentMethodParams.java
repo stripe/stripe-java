@@ -38,6 +38,10 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Simulated data for the gift_card payment method. */
+  @SerializedName("gift_card")
+  GiftCard giftCard;
+
   /** Simulated data for the interac_present payment method. */
   @SerializedName("interac_present")
   InteracPresent interacPresent;
@@ -52,6 +56,7 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
       CardPresent cardPresent,
       List<String> expand,
       Map<String, Object> extraParams,
+      GiftCard giftCard,
       InteracPresent interacPresent,
       Type type) {
     this.amountTip = amountTip;
@@ -59,6 +64,7 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
     this.cardPresent = cardPresent;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.giftCard = giftCard;
     this.interacPresent = interacPresent;
     this.type = type;
   }
@@ -78,6 +84,8 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private GiftCard giftCard;
+
     private InteracPresent interacPresent;
 
     private Type type;
@@ -90,6 +98,7 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
           this.cardPresent,
           this.expand,
           this.extraParams,
+          this.giftCard,
           this.interacPresent,
           this.type);
     }
@@ -161,6 +170,12 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Simulated data for the gift_card payment method. */
+    public Builder setGiftCard(ReaderPresentPaymentMethodParams.GiftCard giftCard) {
+      this.giftCard = giftCard;
       return this;
     }
 
@@ -365,6 +380,102 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class GiftCard {
+    /** <strong>Required.</strong> The brand of the gift card. */
+    @SerializedName("brand")
+    Brand brand;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> Simulated track 2 data for the gift card payment method. */
+    @SerializedName("track_2")
+    String track2;
+
+    private GiftCard(Brand brand, Map<String, Object> extraParams, String track2) {
+      this.brand = brand;
+      this.extraParams = extraParams;
+      this.track2 = track2;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Brand brand;
+
+      private Map<String, Object> extraParams;
+
+      private String track2;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ReaderPresentPaymentMethodParams.GiftCard build() {
+        return new ReaderPresentPaymentMethodParams.GiftCard(
+            this.brand, this.extraParams, this.track2);
+      }
+
+      /** <strong>Required.</strong> The brand of the gift card. */
+      public Builder setBrand(ReaderPresentPaymentMethodParams.GiftCard.Brand brand) {
+        this.brand = brand;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ReaderPresentPaymentMethodParams.GiftCard#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ReaderPresentPaymentMethodParams.GiftCard#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> Simulated track 2 data for the gift card payment method. */
+      public Builder setTrack2(String track2) {
+        this.track2 = track2;
+        return this;
+      }
+    }
+
+    public enum Brand implements ApiRequestParams.EnumParam {
+      @SerializedName("svs")
+      SVS("svs");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Brand(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class InteracPresent {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -439,6 +550,9 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
 
     @SerializedName("card_present")
     CARD_PRESENT("card_present"),
+
+    @SerializedName("gift_card")
+    GIFT_CARD("gift_card"),
 
     @SerializedName("interac_present")
     INTERAC_PRESENT("interac_present");

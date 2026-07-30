@@ -167,6 +167,10 @@ public class OffSessionPayment extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
+  /** Provides a way to schedule deferred payments for cards and debits, in YYYY-MM-DD format. */
+  @SerializedName("target_date")
+  String targetDate;
+
   /** Test clock that can be used to advance the retry attempts in a sandbox. */
   @SerializedName("test_clock")
   String testClock;

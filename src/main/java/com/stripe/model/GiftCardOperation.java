@@ -60,7 +60,7 @@ public class GiftCardOperation extends ApiResource implements HasId {
    * invalid_number}, {@code invalid_pin}, {@code invalid_track_data}, {@code lost_card}, {@code
    * lost_or_stolen_card}, {@code pin_required}, {@code pin_tries_exceeded}, {@code
    * processing_error}, {@code provider_unavailable}, {@code stolen_card}, {@code suspected_fraud},
-   * or {@code timeout}.
+   * {@code timeout}, or {@code try_again_later}.
    */
   @SerializedName("failure_code")
   String failureCode;

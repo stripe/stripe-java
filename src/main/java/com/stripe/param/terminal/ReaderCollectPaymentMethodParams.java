@@ -377,12 +377,6 @@ public class ReaderCollectPaymentMethodParams extends ApiRequestParams {
     }
 
     public enum GiftCardBrand implements ApiRequestParams.EnumParam {
-      @SerializedName("fiserv_valuelink")
-      FISERV_VALUELINK("fiserv_valuelink"),
-
-      @SerializedName("givex")
-      GIVEX("givex"),
-
       @SerializedName("svs")
       SVS("svs");
 

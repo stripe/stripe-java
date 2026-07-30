@@ -91,6 +91,10 @@ public class OutboundPayment extends StripeObject implements HasId {
   @SerializedName("outbound_payment_quote")
   String outboundPaymentQuote;
 
+  /** The PayoutIntent ID that triggered this OutboundPayment. */
+  @SerializedName("payout_intent")
+  String payoutIntent;
+
   /**
    * The purpose of the OutboundPayment.
    *
