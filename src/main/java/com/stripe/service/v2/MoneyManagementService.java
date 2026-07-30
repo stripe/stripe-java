@@ -76,6 +76,11 @@ public final class MoneyManagementService extends ApiService {
         this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.moneymanagement.ReceivedDebitMandateService receivedDebitMandates() {
+    return new com.stripe.service.v2.moneymanagement.ReceivedDebitMandateService(
+        this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.moneymanagement.ReceivedDebitService receivedDebits() {
     return new com.stripe.service.v2.moneymanagement.ReceivedDebitService(this.getResponseGetter());
   }

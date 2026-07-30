@@ -114,6 +114,10 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
   @SerializedName("statement_descriptor_suffix")
   String statementDescriptorSuffix;
 
+  /** Provides a way to schedule deferred payments for cards and debits, in YYYY-MM-DD format. */
+  @SerializedName("target_date")
+  String targetDate;
+
   /** Test clock that can be used to advance the retry attempts in a sandbox. */
   @SerializedName("test_clock")
   String testClock;
@@ -145,6 +149,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       RetryDetails retryDetails,
       String statementDescriptor,
       String statementDescriptorSuffix,
+      String targetDate,
       String testClock,
       TransferData transferData) {
     this.amount = amount;
@@ -165,6 +170,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     this.retryDetails = retryDetails;
     this.statementDescriptor = statementDescriptor;
     this.statementDescriptorSuffix = statementDescriptorSuffix;
+    this.targetDate = targetDate;
     this.testClock = testClock;
     this.transferData = transferData;
   }
@@ -210,6 +216,8 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
 
     private String statementDescriptorSuffix;
 
+    private String targetDate;
+
     private String testClock;
 
     private TransferData transferData;
@@ -235,6 +243,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
           this.retryDetails,
           this.statementDescriptor,
           this.statementDescriptorSuffix,
+          this.targetDate,
           this.testClock,
           this.transferData);
     }
@@ -404,6 +413,12 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
      */
     public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
       this.statementDescriptorSuffix = statementDescriptorSuffix;
+      return this;
+    }
+
+    /** Provides a way to schedule deferred payments for cards and debits, in YYYY-MM-DD format. */
+    public Builder setTargetDate(String targetDate) {
+      this.targetDate = targetDate;
       return this;
     }
 

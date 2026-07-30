@@ -121,6 +121,10 @@ public class IssuedToken extends ApiResource implements HasId {
   @SerializedName("usage_limits")
   UsageLimits usageLimits;
 
+  /** Set to true when using Stripe.js, iOS, or Android client-side SDKs to handle next actions. */
+  @SerializedName("use_stripe_sdk")
+  Boolean useStripeSdk;
+
   /** Creates a new SharedPaymentIssuedToken object. */
   public static IssuedToken create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);

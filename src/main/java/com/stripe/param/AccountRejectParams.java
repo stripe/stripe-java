@@ -27,15 +27,27 @@ public class AccountRejectParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * Whether to pause payouts on the account as part of the rejection. Defaults to {@code pause}.
+   * Use {@code none} to leave payouts enabled.
+   */
+  @SerializedName("payouts_action")
+  PayoutsAction payoutsAction;
+
+  /**
    * <strong>Required.</strong> The reason for rejecting the account. Can be {@code fraud}, {@code
    * terms_of_service}, or {@code other}.
    */
   @SerializedName("reason")
   String reason;
 
-  private AccountRejectParams(List<String> expand, Map<String, Object> extraParams, String reason) {
+  private AccountRejectParams(
+      List<String> expand,
+      Map<String, Object> extraParams,
+      PayoutsAction payoutsAction,
+      String reason) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.payoutsAction = payoutsAction;
     this.reason = reason;
   }
 
@@ -48,11 +60,14 @@ public class AccountRejectParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private PayoutsAction payoutsAction;
+
     private String reason;
 
     /** Finalize and obtain parameter instance from this builder. */
     public AccountRejectParams build() {
-      return new AccountRejectParams(this.expand, this.extraParams, this.reason);
+      return new AccountRejectParams(
+          this.expand, this.extraParams, this.payoutsAction, this.reason);
     }
 
     /**
@@ -108,12 +123,36 @@ public class AccountRejectParams extends ApiRequestParams {
     }
 
     /**
+     * Whether to pause payouts on the account as part of the rejection. Defaults to {@code pause}.
+     * Use {@code none} to leave payouts enabled.
+     */
+    public Builder setPayoutsAction(AccountRejectParams.PayoutsAction payoutsAction) {
+      this.payoutsAction = payoutsAction;
+      return this;
+    }
+
+    /**
      * <strong>Required.</strong> The reason for rejecting the account. Can be {@code fraud}, {@code
      * terms_of_service}, or {@code other}.
      */
     public Builder setReason(String reason) {
       this.reason = reason;
       return this;
+    }
+  }
+
+  public enum PayoutsAction implements ApiRequestParams.EnumParam {
+    @SerializedName("none")
+    NONE("none"),
+
+    @SerializedName("pause")
+    PAUSE("pause");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    PayoutsAction(String value) {
+      this.value = value;
     }
   }
 }

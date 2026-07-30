@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec
 package com.stripe.model.v2.signals;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
+import com.stripe.model.StringInt64TypeAdapter;
 import com.stripe.model.StripeObject;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -25,6 +27,10 @@ public class AccountSignal extends StripeObject implements HasId {
   @SerializedName("account_details")
   AccountDetails accountDetails;
 
+  /** The account evaluation that produced this signal, if applicable. */
+  @SerializedName("account_evaluation")
+  String accountEvaluation;
+
   /** Timestamp at which the signal was created. */
   @SerializedName("created")
   Instant created;
@@ -32,6 +38,10 @@ public class AccountSignal extends StripeObject implements HasId {
   /** Data for the fraudulent merchant signal. Present only when type is fraudulent_merchant. */
   @SerializedName("fraudulent_merchant")
   FraudulentMerchant fraudulentMerchant;
+
+  /** Data for the fraudulent website signal. Present only when type is fraudulent_website. */
+  @SerializedName("fraudulent_website")
+  FraudulentWebsite fraudulentWebsite;
 
   /** Unique identifier for the account signal. */
   @Getter(onMethod_ = {@Override})
@@ -59,13 +69,29 @@ public class AccountSignal extends StripeObject implements HasId {
   String object;
 
   /**
+   * Data for the payment delinquency exposure signal. Present only when type is
+   * payment_delinquency_exposure.
+   */
+  @SerializedName("payment_delinquency_exposure")
+  PaymentDelinquencyExposure paymentDelinquencyExposure;
+
+  /**
    * The type of signal.
    *
-   * <p>One of {@code fraudulent_merchant}, {@code merchant_delinquency}, or {@code
-   * payment_delinquency_exposure}.
+   * <p>One of {@code fraudulent_merchant}, {@code fraudulent_website}, {@code
+   * merchant_delinquency}, {@code payment_delinquency_exposure}, {@code user_account_sharing}, or
+   * {@code user_multi_accounting}.
    */
   @SerializedName("type")
   String type;
+
+  /** Data for the user account-sharing signal. Present only when type is user_account_sharing. */
+  @SerializedName("user_account_sharing")
+  UserAccountSharing userAccountSharing;
+
+  /** Data for the user multi-accounting signal. Present only when type is user_multi_accounting. */
+  @SerializedName("user_multi_accounting")
+  UserMultiAccounting userMultiAccounting;
 
   /** The account or customer this signal is associated with. */
   @Getter
@@ -147,6 +173,25 @@ public class AccountSignal extends StripeObject implements HasId {
     }
   }
 
+  /** Data for the fraudulent website signal. Present only when type is fraudulent_website. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FraudulentWebsite extends StripeObject {
+    /** Human-readable details about the fraudulent website evaluation. */
+    @SerializedName("details")
+    String details;
+
+    /**
+     * Categorical assessment of the fraudulent website risk.
+     *
+     * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+     * not_assessed}, or {@code unknown}.
+     */
+    @SerializedName("risk_level")
+    String riskLevel;
+  }
+
   /** Data for the merchant delinquency signal. Present only when type is merchant_delinquency. */
   @Getter
   @Setter
@@ -210,5 +255,119 @@ public class AccountSignal extends StripeObject implements HasId {
       @SerializedName("indicator")
       String indicator;
     }
+  }
+
+  /**
+   * Data for the payment delinquency exposure signal. Present only when type is
+   * payment_delinquency_exposure.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentDelinquencyExposure extends StripeObject {
+    /** Additional details about the exposure assessment. */
+    @SerializedName("additional_details")
+    AdditionalDetails additionalDetails;
+
+    /** The exposure amount if this account becomes delinquent. */
+    @SerializedName("exposure_amount")
+    ExposureAmount exposureAmount;
+
+    /** Additional details about the exposure assessment. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdditionalDetails extends StripeObject {
+      /** Total payments still exposed to dispute or refund risk in the event of delinquency. */
+      @SerializedName("gross_exposure_amount")
+      GrossExposureAmount grossExposureAmount;
+
+      /**
+       * Percentage of Gross Exposure expected to be disputed or refunded and materialize as a loss
+       * in the event of delinquency.
+       */
+      @SerializedName("loss_given_default_in_percentages")
+      Long lossGivenDefaultInPercentages;
+
+      /** Predicted window size in days until dispute is raised. */
+      @SerializedName("predicted_dispute_window_in_days")
+      Long predictedDisputeWindowInDays;
+
+      /** Total payments still exposed to dispute or refund risk in the event of delinquency. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class GrossExposureAmount extends StripeObject {
+        /** ISO 4217 currency code. */
+        @SerializedName("currency")
+        String currency;
+
+        /** Amount in minor units for the given currency. */
+        @SerializedName("value")
+        @JsonAdapter(StringInt64TypeAdapter.class)
+        Long value;
+      }
+    }
+
+    /** The exposure amount if this account becomes delinquent. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ExposureAmount extends StripeObject {
+      /** ISO 4217 currency code. */
+      @SerializedName("currency")
+      String currency;
+
+      /** Amount in minor units for the given currency. */
+      @SerializedName("value")
+      @JsonAdapter(StringInt64TypeAdapter.class)
+      Long value;
+    }
+  }
+
+  /** Data for the user account-sharing signal. Present only when type is user_account_sharing. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class UserAccountSharing extends StripeObject {
+    /**
+     * Categorical assessment of the account-sharing risk.
+     *
+     * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+     * not_assessed}, or {@code unknown}.
+     */
+    @SerializedName("risk_level")
+    String riskLevel;
+
+    /**
+     * The specific risk score for the account, between 0.00 and 100.00. Absent when risk level is
+     * not_assessed or unknown, or when the user is not on a product tier that includes numeric
+     * scores.
+     */
+    @SerializedName("score")
+    BigDecimal score;
+  }
+
+  /** Data for the user multi-accounting signal. Present only when type is user_multi_accounting. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class UserMultiAccounting extends StripeObject {
+    /**
+     * Categorical assessment of the multi-accounting risk.
+     *
+     * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+     * not_assessed}, or {@code unknown}.
+     */
+    @SerializedName("risk_level")
+    String riskLevel;
+
+    /**
+     * The specific risk score for the account, between 0.00 and 100.00. Absent when risk level is
+     * not_assessed or unknown, or when the user is not on a product tier that includes numeric
+     * scores.
+     */
+    @SerializedName("score")
+    BigDecimal score;
   }
 }

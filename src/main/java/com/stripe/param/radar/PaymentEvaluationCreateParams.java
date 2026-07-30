@@ -1046,7 +1046,7 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
       @SerializedName("billing_details")
       BillingDetails billingDetails;
 
-      /** Masked PAN card details to use as an alternative to a payment_method token. */
+      /** Masked/raw PAN card details to use as an alternative to a payment_method token. */
       @SerializedName("card")
       Card card;
 
@@ -1101,7 +1101,7 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Masked PAN card details to use as an alternative to a payment_method token. */
+        /** Masked/raw PAN card details to use as an alternative to a payment_method token. */
         public Builder setCard(
             PaymentEvaluationCreateParams.PaymentDetails.PaymentMethodDetails.Card card) {
           this.card = card;
@@ -1439,6 +1439,10 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Card {
+        /** The CVC of the card. */
+        @SerializedName("cvc")
+        String cvc;
+
         /** <strong>Required.</strong> Two-digit number representing the card's expiration month. */
         @SerializedName("exp_month")
         Long expMonth;
@@ -1457,25 +1461,33 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** <strong>Required.</strong> First six digits of the card number. */
+        /** First six digits of the card number. */
         @SerializedName("first6")
         String first6;
 
-        /** <strong>Required.</strong> Last four digits of the card number. */
+        /** Last four digits of the card number. */
         @SerializedName("last4")
         String last4;
 
+        /** The card number, as a string without any separators. */
+        @SerializedName("number")
+        String number;
+
         private Card(
+            String cvc,
             Long expMonth,
             Long expYear,
             Map<String, Object> extraParams,
             String first6,
-            String last4) {
+            String last4,
+            String number) {
+          this.cvc = cvc;
           this.expMonth = expMonth;
           this.expYear = expYear;
           this.extraParams = extraParams;
           this.first6 = first6;
           this.last4 = last4;
+          this.number = number;
         }
 
         public static Builder builder() {
@@ -1483,6 +1495,8 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private String cvc;
+
           private Long expMonth;
 
           private Long expYear;
@@ -1493,10 +1507,24 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
 
           private String last4;
 
+          private String number;
+
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentEvaluationCreateParams.PaymentDetails.PaymentMethodDetails.Card build() {
             return new PaymentEvaluationCreateParams.PaymentDetails.PaymentMethodDetails.Card(
-                this.expMonth, this.expYear, this.extraParams, this.first6, this.last4);
+                this.cvc,
+                this.expMonth,
+                this.expYear,
+                this.extraParams,
+                this.first6,
+                this.last4,
+                this.number);
+          }
+
+          /** The CVC of the card. */
+          public Builder setCvc(String cvc) {
+            this.cvc = cvc;
+            return this;
           }
 
           /**
@@ -1545,15 +1573,21 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> First six digits of the card number. */
+          /** First six digits of the card number. */
           public Builder setFirst6(String first6) {
             this.first6 = first6;
             return this;
           }
 
-          /** <strong>Required.</strong> Last four digits of the card number. */
+          /** Last four digits of the card number. */
           public Builder setLast4(String last4) {
             this.last4 = last4;
+            return this;
+          }
+
+          /** The card number, as a string without any separators. */
+          public Builder setNumber(String number) {
+            this.number = number;
             return this;
           }
         }

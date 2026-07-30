@@ -119,7 +119,10 @@ public class FinancialAddressDebitParams extends ApiRequestParams {
 
   public enum Network implements ApiRequestParams.EnumParam {
     @SerializedName("ach")
-    ACH("ach");
+    ACH("ach"),
+
+    @SerializedName("bacs")
+    BACS("bacs");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

@@ -712,15 +712,25 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       @SerializedName("prices")
       List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices;
 
+      /**
+       * A list of rate cards that the credit grant can apply to. The credit grant applies to any
+       * metered item billed under one of these rate cards. Cannot be used in combination with
+       * {@code price_type}, {@code prices}, or {@code billable_items}.
+       */
+      @SerializedName("rate_cards")
+      List<CreditGrantCreateParams.ApplicabilityConfig.Scope.RateCard> rateCards;
+
       private Scope(
           List<CreditGrantCreateParams.ApplicabilityConfig.Scope.BillableItem> billableItems,
           Map<String, Object> extraParams,
           PriceType priceType,
-          List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices) {
+          List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices,
+          List<CreditGrantCreateParams.ApplicabilityConfig.Scope.RateCard> rateCards) {
         this.billableItems = billableItems;
         this.extraParams = extraParams;
         this.priceType = priceType;
         this.prices = prices;
+        this.rateCards = rateCards;
       }
 
       public static Builder builder() {
@@ -736,10 +746,12 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
         private List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices;
 
+        private List<CreditGrantCreateParams.ApplicabilityConfig.Scope.RateCard> rateCards;
+
         /** Finalize and obtain parameter instance from this builder. */
         public CreditGrantCreateParams.ApplicabilityConfig.Scope build() {
           return new CreditGrantCreateParams.ApplicabilityConfig.Scope(
-              this.billableItems, this.extraParams, this.priceType, this.prices);
+              this.billableItems, this.extraParams, this.priceType, this.prices, this.rateCards);
         }
 
         /**
@@ -834,6 +846,34 @@ public class CreditGrantCreateParams extends ApiRequestParams {
             this.prices = new ArrayList<>();
           }
           this.prices.addAll(elements);
+          return this;
+        }
+
+        /**
+         * Add an element to `rateCards` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * CreditGrantCreateParams.ApplicabilityConfig.Scope#rateCards} for the field documentation.
+         */
+        public Builder addRateCard(
+            CreditGrantCreateParams.ApplicabilityConfig.Scope.RateCard element) {
+          if (this.rateCards == null) {
+            this.rateCards = new ArrayList<>();
+          }
+          this.rateCards.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `rateCards` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * CreditGrantCreateParams.ApplicabilityConfig.Scope#rateCards} for the field documentation.
+         */
+        public Builder addAllRateCard(
+            List<CreditGrantCreateParams.ApplicabilityConfig.Scope.RateCard> elements) {
+          if (this.rateCards == null) {
+            this.rateCards = new ArrayList<>();
+          }
+          this.rateCards.addAll(elements);
           return this;
         }
       }
@@ -979,6 +1019,79 @@ public class CreditGrantCreateParams extends ApiRequestParams {
           }
 
           /** <strong>Required.</strong> The price ID this credit grant should apply to. */
+          public Builder setId(String id) {
+            this.id = id;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RateCard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> The rate card ID this credit grant should apply to. */
+        @SerializedName("id")
+        String id;
+
+        private RateCard(Map<String, Object> extraParams, String id) {
+          this.extraParams = extraParams;
+          this.id = id;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String id;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public CreditGrantCreateParams.ApplicabilityConfig.Scope.RateCard build() {
+            return new CreditGrantCreateParams.ApplicabilityConfig.Scope.RateCard(
+                this.extraParams, this.id);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link CreditGrantCreateParams.ApplicabilityConfig.Scope.RateCard#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link CreditGrantCreateParams.ApplicabilityConfig.Scope.RateCard#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> The rate card ID this credit grant should apply to. */
           public Builder setId(String id) {
             this.id = id;
             return this;

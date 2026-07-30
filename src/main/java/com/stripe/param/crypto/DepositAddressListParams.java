@@ -13,12 +13,18 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class DepositAddressListParams extends ApiRequestParams {
+  /** Only return the deposit address matching this on-chain address. */
   @SerializedName("address")
   String address;
 
+  /**
+   * Only return deposit addresses scoped to this <a
+   * href="https://docs.stripe.com/api/customers/object">Customer</a>.
+   */
   @SerializedName("customer")
   String customer;
 
+  /** Only return deposit addresses belonging to this customer account. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -51,6 +57,7 @@ public class DepositAddressListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  /** Only return deposit addresses for this blockchain network. */
   @SerializedName("network")
   Network network;
 
@@ -121,16 +128,22 @@ public class DepositAddressListParams extends ApiRequestParams {
           this.startingAfter);
     }
 
+    /** Only return the deposit address matching this on-chain address. */
     public Builder setAddress(String address) {
       this.address = address;
       return this;
     }
 
+    /**
+     * Only return deposit addresses scoped to this <a
+     * href="https://docs.stripe.com/api/customers/object">Customer</a>.
+     */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
     }
 
+    /** Only return deposit addresses belonging to this customer account. */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
       return this;
@@ -208,6 +221,7 @@ public class DepositAddressListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Only return deposit addresses for this blockchain network. */
     public Builder setNetwork(DepositAddressListParams.Network network) {
       this.network = network;
       return this;

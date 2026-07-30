@@ -22,17 +22,26 @@ import lombok.Setter;
 /**
  * A crypto deposit address is a blockchain address that can be used by a merchant for deposit mode
  * crypto payments.
+ *
+ * <p>Related guide: <a href="https://stripe.com/payments/machine">Machine payments</a>
  */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class DepositAddress extends ApiResource implements HasId {
+  /** The on-chain address where funds can be received. */
   @SerializedName("address")
   String address;
 
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
 
+  /**
+   * If set, this deposit address is scoped to a <a
+   * href="https://docs.stripe.com/api/customers/object">Customer</a> and can only receive funds
+   * from that customer. Otherwise, this deposit address can receive funds from any customer.
+   */
   @SerializedName("customer")
   String customer;
 
@@ -41,6 +50,10 @@ public class DepositAddress extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
+  /**
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
+   */
   @SerializedName("livemode")
   Boolean livemode;
 
@@ -52,6 +65,11 @@ public class DepositAddress extends ApiResource implements HasId {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /**
+   * The blockchain network where this address can accept funds.
+   *
+   * <p>One of {@code base}, {@code solana}, or {@code tempo}.
+   */
   @SerializedName("network")
   String network;
 
@@ -63,6 +81,7 @@ public class DepositAddress extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /** The tokens that can be sent to this deposit address on its network. */
   @SerializedName("supported_tokens")
   List<DepositAddress.SupportedToken> supportedTokens;
 

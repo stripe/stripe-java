@@ -554,6 +554,14 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
       List<CreditGrant.ApplicabilityConfig.Scope.Price> prices;
 
       /**
+       * The rate cards that credit grants can apply to. The credit grant applies to any metered
+       * item billed under one of these rate cards. Cannot be used in combination with {@code
+       * price_type}, {@code prices}, or {@code billable_items}.
+       */
+      @SerializedName("rate_cards")
+      List<CreditGrant.ApplicabilityConfig.Scope.RateCard> rateCards;
+
+      /**
        * For more details about BillableItem, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
        */
@@ -575,6 +583,20 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Price extends StripeObject implements HasId {
+        /** Unique identifier for the object. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+      }
+
+      /**
+       * For more details about RateCard, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RateCard extends StripeObject implements HasId {
         /** Unique identifier for the object. */
         @Getter(onMethod_ = {@Override})
         @SerializedName("id")

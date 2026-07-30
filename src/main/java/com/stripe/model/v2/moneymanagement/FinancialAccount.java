@@ -72,14 +72,6 @@ public class FinancialAccount extends StripeObject implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /**
-   * If this is a managed FinancialAccount, {@code managed_by} indicates the product that created
-   * and manages this FinancialAccount. For managed FinancialAccounts, creation of money management
-   * resources can only be orchestrated by the managing product.
-   */
-  @SerializedName("managed_by")
-  ManagedBy managedBy;
-
   /** Metadata associated with the FinancialAccount. */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -231,24 +223,6 @@ public class FinancialAccount extends StripeObject implements HasId {
         String financialAccount;
       }
     }
-  }
-
-  /**
-   * If this is a managed FinancialAccount, {@code managed_by} indicates the product that created
-   * and manages this FinancialAccount. For managed FinancialAccounts, creation of money management
-   * resources can only be orchestrated by the managing product.
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class ManagedBy extends StripeObject {
-    /**
-     * Enum describing the Stripe product that is managing this FinancialAccount.
-     *
-     * <p>Equal to {@code multiprocessor_settlement}.
-     */
-    @SerializedName("type")
-    String type;
   }
 
   /**

@@ -2,7 +2,10 @@
 package com.stripe.events;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.exception.StripeException;
 import com.stripe.model.v2.core.Event;
+import com.stripe.model.v2.core.Event.RelatedObject;
+import com.stripe.model.v2.signals.AccountSignal;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
@@ -27,9 +30,6 @@ public final class V2SignalsAccountSignalFraudulentMerchantReadyEvent extends Ev
     /** Fraudulent merchant signal data. Present when type is fraudulent_merchant. */
     @SerializedName("fraudulent_merchant")
     FraudulentMerchant fraudulentMerchant;
-    /** Unique identifier for this account signal. */
-    @SerializedName("id")
-    String id;
     /**
      * The type of account signal. Currently only fraudulent_merchant is supported.
      *
@@ -90,5 +90,15 @@ public final class V2SignalsAccountSignalFraudulentMerchantReadyEvent extends Ev
         String indicator;
       }
     }
+  }
+
+  @SerializedName("related_object")
+
+  /** Object containing the reference to API resource relevant to the event. */
+  RelatedObject relatedObject;
+
+  /** Retrieves the related object from the API. Make an API request on every call. */
+  public AccountSignal fetchRelatedObject() throws StripeException {
+    return (AccountSignal) super.fetchRelatedObject(this.relatedObject);
   }
 }

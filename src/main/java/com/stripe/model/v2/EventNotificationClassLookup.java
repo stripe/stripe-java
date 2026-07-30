@@ -1075,17 +1075,39 @@ public final class EventNotificationClassLookup {
         "v2.money_management.received_debit.canceled",
         com.stripe.events.V2MoneyManagementReceivedDebitCanceledEventNotification.class);
     eventClassLookup.put(
+        "v2.money_management.received_debit.created",
+        com.stripe.events.V2MoneyManagementReceivedDebitCreatedEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.received_debit.failed",
         com.stripe.events.V2MoneyManagementReceivedDebitFailedEventNotification.class);
     eventClassLookup.put(
         "v2.money_management.received_debit.pending",
         com.stripe.events.V2MoneyManagementReceivedDebitPendingEventNotification.class);
     eventClassLookup.put(
+        "v2.money_management.received_debit.scheduled",
+        com.stripe.events.V2MoneyManagementReceivedDebitScheduledEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.received_debit.succeeded",
         com.stripe.events.V2MoneyManagementReceivedDebitSucceededEventNotification.class);
     eventClassLookup.put(
         "v2.money_management.received_debit.updated",
         com.stripe.events.V2MoneyManagementReceivedDebitUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.received_debit_mandate.canceled",
+        com.stripe.events.V2MoneyManagementReceivedDebitMandateCanceledEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.received_debit_mandate.created",
+        com.stripe.events.V2MoneyManagementReceivedDebitMandateCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.received_debit_mandate.expired",
+        com.stripe.events.V2MoneyManagementReceivedDebitMandateExpiredEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.received_debit_mandate.pending_cancellation",
+        com.stripe.events.V2MoneyManagementReceivedDebitMandatePendingCancellationEventNotification
+            .class);
+    eventClassLookup.put(
+        "v2.money_management.received_debit_mandate.updated",
+        com.stripe.events.V2MoneyManagementReceivedDebitMandateUpdatedEventNotification.class);
     eventClassLookup.put(
         "v2.money_management.recipient_verification.created",
         com.stripe.events.V2MoneyManagementRecipientVerificationCreatedEventNotification.class);
@@ -1192,10 +1214,20 @@ public final class EventNotificationClassLookup {
         "v2.reporting.report_run.updated",
         com.stripe.events.V2ReportingReportRunUpdatedEventNotification.class);
     eventClassLookup.put(
+        "v2.signals.account_evaluation.complete",
+        com.stripe.events.V2SignalsAccountEvaluationCompleteEventNotification.class);
+    eventClassLookup.put(
         "v2.signals.account_signal.fraudulent_merchant_ready",
         com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEventNotification.class);
     eventClassLookup.put(
+        "v2.signals.account_signal.fraudulent_website_ready",
+        com.stripe.events.V2SignalsAccountSignalFraudulentWebsiteReadyEventNotification.class);
+    eventClassLookup.put(
         "v2.signals.account_signal.merchant_delinquency_ready",
         com.stripe.events.V2SignalsAccountSignalMerchantDelinquencyReadyEventNotification.class);
+    eventClassLookup.put(
+        "v2.signals.account_signal.payment_delinquency_exposure_ready",
+        com.stripe.events.V2SignalsAccountSignalPaymentDelinquencyExposureReadyEventNotification
+            .class);
   }
 }

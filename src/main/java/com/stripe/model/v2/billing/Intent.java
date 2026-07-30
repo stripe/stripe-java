@@ -77,9 +77,17 @@ public class Intent extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AmountDetails extends StripeObject {
+    /** The outstanding amount after discount, tax, and customer balance application. */
+    @SerializedName("amount_due")
+    String amountDue;
+
     /** Three-letter ISO currency code, in lowercase. Must be a supported currency. */
     @SerializedName("currency")
     String currency;
+
+    /** The customer's account balance applied to the amount. */
+    @SerializedName("customer_balance_applied")
+    String customerBalanceApplied;
 
     /** Amount of discount applied. */
     @SerializedName("discount")

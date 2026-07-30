@@ -90,10 +90,18 @@ public class ReceivedDebit extends StripeObject implements HasId {
   String receiptUrl;
 
   /**
+   * The time at which the scheduled ReceivedDebit is expected to settle. Represented as a RFC 3339
+   * date &amp; time UTC value in millisecond precision, for example: {@code
+   * 2022-09-18T13:22:18.123Z}. Only present when status is {@code scheduled}.
+   */
+  @SerializedName("settles_at")
+  Instant settlesAt;
+
+  /**
    * Open Enum. The status of the ReceivedDebit.
    *
-   * <p>One of {@code canceled}, {@code failed}, {@code pending}, {@code returned}, or {@code
-   * succeeded}.
+   * <p>One of {@code canceled}, {@code failed}, {@code pending}, {@code returned}, {@code
+   * scheduled}, or {@code succeeded}.
    */
   @SerializedName("status")
   String status;
@@ -155,9 +163,16 @@ public class ReceivedDebit extends StripeObject implements HasId {
     String financialAddress;
 
     /**
+     * Object containing details of the GB Bank Account that originated the debit. Present when the
+     * debit was originated via BACS.
+     */
+    @SerializedName("gb_bank_account")
+    GbBankAccount gbBankAccount;
+
+    /**
      * Open Enum. Indicates the origin type through which this debit was initiated.
      *
-     * <p>Equal to {@code us_bank_account}.
+     * <p>One of {@code gb_bank_account}, or {@code us_bank_account}.
      */
     @SerializedName("origin_type")
     String originType;
@@ -165,7 +180,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
     /**
      * Open Enum. The type of the payment method used to originate the debit.
      *
-     * <p>Equal to {@code us_bank_account}.
+     * <p>One of {@code gb_bank_account}, or {@code us_bank_account}.
      */
     @SerializedName("payment_method_type")
     String paymentMethodType;
@@ -174,11 +189,54 @@ public class ReceivedDebit extends StripeObject implements HasId {
     @SerializedName("statement_descriptor")
     String statementDescriptor;
 
-    /** The payment method used to originate the debit. */
+    /**
+     * Object containing details of the US Bank Account that originated the debit. Present when the
+     * debit was originated via ACH.
+     */
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
-    /** The payment method used to originate the debit. */
+    /**
+     * Object containing details of the GB Bank Account that originated the debit. Present when the
+     * debit was originated via BACS.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class GbBankAccount extends StripeObject {
+      /** The name of the account holder that originated the debit. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The name of the bank the debit originated from. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** Last 4 digits of the bank account number. */
+      @SerializedName("last4")
+      String last4;
+
+      /**
+       * Open Enum. The bank network the debit was originated on.
+       *
+       * <p>Equal to {@code bacs}.
+       */
+      @SerializedName("network")
+      String network;
+
+      /** The ID of the mandate associated with this debit. */
+      @SerializedName("received_debit_mandate")
+      String receivedDebitMandate;
+
+      /** The sort code of the bank that originated the debit. */
+      @SerializedName("sort_code")
+      String sortCode;
+    }
+
+    /**
+     * Object containing details of the US Bank Account that originated the debit. Present when the
+     * debit was originated via ACH.
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -301,7 +359,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
        * Open Enum. The reason for the failure of the ReceivedDebit.
        *
        * <p>One of {@code capability_inactive}, {@code financial_address_inactive}, {@code
-       * insufficient_funds}, or {@code stripe_rejected}.
+       * insufficient_funds}, {@code no_mandate}, or {@code stripe_rejected}.
        */
       @SerializedName("reason")
       String reason;

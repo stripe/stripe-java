@@ -222,11 +222,20 @@ public class AccountSignalListParams extends ApiRequestParams {
     @SerializedName("fraudulent_merchant")
     FRAUDULENT_MERCHANT("fraudulent_merchant"),
 
+    @SerializedName("fraudulent_website")
+    FRAUDULENT_WEBSITE("fraudulent_website"),
+
     @SerializedName("merchant_delinquency")
     MERCHANT_DELINQUENCY("merchant_delinquency"),
 
     @SerializedName("payment_delinquency_exposure")
-    PAYMENT_DELINQUENCY_EXPOSURE("payment_delinquency_exposure");
+    PAYMENT_DELINQUENCY_EXPOSURE("payment_delinquency_exposure"),
+
+    @SerializedName("user_account_sharing")
+    USER_ACCOUNT_SHARING("user_account_sharing"),
+
+    @SerializedName("user_multi_accounting")
+    USER_MULTI_ACCOUNTING("user_multi_accounting");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
