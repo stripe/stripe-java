@@ -183,7 +183,7 @@ public class Dispute extends ApiResource
 
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
+   * essentially dismissing the dispute (accepting it), acknowledging it as lost.
    *
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
@@ -194,7 +194,7 @@ public class Dispute extends ApiResource
 
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
+   * essentially dismissing the dispute (accepting it), acknowledging it as lost.
    *
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
@@ -205,7 +205,7 @@ public class Dispute extends ApiResource
 
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
+   * essentially dismissing the dispute (accepting it), acknowledging it as lost.
    *
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
@@ -216,7 +216,7 @@ public class Dispute extends ApiResource
 
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
+   * essentially dismissing the dispute (accepting it), acknowledging it as lost.
    *
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
@@ -230,7 +230,7 @@ public class Dispute extends ApiResource
 
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
+   * essentially dismissing the dispute (accepting it), acknowledging it as lost.
    *
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
@@ -241,7 +241,7 @@ public class Dispute extends ApiResource
 
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
+   * essentially dismissing the dispute (accepting it), acknowledging it as lost.
    *
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
@@ -1216,6 +1216,15 @@ public class Dispute extends ApiResource
        */
       @SerializedName("case_type")
       String caseType;
+
+      /**
+       * Identifies which network this charge was processed on. Can be {@code amex}, {@code
+       * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
+       * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
+       * unknown}.
+       */
+      @SerializedName("network")
+      String network;
 
       /**
        * The card network's specific dispute reason code, which maps to one of Stripe's primary

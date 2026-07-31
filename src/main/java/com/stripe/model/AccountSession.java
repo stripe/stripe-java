@@ -417,6 +417,13 @@ public class AccountSession extends ApiResource {
         /** Whether sending refunds is enabled. This is {@code true} by default. */
         @SerializedName("refund_management")
         Boolean refundManagement;
+
+        /**
+         * Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults to
+         * the value of {@code dispute_management}.
+         */
+        @SerializedName("smart_disputes_management")
+        Boolean smartDisputesManagement;
       }
     }
 
@@ -761,6 +768,13 @@ public class AccountSession extends ApiResource {
         /** Whether sending refunds is enabled. This is {@code true} by default. */
         @SerializedName("refund_management")
         Boolean refundManagement;
+
+        /**
+         * Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults to
+         * the value of {@code dispute_management}.
+         */
+        @SerializedName("smart_disputes_management")
+        Boolean smartDisputesManagement;
       }
     }
 
@@ -804,6 +818,13 @@ public class AccountSession extends ApiResource {
         /** Whether sending refunds is enabled. This is {@code true} by default. */
         @SerializedName("refund_management")
         Boolean refundManagement;
+
+        /**
+         * Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults to
+         * the value of {@code dispute_management}.
+         */
+        @SerializedName("smart_disputes_management")
+        Boolean smartDisputesManagement;
       }
     }
 
@@ -854,6 +875,13 @@ public class AccountSession extends ApiResource {
         /** Whether sending refunds is enabled. This is {@code true} by default. */
         @SerializedName("refund_management")
         Boolean refundManagement;
+
+        /**
+         * Whether to allow connected accounts to submit disputes using Smart Disputes. Defaults to
+         * the value of {@code dispute_management}.
+         */
+        @SerializedName("smart_disputes_management")
+        Boolean smartDisputesManagement;
       }
     }
 

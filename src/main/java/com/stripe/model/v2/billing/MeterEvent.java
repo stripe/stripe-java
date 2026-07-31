@@ -28,7 +28,7 @@ public class MeterEvent extends StripeObject {
 
   /**
    * A unique identifier for the event. If not provided, one will be generated. We recommend using a
-   * globally unique identifier for this. We’ll enforce uniqueness within a rolling 24 hour period.
+   * globally unique identifier for this. We'll enforce uniqueness within a rolling 24 hour period.
    */
   @SerializedName("identifier")
   String identifier;
@@ -50,7 +50,7 @@ public class MeterEvent extends StripeObject {
   String object;
 
   /**
-   * The payload of the event. This must contain the fields corresponding to a meter’s {@code
+   * The payload of the event. This must contain the fields corresponding to a meter's {@code
    * customer_mapping.event_payload_key} (default is {@code stripe_customer_id}) and {@code
    * value_settings.event_payload_key} (default is {@code value}). Read more about the <a
    * href="https://docs.stripe.com/billing/subscriptions/usage-based/recording-usage#payload-key-overrides">payload</a>..

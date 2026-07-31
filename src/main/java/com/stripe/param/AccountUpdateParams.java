@@ -7766,6 +7766,9 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("address_kanji")
     AddressKanji addressKanji;
 
+    @SerializedName("administrative_address")
+    AdministrativeAddress administrativeAddress;
+
     /**
      * Whether the company's directors have been provided. Set this Boolean to {@code true} after
      * creating all the company's directors with <a href="https://stripe.com/api/persons">the
@@ -7853,6 +7856,9 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("phone")
     Object phone;
 
+    @SerializedName("principal_place_of_business")
+    PrincipalPlaceOfBusiness principalPlaceOfBusiness;
+
     @SerializedName("registration_date")
     Object registrationDate;
 
@@ -7884,6 +7890,10 @@ public class AccountUpdateParams extends ApiRequestParams {
      * The business ID number of the company, as appropriate for the company’s country. (Examples
      * are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in
      * the UK.)
+     *
+     * <p>Changing this value requires that the account re-accept the <a
+     * href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+     * service</a>.
      */
     @SerializedName("tax_id")
     Object taxId;
@@ -7906,6 +7916,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Address address,
         AddressKana addressKana,
         AddressKanji addressKanji,
+        AdministrativeAddress administrativeAddress,
         Boolean directorsProvided,
         DirectorshipDeclaration directorshipDeclaration,
         Boolean executivesProvided,
@@ -7919,6 +7930,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         OwnershipDeclaration ownershipDeclaration,
         ApiRequestParams.EnumParam ownershipExemptionReason,
         Object phone,
+        PrincipalPlaceOfBusiness principalPlaceOfBusiness,
         Object registrationDate,
         Object registrationNumber,
         RepresentativeDeclaration representativeDeclaration,
@@ -7930,6 +7942,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.address = address;
       this.addressKana = addressKana;
       this.addressKanji = addressKanji;
+      this.administrativeAddress = administrativeAddress;
       this.directorsProvided = directorsProvided;
       this.directorshipDeclaration = directorshipDeclaration;
       this.executivesProvided = executivesProvided;
@@ -7943,6 +7956,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.ownershipDeclaration = ownershipDeclaration;
       this.ownershipExemptionReason = ownershipExemptionReason;
       this.phone = phone;
+      this.principalPlaceOfBusiness = principalPlaceOfBusiness;
       this.registrationDate = registrationDate;
       this.registrationNumber = registrationNumber;
       this.representativeDeclaration = representativeDeclaration;
@@ -7963,6 +7977,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       private AddressKana addressKana;
 
       private AddressKanji addressKanji;
+
+      private AdministrativeAddress administrativeAddress;
 
       private Boolean directorsProvided;
 
@@ -7990,6 +8006,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private Object phone;
 
+      private PrincipalPlaceOfBusiness principalPlaceOfBusiness;
+
       private Object registrationDate;
 
       private Object registrationNumber;
@@ -8012,6 +8030,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.address,
             this.addressKana,
             this.addressKanji,
+            this.administrativeAddress,
             this.directorsProvided,
             this.directorshipDeclaration,
             this.executivesProvided,
@@ -8025,6 +8044,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.ownershipDeclaration,
             this.ownershipExemptionReason,
             this.phone,
+            this.principalPlaceOfBusiness,
             this.registrationDate,
             this.registrationNumber,
             this.representativeDeclaration,
@@ -8050,6 +8070,12 @@ public class AccountUpdateParams extends ApiRequestParams {
       /** The Kanji variation of the company's primary address (Japan only). */
       public Builder setAddressKanji(AccountUpdateParams.Company.AddressKanji addressKanji) {
         this.addressKanji = addressKanji;
+        return this;
+      }
+
+      public Builder setAdministrativeAddress(
+          AccountUpdateParams.Company.AdministrativeAddress administrativeAddress) {
+        this.administrativeAddress = administrativeAddress;
         return this;
       }
 
@@ -8236,6 +8262,12 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setPrincipalPlaceOfBusiness(
+          AccountUpdateParams.Company.PrincipalPlaceOfBusiness principalPlaceOfBusiness) {
+        this.principalPlaceOfBusiness = principalPlaceOfBusiness;
+        return this;
+      }
+
       public Builder setRegistrationDate(
           AccountUpdateParams.Company.RegistrationDate registrationDate) {
         this.registrationDate = registrationDate;
@@ -8303,6 +8335,10 @@ public class AccountUpdateParams extends ApiRequestParams {
        * The business ID number of the company, as appropriate for the company’s country. (Examples
        * are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in
        * the UK.)
+       *
+       * <p>Changing this value requires that the account re-accept the <a
+       * href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+       * service</a>.
        */
       public Builder setTaxId(String taxId) {
         this.taxId = taxId;
@@ -8313,6 +8349,10 @@ public class AccountUpdateParams extends ApiRequestParams {
        * The business ID number of the company, as appropriate for the company’s country. (Examples
        * are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in
        * the UK.)
+       *
+       * <p>Changing this value requires that the account re-accept the <a
+       * href="https://stripe.com/api/accounts/object#account_object-tos_acceptance">terms of
+       * service</a>.
        */
       public Builder setTaxId(EmptyParam taxId) {
         this.taxId = taxId;
@@ -8992,6 +9032,210 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class AdministrativeAddress {
+      /** City, district, suburb, town, or village. */
+      @SerializedName("city")
+      Object city;
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      Object country;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Address line 1, such as the street, PO Box, or company name. */
+      @SerializedName("line1")
+      Object line1;
+
+      /** Address line 2, such as the apartment, suite, unit, or building. */
+      @SerializedName("line2")
+      Object line2;
+
+      /** ZIP or postal code. */
+      @SerializedName("postal_code")
+      Object postalCode;
+
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
+      @SerializedName("state")
+      Object state;
+
+      private AdministrativeAddress(
+          Object city,
+          Object country,
+          Map<String, Object> extraParams,
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state) {
+        this.city = city;
+        this.country = country;
+        this.extraParams = extraParams;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.postalCode = postalCode;
+        this.state = state;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object city;
+
+        private Object country;
+
+        private Map<String, Object> extraParams;
+
+        private Object line1;
+
+        private Object line2;
+
+        private Object postalCode;
+
+        private Object state;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Company.AdministrativeAddress build() {
+          return new AccountUpdateParams.Company.AdministrativeAddress(
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
+        }
+
+        /** City, district, suburb, town, or village. */
+        public Builder setCity(String city) {
+          this.city = city;
+          return this;
+        }
+
+        /** City, district, suburb, town, or village. */
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        public Builder setCountry(EmptyParam country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Company.AdministrativeAddress#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Company.AdministrativeAddress#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Address line 1, such as the street, PO Box, or company name. */
+        public Builder setLine1(String line1) {
+          this.line1 = line1;
+          return this;
+        }
+
+        /** Address line 1, such as the street, PO Box, or company name. */
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
+        /** Address line 2, such as the apartment, suite, unit, or building. */
+        public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** Address line 2, such as the apartment, suite, unit, or building. */
+        public Builder setLine2(EmptyParam line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** ZIP or postal code. */
+        public Builder setPostalCode(String postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
+        /** ZIP or postal code. */
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
+        public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
+        public Builder setState(EmptyParam state) {
+          this.state = state;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DirectorshipDeclaration {
       /** The Unix timestamp marking when the directorship declaration attestation was made. */
       @SerializedName("date")
@@ -9215,6 +9459,210 @@ public class AccountUpdateParams extends ApiRequestParams {
         /** The user agent of the browser from which the beneficial owner attestation was made. */
         public Builder setUserAgent(EmptyParam userAgent) {
           this.userAgent = userAgent;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PrincipalPlaceOfBusiness {
+      /** City, district, suburb, town, or village. */
+      @SerializedName("city")
+      Object city;
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      Object country;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Address line 1, such as the street, PO Box, or company name. */
+      @SerializedName("line1")
+      Object line1;
+
+      /** Address line 2, such as the apartment, suite, unit, or building. */
+      @SerializedName("line2")
+      Object line2;
+
+      /** ZIP or postal code. */
+      @SerializedName("postal_code")
+      Object postalCode;
+
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
+      @SerializedName("state")
+      Object state;
+
+      private PrincipalPlaceOfBusiness(
+          Object city,
+          Object country,
+          Map<String, Object> extraParams,
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state) {
+        this.city = city;
+        this.country = country;
+        this.extraParams = extraParams;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.postalCode = postalCode;
+        this.state = state;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object city;
+
+        private Object country;
+
+        private Map<String, Object> extraParams;
+
+        private Object line1;
+
+        private Object line2;
+
+        private Object postalCode;
+
+        private Object state;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Company.PrincipalPlaceOfBusiness build() {
+          return new AccountUpdateParams.Company.PrincipalPlaceOfBusiness(
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
+        }
+
+        /** City, district, suburb, town, or village. */
+        public Builder setCity(String city) {
+          this.city = city;
+          return this;
+        }
+
+        /** City, district, suburb, town, or village. */
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        public Builder setCountry(EmptyParam country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Company.PrincipalPlaceOfBusiness#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Company.PrincipalPlaceOfBusiness#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Address line 1, such as the street, PO Box, or company name. */
+        public Builder setLine1(String line1) {
+          this.line1 = line1;
+          return this;
+        }
+
+        /** Address line 1, such as the street, PO Box, or company name. */
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
+        /** Address line 2, such as the apartment, suite, unit, or building. */
+        public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** Address line 2, such as the apartment, suite, unit, or building. */
+        public Builder setLine2(EmptyParam line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** ZIP or postal code. */
+        public Builder setPostalCode(String postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
+        /** ZIP or postal code. */
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
+        public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
+        public Builder setState(EmptyParam state) {
+          this.state = state;
           return this;
         }
       }
@@ -13247,6 +13695,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("payouts")
     Payouts payouts;
 
+    /** Settings specific to SEPA Direct Debit payments. */
+    @SerializedName("sepa_debit_payments")
+    SepaDebitPayments sepaDebitPayments;
+
     /** Settings specific to the account's Treasury FinancialAccounts. */
     @SerializedName("treasury")
     Treasury treasury;
@@ -13260,6 +13712,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Invoices invoices,
         Payments payments,
         Payouts payouts,
+        SepaDebitPayments sepaDebitPayments,
         Treasury treasury) {
       this.bacsDebitPayments = bacsDebitPayments;
       this.branding = branding;
@@ -13269,6 +13722,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.invoices = invoices;
       this.payments = payments;
       this.payouts = payouts;
+      this.sepaDebitPayments = sepaDebitPayments;
       this.treasury = treasury;
     }
 
@@ -13293,6 +13747,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private Payouts payouts;
 
+      private SepaDebitPayments sepaDebitPayments;
+
       private Treasury treasury;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -13306,6 +13762,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.invoices,
             this.payments,
             this.payouts,
+            this.sepaDebitPayments,
             this.treasury);
       }
 
@@ -13378,6 +13835,13 @@ public class AccountUpdateParams extends ApiRequestParams {
       /** Settings specific to the account's payouts. */
       public Builder setPayouts(AccountUpdateParams.Settings.Payouts payouts) {
         this.payouts = payouts;
+        return this;
+      }
+
+      /** Settings specific to SEPA Direct Debit payments. */
+      public Builder setSepaDebitPayments(
+          AccountUpdateParams.Settings.SepaDebitPayments sepaDebitPayments) {
+        this.sepaDebitPayments = sepaDebitPayments;
         return this;
       }
 
@@ -14983,6 +15447,84 @@ public class AccountUpdateParams extends ApiRequestParams {
           WeeklyPayoutDay(String value) {
             this.value = value;
           }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebitPayments {
+      /** The business creditor id for european payments. */
+      @SerializedName("creditor_id")
+      Object creditorId;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private SepaDebitPayments(Object creditorId, Map<String, Object> extraParams) {
+        this.creditorId = creditorId;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object creditorId;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Settings.SepaDebitPayments build() {
+          return new AccountUpdateParams.Settings.SepaDebitPayments(
+              this.creditorId, this.extraParams);
+        }
+
+        /** The business creditor id for european payments. */
+        public Builder setCreditorId(String creditorId) {
+          this.creditorId = creditorId;
+          return this;
+        }
+
+        /** The business creditor id for european payments. */
+        public Builder setCreditorId(EmptyParam creditorId) {
+          this.creditorId = creditorId;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Settings.SepaDebitPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Settings.SepaDebitPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }

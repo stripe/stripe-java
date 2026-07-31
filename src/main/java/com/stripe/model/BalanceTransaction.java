@@ -66,7 +66,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
 
   /**
    * If applicable, this transaction uses an exchange rate. If money converts from currency A to
-   * currency B, then the {@code amount} in currency A, multipled by the {@code exchange_rate},
+   * currency B, then the {@code amount} in currency A, multiplied by the {@code exchange_rate},
    * equals the {@code amount} in currency B. For example, if you charge a customer 10.00 EUR, the
    * PaymentIntent's {@code amount} is {@code 1000} and {@code currency} is {@code eur}. If this
    * converts to 12.34 USD in your Stripe account, the BalanceTransaction's {@code amount} is {@code
