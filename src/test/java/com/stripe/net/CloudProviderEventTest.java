@@ -72,12 +72,23 @@ public class CloudProviderEventTest extends BaseStripeTest {
           + "\"created\":\"2024-03-07T18:27:56.000Z\","
           + "\"livemode\":true}}";
 
-  // constructEventFromCloudProvider tests
+  private static final String RAW_EVENT_PAYLOAD =
+      "{\"id\":\"evt_test_123\","
+          + "\"object\":\"event\","
+          + "\"api_version\":\"2023-10-16\","
+          + "\"created\":1709836076,"
+          + "\"data\":{\"object\":{\"id\":\"cus_123\",\"object\":\"customer\"}},"
+          + "\"livemode\":true,"
+          + "\"pending_webhooks\":0,"
+          + "\"request\":{\"id\":\"req_123\",\"idempotency_key\":null},"
+          + "\"type\":\"customer.created\"}";
+
+  // constructEventWithoutVerification tests
 
   @Test
   public void testEventBridgeViaClient() {
     StripeClient client = new StripeClient("sk_test_fake");
-    Event event = client.constructEventFromCloudProvider(EVENTBRIDGE_PAYLOAD);
+    Event event = client.constructEventWithoutVerification(EVENTBRIDGE_PAYLOAD);
     assertNotNull(event);
     assertEquals("evt_test_123", event.getId());
     assertEquals("customer.created", event.getType());
@@ -86,9 +97,18 @@ public class CloudProviderEventTest extends BaseStripeTest {
   @Test
   public void testEventGridViaClient() {
     StripeClient client = new StripeClient("sk_test_fake");
-    Event event = client.constructEventFromCloudProvider(EVENTGRID_PAYLOAD);
+    Event event = client.constructEventWithoutVerification(EVENTGRID_PAYLOAD);
     assertNotNull(event);
     assertEquals("evt_test_456", event.getId());
+    assertEquals("customer.created", event.getType());
+  }
+
+  @Test
+  public void testRawEventViaClient() {
+    StripeClient client = new StripeClient("sk_test_fake");
+    Event event = client.constructEventWithoutVerification(RAW_EVENT_PAYLOAD);
+    assertNotNull(event);
+    assertEquals("evt_test_123", event.getId());
     assertEquals("customer.created", event.getType());
   }
 
@@ -96,18 +116,8 @@ public class CloudProviderEventTest extends BaseStripeTest {
   public void testInvalidJsonViaClient() {
     StripeClient client = new StripeClient("sk_test_fake");
     assertThrows(
-        JsonSyntaxException.class, () -> client.constructEventFromCloudProvider("not valid json"));
-  }
-
-  @Test
-  public void testRawEventFromClientSuggestsConstructEvent() {
-    String rawEvent =
-        "{\"id\":\"evt_test_123\",\"object\":\"event\",\"type\":\"customer.created\"}";
-    StripeClient client = new StripeClient("sk_test_fake");
-    IllegalArgumentException ex =
-        assertThrows(
-            IllegalArgumentException.class, () -> client.constructEventFromCloudProvider(rawEvent));
-    assertTrue(ex.getMessage().contains("constructEvent"));
+        JsonSyntaxException.class,
+        () -> client.constructEventWithoutVerification("not valid json"));
   }
 
   @Test
@@ -116,17 +126,17 @@ public class CloudProviderEventTest extends BaseStripeTest {
     IllegalArgumentException ex =
         assertThrows(
             IllegalArgumentException.class,
-            () -> client.constructEventFromCloudProvider("{\"foo\":\"bar\"}"));
+            () -> client.constructEventWithoutVerification("{\"foo\":\"bar\"}"));
     assertTrue(ex.getMessage().contains("Unrecognized cloud event format"));
   }
 
-  // parseEventNotificationFromCloudProvider tests
+  // parseEventNotificationWithoutVerification tests
 
   @Test
   public void testEventBridgeNotificationViaClient() {
     StripeClient client = new StripeClient("sk_test_fake");
     EventNotification notification =
-        client.parseEventNotificationFromCloudProvider(EVENTBRIDGE_NOTIFICATION_PAYLOAD);
+        client.parseEventNotificationWithoutVerification(EVENTBRIDGE_NOTIFICATION_PAYLOAD);
     assertNotNull(notification);
     assertEquals("evt_test_789", notification.getId());
   }
@@ -135,16 +145,64 @@ public class CloudProviderEventTest extends BaseStripeTest {
   public void testEventGridNotificationViaClient() {
     StripeClient client = new StripeClient("sk_test_fake");
     EventNotification notification =
-        client.parseEventNotificationFromCloudProvider(EVENTGRID_NOTIFICATION_PAYLOAD);
+        client.parseEventNotificationWithoutVerification(EVENTGRID_NOTIFICATION_PAYLOAD);
     assertNotNull(notification);
     assertEquals("evt_test_789", notification.getId());
   }
 
   @Test
-  public void testParseNotificationWithV1EventSuggestsConstructEventFromCloudProvider() {
+  public void testParseNotificationWithV1EventSuggestsConstructEventWithoutVerification() {
     StripeClient client = new StripeClient("sk_test_fake");
     assertThrows(
         IllegalArgumentException.class,
-        () -> client.parseEventNotificationFromCloudProvider(EVENTBRIDGE_PAYLOAD));
+        () -> client.parseEventNotificationWithoutVerification(EVENTBRIDGE_PAYLOAD));
+  }
+
+  @Test
+  public void testParseNotificationInvalidJsonThrows() {
+    StripeClient client = new StripeClient("sk_test_fake");
+    assertThrows(
+        JsonSyntaxException.class,
+        () -> client.parseEventNotificationWithoutVerification("not valid json"));
+  }
+
+  @Test
+  public void testParseNotificationUnrecognizedFormatThrows() {
+    StripeClient client = new StripeClient("sk_test_fake");
+    IllegalArgumentException ex =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> client.parseEventNotificationWithoutVerification("{\"foo\":\"bar\"}"));
+    assertTrue(ex.getMessage().contains("Unrecognized cloud event format"));
+  }
+
+  @Test
+  public void testParseNotificationRawV2NotificationPassthrough() {
+    StripeClient client = new StripeClient("sk_test_fake");
+    String rawV2Payload =
+        "{\"id\":\"evt_234\","
+            + "\"object\":\"v2.core.event\","
+            + "\"type\":\"v2.core.event_destination.ping\","
+            + "\"created\":\"2024-03-07T18:27:56.000Z\","
+            + "\"livemode\":true}";
+    EventNotification notification = client.parseEventNotificationWithoutVerification(rawV2Payload);
+    assertNotNull(notification);
+    assertEquals("evt_234", notification.getId());
+  }
+
+  @Test
+  public void testConstructEventWithoutVerificationRejectsV2ThinEvent() {
+    StripeClient client = new StripeClient("sk_test_fake");
+    String v2Payload =
+        "{\"id\":\"evt_234\","
+            + "\"object\":\"v2.core.event\","
+            + "\"type\":\"v2.core.event_destination.ping\","
+            + "\"created\":\"2024-03-07T18:27:56.000Z\","
+            + "\"livemode\":true}";
+    IllegalArgumentException ex =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> client.constructEventWithoutVerification(v2Payload));
+    assertTrue(ex.getMessage().contains("parseEventNotification"));
   }
 }

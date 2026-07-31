@@ -18,11 +18,10 @@ public final class TemporarySessionExpiredException extends ApiException {
   static TemporarySessionExpiredException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     TemporarySessionExpiredException.TemporarySessionExpiredError error =
-        (TemporarySessionExpiredException.TemporarySessionExpiredError)
-            StripeObject.deserializeStripeObject(
-                body,
-                TemporarySessionExpiredException.TemporarySessionExpiredError.class,
-                responseGetter);
+        StripeObject.deserializeStripeObject(
+            body,
+            TemporarySessionExpiredException.TemporarySessionExpiredError.class,
+            responseGetter);
     TemporarySessionExpiredException exception =
         new TemporarySessionExpiredException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);

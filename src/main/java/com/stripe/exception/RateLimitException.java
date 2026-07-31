@@ -26,9 +26,8 @@ public class RateLimitException extends StripeException {
   static RateLimitException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     RateLimitException.RateLimitError error =
-        (RateLimitException.RateLimitError)
-            StripeObject.deserializeStripeObject(
-                body, RateLimitException.RateLimitError.class, responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, RateLimitException.RateLimitError.class, responseGetter);
     RateLimitException exception =
         new RateLimitException(
             error.getMessage(), error.getParam(), requestId, error.getCode(), statusCode, null);
