@@ -15,6 +15,7 @@ public abstract class Stripe {
    * compatible. Is an empty string in preview versions of the SDK.
    */
   public static final String MAJOR_API_VERSION = ApiVersion.CURRENT_MAJOR;
+
   public static final String CONNECT_API_BASE = "https://connect.stripe.com";
   public static final String LIVE_API_BASE = "https://api.stripe.com";
   public static final String UPLOAD_API_BASE = "https://files.stripe.com";
