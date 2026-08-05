@@ -3850,7 +3850,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Dropdown {
       /**
-       * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+       * The value that pre-fills the field on the payment page. Must match a {@code value} in the
        * {@code options} array.
        */
       @SerializedName("default_value")
@@ -3899,7 +3899,7 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+         * The value that pre-fills the field on the payment page. Must match a {@code value} in the
          * {@code options} array.
          */
         public Builder setDefaultValue(String defaultValue) {
@@ -6776,11 +6776,17 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The ID of the price for this subscription item. */
+        /**
+         * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a>. One of {@code
+         * price} or {@code price_data} is required.
+         */
         @SerializedName("price")
         String price;
 
-        /** Data used to generate a new Price object inline. */
+        /**
+         * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
+         * inline. One of {@code price} or {@code price_data} is required.
+         */
         @SerializedName("price_data")
         PriceData priceData;
 
@@ -6843,13 +6849,19 @@ public class SessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The ID of the price for this subscription item. */
+          /**
+           * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a>. One of {@code
+           * price} or {@code price_data} is required.
+           */
           public Builder setPrice(String price) {
             this.price = price;
             return this;
           }
 
-          /** Data used to generate a new Price object inline. */
+          /**
+           * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a>
+           * object inline. One of {@code price} or {@code price_data} is required.
+           */
           public Builder setPriceData(
               SessionCreateParams.Item.Subscription.InnerItem.PriceData priceData) {
             this.priceData = priceData;
@@ -22943,11 +22955,22 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("shipping_rate_data")
     ShippingRateData shippingRateData;
 
+    /**
+     * The tax rates that will be applied to this shipping option. This parameter is only supported
+     * for Checkout Sessions with {@code ui_mode} set to {@code form} or {@code elements}.
+     */
+    @SerializedName("tax_rates")
+    List<String> taxRates;
+
     private ShippingOption(
-        Map<String, Object> extraParams, String shippingRate, ShippingRateData shippingRateData) {
+        Map<String, Object> extraParams,
+        String shippingRate,
+        ShippingRateData shippingRateData,
+        List<String> taxRates) {
       this.extraParams = extraParams;
       this.shippingRate = shippingRate;
       this.shippingRateData = shippingRateData;
+      this.taxRates = taxRates;
     }
 
     public static Builder builder() {
@@ -22961,10 +22984,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private ShippingRateData shippingRateData;
 
+      private List<String> taxRates;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.ShippingOption build() {
         return new SessionCreateParams.ShippingOption(
-            this.extraParams, this.shippingRate, this.shippingRateData);
+            this.extraParams, this.shippingRate, this.shippingRateData, this.taxRates);
       }
 
       /**
@@ -23003,6 +23028,32 @@ public class SessionCreateParams extends ApiRequestParams {
       public Builder setShippingRateData(
           SessionCreateParams.ShippingOption.ShippingRateData shippingRateData) {
         this.shippingRateData = shippingRateData;
+        return this;
+      }
+
+      /**
+       * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SessionCreateParams.ShippingOption#taxRates} for the field documentation.
+       */
+      public Builder addTaxRate(String element) {
+        if (this.taxRates == null) {
+          this.taxRates = new ArrayList<>();
+        }
+        this.taxRates.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SessionCreateParams.ShippingOption#taxRates} for the field documentation.
+       */
+      public Builder addAllTaxRate(List<String> elements) {
+        if (this.taxRates == null) {
+          this.taxRates = new ArrayList<>();
+        }
+        this.taxRates.addAll(elements);
         return this;
       }
     }

@@ -73,6 +73,10 @@ public class AuthorizationCreateParams extends ApiRequestParams {
   @SerializedName("fuel")
   Fuel fuel;
 
+  /** Healthcare-specific information for IIAS-eligible authorizations. */
+  @SerializedName("healthcare")
+  Healthcare healthcare;
+
   /**
    * If set {@code true}, you may provide <a
    * href="https://docs.stripe.com/api/issuing/authorizations/approve#approve_issuing_authorization-amount">amount</a>
@@ -136,6 +140,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
       Fleet fleet,
       FraudDisputabilityLikelihood fraudDisputabilityLikelihood,
       Fuel fuel,
+      Healthcare healthcare,
       Boolean isAmountControllable,
       Long merchantAmount,
       String merchantCurrency,
@@ -154,6 +159,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     this.fleet = fleet;
     this.fraudDisputabilityLikelihood = fraudDisputabilityLikelihood;
     this.fuel = fuel;
+    this.healthcare = healthcare;
     this.isAmountControllable = isAmountControllable;
     this.merchantAmount = merchantAmount;
     this.merchantCurrency = merchantCurrency;
@@ -189,6 +195,8 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
     private Fuel fuel;
 
+    private Healthcare healthcare;
+
     private Boolean isAmountControllable;
 
     private Long merchantAmount;
@@ -218,6 +226,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
           this.fleet,
           this.fraudDisputabilityLikelihood,
           this.fuel,
+          this.healthcare,
           this.isAmountControllable,
           this.merchantAmount,
           this.merchantCurrency,
@@ -343,6 +352,12 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     /** Information about fuel that was purchased with this transaction. */
     public Builder setFuel(AuthorizationCreateParams.Fuel fuel) {
       this.fuel = fuel;
+      return this;
+    }
+
+    /** Healthcare-specific information for IIAS-eligible authorizations. */
+    public Builder setHealthcare(AuthorizationCreateParams.Healthcare healthcare) {
+      this.healthcare = healthcare;
       return this;
     }
 
@@ -1401,6 +1416,244 @@ public class AuthorizationCreateParams extends ApiRequestParams {
       private final String value;
 
       Unit(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Healthcare {
+    /** Clinic and urgent care sub-amount for Visa only. */
+    @SerializedName("clinic_amount")
+    Long clinicAmount;
+
+    /**
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /** Dental care sub-amount for Visa only. */
+    @SerializedName("dental_amount")
+    Long dentalAmount;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Prescription drug sub-amount. Null if the merchant did not send this amount. */
+    @SerializedName("prescription_amount")
+    Long prescriptionAmount;
+
+    /**
+     * The type of healthcare transaction. {@code medical} for FSA/HSA-eligible healthcare
+     * purchases; {@code transit_for_healthcare} for FSA/HSA-eligible transit for healthcare
+     * purchases.
+     */
+    @SerializedName("purchase_type")
+    PurchaseType purchaseType;
+
+    /** <strong>Required.</strong> Total FSA/HSA-eligible amount in the smallest currency unit. */
+    @SerializedName("total_qualified_amount")
+    Long totalQualifiedAmount;
+
+    /**
+     * <strong>Required.</strong> IIAS verification status from the merchant terminal. For Visa,
+     * this is always iias_verified.
+     */
+    @SerializedName("verification_status")
+    VerificationStatus verificationStatus;
+
+    /** Vision/optical sub-amount. Null if the merchant did not send this amount. */
+    @SerializedName("vision_amount")
+    Long visionAmount;
+
+    private Healthcare(
+        Long clinicAmount,
+        String currency,
+        Long dentalAmount,
+        Map<String, Object> extraParams,
+        Long prescriptionAmount,
+        PurchaseType purchaseType,
+        Long totalQualifiedAmount,
+        VerificationStatus verificationStatus,
+        Long visionAmount) {
+      this.clinicAmount = clinicAmount;
+      this.currency = currency;
+      this.dentalAmount = dentalAmount;
+      this.extraParams = extraParams;
+      this.prescriptionAmount = prescriptionAmount;
+      this.purchaseType = purchaseType;
+      this.totalQualifiedAmount = totalQualifiedAmount;
+      this.verificationStatus = verificationStatus;
+      this.visionAmount = visionAmount;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long clinicAmount;
+
+      private String currency;
+
+      private Long dentalAmount;
+
+      private Map<String, Object> extraParams;
+
+      private Long prescriptionAmount;
+
+      private PurchaseType purchaseType;
+
+      private Long totalQualifiedAmount;
+
+      private VerificationStatus verificationStatus;
+
+      private Long visionAmount;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AuthorizationCreateParams.Healthcare build() {
+        return new AuthorizationCreateParams.Healthcare(
+            this.clinicAmount,
+            this.currency,
+            this.dentalAmount,
+            this.extraParams,
+            this.prescriptionAmount,
+            this.purchaseType,
+            this.totalQualifiedAmount,
+            this.verificationStatus,
+            this.visionAmount);
+      }
+
+      /** Clinic and urgent care sub-amount for Visa only. */
+      public Builder setClinicAmount(Long clinicAmount) {
+        this.clinicAmount = clinicAmount;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+       */
+      public Builder setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /** Dental care sub-amount for Visa only. */
+      public Builder setDentalAmount(Long dentalAmount) {
+        this.dentalAmount = dentalAmount;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AuthorizationCreateParams.Healthcare#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AuthorizationCreateParams.Healthcare#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Prescription drug sub-amount. Null if the merchant did not send this amount. */
+      public Builder setPrescriptionAmount(Long prescriptionAmount) {
+        this.prescriptionAmount = prescriptionAmount;
+        return this;
+      }
+
+      /**
+       * The type of healthcare transaction. {@code medical} for FSA/HSA-eligible healthcare
+       * purchases; {@code transit_for_healthcare} for FSA/HSA-eligible transit for healthcare
+       * purchases.
+       */
+      public Builder setPurchaseType(
+          AuthorizationCreateParams.Healthcare.PurchaseType purchaseType) {
+        this.purchaseType = purchaseType;
+        return this;
+      }
+
+      /** <strong>Required.</strong> Total FSA/HSA-eligible amount in the smallest currency unit. */
+      public Builder setTotalQualifiedAmount(Long totalQualifiedAmount) {
+        this.totalQualifiedAmount = totalQualifiedAmount;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> IIAS verification status from the merchant terminal. For Visa,
+       * this is always iias_verified.
+       */
+      public Builder setVerificationStatus(
+          AuthorizationCreateParams.Healthcare.VerificationStatus verificationStatus) {
+        this.verificationStatus = verificationStatus;
+        return this;
+      }
+
+      /** Vision/optical sub-amount. Null if the merchant did not send this amount. */
+      public Builder setVisionAmount(Long visionAmount) {
+        this.visionAmount = visionAmount;
+        return this;
+      }
+    }
+
+    public enum PurchaseType implements ApiRequestParams.EnumParam {
+      @SerializedName("medical")
+      MEDICAL("medical"),
+
+      @SerializedName("transit_for_healthcare")
+      TRANSIT_FOR_HEALTHCARE("transit_for_healthcare");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      PurchaseType(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum VerificationStatus implements ApiRequestParams.EnumParam {
+      @SerializedName("iias_merchant_exempt")
+      IIAS_MERCHANT_EXEMPT("iias_merchant_exempt"),
+
+      @SerializedName("iias_merchant_not_certified")
+      IIAS_MERCHANT_NOT_CERTIFIED("iias_merchant_not_certified"),
+
+      @SerializedName("iias_verified")
+      IIAS_VERIFIED("iias_verified"),
+
+      @SerializedName("not_verified")
+      NOT_VERIFIED("not_verified");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      VerificationStatus(String value) {
         this.value = value;
       }
     }

@@ -38,6 +38,10 @@ public class OffSessionPayment extends StripeObject implements HasId {
   @SerializedName("amount_requested")
   Amount amountRequested;
 
+  /** The application associated with this OffSessionPayment. */
+  @SerializedName("application")
+  String application;
+
   /** The amount of the application fee requested to be applied to the payment. */
   @SerializedName("application_fee_amount_requested")
   Amount applicationFeeAmountRequested;

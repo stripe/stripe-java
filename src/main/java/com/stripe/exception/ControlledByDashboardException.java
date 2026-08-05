@@ -21,11 +21,8 @@ public final class ControlledByDashboardException extends ApiException {
   static ControlledByDashboardException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     ControlledByDashboardException.ControlledByDashboardError error =
-        (ControlledByDashboardException.ControlledByDashboardError)
-            StripeObject.deserializeStripeObject(
-                body,
-                ControlledByDashboardException.ControlledByDashboardError.class,
-                responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, ControlledByDashboardException.ControlledByDashboardError.class, responseGetter);
     ControlledByDashboardException exception =
         new ControlledByDashboardException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);

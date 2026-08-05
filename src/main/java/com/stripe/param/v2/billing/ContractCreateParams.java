@@ -52,7 +52,7 @@ public class ContractCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** <strong>Required.</strong> A list of pricing lines to create with the contract. */
+  /** A list of pricing lines to create with the contract. */
   @SerializedName("pricing_lines")
   List<ContractCreateParams.PricingLine> pricingLines;
 

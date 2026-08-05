@@ -21,11 +21,10 @@ public final class ControlledByAlternateResourceException extends ApiException {
   static ControlledByAlternateResourceException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     ControlledByAlternateResourceException.ControlledByAlternateResourceError error =
-        (ControlledByAlternateResourceException.ControlledByAlternateResourceError)
-            StripeObject.deserializeStripeObject(
-                body,
-                ControlledByAlternateResourceException.ControlledByAlternateResourceError.class,
-                responseGetter);
+        StripeObject.deserializeStripeObject(
+            body,
+            ControlledByAlternateResourceException.ControlledByAlternateResourceError.class,
+            responseGetter);
     ControlledByAlternateResourceException exception =
         new ControlledByAlternateResourceException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);

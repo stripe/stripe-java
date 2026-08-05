@@ -18,9 +18,8 @@ public final class QuotaExceededException extends ApiException {
   static QuotaExceededException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     QuotaExceededException.QuotaExceededError error =
-        (QuotaExceededException.QuotaExceededError)
-            StripeObject.deserializeStripeObject(
-                body, QuotaExceededException.QuotaExceededError.class, responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, QuotaExceededException.QuotaExceededError.class, responseGetter);
     QuotaExceededException exception =
         new QuotaExceededException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);

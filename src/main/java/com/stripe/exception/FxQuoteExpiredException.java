@@ -18,9 +18,8 @@ public final class FxQuoteExpiredException extends ApiException {
   static FxQuoteExpiredException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     FxQuoteExpiredException.FxQuoteExpiredError error =
-        (FxQuoteExpiredException.FxQuoteExpiredError)
-            StripeObject.deserializeStripeObject(
-                body, FxQuoteExpiredException.FxQuoteExpiredError.class, responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, FxQuoteExpiredException.FxQuoteExpiredError.class, responseGetter);
     FxQuoteExpiredException exception =
         new FxQuoteExpiredException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);

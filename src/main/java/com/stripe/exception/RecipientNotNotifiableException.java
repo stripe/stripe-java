@@ -21,11 +21,10 @@ public final class RecipientNotNotifiableException extends ApiException {
   static RecipientNotNotifiableException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     RecipientNotNotifiableException.RecipientNotNotifiableError error =
-        (RecipientNotNotifiableException.RecipientNotNotifiableError)
-            StripeObject.deserializeStripeObject(
-                body,
-                RecipientNotNotifiableException.RecipientNotNotifiableError.class,
-                responseGetter);
+        StripeObject.deserializeStripeObject(
+            body,
+            RecipientNotNotifiableException.RecipientNotNotifiableError.class,
+            responseGetter);
     RecipientNotNotifiableException exception =
         new RecipientNotNotifiableException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);

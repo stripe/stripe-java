@@ -18,9 +18,8 @@ public final class InvalidPayoutMethodException extends ApiException {
   static InvalidPayoutMethodException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     InvalidPayoutMethodException.InvalidPayoutMethodError error =
-        (InvalidPayoutMethodException.InvalidPayoutMethodError)
-            StripeObject.deserializeStripeObject(
-                body, InvalidPayoutMethodException.InvalidPayoutMethodError.class, responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, InvalidPayoutMethodException.InvalidPayoutMethodError.class, responseGetter);
     InvalidPayoutMethodException exception =
         new InvalidPayoutMethodException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);

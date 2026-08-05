@@ -5698,6 +5698,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    @SerializedName("sequra")
+    Sequra sequra;
+
     @SerializedName("shopeepay")
     Shopeepay shopeepay;
 
@@ -6671,6 +6674,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent extends StripeObject {
+      @SerializedName("aade_data")
+      AadeData aadeData;
+
       /**
        * Controls when funds are captured from the customer's account when {@code capture_method} is
        * {@code automatic_delayed}.
@@ -6733,6 +6739,54 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
       @SerializedName("routing")
       Routing routing;
+
+      /**
+       * For more details about AadeData, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AadeData extends StripeObject {
+        /**
+         * The canonical string that was signed by the e-invoicing provider to produce {@code
+         * signed_mark}, formatted per Appendix A of A.1155/2023. Required when {@code mode} is
+         * {@code standard}.
+         */
+        @SerializedName("mark_data")
+        String markData;
+
+        /**
+         * The e-invoicing mode under which the mark was generated.
+         *
+         * <p>One of {@code autonomous}, or {@code standard}.
+         */
+        @SerializedName("mode")
+        String mode;
+
+        /**
+         * The AADE-assigned approval number of the e-invoicing provider that generated the mark.
+         * Required when {@code mode} is {@code standard}.
+         */
+        @SerializedName("provider_id")
+        Long providerId;
+
+        /**
+         * The cryptographic signature returned by the e-invoicing provider for this transaction,
+         * hex-encoded. Required when {@code mode} is {@code standard}.
+         */
+        @SerializedName("signed_mark")
+        String signedMark;
+
+        /**
+         * The reason for entering autonomous mode. Required when {@code mode} is {@code
+         * autonomous}.
+         *
+         * <p>One of {@code interconnection_loss}, {@code lock}, or {@code replacement_cash_system}.
+         */
+        @SerializedName("unbound_pos")
+        String unboundPos;
+      }
 
       /**
        * For more details about CaptureDelay, please refer to the <a
@@ -8561,6 +8615,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("reference_prefix")
         String referencePrefix;
       }
+    }
+
+    /**
+     * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sequra extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
     }
 
     /**

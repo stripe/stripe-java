@@ -28,10 +28,16 @@ public class StatementListParams extends ApiRequestParams {
   @SerializedName("order_by")
   OrderBy orderBy;
 
-  private StatementListParams(Map<String, Object> extraParams, Long limit, OrderBy orderBy) {
+  /** Filter results by status. If omitted, statements of all statuses are returned. */
+  @SerializedName("status")
+  Status status;
+
+  private StatementListParams(
+      Map<String, Object> extraParams, Long limit, OrderBy orderBy, Status status) {
     this.extraParams = extraParams;
     this.limit = limit;
     this.orderBy = orderBy;
+    this.status = status;
   }
 
   public static Builder builder() {
@@ -45,9 +51,11 @@ public class StatementListParams extends ApiRequestParams {
 
     private OrderBy orderBy;
 
+    private Status status;
+
     /** Finalize and obtain parameter instance from this builder. */
     public StatementListParams build() {
-      return new StatementListParams(this.extraParams, this.limit, this.orderBy);
+      return new StatementListParams(this.extraParams, this.limit, this.orderBy, this.status);
     }
 
     /**
@@ -87,6 +95,12 @@ public class StatementListParams extends ApiRequestParams {
       this.orderBy = orderBy;
       return this;
     }
+
+    /** Filter results by status. If omitted, statements of all statuses are returned. */
+    public Builder setStatus(StatementListParams.Status status) {
+      this.status = status;
+      return this;
+    }
   }
 
   public enum OrderBy implements ApiRequestParams.EnumParam {
@@ -100,6 +114,21 @@ public class StatementListParams extends ApiRequestParams {
     private final String value;
 
     OrderBy(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("active")
+    ACTIVE("active"),
+
+    @SerializedName("restated")
+    RESTATED("restated");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
       this.value = value;
     }
   }
