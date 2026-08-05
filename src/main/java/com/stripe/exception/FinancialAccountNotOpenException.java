@@ -17,11 +17,10 @@ public final class FinancialAccountNotOpenException extends ApiException {
   static FinancialAccountNotOpenException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     FinancialAccountNotOpenException.FinancialAccountNotOpenError error =
-        (FinancialAccountNotOpenException.FinancialAccountNotOpenError)
-            StripeObject.deserializeStripeObject(
-                body,
-                FinancialAccountNotOpenException.FinancialAccountNotOpenError.class,
-                responseGetter);
+        StripeObject.deserializeStripeObject(
+            body,
+            FinancialAccountNotOpenException.FinancialAccountNotOpenError.class,
+            responseGetter);
     FinancialAccountNotOpenException exception =
         new FinancialAccountNotOpenException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);

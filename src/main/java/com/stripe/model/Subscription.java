@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.model.billing.FeedbackOptions;
 import com.stripe.model.testhelpers.TestClock;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -1281,7 +1282,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * then on June 1 they’ll be billed 250 (200 for a renewal of her subscription, plus a 50
    * prorating adjustment for half of the previous month’s 100 difference). Similarly, a downgrade
    * generates a credit that is applied to the next invoice. We also prorate when you make quantity
-   * changes.
+   * changes. You can also <a
+   * href="https://stripe.com/billing/scripts/stripe-authored/proration">use scripts to prorate your
+   * billing</a>. To learn more, see <a
+   * href="https://stripe.com/billing/subscriptions/prorations">Prorations</a>.
    *
    * <p>Switching prices does not normally change the billing date or generate an immediate charge
    * unless:
@@ -1334,7 +1338,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * then on June 1 they’ll be billed 250 (200 for a renewal of her subscription, plus a 50
    * prorating adjustment for half of the previous month’s 100 difference). Similarly, a downgrade
    * generates a credit that is applied to the next invoice. We also prorate when you make quantity
-   * changes.
+   * changes. You can also <a
+   * href="https://stripe.com/billing/scripts/stripe-authored/proration">use scripts to prorate your
+   * billing</a>. To learn more, see <a
+   * href="https://stripe.com/billing/subscriptions/prorations">Prorations</a>.
    *
    * <p>Switching prices does not normally change the billing date or generate an immediate charge
    * unless:
@@ -1391,7 +1398,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * then on June 1 they’ll be billed 250 (200 for a renewal of her subscription, plus a 50
    * prorating adjustment for half of the previous month’s 100 difference). Similarly, a downgrade
    * generates a credit that is applied to the next invoice. We also prorate when you make quantity
-   * changes.
+   * changes. You can also <a
+   * href="https://stripe.com/billing/scripts/stripe-authored/proration">use scripts to prorate your
+   * billing</a>. To learn more, see <a
+   * href="https://stripe.com/billing/subscriptions/prorations">Prorations</a>.
    *
    * <p>Switching prices does not normally change the billing date or generate an immediate charge
    * unless:
@@ -1443,7 +1453,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * then on June 1 they’ll be billed 250 (200 for a renewal of her subscription, plus a 50
    * prorating adjustment for half of the previous month’s 100 difference). Similarly, a downgrade
    * generates a credit that is applied to the next invoice. We also prorate when you make quantity
-   * changes.
+   * changes. You can also <a
+   * href="https://stripe.com/billing/scripts/stripe-authored/proration">use scripts to prorate your
+   * billing</a>. To learn more, see <a
+   * href="https://stripe.com/billing/subscriptions/prorations">Prorations</a>.
    *
    * <p>Switching prices does not normally change the billing date or generate an immediate charge
    * unless:
@@ -1786,6 +1799,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     String feedback;
 
     /**
+     * Customized feedback options that provide deeper insight into why the subscription was
+     * canceled, if the subscription was canceled explicitly by the user.
+     */
+    @SerializedName("feedback_option")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<FeedbackOptions> feedbackOption;
+
+    /**
      * Why this subscription was canceled.
      *
      * <p>One of {@code canceled_by_retention_policy}, {@code cancellation_requested}, {@code
@@ -1793,6 +1815,25 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("reason")
     String reason;
+
+    /** Get ID of expandable {@code feedbackOption} object. */
+    public String getFeedbackOption() {
+      return (this.feedbackOption != null) ? this.feedbackOption.getId() : null;
+    }
+
+    public void setFeedbackOption(String id) {
+      this.feedbackOption = ApiResource.setExpandableFieldId(id, this.feedbackOption);
+    }
+
+    /** Get expanded {@code feedbackOption}. */
+    public FeedbackOptions getFeedbackOptionObject() {
+      return (this.feedbackOption != null) ? this.feedbackOption.getExpanded() : null;
+    }
+
+    public void setFeedbackOptionObject(FeedbackOptions expandableObject) {
+      this.feedbackOption =
+          new ExpandableField<FeedbackOptions>(expandableObject.getId(), expandableObject);
+    }
   }
 
   /**

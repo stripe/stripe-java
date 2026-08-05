@@ -975,6 +975,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    @SerializedName("sequra")
+    Sequra sequra;
+
     @SerializedName("shopeepay")
     Shopeepay shopeepay;
 
@@ -2138,6 +2141,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
        */
       @SerializedName("receipt")
       Receipt receipt;
+
+      /** The retrieval reference number assigned to this transaction. */
+      @SerializedName("retrieval_reference_number")
+      String retrievalReferenceNumber;
 
       @SerializedName("wallet")
       Wallet wallet;
@@ -3706,6 +3713,19 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
        */
       @SerializedName("mandate")
       String mandate;
+    }
+
+    /**
+     * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sequra extends StripeObject {
+      /** The Sequra transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**

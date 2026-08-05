@@ -2799,11 +2799,22 @@ public class SessionUpdateParams extends ApiRequestParams {
     @SerializedName("shipping_rate_data")
     ShippingRateData shippingRateData;
 
+    /**
+     * The tax rates that will be applied to this shipping option. This parameter is only supported
+     * for Checkout Sessions with {@code ui_mode} set to {@code form} or {@code elements}.
+     */
+    @SerializedName("tax_rates")
+    Object taxRates;
+
     private ShippingOption(
-        Map<String, Object> extraParams, Object shippingRate, ShippingRateData shippingRateData) {
+        Map<String, Object> extraParams,
+        Object shippingRate,
+        ShippingRateData shippingRateData,
+        Object taxRates) {
       this.extraParams = extraParams;
       this.shippingRate = shippingRate;
       this.shippingRateData = shippingRateData;
+      this.taxRates = taxRates;
     }
 
     public static Builder builder() {
@@ -2817,10 +2828,12 @@ public class SessionUpdateParams extends ApiRequestParams {
 
       private ShippingRateData shippingRateData;
 
+      private Object taxRates;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SessionUpdateParams.ShippingOption build() {
         return new SessionUpdateParams.ShippingOption(
-            this.extraParams, this.shippingRate, this.shippingRateData);
+            this.extraParams, this.shippingRate, this.shippingRateData, this.taxRates);
       }
 
       /**
@@ -2865,6 +2878,54 @@ public class SessionUpdateParams extends ApiRequestParams {
       public Builder setShippingRateData(
           SessionUpdateParams.ShippingOption.ShippingRateData shippingRateData) {
         this.shippingRateData = shippingRateData;
+        return this;
+      }
+
+      /**
+       * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SessionUpdateParams.ShippingOption#taxRates} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addTaxRate(String element) {
+        if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+          this.taxRates = new ArrayList<String>();
+        }
+        ((List<String>) this.taxRates).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SessionUpdateParams.ShippingOption#taxRates} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllTaxRate(List<String> elements) {
+        if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+          this.taxRates = new ArrayList<String>();
+        }
+        ((List<String>) this.taxRates).addAll(elements);
+        return this;
+      }
+
+      /**
+       * The tax rates that will be applied to this shipping option. This parameter is only
+       * supported for Checkout Sessions with {@code ui_mode} set to {@code form} or {@code
+       * elements}.
+       */
+      public Builder setTaxRates(EmptyParam taxRates) {
+        this.taxRates = taxRates;
+        return this;
+      }
+
+      /**
+       * The tax rates that will be applied to this shipping option. This parameter is only
+       * supported for Checkout Sessions with {@code ui_mode} set to {@code form} or {@code
+       * elements}.
+       */
+      public Builder setTaxRates(List<String> taxRates) {
+        this.taxRates = taxRates;
         return this;
       }
     }

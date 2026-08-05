@@ -133,6 +133,12 @@ public abstract class StripeObject implements StripeObjectInterface {
     return (T) deserializeStripeObject(payload, (Type) type, responseGetter);
   }
 
+  @SuppressWarnings("unchecked")
+  public static <T> T deserializeStripeObject(
+      JsonObject payload, Class<T> type, StripeResponseGetter responseGetter) {
+    return (T) deserializeStripeObject(payload, (Type) type, responseGetter);
+  }
+
   public static StripeObject deserializeStripeObject(
       String payload, Type type, StripeResponseGetter responseGetter) {
     StripeObject object = ApiResource.INTERNAL_GSON.fromJson(payload, type);

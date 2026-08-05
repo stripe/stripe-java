@@ -8,6 +8,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
+import com.stripe.model.billing.FeedbackOptions;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -20,6 +21,7 @@ import com.stripe.param.billingportal.ConfigurationRetrieveParams;
 import com.stripe.param.billingportal.ConfigurationUpdateParams;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -420,9 +422,57 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
         @SerializedName("enabled")
         Boolean enabled;
 
+        /** The IDs of custom feedback options configured for this cancellation reason. */
+        @SerializedName("feedback_options")
+        List<ExpandableField<FeedbackOptions>> feedbackOptions;
+
         /** Which cancellation reasons will be given as options to the customer. */
         @SerializedName("options")
         List<String> options;
+
+        /** Get IDs of expandable {@code feedbackOptions} object list. */
+        public List<String> getFeedbackOptions() {
+          return (this.feedbackOptions != null)
+              ? this.feedbackOptions.stream().map(x -> x.getId()).collect(Collectors.toList())
+              : null;
+        }
+
+        public void setFeedbackOptions(List<String> ids) {
+          if (ids == null) {
+            this.feedbackOptions = null;
+            return;
+          }
+          if (this.feedbackOptions != null
+              && this.feedbackOptions.stream()
+                  .map(x -> x.getId())
+                  .collect(Collectors.toList())
+                  .equals(ids)) {
+            // noop if the ids are equal to what are already present
+            return;
+          }
+          this.feedbackOptions =
+              (ids != null)
+                  ? ids.stream()
+                      .map(id -> new ExpandableField<FeedbackOptions>(id, null))
+                      .collect(Collectors.toList())
+                  : null;
+        }
+
+        /** Get expanded {@code feedbackOptions}. */
+        public List<FeedbackOptions> getFeedbackOptionObjects() {
+          return (this.feedbackOptions != null)
+              ? this.feedbackOptions.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+              : null;
+        }
+
+        public void setFeedbackOptionObjects(List<FeedbackOptions> objs) {
+          this.feedbackOptions =
+              objs != null
+                  ? objs.stream()
+                      .map(x -> new ExpandableField<FeedbackOptions>(x.getId(), x))
+                      .collect(Collectors.toList())
+                  : null;
+        }
       }
     }
 

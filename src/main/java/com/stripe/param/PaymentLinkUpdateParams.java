@@ -1801,7 +1801,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Dropdown {
       /**
-       * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+       * The value that pre-fills the field on the payment page. Must match a {@code value} in the
        * {@code options} array.
        */
       @SerializedName("default_value")
@@ -1850,7 +1850,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+         * The value that pre-fills the field on the payment page. Must match a {@code value} in the
          * {@code options} array.
          */
         public Builder setDefaultValue(String defaultValue) {
@@ -1859,7 +1859,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+         * The value that pre-fills the field on the payment page. Must match a {@code value} in the
          * {@code options} array.
          */
         public Builder setDefaultValue(EmptyParam defaultValue) {

@@ -1469,7 +1469,7 @@ public class Authorization extends ApiResource
 
     /**
      * IIAS verification status from the merchant terminal. For Visa, this value will always be
-     * iias_verified.
+     * iias_verified. Defaults to not_verified when the network does not provide IIAS status.
      *
      * <p>One of {@code iias_merchant_exempt}, {@code iias_merchant_not_certified}, {@code
      * iias_verified}, or {@code not_verified}.

@@ -32,6 +32,13 @@ public class PaymentAttemptRecordReportGuaranteedParams extends ApiRequestParams
   Long guaranteedAt;
 
   /**
+   * Set to {@code true} to enable writing an anomalous guaranteed payment to an outdated
+   * PaymentAttemptRecord. This parameter defaults to {@code false}.
+   */
+  @SerializedName("is_anomalous")
+  Boolean isAnomalous;
+
+  /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -56,6 +63,7 @@ public class PaymentAttemptRecordReportGuaranteedParams extends ApiRequestParams
       List<String> expand,
       Map<String, Object> extraParams,
       Long guaranteedAt,
+      Boolean isAnomalous,
       Object metadata,
       List<String> paymentEvaluations,
       PaymentMethodDetails paymentMethodDetails,
@@ -63,6 +71,7 @@ public class PaymentAttemptRecordReportGuaranteedParams extends ApiRequestParams
     this.expand = expand;
     this.extraParams = extraParams;
     this.guaranteedAt = guaranteedAt;
+    this.isAnomalous = isAnomalous;
     this.metadata = metadata;
     this.paymentEvaluations = paymentEvaluations;
     this.paymentMethodDetails = paymentMethodDetails;
@@ -80,6 +89,8 @@ public class PaymentAttemptRecordReportGuaranteedParams extends ApiRequestParams
 
     private Long guaranteedAt;
 
+    private Boolean isAnomalous;
+
     private Object metadata;
 
     private List<String> paymentEvaluations;
@@ -94,6 +105,7 @@ public class PaymentAttemptRecordReportGuaranteedParams extends ApiRequestParams
           this.expand,
           this.extraParams,
           this.guaranteedAt,
+          this.isAnomalous,
           this.metadata,
           this.paymentEvaluations,
           this.paymentMethodDetails,
@@ -156,6 +168,15 @@ public class PaymentAttemptRecordReportGuaranteedParams extends ApiRequestParams
     /** When the reported payment was guaranteed. Measured in seconds since the Unix epoch. */
     public Builder setGuaranteedAt(Long guaranteedAt) {
       this.guaranteedAt = guaranteedAt;
+      return this;
+    }
+
+    /**
+     * Set to {@code true} to enable writing an anomalous guaranteed payment to an outdated
+     * PaymentAttemptRecord. This parameter defaults to {@code false}.
+     */
+    public Builder setIsAnomalous(Boolean isAnomalous) {
+      this.isAnomalous = isAnomalous;
       return this;
     }
 

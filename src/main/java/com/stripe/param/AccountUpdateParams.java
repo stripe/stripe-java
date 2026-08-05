@@ -9237,6 +9237,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("address_kanji")
     AddressKanji addressKanji;
 
+    /** The location where the business is administered. */
     @SerializedName("administrative_address")
     AdministrativeAddress administrativeAddress;
 
@@ -9327,6 +9328,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("phone")
     Object phone;
 
+    /** The primary location where the business conducts operations. */
     @SerializedName("principal_place_of_business")
     PrincipalPlaceOfBusiness principalPlaceOfBusiness;
 
@@ -9544,6 +9546,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The location where the business is administered. */
       public Builder setAdministrativeAddress(
           AccountUpdateParams.Company.AdministrativeAddress administrativeAddress) {
         this.administrativeAddress = administrativeAddress;
@@ -9733,6 +9736,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The primary location where the business conducts operations. */
       public Builder setPrincipalPlaceOfBusiness(
           AccountUpdateParams.Company.PrincipalPlaceOfBusiness principalPlaceOfBusiness) {
         this.principalPlaceOfBusiness = principalPlaceOfBusiness;

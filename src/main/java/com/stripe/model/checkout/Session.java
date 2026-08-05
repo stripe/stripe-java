@@ -1119,7 +1119,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     /**
      * The surcharge provider used for this session.
      *
-     * <p>One of {@code interpayments}, {@code proserv}, or {@code yeeld}.
+     * <p>One of {@code daikin}, {@code interpayments}, {@code proserv}, or {@code yeeld}.
      */
     @SerializedName("provider")
     String provider;
@@ -2949,6 +2949,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    @SerializedName("sequra")
+    Sequra sequra;
+
     @SerializedName("sofort")
     Sofort sofort;
 
@@ -3615,6 +3618,13 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
          */
         @SerializedName("brands_blocked")
         List<String> brandsBlocked;
+
+        /**
+         * Card funding types to block for this Checkout Session. Supported values are {@code
+         * credit}, {@code debit}, and {@code prepaid}.
+         */
+        @SerializedName("funding_types_blocked")
+        List<String> fundingTypesBlocked;
       }
     }
 
@@ -4840,6 +4850,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
 
     /**
+     * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sequra extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+    }
+
+    /**
      * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -5493,6 +5520,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<ShippingRate> shippingRate;
+
+    /** The tax rates applied to this shipping option. */
+    @SerializedName("tax_rates")
+    List<String> taxRates;
 
     /** Get ID of expandable {@code shippingRate} object. */
     public String getShippingRate() {

@@ -18,9 +18,8 @@ public final class AlreadyCanceledException extends ApiException {
   static AlreadyCanceledException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     AlreadyCanceledException.AlreadyCanceledError error =
-        (AlreadyCanceledException.AlreadyCanceledError)
-            StripeObject.deserializeStripeObject(
-                body, AlreadyCanceledException.AlreadyCanceledError.class, responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, AlreadyCanceledException.AlreadyCanceledError.class, responseGetter);
     AlreadyCanceledException exception =
         new AlreadyCanceledException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);

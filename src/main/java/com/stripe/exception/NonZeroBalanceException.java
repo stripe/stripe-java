@@ -18,9 +18,8 @@ public final class NonZeroBalanceException extends ApiException {
   static NonZeroBalanceException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     NonZeroBalanceException.NonZeroBalanceError error =
-        (NonZeroBalanceException.NonZeroBalanceError)
-            StripeObject.deserializeStripeObject(
-                body, NonZeroBalanceException.NonZeroBalanceError.class, responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, NonZeroBalanceException.NonZeroBalanceError.class, responseGetter);
     NonZeroBalanceException exception =
         new NonZeroBalanceException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);

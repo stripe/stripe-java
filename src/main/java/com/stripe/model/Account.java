@@ -1530,6 +1530,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String sepaDebitPayments;
 
     /**
+     * The status of the Sequra capability of the account, or whether the account can directly
+     * process Sequra payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("sequra_payments")
+    String sequraPayments;
+
+    /**
      * The status of the ShopeePay capability of the account, or whether the account can directly
      * process ShopeePay payments.
      *
