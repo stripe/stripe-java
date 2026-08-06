@@ -139,7 +139,7 @@ public final class Webhook {
 
     // Azure
     // https://docs.stripe.com/event-destinations/eventgrid#event-structure
-    if (root.has("specversion")) {
+    if (root.has("specversion") && root.has("data")) {
       return root.get("data").getAsJsonObject();
     }
 
@@ -152,7 +152,7 @@ public final class Webhook {
     }
 
     throw new IllegalArgumentException(
-        "Unrecognized cloud event format. The payload must be an AWS EventBridge / Azure Event Grid event envelope or a Stripe event.");
+        "Unrecognized event format. The payload must be an AWS EventBridge/Azure Event Grid event envelope or a Stripe webhook (thin event notification or snapshot).");
   }
 
   public static final class Signature {

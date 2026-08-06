@@ -2,6 +2,7 @@ package com.stripe.net;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.stripe.BaseStripeTest;
 import com.stripe.StripeClient;
@@ -127,7 +128,7 @@ public class CloudProviderEventTest extends BaseStripeTest {
         assertThrows(
             IllegalArgumentException.class,
             () -> client.constructEventWithoutVerification("{\"foo\":\"bar\"}"));
-    assertTrue(ex.getMessage().contains("Unrecognized cloud event format"));
+    assertTrue(ex.getMessage().contains("Unrecognized event format"));
   }
 
   // parseEventNotificationWithoutVerification tests
@@ -173,7 +174,7 @@ public class CloudProviderEventTest extends BaseStripeTest {
         assertThrows(
             IllegalArgumentException.class,
             () -> client.parseEventNotificationWithoutVerification("{\"foo\":\"bar\"}"));
-    assertTrue(ex.getMessage().contains("Unrecognized cloud event format"));
+    assertTrue(ex.getMessage().contains("Unrecognized event format"));
   }
 
   @Test
@@ -204,5 +205,32 @@ public class CloudProviderEventTest extends BaseStripeTest {
             IllegalArgumentException.class,
             () -> client.constructEventWithoutVerification(v2Payload));
     assertTrue(ex.getMessage().contains("parseEventNotification"));
+  }
+
+  @Test
+  public void testAzureEnvelopeMissingDataThrows() {
+    StripeClient client = new StripeClient("sk_test_fake");
+    String payloadMissingData =
+        "{\"specversion\":\"1.0\","
+            + "\"type\":\"customer.created\","
+            + "\"source\":\"/providers/stripe/ed_test_123\","
+            + "\"id\":\"test-missing-data\"}";
+    IllegalArgumentException ex =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> client.constructEventWithoutVerification(payloadMissingData));
+    assertTrue(ex.getMessage().contains("Unrecognized event format"));
+  }
+
+  @Test
+  public void testFromJsonUnexpectedObjectTypeThrows() {
+    StripeClient client = new StripeClient("sk_test_fake");
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("object", "customer");
+    jsonObject.addProperty("type", "customer.created");
+    IllegalArgumentException ex =
+        assertThrows(
+            IllegalArgumentException.class, () -> EventNotification.fromJson(jsonObject, client));
+    assertTrue(ex.getMessage().contains("Unexpected object type"));
   }
 }

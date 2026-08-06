@@ -86,8 +86,8 @@ public abstract class EventNotification {
   /**
    * Helper for constructing an Event Notification. Doesn't perform signature validation, so you
    * should use {@link com.stripe.StripeClient#parseEventNotification} instead for initial handling.
-   * This is useful in unit tests and working with EventNotifications that you've already validated
-   * the authenticity of.
+   * This is useful in unit tests and working with EventNotifications whose authenticity you've
+   * already validated.
    */
   public static EventNotification fromJson(String payload, StripeClient client) {
     // don't love the double json parse here, but I don't think we can avoid it?
@@ -98,13 +98,22 @@ public abstract class EventNotification {
   /**
    * Helper for constructing an Event Notification. Doesn't perform signature validation, so you
    * should use {@link com.stripe.StripeClient#parseEventNotification} instead for initial handling.
-   * This is useful in unit tests and working with EventNotifications that you've already validated
-   * the authenticity of.
+   * This is useful in unit tests and working with EventNotifications whose authenticity you've
+   * already validated.
    */
   public static EventNotification fromJson(JsonObject jsonObject, StripeClient client) {
-    if (jsonObject.has("object") && "event".equals(jsonObject.get("object").getAsString())) {
-      throw new IllegalArgumentException(
-          "You passed a webhook payload to a method that expects an event notification. Use the corresponding constructEvent method instead.");
+    if (jsonObject.has("object")) {
+      String object = jsonObject.get("object").getAsString();
+      if ("event".equals(object)) {
+        throw new IllegalArgumentException(
+            "You passed a webhook payload to a method that expects an event notification. Use the corresponding constructEvent method instead.");
+      }
+      if (!"v2.core.event".equals(object)) {
+        throw new IllegalArgumentException(
+            "Unexpected object type '"
+                + object
+                + "'. Expected 'v2.core.event' for an event notification.");
+      }
     }
 
     Class<? extends EventNotification> cls =
