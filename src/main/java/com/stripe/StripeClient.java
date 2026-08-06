@@ -2,6 +2,7 @@ package com.stripe;
 
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Event;
 import com.stripe.model.StripeObject;
 import com.stripe.model.v2.core.EventNotification;
 import com.stripe.net.*;
@@ -58,9 +59,10 @@ public class StripeClient {
   }
 
   /**
-   * Returns an StripeEvent instance using the provided JSON payload. Throws a JsonSyntaxException
-   * if the payload is not valid JSON, and a SignatureVerificationException if the signature
-   * verification fails for any reason.
+   * Constructs a <a href="https://docs.stripe.com/event-destinations#thin-payload">thin event
+   * notification</a> from an incoming webhook after verifying its authenticity. To work with a
+   * webhook that has already been verified (i.e. one from a cloud provider, an asynchronous queue,
+   * or during testing), see {@code parseEventNotificationWithoutVerification}.
    *
    * @param payload the payload sent by Stripe.
    * @param sigHeader the contents of the signature header sent by Stripe.
@@ -115,6 +117,45 @@ public class StripeClient {
     com.stripe.model.Event event = Webhook.constructEvent(payload, sigHeader, secret, tolerance);
     event.setResponseGetter(this.getResponseGetter());
     return event;
+  }
+
+  /**
+   * Constructs a <a href="https://docs.stripe.com/event-destinations#snapshot-payload">snapshot
+   * event</a> from an incoming webhook without first verifying its authenticity. Should be used
+   * after calling {@code Webhook.Signature.verifyHeader(...)} or with input from a trusted source
+   * (such as <a href="https://docs.stripe.com/event-destinations/eventbridge">AWS EventBridge</a>,
+   * or <a href="https://docs.stripe.com/event-destinations/eventgrid">Azure Event Grid</a>
+   * payload). Or, to verify &amp; construct in a single call, use {@code constructEvent(...)}
+   * instead.
+   *
+   * @param payload the JSON payload: a raw Stripe Event or an AWS EventBridge/Azure Event Grid
+   *     envelope.
+   * @return the Event instance.
+   * @throws IllegalArgumentException if the payload is a thin event notification, or if the format
+   *     is not recognized.
+   */
+  public com.stripe.model.Event constructEventWithoutVerification(String payload) {
+    Event event = Webhook.constructEventWithoutVerification(payload);
+    event.setResponseGetter(this.getResponseGetter());
+    return event;
+  }
+
+  /**
+   * Constructs a <a href="https://docs.stripe.com/event-destinations#thin-payload">thin event
+   * notification</a> from an incoming webhook without first verifying its authenticity. Should be
+   * used after calling {@code Webhook.Signature.verifyHeader(...)} or with input from a trusted
+   * source (such as <a href="https://docs.stripe.com/event-destinations/eventbridge">AWS
+   * EventBridge</a>, or <a href="https://docs.stripe.com/event-destinations/eventgrid">Azure Event
+   * Grid</a> payload). Or, to verify &amp; parse in a single call, use {@code
+   * parseEventNotification(...)} instead.
+   *
+   * @param payload the JSON payload: a raw Stripe Event, or an AWS EventBridge/Azure Event Grid
+   *     envelope.
+   * @return the EventNotification instance.
+   * @throws IllegalArgumentException if the payload format is not recognized.
+   */
+  public EventNotification parseEventNotificationWithoutVerification(String payload) {
+    return EventNotification.fromJson(Webhook.maybeExtractFromCloudProviderEnvelope(payload), this);
   }
 
   // The beginning of the section generated from our OpenAPI spec
