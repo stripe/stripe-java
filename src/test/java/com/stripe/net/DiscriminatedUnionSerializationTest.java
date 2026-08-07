@@ -216,6 +216,9 @@ public class DiscriminatedUnionSerializationTest {
     Map<String, Object> cardMap = (Map<String, Object>) map.get("card");
     assertEquals("4242424242424242", cardMap.get("number"));
     assertEquals(12L, cardMap.get("exp_month"));
+
+    // Non-selected variant is not present in serialized output.
+    assertEquals(null, map.get("bank"));
   }
 
   @Test
@@ -253,6 +256,11 @@ public class DiscriminatedUnionSerializationTest {
     assertEquals(Long.valueOf(255L), container.color.r);
     assertEquals(Long.valueOf(128L), container.color.g);
     assertEquals(Long.valueOf(0L), container.color.b);
+
+    // Non-selected variant fields remain null.
+    assertEquals(null, container.color.h);
+    assertEquals(null, container.color.s);
+    assertEquals(null, container.color.v);
   }
 
   @Test
@@ -265,5 +273,8 @@ public class DiscriminatedUnionSerializationTest {
     assertEquals("card", entity.type);
     assertEquals("4242424242424242", entity.card.number);
     assertEquals(Long.valueOf(12L), entity.card.expMonth);
+
+    // Non-selected variant remains null.
+    assertEquals(null, entity.bank);
   }
 }
