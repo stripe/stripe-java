@@ -60,6 +60,10 @@ public abstract class EventNotification {
   @SerializedName("id")
   public String id;
 
+  /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
+  public String object;
+
   /** The type of the event. */
   @SerializedName("type")
   public String type;
