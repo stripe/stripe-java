@@ -18,9 +18,8 @@ public final class BlockedByStripeException extends ApiException {
   static BlockedByStripeException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     BlockedByStripeException.BlockedByStripeError error =
-        (BlockedByStripeException.BlockedByStripeError)
-            StripeObject.deserializeStripeObject(
-                body, BlockedByStripeException.BlockedByStripeError.class, responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, BlockedByStripeException.BlockedByStripeError.class, responseGetter);
     BlockedByStripeException exception =
         new BlockedByStripeException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);

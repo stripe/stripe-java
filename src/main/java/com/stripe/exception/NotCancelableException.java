@@ -18,9 +18,8 @@ public final class NotCancelableException extends ApiException {
   static NotCancelableException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     NotCancelableException.NotCancelableError error =
-        (NotCancelableException.NotCancelableError)
-            StripeObject.deserializeStripeObject(
-                body, NotCancelableException.NotCancelableError.class, responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, NotCancelableException.NotCancelableError.class, responseGetter);
     NotCancelableException exception =
         new NotCancelableException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);
