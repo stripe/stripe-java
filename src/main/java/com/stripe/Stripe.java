@@ -11,6 +11,12 @@ public abstract class Stripe {
   public static final int DEFAULT_READ_TIMEOUT = 80 * 1000;
 
   public static final String API_VERSION = ApiVersion.CURRENT;
+  /**
+   * The major API version that this SDK uses. Objects retrieved using the same major version are
+   * compatible. Is an empty string in preview versions of the SDK.
+   */
+  public static final String MAJOR_API_VERSION = ApiVersion.CURRENT_MAJOR;
+
   public static final String CONNECT_API_BASE = "https://connect.stripe.com";
   public static final String LIVE_API_BASE = "https://api.stripe.com";
   public static final String UPLOAD_API_BASE = "https://files.stripe.com";

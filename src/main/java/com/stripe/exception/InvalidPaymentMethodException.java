@@ -30,11 +30,8 @@ public final class InvalidPaymentMethodException extends ApiException {
   static InvalidPaymentMethodException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     InvalidPaymentMethodException.InvalidPaymentMethodError error =
-        (InvalidPaymentMethodException.InvalidPaymentMethodError)
-            StripeObject.deserializeStripeObject(
-                body,
-                InvalidPaymentMethodException.InvalidPaymentMethodError.class,
-                responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, InvalidPaymentMethodException.InvalidPaymentMethodError.class, responseGetter);
     InvalidPaymentMethodException exception =
         new InvalidPaymentMethodException(
             error.getMessage(),
