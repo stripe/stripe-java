@@ -2103,6 +2103,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       Bancontact bancontact;
 
       /**
+       * This sub-hash contains details about the Billie payment method options to pass to invoices
+       * created by the subscription.
+       */
+      @SerializedName("billie")
+      Billie billie;
+
+      /**
        * This sub-hash contains details about the Bizum payment method options to pass to invoices
        * created by the subscription.
        */
@@ -2247,6 +2254,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         @SerializedName("preferred_language")
         String preferredLanguage;
       }
+
+      /**
+       * For more details about Billie, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Billie extends StripeObject {}
 
       /**
        * For more details about Bizum, please refer to the <a href="https://docs.stripe.com/api">API

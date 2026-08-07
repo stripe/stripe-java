@@ -179,6 +179,9 @@ public class OnrampTransactionLimitsRetrieveParams extends ApiRequestParams {
     @SerializedName("bitcoin")
     BITCOIN("bitcoin"),
 
+    @SerializedName("celo")
+    CELO("celo"),
+
     @SerializedName("ethereum")
     ETHEREUM("ethereum"),
 

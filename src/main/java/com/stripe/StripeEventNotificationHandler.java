@@ -16,9 +16,17 @@ import com.stripe.events.V1ApplicationFeeCreatedEventNotification;
 import com.stripe.events.V1ApplicationFeeRefundUpdatedEventNotification;
 import com.stripe.events.V1ApplicationFeeRefundedEventNotification;
 import com.stripe.events.V1BalanceAvailableEventNotification;
+import com.stripe.events.V1BalanceSettingsUpdatedEventNotification;
 import com.stripe.events.V1BillingAlertTriggeredEventNotification;
+import com.stripe.events.V1BillingCreditBalanceTransactionCreatedEventNotification;
+import com.stripe.events.V1BillingCreditGrantCreatedEventNotification;
+import com.stripe.events.V1BillingCreditGrantUpdatedEventNotification;
+import com.stripe.events.V1BillingMeterCreatedEventNotification;
+import com.stripe.events.V1BillingMeterDeactivatedEventNotification;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification;
 import com.stripe.events.V1BillingMeterNoMeterFoundEventNotification;
+import com.stripe.events.V1BillingMeterReactivatedEventNotification;
+import com.stripe.events.V1BillingMeterUpdatedEventNotification;
 import com.stripe.events.V1BillingPortalConfigurationCreatedEventNotification;
 import com.stripe.events.V1BillingPortalConfigurationUpdatedEventNotification;
 import com.stripe.events.V1BillingPortalSessionCreatedEventNotification;
@@ -71,13 +79,18 @@ import com.stripe.events.V1CustomerTaxIdUpdatedEventNotification;
 import com.stripe.events.V1CustomerUpdatedEventNotification;
 import com.stripe.events.V1EntitlementsActiveEntitlementSummaryUpdatedEventNotification;
 import com.stripe.events.V1FileCreatedEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountAccountNumbersUpdatedEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountCreatedEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountDeactivatedEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountDisconnectedEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountExpectedDeactivationDateUpdatedEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountReactivatedEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountRefreshedBalanceEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountRefreshedOwnershipEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountRefreshedTransactionsEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountSupportedPaymentMethodTypesUpdatedEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountUpcomingAccountNumberExpiryEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountUpcomingDeactivationEventNotification;
 import com.stripe.events.V1IdentityVerificationSessionCanceledEventNotification;
 import com.stripe.events.V1IdentityVerificationSessionCreatedEventNotification;
 import com.stripe.events.V1IdentityVerificationSessionProcessingEventNotification;
@@ -93,6 +106,7 @@ import com.stripe.events.V1InvoiceOverdueEventNotification;
 import com.stripe.events.V1InvoiceOverpaidEventNotification;
 import com.stripe.events.V1InvoicePaidEventNotification;
 import com.stripe.events.V1InvoicePaymentActionRequiredEventNotification;
+import com.stripe.events.V1InvoicePaymentAttemptRequiredEventNotification;
 import com.stripe.events.V1InvoicePaymentFailedEventNotification;
 import com.stripe.events.V1InvoicePaymentPaidEventNotification;
 import com.stripe.events.V1InvoicePaymentSucceededEventNotification;
@@ -616,9 +630,45 @@ public class StripeEventNotificationHandler {
     return this;
   }
 
+  public StripeEventNotificationHandler onV1BalanceSettingsUpdated(
+      Callback<V1BalanceSettingsUpdatedEventNotification> callback) {
+    this.register("v1.balance_settings.updated", callback);
+    return this;
+  }
+
   public StripeEventNotificationHandler onV1BillingAlertTriggered(
       Callback<V1BillingAlertTriggeredEventNotification> callback) {
     this.register("v1.billing.alert.triggered", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV1BillingCreditBalanceTransactionCreated(
+      Callback<V1BillingCreditBalanceTransactionCreatedEventNotification> callback) {
+    this.register("v1.billing.credit_balance_transaction.created", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV1BillingCreditGrantCreated(
+      Callback<V1BillingCreditGrantCreatedEventNotification> callback) {
+    this.register("v1.billing.credit_grant.created", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV1BillingCreditGrantUpdated(
+      Callback<V1BillingCreditGrantUpdatedEventNotification> callback) {
+    this.register("v1.billing.credit_grant.updated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV1BillingMeterCreated(
+      Callback<V1BillingMeterCreatedEventNotification> callback) {
+    this.register("v1.billing.meter.created", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV1BillingMeterDeactivated(
+      Callback<V1BillingMeterDeactivatedEventNotification> callback) {
+    this.register("v1.billing.meter.deactivated", callback);
     return this;
   }
 
@@ -631,6 +681,18 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV1BillingMeterNoMeterFound(
       Callback<V1BillingMeterNoMeterFoundEventNotification> callback) {
     this.register("v1.billing.meter.no_meter_found", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV1BillingMeterReactivated(
+      Callback<V1BillingMeterReactivatedEventNotification> callback) {
+    this.register("v1.billing.meter.reactivated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV1BillingMeterUpdated(
+      Callback<V1BillingMeterUpdatedEventNotification> callback) {
+    this.register("v1.billing.meter.updated", callback);
     return this;
   }
 
@@ -946,6 +1008,12 @@ public class StripeEventNotificationHandler {
     return this;
   }
 
+  public StripeEventNotificationHandler onV1FinancialConnectionsAccountAccountNumbersUpdated(
+      Callback<V1FinancialConnectionsAccountAccountNumbersUpdatedEventNotification> callback) {
+    this.register("v1.financial_connections.account.account_numbers_updated", callback);
+    return this;
+  }
+
   public StripeEventNotificationHandler onV1FinancialConnectionsAccountCreated(
       Callback<V1FinancialConnectionsAccountCreatedEventNotification> callback) {
     this.register("v1.financial_connections.account.created", callback);
@@ -961,6 +1029,14 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV1FinancialConnectionsAccountDisconnected(
       Callback<V1FinancialConnectionsAccountDisconnectedEventNotification> callback) {
     this.register("v1.financial_connections.account.disconnected", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler
+      onV1FinancialConnectionsAccountExpectedDeactivationDateUpdated(
+          Callback<V1FinancialConnectionsAccountExpectedDeactivationDateUpdatedEventNotification>
+              callback) {
+    this.register("v1.financial_connections.account.expected_deactivation_date_updated", callback);
     return this;
   }
 
@@ -985,6 +1061,28 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV1FinancialConnectionsAccountRefreshedTransactions(
       Callback<V1FinancialConnectionsAccountRefreshedTransactionsEventNotification> callback) {
     this.register("v1.financial_connections.account.refreshed_transactions", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler
+      onV1FinancialConnectionsAccountSupportedPaymentMethodTypesUpdated(
+          Callback<V1FinancialConnectionsAccountSupportedPaymentMethodTypesUpdatedEventNotification>
+              callback) {
+    this.register(
+        "v1.financial_connections.account.supported_payment_method_types_updated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV1FinancialConnectionsAccountUpcomingAccountNumberExpiry(
+      Callback<V1FinancialConnectionsAccountUpcomingAccountNumberExpiryEventNotification>
+          callback) {
+    this.register("v1.financial_connections.account.upcoming_account_number_expiry", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV1FinancialConnectionsAccountUpcomingDeactivation(
+      Callback<V1FinancialConnectionsAccountUpcomingDeactivationEventNotification> callback) {
+    this.register("v1.financial_connections.account.upcoming_deactivation", callback);
     return this;
   }
 
@@ -1075,6 +1173,12 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV1InvoicePaymentActionRequired(
       Callback<V1InvoicePaymentActionRequiredEventNotification> callback) {
     this.register("v1.invoice.payment_action_required", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV1InvoicePaymentAttemptRequired(
+      Callback<V1InvoicePaymentAttemptRequiredEventNotification> callback) {
+    this.register("v1.invoice.payment_attempt_required", callback);
     return this;
   }
 

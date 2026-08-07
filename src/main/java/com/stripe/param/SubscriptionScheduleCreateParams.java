@@ -87,8 +87,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   Object metadata;
 
   /**
-   * Sets the pause schedules for the subscription schedule. Each entry configures when and how the
-   * subscription pauses and optionally when and how it resumes.
+   * Configures the subscription's pause behavior and, optionally, its resume behavior. Only one
+   * entry is supported.
    */
   @SerializedName("pause_schedules")
   List<SubscriptionScheduleCreateParams.PauseSchedule> pauseSchedules;
@@ -2417,7 +2417,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @SerializedName("key")
     String key;
 
-    /** <strong>Required.</strong> Configuration for when and how the subscription pauses. */
+    /** Configuration for when and how the subscription pauses. */
     @SerializedName("pause")
     Pause pause;
 
@@ -2484,7 +2484,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> Configuration for when and how the subscription pauses. */
+      /** Configuration for when and how the subscription pauses. */
       public Builder setPause(SubscriptionScheduleCreateParams.PauseSchedule.Pause pause) {
         this.pause = pause;
         return this;
@@ -3489,7 +3489,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         /**
          * Controls whether Stripe attempts payment on the resumption invoice and how payment
-         * affects the subscription's status. The default is {@code resume_on_payment_attempt}.
+         * affects the subscription's status. The default is {@code resume_on_payment_success}.
          */
         @SerializedName("payment_behavior")
         PaymentBehavior paymentBehavior;
@@ -3574,7 +3574,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
           /**
            * Controls whether Stripe attempts payment on the resumption invoice and how payment
-           * affects the subscription's status. The default is {@code resume_on_payment_attempt}.
+           * affects the subscription's status. The default is {@code resume_on_payment_success}.
            */
           public Builder setPaymentBehavior(
               SubscriptionScheduleCreateParams.PauseSchedule.Resume.Settings.PaymentBehavior

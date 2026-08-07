@@ -48,14 +48,36 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v1.balance.available", com.stripe.events.V1BalanceAvailableEventNotification.class);
     eventClassLookup.put(
+        "v1.balance_settings.updated",
+        com.stripe.events.V1BalanceSettingsUpdatedEventNotification.class);
+    eventClassLookup.put(
         "v1.billing.alert.triggered",
         com.stripe.events.V1BillingAlertTriggeredEventNotification.class);
+    eventClassLookup.put(
+        "v1.billing.credit_balance_transaction.created",
+        com.stripe.events.V1BillingCreditBalanceTransactionCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v1.billing.credit_grant.created",
+        com.stripe.events.V1BillingCreditGrantCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v1.billing.credit_grant.updated",
+        com.stripe.events.V1BillingCreditGrantUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v1.billing.meter.created", com.stripe.events.V1BillingMeterCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v1.billing.meter.deactivated",
+        com.stripe.events.V1BillingMeterDeactivatedEventNotification.class);
     eventClassLookup.put(
         "v1.billing.meter.error_report_triggered",
         com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification.class);
     eventClassLookup.put(
         "v1.billing.meter.no_meter_found",
         com.stripe.events.V1BillingMeterNoMeterFoundEventNotification.class);
+    eventClassLookup.put(
+        "v1.billing.meter.reactivated",
+        com.stripe.events.V1BillingMeterReactivatedEventNotification.class);
+    eventClassLookup.put(
+        "v1.billing.meter.updated", com.stripe.events.V1BillingMeterUpdatedEventNotification.class);
     eventClassLookup.put(
         "v1.billing_portal.configuration.created",
         com.stripe.events.V1BillingPortalConfigurationCreatedEventNotification.class);
@@ -190,6 +212,10 @@ public final class EventNotificationClassLookup {
         com.stripe.events.V1EntitlementsActiveEntitlementSummaryUpdatedEventNotification.class);
     eventClassLookup.put("v1.file.created", com.stripe.events.V1FileCreatedEventNotification.class);
     eventClassLookup.put(
+        "v1.financial_connections.account.account_numbers_updated",
+        com.stripe.events.V1FinancialConnectionsAccountAccountNumbersUpdatedEventNotification
+            .class);
+    eventClassLookup.put(
         "v1.financial_connections.account.created",
         com.stripe.events.V1FinancialConnectionsAccountCreatedEventNotification.class);
     eventClassLookup.put(
@@ -198,6 +224,10 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v1.financial_connections.account.disconnected",
         com.stripe.events.V1FinancialConnectionsAccountDisconnectedEventNotification.class);
+    eventClassLookup.put(
+        "v1.financial_connections.account.expected_deactivation_date_updated",
+        com.stripe.events
+            .V1FinancialConnectionsAccountExpectedDeactivationDateUpdatedEventNotification.class);
     eventClassLookup.put(
         "v1.financial_connections.account.reactivated",
         com.stripe.events.V1FinancialConnectionsAccountReactivatedEventNotification.class);
@@ -211,6 +241,18 @@ public final class EventNotificationClassLookup {
         "v1.financial_connections.account.refreshed_transactions",
         com.stripe.events.V1FinancialConnectionsAccountRefreshedTransactionsEventNotification
             .class);
+    eventClassLookup.put(
+        "v1.financial_connections.account.supported_payment_method_types_updated",
+        com.stripe.events
+            .V1FinancialConnectionsAccountSupportedPaymentMethodTypesUpdatedEventNotification
+            .class);
+    eventClassLookup.put(
+        "v1.financial_connections.account.upcoming_account_number_expiry",
+        com.stripe.events.V1FinancialConnectionsAccountUpcomingAccountNumberExpiryEventNotification
+            .class);
+    eventClassLookup.put(
+        "v1.financial_connections.account.upcoming_deactivation",
+        com.stripe.events.V1FinancialConnectionsAccountUpcomingDeactivationEventNotification.class);
     eventClassLookup.put(
         "v1.identity.verification_session.canceled",
         com.stripe.events.V1IdentityVerificationSessionCanceledEventNotification.class);
@@ -249,6 +291,9 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v1.invoice.payment_action_required",
         com.stripe.events.V1InvoicePaymentActionRequiredEventNotification.class);
+    eventClassLookup.put(
+        "v1.invoice.payment_attempt_required",
+        com.stripe.events.V1InvoicePaymentAttemptRequiredEventNotification.class);
     eventClassLookup.put(
         "v1.invoice.payment_failed",
         com.stripe.events.V1InvoicePaymentFailedEventNotification.class);

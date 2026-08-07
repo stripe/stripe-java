@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
@@ -76,7 +77,7 @@ public class WebhookTest extends BaseStripeTest {
   @Test
   public void testValidJsonAndHeader()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
-    final String sigHeader = generateSigHeader();
+    final String sigHeader = Webhook.Signature.generateSignatureHeader(payload, secret);
 
     final Event event = Webhook.constructEvent(payload, sigHeader, secret);
 
@@ -86,10 +87,7 @@ public class WebhookTest extends BaseStripeTest {
   @Test
   public void testValidJsonAndHeaderButOutsideTimeTolerance()
       throws NoSuchAlgorithmException, InvalidKeyException {
-    final Map<String, Object> options = new HashMap<>();
-    options.put("timestamp", 1L);
-
-    final String sigHeader = generateSigHeader(options);
+    final String sigHeader = Webhook.Signature.generateSignatureHeader(payload, secret, 1L);
     final Clock clock = Clock.fixed(Instant.ofEpochMilli(12000), ZoneId.of("UTC"));
 
     assertThrows(
@@ -109,9 +107,7 @@ public class WebhookTest extends BaseStripeTest {
             + "\","
             + "\"object\": \"event\",\"data\": {\"object\": {\"id\": \"acct_123\",\"object\": \"account\"}}}";
 
-    final Map<String, Object> options = new HashMap<>();
-    options.put("payload", payload);
-    final String sigHeader = generateSigHeader(options);
+    final String sigHeader = Webhook.Signature.generateSignatureHeader(payload, secret);
 
     final Event event = Webhook.constructEvent(payload, sigHeader, secret);
     Account modelViaData = ((Account) event.getData().getObject());
@@ -125,9 +121,7 @@ public class WebhookTest extends BaseStripeTest {
   public void testInvalidJson()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
     final String payload = "this is not valid JSON";
-    final Map<String, Object> options = new HashMap<>();
-    options.put("payload", payload);
-    final String sigHeader = generateSigHeader(options);
+    final String sigHeader = Webhook.Signature.generateSignatureHeader(payload, secret);
 
     assertThrows(
         JsonSyntaxException.class,
@@ -196,9 +190,8 @@ public class WebhookTest extends BaseStripeTest {
   @Test
   public void testTimestampOutsideTolerance()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
-    final Map<String, Object> options = new HashMap<>();
-    options.put("timestamp", Webhook.Util.getTimeNow() - 15);
-    final String sigHeader = generateSigHeader(options);
+    final String sigHeader =
+        Webhook.Signature.generateSignatureHeader(payload, secret, Webhook.Util.getTimeNow() - 15);
 
     Throwable exception =
         assertThrows(
@@ -212,7 +205,7 @@ public class WebhookTest extends BaseStripeTest {
   @Test
   public void testValidHeaderAndSignature()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
-    final String sigHeader = generateSigHeader();
+    final String sigHeader = Webhook.Signature.generateSignatureHeader(payload, secret);
 
     assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10, null));
   }
@@ -220,7 +213,9 @@ public class WebhookTest extends BaseStripeTest {
   @Test
   public void testHeaderContainsValidSignature()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
-    final String sigHeader = String.format("%s,v1=bad_signature", generateSigHeader());
+    final String sigHeader =
+        String.format(
+            "%s,v1=bad_signature", Webhook.Signature.generateSignatureHeader(payload, secret));
 
     assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10, null));
   }
@@ -228,9 +223,7 @@ public class WebhookTest extends BaseStripeTest {
   @Test
   public void testTimestampOffButNoTolerance()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
-    final Map<String, Object> options = new HashMap<>();
-    options.put("timestamp", Long.valueOf(12345L));
-    final String sigHeader = generateSigHeader(options);
+    final String sigHeader = Webhook.Signature.generateSignatureHeader(payload, secret, 12345L);
 
     assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0, null));
   }
@@ -238,11 +231,7 @@ public class WebhookTest extends BaseStripeTest {
   @Test
   public void testTimestampWithClock()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
-
-    final Map<String, Object> options = new HashMap<>();
-    options.put("timestamp", 11L);
-
-    final String sigHeader = generateSigHeader(options);
+    final String sigHeader = Webhook.Signature.generateSignatureHeader(payload, secret, 11L);
     final Clock clock = Clock.fixed(Instant.ofEpochMilli(1), ZoneId.of("UTC"));
 
     assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10, clock));
@@ -251,11 +240,7 @@ public class WebhookTest extends BaseStripeTest {
   @Test
   public void testTimestampWithClockOutsideTolerance()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
-
-    final Map<String, Object> options = new HashMap<>();
-    options.put("timestamp", 11L);
-
-    final String sigHeader = generateSigHeader(options);
+    final String sigHeader = Webhook.Signature.generateSignatureHeader(payload, secret, 11L);
     final Clock clock = Clock.fixed(Instant.ofEpochMilli(12), ZoneId.of("UTC"));
 
     assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10, clock));
@@ -282,9 +267,7 @@ public class WebhookTest extends BaseStripeTest {
             + "\","
             + "\"object\": \"event\",\"data\": {\"object\": {\"id\": \"rdr_123\",\"object\": \"terminal.reader\"}}}";
 
-    final Map<String, Object> options = new HashMap<>();
-    options.put("payload", payload);
-    final String sigHeader = generateSigHeader(options);
+    final String sigHeader = Webhook.Signature.generateSignatureHeader(payload, secret);
 
     final Event event = client.constructEvent(payload, sigHeader, secret);
 
@@ -315,9 +298,7 @@ public class WebhookTest extends BaseStripeTest {
             + "\","
             + "\"object\": \"event\",\"data\": {\"object\": {\"id\": \"rdr_123\",\"object\": \"terminal.reader\"}}}";
 
-    final Map<String, Object> options = new HashMap<>();
-    options.put("payload", payload);
-    final String sigHeader = generateSigHeader(options);
+    final String sigHeader = Webhook.Signature.generateSignatureHeader(payload, secret);
 
     final Event event = client.constructEvent(payload, sigHeader, secret, 500);
 
@@ -331,9 +312,108 @@ public class WebhookTest extends BaseStripeTest {
   public void testConstructEventWithRawJson()
       throws StripeException, NoSuchAlgorithmException, InvalidKeyException {
 
-    final Event event = Webhook.constructEvent(payload, generateSigHeader(), secret);
+    final Event event =
+        Webhook.constructEvent(
+            payload, Webhook.Signature.generateSignatureHeader(payload, secret), secret);
 
     assertNotNull(event.getRawJsonObject());
+  }
+
+  @Test
+  public void testGenerateSignatureHeaderWithTimestamp()
+      throws NoSuchAlgorithmException, InvalidKeyException, SignatureVerificationException {
+    final long timestamp = 1609459200L;
+    final String header = Webhook.Signature.generateSignatureHeader(payload, secret, timestamp);
+
+    assertTrue(Webhook.Signature.verifyHeader(payload, header, secret, 0, null));
+    assertTrue(header.startsWith(String.format("t=%d,v1=", timestamp)));
+  }
+
+  @Test
+  public void testGenerateSignatureHeaderWithCurrentTimestamp()
+      throws NoSuchAlgorithmException, InvalidKeyException, SignatureVerificationException {
+    final String header = Webhook.Signature.generateSignatureHeader(payload, secret);
+
+    assertTrue(Webhook.Signature.verifyHeader(payload, header, secret, 10, null));
+  }
+
+  @Test
+  public void testGenerateSignatureHeaderRoundtrip()
+      throws NoSuchAlgorithmException, InvalidKeyException, SignatureVerificationException {
+    String payload = "test_payload";
+    String secret = "whsec_test_secret";
+    String header = Webhook.Signature.generateSignatureHeader(payload, secret);
+    // Should not throw:
+    assertTrue(Webhook.Signature.verifyHeader(payload, header, secret, 300));
+  }
+
+  @Test
+  public void testParseEventNotification()
+      throws NoSuchAlgorithmException, InvalidKeyException, SignatureVerificationException {
+    StripeClient client = new StripeClient(new LiveStripeResponseGetter());
+
+    final String v2Payload =
+        "{\n"
+            + "  \"id\": \"evt_test_webhook\",\n"
+            + "  \"object\": \"v2.core.event\",\n"
+            + "  \"type\": \"v1.billing.meter.no_meter_found\",\n"
+            + "  \"livemode\": false,\n"
+            + "  \"created\": \"2022-02-15T00:27:45.330Z\"\n"
+            + "}";
+
+    final String header = Webhook.Signature.generateSignatureHeader(v2Payload, secret);
+
+    final com.stripe.model.v2.core.EventNotification notification =
+        client.parseEventNotification(v2Payload, header, secret);
+
+    assertNotNull(notification);
+    assertEquals("evt_test_webhook", notification.getId());
+  }
+
+  @Test
+  public void testMaybeExtractPassesThroughV1Event() {
+    final String v1Payload = "{\"id\": \"evt_test_webhook\", \"object\": \"event\"}";
+    final JsonObject result = Webhook.maybeExtractFromCloudProviderEnvelope(v1Payload);
+    assertEquals("event", result.get("object").getAsString());
+  }
+
+  @Test
+  public void testMaybeExtractPassesThroughV2Event() {
+    final String v2Payload = "{\"id\": \"evt_test_webhook\", \"object\": \"v2.core.event\"}";
+    final JsonObject result = Webhook.maybeExtractFromCloudProviderEnvelope(v2Payload);
+    assertEquals("v2.core.event", result.get("object").getAsString());
+  }
+
+  @Test
+  public void testMaybeExtractThrowsForUnrecognizedFormat() {
+    final String unknownPayload = "{\"id\": \"evt_test_webhook\", \"object\": \"something_else\"}";
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> {
+          Webhook.maybeExtractFromCloudProviderEnvelope(unknownPayload);
+        });
+  }
+
+  @Test
+  public void testConstructEventWithoutVerification() {
+    final Event event = Webhook.constructEventWithoutVerification(payload);
+
+    assertNotNull(event);
+    assertEquals("evt_test_webhook", event.getId());
+  }
+
+  @Test
+  public void testConstructEventWithoutVerificationRejectsV2Payload() {
+    final String v2Payload =
+        "{\n  \"id\": \"evt_test_webhook\",\n  \"object\": \"v2.core.event\"\n}";
+
+    Throwable exception =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+              Webhook.constructEventWithoutVerification(v2Payload);
+            });
+    assertTrue(exception.getMessage().contains("parseEventNotification"));
   }
 
   @Test
@@ -341,9 +421,7 @@ public class WebhookTest extends BaseStripeTest {
       throws NoSuchAlgorithmException, InvalidKeyException {
     final String v2Payload =
         "{\n  \"id\": \"evt_test_webhook\",\n  \"object\": \"v2.core.event\"\n}";
-    final Map<String, Object> options = new HashMap<>();
-    options.put("payload", v2Payload);
-    final String sigHeader = generateSigHeader(options);
+    final String sigHeader = Webhook.Signature.generateSignatureHeader(v2Payload, secret);
 
     Throwable exception =
         assertThrows(
@@ -351,7 +429,7 @@ public class WebhookTest extends BaseStripeTest {
             () -> {
               Webhook.constructEvent(v2Payload, sigHeader, secret);
             });
-    assertTrue(exception.getMessage().contains("StripeClient.parseEventNotification"));
+    assertTrue(exception.getMessage().contains("parseEventNotification"));
   }
 
   @Test
@@ -361,9 +439,7 @@ public class WebhookTest extends BaseStripeTest {
 
     final String v2Payload =
         "{\n  \"id\": \"evt_test_webhook\",\n  \"object\": \"v2.core.event\"\n}";
-    final Map<String, Object> options = new HashMap<>();
-    options.put("payload", v2Payload);
-    final String sigHeader = generateSigHeader(options);
+    final String sigHeader = Webhook.Signature.generateSignatureHeader(v2Payload, secret);
 
     Throwable exception =
         assertThrows(
@@ -371,6 +447,6 @@ public class WebhookTest extends BaseStripeTest {
             () -> {
               client.constructEvent(v2Payload, sigHeader, secret);
             });
-    assertTrue(exception.getMessage().contains("StripeClient.parseEventNotification"));
+    assertTrue(exception.getMessage().contains("parseEventNotification"));
   }
 }

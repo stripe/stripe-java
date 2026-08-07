@@ -3268,6 +3268,9 @@ public class ContractCreateParams extends ApiRequestParams {
     @SerializedName("billing_settings")
     BILLING_SETTINGS("billing_settings"),
 
+    @SerializedName("one_time_fees")
+    ONE_TIME_FEES("one_time_fees"),
+
     @SerializedName("pricing_lines")
     PRICING_LINES("pricing_lines"),
 

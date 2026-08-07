@@ -1312,6 +1312,9 @@ public class SubscriptionSchedule extends ApiResource
       @SerializedName("settings")
       Settings settings;
 
+      @SerializedName("status")
+      Status status;
+
       /**
        * For more details about Settings, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
@@ -1388,6 +1391,43 @@ public class SubscriptionSchedule extends ApiResource
           }
         }
       }
+
+      /**
+       * For more details about Status, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Status extends StripeObject {
+        @SerializedName("error")
+        Errors error;
+
+        /**
+         * The lifecycle state of the pause operation.
+         *
+         * <p>One of {@code error}, {@code scheduled}, or {@code succeeded}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about Errors, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Errors extends StripeObject {
+          /** A machine-readable error code. */
+          @SerializedName("code")
+          String code;
+
+          /** A description of the error. */
+          @SerializedName("message")
+          String message;
+        }
+      }
     }
 
     /**
@@ -1404,6 +1444,9 @@ public class SubscriptionSchedule extends ApiResource
 
       @SerializedName("settings")
       Settings settings;
+
+      @SerializedName("status")
+      Status status;
 
       /**
        * For more details about Settings, please refer to the <a
@@ -1438,6 +1481,44 @@ public class SubscriptionSchedule extends ApiResource
          */
         @SerializedName("proration_behavior")
         String prorationBehavior;
+      }
+
+      /**
+       * For more details about Status, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Status extends StripeObject {
+        @SerializedName("error")
+        Errors error;
+
+        /**
+         * The lifecycle state of the resume operation.
+         *
+         * <p>One of {@code error}, {@code pending}, {@code requires_action}, {@code scheduled}, or
+         * {@code succeeded}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about Errors, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Errors extends StripeObject {
+          /** A machine-readable error code. */
+          @SerializedName("code")
+          String code;
+
+          /** A description of the error. */
+          @SerializedName("message")
+          String message;
+        }
       }
     }
   }

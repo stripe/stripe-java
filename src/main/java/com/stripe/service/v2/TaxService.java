@@ -12,4 +12,8 @@ public final class TaxService extends ApiService {
   public com.stripe.service.v2.tax.ManualRuleService manualRules() {
     return new com.stripe.service.v2.tax.ManualRuleService(this.getResponseGetter());
   }
+
+  public com.stripe.service.v2.tax.OperationService operations() {
+    return new com.stripe.service.v2.tax.OperationService(this.getResponseGetter());
+  }
 }

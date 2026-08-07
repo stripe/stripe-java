@@ -32574,6 +32574,41 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2TaxOperationPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/tax/operations/resolve_address",
+        null,
+        null,
+        com.stripe.model.v2.tax.OperationsResolveAddressResult.class,
+        "{\"object\":\"v2.tax.operations_resolve_address_result\",\"address\":{},\"livemode\":true,\"precision\":\"none\",\"precision_details\":{\"issues\":[{\"code\":\"required_for_improved_precision\",\"field\":\"country\"}]}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.tax.OperationResolveAddressParams params =
+        com.stripe.param.v2.tax.OperationResolveAddressParams.builder()
+            .setAddress(
+                com.stripe.param.v2.tax.OperationResolveAddressParams.Address.builder()
+                    .setCity("city")
+                    .setCountry("country")
+                    .setLine1("line1")
+                    .setPostalCode("postal_code")
+                    .setState("state")
+                    .build())
+            .build();
+
+    com.stripe.model.v2.tax.OperationsResolveAddressResult operationsResolveAddressResult =
+        client.v2().tax().operations().resolveAddress(params);
+    assertNotNull(operationsResolveAddressResult);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/tax/operations/resolve_address",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testV2TestHelpersFinancialAddressPostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,

@@ -153,6 +153,10 @@ public class CustomerSession extends ApiResource {
     @SerializedName("buy_button")
     BuyButton buyButton;
 
+    /** This hash contains whether the customer portal is enabled. */
+    @SerializedName("customer_portal")
+    CustomerPortal customerPortal;
+
     /** This hash contains whether the customer sheet is enabled and the features it supports. */
     @SerializedName("customer_sheet")
     CustomerSheet customerSheet;
@@ -182,6 +186,16 @@ public class CustomerSession extends ApiResource {
     @EqualsAndHashCode(callSuper = false)
     public static class BuyButton extends StripeObject {
       /** Whether the buy button is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+    }
+
+    /** This hash contains whether the customer portal is enabled. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomerPortal extends StripeObject {
+      /** Whether the customer portal is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
     }
