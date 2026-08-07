@@ -33,7 +33,10 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
 
   /**
    * The failure code for this payment attempt. Must be one of {@code
-   * payment_method_customer_decline} or {@code payment_method_provider_unknown_outcome}.
+   * payment_method_customer_decline}, {@code payment_method_provider_unknown_outcome}, {@code
+   * authentication_failure}, {@code expired_payment_method}, {@code incorrect_cvc}, {@code
+   * incorrect_number}, {@code incorrect_postal_code}, {@code insufficient_funds}, {@code
+   * processing_error}, or {@code payment_method_restricted}.
    */
   @SerializedName("failure_code")
   FailureCode failureCode;
@@ -173,7 +176,10 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
 
     /**
      * The failure code for this payment attempt. Must be one of {@code
-     * payment_method_customer_decline} or {@code payment_method_provider_unknown_outcome}.
+     * payment_method_customer_decline}, {@code payment_method_provider_unknown_outcome}, {@code
+     * authentication_failure}, {@code expired_payment_method}, {@code incorrect_cvc}, {@code
+     * incorrect_number}, {@code incorrect_postal_code}, {@code insufficient_funds}, {@code
+     * processing_error}, or {@code payment_method_restricted}.
      */
     public Builder setFailureCode(
         PaymentRecordReportPaymentAttemptFailedParams.FailureCode failureCode) {
@@ -385,9 +391,14 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Card(Checks checks, Map<String, Object> extraParams) {
+      /** Decline code from the card network for the failed payment. */
+      @SerializedName("network_decline_code")
+      String networkDeclineCode;
+
+      private Card(Checks checks, Map<String, Object> extraParams, String networkDeclineCode) {
         this.checks = checks;
         this.extraParams = extraParams;
+        this.networkDeclineCode = networkDeclineCode;
       }
 
       public static Builder builder() {
@@ -399,10 +410,12 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
 
         private Map<String, Object> extraParams;
 
+        private String networkDeclineCode;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card build() {
           return new PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Card(
-              this.checks, this.extraParams);
+              this.checks, this.extraParams, this.networkDeclineCode);
         }
 
         /** Verification checks performed on the card. */
@@ -439,6 +452,12 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Decline code from the card network for the failed payment. */
+        public Builder setNetworkDeclineCode(String networkDeclineCode) {
+          this.networkDeclineCode = networkDeclineCode;
           return this;
         }
       }
@@ -827,11 +846,35 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
   }
 
   public enum FailureCode implements ApiRequestParams.EnumParam {
+    @SerializedName("authentication_failure")
+    AUTHENTICATION_FAILURE("authentication_failure"),
+
+    @SerializedName("expired_payment_method")
+    EXPIRED_PAYMENT_METHOD("expired_payment_method"),
+
+    @SerializedName("incorrect_cvc")
+    INCORRECT_CVC("incorrect_cvc"),
+
+    @SerializedName("incorrect_number")
+    INCORRECT_NUMBER("incorrect_number"),
+
+    @SerializedName("incorrect_postal_code")
+    INCORRECT_POSTAL_CODE("incorrect_postal_code"),
+
+    @SerializedName("insufficient_funds")
+    INSUFFICIENT_FUNDS("insufficient_funds"),
+
     @SerializedName("payment_method_customer_decline")
     PAYMENT_METHOD_CUSTOMER_DECLINE("payment_method_customer_decline"),
 
     @SerializedName("payment_method_provider_unknown_outcome")
-    PAYMENT_METHOD_PROVIDER_UNKNOWN_OUTCOME("payment_method_provider_unknown_outcome");
+    PAYMENT_METHOD_PROVIDER_UNKNOWN_OUTCOME("payment_method_provider_unknown_outcome"),
+
+    @SerializedName("payment_method_restricted")
+    PAYMENT_METHOD_RESTRICTED("payment_method_restricted"),
+
+    @SerializedName("processing_error")
+    PROCESSING_ERROR("processing_error");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

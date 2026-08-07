@@ -62,6 +62,10 @@ public class Account extends ApiResource implements HasId {
   @SerializedName("category")
   String category;
 
+  /** Per-taxonomy processing state for this account. One entry per subscribed taxonomy. */
+  @SerializedName("classification_state")
+  Map<String, Account.ClassificationState> classificationState;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -72,6 +76,10 @@ public class Account extends ApiResource implements HasId {
    */
   @SerializedName("display_name")
   String displayName;
+
+  /** The state of merchant name enrichment for this account. */
+  @SerializedName("enrichment_state")
+  EnrichmentState enrichmentState;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -774,6 +782,45 @@ public class Account extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about ClassificationState, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ClassificationState extends StripeObject {
+    /** The taxonomy classification status for this account. One of 'pending' or 'completed'. */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
+   * For more details about EnrichmentState, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class EnrichmentState extends StripeObject {
+    /** The enrichment status for merchant name normalization. */
+    @SerializedName("merchant")
+    Merchant merchant;
+
+    /**
+     * For more details about Merchant, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Merchant extends StripeObject {
+      /** The merchant enrichment status for this account. One of 'pending' or 'completed'. */
+      @SerializedName("status")
+      String status;
+    }
+  }
+
+  /**
    * For more details about InferredBalancesRefresh, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -947,6 +994,7 @@ public class Account extends ApiResource implements HasId {
     trySetResponseGetter(accountHolder, responseGetter);
     trySetResponseGetter(balance, responseGetter);
     trySetResponseGetter(balanceRefresh, responseGetter);
+    trySetResponseGetter(enrichmentState, responseGetter);
     trySetResponseGetter(inferredBalancesRefresh, responseGetter);
     trySetResponseGetter(institution, responseGetter);
     trySetResponseGetter(ownership, responseGetter);

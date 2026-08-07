@@ -772,6 +772,9 @@ public class OnrampSessionCreateParams extends ApiRequestParams {
     @SerializedName("bitcoin")
     BITCOIN("bitcoin"),
 
+    @SerializedName("celo")
+    CELO("celo"),
+
     @SerializedName("ethereum")
     ETHEREUM("ethereum"),
 

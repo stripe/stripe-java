@@ -291,14 +291,18 @@ public class AlertHistoryEntry extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Dimension extends StripeObject {
+      /** Populated when type is acquirer. */
+      @SerializedName("acquirer")
+      String acquirer;
+
       /** Populated when type is issuer. */
       @SerializedName("issuer")
       String issuer;
 
       /**
-       * The type of the dimension. Determines which field in dimension_details is populated.
+       * The type of the dimension. Determines which field is populated.
        *
-       * <p>Equal to {@code issuer}.
+       * <p>One of {@code acquirer}, or {@code issuer}.
        */
       @SerializedName("type")
       String type;

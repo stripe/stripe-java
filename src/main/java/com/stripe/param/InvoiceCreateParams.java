@@ -5297,6 +5297,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("bancontact")
       BANCONTACT("bancontact"),
 
+      @SerializedName("billie")
+      BILLIE("billie"),
+
       @SerializedName("bizum")
       BIZUM("bizum"),
 
@@ -5390,6 +5393,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("paypal")
       PAYPAL("paypal"),
 
+      @SerializedName("paypay")
+      PAYPAY("paypay"),
+
       @SerializedName("payto")
       PAYTO("payto"),
 
@@ -5431,6 +5437,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
       @SerializedName("us_bank_account")
       US_BANK_ACCOUNT("us_bank_account"),
+
+      @SerializedName("vipps")
+      VIPPS("vipps"),
 
       @SerializedName("wechat_pay")
       WECHAT_PAY("wechat_pay");
