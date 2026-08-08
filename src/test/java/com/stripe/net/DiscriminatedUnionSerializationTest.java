@@ -158,18 +158,15 @@ public class DiscriminatedUnionSerializationTest {
               JsonObject obj = JsonParser.parseReader(in).getAsJsonObject();
               String model = obj.has("model") ? obj.get("model").getAsString() : null;
               if ("rgb".equals(model)) {
-                return gson
-                    .getDelegateAdapter(
+                return gson.getDelegateAdapter(
                         TestColorTypeAdapterFactory.this, TypeToken.get(TestRgbColorEntity.class))
                     .fromJsonTree(obj);
               } else if ("hsv".equals(model)) {
-                return gson
-                    .getDelegateAdapter(
+                return gson.getDelegateAdapter(
                         TestColorTypeAdapterFactory.this, TypeToken.get(TestHsvColorEntity.class))
                     .fromJsonTree(obj);
               }
-              return gson
-                  .getDelegateAdapter(
+              return gson.getDelegateAdapter(
                       TestColorTypeAdapterFactory.this, TypeToken.get(TestColorEntity.class))
                   .fromJsonTree(obj);
             }
