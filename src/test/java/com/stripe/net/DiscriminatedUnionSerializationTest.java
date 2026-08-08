@@ -1,14 +1,32 @@
 package com.stripe.net;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.stripe.model.StripeObject;
+import java.io.IOException;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 public class DiscriminatedUnionSerializationTest {
   private final ApiRequestParamsConverter converter = new ApiRequestParamsConverter();
+
+  private final Gson testGson =
+      new GsonBuilder()
+          .registerTypeAdapterFactory(new TestColorTypeAdapterFactory())
+          .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+          .create();
 
   // ---------------------------------------------------------------------------
   // Request-side fixtures — standalone union
@@ -96,7 +114,9 @@ public class DiscriminatedUnionSerializationTest {
   private static class TestColorEntity extends StripeObject {
     @SerializedName("model")
     String model;
+  }
 
+  private static class TestRgbColorEntity extends TestColorEntity {
     @SerializedName("r")
     Long r;
 
@@ -105,7 +125,9 @@ public class DiscriminatedUnionSerializationTest {
 
     @SerializedName("b")
     Long b;
+  }
 
+  private static class TestHsvColorEntity extends TestColorEntity {
     @SerializedName("h")
     Long h;
 
@@ -114,6 +136,45 @@ public class DiscriminatedUnionSerializationTest {
 
     @SerializedName("v")
     Long v;
+  }
+
+  private static class TestColorTypeAdapterFactory implements TypeAdapterFactory {
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+      if (!TestColorEntity.class.isAssignableFrom(type.getRawType())) {
+        return null;
+      }
+      return (TypeAdapter<T>)
+          new TypeAdapter<TestColorEntity>() {
+            @Override
+            @SuppressWarnings("unchecked")
+            public void write(JsonWriter out, TestColorEntity value) throws IOException {
+              ((TypeAdapter<TestColorEntity>) gson.getAdapter(value.getClass())).write(out, value);
+            }
+
+            @Override
+            public TestColorEntity read(JsonReader in) throws IOException {
+              JsonObject obj = JsonParser.parseReader(in).getAsJsonObject();
+              String model = obj.has("model") ? obj.get("model").getAsString() : null;
+              if ("rgb".equals(model)) {
+                return gson
+                    .getDelegateAdapter(
+                        TestColorTypeAdapterFactory.this, TypeToken.get(TestRgbColorEntity.class))
+                    .fromJsonTree(obj);
+              } else if ("hsv".equals(model)) {
+                return gson
+                    .getDelegateAdapter(
+                        TestColorTypeAdapterFactory.this, TypeToken.get(TestHsvColorEntity.class))
+                    .fromJsonTree(obj);
+              }
+              return gson
+                  .getDelegateAdapter(
+                      TestColorTypeAdapterFactory.this, TypeToken.get(TestColorEntity.class))
+                  .fromJsonTree(obj);
+            }
+          };
+    }
   }
 
   private static class TestColorContainer extends StripeObject {
@@ -249,18 +310,31 @@ public class DiscriminatedUnionSerializationTest {
     String json =
         "{\"color\": {\"model\": \"rgb\", \"r\": 255, \"g\": 128, \"b\": 0}, \"name\": \"sunset\"}";
 
-    TestColorContainer container = ApiResource.GSON.fromJson(json, TestColorContainer.class);
+    TestColorContainer container = testGson.fromJson(json, TestColorContainer.class);
 
     assertEquals("sunset", container.name);
-    assertEquals("rgb", container.color.model);
-    assertEquals(Long.valueOf(255L), container.color.r);
-    assertEquals(Long.valueOf(128L), container.color.g);
-    assertEquals(Long.valueOf(0L), container.color.b);
+    assertTrue(container.color instanceof TestRgbColorEntity);
+    TestRgbColorEntity rgb = (TestRgbColorEntity) container.color;
+    assertEquals("rgb", rgb.model);
+    assertEquals(Long.valueOf(255L), rgb.r);
+    assertEquals(Long.valueOf(128L), rgb.g);
+    assertEquals(Long.valueOf(0L), rgb.b);
+  }
 
-    // Non-selected variant fields remain null.
-    assertEquals(null, container.color.h);
-    assertEquals(null, container.color.s);
-    assertEquals(null, container.color.v);
+  @Test
+  public void testStandaloneUnion_HsvVariant_Deserialization() {
+    String json =
+        "{\"color\": {\"model\": \"hsv\", \"h\": 30, \"s\": 100, \"v\": 50}, \"name\": \"orange\"}";
+
+    TestColorContainer container = testGson.fromJson(json, TestColorContainer.class);
+
+    assertEquals("orange", container.name);
+    assertTrue(container.color instanceof TestHsvColorEntity);
+    TestHsvColorEntity hsv = (TestHsvColorEntity) container.color;
+    assertEquals("hsv", hsv.model);
+    assertEquals(Long.valueOf(30L), hsv.h);
+    assertEquals(Long.valueOf(100L), hsv.s);
+    assertEquals(Long.valueOf(50L), hsv.v);
   }
 
   @Test
