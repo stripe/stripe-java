@@ -1,5 +1,17 @@
 # Changelog
 
+## 33.3.0 - 2026-08-10
+* [#2265](https://github.com/stripe/stripe-java/pull/2265) Surface `object` property on `EventNotification`
+* [#2256](https://github.com/stripe/stripe-java/pull/2256) add/adjust event parsing helpers
+  
+  - Added methods that return their respective `Event`/`EventNotification` class instances without verifying authenticity. Use them when you've previously verified an event (e.g. you verified, put the event in a queue, and are now processing). Supports events from [AWS EventBridge](https://docs.stripe.com/event-destinations/eventbridge) and [Azure Event Grid](https://docs.stripe.com/event-destinations/eventgrid) natively.
+    - `Webhook.constructEventWithoutVerification(payload)`
+    - `StripeClient.constructEventWithoutVerification(payload)`
+    - `StripeClient.parseEventNotificationWithoutVerification(payload)`
+  - Added `Webhook.Signature.generateSignatureHeader(payload, secret)`, which computes a full `Stripe-Signature` header for the given payload. Useful for unit tests!
+* [#2263](https://github.com/stripe/stripe-java/pull/2263) add stripeobject deserialization helper for JsonObject
+* [#2261](https://github.com/stripe/stripe-java/pull/2261) Add `stripe.major_api_version` constant
+
 ## 33.2.0 - 2026-07-29
 This release changes the pinned API version to 2026-07-29.dahlia.
 
