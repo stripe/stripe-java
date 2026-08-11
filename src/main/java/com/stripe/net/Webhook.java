@@ -1,5 +1,6 @@
 package com.stripe.net;
 
+import com.google.gson.JsonObject;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;
 import com.stripe.model.StripeObject;
@@ -53,9 +54,10 @@ public final class Webhook {
   }
 
   /**
-   * Returns an Event instance using the provided JSON payload. Throws a JsonSyntaxException if the
-   * payload is not valid JSON, a SignatureVerificationException if the signature verification fails
-   * for any reason, and an IllegalArgumentException if you pass the wrong type of input.
+   * Constructs a <a href="https://docs.stripe.com/event-destinations#snapshot-payload">snapshot
+   * event</a> from an incoming webhook after verifying its authenticity. To work with a webhook
+   * that has already been verified (i.e. one from a cloud provider, an asynchronous queue, or
+   * during testing), see {@code constructEventWithoutVerification}.
    *
    * @param payload the payload sent by Stripe.
    * @param sigHeader the contents of the signature header sent by Stripe.
@@ -69,26 +71,88 @@ public final class Webhook {
   public static Event constructEvent(
       String payload, String sigHeader, String secret, long tolerance, Clock clock)
       throws SignatureVerificationException {
-    Event event =
-        StripeObject.deserializeStripeObject(
-            payload, Event.class, ApiResource.getGlobalResponseGetter());
+    Signature.verifyHeader(payload, sigHeader, secret, tolerance, clock);
 
-    if ("v2.core.event".equals(event.getObject())) {
+    return buildV1Event(payload);
+  }
+
+  /**
+   * Constructs a <a href="https://docs.stripe.com/event-destinations#snapshot-payload">snapshot
+   * event</a> from an incoming webhook without first verifying its authenticity. Should be used
+   * after calling {@code Webhook.Signature.verifyHeader(...)} or with input from a trusted source
+   * (such as <a href="https://docs.stripe.com/event-destinations/eventbridge">AWS EventBridge</a>,
+   * or <a href="https://docs.stripe.com/event-destinations/eventgrid">Azure Event Grid</a>
+   * payload). Or, to verify &amp; construct in a single call, use {@code
+   * Webhook.constructEvent(...)} instead.
+   *
+   * @param payload the payload sent by Stripe, or a cloud provider envelope wrapping it.
+   * @return the Event instance
+   * @throws IllegalArgumentException if the payload is a v2 thin event notification.
+   */
+  public static Event constructEventWithoutVerification(String payload) {
+    return buildV1Event(maybeExtractFromCloudProviderEnvelope(payload));
+  }
+
+  private static Event buildV1Event(String payload) {
+    return buildV1Event(ApiResource.GSON.fromJson(payload, JsonObject.class));
+  }
+
+  private static Event buildV1Event(JsonObject jsonObject) {
+    if (jsonObject.has("object")
+        && "v2.core.event".equals(jsonObject.get("object").getAsString())) {
       throw new IllegalArgumentException(
-          "You passed an event notification to Webhook.constructEvent, which expects a webhook payload."
-              + " Use StripeClient.parseEventNotification instead.");
+          "You passed an event notification to Webhook method, which expects a webhook payload. Use the corresponding parseEventNotification method instead.");
     }
 
-    Signature.verifyHeader(payload, sigHeader, secret, tolerance, clock);
+    Event event =
+        StripeObject.deserializeStripeObject(
+            jsonObject, Event.class, ApiResource.getGlobalResponseGetter());
+
     // StripeObjects source their raw JSON object from their last response, but constructed webhooks
     // don't have that
     // in order to make the raw object available on parsed events, we fake the response.
     if (event.getLastResponse() == null) {
       event.setLastResponse(
-          new StripeResponse(200, HttpHeaders.of(Collections.emptyMap()), payload));
+          new StripeResponse(200, HttpHeaders.of(Collections.emptyMap()), jsonObject.toString()));
     }
 
     return event;
+  }
+
+  /**
+   * Parses a JSON payload (or cloud provider envelope) and returns the inner Stripe event JSON
+   * object. If the payload is already a raw Stripe event (object is "event" or "v2.core.event"), it
+   * is returned as-is. If it is an AWS EventBridge or Azure Event Grid envelope, the inner event is
+   * extracted. Throws {@link IllegalArgumentException} for unrecognized formats.
+   *
+   * @param payload the raw JSON string.
+   * @return the inner event as a {@link JsonObject}.
+   */
+  public static JsonObject maybeExtractFromCloudProviderEnvelope(String payload) {
+    JsonObject root = ApiResource.GSON.fromJson(payload, JsonObject.class);
+
+    // AWS
+    // https://docs.stripe.com/event-destinations/eventbridge#event-structure
+    if (root.has("detail")) {
+      return root.get("detail").getAsJsonObject();
+    }
+
+    // Azure
+    // https://docs.stripe.com/event-destinations/eventgrid#event-structure
+    if (root.has("specversion") && root.has("data")) {
+      return root.get("data").getAsJsonObject();
+    }
+
+    // Raw Stripe event passed directly: pass through as-is
+    if (root.has("object") && root.get("object").isJsonPrimitive()) {
+      String object = root.get("object").getAsString();
+      if ("event".equals(object) || "v2.core.event".equals(object)) {
+        return root;
+      }
+    }
+
+    throw new IllegalArgumentException(
+        "Unrecognized event format. The payload must be an AWS EventBridge/Azure Event Grid event envelope or a Stripe webhook (thin event notification or snapshot).");
   }
 
   public static final class Signature {
@@ -112,8 +176,10 @@ public final class Webhook {
     }
 
     /**
-     * Verifies the signature header sent by Stripe. Throws a SignatureVerificationException if the
-     * verification fails for any reason.
+     * Verifies the authenticity (and recency) of a webhook, throwing a {@code
+     * SignatureVerificationException} if there's a mismatch. Useful for quickly validating incoming
+     * webhooks before storing them for later processing (at which time you can use the {@code
+     * *WithoutVerification} methods for parsing).
      *
      * @param payload the payload sent by Stripe.
      * @param sigHeader the contents of the signature header sent by Stripe.
@@ -169,6 +235,35 @@ public final class Webhook {
       }
 
       return true;
+    }
+
+    /**
+     * Generates a {@code Stripe-Signature} header for the given payload and secret using the
+     * current timestamp.
+     *
+     * @param payload the payload to sign.
+     * @param secret the webhook secret.
+     * @return the generated signature header string.
+     */
+    public static String generateSignatureHeader(String payload, String secret)
+        throws NoSuchAlgorithmException, InvalidKeyException {
+      return generateSignatureHeader(payload, secret, Util.getTimeNow());
+    }
+
+    /**
+     * Compute the {@code Stripe-Signature} header for a given webhook body &amp; secret. Useful for
+     * signing payloads in unit tests.
+     *
+     * @param payload the payload to sign.
+     * @param secret the webhook secret.
+     * @param timestamp the timestamp to use (seconds since epoch).
+     * @return the generated signature header string.
+     */
+    public static String generateSignatureHeader(String payload, String secret, long timestamp)
+        throws NoSuchAlgorithmException, InvalidKeyException {
+      String payloadToSign = String.format("%d.%s", timestamp, payload);
+      String signature = computeSignature(payloadToSign, secret);
+      return String.format("t=%d,%s=%s", timestamp, EXPECTED_SCHEME, signature);
     }
 
     /**

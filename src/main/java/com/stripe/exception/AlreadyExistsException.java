@@ -18,9 +18,8 @@ public final class AlreadyExistsException extends ApiException {
   static AlreadyExistsException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     AlreadyExistsException.AlreadyExistsError error =
-        (AlreadyExistsException.AlreadyExistsError)
-            StripeObject.deserializeStripeObject(
-                body, AlreadyExistsException.AlreadyExistsError.class, responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, AlreadyExistsException.AlreadyExistsError.class, responseGetter);
     AlreadyExistsException exception =
         new AlreadyExistsException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);

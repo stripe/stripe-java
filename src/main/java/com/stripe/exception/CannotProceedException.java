@@ -27,9 +27,8 @@ public final class CannotProceedException extends ApiException {
   static CannotProceedException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     CannotProceedException.CannotProceedError error =
-        (CannotProceedException.CannotProceedError)
-            StripeObject.deserializeStripeObject(
-                body, CannotProceedException.CannotProceedError.class, responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, CannotProceedException.CannotProceedError.class, responseGetter);
     CannotProceedException exception =
         new CannotProceedException(
             error.getMessage(), requestId, error.getCode(), statusCode, null, error.getReason());
