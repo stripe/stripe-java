@@ -21,9 +21,8 @@ public final class InsufficientFundsException extends ApiException {
   static InsufficientFundsException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     InsufficientFundsException.InsufficientFundsError error =
-        (InsufficientFundsException.InsufficientFundsError)
-            StripeObject.deserializeStripeObject(
-                body, InsufficientFundsException.InsufficientFundsError.class, responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, InsufficientFundsException.InsufficientFundsError.class, responseGetter);
     InsufficientFundsException exception =
         new InsufficientFundsException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);

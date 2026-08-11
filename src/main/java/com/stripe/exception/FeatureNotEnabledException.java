@@ -18,9 +18,8 @@ public final class FeatureNotEnabledException extends ApiException {
   static FeatureNotEnabledException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
     FeatureNotEnabledException.FeatureNotEnabledError error =
-        (FeatureNotEnabledException.FeatureNotEnabledError)
-            StripeObject.deserializeStripeObject(
-                body, FeatureNotEnabledException.FeatureNotEnabledError.class, responseGetter);
+        StripeObject.deserializeStripeObject(
+            body, FeatureNotEnabledException.FeatureNotEnabledError.class, responseGetter);
     FeatureNotEnabledException exception =
         new FeatureNotEnabledException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);
