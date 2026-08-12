@@ -65,9 +65,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   Object metadata;
 
   /**
-   * Sets the pause schedules for the subscription schedule. Include a {@code key} to update an
-   * existing entry or omit it to add a new one. Pass {@code ""} to clear all entries or {@code []}
-   * to leave them unchanged.
+   * Configures the subscription's pause behavior and, optionally, its resume behavior. Only one
+   * entry is supported. Include a key to update an existing entry. Omit to leave an existing pause
+   * schedule unchanged, or pass &quot;&quot; to clear it.
    */
   @SerializedName("pause_schedules")
   Object pauseSchedules;
@@ -367,9 +367,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Sets the pause schedules for the subscription schedule. Include a {@code key} to update an
-     * existing entry or omit it to add a new one. Pass {@code ""} to clear all entries or {@code
-     * []} to leave them unchanged.
+     * Configures the subscription's pause behavior and, optionally, its resume behavior. Only one
+     * entry is supported. Include a key to update an existing entry. Omit to leave an existing
+     * pause schedule unchanged, or pass &quot;&quot; to clear it.
      */
     public Builder setPauseSchedules(EmptyParam pauseSchedules) {
       this.pauseSchedules = pauseSchedules;
@@ -377,9 +377,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Sets the pause schedules for the subscription schedule. Include a {@code key} to update an
-     * existing entry or omit it to add a new one. Pass {@code ""} to clear all entries or {@code
-     * []} to leave them unchanged.
+     * Configures the subscription's pause behavior and, optionally, its resume behavior. Only one
+     * entry is supported. Include a key to update an existing entry. Omit to leave an existing
+     * pause schedule unchanged, or pass &quot;&quot; to clear it.
      */
     public Builder setPauseSchedules(
         List<SubscriptionScheduleUpdateParams.PauseSchedule> pauseSchedules) {
@@ -2242,9 +2242,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
     /** Configuration for when and how the subscription resumes. */
     @SerializedName("resume")
-    Resume resume;
+    Object resume;
 
-    private PauseSchedule(Map<String, Object> extraParams, Object key, Pause pause, Resume resume) {
+    private PauseSchedule(Map<String, Object> extraParams, Object key, Pause pause, Object resume) {
       this.extraParams = extraParams;
       this.key = key;
       this.pause = pause;
@@ -2262,7 +2262,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       private Pause pause;
 
-      private Resume resume;
+      private Object resume;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionScheduleUpdateParams.PauseSchedule build() {
@@ -2317,6 +2317,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       /** Configuration for when and how the subscription resumes. */
       public Builder setResume(SubscriptionScheduleUpdateParams.PauseSchedule.Resume resume) {
+        this.resume = resume;
+        return this;
+      }
+
+      /** Configuration for when and how the subscription resumes. */
+      public Builder setResume(EmptyParam resume) {
         this.resume = resume;
         return this;
       }
@@ -3314,7 +3320,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
         /**
          * Controls whether Stripe attempts payment on the resumption invoice and how payment
-         * affects the subscription's status. The default is {@code resume_on_payment_attempt}.
+         * affects the subscription's status. The default is {@code resume_on_payment_success}.
          */
         @SerializedName("payment_behavior")
         PaymentBehavior paymentBehavior;
@@ -3399,7 +3405,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
           /**
            * Controls whether Stripe attempts payment on the resumption invoice and how payment
-           * affects the subscription's status. The default is {@code resume_on_payment_attempt}.
+           * affects the subscription's status. The default is {@code resume_on_payment_success}.
            */
           public Builder setPaymentBehavior(
               SubscriptionScheduleUpdateParams.PauseSchedule.Resume.Settings.PaymentBehavior

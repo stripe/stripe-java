@@ -5445,7 +5445,7 @@ public class AccountCreateParams extends ApiRequestParams {
         /**
          * Describes the customer's tax exemption status, which is {@code none}, {@code exempt}, or
          * {@code reverse}. When set to reverse, invoice and receipt PDFs include the following
-         * text: “Reverse charge”.
+         * text: &quot;Reverse charge&quot;.
          */
         @SerializedName("exempt")
         Exempt exempt;
@@ -5507,7 +5507,7 @@ public class AccountCreateParams extends ApiRequestParams {
           /**
            * Describes the customer's tax exemption status, which is {@code none}, {@code exempt},
            * or {@code reverse}. When set to reverse, invoice and receipt PDFs include the following
-           * text: “Reverse charge”.
+           * text: &quot;Reverse charge&quot;.
            */
           public Builder setExempt(
               AccountCreateParams.Configuration.Customer.AutomaticIndirectTax.Exempt exempt) {
@@ -45952,35 +45952,35 @@ public class AccountCreateParams extends ApiRequestParams {
       public static class Documents {
         /**
          * One or more documents that support the bank account ownership verification requirement.
-         * Must be a document associated with the account’s primary active bank account that
+         * Must be a document associated with the account's primary active bank account that
          * displays the last 4 digits of the account number, either a statement or a check.
          */
         @SerializedName("bank_account_ownership_verification")
         BankAccountOwnershipVerification bankAccountOwnershipVerification;
 
-        /** One or more documents that demonstrate proof of a company’s license to operate. */
+        /** One or more documents that demonstrate proof of a company's license to operate. */
         @SerializedName("company_license")
         CompanyLicense companyLicense;
 
-        /** One or more documents showing the company’s Memorandum of Association. */
+        /** One or more documents showing the company's Memorandum of Association. */
         @SerializedName("company_memorandum_of_association")
         CompanyMemorandumOfAssociation companyMemorandumOfAssociation;
 
         /**
          * Certain countries only: One or more documents showing the ministerial decree legalizing
-         * the company’s establishment.
+         * the company's establishment.
          */
         @SerializedName("company_ministerial_decree")
         CompanyMinisterialDecree companyMinisterialDecree;
 
         /**
-         * One or more documents that demonstrate proof of a company’s registration with the
+         * One or more documents that demonstrate proof of a company's registration with the
          * appropriate local authorities.
          */
         @SerializedName("company_registration_verification")
         CompanyRegistrationVerification companyRegistrationVerification;
 
-        /** One or more documents that demonstrate proof of a company’s tax ID. */
+        /** One or more documents that demonstrate proof of a company's tax ID. */
         @SerializedName("company_tax_id_verification")
         CompanyTaxIdVerification companyTaxIdVerification;
 
@@ -46003,7 +46003,7 @@ public class AccountCreateParams extends ApiRequestParams {
         ProofOfAddress proofOfAddress;
 
         /**
-         * One or more documents showing the company’s proof of registration with the national
+         * One or more documents showing the company's proof of registration with the national
          * business registry.
          */
         @SerializedName("proof_of_registration")
@@ -46083,7 +46083,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * One or more documents that support the bank account ownership verification requirement.
-           * Must be a document associated with the account’s primary active bank account that
+           * Must be a document associated with the account's primary active bank account that
            * displays the last 4 digits of the account number, either a statement or a check.
            */
           public Builder setBankAccountOwnershipVerification(
@@ -46094,7 +46094,7 @@ public class AccountCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** One or more documents that demonstrate proof of a company’s license to operate. */
+          /** One or more documents that demonstrate proof of a company's license to operate. */
           public Builder setCompanyLicense(
               AccountCreateParams.Identity.BusinessDetails.Documents.CompanyLicense
                   companyLicense) {
@@ -46102,7 +46102,7 @@ public class AccountCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** One or more documents showing the company’s Memorandum of Association. */
+          /** One or more documents showing the company's Memorandum of Association. */
           public Builder setCompanyMemorandumOfAssociation(
               AccountCreateParams.Identity.BusinessDetails.Documents.CompanyMemorandumOfAssociation
                   companyMemorandumOfAssociation) {
@@ -46112,7 +46112,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * Certain countries only: One or more documents showing the ministerial decree legalizing
-           * the company’s establishment.
+           * the company's establishment.
            */
           public Builder setCompanyMinisterialDecree(
               AccountCreateParams.Identity.BusinessDetails.Documents.CompanyMinisterialDecree
@@ -46122,7 +46122,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * One or more documents that demonstrate proof of a company’s registration with the
+           * One or more documents that demonstrate proof of a company's registration with the
            * appropriate local authorities.
            */
           public Builder setCompanyRegistrationVerification(
@@ -46132,7 +46132,7 @@ public class AccountCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** One or more documents that demonstrate proof of a company’s tax ID. */
+          /** One or more documents that demonstrate proof of a company's tax ID. */
           public Builder setCompanyTaxIdVerification(
               AccountCreateParams.Identity.BusinessDetails.Documents.CompanyTaxIdVerification
                   companyTaxIdVerification) {
@@ -46185,7 +46185,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * One or more documents showing the company’s proof of registration with the national
+           * One or more documents showing the company's proof of registration with the national
            * business registry.
            */
           public Builder setProofOfRegistration(
@@ -50401,7 +50401,7 @@ public class AccountCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * One or more documents showing the person’s passport page with photo and personal data.
+         * One or more documents showing the person's passport page with photo and personal data.
          */
         @SerializedName("passport")
         Passport passport;
@@ -50420,7 +50420,7 @@ public class AccountCreateParams extends ApiRequestParams {
         SecondaryVerification secondaryVerification;
 
         /**
-         * One or more documents showing the person’s visa required for living in the country where
+         * One or more documents showing the person's visa required for living in the country where
          * they are residing.
          */
         @SerializedName("visa")
@@ -50509,7 +50509,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * One or more documents showing the person’s passport page with photo and personal data.
+           * One or more documents showing the person's passport page with photo and personal data.
            */
           public Builder setPassport(
               AccountCreateParams.Identity.Individual.Documents.Passport passport) {
@@ -50539,7 +50539,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * One or more documents showing the person’s visa required for living in the country
+           * One or more documents showing the person's visa required for living in the country
            * where they are residing.
            */
           public Builder setVisa(AccountCreateParams.Identity.Individual.Documents.Visa visa) {
@@ -51828,7 +51828,7 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether the person is an owner of the account’s identity. */
+        /** Whether the person is an owner of the account's identity. */
         @SerializedName("owner")
         Boolean owner;
 
@@ -51930,7 +51930,7 @@ public class AccountCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether the person is an owner of the account’s identity. */
+          /** Whether the person is an owner of the account's identity. */
           public Builder setOwner(Boolean owner) {
             this.owner = owner;
             return this;

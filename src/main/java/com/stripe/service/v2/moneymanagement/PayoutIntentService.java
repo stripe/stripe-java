@@ -3,6 +3,7 @@ package com.stripe.service.v2.moneymanagement;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.FeatureNotEnabledException;
+import com.stripe.exception.FxQuoteNeedsRefreshException;
 import com.stripe.exception.NotCancelableException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.StripeCollection;
@@ -119,20 +120,47 @@ public final class PayoutIntentService extends ApiService {
     return this.request(request, PayoutIntent.class);
   }
   /**
-   * Cancels a PayoutIntent. Only pending PayoutIntents or processing PayoutIntents with cancelable
-   * OutboundPayment/Transfer can be canceled.
+   * Cancels a PayoutIntent. Only pending PayoutIntents, processing PayoutIntents with cancelable
+   * OutboundPayment/Transfer, or requires_action PayoutIntents can be canceled.
    */
   public PayoutIntent cancel(String id) throws StripeException, NotCancelableException {
     return cancel(id, (RequestOptions) null);
   }
   /**
-   * Cancels a PayoutIntent. Only pending PayoutIntents or processing PayoutIntents with cancelable
-   * OutboundPayment/Transfer can be canceled.
+   * Cancels a PayoutIntent. Only pending PayoutIntents, processing PayoutIntents with cancelable
+   * OutboundPayment/Transfer, or requires_action PayoutIntents can be canceled.
    */
   public PayoutIntent cancel(String id, RequestOptions options)
       throws StripeException, NotCancelableException {
     String path =
         String.format("/v2/money_management/payout_intents/%s/cancel", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, PayoutIntent.class);
+  }
+  /** Confirms a PayoutIntent that is in the requires_action state, transitioning it to pending. */
+  public PayoutIntent confirm(String id) throws StripeException, FxQuoteNeedsRefreshException {
+    return confirm(id, (RequestOptions) null);
+  }
+  /** Confirms a PayoutIntent that is in the requires_action state, transitioning it to pending. */
+  public PayoutIntent confirm(String id, RequestOptions options)
+      throws StripeException, FxQuoteNeedsRefreshException {
+    String path =
+        String.format(
+            "/v2/money_management/payout_intents/%s/confirm", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, PayoutIntent.class);
+  }
+  /** Refreshes FX quote for a PayoutIntent. */
+  public PayoutIntent fxQuote(String id) throws StripeException {
+    return fxQuote(id, (RequestOptions) null);
+  }
+  /** Refreshes FX quote for a PayoutIntent. */
+  public PayoutIntent fxQuote(String id, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v2/money_management/payout_intents/%s/fx_quote", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, PayoutIntent.class);

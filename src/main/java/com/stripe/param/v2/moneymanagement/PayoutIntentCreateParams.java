@@ -18,6 +18,13 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
   @SerializedName("amount")
   Amount amount;
 
+  /**
+   * Controls whether the intent requires explicit confirmation before transitioning to pending.
+   * Defaults to automatic.
+   */
+  @SerializedName("confirmation_method")
+  ConfirmationMethod confirmationMethod;
+
   /** An arbitrary string attached to the PayoutIntent. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
@@ -66,6 +73,7 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
 
   private PayoutIntentCreateParams(
       Amount amount,
+      ConfirmationMethod confirmationMethod,
       String description,
       Map<String, Object> extraParams,
       From from,
@@ -75,6 +83,7 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
       String statementDescriptor,
       To to) {
     this.amount = amount;
+    this.confirmationMethod = confirmationMethod;
     this.description = description;
     this.extraParams = extraParams;
     this.from = from;
@@ -91,6 +100,8 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private Amount amount;
+
+    private ConfirmationMethod confirmationMethod;
 
     private String description;
 
@@ -112,6 +123,7 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
     public PayoutIntentCreateParams build() {
       return new PayoutIntentCreateParams(
           this.amount,
+          this.confirmationMethod,
           this.description,
           this.extraParams,
           this.from,
@@ -125,6 +137,16 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
     /** <strong>Required.</strong> The monetary amount to be sent. */
     public Builder setAmount(Amount amount) {
       this.amount = amount;
+      return this;
+    }
+
+    /**
+     * Controls whether the intent requires explicit confirmation before transitioning to pending.
+     * Defaults to automatic.
+     */
+    public Builder setConfirmationMethod(
+        PayoutIntentCreateParams.ConfirmationMethod confirmationMethod) {
+      this.confirmationMethod = confirmationMethod;
       return this;
     }
 
@@ -1035,6 +1057,21 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
           }
         }
       }
+    }
+  }
+
+  public enum ConfirmationMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("automatic")
+    AUTOMATIC("automatic"),
+
+    @SerializedName("manual")
+    MANUAL("manual");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    ConfirmationMethod(String value) {
+      this.value = value;
     }
   }
 }

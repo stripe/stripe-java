@@ -13,6 +13,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.financialconnections.TransactionListParams;
 import com.stripe.param.financialconnections.TransactionRetrieveParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,6 +34,10 @@ public class Transaction extends ApiResource implements HasId {
   @SerializedName("amount")
   Long amount;
 
+  /** Classification labels for this transaction, one entry per subscribed use case. */
+  @SerializedName("classifications")
+  List<Transaction.Classification> classifications;
+
   /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
    * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
@@ -43,6 +48,10 @@ public class Transaction extends ApiResource implements HasId {
   /** The description of this transaction. */
   @SerializedName("description")
   String description;
+
+  /** Enriched merchant information for this transaction. */
+  @SerializedName("enrichments")
+  Enrichments enrichments;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -163,6 +172,110 @@ public class Transaction extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about Classification, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Classification extends StripeObject {
+    /** Money movement classification labels for this transaction. */
+    @SerializedName("money_movement")
+    MoneyMovement moneyMovement;
+
+    /** Personal finance classification labels for this transaction. */
+    @SerializedName("personal_finance")
+    PersonalFinance personalFinance;
+
+    /** The taxonomy type for this classification entry. */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about MoneyMovement, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MoneyMovement extends StripeObject {
+      /**
+       * Stripe's confidence in this classification.
+       *
+       * <p>One of {@code high}, {@code low}, {@code medium}, or {@code very_high}.
+       */
+      @SerializedName("confidence_level")
+      String confidenceLevel;
+
+      /** The detailed category label for this transaction. */
+      @SerializedName("detailed_label")
+      String detailedLabel;
+
+      /** The primary category label for this transaction. */
+      @SerializedName("primary_label")
+      String primaryLabel;
+    }
+
+    /**
+     * For more details about PersonalFinance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PersonalFinance extends StripeObject {
+      /**
+       * Stripe's confidence in this classification.
+       *
+       * <p>One of {@code high}, {@code low}, {@code medium}, or {@code very_high}.
+       */
+      @SerializedName("confidence_level")
+      String confidenceLevel;
+
+      /** The detailed category label for this transaction. */
+      @SerializedName("detailed_label")
+      String detailedLabel;
+
+      /** The primary category label for this transaction. */
+      @SerializedName("primary_label")
+      String primaryLabel;
+    }
+  }
+
+  /**
+   * For more details about Enrichments, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Enrichments extends StripeObject {
+    @SerializedName("merchant")
+    Merchant merchant;
+
+    /**
+     * For more details about Merchant, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Merchant extends StripeObject {
+      /**
+       * Stripe's confidence in the enriched merchant name.
+       *
+       * <p>One of {@code high}, {@code low}, {@code medium}, or {@code very_high}.
+       */
+      @SerializedName("confidence_level")
+      String confidenceLevel;
+
+      /** The normalized merchant name for this transaction. */
+      @SerializedName("name")
+      String name;
+    }
+  }
+
+  /**
    * For more details about StatusTransitions, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -182,6 +295,7 @@ public class Transaction extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(enrichments, responseGetter);
     trySetResponseGetter(statusTransitions, responseGetter);
   }
 }

@@ -50,8 +50,8 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
   PaymentDetails paymentDetails;
 
   /**
-   * Text that appears on the customer’s statement as the statement descriptor for a non-card
-   * charge. This value overrides the account’s default statement descriptor. For information about
+   * Text that appears on the customer's statement as the statement descriptor for a non-card
+   * charge. This value overrides the account's default statement descriptor. For information about
    * requirements, including the 22-character limit, see the <a
    * href="https://docs.stripe.com/get-started/account/statement-descriptors">Statement Descriptor
    * docs</a>.
@@ -211,8 +211,8 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Text that appears on the customer’s statement as the statement descriptor for a non-card
-     * charge. This value overrides the account’s default statement descriptor. For information
+     * Text that appears on the customer's statement as the statement descriptor for a non-card
+     * charge. This value overrides the account's default statement descriptor. For information
      * about requirements, including the 22-character limit, see the <a
      * href="https://docs.stripe.com/get-started/account/statement-descriptors">Statement Descriptor
      * docs</a>.
