@@ -34,7 +34,7 @@ public class OffSessionPayment extends StripeObject implements HasId {
   @SerializedName("amount_details")
   AmountDetails amountDetails;
 
-  /** The “presentment amount” to be collected from the customer. */
+  /** The &quot;presentment amount&quot; to be collected from the customer. */
   @SerializedName("amount_requested")
   Amount amountRequested;
 
@@ -146,8 +146,8 @@ public class OffSessionPayment extends StripeObject implements HasId {
   RetryDetails retryDetails;
 
   /**
-   * Text that appears on the customer’s statement as the statement descriptor for a non-card
-   * charge. This value overrides the account’s default statement descriptor. For information about
+   * Text that appears on the customer's statement as the statement descriptor for a non-card
+   * charge. This value overrides the account's default statement descriptor. For information about
    * requirements, including the 22-character limit, see the <a
    * href="https://docs.stripe.com/get-started/account/statement-descriptors">Statement Descriptor
    * docs</a>.
@@ -156,9 +156,9 @@ public class OffSessionPayment extends StripeObject implements HasId {
   String statementDescriptor;
 
   /**
-   * Provides information about a card charge. Concatenated to the account’s <a
+   * Provides information about a card charge. Concatenated to the account's <a
    * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
-   * descriptor prefix</a> to form the complete statement descriptor that appears on the customer’s
+   * descriptor prefix</a> to form the complete statement descriptor that appears on the customer's
    * statement.
    */
   @SerializedName("statement_descriptor_suffix")

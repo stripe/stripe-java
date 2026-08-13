@@ -1628,6 +1628,14 @@ public class Authorization extends ApiResource
     @SerializedName("currency")
     String currency;
 
+    /** The total amount to be held for this authorization request. */
+    @SerializedName("hold_amount")
+    HoldAmount holdAmount;
+
+    /** Breakdown of the amounts contributing to hold_amount. */
+    @SerializedName("hold_amount_details")
+    HoldAmountDetails holdAmountDetails;
+
     /**
      * If set {@code true}, you may provide <a
      * href="https://docs.stripe.com/api/issuing/authorizations/approve#approve_issuing_authorization-amount">amount</a>
@@ -1670,6 +1678,76 @@ public class Authorization extends ApiResource
       /** The amount of cash requested by the cardholder. */
       @SerializedName("cashback_amount")
       Long cashbackAmount;
+    }
+
+    /**
+     * For more details about HoldAmount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class HoldAmount extends StripeObject {
+      /** Three-letter ISO currency code. */
+      @SerializedName("currency")
+      String currency;
+
+      /** The amount in the smallest currency unit. */
+      @SerializedName("value")
+      Long value;
+    }
+
+    /**
+     * For more details about HoldAmountDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class HoldAmountDetails extends StripeObject {
+      @SerializedName("network")
+      Network network;
+
+      /**
+       * The reserve amount held for this authorization. Present for certain MCCs that may have
+       * overcaptures.
+       */
+      @SerializedName("reserve")
+      Reserve reserve;
+
+      /**
+       * For more details about Network, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Network extends StripeObject {
+        /** Three-letter ISO currency code. */
+        @SerializedName("currency")
+        String currency;
+
+        /** The amount in the smallest currency unit. */
+        @SerializedName("value")
+        Long value;
+      }
+
+      /**
+       * For more details about Reserve, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Reserve extends StripeObject {
+        /** Three-letter ISO currency code. */
+        @SerializedName("currency")
+        String currency;
+
+        /** The amount in the smallest currency unit. */
+        @SerializedName("value")
+        Long value;
+      }
     }
   }
 
@@ -1740,6 +1818,14 @@ public class Authorization extends ApiResource
      */
     @SerializedName("currency")
     String currency;
+
+    /** The total amount that was held for this authorization request. */
+    @SerializedName("hold_amount")
+    HoldAmount holdAmount;
+
+    /** Breakdown of the amounts contributing to hold_amount. */
+    @SerializedName("hold_amount_details")
+    HoldAmountDetails holdAmountDetails;
 
     /**
      * The {@code pending_request.merchant_amount} at the time of the request, presented in the
@@ -1814,6 +1900,76 @@ public class Authorization extends ApiResource
       /** The amount of cash requested by the cardholder. */
       @SerializedName("cashback_amount")
       Long cashbackAmount;
+    }
+
+    /**
+     * For more details about HoldAmount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class HoldAmount extends StripeObject {
+      /** Three-letter ISO currency code. */
+      @SerializedName("currency")
+      String currency;
+
+      /** The amount in the smallest currency unit. */
+      @SerializedName("value")
+      Long value;
+    }
+
+    /**
+     * For more details about HoldAmountDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class HoldAmountDetails extends StripeObject {
+      @SerializedName("network")
+      Network network;
+
+      /**
+       * The reserve amount held for this authorization. Present for certain MCCs that may have
+       * overcaptures.
+       */
+      @SerializedName("reserve")
+      Reserve reserve;
+
+      /**
+       * For more details about Network, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Network extends StripeObject {
+        /** Three-letter ISO currency code. */
+        @SerializedName("currency")
+        String currency;
+
+        /** The amount in the smallest currency unit. */
+        @SerializedName("value")
+        Long value;
+      }
+
+      /**
+       * For more details about Reserve, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Reserve extends StripeObject {
+        /** Three-letter ISO currency code. */
+        @SerializedName("currency")
+        String currency;
+
+        /** The amount in the smallest currency unit. */
+        @SerializedName("value")
+        Long value;
+      }
     }
 
     /**

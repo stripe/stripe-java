@@ -22,6 +22,14 @@ public class PayoutIntent extends StripeObject implements HasId {
   Amount amount;
 
   /**
+   * Controls whether the intent requires explicit confirmation before transitioning to pending.
+   *
+   * <p>One of {@code automatic}, or {@code manual}.
+   */
+  @SerializedName("confirmation_method")
+  String confirmationMethod;
+
+  /**
    * Time at which the PayoutIntent was created. Represented as a RFC 3339 date &amp; time UTC value
    * in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
    */
@@ -32,9 +40,17 @@ public class PayoutIntent extends StripeObject implements HasId {
   @SerializedName("description")
   String description;
 
+  /** Estimated fees and taxes. */
+  @SerializedName("estimated_fees")
+  List<PayoutIntent.EstimatedFee> estimatedFees;
+
   /** The FinancialAccount that funds are pulled from. */
   @SerializedName("from")
   From from;
+
+  /** FX rate information for fee transparency. */
+  @SerializedName("fx_quote")
+  FxQuote fxQuote;
 
   /** Unique identifier for the PayoutIntent. */
   @Getter(onMethod_ = {@Override})
@@ -111,6 +127,52 @@ public class PayoutIntent extends StripeObject implements HasId {
   @SerializedName("to")
   To to;
 
+  /**
+   * For more details about EstimatedFee, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class EstimatedFee extends StripeObject {
+    /** The fee amount. */
+    @SerializedName("amount")
+    Amount amount;
+
+    /**
+     * Tax charged for this fee, if applicable. Value expressed as a decimal string in major units.
+     */
+    @SerializedName("tax_amount")
+    TaxAmount taxAmount;
+
+    /**
+     * Open Enum. The type of fee.
+     *
+     * <p>One of {@code cross_border_fee}, {@code foreign_exchange_fee}, {@code
+     * instant_card_payout_fee}, {@code next_day_payout_fee}, {@code real_time_payout_fee}, {@code
+     * stablecoin_payout_fee}, {@code stablecoin_routing_fee}, {@code standard_payout_fee}, or
+     * {@code wire_payout_fee}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * Tax charged for this fee, if applicable. Value expressed as a decimal string in major units.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TaxAmount extends StripeObject {
+      /** Currency code. */
+      @SerializedName("currency")
+      String currency;
+
+      /** Tax amount value represented as a decimal string in major units. */
+      @SerializedName("value_decimal")
+      String valueDecimal;
+    }
+  }
+
   /** The FinancialAccount that funds are pulled from. */
   @Getter
   @Setter
@@ -120,9 +182,63 @@ public class PayoutIntent extends StripeObject implements HasId {
     @SerializedName("currency")
     String currency;
 
+    /** Estimated amount to be debited from the financial account. */
+    @SerializedName("debited")
+    Amount debited;
+
     /** The FinancialAccount that funds are pulled from. */
     @SerializedName("financial_account")
     String financialAccount;
+  }
+
+  /** FX rate information for fee transparency. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FxQuote extends StripeObject {
+    /**
+     * Open Enum. Duration of the FX rate lock.
+     *
+     * <p>One of {@code five_minutes}, or {@code none}.
+     */
+    @SerializedName("lock_duration")
+    String lockDuration;
+
+    /** Timestamp when the rate lock expires. Null when rate locking is not supported. */
+    @SerializedName("lock_expires_at")
+    Instant lockExpiresAt;
+
+    /**
+     * Open Enum. Lock status of the FX rate.
+     *
+     * <p>One of {@code active}, {@code expired}, or {@code none}.
+     */
+    @SerializedName("lock_status")
+    String lockStatus;
+
+    /** Key: source currency. Value: exchange rate from source currency to to_currency. */
+    @SerializedName("rates")
+    Map<String, PayoutIntent.FxQuote.Rate> rates;
+
+    /** The destination currency. */
+    @SerializedName("to_currency")
+    String toCurrency;
+
+    /**
+     * For more details about Rate, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Rate extends StripeObject {
+      /**
+       * The exchange rate going from_currency -&gt; to_currency, represented as a decimal string
+       * (e.g., &quot;1.1520&quot;) to preserve the full precision of the rate.
+       */
+      @SerializedName("exchange_rate")
+      String exchangeRate;
+    }
   }
 
   /** Details about the latest payout associated with this PayoutIntent. */
@@ -155,6 +271,10 @@ public class PayoutIntent extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class NextAction extends StripeObject {
+    /** Details about a confirmation required. Populated when type is confirm. */
+    @SerializedName("confirm")
+    Confirm confirm;
+
     /** Details about a failure that requires user action. Populated when type is handle_failure. */
     @SerializedName("handle_failure")
     HandleFailure handleFailure;
@@ -162,10 +282,24 @@ public class PayoutIntent extends StripeObject implements HasId {
     /**
      * Open Enum. The type of next action required.
      *
-     * <p>Equal to {@code handle_failure}.
+     * <p>One of {@code confirm}, or {@code handle_failure}.
      */
     @SerializedName("type")
     String type;
+
+    /** Details about a confirmation required. Populated when type is confirm. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Confirm extends StripeObject {
+      /**
+       * Open Enum. The reason the PayoutIntent requires confirmation.
+       *
+       * <p>One of {@code automatically_required}, or {@code manually_requested}.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
 
     /** Details about a failure that requires user action. Populated when type is handle_failure. */
     @Getter
@@ -266,6 +400,10 @@ public class PayoutIntent extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class To extends StripeObject {
+    /** Estimated amount to be credited to the recipient in the destination currency. */
+    @SerializedName("credited")
+    Amount credited;
+
     /** The currency to send to the recipient. */
     @SerializedName("currency")
     String currency;

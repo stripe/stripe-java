@@ -245,6 +245,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("customer_address")
   Address customerAddress;
 
+  /** The customer balance amounts applied to this invoice. */
+  @SerializedName("customer_balance")
+  CustomerBalance customerBalance;
+
   /**
    * The customer's email. Until the invoice is finalized, this field will equal {@code
    * customer.email}. Once the invoice is finalized, this field will no longer be updated.
@@ -2248,6 +2252,27 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * For more details about CustomerBalance, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomerBalance extends StripeObject {
+    /** The total amount of customer balance applied to this invoice (automatically + manually). */
+    @SerializedName("applied_balance")
+    Long appliedBalance;
+
+    /** The amount of customer balance automatically applied during invoice finalization. */
+    @SerializedName("automatically_applied_balance")
+    Long automaticallyAppliedBalance;
+
+    /** The total amount of customer balance manually applied after finalization. */
+    @SerializedName("manually_applied_balance")
+    Long manuallyAppliedBalance;
+  }
+
+  /**
    * For more details about CustomerTaxId, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -2595,6 +2620,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       Bancontact bancontact;
 
       /**
+       * If paying by {@code billie}, this sub-hash contains details about the Billie payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("billie")
+      Billie billie;
+
+      /**
        * If paying by {@code bizum}, this sub-hash contains details about the Bizum payment method
        * options to pass to the invoice’s PaymentIntent.
        */
@@ -2739,6 +2771,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
         @SerializedName("preferred_language")
         String preferredLanguage;
       }
+
+      /**
+       * For more details about Billie, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Billie extends StripeObject {}
 
       /**
        * For more details about Bizum, please refer to the <a href="https://docs.stripe.com/api">API
@@ -3557,6 +3598,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     trySetResponseGetter(confirmationSecret, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(customerAddress, responseGetter);
+    trySetResponseGetter(customerBalance, responseGetter);
     trySetResponseGetter(customerShipping, responseGetter);
     trySetResponseGetter(defaultPaymentMethod, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);

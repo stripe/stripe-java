@@ -74,13 +74,16 @@ public final class V2CoreHealthAuthorizationRateDropFiringEvent extends Event {
       BigDecimal previousPercentage;
 
       public static final class Dimension {
+        /** The acquirer dimension. */
+        @SerializedName("acquirer")
+        String acquirer;
         /** The issuer dimension. */
         @SerializedName("issuer")
         String issuer;
         /**
          * The type of the dimension.
          *
-         * <p>Equal to {@code issuer}.
+         * <p>One of {@code acquirer}, or {@code issuer}.
          */
         @SerializedName("type")
         String type;

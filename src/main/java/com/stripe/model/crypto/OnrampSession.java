@@ -413,9 +413,9 @@ public class OnrampSession extends ApiResource implements HasId {
      * The specific crypto network the {@code destination_currency} is settled on. If {@code
      * destination_networks} is set, it must be a value in that array.
      *
-     * <p>One of {@code avalanche}, {@code base}, {@code bitcoin}, {@code ethereum}, {@code
-     * optimism}, {@code polygon}, {@code solana}, {@code stellar}, {@code sui}, {@code tempo}, or
-     * {@code worldchain}.
+     * <p>One of {@code avalanche}, {@code base}, {@code bitcoin}, {@code celo}, {@code ethereum},
+     * {@code optimism}, {@code polygon}, {@code solana}, {@code stellar}, {@code sui}, {@code
+     * tempo}, or {@code worldchain}.
      */
     @SerializedName("destination_network")
     String destinationNetwork;
@@ -512,6 +512,10 @@ public class OnrampSession extends ApiResource implements HasId {
       /** A bitcoin address. */
       @SerializedName("bitcoin")
       String bitcoin;
+
+      /** A Celo address. */
+      @SerializedName("celo")
+      String celo;
 
       /**
        * The end customer's crypto wallet destination tag (for each network) to use for this
