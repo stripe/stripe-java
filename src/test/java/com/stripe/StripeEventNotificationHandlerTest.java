@@ -32,7 +32,7 @@ public class StripeEventNotificationHandlerTest {
   private static final String DUMMY_WEBHOOK_SECRET = "whsec_test_secret";
 
   private StripeClient stripeClient;
-  private StripeEventNotificationHandler.FallbackCallback fallbackCallback;
+  private EventNotificationFallbackCallback fallbackCallback;
   private StripeEventNotificationHandler eventNotificationHandler;
 
   private String v1BillingMeterPayload;
@@ -49,7 +49,7 @@ public class StripeEventNotificationHandlerTest {
             .build();
 
     // Create mock handler for unhandled events
-    fallbackCallback = mock(StripeEventNotificationHandler.FallbackCallback.class);
+    fallbackCallback = mock(EventNotificationFallbackCallback.class);
 
     // Create event router
     eventNotificationHandler =
@@ -137,8 +137,8 @@ public class StripeEventNotificationHandlerTest {
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
     // Test that a registered event type is routed to the correct handler
     @SuppressWarnings("unchecked")
-    StripeEventNotificationHandler.Callback<V1BillingMeterErrorReportTriggeredEventNotification>
-        handler = mock(StripeEventNotificationHandler.Callback.class);
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
+        mock(EventNotificationCallback.class);
     eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler);
 
     String sigHeader = generateSigHeader(v1BillingMeterPayload);
@@ -158,10 +158,10 @@ public class StripeEventNotificationHandlerTest {
   public void testRoutesDifferentEventsToCorrectHandlers()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
     // Test that different event types route to their respective handlers
-    StripeEventNotificationHandler.Callback<V1BillingMeterErrorReportTriggeredEventNotification>
-        billingHandler = mock(StripeEventNotificationHandler.Callback.class);
-    StripeEventNotificationHandler.Callback<V2CoreAccountCreatedEventNotification> accountHandler =
-        mock(StripeEventNotificationHandler.Callback.class);
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> billingHandler =
+        mock(EventNotificationCallback.class);
+    EventNotificationCallback<V2CoreAccountCreatedEventNotification> accountHandler =
+        mock(EventNotificationCallback.class);
 
     eventNotificationHandler.onV1BillingMeterErrorReportTriggered(billingHandler);
     eventNotificationHandler.onV2CoreAccountCreated(accountHandler);
@@ -192,12 +192,11 @@ public class StripeEventNotificationHandlerTest {
     AtomicReference<EventNotification> receivedEvent = new AtomicReference<>();
     AtomicReference<StripeClient> receivedClient = new AtomicReference<>();
 
-    StripeEventNotificationHandler.Callback<V1BillingMeterErrorReportTriggeredEventNotification>
-        handler =
-            (event, client) -> {
-              receivedEvent.set(event);
-              receivedClient.set(client);
-            };
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
+        (event, client) -> {
+          receivedEvent.set(event);
+          receivedClient.set(client);
+        };
 
     eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler);
 
@@ -219,8 +218,8 @@ public class StripeEventNotificationHandlerTest {
   public void testCannotRegisterHandlerAfterHandling()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
     // Test that registering handlers after handle() raises IllegalStateException
-    StripeEventNotificationHandler.Callback<V1BillingMeterErrorReportTriggeredEventNotification>
-        handler = mock(StripeEventNotificationHandler.Callback.class);
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
+        mock(EventNotificationCallback.class);
     eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler);
 
     String sigHeader = generateSigHeader(v1BillingMeterPayload);
@@ -231,7 +230,7 @@ public class StripeEventNotificationHandlerTest {
             IllegalStateException.class,
             () ->
                 eventNotificationHandler.onV2CoreAccountCreated(
-                    mock(StripeEventNotificationHandler.Callback.class)));
+                    mock(EventNotificationCallback.class)));
 
     assertTrue(exception.getMessage().contains("Cannot register handlers after handling an event"));
   }
@@ -240,10 +239,10 @@ public class StripeEventNotificationHandlerTest {
   @Test
   public void testCannotRegisterDuplicateHandler() {
     // Test that registering the same event type twice raises IllegalArgumentException
-    StripeEventNotificationHandler.Callback<V1BillingMeterErrorReportTriggeredEventNotification>
-        handler1 = mock(StripeEventNotificationHandler.Callback.class);
-    StripeEventNotificationHandler.Callback<V1BillingMeterErrorReportTriggeredEventNotification>
-        handler2 = mock(StripeEventNotificationHandler.Callback.class);
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler1 =
+        mock(EventNotificationCallback.class);
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler2 =
+        mock(EventNotificationCallback.class);
 
     eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler1);
 
@@ -265,11 +264,10 @@ public class StripeEventNotificationHandlerTest {
     // Test that the handler receives a client with stripe_context from the event
     AtomicReference<String> receivedContext = new AtomicReference<>();
 
-    StripeEventNotificationHandler.Callback<V1BillingMeterErrorReportTriggeredEventNotification>
-        handler =
-            (event, client) -> {
-              receivedContext.set(client.getContext());
-            };
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
+        (event, client) -> {
+          receivedContext.set(client.getContext());
+        };
 
     eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler);
 
@@ -285,11 +283,10 @@ public class StripeEventNotificationHandlerTest {
   public void testStripeContextRestoredAfterHandlerSuccess()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
     // Test that the original stripe_context is restored after successful handler execution
-    StripeEventNotificationHandler.Callback<V1BillingMeterErrorReportTriggeredEventNotification>
-        handler =
-            (event, client) -> {
-              assertEquals("event_context_456", client.getContext());
-            };
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
+        (event, client) -> {
+          assertEquals("event_context_456", client.getContext());
+        };
 
     eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler);
 
@@ -305,12 +302,11 @@ public class StripeEventNotificationHandlerTest {
   public void testStripeContextRestoredAfterHandlerError()
       throws NoSuchAlgorithmException, InvalidKeyException {
     // Test that the original stripe_context is restored even when handler raises an exception
-    StripeEventNotificationHandler.Callback<V1BillingMeterErrorReportTriggeredEventNotification>
-        handler =
-            (event, client) -> {
-              assertEquals("event_context_456", client.getContext());
-              throw new RuntimeException("Handler error!");
-            };
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
+        (event, client) -> {
+          assertEquals("event_context_456", client.getContext());
+          throw new RuntimeException("Handler error!");
+        };
 
     eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler);
 
@@ -333,7 +329,7 @@ public class StripeEventNotificationHandlerTest {
     // Test that stripe_context is set to null when event context is null
     AtomicReference<String> receivedContext = new AtomicReference<>();
 
-    StripeEventNotificationHandler.Callback<V2CoreAccountCreatedEventNotification> handler =
+    EventNotificationCallback<V2CoreAccountCreatedEventNotification> handler =
         (event, client) -> {
           receivedContext.set(client.getContext());
         };
@@ -388,8 +384,8 @@ public class StripeEventNotificationHandlerTest {
   public void testRegisteredEventDoesNotCallOnUnhandled()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
     // Test that registered events don't tri
-    StripeEventNotificationHandler.Callback<V1BillingMeterErrorReportTriggeredEventNotification>
-        handler = mock(StripeEventNotificationHandler.Callback.class);
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
+        mock(EventNotificationCallback.class);
     eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler);
 
     String sigHeader = generateSigHeader(v1BillingMeterPayload);
@@ -421,11 +417,10 @@ public class StripeEventNotificationHandlerTest {
 
     AtomicReference<String> receivedContext = new AtomicReference<>();
 
-    StripeEventNotificationHandler.Callback<V1BillingMeterErrorReportTriggeredEventNotification>
-        handler =
-            (event, client) -> {
-              receivedContext.set(client.getContext());
-            };
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
+        (event, client) -> {
+          receivedContext.set(client.getContext());
+        };
 
     customRouter.onV1BillingMeterErrorReportTriggered(handler);
 
@@ -474,6 +469,128 @@ public class StripeEventNotificationHandlerTest {
   }
 
   @Test
+  public void testConstructor_rejectsNullSecret() {
+    // Test that constructing with a null secret throws IllegalArgumentException
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new StripeEventNotificationHandler(null, stripeClient, fallbackCallback));
+  }
+
+  @Test
+  public void testConstructor_rejectsEmptySecret() {
+    // Test that constructing with an empty secret throws IllegalArgumentException
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new StripeEventNotificationHandler("", stripeClient, fallbackCallback));
+  }
+
+  @Test
+  public void testWithoutVerification_staticFactory() {
+    // Test that StripeEventNotificationHandler.withoutVerification(...) returns the correct type.
+    // Declared as the concrete type: the handlers are siblings, so this is deliberately NOT
+    // assignable to StripeEventNotificationHandler.
+    StripeEventNotificationHandlerWithoutVerification handler =
+        StripeEventNotificationHandler.withoutVerification(stripeClient, fallbackCallback);
+
+    assertInstanceOf(StripeEventNotificationHandlerWithoutVerification.class, handler);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Test
+  public void testWithoutVerification_routesEventToHandler() {
+    // Test that a registered event type is routed to the correct handler without sig verification
+    StripeEventNotificationHandlerWithoutVerification handler =
+        StripeEventNotificationHandler.withoutVerification(stripeClient, fallbackCallback);
+
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> callback =
+        mock(EventNotificationCallback.class);
+    handler.onV1BillingMeterErrorReportTriggered(callback);
+
+    handler.handle(v1BillingMeterPayload);
+
+    verify(callback, times(1))
+        .process(org.mockito.ArgumentMatchers.any(), org.mockito.ArgumentMatchers.any());
+    verify(fallbackCallback, never())
+        .process(
+            org.mockito.ArgumentMatchers.any(),
+            org.mockito.ArgumentMatchers.any(),
+            org.mockito.ArgumentMatchers.any());
+  }
+
+  @Test
+  public void testWithoutVerification_fallbackForUnregisteredEvent() {
+    // Test that a known event type without a registered handler calls fallback with
+    // isKnownEventType true
+    StripeEventNotificationHandlerWithoutVerification handler =
+        StripeEventNotificationHandler.withoutVerification(stripeClient, fallbackCallback);
+
+    handler.handle(v1BillingMeterPayload);
+
+    verify(fallbackCallback, times(1))
+        .process(
+            org.mockito.ArgumentMatchers.argThat(
+                event ->
+                    event instanceof V1BillingMeterErrorReportTriggeredEventNotification
+                        && event.getType().equals("v1.billing.meter.error_report_triggered")),
+            org.mockito.ArgumentMatchers.any(StripeClient.class),
+            org.mockito.ArgumentMatchers.argThat(info -> info.isKnownEventType() == true));
+  }
+
+  @Test
+  public void testWithoutVerification_unknownEventType() {
+    // Test that an unknown event type calls fallback with isKnownEventType false
+    StripeEventNotificationHandlerWithoutVerification handler =
+        StripeEventNotificationHandler.withoutVerification(stripeClient, fallbackCallback);
+
+    handler.handle(unknownEventPayload);
+
+    verify(fallbackCallback, times(1))
+        .process(
+            org.mockito.ArgumentMatchers.argThat(
+                event ->
+                    event instanceof UnknownEventNotification
+                        && event.getType().equals("llama.created")),
+            org.mockito.ArgumentMatchers.any(StripeClient.class),
+            org.mockito.ArgumentMatchers.argThat(info -> info.isKnownEventType() == false));
+  }
+
+  @Test
+  public void testWithoutVerification_contextPropagation() {
+    // Test that the client passed to callbacks has the event's stripe_context
+    AtomicReference<String> receivedContext = new AtomicReference<>();
+
+    StripeEventNotificationHandlerWithoutVerification handler =
+        StripeEventNotificationHandler.withoutVerification(stripeClient, fallbackCallback);
+
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> callback =
+        (event, client) -> {
+          receivedContext.set(client.getContext());
+        };
+
+    handler.onV1BillingMeterErrorReportTriggered(callback);
+    handler.handle(v1BillingMeterPayload);
+
+    assertEquals("event_context_456", receivedContext.get());
+  }
+
+  @Test
+  public void testWithoutVerification_doesNotExposeVerifyingHandle() {
+    // The two handlers are siblings, so the signature-verifying handle(body, sig) isn't
+    // inherited here at all -- passing a signature header is a compile error rather than a
+    // runtime one. Assert on the declared methods so a refactor can't quietly reintroduce it.
+    int handleMethods = 0;
+    for (java.lang.reflect.Method method :
+        StripeEventNotificationHandlerWithoutVerification.class.getMethods()) {
+      if (method.getName().equals("handle")) {
+        handleMethods += 1;
+        assertEquals(1, method.getParameterCount());
+      }
+    }
+
+    assertEquals(1, handleMethods);
+  }
+
+  @Test
   public void testRegisteredEventTypesEmpty() {
     // Test that registered_event_types returns empty list when no handlers are registered
     List<String> eventTypes = eventNotificationHandler.getRegisteredEventTypes();
@@ -485,8 +602,8 @@ public class StripeEventNotificationHandlerTest {
   @Test
   public void testRegisteredEventTypesSingle() {
     // Test that registered_event_types returns a single event type
-    StripeEventNotificationHandler.Callback<V1BillingMeterErrorReportTriggeredEventNotification>
-        handler = mock(StripeEventNotificationHandler.Callback.class);
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
+        mock(EventNotificationCallback.class);
     eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler);
 
     List<String> eventTypes = eventNotificationHandler.getRegisteredEventTypes();
@@ -498,8 +615,7 @@ public class StripeEventNotificationHandlerTest {
   @Test
   public void testRegisteredEventTypesMultipleAlphabetized() {
     // Test that registered_event_types returns multiple event types in alphabetical order
-    StripeEventNotificationHandler.Callback handler =
-        mock(StripeEventNotificationHandler.Callback.class);
+    EventNotificationCallback handler = mock(EventNotificationCallback.class);
 
     // Register in non-alphabetical order
     eventNotificationHandler.onV2CoreAccountUpdated(handler);

@@ -3,7 +3,8 @@ package com.stripe.examples;
 
 import com.stripe.StripeClient;
 import com.stripe.StripeEventNotificationHandler;
-import com.stripe.StripeEventNotificationHandler.UnhandledNotificationDetails;
+import com.stripe.StripeEventNotificationHandlerWithoutVerification;
+import com.stripe.UnhandledNotificationDetails;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification;
 import com.stripe.exception.StripeException;
 import com.stripe.model.billing.Meter;
@@ -32,6 +33,11 @@ import java.nio.charset.StandardCharsets;
  *       notification type
  *   <li>use handler.handle() to process the received notification webhook body
  * </ul>
+ *
+ * <p>We also expose a second endpoint for events that arrive through a pre-authenticated channel
+ * (such as AWS EventBridge or Azure Event Grid). Those payloads carry no Stripe-Signature header
+ * because the channel has already authenticated them, so they're routed through a handler created
+ * with notificationHandlerWithoutVerification().
  */
 public class EventNotificationHandlerEndpoint {
   private static final String API_KEY = System.getenv("STRIPE_API_KEY");
@@ -42,12 +48,21 @@ public class EventNotificationHandlerEndpoint {
       client.notificationHandler(
           WEBHOOK_SECRET, EventNotificationHandlerEndpoint::fallbackCallback);
 
+  // Handles events that reach us through a channel which has already authenticated them, so there
+  // is no signature to verify. Callbacks are registered separately from the verifying handler.
+  private static final StripeEventNotificationHandlerWithoutVerification unverifiedHandler =
+      client.notificationHandlerWithoutVerification(
+          EventNotificationHandlerEndpoint::fallbackCallback);
+
   public static void main(String[] args) throws IOException {
     handler.onV1BillingMeterErrorReportTriggered(
+        EventNotificationHandlerEndpoint::handleMeterErrors);
+    unverifiedHandler.onV1BillingMeterErrorReportTriggered(
         EventNotificationHandlerEndpoint::handleMeterErrors);
 
     HttpServer server = HttpServer.create(new InetSocketAddress(4242), 0);
     server.createContext("/webhook", new WebhookHandler());
+    server.createContext("/webhook-from-cloud-provider", new UnverifiedWebhookHandler());
     server.setExecutor(null);
     server.start();
   }
@@ -99,6 +114,29 @@ public class EventNotificationHandlerEndpoint {
         } catch (StripeException e) {
           exchange.sendResponseHeaders(400, -1);
         }
+      } else {
+        exchange.sendResponseHeaders(405, -1);
+      }
+      exchange.close();
+    }
+  }
+
+  /**
+   * Receives events from a pre-authenticated channel, which deliver no Stripe-Signature header.
+   * Note that handle() takes only the body here, and that it declares no
+   * SignatureVerificationException because no signature is checked.
+   */
+  static class UnverifiedWebhookHandler implements HttpHandler {
+    @Override
+    public void handle(HttpExchange exchange) throws IOException {
+      if ("POST".equals(exchange.getRequestMethod())) {
+        InputStream requestBody = exchange.getRequestBody();
+        String webhookBody =
+            new String(WebhookHandler.readAllBytes(requestBody), StandardCharsets.UTF_8);
+
+        unverifiedHandler.handle(webhookBody);
+
+        exchange.sendResponseHeaders(200, -1);
       } else {
         exchange.sendResponseHeaders(405, -1);
       }
