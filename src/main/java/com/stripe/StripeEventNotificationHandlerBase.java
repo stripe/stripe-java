@@ -103,10 +103,6 @@ import java.util.List;
  * Shared registration and dispatch machinery for {@link StripeEventNotificationHandler} and {@link
  * StripeEventNotificationHandlerWithoutVerification}.
  *
- * <p>Deliberately declares no {@code handle} method. Java resolves overloads by arity rather than
- * replacing them, so if either handler subclassed the other it would inherit — and publicly expose
- * — the other's {@code handle}. As siblings, each declares only its own.
- *
  * <p>Package-private, because it's an implementation detail: the user-facing types live at the top
  * level of this package instead ({@link EventNotificationCallback}, {@link
  * EventNotificationFallbackCallback}, {@link UnhandledNotificationDetails}).
