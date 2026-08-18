@@ -117,6 +117,9 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("livemode")
   Boolean livemode;
 
+  @SerializedName("managed_payments")
+  ManagedPayments managedPayments;
+
   /**
    * The margins which apply to the invoice item. When set, the {@code default_margins} on the
    * invoice do not apply to this invoice item.
@@ -548,6 +551,23 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   }
 
   /**
+   * For more details about ManagedPayments, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManagedPayments extends StripeObject {
+    /**
+     * Set to {@code true} to enable <a
+     * href="https://docs.stripe.com/payments/managed-payments">Managed Payments</a>, Stripe's
+     * merchant of record solution, for this session.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+  }
+
+  /**
    * For more details about Parent, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -920,6 +940,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(invoice, responseGetter);
+    trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(period, responseGetter);
     trySetResponseGetter(pricing, responseGetter);

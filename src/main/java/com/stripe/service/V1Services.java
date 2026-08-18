@@ -233,6 +233,10 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.PaymentMethodService(this.getResponseGetter());
   }
 
+  public com.stripe.service.PaymentPlanService paymentPlans() {
+    return new com.stripe.service.PaymentPlanService(this.getResponseGetter());
+  }
+
   public com.stripe.service.PaymentRecordService paymentRecords() {
     return new com.stripe.service.PaymentRecordService(this.getResponseGetter());
   }

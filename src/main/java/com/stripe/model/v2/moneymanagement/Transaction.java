@@ -6,6 +6,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.v2.Amount;
 import java.time.Instant;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -96,6 +97,13 @@ public class Transaction extends StripeObject implements HasId {
    */
   @SerializedName("livemode")
   Boolean livemode;
+
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
+   */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
 
   /**
    * String representing the object's type. Objects of the same type share the same value of the

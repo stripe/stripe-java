@@ -1705,6 +1705,14 @@ public class Authorization extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class HoldAmountDetails extends StripeObject {
+      /** Advisory estimate of total fees for this authorization request. */
+      @SerializedName("estimated_fee")
+      EstimatedFee estimatedFee;
+
+      /** Per-fee-type breakdown of the estimated fees for this authorization request. */
+      @SerializedName("estimated_fee_details")
+      List<Authorization.PendingRequest.HoldAmountDetails.EstimatedFeeDetail> estimatedFeeDetails;
+
       @SerializedName("network")
       Network network;
 
@@ -1714,6 +1722,89 @@ public class Authorization extends ApiResource
        */
       @SerializedName("reserve")
       Reserve reserve;
+
+      /**
+       * For more details about EstimatedFee, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EstimatedFee extends StripeObject {
+        /** Three-letter ISO currency code. */
+        @SerializedName("currency")
+        String currency;
+
+        /** The amount in the smallest currency unit. */
+        @SerializedName("value")
+        Long value;
+      }
+
+      /**
+       * For more details about EstimatedFeeDetail, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EstimatedFeeDetail extends StripeObject {
+        @SerializedName("amount")
+        Amount amount;
+
+        @SerializedName("charged_by")
+        ChargedBy chargedBy;
+
+        /** The category of this fee. */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about Amount, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Amount extends StripeObject {
+          /** Three-letter ISO currency code. */
+          @SerializedName("currency")
+          String currency;
+
+          /** The amount in the smallest currency unit. */
+          @SerializedName("value")
+          Long value;
+        }
+
+        /**
+         * For more details about ChargedBy, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ChargedBy extends StripeObject {
+          /** Details for a fee charged by a Connect application. */
+          @SerializedName("application")
+          Application application;
+
+          /** The type of entity that charged this fee. */
+          @SerializedName("type")
+          String type;
+
+          /**
+           * For more details about Application, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Application extends StripeObject {
+            /** Human-readable product name. */
+            @SerializedName("feature_name")
+            String featureName;
+          }
+        }
+      }
 
       /**
        * For more details about Network, please refer to the <a
@@ -1927,6 +2018,14 @@ public class Authorization extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class HoldAmountDetails extends StripeObject {
+      /** Advisory estimate of total fees for this authorization request. */
+      @SerializedName("estimated_fee")
+      EstimatedFee estimatedFee;
+
+      /** Per-fee-type breakdown of the estimated fees for this authorization request. */
+      @SerializedName("estimated_fee_details")
+      List<Authorization.RequestHistory.HoldAmountDetails.EstimatedFeeDetail> estimatedFeeDetails;
+
       @SerializedName("network")
       Network network;
 
@@ -1936,6 +2035,89 @@ public class Authorization extends ApiResource
        */
       @SerializedName("reserve")
       Reserve reserve;
+
+      /**
+       * For more details about EstimatedFee, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EstimatedFee extends StripeObject {
+        /** Three-letter ISO currency code. */
+        @SerializedName("currency")
+        String currency;
+
+        /** The amount in the smallest currency unit. */
+        @SerializedName("value")
+        Long value;
+      }
+
+      /**
+       * For more details about EstimatedFeeDetail, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EstimatedFeeDetail extends StripeObject {
+        @SerializedName("amount")
+        Amount amount;
+
+        @SerializedName("charged_by")
+        ChargedBy chargedBy;
+
+        /** The category of this fee. */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about Amount, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Amount extends StripeObject {
+          /** Three-letter ISO currency code. */
+          @SerializedName("currency")
+          String currency;
+
+          /** The amount in the smallest currency unit. */
+          @SerializedName("value")
+          Long value;
+        }
+
+        /**
+         * For more details about ChargedBy, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ChargedBy extends StripeObject {
+          /** Details for a fee charged by a Connect application. */
+          @SerializedName("application")
+          Application application;
+
+          /** The type of entity that charged this fee. */
+          @SerializedName("type")
+          String type;
+
+          /**
+           * For more details about Application, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Application extends StripeObject {
+            /** Human-readable product name. */
+            @SerializedName("feature_name")
+            String featureName;
+          }
+        }
+      }
 
       /**
        * For more details about Network, please refer to the <a

@@ -404,7 +404,7 @@ public class OnrampSession extends ApiResource implements HasId {
      * array.
      *
      * <p>One of {@code avax}, {@code btc}, {@code eth}, {@code matic}, {@code sol}, {@code usdc},
-     * {@code wld}, or {@code xlm}.
+     * {@code usdt}, {@code wld}, or {@code xlm}.
      */
     @SerializedName("destination_currency")
     String destinationCurrency;

@@ -30449,6 +30449,41 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.To.builder()
                     .setCurrency("usd")
                     .setPayoutMethod("payout_method")
+                    .setPayoutMethodOptions(
+                        com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.To
+                            .PayoutMethodOptions.builder()
+                            .setBankAccount(
+                                com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams
+                                    .To.PayoutMethodOptions.BankAccount.builder()
+                                    .setPreferredNetworkOptions(
+                                        com.stripe.param.v2.moneymanagement
+                                            .OutboundPaymentQuoteCreateParams.To.PayoutMethodOptions
+                                            .BankAccount.PreferredNetworkOptions.builder()
+                                            .setAch(
+                                                com.stripe.param.v2.moneymanagement
+                                                    .OutboundPaymentQuoteCreateParams.To
+                                                    .PayoutMethodOptions.BankAccount
+                                                    .PreferredNetworkOptions.Ach.builder()
+                                                    .setSubmission(
+                                                        com.stripe.param.v2.moneymanagement
+                                                            .OutboundPaymentQuoteCreateParams.To
+                                                            .PayoutMethodOptions.BankAccount
+                                                            .PreferredNetworkOptions.Ach.Submission
+                                                            .NEXT_DAY)
+                                                    .setTransactionPurpose(
+                                                        com.stripe.param.v2.moneymanagement
+                                                            .OutboundPaymentQuoteCreateParams.To
+                                                            .PayoutMethodOptions.BankAccount
+                                                            .PreferredNetworkOptions.Ach
+                                                            .TransactionPurpose.PAYROLL)
+                                                    .build())
+                                            .build())
+                                    .addPreferredNetwork(
+                                        com.stripe.param.v2.moneymanagement
+                                            .OutboundPaymentQuoteCreateParams.To.PayoutMethodOptions
+                                            .BankAccount.PreferredNetwork.SEPA_CREDIT)
+                                    .build())
+                            .build())
                     .setRecipient("recipient")
                     .build())
             .build();
@@ -31418,6 +31453,32 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.GET,
         "/v2/money_management/transactions/id_123",
         null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementTransactionPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/transactions/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.Transaction.class,
+        "{\"object\":\"v2.money_management.transaction\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"balance_impact\":{\"available\":{\"currency\":\"USD\",\"value\":35},\"inbound_pending\":{\"currency\":\"USD\",\"value\":11},\"outbound_pending\":{\"currency\":\"USD\",\"value\":60}},\"category\":\"platform_earning_refund\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"pending\",\"status_transitions\":{}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.TransactionUpdateParams params =
+        com.stripe.param.v2.moneymanagement.TransactionUpdateParams.builder().build();
+
+    com.stripe.model.v2.moneymanagement.Transaction transaction =
+        client.v2().moneyManagement().transactions().update("id_123", params);
+    assertNotNull(transaction);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/transactions/id_123",
+        params.toMap(),
         null);
   }
 

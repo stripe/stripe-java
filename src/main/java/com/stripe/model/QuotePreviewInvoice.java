@@ -388,6 +388,9 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
+  @SerializedName("managed_payments")
+  ManagedPayments managedPayments;
+
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -1209,6 +1212,23 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     public void setAccountObject(Account expandableObject) {
       this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
+  }
+
+  /**
+   * For more details about ManagedPayments, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManagedPayments extends StripeObject {
+    /**
+     * Set to {@code true} to enable <a
+     * href="https://docs.stripe.com/payments/managed-payments">Managed Payments</a>, Stripe's
+     * merchant of record solution, for this session.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
   }
 
   /**
@@ -2428,6 +2448,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     trySetResponseGetter(lastFinalizationError, responseGetter);
     trySetResponseGetter(latestRevision, responseGetter);
     trySetResponseGetter(lines, responseGetter);
+    trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(paymentSettings, responseGetter);

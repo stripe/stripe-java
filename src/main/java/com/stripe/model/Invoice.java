@@ -433,6 +433,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("livemode")
   Boolean livemode;
 
+  @SerializedName("managed_payments")
+  ManagedPayments managedPayments;
+
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -478,6 +481,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /** The parent that generated this invoice. */
   @SerializedName("parent")
   Parent parent;
+
+  /**
+   * The ID of the payment plan associated with this invoice, if any. Use {@code
+   * expand[]=payment_plan} to include the full payment plan object.
+   */
+  @SerializedName("payment_plan")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentPlan> paymentPlan;
 
   @SerializedName("payment_settings")
   PaymentSettings paymentSettings;
@@ -729,6 +741,24 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   public void setOnBehalfOfObject(Account expandableObject) {
     this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code paymentPlan} object. */
+  public String getPaymentPlan() {
+    return (this.paymentPlan != null) ? this.paymentPlan.getId() : null;
+  }
+
+  public void setPaymentPlan(String id) {
+    this.paymentPlan = ApiResource.setExpandableFieldId(id, this.paymentPlan);
+  }
+
+  /** Get expanded {@code paymentPlan}. */
+  public PaymentPlan getPaymentPlanObject() {
+    return (this.paymentPlan != null) ? this.paymentPlan.getExpanded() : null;
+  }
+
+  public void setPaymentPlanObject(PaymentPlan expandableObject) {
+    this.paymentPlan = new ExpandableField<PaymentPlan>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code testClock} object. */
@@ -2391,6 +2421,23 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * For more details about ManagedPayments, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManagedPayments extends StripeObject {
+    /**
+     * Set to {@code true} to enable <a
+     * href="https://docs.stripe.com/payments/managed-payments">Managed Payments</a>, Stripe's
+     * merchant of record solution, for this session.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+  }
+
+  /**
    * For more details about Parent, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -3607,8 +3654,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     trySetResponseGetter(lastFinalizationError, responseGetter);
     trySetResponseGetter(latestRevision, responseGetter);
     trySetResponseGetter(lines, responseGetter);
+    trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(parent, responseGetter);
+    trySetResponseGetter(paymentPlan, responseGetter);
     trySetResponseGetter(paymentSettings, responseGetter);
     trySetResponseGetter(payments, responseGetter);
     trySetResponseGetter(rendering, responseGetter);
