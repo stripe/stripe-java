@@ -3,7 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.model.billing.FeedbackOptions;
+import com.stripe.model.billing.FeedbackOption;
 import com.stripe.model.testhelpers.TestClock;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -1805,7 +1805,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @SerializedName("feedback_option")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<FeedbackOptions> feedbackOption;
+    ExpandableField<FeedbackOption> feedbackOption;
 
     /**
      * Why this subscription was canceled.
@@ -1826,13 +1826,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     }
 
     /** Get expanded {@code feedbackOption}. */
-    public FeedbackOptions getFeedbackOptionObject() {
+    public FeedbackOption getFeedbackOptionObject() {
       return (this.feedbackOption != null) ? this.feedbackOption.getExpanded() : null;
     }
 
-    public void setFeedbackOptionObject(FeedbackOptions expandableObject) {
+    public void setFeedbackOptionObject(FeedbackOption expandableObject) {
       this.feedbackOption =
-          new ExpandableField<FeedbackOptions>(expandableObject.getId(), expandableObject);
+          new ExpandableField<FeedbackOption>(expandableObject.getId(), expandableObject);
     }
   }
 
@@ -2759,6 +2759,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("billing_cycle_anchor")
     Long billingCycleAnchor;
+
+    /**
+     * Indicates whether this subscription should cancel at the end of the current period if the
+     * update is applied.
+     */
+    @SerializedName("cancel_at_period_end")
+    Boolean cancelAtPeriodEnd;
 
     /**
      * The pending subscription-level discount that will be applied when the pending update is

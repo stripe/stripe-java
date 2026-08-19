@@ -29,6 +29,10 @@ public class ContractUpdateParams extends ApiRequestParams {
   @SerializedName("include")
   List<ContractUpdateParams.Include> include;
 
+  /** Set of key-value pairs. */
+  @SerializedName("metadata")
+  Map<String, Object> metadata;
+
   /** Pricing line actions to apply. */
   @SerializedName("pricing_line_actions")
   List<ContractUpdateParams.PricingLineAction> pricingLineActions;
@@ -40,10 +44,12 @@ public class ContractUpdateParams extends ApiRequestParams {
   private ContractUpdateParams(
       Map<String, Object> extraParams,
       List<ContractUpdateParams.Include> include,
+      Map<String, Object> metadata,
       List<ContractUpdateParams.PricingLineAction> pricingLineActions,
       List<ContractUpdateParams.PricingOverrideAction> pricingOverrideActions) {
     this.extraParams = extraParams;
     this.include = include;
+    this.metadata = metadata;
     this.pricingLineActions = pricingLineActions;
     this.pricingOverrideActions = pricingOverrideActions;
   }
@@ -57,6 +63,8 @@ public class ContractUpdateParams extends ApiRequestParams {
 
     private List<ContractUpdateParams.Include> include;
 
+    private Map<String, Object> metadata;
+
     private List<ContractUpdateParams.PricingLineAction> pricingLineActions;
 
     private List<ContractUpdateParams.PricingOverrideAction> pricingOverrideActions;
@@ -64,7 +72,11 @@ public class ContractUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ContractUpdateParams build() {
       return new ContractUpdateParams(
-          this.extraParams, this.include, this.pricingLineActions, this.pricingOverrideActions);
+          this.extraParams,
+          this.include,
+          this.metadata,
+          this.pricingLineActions,
+          this.pricingOverrideActions);
     }
 
     /**
@@ -116,6 +128,50 @@ public class ContractUpdateParams extends ApiRequestParams {
         this.include = new ArrayList<>();
       }
       this.include.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ContractUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ContractUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, EmptyParam value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * Map values can only be one of the following types: `String`, `EmptyParam`. See {@link
+     * ContractUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, Object> map) {
+      if (!map.values().stream().allMatch(v -> v instanceof String || v instanceof EmptyParam)) {
+        throw new IllegalArgumentException(
+            "All map values must one of the following types: String, EmptyParam");
+      }
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 
@@ -1769,6 +1825,10 @@ public class ContractUpdateParams extends ApiRequestParams {
       @SerializedName("id")
       Object id;
 
+      /** Metadata mutations to apply to the pricing line. */
+      @SerializedName("metadata")
+      Map<String, Object> metadata;
+
       /** Updated pricing configuration. */
       @SerializedName("pricing")
       Pricing pricing;
@@ -1781,11 +1841,13 @@ public class ContractUpdateParams extends ApiRequestParams {
           EndsAt endsAt,
           Map<String, Object> extraParams,
           Object id,
+          Map<String, Object> metadata,
           Pricing pricing,
           StartsAt startsAt) {
         this.endsAt = endsAt;
         this.extraParams = extraParams;
         this.id = id;
+        this.metadata = metadata;
         this.pricing = pricing;
         this.startsAt = startsAt;
       }
@@ -1801,6 +1863,8 @@ public class ContractUpdateParams extends ApiRequestParams {
 
         private Object id;
 
+        private Map<String, Object> metadata;
+
         private Pricing pricing;
 
         private StartsAt startsAt;
@@ -1808,7 +1872,7 @@ public class ContractUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public ContractUpdateParams.PricingLineAction.Update build() {
           return new ContractUpdateParams.PricingLineAction.Update(
-              this.endsAt, this.extraParams, this.id, this.pricing, this.startsAt);
+              this.endsAt, this.extraParams, this.id, this.metadata, this.pricing, this.startsAt);
         }
 
         /** Updated end time. */
@@ -1854,6 +1918,52 @@ public class ContractUpdateParams extends ApiRequestParams {
         /** <strong>Required.</strong> The id of the pricing line. */
         public Builder setId(EmptyParam id) {
           this.id = id;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * ContractUpdateParams.PricingLineAction.Update#metadata} for the field documentation.
+         */
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * ContractUpdateParams.PricingLineAction.Update#metadata} for the field documentation.
+         */
+        public Builder putMetadata(String key, EmptyParam value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. Map values can only be one of the following types: `String`, `EmptyParam`. See
+         * {@link ContractUpdateParams.PricingLineAction.Update#metadata} for the field
+         * documentation.
+         */
+        public Builder putAllMetadata(Map<String, Object> map) {
+          if (!map.values().stream()
+              .allMatch(v -> v instanceof String || v instanceof EmptyParam)) {
+            throw new IllegalArgumentException(
+                "All map values must one of the following types: String, EmptyParam");
+          }
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.putAll(map);
           return this;
         }
 
@@ -2911,9 +3021,9 @@ public class ContractUpdateParams extends ApiRequestParams {
               @SerializedName("lookup_key")
               Object lookupKey;
 
-              /** Metadata for the pricing override. */
+              /** Metadata mutations to apply to the pricing override. */
               @SerializedName("metadata")
-              Map<String, String> metadata;
+              Map<String, Object> metadata;
 
               /** Updated start time. */
               @SerializedName("starts_at")
@@ -2924,7 +3034,7 @@ public class ContractUpdateParams extends ApiRequestParams {
                   Map<String, Object> extraParams,
                   Object id,
                   Object lookupKey,
-                  Map<String, String> metadata,
+                  Map<String, Object> metadata,
                   StartsAt startsAt) {
                 this.endsAt = endsAt;
                 this.extraParams = extraParams;
@@ -2947,7 +3057,7 @@ public class ContractUpdateParams extends ApiRequestParams {
 
                 private Object lookupKey;
 
-                private Map<String, String> metadata;
+                private Map<String, Object> metadata;
 
                 private StartsAt startsAt;
 
@@ -3044,13 +3154,34 @@ public class ContractUpdateParams extends ApiRequestParams {
                 }
 
                 /**
-                 * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+                 * Add a key/value pair to `metadata` map. A map is initialized for the first
                  * `put/putAll` call, and subsequent calls add additional key/value pairs to the
                  * original map. See {@link
                  * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.InnerUpdate#metadata}
                  * for the field documentation.
                  */
-                public Builder putAllMetadata(Map<String, String> map) {
+                public Builder putMetadata(String key, EmptyParam value) {
+                  if (this.metadata == null) {
+                    this.metadata = new HashMap<>();
+                  }
+                  this.metadata.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. Map values can only be one of the following types: `String`,
+                 * `EmptyParam`. See {@link
+                 * ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails.PricingOverrideAction.InnerUpdate#metadata}
+                 * for the field documentation.
+                 */
+                public Builder putAllMetadata(Map<String, Object> map) {
+                  if (!map.values().stream()
+                      .allMatch(v -> v instanceof String || v instanceof EmptyParam)) {
+                    throw new IllegalArgumentException(
+                        "All map values must one of the following types: String, EmptyParam");
+                  }
                   if (this.metadata == null) {
                     this.metadata = new HashMap<>();
                   }
@@ -3857,6 +3988,10 @@ public class ContractUpdateParams extends ApiRequestParams {
       @SerializedName("lookup_key")
       Object lookupKey;
 
+      /** Metadata for the pricing override. */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
       /** A multiply_pricing override to add. */
       @SerializedName("multiply_pricing")
       MultiplyPricing multiplyPricing;
@@ -3881,6 +4016,7 @@ public class ContractUpdateParams extends ApiRequestParams {
           EndsAt endsAt,
           Map<String, Object> extraParams,
           Object lookupKey,
+          Map<String, String> metadata,
           MultiplyPricing multiplyPricing,
           OverwritePrice overwritePrice,
           Long priority,
@@ -3889,6 +4025,7 @@ public class ContractUpdateParams extends ApiRequestParams {
         this.endsAt = endsAt;
         this.extraParams = extraParams;
         this.lookupKey = lookupKey;
+        this.metadata = metadata;
         this.multiplyPricing = multiplyPricing;
         this.overwritePrice = overwritePrice;
         this.priority = priority;
@@ -3907,6 +4044,8 @@ public class ContractUpdateParams extends ApiRequestParams {
 
         private Object lookupKey;
 
+        private Map<String, String> metadata;
+
         private MultiplyPricing multiplyPricing;
 
         private OverwritePrice overwritePrice;
@@ -3923,6 +4062,7 @@ public class ContractUpdateParams extends ApiRequestParams {
               this.endsAt,
               this.extraParams,
               this.lookupKey,
+              this.metadata,
               this.multiplyPricing,
               this.overwritePrice,
               this.priority,
@@ -3973,6 +4113,33 @@ public class ContractUpdateParams extends ApiRequestParams {
         /** A lookup key for the pricing override. */
         public Builder setLookupKey(EmptyParam lookupKey) {
           this.lookupKey = lookupKey;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * ContractUpdateParams.PricingOverrideAction.Add#metadata} for the field documentation.
+         */
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ContractUpdateParams.PricingOverrideAction.Add#metadata} for the field
+         * documentation.
+         */
+        public Builder putAllMetadata(Map<String, String> map) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.putAll(map);
           return this;
         }
 
@@ -4720,14 +4887,24 @@ public class ContractUpdateParams extends ApiRequestParams {
       @SerializedName("id")
       Object id;
 
+      /** Metadata mutations to apply to the pricing override. */
+      @SerializedName("metadata")
+      Map<String, Object> metadata;
+
       /** The updated start time for the pricing override. */
       @SerializedName("starts_at")
       StartsAt startsAt;
 
-      private Update(EndsAt endsAt, Map<String, Object> extraParams, Object id, StartsAt startsAt) {
+      private Update(
+          EndsAt endsAt,
+          Map<String, Object> extraParams,
+          Object id,
+          Map<String, Object> metadata,
+          StartsAt startsAt) {
         this.endsAt = endsAt;
         this.extraParams = extraParams;
         this.id = id;
+        this.metadata = metadata;
         this.startsAt = startsAt;
       }
 
@@ -4742,12 +4919,14 @@ public class ContractUpdateParams extends ApiRequestParams {
 
         private Object id;
 
+        private Map<String, Object> metadata;
+
         private StartsAt startsAt;
 
         /** Finalize and obtain parameter instance from this builder. */
         public ContractUpdateParams.PricingOverrideAction.Update build() {
           return new ContractUpdateParams.PricingOverrideAction.Update(
-              this.endsAt, this.extraParams, this.id, this.startsAt);
+              this.endsAt, this.extraParams, this.id, this.metadata, this.startsAt);
         }
 
         /** The updated end time for the pricing override. */
@@ -4793,6 +4972,52 @@ public class ContractUpdateParams extends ApiRequestParams {
         /** <strong>Required.</strong> The ID of the pricing override. */
         public Builder setId(EmptyParam id) {
           this.id = id;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * ContractUpdateParams.PricingOverrideAction.Update#metadata} for the field documentation.
+         */
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * ContractUpdateParams.PricingOverrideAction.Update#metadata} for the field documentation.
+         */
+        public Builder putMetadata(String key, EmptyParam value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. Map values can only be one of the following types: `String`, `EmptyParam`. See
+         * {@link ContractUpdateParams.PricingOverrideAction.Update#metadata} for the field
+         * documentation.
+         */
+        public Builder putAllMetadata(Map<String, Object> map) {
+          if (!map.values().stream()
+              .allMatch(v -> v instanceof String || v instanceof EmptyParam)) {
+            throw new IllegalArgumentException(
+                "All map values must one of the following types: String, EmptyParam");
+          }
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.putAll(map);
           return this;
         }
 

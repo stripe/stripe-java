@@ -2626,6 +2626,10 @@ public class ContractCreateParams extends ApiRequestParams {
     @SerializedName("lookup_key")
     String lookupKey;
 
+    /** Set of key-value pairs. */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
     /**
      * Parameters for a multiply_pricing override. Required if {@code type} is {@code
      * multiply_pricing}.
@@ -2652,6 +2656,7 @@ public class ContractCreateParams extends ApiRequestParams {
         EndsAt endsAt,
         Map<String, Object> extraParams,
         String lookupKey,
+        Map<String, String> metadata,
         MultiplyPricing multiplyPricing,
         Long priority,
         StartsAt startsAt,
@@ -2659,6 +2664,7 @@ public class ContractCreateParams extends ApiRequestParams {
       this.endsAt = endsAt;
       this.extraParams = extraParams;
       this.lookupKey = lookupKey;
+      this.metadata = metadata;
       this.multiplyPricing = multiplyPricing;
       this.priority = priority;
       this.startsAt = startsAt;
@@ -2676,6 +2682,8 @@ public class ContractCreateParams extends ApiRequestParams {
 
       private String lookupKey;
 
+      private Map<String, String> metadata;
+
       private MultiplyPricing multiplyPricing;
 
       private Long priority;
@@ -2690,6 +2698,7 @@ public class ContractCreateParams extends ApiRequestParams {
             this.endsAt,
             this.extraParams,
             this.lookupKey,
+            this.metadata,
             this.multiplyPricing,
             this.priority,
             this.startsAt,
@@ -2731,6 +2740,32 @@ public class ContractCreateParams extends ApiRequestParams {
       /** A user-provided lookup key to reference this pricing override. */
       public Builder setLookupKey(String lookupKey) {
         this.lookupKey = lookupKey;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ContractCreateParams.PricingOverride#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ContractCreateParams.PricingOverride#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
         return this;
       }
 

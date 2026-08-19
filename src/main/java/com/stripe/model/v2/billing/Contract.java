@@ -337,6 +337,10 @@ public class Contract extends StripeObject implements HasId {
               @SerializedName("lookup_key")
               String lookupKey;
 
+              /** Set of key-value pairs. */
+              @SerializedName("metadata")
+              Map<String, String> metadata;
+
               /** Details for an overwrite_price override. */
               @SerializedName("overwrite_price")
               OverwritePrice overwritePrice;
@@ -440,6 +444,10 @@ public class Contract extends StripeObject implements HasId {
       /** The user-provided lookup key for the pricing override. */
       @SerializedName("lookup_key")
       String lookupKey;
+
+      /** Set of key-value pairs. */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
 
       /** Details for a multiply_pricing override. */
       @SerializedName("multiply_pricing")

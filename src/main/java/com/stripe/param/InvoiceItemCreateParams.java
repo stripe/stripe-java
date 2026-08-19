@@ -83,6 +83,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   @SerializedName("invoice")
   String invoice;
 
+  /** Settings for Managed Payments for this invoice item. */
+  @SerializedName("managed_payments")
+  ManagedPayments managedPayments;
+
   /**
    * The ids of the margins to apply to the invoice item. When set, the {@code default_margins} on
    * the invoice do not apply to this invoice item.
@@ -187,6 +191,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String invoice,
+      ManagedPayments managedPayments,
       List<String> margins,
       Object metadata,
       Period period,
@@ -209,6 +214,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.invoice = invoice;
+    this.managedPayments = managedPayments;
     this.margins = margins;
     this.metadata = metadata;
     this.period = period;
@@ -248,6 +254,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
     private String invoice;
 
+    private ManagedPayments managedPayments;
+
     private List<String> margins;
 
     private Object metadata;
@@ -285,6 +293,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.invoice,
+          this.managedPayments,
           this.margins,
           this.metadata,
           this.period,
@@ -457,6 +466,12 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
      */
     public Builder setInvoice(String invoice) {
       this.invoice = invoice;
+      return this;
+    }
+
+    /** Settings for Managed Payments for this invoice item. */
+    public Builder setManagedPayments(InvoiceItemCreateParams.ManagedPayments managedPayments) {
+      this.managedPayments = managedPayments;
       return this;
     }
 
@@ -1008,6 +1023,84 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
         Type(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManagedPayments {
+    /**
+     * Set to {@code true} to enable <a
+     * href="https://docs.stripe.com/payments/managed-payments">Managed Payments</a>, Stripe's
+     * merchant of record solution.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private ManagedPayments(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public InvoiceItemCreateParams.ManagedPayments build() {
+        return new InvoiceItemCreateParams.ManagedPayments(this.enabled, this.extraParams);
+      }
+
+      /**
+       * Set to {@code true} to enable <a
+       * href="https://docs.stripe.com/payments/managed-payments">Managed Payments</a>, Stripe's
+       * merchant of record solution.
+       */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceItemCreateParams.ManagedPayments#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceItemCreateParams.ManagedPayments#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }

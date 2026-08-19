@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class FeedbackOptions extends StripeObject implements HasId {
+public class FeedbackOption extends StripeObject implements HasId {
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
@@ -32,7 +32,7 @@ public class FeedbackOptions extends StripeObject implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to {@code billing.feedback_options}.
+   * <p>Equal to {@code billing.feedback_option}.
    */
   @SerializedName("object")
   String object;

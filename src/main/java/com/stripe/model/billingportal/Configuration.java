@@ -8,7 +8,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
-import com.stripe.model.billing.FeedbackOptions;
+import com.stripe.model.billing.FeedbackOption;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -424,7 +424,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
 
         /** The IDs of custom feedback options configured for this cancellation reason. */
         @SerializedName("feedback_options")
-        List<ExpandableField<FeedbackOptions>> feedbackOptions;
+        List<ExpandableField<FeedbackOption>> feedbackOptions;
 
         /** Which cancellation reasons will be given as options to the customer. */
         @SerializedName("options")
@@ -453,23 +453,23 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
           this.feedbackOptions =
               (ids != null)
                   ? ids.stream()
-                      .map(id -> new ExpandableField<FeedbackOptions>(id, null))
+                      .map(id -> new ExpandableField<FeedbackOption>(id, null))
                       .collect(Collectors.toList())
                   : null;
         }
 
         /** Get expanded {@code feedbackOptions}. */
-        public List<FeedbackOptions> getFeedbackOptionObjects() {
+        public List<FeedbackOption> getFeedbackOptionObjects() {
           return (this.feedbackOptions != null)
               ? this.feedbackOptions.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
               : null;
         }
 
-        public void setFeedbackOptionObjects(List<FeedbackOptions> objs) {
+        public void setFeedbackOptionObjects(List<FeedbackOption> objs) {
           this.feedbackOptions =
               objs != null
                   ? objs.stream()
-                      .map(x -> new ExpandableField<FeedbackOptions>(x.getId(), x))
+                      .map(x -> new ExpandableField<FeedbackOption>(x.getId(), x))
                       .collect(Collectors.toList())
                   : null;
         }

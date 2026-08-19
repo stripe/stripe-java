@@ -194,6 +194,10 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("subscription_cancel")
     SubscriptionCancel subscriptionCancel;
 
+    /** Configuration when {@code flow.type=subscription_pause}. */
+    @SerializedName("subscription_pause")
+    SubscriptionPause subscriptionPause;
+
     /** Configuration when {@code flow.type=subscription_update}. */
     @SerializedName("subscription_update")
     SubscriptionUpdate subscriptionUpdate;
@@ -206,7 +210,8 @@ public class Session extends ApiResource implements HasId {
      * Type of flow that the customer will go through.
      *
      * <p>One of {@code customer_update}, {@code payment_method_update}, {@code
-     * subscription_cancel}, {@code subscription_update}, or {@code subscription_update_confirm}.
+     * subscription_cancel}, {@code subscription_pause}, {@code subscription_update}, or {@code
+     * subscription_update_confirm}.
      */
     @SerializedName("type")
     String type;
@@ -320,6 +325,19 @@ public class Session extends ApiResource implements HasId {
           String coupon;
         }
       }
+    }
+
+    /**
+     * For more details about SubscriptionPause, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionPause extends StripeObject {
+      /** The ID of the subscription to be paused. */
+      @SerializedName("subscription")
+      String subscription;
     }
 
     /**
