@@ -1680,7 +1680,12 @@ public class StripeClient {
   }
 
   public StripeEventNotificationHandler notificationHandler(
-      String webhookSecret, StripeEventNotificationHandler.FallbackCallback fallbackCallback) {
+      String webhookSecret, EventNotificationFallbackCallback fallbackCallback) {
     return new StripeEventNotificationHandler(webhookSecret, this, fallbackCallback);
+  }
+
+  public StripeEventNotificationHandlerWithoutVerification notificationHandlerWithoutVerification(
+      EventNotificationFallbackCallback fallbackCallback) {
+    return StripeEventNotificationHandler.withoutVerification(this, fallbackCallback);
   }
 }
