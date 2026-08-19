@@ -13,6 +13,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.moneymanagement.TransactionListParams;
+import com.stripe.param.v2.moneymanagement.TransactionUpdateParams;
 
 public final class TransactionService extends ApiService {
   public TransactionService(StripeResponseGetter responseGetter) {
@@ -54,6 +55,32 @@ public final class TransactionService extends ApiService {
         String.format("/v2/money_management/transactions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+    return this.request(request, Transaction.class);
+  }
+  /** Updates the description of an existing Transaction. */
+  public Transaction update(String id, TransactionUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /** Updates the description of an existing Transaction. */
+  public Transaction update(String id, RequestOptions options) throws StripeException {
+    return update(id, (TransactionUpdateParams) null, options);
+  }
+  /** Updates the description of an existing Transaction. */
+  public Transaction update(String id) throws StripeException {
+    return update(id, (TransactionUpdateParams) null, (RequestOptions) null);
+  }
+  /** Updates the description of an existing Transaction. */
+  public Transaction update(String id, TransactionUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v2/money_management/transactions/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return this.request(request, Transaction.class);
   }
 }

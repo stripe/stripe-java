@@ -107,6 +107,12 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
     Amount amount;
 
     /**
+     * Tax charged for this fee, if applicable. Value expressed as a decimal string in major units.
+     */
+    @SerializedName("tax_amount")
+    TaxAmount taxAmount;
+
+    /**
      * The fee type.
      *
      * <p>One of {@code cross_border_payout_fee}, {@code foreign_exchange_fee}, {@code
@@ -115,6 +121,22 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
      */
     @SerializedName("type")
     String type;
+
+    /**
+     * Tax charged for this fee, if applicable. Value expressed as a decimal string in major units.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TaxAmount extends StripeObject {
+      /** Currency code. */
+      @SerializedName("currency")
+      String currency;
+
+      /** Tax amount value represented as a decimal string in major units. */
+      @SerializedName("value_decimal")
+      String valueDecimal;
+    }
   }
 
   /** Details about the sender of an OutboundPaymentQuote. */
@@ -196,8 +218,68 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
     @SerializedName("payout_method")
     String payoutMethod;
 
+    /** Payout method options for the OutboundPaymentQuote. */
+    @SerializedName("payout_method_options")
+    PayoutMethodOptions payoutMethodOptions;
+
     /** To which account the OutboundPayment is sent. */
     @SerializedName("recipient")
     String recipient;
+
+    /** Payout method options for the OutboundPaymentQuote. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PayoutMethodOptions extends StripeObject {
+      /** Options for bank account payout methods. */
+      @SerializedName("bank_account")
+      BankAccount bankAccount;
+
+      /** Options for bank account payout methods. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BankAccount extends StripeObject {
+        /** Per-network configuration options. */
+        @SerializedName("preferred_network_options")
+        PreferredNetworkOptions preferredNetworkOptions;
+
+        /** The preferred networks to use for this OutboundPayment. */
+        @SerializedName("preferred_networks")
+        List<String> preferredNetworks;
+
+        /** Per-network configuration options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PreferredNetworkOptions extends StripeObject {
+          /** ACH-specific network options. */
+          @SerializedName("ach")
+          Ach ach;
+
+          /** ACH-specific network options. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Ach extends StripeObject {
+            /**
+             * Open Enum. ACH submission timing.
+             *
+             * <p>One of {@code next_day}, or {@code same_day}.
+             */
+            @SerializedName("submission")
+            String submission;
+
+            /**
+             * The transaction purpose for this ACH payment.
+             *
+             * <p>Equal to {@code payroll}.
+             */
+            @SerializedName("transaction_purpose")
+            String transactionPurpose;
+          }
+        }
+      }
+    }
   }
 }

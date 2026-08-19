@@ -1829,13 +1829,6 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
         String authenticationFlow;
 
         /**
-         * The 3D Secure cryptogram, also known as the &quot;authentication value&quot; (AAV, CAVV
-         * or AEVV).
-         */
-        @SerializedName("cryptogram")
-        String cryptogram;
-
-        /**
          * The Electronic Commerce Indicator (ECI). A protocol-level field indicating what degree of
          * authentication was performed.
          *
@@ -3202,7 +3195,7 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     public static class NzBankAccount extends StripeObject {
       /**
        * The name on the bank account. Only present if the account holder name is different from the
-       * name of the authorized signatory collected in the PaymentMethod’s billing details.
+       * name of the authorized signatory collected in the PaymentMethod's billing details.
        */
       @SerializedName("account_holder_name")
       String accountHolderName;

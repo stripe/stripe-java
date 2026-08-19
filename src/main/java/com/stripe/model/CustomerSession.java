@@ -149,6 +149,10 @@ public class CustomerSession extends ApiResource {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Components extends StripeObject {
+    /** This hash contains whether the active entitlements is enabled. */
+    @SerializedName("active_entitlements")
+    ActiveEntitlements activeEntitlements;
+
     /** This hash contains whether the buy button is enabled. */
     @SerializedName("buy_button")
     BuyButton buyButton;
@@ -179,6 +183,16 @@ public class CustomerSession extends ApiResource {
     /** This hash contains whether the Tax ID Element is enabled and the features it supports. */
     @SerializedName("tax_id_element")
     TaxIdElement taxIdElement;
+
+    /** This hash contains whether the active entitlements is enabled. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ActiveEntitlements extends StripeObject {
+      /** Whether the active entitlements is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+    }
 
     /** This hash contains whether the buy button is enabled. */
     @Getter

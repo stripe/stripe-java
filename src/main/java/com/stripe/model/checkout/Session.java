@@ -376,8 +376,8 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   ExpandableField<PaymentLink> paymentLink;
 
   /**
-   * Configure whether a Checkout Session should collect a payment method. Defaults to {@code
-   * always}.
+   * Configure whether a Checkout Session should collect a payment method for sessions with mode
+   * {@code payment}. Defaults to {@code always}.
    *
    * <p>One of {@code always}, or {@code if_required}.
    */

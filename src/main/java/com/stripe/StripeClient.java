@@ -874,6 +874,18 @@ public class StripeClient {
   }
 
   /**
+   * @deprecated StripeClient.paymentPlans() is deprecated, use StripeClient.v1().paymentPlans()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().paymentPlans(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.PaymentPlanService paymentPlans() {
+    return new com.stripe.service.PaymentPlanService(this.getResponseGetter());
+  }
+
+  /**
    * @deprecated StripeClient.paymentRecords() is deprecated, use StripeClient.v1().paymentRecords()
    *     instead. All functionality under it has been copied over to
    *     StripeClient.v1().paymentRecords(). See <a

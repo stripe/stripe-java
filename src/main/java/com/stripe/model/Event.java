@@ -197,8 +197,10 @@ public class Event extends ApiResource implements HasId {
    * payment_intent.processing}, {@code payment_intent.requires_action}, {@code
    * payment_intent.succeeded}, {@code payment_link.created}, {@code payment_link.updated}, {@code
    * payment_method.attached}, {@code payment_method.automatically_updated}, {@code
-   * payment_method.detached}, {@code payment_method.updated}, {@code payout.canceled}, {@code
-   * payout.created}, {@code payout.failed}, {@code payout.paid}, {@code
+   * payment_method.detached}, {@code payment_method.updated}, {@code payment_plan.created}, {@code
+   * payment_plan.installment_due}, {@code payment_plan.installment_paid}, {@code
+   * payment_plan.installment_will_be_due}, {@code payment_plan.updated}, {@code payout.canceled},
+   * {@code payout.created}, {@code payout.failed}, {@code payout.paid}, {@code
    * payout.reconciliation_completed}, {@code payout.updated}, {@code person.created}, {@code
    * person.deleted}, {@code person.updated}, {@code plan.created}, {@code plan.deleted}, {@code
    * plan.updated}, {@code price.created}, {@code price.deleted}, {@code price.updated}, {@code

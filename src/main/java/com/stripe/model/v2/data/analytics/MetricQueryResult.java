@@ -13,7 +13,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** The result of a metric query. */
+/**
+ * The result of a metric query. For the full list of supported metrics, see <a
+ * href="https://docs.stripe.com/data/analytics/supported-metrics">Supported metrics</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

@@ -349,6 +349,9 @@ public class OnrampSessionListParams extends ApiRequestParams {
     @SerializedName("usdc")
     USDC("usdc"),
 
+    @SerializedName("usdt")
+    USDT("usdt"),
+
     @SerializedName("wld")
     WLD("wld"),
 

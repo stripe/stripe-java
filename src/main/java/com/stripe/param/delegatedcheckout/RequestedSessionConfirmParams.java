@@ -54,6 +54,13 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
   @SerializedName("risk_details")
   RiskDetails riskDetails;
 
+  /**
+   * A SharedPaymentIssuedToken ({@code spt_...}) previously issued to this buyer. Mutually
+   * exclusive with {@code payment_method} and {@code payment_method_data}.
+   */
+  @SerializedName("shared_payment_issued_token")
+  String sharedPaymentIssuedToken;
+
   /** Set to true when using Stripe.js, iOS, or Android client-side SDKs to handle next actions. */
   @SerializedName("use_stripe_sdk")
   Boolean useStripeSdk;
@@ -67,6 +74,7 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
       String paymentMethod,
       String returnUrl,
       RiskDetails riskDetails,
+      String sharedPaymentIssuedToken,
       Boolean useStripeSdk) {
     this.affiliateAttribution = affiliateAttribution;
     this.buyerConsents = buyerConsents;
@@ -76,6 +84,7 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
     this.paymentMethod = paymentMethod;
     this.returnUrl = returnUrl;
     this.riskDetails = riskDetails;
+    this.sharedPaymentIssuedToken = sharedPaymentIssuedToken;
     this.useStripeSdk = useStripeSdk;
   }
 
@@ -100,6 +109,8 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
 
     private RiskDetails riskDetails;
 
+    private String sharedPaymentIssuedToken;
+
     private Boolean useStripeSdk;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -113,6 +124,7 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
           this.paymentMethod,
           this.returnUrl,
           this.riskDetails,
+          this.sharedPaymentIssuedToken,
           this.useStripeSdk);
     }
 
@@ -239,6 +251,15 @@ public class RequestedSessionConfirmParams extends ApiRequestParams {
     /** Risk details/signals associated with the requested session. */
     public Builder setRiskDetails(RequestedSessionConfirmParams.RiskDetails riskDetails) {
       this.riskDetails = riskDetails;
+      return this;
+    }
+
+    /**
+     * A SharedPaymentIssuedToken ({@code spt_...}) previously issued to this buyer. Mutually
+     * exclusive with {@code payment_method} and {@code payment_method_data}.
+     */
+    public Builder setSharedPaymentIssuedToken(String sharedPaymentIssuedToken) {
+      this.sharedPaymentIssuedToken = sharedPaymentIssuedToken;
       return this;
     }
 
