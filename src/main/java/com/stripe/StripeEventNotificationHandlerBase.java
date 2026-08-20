@@ -1,4 +1,3 @@
-// File copied from our code generator; changes here will be overwritten.
 package com.stripe;
 
 // event-notification-class-imports: The beginning of the section generated from our OpenAPI spec
