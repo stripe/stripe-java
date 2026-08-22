@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Receive and process event notifications (AKA thin events) like
@@ -28,6 +31,8 @@ import java.nio.charset.StandardCharsets;
  *   <li>create a StripeClient called client
  *   <li>Initialize an EventNotificationHandler with the client, webhook secret, and fallback
  *       callback
+ *   <li>register a preHandle hook that deduplicates events we've already processed, so a
+ *       redelivered webhook doesn't trigger the callback (or the fallback) a second time
  *   <li>register a specific handler for the "v1.billing.meter.error_report_triggered" event
  *       notification type
  *   <li>use handler.handle() to process the received notification webhook body
@@ -42,6 +47,12 @@ public class EventNotificationHandlerEndpoint {
   private static final String API_KEY = System.getenv("STRIPE_API_KEY");
   private static final String WEBHOOK_SECRET = System.getenv("WEBHOOK_SECRET");
 
+  // A real deployment would track processed event IDs somewhere durable (e.g. a database or
+  // cache) rather than in memory, but the idea is the same: preHandle lets you make that check
+  // once, before any callback runs, instead of duplicating it in every callback.
+  private static final Set<String> processedEventIds =
+      Collections.synchronizedSet(new LinkedHashSet<>());
+
   private static final StripeClient client = new StripeClient(API_KEY);
   private static final StripeEventNotificationHandler handler =
       client.notificationHandler(
@@ -54,8 +65,11 @@ public class EventNotificationHandlerEndpoint {
           EventNotificationHandlerEndpoint::fallbackCallback);
 
   public static void main(String[] args) throws IOException {
+    handler.preHandle(EventNotificationHandlerEndpoint::deduplicate);
     handler.onV1BillingMeterErrorReportTriggered(
         EventNotificationHandlerEndpoint::handleMeterErrors);
+
+    unverifiedHandler.preHandle(EventNotificationHandlerEndpoint::deduplicate);
     unverifiedHandler.onV1BillingMeterErrorReportTriggered(
         EventNotificationHandlerEndpoint::handleMeterErrors);
 
@@ -69,6 +83,16 @@ public class EventNotificationHandlerEndpoint {
   private static void fallbackCallback(
       EventNotification notif, StripeClient client, UnhandledNotificationDetails details) {
     System.out.println("Received unhandled event notification type: " + notif.getType());
+  }
+
+  // Registered via preHandle() on both handlers below. Runs before any callback (or the
+  // fallback), so a redelivered webhook is skipped entirely instead of being handled twice.
+  private static boolean deduplicate(EventNotification notif, StripeClient client) {
+    boolean isNewEvent = processedEventIds.add(notif.getId());
+    if (!isNewEvent) {
+      System.out.println("Skipping already-processed event: " + notif.getId());
+    }
+    return isNewEvent;
   }
 
   private static void handleMeterErrors(

@@ -56,6 +56,7 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
 
   final StripeClient client;
   private final EventNotificationFallbackCallback fallbackCallback;
+  private EventNotificationPreHandleCallback preHandleCallback;
   private final HashMap<String, EventNotificationCallback<? extends EventNotification>>
       registeredHandlers = new HashMap<>();
 
@@ -65,16 +66,44 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     this.fallbackCallback = fallbackCallback;
   }
 
+  /**
+   * Callbacks are expected to be registered once on startup, so registering anything after handling
+   * has begun indicates a bug.
+   */
+  private void assertCanRegister() {
+    if (hasHandledEvent) {
+      throw new IllegalStateException(
+          "Cannot register new callbacks after an event has been handled. This is indicative of a bug.");
+    }
+  }
+
   private <E extends EventNotification> void register(
       String eventType, EventNotificationCallback<E> handler) {
-    if (hasHandledEvent) {
-      throw new IllegalStateException("Cannot register handlers after handling an event");
-    }
+    assertCanRegister();
 
     if (this.registeredHandlers.containsKey(eventType)) {
-      throw new IllegalArgumentException("Handler already registered for event type: " + eventType);
+      throw new IllegalArgumentException(
+          "Callback for event type \"" + eventType + "\" is already registered");
     }
     this.registeredHandlers.put(eventType, handler);
+  }
+
+  /**
+   * Registers a hook that runs after {@code handle()} parses the payload but before any callback
+   * fires. If the hook returns {@code false}, handling stops for that event and neither the
+   * registered callback nor the fallback runs.
+   *
+   * @param callback the hook to run before handling continues
+   * @return this handler, for chaining
+   */
+  public T preHandle(EventNotificationPreHandleCallback callback) {
+    assertCanRegister();
+
+    if (this.preHandleCallback != null) {
+      throw new IllegalArgumentException("A preHandle callback is already registered");
+    }
+    this.preHandleCallback = callback;
+    return self();
   }
 
   /** Lets the generated {@code on*} methods return the concrete handler type for chaining. */
@@ -90,6 +119,11 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
 
     // Create a new client with the event's context for thread-safe processing
     StripeClient eventClient = this.client.withStripeContext(eventNotification.context);
+
+    if (this.preHandleCallback != null
+        && !this.preHandleCallback.process(eventNotification, eventClient)) {
+      return;
+    }
 
     if (handler == null) {
       boolean isKnownEventType =
