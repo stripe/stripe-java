@@ -89,9 +89,13 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   }
 
   /**
-   * Registers a hook that runs after {@code handle()} parses the payload but before any callback
-   * fires. If the hook returns {@code false}, handling stops for that event and neither the
-   * registered callback nor the fallback runs.
+   * Registers a function that will be run before any event-specific callbacks. A useful place to
+   * store event-agnostic logic, such as logging or checking for <a
+   * href="https://docs.stripe.com/webhooks#handle-duplicate-events">duplicate event deliveries</a>.
+   *
+   * <p>Returning {@code true} causes handling to continue as normal; returning {@code false}
+   * returns from {@code handle()} immediately, so neither the registered callback nor the fallback
+   * callback are called.
    *
    * @param callback the hook to run before handling continues
    * @return this handler, for chaining
