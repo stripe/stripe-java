@@ -30,17 +30,18 @@ jobs:
       contents: read
 
     steps:
-      - uses: extractions/setup-just@dd310ad5a97d8e7b41793f8ef055398d51ad4de6 # v2.0.0
-      - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
+      - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Java
         id: setup-jre
-        uses: actions/setup-java@0f62d2ad8407a414cddd4790bed06fd9ebda0f56 # v1.4.5
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           java-version: "17" # always use 17 LTS for building
           architecture: x64
+          distribution: zulu
 
       - name: Set Test Java Runtime Environment variable
         run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
@@ -71,7 +72,7 @@ jobs:
         # https://endoflife.date/oracle-jdk
         java-version:
           # LTS versions
-          - "1.8"
+          - "8"
           - "11"
           - "17"
           - "21"
@@ -85,17 +86,18 @@ jobs:
             java-version: "25"
 
     steps:
-      - uses: extractions/setup-just@dd310ad5a97d8e7b41793f8ef055398d51ad4de6 # v2.0.0
-      - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
+      - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Test Java Runtime
         id: setup-test-jre
-        uses: actions/setup-java@0f62d2ad8407a414cddd4790bed06fd9ebda0f56 # v1.4.5
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           java-version: ${{ matrix.java-version }}
           architecture: x64
+          distribution: zulu
 
       - name: Set Test Java Runtime Environment variable
         shell: bash
@@ -106,13 +108,14 @@ jobs:
       # our gradle version wants java 17, so any other test version needs a separate setup
       - name: Setup Gradle JDK
         if: ${{ matrix.java-version != '17' }}
-        uses: actions/setup-java@0f62d2ad8407a414cddd4790bed06fd9ebda0f56 # v1.4.5
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           java-version: "17"
           architecture: x64
+          distribution: zulu
 
-      - name: Tweak gradle.properties for Java 1.8
-        if: ${{ matrix.java-version == '1.8' }}
+      - name: Tweak gradle.properties for Java 8
+        if: ${{ matrix.java-version == '8' }}
         run: sed -e '/--add-exports/ s/^#*/#/' -i gradle.properties
 
       - name: Display version
@@ -134,15 +137,16 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Setup Java
         id: setup-jre
-        uses: actions/setup-java@0f62d2ad8407a414cddd4790bed06fd9ebda0f56 # v1.4.5
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           java-version: "17" # always use 17 LTS for building
           architecture: x64
+          distribution: zulu
       - name: Set Test Java Runtime Environment variable
         run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
         env:
@@ -180,15 +184,16 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Setup Java
         id: setup-jre
-        uses: actions/setup-java@0f62d2ad8407a414cddd4790bed06fd9ebda0f56 # v1.4.5
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           java-version: "17" # always use 17 TLS for building
           architecture: x64
+          distribution: zulu
       - name: Set Test Java Runtime Environment variable
         run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
         env:
@@ -209,16 +214,17 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Java
         id: setup-jre
-        uses: actions/setup-java@0f62d2ad8407a414cddd4790bed06fd9ebda0f56 # v1.4.5
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           java-version: "17" # always use 17 TLS for building
           architecture: x64
+          distribution: zulu
 
       - name: Set Test Java Runtime Environment variable
         run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
@@ -237,7 +243,7 @@ jobs:
           mv build/libs/*.jar ../japi-compliance-checker/new.jar
 
       - name: Checkout base branch
-        uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event.pull_request.base.sha }}
           persist-credentials: false
@@ -257,7 +263,7 @@ jobs:
           mv ../japi-compliance-checker/compat_reports/stripe-java/*/compat_report.html report.html
 
       - name: Upload report as artifact
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: JAPI Compliance Report
           path: report.html
