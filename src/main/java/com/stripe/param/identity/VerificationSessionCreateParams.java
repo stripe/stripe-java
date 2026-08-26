@@ -79,6 +79,10 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   @SerializedName("type")
   Type type;
 
+  /** Details on the user's consent to Stripe Terms of Service and Privacy Policy. */
+  @SerializedName("user_consent")
+  UserConsent userConsent;
+
   /**
    * The ID of a verification flow from the Dashboard. See
    * https://docs.stripe.com/identity/verification-flows.
@@ -99,6 +103,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       RelatedPerson relatedPerson,
       String returnUrl,
       Type type,
+      UserConsent userConsent,
       String verificationFlow) {
     this.clientReferenceId = clientReferenceId;
     this.confirm = confirm;
@@ -112,6 +117,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     this.relatedPerson = relatedPerson;
     this.returnUrl = returnUrl;
     this.type = type;
+    this.userConsent = userConsent;
     this.verificationFlow = verificationFlow;
   }
 
@@ -144,6 +150,8 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
 
     private Type type;
 
+    private UserConsent userConsent;
+
     private String verificationFlow;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -161,6 +169,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
           this.relatedPerson,
           this.returnUrl,
           this.type,
+          this.userConsent,
           this.verificationFlow);
     }
 
@@ -301,6 +310,12 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
      */
     public Builder setType(VerificationSessionCreateParams.Type type) {
       this.type = type;
+      return this;
+    }
+
+    /** Details on the user's consent to Stripe Terms of Service and Privacy Policy. */
+    public Builder setUserConsent(VerificationSessionCreateParams.UserConsent userConsent) {
+      this.userConsent = userConsent;
       return this;
     }
 
@@ -766,6 +781,105 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
        */
       public Builder setPerson(String person) {
         this.person = person;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class UserConsent {
+    /** <strong>Required.</strong> The time at which the user gave consent, as a Unix timestamp. */
+    @SerializedName("date")
+    Long date;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The IP address of the user when they gave consent. */
+    @SerializedName("ip")
+    String ip;
+
+    /** The user agent of the browser or device the user used to give consent. */
+    @SerializedName("user_agent")
+    String userAgent;
+
+    private UserConsent(Long date, Map<String, Object> extraParams, String ip, String userAgent) {
+      this.date = date;
+      this.extraParams = extraParams;
+      this.ip = ip;
+      this.userAgent = userAgent;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long date;
+
+      private Map<String, Object> extraParams;
+
+      private String ip;
+
+      private String userAgent;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public VerificationSessionCreateParams.UserConsent build() {
+        return new VerificationSessionCreateParams.UserConsent(
+            this.date, this.extraParams, this.ip, this.userAgent);
+      }
+
+      /**
+       * <strong>Required.</strong> The time at which the user gave consent, as a Unix timestamp.
+       */
+      public Builder setDate(Long date) {
+        this.date = date;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * VerificationSessionCreateParams.UserConsent#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link VerificationSessionCreateParams.UserConsent#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The IP address of the user when they gave consent. */
+      public Builder setIp(String ip) {
+        this.ip = ip;
+        return this;
+      }
+
+      /** The user agent of the browser or device the user used to give consent. */
+      public Builder setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
         return this;
       }
     }

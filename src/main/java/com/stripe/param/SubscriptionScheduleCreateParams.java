@@ -680,7 +680,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @SerializedName("applies_to")
     List<SubscriptionScheduleCreateParams.BillingSchedule.AppliesTo> appliesTo;
 
-    /** <strong>Required.</strong> The end date for the billing schedule. */
+    /**
+     * <strong>Required.</strong> The end date for the billing schedule. You must not set this
+     * earlier than current period end for every applicable subscription item.
+     */
     @SerializedName("bill_until")
     BillUntil billUntil;
 
@@ -758,7 +761,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The end date for the billing schedule. */
+      /**
+       * <strong>Required.</strong> The end date for the billing schedule. You must not set this
+       * earlier than current period end for every applicable subscription item.
+       */
       public Builder setBillUntil(
           SubscriptionScheduleCreateParams.BillingSchedule.BillUntil billUntil) {
         this.billUntil = billUntil;

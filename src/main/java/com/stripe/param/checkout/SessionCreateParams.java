@@ -21384,9 +21384,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * shipping details. If set to {@code server_only}, only your server is allowed to update the
      * shipping details.
      *
-     * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
-     * when initializing the Stripe Checkout client and manually update the shipping details from
-     * your server using the Stripe API.
+     * <p>This parameter is only supported when {@code ui_mode=elements}.
      */
     @SerializedName("update_shipping_details")
     UpdateShippingDetails updateShippingDetails;
@@ -21499,9 +21497,7 @@ public class SessionCreateParams extends ApiRequestParams {
        * shipping details. If set to {@code server_only}, only your server is allowed to update the
        * shipping details.
        *
-       * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
-       * when initializing the Stripe Checkout client and manually update the shipping details from
-       * your server using the Stripe API.
+       * <p>This parameter is only supported when {@code ui_mode=elements}.
        */
       public Builder setUpdateShippingDetails(
           SessionCreateParams.Permissions.UpdateShippingDetails updateShippingDetails) {
@@ -21543,9 +21539,7 @@ public class SessionCreateParams extends ApiRequestParams {
        * shipping details. If set to {@code server_only}, only your server is allowed to update the
        * shipping details.
        *
-       * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
-       * when initializing the Stripe Checkout client and manually update the shipping details from
-       * your server using the Stripe API.
+       * <p>This parameter is only supported when {@code ui_mode=elements}.
        */
       @SerializedName("shipping_details")
       ShippingDetails shippingDetails;
@@ -21625,9 +21619,7 @@ public class SessionCreateParams extends ApiRequestParams {
          * shipping details. If set to {@code server_only}, only your server is allowed to update
          * the shipping details.
          *
-         * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event
-         * handler when initializing the Stripe Checkout client and manually update the shipping
-         * details from your server using the Stripe API.
+         * <p>This parameter is only supported when {@code ui_mode=elements}.
          */
         public Builder setShippingDetails(
             SessionCreateParams.Permissions.Update.ShippingDetails shippingDetails) {

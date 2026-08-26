@@ -179,17 +179,43 @@ public class Transaction extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Classification extends StripeObject {
-    /** Money movement classification labels for this transaction. */
+    @SerializedName("credit")
+    Credit credit;
+
     @SerializedName("money_movement")
     MoneyMovement moneyMovement;
 
-    /** Personal finance classification labels for this transaction. */
     @SerializedName("personal_finance")
     PersonalFinance personalFinance;
 
     /** The taxonomy type for this classification entry. */
     @SerializedName("type")
     String type;
+
+    /**
+     * For more details about Credit, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Credit extends StripeObject {
+      /**
+       * Stripe's confidence in this classification.
+       *
+       * <p>One of {@code high}, {@code low}, {@code medium}, or {@code very_high}.
+       */
+      @SerializedName("confidence_level")
+      String confidenceLevel;
+
+      /** The detailed category label for this transaction. */
+      @SerializedName("detailed_label")
+      String detailedLabel;
+
+      /** The primary category label for this transaction. */
+      @SerializedName("primary_label")
+      String primaryLabel;
+    }
 
     /**
      * For more details about MoneyMovement, please refer to the <a

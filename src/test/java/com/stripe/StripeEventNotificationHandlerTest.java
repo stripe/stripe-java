@@ -10,6 +10,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.stripe.events.UnknownEventNotification;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification;
@@ -19,6 +20,7 @@ import com.stripe.model.v2.core.EventNotification;
 import com.stripe.net.Webhook;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -231,7 +233,12 @@ public class StripeEventNotificationHandlerTest {
                 eventNotificationHandler.onV2CoreAccountCreated(
                     mock(EventNotificationCallback.class)));
 
-    assertTrue(exception.getMessage().contains("Cannot register handlers after handling an event"));
+    assertTrue(
+        exception
+            .getMessage()
+            .contains(
+                "Cannot register new callbacks after an event has been handled. This is indicative of a"
+                    + " bug."));
   }
 
   @SuppressWarnings("unchecked")
@@ -254,7 +261,8 @@ public class StripeEventNotificationHandlerTest {
         exception
             .getMessage()
             .contains(
-                "Handler already registered for event type: v1.billing.meter.error_report_triggered"));
+                "Callback for event type \"v1.billing.meter.error_report_triggered\" is already"
+                    + " registered"));
   }
 
   @Test
@@ -629,5 +637,217 @@ public class StripeEventNotificationHandlerTest {
 
     List<String> eventTypes = eventNotificationHandler.getRegisteredEventTypes();
     assertEquals(expected, eventTypes);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Test
+  public void testPreHandle_noHookRegistered_callbackStillRuns()
+      throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+    // Regression: with no preHandle hook registered, behavior is unchanged.
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
+        mock(EventNotificationCallback.class);
+    eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler);
+
+    String sigHeader = generateSigHeader(v1BillingMeterPayload);
+    eventNotificationHandler.handle(v1BillingMeterPayload, sigHeader);
+
+    verify(handler, times(1))
+        .process(org.mockito.ArgumentMatchers.any(), org.mockito.ArgumentMatchers.any());
+  }
+
+  @SuppressWarnings("unchecked")
+  @Test
+  public void testPreHandle_returnsTrue_runsFirstThenCallbackRuns()
+      throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+    List<String> callOrder = new ArrayList<>();
+
+    EventNotificationPreHandleCallback preHandleCallback =
+        (event, client) -> {
+          callOrder.add("preHandle");
+          return true;
+        };
+
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
+        (event, client) -> callOrder.add("callback");
+
+    eventNotificationHandler.preHandle(preHandleCallback);
+    eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler);
+
+    String sigHeader = generateSigHeader(v1BillingMeterPayload);
+    eventNotificationHandler.handle(v1BillingMeterPayload, sigHeader);
+
+    assertEquals(Arrays.asList("preHandle", "callback"), callOrder);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Test
+  public void testPreHandle_returnsFalse_registeredCallbackDoesNotRun()
+      throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+    EventNotificationPreHandleCallback preHandleCallback =
+        mock(EventNotificationPreHandleCallback.class);
+    when(preHandleCallback.process(
+            org.mockito.ArgumentMatchers.any(), org.mockito.ArgumentMatchers.any()))
+        .thenReturn(false);
+
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
+        mock(EventNotificationCallback.class);
+
+    eventNotificationHandler.preHandle(preHandleCallback);
+    eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler);
+
+    String sigHeader = generateSigHeader(v1BillingMeterPayload);
+    eventNotificationHandler.handle(v1BillingMeterPayload, sigHeader);
+
+    verify(handler, never())
+        .process(org.mockito.ArgumentMatchers.any(), org.mockito.ArgumentMatchers.any());
+  }
+
+  @Test
+  public void testPreHandle_returnsFalse_fallbackAlsoDoesNotRunForUnknownEvent()
+      throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+    // Unregistered/unknown event types normally fall through to the fallback callback. A
+    // preHandle hook returning false should suppress that fallback too.
+    EventNotificationPreHandleCallback preHandleCallback =
+        mock(EventNotificationPreHandleCallback.class);
+    when(preHandleCallback.process(
+            org.mockito.ArgumentMatchers.any(), org.mockito.ArgumentMatchers.any()))
+        .thenReturn(false);
+
+    eventNotificationHandler.preHandle(preHandleCallback);
+
+    String sigHeader = generateSigHeader(unknownEventPayload);
+    eventNotificationHandler.handle(unknownEventPayload, sigHeader);
+
+    verify(fallbackCallback, never())
+        .process(
+            org.mockito.ArgumentMatchers.any(),
+            org.mockito.ArgumentMatchers.any(),
+            org.mockito.ArgumentMatchers.any());
+  }
+
+  @Test
+  public void testPreHandle_receivesContextScopedClient()
+      throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+    // The preHandle hook should receive the same event-context-scoped client that callbacks do,
+    // and the handler's own client should be left unmutated.
+    AtomicReference<String> receivedContext = new AtomicReference<>();
+
+    EventNotificationPreHandleCallback preHandleCallback =
+        (event, client) -> {
+          receivedContext.set(client.getContext());
+          return true;
+        };
+
+    eventNotificationHandler.preHandle(preHandleCallback);
+
+    assertEquals("original_context_123", stripeClient.getContext());
+
+    String sigHeader = generateSigHeader(v1BillingMeterPayload);
+    eventNotificationHandler.handle(v1BillingMeterPayload, sigHeader);
+
+    assertEquals("event_context_456", receivedContext.get());
+    assertEquals("original_context_123", stripeClient.getContext());
+  }
+
+  @Test
+  public void testPreHandle_throwing_propagatesAndNoCallbackRuns()
+      throws NoSuchAlgorithmException, InvalidKeyException {
+    EventNotificationPreHandleCallback preHandleCallback =
+        (event, client) -> {
+          throw new RuntimeException("preHandle error!");
+        };
+
+    AtomicReference<Boolean> callbackRan = new AtomicReference<>(false);
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
+        (event, client) -> callbackRan.set(true);
+
+    eventNotificationHandler.preHandle(preHandleCallback);
+    eventNotificationHandler.onV1BillingMeterErrorReportTriggered(handler);
+
+    String sigHeader = generateSigHeader(v1BillingMeterPayload);
+
+    RuntimeException exception =
+        assertThrows(
+            RuntimeException.class,
+            () -> eventNotificationHandler.handle(v1BillingMeterPayload, sigHeader));
+    assertEquals("preHandle error!", exception.getMessage());
+    assertTrue(!callbackRan.get());
+  }
+
+  @SuppressWarnings("unchecked")
+  @Test
+  public void testPreHandle_cannotRegisterAfterHandling()
+      throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+    eventNotificationHandler.onV1BillingMeterErrorReportTriggered(
+        mock(EventNotificationCallback.class));
+
+    String sigHeader = generateSigHeader(v1BillingMeterPayload);
+    eventNotificationHandler.handle(v1BillingMeterPayload, sigHeader);
+
+    IllegalStateException exception =
+        assertThrows(
+            IllegalStateException.class,
+            () ->
+                eventNotificationHandler.preHandle(mock(EventNotificationPreHandleCallback.class)));
+
+    assertTrue(
+        exception
+            .getMessage()
+            .contains(
+                "Cannot register new callbacks after an event has been handled. This is indicative of a"
+                    + " bug."));
+  }
+
+  @Test
+  public void testPreHandle_cannotRegisterTwice() {
+    eventNotificationHandler.preHandle(mock(EventNotificationPreHandleCallback.class));
+
+    IllegalArgumentException exception =
+        assertThrows(
+            IllegalArgumentException.class,
+            () ->
+                eventNotificationHandler.preHandle(mock(EventNotificationPreHandleCallback.class)));
+
+    assertTrue(exception.getMessage().contains("already registered"));
+  }
+
+  @Test
+  public void testPreHandle_returnsConcreteHandlerType() {
+    // preHandle should return the concrete handler type for chaining, just like the generated
+    // on* methods.
+    StripeEventNotificationHandler returned =
+        eventNotificationHandler.preHandle((event, client) -> true);
+
+    assertEquals(eventNotificationHandler, returned);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Test
+  public void testWithoutVerification_preHandleGatesCallback() {
+    // The preHandle hook should also gate StripeEventNotificationHandlerWithoutVerification.
+    StripeEventNotificationHandlerWithoutVerification handler =
+        StripeEventNotificationHandler.withoutVerification(stripeClient, fallbackCallback);
+
+    EventNotificationPreHandleCallback preHandleCallback =
+        mock(EventNotificationPreHandleCallback.class);
+    when(preHandleCallback.process(
+            org.mockito.ArgumentMatchers.any(), org.mockito.ArgumentMatchers.any()))
+        .thenReturn(false);
+
+    EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> callback =
+        mock(EventNotificationCallback.class);
+
+    handler.preHandle(preHandleCallback);
+    handler.onV1BillingMeterErrorReportTriggered(callback);
+
+    handler.handle(v1BillingMeterPayload);
+
+    verify(callback, never())
+        .process(org.mockito.ArgumentMatchers.any(), org.mockito.ArgumentMatchers.any());
+    verify(fallbackCallback, never())
+        .process(
+            org.mockito.ArgumentMatchers.any(),
+            org.mockito.ArgumentMatchers.any(),
+            org.mockito.ArgumentMatchers.any());
   }
 }

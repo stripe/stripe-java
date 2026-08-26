@@ -7173,6 +7173,10 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName("blik_payments")
         BlikPayments blikPayments;
 
+        /** Allow the merchant to process recurring BLIK payments. */
+        @SerializedName("blik_recurring_payments")
+        BlikRecurringPayments blikRecurringPayments;
+
         /** Allow the merchant to process Boleto payments. */
         @SerializedName("boleto_payments")
         BoletoPayments boletoPayments;
@@ -7334,6 +7338,7 @@ public class AccountCreateParams extends ApiRequestParams {
             BacsDebitPayments bacsDebitPayments,
             BancontactPayments bancontactPayments,
             BlikPayments blikPayments,
+            BlikRecurringPayments blikRecurringPayments,
             BoletoPayments boletoPayments,
             CardPayments cardPayments,
             CartesBancairesPayments cartesBancairesPayments,
@@ -7380,6 +7385,7 @@ public class AccountCreateParams extends ApiRequestParams {
           this.bacsDebitPayments = bacsDebitPayments;
           this.bancontactPayments = bancontactPayments;
           this.blikPayments = blikPayments;
+          this.blikRecurringPayments = blikRecurringPayments;
           this.boletoPayments = boletoPayments;
           this.cardPayments = cardPayments;
           this.cartesBancairesPayments = cartesBancairesPayments;
@@ -7442,6 +7448,8 @@ public class AccountCreateParams extends ApiRequestParams {
           private BancontactPayments bancontactPayments;
 
           private BlikPayments blikPayments;
+
+          private BlikRecurringPayments blikRecurringPayments;
 
           private BoletoPayments boletoPayments;
 
@@ -7528,6 +7536,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 this.bacsDebitPayments,
                 this.bancontactPayments,
                 this.blikPayments,
+                this.blikRecurringPayments,
                 this.boletoPayments,
                 this.cardPayments,
                 this.cartesBancairesPayments,
@@ -7641,6 +7650,14 @@ public class AccountCreateParams extends ApiRequestParams {
           public Builder setBlikPayments(
               AccountCreateParams.Configuration.Merchant.Capabilities.BlikPayments blikPayments) {
             this.blikPayments = blikPayments;
+            return this;
+          }
+
+          /** Allow the merchant to process recurring BLIK payments. */
+          public Builder setBlikRecurringPayments(
+              AccountCreateParams.Configuration.Merchant.Capabilities.BlikRecurringPayments
+                  blikRecurringPayments) {
+            this.blikRecurringPayments = blikRecurringPayments;
             return this;
           }
 
@@ -10477,6 +10494,263 @@ public class AccountCreateParams extends ApiRequestParams {
                  * first `put/putAll` call, and subsequent calls add additional key/value pairs to
                  * the original map. See {@link
                  * AccountCreateParams.Configuration.Merchant.Capabilities.BlikPayments.Protections.PspMigration#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** <strong>Required.</strong> To request a protection, pass true. */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BlikRecurringPayments {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
+           * <strong>Required.</strong> To request a new Capability for an account, pass true. There
+           * can be a delay before the requested Capability becomes active.
+           */
+          @SerializedName("requested")
+          Boolean requested;
+
+          private BlikRecurringPayments(
+              Map<String, Object> extraParams, Protections protections, Boolean requested) {
+            this.extraParams = extraParams;
+            this.protections = protections;
+            this.requested = requested;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Protections protections;
+
+            private Boolean requested;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Configuration.Merchant.Capabilities.BlikRecurringPayments
+                build() {
+              return new AccountCreateParams.Configuration.Merchant.Capabilities
+                  .BlikRecurringPayments(this.extraParams, this.protections, this.requested);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Merchant.Capabilities.BlikRecurringPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.Merchant.Capabilities.BlikRecurringPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
+            public Builder setProtections(
+                AccountCreateParams.Configuration.Merchant.Capabilities.BlikRecurringPayments
+                        .Protections
+                    protections) {
+              this.protections = protections;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            public Builder setRequested(Boolean requested) {
+              this.requested = requested;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            private Protections(Map<String, Object> extraParams, PspMigration pspMigration) {
+              this.extraParams = extraParams;
+              this.pspMigration = pspMigration;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private PspMigration pspMigration;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Merchant.Capabilities.BlikRecurringPayments
+                      .Protections
+                  build() {
+                return new AccountCreateParams.Configuration.Merchant.Capabilities
+                    .BlikRecurringPayments.Protections(this.extraParams, this.pspMigration);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Merchant.Capabilities.BlikRecurringPayments.Protections#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Merchant.Capabilities.BlikRecurringPayments.Protections#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+              public Builder setPspMigration(
+                  AccountCreateParams.Configuration.Merchant.Capabilities.BlikRecurringPayments
+                          .Protections.PspMigration
+                      pspMigration) {
+                this.pspMigration = pspMigration;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** <strong>Required.</strong> To request a protection, pass true. */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private PspMigration(Map<String, Object> extraParams, Boolean requested) {
+                this.extraParams = extraParams;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Configuration.Merchant.Capabilities.BlikRecurringPayments
+                        .Protections.PspMigration
+                    build() {
+                  return new AccountCreateParams.Configuration.Merchant.Capabilities
+                      .BlikRecurringPayments.Protections.PspMigration(
+                      this.extraParams, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Configuration.Merchant.Capabilities.BlikRecurringPayments.Protections.PspMigration#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Configuration.Merchant.Capabilities.BlikRecurringPayments.Protections.PspMigration#extraParams}
                  * for the field documentation.
                  */
                 public Builder putAllExtraParam(Map<String, Object> map) {

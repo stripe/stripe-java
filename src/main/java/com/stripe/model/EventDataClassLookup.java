@@ -44,6 +44,7 @@ public final class EventDataClassLookup {
     classLookup.put(
         "customer_cash_balance_transaction", com.stripe.model.CustomerCashBalanceTransaction.class);
     classLookup.put("customer_session", com.stripe.model.CustomerSession.class);
+    classLookup.put("customer_tax_exemption", com.stripe.model.CustomerTaxExemption.class);
     classLookup.put("discount", com.stripe.model.Discount.class);
     classLookup.put("dispute", com.stripe.model.Dispute.class);
     classLookup.put("ephemeral_key", com.stripe.model.EphemeralKey.class);

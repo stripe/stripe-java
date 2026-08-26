@@ -21,6 +21,10 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("cardholder")
   String cardholder;
 
+  /** The crypto wallet to attach this card to for Bridge integration. */
+  @SerializedName("crypto_wallet")
+  CryptoWallet cryptoWallet;
+
   /** <strong>Required.</strong> The currency for the card. */
   @SerializedName("currency")
   String currency;
@@ -132,6 +136,7 @@ public class CardCreateParams extends ApiRequestParams {
 
   private CardCreateParams(
       String cardholder,
+      CryptoWallet cryptoWallet,
       String currency,
       Long expMonth,
       Long expYear,
@@ -151,6 +156,7 @@ public class CardCreateParams extends ApiRequestParams {
       Status status,
       Type type) {
     this.cardholder = cardholder;
+    this.cryptoWallet = cryptoWallet;
     this.currency = currency;
     this.expMonth = expMonth;
     this.expYear = expYear;
@@ -177,6 +183,8 @@ public class CardCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private String cardholder;
+
+    private CryptoWallet cryptoWallet;
 
     private String currency;
 
@@ -218,6 +226,7 @@ public class CardCreateParams extends ApiRequestParams {
     public CardCreateParams build() {
       return new CardCreateParams(
           this.cardholder,
+          this.cryptoWallet,
           this.currency,
           this.expMonth,
           this.expYear,
@@ -244,6 +253,12 @@ public class CardCreateParams extends ApiRequestParams {
      */
     public Builder setCardholder(String cardholder) {
       this.cardholder = cardholder;
+      return this;
+    }
+
+    /** The crypto wallet to attach this card to for Bridge integration. */
+    public Builder setCryptoWallet(CardCreateParams.CryptoWallet cryptoWallet) {
+      this.cryptoWallet = cryptoWallet;
       return this;
     }
 
@@ -447,6 +462,131 @@ public class CardCreateParams extends ApiRequestParams {
     public Builder setType(CardCreateParams.Type type) {
       this.type = type;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CryptoWallet {
+    /** The public address of the crypto wallet. */
+    @SerializedName("address")
+    String address;
+
+    /** <strong>Required.</strong> The blockchain network the wallet is on. */
+    @SerializedName("chain")
+    String chain;
+
+    /** <strong>Required.</strong> The cryptocurrency held in the wallet. */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The type of wallet (standard or bridge_wallet). */
+    @SerializedName("type")
+    Type type;
+
+    private CryptoWallet(
+        String address, String chain, String currency, Map<String, Object> extraParams, Type type) {
+      this.address = address;
+      this.chain = chain;
+      this.currency = currency;
+      this.extraParams = extraParams;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String address;
+
+      private String chain;
+
+      private String currency;
+
+      private Map<String, Object> extraParams;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CardCreateParams.CryptoWallet build() {
+        return new CardCreateParams.CryptoWallet(
+            this.address, this.chain, this.currency, this.extraParams, this.type);
+      }
+
+      /** The public address of the crypto wallet. */
+      public Builder setAddress(String address) {
+        this.address = address;
+        return this;
+      }
+
+      /** <strong>Required.</strong> The blockchain network the wallet is on. */
+      public Builder setChain(String chain) {
+        this.chain = chain;
+        return this;
+      }
+
+      /** <strong>Required.</strong> The cryptocurrency held in the wallet. */
+      public Builder setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CardCreateParams.CryptoWallet#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CardCreateParams.CryptoWallet#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The type of wallet (standard or bridge_wallet). */
+      public Builder setType(CardCreateParams.CryptoWallet.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("bridge_wallet")
+      BRIDGE_WALLET("bridge_wallet"),
+
+      @SerializedName("standard")
+      STANDARD("standard");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
+      }
     }
   }
 

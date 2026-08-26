@@ -618,6 +618,9 @@ public class BankAccount extends ApiResource
       @SerializedName("code")
       String code;
 
+      @SerializedName("details")
+      Details details;
+
       /**
        * An informative message that indicates the error type and provides additional details about
        * the error.
@@ -631,6 +634,19 @@ public class BankAccount extends ApiResource
        */
       @SerializedName("requirement")
       String requirement;
+
+      /**
+       * For more details about Details, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Details extends StripeObject {
+        /** The rejection code as received from our payment method partner. */
+        @SerializedName("partner_rejection_code")
+        String partnerRejectionCode;
+      }
     }
   }
 
@@ -747,6 +763,9 @@ public class BankAccount extends ApiResource
       @SerializedName("code")
       String code;
 
+      @SerializedName("details")
+      Details details;
+
       /**
        * An informative message that indicates the error type and provides additional details about
        * the error.
@@ -760,6 +779,19 @@ public class BankAccount extends ApiResource
        */
       @SerializedName("requirement")
       String requirement;
+
+      /**
+       * For more details about Details, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Details extends StripeObject {
+        /** The rejection code as received from our payment method partner. */
+        @SerializedName("partner_rejection_code")
+        String partnerRejectionCode;
+      }
     }
   }
 

@@ -14829,7 +14829,9 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSetupIntentsPost() throws StripeException {
     SetupIntentCreateParams params =
-        SetupIntentCreateParams.builder().addPaymentMethodType("card").build();
+        SetupIntentCreateParams.builder()
+            .addAllowedPaymentMethodType(SetupIntentCreateParams.AllowedPaymentMethodType.CARD)
+            .build();
 
     SetupIntent setupIntent = SetupIntent.create(params);
     assertNotNull(setupIntent);
@@ -14842,7 +14844,10 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.SetupIntentCreateParams params =
-        com.stripe.param.SetupIntentCreateParams.builder().addPaymentMethodType("card").build();
+        com.stripe.param.SetupIntentCreateParams.builder()
+            .addAllowedPaymentMethodType(
+                com.stripe.param.SetupIntentCreateParams.AllowedPaymentMethodType.CARD)
+            .build();
 
     com.stripe.model.SetupIntent setupIntent = client.v1().setupIntents().create(params);
     assertNotNull(setupIntent);
@@ -14855,7 +14860,10 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.SetupIntentCreateParams params =
-        com.stripe.param.SetupIntentCreateParams.builder().addPaymentMethodType("card").build();
+        com.stripe.param.SetupIntentCreateParams.builder()
+            .addAllowedPaymentMethodType(
+                com.stripe.param.SetupIntentCreateParams.AllowedPaymentMethodType.CARD)
+            .build();
 
     com.stripe.model.SetupIntent setupIntent = client.setupIntents().create(params);
     assertNotNull(setupIntent);
@@ -29512,7 +29520,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.iam.ActivityLog>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.iam.activity_log\",\"actor\":{\"type\":\"api_key\"},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"details\":{\"type\":\"api_key\"},\"id\":\"obj_123\",\"livemode\":true,\"type\":\"api_key_created\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.iam.activity_log\",\"actor\":{\"type\":\"api_key\"},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"details\":{\"type\":\"user_invite\"},\"id\":\"obj_123\",\"livemode\":true,\"type\":\"api_key_created\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.iam.ActivityLogListParams params =
@@ -29538,7 +29546,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.iam.ActivityLog.class,
-        "{\"object\":\"v2.iam.activity_log\",\"actor\":{\"type\":\"api_key\"},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"details\":{\"type\":\"api_key\"},\"id\":\"obj_123\",\"livemode\":true,\"type\":\"api_key_created\"}");
+        "{\"object\":\"v2.iam.activity_log\",\"actor\":{\"type\":\"api_key\"},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"details\":{\"type\":\"user_invite\"},\"id\":\"obj_123\",\"livemode\":true,\"type\":\"api_key_created\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.iam.ActivityLog activityLog =

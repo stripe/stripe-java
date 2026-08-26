@@ -13,8 +13,8 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.PaymentRecordCreateParams;
 import com.stripe.param.PaymentRecordListParams;
+import com.stripe.param.PaymentRecordReportDisputeParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptCanceledParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptFailedParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptGuaranteedParams;
@@ -116,11 +116,13 @@ public final class PaymentRecordService extends ApiService {
     return this.request(request, new TypeToken<StripeSearchResult<PaymentRecord>>() {}.getType());
   }
   /** Report that the most recent payment attempt on the specified Payment Record was disputed. */
-  public PaymentRecord create(String id, PaymentRecordCreateParams params) throws StripeException {
-    return create(id, params, (RequestOptions) null);
+  public PaymentRecord reportDispute(String id, PaymentRecordReportDisputeParams params)
+      throws StripeException {
+    return reportDispute(id, params, (RequestOptions) null);
   }
   /** Report that the most recent payment attempt on the specified Payment Record was disputed. */
-  public PaymentRecord create(String id, PaymentRecordCreateParams params, RequestOptions options)
+  public PaymentRecord reportDispute(
+      String id, PaymentRecordReportDisputeParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format("/v1/payment_records/%s/report_dispute", ApiResource.urlEncodeId(id));
