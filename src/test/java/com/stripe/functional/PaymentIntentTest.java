@@ -39,7 +39,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     final Map<String, Object> params = new HashMap<>();
     params.put("amount", 1234);
     params.put("currency", "usd");
-    params.put("payment_method_types", paymentMethodTypes);
+    params.put("allowed_payment_method_types", paymentMethodTypes);
 
     final PaymentIntent paymentIntent = PaymentIntent.create(params);
 
