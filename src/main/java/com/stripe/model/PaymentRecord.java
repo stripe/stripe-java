@@ -9,8 +9,8 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.PaymentRecordCreateParams;
 import com.stripe.param.PaymentRecordListParams;
+import com.stripe.param.PaymentRecordReportDisputeParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptCanceledParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptFailedParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptGuaranteedParams;
@@ -141,44 +141,6 @@ public class PaymentRecord extends ApiResource implements HasId {
   @SerializedName("shipping_details")
   ShippingDetails shippingDetails;
 
-  /** Report that the most recent payment attempt on the specified Payment Record was disputed. */
-  public PaymentRecord create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Report that the most recent payment attempt on the specified Payment Record was disputed. */
-  public PaymentRecord create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/payment_records/%s/report_dispute", ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
-    return getResponseGetter().request(request, PaymentRecord.class);
-  }
-
-  /** Report that the most recent payment attempt on the specified Payment Record was disputed. */
-  public PaymentRecord create(PaymentRecordCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Report that the most recent payment attempt on the specified Payment Record was disputed. */
-  public PaymentRecord create(PaymentRecordCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/payment_records/%s/report_dispute", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getResponseGetter().request(request, PaymentRecord.class);
-  }
-
   /** List all the Payment Records for a given merchant. */
   public static PaymentRecordCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -212,6 +174,45 @@ public class PaymentRecord extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, PaymentRecordCollection.class);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was disputed. */
+  public PaymentRecord reportDispute(Map<String, Object> params) throws StripeException {
+    return reportDispute(params, (RequestOptions) null);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was disputed. */
+  public PaymentRecord reportDispute(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_records/%s/report_dispute", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was disputed. */
+  public PaymentRecord reportDispute(PaymentRecordReportDisputeParams params)
+      throws StripeException {
+    return reportDispute(params, (RequestOptions) null);
+  }
+
+  /** Report that the most recent payment attempt on the specified Payment Record was disputed. */
+  public PaymentRecord reportDispute(
+      PaymentRecordReportDisputeParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_records/%s/report_dispute", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, PaymentRecord.class);
   }
 
   /**
@@ -1048,9 +1049,6 @@ public class PaymentRecord extends ApiResource implements HasId {
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
-
-    @SerializedName("sequra")
-    Sequra sequra;
 
     @SerializedName("shopeepay")
     Shopeepay shopeepay;
@@ -3779,19 +3777,6 @@ public class PaymentRecord extends ApiResource implements HasId {
        */
       @SerializedName("mandate")
       String mandate;
-    }
-
-    /**
-     * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Sequra extends StripeObject {
-      /** The SeQura transaction ID associated with this payment. */
-      @SerializedName("transaction_id")
-      String transactionId;
     }
 
     /**

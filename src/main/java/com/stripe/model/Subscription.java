@@ -2262,7 +2262,78 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Billie extends StripeObject {}
+      public static class Billie extends StripeObject {
+        @SerializedName("company_details")
+        CompanyDetails companyDetails;
+
+        /**
+         * For more details about CompanyDetails, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CompanyDetails extends StripeObject {
+          @SerializedName("registered_address")
+          RegisteredAddress registeredAddress;
+
+          /** Company or entity name. */
+          @SerializedName("registered_name")
+          String registeredName;
+
+          /** The official registration number for the given registration type. */
+          @SerializedName("registration_number")
+          String registrationNumber;
+
+          /**
+           * Type of registration the company or entity holds in their registered country.
+           *
+           * <p>One of {@code ch_ein}, {@code de_hrb}, {@code dk_cvr}, {@code es_cif}, {@code
+           * fi_tunnus}, {@code fr_siren}, {@code fr_siret}, {@code it_rea}, {@code nl_kvk}, {@code
+           * no_org_number}, {@code no_pno}, {@code se_org_number}, {@code se_pno}, or {@code
+           * uk_crn}.
+           */
+          @SerializedName("registration_type")
+          String registrationType;
+
+          /** VAT ID number. */
+          @SerializedName("vat")
+          String vat;
+
+          /**
+           * For more details about RegisteredAddress, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class RegisteredAddress extends StripeObject {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            String city;
+
+            /** Two-letter country code. */
+            @SerializedName("country")
+            String country;
+
+            /** Address line 1 (for example, street, PO Box, or company name). */
+            @SerializedName("line1")
+            String line1;
+
+            /** Address line 2 (for example, apartment, suite, unit, or building). */
+            @SerializedName("line2")
+            String line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            String postalCode;
+
+            /** State, county, province, or region. */
+            @SerializedName("state")
+            String state;
+          }
+        }
+      }
 
       /**
        * For more details about Bizum, please refer to the <a href="https://docs.stripe.com/api">API
@@ -2759,13 +2830,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("billing_cycle_anchor")
     Long billingCycleAnchor;
-
-    /**
-     * Indicates whether this subscription should cancel at the end of the current period if the
-     * update is applied.
-     */
-    @SerializedName("cancel_at_period_end")
-    Boolean cancelAtPeriodEnd;
 
     /**
      * The pending subscription-level discount that will be applied when the pending update is

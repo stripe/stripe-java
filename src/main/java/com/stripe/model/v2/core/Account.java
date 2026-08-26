@@ -2269,6 +2269,10 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("blik_payments")
         BlikPayments blikPayments;
 
+        /** Allow the merchant to process recurring BLIK payments. */
+        @SerializedName("blik_recurring_payments")
+        BlikRecurringPayments blikRecurringPayments;
+
         /** Allow the merchant to process Boleto payments. */
         @SerializedName("boleto_payments")
         BoletoPayments boletoPayments;
@@ -3293,6 +3297,101 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Merchant.Capabilities.BlikPayments.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+             * requirements_pending_verification}, {@code restricted_other}, {@code
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
+        }
+
+        /** Allow the merchant to process recurring BLIK payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BlikRecurringPayments extends StripeObject {
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<Account.Configuration.Merchant.Capabilities.BlikRecurringPayments.StatusDetail>
+              statusDetails;
 
           /**
            * Protections applied to this capability, keyed by protection type (e.g.

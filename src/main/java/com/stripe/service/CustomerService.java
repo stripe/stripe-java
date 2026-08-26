@@ -364,6 +364,10 @@ public final class CustomerService extends ApiService {
     return new com.stripe.service.CustomerPaymentSourceService(this.getResponseGetter());
   }
 
+  public com.stripe.service.CustomerTaxExemptionService taxExemptions() {
+    return new com.stripe.service.CustomerTaxExemptionService(this.getResponseGetter());
+  }
+
   public com.stripe.service.CustomerTaxIdService taxIds() {
     return new com.stripe.service.CustomerTaxIdService(this.getResponseGetter());
   }

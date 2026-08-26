@@ -25542,9 +25542,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
 
-      @SerializedName("sequra")
-      SEQURA("sequra"),
-
       @SerializedName("shopeepay")
       SHOPEEPAY("shopeepay"),
 
@@ -29734,6 +29731,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("capture_method")
       ApiRequestParams.EnumParam captureMethod;
 
+      /** Registration details about the buyer's organization. */
+      @SerializedName("company_details")
+      Object companyDetails;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -29743,9 +29744,19 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Billie(ApiRequestParams.EnumParam captureMethod, Map<String, Object> extraParams) {
+      /** An identifier or reference that this payment corresponds to. */
+      @SerializedName("reference")
+      Object reference;
+
+      private Billie(
+          ApiRequestParams.EnumParam captureMethod,
+          Object companyDetails,
+          Map<String, Object> extraParams,
+          Object reference) {
         this.captureMethod = captureMethod;
+        this.companyDetails = companyDetails;
         this.extraParams = extraParams;
+        this.reference = reference;
       }
 
       public static Builder builder() {
@@ -29755,12 +29766,16 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public static class Builder {
         private ApiRequestParams.EnumParam captureMethod;
 
+        private Object companyDetails;
+
         private Map<String, Object> extraParams;
+
+        private Object reference;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.Billie build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.Billie(
-              this.captureMethod, this.extraParams);
+              this.captureMethod, this.companyDetails, this.extraParams, this.reference);
         }
 
         /**
@@ -29794,6 +29809,19 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Registration details about the buyer's organization. */
+        public Builder setCompanyDetails(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails companyDetails) {
+          this.companyDetails = companyDetails;
+          return this;
+        }
+
+        /** Registration details about the buyer's organization. */
+        public Builder setCompanyDetails(EmptyParam companyDetails) {
+          this.companyDetails = companyDetails;
+          return this;
+        }
+
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
@@ -29820,6 +29848,433 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+
+        /** An identifier or reference that this payment corresponds to. */
+        public Builder setReference(String reference) {
+          this.reference = reference;
+          return this;
+        }
+
+        /** An identifier or reference that this payment corresponds to. */
+        public Builder setReference(EmptyParam reference) {
+          this.reference = reference;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CompanyDetails {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The address the company or entity is registered with. */
+        @SerializedName("registered_address")
+        Object registeredAddress;
+
+        /** Company or entity name. */
+        @SerializedName("registered_name")
+        Object registeredName;
+
+        /** The official registration number for the given registration type. */
+        @SerializedName("registration_number")
+        Object registrationNumber;
+
+        /** Type of registration the company or entity holds in their registered country. */
+        @SerializedName("registration_type")
+        ApiRequestParams.EnumParam registrationType;
+
+        /** VAT id number. */
+        @SerializedName("vat")
+        Object vat;
+
+        private CompanyDetails(
+            Map<String, Object> extraParams,
+            Object registeredAddress,
+            Object registeredName,
+            Object registrationNumber,
+            ApiRequestParams.EnumParam registrationType,
+            Object vat) {
+          this.extraParams = extraParams;
+          this.registeredAddress = registeredAddress;
+          this.registeredName = registeredName;
+          this.registrationNumber = registrationNumber;
+          this.registrationType = registrationType;
+          this.vat = vat;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object registeredAddress;
+
+          private Object registeredName;
+
+          private Object registrationNumber;
+
+          private ApiRequestParams.EnumParam registrationType;
+
+          private Object vat;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails build() {
+            return new PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails(
+                this.extraParams,
+                this.registeredAddress,
+                this.registeredName,
+                this.registrationNumber,
+                this.registrationType,
+                this.vat);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The address the company or entity is registered with. */
+          public Builder setRegisteredAddress(
+              PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails.RegisteredAddress
+                  registeredAddress) {
+            this.registeredAddress = registeredAddress;
+            return this;
+          }
+
+          /** The address the company or entity is registered with. */
+          public Builder setRegisteredAddress(EmptyParam registeredAddress) {
+            this.registeredAddress = registeredAddress;
+            return this;
+          }
+
+          /** Company or entity name. */
+          public Builder setRegisteredName(String registeredName) {
+            this.registeredName = registeredName;
+            return this;
+          }
+
+          /** Company or entity name. */
+          public Builder setRegisteredName(EmptyParam registeredName) {
+            this.registeredName = registeredName;
+            return this;
+          }
+
+          /** The official registration number for the given registration type. */
+          public Builder setRegistrationNumber(String registrationNumber) {
+            this.registrationNumber = registrationNumber;
+            return this;
+          }
+
+          /** The official registration number for the given registration type. */
+          public Builder setRegistrationNumber(EmptyParam registrationNumber) {
+            this.registrationNumber = registrationNumber;
+            return this;
+          }
+
+          /** Type of registration the company or entity holds in their registered country. */
+          public Builder setRegistrationType(
+              PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails.RegistrationType
+                  registrationType) {
+            this.registrationType = registrationType;
+            return this;
+          }
+
+          /** Type of registration the company or entity holds in their registered country. */
+          public Builder setRegistrationType(EmptyParam registrationType) {
+            this.registrationType = registrationType;
+            return this;
+          }
+
+          /** VAT id number. */
+          public Builder setVat(String vat) {
+            this.vat = vat;
+            return this;
+          }
+
+          /** VAT id number. */
+          public Builder setVat(EmptyParam vat) {
+            this.vat = vat;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class RegisteredAddress {
+          /** City, district, suburb, town, or village. */
+          @SerializedName("city")
+          Object city;
+
+          /** Two-letter country code. */
+          @SerializedName("country")
+          Object country;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Address line 1 (e.g., street, PO Box, or company name). */
+          @SerializedName("line1")
+          Object line1;
+
+          /** Address line 2 (e.g., apartment, suite, unit, or building). */
+          @SerializedName("line2")
+          Object line2;
+
+          /** ZIP or postal code. */
+          @SerializedName("postal_code")
+          Object postalCode;
+
+          /** State, county, province, or region. */
+          @SerializedName("state")
+          Object state;
+
+          private RegisteredAddress(
+              Object city,
+              Object country,
+              Map<String, Object> extraParams,
+              Object line1,
+              Object line2,
+              Object postalCode,
+              Object state) {
+            this.city = city;
+            this.country = country;
+            this.extraParams = extraParams;
+            this.line1 = line1;
+            this.line2 = line2;
+            this.postalCode = postalCode;
+            this.state = state;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Object city;
+
+            private Object country;
+
+            private Map<String, Object> extraParams;
+
+            private Object line1;
+
+            private Object line2;
+
+            private Object postalCode;
+
+            private Object state;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails
+                    .RegisteredAddress
+                build() {
+              return new PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails
+                  .RegisteredAddress(
+                  this.city,
+                  this.country,
+                  this.extraParams,
+                  this.line1,
+                  this.line2,
+                  this.postalCode,
+                  this.state);
+            }
+
+            /** City, district, suburb, town, or village. */
+            public Builder setCity(String city) {
+              this.city = city;
+              return this;
+            }
+
+            /** City, district, suburb, town, or village. */
+            public Builder setCity(EmptyParam city) {
+              this.city = city;
+              return this;
+            }
+
+            /** Two-letter country code. */
+            public Builder setCountry(String country) {
+              this.country = country;
+              return this;
+            }
+
+            /** Two-letter country code. */
+            public Builder setCountry(EmptyParam country) {
+              this.country = country;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails.RegisteredAddress#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails.RegisteredAddress#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Address line 1 (e.g., street, PO Box, or company name). */
+            public Builder setLine1(String line1) {
+              this.line1 = line1;
+              return this;
+            }
+
+            /** Address line 1 (e.g., street, PO Box, or company name). */
+            public Builder setLine1(EmptyParam line1) {
+              this.line1 = line1;
+              return this;
+            }
+
+            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            public Builder setLine2(String line2) {
+              this.line2 = line2;
+              return this;
+            }
+
+            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            public Builder setLine2(EmptyParam line2) {
+              this.line2 = line2;
+              return this;
+            }
+
+            /** ZIP or postal code. */
+            public Builder setPostalCode(String postalCode) {
+              this.postalCode = postalCode;
+              return this;
+            }
+
+            /** ZIP or postal code. */
+            public Builder setPostalCode(EmptyParam postalCode) {
+              this.postalCode = postalCode;
+              return this;
+            }
+
+            /** State, county, province, or region. */
+            public Builder setState(String state) {
+              this.state = state;
+              return this;
+            }
+
+            /** State, county, province, or region. */
+            public Builder setState(EmptyParam state) {
+              this.state = state;
+              return this;
+            }
+          }
+        }
+
+        public enum RegistrationType implements ApiRequestParams.EnumParam {
+          @SerializedName("ch_ein")
+          CH_EIN("ch_ein"),
+
+          @SerializedName("de_hrb")
+          DE_HRB("de_hrb"),
+
+          @SerializedName("dk_cvr")
+          DK_CVR("dk_cvr"),
+
+          @SerializedName("es_cif")
+          ES_CIF("es_cif"),
+
+          @SerializedName("fi_tunnus")
+          FI_TUNNUS("fi_tunnus"),
+
+          @SerializedName("fr_siren")
+          FR_SIREN("fr_siren"),
+
+          @SerializedName("fr_siret")
+          FR_SIRET("fr_siret"),
+
+          @SerializedName("it_rea")
+          IT_REA("it_rea"),
+
+          @SerializedName("nl_kvk")
+          NL_KVK("nl_kvk"),
+
+          @SerializedName("no_org_number")
+          NO_ORG_NUMBER("no_org_number"),
+
+          @SerializedName("no_pno")
+          NO_PNO("no_pno"),
+
+          @SerializedName("se_org_number")
+          SE_ORG_NUMBER("se_org_number"),
+
+          @SerializedName("se_pno")
+          SE_PNO("se_pno"),
+
+          @SerializedName("uk_crn")
+          UK_CRN("uk_crn");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          RegistrationType(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -33111,6 +33566,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent {
       /**
+       * Greek e-invoicing data required for card-present transactions processed by merchants
+       * subject to AADE's myDATA POS compliance mandate (Governor's Decision A.1155/2023).
+       */
+      @SerializedName("aade_data")
+      AadeData aadeData;
+
+      /**
        * Controls when funds are captured from the customer's account when {@code capture_method} is
        * {@code automatic_delayed}.
        *
@@ -33197,6 +33659,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Routing routing;
 
       private CardPresent(
+          AadeData aadeData,
           CaptureBy captureBy,
           CaptureDelay captureDelay,
           CaptureMethod captureMethod,
@@ -33207,6 +33670,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           RequestMulticapture requestMulticapture,
           RequestReauthorization requestReauthorization,
           Routing routing) {
+        this.aadeData = aadeData;
         this.captureBy = captureBy;
         this.captureDelay = captureDelay;
         this.captureMethod = captureMethod;
@@ -33224,6 +33688,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private AadeData aadeData;
+
         private CaptureBy captureBy;
 
         private CaptureDelay captureDelay;
@@ -33247,6 +33713,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent(
+              this.aadeData,
               this.captureBy,
               this.captureDelay,
               this.captureMethod,
@@ -33257,6 +33724,16 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.requestMulticapture,
               this.requestReauthorization,
               this.routing);
+        }
+
+        /**
+         * Greek e-invoicing data required for card-present transactions processed by merchants
+         * subject to AADE's myDATA POS compliance mandate (Governor's Decision A.1155/2023).
+         */
+        public Builder setAadeData(
+            PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.AadeData aadeData) {
+          this.aadeData = aadeData;
+          return this;
         }
 
         /**
@@ -33392,6 +33869,225 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.Routing routing) {
           this.routing = routing;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AadeData {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The canonical string that was signed by the e-invoicing provider to produce {@code
+         * signed_mark}, formatted per Appendix A of A.1155/2023. Required when {@code mode} is
+         * {@code standard}.
+         */
+        @SerializedName("mark_data")
+        Object markData;
+
+        /** <strong>Required.</strong> The e-invoicing mode under which the mark was generated. */
+        @SerializedName("mode")
+        Mode mode;
+
+        /**
+         * The AADE-assigned approval number of the e-invoicing provider that generated the mark.
+         * Required when {@code mode} is {@code standard}.
+         */
+        @SerializedName("provider_id")
+        Long providerId;
+
+        /**
+         * The cryptographic signature returned by the e-invoicing provider for this transaction,
+         * hex-encoded. Required when {@code mode} is {@code standard}.
+         */
+        @SerializedName("signed_mark")
+        Object signedMark;
+
+        /**
+         * The reason for entering autonomous mode. Required when {@code mode} is {@code
+         * autonomous}.
+         */
+        @SerializedName("unbound_pos")
+        UnboundPos unboundPos;
+
+        private AadeData(
+            Map<String, Object> extraParams,
+            Object markData,
+            Mode mode,
+            Long providerId,
+            Object signedMark,
+            UnboundPos unboundPos) {
+          this.extraParams = extraParams;
+          this.markData = markData;
+          this.mode = mode;
+          this.providerId = providerId;
+          this.signedMark = signedMark;
+          this.unboundPos = unboundPos;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object markData;
+
+          private Mode mode;
+
+          private Long providerId;
+
+          private Object signedMark;
+
+          private UnboundPos unboundPos;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.AadeData build() {
+            return new PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.AadeData(
+                this.extraParams,
+                this.markData,
+                this.mode,
+                this.providerId,
+                this.signedMark,
+                this.unboundPos);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.AadeData#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.AadeData#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The canonical string that was signed by the e-invoicing provider to produce {@code
+           * signed_mark}, formatted per Appendix A of A.1155/2023. Required when {@code mode} is
+           * {@code standard}.
+           */
+          public Builder setMarkData(String markData) {
+            this.markData = markData;
+            return this;
+          }
+
+          /**
+           * The canonical string that was signed by the e-invoicing provider to produce {@code
+           * signed_mark}, formatted per Appendix A of A.1155/2023. Required when {@code mode} is
+           * {@code standard}.
+           */
+          public Builder setMarkData(EmptyParam markData) {
+            this.markData = markData;
+            return this;
+          }
+
+          /** <strong>Required.</strong> The e-invoicing mode under which the mark was generated. */
+          public Builder setMode(
+              PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.AadeData.Mode mode) {
+            this.mode = mode;
+            return this;
+          }
+
+          /**
+           * The AADE-assigned approval number of the e-invoicing provider that generated the mark.
+           * Required when {@code mode} is {@code standard}.
+           */
+          public Builder setProviderId(Long providerId) {
+            this.providerId = providerId;
+            return this;
+          }
+
+          /**
+           * The cryptographic signature returned by the e-invoicing provider for this transaction,
+           * hex-encoded. Required when {@code mode} is {@code standard}.
+           */
+          public Builder setSignedMark(String signedMark) {
+            this.signedMark = signedMark;
+            return this;
+          }
+
+          /**
+           * The cryptographic signature returned by the e-invoicing provider for this transaction,
+           * hex-encoded. Required when {@code mode} is {@code standard}.
+           */
+          public Builder setSignedMark(EmptyParam signedMark) {
+            this.signedMark = signedMark;
+            return this;
+          }
+
+          /**
+           * The reason for entering autonomous mode. Required when {@code mode} is {@code
+           * autonomous}.
+           */
+          public Builder setUnboundPos(
+              PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.AadeData.UnboundPos
+                  unboundPos) {
+            this.unboundPos = unboundPos;
+            return this;
+          }
+        }
+
+        public enum Mode implements ApiRequestParams.EnumParam {
+          @SerializedName("autonomous")
+          AUTONOMOUS("autonomous"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Mode(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum UnboundPos implements ApiRequestParams.EnumParam {
+          @SerializedName("interconnection_loss")
+          INTERCONNECTION_LOSS("interconnection_loss"),
+
+          @SerializedName("lock")
+          LOCK("lock"),
+
+          @SerializedName("replacement_cash_system")
+          REPLACEMENT_CASH_SYSTEM("replacement_cash_system");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          UnboundPos(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -54930,9 +55626,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
-
-    @SerializedName("sequra")
-    SEQURA("sequra"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),

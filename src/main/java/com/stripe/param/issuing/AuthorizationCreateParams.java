@@ -111,6 +111,10 @@ public class AuthorizationCreateParams extends ApiRequestParams {
   @SerializedName("network_data")
   NetworkData networkData;
 
+  /** The point-of-sale initiation condition for this test authorization. */
+  @SerializedName("pos_condition")
+  PosCondition posCondition;
+
   /** Stripe’s assessment of the fraud risk for this authorization. */
   @SerializedName("risk_assessment")
   RiskAssessment riskAssessment;
@@ -146,6 +150,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
       String merchantCurrency,
       MerchantData merchantData,
       NetworkData networkData,
+      PosCondition posCondition,
       RiskAssessment riskAssessment,
       VerificationData verificationData,
       Wallet wallet) {
@@ -165,6 +170,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     this.merchantCurrency = merchantCurrency;
     this.merchantData = merchantData;
     this.networkData = networkData;
+    this.posCondition = posCondition;
     this.riskAssessment = riskAssessment;
     this.verificationData = verificationData;
     this.wallet = wallet;
@@ -207,6 +213,8 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
     private NetworkData networkData;
 
+    private PosCondition posCondition;
+
     private RiskAssessment riskAssessment;
 
     private VerificationData verificationData;
@@ -232,6 +240,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
           this.merchantCurrency,
           this.merchantData,
           this.networkData,
+          this.posCondition,
           this.riskAssessment,
           this.verificationData,
           this.wallet);
@@ -404,6 +413,12 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     /** Details about the authorization, such as identifiers, set by the card network. */
     public Builder setNetworkData(AuthorizationCreateParams.NetworkData networkData) {
       this.networkData = networkData;
+      return this;
+    }
+
+    /** The point-of-sale initiation condition for this test authorization. */
+    public Builder setPosCondition(AuthorizationCreateParams.PosCondition posCondition) {
+      this.posCondition = posCondition;
       return this;
     }
 
@@ -3921,6 +3936,39 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     private final String value;
 
     FraudDisputabilityLikelihood(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum PosCondition implements ApiRequestParams.EnumParam {
+    @SerializedName("account_verification")
+    ACCOUNT_VERIFICATION("account_verification"),
+
+    @SerializedName("card_not_present")
+    CARD_NOT_PRESENT("card_not_present"),
+
+    @SerializedName("card_present")
+    CARD_PRESENT("card_present"),
+
+    @SerializedName("e_commerce")
+    E_COMMERCE("e_commerce"),
+
+    @SerializedName("key_entered_pos")
+    KEY_ENTERED_POS("key_entered_pos"),
+
+    @SerializedName("other")
+    OTHER("other"),
+
+    @SerializedName("pin_entered")
+    PIN_ENTERED("pin_entered"),
+
+    @SerializedName("recurring_or_moto")
+    RECURRING_OR_MOTO("recurring_or_moto");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    PosCondition(String value) {
       this.value = value;
     }
   }

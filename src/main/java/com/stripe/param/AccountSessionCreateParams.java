@@ -5499,7 +5499,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** An empty list, because this embedded component has no features. */
+      /** The list of features enabled in the embedded component. */
       @SerializedName("features")
       Features features;
 
@@ -5561,7 +5561,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** An empty list, because this embedded component has no features. */
+        /** The list of features enabled in the embedded component. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.PaymentMethodSettings.Features features) {
           this.features = features;

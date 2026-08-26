@@ -1307,7 +1307,7 @@ public class Dispute extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class SmartDisputes extends StripeObject {
-    /** Evidence that could be provided to improve the SmartDisputes packet. */
+    /** Evidence that could be provided to improve the Smart Disputes packet. */
     @SerializedName("recommended_evidence")
     List<List<String>> recommendedEvidence;
 

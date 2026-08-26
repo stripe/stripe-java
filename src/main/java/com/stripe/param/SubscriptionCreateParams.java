@@ -76,7 +76,12 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("billing_mode")
   BillingMode billingMode;
 
-  /** Sets the billing schedules for the subscription. */
+  /**
+   * An array of billing schedules, which allow you to bill customers in advance for multiple
+   * service periods. Requires flexible billing mode and API version 2026-05-27.dahlia or later.
+   * Learn more about <a
+   * href="https://docs.stripe.com/billing/subscriptions/prebilling">prebilling</a>.
+   */
   @SerializedName("billing_schedules")
   List<SubscriptionCreateParams.BillingSchedule> billingSchedules;
 
@@ -2837,7 +2842,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName("applies_to")
     List<SubscriptionCreateParams.BillingSchedule.AppliesTo> appliesTo;
 
-    /** <strong>Required.</strong> The end date for the billing schedule. */
+    /**
+     * <strong>Required.</strong> The end date for the billing schedule. You must not set this
+     * earlier than current period end for every applicable subscription item.
+     */
     @SerializedName("bill_until")
     BillUntil billUntil;
 
@@ -2914,7 +2922,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The end date for the billing schedule. */
+      /**
+       * <strong>Required.</strong> The end date for the billing schedule. You must not set this
+       * earlier than current period end for every applicable subscription item.
+       */
       public Builder setBillUntil(SubscriptionCreateParams.BillingSchedule.BillUntil billUntil) {
         this.billUntil = billUntil;
         return this;
@@ -6494,6 +6505,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Object bancontact;
 
       /**
+       * This sub-hash contains details about the Billie payment method options to pass to the
+       * invoice’s PaymentIntent.
+       */
+      @SerializedName("billie")
+      Object billie;
+
+      /**
        * This sub-hash contains details about the Bizum payment method options to pass to the
        * invoice’s PaymentIntent.
        */
@@ -6596,6 +6614,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       private PaymentMethodOptions(
           Object acssDebit,
           Object bancontact,
+          Object billie,
           Object bizum,
           Object blik,
           Object card,
@@ -6612,6 +6631,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           Object wechatPay) {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
+        this.billie = billie;
         this.bizum = bizum;
         this.blik = blik;
         this.card = card;
@@ -6636,6 +6656,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         private Object acssDebit;
 
         private Object bancontact;
+
+        private Object billie;
 
         private Object bizum;
 
@@ -6670,6 +6692,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions(
               this.acssDebit,
               this.bancontact,
+              this.billie,
               this.bizum,
               this.blik,
               this.card,
@@ -6721,6 +6744,25 @@ public class SubscriptionCreateParams extends ApiRequestParams {
          */
         public Builder setBancontact(EmptyParam bancontact) {
           this.bancontact = bancontact;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Billie payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setBillie(
+            SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie billie) {
+          this.billie = billie;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Billie payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setBillie(EmptyParam billie) {
+          this.billie = billie;
           return this;
         }
 
@@ -7315,6 +7357,455 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
           PreferredLanguage(String value) {
             this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Billie {
+        /** Registration details about the buyer's organization. */
+        @SerializedName("company_details")
+        Object companyDetails;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Billie(Object companyDetails, Map<String, Object> extraParams) {
+          this.companyDetails = companyDetails;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object companyDetails;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie build() {
+            return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie(
+                this.companyDetails, this.extraParams);
+          }
+
+          /** Registration details about the buyer's organization. */
+          public Builder setCompanyDetails(
+              SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails
+                  companyDetails) {
+            this.companyDetails = companyDetails;
+            return this;
+          }
+
+          /** Registration details about the buyer's organization. */
+          public Builder setCompanyDetails(EmptyParam companyDetails) {
+            this.companyDetails = companyDetails;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CompanyDetails {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** The address the company or entity is registered with. */
+          @SerializedName("registered_address")
+          Object registeredAddress;
+
+          /** Company or entity name. */
+          @SerializedName("registered_name")
+          String registeredName;
+
+          /** The official registration number for the given registration type. */
+          @SerializedName("registration_number")
+          String registrationNumber;
+
+          /** Type of registration the company or entity holds in their registered country. */
+          @SerializedName("registration_type")
+          ApiRequestParams.EnumParam registrationType;
+
+          /** VAT ID number. */
+          @SerializedName("vat")
+          String vat;
+
+          private CompanyDetails(
+              Map<String, Object> extraParams,
+              Object registeredAddress,
+              String registeredName,
+              String registrationNumber,
+              ApiRequestParams.EnumParam registrationType,
+              String vat) {
+            this.extraParams = extraParams;
+            this.registeredAddress = registeredAddress;
+            this.registeredName = registeredName;
+            this.registrationNumber = registrationNumber;
+            this.registrationType = registrationType;
+            this.vat = vat;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Object registeredAddress;
+
+            private String registeredName;
+
+            private String registrationNumber;
+
+            private ApiRequestParams.EnumParam registrationType;
+
+            private String vat;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie
+                    .CompanyDetails
+                build() {
+              return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie
+                  .CompanyDetails(
+                  this.extraParams,
+                  this.registeredAddress,
+                  this.registeredName,
+                  this.registrationNumber,
+                  this.registrationType,
+                  this.vat);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** The address the company or entity is registered with. */
+            public Builder setRegisteredAddress(
+                SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails
+                        .RegisteredAddress
+                    registeredAddress) {
+              this.registeredAddress = registeredAddress;
+              return this;
+            }
+
+            /** The address the company or entity is registered with. */
+            public Builder setRegisteredAddress(EmptyParam registeredAddress) {
+              this.registeredAddress = registeredAddress;
+              return this;
+            }
+
+            /** Company or entity name. */
+            public Builder setRegisteredName(String registeredName) {
+              this.registeredName = registeredName;
+              return this;
+            }
+
+            /** The official registration number for the given registration type. */
+            public Builder setRegistrationNumber(String registrationNumber) {
+              this.registrationNumber = registrationNumber;
+              return this;
+            }
+
+            /** Type of registration the company or entity holds in their registered country. */
+            public Builder setRegistrationType(
+                SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails
+                        .RegistrationType
+                    registrationType) {
+              this.registrationType = registrationType;
+              return this;
+            }
+
+            /** Type of registration the company or entity holds in their registered country. */
+            public Builder setRegistrationType(EmptyParam registrationType) {
+              this.registrationType = registrationType;
+              return this;
+            }
+
+            /** VAT ID number. */
+            public Builder setVat(String vat) {
+              this.vat = vat;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class RegisteredAddress {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            String city;
+
+            /** Two-letter country code. */
+            @SerializedName("country")
+            String country;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Address line 1 (for example, street, PO Box, or company name). */
+            @SerializedName("line1")
+            String line1;
+
+            /** Address line 2 (for example, apartment, suite, unit, or building). */
+            @SerializedName("line2")
+            String line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            String postalCode;
+
+            /** State, county, province, or region. */
+            @SerializedName("state")
+            String state;
+
+            private RegisteredAddress(
+                String city,
+                String country,
+                Map<String, Object> extraParams,
+                String line1,
+                String line2,
+                String postalCode,
+                String state) {
+              this.city = city;
+              this.country = country;
+              this.extraParams = extraParams;
+              this.line1 = line1;
+              this.line2 = line2;
+              this.postalCode = postalCode;
+              this.state = state;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private String city;
+
+              private String country;
+
+              private Map<String, Object> extraParams;
+
+              private String line1;
+
+              private String line2;
+
+              private String postalCode;
+
+              private String state;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie
+                      .CompanyDetails.RegisteredAddress
+                  build() {
+                return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie
+                    .CompanyDetails.RegisteredAddress(
+                    this.city,
+                    this.country,
+                    this.extraParams,
+                    this.line1,
+                    this.line2,
+                    this.postalCode,
+                    this.state);
+              }
+
+              /** City, district, suburb, town, or village. */
+              public Builder setCity(String city) {
+                this.city = city;
+                return this;
+              }
+
+              /** Two-letter country code. */
+              public Builder setCountry(String country) {
+                this.country = country;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails.RegisteredAddress#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails.RegisteredAddress#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Address line 1 (for example, street, PO Box, or company name). */
+              public Builder setLine1(String line1) {
+                this.line1 = line1;
+                return this;
+              }
+
+              /** Address line 2 (for example, apartment, suite, unit, or building). */
+              public Builder setLine2(String line2) {
+                this.line2 = line2;
+                return this;
+              }
+
+              /** ZIP or postal code. */
+              public Builder setPostalCode(String postalCode) {
+                this.postalCode = postalCode;
+                return this;
+              }
+
+              /** State, county, province, or region. */
+              public Builder setState(String state) {
+                this.state = state;
+                return this;
+              }
+            }
+          }
+
+          public enum RegistrationType implements ApiRequestParams.EnumParam {
+            @SerializedName("ch_ein")
+            CH_EIN("ch_ein"),
+
+            @SerializedName("de_hrb")
+            DE_HRB("de_hrb"),
+
+            @SerializedName("dk_cvr")
+            DK_CVR("dk_cvr"),
+
+            @SerializedName("es_cif")
+            ES_CIF("es_cif"),
+
+            @SerializedName("fi_tunnus")
+            FI_TUNNUS("fi_tunnus"),
+
+            @SerializedName("fr_siren")
+            FR_SIREN("fr_siren"),
+
+            @SerializedName("fr_siret")
+            FR_SIRET("fr_siret"),
+
+            @SerializedName("it_rea")
+            IT_REA("it_rea"),
+
+            @SerializedName("nl_kvk")
+            NL_KVK("nl_kvk"),
+
+            @SerializedName("no_org_number")
+            NO_ORG_NUMBER("no_org_number"),
+
+            @SerializedName("no_pno")
+            NO_PNO("no_pno"),
+
+            @SerializedName("se_org_number")
+            SE_ORG_NUMBER("se_org_number"),
+
+            @SerializedName("se_pno")
+            SE_PNO("se_pno"),
+
+            @SerializedName("uk_crn")
+            UK_CRN("uk_crn");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            RegistrationType(String value) {
+              this.value = value;
+            }
           }
         }
       }

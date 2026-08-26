@@ -1162,6 +1162,13 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     Boolean enabled;
 
     /**
+     * How {@code automatic_tax} was set ({@code explicit}, {@code managed_payments}, or {@code
+     * tax_integration_configuration}) and why it may have been disabled.
+     */
+    @SerializedName("enablement_details")
+    EnablementDetails enablementDetails;
+
+    /**
      * The account that's liable for tax. If set, the business address and tax registrations
      * required to perform the tax calculation are loaded from this account. The tax transaction is
      * returned in the report of the connected account.
@@ -1180,6 +1187,48 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
      */
     @SerializedName("status")
     String status;
+
+    /**
+     * For more details about EnablementDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EnablementDetails extends StripeObject {
+      /**
+       * Present when {@code source=tax_integration_configuration} and {@code
+       * automatic_tax[enabled]=false}.
+       */
+      @SerializedName("integration_configuration_disabled_reason")
+      IntegrationConfigurationDisabledReason integrationConfigurationDisabledReason;
+
+      /**
+       * How {@code automatic_tax} was set: {@code explicit}, {@code managed_payments}, or {@code
+       * tax_integration_configuration}.
+       *
+       * <p>One of {@code explicit}, {@code managed_payments}, or {@code
+       * tax_integration_configuration}.
+       */
+      @SerializedName("source")
+      String source;
+
+      /**
+       * For more details about IntegrationConfigurationDisabledReason, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class IntegrationConfigurationDisabledReason extends StripeObject {
+        /**
+         * The parameter that prevented {@code automatic_tax} from being enabled (e.g. {@code
+         * line_items[][tax_rates]}).
+         */
+        @SerializedName("conflicting_field")
+        String conflictingField;
+      }
+    }
 
     /**
      * For more details about Liability, please refer to the <a
@@ -2948,9 +2997,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
-
-    @SerializedName("sequra")
-    Sequra sequra;
 
     @SerializedName("sofort")
     Sofort sofort;
@@ -4850,23 +4896,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
 
     /**
-     * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Sequra extends StripeObject {
-      /**
-       * Controls when the funds will be captured from the customer's account.
-       *
-       * <p>Equal to {@code manual}.
-       */
-      @SerializedName("capture_method")
-      String captureMethod;
-    }
-
-    /**
      * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -5259,9 +5288,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
      * shipping details. If set to {@code server_only}, only your server is allowed to update the
      * shipping details.
      *
-     * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
-     * when initializing the Stripe Checkout client and manually update the shipping details from
-     * your server using the Stripe API.
+     * <p>This parameter is only supported when {@code ui_mode=elements}.
      *
      * <p>One of {@code client_only}, or {@code server_only}.
      */
@@ -5299,9 +5326,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * shipping details. If set to {@code server_only}, only your server is allowed to update the
        * shipping details.
        *
-       * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
-       * when initializing the Stripe Checkout client and manually update the shipping details from
-       * your server using the Stripe API.
+       * <p>This parameter is only supported when {@code ui_mode=elements}.
        *
        * <p>One of {@code client_only}, or {@code server_only}.
        */

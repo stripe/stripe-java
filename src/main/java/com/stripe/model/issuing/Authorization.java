@@ -218,6 +218,16 @@ public class Authorization extends ApiResource
   PendingRequest pendingRequest;
 
   /**
+   * The point-of-sale initiation condition. This is null when the card network did not provide one.
+   *
+   * <p>One of {@code account_verification}, {@code card_not_present}, {@code card_present}, {@code
+   * e_commerce}, {@code key_entered_pos}, {@code other}, {@code pin_entered}, or {@code
+   * recurring_or_moto}.
+   */
+  @SerializedName("pos_condition")
+  String posCondition;
+
+  /**
    * Redaction status of this authorization. If the authorization is not redacted, this field will
    * be null.
    */

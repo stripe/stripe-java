@@ -64,6 +64,9 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("created")
   Long created;
 
+  @SerializedName("crypto_wallet")
+  CryptoWallet cryptoWallet;
+
   /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
    * in lowercase. Supported currencies are {@code usd} in the US, {@code eur} in the EU, and {@code
@@ -448,6 +451,35 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, Card.class);
+  }
+
+  /**
+   * For more details about CryptoWallet, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CryptoWallet extends StripeObject {
+    /** The public address of the wallet. */
+    @SerializedName("address")
+    String address;
+
+    /** The blockchain network the wallet is on. */
+    @SerializedName("chain")
+    String chain;
+
+    /** The cryptocurrency held in the wallet. */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * The type of wallet (standard or bridge_wallet).
+     *
+     * <p>One of {@code bridge_wallet}, or {@code standard}.
+     */
+    @SerializedName("type")
+    String type;
   }
 
   /**
@@ -1202,6 +1234,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
+    trySetResponseGetter(cryptoWallet, responseGetter);
     trySetResponseGetter(latestFraudWarning, responseGetter);
     trySetResponseGetter(lifecycleControls, responseGetter);
     trySetResponseGetter(personalizationDesign, responseGetter);

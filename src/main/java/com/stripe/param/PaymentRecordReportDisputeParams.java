@@ -13,7 +13,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentRecordCreateParams extends ApiRequestParams {
+public class PaymentRecordReportDisputeParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> The amount that has been lost to the customer due to disputes on
    * this payment.
@@ -63,7 +63,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
   @SerializedName("reason")
   Reason reason;
 
-  private PaymentRecordCreateParams(
+  private PaymentRecordReportDisputeParams(
       Amount amount,
       Closed closed,
       List<String> expand,
@@ -108,8 +108,8 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
     private Reason reason;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentRecordCreateParams build() {
-      return new PaymentRecordCreateParams(
+    public PaymentRecordReportDisputeParams build() {
+      return new PaymentRecordReportDisputeParams(
           this.amount,
           this.closed,
           this.expand,
@@ -125,13 +125,13 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
      * <strong>Required.</strong> The amount that has been lost to the customer due to disputes on
      * this payment.
      */
-    public Builder setAmount(PaymentRecordCreateParams.Amount amount) {
+    public Builder setAmount(PaymentRecordReportDisputeParams.Amount amount) {
       this.amount = amount;
       return this;
     }
 
     /** Information about the dispute closing. */
-    public Builder setClosed(PaymentRecordCreateParams.Closed closed) {
+    public Builder setClosed(PaymentRecordReportDisputeParams.Closed closed) {
       this.closed = closed;
       return this;
     }
@@ -139,7 +139,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentRecordCreateParams#expand} for the field documentation.
+     * PaymentRecordReportDisputeParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -152,7 +152,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentRecordCreateParams#expand} for the field documentation.
+     * PaymentRecordReportDisputeParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -165,7 +165,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentRecordCreateParams#extraParams} for the field documentation.
+     * PaymentRecordReportDisputeParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -178,7 +178,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentRecordCreateParams#extraParams} for the field documentation.
+     * See {@link PaymentRecordReportDisputeParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -189,7 +189,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
     }
 
     /** Information about the dispute funding event. */
-    public Builder setFunded(PaymentRecordCreateParams.Funded funded) {
+    public Builder setFunded(PaymentRecordReportDisputeParams.Funded funded) {
       this.funded = funded;
       return this;
     }
@@ -203,7 +203,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentRecordCreateParams#metadata} for the field documentation.
+     * PaymentRecordReportDisputeParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -217,7 +217,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentRecordCreateParams#metadata} for the field documentation.
+     * See {@link PaymentRecordReportDisputeParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
@@ -252,13 +252,13 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
 
     /** <strong>Required.</strong> Processor information for this payment. */
     public Builder setProcessorDetails(
-        PaymentRecordCreateParams.ProcessorDetails processorDetails) {
+        PaymentRecordReportDisputeParams.ProcessorDetails processorDetails) {
       this.processorDetails = processorDetails;
       return this;
     }
 
     /** The reason the payment was disputed. */
-    public Builder setReason(PaymentRecordCreateParams.Reason reason) {
+    public Builder setReason(PaymentRecordReportDisputeParams.Reason reason) {
       this.reason = reason;
       return this;
     }
@@ -310,8 +310,9 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       private Long value;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentRecordCreateParams.Amount build() {
-        return new PaymentRecordCreateParams.Amount(this.currency, this.extraParams, this.value);
+      public PaymentRecordReportDisputeParams.Amount build() {
+        return new PaymentRecordReportDisputeParams.Amount(
+            this.currency, this.extraParams, this.value);
       }
 
       /**
@@ -327,7 +328,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentRecordCreateParams.Amount#extraParams} for the field documentation.
+       * PaymentRecordReportDisputeParams.Amount#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -340,7 +341,8 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentRecordCreateParams.Amount#extraParams} for the field documentation.
+       * See {@link PaymentRecordReportDisputeParams.Amount#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -396,8 +398,8 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentRecordCreateParams.Closed build() {
-        return new PaymentRecordCreateParams.Closed(this.closedAt, this.extraParams);
+      public PaymentRecordReportDisputeParams.Closed build() {
+        return new PaymentRecordReportDisputeParams.Closed(this.closedAt, this.extraParams);
       }
 
       /**
@@ -412,7 +414,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentRecordCreateParams.Closed#extraParams} for the field documentation.
+       * PaymentRecordReportDisputeParams.Closed#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -425,7 +427,8 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentRecordCreateParams.Closed#extraParams} for the field documentation.
+       * See {@link PaymentRecordReportDisputeParams.Closed#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -488,8 +491,8 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentRecordCreateParams.Funded build() {
-        return new PaymentRecordCreateParams.Funded(
+      public PaymentRecordReportDisputeParams.Funded build() {
+        return new PaymentRecordReportDisputeParams.Funded(
             this.amount, this.extraParams, this.fundedAt, this.type);
       }
 
@@ -497,7 +500,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
        * <strong>Required.</strong> The amount that has been lost to the customer due to disputes on
        * this payment.
        */
-      public Builder setAmount(PaymentRecordCreateParams.Funded.Amount amount) {
+      public Builder setAmount(PaymentRecordReportDisputeParams.Funded.Amount amount) {
         this.amount = amount;
         return this;
       }
@@ -505,7 +508,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentRecordCreateParams.Funded#extraParams} for the field documentation.
+       * PaymentRecordReportDisputeParams.Funded#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -518,7 +521,8 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentRecordCreateParams.Funded#extraParams} for the field documentation.
+       * See {@link PaymentRecordReportDisputeParams.Funded#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -538,7 +542,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       }
 
       /** <strong>Required.</strong> The type of dispute funding event. */
-      public Builder setType(PaymentRecordCreateParams.Funded.Type type) {
+      public Builder setType(PaymentRecordReportDisputeParams.Funded.Type type) {
         this.type = type;
         return this;
       }
@@ -590,8 +594,8 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
         private Long value;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PaymentRecordCreateParams.Funded.Amount build() {
-          return new PaymentRecordCreateParams.Funded.Amount(
+        public PaymentRecordReportDisputeParams.Funded.Amount build() {
+          return new PaymentRecordReportDisputeParams.Funded.Amount(
               this.currency, this.extraParams, this.value);
         }
 
@@ -608,7 +612,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link PaymentRecordCreateParams.Funded.Amount#extraParams} for the field
+         * map. See {@link PaymentRecordReportDisputeParams.Funded.Amount#extraParams} for the field
          * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -622,7 +626,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link PaymentRecordCreateParams.Funded.Amount#extraParams} for the field
+         * map. See {@link PaymentRecordReportDisputeParams.Funded.Amount#extraParams} for the field
          * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -700,13 +704,13 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentRecordCreateParams.ProcessorDetails build() {
-        return new PaymentRecordCreateParams.ProcessorDetails(
+      public PaymentRecordReportDisputeParams.ProcessorDetails build() {
+        return new PaymentRecordReportDisputeParams.ProcessorDetails(
             this.custom, this.extraParams, this.type);
       }
 
       /** Information about the custom processor used to make this payment. */
-      public Builder setCustom(PaymentRecordCreateParams.ProcessorDetails.Custom custom) {
+      public Builder setCustom(PaymentRecordReportDisputeParams.ProcessorDetails.Custom custom) {
         this.custom = custom;
         return this;
       }
@@ -714,7 +718,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentRecordCreateParams.ProcessorDetails#extraParams} for the field documentation.
+       * PaymentRecordReportDisputeParams.ProcessorDetails#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -727,7 +731,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentRecordCreateParams.ProcessorDetails#extraParams} for the field
+       * See {@link PaymentRecordReportDisputeParams.ProcessorDetails#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
@@ -743,7 +747,7 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
        * included on processor_details with a name matching this value. It contains additional
        * information specific to the processor.
        */
-      public Builder setType(PaymentRecordCreateParams.ProcessorDetails.Type type) {
+      public Builder setType(PaymentRecordReportDisputeParams.ProcessorDetails.Type type) {
         this.type = type;
         return this;
       }
@@ -783,8 +787,8 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PaymentRecordCreateParams.ProcessorDetails.Custom build() {
-          return new PaymentRecordCreateParams.ProcessorDetails.Custom(
+        public PaymentRecordReportDisputeParams.ProcessorDetails.Custom build() {
+          return new PaymentRecordReportDisputeParams.ProcessorDetails.Custom(
               this.disputeReference, this.extraParams);
         }
 
@@ -800,8 +804,8 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link PaymentRecordCreateParams.ProcessorDetails.Custom#extraParams} for the
-         * field documentation.
+         * map. See {@link PaymentRecordReportDisputeParams.ProcessorDetails.Custom#extraParams} for
+         * the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -814,8 +818,8 @@ public class PaymentRecordCreateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link PaymentRecordCreateParams.ProcessorDetails.Custom#extraParams} for the
-         * field documentation.
+         * map. See {@link PaymentRecordReportDisputeParams.ProcessorDetails.Custom#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {

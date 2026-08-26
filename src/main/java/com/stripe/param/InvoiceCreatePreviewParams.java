@@ -10626,7 +10626,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @SerializedName("applies_to")
       List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.AppliesTo> appliesTo;
 
-      /** The end date for the billing schedule. */
+      /**
+       * The end date for the billing schedule. You must not set this earlier than current period
+       * end for every applicable subscription item.
+       */
       @SerializedName("bill_until")
       BillUntil billUntil;
 
@@ -10707,7 +10710,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           return this;
         }
 
-        /** The end date for the billing schedule. */
+        /**
+         * The end date for the billing schedule. You must not set this earlier than current period
+         * end for every applicable subscription item.
+         */
         public Builder setBillUntil(
             InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.BillUntil billUntil) {
           this.billUntil = billUntil;
@@ -18269,7 +18275,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @SerializedName("applies_to")
       List<InvoiceCreatePreviewParams.SubscriptionDetails.BillingSchedule.AppliesTo> appliesTo;
 
-      /** The end date for the billing schedule. */
+      /**
+       * The end date for the billing schedule. You must not set this earlier than current period
+       * end for every applicable subscription item.
+       */
       @SerializedName("bill_until")
       BillUntil billUntil;
 
@@ -18351,7 +18360,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           return this;
         }
 
-        /** The end date for the billing schedule. */
+        /**
+         * The end date for the billing schedule. You must not set this earlier than current period
+         * end for every applicable subscription item.
+         */
         public Builder setBillUntil(
             InvoiceCreatePreviewParams.SubscriptionDetails.BillingSchedule.BillUntil billUntil) {
           this.billUntil = billUntil;

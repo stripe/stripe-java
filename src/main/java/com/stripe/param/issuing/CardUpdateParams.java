@@ -18,6 +18,10 @@ public class CardUpdateParams extends ApiRequestParams {
   @SerializedName("cancellation_reason")
   CancellationReason cancellationReason;
 
+  /** Updates the cryptocurrency used to fund this card's existing crypto wallet. */
+  @SerializedName("crypto_wallet")
+  CryptoWallet cryptoWallet;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -74,6 +78,7 @@ public class CardUpdateParams extends ApiRequestParams {
 
   private CardUpdateParams(
       CancellationReason cancellationReason,
+      CryptoWallet cryptoWallet,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
@@ -84,6 +89,7 @@ public class CardUpdateParams extends ApiRequestParams {
       SpendingControls spendingControls,
       Status status) {
     this.cancellationReason = cancellationReason;
+    this.cryptoWallet = cryptoWallet;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
@@ -101,6 +107,8 @@ public class CardUpdateParams extends ApiRequestParams {
 
   public static class Builder {
     private CancellationReason cancellationReason;
+
+    private CryptoWallet cryptoWallet;
 
     private List<String> expand;
 
@@ -124,6 +132,7 @@ public class CardUpdateParams extends ApiRequestParams {
     public CardUpdateParams build() {
       return new CardUpdateParams(
           this.cancellationReason,
+          this.cryptoWallet,
           this.expand,
           this.extraParams,
           this.metadata,
@@ -138,6 +147,12 @@ public class CardUpdateParams extends ApiRequestParams {
     /** Reason why the {@code status} of this card is {@code canceled}. */
     public Builder setCancellationReason(CardUpdateParams.CancellationReason cancellationReason) {
       this.cancellationReason = cancellationReason;
+      return this;
+    }
+
+    /** Updates the cryptocurrency used to fund this card's existing crypto wallet. */
+    public Builder setCryptoWallet(CardUpdateParams.CryptoWallet cryptoWallet) {
+      this.cryptoWallet = cryptoWallet;
       return this;
     }
 
@@ -296,6 +311,93 @@ public class CardUpdateParams extends ApiRequestParams {
     public Builder setStatus(CardUpdateParams.Status status) {
       this.status = status;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CryptoWallet {
+    /**
+     * <strong>Required.</strong> Updates the crypto wallet's funding currency for subsequent card
+     * movements. This doesn't convert existing balances or change the wallet's address, chain, or
+     * type.
+     */
+    @SerializedName("currency")
+    Object currency;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private CryptoWallet(Object currency, Map<String, Object> extraParams) {
+      this.currency = currency;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object currency;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CardUpdateParams.CryptoWallet build() {
+        return new CardUpdateParams.CryptoWallet(this.currency, this.extraParams);
+      }
+
+      /**
+       * <strong>Required.</strong> Updates the crypto wallet's funding currency for subsequent card
+       * movements. This doesn't convert existing balances or change the wallet's address, chain, or
+       * type.
+       */
+      public Builder setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Updates the crypto wallet's funding currency for subsequent card
+       * movements. This doesn't convert existing balances or change the wallet's address, chain, or
+       * type.
+       */
+      public Builder setCurrency(EmptyParam currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CardUpdateParams.CryptoWallet#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CardUpdateParams.CryptoWallet#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
     }
   }
 

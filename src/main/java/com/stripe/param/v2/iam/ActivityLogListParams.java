@@ -162,6 +162,9 @@ public class ActivityLogListParams extends ApiRequestParams {
     @SerializedName("api_key_viewed")
     API_KEY_VIEWED("api_key_viewed"),
 
+    @SerializedName("user_access_started")
+    USER_ACCESS_STARTED("user_access_started"),
+
     @SerializedName("user_invite_accepted")
     USER_INVITE_ACCEPTED("user_invite_accepted"),
 
@@ -188,6 +191,9 @@ public class ActivityLogListParams extends ApiRequestParams {
   public enum ActionGroup implements ApiRequestParams.EnumParam {
     @SerializedName("api_key")
     API_KEY("api_key"),
+
+    @SerializedName("user_access")
+    USER_ACCESS("user_access"),
 
     @SerializedName("user_invite")
     USER_INVITE("user_invite"),

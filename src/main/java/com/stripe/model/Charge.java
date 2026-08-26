@@ -1329,9 +1329,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
-    @SerializedName("sequra")
-    Sequra sequra;
-
     @SerializedName("shopeepay")
     Shopeepay shopeepay;
 
@@ -2513,7 +2510,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Link extends StripeObject {}
+        public static class Link extends StripeObject {
+          /**
+           * The <a href="https://docs.stripe.com/payments/link/link-payment-methods">funding source
+           * group code</a> applied to this Link payment at confirmation time.
+           */
+          @SerializedName("funding_source_group")
+          String fundingSourceGroup;
+        }
 
         /**
          * For more details about Masterpass, please refer to the <a
@@ -3748,9 +3752,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String country;
 
       /**
-       * The funding source group applied to this Link payment at confirmation time. Maps to a
-       * bundle in your Stripe pricing contract and on Stripe's published pricing page. Omitted if
-       * group lookup failed at confirmation time.
+       * The <a href="https://docs.stripe.com/payments/link/link-payment-methods">funding source
+       * group code</a> applied to this Link payment at confirmation time.
        */
       @SerializedName("funding_source_group")
       String fundingSourceGroup;
@@ -4369,19 +4372,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("mandate")
       String mandate;
-    }
-
-    /**
-     * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Sequra extends StripeObject {
-      /** The SeQura transaction ID associated with this payment. */
-      @SerializedName("transaction_id")
-      String transactionId;
     }
 
     /**
