@@ -32,12 +32,13 @@ public class StripeError extends StripeObject {
    * account_token_required_for_v2_account}, {@code acss_debit_session_incomplete}, {@code
    * action_blocked}, {@code alipay_upgrade_required}, {@code amount_too_large}, {@code
    * amount_too_small}, {@code anomalous_money_movement_request}, {@code api_key_expired}, {@code
-   * application_fees_not_allowed}, {@code approval_required}, {@code authentication_required},
-   * {@code balance_insufficient}, {@code balance_invalid_parameter}, {@code
-   * bank_account_bad_routing_numbers}, {@code bank_account_declined}, {@code bank_account_exists},
-   * {@code bank_account_restricted}, {@code bank_account_unusable}, {@code
-   * bank_account_unverified}, {@code bank_account_verification_failed}, {@code
-   * billing_invalid_mandate}, {@code bitcoin_upgrade_required}, {@code
+   * application_fees_not_allowed}, {@code approval_required}, {@code authentication_failure},
+   * {@code authentication_required}, {@code balance_insufficient}, {@code
+   * balance_invalid_parameter}, {@code bank_account_bad_routing_numbers}, {@code
+   * bank_account_declined}, {@code bank_account_exists}, {@code bank_account_restricted}, {@code
+   * bank_account_unusable}, {@code bank_account_unverified}, {@code
+   * bank_account_verification_failed}, {@code billing_invalid_mandate}, {@code
+   * bitcoin_upgrade_required}, {@code capability_not_active}, {@code
    * capture_charge_authorization_expired}, {@code capture_unauthorized_payment}, {@code
    * card_decline_rate_limit_exceeded}, {@code card_declined}, {@code
    * cardholder_phone_number_required}, {@code charge_already_captured}, {@code
@@ -47,8 +48,8 @@ public class StripeError extends StripeObject {
    * {@code country_code_invalid}, {@code country_unsupported}, {@code coupon_expired}, {@code
    * customer_max_payment_methods}, {@code customer_max_subscriptions}, {@code
    * customer_session_expired}, {@code customer_tax_location_invalid}, {@code debit_not_authorized},
-   * {@code email_invalid}, {@code expired_card}, {@code failed_tax_calculation}, {@code
-   * financial_account_balance_does_not_support_currency}, {@code
+   * {@code email_invalid}, {@code expired_card}, {@code expired_payment_method}, {@code
+   * failed_tax_calculation}, {@code financial_account_balance_does_not_support_currency}, {@code
    * financial_account_capability_not_enabled}, {@code financial_account_capability_restricted},
    * {@code financial_connections_account_inactive}, {@code
    * financial_connections_account_pending_account_numbers}, {@code
@@ -58,11 +59,12 @@ public class StripeError extends StripeObject {
    * {@code forwarding_api_upstream_connection_error}, {@code
    * forwarding_api_upstream_connection_timeout}, {@code forwarding_api_upstream_error}, {@code
    * idempotency_key_in_use}, {@code incorrect_address}, {@code incorrect_cvc}, {@code
-   * incorrect_number}, {@code incorrect_zip}, {@code india_recurring_payment_mandate_canceled},
-   * {@code instant_payouts_config_disabled}, {@code instant_payouts_currency_disabled}, {@code
-   * instant_payouts_limit_exceeded}, {@code instant_payouts_unsupported}, {@code
-   * insufficient_funds}, {@code intent_invalid_state}, {@code intent_verification_method_missing},
-   * {@code invalid_card_type}, {@code invalid_characters}, {@code invalid_charge_amount}, {@code
+   * incorrect_number}, {@code incorrect_postal_code}, {@code incorrect_zip}, {@code
+   * india_recurring_payment_mandate_canceled}, {@code instant_payouts_config_disabled}, {@code
+   * instant_payouts_currency_disabled}, {@code instant_payouts_limit_exceeded}, {@code
+   * instant_payouts_unsupported}, {@code insufficient_funds}, {@code intent_invalid_state}, {@code
+   * intent_verification_method_missing}, {@code invalid_canceled_subscription_fields}, {@code
+   * invalid_card_type}, {@code invalid_characters}, {@code invalid_charge_amount}, {@code
    * invalid_cvc}, {@code invalid_expiry_month}, {@code invalid_expiry_year}, {@code
    * invalid_mandate_reference_prefix_format}, {@code invalid_number}, {@code invalid_source_usage},
    * {@code invalid_tax_location}, {@code invoice_no_customer_line_items}, {@code
@@ -92,23 +94,23 @@ public class StripeError extends StripeObject {
    * payment_method_microdeposit_verification_descriptor_code_mismatch}, {@code
    * payment_method_microdeposit_verification_timeout}, {@code payment_method_not_available}, {@code
    * payment_method_provider_decline}, {@code payment_method_provider_timeout}, {@code
-   * payment_method_unactivated}, {@code payment_method_unexpected_state}, {@code
-   * payment_method_unsupported_type}, {@code payout_reconciliation_not_ready}, {@code
-   * payouts_limit_exceeded}, {@code payouts_not_allowed}, {@code platform_account_required}, {@code
-   * platform_api_key_expired}, {@code postal_code_invalid}, {@code processing_error}, {@code
-   * product_inactive}, {@code progressive_onboarding_limit_exceeded}, {@code rate_limit}, {@code
-   * refer_to_customer}, {@code refund_disputed_payment}, {@code request_blocked}, {@code
-   * resource_already_exists}, {@code resource_missing}, {@code return_intent_already_processed},
-   * {@code routing_number_invalid}, {@code secret_key_required}, {@code sepa_unsupported_account},
-   * {@code service_period_coupon_with_metered_tiered_item_unsupported}, {@code
-   * setup_attempt_failed}, {@code setup_intent_authentication_failure}, {@code
-   * setup_intent_invalid_parameter}, {@code setup_intent_mandate_invalid}, {@code
-   * setup_intent_mobile_wallet_unsupported}, {@code setup_intent_setup_attempt_expired}, {@code
-   * setup_intent_unexpected_state}, {@code shipping_address_invalid}, {@code
-   * shipping_calculation_failed}, {@code siret_invalid}, {@code sku_inactive}, {@code
-   * state_unsupported}, {@code status_transition_invalid}, {@code storer_capability_missing},
-   * {@code storer_capability_not_active}, {@code stripe_tax_inactive}, {@code tax_id_invalid},
-   * {@code tax_id_prohibited}, {@code taxes_calculation_failed}, {@code
+   * payment_method_restricted}, {@code payment_method_unactivated}, {@code
+   * payment_method_unexpected_state}, {@code payment_method_unsupported_type}, {@code
+   * payout_reconciliation_not_ready}, {@code payouts_limit_exceeded}, {@code payouts_not_allowed},
+   * {@code platform_account_required}, {@code platform_api_key_expired}, {@code
+   * postal_code_invalid}, {@code processing_error}, {@code product_inactive}, {@code
+   * progressive_onboarding_limit_exceeded}, {@code rate_limit}, {@code refer_to_customer}, {@code
+   * refund_disputed_payment}, {@code request_blocked}, {@code resource_already_exists}, {@code
+   * resource_missing}, {@code return_intent_already_processed}, {@code routing_number_invalid},
+   * {@code secret_key_required}, {@code sepa_unsupported_account}, {@code
+   * service_period_coupon_with_metered_tiered_item_unsupported}, {@code setup_attempt_failed},
+   * {@code setup_intent_authentication_failure}, {@code setup_intent_invalid_parameter}, {@code
+   * setup_intent_mandate_invalid}, {@code setup_intent_mobile_wallet_unsupported}, {@code
+   * setup_intent_setup_attempt_expired}, {@code setup_intent_unexpected_state}, {@code
+   * shipping_address_invalid}, {@code shipping_calculation_failed}, {@code siret_invalid}, {@code
+   * sku_inactive}, {@code state_unsupported}, {@code status_transition_invalid}, {@code
+   * storer_capability_missing}, {@code storer_capability_not_active}, {@code stripe_tax_inactive},
+   * {@code tax_id_invalid}, {@code tax_id_prohibited}, {@code taxes_calculation_failed}, {@code
    * terminal_location_country_unsupported}, {@code terminal_reader_busy}, {@code
    * terminal_reader_hardware_fault}, {@code terminal_reader_invalid_location_for_activation},
    * {@code terminal_reader_invalid_location_for_payment}, {@code terminal_reader_offline}, {@code

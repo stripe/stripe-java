@@ -286,6 +286,10 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("countries")
     List<String> countries;
 
+    /** Country from which to filter accounts. */
+    @SerializedName("country")
+    String country;
+
     /**
      * Whether the Session should require that linked accounts support payments and retrieve account
      * numbers before completion.
