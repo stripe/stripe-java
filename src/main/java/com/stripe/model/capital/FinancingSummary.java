@@ -31,7 +31,7 @@ public class FinancingSummary extends ApiResource {
    * amount, withhold rate, remaining amount, paid amount, current repayment interval, repayment
    * start date, and advance payout date.
    *
-   * <p>Only present for financing offers with the {@code paid_out} status.
+   * <p>Only present for financing offers with a {@code status} other than {@code none}.
    */
   @SerializedName("details")
   Details details;

@@ -1227,7 +1227,7 @@ public class PersonTokenCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** One or more documents showing the person’s passport page with photo and personal data. */
+    /** One or more documents showing the person's passport page with photo and personal data. */
     @SerializedName("passport")
     Passport passport;
 
@@ -1243,7 +1243,7 @@ public class PersonTokenCreateParams extends ApiRequestParams {
     SecondaryVerification secondaryVerification;
 
     /**
-     * One or more documents showing the person’s visa required for living in the country where they
+     * One or more documents showing the person's visa required for living in the country where they
      * are residing.
      */
     @SerializedName("visa")
@@ -1328,7 +1328,7 @@ public class PersonTokenCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** One or more documents showing the person’s passport page with photo and personal data. */
+      /** One or more documents showing the person's passport page with photo and personal data. */
       public Builder setPassport(PersonTokenCreateParams.Documents.Passport passport) {
         this.passport = passport;
         return this;
@@ -1352,7 +1352,7 @@ public class PersonTokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * One or more documents showing the person’s visa required for living in the country where
+       * One or more documents showing the person's visa required for living in the country where
        * they are residing.
        */
       public Builder setVisa(PersonTokenCreateParams.Documents.Visa visa) {

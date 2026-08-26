@@ -335,8 +335,8 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   ExpandableField<PaymentLink> paymentLink;
 
   /**
-   * Configure whether a Checkout Session should collect a payment method. Defaults to {@code
-   * always}.
+   * Configure whether a Checkout Session should collect a payment method for sessions with mode
+   * {@code payment}. Defaults to {@code always}.
    *
    * <p>One of {@code always}, or {@code if_required}.
    */
@@ -2825,6 +2825,13 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
          */
         @SerializedName("brands_blocked")
         List<String> brandsBlocked;
+
+        /**
+         * Card funding types to block for this Checkout Session. Supported values are {@code
+         * credit}, {@code debit}, and {@code prepaid}.
+         */
+        @SerializedName("funding_types_blocked")
+        List<String> fundingTypesBlocked;
       }
     }
 
@@ -4442,9 +4449,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
      * shipping details. If set to {@code server_only}, only your server is allowed to update the
      * shipping details.
      *
-     * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
-     * when initializing the Stripe Checkout client and manually update the shipping details from
-     * your server using the Stripe API.
+     * <p>This parameter is only supported when {@code ui_mode=elements}.
      *
      * <p>One of {@code client_only}, or {@code server_only}.
      */
@@ -4482,9 +4487,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * shipping details. If set to {@code server_only}, only your server is allowed to update the
        * shipping details.
        *
-       * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
-       * when initializing the Stripe Checkout client and manually update the shipping details from
-       * your server using the Stripe API.
+       * <p>This parameter is only supported when {@code ui_mode=elements}.
        *
        * <p>One of {@code client_only}, or {@code server_only}.
        */

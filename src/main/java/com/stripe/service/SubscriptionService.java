@@ -168,7 +168,10 @@ public final class SubscriptionService extends ApiService {
    * then on June 1 they’ll be billed 250 (200 for a renewal of her subscription, plus a 50
    * prorating adjustment for half of the previous month’s 100 difference). Similarly, a downgrade
    * generates a credit that is applied to the next invoice. We also prorate when you make quantity
-   * changes.
+   * changes. You can also <a
+   * href="https://stripe.com/billing/scripts/stripe-authored/proration">use scripts to prorate your
+   * billing</a>. To learn more, see <a
+   * href="https://stripe.com/billing/subscriptions/prorations">Prorations</a>.
    *
    * <p>Switching prices does not normally change the billing date or generate an immediate charge
    * unless:
@@ -220,7 +223,10 @@ public final class SubscriptionService extends ApiService {
    * then on June 1 they’ll be billed 250 (200 for a renewal of her subscription, plus a 50
    * prorating adjustment for half of the previous month’s 100 difference). Similarly, a downgrade
    * generates a credit that is applied to the next invoice. We also prorate when you make quantity
-   * changes.
+   * changes. You can also <a
+   * href="https://stripe.com/billing/scripts/stripe-authored/proration">use scripts to prorate your
+   * billing</a>. To learn more, see <a
+   * href="https://stripe.com/billing/subscriptions/prorations">Prorations</a>.
    *
    * <p>Switching prices does not normally change the billing date or generate an immediate charge
    * unless:
@@ -272,7 +278,10 @@ public final class SubscriptionService extends ApiService {
    * then on June 1 they’ll be billed 250 (200 for a renewal of her subscription, plus a 50
    * prorating adjustment for half of the previous month’s 100 difference). Similarly, a downgrade
    * generates a credit that is applied to the next invoice. We also prorate when you make quantity
-   * changes.
+   * changes. You can also <a
+   * href="https://stripe.com/billing/scripts/stripe-authored/proration">use scripts to prorate your
+   * billing</a>. To learn more, see <a
+   * href="https://stripe.com/billing/subscriptions/prorations">Prorations</a>.
    *
    * <p>Switching prices does not normally change the billing date or generate an immediate charge
    * unless:
@@ -323,7 +332,10 @@ public final class SubscriptionService extends ApiService {
    * then on June 1 they’ll be billed 250 (200 for a renewal of her subscription, plus a 50
    * prorating adjustment for half of the previous month’s 100 difference). Similarly, a downgrade
    * generates a credit that is applied to the next invoice. We also prorate when you make quantity
-   * changes.
+   * changes. You can also <a
+   * href="https://stripe.com/billing/scripts/stripe-authored/proration">use scripts to prorate your
+   * billing</a>. To learn more, see <a
+   * href="https://stripe.com/billing/subscriptions/prorations">Prorations</a>.
    *
    * <p>Switching prices does not normally change the billing date or generate an immediate charge
    * unless:

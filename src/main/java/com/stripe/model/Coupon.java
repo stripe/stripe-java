@@ -147,8 +147,9 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   Long timesRedeemed;
 
   /**
-   * One of {@code amount_off}, {@code percent_off}, or {@code script}. Describes the type of coupon
-   * logic used to calculate the discount.
+   * The type of coupon logic used to calculate the discount.
+   *
+   * <p>One of {@code amount_off}, {@code percent_off}, or {@code script}.
    */
   @SerializedName("type")
   String type;

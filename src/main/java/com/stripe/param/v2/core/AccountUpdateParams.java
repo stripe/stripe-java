@@ -11807,6 +11807,14 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("locales")
     List<AccountUpdateParams.Defaults.Locale> locales;
 
+    /**
+     * Default payout methods per currency. Keys are three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency codes</a>, in lowercase.
+     * Values are v2 Payout Method IDs.
+     */
+    @SerializedName("payout_methods")
+    Map<String, String> payoutMethods;
+
     /** Account profile information. */
     @SerializedName("profile")
     Profile profile;
@@ -11826,12 +11834,14 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object currency,
         Map<String, Object> extraParams,
         List<AccountUpdateParams.Defaults.Locale> locales,
+        Map<String, String> payoutMethods,
         Profile profile,
         Responsibilities responsibilities,
         Object timezone) {
       this.currency = currency;
       this.extraParams = extraParams;
       this.locales = locales;
+      this.payoutMethods = payoutMethods;
       this.profile = profile;
       this.responsibilities = responsibilities;
       this.timezone = timezone;
@@ -11848,6 +11858,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private List<AccountUpdateParams.Defaults.Locale> locales;
 
+      private Map<String, String> payoutMethods;
+
       private Profile profile;
 
       private Responsibilities responsibilities;
@@ -11860,6 +11872,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.currency,
             this.extraParams,
             this.locales,
+            this.payoutMethods,
             this.profile,
             this.responsibilities,
             this.timezone);
@@ -11934,6 +11947,32 @@ public class AccountUpdateParams extends ApiRequestParams {
           this.locales = new ArrayList<>();
         }
         this.locales.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `payoutMethods` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountUpdateParams.Defaults#payoutMethods} for the field documentation.
+       */
+      public Builder putPayoutMethod(String key, String value) {
+        if (this.payoutMethods == null) {
+          this.payoutMethods = new HashMap<>();
+        }
+        this.payoutMethods.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `payoutMethods` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountUpdateParams.Defaults#payoutMethods} for the field documentation.
+       */
+      public Builder putAllPayoutMethod(Map<String, String> map) {
+        if (this.payoutMethods == null) {
+          this.payoutMethods = new HashMap<>();
+        }
+        this.payoutMethods.putAll(map);
         return this;
       }
 
@@ -14785,35 +14824,35 @@ public class AccountUpdateParams extends ApiRequestParams {
       public static class Documents {
         /**
          * One or more documents that support the bank account ownership verification requirement.
-         * Must be a document associated with the account’s primary active bank account that
+         * Must be a document associated with the account's primary active bank account that
          * displays the last 4 digits of the account number, either a statement or a check.
          */
         @SerializedName("bank_account_ownership_verification")
         BankAccountOwnershipVerification bankAccountOwnershipVerification;
 
-        /** One or more documents that demonstrate proof of a company’s license to operate. */
+        /** One or more documents that demonstrate proof of a company's license to operate. */
         @SerializedName("company_license")
         CompanyLicense companyLicense;
 
-        /** One or more documents showing the company’s Memorandum of Association. */
+        /** One or more documents showing the company's Memorandum of Association. */
         @SerializedName("company_memorandum_of_association")
         CompanyMemorandumOfAssociation companyMemorandumOfAssociation;
 
         /**
          * Certain countries only: One or more documents showing the ministerial decree legalizing
-         * the company’s establishment.
+         * the company's establishment.
          */
         @SerializedName("company_ministerial_decree")
         CompanyMinisterialDecree companyMinisterialDecree;
 
         /**
-         * One or more documents that demonstrate proof of a company’s registration with the
+         * One or more documents that demonstrate proof of a company's registration with the
          * appropriate local authorities.
          */
         @SerializedName("company_registration_verification")
         CompanyRegistrationVerification companyRegistrationVerification;
 
-        /** One or more documents that demonstrate proof of a company’s tax ID. */
+        /** One or more documents that demonstrate proof of a company's tax ID. */
         @SerializedName("company_tax_id_verification")
         CompanyTaxIdVerification companyTaxIdVerification;
 
@@ -14913,7 +14952,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           /**
            * One or more documents that support the bank account ownership verification requirement.
-           * Must be a document associated with the account’s primary active bank account that
+           * Must be a document associated with the account's primary active bank account that
            * displays the last 4 digits of the account number, either a statement or a check.
            */
           public Builder setBankAccountOwnershipVerification(
@@ -14924,7 +14963,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** One or more documents that demonstrate proof of a company’s license to operate. */
+          /** One or more documents that demonstrate proof of a company's license to operate. */
           public Builder setCompanyLicense(
               AccountUpdateParams.Identity.BusinessDetails.Documents.CompanyLicense
                   companyLicense) {
@@ -14932,7 +14971,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** One or more documents showing the company’s Memorandum of Association. */
+          /** One or more documents showing the company's Memorandum of Association. */
           public Builder setCompanyMemorandumOfAssociation(
               AccountUpdateParams.Identity.BusinessDetails.Documents.CompanyMemorandumOfAssociation
                   companyMemorandumOfAssociation) {
@@ -14942,7 +14981,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           /**
            * Certain countries only: One or more documents showing the ministerial decree legalizing
-           * the company’s establishment.
+           * the company's establishment.
            */
           public Builder setCompanyMinisterialDecree(
               AccountUpdateParams.Identity.BusinessDetails.Documents.CompanyMinisterialDecree
@@ -14952,7 +14991,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * One or more documents that demonstrate proof of a company’s registration with the
+           * One or more documents that demonstrate proof of a company's registration with the
            * appropriate local authorities.
            */
           public Builder setCompanyRegistrationVerification(
@@ -14962,7 +15001,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** One or more documents that demonstrate proof of a company’s tax ID. */
+          /** One or more documents that demonstrate proof of a company's tax ID. */
           public Builder setCompanyTaxIdVerification(
               AccountUpdateParams.Identity.BusinessDetails.Documents.CompanyTaxIdVerification
                   companyTaxIdVerification) {
@@ -19456,7 +19495,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * One or more documents showing the person’s passport page with photo and personal data.
+         * One or more documents showing the person's passport page with photo and personal data.
          */
         @SerializedName("passport")
         Passport passport;
@@ -19475,7 +19514,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         SecondaryVerification secondaryVerification;
 
         /**
-         * One or more documents showing the person’s visa required for living in the country where
+         * One or more documents showing the person's visa required for living in the country where
          * they are residing.
          */
         @SerializedName("visa")
@@ -19564,7 +19603,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * One or more documents showing the person’s passport page with photo and personal data.
+           * One or more documents showing the person's passport page with photo and personal data.
            */
           public Builder setPassport(
               AccountUpdateParams.Identity.Individual.Documents.Passport passport) {
@@ -19594,7 +19633,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * One or more documents showing the person’s visa required for living in the country
+           * One or more documents showing the person's visa required for living in the country
            * where they are residing.
            */
           public Builder setVisa(AccountUpdateParams.Identity.Individual.Documents.Visa visa) {
@@ -20875,7 +20914,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether the person is an owner of the account’s identity. */
+        /** Whether the person is an owner of the account's identity. */
         @SerializedName("owner")
         Boolean owner;
 
@@ -20977,7 +21016,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether the person is an owner of the account’s identity. */
+          /** Whether the person is an owner of the account's identity. */
           public Builder setOwner(Boolean owner) {
             this.owner = owner;
             return this;

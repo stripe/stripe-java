@@ -1745,7 +1745,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
     /**
      * For point-in-time quote lines (having no {@code ends_at} timestamp), this attribute lets you
      * set or remove whether the subscription's billing cycle anchor is reset at the Quote Line
-     * {@code starts_at} timestamp.For time-span based quote lines (having both {@code starts_at}
+     * {@code starts_at} timestamp. For time-span based quote lines (having both {@code starts_at}
      * and {@code ends_at}), the only valid value is {@code automatic}, which removes any previously
      * configured billing cycle anchor resets during the window of time spanning the quote line.
      */
@@ -1921,7 +1921,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       /**
        * For point-in-time quote lines (having no {@code ends_at} timestamp), this attribute lets
        * you set or remove whether the subscription's billing cycle anchor is reset at the Quote
-       * Line {@code starts_at} timestamp.For time-span based quote lines (having both {@code
+       * Line {@code starts_at} timestamp. For time-span based quote lines (having both {@code
        * starts_at} and {@code ends_at}), the only valid value is {@code automatic}, which removes
        * any previously configured billing cycle anchor resets during the window of time spanning
        * the quote line.

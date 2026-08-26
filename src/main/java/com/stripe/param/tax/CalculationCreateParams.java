@@ -46,7 +46,10 @@ public class CalculationCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> A list of items the customer is purchasing. */
+  /**
+   * <strong>Required.</strong> A list of items the customer is purchasing. You can pass up to 100
+   * line items, or 1,000 if your account has an increased limit.
+   */
   @SerializedName("line_items")
   List<CalculationCreateParams.LineItem> lineItems;
 

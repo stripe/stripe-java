@@ -177,6 +177,9 @@ public class AccountSession extends ApiResource {
     @SerializedName("payment_disputes")
     PaymentDisputes paymentDisputes;
 
+    @SerializedName("payment_method_settings")
+    PaymentMethodSettings paymentMethodSettings;
+
     @SerializedName("payments")
     Payments payments;
 
@@ -909,6 +912,39 @@ public class AccountSession extends ApiResource {
          */
         @SerializedName("smart_disputes_management")
         Boolean smartDisputesManagement;
+      }
+    }
+
+    /**
+     * For more details about PaymentMethodSettings, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentMethodSettings extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /**
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. This is {@code false} by default.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
       }
     }
 

@@ -29,6 +29,13 @@ import com.stripe.events.V2CoreAccountPersonCreatedEventNotification;
 import com.stripe.events.V2CoreAccountPersonDeletedEventNotification;
 import com.stripe.events.V2CoreAccountPersonUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountUpdatedEventNotification;
+import com.stripe.events.V2CoreApprovalRequestApprovedEventNotification;
+import com.stripe.events.V2CoreApprovalRequestCanceledEventNotification;
+import com.stripe.events.V2CoreApprovalRequestCreatedEventNotification;
+import com.stripe.events.V2CoreApprovalRequestExpiredEventNotification;
+import com.stripe.events.V2CoreApprovalRequestFailedEventNotification;
+import com.stripe.events.V2CoreApprovalRequestRejectedEventNotification;
+import com.stripe.events.V2CoreApprovalRequestSucceededEventNotification;
 import com.stripe.events.V2CoreBatchJobBatchFailedEventNotification;
 import com.stripe.events.V2CoreBatchJobCanceledEventNotification;
 import com.stripe.events.V2CoreBatchJobCompletedEventNotification;
@@ -90,6 +97,7 @@ import com.stripe.events.V2OrchestratedCommerceAgreementConfirmedEventNotificati
 import com.stripe.events.V2OrchestratedCommerceAgreementCreatedEventNotification;
 import com.stripe.events.V2OrchestratedCommerceAgreementPartiallyConfirmedEventNotification;
 import com.stripe.events.V2OrchestratedCommerceAgreementTerminatedEventNotification;
+import com.stripe.events.V2SignalsAccountEvaluationCompleteEventNotification;
 import com.stripe.model.v2.core.EventNotification;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -118,6 +126,7 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
 
   final StripeClient client;
   private final EventNotificationFallbackCallback fallbackCallback;
+  private EventNotificationPreHandleCallback preHandleCallback;
   private final HashMap<String, EventNotificationCallback<? extends EventNotification>>
       registeredHandlers = new HashMap<>();
 
@@ -127,16 +136,48 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     this.fallbackCallback = fallbackCallback;
   }
 
+  /**
+   * Callbacks are expected to be registered once on startup, so registering anything after handling
+   * has begun indicates a bug.
+   */
+  private void assertCanRegister() {
+    if (hasHandledEvent) {
+      throw new IllegalStateException(
+          "Cannot register new callbacks after an event has been handled. This is indicative of a bug.");
+    }
+  }
+
   private <E extends EventNotification> void register(
       String eventType, EventNotificationCallback<E> handler) {
-    if (hasHandledEvent) {
-      throw new IllegalStateException("Cannot register handlers after handling an event");
-    }
+    assertCanRegister();
 
     if (this.registeredHandlers.containsKey(eventType)) {
-      throw new IllegalArgumentException("Handler already registered for event type: " + eventType);
+      throw new IllegalArgumentException(
+          "Callback for event type \"" + eventType + "\" is already registered");
     }
     this.registeredHandlers.put(eventType, handler);
+  }
+
+  /**
+   * Registers a function that will be run before any event-specific callbacks. A useful place to
+   * store event-agnostic logic, such as logging or checking for <a
+   * href="https://docs.stripe.com/webhooks#handle-duplicate-events">duplicate event deliveries</a>.
+   *
+   * <p>Returning {@code true} causes handling to continue as normal; returning {@code false}
+   * returns from {@code handle()} immediately, so neither the registered callback nor the fallback
+   * callback are called.
+   *
+   * @param callback the hook to run before handling continues
+   * @return this handler, for chaining
+   */
+  public T preHandle(EventNotificationPreHandleCallback callback) {
+    assertCanRegister();
+
+    if (this.preHandleCallback != null) {
+      throw new IllegalArgumentException("A preHandle callback is already registered");
+    }
+    this.preHandleCallback = callback;
+    return self();
   }
 
   /** Lets the generated {@code on*} methods return the concrete handler type for chaining. */
@@ -152,6 +193,11 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
 
     // Create a new client with the event's context for thread-safe processing
     StripeClient eventClient = this.client.withStripeContext(eventNotification.context);
+
+    if (this.preHandleCallback != null
+        && !this.preHandleCallback.process(eventNotification, eventClient)) {
+      return;
+    }
 
     if (handler == null) {
       boolean isKnownEventType =
@@ -334,6 +380,48 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV2CoreAccountPersonUpdated(
       EventNotificationCallback<V2CoreAccountPersonUpdatedEventNotification> callback) {
     this.register("v2.core.account_person.updated", callback);
+    return self();
+  }
+
+  public T onV2CoreApprovalRequestApproved(
+      EventNotificationCallback<V2CoreApprovalRequestApprovedEventNotification> callback) {
+    this.register("v2.core.approval_request.approved", callback);
+    return self();
+  }
+
+  public T onV2CoreApprovalRequestCanceled(
+      EventNotificationCallback<V2CoreApprovalRequestCanceledEventNotification> callback) {
+    this.register("v2.core.approval_request.canceled", callback);
+    return self();
+  }
+
+  public T onV2CoreApprovalRequestCreated(
+      EventNotificationCallback<V2CoreApprovalRequestCreatedEventNotification> callback) {
+    this.register("v2.core.approval_request.created", callback);
+    return self();
+  }
+
+  public T onV2CoreApprovalRequestExpired(
+      EventNotificationCallback<V2CoreApprovalRequestExpiredEventNotification> callback) {
+    this.register("v2.core.approval_request.expired", callback);
+    return self();
+  }
+
+  public T onV2CoreApprovalRequestFailed(
+      EventNotificationCallback<V2CoreApprovalRequestFailedEventNotification> callback) {
+    this.register("v2.core.approval_request.failed", callback);
+    return self();
+  }
+
+  public T onV2CoreApprovalRequestRejected(
+      EventNotificationCallback<V2CoreApprovalRequestRejectedEventNotification> callback) {
+    this.register("v2.core.approval_request.rejected", callback);
+    return self();
+  }
+
+  public T onV2CoreApprovalRequestSucceeded(
+      EventNotificationCallback<V2CoreApprovalRequestSucceededEventNotification> callback) {
+    this.register("v2.core.approval_request.succeeded", callback);
     return self();
   }
 
@@ -731,6 +819,12 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
       EventNotificationCallback<V2OrchestratedCommerceAgreementTerminatedEventNotification>
           callback) {
     this.register("v2.orchestrated_commerce.agreement.terminated", callback);
+    return self();
+  }
+
+  public T onV2SignalsAccountEvaluationComplete(
+      EventNotificationCallback<V2SignalsAccountEvaluationCompleteEventNotification> callback) {
+    this.register("v2.signals.account_evaluation.complete", callback);
     return self();
   }
   // notification-handler-methods: The end of the section generated from our OpenAPI spec

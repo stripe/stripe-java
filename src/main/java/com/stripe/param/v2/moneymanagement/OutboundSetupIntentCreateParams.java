@@ -150,7 +150,7 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> Closed Enum. The type of payout method to be created. */
+    /** <strong>Required.</strong> Open Enum. The type of payout method to be created. */
     @SerializedName("type")
     Type type;
 
@@ -221,7 +221,7 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> Closed Enum. The type of payout method to be created. */
+      /** <strong>Required.</strong> Open Enum. The type of payout method to be created. */
       public Builder setType(OutboundSetupIntentCreateParams.PayoutMethodData.Type type) {
         this.type = type;
         return this;
