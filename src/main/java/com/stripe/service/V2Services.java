@@ -45,6 +45,10 @@ public final class V2Services extends ApiService {
     return new com.stripe.service.v2.OrchestratedCommerceService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.SignalsService signals() {
+    return new com.stripe.service.v2.SignalsService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.TestHelperService testHelpers() {
     return new com.stripe.service.v2.TestHelperService(this.getResponseGetter());
   }

@@ -5052,6 +5052,14 @@ public class Account extends StripeObject implements HasId {
     @SerializedName("locales")
     List<String> locales;
 
+    /**
+     * Default payout methods per currency. Keys are three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency codes</a>, in lowercase.
+     * Values are v2 Payout Method IDs.
+     */
+    @SerializedName("payout_methods")
+    Map<String, String> payoutMethods;
+
     /** Account profile information. */
     @SerializedName("profile")
     Profile profile;
@@ -5730,7 +5738,7 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("additional_addresses")
       List<Account.Identity.BusinessDetails.AdditionalAddress> additionalAddresses;
 
-      /** The company’s primary address. */
+      /** The company's primary address. */
       @SerializedName("address")
       Address address;
 
@@ -5760,7 +5768,7 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("monthly_estimated_revenue")
       MonthlyEstimatedRevenue monthlyEstimatedRevenue;
 
-      /** The company’s phone number (used for verification). */
+      /** The company's phone number (used for verification). */
       @SerializedName("phone")
       String phone;
 
@@ -5845,7 +5853,7 @@ public class Account extends StripeObject implements HasId {
         String town;
       }
 
-      /** The company’s primary address. */
+      /** The company's primary address. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -5906,35 +5914,35 @@ public class Account extends StripeObject implements HasId {
       public static class Documents extends StripeObject {
         /**
          * One or more documents that support the Bank account ownership verification requirement.
-         * Must be a document associated with the account’s primary active bank account that
+         * Must be a document associated with the account's primary active bank account that
          * displays the last 4 digits of the account number, either a statement or a check.
          */
         @SerializedName("bank_account_ownership_verification")
         BankAccountOwnershipVerification bankAccountOwnershipVerification;
 
-        /** One or more documents that demonstrate proof of a company’s license to operate. */
+        /** One or more documents that demonstrate proof of a company's license to operate. */
         @SerializedName("company_license")
         CompanyLicense companyLicense;
 
-        /** One or more documents showing the company’s Memorandum of Association. */
+        /** One or more documents showing the company's Memorandum of Association. */
         @SerializedName("company_memorandum_of_association")
         CompanyMemorandumOfAssociation companyMemorandumOfAssociation;
 
         /**
          * Certain countries only: One or more documents showing the ministerial decree legalizing
-         * the company’s establishment.
+         * the company's establishment.
          */
         @SerializedName("company_ministerial_decree")
         CompanyMinisterialDecree companyMinisterialDecree;
 
         /**
-         * One or more documents that demonstrate proof of a company’s registration with the
+         * One or more documents that demonstrate proof of a company's registration with the
          * appropriate local authorities.
          */
         @SerializedName("company_registration_verification")
         CompanyRegistrationVerification companyRegistrationVerification;
 
-        /** One or more documents that demonstrate proof of a company’s tax ID. */
+        /** One or more documents that demonstrate proof of a company's tax ID. */
         @SerializedName("company_tax_id_verification")
         CompanyTaxIdVerification companyTaxIdVerification;
 
@@ -5947,7 +5955,7 @@ public class Account extends StripeObject implements HasId {
         ProofOfAddress proofOfAddress;
 
         /**
-         * One or more documents showing the company’s proof of registration with the national
+         * One or more documents showing the company's proof of registration with the national
          * business registry.
          */
         @SerializedName("proof_of_registration")
@@ -5959,7 +5967,7 @@ public class Account extends StripeObject implements HasId {
 
         /**
          * One or more documents that support the Bank account ownership verification requirement.
-         * Must be a document associated with the account’s primary active bank account that
+         * Must be a document associated with the account's primary active bank account that
          * displays the last 4 digits of the account number, either a statement or a check.
          */
         @Getter
@@ -5983,7 +5991,7 @@ public class Account extends StripeObject implements HasId {
           String type;
         }
 
-        /** One or more documents that demonstrate proof of a company’s license to operate. */
+        /** One or more documents that demonstrate proof of a company's license to operate. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -6005,7 +6013,7 @@ public class Account extends StripeObject implements HasId {
           String type;
         }
 
-        /** One or more documents showing the company’s Memorandum of Association. */
+        /** One or more documents showing the company's Memorandum of Association. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -6029,7 +6037,7 @@ public class Account extends StripeObject implements HasId {
 
         /**
          * Certain countries only: One or more documents showing the ministerial decree legalizing
-         * the company’s establishment.
+         * the company's establishment.
          */
         @Getter
         @Setter
@@ -6053,7 +6061,7 @@ public class Account extends StripeObject implements HasId {
         }
 
         /**
-         * One or more documents that demonstrate proof of a company’s registration with the
+         * One or more documents that demonstrate proof of a company's registration with the
          * appropriate local authorities.
          */
         @Getter
@@ -6077,7 +6085,7 @@ public class Account extends StripeObject implements HasId {
           String type;
         }
 
-        /** One or more documents that demonstrate proof of a company’s tax ID. */
+        /** One or more documents that demonstrate proof of a company's tax ID. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -6172,7 +6180,7 @@ public class Account extends StripeObject implements HasId {
         }
 
         /**
-         * One or more documents showing the company’s proof of registration with the national
+         * One or more documents showing the company's proof of registration with the national
          * business registry.
          */
         @Getter
@@ -6511,7 +6519,7 @@ public class Account extends StripeObject implements HasId {
       List<Account.Identity.Individual.IdNumber> idNumbers;
 
       /**
-       * The individual's gender (International regulations require either &quot;male” or
+       * The individual's gender (International regulations require either &quot;male&quot; or
        * &quot;female&quot;).
        *
        * <p>One of {@code female}, or {@code male}.
@@ -6753,7 +6761,7 @@ public class Account extends StripeObject implements HasId {
         CompanyAuthorization companyAuthorization;
 
         /**
-         * One or more documents showing the person’s passport page with photo and personal data.
+         * One or more documents showing the person's passport page with photo and personal data.
          */
         @SerializedName("passport")
         Passport passport;
@@ -6772,7 +6780,7 @@ public class Account extends StripeObject implements HasId {
         SecondaryVerification secondaryVerification;
 
         /**
-         * One or more documents showing the person’s visa required for living in the country where
+         * One or more documents showing the person's visa required for living in the country where
          * they are residing.
          */
         @SerializedName("visa")
@@ -6804,7 +6812,7 @@ public class Account extends StripeObject implements HasId {
         }
 
         /**
-         * One or more documents showing the person’s passport page with photo and personal data.
+         * One or more documents showing the person's passport page with photo and personal data.
          */
         @Getter
         @Setter
@@ -6933,7 +6941,7 @@ public class Account extends StripeObject implements HasId {
         }
 
         /**
-         * One or more documents showing the person’s visa required for living in the country where
+         * One or more documents showing the person's visa required for living in the country where
          * they are residing.
          */
         @Getter

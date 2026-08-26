@@ -3854,7 +3854,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       /**
        * For point-in-time amendments (having no {@code amendment_end}), this attribute lets you set
        * or remove whether the subscription's billing cycle anchor is reset at the {@code
-       * amendment_start} timestamp.For time-span based amendments (having both {@code
+       * amendment_start} timestamp. For time-span based amendments (having both {@code
        * amendment_start} and {@code amendment_end}), the only value valid is {@code automatic},
        * which removes any previously configured billing cycle anchor resets scheduled to occur
        * during the window of time spanned by the amendment.
@@ -4009,7 +4009,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         /**
          * For point-in-time amendments (having no {@code amendment_end}), this attribute lets you
          * set or remove whether the subscription's billing cycle anchor is reset at the {@code
-         * amendment_start} timestamp.For time-span based amendments (having both {@code
+         * amendment_start} timestamp. For time-span based amendments (having both {@code
          * amendment_start} and {@code amendment_end}), the only value valid is {@code automatic},
          * which removes any previously configured billing cycle anchor resets scheduled to occur
          * during the window of time spanned by the amendment.
@@ -14376,7 +14376,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @SerializedName("applies_to")
       List<InvoiceCreatePreviewParams.SubscriptionDetails.BillingSchedule.AppliesTo> appliesTo;
 
-      /** The end date for the billing schedule. */
+      /**
+       * The end date for the billing schedule. You must not set this earlier than current period
+       * end for every applicable subscription item.
+       */
       @SerializedName("bill_until")
       BillUntil billUntil;
 
@@ -14458,7 +14461,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           return this;
         }
 
-        /** The end date for the billing schedule. */
+        /**
+         * The end date for the billing schedule. You must not set this earlier than current period
+         * end for every applicable subscription item.
+         */
         public Builder setBillUntil(
             InvoiceCreatePreviewParams.SubscriptionDetails.BillingSchedule.BillUntil billUntil) {
           this.billUntil = billUntil;

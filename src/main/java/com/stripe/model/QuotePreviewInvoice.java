@@ -1356,6 +1356,13 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       Bancontact bancontact;
 
       /**
+       * If paying by {@code billie}, this sub-hash contains details about the Billie payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("billie")
+      Billie billie;
+
+      /**
        * If paying by {@code blik}, this sub-hash contains details about the Blik payment method
        * options to pass to the invoice’s PaymentIntent.
        */
@@ -1479,6 +1486,15 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
         @SerializedName("preferred_language")
         String preferredLanguage;
       }
+
+      /**
+       * For more details about Billie, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Billie extends StripeObject {}
 
       /**
        * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API

@@ -247,7 +247,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     /**
      * For point-in-time amendments (having no {@code amendment_end}), this attribute lets you set
      * or remove whether the subscription's billing cycle anchor is reset at the {@code
-     * amendment_start} timestamp.For time-span based amendments (having both {@code
+     * amendment_start} timestamp. For time-span based amendments (having both {@code
      * amendment_start} and {@code amendment_end}), the only value valid is {@code automatic}, which
      * removes any previously configured billing cycle anchor resets scheduled to occur during the
      * window of time spanned by the amendment.
@@ -400,7 +400,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       /**
        * For point-in-time amendments (having no {@code amendment_end}), this attribute lets you set
        * or remove whether the subscription's billing cycle anchor is reset at the {@code
-       * amendment_start} timestamp.For time-span based amendments (having both {@code
+       * amendment_start} timestamp. For time-span based amendments (having both {@code
        * amendment_start} and {@code amendment_end}), the only value valid is {@code automatic},
        * which removes any previously configured billing cycle anchor resets scheduled to occur
        * during the window of time spanned by the amendment.

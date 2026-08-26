@@ -84,6 +84,30 @@ public final class PayoutMethodService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, PayoutMethod.class);
   }
+  /**
+   * Disable a PayoutMethod object. The payout method will not be available for use in outbound
+   * money movement. To re-enable the payout method, create an OutboundSetupIntent using <a
+   * href="https://docs.stripe.com/api/v2/money-management/outbound-setup-intents/create">{@code
+   * POST /v2/money_management/outbound_setup_intents}</a>.
+   */
+  public PayoutMethod disable(String id) throws StripeException, CannotProceedException {
+    return disable(id, (RequestOptions) null);
+  }
+  /**
+   * Disable a PayoutMethod object. The payout method will not be available for use in outbound
+   * money movement. To re-enable the payout method, create an OutboundSetupIntent using <a
+   * href="https://docs.stripe.com/api/v2/money-management/outbound-setup-intents/create">{@code
+   * POST /v2/money_management/outbound_setup_intents}</a>.
+   */
+  public PayoutMethod disable(String id, RequestOptions options)
+      throws StripeException, CannotProceedException {
+    String path =
+        String.format(
+            "/v2/money_management/payout_methods/%s/disable", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, PayoutMethod.class);
+  }
   /** Unarchive an PayoutMethod object. */
   public PayoutMethod unarchive(String id)
       throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException,

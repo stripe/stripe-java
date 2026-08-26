@@ -155,16 +155,6 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   PaymentMethodOptions paymentMethodOptions;
 
   /**
-   * The list of payment method types (for example, card) that this SetupIntent can use. If you
-   * don't provide this, Stripe will dynamically show relevant payment methods from your <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>. A
-   * list of valid payment method types can be found <a
-   * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-type">here</a>.
-   */
-  @SerializedName("payment_method_types")
-  List<String> paymentMethodTypes;
-
-  /**
    * The URL to redirect your customer back to after they authenticate or cancel their payment on
    * the payment method's app or site. To redirect to a mobile application, you can alternatively
    * supply an application URI scheme. This parameter can only be used with <a
@@ -219,7 +209,6 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       String paymentMethodConfiguration,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
-      List<String> paymentMethodTypes,
       String returnUrl,
       SingleUse singleUse,
       Usage usage,
@@ -243,7 +232,6 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     this.paymentMethodConfiguration = paymentMethodConfiguration;
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
-    this.paymentMethodTypes = paymentMethodTypes;
     this.returnUrl = returnUrl;
     this.singleUse = singleUse;
     this.usage = usage;
@@ -293,8 +281,6 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     private PaymentMethodOptions paymentMethodOptions;
 
-    private List<String> paymentMethodTypes;
-
     private String returnUrl;
 
     private SingleUse singleUse;
@@ -325,7 +311,6 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           this.paymentMethodConfiguration,
           this.paymentMethodData,
           this.paymentMethodOptions,
-          this.paymentMethodTypes,
           this.returnUrl,
           this.singleUse,
           this.usage,
@@ -626,32 +611,6 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     public Builder setPaymentMethodOptions(
         SetupIntentCreateParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
-      return this;
-    }
-
-    /**
-     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * SetupIntentCreateParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addPaymentMethodType(String element) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link SetupIntentCreateParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addAllPaymentMethodType(List<String> elements) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.addAll(elements);
       return this;
     }
 
@@ -13839,6 +13798,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     @SerializedName("test_pay")
     TEST_PAY("test_pay"),
+
+    @SerializedName("touch_n_go")
+    TOUCH_N_GO("touch_n_go"),
 
     @SerializedName("truemoney")
     TRUEMONEY("truemoney"),

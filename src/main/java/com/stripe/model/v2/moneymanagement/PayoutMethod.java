@@ -68,7 +68,7 @@ public class PayoutMethod extends StripeObject implements HasId {
   Boolean restricted;
 
   /**
-   * Closed Enum. The type of payout method.
+   * Open Enum. The type of payout method.
    *
    * <p>One of {@code bank_account}, {@code card}, or {@code crypto_wallet}.
    */
@@ -139,8 +139,8 @@ public class PayoutMethod extends StripeObject implements HasId {
     String country;
 
     /** List of enabled flows for this bank account (wire or local). */
-    @SerializedName("enabled_delivery_options")
-    List<String> enabledDeliveryOptions;
+    @SerializedName("enabled_delivery_schemes")
+    List<String> enabledDeliverySchemes;
 
     /** The ID of the Financial Connections Account used to create the bank account. */
     @SerializedName("financial_connections_account")
@@ -210,17 +210,23 @@ public class PayoutMethod extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class UsageStatus extends StripeObject {
     /**
-     * Payments status - used when sending OutboundPayments (sending funds to recipients).
+     * Payments status - used when sending OutboundPayments (sending funds to recipients). If
+     * disabled, enable the payout method by creating an OutboundSetupIntent using <a
+     * href="https://docs.stripe.com/api/v2/money-management/outbound-setup-intents/create">{@code
+     * POST /v2/money_management/outbound_setup_intents}</a>.
      *
-     * <p>One of {@code eligible}, {@code invalid}, or {@code requires_action}.
+     * <p>One of {@code disabled}, {@code eligible}, {@code invalid}, or {@code requires_action}.
      */
     @SerializedName("payments")
     String payments;
 
     /**
-     * Transfers status - used when making an OutboundTransfer (sending funds to yourself).
+     * Transfers status - used when making an OutboundTransfer (sending funds to yourself). If
+     * disabled, enable the payout method by creating an OutboundSetupIntent using <a
+     * href="https://docs.stripe.com/api/v2/money-management/outbound-setup-intents/create">{@code
+     * POST /v2/money_management/outbound_setup_intents}</a>.
      *
-     * <p>One of {@code eligible}, {@code invalid}, or {@code requires_action}.
+     * <p>One of {@code disabled}, {@code eligible}, {@code invalid}, or {@code requires_action}.
      */
     @SerializedName("transfers")
     String transfers;

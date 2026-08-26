@@ -49,7 +49,12 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   @SerializedName("billing_cycle_anchor")
   BillingCycleAnchor billingCycleAnchor;
 
-  /** Sets the billing schedules for the subscription. */
+  /**
+   * An array of billing schedules, which allow you to bill customers in advance for multiple
+   * service periods. Requires flexible billing mode and API version 2026-05-27.dahlia or later.
+   * Learn more about <a
+   * href="https://docs.stripe.com/billing/subscriptions/prebilling">prebilling</a>.
+   */
   @SerializedName("billing_schedules")
   Object billingSchedules;
 
@@ -554,13 +559,23 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Sets the billing schedules for the subscription. */
+    /**
+     * An array of billing schedules, which allow you to bill customers in advance for multiple
+     * service periods. Requires flexible billing mode and API version 2026-05-27.dahlia or later.
+     * Learn more about <a
+     * href="https://docs.stripe.com/billing/subscriptions/prebilling">prebilling</a>.
+     */
     public Builder setBillingSchedules(EmptyParam billingSchedules) {
       this.billingSchedules = billingSchedules;
       return this;
     }
 
-    /** Sets the billing schedules for the subscription. */
+    /**
+     * An array of billing schedules, which allow you to bill customers in advance for multiple
+     * service periods. Requires flexible billing mode and API version 2026-05-27.dahlia or later.
+     * Learn more about <a
+     * href="https://docs.stripe.com/billing/subscriptions/prebilling">prebilling</a>.
+     */
     public Builder setBillingSchedules(
         List<SubscriptionUpdateParams.BillingSchedule> billingSchedules) {
       this.billingSchedules = billingSchedules;
@@ -2563,7 +2578,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     @SerializedName("applies_to")
     List<SubscriptionUpdateParams.BillingSchedule.AppliesTo> appliesTo;
 
-    /** The end date for the billing schedule. */
+    /**
+     * The end date for the billing schedule. You must not set this earlier than current period end
+     * for every applicable subscription item.
+     */
     @SerializedName("bill_until")
     BillUntil billUntil;
 
@@ -2640,7 +2658,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The end date for the billing schedule. */
+      /**
+       * The end date for the billing schedule. You must not set this earlier than current period
+       * end for every applicable subscription item.
+       */
       public Builder setBillUntil(SubscriptionUpdateParams.BillingSchedule.BillUntil billUntil) {
         this.billUntil = billUntil;
         return this;
@@ -3158,11 +3179,22 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     @SerializedName("feedback")
     ApiRequestParams.EnumParam feedback;
 
+    /**
+     * Customized feedback options that provide deeper insight into why the subscription was
+     * canceled, if the subscription was canceled explicitly by the user.
+     */
+    @SerializedName("feedback_option")
+    Object feedbackOption;
+
     private CancellationDetails(
-        Object comment, Map<String, Object> extraParams, ApiRequestParams.EnumParam feedback) {
+        Object comment,
+        Map<String, Object> extraParams,
+        ApiRequestParams.EnumParam feedback,
+        Object feedbackOption) {
       this.comment = comment;
       this.extraParams = extraParams;
       this.feedback = feedback;
+      this.feedbackOption = feedbackOption;
     }
 
     public static Builder builder() {
@@ -3176,10 +3208,12 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       private ApiRequestParams.EnumParam feedback;
 
+      private Object feedbackOption;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionUpdateParams.CancellationDetails build() {
         return new SubscriptionUpdateParams.CancellationDetails(
-            this.comment, this.extraParams, this.feedback);
+            this.comment, this.extraParams, this.feedback, this.feedbackOption);
       }
 
       /**
@@ -3242,6 +3276,24 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        */
       public Builder setFeedback(EmptyParam feedback) {
         this.feedback = feedback;
+        return this;
+      }
+
+      /**
+       * Customized feedback options that provide deeper insight into why the subscription was
+       * canceled, if the subscription was canceled explicitly by the user.
+       */
+      public Builder setFeedbackOption(String feedbackOption) {
+        this.feedbackOption = feedbackOption;
+        return this;
+      }
+
+      /**
+       * Customized feedback options that provide deeper insight into why the subscription was
+       * canceled, if the subscription was canceled explicitly by the user.
+       */
+      public Builder setFeedbackOption(EmptyParam feedbackOption) {
+        this.feedbackOption = feedbackOption;
         return this;
       }
     }
@@ -5790,6 +5842,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Object bancontact;
 
       /**
+       * This sub-hash contains details about the Billie payment method options to pass to the
+       * invoice’s PaymentIntent.
+       */
+      @SerializedName("billie")
+      Object billie;
+
+      /**
        * This sub-hash contains details about the Blik payment method options to pass to the
        * invoice’s PaymentIntent.
        */
@@ -5871,6 +5930,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private PaymentMethodOptions(
           Object acssDebit,
           Object bancontact,
+          Object billie,
           Object blik,
           Object card,
           Object customerBalance,
@@ -5884,6 +5944,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           Object usBankAccount) {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
+        this.billie = billie;
         this.blik = blik;
         this.card = card;
         this.customerBalance = customerBalance;
@@ -5905,6 +5966,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         private Object acssDebit;
 
         private Object bancontact;
+
+        private Object billie;
 
         private Object blik;
 
@@ -5933,6 +5996,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions(
               this.acssDebit,
               this.bancontact,
+              this.billie,
               this.blik,
               this.card,
               this.customerBalance,
@@ -5981,6 +6045,25 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          */
         public Builder setBancontact(EmptyParam bancontact) {
           this.bancontact = bancontact;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Billie payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setBillie(
+            SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie billie) {
+          this.billie = billie;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Billie payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setBillie(EmptyParam billie) {
+          this.billie = billie;
           return this;
         }
 
@@ -6518,6 +6601,68 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
           PreferredLanguage(String value) {
             this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Billie {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Billie(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie build() {
+            return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
           }
         }
       }
@@ -8831,6 +8976,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       @SerializedName("bancontact")
       BANCONTACT("bancontact"),
+
+      @SerializedName("billie")
+      BILLIE("billie"),
 
       @SerializedName("blik")
       BLIK("blik"),

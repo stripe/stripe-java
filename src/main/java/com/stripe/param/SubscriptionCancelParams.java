@@ -183,11 +183,22 @@ public class SubscriptionCancelParams extends ApiRequestParams {
     @SerializedName("feedback")
     ApiRequestParams.EnumParam feedback;
 
+    /**
+     * Customized feedback options that provide deeper insight into why the subscription was
+     * canceled, if the subscription was canceled explicitly by the user.
+     */
+    @SerializedName("feedback_option")
+    String feedbackOption;
+
     private CancellationDetails(
-        Object comment, Map<String, Object> extraParams, ApiRequestParams.EnumParam feedback) {
+        Object comment,
+        Map<String, Object> extraParams,
+        ApiRequestParams.EnumParam feedback,
+        String feedbackOption) {
       this.comment = comment;
       this.extraParams = extraParams;
       this.feedback = feedback;
+      this.feedbackOption = feedbackOption;
     }
 
     public static Builder builder() {
@@ -201,10 +212,12 @@ public class SubscriptionCancelParams extends ApiRequestParams {
 
       private ApiRequestParams.EnumParam feedback;
 
+      private String feedbackOption;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionCancelParams.CancellationDetails build() {
         return new SubscriptionCancelParams.CancellationDetails(
-            this.comment, this.extraParams, this.feedback);
+            this.comment, this.extraParams, this.feedback, this.feedbackOption);
       }
 
       /**
@@ -267,6 +280,15 @@ public class SubscriptionCancelParams extends ApiRequestParams {
        */
       public Builder setFeedback(EmptyParam feedback) {
         this.feedback = feedback;
+        return this;
+      }
+
+      /**
+       * Customized feedback options that provide deeper insight into why the subscription was
+       * canceled, if the subscription was canceled explicitly by the user.
+       */
+      public Builder setFeedbackOption(String feedbackOption) {
+        this.feedbackOption = feedbackOption;
         return this;
       }
     }

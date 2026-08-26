@@ -654,6 +654,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class At extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -664,6 +667,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -813,6 +833,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Be extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -823,6 +846,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -867,6 +907,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Bg extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -877,6 +920,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1147,6 +1207,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Cy extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1157,6 +1220,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1184,6 +1264,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Cz extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1194,6 +1277,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1221,6 +1321,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class De extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1231,6 +1334,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1258,6 +1378,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Dk extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1268,6 +1391,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1312,6 +1452,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Ee extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1322,6 +1465,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1366,6 +1526,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Es extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1376,6 +1539,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1420,6 +1600,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Fi extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1430,6 +1613,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1457,6 +1657,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Fr extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1467,6 +1670,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1565,6 +1785,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Gr extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1575,6 +1798,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1602,6 +1842,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Hr extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1612,6 +1855,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1639,6 +1899,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Hu extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1649,6 +1912,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1693,6 +1973,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Ie extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1703,6 +1986,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1764,6 +2064,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class It extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1774,6 +2077,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1957,6 +2277,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Lt extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -1967,6 +2290,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -1994,6 +2334,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Lu extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -2004,6 +2347,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -2031,6 +2391,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Lv extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -2041,6 +2404,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -2153,6 +2533,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Mt extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -2163,6 +2546,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -2241,6 +2641,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Nl extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -2251,6 +2654,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -2420,6 +2840,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Pl extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -2430,6 +2853,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -2457,6 +2897,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Pt extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -2467,6 +2910,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -2494,6 +2954,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Ro extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -2504,6 +2967,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -2582,6 +3062,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Se extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -2592,6 +3075,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -2656,6 +3156,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Si extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -2666,6 +3169,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a
@@ -2693,6 +3213,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Sk extends StripeObject {
+      @SerializedName("igic")
+      Igic igic;
+
       @SerializedName("standard")
       Standard standard;
 
@@ -2703,6 +3226,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Igic, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Igic extends StripeObject {
+        /**
+         * Place of supply scheme used in an IGIC registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
 
       /**
        * For more details about Standard, please refer to the <a

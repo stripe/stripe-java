@@ -53,6 +53,7 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.core.account_person_token", com.stripe.model.v2.core.AccountPersonToken.class);
     classLookup.put("v2.core.account_token", com.stripe.model.v2.core.AccountToken.class);
+    classLookup.put("v2.core.approval_request", com.stripe.model.v2.core.ApprovalRequest.class);
     classLookup.put("v2.core.batch_job", com.stripe.model.v2.core.BatchJob.class);
     classLookup.put("v2.core.event", com.stripe.model.v2.core.Event.class);
     classLookup.put("v2.core.event_destination", com.stripe.model.v2.core.EventDestination.class);
@@ -117,6 +118,12 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.orchestrated_commerce.agreement",
         com.stripe.model.v2.orchestratedcommerce.Agreement.class);
+
+    classLookup.put(
+        "v2.signals.account_activity", com.stripe.model.v2.signals.AccountActivity.class);
+    classLookup.put(
+        "v2.signals.account_evaluation", com.stripe.model.v2.signals.AccountEvaluation.class);
+    classLookup.put("v2.signals.account_signal", com.stripe.model.v2.signals.AccountSignal.class);
 
     eventClassLookup.put(
         "v1.billing.meter.error_report_triggered",
@@ -189,6 +196,27 @@ public final class EventDataClassLookup {
         "v2.core.account_person.deleted", com.stripe.events.V2CoreAccountPersonDeletedEvent.class);
     eventClassLookup.put(
         "v2.core.account_person.updated", com.stripe.events.V2CoreAccountPersonUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.approved",
+        com.stripe.events.V2CoreApprovalRequestApprovedEvent.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.canceled",
+        com.stripe.events.V2CoreApprovalRequestCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.created",
+        com.stripe.events.V2CoreApprovalRequestCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.expired",
+        com.stripe.events.V2CoreApprovalRequestExpiredEvent.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.failed",
+        com.stripe.events.V2CoreApprovalRequestFailedEvent.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.rejected",
+        com.stripe.events.V2CoreApprovalRequestRejectedEvent.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.succeeded",
+        com.stripe.events.V2CoreApprovalRequestSucceededEvent.class);
     eventClassLookup.put(
         "v2.core.batch_job.batch_failed", com.stripe.events.V2CoreBatchJobBatchFailedEvent.class);
     eventClassLookup.put(
@@ -362,5 +390,8 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.orchestrated_commerce.agreement.terminated",
         com.stripe.events.V2OrchestratedCommerceAgreementTerminatedEvent.class);
+    eventClassLookup.put(
+        "v2.signals.account_evaluation.complete",
+        com.stripe.events.V2SignalsAccountEvaluationCompleteEvent.class);
   }
 }

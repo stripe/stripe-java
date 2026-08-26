@@ -102,6 +102,27 @@ public final class EventNotificationClassLookup {
         "v2.core.account_person.updated",
         com.stripe.events.V2CoreAccountPersonUpdatedEventNotification.class);
     eventClassLookup.put(
+        "v2.core.approval_request.approved",
+        com.stripe.events.V2CoreApprovalRequestApprovedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.canceled",
+        com.stripe.events.V2CoreApprovalRequestCanceledEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.created",
+        com.stripe.events.V2CoreApprovalRequestCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.expired",
+        com.stripe.events.V2CoreApprovalRequestExpiredEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.failed",
+        com.stripe.events.V2CoreApprovalRequestFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.rejected",
+        com.stripe.events.V2CoreApprovalRequestRejectedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.approval_request.succeeded",
+        com.stripe.events.V2CoreApprovalRequestSucceededEventNotification.class);
+    eventClassLookup.put(
         "v2.core.batch_job.batch_failed",
         com.stripe.events.V2CoreBatchJobBatchFailedEventNotification.class);
     eventClassLookup.put(
@@ -286,5 +307,8 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.orchestrated_commerce.agreement.terminated",
         com.stripe.events.V2OrchestratedCommerceAgreementTerminatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.signals.account_evaluation.complete",
+        com.stripe.events.V2SignalsAccountEvaluationCompleteEventNotification.class);
   }
 }
