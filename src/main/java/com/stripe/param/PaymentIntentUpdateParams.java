@@ -26647,6 +26647,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName("test_pay")
     TEST_PAY("test_pay"),
 
+    @SerializedName("touch_n_go")
+    TOUCH_N_GO("touch_n_go"),
+
     @SerializedName("truemoney")
     TRUEMONEY("truemoney"),
 

@@ -3,7 +3,6 @@ package com.stripe.model.terminal;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Address;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
@@ -282,6 +281,45 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, Location.class);
+  }
+
+  /**
+   * For more details about Address, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Address extends StripeObject {
+    /** City, district, suburb, town, or village. */
+    @SerializedName("city")
+    String city;
+
+    /**
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
+     */
+    @SerializedName("country")
+    String country;
+
+    /** Address line 1, such as the street, PO Box, or company name. */
+    @SerializedName("line1")
+    String line1;
+
+    /** Address line 2, such as the apartment, suite, unit, or building. */
+    @SerializedName("line2")
+    String line2;
+
+    /** ZIP or postal code. */
+    @SerializedName("postal_code")
+    String postalCode;
+
+    /**
+     * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+     * 3166-2</a>).
+     */
+    @SerializedName("state")
+    String state;
   }
 
   /**

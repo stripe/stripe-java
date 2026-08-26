@@ -1765,35 +1765,35 @@ public class AccountTokenCreateParams extends ApiRequestParams {
       public static class Documents {
         /**
          * One or more documents that support the bank account ownership verification requirement.
-         * Must be a document associated with the account’s primary active bank account that
+         * Must be a document associated with the account's primary active bank account that
          * displays the last 4 digits of the account number, either a statement or a check.
          */
         @SerializedName("bank_account_ownership_verification")
         BankAccountOwnershipVerification bankAccountOwnershipVerification;
 
-        /** One or more documents that demonstrate proof of a company’s license to operate. */
+        /** One or more documents that demonstrate proof of a company's license to operate. */
         @SerializedName("company_license")
         CompanyLicense companyLicense;
 
-        /** One or more documents showing the company’s Memorandum of Association. */
+        /** One or more documents showing the company's Memorandum of Association. */
         @SerializedName("company_memorandum_of_association")
         CompanyMemorandumOfAssociation companyMemorandumOfAssociation;
 
         /**
          * Certain countries only: One or more documents showing the ministerial decree legalizing
-         * the company’s establishment.
+         * the company's establishment.
          */
         @SerializedName("company_ministerial_decree")
         CompanyMinisterialDecree companyMinisterialDecree;
 
         /**
-         * One or more documents that demonstrate proof of a company’s registration with the
+         * One or more documents that demonstrate proof of a company's registration with the
          * appropriate local authorities.
          */
         @SerializedName("company_registration_verification")
         CompanyRegistrationVerification companyRegistrationVerification;
 
-        /** One or more documents that demonstrate proof of a company’s tax ID. */
+        /** One or more documents that demonstrate proof of a company's tax ID. */
         @SerializedName("company_tax_id_verification")
         CompanyTaxIdVerification companyTaxIdVerification;
 
@@ -1893,7 +1893,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * One or more documents that support the bank account ownership verification requirement.
-           * Must be a document associated with the account’s primary active bank account that
+           * Must be a document associated with the account's primary active bank account that
            * displays the last 4 digits of the account number, either a statement or a check.
            */
           public Builder setBankAccountOwnershipVerification(
@@ -1904,7 +1904,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** One or more documents that demonstrate proof of a company’s license to operate. */
+          /** One or more documents that demonstrate proof of a company's license to operate. */
           public Builder setCompanyLicense(
               AccountTokenCreateParams.Identity.BusinessDetails.Documents.CompanyLicense
                   companyLicense) {
@@ -1912,7 +1912,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** One or more documents showing the company’s Memorandum of Association. */
+          /** One or more documents showing the company's Memorandum of Association. */
           public Builder setCompanyMemorandumOfAssociation(
               AccountTokenCreateParams.Identity.BusinessDetails.Documents
                       .CompanyMemorandumOfAssociation
@@ -1923,7 +1923,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * Certain countries only: One or more documents showing the ministerial decree legalizing
-           * the company’s establishment.
+           * the company's establishment.
            */
           public Builder setCompanyMinisterialDecree(
               AccountTokenCreateParams.Identity.BusinessDetails.Documents.CompanyMinisterialDecree
@@ -1933,7 +1933,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           }
 
           /**
-           * One or more documents that demonstrate proof of a company’s registration with the
+           * One or more documents that demonstrate proof of a company's registration with the
            * appropriate local authorities.
            */
           public Builder setCompanyRegistrationVerification(
@@ -1944,7 +1944,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** One or more documents that demonstrate proof of a company’s tax ID. */
+          /** One or more documents that demonstrate proof of a company's tax ID. */
           public Builder setCompanyTaxIdVerification(
               AccountTokenCreateParams.Identity.BusinessDetails.Documents.CompanyTaxIdVerification
                   companyTaxIdVerification) {
@@ -6174,7 +6174,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * One or more documents showing the person’s passport page with photo and personal data.
+         * One or more documents showing the person's passport page with photo and personal data.
          */
         @SerializedName("passport")
         Passport passport;
@@ -6193,7 +6193,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
         SecondaryVerification secondaryVerification;
 
         /**
-         * One or more documents showing the person’s visa required for living in the country where
+         * One or more documents showing the person's visa required for living in the country where
          * they are residing.
          */
         @SerializedName("visa")
@@ -6282,7 +6282,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           }
 
           /**
-           * One or more documents showing the person’s passport page with photo and personal data.
+           * One or more documents showing the person's passport page with photo and personal data.
            */
           public Builder setPassport(
               AccountTokenCreateParams.Identity.Individual.Documents.Passport passport) {
@@ -6312,7 +6312,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           }
 
           /**
-           * One or more documents showing the person’s visa required for living in the country
+           * One or more documents showing the person's visa required for living in the country
            * where they are residing.
            */
           public Builder setVisa(AccountTokenCreateParams.Identity.Individual.Documents.Visa visa) {
@@ -7547,7 +7547,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether the person is an owner of the account’s identity. */
+        /** Whether the person is an owner of the account's identity. */
         @SerializedName("owner")
         Boolean owner;
 
@@ -7649,7 +7649,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether the person is an owner of the account’s identity. */
+          /** Whether the person is an owner of the account's identity. */
           public Builder setOwner(Boolean owner) {
             this.owner = owner;
             return this;

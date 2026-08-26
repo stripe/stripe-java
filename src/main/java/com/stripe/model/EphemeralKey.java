@@ -15,6 +15,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Ephemeral keys give the SDKs (like Stripe's mobile SDKs and Issuing Elements) temporary, scoped
+ * access to a specific resource, such as a Customer, Issuing Card, or Identity VerificationSession,
+ * without exposing your secret API key.
+ *
+ * <p>Related guides: <a href="https://docs.stripe.com/issuing/elements">Using Issuing Elements</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

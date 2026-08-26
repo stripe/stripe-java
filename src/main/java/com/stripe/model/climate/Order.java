@@ -97,7 +97,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @SerializedName("delivery_details")
   List<Order.DeliveryDetail> deliveryDetails;
 
-  /** The year this order is expected to be delivered. */
+  /**
+   * The year this order is expected to be delivered. If the year is in the past, the order is a
+   * spot purchase and will be delivered within 30 days of purchase.
+   */
   @SerializedName("expected_delivery_year")
   Long expectedDeliveryYear;
 

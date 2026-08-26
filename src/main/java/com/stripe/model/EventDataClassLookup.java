@@ -110,6 +110,7 @@ public final class EventDataClassLookup {
         "billing.credit_balance_transaction",
         com.stripe.model.billing.CreditBalanceTransaction.class);
     classLookup.put("billing.credit_grant", com.stripe.model.billing.CreditGrant.class);
+    classLookup.put("billing.feedback_option", com.stripe.model.billing.FeedbackOption.class);
     classLookup.put("billing.meter", com.stripe.model.billing.Meter.class);
     classLookup.put("billing.meter_event", com.stripe.model.billing.MeterEvent.class);
     classLookup.put(

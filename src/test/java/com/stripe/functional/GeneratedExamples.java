@@ -14819,7 +14819,9 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testSetupIntentsPost() throws StripeException {
     SetupIntentCreateParams params =
-        SetupIntentCreateParams.builder().addPaymentMethodType("card").build();
+        SetupIntentCreateParams.builder()
+            .addAllowedPaymentMethodType(SetupIntentCreateParams.AllowedPaymentMethodType.CARD)
+            .build();
 
     SetupIntent setupIntent = SetupIntent.create(params);
     assertNotNull(setupIntent);
@@ -14832,7 +14834,10 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.SetupIntentCreateParams params =
-        com.stripe.param.SetupIntentCreateParams.builder().addPaymentMethodType("card").build();
+        com.stripe.param.SetupIntentCreateParams.builder()
+            .addAllowedPaymentMethodType(
+                com.stripe.param.SetupIntentCreateParams.AllowedPaymentMethodType.CARD)
+            .build();
 
     com.stripe.model.SetupIntent setupIntent = client.v1().setupIntents().create(params);
     assertNotNull(setupIntent);
@@ -14845,7 +14850,10 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.SetupIntentCreateParams params =
-        com.stripe.param.SetupIntentCreateParams.builder().addPaymentMethodType("card").build();
+        com.stripe.param.SetupIntentCreateParams.builder()
+            .addAllowedPaymentMethodType(
+                com.stripe.param.SetupIntentCreateParams.AllowedPaymentMethodType.CARD)
+            .build();
 
     com.stripe.model.SetupIntent setupIntent = client.setupIntents().create(params);
     assertNotNull(setupIntent);

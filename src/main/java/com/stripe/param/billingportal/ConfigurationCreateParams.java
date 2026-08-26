@@ -1002,6 +1002,10 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** The IDs of custom feedback options to use for this cancellation reason. */
+        @SerializedName("feedback_options")
+        Object feedbackOptions;
+
         /**
          * <strong>Required.</strong> Which cancellation reasons will be given as options to the
          * customer.
@@ -1010,9 +1014,13 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         Object options;
 
         private CancellationReason(
-            Boolean enabled, Map<String, Object> extraParams, Object options) {
+            Boolean enabled,
+            Map<String, Object> extraParams,
+            Object feedbackOptions,
+            Object options) {
           this.enabled = enabled;
           this.extraParams = extraParams;
+          this.feedbackOptions = feedbackOptions;
           this.options = options;
         }
 
@@ -1025,12 +1033,14 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private Object feedbackOptions;
+
           private Object options;
 
           /** Finalize and obtain parameter instance from this builder. */
           public ConfigurationCreateParams.Features.SubscriptionCancel.CancellationReason build() {
             return new ConfigurationCreateParams.Features.SubscriptionCancel.CancellationReason(
-                this.enabled, this.extraParams, this.options);
+                this.enabled, this.extraParams, this.feedbackOptions, this.options);
           }
 
           /** <strong>Required.</strong> Whether the feature is enabled. */
@@ -1066,6 +1076,50 @@ public class ConfigurationCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `feedbackOptions` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * ConfigurationCreateParams.Features.SubscriptionCancel.CancellationReason#feedbackOptions}
+           * for the field documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addFeedbackOption(String element) {
+            if (this.feedbackOptions == null || this.feedbackOptions instanceof EmptyParam) {
+              this.feedbackOptions = new ArrayList<String>();
+            }
+            ((List<String>) this.feedbackOptions).add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `feedbackOptions` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * ConfigurationCreateParams.Features.SubscriptionCancel.CancellationReason#feedbackOptions}
+           * for the field documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addAllFeedbackOption(List<String> elements) {
+            if (this.feedbackOptions == null || this.feedbackOptions instanceof EmptyParam) {
+              this.feedbackOptions = new ArrayList<String>();
+            }
+            ((List<String>) this.feedbackOptions).addAll(elements);
+            return this;
+          }
+
+          /** The IDs of custom feedback options to use for this cancellation reason. */
+          public Builder setFeedbackOptions(EmptyParam feedbackOptions) {
+            this.feedbackOptions = feedbackOptions;
+            return this;
+          }
+
+          /** The IDs of custom feedback options to use for this cancellation reason. */
+          public Builder setFeedbackOptions(List<String> feedbackOptions) {
+            this.feedbackOptions = feedbackOptions;
             return this;
           }
 
