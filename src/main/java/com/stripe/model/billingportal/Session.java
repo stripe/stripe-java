@@ -186,6 +186,10 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("after_completion")
     AfterCompletion afterCompletion;
 
+    /** Configuration when {@code flow.type=customer_update}. */
+    @SerializedName("customer_update")
+    CustomerUpdate customerUpdate;
+
     /** Configuration when {@code flow.type=subscription_cancel}. */
     @SerializedName("subscription_cancel")
     SubscriptionCancel subscriptionCancel;
@@ -201,8 +205,8 @@ public class Session extends ApiResource implements HasId {
     /**
      * Type of flow that the customer will go through.
      *
-     * <p>One of {@code payment_method_update}, {@code subscription_cancel}, {@code
-     * subscription_update}, or {@code subscription_update_confirm}.
+     * <p>One of {@code customer_update}, {@code payment_method_update}, {@code
+     * subscription_cancel}, {@code subscription_update}, or {@code subscription_update_confirm}.
      */
     @SerializedName("type")
     String type;
@@ -257,6 +261,15 @@ public class Session extends ApiResource implements HasId {
         String returnUrl;
       }
     }
+
+    /**
+     * For more details about CustomerUpdate, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomerUpdate extends StripeObject {}
 
     /**
      * For more details about SubscriptionCancel, please refer to the <a

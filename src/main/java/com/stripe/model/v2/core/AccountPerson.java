@@ -326,7 +326,7 @@ public class AccountPerson extends StripeObject implements HasId {
     @SerializedName("company_authorization")
     CompanyAuthorization companyAuthorization;
 
-    /** One or more documents showing the person’s passport page with photo and personal data. */
+    /** One or more documents showing the person's passport page with photo and personal data. */
     @SerializedName("passport")
     Passport passport;
 
@@ -342,7 +342,7 @@ public class AccountPerson extends StripeObject implements HasId {
     SecondaryVerification secondaryVerification;
 
     /**
-     * One or more documents showing the person’s visa required for living in the country where they
+     * One or more documents showing the person's visa required for living in the country where they
      * are residing.
      */
     @SerializedName("visa")
@@ -373,7 +373,7 @@ public class AccountPerson extends StripeObject implements HasId {
       String type;
     }
 
-    /** One or more documents showing the person’s passport page with photo and personal data. */
+    /** One or more documents showing the person's passport page with photo and personal data. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -495,7 +495,7 @@ public class AccountPerson extends StripeObject implements HasId {
     }
 
     /**
-     * One or more documents showing the person’s visa required for living in the country where they
+     * One or more documents showing the person's visa required for living in the country where they
      * are residing.
      */
     @Getter

@@ -1369,6 +1369,9 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("customer_update")
+      CUSTOMER_UPDATE("customer_update"),
+
       @SerializedName("payment_method_update")
       PAYMENT_METHOD_UPDATE("payment_method_update"),
 
