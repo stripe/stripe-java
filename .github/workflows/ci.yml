@@ -188,7 +188,7 @@ jobs:
           java-version: "17"
           architecture: x64
           distribution: zulu
-      - run: ./gradlew build
+      - run: ./gradlew publishToMavenLocal
 
   publish-docs:
     if: >-
