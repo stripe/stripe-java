@@ -6,6 +6,7 @@ on:
     branches:
       - master
       - beta
+      - private-preview
       - sdk-release/**
       - feature/**
     tags:
@@ -125,6 +126,9 @@ jobs:
           echo "JAVA_TEST_HOME=$JAVA_TEST_HOME"
 
       - uses: stripe/openapi/actions/stripe-mock@master
+        with:
+          # Used to determine if stripe-mock runs in beta mode
+          base: ${{ github.base_ref == 'private-preview' && 'beta' || github.ref_name == 'private-preview' && 'beta' || contains(github.ref_name, '-alpha.') && 'beta' || github.base_ref || github.ref_name }}
       - name: Run test suite
         run: just test
 
