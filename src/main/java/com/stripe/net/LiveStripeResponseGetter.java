@@ -476,6 +476,31 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
   }
 
+  /**
+   * Asserts that a request path is origin-relative: that it begins with a single {@code "/"}.
+   *
+   * <p>The absolute URL is built by concatenating a base URL onto this path, and no base URL ends
+   * in a slash. A path like {@code "@evil.example/v1/x"} or {@code ".evil.example/v1/x"} would
+   * therefore land inside the authority component and send the request -- {@code Authorization}
+   * header included -- to a host of the path's choosing. Some request paths originate in remote
+   * data (a webhook body's {@code related_object.url}, a collection's {@code url}, a response's
+   * {@code next_page_url}), so the path cannot be assumed to be well-formed.
+   *
+   * <p>A single leading slash is sufficient: it terminates the authority component, after which
+   * nothing in the path can extend it. Deliberately not using {@link java.net.URI} to parse -- it
+   * enforces RFC 2396 strictly and would reject paths containing characters that callers have
+   * always been able to send.
+   *
+   * <p>Stripe only ever issues plain paths, so anything else is tampering and is rejected rather
+   * than sanitized.
+   */
+  static void validatePath(String path) {
+    if (path == null || !path.startsWith("/") || path.startsWith("//")) {
+      throw new IllegalArgumentException(
+          "Request path must begin with a single \"/\", got: " + path);
+    }
+  }
+
   private String fullUrl(BaseApiRequest apiRequest) {
     BaseAddress baseAddress = apiRequest.getBaseAddress();
     RequestOptions options = apiRequest.getOptions();
@@ -500,6 +525,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     if (options != null && options.getBaseUrl() != null) {
       baseUrl = options.getBaseUrl();
     }
+    validatePath(relativeUrl);
     return String.format("%s%s", baseUrl, relativeUrl);
   }
 }
