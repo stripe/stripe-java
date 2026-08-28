@@ -2,12 +2,14 @@ package com.stripe;
 
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Event;
 import com.stripe.model.StripeObject;
 import com.stripe.model.v2.core.EventNotification;
 import com.stripe.net.*;
 import com.stripe.net.Webhook.Signature;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
+import lombok.Builder;
 import lombok.Getter;
 
 /**
@@ -41,6 +43,62 @@ public class StripeClient {
     return responseGetter;
   }
 
+  /** Gets the current StripeContext from the client's configuration. Used in unit testing. */
+  protected String getContext() {
+    // TODO(major): add getOptions to the StripeResponseGetter interface? that would simplify this
+    if (!(responseGetter instanceof LiveStripeResponseGetter)) {
+      return null;
+    }
+
+    LiveStripeResponseGetter liveGetter = (LiveStripeResponseGetter) responseGetter;
+    StripeResponseGetterOptions options = liveGetter.getOptions();
+
+    return options.getStripeContext();
+  }
+
+  /**
+   * Creates a new StripeClient with the same configuration as this client but with a custom
+   * StripeContext. This method is useful for creating thread-safe clients with different contexts,
+   * such as when processing webhooks in parallel where each webhook has its own context.
+   *
+   * <p>The new client will share the same configuration (API key, timeouts, proxy settings, etc.)
+   * and HTTP client as this client, but will have the specified context. This allows for efficient
+   * parallel processing without reinitializing HTTP connections.
+   *
+   * @param context the custom stripe_context to use for the new client
+   * @return a new StripeClient with the custom context
+   * @throws IllegalStateException if this client doesn't use a LiveStripeResponseGetter
+   */
+  public StripeClient withStripeContext(StripeContext context) {
+    // Convert StripeContext to String
+    String contextString = (context == null) ? null : context.toString();
+
+    StripeResponseGetter responseGetter = this.getResponseGetter();
+
+    // We can only create a new client for LiveStripeResponseGetter because it's the only class with
+    // `getOptions()`. If we add that method to the interface in a later major, we could remove this
+    // check.
+    if (!(responseGetter instanceof LiveStripeResponseGetter)) {
+      throw new IllegalStateException(
+          "Cannot create a client with custom context for non-Live response getters");
+    }
+
+    LiveStripeResponseGetter liveGetter = (LiveStripeResponseGetter) responseGetter;
+
+    // Create a new LiveStripeResponseGetter with updated context, reusing the HTTP client
+    LiveStripeResponseGetter newResponseGetter =
+        liveGetter.withNewOptions(
+            options -> {
+              ClientStripeResponseGetterOptions existingOptions =
+                  (ClientStripeResponseGetterOptions) options;
+
+              return existingOptions.toBuilder().stripeContext(contextString).build();
+            });
+
+    // Create and return a new StripeClient with the new response getter
+    return new StripeClient(newResponseGetter);
+  }
+
   /**
    * Returns an StripeEvent instance using the provided JSON payload. Throws a JsonSyntaxException
    * if the payload is not valid JSON, and a SignatureVerificationException if the signature
@@ -58,9 +116,10 @@ public class StripeClient {
   }
 
   /**
-   * Returns an StripeEvent instance using the provided JSON payload. Throws a JsonSyntaxException
-   * if the payload is not valid JSON, and a SignatureVerificationException if the signature
-   * verification fails for any reason.
+   * Constructs a <a href="https://docs.stripe.com/event-destinations#thin-payload">thin event
+   * notification</a> from an incoming webhook after verifying its authenticity. To work with a
+   * webhook that has already been verified (i.e. one from a cloud provider, an asynchronous queue,
+   * or during testing), see {@code parseEventNotificationWithoutVerification}.
    *
    * @param payload the payload sent by Stripe.
    * @param sigHeader the contents of the signature header sent by Stripe.
@@ -115,6 +174,45 @@ public class StripeClient {
     com.stripe.model.Event event = Webhook.constructEvent(payload, sigHeader, secret, tolerance);
     event.setResponseGetter(this.getResponseGetter());
     return event;
+  }
+
+  /**
+   * Constructs a <a href="https://docs.stripe.com/event-destinations#snapshot-payload">snapshot
+   * event</a> from an incoming webhook without first verifying its authenticity. Should be used
+   * after calling {@code Webhook.Signature.verifyHeader(...)} or with input from a trusted source
+   * (such as <a href="https://docs.stripe.com/event-destinations/eventbridge">AWS EventBridge</a>,
+   * or <a href="https://docs.stripe.com/event-destinations/eventgrid">Azure Event Grid</a>
+   * payload). Or, to verify &amp; construct in a single call, use {@code constructEvent(...)}
+   * instead.
+   *
+   * @param payload the JSON payload: a raw Stripe Event or an AWS EventBridge/Azure Event Grid
+   *     envelope.
+   * @return the Event instance.
+   * @throws IllegalArgumentException if the payload is a thin event notification, or if the format
+   *     is not recognized.
+   */
+  public com.stripe.model.Event constructEventWithoutVerification(String payload) {
+    Event event = Webhook.constructEventWithoutVerification(payload);
+    event.setResponseGetter(this.getResponseGetter());
+    return event;
+  }
+
+  /**
+   * Constructs a <a href="https://docs.stripe.com/event-destinations#thin-payload">thin event
+   * notification</a> from an incoming webhook without first verifying its authenticity. Should be
+   * used after calling {@code Webhook.Signature.verifyHeader(...)} or with input from a trusted
+   * source (such as <a href="https://docs.stripe.com/event-destinations/eventbridge">AWS
+   * EventBridge</a>, or <a href="https://docs.stripe.com/event-destinations/eventgrid">Azure Event
+   * Grid</a> payload). Or, to verify &amp; parse in a single call, use {@code
+   * parseEventNotification(...)} instead.
+   *
+   * @param payload the JSON payload: a raw Stripe Event, or an AWS EventBridge/Azure Event Grid
+   *     envelope.
+   * @return the EventNotification instance.
+   * @throws IllegalArgumentException if the payload format is not recognized.
+   */
+  public EventNotification parseEventNotificationWithoutVerification(String payload) {
+    return EventNotification.fromJson(Webhook.maybeExtractFromCloudProviderEnvelope(payload), this);
   }
 
   // The beginning of the section generated from our OpenAPI spec
@@ -954,6 +1052,8 @@ public class StripeClient {
   }
 
   // The end of the section generated from our OpenAPI spec
+  @SuppressWarnings("ObjectToString")
+  @Builder(toBuilder = true)
   static class ClientStripeResponseGetterOptions extends StripeResponseGetterOptions {
     // When adding setting here keep them in sync with settings in RequestOptions and
     // in the RequestOptions.merge method
@@ -1358,5 +1458,15 @@ public class StripeClient {
   /** Deserializes StripeResponse returned by rawRequest into a similar class. */
   public StripeObject deserialize(String rawJson, ApiMode apiMode) throws StripeException {
     return StripeObject.deserializeStripeObject(rawJson, this.getResponseGetter(), apiMode);
+  }
+
+  public StripeEventNotificationHandler notificationHandler(
+      String webhookSecret, EventNotificationFallbackCallback fallbackCallback) {
+    return new StripeEventNotificationHandler(webhookSecret, this, fallbackCallback);
+  }
+
+  public StripeEventNotificationHandlerWithoutVerification notificationHandlerWithoutVerification(
+      EventNotificationFallbackCallback fallbackCallback) {
+    return StripeEventNotificationHandler.withoutVerification(this, fallbackCallback);
   }
 }

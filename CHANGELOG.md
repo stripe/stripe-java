@@ -1,5 +1,48 @@
 # Changelog
 
+## 33.4.0 - 2026-08-26
+This release changes the pinned API version to 2026-08-26.dahlia.
+
+* [#2269](https://github.com/stripe/stripe-java/pull/2269) Add new `EventNotificationHandler` class for better thin event management
+  
+  - We've been putting a lot of time into rethinking the event handling experience in the SDKs. This new class is the culmination [of that effort](https://stripe.dev/blog/event-notification-handlers-thin-events).
+  - They're designed for a tight coupling with both `StripeClient` and the fully-typed nature of [thin events](https://docs.stripe.com/event-destinations#thin-events). This delivers painless event destination upgrades, in-editor checks for common mistakes, and better code modularity.
+  - Now that we've released [thin event notifications for v1 objects](https://docs.stripe.com/changelog#2026-08-26.dahlia), these new handlers are our recommended path for all integrations using thin event notifications.
+  - See more detailed docs here: https://docs.stripe.com/webhooks/event-notification-handlers
+* [#2262](https://github.com/stripe/stripe-java/pull/2262) Update generated code
+  * Add support for new resource `billing.FeedbackOption`
+  * Add support for `create`, `deactivate`, `list`, `retrieve`, and `update` methods on resource `billing.FeedbackOption`
+  * Add support for `paymentMethodSettings` on `AccountSession.components` and `AccountSessionCreateParams.components`
+  * Add support for `feedbackOptions` on `billingportal.Configuration.features.subscription_cancel.cancellation_reason`, `billingportal.ConfigurationCreateParams.features.subscription_cancel.cancellation_reason`, and `billingportal.ConfigurationUpdateParams.features.subscription_cancel.cancellation_reason`
+  * Add support for new value `customer_update` on enum `billingportal.SessionCreateParams.flow_data.type`
+  * Add support for `customerUpdate` on `billingportal.Session.flow`
+  * Add support for `fundingSourceGroup` on `Charge.payment_method_details.card.wallet.link` and `Charge.payment_method_details.link`
+  * Add support for `fundingTypesBlocked` on `checkout.Session.payment_method_options.card.restrictions` and `checkout.SessionCreateParams.payment_method_options.card.restrictions`
+  * Add support for `metadata` on `ConfirmationToken`
+  * Add support for `activeEntitlements` and `customerPortal` on `CustomerSession.components` and `CustomerSessionCreateParams.components`
+  * Add support for `country` on `financialconnections.Session.filters`
+  * Add support for `frozenFields` on `InvoiceItem`
+  * Add support for `billie` on `Invoice.payment_settings.payment_method_options`, `InvoiceCreateParams.payment_settings.payment_method_options`, `InvoiceUpdateParams.payment_settings.payment_method_options`, `Subscription.payment_settings.payment_method_options`, `SubscriptionCreateParams.payment_settings.payment_method_options`, and `SubscriptionUpdateParams.payment_settings.payment_method_options`
+  * Add support for new value `billie` on enums `InvoiceCreateParams.payment_settings.paymentMethodTypes`, `InvoiceUpdateParams.payment_settings.paymentMethodTypes`, `SubscriptionCreateParams.payment_settings.paymentMethodTypes`, and `SubscriptionUpdateParams.payment_settings.paymentMethodTypes`
+  * ⚠️ Remove support for `cryptogram` on `PaymentAttemptRecord.payment_method_details.card.three_d_secure` and `PaymentRecord.payment_method_details.card.three_d_secure`
+  * Add support for new value `touch_n_go` on enums `PaymentIntentConfirmParams.allowedPaymentMethodTypes`, `PaymentIntentCreateParams.allowedPaymentMethodTypes`, `PaymentIntentUpdateParams.allowedPaymentMethodTypes`, `SetupIntentConfirmParams.allowedPaymentMethodTypes`, `SetupIntentCreateParams.allowedPaymentMethodTypes`, and `SetupIntentUpdateParams.allowedPaymentMethodTypes`
+  * Add support for `applicationFeeAmount`, `applicationFeePercent`, `onBehalfOf`, and `transferData` on `PaymentLinkUpdateParams`
+  * Add support for `feedbackOption` on `Subscription.cancellation_details`, `SubscriptionCancelParams.cancellation_details`, and `SubscriptionUpdateParams.cancellation_details`
+  * Add support for `igic` on `tax.Registration.country_options.at`, `tax.Registration.country_options.be`, `tax.Registration.country_options.bg`, `tax.Registration.country_options.cy`, `tax.Registration.country_options.cz`, `tax.Registration.country_options.de`, `tax.Registration.country_options.dk`, `tax.Registration.country_options.ee`, `tax.Registration.country_options.es`, `tax.Registration.country_options.fi`, `tax.Registration.country_options.fr`, `tax.Registration.country_options.gr`, `tax.Registration.country_options.hr`, `tax.Registration.country_options.hu`, `tax.Registration.country_options.ie`, `tax.Registration.country_options.it`, `tax.Registration.country_options.lt`, `tax.Registration.country_options.lu`, `tax.Registration.country_options.lv`, `tax.Registration.country_options.mt`, `tax.Registration.country_options.nl`, `tax.Registration.country_options.pl`, `tax.Registration.country_options.pt`, `tax.Registration.country_options.ro`, `tax.Registration.country_options.se`, `tax.Registration.country_options.si`, `tax.Registration.country_options.sk`, `tax.RegistrationCreateParams.country_options.at`, `tax.RegistrationCreateParams.country_options.be`, `tax.RegistrationCreateParams.country_options.bg`, `tax.RegistrationCreateParams.country_options.cy`, `tax.RegistrationCreateParams.country_options.cz`, `tax.RegistrationCreateParams.country_options.de`, `tax.RegistrationCreateParams.country_options.dk`, `tax.RegistrationCreateParams.country_options.ee`, `tax.RegistrationCreateParams.country_options.es`, `tax.RegistrationCreateParams.country_options.fi`, `tax.RegistrationCreateParams.country_options.fr`, `tax.RegistrationCreateParams.country_options.gr`, `tax.RegistrationCreateParams.country_options.hr`, `tax.RegistrationCreateParams.country_options.hu`, `tax.RegistrationCreateParams.country_options.ie`, `tax.RegistrationCreateParams.country_options.it`, `tax.RegistrationCreateParams.country_options.lt`, `tax.RegistrationCreateParams.country_options.lu`, `tax.RegistrationCreateParams.country_options.lv`, `tax.RegistrationCreateParams.country_options.mt`, `tax.RegistrationCreateParams.country_options.nl`, `tax.RegistrationCreateParams.country_options.pl`, `tax.RegistrationCreateParams.country_options.pt`, `tax.RegistrationCreateParams.country_options.ro`, `tax.RegistrationCreateParams.country_options.se`, `tax.RegistrationCreateParams.country_options.si`, and `tax.RegistrationCreateParams.country_options.sk`
+  * Add support for new value `2026-08-26.dahlia` on enum `WebhookEndpointCreateParams.apiVersion`
+
+## 33.3.0 - 2026-08-10
+* [#2265](https://github.com/stripe/stripe-java/pull/2265) Surface `object` property on `EventNotification`
+* [#2256](https://github.com/stripe/stripe-java/pull/2256) add/adjust event parsing helpers
+  
+  - Added methods that return their respective `Event`/`EventNotification` class instances without verifying authenticity. Use them when you've previously verified an event (e.g. you verified, put the event in a queue, and are now processing). Supports events from [AWS EventBridge](https://docs.stripe.com/event-destinations/eventbridge) and [Azure Event Grid](https://docs.stripe.com/event-destinations/eventgrid) natively.
+    - `Webhook.constructEventWithoutVerification(payload)`
+    - `StripeClient.constructEventWithoutVerification(payload)`
+    - `StripeClient.parseEventNotificationWithoutVerification(payload)`
+  - Added `Webhook.Signature.generateSignatureHeader(payload, secret)`, which computes a full `Stripe-Signature` header for the given payload. Useful for unit tests!
+* [#2263](https://github.com/stripe/stripe-java/pull/2263) add stripeobject deserialization helper for JsonObject
+* [#2261](https://github.com/stripe/stripe-java/pull/2261) Add `stripe.major_api_version` constant
+
 ## 33.2.0 - 2026-07-29
 This release changes the pinned API version to 2026-07-29.dahlia.
 

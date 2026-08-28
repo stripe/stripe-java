@@ -4,6 +4,7 @@ package com.stripe.param;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,23 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   /** Enables user redeemable promotion codes. */
   @SerializedName("allow_promotion_codes")
   Boolean allowPromotionCodes;
+
+  /**
+   * The amount of the application fee (if any) that will be requested to be applied to the payment
+   * and transferred to the application owner's Stripe account. Can only be applied when there are
+   * no line items with recurring prices.
+   */
+  @SerializedName("application_fee_amount")
+  Object applicationFeeAmount;
+
+  /**
+   * A non-negative decimal between 0 and 100, with at most two decimal places. This represents the
+   * percentage of the subscription invoice total that will be transferred to the application
+   * owner's Stripe account. There must be at least 1 line item with a recurring price to use this
+   * field.
+   */
+  @SerializedName("application_fee_percent")
+  Object applicationFeePercent;
 
   /** Configuration for automatic tax collection. */
   @SerializedName("automatic_tax")
@@ -106,6 +124,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   /** Controls settings applied for collecting the customer's name. */
   @SerializedName("name_collection")
   Object nameCollection;
+
+  /** The account on behalf of which to charge. */
+  @SerializedName("on_behalf_of")
+  Object onBehalfOf;
 
   /**
    * A list of optional items the customer can add to their order at checkout. Use this parameter to
@@ -194,10 +216,19 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @SerializedName("tax_id_collection")
   TaxIdCollection taxIdCollection;
 
+  /**
+   * The account (if any) the payments will be attributed to for tax reporting, and where funds from
+   * each payment will be transferred to.
+   */
+  @SerializedName("transfer_data")
+  Object transferData;
+
   private PaymentLinkUpdateParams(
       Boolean active,
       AfterCompletion afterCompletion,
       Boolean allowPromotionCodes,
+      Object applicationFeeAmount,
+      Object applicationFeePercent,
       AutomaticTax automaticTax,
       BillingAddressCollection billingAddressCollection,
       ConsentCollection consentCollection,
@@ -211,6 +242,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       List<PaymentLinkUpdateParams.LineItem> lineItems,
       Map<String, String> metadata,
       Object nameCollection,
+      Object onBehalfOf,
       Object optionalItems,
       PaymentIntentData paymentIntentData,
       PaymentMethodCollection paymentMethodCollection,
@@ -222,10 +254,13 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       Object shippingOptions,
       SubmitType submitType,
       SubscriptionData subscriptionData,
-      TaxIdCollection taxIdCollection) {
+      TaxIdCollection taxIdCollection,
+      Object transferData) {
     this.active = active;
     this.afterCompletion = afterCompletion;
     this.allowPromotionCodes = allowPromotionCodes;
+    this.applicationFeeAmount = applicationFeeAmount;
+    this.applicationFeePercent = applicationFeePercent;
     this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
     this.consentCollection = consentCollection;
@@ -239,6 +274,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     this.lineItems = lineItems;
     this.metadata = metadata;
     this.nameCollection = nameCollection;
+    this.onBehalfOf = onBehalfOf;
     this.optionalItems = optionalItems;
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodCollection = paymentMethodCollection;
@@ -251,6 +287,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     this.submitType = submitType;
     this.subscriptionData = subscriptionData;
     this.taxIdCollection = taxIdCollection;
+    this.transferData = transferData;
   }
 
   public static Builder builder() {
@@ -263,6 +300,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     private AfterCompletion afterCompletion;
 
     private Boolean allowPromotionCodes;
+
+    private Object applicationFeeAmount;
+
+    private Object applicationFeePercent;
 
     private AutomaticTax automaticTax;
 
@@ -290,6 +331,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     private Object nameCollection;
 
+    private Object onBehalfOf;
+
     private Object optionalItems;
 
     private PaymentIntentData paymentIntentData;
@@ -314,12 +357,16 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     private TaxIdCollection taxIdCollection;
 
+    private Object transferData;
+
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentLinkUpdateParams build() {
       return new PaymentLinkUpdateParams(
           this.active,
           this.afterCompletion,
           this.allowPromotionCodes,
+          this.applicationFeeAmount,
+          this.applicationFeePercent,
           this.automaticTax,
           this.billingAddressCollection,
           this.consentCollection,
@@ -333,6 +380,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           this.lineItems,
           this.metadata,
           this.nameCollection,
+          this.onBehalfOf,
           this.optionalItems,
           this.paymentIntentData,
           this.paymentMethodCollection,
@@ -344,7 +392,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           this.shippingOptions,
           this.submitType,
           this.subscriptionData,
-          this.taxIdCollection);
+          this.taxIdCollection,
+          this.transferData);
     }
 
     /**
@@ -365,6 +414,48 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     /** Enables user redeemable promotion codes. */
     public Builder setAllowPromotionCodes(Boolean allowPromotionCodes) {
       this.allowPromotionCodes = allowPromotionCodes;
+      return this;
+    }
+
+    /**
+     * The amount of the application fee (if any) that will be requested to be applied to the
+     * payment and transferred to the application owner's Stripe account. Can only be applied when
+     * there are no line items with recurring prices.
+     */
+    public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
+      this.applicationFeeAmount = applicationFeeAmount;
+      return this;
+    }
+
+    /**
+     * The amount of the application fee (if any) that will be requested to be applied to the
+     * payment and transferred to the application owner's Stripe account. Can only be applied when
+     * there are no line items with recurring prices.
+     */
+    public Builder setApplicationFeeAmount(EmptyParam applicationFeeAmount) {
+      this.applicationFeeAmount = applicationFeeAmount;
+      return this;
+    }
+
+    /**
+     * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+     * the percentage of the subscription invoice total that will be transferred to the application
+     * owner's Stripe account. There must be at least 1 line item with a recurring price to use this
+     * field.
+     */
+    public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
+      this.applicationFeePercent = applicationFeePercent;
+      return this;
+    }
+
+    /**
+     * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+     * the percentage of the subscription invoice total that will be transferred to the application
+     * owner's Stripe account. There must be at least 1 line item with a recurring price to use this
+     * field.
+     */
+    public Builder setApplicationFeePercent(EmptyParam applicationFeePercent) {
+      this.applicationFeePercent = applicationFeePercent;
       return this;
     }
 
@@ -584,6 +675,18 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     /** Controls settings applied for collecting the customer's name. */
     public Builder setNameCollection(EmptyParam nameCollection) {
       this.nameCollection = nameCollection;
+      return this;
+    }
+
+    /** The account on behalf of which to charge. */
+    public Builder setOnBehalfOf(String onBehalfOf) {
+      this.onBehalfOf = onBehalfOf;
+      return this;
+    }
+
+    /** The account on behalf of which to charge. */
+    public Builder setOnBehalfOf(EmptyParam onBehalfOf) {
+      this.onBehalfOf = onBehalfOf;
       return this;
     }
 
@@ -837,6 +940,24 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     /** Controls tax ID collection during checkout. */
     public Builder setTaxIdCollection(PaymentLinkUpdateParams.TaxIdCollection taxIdCollection) {
       this.taxIdCollection = taxIdCollection;
+      return this;
+    }
+
+    /**
+     * The account (if any) the payments will be attributed to for tax reporting, and where funds
+     * from each payment will be transferred to.
+     */
+    public Builder setTransferData(PaymentLinkUpdateParams.TransferData transferData) {
+      this.transferData = transferData;
+      return this;
+    }
+
+    /**
+     * The account (if any) the payments will be attributed to for tax reporting, and where funds
+     * from each payment will be transferred to.
+     */
+    public Builder setTransferData(EmptyParam transferData) {
+      this.transferData = transferData;
       return this;
     }
   }
@@ -1798,7 +1919,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Dropdown {
       /**
-       * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+       * The value that pre-fills the field on the payment page. Must match a {@code value} in the
        * {@code options} array.
        */
       @SerializedName("default_value")
@@ -1847,7 +1968,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+         * The value that pre-fills the field on the payment page. Must match a {@code value} in the
          * {@code options} array.
          */
         public Builder setDefaultValue(String defaultValue) {
@@ -1856,7 +1977,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+         * The value that pre-fills the field on the payment page. Must match a {@code value} in the
          * {@code options} array.
          */
         public Builder setDefaultValue(EmptyParam defaultValue) {
@@ -6859,6 +6980,116 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       Required(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TransferData {
+    /** The amount that will be transferred automatically when a charge succeeds. */
+    @SerializedName("amount")
+    Object amount;
+
+    /**
+     * <strong>Required.</strong> If specified, successful charges will be attributed to the
+     * destination account for tax reporting, and the funds from charges will be transferred to the
+     * destination account. The ID of the resulting transfer will be returned on the successful
+     * charge's {@code transfer} field.
+     */
+    @SerializedName("destination")
+    Object destination;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private TransferData(Object amount, Object destination, Map<String, Object> extraParams) {
+      this.amount = amount;
+      this.destination = destination;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object amount;
+
+      private Object destination;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkUpdateParams.TransferData build() {
+        return new PaymentLinkUpdateParams.TransferData(
+            this.amount, this.destination, this.extraParams);
+      }
+
+      /** The amount that will be transferred automatically when a charge succeeds. */
+      public Builder setAmount(Long amount) {
+        this.amount = amount;
+        return this;
+      }
+
+      /** The amount that will be transferred automatically when a charge succeeds. */
+      public Builder setAmount(EmptyParam amount) {
+        this.amount = amount;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> If specified, successful charges will be attributed to the
+       * destination account for tax reporting, and the funds from charges will be transferred to
+       * the destination account. The ID of the resulting transfer will be returned on the
+       * successful charge's {@code transfer} field.
+       */
+      public Builder setDestination(String destination) {
+        this.destination = destination;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> If specified, successful charges will be attributed to the
+       * destination account for tax reporting, and the funds from charges will be transferred to
+       * the destination account. The ID of the resulting transfer will be returned on the
+       * successful charge's {@code transfer} field.
+       */
+      public Builder setDestination(EmptyParam destination) {
+        this.destination = destination;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkUpdateParams.TransferData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkUpdateParams.TransferData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }

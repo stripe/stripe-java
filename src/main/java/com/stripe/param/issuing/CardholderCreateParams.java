@@ -72,9 +72,9 @@ public class CardholderCreateParams extends ApiRequestParams {
 
   /**
    * The cardholder’s preferred locales (languages), ordered by preference. Locales can be {@code
-   * da}, {@code de}, {@code en}, {@code es}, {@code fr}, {@code it}, {@code pl}, or {@code sv}.
-   * This changes the language of the <a href="https://docs.stripe.com/issuing/3d-secure">3D Secure
-   * flow</a> and one-time password messages sent to the cardholder.
+   * de}, {@code en}, {@code es}, {@code fr}, or {@code it}. This changes the language of the <a
+   * href="https://docs.stripe.com/issuing/3d-secure">3D Secure flow</a> and one-time password
+   * messages sent to the cardholder.
    */
   @SerializedName("preferred_locales")
   List<CardholderCreateParams.PreferredLocale> preferredLocales;
@@ -824,7 +824,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
       /**
        * Information about cardholder acceptance of Celtic <a
-       * href="https://stripe.com/docs/issuing/cards#accept-authorized-user-terms">Authorized User
+       * href="https://docs.stripe.com/issuing/compliance-us#issuing-terms">Authorized User
        * Terms</a>. Required for cards backed by a Celtic program.
        */
       @SerializedName("user_terms_acceptance")
@@ -881,7 +881,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
         /**
          * Information about cardholder acceptance of Celtic <a
-         * href="https://stripe.com/docs/issuing/cards#accept-authorized-user-terms">Authorized User
+         * href="https://docs.stripe.com/issuing/compliance-us#issuing-terms">Authorized User
          * Terms</a>. Required for cards backed by a Celtic program.
          */
         public Builder setUserTermsAcceptance(

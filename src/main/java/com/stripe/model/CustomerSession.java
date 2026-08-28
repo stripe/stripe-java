@@ -149,9 +149,17 @@ public class CustomerSession extends ApiResource {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Components extends StripeObject {
+    /** This hash contains whether the active entitlements is enabled. */
+    @SerializedName("active_entitlements")
+    ActiveEntitlements activeEntitlements;
+
     /** This hash contains whether the buy button is enabled. */
     @SerializedName("buy_button")
     BuyButton buyButton;
+
+    /** This hash contains whether the customer portal is enabled. */
+    @SerializedName("customer_portal")
+    CustomerPortal customerPortal;
 
     /** This hash contains whether the customer sheet is enabled and the features it supports. */
     @SerializedName("customer_sheet")
@@ -172,12 +180,32 @@ public class CustomerSession extends ApiResource {
     @SerializedName("pricing_table")
     PricingTable pricingTable;
 
+    /** This hash contains whether the active entitlements is enabled. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ActiveEntitlements extends StripeObject {
+      /** Whether the active entitlements is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+    }
+
     /** This hash contains whether the buy button is enabled. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BuyButton extends StripeObject {
       /** Whether the buy button is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+    }
+
+    /** This hash contains whether the customer portal is enabled. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomerPortal extends StripeObject {
+      /** Whether the customer portal is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
     }

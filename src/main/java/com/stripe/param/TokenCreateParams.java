@@ -382,6 +382,7 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("address_kanji")
       AddressKanji addressKanji;
 
+      /** The location where the business is administered. */
       @SerializedName("administrative_address")
       AdministrativeAddress administrativeAddress;
 
@@ -479,6 +480,7 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("phone")
       String phone;
 
+      /** The primary location where the business conducts operations. */
       @SerializedName("principal_place_of_business")
       PrincipalPlaceOfBusiness principalPlaceOfBusiness;
 
@@ -703,6 +705,7 @@ public class TokenCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** The location where the business is administered. */
         public Builder setAdministrativeAddress(
             TokenCreateParams.Account.Company.AdministrativeAddress administrativeAddress) {
           this.administrativeAddress = administrativeAddress;
@@ -867,6 +870,7 @@ public class TokenCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** The primary location where the business conducts operations. */
         public Builder setPrincipalPlaceOfBusiness(
             TokenCreateParams.Account.Company.PrincipalPlaceOfBusiness principalPlaceOfBusiness) {
           this.principalPlaceOfBusiness = principalPlaceOfBusiness;
