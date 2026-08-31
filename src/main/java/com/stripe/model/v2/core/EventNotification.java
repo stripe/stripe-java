@@ -143,9 +143,14 @@ public abstract class EventNotification {
 
   /* retrieves the full payload for an event. Protected because individual push classes use it, but type it correctly */
   protected Event fetchEvent() throws StripeException {
+    // `id` comes from the notification body, so encode it the way the generated
+    // services do -- otherwise it can inject extra path or query segments.
     StripeResponse response =
         client.rawRequest(
-            RequestMethod.GET, String.format("/v2/core/events/%s", id), null, getRequestOptions());
+            RequestMethod.GET,
+            String.format("/v2/core/events/%s", ApiResource.urlEncodeId(id)),
+            null,
+            getRequestOptions());
 
     return (Event) client.deserialize(response.body(), ApiMode.V2);
   }
