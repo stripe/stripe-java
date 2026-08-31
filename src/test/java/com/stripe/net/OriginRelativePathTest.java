@@ -5,15 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.stripe.BaseStripeTest;
 import org.junit.jupiter.api.Test;
 
-/**
- * The absolute request URL is built by concatenating a base URL onto a relative path, and no base
- * URL ends in a slash. A path that does not begin with a single "/" can therefore land inside the
- * URL's authority component and redirect the request -- Authorization header included -- to a host
- * of the path's choosing.
- *
- * <p>This matters because some request paths originate in remote data: a webhook body's {@code
- * related_object.url}, a collection's {@code url}, a response's {@code next_page_url}.
- */
 public class OriginRelativePathTest extends BaseStripeTest {
 
   private static final String[] ORIGIN_RELATIVE_PATHS = {
