@@ -137,6 +137,10 @@ public class ReceivedDebit extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BalanceTransfer extends StripeObject {
+    /** The ID of the v1 account that received the balance transfer. */
+    @SerializedName("to_account")
+    String toAccount;
+
     /** The ID of the topup object that originated the ReceivedDebit. */
     @SerializedName("topup")
     String topup;

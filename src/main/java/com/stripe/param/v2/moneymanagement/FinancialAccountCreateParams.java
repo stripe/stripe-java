@@ -33,6 +33,10 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** Parameters specific to creating {@code savings} type FinancialAccounts. */
+  @SerializedName("savings")
+  Savings savings;
+
   /** Parameters specific to creating {@code storage} type FinancialAccounts. */
   @SerializedName("storage")
   Storage storage;
@@ -45,11 +49,13 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       String displayName,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
+      Savings savings,
       Storage storage,
       Type type) {
     this.displayName = displayName;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.savings = savings;
     this.storage = storage;
     this.type = type;
   }
@@ -65,6 +71,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private Savings savings;
+
     private Storage storage;
 
     private Type type;
@@ -72,7 +80,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAccountCreateParams build() {
       return new FinancialAccountCreateParams(
-          this.displayName, this.extraParams, this.metadata, this.storage, this.type);
+          this.displayName, this.extraParams, this.metadata, this.savings, this.storage, this.type);
     }
 
     /**
@@ -136,6 +144,12 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Parameters specific to creating {@code savings} type FinancialAccounts. */
+    public Builder setSavings(FinancialAccountCreateParams.Savings savings) {
+      this.savings = savings;
+      return this;
+    }
+
     /** Parameters specific to creating {@code storage} type FinancialAccounts. */
     public Builder setStorage(FinancialAccountCreateParams.Storage storage) {
       this.storage = storage;
@@ -146,6 +160,98 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     public Builder setType(FinancialAccountCreateParams.Type type) {
       this.type = type;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Savings {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> The currencies that this savings FinancialAccount can hold.
+     * Three-letter ISO currency code, in lowercase.
+     */
+    @SerializedName("holds_currencies")
+    List<String> holdsCurrencies;
+
+    private Savings(Map<String, Object> extraParams, List<String> holdsCurrencies) {
+      this.extraParams = extraParams;
+      this.holdsCurrencies = holdsCurrencies;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private List<String> holdsCurrencies;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public FinancialAccountCreateParams.Savings build() {
+        return new FinancialAccountCreateParams.Savings(this.extraParams, this.holdsCurrencies);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * FinancialAccountCreateParams.Savings#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link FinancialAccountCreateParams.Savings#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add an element to `holdsCurrencies` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * FinancialAccountCreateParams.Savings#holdsCurrencies} for the field documentation.
+       */
+      public Builder addHoldsCurrency(String element) {
+        if (this.holdsCurrencies == null) {
+          this.holdsCurrencies = new ArrayList<>();
+        }
+        this.holdsCurrencies.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `holdsCurrencies` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link FinancialAccountCreateParams.Savings#holdsCurrencies} for the field documentation.
+       */
+      public Builder addAllHoldsCurrency(List<String> elements) {
+        if (this.holdsCurrencies == null) {
+          this.holdsCurrencies = new ArrayList<>();
+        }
+        this.holdsCurrencies.addAll(elements);
+        return this;
+      }
     }
   }
 
@@ -280,6 +386,9 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
   public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("credit")
     CREDIT("credit"),
+
+    @SerializedName("savings")
+    SAVINGS("savings"),
 
     @SerializedName("storage")
     STORAGE("storage");

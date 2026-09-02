@@ -5573,6 +5573,14 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. This is {@code false} by default.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -5582,7 +5590,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private Features(Map<String, Object> extraParams) {
+        private Features(Boolean disableStripeUserAuthentication, Map<String, Object> extraParams) {
+          this.disableStripeUserAuthentication = disableStripeUserAuthentication;
           this.extraParams = extraParams;
         }
 
@@ -5591,12 +5600,25 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Boolean disableStripeUserAuthentication;
+
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountSessionCreateParams.Components.PaymentMethodSettings.Features build() {
             return new AccountSessionCreateParams.Components.PaymentMethodSettings.Features(
-                this.extraParams);
+                this.disableStripeUserAuthentication, this.extraParams);
+          }
+
+          /**
+           * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+           * accounts where {@code controller.requirement_collection} is {@code application} for the
+           * account. This is {@code false} by default.
+           */
+          public Builder setDisableStripeUserAuthentication(
+              Boolean disableStripeUserAuthentication) {
+            this.disableStripeUserAuthentication = disableStripeUserAuthentication;
+            return this;
           }
 
           /**

@@ -289,7 +289,14 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.signals.account_evaluation", com.stripe.model.v2.signals.AccountEvaluation.class);
     classLookup.put("v2.signals.account_signal", com.stripe.model.v2.signals.AccountSignal.class);
+    classLookup.put(
+        "v2.signals.payment_retry_evaluation",
+        com.stripe.model.v2.signals.PaymentRetryEvaluation.class);
+    classLookup.put(
+        "v2.signals.payment_retry_signal", com.stripe.model.v2.signals.PaymentRetrySignal.class);
 
+    classLookup.put(
+        "v2.tax.integration_configuration", com.stripe.model.v2.tax.IntegrationConfiguration.class);
     classLookup.put("v2.tax.manual_rule", com.stripe.model.v2.tax.ManualRule.class);
     classLookup.put(
         "v2.tax.operations_resolve_address_result",
@@ -1056,6 +1063,12 @@ public final class EventDataClassLookup {
         "v2.core.health.meter_event_summaries_delayed.resolved",
         com.stripe.events.V2CoreHealthMeterEventSummariesDelayedResolvedEvent.class);
     eventClassLookup.put(
+        "v2.core.health.metronome_notification_latency.firing",
+        com.stripe.events.V2CoreHealthMetronomeNotificationLatencyFiringEvent.class);
+    eventClassLookup.put(
+        "v2.core.health.metronome_notification_latency.resolved",
+        com.stripe.events.V2CoreHealthMetronomeNotificationLatencyResolvedEvent.class);
+    eventClassLookup.put(
         "v2.core.health.payment_method_error.firing",
         com.stripe.events.V2CoreHealthPaymentMethodErrorFiringEvent.class);
     eventClassLookup.put(
@@ -1218,6 +1231,21 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.money_management.outbound_transfer.updated",
         com.stripe.events.V2MoneyManagementOutboundTransferUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.canceled",
+        com.stripe.events.V2MoneyManagementPayoutIntentCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.created",
+        com.stripe.events.V2MoneyManagementPayoutIntentCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.posted",
+        com.stripe.events.V2MoneyManagementPayoutIntentPostedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.processing",
+        com.stripe.events.V2MoneyManagementPayoutIntentProcessingEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.requires_action",
+        com.stripe.events.V2MoneyManagementPayoutIntentRequiresActionEvent.class);
     eventClassLookup.put(
         "v2.money_management.payout_method.created",
         com.stripe.events.V2MoneyManagementPayoutMethodCreatedEvent.class);
@@ -1388,5 +1416,8 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.signals.account_signal.payment_delinquency_exposure_ready",
         com.stripe.events.V2SignalsAccountSignalPaymentDelinquencyExposureReadyEvent.class);
+    eventClassLookup.put(
+        "v2.signals.payment_retry_evaluations.retry_recommended",
+        com.stripe.events.V2SignalsPaymentRetryEvaluationsRetryRecommendedEvent.class);
   }
 }

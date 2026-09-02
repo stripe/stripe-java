@@ -232,6 +232,9 @@ public class FinancialAccountListParams extends ApiRequestParams {
     @SerializedName("payments")
     PAYMENTS("payments"),
 
+    @SerializedName("savings")
+    SAVINGS("savings"),
+
     @SerializedName("storage")
     STORAGE("storage");
 

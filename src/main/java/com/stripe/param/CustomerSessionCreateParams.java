@@ -152,9 +152,17 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Components {
+    /** Configuration for active entitlements. */
+    @SerializedName("active_entitlements")
+    ActiveEntitlements activeEntitlements;
+
     /** Configuration for buy button. */
     @SerializedName("buy_button")
     BuyButton buyButton;
+
+    /** Configuration for customer portal. */
+    @SerializedName("customer_portal")
+    CustomerPortal customerPortal;
 
     /** Configuration for the customer sheet. */
     @SerializedName("customer_sheet")
@@ -186,14 +194,18 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     TaxIdElement taxIdElement;
 
     private Components(
+        ActiveEntitlements activeEntitlements,
         BuyButton buyButton,
+        CustomerPortal customerPortal,
         CustomerSheet customerSheet,
         Map<String, Object> extraParams,
         MobilePaymentElement mobilePaymentElement,
         PaymentElement paymentElement,
         PricingTable pricingTable,
         TaxIdElement taxIdElement) {
+      this.activeEntitlements = activeEntitlements;
       this.buyButton = buyButton;
+      this.customerPortal = customerPortal;
       this.customerSheet = customerSheet;
       this.extraParams = extraParams;
       this.mobilePaymentElement = mobilePaymentElement;
@@ -207,7 +219,11 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private ActiveEntitlements activeEntitlements;
+
       private BuyButton buyButton;
+
+      private CustomerPortal customerPortal;
 
       private CustomerSheet customerSheet;
 
@@ -224,7 +240,9 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public CustomerSessionCreateParams.Components build() {
         return new CustomerSessionCreateParams.Components(
+            this.activeEntitlements,
             this.buyButton,
+            this.customerPortal,
             this.customerSheet,
             this.extraParams,
             this.mobilePaymentElement,
@@ -233,9 +251,23 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
             this.taxIdElement);
       }
 
+      /** Configuration for active entitlements. */
+      public Builder setActiveEntitlements(
+          CustomerSessionCreateParams.Components.ActiveEntitlements activeEntitlements) {
+        this.activeEntitlements = activeEntitlements;
+        return this;
+      }
+
       /** Configuration for buy button. */
       public Builder setBuyButton(CustomerSessionCreateParams.Components.BuyButton buyButton) {
         this.buyButton = buyButton;
+        return this;
+      }
+
+      /** Configuration for customer portal. */
+      public Builder setCustomerPortal(
+          CustomerSessionCreateParams.Components.CustomerPortal customerPortal) {
+        this.customerPortal = customerPortal;
         return this;
       }
 
@@ -303,6 +335,78 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class ActiveEntitlements {
+      /** <strong>Required.</strong> Whether the active entitlements is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private ActiveEntitlements(Boolean enabled, Map<String, Object> extraParams) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CustomerSessionCreateParams.Components.ActiveEntitlements build() {
+          return new CustomerSessionCreateParams.Components.ActiveEntitlements(
+              this.enabled, this.extraParams);
+        }
+
+        /** <strong>Required.</strong> Whether the active entitlements is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerSessionCreateParams.Components.ActiveEntitlements#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerSessionCreateParams.Components.ActiveEntitlements#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BuyButton {
       /** <strong>Required.</strong> Whether the buy button is enabled. */
       @SerializedName("enabled")
@@ -362,6 +466,78 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link CustomerSessionCreateParams.Components.BuyButton#extraParams} for the
          * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomerPortal {
+      /** <strong>Required.</strong> Whether the customer portal is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private CustomerPortal(Boolean enabled, Map<String, Object> extraParams) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CustomerSessionCreateParams.Components.CustomerPortal build() {
+          return new CustomerSessionCreateParams.Components.CustomerPortal(
+              this.enabled, this.extraParams);
+        }
+
+        /** <strong>Required.</strong> Whether the customer portal is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerSessionCreateParams.Components.CustomerPortal#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerSessionCreateParams.Components.CustomerPortal#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {

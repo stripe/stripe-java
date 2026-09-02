@@ -218,6 +218,9 @@ public class PayoutMethodListParams extends ApiRequestParams {
     }
 
     public enum Payment implements ApiRequestParams.EnumParam {
+      @SerializedName("disabled")
+      DISABLED("disabled"),
+
       @SerializedName("eligible")
       ELIGIBLE("eligible"),
 
@@ -236,6 +239,9 @@ public class PayoutMethodListParams extends ApiRequestParams {
     }
 
     public enum Transfer implements ApiRequestParams.EnumParam {
+      @SerializedName("disabled")
+      DISABLED("disabled"),
+
       @SerializedName("eligible")
       ELIGIBLE("eligible"),
 

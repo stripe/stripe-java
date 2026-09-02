@@ -7865,6 +7865,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
 
+      @SerializedName("sequra")
+      SEQURA("sequra"),
+
       @SerializedName("shopeepay")
       SHOPEEPAY("shopeepay"),
 
@@ -8754,9 +8757,16 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
-      private BacsDebit(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+      @SerializedName("verification_method")
+      VerificationMethod verificationMethod;
+
+      private BacsDebit(
+          Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
+          VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
         this.mandateOptions = mandateOptions;
+        this.verificationMethod = verificationMethod;
       }
 
       public static Builder builder() {
@@ -8768,10 +8778,12 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
         private MandateOptions mandateOptions;
 
+        private VerificationMethod verificationMethod;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SetupIntentConfirmParams.PaymentMethodOptions.BacsDebit build() {
           return new SetupIntentConfirmParams.PaymentMethodOptions.BacsDebit(
-              this.extraParams, this.mandateOptions);
+              this.extraParams, this.mandateOptions, this.verificationMethod);
         }
 
         /**
@@ -8806,6 +8818,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         public Builder setMandateOptions(
             SetupIntentConfirmParams.PaymentMethodOptions.BacsDebit.MandateOptions mandateOptions) {
           this.mandateOptions = mandateOptions;
+          return this;
+        }
+
+        public Builder setVerificationMethod(
+            SetupIntentConfirmParams.PaymentMethodOptions.BacsDebit.VerificationMethod
+                verificationMethod) {
+          this.verificationMethod = verificationMethod;
           return this;
         }
       }
@@ -8900,6 +8919,21 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.referencePrefix = referencePrefix;
             return this;
           }
+        }
+      }
+
+      public enum VerificationMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("automatic")
+        AUTOMATIC("automatic"),
+
+        @SerializedName("payer_name_verification")
+        PAYER_NAME_VERIFICATION("payer_name_verification");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        VerificationMethod(String value) {
+          this.value = value;
         }
       }
     }
@@ -13914,6 +13948,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
     @SerializedName("test_pay")
     TEST_PAY("test_pay"),
+
+    @SerializedName("touch_n_go")
+    TOUCH_N_GO("touch_n_go"),
 
     @SerializedName("truemoney")
     TRUEMONEY("truemoney"),

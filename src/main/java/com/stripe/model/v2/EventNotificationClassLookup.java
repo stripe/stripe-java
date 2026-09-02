@@ -926,6 +926,12 @@ public final class EventNotificationClassLookup {
         "v2.core.health.meter_event_summaries_delayed.resolved",
         com.stripe.events.V2CoreHealthMeterEventSummariesDelayedResolvedEventNotification.class);
     eventClassLookup.put(
+        "v2.core.health.metronome_notification_latency.firing",
+        com.stripe.events.V2CoreHealthMetronomeNotificationLatencyFiringEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.health.metronome_notification_latency.resolved",
+        com.stripe.events.V2CoreHealthMetronomeNotificationLatencyResolvedEventNotification.class);
+    eventClassLookup.put(
         "v2.core.health.payment_method_error.firing",
         com.stripe.events.V2CoreHealthPaymentMethodErrorFiringEventNotification.class);
     eventClassLookup.put(
@@ -1098,6 +1104,21 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.money_management.outbound_transfer.updated",
         com.stripe.events.V2MoneyManagementOutboundTransferUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.canceled",
+        com.stripe.events.V2MoneyManagementPayoutIntentCanceledEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.created",
+        com.stripe.events.V2MoneyManagementPayoutIntentCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.posted",
+        com.stripe.events.V2MoneyManagementPayoutIntentPostedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.processing",
+        com.stripe.events.V2MoneyManagementPayoutIntentProcessingEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.requires_action",
+        com.stripe.events.V2MoneyManagementPayoutIntentRequiresActionEventNotification.class);
     eventClassLookup.put(
         "v2.money_management.payout_method.created",
         com.stripe.events.V2MoneyManagementPayoutMethodCreatedEventNotification.class);
@@ -1274,5 +1295,8 @@ public final class EventNotificationClassLookup {
         "v2.signals.account_signal.payment_delinquency_exposure_ready",
         com.stripe.events.V2SignalsAccountSignalPaymentDelinquencyExposureReadyEventNotification
             .class);
+    eventClassLookup.put(
+        "v2.signals.payment_retry_evaluations.retry_recommended",
+        com.stripe.events.V2SignalsPaymentRetryEvaluationsRetryRecommendedEventNotification.class);
   }
 }

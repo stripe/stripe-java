@@ -21,6 +21,22 @@ public class AccountActivityCreateParams extends ApiRequestParams {
   String accountEvaluation;
 
   /**
+   * Details for the account restriction. Provide only when type is account_restricted. The activity
+   * requires an existing account_details.account or account_details.customer; inline data is
+   * unsupported.
+   */
+  @SerializedName("account_restricted")
+  AccountRestricted accountRestricted;
+
+  /**
+   * Details for the account suspension. Provide only when type is account_suspended. The activity
+   * requires an existing account_details.customer; account_details.account and inline data are
+   * unsupported.
+   */
+  @SerializedName("account_suspended")
+  AccountSuspended accountSuspended;
+
+  /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
    * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -36,6 +52,10 @@ public class AccountActivityCreateParams extends ApiRequestParams {
   /** Details for the login decision. Provide only when type is login_decision. */
   @SerializedName("login_decision")
   LoginDecision loginDecision;
+
+  /** Additional information about the activity. */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
 
   /** Timestamp at which the activity occurred. Defaults to the created time if not provided. */
   @SerializedName("occurred_at")
@@ -56,18 +76,24 @@ public class AccountActivityCreateParams extends ApiRequestParams {
   private AccountActivityCreateParams(
       AccountDetails accountDetails,
       String accountEvaluation,
+      AccountRestricted accountRestricted,
+      AccountSuspended accountSuspended,
       Map<String, Object> extraParams,
       LoginAttempt loginAttempt,
       LoginDecision loginDecision,
+      Map<String, String> metadata,
       Instant occurredAt,
       RegistrationAttempt registrationAttempt,
       RegistrationDecision registrationDecision,
       Type type) {
     this.accountDetails = accountDetails;
     this.accountEvaluation = accountEvaluation;
+    this.accountRestricted = accountRestricted;
+    this.accountSuspended = accountSuspended;
     this.extraParams = extraParams;
     this.loginAttempt = loginAttempt;
     this.loginDecision = loginDecision;
+    this.metadata = metadata;
     this.occurredAt = occurredAt;
     this.registrationAttempt = registrationAttempt;
     this.registrationDecision = registrationDecision;
@@ -83,11 +109,17 @@ public class AccountActivityCreateParams extends ApiRequestParams {
 
     private String accountEvaluation;
 
+    private AccountRestricted accountRestricted;
+
+    private AccountSuspended accountSuspended;
+
     private Map<String, Object> extraParams;
 
     private LoginAttempt loginAttempt;
 
     private LoginDecision loginDecision;
+
+    private Map<String, String> metadata;
 
     private Instant occurredAt;
 
@@ -102,9 +134,12 @@ public class AccountActivityCreateParams extends ApiRequestParams {
       return new AccountActivityCreateParams(
           this.accountDetails,
           this.accountEvaluation,
+          this.accountRestricted,
+          this.accountSuspended,
           this.extraParams,
           this.loginAttempt,
           this.loginDecision,
+          this.metadata,
           this.occurredAt,
           this.registrationAttempt,
           this.registrationDecision,
@@ -120,6 +155,28 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     /** The account evaluation this activity is associated with, when applicable. */
     public Builder setAccountEvaluation(String accountEvaluation) {
       this.accountEvaluation = accountEvaluation;
+      return this;
+    }
+
+    /**
+     * Details for the account restriction. Provide only when type is account_restricted. The
+     * activity requires an existing account_details.account or account_details.customer; inline
+     * data is unsupported.
+     */
+    public Builder setAccountRestricted(
+        AccountActivityCreateParams.AccountRestricted accountRestricted) {
+      this.accountRestricted = accountRestricted;
+      return this;
+    }
+
+    /**
+     * Details for the account suspension. Provide only when type is account_suspended. The activity
+     * requires an existing account_details.customer; account_details.account and inline data are
+     * unsupported.
+     */
+    public Builder setAccountSuspended(
+        AccountActivityCreateParams.AccountSuspended accountSuspended) {
+      this.accountSuspended = accountSuspended;
       return this;
     }
 
@@ -158,6 +215,32 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     /** Details for the login decision. Provide only when type is login_decision. */
     public Builder setLoginDecision(AccountActivityCreateParams.LoginDecision loginDecision) {
       this.loginDecision = loginDecision;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * AccountActivityCreateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link AccountActivityCreateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 
@@ -702,6 +785,176 @@ public class AccountActivityCreateParams extends ApiRequestParams {
             }
           }
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AccountRestricted {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The reason the account or customer was restricted. */
+    @SerializedName("reason")
+    Reason reason;
+
+    private AccountRestricted(Map<String, Object> extraParams, Reason reason) {
+      this.extraParams = extraParams;
+      this.reason = reason;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Reason reason;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountActivityCreateParams.AccountRestricted build() {
+        return new AccountActivityCreateParams.AccountRestricted(this.extraParams, this.reason);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountActivityCreateParams.AccountRestricted#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountActivityCreateParams.AccountRestricted#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The reason the account or customer was restricted. */
+      public Builder setReason(AccountActivityCreateParams.AccountRestricted.Reason reason) {
+        this.reason = reason;
+        return this;
+      }
+    }
+
+    public enum Reason implements ApiRequestParams.EnumParam {
+      @SerializedName("abuse")
+      ABUSE("abuse"),
+
+      @SerializedName("other")
+      OTHER("other");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Reason(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AccountSuspended {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The reason the customer was suspended. */
+    @SerializedName("reason")
+    Reason reason;
+
+    private AccountSuspended(Map<String, Object> extraParams, Reason reason) {
+      this.extraParams = extraParams;
+      this.reason = reason;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Reason reason;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountActivityCreateParams.AccountSuspended build() {
+        return new AccountActivityCreateParams.AccountSuspended(this.extraParams, this.reason);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountActivityCreateParams.AccountSuspended#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountActivityCreateParams.AccountSuspended#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The reason the customer was suspended. */
+      public Builder setReason(AccountActivityCreateParams.AccountSuspended.Reason reason) {
+        this.reason = reason;
+        return this;
+      }
+    }
+
+    public enum Reason implements ApiRequestParams.EnumParam {
+      @SerializedName("abuse")
+      ABUSE("abuse"),
+
+      @SerializedName("other")
+      OTHER("other");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Reason(String value) {
+        this.value = value;
       }
     }
   }
@@ -1403,6 +1656,12 @@ public class AccountActivityCreateParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("account_restricted")
+    ACCOUNT_RESTRICTED("account_restricted"),
+
+    @SerializedName("account_suspended")
+    ACCOUNT_SUSPENDED("account_suspended"),
+
     @SerializedName("login_attempt")
     LOGIN_ATTEMPT("login_attempt"),
 

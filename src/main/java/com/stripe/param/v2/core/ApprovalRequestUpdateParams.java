@@ -3,6 +3,7 @@ package com.stripe.param.v2.core;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -10,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class ApprovalRequestSubmitParams extends ApiRequestParams {
+public class ApprovalRequestUpdateParams extends ApiRequestParams {
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -20,11 +21,11 @@ public class ApprovalRequestSubmitParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The reason for submitting the approval request. */
+  /** The updated reason for the approval request. */
   @SerializedName("reason")
-  String reason;
+  Object reason;
 
-  private ApprovalRequestSubmitParams(Map<String, Object> extraParams, String reason) {
+  private ApprovalRequestUpdateParams(Map<String, Object> extraParams, Object reason) {
     this.extraParams = extraParams;
     this.reason = reason;
   }
@@ -36,17 +37,17 @@ public class ApprovalRequestSubmitParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private String reason;
+    private Object reason;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public ApprovalRequestSubmitParams build() {
-      return new ApprovalRequestSubmitParams(this.extraParams, this.reason);
+    public ApprovalRequestUpdateParams build() {
+      return new ApprovalRequestUpdateParams(this.extraParams, this.reason);
     }
 
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * ApprovalRequestSubmitParams#extraParams} for the field documentation.
+     * ApprovalRequestUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -59,7 +60,7 @@ public class ApprovalRequestSubmitParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ApprovalRequestSubmitParams#extraParams} for the field documentation.
+     * See {@link ApprovalRequestUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -69,8 +70,14 @@ public class ApprovalRequestSubmitParams extends ApiRequestParams {
       return this;
     }
 
-    /** The reason for submitting the approval request. */
+    /** The updated reason for the approval request. */
     public Builder setReason(String reason) {
+      this.reason = reason;
+      return this;
+    }
+
+    /** The updated reason for the approval request. */
+    public Builder setReason(EmptyParam reason) {
       this.reason = reason;
       return this;
     }

@@ -20,4 +20,13 @@ public final class SignalsService extends ApiService {
   public com.stripe.service.v2.signals.AccountSignalService accountSignals() {
     return new com.stripe.service.v2.signals.AccountSignalService(this.getResponseGetter());
   }
+
+  public com.stripe.service.v2.signals.PaymentRetryEvaluationService paymentRetryEvaluations() {
+    return new com.stripe.service.v2.signals.PaymentRetryEvaluationService(
+        this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.signals.PaymentRetrySignalService paymentRetrySignals() {
+    return new com.stripe.service.v2.signals.PaymentRetrySignalService(this.getResponseGetter());
+  }
 }

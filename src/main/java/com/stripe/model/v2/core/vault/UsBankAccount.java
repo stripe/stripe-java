@@ -78,6 +78,13 @@ public class UsBankAccount extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
+  /**
+   * Whether the US Bank Account is currently unusable for money movement, despite potentially being
+   * correctly set up. Please reach out to Stripe Support for more information.
+   */
+  @SerializedName("restricted")
+  Boolean restricted;
+
   /** The ACH routing number of the bank account. */
   @SerializedName("routing_number")
   String routingNumber;

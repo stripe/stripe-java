@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,22 @@ public class AccountActivity extends StripeObject implements HasId {
   /** The account evaluation this activity is associated with, when applicable. */
   @SerializedName("account_evaluation")
   String accountEvaluation;
+
+  /**
+   * Details for the account restriction. Present only when type is account_restricted. The activity
+   * requires an existing account_details.account or account_details.customer; inline data is
+   * unsupported.
+   */
+  @SerializedName("account_restricted")
+  AccountRestricted accountRestricted;
+
+  /**
+   * Details for the account suspension. Present only when type is account_suspended. The activity
+   * requires an existing account_details.customer; account_details.account and inline data are
+   * unsupported.
+   */
+  @SerializedName("account_suspended")
+  AccountSuspended accountSuspended;
 
   /** Timestamp at which the account activity was created. */
   @SerializedName("created")
@@ -46,6 +63,10 @@ public class AccountActivity extends StripeObject implements HasId {
   @SerializedName("login_decision")
   LoginDecision loginDecision;
 
+  /** Additional information about the activity. */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
+
   /**
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
@@ -70,8 +91,8 @@ public class AccountActivity extends StripeObject implements HasId {
   /**
    * The type of activity.
    *
-   * <p>One of {@code login_attempt}, {@code login_decision}, {@code registration_attempt}, or
-   * {@code registration_decision}.
+   * <p>One of {@code account_restricted}, {@code account_suspended}, {@code login_attempt}, {@code
+   * login_decision}, {@code registration_attempt}, or {@code registration_decision}.
    */
   @SerializedName("type")
   String type;
@@ -154,6 +175,42 @@ public class AccountActivity extends StripeObject implements HasId {
         }
       }
     }
+  }
+
+  /**
+   * Details for the account restriction. Present only when type is account_restricted. The activity
+   * requires an existing account_details.account or account_details.customer; inline data is
+   * unsupported.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AccountRestricted extends StripeObject {
+    /**
+     * The reason the account or customer was restricted.
+     *
+     * <p>One of {@code abuse}, or {@code other}.
+     */
+    @SerializedName("reason")
+    String reason;
+  }
+
+  /**
+   * Details for the account suspension. Present only when type is account_suspended. The activity
+   * requires an existing account_details.customer; account_details.account and inline data are
+   * unsupported.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AccountSuspended extends StripeObject {
+    /**
+     * The reason the customer was suspended.
+     *
+     * <p>One of {@code abuse}, or {@code other}.
+     */
+    @SerializedName("reason")
+    String reason;
   }
 
   /** Details for the login attempt. Present only when type is login_attempt. */

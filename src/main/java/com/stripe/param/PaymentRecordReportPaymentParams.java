@@ -18,6 +18,10 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
   @SerializedName("amount_requested")
   AmountRequested amountRequested;
 
+  /** Information about the payment attempt cancelation. */
+  @SerializedName("canceled")
+  Canceled canceled;
+
   /** Customer information for this payment. */
   @SerializedName("customer_details")
   CustomerDetails customerDetails;
@@ -85,6 +89,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
 
   private PaymentRecordReportPaymentParams(
       AmountRequested amountRequested,
+      Canceled canceled,
       CustomerDetails customerDetails,
       CustomerPresence customerPresence,
       String description,
@@ -99,6 +104,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
       ProcessorDetails processorDetails,
       ShippingDetails shippingDetails) {
     this.amountRequested = amountRequested;
+    this.canceled = canceled;
     this.customerDetails = customerDetails;
     this.customerPresence = customerPresence;
     this.description = description;
@@ -120,6 +126,8 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
 
   public static class Builder {
     private AmountRequested amountRequested;
+
+    private Canceled canceled;
 
     private CustomerDetails customerDetails;
 
@@ -151,6 +159,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
     public PaymentRecordReportPaymentParams build() {
       return new PaymentRecordReportPaymentParams(
           this.amountRequested,
+          this.canceled,
           this.customerDetails,
           this.customerPresence,
           this.description,
@@ -170,6 +179,12 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
     public Builder setAmountRequested(
         PaymentRecordReportPaymentParams.AmountRequested amountRequested) {
       this.amountRequested = amountRequested;
+      return this;
+    }
+
+    /** Information about the payment attempt cancelation. */
+    public Builder setCanceled(PaymentRecordReportPaymentParams.Canceled canceled) {
+      this.canceled = canceled;
       return this;
     }
 
@@ -440,6 +455,150 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
       public Builder setValue(Long value) {
         this.value = value;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Canceled {
+    /**
+     * <strong>Required.</strong> When the reported payment was canceled. Measured in seconds since
+     * the Unix epoch.
+     */
+    @SerializedName("canceled_at")
+    Long canceledAt;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Payment evaluations associated with this reported payment. */
+    @SerializedName("payment_evaluations")
+    List<String> paymentEvaluations;
+
+    /** The reason the payment attempt was canceled. */
+    @SerializedName("reason")
+    Reason reason;
+
+    private Canceled(
+        Long canceledAt,
+        Map<String, Object> extraParams,
+        List<String> paymentEvaluations,
+        Reason reason) {
+      this.canceledAt = canceledAt;
+      this.extraParams = extraParams;
+      this.paymentEvaluations = paymentEvaluations;
+      this.reason = reason;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long canceledAt;
+
+      private Map<String, Object> extraParams;
+
+      private List<String> paymentEvaluations;
+
+      private Reason reason;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentRecordReportPaymentParams.Canceled build() {
+        return new PaymentRecordReportPaymentParams.Canceled(
+            this.canceledAt, this.extraParams, this.paymentEvaluations, this.reason);
+      }
+
+      /**
+       * <strong>Required.</strong> When the reported payment was canceled. Measured in seconds
+       * since the Unix epoch.
+       */
+      public Builder setCanceledAt(Long canceledAt) {
+        this.canceledAt = canceledAt;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentRecordReportPaymentParams.Canceled#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentRecordReportPaymentParams.Canceled#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add an element to `paymentEvaluations` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link PaymentRecordReportPaymentParams.Canceled#paymentEvaluations} for the field
+       * documentation.
+       */
+      public Builder addPaymentEvaluation(String element) {
+        if (this.paymentEvaluations == null) {
+          this.paymentEvaluations = new ArrayList<>();
+        }
+        this.paymentEvaluations.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `paymentEvaluations` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link PaymentRecordReportPaymentParams.Canceled#paymentEvaluations} for the field
+       * documentation.
+       */
+      public Builder addAllPaymentEvaluation(List<String> elements) {
+        if (this.paymentEvaluations == null) {
+          this.paymentEvaluations = new ArrayList<>();
+        }
+        this.paymentEvaluations.addAll(elements);
+        return this;
+      }
+
+      /** The reason the payment attempt was canceled. */
+      public Builder setReason(PaymentRecordReportPaymentParams.Canceled.Reason reason) {
+        this.reason = reason;
+        return this;
+      }
+    }
+
+    public enum Reason implements ApiRequestParams.EnumParam {
+      @SerializedName("blocked_for_fraud")
+      BLOCKED_FOR_FRAUD("blocked_for_fraud"),
+
+      @SerializedName("merchant_canceled")
+      MERCHANT_CANCELED("merchant_canceled");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Reason(String value) {
+        this.value = value;
       }
     }
   }

@@ -232,6 +232,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   Prebilling prebilling;
 
   /**
+   * Token used to resolve the presentment currency and FX rate applied to this subscription's
+   * adaptive pricing.
+   */
+  @SerializedName("pricing_token")
+  Object pricingToken;
+
+  /**
    * Determines how to handle <a
    * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when the billing
    * cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now}, or
@@ -314,6 +321,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       PaymentSettings paymentSettings,
       Object pendingInvoiceItemInterval,
       Prebilling prebilling,
+      Object pricingToken,
       ProrationBehavior prorationBehavior,
       Long prorationDate,
       Object transferData,
@@ -349,6 +357,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.paymentSettings = paymentSettings;
     this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
     this.prebilling = prebilling;
+    this.pricingToken = pricingToken;
     this.prorationBehavior = prorationBehavior;
     this.prorationDate = prorationDate;
     this.transferData = transferData;
@@ -420,6 +429,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     private Prebilling prebilling;
 
+    private Object pricingToken;
+
     private ProrationBehavior prorationBehavior;
 
     private Long prorationDate;
@@ -464,6 +475,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.paymentSettings,
           this.pendingInvoiceItemInterval,
           this.prebilling,
+          this.pricingToken,
           this.prorationBehavior,
           this.prorationDate,
           this.transferData,
@@ -1093,6 +1105,24 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     /** If specified, the invoicing for the given billing cycle iterations will be processed now. */
     public Builder setPrebilling(SubscriptionUpdateParams.Prebilling prebilling) {
       this.prebilling = prebilling;
+      return this;
+    }
+
+    /**
+     * Token used to resolve the presentment currency and FX rate applied to this subscription's
+     * adaptive pricing.
+     */
+    public Builder setPricingToken(String pricingToken) {
+      this.pricingToken = pricingToken;
+      return this;
+    }
+
+    /**
+     * Token used to resolve the presentment currency and FX rate applied to this subscription's
+     * adaptive pricing.
+     */
+    public Builder setPricingToken(EmptyParam pricingToken) {
+      this.pricingToken = pricingToken;
       return this;
     }
 
@@ -3218,11 +3248,22 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     @SerializedName("feedback")
     ApiRequestParams.EnumParam feedback;
 
+    /**
+     * Customized feedback options that provide deeper insight into why the subscription was
+     * canceled, if the subscription was canceled explicitly by the user.
+     */
+    @SerializedName("feedback_option")
+    Object feedbackOption;
+
     private CancellationDetails(
-        Object comment, Map<String, Object> extraParams, ApiRequestParams.EnumParam feedback) {
+        Object comment,
+        Map<String, Object> extraParams,
+        ApiRequestParams.EnumParam feedback,
+        Object feedbackOption) {
       this.comment = comment;
       this.extraParams = extraParams;
       this.feedback = feedback;
+      this.feedbackOption = feedbackOption;
     }
 
     public static Builder builder() {
@@ -3236,10 +3277,12 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       private ApiRequestParams.EnumParam feedback;
 
+      private Object feedbackOption;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionUpdateParams.CancellationDetails build() {
         return new SubscriptionUpdateParams.CancellationDetails(
-            this.comment, this.extraParams, this.feedback);
+            this.comment, this.extraParams, this.feedback, this.feedbackOption);
       }
 
       /**
@@ -3302,6 +3345,24 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        */
       public Builder setFeedback(EmptyParam feedback) {
         this.feedback = feedback;
+        return this;
+      }
+
+      /**
+       * Customized feedback options that provide deeper insight into why the subscription was
+       * canceled, if the subscription was canceled explicitly by the user.
+       */
+      public Builder setFeedbackOption(String feedbackOption) {
+        this.feedbackOption = feedbackOption;
+        return this;
+      }
+
+      /**
+       * Customized feedback options that provide deeper insight into why the subscription was
+       * canceled, if the subscription was canceled explicitly by the user.
+       */
+      public Builder setFeedbackOption(EmptyParam feedbackOption) {
+        this.feedbackOption = feedbackOption;
         return this;
       }
     }
@@ -10821,6 +10882,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       @SerializedName("swish")
       SWISH("swish"),
+
+      @SerializedName("truemoney")
+      TRUEMONEY("truemoney"),
 
       @SerializedName("twint")
       TWINT("twint"),

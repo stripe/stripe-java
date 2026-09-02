@@ -249,6 +249,10 @@ public class GrantedTokenCreateParams extends ApiRequestParams {
     @SerializedName("max_amount")
     Long maxAmount;
 
+    /** The recurring schedule for the shared payment token's amount usage restrictions. */
+    @SerializedName("recurring")
+    Recurring recurring;
+
     /**
      * The recurring interval at which the shared payment token's amount usage restrictions reset.
      */
@@ -260,11 +264,13 @@ public class GrantedTokenCreateParams extends ApiRequestParams {
         Long expiresAt,
         Map<String, Object> extraParams,
         Long maxAmount,
+        Recurring recurring,
         RecurringInterval recurringInterval) {
       this.currency = currency;
       this.expiresAt = expiresAt;
       this.extraParams = extraParams;
       this.maxAmount = maxAmount;
+      this.recurring = recurring;
       this.recurringInterval = recurringInterval;
     }
 
@@ -281,6 +287,8 @@ public class GrantedTokenCreateParams extends ApiRequestParams {
 
       private Long maxAmount;
 
+      private Recurring recurring;
+
       private RecurringInterval recurringInterval;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -290,6 +298,7 @@ public class GrantedTokenCreateParams extends ApiRequestParams {
             this.expiresAt,
             this.extraParams,
             this.maxAmount,
+            this.recurring,
             this.recurringInterval);
       }
 
@@ -346,6 +355,12 @@ public class GrantedTokenCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The recurring schedule for the shared payment token's amount usage restrictions. */
+      public Builder setRecurring(GrantedTokenCreateParams.UsageLimits.Recurring recurring) {
+        this.recurring = recurring;
+        return this;
+      }
+
       /**
        * The recurring interval at which the shared payment token's amount usage restrictions reset.
        */
@@ -353,6 +368,119 @@ public class GrantedTokenCreateParams extends ApiRequestParams {
           GrantedTokenCreateParams.UsageLimits.RecurringInterval recurringInterval) {
         this.recurringInterval = recurringInterval;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Recurring {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> The interval at which the shared payment token's amount usage
+       * restrictions reset.
+       */
+      @SerializedName("interval")
+      Interval interval;
+
+      /** The number of intervals between each reset. Defaults to 1. */
+      @SerializedName("interval_count")
+      Long intervalCount;
+
+      private Recurring(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+        this.extraParams = extraParams;
+        this.interval = interval;
+        this.intervalCount = intervalCount;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Interval interval;
+
+        private Long intervalCount;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public GrantedTokenCreateParams.UsageLimits.Recurring build() {
+          return new GrantedTokenCreateParams.UsageLimits.Recurring(
+              this.extraParams, this.interval, this.intervalCount);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link GrantedTokenCreateParams.UsageLimits.Recurring#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link GrantedTokenCreateParams.UsageLimits.Recurring#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The interval at which the shared payment token's amount usage
+         * restrictions reset.
+         */
+        public Builder setInterval(
+            GrantedTokenCreateParams.UsageLimits.Recurring.Interval interval) {
+          this.interval = interval;
+          return this;
+        }
+
+        /** The number of intervals between each reset. Defaults to 1. */
+        public Builder setIntervalCount(Long intervalCount) {
+          this.intervalCount = intervalCount;
+          return this;
+        }
+      }
+
+      public enum Interval implements ApiRequestParams.EnumParam {
+        @SerializedName("day")
+        DAY("day"),
+
+        @SerializedName("month")
+        MONTH("month"),
+
+        @SerializedName("week")
+        WEEK("week"),
+
+        @SerializedName("year")
+        YEAR("year");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Interval(String value) {
+          this.value = value;
+        }
       }
     }
 

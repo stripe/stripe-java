@@ -692,12 +692,16 @@ public class VerificationSession extends ApiResource
      *
      * <p>One of {@code abandoned}, {@code consent_declined}, {@code country_not_supported}, {@code
      * device_not_supported}, {@code document_expired}, {@code document_type_not_supported}, {@code
-     * document_unverified_other}, {@code email_unverified_other}, {@code
-     * email_verification_declined}, {@code id_number_insufficient_document_data}, {@code
-     * id_number_mismatch}, {@code id_number_unverified_other}, {@code phone_unverified_other},
-     * {@code phone_verification_declined}, {@code selfie_document_missing_photo}, {@code
-     * selfie_face_mismatch}, {@code selfie_manipulated}, {@code selfie_unverified_other}, or {@code
-     * under_supported_age}.
+     * document_unverified_other}, {@code email_address_mismatch}, {@code email_name_mismatch},
+     * {@code email_ownership_unverified}, {@code email_phone_mismatch}, {@code email_short_tenure},
+     * {@code email_unverified_other}, {@code email_verification_declined}, {@code
+     * id_number_insufficient_document_data}, {@code id_number_mismatch}, {@code
+     * id_number_unverified_other}, {@code phone_address_mismatch}, {@code phone_invalid}, {@code
+     * phone_invalid_line_type}, {@code phone_name_mismatch}, {@code phone_ownership_unverified},
+     * {@code phone_short_tenure}, {@code phone_unsupported_country}, {@code
+     * phone_unverified_other}, {@code phone_verification_declined}, {@code
+     * selfie_document_missing_photo}, {@code selfie_face_mismatch}, {@code selfie_manipulated},
+     * {@code selfie_unverified_other}, or {@code under_supported_age}.
      */
     @SerializedName("code")
     String code;

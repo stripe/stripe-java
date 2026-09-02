@@ -158,6 +158,10 @@ public class FeeBatch extends StripeObject implements HasId {
     @SerializedName("credit_transaction")
     String creditTransaction;
 
+    /** The ID of the associated crypto transaction. */
+    @SerializedName("crypto_transaction")
+    String cryptoTransaction;
+
     /** The ID of the associated v2 money management transaction. */
     @SerializedName("money_management_transaction")
     String moneyManagementTransaction;
@@ -174,7 +178,7 @@ public class FeeBatch extends StripeObject implements HasId {
      * The type of money movement object.
      *
      * <p>One of {@code balance_transaction}, {@code credit_transaction}, {@code
-     * money_management_transaction}, or {@code payable_invoice}.
+     * crypto_transaction}, {@code money_management_transaction}, or {@code payable_invoice}.
      */
     @SerializedName("type")
     String type;

@@ -975,6 +975,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    @SerializedName("sequra")
+    Sequra sequra;
+
     @SerializedName("shopeepay")
     Shopeepay shopeepay;
 
@@ -1853,8 +1856,8 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
         /**
          * Indicates the outcome of 3D Secure authentication.
          *
-         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code data_share_only},
-         * {@code exempted}, {@code failed}, {@code not_supported}, or {@code processing_error}.
+         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code exempted}, {@code
+         * failed}, {@code not_supported}, or {@code processing_error}.
          */
         @SerializedName("result")
         String result;
@@ -3703,6 +3706,19 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
        */
       @SerializedName("mandate")
       String mandate;
+    }
+
+    /**
+     * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sequra extends StripeObject {
+      /** The SeQura transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**

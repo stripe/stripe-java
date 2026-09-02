@@ -10558,6 +10558,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("swish")
       SWISH("swish"),
 
+      @SerializedName("truemoney")
+      TRUEMONEY("truemoney"),
+
       @SerializedName("twint")
       TWINT("twint"),
 

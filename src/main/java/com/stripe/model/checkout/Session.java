@@ -2998,6 +2998,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    @SerializedName("sequra")
+    Sequra sequra;
+
     @SerializedName("sofort")
     Sofort sofort;
 
@@ -3424,7 +3427,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * with regional legislation and network rules, such as <a
        * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
-       * <p>Equal to {@code none}.
+       * <p>One of {@code none}, or {@code off_session}.
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
@@ -4893,6 +4896,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         @SerializedName("reference_prefix")
         String referencePrefix;
       }
+    }
+
+    /**
+     * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sequra extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
     }
 
     /**

@@ -29,6 +29,10 @@ public final class BillingService extends ApiService {
     return new com.stripe.service.billing.CreditGrantService(this.getResponseGetter());
   }
 
+  public com.stripe.service.billing.FeedbackOptionService feedbackOptions() {
+    return new com.stripe.service.billing.FeedbackOptionService(this.getResponseGetter());
+  }
+
   public com.stripe.service.billing.MeterEventAdjustmentService meterEventAdjustments() {
     return new com.stripe.service.billing.MeterEventAdjustmentService(this.getResponseGetter());
   }

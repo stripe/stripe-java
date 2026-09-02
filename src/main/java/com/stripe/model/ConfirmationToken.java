@@ -59,6 +59,13 @@ public class ConfirmationToken extends ApiResource implements HasId {
   MandateData mandateData;
 
   /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
+   */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value.
    *
    * <p>Equal to {@code confirmation_token}.
@@ -455,6 +462,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    @SerializedName("sequra")
+    Sequra sequra;
+
     @SerializedName("shopeepay")
     Shopeepay shopeepay;
 
@@ -492,9 +502,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * {@code oxxo}, {@code p24}, {@code pay_by_bank}, {@code payco}, {@code paynow}, {@code
      * paypal}, {@code paypay}, {@code payto}, {@code pix}, {@code promptpay}, {@code qris}, {@code
      * rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code satispay}, {@code scalapay},
-     * {@code sepa_debit}, {@code shopeepay}, {@code sofort}, {@code stripe_balance}, {@code
-     * sunbit}, {@code swish}, {@code tamara}, {@code twint}, {@code upi}, {@code us_bank_account},
-     * {@code vipps}, {@code wechat_pay}, or {@code zip}.
+     * {@code sepa_debit}, {@code sequra}, {@code shopeepay}, {@code sofort}, {@code
+     * stripe_balance}, {@code sunbit}, {@code swish}, {@code tamara}, {@code twint}, {@code upi},
+     * {@code us_bank_account}, {@code vipps}, {@code wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -2564,6 +2574,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
         }
       }
     }
+
+    /**
+     * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sequra extends StripeObject {}
 
     /**
      * For more details about Shopeepay, please refer to the <a

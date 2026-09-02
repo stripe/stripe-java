@@ -801,7 +801,7 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class MoneyMovementDetails {
-      /** Describes card money movement details for the payment evaluation. */
+      /** Describes card money movement details. */
       @SerializedName("card")
       Card card;
 
@@ -845,7 +845,7 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
               this.card, this.extraParams, this.moneyMovementType);
         }
 
-        /** Describes card money movement details for the payment evaluation. */
+        /** Describes card money movement details. */
         public Builder setCard(
             PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.Card card) {
           this.card = card;
