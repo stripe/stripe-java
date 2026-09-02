@@ -1295,6 +1295,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
+      @SerializedName("verification_method")
+      String verificationMethod;
+
       /**
        * For more details about MandateOptions, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>

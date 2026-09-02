@@ -25,12 +25,18 @@ public class CustomerTaxExemption extends ApiResource implements HasId {
   @SerializedName("ca")
   Ca ca;
 
+  /**
+   * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1
+   * alpha-2</a>).
+   */
   @SerializedName("country")
   String country;
 
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
 
+  /** ID of the customer this tax exemption belongs to. */
   @SerializedName("customer")
   String customer;
 
@@ -46,13 +52,23 @@ public class CustomerTaxExemption extends ApiResource implements HasId {
   @SerializedName("expiration_date")
   String expirationDate;
 
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
+  /**
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
+   */
   @SerializedName("livemode")
   Boolean livemode;
 
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to {@code customer_tax_exemption}.
+   */
   @SerializedName("object")
   String object;
 

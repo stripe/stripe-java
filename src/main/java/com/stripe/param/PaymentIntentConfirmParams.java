@@ -141,16 +141,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   PaymentMethodOptions paymentMethodOptions;
 
   /**
-   * The list of payment method types (for example, a card) that this PaymentIntent can use. If you
-   * don't provide this, Stripe will dynamically show relevant payment methods from your <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>. A
-   * list of valid payment method types can be found <a
-   * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-type">here</a>.
-   */
-  @SerializedName("payment_method_types")
-  List<String> paymentMethodTypes;
-
-  /**
    * Options to configure Radar. Learn more about <a
    * href="https://docs.stripe.com/radar/radar-session">Radar Sessions</a>.
    */
@@ -231,7 +221,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       String paymentMethod,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
-      List<String> paymentMethodTypes,
       RadarOptions radarOptions,
       Object receiptEmail,
       String returnUrl,
@@ -258,7 +247,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     this.paymentMethod = paymentMethod;
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
-    this.paymentMethodTypes = paymentMethodTypes;
     this.radarOptions = radarOptions;
     this.receiptEmail = receiptEmail;
     this.returnUrl = returnUrl;
@@ -312,8 +300,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     private PaymentMethodOptions paymentMethodOptions;
 
-    private List<String> paymentMethodTypes;
-
     private RadarOptions radarOptions;
 
     private Object receiptEmail;
@@ -349,7 +335,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.paymentMethod,
           this.paymentMethodData,
           this.paymentMethodOptions,
-          this.paymentMethodTypes,
           this.radarOptions,
           this.receiptEmail,
           this.returnUrl,
@@ -659,32 +644,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     public Builder setPaymentMethodOptions(
         PaymentIntentConfirmParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
-      return this;
-    }
-
-    /**
-     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentConfirmParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addPaymentMethodType(String element) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link PaymentIntentConfirmParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addAllPaymentMethodType(List<String> elements) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.addAll(elements);
       return this;
     }
 
@@ -23880,6 +23839,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
 
+      @SerializedName("sequra")
+      SEQURA("sequra"),
+
       @SerializedName("shopeepay")
       SHOPEEPAY("shopeepay"),
 
@@ -27546,15 +27508,20 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("target_date")
       String targetDate;
 
+      @SerializedName("verification_method")
+      VerificationMethod verificationMethod;
+
       private BacsDebit(
           Map<String, Object> extraParams,
           MandateOptions mandateOptions,
           ApiRequestParams.EnumParam setupFutureUsage,
-          String targetDate) {
+          String targetDate,
+          VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
         this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
         this.targetDate = targetDate;
+        this.verificationMethod = verificationMethod;
       }
 
       public static Builder builder() {
@@ -27570,10 +27537,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private String targetDate;
 
+        private VerificationMethod verificationMethod;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentConfirmParams.PaymentMethodOptions.BacsDebit build() {
           return new PaymentIntentConfirmParams.PaymentMethodOptions.BacsDebit(
-              this.extraParams, this.mandateOptions, this.setupFutureUsage, this.targetDate);
+              this.extraParams,
+              this.mandateOptions,
+              this.setupFutureUsage,
+              this.targetDate,
+              this.verificationMethod);
         }
 
         /**
@@ -27679,6 +27652,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          */
         public Builder setTargetDate(String targetDate) {
           this.targetDate = targetDate;
+          return this;
+        }
+
+        public Builder setVerificationMethod(
+            PaymentIntentConfirmParams.PaymentMethodOptions.BacsDebit.VerificationMethod
+                verificationMethod) {
+          this.verificationMethod = verificationMethod;
           return this;
         }
       }
@@ -27790,6 +27770,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private final String value;
 
         SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum VerificationMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("automatic")
+        AUTOMATIC("automatic"),
+
+        @SerializedName("payer_name_verification")
+        PAYER_NAME_VERIFICATION("payer_name_verification");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        VerificationMethod(String value) {
           this.value = value;
         }
       }
@@ -52391,6 +52386,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     @SerializedName("test_pay")
     TEST_PAY("test_pay"),
 
+    @SerializedName("touch_n_go")
+    TOUCH_N_GO("touch_n_go"),
+
     @SerializedName("truemoney")
     TRUEMONEY("truemoney"),
 
@@ -52597,6 +52595,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),

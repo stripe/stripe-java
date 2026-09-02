@@ -330,6 +330,8 @@ import com.stripe.events.V2CoreHealthIssuingAuthorizationRequestTimeoutFiringEve
 import com.stripe.events.V2CoreHealthIssuingAuthorizationRequestTimeoutResolvedEventNotification;
 import com.stripe.events.V2CoreHealthMeterEventSummariesDelayedFiringEventNotification;
 import com.stripe.events.V2CoreHealthMeterEventSummariesDelayedResolvedEventNotification;
+import com.stripe.events.V2CoreHealthMetronomeNotificationLatencyFiringEventNotification;
+import com.stripe.events.V2CoreHealthMetronomeNotificationLatencyResolvedEventNotification;
 import com.stripe.events.V2CoreHealthPaymentMethodErrorFiringEventNotification;
 import com.stripe.events.V2CoreHealthPaymentMethodErrorResolvedEventNotification;
 import com.stripe.events.V2CoreHealthSepaDebitDelayedFiringEventNotification;
@@ -388,6 +390,11 @@ import com.stripe.events.V2MoneyManagementOutboundTransferPostedEventNotificatio
 import com.stripe.events.V2MoneyManagementOutboundTransferReturnedEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundTransferUnderReviewEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundTransferUpdatedEventNotification;
+import com.stripe.events.V2MoneyManagementPayoutIntentCanceledEventNotification;
+import com.stripe.events.V2MoneyManagementPayoutIntentCreatedEventNotification;
+import com.stripe.events.V2MoneyManagementPayoutIntentPostedEventNotification;
+import com.stripe.events.V2MoneyManagementPayoutIntentProcessingEventNotification;
+import com.stripe.events.V2MoneyManagementPayoutIntentRequiresActionEventNotification;
 import com.stripe.events.V2MoneyManagementPayoutMethodCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementPayoutMethodUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedCreditAvailableEventNotification;
@@ -445,6 +452,7 @@ import com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEventNotif
 import com.stripe.events.V2SignalsAccountSignalFraudulentWebsiteReadyEventNotification;
 import com.stripe.events.V2SignalsAccountSignalMerchantDelinquencyReadyEventNotification;
 import com.stripe.events.V2SignalsAccountSignalPaymentDelinquencyExposureReadyEventNotification;
+import com.stripe.events.V2SignalsPaymentRetryEvaluationsRetryRecommendedEventNotification;
 import com.stripe.model.v2.core.EventNotification;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -2567,6 +2575,20 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV2CoreHealthMetronomeNotificationLatencyFiring(
+      EventNotificationCallback<V2CoreHealthMetronomeNotificationLatencyFiringEventNotification>
+          callback) {
+    this.register("v2.core.health.metronome_notification_latency.firing", callback);
+    return self();
+  }
+
+  public T onV2CoreHealthMetronomeNotificationLatencyResolved(
+      EventNotificationCallback<V2CoreHealthMetronomeNotificationLatencyResolvedEventNotification>
+          callback) {
+    this.register("v2.core.health.metronome_notification_latency.resolved", callback);
+    return self();
+  }
+
   public T onV2CoreHealthPaymentMethodErrorFiring(
       EventNotificationCallback<V2CoreHealthPaymentMethodErrorFiringEventNotification> callback) {
     this.register("v2.core.health.payment_method_error.firing", callback);
@@ -2937,6 +2959,38 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
       EventNotificationCallback<V2MoneyManagementOutboundTransferUpdatedEventNotification>
           callback) {
     this.register("v2.money_management.outbound_transfer.updated", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementPayoutIntentCanceled(
+      EventNotificationCallback<V2MoneyManagementPayoutIntentCanceledEventNotification> callback) {
+    this.register("v2.money_management.payout_intent.canceled", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementPayoutIntentCreated(
+      EventNotificationCallback<V2MoneyManagementPayoutIntentCreatedEventNotification> callback) {
+    this.register("v2.money_management.payout_intent.created", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementPayoutIntentPosted(
+      EventNotificationCallback<V2MoneyManagementPayoutIntentPostedEventNotification> callback) {
+    this.register("v2.money_management.payout_intent.posted", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementPayoutIntentProcessing(
+      EventNotificationCallback<V2MoneyManagementPayoutIntentProcessingEventNotification>
+          callback) {
+    this.register("v2.money_management.payout_intent.processing", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementPayoutIntentRequiresAction(
+      EventNotificationCallback<V2MoneyManagementPayoutIntentRequiresActionEventNotification>
+          callback) {
+    this.register("v2.money_management.payout_intent.requires_action", callback);
     return self();
   }
 
@@ -3319,6 +3373,13 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
               V2SignalsAccountSignalPaymentDelinquencyExposureReadyEventNotification>
           callback) {
     this.register("v2.signals.account_signal.payment_delinquency_exposure_ready", callback);
+    return self();
+  }
+
+  public T onV2SignalsPaymentRetryEvaluationsRetryRecommended(
+      EventNotificationCallback<V2SignalsPaymentRetryEvaluationsRetryRecommendedEventNotification>
+          callback) {
+    this.register("v2.signals.payment_retry_evaluations.retry_recommended", callback);
     return self();
   }
   // notification-handler-methods: The end of the section generated from our OpenAPI spec

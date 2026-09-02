@@ -171,16 +171,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   PaymentMethodOptions paymentMethodOptions;
 
   /**
-   * The list of payment method types (for example, card) that this PaymentIntent can use. Use
-   * {@code automatic_payment_methods} to manage payment methods from the <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>. A list of
-   * valid payment method types can be found <a
-   * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-type">here</a>.
-   */
-  @SerializedName("payment_method_types")
-  List<String> paymentMethodTypes;
-
-  /**
    * Email address that the receipt for the resulting payment will be sent to. If {@code
    * receipt_email} is specified for a payment in live mode, a receipt will be sent regardless of
    * your <a href="https://dashboard.stripe.com/account/emails">email settings</a>.
@@ -279,7 +269,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Object paymentMethodConfiguration,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
-      List<String> paymentMethodTypes,
       Object receiptEmail,
       ApiRequestParams.EnumParam setupFutureUsage,
       Object shipping,
@@ -309,7 +298,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     this.paymentMethodConfiguration = paymentMethodConfiguration;
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
-    this.paymentMethodTypes = paymentMethodTypes;
     this.receiptEmail = receiptEmail;
     this.setupFutureUsage = setupFutureUsage;
     this.shipping = shipping;
@@ -368,8 +356,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private PaymentMethodOptions paymentMethodOptions;
 
-    private List<String> paymentMethodTypes;
-
     private Object receiptEmail;
 
     private ApiRequestParams.EnumParam setupFutureUsage;
@@ -409,7 +395,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           this.paymentMethodConfiguration,
           this.paymentMethodData,
           this.paymentMethodOptions,
-          this.paymentMethodTypes,
           this.receiptEmail,
           this.setupFutureUsage,
           this.shipping,
@@ -856,32 +841,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     public Builder setPaymentMethodOptions(
         PaymentIntentUpdateParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
-      return this;
-    }
-
-    /**
-     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentUpdateParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addPaymentMethodType(String element) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link PaymentIntentUpdateParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addAllPaymentMethodType(List<String> elements) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.addAll(elements);
       return this;
     }
 
@@ -25542,6 +25501,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
 
+      @SerializedName("sequra")
+      SEQURA("sequra"),
+
       @SerializedName("shopeepay")
       SHOPEEPAY("shopeepay"),
 
@@ -29249,15 +29211,20 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("target_date")
       Object targetDate;
 
+      @SerializedName("verification_method")
+      VerificationMethod verificationMethod;
+
       private BacsDebit(
           Map<String, Object> extraParams,
           MandateOptions mandateOptions,
           ApiRequestParams.EnumParam setupFutureUsage,
-          Object targetDate) {
+          Object targetDate,
+          VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
         this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
         this.targetDate = targetDate;
+        this.verificationMethod = verificationMethod;
       }
 
       public static Builder builder() {
@@ -29273,10 +29240,16 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private Object targetDate;
 
+        private VerificationMethod verificationMethod;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit(
-              this.extraParams, this.mandateOptions, this.setupFutureUsage, this.targetDate);
+              this.extraParams,
+              this.mandateOptions,
+              this.setupFutureUsage,
+              this.targetDate,
+              this.verificationMethod);
         }
 
         /**
@@ -29394,6 +29367,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           this.targetDate = targetDate;
           return this;
         }
+
+        public Builder setVerificationMethod(
+            PaymentIntentUpdateParams.PaymentMethodOptions.BacsDebit.VerificationMethod
+                verificationMethod) {
+          this.verificationMethod = verificationMethod;
+          return this;
+        }
       }
 
       @Getter
@@ -29503,6 +29483,21 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         private final String value;
 
         SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum VerificationMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("automatic")
+        AUTOMATIC("automatic"),
+
+        @SerializedName("payer_name_verification")
+        PAYER_NAME_VERIFICATION("payer_name_verification");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        VerificationMethod(String value) {
           this.value = value;
         }
       }
@@ -55420,6 +55415,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName("test_pay")
     TEST_PAY("test_pay"),
 
+    @SerializedName("touch_n_go")
+    TOUCH_N_GO("touch_n_go"),
+
     @SerializedName("truemoney")
     TRUEMONEY("truemoney"),
 
@@ -55626,6 +55624,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),

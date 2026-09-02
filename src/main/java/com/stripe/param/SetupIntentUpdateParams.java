@@ -118,16 +118,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
 
-  /**
-   * The list of payment method types (for example, card) that this SetupIntent can set up. If you
-   * don't provide this, Stripe will dynamically show relevant payment methods from your <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>. A
-   * list of valid payment method types can be found <a
-   * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-type">here</a>.
-   */
-  @SerializedName("payment_method_types")
-  List<String> paymentMethodTypes;
-
   /** Provides industry-specific information about the SetupIntent. */
   @SerializedName("setup_details")
   SetupDetails setupDetails;
@@ -147,7 +137,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       Object paymentMethodConfiguration,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
-      List<String> paymentMethodTypes,
       SetupDetails setupDetails) {
     this.allowedPaymentMethodTypes = allowedPaymentMethodTypes;
     this.attachToSelf = attachToSelf;
@@ -163,7 +152,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     this.paymentMethodConfiguration = paymentMethodConfiguration;
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
-    this.paymentMethodTypes = paymentMethodTypes;
     this.setupDetails = setupDetails;
   }
 
@@ -200,8 +188,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     private PaymentMethodOptions paymentMethodOptions;
 
-    private List<String> paymentMethodTypes;
-
     private SetupDetails setupDetails;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -221,7 +207,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           this.paymentMethodConfiguration,
           this.paymentMethodData,
           this.paymentMethodOptions,
-          this.paymentMethodTypes,
           this.setupDetails);
     }
 
@@ -584,32 +569,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     public Builder setPaymentMethodOptions(
         SetupIntentUpdateParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
-      return this;
-    }
-
-    /**
-     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * SetupIntentUpdateParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addPaymentMethodType(String element) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link SetupIntentUpdateParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addAllPaymentMethodType(List<String> elements) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.addAll(elements);
       return this;
     }
 
@@ -8018,6 +7977,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
 
+      @SerializedName("sequra")
+      SEQURA("sequra"),
+
       @SerializedName("shopeepay")
       SHOPEEPAY("shopeepay"),
 
@@ -8914,9 +8876,16 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
 
-      private BacsDebit(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+      @SerializedName("verification_method")
+      VerificationMethod verificationMethod;
+
+      private BacsDebit(
+          Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
+          VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
         this.mandateOptions = mandateOptions;
+        this.verificationMethod = verificationMethod;
       }
 
       public static Builder builder() {
@@ -8928,10 +8897,12 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
         private MandateOptions mandateOptions;
 
+        private VerificationMethod verificationMethod;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SetupIntentUpdateParams.PaymentMethodOptions.BacsDebit build() {
           return new SetupIntentUpdateParams.PaymentMethodOptions.BacsDebit(
-              this.extraParams, this.mandateOptions);
+              this.extraParams, this.mandateOptions, this.verificationMethod);
         }
 
         /**
@@ -8966,6 +8937,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         public Builder setMandateOptions(
             SetupIntentUpdateParams.PaymentMethodOptions.BacsDebit.MandateOptions mandateOptions) {
           this.mandateOptions = mandateOptions;
+          return this;
+        }
+
+        public Builder setVerificationMethod(
+            SetupIntentUpdateParams.PaymentMethodOptions.BacsDebit.VerificationMethod
+                verificationMethod) {
+          this.verificationMethod = verificationMethod;
           return this;
         }
       }
@@ -9060,6 +9038,21 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.referencePrefix = referencePrefix;
             return this;
           }
+        }
+      }
+
+      public enum VerificationMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("automatic")
+        AUTOMATIC("automatic"),
+
+        @SerializedName("payer_name_verification")
+        PAYER_NAME_VERIFICATION("payer_name_verification");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        VerificationMethod(String value) {
+          this.value = value;
         }
       }
     }
@@ -14266,6 +14259,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     @SerializedName("test_pay")
     TEST_PAY("test_pay"),
 
+    @SerializedName("touch_n_go")
+    TOUCH_N_GO("touch_n_go"),
+
     @SerializedName("truemoney")
     TRUEMONEY("truemoney"),
 
@@ -14454,6 +14450,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),

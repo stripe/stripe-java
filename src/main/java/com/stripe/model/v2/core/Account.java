@@ -6930,14 +6930,6 @@ public class Account extends StripeObject implements HasId {
         /** The ID of the payment method to use for gross settlement payouts. */
         @SerializedName("payment_method")
         String paymentMethod;
-
-        /**
-         * Whether to collect a payment method for gross settlement.
-         *
-         * <p>One of {@code always}, or {@code never}.
-         */
-        @SerializedName("payment_method_collection")
-        String paymentMethodCollection;
       }
 
       /** Settings specific to Konbini payments on the account. */
@@ -12391,6 +12383,14 @@ public class Account extends StripeObject implements HasId {
     /** The Account's preferred locales (languages), ordered by preference. */
     @SerializedName("locales")
     List<String> locales;
+
+    /**
+     * Default payout methods per currency. Keys are three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency codes</a>, in lowercase.
+     * Values are v2 Payout Method IDs.
+     */
+    @SerializedName("payout_methods")
+    Map<String, String> payoutMethods;
 
     /** Account profile information. */
     @SerializedName("profile")

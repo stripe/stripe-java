@@ -9,6 +9,10 @@ public final class TaxService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.v2.tax.IntegrationConfigurationService integrationConfigurations() {
+    return new com.stripe.service.v2.tax.IntegrationConfigurationService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.tax.ManualRuleService manualRules() {
     return new com.stripe.service.v2.tax.ManualRuleService(this.getResponseGetter());
   }

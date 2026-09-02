@@ -583,7 +583,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class MoneyMovementDetails extends StripeObject {
-      /** Describes card money movement details for the payment evaluation. */
+      /** Describes card money movement details. */
       @SerializedName("card")
       Card card;
 
@@ -657,7 +657,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
             new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
       }
 
-      /** Billing details attached to this payment evaluation. */
+      /** Billing details attached to the payment method. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

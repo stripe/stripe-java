@@ -506,6 +506,10 @@ public class IssuedToken extends ApiResource implements HasId {
     @SerializedName("max_amount")
     Long maxAmount;
 
+    /** The recurring schedule for the shared payment token's amount usage restrictions. */
+    @SerializedName("recurring")
+    Recurring recurring;
+
     /**
      * The recurring interval at which the shared payment token's amount usage restrictions reset.
      *
@@ -513,6 +517,27 @@ public class IssuedToken extends ApiResource implements HasId {
      */
     @SerializedName("recurring_interval")
     String recurringInterval;
+
+    /**
+     * For more details about Recurring, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Recurring extends StripeObject {
+      /**
+       * The interval at which the shared payment token's amount usage restrictions reset.
+       *
+       * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+       */
+      @SerializedName("interval")
+      String interval;
+
+      /** The number of intervals between each reset. */
+      @SerializedName("interval_count")
+      Long intervalCount;
+    }
   }
 
   @Override

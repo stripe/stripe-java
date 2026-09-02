@@ -14064,12 +14064,23 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /**
+         * Card funding types to block for this Checkout Session. Supported values are {@code
+         * credit}, {@code debit}, and {@code prepaid}.
+         */
+        @SerializedName("funding_types_blocked")
+        List<SessionCreateParams.PaymentMethodOptions.Card.Restrictions.FundingTypesBlocked>
+            fundingTypesBlocked;
+
         private Restrictions(
             List<SessionCreateParams.PaymentMethodOptions.Card.Restrictions.BrandsBlocked>
                 brandsBlocked,
-            Map<String, Object> extraParams) {
+            Map<String, Object> extraParams,
+            List<SessionCreateParams.PaymentMethodOptions.Card.Restrictions.FundingTypesBlocked>
+                fundingTypesBlocked) {
           this.brandsBlocked = brandsBlocked;
           this.extraParams = extraParams;
+          this.fundingTypesBlocked = fundingTypesBlocked;
         }
 
         public static Builder builder() {
@@ -14082,10 +14093,14 @@ public class SessionCreateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private List<
+                  SessionCreateParams.PaymentMethodOptions.Card.Restrictions.FundingTypesBlocked>
+              fundingTypesBlocked;
+
           /** Finalize and obtain parameter instance from this builder. */
           public SessionCreateParams.PaymentMethodOptions.Card.Restrictions build() {
             return new SessionCreateParams.PaymentMethodOptions.Card.Restrictions(
-                this.brandsBlocked, this.extraParams);
+                this.brandsBlocked, this.extraParams, this.fundingTypesBlocked);
           }
 
           /**
@@ -14146,6 +14161,40 @@ public class SessionCreateParams extends ApiRequestParams {
             this.extraParams.putAll(map);
             return this;
           }
+
+          /**
+           * Add an element to `fundingTypesBlocked` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * SessionCreateParams.PaymentMethodOptions.Card.Restrictions#fundingTypesBlocked} for the
+           * field documentation.
+           */
+          public Builder addFundingTypesBlocked(
+              SessionCreateParams.PaymentMethodOptions.Card.Restrictions.FundingTypesBlocked
+                  element) {
+            if (this.fundingTypesBlocked == null) {
+              this.fundingTypesBlocked = new ArrayList<>();
+            }
+            this.fundingTypesBlocked.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `fundingTypesBlocked` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * SessionCreateParams.PaymentMethodOptions.Card.Restrictions#fundingTypesBlocked} for the
+           * field documentation.
+           */
+          public Builder addAllFundingTypesBlocked(
+              List<SessionCreateParams.PaymentMethodOptions.Card.Restrictions.FundingTypesBlocked>
+                  elements) {
+            if (this.fundingTypesBlocked == null) {
+              this.fundingTypesBlocked = new ArrayList<>();
+            }
+            this.fundingTypesBlocked.addAll(elements);
+            return this;
+          }
         }
 
         public enum BrandsBlocked implements ApiRequestParams.EnumParam {
@@ -14165,6 +14214,24 @@ public class SessionCreateParams extends ApiRequestParams {
           private final String value;
 
           BrandsBlocked(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum FundingTypesBlocked implements ApiRequestParams.EnumParam {
+          @SerializedName("credit")
+          CREDIT("credit"),
+
+          @SerializedName("debit")
+          DEBIT("debit"),
+
+          @SerializedName("prepaid")
+          PREPAID("prepaid");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          FundingTypesBlocked(String value) {
             this.value = value;
           }
         }

@@ -35,10 +35,6 @@ public class ApprovalRequest extends StripeObject implements HasId {
   @SerializedName("dashboard_url")
   String dashboardUrl;
 
-  /** A description of the approval request. */
-  @SerializedName("description")
-  String description;
-
   /** The timestamp at which this ApprovalRequest will expire. */
   @SerializedName("expires_at")
   Instant expiresAt;
@@ -60,6 +56,10 @@ public class ApprovalRequest extends StripeObject implements HasId {
    */
   @SerializedName("object")
   String object;
+
+  /** Context provided by the requester (e.g. an agent) to help reviewers evaluate the request. */
+  @SerializedName("reason")
+  String reason;
 
   /** The requester of this ApprovalRequest. */
   @SerializedName("requested_by")
@@ -96,15 +96,47 @@ public class ApprovalRequest extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class RequestedBy extends StripeObject implements HasId {
-    /** Stripe-defined identifier for the requester (e.g. a restricted API key token). */
-    @Getter(onMethod_ = {@Override})
-    @SerializedName("id")
-    String id;
+  public static class RequestedBy extends StripeObject {
+    /** Present when {@code type} is {@code api_key}. */
+    @SerializedName("api_key")
+    ApiKey apiKey;
 
-    /** Merchant-defined name for the requester. */
-    @SerializedName("name")
-    String name;
+    /**
+     * The type of actor that made the request.
+     *
+     * <p>One of {@code api_key}, or {@code user}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /** Present when {@code type} is {@code user}. */
+    @SerializedName("user")
+    User user;
+
+    /** Present when {@code type} is {@code api_key}. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ApiKey extends StripeObject implements HasId {
+      /** Stripe-defined identifier for the API key (e.g. a restricted API key token). */
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+
+      /** Merchant-defined name for the API key. */
+      @SerializedName("name")
+      String name;
+    }
+
+    /** Present when {@code type} is {@code user}. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class User extends StripeObject {
+      /** Email address of the dashboard user. */
+      @SerializedName("email")
+      String email;
+    }
   }
 
   /** The review of this ApprovalRequest if it has been reviewed. */
@@ -136,15 +168,47 @@ public class ApprovalRequest extends StripeObject implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ReviewedBy extends StripeObject implements HasId {
-      /** Stripe-defined identifier for the reviewer (e.g. a restricted API key token). */
-      @Getter(onMethod_ = {@Override})
-      @SerializedName("id")
-      String id;
+    public static class ReviewedBy extends StripeObject {
+      /** Present when {@code type} is {@code api_key}. */
+      @SerializedName("api_key")
+      ApiKey apiKey;
 
-      /** Merchant-defined name for the reviewer. */
-      @SerializedName("name")
-      String name;
+      /**
+       * The type of actor that reviewed the request.
+       *
+       * <p>One of {@code api_key}, or {@code user}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Present when {@code type} is {@code user}. */
+      @SerializedName("user")
+      User user;
+
+      /** Present when {@code type} is {@code api_key}. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ApiKey extends StripeObject implements HasId {
+        /** Stripe-defined identifier for the API key (e.g. a restricted API key token). */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+
+        /** Merchant-defined name for the API key. */
+        @SerializedName("name")
+        String name;
+      }
+
+      /** Present when {@code type} is {@code user}. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class User extends StripeObject {
+        /** Email address of the dashboard user. */
+        @SerializedName("email")
+        String email;
+      }
     }
   }
 
@@ -339,6 +403,10 @@ public class ApprovalRequest extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusTransitions extends StripeObject {
+    /** Timestamp when the approval request was approved. */
+    @SerializedName("approved_at")
+    Instant approvedAt;
+
     /** Timestamp when the approval request was canceled. */
     @SerializedName("canceled_at")
     Instant canceledAt;
@@ -354,10 +422,6 @@ public class ApprovalRequest extends StripeObject implements HasId {
     /** Timestamp when the approval request was rejected. */
     @SerializedName("rejected_at")
     Instant rejectedAt;
-
-    /** Timestamp when the approval request moved to requires_execution status. */
-    @SerializedName("requires_execution_at")
-    Instant requiresExecutionAt;
 
     /** Timestamp when the approval request succeeded. */
     @SerializedName("succeeded_at")

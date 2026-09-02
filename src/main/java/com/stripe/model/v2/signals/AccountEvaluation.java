@@ -184,8 +184,8 @@ public class AccountEvaluation extends StripeObject implements HasId {
       /**
        * Categorical assessment of the fraudulent website risk.
        *
-       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
-       * not_assessed}, or {@code unknown}.
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, or {@code
+       * unknown}.
        */
       @SerializedName("risk_level")
       String riskLevel;
@@ -207,8 +207,8 @@ public class AccountEvaluation extends StripeObject implements HasId {
       /**
        * Categorical assessment of the account-sharing risk.
        *
-       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
-       * not_assessed}, or {@code unknown}.
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, or {@code
+       * unknown}.
        */
       @SerializedName("risk_level")
       String riskLevel;
@@ -234,8 +234,8 @@ public class AccountEvaluation extends StripeObject implements HasId {
       /**
        * Categorical assessment of the multi-accounting risk.
        *
-       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
-       * not_assessed}, or {@code unknown}.
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, or {@code
+       * unknown}.
        */
       @SerializedName("risk_level")
       String riskLevel;

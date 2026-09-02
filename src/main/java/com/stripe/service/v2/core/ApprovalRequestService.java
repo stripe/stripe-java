@@ -13,7 +13,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.core.ApprovalRequestListParams;
-import com.stripe.param.v2.core.ApprovalRequestSubmitParams;
+import com.stripe.param.v2.core.ApprovalRequestUpdateParams;
 
 public final class ApprovalRequestService extends ApiService {
   public ApprovalRequestService(StripeResponseGetter responseGetter) {
@@ -57,6 +57,33 @@ public final class ApprovalRequestService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
     return this.request(request, ApprovalRequest.class);
   }
+  /** POST /v2/core/approval_requests/:id Updates a pending approval request's mutable fields. */
+  public ApprovalRequest update(String id, ApprovalRequestUpdateParams params)
+      throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /** POST /v2/core/approval_requests/:id Updates a pending approval request's mutable fields. */
+  public ApprovalRequest update(String id, RequestOptions options) throws StripeException {
+    return update(id, (ApprovalRequestUpdateParams) null, options);
+  }
+  /** POST /v2/core/approval_requests/:id Updates a pending approval request's mutable fields. */
+  public ApprovalRequest update(String id) throws StripeException {
+    return update(id, (ApprovalRequestUpdateParams) null, (RequestOptions) null);
+  }
+  /** POST /v2/core/approval_requests/:id Updates a pending approval request's mutable fields. */
+  public ApprovalRequest update(
+      String id, ApprovalRequestUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v2/core/approval_requests/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, ApprovalRequest.class);
+  }
   /** POST /v2/core/approval_requests/:id/cancel Cancels a pending approval request. */
   public ApprovalRequest cancel(String id) throws StripeException {
     return cancel(id, (RequestOptions) null);
@@ -67,58 +94,6 @@ public final class ApprovalRequestService extends ApiService {
         String.format("/v2/core/approval_requests/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
-    return this.request(request, ApprovalRequest.class);
-  }
-  /** POST /v2/core/approval_requests/:id/execute Executes an approved approval request. */
-  public ApprovalRequest execute(String id) throws StripeException {
-    return execute(id, (RequestOptions) null);
-  }
-  /** POST /v2/core/approval_requests/:id/execute Executes an approved approval request. */
-  public ApprovalRequest execute(String id, RequestOptions options) throws StripeException {
-    String path =
-        String.format("/v2/core/approval_requests/%s/execute", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
-    return this.request(request, ApprovalRequest.class);
-  }
-  /**
-   * POST /v2/core/approval_requests/:id/submit Moves a pending approval request into the reviewer
-   * queue for auto-execution upon approval.
-   */
-  public ApprovalRequest submit(String id, ApprovalRequestSubmitParams params)
-      throws StripeException {
-    return submit(id, params, (RequestOptions) null);
-  }
-  /**
-   * POST /v2/core/approval_requests/:id/submit Moves a pending approval request into the reviewer
-   * queue for auto-execution upon approval.
-   */
-  public ApprovalRequest submit(String id, RequestOptions options) throws StripeException {
-    return submit(id, (ApprovalRequestSubmitParams) null, options);
-  }
-  /**
-   * POST /v2/core/approval_requests/:id/submit Moves a pending approval request into the reviewer
-   * queue for auto-execution upon approval.
-   */
-  public ApprovalRequest submit(String id) throws StripeException {
-    return submit(id, (ApprovalRequestSubmitParams) null, (RequestOptions) null);
-  }
-  /**
-   * POST /v2/core/approval_requests/:id/submit Moves a pending approval request into the reviewer
-   * queue for auto-execution upon approval.
-   */
-  public ApprovalRequest submit(
-      String id, ApprovalRequestSubmitParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v2/core/approval_requests/%s/submit", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
     return this.request(request, ApprovalRequest.class);
   }
 }

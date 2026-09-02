@@ -160,6 +160,14 @@ public class AccountSession extends ApiResource {
     @SerializedName("capital_financing_application")
     CapitalFinancingApplication capitalFinancingApplication;
 
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/capital-financing-manual-payment/">Capital
+     * financing manual payment</a> embedded component.
+     */
+    @SerializedName("capital_financing_manual_payment")
+    CapitalFinancingManualPayment capitalFinancingManualPayment;
+
     @SerializedName("capital_financing_promotion")
     CapitalFinancingPromotion capitalFinancingPromotion;
 
@@ -574,6 +582,31 @@ public class AccountSession extends ApiResource {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CapitalFinancingApplication extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
+    }
+
+    /**
+     * For more details about CapitalFinancingManualPayment, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CapitalFinancingManualPayment extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;

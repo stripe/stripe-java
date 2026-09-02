@@ -79,6 +79,16 @@ public class SessionUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  /**
+   * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
+   * payment} mode.
+   *
+   * <p>You can only update these parameters when {@code ui_mode} is {@code elements} and while the
+   * session is active.
+   */
+  @SerializedName("payment_intent_data")
+  PaymentIntentData paymentIntentData;
+
   /** The shipping rate options to apply to this Session. Up to a maximum of 5. */
   @SerializedName("shipping_options")
   Object shippingOptions;
@@ -99,6 +109,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       InvoiceCreation invoiceCreation,
       List<SessionUpdateParams.LineItem> lineItems,
       Object metadata,
+      PaymentIntentData paymentIntentData,
       Object shippingOptions,
       SubscriptionData subscriptionData) {
     this.automaticTax = automaticTax;
@@ -109,6 +120,7 @@ public class SessionUpdateParams extends ApiRequestParams {
     this.invoiceCreation = invoiceCreation;
     this.lineItems = lineItems;
     this.metadata = metadata;
+    this.paymentIntentData = paymentIntentData;
     this.shippingOptions = shippingOptions;
     this.subscriptionData = subscriptionData;
   }
@@ -134,6 +146,8 @@ public class SessionUpdateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private PaymentIntentData paymentIntentData;
+
     private Object shippingOptions;
 
     private SubscriptionData subscriptionData;
@@ -149,6 +163,7 @@ public class SessionUpdateParams extends ApiRequestParams {
           this.invoiceCreation,
           this.lineItems,
           this.metadata,
+          this.paymentIntentData,
           this.shippingOptions,
           this.subscriptionData);
     }
@@ -343,6 +358,18 @@ public class SessionUpdateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
+     * payment} mode.
+     *
+     * <p>You can only update these parameters when {@code ui_mode} is {@code elements} and while
+     * the session is active.
+     */
+    public Builder setPaymentIntentData(SessionUpdateParams.PaymentIntentData paymentIntentData) {
+      this.paymentIntentData = paymentIntentData;
       return this;
     }
 
@@ -2775,6 +2802,386 @@ public class SessionUpdateParams extends ApiRequestParams {
         TaxBehavior(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentIntentData {
+    /**
+     * An arbitrary string attached to the object. Often useful for displaying to users. Pass an
+     * empty string to clear a previously configured value.
+     */
+    @SerializedName("description")
+    Object description;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
+     */
+    @SerializedName("metadata")
+    Object metadata;
+
+    /**
+     * Email address that the receipt for the resulting payment will be sent to. If {@code
+     * receipt_email} is specified for a payment in live mode, a receipt will be sent regardless of
+     * your <a href="https://dashboard.stripe.com/account/emails">email settings</a>. Pass an empty
+     * string to clear a previously configured recipient.
+     */
+    @SerializedName("receipt_email")
+    Object receiptEmail;
+
+    /**
+     * Indicates that you intend to <a
+     * href="https://docs.stripe.com/payments/payment-intents#future-usage">make future payments</a>
+     * with the payment method collected by this Checkout Session.
+     *
+     * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer that
+     * their payment details will be saved.
+     *
+     * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer that
+     * their payment details will be saved and used for future payments.
+     *
+     * <p>If a Customer has been provided or Checkout creates a new Customer, Checkout will attach
+     * the payment method to the Customer.
+     *
+     * <p>If Checkout does not create a Customer, the payment method is not attached to a Customer.
+     * To reuse the payment method, you can retrieve it from the Checkout Session's PaymentIntent.
+     *
+     * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
+     * dynamically optimize your payment flow and comply with regional legislation and network
+     * rules, such as SCA.
+     *
+     * <p>Pass an empty string to remove a previously supplied configuration.
+     */
+    @SerializedName("setup_future_usage")
+    ApiRequestParams.EnumParam setupFutureUsage;
+
+    /**
+     * Text that appears on the customer's statement as the statement descriptor for a non-card
+     * charge. This value overrides the account's default statement descriptor. For information
+     * about requirements, including the 22-character limit, see <a
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors">the Statement
+     * Descriptor docs</a>.
+     *
+     * <p>Setting this value for a card charge returns an error. For card charges, set the <a
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>
+     * instead. Pass an empty string to clear a previously configured value.
+     */
+    @SerializedName("statement_descriptor")
+    Object statementDescriptor;
+
+    /**
+     * Provides information about a card charge. Concatenated to the account's <a
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
+     * descriptor prefix</a> to form the complete statement descriptor that appears on the
+     * customer's statement. Pass an empty string to clear a previously configured value.
+     */
+    @SerializedName("statement_descriptor_suffix")
+    Object statementDescriptorSuffix;
+
+    private PaymentIntentData(
+        Object description,
+        Map<String, Object> extraParams,
+        Object metadata,
+        Object receiptEmail,
+        ApiRequestParams.EnumParam setupFutureUsage,
+        Object statementDescriptor,
+        Object statementDescriptorSuffix) {
+      this.description = description;
+      this.extraParams = extraParams;
+      this.metadata = metadata;
+      this.receiptEmail = receiptEmail;
+      this.setupFutureUsage = setupFutureUsage;
+      this.statementDescriptor = statementDescriptor;
+      this.statementDescriptorSuffix = statementDescriptorSuffix;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object description;
+
+      private Map<String, Object> extraParams;
+
+      private Object metadata;
+
+      private Object receiptEmail;
+
+      private ApiRequestParams.EnumParam setupFutureUsage;
+
+      private Object statementDescriptor;
+
+      private Object statementDescriptorSuffix;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionUpdateParams.PaymentIntentData build() {
+        return new SessionUpdateParams.PaymentIntentData(
+            this.description,
+            this.extraParams,
+            this.metadata,
+            this.receiptEmail,
+            this.setupFutureUsage,
+            this.statementDescriptor,
+            this.statementDescriptorSuffix);
+      }
+
+      /**
+       * An arbitrary string attached to the object. Often useful for displaying to users. Pass an
+       * empty string to clear a previously configured value.
+       */
+      public Builder setDescription(String description) {
+        this.description = description;
+        return this;
+      }
+
+      /**
+       * An arbitrary string attached to the object. Often useful for displaying to users. Pass an
+       * empty string to clear a previously configured value.
+       */
+      public Builder setDescription(EmptyParam description) {
+        this.description = description;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionUpdateParams.PaymentIntentData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionUpdateParams.PaymentIntentData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionUpdateParams.PaymentIntentData#metadata} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
+        }
+        ((Map<String, String>) this.metadata).put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionUpdateParams.PaymentIntentData#metadata} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
+        }
+        ((Map<String, String>) this.metadata).putAll(map);
+        return this;
+      }
+
+      /**
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format. Individual keys can be unset by posting an empty value to them. All
+       * keys can be unset by posting an empty value to {@code metadata}.
+       */
+      public Builder setMetadata(EmptyParam metadata) {
+        this.metadata = metadata;
+        return this;
+      }
+
+      /**
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format. Individual keys can be unset by posting an empty value to them. All
+       * keys can be unset by posting an empty value to {@code metadata}.
+       */
+      public Builder setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
+      }
+
+      /**
+       * Email address that the receipt for the resulting payment will be sent to. If {@code
+       * receipt_email} is specified for a payment in live mode, a receipt will be sent regardless
+       * of your <a href="https://dashboard.stripe.com/account/emails">email settings</a>. Pass an
+       * empty string to clear a previously configured recipient.
+       */
+      public Builder setReceiptEmail(String receiptEmail) {
+        this.receiptEmail = receiptEmail;
+        return this;
+      }
+
+      /**
+       * Email address that the receipt for the resulting payment will be sent to. If {@code
+       * receipt_email} is specified for a payment in live mode, a receipt will be sent regardless
+       * of your <a href="https://dashboard.stripe.com/account/emails">email settings</a>. Pass an
+       * empty string to clear a previously configured recipient.
+       */
+      public Builder setReceiptEmail(EmptyParam receiptEmail) {
+        this.receiptEmail = receiptEmail;
+        return this;
+      }
+
+      /**
+       * Indicates that you intend to <a
+       * href="https://docs.stripe.com/payments/payment-intents#future-usage">make future
+       * payments</a> with the payment method collected by this Checkout Session.
+       *
+       * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer
+       * that their payment details will be saved.
+       *
+       * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer
+       * that their payment details will be saved and used for future payments.
+       *
+       * <p>If a Customer has been provided or Checkout creates a new Customer, Checkout will attach
+       * the payment method to the Customer.
+       *
+       * <p>If Checkout does not create a Customer, the payment method is not attached to a
+       * Customer. To reuse the payment method, you can retrieve it from the Checkout Session's
+       * PaymentIntent.
+       *
+       * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as SCA.
+       *
+       * <p>Pass an empty string to remove a previously supplied configuration.
+       */
+      public Builder setSetupFutureUsage(
+          SessionUpdateParams.PaymentIntentData.SetupFutureUsage setupFutureUsage) {
+        this.setupFutureUsage = setupFutureUsage;
+        return this;
+      }
+
+      /**
+       * Indicates that you intend to <a
+       * href="https://docs.stripe.com/payments/payment-intents#future-usage">make future
+       * payments</a> with the payment method collected by this Checkout Session.
+       *
+       * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer
+       * that their payment details will be saved.
+       *
+       * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer
+       * that their payment details will be saved and used for future payments.
+       *
+       * <p>If a Customer has been provided or Checkout creates a new Customer, Checkout will attach
+       * the payment method to the Customer.
+       *
+       * <p>If Checkout does not create a Customer, the payment method is not attached to a
+       * Customer. To reuse the payment method, you can retrieve it from the Checkout Session's
+       * PaymentIntent.
+       *
+       * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as SCA.
+       *
+       * <p>Pass an empty string to remove a previously supplied configuration.
+       */
+      public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+        this.setupFutureUsage = setupFutureUsage;
+        return this;
+      }
+
+      /**
+       * Text that appears on the customer's statement as the statement descriptor for a non-card
+       * charge. This value overrides the account's default statement descriptor. For information
+       * about requirements, including the 22-character limit, see <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors">the Statement
+       * Descriptor docs</a>.
+       *
+       * <p>Setting this value for a card charge returns an error. For card charges, set the <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>
+       * instead. Pass an empty string to clear a previously configured value.
+       */
+      public Builder setStatementDescriptor(String statementDescriptor) {
+        this.statementDescriptor = statementDescriptor;
+        return this;
+      }
+
+      /**
+       * Text that appears on the customer's statement as the statement descriptor for a non-card
+       * charge. This value overrides the account's default statement descriptor. For information
+       * about requirements, including the 22-character limit, see <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors">the Statement
+       * Descriptor docs</a>.
+       *
+       * <p>Setting this value for a card charge returns an error. For card charges, set the <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>
+       * instead. Pass an empty string to clear a previously configured value.
+       */
+      public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
+        this.statementDescriptor = statementDescriptor;
+        return this;
+      }
+
+      /**
+       * Provides information about a card charge. Concatenated to the account's <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
+       * descriptor prefix</a> to form the complete statement descriptor that appears on the
+       * customer's statement. Pass an empty string to clear a previously configured value.
+       */
+      public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
+        this.statementDescriptorSuffix = statementDescriptorSuffix;
+        return this;
+      }
+
+      /**
+       * Provides information about a card charge. Concatenated to the account's <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
+       * descriptor prefix</a> to form the complete statement descriptor that appears on the
+       * customer's statement. Pass an empty string to clear a previously configured value.
+       */
+      public Builder setStatementDescriptorSuffix(EmptyParam statementDescriptorSuffix) {
+        this.statementDescriptorSuffix = statementDescriptorSuffix;
+        return this;
+      }
+    }
+
+    public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+      @SerializedName("off_session")
+      OFF_SESSION("off_session"),
+
+      @SerializedName("on_session")
+      ON_SESSION("on_session");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      SetupFutureUsage(String value) {
+        this.value = value;
       }
     }
   }

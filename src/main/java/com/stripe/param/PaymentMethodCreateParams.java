@@ -7521,6 +7521,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
 
+    @SerializedName("sequra")
+    SEQURA("sequra"),
+
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),
 

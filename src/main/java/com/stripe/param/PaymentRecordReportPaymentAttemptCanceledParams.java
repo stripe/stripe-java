@@ -238,7 +238,10 @@ public class PaymentRecordReportPaymentAttemptCanceledParams extends ApiRequestP
 
   public enum Reason implements ApiRequestParams.EnumParam {
     @SerializedName("blocked_for_fraud")
-    BLOCKED_FOR_FRAUD("blocked_for_fraud");
+    BLOCKED_FOR_FRAUD("blocked_for_fraud"),
+
+    @SerializedName("merchant_canceled")
+    MERCHANT_CANCELED("merchant_canceled");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

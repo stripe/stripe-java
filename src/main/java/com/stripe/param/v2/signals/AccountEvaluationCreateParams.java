@@ -907,6 +907,12 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("account_restricted")
+        ACCOUNT_RESTRICTED("account_restricted"),
+
+        @SerializedName("account_suspended")
+        ACCOUNT_SUSPENDED("account_suspended"),
+
         @SerializedName("login_attempt")
         LOGIN_ATTEMPT("login_attempt"),
 

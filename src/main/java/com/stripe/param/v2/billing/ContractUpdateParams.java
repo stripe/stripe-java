@@ -4,6 +4,7 @@ package com.stripe.param.v2.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
+import com.stripe.v2.Amount;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -33,6 +34,10 @@ public class ContractUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, Object> metadata;
 
+  /** One-time fee actions to apply. */
+  @SerializedName("one_time_fee_actions")
+  List<ContractUpdateParams.OneTimeFeeAction> oneTimeFeeActions;
+
   /** Pricing line actions to apply. */
   @SerializedName("pricing_line_actions")
   List<ContractUpdateParams.PricingLineAction> pricingLineActions;
@@ -45,11 +50,13 @@ public class ContractUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       List<ContractUpdateParams.Include> include,
       Map<String, Object> metadata,
+      List<ContractUpdateParams.OneTimeFeeAction> oneTimeFeeActions,
       List<ContractUpdateParams.PricingLineAction> pricingLineActions,
       List<ContractUpdateParams.PricingOverrideAction> pricingOverrideActions) {
     this.extraParams = extraParams;
     this.include = include;
     this.metadata = metadata;
+    this.oneTimeFeeActions = oneTimeFeeActions;
     this.pricingLineActions = pricingLineActions;
     this.pricingOverrideActions = pricingOverrideActions;
   }
@@ -65,6 +72,8 @@ public class ContractUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> metadata;
 
+    private List<ContractUpdateParams.OneTimeFeeAction> oneTimeFeeActions;
+
     private List<ContractUpdateParams.PricingLineAction> pricingLineActions;
 
     private List<ContractUpdateParams.PricingOverrideAction> pricingOverrideActions;
@@ -75,6 +84,7 @@ public class ContractUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.include,
           this.metadata,
+          this.oneTimeFeeActions,
           this.pricingLineActions,
           this.pricingOverrideActions);
     }
@@ -176,6 +186,32 @@ public class ContractUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `oneTimeFeeActions` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * ContractUpdateParams#oneTimeFeeActions} for the field documentation.
+     */
+    public Builder addOneTimeFeeAction(ContractUpdateParams.OneTimeFeeAction element) {
+      if (this.oneTimeFeeActions == null) {
+        this.oneTimeFeeActions = new ArrayList<>();
+      }
+      this.oneTimeFeeActions.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `oneTimeFeeActions` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link ContractUpdateParams#oneTimeFeeActions} for the field documentation.
+     */
+    public Builder addAllOneTimeFeeAction(List<ContractUpdateParams.OneTimeFeeAction> elements) {
+      if (this.oneTimeFeeActions == null) {
+        this.oneTimeFeeActions = new ArrayList<>();
+      }
+      this.oneTimeFeeActions.addAll(elements);
+      return this;
+    }
+
+    /**
      * Add an element to `pricingLineActions` list. A list is initialized for the first `add/addAll`
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * ContractUpdateParams#pricingLineActions} for the field documentation.
@@ -226,6 +262,701 @@ public class ContractUpdateParams extends ApiRequestParams {
       }
       this.pricingOverrideActions.addAll(elements);
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class OneTimeFeeAction {
+    /** Parameters for adding a one-time fee. */
+    @SerializedName("add")
+    Add add;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Parameters for removing a one-time fee. */
+    @SerializedName("remove")
+    Remove remove;
+
+    /** <strong>Required.</strong> The type of one-time fee action. */
+    @SerializedName("type")
+    Type type;
+
+    /** Parameters for updating a one-time fee. */
+    @SerializedName("update")
+    Update update;
+
+    private OneTimeFeeAction(
+        Add add, Map<String, Object> extraParams, Remove remove, Type type, Update update) {
+      this.add = add;
+      this.extraParams = extraParams;
+      this.remove = remove;
+      this.type = type;
+      this.update = update;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Add add;
+
+      private Map<String, Object> extraParams;
+
+      private Remove remove;
+
+      private Type type;
+
+      private Update update;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ContractUpdateParams.OneTimeFeeAction build() {
+        return new ContractUpdateParams.OneTimeFeeAction(
+            this.add, this.extraParams, this.remove, this.type, this.update);
+      }
+
+      /** Parameters for adding a one-time fee. */
+      public Builder setAdd(ContractUpdateParams.OneTimeFeeAction.Add add) {
+        this.add = add;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ContractUpdateParams.OneTimeFeeAction#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ContractUpdateParams.OneTimeFeeAction#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Parameters for removing a one-time fee. */
+      public Builder setRemove(ContractUpdateParams.OneTimeFeeAction.Remove remove) {
+        this.remove = remove;
+        return this;
+      }
+
+      /** <strong>Required.</strong> The type of one-time fee action. */
+      public Builder setType(ContractUpdateParams.OneTimeFeeAction.Type type) {
+        this.type = type;
+        return this;
+      }
+
+      /** Parameters for updating a one-time fee. */
+      public Builder setUpdate(ContractUpdateParams.OneTimeFeeAction.Update update) {
+        this.update = update;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Add {
+      /** <strong>Required.</strong> The amount to bill. */
+      @SerializedName("amount")
+      Amount amount;
+
+      /** <strong>Required.</strong> When this fee should be billed. */
+      @SerializedName("bill_at")
+      BillAt billAt;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** A user-provided lookup key. */
+      @SerializedName("lookup_key")
+      Object lookupKey;
+
+      /** <strong>Required.</strong> The id of the product for this fee. */
+      @SerializedName("product")
+      Object product;
+
+      private Add(
+          Amount amount,
+          BillAt billAt,
+          Map<String, Object> extraParams,
+          Object lookupKey,
+          Object product) {
+        this.amount = amount;
+        this.billAt = billAt;
+        this.extraParams = extraParams;
+        this.lookupKey = lookupKey;
+        this.product = product;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Amount amount;
+
+        private BillAt billAt;
+
+        private Map<String, Object> extraParams;
+
+        private Object lookupKey;
+
+        private Object product;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ContractUpdateParams.OneTimeFeeAction.Add build() {
+          return new ContractUpdateParams.OneTimeFeeAction.Add(
+              this.amount, this.billAt, this.extraParams, this.lookupKey, this.product);
+        }
+
+        /** <strong>Required.</strong> The amount to bill. */
+        public Builder setAmount(Amount amount) {
+          this.amount = amount;
+          return this;
+        }
+
+        /** <strong>Required.</strong> When this fee should be billed. */
+        public Builder setBillAt(ContractUpdateParams.OneTimeFeeAction.Add.BillAt billAt) {
+          this.billAt = billAt;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ContractUpdateParams.OneTimeFeeAction.Add#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ContractUpdateParams.OneTimeFeeAction.Add#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** A user-provided lookup key. */
+        public Builder setLookupKey(String lookupKey) {
+          this.lookupKey = lookupKey;
+          return this;
+        }
+
+        /** A user-provided lookup key. */
+        public Builder setLookupKey(EmptyParam lookupKey) {
+          this.lookupKey = lookupKey;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The id of the product for this fee. */
+        public Builder setProduct(String product) {
+          this.product = product;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The id of the product for this fee. */
+        public Builder setProduct(EmptyParam product) {
+          this.product = product;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillAt {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The timestamp at which the entry should be billed. Required if {@code type} is {@code
+         * timestamp}.
+         */
+        @SerializedName("timestamp")
+        Instant timestamp;
+
+        /** <strong>Required.</strong> The type of the bill_at. */
+        @SerializedName("type")
+        Type type;
+
+        private BillAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
+          this.extraParams = extraParams;
+          this.timestamp = timestamp;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Instant timestamp;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public ContractUpdateParams.OneTimeFeeAction.Add.BillAt build() {
+            return new ContractUpdateParams.OneTimeFeeAction.Add.BillAt(
+                this.extraParams, this.timestamp, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link ContractUpdateParams.OneTimeFeeAction.Add.BillAt#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link ContractUpdateParams.OneTimeFeeAction.Add.BillAt#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The timestamp at which the entry should be billed. Required if {@code type} is {@code
+           * timestamp}.
+           */
+          public Builder setTimestamp(Instant timestamp) {
+            this.timestamp = timestamp;
+            return this;
+          }
+
+          /** <strong>Required.</strong> The type of the bill_at. */
+          public Builder setType(ContractUpdateParams.OneTimeFeeAction.Add.BillAt.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("now")
+          NOW("now"),
+
+          @SerializedName("timestamp")
+          TIMESTAMP("timestamp");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Remove {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The id of the one-time fee to remove. */
+      @SerializedName("id")
+      Object id;
+
+      /** The lookup key of the one-time fee to remove. */
+      @SerializedName("lookup_key")
+      Object lookupKey;
+
+      private Remove(Map<String, Object> extraParams, Object id, Object lookupKey) {
+        this.extraParams = extraParams;
+        this.id = id;
+        this.lookupKey = lookupKey;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Object id;
+
+        private Object lookupKey;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ContractUpdateParams.OneTimeFeeAction.Remove build() {
+          return new ContractUpdateParams.OneTimeFeeAction.Remove(
+              this.extraParams, this.id, this.lookupKey);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ContractUpdateParams.OneTimeFeeAction.Remove#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ContractUpdateParams.OneTimeFeeAction.Remove#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The id of the one-time fee to remove. */
+        public Builder setId(String id) {
+          this.id = id;
+          return this;
+        }
+
+        /** The id of the one-time fee to remove. */
+        public Builder setId(EmptyParam id) {
+          this.id = id;
+          return this;
+        }
+
+        /** The lookup key of the one-time fee to remove. */
+        public Builder setLookupKey(String lookupKey) {
+          this.lookupKey = lookupKey;
+          return this;
+        }
+
+        /** The lookup key of the one-time fee to remove. */
+        public Builder setLookupKey(EmptyParam lookupKey) {
+          this.lookupKey = lookupKey;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Update {
+      /** The updated amount to bill. */
+      @SerializedName("amount")
+      Amount amount;
+
+      /** The updated bill_at schedule. */
+      @SerializedName("bill_at")
+      BillAt billAt;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The id of the one-time fee to update. */
+      @SerializedName("id")
+      Object id;
+
+      /** The lookup key of the one-time fee to update. */
+      @SerializedName("lookup_key")
+      Object lookupKey;
+
+      private Update(
+          Amount amount,
+          BillAt billAt,
+          Map<String, Object> extraParams,
+          Object id,
+          Object lookupKey) {
+        this.amount = amount;
+        this.billAt = billAt;
+        this.extraParams = extraParams;
+        this.id = id;
+        this.lookupKey = lookupKey;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Amount amount;
+
+        private BillAt billAt;
+
+        private Map<String, Object> extraParams;
+
+        private Object id;
+
+        private Object lookupKey;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ContractUpdateParams.OneTimeFeeAction.Update build() {
+          return new ContractUpdateParams.OneTimeFeeAction.Update(
+              this.amount, this.billAt, this.extraParams, this.id, this.lookupKey);
+        }
+
+        /** The updated amount to bill. */
+        public Builder setAmount(Amount amount) {
+          this.amount = amount;
+          return this;
+        }
+
+        /** The updated bill_at schedule. */
+        public Builder setBillAt(ContractUpdateParams.OneTimeFeeAction.Update.BillAt billAt) {
+          this.billAt = billAt;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ContractUpdateParams.OneTimeFeeAction.Update#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ContractUpdateParams.OneTimeFeeAction.Update#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The id of the one-time fee to update. */
+        public Builder setId(String id) {
+          this.id = id;
+          return this;
+        }
+
+        /** The id of the one-time fee to update. */
+        public Builder setId(EmptyParam id) {
+          this.id = id;
+          return this;
+        }
+
+        /** The lookup key of the one-time fee to update. */
+        public Builder setLookupKey(String lookupKey) {
+          this.lookupKey = lookupKey;
+          return this;
+        }
+
+        /** The lookup key of the one-time fee to update. */
+        public Builder setLookupKey(EmptyParam lookupKey) {
+          this.lookupKey = lookupKey;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillAt {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The timestamp at which the entry should be billed. Required if {@code type} is {@code
+         * timestamp}.
+         */
+        @SerializedName("timestamp")
+        Instant timestamp;
+
+        /** <strong>Required.</strong> The type of the bill_at. */
+        @SerializedName("type")
+        Type type;
+
+        private BillAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
+          this.extraParams = extraParams;
+          this.timestamp = timestamp;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Instant timestamp;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public ContractUpdateParams.OneTimeFeeAction.Update.BillAt build() {
+            return new ContractUpdateParams.OneTimeFeeAction.Update.BillAt(
+                this.extraParams, this.timestamp, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link ContractUpdateParams.OneTimeFeeAction.Update.BillAt#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link ContractUpdateParams.OneTimeFeeAction.Update.BillAt#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The timestamp at which the entry should be billed. Required if {@code type} is {@code
+           * timestamp}.
+           */
+          public Builder setTimestamp(Instant timestamp) {
+            this.timestamp = timestamp;
+            return this;
+          }
+
+          /** <strong>Required.</strong> The type of the bill_at. */
+          public Builder setType(ContractUpdateParams.OneTimeFeeAction.Update.BillAt.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("now")
+          NOW("now"),
+
+          @SerializedName("timestamp")
+          TIMESTAMP("timestamp");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
+        }
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("add")
+      ADD("add"),
+
+      @SerializedName("remove")
+      REMOVE("remove"),
+
+      @SerializedName("update")
+      UPDATE("update");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
+      }
     }
   }
 

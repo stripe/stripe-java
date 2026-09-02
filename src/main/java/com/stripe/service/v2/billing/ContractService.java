@@ -2,6 +2,8 @@
 package com.stripe.service.v2.billing;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.exception.AlreadyExistsException;
+import com.stripe.exception.CannotProceedException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.DeletedObject;
 import com.stripe.model.v2.StripeCollection;
@@ -51,12 +53,13 @@ public final class ContractService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Contract>>() {}.getType());
   }
   /** Create a draft contract. */
-  public Contract create(ContractCreateParams params) throws StripeException {
+  public Contract create(ContractCreateParams params)
+      throws StripeException, AlreadyExistsException {
     return create(params, (RequestOptions) null);
   }
   /** Create a draft contract. */
   public Contract create(ContractCreateParams params, RequestOptions options)
-      throws StripeException {
+      throws StripeException, AlreadyExistsException {
     String path = "/v2/billing/contracts";
     ApiRequest request =
         new ApiRequest(
@@ -104,20 +107,23 @@ public final class ContractService extends ApiService {
     return this.request(request, Contract.class);
   }
   /** Update a draft or active contract. */
-  public Contract update(String id, ContractUpdateParams params) throws StripeException {
+  public Contract update(String id, ContractUpdateParams params)
+      throws StripeException, AlreadyExistsException, CannotProceedException {
     return update(id, params, (RequestOptions) null);
   }
   /** Update a draft or active contract. */
-  public Contract update(String id, RequestOptions options) throws StripeException {
+  public Contract update(String id, RequestOptions options)
+      throws StripeException, AlreadyExistsException, CannotProceedException {
     return update(id, (ContractUpdateParams) null, options);
   }
   /** Update a draft or active contract. */
-  public Contract update(String id) throws StripeException {
+  public Contract update(String id)
+      throws StripeException, AlreadyExistsException, CannotProceedException {
     return update(id, (ContractUpdateParams) null, (RequestOptions) null);
   }
   /** Update a draft or active contract. */
   public Contract update(String id, ContractUpdateParams params, RequestOptions options)
-      throws StripeException {
+      throws StripeException, AlreadyExistsException, CannotProceedException {
     String path = String.format("/v2/billing/contracts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(

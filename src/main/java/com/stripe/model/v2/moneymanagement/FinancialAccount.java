@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.v2.Amount;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -107,6 +108,13 @@ public class FinancialAccount extends StripeObject implements HasId {
   Payments payments;
 
   /**
+   * If this is a {@code savings} FinancialAccount, this hash includes details specific to {@code
+   * savings} FinancialAccounts.
+   */
+  @SerializedName("savings")
+  Savings savings;
+
+  /**
    * Closed Enum. An enum representing the status of the FinancialAccount. This indicates whether or
    * not the FinancialAccount can be used for any money movement flows.
    *
@@ -132,7 +140,7 @@ public class FinancialAccount extends StripeObject implements HasId {
    * type.
    *
    * <p>One of {@code accrued_fees}, {@code credit}, {@code multiprocessor_settlement}, {@code
-   * other}, {@code payments}, or {@code storage}.
+   * other}, {@code payments}, {@code savings}, or {@code storage}.
    */
   @SerializedName("type")
   String type;
@@ -357,6 +365,51 @@ public class FinancialAccount extends StripeObject implements HasId {
       /** The available balance at the time when the balance was projected. */
       @SerializedName("available")
       Map<String, Amount> available;
+    }
+  }
+
+  /**
+   * If this is a {@code savings} FinancialAccount, this hash includes details specific to {@code
+   * savings} FinancialAccounts.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Savings extends StripeObject {
+    /** The currencies that this savings FinancialAccount can hold. */
+    @SerializedName("holds_currencies")
+    List<String> holdsCurrencies;
+
+    /** Interest details for this savings FinancialAccount. Populated by the server. */
+    @SerializedName("interest")
+    Interest interest;
+
+    /** Interest details for this savings FinancialAccount. Populated by the server. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Interest extends StripeObject {
+      /** The interest rate applied to this savings FinancialAccount. */
+      @SerializedName("rate")
+      Rate rate;
+
+      /** The interest rate applied to this savings FinancialAccount. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Rate extends StripeObject {
+        /** Current variable rate, e.g. &quot;3.00&quot;. */
+        @SerializedName("percentage")
+        BigDecimal percentage;
+
+        /**
+         * The period over which interest accrues.
+         *
+         * <p>Equal to {@code annual}.
+         */
+        @SerializedName("period")
+        String period;
+      }
     }
   }
 

@@ -379,17 +379,61 @@ public class VerificationReport extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Email extends StripeObject {
+    /**
+     * Confidence that the provided address matches the email records.
+     *
+     * <p>One of {@code highest}, {@code low}, {@code normal}, or {@code unknown}.
+     */
+    @SerializedName("address_match_confidence")
+    String addressMatchConfidence;
+
     /** Additional email verification details. */
     @SerializedName("details")
     Details details;
+
+    /** Two-letter country code of the email domain's country. */
+    @SerializedName("domain_country")
+    String domainCountry;
 
     /** Email to be verified. */
     @SerializedName("email")
     String email;
 
+    /**
+     * Confidence that the email address exists.
+     *
+     * <p>One of {@code highest}, {@code low}, {@code normal}, or {@code unknown}.
+     */
+    @SerializedName("email_exists_confidence")
+    String emailExistsConfidence;
+
     /** Details on the verification error. Present when status is {@code unverified}. */
     @SerializedName("error")
     Errors error;
+
+    /**
+     * Confidence that the provided name matches the email records.
+     *
+     * <p>One of {@code highest}, {@code low}, {@code normal}, or {@code unknown}.
+     */
+    @SerializedName("name_match_confidence")
+    String nameMatchConfidence;
+
+    /** The observed number of days the email domain has existed. */
+    @SerializedName("observed_domain_tenure_days")
+    BigDecimal observedDomainTenureDays;
+
+    /** The observed number of days the email address has existed. */
+    @SerializedName("observed_email_tenure_days")
+    BigDecimal observedEmailTenureDays;
+
+    /**
+     * Confidence that the provided phone matches the email records.
+     *
+     * <p>One of {@code highest}, {@code low}, {@code normal}, or {@code unknown}.
+     */
+    @SerializedName("phone_match_confidence")
+    String phoneMatchConfidence;
 
     /**
      * Status of this {@code email} check.
@@ -434,7 +478,9 @@ public class VerificationReport extends ApiResource implements HasId {
       /**
        * A short machine-readable string giving the reason for the verification failure.
        *
-       * <p>One of {@code email_unverified_other}, or {@code email_verification_declined}.
+       * <p>One of {@code email_address_mismatch}, {@code email_name_mismatch}, {@code
+       * email_ownership_unverified}, {@code email_phone_mismatch}, {@code email_short_tenure},
+       * {@code email_unverified_other}, or {@code email_verification_declined}.
        */
       @SerializedName("code")
       String code;
@@ -605,9 +651,41 @@ public class VerificationReport extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Phone extends StripeObject {
+    /**
+     * Confidence that the provided address matches the phone records.
+     *
+     * <p>One of {@code highest}, {@code low}, {@code normal}, or {@code unknown}.
+     */
+    @SerializedName("address_match_confidence")
+    String addressMatchConfidence;
+
+    /** The phone carrier. */
+    @SerializedName("carrier")
+    String carrier;
+
     /** Details on the verification error. Present when status is {@code unverified}. */
     @SerializedName("error")
     Errors error;
+
+    /**
+     * The type of phone line.
+     *
+     * <p>One of {@code landline}, {@code mobile}, or {@code voip}.
+     */
+    @SerializedName("line_type")
+    String lineType;
+
+    /**
+     * Confidence that the provided name matches the phone records.
+     *
+     * <p>One of {@code highest}, {@code low}, {@code normal}, or {@code unknown}.
+     */
+    @SerializedName("name_match_confidence")
+    String nameMatchConfidence;
+
+    /** The observed number of days the person has owned the phone number. */
+    @SerializedName("observed_phone_tenure_days")
+    BigDecimal observedPhoneTenureDays;
 
     /** Phone to be verified. */
     @SerializedName("phone")
@@ -632,7 +710,10 @@ public class VerificationReport extends ApiResource implements HasId {
       /**
        * A short machine-readable string giving the reason for the verification failure.
        *
-       * <p>One of {@code phone_unverified_other}, or {@code phone_verification_declined}.
+       * <p>One of {@code phone_address_mismatch}, {@code phone_invalid}, {@code
+       * phone_invalid_line_type}, {@code phone_name_mismatch}, {@code phone_ownership_unverified},
+       * {@code phone_short_tenure}, {@code phone_unsupported_country}, {@code
+       * phone_unverified_other}, or {@code phone_verification_declined}.
        */
       @SerializedName("code")
       String code;

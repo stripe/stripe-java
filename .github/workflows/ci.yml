@@ -31,18 +31,23 @@ jobs:
       contents: read
 
     steps:
-      - uses: extractions/setup-just@v2
-      - uses: actions/checkout@master
+      - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Setup Java
         id: setup-jre
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           java-version: "17" # always use 17 LTS for building
           architecture: x64
+          distribution: zulu
 
       - name: Set Test Java Runtime Environment variable
-        run: echo "JAVA_TEST_HOME=${{ steps.setup-jre.outputs.path }}" >> $GITHUB_ENV
+        run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
+        env:
+          JRE_PATH: ${{ steps.setup-jre.outputs.path }}
 
       - name: Spotless
         run: just format-check
@@ -68,7 +73,7 @@ jobs:
         # https://endoflife.date/oracle-jdk
         java-version:
           # LTS versions
-          - "1.8"
+          - "8"
           - "11"
           - "17"
           - "21"
@@ -82,30 +87,36 @@ jobs:
             java-version: "25"
 
     steps:
-      - uses: extractions/setup-just@v2
-      - uses: actions/checkout@master
+      - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Setup Test Java Runtime
         id: setup-test-jre
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           java-version: ${{ matrix.java-version }}
           architecture: x64
+          distribution: zulu
 
       - name: Set Test Java Runtime Environment variable
         shell: bash
-        run: echo "JAVA_TEST_HOME=${{ steps.setup-test-jre.outputs.path }}" >> $GITHUB_ENV
+        run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
+        env:
+          JRE_PATH: ${{ steps.setup-test-jre.outputs.path }}
 
       # our gradle version wants java 17, so any other test version needs a separate setup
       - name: Setup Gradle JDK
         if: ${{ matrix.java-version != '17' }}
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           java-version: "17"
           architecture: x64
+          distribution: zulu
 
-      - name: Tweak gradle.properties for Java 1.8
-        if: ${{ matrix.java-version == '1.8' }}
+      - name: Tweak gradle.properties for Java 8
+        if: ${{ matrix.java-version == '8' }}
         run: sed -e '/--add-exports/ s/^#*/#/' -i gradle.properties
 
       - name: Display version
@@ -130,15 +141,20 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Setup Java
         id: setup-jre
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           java-version: "17" # always use 17 LTS for building
           architecture: x64
+          distribution: zulu
       - name: Set Test Java Runtime Environment variable
-        run: echo "JAVA_TEST_HOME=${{ steps.setup-jre.outputs.path }}" >> $GITHUB_ENV
+        run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
+        env:
+          JRE_PATH: ${{ steps.setup-jre.outputs.path }}
 
       - name: Configure GPG Key
         run: |
@@ -172,15 +188,20 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Setup Java
         id: setup-jre
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           java-version: "17" # always use 17 TLS for building
           architecture: x64
+          distribution: zulu
       - name: Set Test Java Runtime Environment variable
-        run: echo "JAVA_TEST_HOME=${{ steps.setup-jre.outputs.path }}" >> $GITHUB_ENV
+        run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
+        env:
+          JRE_PATH: ${{ steps.setup-jre.outputs.path }}
 
       - name: Publish Javadoc
         run: |
@@ -197,17 +218,22 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Setup Java
         id: setup-jre
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
         with:
           java-version: "17" # always use 17 TLS for building
           architecture: x64
+          distribution: zulu
 
       - name: Set Test Java Runtime Environment variable
-        run: echo "JAVA_TEST_HOME=${{ steps.setup-jre.outputs.path }}" >> $GITHUB_ENV
+        run: echo "JAVA_TEST_HOME=${JRE_PATH}" >> $GITHUB_ENV
+        env:
+          JRE_PATH: ${{ steps.setup-jre.outputs.path }}
 
       - name: Clone japi-compliance-checker
         run: |
@@ -221,9 +247,10 @@ jobs:
           mv build/libs/*.jar ../japi-compliance-checker/new.jar
 
       - name: Checkout base branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
 
       - name: Build Base JAR file
         run: ./gradlew jar
@@ -240,7 +267,7 @@ jobs:
           mv ../japi-compliance-checker/compat_reports/stripe-java/*/compat_report.html report.html
 
       - name: Upload report as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: JAPI Compliance Report
           path: report.html

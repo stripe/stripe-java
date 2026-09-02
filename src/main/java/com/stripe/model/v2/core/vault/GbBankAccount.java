@@ -77,6 +77,13 @@ public class GbBankAccount extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
+  /**
+   * Whether the GB Bank Account is currently unusable for money movement, despite potentially being
+   * correctly set up. Please reach out to Stripe Support for more information.
+   */
+  @SerializedName("restricted")
+  Boolean restricted;
+
   /** The Sort Code of the bank account. */
   @SerializedName("sort_code")
   String sortCode;
