@@ -84,8 +84,9 @@ public final class InvoiceService extends ApiService {
   }
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as {@code collection_method}, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, you can no
+   * longer change most of its details, including monetary values and {@code collection_method}. For
+   * most invoices, this also includes {@code description}.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -97,8 +98,9 @@ public final class InvoiceService extends ApiService {
   }
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as {@code collection_method}, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, you can no
+   * longer change most of its details, including monetary values and {@code collection_method}. For
+   * most invoices, this also includes {@code description}.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -110,8 +112,9 @@ public final class InvoiceService extends ApiService {
   }
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as {@code collection_method}, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, you can no
+   * longer change most of its details, including monetary values and {@code collection_method}. For
+   * most invoices, this also includes {@code description}.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -123,8 +126,9 @@ public final class InvoiceService extends ApiService {
   }
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as {@code collection_method}, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, you can no
+   * longer change most of its details, including monetary values and {@code collection_method}. For
+   * most invoices, this also includes {@code description}.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a

@@ -1582,6 +1582,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("unit_cost")
       Long unitCost;
 
+      /**
+       * The number of decimal places implied in the unit_cost. For example, if unit_cost is 10000
+       * and unit_cost_precision is 1, the actual unit cost is 1000.0. Defaults to 0 if not
+       * provided.
+       */
+      @SerializedName("unit_cost_precision")
+      Long unitCostPrecision;
+
       /** A unit of measure for the line item, such as gallons, feet, meters, etc. */
       @SerializedName("unit_of_measure")
       String unitOfMeasure;
@@ -1596,6 +1604,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           Long quantityPrecision,
           Tax tax,
           Long unitCost,
+          Long unitCostPrecision,
           String unitOfMeasure) {
         this.discountAmount = discountAmount;
         this.extraParams = extraParams;
@@ -1606,6 +1615,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.quantityPrecision = quantityPrecision;
         this.tax = tax;
         this.unitCost = unitCost;
+        this.unitCostPrecision = unitCostPrecision;
         this.unitOfMeasure = unitOfMeasure;
       }
 
@@ -1632,6 +1642,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Long unitCost;
 
+        private Long unitCostPrecision;
+
         private String unitOfMeasure;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -1646,6 +1658,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.quantityPrecision,
               this.tax,
               this.unitCost,
+              this.unitCostPrecision,
               this.unitOfMeasure);
         }
 
@@ -1751,6 +1764,16 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
          */
         public Builder setUnitCost(Long unitCost) {
           this.unitCost = unitCost;
+          return this;
+        }
+
+        /**
+         * The number of decimal places implied in the unit_cost. For example, if unit_cost is 10000
+         * and unit_cost_precision is 1, the actual unit cost is 1000.0. Defaults to 0 if not
+         * provided.
+         */
+        public Builder setUnitCostPrecision(Long unitCostPrecision) {
+          this.unitCostPrecision = unitCostPrecision;
           return this;
         }
 

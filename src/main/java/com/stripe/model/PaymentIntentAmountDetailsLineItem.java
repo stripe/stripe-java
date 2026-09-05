@@ -86,6 +86,13 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
   Long unitCost;
 
   /**
+   * The number of decimal places implied in the unit_cost. For example, if unit_cost is 10000 and
+   * unit_cost_precision is 1, the actual unit cost is 1000.0. Defaults to 0 if not provided.
+   */
+  @SerializedName("unit_cost_precision")
+  Long unitCostPrecision;
+
+  /**
    * A unit of measure for the line item, such as gallons, feet, meters, etc. Required for L3 rates.
    * At most 12 alphanumeric characters long.
    */

@@ -96,6 +96,9 @@ public class VerificationReport extends ApiResource implements HasId {
   @SerializedName("selfie")
   Selfie selfie;
 
+  @SerializedName("signals")
+  Signals signals;
+
   /**
    * Type of report.
    *
@@ -812,6 +815,194 @@ public class VerificationReport extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Signals, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Signals extends StripeObject {
+    @SerializedName("fraudulent_email")
+    FraudulentEmail fraudulentEmail;
+
+    @SerializedName("fraudulent_person")
+    FraudulentPerson fraudulentPerson;
+
+    @SerializedName("fraudulent_phone")
+    FraudulentPhone fraudulentPhone;
+
+    /**
+     * For more details about FraudulentEmail, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FraudulentEmail extends StripeObject {
+      /**
+       * Array of objects representing individual factors that contributed to the calculated risk
+       * level.
+       */
+      @SerializedName("indicators")
+      List<VerificationReport.Signals.FraudulentEmail.Indicator> indicators;
+
+      /**
+       * Categorical assessment of the email risk.
+       *
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+       * not_assessed}, or {@code unknown}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
+
+      /**
+       * For more details about Indicator, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Indicator extends StripeObject {
+        /** A brief explanation of how this indicator contributed to the risk level. */
+        @SerializedName("explanation")
+        String explanation;
+
+        /**
+         * The effect this indicator had on the overall risk level.
+         *
+         * <p>One of {@code decrease}, {@code neutral}, {@code slight_increase}, or {@code
+         * strong_increase}.
+         */
+        @SerializedName("impact")
+        String impact;
+
+        /**
+         * The name of the specific indicator used in the risk assessment.
+         *
+         * <p>One of {@code address_mismatch}, {@code domain_reputation}, {@code domain_tenure},
+         * {@code email_reputation}, {@code email_tenure}, {@code gibberish_email}, {@code
+         * invalid_email}, {@code name_mismatch}, {@code other}, or {@code phone_mismatch}.
+         */
+        @SerializedName("indicator")
+        String indicator;
+      }
+    }
+
+    /**
+     * For more details about FraudulentPerson, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FraudulentPerson extends StripeObject {
+      /**
+       * Array of objects representing individual factors that contributed to the calculated risk
+       * level.
+       */
+      @SerializedName("indicators")
+      List<VerificationReport.Signals.FraudulentPerson.Indicator> indicators;
+
+      /**
+       * Categorical assessment of the fraudulent person risk.
+       *
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+       * not_assessed}, or {@code unknown}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
+
+      /**
+       * For more details about Indicator, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Indicator extends StripeObject {
+        /** A brief explanation of how this indicator contributed to the risk level. */
+        @SerializedName("explanation")
+        String explanation;
+
+        /**
+         * The effect this indicator had on the overall risk level.
+         *
+         * <p>One of {@code decrease}, {@code neutral}, {@code slight_increase}, or {@code
+         * strong_increase}.
+         */
+        @SerializedName("impact")
+        String impact;
+
+        /**
+         * The name of the specific indicator used in the risk assessment.
+         *
+         * <p>One of {@code fraudulent_person_match}, {@code no_transaction_match}, or {@code
+         * other}.
+         */
+        @SerializedName("indicator")
+        String indicator;
+      }
+    }
+
+    /**
+     * For more details about FraudulentPhone, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FraudulentPhone extends StripeObject {
+      /**
+       * Array of objects representing individual factors that contributed to the calculated risk
+       * level.
+       */
+      @SerializedName("indicators")
+      List<VerificationReport.Signals.FraudulentPhone.Indicator> indicators;
+
+      /**
+       * Categorical assessment of the phone risk.
+       *
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+       * not_assessed}, or {@code unknown}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
+
+      /**
+       * For more details about Indicator, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Indicator extends StripeObject {
+        /** A brief explanation of how this indicator contributed to the risk level. */
+        @SerializedName("explanation")
+        String explanation;
+
+        /**
+         * The effect this indicator had on the overall risk level.
+         *
+         * <p>One of {@code decrease}, {@code neutral}, {@code slight_increase}, or {@code
+         * strong_increase}.
+         */
+        @SerializedName("impact")
+        String impact;
+
+        /**
+         * The name of the specific indicator used in the risk assessment.
+         *
+         * <p>One of {@code address_mismatch}, {@code carrier_reputation}, {@code line_type}, {@code
+         * name_mismatch}, {@code other}, {@code phone_reputation}, {@code phone_tenure}, or {@code
+         * phone_velocity}.
+         */
+        @SerializedName("indicator")
+        String indicator;
+      }
+    }
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -821,5 +1012,6 @@ public class VerificationReport extends ApiResource implements HasId {
     trySetResponseGetter(options, responseGetter);
     trySetResponseGetter(phone, responseGetter);
     trySetResponseGetter(selfie, responseGetter);
+    trySetResponseGetter(signals, responseGetter);
   }
 }
