@@ -24,6 +24,9 @@ This release changes the pinned API version to 2026-08-26.preview.
   * Add support for event notification `V2SignalsAccountEvaluationCompleteEvent` with related object `v2.signals.AccountEvaluation`
 * [#2267](https://github.com/stripe/stripe-java/pull/2267) Add non-verified methods to managed handlers
 
+## 33.4.1 - 2026-09-01
+* [#2284](https://github.com/stripe/stripe-java/pull/2284) Harden API requestor code against malicious URLs
+
 ## 33.4.0 - 2026-08-26
 This release changes the pinned API version to 2026-08-26.dahlia.
 
