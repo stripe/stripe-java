@@ -316,7 +316,7 @@ public class SessionCreateParams extends ApiRequestParams {
    * <p>For {@code subscription} mode, there is a maximum of 20 line items and optional items with
    * recurring Prices and 20 line items and optional items with one-time Prices.
    *
-   * <p>You can't set this parameter if {@code ui_mode} is {@code custom}.
+   * <p>You can't set this parameter if {@code ui_mode} is {@code elements} or {@code form}.
    */
   @SerializedName("optional_items")
   List<SessionCreateParams.OptionalItem> optionalItems;
@@ -6134,6 +6134,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Subscription {
+      /** A past timestamp to backdate the subscription's start date to. */
+      @SerializedName("backdate_start_date")
+      Long backdateStartDate;
+
       /**
        * Configures when the subscription schedule's billing cycle anchors to a specific day of the
        * week or month.
@@ -6201,6 +6205,7 @@ public class SessionCreateParams extends ApiRequestParams {
       TrialSettings trialSettings;
 
       private Subscription(
+          Long backdateStartDate,
           BillingCycleAnchorConfig billingCycleAnchorConfig,
           BillingMode billingMode,
           String description,
@@ -6212,6 +6217,7 @@ public class SessionCreateParams extends ApiRequestParams {
           Long trialEnd,
           Long trialPeriodDays,
           TrialSettings trialSettings) {
+        this.backdateStartDate = backdateStartDate;
         this.billingCycleAnchorConfig = billingCycleAnchorConfig;
         this.billingMode = billingMode;
         this.description = description;
@@ -6230,6 +6236,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Long backdateStartDate;
+
         private BillingCycleAnchorConfig billingCycleAnchorConfig;
 
         private BillingMode billingMode;
@@ -6255,6 +6263,7 @@ public class SessionCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.Item.Subscription build() {
           return new SessionCreateParams.Item.Subscription(
+              this.backdateStartDate,
               this.billingCycleAnchorConfig,
               this.billingMode,
               this.description,
@@ -6266,6 +6275,12 @@ public class SessionCreateParams extends ApiRequestParams {
               this.trialEnd,
               this.trialPeriodDays,
               this.trialSettings);
+        }
+
+        /** A past timestamp to backdate the subscription's start date to. */
+        public Builder setBackdateStartDate(Long backdateStartDate) {
+          this.backdateStartDate = backdateStartDate;
+          return this;
         }
 
         /**
@@ -26158,6 +26173,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),

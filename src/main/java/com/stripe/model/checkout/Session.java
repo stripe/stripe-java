@@ -2581,6 +2581,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Subscription extends StripeObject {
+      /** The Unix timestamp marking the subscription's backdated start date. */
+      @SerializedName("backdate_start_date")
+      Long backdateStartDate;
+
       /** The description for the subscription. */
       @SerializedName("description")
       String description;
