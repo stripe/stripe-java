@@ -1,5 +1,8 @@
 # Changelog
 
+## 33.4.2 - 2026-09-09
+* [#2286](https://github.com/stripe/stripe-java/pull/2286) Validate that webhook secrets are non-empty
+
 ## 33.4.1 - 2026-09-01
 * [#2284](https://github.com/stripe/stripe-java/pull/2284) Harden API requestor code against malicious URLs
 
