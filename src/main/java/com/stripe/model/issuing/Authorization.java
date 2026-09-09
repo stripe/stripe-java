@@ -1950,6 +1950,14 @@ public class Authorization extends ApiResource
     NetworkData networkData;
 
     /**
+     * The network-specific response code associated with Stripe's decision for this authorization
+     * request. The value is a Visa or Mastercard response code depending on the network over which
+     * the authorization was routed.
+     */
+    @SerializedName("network_response_code")
+    String networkResponseCode;
+
+    /**
      * The card network's estimate of the likelihood that an authorization is fraudulent. Takes on
      * values between 1 and 99.
      */

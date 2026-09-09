@@ -1614,7 +1614,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * client_secret} is in the query string.
    *
    * <p>If you retrieve a PaymentIntent with a publishable key, it only returns a subset of
-   * properties. Refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment
+   * properties. Refer to the <a href="https://stripe.com/api/payment_intents/object">payment
    * intent</a> object reference for more details.
    */
   public static PaymentIntent retrieve(String intent) throws StripeException {
@@ -1628,7 +1628,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * client_secret} is in the query string.
    *
    * <p>If you retrieve a PaymentIntent with a publishable key, it only returns a subset of
-   * properties. Refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment
+   * properties. Refer to the <a href="https://stripe.com/api/payment_intents/object">payment
    * intent</a> object reference for more details.
    */
   public static PaymentIntent retrieve(String intent, RequestOptions options)
@@ -1643,7 +1643,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * client_secret} is in the query string.
    *
    * <p>If you retrieve a PaymentIntent with a publishable key, it only returns a subset of
-   * properties. Refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment
+   * properties. Refer to the <a href="https://stripe.com/api/payment_intents/object">payment
    * intent</a> object reference for more details.
    */
   public static PaymentIntent retrieve(
@@ -1661,7 +1661,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * client_secret} is in the query string.
    *
    * <p>If you retrieve a PaymentIntent with a publishable key, it only returns a subset of
-   * properties. Refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment
+   * properties. Refer to the <a href="https://stripe.com/api/payment_intents/object">payment
    * intent</a> object reference for more details.
    */
   public static PaymentIntent retrieve(
