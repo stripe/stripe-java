@@ -1,5 +1,14 @@
 # Changelog
 
+## 33.5.0-alpha.3 - 2026-09-09
+* [#2285](https://github.com/stripe/stripe-java/pull/2285) Update generated code for private-preview
+  * Add support for `customerTaxExemption` on `tax.Calculation.shipping_cost.tax_breakdown[]`, `tax.CalculationLineItem.tax_breakdown[]`, and `tax.Transaction.shipping_cost.tax_breakdown[]`
+  * Add support for `backdateStartDate` on `checkout.Session.items[].subscription` and `checkout.SessionCreateParams.items[].subscription`
+  * Add support for `signals` on `identity.VerificationReport`
+  * Add support for `networkResponseCode` on `issuing.Authorization.request_history[]`
+  * Add support for `unitCostPrecision` on `PaymentIntentAmountDetailsLineItem`, `PaymentIntentCaptureParams.amount_details.line_items[]`, `PaymentIntentConfirmParams.amount_details.line_items[]`, `PaymentIntentCreateParams.amount_details.line_items[]`, `PaymentIntentDecrementAuthorizationParams.amount_details.line_items[]`, `PaymentIntentIncrementAuthorizationParams.amount_details.line_items[]`, and `PaymentIntentUpdateParams.amount_details.line_items[]`
+  * Add support for `active` on `productcatalog.TrialOfferListParams`
+
 ## 33.5.0-alpha.2 - 2026-09-02
 * [#2278](https://github.com/stripe/stripe-java/pull/2278) Update generated code for private-preview
   * Add support for new resources `radar.BillingEvaluation`, `v2.signals.PaymentRetryEvaluation`, `v2.signals.PaymentRetrySignal`, and `v2.tax.IntegrationConfiguration`
