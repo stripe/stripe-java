@@ -17,11 +17,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * A financing summary object describes a connected account's financing status in real time. A
- * financing status is either {@code accepted}, {@code delivered}, or {@code none}. You can read the
- * status of your connected accounts.
- */
+/** A financing summary object describes a connected account's financing details in real time. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

@@ -13,6 +13,13 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class TrialOfferListParams extends ApiRequestParams {
+  /**
+   * Only return trial offers that are active ({@code true}) or archived ({@code false}). If
+   * omitted, both active and archived trial offers are returned.
+   */
+  @SerializedName("active")
+  Boolean active;
+
   /** Only return trial offers that were created during the given date interval. */
   @SerializedName("created")
   Object created;
@@ -60,6 +67,7 @@ public class TrialOfferListParams extends ApiRequestParams {
   String startingAfter;
 
   private TrialOfferListParams(
+      Boolean active,
       Object created,
       String endingBefore,
       List<String> expand,
@@ -67,6 +75,7 @@ public class TrialOfferListParams extends ApiRequestParams {
       Long limit,
       List<String> prices,
       String startingAfter) {
+    this.active = active;
     this.created = created;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -81,6 +90,8 @@ public class TrialOfferListParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Boolean active;
+
     private Object created;
 
     private String endingBefore;
@@ -98,6 +109,7 @@ public class TrialOfferListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public TrialOfferListParams build() {
       return new TrialOfferListParams(
+          this.active,
           this.created,
           this.endingBefore,
           this.expand,
@@ -105,6 +117,15 @@ public class TrialOfferListParams extends ApiRequestParams {
           this.limit,
           this.prices,
           this.startingAfter);
+    }
+
+    /**
+     * Only return trial offers that are active ({@code true}) or archived ({@code false}). If
+     * omitted, both active and archived trial offers are returned.
+     */
+    public Builder setActive(Boolean active) {
+      this.active = active;
+      return this;
     }
 
     /** Only return trial offers that were created during the given date interval. */

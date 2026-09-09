@@ -176,6 +176,13 @@ public class CalculationLineItem extends StripeObject implements HasId {
     @SerializedName("amount")
     Long amount;
 
+    /**
+     * The ID of the <a href="https://stripe.com/api/tax/exemptions">customer tax exemption</a> that
+     * was applied to this tax breakdown.
+     */
+    @SerializedName("customer_tax_exemption")
+    String customerTaxExemption;
+
     @SerializedName("jurisdiction")
     Jurisdiction jurisdiction;
 

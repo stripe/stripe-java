@@ -12642,12 +12642,12 @@ public class Account extends StripeObject implements HasId {
            * {@code bank_accounts.npp}, {@code bank_accounts.rtp}, {@code
            * bank_accounts.sepa_credit}, {@code bank_accounts.sepa_instant}, {@code
            * bank_accounts.swift}, {@code bank_accounts.wire}, {@code blik_payments}, {@code
-           * boleto_payments}, {@code business_storage.inbound.eur}, {@code
-           * business_storage.inbound.gbp}, {@code business_storage.inbound.usd}, {@code
-           * business_storage.outbound.eur}, {@code business_storage.outbound.gbp}, {@code
-           * business_storage.outbound.usd}, {@code cards}, {@code card_payments}, {@code
-           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code
-           * commercial.celtic.charge_card}, {@code commercial.celtic.spend_card}, {@code
+           * blik_recurring_payments}, {@code boleto_payments}, {@code
+           * business_storage.inbound.eur}, {@code business_storage.inbound.gbp}, {@code
+           * business_storage.inbound.usd}, {@code business_storage.outbound.eur}, {@code
+           * business_storage.outbound.gbp}, {@code business_storage.outbound.usd}, {@code cards},
+           * {@code card_payments}, {@code cartes_bancaires_payments}, {@code cashapp_payments},
+           * {@code commercial.celtic.charge_card}, {@code commercial.celtic.spend_card}, {@code
            * commercial.cross_river_bank.charge_card}, {@code
            * commercial.cross_river_bank.prepaid_card}, {@code
            * commercial.cross_river_bank.spend_card}, {@code commercial.fifth_third.charge_card},
@@ -16662,12 +16662,12 @@ public class Account extends StripeObject implements HasId {
            * {@code bank_accounts.npp}, {@code bank_accounts.rtp}, {@code
            * bank_accounts.sepa_credit}, {@code bank_accounts.sepa_instant}, {@code
            * bank_accounts.swift}, {@code bank_accounts.wire}, {@code blik_payments}, {@code
-           * boleto_payments}, {@code business_storage.inbound.eur}, {@code
-           * business_storage.inbound.gbp}, {@code business_storage.inbound.usd}, {@code
-           * business_storage.outbound.eur}, {@code business_storage.outbound.gbp}, {@code
-           * business_storage.outbound.usd}, {@code cards}, {@code card_payments}, {@code
-           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code
-           * commercial.celtic.charge_card}, {@code commercial.celtic.spend_card}, {@code
+           * blik_recurring_payments}, {@code boleto_payments}, {@code
+           * business_storage.inbound.eur}, {@code business_storage.inbound.gbp}, {@code
+           * business_storage.inbound.usd}, {@code business_storage.outbound.eur}, {@code
+           * business_storage.outbound.gbp}, {@code business_storage.outbound.usd}, {@code cards},
+           * {@code card_payments}, {@code cartes_bancaires_payments}, {@code cashapp_payments},
+           * {@code commercial.celtic.charge_card}, {@code commercial.celtic.spend_card}, {@code
            * commercial.cross_river_bank.charge_card}, {@code
            * commercial.cross_river_bank.prepaid_card}, {@code
            * commercial.cross_river_bank.spend_card}, {@code commercial.fifth_third.charge_card},
