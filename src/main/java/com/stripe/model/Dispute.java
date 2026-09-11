@@ -433,6 +433,9 @@ public class Dispute extends ApiResource
     @SerializedName("access_activity_log")
     String accessActivityLog;
 
+    @SerializedName("appeal")
+    Appeal appeal;
+
     /** The billing address provided by the customer. */
     @SerializedName("billing_address")
     String billingAddress;
@@ -788,6 +791,39 @@ public class Dispute extends ApiResource
     public void setUncategorizedFileObject(File expandableObject) {
       this.uncategorizedFile =
           new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+
+    /**
+     * For more details about Appeal, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Appeal extends StripeObject {
+      @SerializedName("card")
+      Card card;
+
+      /**
+       * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Card extends StripeObject {
+        /** The reason for filing the appeal. */
+        @SerializedName("reason_for_filing")
+        String reasonForFiling;
+
+        /**
+         * One or more document IDs returned by a <a href="https://api.stripe.com#create_file">file
+         * upload</a> with a {@code purpose} value of {@code dispute_evidence} to support the
+         * appeal.
+         */
+        @SerializedName("supporting_files")
+        List<String> supportingFiles;
+      }
     }
 
     /**

@@ -420,7 +420,7 @@ public class Form extends ApiResource implements HasId {
     String externalReference;
 
     /**
-     * Either {@code account} or {@code external_reference}.
+     * Specifies the payee type.
      *
      * <p>One of {@code account}, or {@code external_reference}.
      */

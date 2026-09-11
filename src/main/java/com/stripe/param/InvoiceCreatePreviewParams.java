@@ -108,6 +108,14 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   PreviewMode previewMode;
 
   /**
+   * A pricing token whose presentment currency and exchange rate are used to convert the amounts on
+   * the previewed invoice into the customer-facing presentment currency. When omitted, amounts are
+   * returned in the settlement currency.
+   */
+  @SerializedName("pricing_token")
+  String pricingToken;
+
+  /**
    * The identifier of the schedule whose upcoming invoice you'd like to retrieve. Cannot be used
    * with subscription or subscription fields.
    */
@@ -152,6 +160,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       Issuer issuer,
       Object onBehalfOf,
       PreviewMode previewMode,
+      String pricingToken,
       String schedule,
       ScheduleDetails scheduleDetails,
       String subscription,
@@ -169,6 +178,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     this.issuer = issuer;
     this.onBehalfOf = onBehalfOf;
     this.previewMode = previewMode;
+    this.pricingToken = pricingToken;
     this.schedule = schedule;
     this.scheduleDetails = scheduleDetails;
     this.subscription = subscription;
@@ -206,6 +216,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
     private PreviewMode previewMode;
 
+    private String pricingToken;
+
     private String schedule;
 
     private ScheduleDetails scheduleDetails;
@@ -230,6 +242,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           this.issuer,
           this.onBehalfOf,
           this.previewMode,
+          this.pricingToken,
           this.schedule,
           this.scheduleDetails,
           this.subscription,
@@ -457,6 +470,16 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
      */
     public Builder setPreviewMode(InvoiceCreatePreviewParams.PreviewMode previewMode) {
       this.previewMode = previewMode;
+      return this;
+    }
+
+    /**
+     * A pricing token whose presentment currency and exchange rate are used to convert the amounts
+     * on the previewed invoice into the customer-facing presentment currency. When omitted, amounts
+     * are returned in the settlement currency.
+     */
+    public Builder setPricingToken(String pricingToken) {
+      this.pricingToken = pricingToken;
       return this;
     }
 
@@ -18825,16 +18848,19 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       String plan;
 
       /**
-       * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-       * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
-       * quantity} parameter is provided.
+       * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+       * both, to set or change this item's price. If you're updating an existing item without
+       * changing its price, omit both. When changing a subscription item's price, {@code quantity}
+       * is set to 1 unless a {@code quantity} parameter is provided.
        */
       @SerializedName("price")
       String price;
 
       /**
        * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-       * inline. One of {@code price} or {@code price_data} is required.
+       * inline. You can use either {@code price} or {@code price_data}, but not both, to set or
+       * change this item's price. If you're updating an existing item without changing its price,
+       * omit both.
        */
       @SerializedName("price_data")
       PriceData priceData;
@@ -19121,9 +19147,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-         * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
-         * quantity} parameter is provided.
+         * The ID of the price object. You can use either {@code price} or {@code price_data}, but
+         * not both, to set or change this item's price. If you're updating an existing item without
+         * changing its price, omit both. When changing a subscription item's price, {@code
+         * quantity} is set to 1 unless a {@code quantity} parameter is provided.
          */
         public Builder setPrice(String price) {
           this.price = price;
@@ -19132,7 +19159,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         /**
          * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-         * inline. One of {@code price} or {@code price_data} is required.
+         * inline. You can use either {@code price} or {@code price_data}, but not both, to set or
+         * change this item's price. If you're updating an existing item without changing its price,
+         * omit both.
          */
         public Builder setPriceData(
             InvoiceCreatePreviewParams.SubscriptionDetails.Item.PriceData priceData) {

@@ -845,7 +845,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     @SerializedName("credited_items")
     CreditedItems creditedItems;
 
-    /** Discount amounts applied when the proration was created. */
+    /**
+     * Discount amounts applied when the proration was created. This field is only populated for
+     * prorations created from subscriptions with {@code billing_mode=flexible}.
+     */
     @SerializedName("discount_amounts")
     List<InvoiceItem.ProrationDetails.DiscountAmount> discountAmounts;
 

@@ -1951,7 +1951,7 @@ public class PaymentRecord extends ApiResource implements HasId {
         /**
          * The version of 3D Secure that was used.
          *
-         * <p>One of {@code 1.0.2}, {@code 2.1.0}, or {@code 2.2.0}.
+         * <p>One of {@code 1.0.2}, {@code 2.1.0}, {@code 2.2.0}, {@code 2.3.0}, or {@code 2.3.1}.
          */
         @SerializedName("version")
         String version;
@@ -3172,6 +3172,13 @@ public class PaymentRecord extends ApiResource implements HasId {
        */
       @SerializedName("country")
       String country;
+
+      /**
+       * The <a href="https://docs.stripe.com/payments/link/link-payment-methods">funding source
+       * group code</a> applied to this Link payment at confirmation time.
+       */
+      @SerializedName("funding_source_group")
+      String fundingSourceGroup;
     }
 
     /**

@@ -742,6 +742,9 @@ public class OnrampSessionCreateParams extends ApiRequestParams {
     @SerializedName("matic")
     MATIC("matic"),
 
+    @SerializedName("ripusd")
+    RIPUSD("ripusd"),
+
     @SerializedName("sol")
     SOL("sol"),
 
@@ -826,11 +829,20 @@ public class OnrampSessionCreateParams extends ApiRequestParams {
   }
 
   public enum SourceCurrency implements ApiRequestParams.EnumParam {
+    @SerializedName("cad")
+    CAD("cad"),
+
+    @SerializedName("cop")
+    COP("cop"),
+
     @SerializedName("eur")
     EUR("eur"),
 
     @SerializedName("gbp")
     GBP("gbp"),
+
+    @SerializedName("php")
+    PHP("php"),
 
     @SerializedName("usd")
     USD("usd");

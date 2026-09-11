@@ -4068,7 +4068,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Label {
       /**
-       * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
+       * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 100
        * characters.
        */
       @SerializedName("custom")
@@ -4111,8 +4111,8 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
-         * characters.
+         * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to
+         * 100 characters.
          */
         public Builder setCustom(String custom) {
           this.custom = custom;
@@ -12708,15 +12708,20 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("target_date")
       String targetDate;
 
+      @SerializedName("verification_method")
+      VerificationMethod verificationMethod;
+
       private BacsDebit(
           Map<String, Object> extraParams,
           MandateOptions mandateOptions,
           SetupFutureUsage setupFutureUsage,
-          String targetDate) {
+          String targetDate,
+          VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
         this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
         this.targetDate = targetDate;
+        this.verificationMethod = verificationMethod;
       }
 
       public static Builder builder() {
@@ -12732,10 +12737,16 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private String targetDate;
 
+        private VerificationMethod verificationMethod;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.BacsDebit build() {
           return new SessionCreateParams.PaymentMethodOptions.BacsDebit(
-              this.extraParams, this.mandateOptions, this.setupFutureUsage, this.targetDate);
+              this.extraParams,
+              this.mandateOptions,
+              this.setupFutureUsage,
+              this.targetDate,
+              this.verificationMethod);
         }
 
         /**
@@ -12806,6 +12817,13 @@ public class SessionCreateParams extends ApiRequestParams {
          */
         public Builder setTargetDate(String targetDate) {
           this.targetDate = targetDate;
+          return this;
+        }
+
+        public Builder setVerificationMethod(
+            SessionCreateParams.PaymentMethodOptions.BacsDebit.VerificationMethod
+                verificationMethod) {
+          this.verificationMethod = verificationMethod;
           return this;
         }
       }
@@ -12917,6 +12935,21 @@ public class SessionCreateParams extends ApiRequestParams {
         private final String value;
 
         SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum VerificationMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("automatic")
+        AUTOMATIC("automatic"),
+
+        @SerializedName("payer_name_verification")
+        PAYER_NAME_VERIFICATION("payer_name_verification");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        VerificationMethod(String value) {
           this.value = value;
         }
       }
@@ -26173,6 +26206,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),
