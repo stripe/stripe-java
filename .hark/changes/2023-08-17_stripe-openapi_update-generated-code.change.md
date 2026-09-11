@@ -1,0 +1,8 @@
+---
+title: Update generated code
+pr_link: https://github.com/stripe/stripe-java/pull/1634
+is_stripe_api_change: true
+released_in_version: 23.1.0
+---
+
+* Add support for `flat_amount` on `tax.TransactionCreateReversalParams`
