@@ -73,7 +73,7 @@ public class AccountSession extends ApiResource {
   String object;
 
   /**
-   * Creates a AccountSession object that includes a single-use token that the platform can use on
+   * Creates an AccountSession object that includes a single-use token that the platform can use on
    * their front-end to grant client-side API access.
    */
   public static AccountSession create(Map<String, Object> params) throws StripeException {
@@ -81,7 +81,7 @@ public class AccountSession extends ApiResource {
   }
 
   /**
-   * Creates a AccountSession object that includes a single-use token that the platform can use on
+   * Creates an AccountSession object that includes a single-use token that the platform can use on
    * their front-end to grant client-side API access.
    */
   public static AccountSession create(Map<String, Object> params, RequestOptions options)
@@ -93,7 +93,7 @@ public class AccountSession extends ApiResource {
   }
 
   /**
-   * Creates a AccountSession object that includes a single-use token that the platform can use on
+   * Creates an AccountSession object that includes a single-use token that the platform can use on
    * their front-end to grant client-side API access.
    */
   public static AccountSession create(AccountSessionCreateParams params) throws StripeException {
@@ -101,7 +101,7 @@ public class AccountSession extends ApiResource {
   }
 
   /**
-   * Creates a AccountSession object that includes a single-use token that the platform can use on
+   * Creates an AccountSession object that includes a single-use token that the platform can use on
    * their front-end to grant client-side API access.
    */
   public static AccountSession create(AccountSessionCreateParams params, RequestOptions options)
@@ -223,14 +223,6 @@ public class AccountSession extends ApiResource {
 
     @SerializedName("issuing_cards_list")
     IssuingCardsList issuingCardsList;
-
-    /**
-     * Configuration for the <a
-     * href="https://stripe.com/connect/supported-embedded-components/nesting-demo/">Nestingdemo</a>
-     * embedded component.
-     */
-    @SerializedName("nesting_demo")
-    NestingDemo nestingDemo;
 
     /**
      * Configuration for the <a
@@ -1118,31 +1110,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("spend_control_management")
         Boolean spendControlManagement;
       }
-    }
-
-    /**
-     * For more details about NestingDemo, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class NestingDemo extends StripeObject {
-      /** Whether the embedded component is enabled. */
-      @SerializedName("enabled")
-      Boolean enabled;
-
-      @SerializedName("features")
-      Features features;
-
-      /**
-       * For more details about Features, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Features extends StripeObject {}
     }
 
     /**

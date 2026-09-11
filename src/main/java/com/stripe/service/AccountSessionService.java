@@ -18,14 +18,14 @@ public final class AccountSessionService extends ApiService {
   }
 
   /**
-   * Creates a AccountSession object that includes a single-use token that the platform can use on
+   * Creates an AccountSession object that includes a single-use token that the platform can use on
    * their front-end to grant client-side API access.
    */
   public AccountSession create(AccountSessionCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
-   * Creates a AccountSession object that includes a single-use token that the platform can use on
+   * Creates an AccountSession object that includes a single-use token that the platform can use on
    * their front-end to grant client-side API access.
    */
   public AccountSession create(AccountSessionCreateParams params, RequestOptions options)

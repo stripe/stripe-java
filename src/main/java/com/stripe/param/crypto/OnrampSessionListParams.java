@@ -343,6 +343,9 @@ public class OnrampSessionListParams extends ApiRequestParams {
     @SerializedName("matic")
     MATIC("matic"),
 
+    @SerializedName("ripusd")
+    RIPUSD("ripusd"),
+
     @SerializedName("sol")
     SOL("sol"),
 

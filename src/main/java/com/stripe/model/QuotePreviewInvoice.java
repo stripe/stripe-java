@@ -1454,6 +1454,13 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       AcssDebit acssDebit;
 
       /**
+       * If paying by {@code bacs_debit}, this sub-hash contains details about the Bacs Direct Debit
+       * payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("bacs_debit")
+      BacsDebit bacsDebit;
+
+      /**
        * If paying by {@code bancontact}, this sub-hash contains details about the Bancontact
        * payment method options to pass to the invoice’s PaymentIntent.
        */
@@ -1593,6 +1600,26 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
           @SerializedName("transaction_type")
           String transactionType;
         }
+      }
+
+      /**
+       * For more details about BacsDebit, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BacsDebit extends StripeObject {
+        /**
+         * Controls when Stripe will attempt to debit the funds from the customer's account. The
+         * date must be a string in YYYY-MM-DD format. The date must be in the future and between 3
+         * and 15 calendar days from now.
+         */
+        @SerializedName("target_date")
+        String targetDate;
+
+        @SerializedName("verification_method")
+        String verificationMethod;
       }
 
       /**

@@ -2096,6 +2096,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       AcssDebit acssDebit;
 
       /**
+       * This sub-hash contains details about the Bacs Direct Debit payment method options to pass
+       * to invoices created by the subscription.
+       */
+      @SerializedName("bacs_debit")
+      BacsDebit bacsDebit;
+
+      /**
        * This sub-hash contains details about the Bancontact payment method options to pass to
        * invoices created by the subscription.
        */
@@ -2235,6 +2242,22 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
           @SerializedName("transaction_type")
           String transactionType;
         }
+      }
+
+      /**
+       * For more details about BacsDebit, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BacsDebit extends StripeObject {
+        /** Controls when the funds will be captured from the customer's account. */
+        @SerializedName("debit_behavior")
+        String debitBehavior;
+
+        @SerializedName("verification_method")
+        String verificationMethod;
       }
 
       /**

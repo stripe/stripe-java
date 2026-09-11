@@ -204,6 +204,11 @@ public final class Webhook {
             "No signatures found with expected scheme", sigHeader);
       }
 
+      if (secret == null || secret.isEmpty()) {
+        throw new SignatureVerificationException(
+            "No webhook secret value was provided. It should start with `whsec_`", sigHeader);
+      }
+
       // Compute expected signature
       String signedPayload = String.format("%d.%s", timestamp, payload);
       String expectedSignature;
