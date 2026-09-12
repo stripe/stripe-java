@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "language": "java",
+    "channel": "private-preview"
+  },
   "versions": [
     {
       "version": "33.5.0-alpha.3",
