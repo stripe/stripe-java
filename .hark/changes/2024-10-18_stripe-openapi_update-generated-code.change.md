@@ -1,6 +1,6 @@
 ---
 title: Update generated code for beta
-pr_link: https://github.com/stripe/stripe-java/pull/1897
+pr_url: https://github.com/stripe/stripe-java/pull/1897
 is_stripe_api_change: true
 released_in_version: 27.2.0-beta.3
 ---

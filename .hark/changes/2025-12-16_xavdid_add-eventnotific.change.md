@@ -1,6 +1,6 @@
 ---
 title: Add EventNotificationHandler
-pr_link: https://github.com/stripe/stripe-java/pull/2104
+pr_url: https://github.com/stripe/stripe-java/pull/2104
 released_in_version: 31.2.0-beta.1
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Change types for capital FinancingSummary back to BigDecimal
-pr_link: https://github.com/stripe/stripe-java/pull/1930
+pr_url: https://github.com/stripe/stripe-java/pull/1930
 released_in_version: 28.2.0-beta.3
 ---
 

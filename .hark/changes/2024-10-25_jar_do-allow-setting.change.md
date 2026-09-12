@@ -1,6 +1,6 @@
 ---
 title: Do not allow setting Stripe.stripeVersion
-pr_link: https://github.com/stripe/stripe-java/pull/1909
+pr_url: https://github.com/stripe/stripe-java/pull/1909
 released_in_version: 28.1.0-beta.1
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Pull in OffSessionPayment changes for the May release
-pr_link: https://github.com/stripe/stripe-java/pull/2021
+pr_url: https://github.com/stripe/stripe-java/pull/2021
 released_in_version: 29.3.0-beta.2
 ---
 

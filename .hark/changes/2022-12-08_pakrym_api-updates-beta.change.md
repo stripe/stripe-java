@@ -1,6 +1,6 @@
 ---
 title: API Updates for beta branch
-pr_link: https://github.com/stripe/stripe-java/pull/1488
+pr_url: https://github.com/stripe/stripe-java/pull/1488
 is_stripe_api_change: true
 released_in_version: 22.3.0-beta.1
 ---
