@@ -1,3 +1,8 @@
+<!--
+THIS IS A GENERATED FILE. Any changes you make to it directly will be blown away.
+Instead, edit a corresponding `.change.md` file and run `hark build`.
+-->
+
 # Changelog
 
 ## 33.4.2 - 2026-09-09
@@ -7,15 +12,14 @@
 * [#2284](https://github.com/stripe/stripe-java/pull/2284) Harden API requestor code against malicious URLs
 
 ## 33.4.0 - 2026-08-26
-This release changes the pinned API version to 2026-08-26.dahlia.
+This release changes the pinned API version to `2026-08-26.dahlia`.
 
 * [#2269](https://github.com/stripe/stripe-java/pull/2269) Add new `EventNotificationHandler` class for better thin event management
-  
   - We've been putting a lot of time into rethinking the event handling experience in the SDKs. This new class is the culmination [of that effort](https://stripe.dev/blog/event-notification-handlers-thin-events).
   - They're designed for a tight coupling with both `StripeClient` and the fully-typed nature of [thin events](https://docs.stripe.com/event-destinations#thin-events). This delivers painless event destination upgrades, in-editor checks for common mistakes, and better code modularity.
   - Now that we've released [thin event notifications for v1 objects](https://docs.stripe.com/changelog#2026-08-26.dahlia), these new handlers are our recommended path for all integrations using thin event notifications.
   - See more detailed docs here: https://docs.stripe.com/webhooks/event-notification-handlers
-* [#2262](https://github.com/stripe/stripe-java/pull/2262) Update generated code
+* ⚠️ [#2262](https://github.com/stripe/stripe-java/pull/2262) Update generated code
   * Add support for new resource `billing.FeedbackOption`
   * Add support for `create`, `deactivate`, `list`, `retrieve`, and `update` methods on resource `billing.FeedbackOption`
   * Add support for `paymentMethodSettings` on `AccountSession.components` and `AccountSessionCreateParams.components`
@@ -38,19 +42,18 @@ This release changes the pinned API version to 2026-08-26.dahlia.
   * Add support for new value `2026-08-26.dahlia` on enum `WebhookEndpointCreateParams.apiVersion`
 
 ## 33.3.0 - 2026-08-10
-* [#2265](https://github.com/stripe/stripe-java/pull/2265) Surface `object` property on `EventNotification`
+* [#2261](https://github.com/stripe/stripe-java/pull/2261) Add `stripe.major_api_version` constant
+* [#2263](https://github.com/stripe/stripe-java/pull/2263) add stripeobject deserialization helper for JsonObject
 * [#2256](https://github.com/stripe/stripe-java/pull/2256) add/adjust event parsing helpers
-  
   - Added methods that return their respective `Event`/`EventNotification` class instances without verifying authenticity. Use them when you've previously verified an event (e.g. you verified, put the event in a queue, and are now processing). Supports events from [AWS EventBridge](https://docs.stripe.com/event-destinations/eventbridge) and [Azure Event Grid](https://docs.stripe.com/event-destinations/eventgrid) natively.
     - `Webhook.constructEventWithoutVerification(payload)`
     - `StripeClient.constructEventWithoutVerification(payload)`
     - `StripeClient.parseEventNotificationWithoutVerification(payload)`
   - Added `Webhook.Signature.generateSignatureHeader(payload, secret)`, which computes a full `Stripe-Signature` header for the given payload. Useful for unit tests!
-* [#2263](https://github.com/stripe/stripe-java/pull/2263) add stripeobject deserialization helper for JsonObject
-* [#2261](https://github.com/stripe/stripe-java/pull/2261) Add `stripe.major_api_version` constant
+* [#2265](https://github.com/stripe/stripe-java/pull/2265) Surface `object` property on `EventNotification`
 
 ## 33.2.0 - 2026-07-29
-This release changes the pinned API version to 2026-07-29.dahlia.
+This release changes the pinned API version to `2026-07-29.dahlia`.
 
 * [#2257](https://github.com/stripe/stripe-java/pull/2257) Update generated code
   * Add support for new resource `financialconnections.Authorization`
@@ -93,9 +96,9 @@ This release changes the pinned API version to 2026-07-29.dahlia.
 * [#2244](https://github.com/stripe/stripe-java/pull/2244) Replace source hash with Telemetry UUID
 
 ## 33.1.0 - 2026-06-24
-This release changes the pinned API version to 2026-06-24.dahlia.
+This release changes the pinned API version to `2026-06-24.dahlia`.
 
-* [#2240](https://github.com/stripe/stripe-java/pull/2240) Update generated code
+* ⚠️ [#2240](https://github.com/stripe/stripe-java/pull/2240) Update generated code
   * Add support for `releaseDetails` on `reserve.Hold`
   * Add support for `buyerId` on `Charge.payment_method_details.bizum`, `ConfirmationToken.payment_method_preview.bizum`, `ConfirmationToken.payment_method_preview.blik`, `PaymentAttemptRecord.payment_method_details.bizum`, `PaymentMethod.bizum`, `PaymentMethod.blik`, and `PaymentRecord.payment_method_details.bizum`
   * Add support for `transactionLinkId` on `Charge.payment_method_details.card`
@@ -121,18 +124,19 @@ This release changes the pinned API version to 2026-06-24.dahlia.
   * Add support for new value `sunbit_payments` on enum `EventsV2CoreAccountIncludingConfigurationMerchantCapabilityStatusUpdatedEvent.updatedCapability`
 
 ## 33.0.0 - 2026-06-05
-
 This release **doesn't** change the pinned API version; it still uses `2026-05-27.dahlia`.
 
 We're doing an out-of-band-major to update a field type that changed. If you're not using `tax_details`, this is a no-op release when compared with the last one. If you _are_ using `tax_details` its type has changed slightly and you'll have to update your code when upgrading.
 
-* [#2234](https://github.com/stripe/stripe-java/pull/2234) ⚠️ Make `tax_rate.tax_details` expandable
 * [#2230](https://github.com/stripe/stripe-java/pull/2230) Add "source" field to user-agent header
+* ⚠️ [#2234](https://github.com/stripe/stripe-java/pull/2234) Make `tax_rate.tax_details` expandable
 
 ## 32.2.0 - 2026-05-27
-This release changes the pinned API version to 2026-05-27.dahlia.
+This release changes the pinned API version to `2026-05-27.dahlia`.
 
-* [#2220](https://github.com/stripe/stripe-java/pull/2220) Update generated code
+* [#2218](https://github.com/stripe/stripe-java/pull/2218) Add better example for accessing non-documented properties in a list response
+* [#2219](https://github.com/stripe/stripe-java/pull/2219) Emit warning when `stripe-notify` header is present in response
+* ⚠️ [#2220](https://github.com/stripe/stripe-java/pull/2220) Update generated code
   * Add support for new resource `v2.commerce.ProductCatalogImport`
   * Add support for `create` and `retrieve` methods on resource `v2.commerce.ProductCatalogImport`
   * Add support for `bizumPayments` and `scalapayPayments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
@@ -173,13 +177,13 @@ This release changes the pinned API version to 2026-05-27.dahlia.
   * Add support for new value `azure_event_grid` on enum `v2.core.EventDestinationCreateParams.type`
   * Add support for new value `meter_event_value_too_many_digits` on enums `EventsV1BillingMeterErrorReportTriggeredEvent.reason.error_types[].code` and `EventsV1BillingMeterNoMeterFoundEvent.reason.error_types[].code`
   * Add support for event notifications `V2CommerceProductCatalogImportsFailedEvent`, `V2CommerceProductCatalogImportsProcessingEvent`, `V2CommerceProductCatalogImportsSucceededEvent`, and `V2CommerceProductCatalogImportsSucceededWithErrorsEvent` with related object `v2.commerce.ProductCatalogImport`
-* [#2219](https://github.com/stripe/stripe-java/pull/2219) Emit warning when `stripe-notify` header is present in response
-* [#2218](https://github.com/stripe/stripe-java/pull/2218) Add better example for accessing non-documented properties in a list response
 
 ## 32.1.0 - 2026-04-23
-This release changes the pinned API version to 2026-04-22.dahlia.
+This release changes the pinned API version to `2026-04-22.dahlia`.
 
-* [#2203](https://github.com/stripe/stripe-java/pull/2203) Update generated code
+* [#2208](https://github.com/stripe/stripe-java/pull/2208) Fix missing stripeContext in RequestOptions.toBuilderFullCopy()
+  - Fixes a bug where an existing `stripeContext` was being reset to `null` when calling `RequestOptions#toBuilderFullCopy()`
+* ⚠️ [#2203](https://github.com/stripe/stripe-java/pull/2203) Update generated code
   * Add support for `balanceReport` and `payoutReconciliationReport` on `AccountSession.components` and `AccountSessionCreateParams.components`
   * Add support for `appDistribution` and `sunbitPayments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
   * Add support for `sunbit` on `Charge.payment_method_details`, `ConfirmationToken.payment_method_preview`, `ConfirmationTokenCreateParams.payment_method_data`, `PaymentAttemptRecord.payment_method_details`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, `PaymentMethodConfiguration`, `PaymentMethodCreateParams`, `PaymentMethod`, `PaymentRecord.payment_method_details`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentCreateParams.payment_method_data`, and `SetupIntentUpdateParams.payment_method_data`
@@ -207,37 +211,34 @@ This release changes the pinned API version to 2026-04-22.dahlia.
   * Add support for `moto` on `SetupAttempt.payment_method_details.card`
   * Add support for `pixDisplayQrCode` on `SetupIntent.next_action`
   * Add support for new value `2026-04-22.dahlia` on enum `WebhookEndpointCreateParams.apiVersion`
-* [#2208](https://github.com/stripe/stripe-java/pull/2208) Fix missing stripeContext in RequestOptions.toBuilderFullCopy()
-  - Fixes a bug where an existing `stripeContext` was being reset to `null` when calling `RequestOptions#toBuilderFullCopy()`
 
 ## 32.0.0 - 2026-03-25
+This release changes the pinned API version to `2026-03-25.dahlia`.
 
-This release changes the pinned API version to `2026-03-25.dahlia` and contains breaking changes (prefixed with ⚠️ below). There's also a [detailed migration guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v32) to simplify your upgrade process.
+This release contains breaking changes (prefixed with ⚠️ below). There's also a [detailed migration guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v32) to simplify your upgrade process.
 
 Please review details for the breaking changes and alternatives in the [Stripe API changelog](https://docs.stripe.com/changelog/dahlia) before upgrading.
 
-* ⚠️ **Breaking change:** [#2182](https://github.com/stripe/stripe-java/pull/2182) Add setHttpClient to StripeClientBuilder; clean up apiKey/authenticator coupling
+* [#2179](https://github.com/stripe/stripe-java/pull/2179) Add runtime support for V2 int64 string-encoded fields
+* ⚠️ [#2181](https://github.com/stripe/stripe-java/pull/2181) Change Automatic-Module-Name to com.stripe
+  - Changes `Automatic-Module-Name` from `stripe.java` to `com.stripe`. Users with `requires stripe.java;` in their `module-info.java` will need to update to `requires com.stripe;`.
+* ⚠️ [#2182](https://github.com/stripe/stripe-java/pull/2182) Add setHttpClient to StripeClientBuilder; clean up apiKey/authenticator coupling
   - ⚠️ Removed `RequestOptions.getApiKey()`, `RequestOptions.RequestOptionsBuilder.getApiKey()`, and `StripeClient.StripeClientBuilder.getApiKey()`. Use `getAuthenticator()` instead.
   - Added `StripeClient.StripeClientBuilder.setHttpClient(HttpClient)` to allow injecting a custom HTTP client.
-* ⚠️ **Breaking change:** [#2187](https://github.com/stripe/stripe-java/pull/2187) Regenerate with decimal_string enabled for v2 APIs
+* ⚠️ [#2172](https://github.com/stripe/stripe-java/pull/2172) Make `RequestOptions` & `RawRequestOptions` constructors private and add Stripe-Request-Trigger header
+* ⚠️ [#2187](https://github.com/stripe/stripe-java/pull/2187) Regenerate with decimal_string enabled for v2 APIs
   - V2 API decimal fields changed type from `String` to `BigDecimal`. Code that reads or writes these fields as `String` will need to use `BigDecimal` instead. Affected fields:
     - **V2.Core.Account** / **V2.Core.AccountPerson**: `percentOwnership`
     - **PaymentEvaluation.Signals.FraudulentPayment**: `score`
     - Params: `AccountCreateParams`, `PersonCreateParams`, `AccountTokenCreateParams`, `PersonTokenCreateParams` (all: `percentOwnership`)
     - Params: `InvoiceItemCreateParams`, `InvoiceAddLinesParams`, `InvoiceUpdateLinesParams`, `InvoiceCreatePreviewParams` (all: `quantityDecimal`)
-* ⚠️ **Breaking change:** [#2131](https://github.com/stripe/stripe-java/pull/2131) Use HTTP status code in V2 errors
+* ⚠️ [#2190](https://github.com/stripe/stripe-java/pull/2190) Throw an error when using the wrong webhook parsing method
+* ⚠️ [#2131](https://github.com/stripe/stripe-java/pull/2131) Use HTTP status code in V2 errors
   - `RateLimitException` now extends `StripeException` rather than `ApiException`
   - Non-200 status codes from V2 endpoints will throw a `StripeException` (e.g. `RateLimitException`, `InvalidRequestException`, etc.) like in V1 instead of a generic `ApiException`
-* ⚠️ **Breaking change:** [#2190](https://github.com/stripe/stripe-java/pull/2190) Throw an error when using the wrong webhook parsing method
-* ⚠️ **Breaking change:** [#2172](https://github.com/stripe/stripe-java/pull/2172) Make `RequestOptions` & `RawRequestOptions` constructors private and add Stripe-Request-Trigger header
-* ⚠️ **Breaking change:** [#2181](https://github.com/stripe/stripe-java/pull/2181) Change Automatic-Module-Name to com.stripe
-  - Changes `Automatic-Module-Name` from `stripe.java` to `com.stripe`. Users with `requires stripe.java;` in their `module-info.java` will need to update to `requires com.stripe;`.
-* [#2179](https://github.com/stripe/stripe-java/pull/2179) Add runtime support for V2 int64 string-encoded fields
-
 
 ### ⚠️ Breaking changes due to changes in the Stripe API
-
-* Generated changes from [#2170](https://github.com/stripe/stripe-java/pull/2170), [#2193](https://github.com/stripe/stripe-java/pull/2193), [#2191](https://github.com/stripe/stripe-java/pull/2191)
+* ⚠️ Generated changes from [#2170](https://github.com/stripe/stripe-java/pull/2170), [#2193](https://github.com/stripe/stripe-java/pull/2193), [#2191](https://github.com/stripe/stripe-java/pull/2191)
   * Add support for `upiPayments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
   * Add support for `upi` on `Charge.payment_method_details`, `ConfirmationToken.payment_method_preview`, `ConfirmationTokenCreateParams.payment_method_data`, `Mandate.payment_method_details`, `PaymentAttemptRecord.payment_method_details`, `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, `PaymentMethodConfiguration`, `PaymentMethodCreateParams`, `PaymentMethod`, `PaymentRecord.payment_method_details`, `SetupAttempt.payment_method_details`, `SetupIntent.payment_method_options`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentConfirmParams.payment_method_options`, `SetupIntentCreateParams.payment_method_data`, `SetupIntentCreateParams.payment_method_options`, `SetupIntentUpdateParams.payment_method_data`, `SetupIntentUpdateParams.payment_method_options`, `checkout.Session.payment_method_options`, and `checkout.SessionCreateParams.payment_method_options`
   * Add support for `integrationIdentifier` on `checkout.SessionCreateParams` and `checkout.Session`
@@ -263,9 +264,9 @@ Please review details for the breaking changes and alternatives in the [Stripe A
   * ⚠️ Change type of `v2.core.EventDestinationCreateParams.eventsFrom` from `enum('other_accounts'|'self')` to `string`
 
 ## 31.4.1 - 2026-03-06
+* [#2165](https://github.com/stripe/stripe-java/pull/2165) Add AI Agent information to UserAgent
 * [#2168](https://github.com/stripe/stripe-java/pull/2168) Support serializing Stripe objects with ApiResource.GSON
   * `ApiResource.GSON` now supports serializing Stripe objects back into compatible JSON
-* [#2165](https://github.com/stripe/stripe-java/pull/2165) Add AI Agent information to UserAgent
 
 ## 31.4.0 - 2026-02-25
 This release changes the pinned API version to `2026-02-25.clover`.
@@ -318,6 +319,8 @@ This release changes the pinned API version to `2026-01-28.clover`.
 ## 31.1.0 - 2025-12-16
 This release changes the pinned API version to `2025-12-15.clover`.
 
+* [#2121](https://github.com/stripe/stripe-java/pull/2121) Adds `Automatic-Module-Name: stripe.java` to the jar's manifest entry
+* [#2124](https://github.com/stripe/stripe-java/pull/2124) Adds the Gson version included at runtime to the X-STRIPE-CLIENT-USER-AGENT header hash
 * [#2126](https://github.com/stripe/stripe-java/pull/2126) Update generated code
   * Add support for new resources `v2.core.AccountLink`, `v2.core.AccountPersonToken`, `v2.core.AccountPerson`, `v2.core.AccountToken`, and `v2.core.Account`
   * Add support for `create` and `retrieve` methods on resources `v2.core.AccountPersonToken` and `v2.core.AccountToken`
@@ -349,14 +352,10 @@ This release changes the pinned API version to `2025-12-15.clover`.
   * Add support for `reportedBy` on `PaymentRecord`
   * Add support for new values `2025-12-15.clover` and `2026-01-28.clover` on enum `WebhookEndpointCreateParams.apiVersion`
   * Add support for `changes` on `v2.core.Event`
-* [#2124](https://github.com/stripe/stripe-java/pull/2124) Adds the Gson version included at runtime to the X-STRIPE-CLIENT-USER-AGENT header hash
-* [#2121](https://github.com/stripe/stripe-java/pull/2121) Adds `Automatic-Module-Name: stripe.java` to the jar's manifest entry
 
 ## 31.0.0 - 2025-11-18
 This release changes the pinned API version to `2025-11-17.clover`.
 
-* [#2113](https://github.com/stripe/stripe-java/pull/2113) Update generated code
-  * ⚠️ Remove support for `gt`, `gte`, `lt`, and `lte` on `v2.core.EventListParams` in favor of `created`.
 * [#2110](https://github.com/stripe/stripe-java/pull/2110) Update v2 array parameter serialization to use indexed format
   - `Retrieve` and `List` calls for `/v2` endpoints now use indexed format (e.g., `?include[0]=foo&include[1]=bar`) instead of repeated parameter format (e.g., `?include=foo&include=bar`) when communicating with the Stripe API. This may break any unit tests that expect the latter behavior when setting up a mock server. Instead, they should now expect the former.
   - The `arraysAsRepeated` parameter was removed from the internal-use-only method `FormEncoder#createQueryString`
@@ -375,17 +374,16 @@ This release changes the pinned API version to `2025-11-17.clover`.
   * Add support for `mbWay` and `twint` on `Refund.destination_details`
   * Add support for new values `financial_connections.account.account_numbers_updated` and `financial_connections.account.upcoming_account_number_expiry` on enums `WebhookEndpointCreateParams.enabledEvents` and `WebhookEndpointUpdateParams.enabledEvents`
   * Add support for snapshot events `financial_connections.account.account_numbers_updated` and `financial_connections.account.upcoming_account_number_expiry` with resource `financialconnections.Account`
+* ⚠️ [#2113](https://github.com/stripe/stripe-java/pull/2113) Update generated code
+  * ⚠️ Remove support for `gt`, `gte`, `lt`, and `lte` on `v2.core.EventListParams` in favor of `created`.
 
 ## 30.2.0 - 2025-11-05
 * [#2102](https://github.com/stripe/stripe-java/pull/2102) Update generated code
   * Add support for `captureMethod` on `PaymentIntent.payment_method_options.card_present`, `PaymentIntentConfirmParams.payment_method_options.card_present`, `PaymentIntentCreateParams.payment_method_options.card_present`, and `PaymentIntentUpdateParams.payment_method_options.card_present`
 
 ## 30.1.0 - 2025-10-29
-
 This release changes the pinned API version to `2025-10-29.clover`.
 
-* [#2093](https://github.com/stripe/stripe-java/pull/2093) Update generated code
-  * Improve docs for PaymentIntent related endpoints
 * [#2086](https://github.com/stripe/stripe-java/pull/2086) Update generated code
   * Add support for new resources `PaymentAttemptRecord`, `PaymentIntentAmountDetailsLineItem`, and `PaymentRecord`
   * Add support for `list` and `retrieve` methods on resource `PaymentAttemptRecord`
@@ -424,29 +422,37 @@ This release changes the pinned API version to `2025-10-29.clover`.
   * Change `v2.core.EventListParams.objectId` to be optional
   * Add support for snapshot event `balance_settings.updated` with resource `BalanceSettings`
   * Add support for snapshot event `invoice.payment_attempt_required` with resource `Invoice`
+* [#2093](https://github.com/stripe/stripe-java/pull/2093) Update generated code
+  * Improve docs for PaymentIntent related endpoints
 
 ## 30.0.0 - 2025-09-30
-This release changes the pinned API version to `2025-09-30.clover` and contains breaking changes (prefixed with ⚠️ below)
+This release changes the pinned API version to `2025-09-30.clover`.
 
-* [#2036](https://github.com/stripe/stripe-java/pull/2036) ⚠️ Add strongly typed EventNotifications
+This release contains breaking changes (prefixed with ⚠️ below)
+
+* ⚠️ [#2037](https://github.com/stripe/stripe-java/pull/2037) Fix type bounds on request
+  * ⚠️ Changes the signature of `LiveResponseGetter#request`, `ApiService#request`, and `StripeResponseGetter#request` to return `<T extends StripeObject>` instead of `<T extends StripeObjectInterface>`. This only affects advanced use cases where users are extending `StripeObjectInterface` with their own objects to deserialize Stripe responses. Those objects will now need to extend `StripeObject`.
+* ⚠️ [#2039](https://github.com/stripe/stripe-java/pull/2039) Build SDK w/ V2 OpenAPI spec
+  - ⚠️ The delete methods for v2 APIs (the ones in the `StripeClient.v2` namespace) now return a `V2DeletedObject` which has the id of the object that has been deleted and a string representing the type of the object that has been deleted.
+  - ⚠️ Query params on v2 APIs (like `limit`) are now `Long` instead of `Integer` (to match v1 APIs)
+  - ⚠️ Deeply nested param hashes with no properties no longer have classes generated for them. Instead, they're typed as `Map<String, Object>`. Because there were no params, it's unlikely you were using these classes.
+* ⚠️ [#2041](https://github.com/stripe/stripe-java/pull/2041) Throw `ApiKeyMissingException` instead of `IllegalArgumentException` for unset API keys
+  - ⚠️ throw `ApiKeyMissingException` instead of `IllegalArgumentException` when making a request before setting an API key initializing a client without an API key. Tweak the wording of that message to better indicate how to fix.
+* ⚠️ [#2046](https://github.com/stripe/stripe-java/pull/2046) Adds v2 support to RateLimitException
+  * ⚠️ The base class of `RateLimitException` has been changed from `InvalidRequestException` to `ApiException`.  There is no change to the public interface for the `RateLimitException` class.
+* ⚠️ [#2036](https://github.com/stripe/stripe-java/pull/2036) Add strongly typed EventNotifications
   We've overhauled how V2 Events are handled in the SDK! This approach should provide a lot more information at authoring and compile time, leading to more robust integrations. As part of this process, there are a number of changes to be aware of.
   - Added matching `EventNotification` classes to every v2 `Event`. For example, there's now a `V1BillingMeterErrorReportTriggeredEventNotification` to match the existing `V1BillingMeterErrorReportTriggeredEvent`. Each notification class defines a `fetchEvent()` method to retrieve its corresponding event. For events with related objects, there's a `fetchRelatedObject()` method that performs the API call and casts the response to the correct type.
   - ⚠️ Rename function `StripeClient.parseThinEvent` to `StripeClient.parseEventNotification` and remove the `Stripe.ThinEvent` class.
       - This function now returns a `Stripe.V2.Core.EventNotification` (which is the shared base class that all of the more specific `Stripe.Events.*EventNotification` classes  share) instead of `Stripe.ThinEvent`. When applicable, these event notifications will have the `relatedObject` property and a `fetchRelatedObject()` function. They also have a `fetchEvent()` method to retrieve their corresponding `Stripe.Event.*Event` instance.
       - If you parse an event the SDK doesn't have types for (e.g. it's newer than the SDK you're using), you'll get an instance of `Stripe.Events.UnknownEventNotification` instead of a more specific type. It has both the `relatedObject` property and the `fetchRelatedObject()` function (but they may be/return `null`)
-* [#2069](https://github.com/stripe/stripe-java/pull/2069) Move `V2.Event` API resources to `V2.Core.Events`
+* ⚠️ [#2057](https://github.com/stripe/stripe-java/pull/2057) Add `StripeContext` object
+  - Add the `StripeContext` class. Previously, you could set the stripe context only as a string via `StripeClientBuilder .setStripeContext()`. The same method can now take an instance of the `StripeContext` class as well
+  - ⚠️ Change `EventNotification` (formerly known as `ThinEvent`)'s `context` property from `string` to `StripeContext`
+* ⚠️ [#2069](https://github.com/stripe/stripe-java/pull/2069) Move `V2.Event` API resources to `V2.Core.Events`
   - ⚠️ Move the below event related classes from `com.stripe.model.v2` to `com.stripe.model.v2.core`. This enables us to correctly match the API path to the namespace
        - `com.stripe.model.v2.Event` -> `com.stripe.model.v2.core.Event`
        - `com.stripe.model.v2.EventDestination` -> `com.stripe.model.v2.core.EventDestination`
-* [#2057](https://github.com/stripe/stripe-java/pull/2057) Add `StripeContext` object
-  - Add the `StripeContext` class. Previously, you could set the stripe context only as a string via `StripeClientBuilder .setStripeContext()`. The same method can now take an instance of the `StripeContext` class as well
-  - ⚠️ Change `EventNotification` (formerly known as `ThinEvent`)'s `context` property from `string` to `StripeContext`
-* [#2041](https://github.com/stripe/stripe-java/pull/2041) Throw `ApiKeyMissingException` instead of `IllegalArgumentException` for unset API keys
-  - ⚠️ throw `ApiKeyMissingException` instead of `IllegalArgumentException` when making a request before setting an API key initializing a client without an API key. Tweak the wording of that message to better indicate how to fix.
-* [#2039](https://github.com/stripe/stripe-java/pull/2039) ⚠️ Build SDK w/ V2 OpenAPI spec
-  - ⚠️ The delete methods for v2 APIs (the ones in the `StripeClient.v2` namespace) now return a `V2DeletedObject` which has the id of the object that has been deleted and a string representing the type of the object that has been deleted.
-  - ⚠️ Query params on v2 APIs (like `limit`) are now `Long` instead of `Integer` (to match v1 APIs)
-  - ⚠️ Deeply nested param hashes with no properties no longer have classes generated for them. Instead, they're typed as `Map<String, Object>`. Because there were no params, it's unlikely you were using these classes.
 * ⚠️ Deprecated the V1 service accessors living directly under StripeClient(e.g. customers, products) as they were copied under the new V1 service in our [last release](https://github.com/stripe/stripe-java/releases/tag/v29.5.0). Service accessors living directly under StripeClient(e.g. customers, products) will be removed from StripeClient in a future release. E.g.
   ```diff
   StripeClient client = new StripeClient("sk_test...")
@@ -456,12 +462,7 @@ This release changes the pinned API version to `2025-09-30.clover` and contains 
   + client.v1().customers().list()
   ```
   Refer to the [migration guide](https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient) for help upgrading.
-* [#2046](https://github.com/stripe/stripe-java/pull/2046) Adds v2 support to RateLimitException
-  * ⚠️ The base class of `RateLimitException` has been changed from `InvalidRequestException` to `ApiException`.  There is no change to the public interface for the `RateLimitException` class.
-* [#2037](https://github.com/stripe/stripe-java/pull/2037) Fix type bounds on request
-  * ⚠️ Changes the signature of `LiveResponseGetter#request`, `ApiService#request`, and `StripeResponseGetter#request` to return `<T extends StripeObject>` instead of `<T extends StripeObjectInterface>`. This only affects advanced use cases where users are extending `StripeObjectInterface` with their own objects to deserialize Stripe responses. Those objects will now need to extend `StripeObject`.
-
-* [#2040](https://github.com/stripe/stripe-java/pull/2040), [#2058](https://github.com/stripe/stripe-java/pull/2058), [#2059](https://github.com/stripe/stripe-java/pull/2059), [#2073](https://github.com/stripe/stripe-java/pull/2073) Update generated code based on incoming API changes in the `2025-09-30.clover` API version.
+* ⚠️ [#2040](https://github.com/stripe/stripe-java/pull/2040) , [#2058](https://github.com/stripe/stripe-java/pull/2058), [#2059](https://github.com/stripe/stripe-java/pull/2059), [#2073](https://github.com/stripe/stripe-java/pull/2073) Update generated code based on incoming API changes in the `2025-09-30.clover` API version.
   * ⚠️ Remove support for `balanceReport` and `payoutReconciliationReport` on `AccountSession.components` and `AccountSessionCreateParams.components`
   * ⚠️ Change type of `InvoiceCreatePreviewParams.subscription_details.cancelAt`, `SubscriptionCreateParams.cancelAt` and `SubscriptionUpdateParams.cancelAt` from `DateTime` to `DateTime | enum('max_period_end'|'min_period_end')`
   * ⚠️ Remove support for values `saturday` and `sunday` from enums `AccountCreateParams.settings.payouts.schedule.weeklyPayoutDays` and `AccountUpdateParams.settings.payouts.schedule.weeklyPayoutDays`
@@ -499,8 +500,20 @@ This release changes the pinned API version to `2025-09-30.clover` and contains 
   * Add support for new value `2025-09-30.clover` on enum `WebhookEndpointCreateParams.apiVersion`
 
 ## 29.5.0 - 2025-08-27
+This release changes the pinned API version to `2025-08-27.basil`.
+
+* [#2032](https://github.com/stripe/stripe-java/pull/2032) Introduce V1 namespaces in StripeClient
+  - All the top level non-namespaced services under StripeClient services(eg. customers, products) are copied under the new V1 namespace. These top level non-namespaced services will be marked as deprecated in the next major release and will be removed in a future release. Eg.
+  ```diff
+  StripeClient client = new StripeClient("sk_test...")
+
+  # Accessing V1 Stripe services on a StripeClient should be through the V1 namespace
+  - client.customers().list()
+  + client.v1().customers().list()
+  ```
+  Refer to the [migration guide](https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient) for help upgrading.
 * [#2034](https://github.com/stripe/stripe-java/pull/2034) Add section on private preview SDKs in readme
-* [#2030](https://github.com/stripe/stripe-java/pull/2030) Update generated code. This release changes the pinned API version to `2025-08-27.basil`.
+* [#2030](https://github.com/stripe/stripe-java/pull/2030) Update generated code.
   * Add support for `balanceReport`, `payoutDetails`, and `payoutReconciliationReport` on `AccountSession.components` and `AccountSessionCreateParams.components`
   * Add support for `name` on `billingportal.ConfigurationCreateParams`, `billingportal.ConfigurationUpdateParams`, and `billingportal.Configuration`
   * Add support for `installments` on `Charge.payment_method_details.alma`
@@ -517,19 +530,11 @@ This release changes the pinned API version to `2025-09-30.clover` and contains 
   * Add support for `card` on `terminal.ReaderPresentPaymentMethodParams`
   * Add support for new value `card` on enum `terminal.ReaderPresentPaymentMethodParams.type`
   * Add support for new value `2025-08-27.basil` on enum `WebhookEndpointCreateParams.apiVersion`
-* [#2032](https://github.com/stripe/stripe-java/pull/2032) Introduce V1 namespaces in StripeClient
-  - All the top level non-namespaced services under StripeClient services(eg. customers, products) are copied under the new V1 namespace. These top level non-namespaced services will be marked as deprecated in the next major release and will be removed in a future release. Eg.
-  ```diff
-  StripeClient client = new StripeClient("sk_test...")
-
-  # Accessing V1 Stripe services on a StripeClient should be through the V1 namespace
-  - client.customers().list()
-  + client.v1().customers().list()
-  ```
-  Refer to the [migration guide](https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient) for help upgrading.
 
 ## 29.4.0 - 2025-07-30
-* [#2027](https://github.com/stripe/stripe-java/pull/2027) Update generated code. This release changes the pinned API version to `2025-07-30.basil`.
+This release changes the pinned API version to `2025-07-30.basil`.
+
+* [#2027](https://github.com/stripe/stripe-java/pull/2027) Update generated code.
   * Add support for `instantPayoutsPromotion` on `AccountSession.components` and `AccountSessionCreateParams.components`
   * Add support for `adjustableQuantity` on `billingportal.Configuration.features.subscription_update.products[]`, `billingportal.ConfigurationCreateParams.features.subscription_update.products[]`, and `billingportal.ConfigurationUpdateParams.features.subscription_update.products[]`
   * Add support for `transactionId` on `Charge.payment_method_details.cashapp`
@@ -547,7 +552,10 @@ This release changes the pinned API version to `2025-09-30.clover` and contains 
   * Add support for new value `2025-07-30.basil` on enum `WebhookEndpointCreateParams.apiVersion`
 
 ## 29.3.0 - 2025-07-01
-* [#2013](https://github.com/stripe/stripe-java/pull/2013) Update generated code. This release changes the pinned API version to `2025-06-30.basil`.
+This release changes the pinned API version to `2025-06-30.basil`.
+
+* [#1987](https://github.com/stripe/stripe-java/pull/1987) Include Java versions 21, 22, 23, 24 in CI
+* [#2013](https://github.com/stripe/stripe-java/pull/2013) Update generated code.
   * Add support for `migrate` method on resource `Subscription`
   * Add support for `collect_payment_method` and `confirm_payment_intent` methods on resource `terminal.Reader`
   * Add support for `cryptoPayments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
@@ -575,11 +583,14 @@ This release changes the pinned API version to `2025-09-30.clover` and contains 
   * Add support for new value `terminal.reader.action_updated` on enums `WebhookEndpointCreateParams.enabledEvents` and `WebhookEndpointUpdateParams.enabledEvents`
   * Add support for new value `2025-06-30.basil` on enum `WebhookEndpointCreateParams.apiVersion`
   * Add support for snapshot event `terminal.reader.action_updated` with resource `terminal.Reader`
-* [#1987](https://github.com/stripe/stripe-java/pull/1987) Include Java versions 21, 22, 23, 24 in CI
 
 ## 29.2.0 - 2025-05-29
+This release changes the pinned API version to `2025-05-28.basil`.
 
-* [#2000](https://github.com/stripe/stripe-java/pull/2000) Update generated code. This release changes the pinned API version to `2025-05-28.basil`.
+* [#1997](https://github.com/stripe/stripe-java/pull/1997) Adds CONTRIBUTING.md
+* [#2002](https://github.com/stripe/stripe-java/pull/2002) Adds generated Customer retrievePaymentMethod overload
+  * Adds `retrievePaymentMethod` overload to `Customer` that accepts a payment method id and `RequestOptions` object
+* [#2000](https://github.com/stripe/stripe-java/pull/2000) Update generated code.
   * Add support for `attach_payment` method on resource `Invoice`
   * Add support for `collect_inputs` method on resource `terminal.Reader`
   * Add support for `succeed_input_collection` and `timeout_input_collection` test helper methods on resource `terminal.Reader`
@@ -605,13 +616,17 @@ This release changes the pinned API version to `2025-09-30.clover` and contains 
   * Add support for new value `invoice_payment.paid` on enums `WebhookEndpointCreateParams.enabledEvents` and `WebhookEndpointUpdateParams.enabledEvents`
   * Add support for new value `2025-05-28.basil` on enum `WebhookEndpointCreateParams.apiVersion`
   * Add support for snapshot event `invoice_payment.paid` with resource `InvoicePayment`
-* [#2002](https://github.com/stripe/stripe-java/pull/2002) Adds generated Customer retrievePaymentMethod overload
-  * Adds `retrievePaymentMethod` overload to `Customer` that accepts a payment method id and `RequestOptions` object
-* [#1997](https://github.com/stripe/stripe-java/pull/1997) Adds CONTRIBUTING.md
 
 ## 29.1.0 - 2025-04-30
-* [#1986](https://github.com/stripe/stripe-java/pull/1986) Update generated code
+This release changes the pinned API version to `2025-04-30.basil`.
 
+* ⚠️ [#1971](https://github.com/stripe/stripe-java/pull/1971) require beta SDKs match event versions exactly when deserializing
+  - ⚠️ Public Preview SDKs now require an exact API version match when deserializing webhooks
+      - To deserialize events from another API version, use `EventDataObjectDeserializer .deserializeUnsafe()` instead of `.deserialize()`.
+* [#1982](https://github.com/stripe/stripe-java/pull/1982) Update readme with clarification on resource based call patterns
+* [#1976](https://github.com/stripe/stripe-java/pull/1976) backport beta fixes
+* [#1989](https://github.com/stripe/stripe-java/pull/1989) Update manual installation instructions in README.md
+* [#1986](https://github.com/stripe/stripe-java/pull/1986) Update generated code
   This release changes the pinned API version to `2025-04-30.basil`.
 
   * Add support for `minorityOwnedBusinessDesignation` on `Account.business_profile`, `AccountCreateParams.business_profile`, and `AccountUpdateParams.business_profile`
@@ -631,17 +646,16 @@ This release changes the pinned API version to `2025-09-30.clover` and contains 
   * Add support for `pendingReason` on `Refund`
   * Add support for `aw`, `az`, `bd`, `bf`, `bj`, `cm`, `cv`, `et`, `in`, `kg`, `la`, and `ph` on `tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
   * Add support for new value `2025-04-30.basil` on enums `WebhookEndpointCreateParams.apiVersion`
-* [#1989](https://github.com/stripe/stripe-java/pull/1989) Update manual installation instructions in README.md
-* [#1982](https://github.com/stripe/stripe-java/pull/1982) Update readme with clarification on resource based call patterns
-* [#1976](https://github.com/stripe/stripe-java/pull/1976) backport beta fixes
-* [#1971](https://github.com/stripe/stripe-java/pull/1971) require beta SDKs match event versions exactly when deserializing
-
-  - ⚠️ Public Preview SDKs now require an exact API version match when deserializing webhooks
-      - To deserialize events from another API version, use `EventDataObjectDeserializer .deserializeUnsafe()` instead of `.deserialize()`.
 
 ## 29.0.0 - 2025-04-01
-* [#1950](https://github.com/stripe/stripe-java/pull/1950) Support for APIs in the new API version 2025-03-31.basil
+This release changes the pinned API version to `2025-03-31.basil`.
 
+* [#1955](https://github.com/stripe/stripe-java/pull/1955) Add @EqualsAndHashCode annotations
+  - Adds `@EqualsAndHashCode(callSuper = false)` to all Params objects which is useful for unit test assertions and caching scenarios.
+* ⚠️ [#1958](https://github.com/stripe/stripe-java/pull/1958) Support for StripeAccount in StripeClient, and StripeContext on V1
+  * ⚠️ Adds `getStripeAccount` to `StripeResponseGetterOptions`.  If you have a class that extends `StripeResponseGetterOptions` you will need to implement this method.
+  * Adds `setStripeAccount` to StripeClientBuilder, so you can specify the Stripe-Account header at the client (instead of the individual request) level.
+* [#1950](https://github.com/stripe/stripe-java/pull/1950) Support for APIs in the new API version 2025-03-31.basil
   This release changes the pinned API version to `2025-03-31.basil`.
 
   ### ⚠️ Breaking changes  due to changes in the Stripe API
@@ -714,14 +728,10 @@ This release changes the pinned API version to `2025-09-30.clover` and contains 
   * Add support for new value `invoice.overpaid` on enums `WebhookEndpointCreateParams.enabledEvents` and `WebhookEndpointUpdateParams.enabledEvents`
   * Add support for new values `2025-03-01.dashboard` and `2025-03-31.basil` on enum `WebhookEndpointCreateParams.apiVersion`
 
-* [#1958](https://github.com/stripe/stripe-java/pull/1958) Support for StripeAccount in StripeClient, and StripeContext on V1
-  * ⚠️ Adds `getStripeAccount` to `StripeResponseGetterOptions`.  If you have a class that extends `StripeResponseGetterOptions` you will need to implement this method.
-  * Adds `setStripeAccount` to StripeClientBuilder, so you can specify the Stripe-Account header at the client (instead of the individual request) level.
-* [#1955](https://github.com/stripe/stripe-java/pull/1955) Add @EqualsAndHashCode annotations
-  - Adds `@EqualsAndHashCode(callSuper = false)` to all Params objects which is useful for unit test assertions and caching scenarios.
-
-
 ## 28.4.0 - 2025-02-24
+This release changes the pinned API version to `2025-02-24.acacia`.
+
+* [#1948](https://github.com/stripe/stripe-java/pull/1948) add codeowners file
 * [#1943](https://github.com/stripe/stripe-java/pull/1943) Update generated code
   * Add support for `prices` on `Billing.CreditGrant.applicability_config.scope`, `billing.CreditBalanceSummaryRetrieveParams.filter.applicability_scope`, and `billing.CreditGrantCreateParams.applicability_config.scope`
   * Change `billing.CreditBalanceSummaryRetrieveParams.filter.applicability_scope.price_type` and `billing.CreditGrantCreateParams.applicability_config.scope.price_type` to be optional
@@ -732,12 +742,18 @@ This release changes the pinned API version to `2025-09-30.clover` and contains 
   * Add support for `metadata` on `ProductCreateParams.default_price_data`
   * Change type of `TokenCreateParams.person.political_exposure` from `string` to `enum('existing'|'none')`
   * Add support for new value `2025-02-24.acacia` on enum `WebhookEndpointCreateParams.api_version`
-* [#1948](https://github.com/stripe/stripe-java/pull/1948) add codeowners file
 
 ## 28.3.1 - 2025-02-07
 * [#1946](https://github.com/stripe/stripe-java/pull/1946) Ensure `getRawJsonObject` returns data for constructed webhooks
 
 ## 28.3.0 - 2025-01-27
+This release changes the pinned API version to `2025-01-27.acacia`.
+
+* [#1933](https://github.com/stripe/stripe-java/pull/1933) Added pull request template
+* [#1934](https://github.com/stripe/stripe-java/pull/1934) add justfile tweak readme, remove coveralls
+* [#1937](https://github.com/stripe/stripe-java/pull/1937) Added CONTRIBUTING.md file
+* [#1938](https://github.com/stripe/stripe-java/pull/1938) update justfile import & pin CI ubuntu
+* [#1941](https://github.com/stripe/stripe-java/pull/1941) Updated upload artifact ci action
 * [#1936](https://github.com/stripe/stripe-java/pull/1936) Update generated code
   * Add support for `close` method on resource `Treasury.FinancialAccount`
   * Add support for `pay_by_bank_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
@@ -763,14 +779,11 @@ This release changes the pinned API version to `2025-09-30.clover` and contains 
   * Add support for new value `outbound_transfer` on enum `treasury.ReceivedCreditListParams.linked_flows.source_flow_type`
   * Add support for `outbound_transfer` on `Treasury.ReceivedCredit.linked_flows.source_flow_details`
   * Add support for new value `2025-01-27.acacia` on enum `WebhookEndpointCreateParams.api_version`
-* [#1941](https://github.com/stripe/stripe-java/pull/1941) Updated upload artifact ci action
-* [#1938](https://github.com/stripe/stripe-java/pull/1938) update justfile import & pin CI ubuntu
-* [#1937](https://github.com/stripe/stripe-java/pull/1937) Added CONTRIBUTING.md file
-* [#1934](https://github.com/stripe/stripe-java/pull/1934) add justfile tweak readme, remove coveralls
-* [#1933](https://github.com/stripe/stripe-java/pull/1933) Added pull request template
 
 ## 28.2.0 - 2024-12-18
-* [#1931](https://github.com/stripe/stripe-java/pull/1931) This release changes the pinned API version to `2024-12-18.acacia`.
+This release changes the pinned API version to `2024-12-18.acacia`.
+
+* [#1931](https://github.com/stripe/stripe-java/pull/1931) Update generated code
   * Add support for `network_advice_code` and `network_decline_code` on `Charge.outcome`, `Invoice.last_finalization_error`, `PaymentIntent.last_payment_error`, `SetupAttempt.setup_error`, `SetupIntent.last_setup_error`, and `StripeError`
   * Add support for `credits_application_invoice_voided` on `Billing.CreditBalanceTransaction.credit`
   * Change type of `Billing.CreditBalanceTransaction.credit.type` from `literal('credits_granted')` to `enum('credits_application_invoice_voided'|'credits_granted')`
@@ -791,7 +804,9 @@ This release changes the pinned API version to `2025-09-30.clover` and contains 
   * Add support for new value `2024-12-18.acacia` on enum `WebhookEndpointCreateParams.api_version`
 
 ## 28.1.0 - 2024-11-20
-* [#1923](https://github.com/stripe/stripe-java/pull/1923) This release changes the pinned API version to `2024-11-20.acacia`.
+This release changes the pinned API version to `2024-11-20.acacia`.
+
+* [#1923](https://github.com/stripe/stripe-java/pull/1923) Update generated code
   * Add support for `respond` test helper method on resource `Issuing.Authorization`
   * Add support for `authorizer` on `AccountPersonsParams.relationship` and `TokenCreateParams.person.relationship`
   * Add support for `adaptive_pricing` on `Checkout.Session` and `checkout.SessionCreateParams`
@@ -816,12 +831,13 @@ This release changes the pinned API version to `2025-09-30.clover` and contains 
 * [#1919](https://github.com/stripe/stripe-java/pull/1919) Catch `JsonSyntaxException` when processing all errors
 
 ## 28.0.0 - 2024-10-29
+This release changes the pinned API version to `2024-10-28.acacia`.
 
 Historically, when upgrading webhooks to a new API version, you also had to upgrade your SDK version. Your webhook's API version needed to match the API version pinned by the SDK you were using to ensure successful deserialization of events. With the `2024-09-30.acacia` release, Stripe follows a [new API release process](https://stripe.com/blog/introducing-stripes-new-api-release-process). As a result, you can safely upgrade your webhook endpoints to any API version within a biannual release (like `acacia`) without upgrading the SDK.
 
 However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y` SDK releases meant that webhook version upgrades from the SDK's pinned `2024-09-30.acacia` version to the new `2024-10-28.acacia` version would fail. Therefore, we are shipping SDK support for `2024-10-28.acacia` as a major version to enforce the idea that an SDK upgrade is also required. Future API versions in the `acacia` line will be released as minor versions.
 
-* [#1896](https://github.com/stripe/stripe-java/pull/1896) This release changes the pinned API version to `2024-10-28.acacia`.
+* [#1896](https://github.com/stripe/stripe-java/pull/1896) Update generated code
   * Add support for new resource `V2.EventDestinations`
   * Add support for `create`, `retrieve`, `update`, `list`, `delete`, `disable`, `enable` and `ping` methods on resource `V2.EventDestinations`
   * Add support for `submit_card` test helper method on resource `Issuing.Card`
@@ -855,29 +871,27 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for new value `2024-10-28.acacia` on enum `WebhookEndpointCreateParams.api_version`
 
 ## 27.1.2 - 2024-10-29
-* [#1912](https://github.com/stripe/stripe-java/pull/1912) add `tolerance` argument to `parseThinEvent`
-  - The default `tolerance` value is still what most users will want, but this fixes an oversight where it wasn't possible to set `tolerance` at all when parsing thin events
-* [#1911](https://github.com/stripe/stripe-java/pull/1911) Fixes bug [#1899](https://github.com/stripe/stripe-java/issues/1899)
-  - Fixes the bug introduced in v27 where StripeException#getUserMessage on v1 API errors would return null instead of the error message.
 * [#1906](https://github.com/stripe/stripe-java/pull/1906) Update webhook API version validation
   - Update webhook event processing to accept events from any API version within the supported major release
+* [#1911](https://github.com/stripe/stripe-java/pull/1911) Fixes bug [#1899](https://github.com/stripe/stripe-java/issues/1899)
+  - Fixes the bug introduced in v27 where StripeException#getUserMessage on v1 API errors would return null instead of the error message.
+* [#1912](https://github.com/stripe/stripe-java/pull/1912) add `tolerance` argument to `parseThinEvent`
+  - The default `tolerance` value is still what most users will want, but this fixes an oversight where it wasn't possible to set `tolerance` at all when parsing thin events
 
 ## 27.1.1 - 2024-10-18
-* [#1901](https://github.com/stripe/stripe-java/pull/1901) update object tags for meter-related classes
-
-  - fixes a bug where the `object` property of the `MeterEvent`, `MeterEventAdjustment`, and `MeterEventSession` didn't match the server.
-* [#1898](https://github.com/stripe/stripe-java/pull/1898) Clean up examples
 * [#1894](https://github.com/stripe/stripe-java/pull/1894) Fixed example for raw request in readme file
+* [#1898](https://github.com/stripe/stripe-java/pull/1898) Clean up examples
+* [#1901](https://github.com/stripe/stripe-java/pull/1901) update object tags for meter-related classes
+  - fixes a bug where the `object` property of the `MeterEvent`, `MeterEventAdjustment`, and `MeterEventSession` didn't match the server.
 
 ## 27.1.0 - 2024-10-03
-* [#1890](https://github.com/stripe/stripe-java/pull/1890) Update the class for `ThinEvent` to include `livemode` and `reason`
 * [#1891](https://github.com/stripe/stripe-java/pull/1891) Removed the class `RequestSigningAuthenticator` that was added in the previous release. Request Signing is not supported yet.
+* [#1890](https://github.com/stripe/stripe-java/pull/1890) Update the class for `ThinEvent` to include `livemode` and `reason`
 * [#1889](https://github.com/stripe/stripe-java/pull/1889) Update generated code
   * Remove the support for resource `Margin` that was accidentally made public in the last release
 
 ## 27.0.0 - 2024-10-01
 * [#1880](https://github.com/stripe/stripe-java/pull/1880) Support for APIs in the new API version 2024-09-30.acacia
-
   This release changes the pinned API version to `2024-09-30.acacia`. Please read the [API Changelog](https://docs.stripe.com/changelog/acacia#2024-09-30.acacia) and carefully review the API changes before upgrading.
 
   ### ⚠️ Breaking changes due to changes in the API
@@ -912,6 +926,8 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   ### Changes
   * Change `billingportal.ConfigurationCreateParams.features.subscription_update.default_allowed_updates` and `billingportal.ConfigurationCreateParams.features.subscription_update.products` to be optional
 
+## 26.13.0 - 2024-10-01
+This release changes the pinned API version to `2024-09-30.acacia`.
 
 ## 26.12.0 - 2024-09-18
 * [#1866](https://github.com/stripe/stripe-java/pull/1866) Update generated code
@@ -942,13 +958,13 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `status_details` on `TestHelpers.TestClock`
 
 ## 26.8.0 - 2024-08-15
+* [#1849](https://github.com/stripe/stripe-java/pull/1849) Update recommended VSCode extensions
 * [#1847](https://github.com/stripe/stripe-java/pull/1847) Update generated code
   * Add support for `authorization_code` on `Charge.payment_method_details.card`
   * Add support for `wallet` on `Charge.payment_method_details.card_present`, `ConfirmationToken.payment_method_preview.card.generated_from.payment_method_details.card_present`, `ConfirmationToken.payment_method_preview.card_present`, `PaymentMethod.card.generated_from.payment_method_details.card_present`, and `PaymentMethod.card_present`
   * Add support for `mandate_options` on `PaymentIntent.payment_method_options.bacs_debit`, `PaymentIntentConfirmParams.payment_method_options.bacs_debit`, `PaymentIntentCreateParams.payment_method_options.bacs_debit`, and `PaymentIntentUpdateParams.payment_method_options.bacs_debit`
   * Add support for `bacs_debit` on `SetupIntent.payment_method_options`, `SetupIntentConfirmParams.payment_method_options`, `SetupIntentCreateParams.payment_method_options`, and `SetupIntentUpdateParams.payment_method_options`
   * Add support for `chips` on `Treasury.OutboundPayment.tracking_details.us_domestic_wire`, `Treasury.OutboundTransfer.tracking_details.us_domestic_wire`, `treasury.OutboundPaymentUpdateParams.tracking_details.us_domestic_wire`, and `treasury.OutboundTransferUpdateParams.tracking_details.us_domestic_wire`
-* [#1849](https://github.com/stripe/stripe-java/pull/1849) Update recommended VSCode extensions
 
 ## 26.7.0 - 2024-08-08
 * [#1843](https://github.com/stripe/stripe-java/pull/1843) Update generated code
@@ -961,7 +977,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for new value `girocard` on enums `PaymentIntentConfirmParams.payment_method_options.card.network`, `PaymentIntentCreateParams.payment_method_options.card.network`, `PaymentIntentUpdateParams.payment_method_options.card.network`, `SetupIntentConfirmParams.payment_method_options.card.network`, `SetupIntentCreateParams.payment_method_options.card.network`, `SetupIntentUpdateParams.payment_method_options.card.network`, `SubscriptionCreateParams.payment_settings.payment_method_options.card.network`, and `SubscriptionUpdateParams.payment_settings.payment_method_options.card.network`
 
 ## 26.6.0 - 2024-08-01
-* [#1841](https://github.com/stripe/stripe-java/pull/1841) Update generated code
+* ⚠️ [#1841](https://github.com/stripe/stripe-java/pull/1841) Update generated code
   * Add support for new resources `Billing.AlertTriggered` and `Billing.Alert`
   * ⚠️ Remove support for `authorization_code` on `Charge.payment_method_details.card`. This was accidentally released last week.
   * Add support for new value `billing.alert.triggered` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
@@ -983,12 +999,12 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for new values `invoice.overdue` and `invoice.will_be_due` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 
 ## 26.4.0 - 2024-07-18
+* [#1805](https://github.com/stripe/stripe-java/pull/1805) Added missing log to changelog
 * [#1836](https://github.com/stripe/stripe-java/pull/1836) Update generated code
   * Add support for `customer` on `ConfirmationToken.payment_method_preview`
   * Add support for new value `multibanco` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]`
   * Add support for new value `stripe_s700` on enum `terminal.ReaderListParams.device_type`
   * Add support for new value `issuing_dispute.funds_rescinded` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-* [#1805](https://github.com/stripe/stripe-java/pull/1805) Added missing log to changelog
 
 ## 26.3.0 - 2024-07-11
 * [#1835](https://github.com/stripe/stripe-java/pull/1835) Update generated code
@@ -998,10 +1014,10 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `shipping` on `issuing.CardUpdateParams`
 
 ## 26.2.0 - 2024-07-05
+* [#1833](https://github.com/stripe/stripe-java/pull/1833) Update formatting settings for VSCode
 * [#1831](https://github.com/stripe/stripe-java/pull/1831) Update generated code
   * Add support for `add_lines`, `remove_lines`, and `update_lines` methods on resource `Invoice`
   * Add support for `posted_at` on `Tax.Transaction` and `tax.TransactionCreateFromCalculationParams`
-* [#1833](https://github.com/stripe/stripe-java/pull/1833) Update formatting settings for VSCode
 
 ## 26.1.0 - 2024-06-27
 * [#1829](https://github.com/stripe/stripe-java/pull/1829) Update generated code
@@ -1012,10 +1028,9 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `reboot_window` on `Terminal.Configuration`, `terminal.ConfigurationCreateParams`, and `terminal.ConfigurationUpdateParams`
 
 ## 26.0.0 - 2024-06-24
-* [#1825](https://github.com/stripe/stripe-java/pull/1825)
+This release changes the pinned API version to `2024-06-20`.
 
-  This release changes the pinned API version to 2024-06-20. Please read the [API Changelog](https://docs.stripe.com/changelog/2024-06-20) and carefully review the API changes before upgrading.
-
+* [#1825](https://github.com/stripe/stripe-java/pull/1825) Please read the [API Changelog](https://docs.stripe.com/changelog/2024-06-20) and carefully review the API changes before upgrading.
   ### ⚠️ Breaking changes
 
     * Remove the unused resource `PlatformTaxFee`
@@ -1065,12 +1080,15 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for new values `issuing_personalization_design.activated`, `issuing_personalization_design.deactivated`, `issuing_personalization_design.rejected`, and `issuing_personalization_design.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 
 ## 25.9.0 - 2024-05-23
+* [#1808](https://github.com/stripe/stripe-java/pull/1808) Track usage for unsafeSetStripeVersionOverride
 * [#1806](https://github.com/stripe/stripe-java/pull/1806) Update generated code
   * Add support for `external_account_collection` on `AccountSession.components.balances.features`, `AccountSession.components.payouts.features`, `AccountSessionCreateParams.components.balances.features`, and `AccountSessionCreateParams.components.payouts.features`
   * Add support for `payment_method_remove` on `Checkout.Session.saved_payment_method_options`
-* [#1808](https://github.com/stripe/stripe-java/pull/1808) Track usage for unsafeSetStripeVersionOverride
 
 ## 25.8.0 - 2024-05-16
+* [#1804](https://github.com/stripe/stripe-java/pull/1804) Added deprecated annotation to builder methods
+  * Deprecate Java builder params based on OpenAPI spec
+    * Mark as deprecated the setters for persistent_token property on `PaymentIntentConfirmParams`, `PaymentIntentCreateParams`, `PaymentIntentUpdateParams`, `SetupIntentConfirmParams`, `SetupIntentCreateParams`, `SetupIntentUpdateParams`. This is a legacy parameter that no longer has any function.
 * [#1803](https://github.com/stripe/stripe-java/pull/1803) Update generated code
   * Add support for `fee_source` on `ApplicationFee`
   * Add support for `net_available` on `Balance.instant_available[]`
@@ -1084,9 +1102,6 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `routing` on `PaymentIntent.payment_method_options.card_present`, `PaymentIntentConfirmParams.payment_method_options.card_present`, `PaymentIntentCreateParams.payment_method_options.card_present`, and `PaymentIntentUpdateParams.payment_method_options.card_present`
   * Add support for `application_fee_amount` and `application_fee` on `Payout`
   * Add support for `stripe_s700` on `Terminal.Configuration`, `terminal.ConfigurationCreateParams`, and `terminal.ConfigurationUpdateParams`
-* [#1804](https://github.com/stripe/stripe-java/pull/1804) Added deprecated annotation to builder methods
-  * Deprecate Java builder params based on OpenAPI spec
-    * Mark as deprecated the setters for persistent_token property on `PaymentIntentConfirmParams`, `PaymentIntentCreateParams`, `PaymentIntentUpdateParams`, `SetupIntentConfirmParams`, `SetupIntentCreateParams`, `SetupIntentUpdateParams`. This is a legacy parameter that no longer has any function.
 
 ## 25.7.0 - 2024-05-09
 * [#1801](https://github.com/stripe/stripe-java/pull/1801) Update generated code
@@ -1101,6 +1116,8 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for new values `treasury.outbound_payment.tracking_details_updated` and `treasury.outbound_transfer.tracking_details_updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 
 ## 25.5.0 - 2024-05-02
+* [#1787](https://github.com/stripe/stripe-java/pull/1787) Deprecate Java params based on OpenAPI spec
+  - Mark as deprecated the `persistent_token` property on `ConfirmationToken.Link.persistentToken`, `PaymentIntent.Link.persistentToken`, `PaymentMethod.Link.persistentToken`, `SetupIntent.Link.persistentToken`, `PaymentIntentConfirmParams.Link.persistentToken`, `PaymentIntentCreateParams.Link.persistentToken`, `PaymentIntentUpdateParams.Link.persistentToken`, `SetupIntentConfirmParams.Link.persistentToken`, `SetupIntentCreateParams.Link.persistentToken`, `SetupIntentUpdateParams.Link.persistentToken`. This is a legacy parameter that no longer has any function.
 * [#1785](https://github.com/stripe/stripe-java/pull/1785) Update generated code
   * Add support for `paypal` on `Dispute.payment_method_details`
   * Change type of `Dispute.payment_method_details.type` from `literal('card')` to `enum('card'|'paypal')`
@@ -1108,10 +1125,10 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `payment_method_types` on `PaymentIntentConfirmParams`
   * Add support for `ship_from_details` on `Tax.Calculation`, `Tax.Transaction`, and `tax.CalculationCreateParams`
   * Add support for `bh`, `eg`, `ge`, `ke`, `kz`, `ng`, and `om` on `Tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
-* [#1787](https://github.com/stripe/stripe-java/pull/1787) Deprecate Java params based on OpenAPI spec
-  - Mark as deprecated the `persistent_token` property on `ConfirmationToken.Link.persistentToken`, `PaymentIntent.Link.persistentToken`, `PaymentMethod.Link.persistentToken`, `SetupIntent.Link.persistentToken`, `PaymentIntentConfirmParams.Link.persistentToken`, `PaymentIntentCreateParams.Link.persistentToken`, `PaymentIntentUpdateParams.Link.persistentToken`, `SetupIntentConfirmParams.Link.persistentToken`, `SetupIntentCreateParams.Link.persistentToken`, `SetupIntentUpdateParams.Link.persistentToken`. This is a legacy parameter that no longer has any function.
 
 ## 25.4.0 - 2024-04-25
+* Deprecate Java methods based on OpenAPI spec
+  * Mark as deprecated the `approve` and `decline` methods on Authorization. Instead, [respond directly to the webhook request to approve an authorization](https://docs.stripe.com/issuing/controls/real-time-authorizations#authorization-handling).
 * [#1784](https://github.com/stripe/stripe-java/pull/1784) Update generated code
   * Add support for `setup_future_usage` on `Checkout.Session.payment_method_options.amazon_pay`, `Checkout.Session.payment_method_options.revolut_pay`, `PaymentIntent.payment_method_options.amazon_pay`, and `PaymentIntent.payment_method_options.revolut_pay`
   * Change type of `Entitlements.ActiveEntitlement.feature` from `string` to `expandable($Entitlements.Feature)`
@@ -1120,8 +1137,6 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `amazon_pay` and `revolut_pay` on `Mandate.payment_method_details` and `SetupAttempt.payment_method_details`
   * Add support for `ending_before`, `limit`, and `starting_after` on `PaymentMethodConfigurationListParams`
   * Add support for `mobilepay` on `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, and `PaymentMethodConfiguration`
-* Deprecate Java methods based on OpenAPI spec
-  * Mark as deprecated the `approve` and `decline` methods on Authorization. Instead, [respond directly to the webhook request to approve an authorization](https://docs.stripe.com/issuing/controls/real-time-authorizations#authorization-handling).
 
 ## 25.3.0 - 2024-04-18
 * [#1782](https://github.com/stripe/stripe-java/pull/1782) Update generated code
@@ -1160,8 +1175,9 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `next_refresh_available_at` on `FinancialConnections.Account.ownership_refresh`
 
 ## 25.0.0 - 2024-04-10
-* [#1776](https://github.com/stripe/stripe-java/pull/1776)
+This release changes the pinned API version to `2024-04-10`.
 
+* [#1776](https://github.com/stripe/stripe-java/pull/1776) Update generated code
   * This release changes the pinned API version to `2024-04-10`. Please read the [API Changelog](https://docs.stripe.com/changelog/2024-04-10) and carefully review the API changes before upgrading.
 
   * Add a new `TaxIdService` for operations on `/v1/tax_ids` endpoints.
@@ -1226,13 +1242,6 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Remove the property `RequestIncrementalAuthorization` on `PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent`, `PaymentIntentCreateParams.PaymentMethodOptions.CardPresent` and `PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent`. This was shipped by mistake.
   * Remove the support for deprecated value `obligation` on `ReportRunCreateParams.ReportingCategory`
   * Remove the legacy field `rendering_options` on `InvoiceCreateParams`, `InvoiceUpdateParams`, and `Invoice`. Use `rendering` instead.
-
-
-
-
-
-
-
 
 ## 24.24.0 - 2024-04-09
 * [#1778](https://github.com/stripe/stripe-java/pull/1778) Update generated code
@@ -1302,12 +1311,12 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `sepa_debit` on `Invoice.payment_settings.payment_method_options`, `InvoiceCreateParams.payment_settings.payment_method_options`, and `InvoiceUpdateParams.payment_settings.payment_method_options`
 
 ## 24.18.0 - 2024-02-29
+* [#1753](https://github.com/stripe/stripe-java/pull/1753) Update README to reference addBetaVersion helper
 * [#1750](https://github.com/stripe/stripe-java/pull/1750) Update generated code
   * Add support for `number` on `InvoiceCreateParams` and `InvoiceUpdateParams`
   * Add support for `enable_customer_cancellation` on `Terminal.Reader.action.process_payment_intent.process_config`, `Terminal.Reader.action.process_setup_intent.process_config`, `terminal.ReaderProcessPaymentIntentParams.process_config`, and `terminal.ReaderProcessSetupIntentParams.process_config`
   * Add support for `refund_payment_config` on `Terminal.Reader.action.refund_payment` and `terminal.ReaderRefundPaymentParams`
   * Add support for `payment_method` on `TokenCreateParams.bank_account`
-* [#1753](https://github.com/stripe/stripe-java/pull/1753) Update README to reference addBetaVersion helper
 
 ## 24.17.0 - 2024-02-22
 * [#1748](https://github.com/stripe/stripe-java/pull/1748) Update generated code
@@ -1325,21 +1334,21 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for new value `financial_connections.account.refreshed_ownership` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 
 ## 24.15.0 - 2024-02-08
+* [#1744](https://github.com/stripe/stripe-java/pull/1744) Define StripeClient "usage" in a single place
 * [#1742](https://github.com/stripe/stripe-java/pull/1742) Update generated code
   * Add support for `invoices` on `Account.settings` and `AccountUpdateParams.settings`
   * Add support for new value `velobank` on enums `PaymentIntentConfirmParams.payment_method_data.p24.bank`, `PaymentIntentCreateParams.payment_method_data.p24.bank`, `PaymentIntentUpdateParams.payment_method_data.p24.bank`, `PaymentMethodCreateParams.p24.bank`, `SetupIntentConfirmParams.payment_method_data.p24.bank`, `SetupIntentCreateParams.payment_method_data.p24.bank`, and `SetupIntentUpdateParams.payment_method_data.p24.bank`
   * Add support for `setup_future_usage` on `PaymentIntent.payment_method_options.blik`, `PaymentIntentConfirmParams.payment_method_options.blik`, `PaymentIntentCreateParams.payment_method_options.blik`, and `PaymentIntentUpdateParams.payment_method_options.blik`
   * Add support for `require_cvc_recollection` on `PaymentIntent.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card`, and `PaymentIntentUpdateParams.payment_method_options.card`
   * Add support for `account_tax_ids` on `SubscriptionCreateParams.invoice_settings`, `SubscriptionSchedule.default_settings.invoice_settings`, `SubscriptionSchedule.phases[].invoice_settings`, `SubscriptionScheduleCreateParams.default_settings.invoice_settings`, `SubscriptionScheduleCreateParams.phases[].invoice_settings`, `SubscriptionScheduleUpdateParams.default_settings.invoice_settings`, `SubscriptionScheduleUpdateParams.phases[].invoice_settings`, and `SubscriptionUpdateParams.invoice_settings`
-* [#1744](https://github.com/stripe/stripe-java/pull/1744) Define StripeClient "usage" in a single place
 
 ## 24.14.0 - 2024-02-01
-* [#1740](https://github.com/stripe/stripe-java/pull/1740) Update generated code
+* [#1739](https://github.com/stripe/stripe-java/pull/1739) Add clock instance on webhook
+* ⚠️ [#1740](https://github.com/stripe/stripe-java/pull/1740) Update generated code
   * Add support for `swish` payment method throughout the API
   * Add support for `relationship` on `AccountCreateParams.individual`, `AccountUpdateParams.individual`, and `TokenCreateParams.account.individual`
   * Add support for `jurisdiction_level` on `TaxRate`
   * ⚠️  Fix broken reference to `com.stripe.model.Discount` from `checkout.Session.TotalDetails.Breakdown.Discount` (this represents a bugfix as this class would never have worked, but might be a breaking type change)
-* [#1739](https://github.com/stripe/stripe-java/pull/1739) Add clock instance on webhook
 
 ## 24.13.0 - 2024-01-25
 * [#1736](https://github.com/stripe/stripe-java/pull/1736) Update generated code
@@ -1354,6 +1363,16 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `account_type` on `PaymentMethod.UpdateParams.us_bank_account`
 
 ## 24.12.0 - 2024-01-18
+* [#1722](https://github.com/stripe/stripe-java/pull/1722) Refactor LiveStripeResponseGetter
+* [#1725](https://github.com/stripe/stripe-java/pull/1725) Move request telemetry to LiveStripeResponseGetter
+* [#1721](https://github.com/stripe/stripe-java/pull/1721) Report usage of `stripe_client`
+  * Reports use of the new `StripeClient` in `X-Stripe-Client-Telemetry`. (You can disable telemetry via `Stripe.enableTelemetry = false;`, see the [README](https://github.com/stripe/stripe-java/blob/master/README.md#telemetry).)
+
+  ## Details
+  * A different approach to #1698. This one sets `usage` on each callsite to `StripeResponseGetter.request` from `StripeClient`, rather than attempting to wrap `LiveStripeResponseGetter`.
+  * Modifies `RequestTelemetry` to accept usage and set it appropriately on `X-Stripe-Client-Telemetry`. Had to add a parameter to a public method, so I made a new overload and deprecated the old one. Had to disable a linter rule to do this.
+* [#1724](https://github.com/stripe/stripe-java/pull/1724) Add webhook parsing method on StripeClient
+  * Add support for `constructEvent()` instance method on `StripeClient` that parses Webhook events and uses the settings inherited from the StripeClient instance to make further requests.
 * [#1732](https://github.com/stripe/stripe-java/pull/1732) Update generated code
 * [#1723](https://github.com/stripe/stripe-java/pull/1723) Update generated code
   * Add support for `issuer` on `InvoiceCreateParams`, `InvoiceUpcomingLinesParams`, `InvoiceUpcomingParams`, `InvoiceUpdateParams`, and `Invoice`
@@ -1364,18 +1383,10 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for new value `nn` on enums `PaymentIntentConfirmParams.payment_method_data.ideal.bank`, `PaymentIntentCreateParams.payment_method_data.ideal.bank`, `PaymentIntentUpdateParams.payment_method_data.ideal.bank`, `PaymentMethodCreateParams.ideal.bank`, `SetupIntentConfirmParams.payment_method_data.ideal.bank`, `SetupIntentCreateParams.payment_method_data.ideal.bank`, and `SetupIntentUpdateParams.payment_method_data.ideal.bank`
   * Add support for `customer_balance` on `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, and `PaymentMethodConfiguration`
   * Add support for `invoice_settings` on `SubscriptionCreateParams` and `SubscriptionUpdateParams`
-* [#1724](https://github.com/stripe/stripe-java/pull/1724) Add webhook parsing method on StripeClient
-  * Add support for `constructEvent()` instance method on `StripeClient` that parses Webhook events and uses the settings inherited from the StripeClient instance to make further requests.
-* [#1721](https://github.com/stripe/stripe-java/pull/1721) Report usage of `stripe_client`
-  * Reports use of the new `StripeClient` in `X-Stripe-Client-Telemetry`. (You can disable telemetry via `Stripe.enableTelemetry = false;`, see the [README](https://github.com/stripe/stripe-java/blob/master/README.md#telemetry).)
-
-  ## Details
-  * A different approach to #1698. This one sets `usage` on each callsite to `StripeResponseGetter.request` from `StripeClient`, rather than attempting to wrap `LiveStripeResponseGetter`.
-  * Modifies `RequestTelemetry` to accept usage and set it appropriately on `X-Stripe-Client-Telemetry`. Had to add a parameter to a public method, so I made a new overload and deprecated the old one. Had to disable a linter rule to do this.
-* [#1725](https://github.com/stripe/stripe-java/pull/1725) Move request telemetry to LiveStripeResponseGetter
-* [#1722](https://github.com/stripe/stripe-java/pull/1722) Refactor LiveStripeResponseGetter
 
 ## 24.11.0 - 2024-01-12
+* [#1716](https://github.com/stripe/stripe-java/pull/1716) Add missing method overloads
+* [#1702](https://github.com/stripe/stripe-java/pull/1702) Change StripeResponseGetter to take a single APIRequest object
 * [#1715](https://github.com/stripe/stripe-java/pull/1715) Update generated code
   * Add support for new resource `CustomerSession`
   * Add support for `create` method on resource `CustomerSession`
@@ -1386,8 +1397,6 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for new values `eps` and `p24` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]`
   * Remove support for value `obligation` from enum `reporting.ReportRunCreateParams.parameters.reporting_category`
   * Add support for `billing_cycle_anchor_config` on `SubscriptionCreateParams` and `Subscription`
-* [#1702](https://github.com/stripe/stripe-java/pull/1702) Change StripeResponseGetter to take a single APIRequest object
-* [#1716](https://github.com/stripe/stripe-java/pull/1716) Add missing method overloads
 
 ## 24.10.0 - 2024-01-04
 * [#1712](https://github.com/stripe/stripe-java/pull/1712) Update generated code
@@ -1479,16 +1488,18 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for new value `unreconciled_customer_funds` on enum `reporting.ReportRunCreateParams.parameters.reporting_category`
 
 ## 24.0.0 - 2023-10-16
-* This release changes the pinned API version to `2023-10-16`. Please read the [API Changelog](https://docs.stripe.com/changelog/2023-10-16) and carefully review the API changes before upgrading `stripe-java`.
+This release changes the pinned API version to `2023-10-16`.
+
+* Please read the [API Changelog](https://docs.stripe.com/changelog/2023-10-16) and carefully review the API changes before upgrading `stripe-java`.
 * [#1672](https://github.com/stripe/stripe-java/pull/1672) Update generated code
   * Add support for `legal_guardian` on `AccountPersonsParams.relationship` and `TokenCreateParams.person.relationship`
   * Add support for `additional_tos_acceptances` on `TokenCreateParams.person`
   * Add support for new value `2023-10-16` on enum `WebhookEndpointCreateParams.api_version`
 
 ## 23.10.0 - 2023-10-16
+* [#1671](https://github.com/stripe/stripe-java/pull/1671) Disallow falback to global response getter only in tests
 * [#1670](https://github.com/stripe/stripe-java/pull/1670) Update generated code
   * Add support for new values `issuing_token.created` and `issuing_token.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-* [#1671](https://github.com/stripe/stripe-java/pull/1671) Disallow falback to global response getter only in tests
 
 ## 23.9.0 - 2023-10-11
 * [#1668](https://github.com/stripe/stripe-java/pull/1668) Update generated code
@@ -1518,11 +1529,12 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `rendering` on `InvoiceCreateParams`, `InvoiceUpdateParams`, and `Invoice`
 
 ## 23.6.0 - 2023-09-21
+* [#1655](https://github.com/stripe/stripe-java/pull/1655) CI: Drop testing for 9, 10, 12-16
 * [#1654](https://github.com/stripe/stripe-java/pull/1654) Update generated code
   * Add support for `terms_of_service_acceptance` on `Checkout.Session.custom_text`, `PaymentLink.custom_text`, `PaymentLinkCreateParams.custom_text`, `PaymentLinkUpdateParams.custom_text`, and `checkout.SessionCreateParams.custom_text`
-* [#1655](https://github.com/stripe/stripe-java/pull/1655) CI: Drop testing for 9, 10, 12-16
 
 ## 23.5.0 - 2023-09-14
+* [#1650](https://github.com/stripe/stripe-java/pull/1650) Flow response getters into Event.data.object and models deserialized via ApiResource.GSON
 * [#1647](https://github.com/stripe/stripe-java/pull/1647) Update generated code
   * Add support for new resource `PaymentMethodConfiguration`
   * Add support for `create`, `list`, `retrieve`, and `update` methods on resource `PaymentMethodConfiguration`
@@ -1533,16 +1545,15 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `nonce` on `EphemeralKeyCreateParams`
   * Add support for `cashback_amount` on `Issuing.Authorization.amount_details`, `Issuing.Authorization.pending_request.amount_details`, `Issuing.Authorization.request_history[].amount_details`, and `Issuing.Transaction.amount_details`
   * Add support for `serial_number` on `terminal.ReaderListParams`
-* [#1650](https://github.com/stripe/stripe-java/pull/1650) Flow response getters into Event.data.object and models deserialized via ApiResource.GSON
 
 ## 23.4.0 - 2023-09-07
+* [#1646](https://github.com/stripe/stripe-java/pull/1646) Fix EphemeralKeyService.create
 * [#1643](https://github.com/stripe/stripe-java/pull/1643) Update generated code
   * Add support for new resource `PaymentMethodDomain`
   * Add support for `create`, `list`, `retrieve`, `update`, and `validate` methods on resource `PaymentMethodDomain`
   * Add support for new value `n26` on enums `PaymentIntentConfirmParams.payment_method_data.ideal.bank`, `PaymentIntentCreateParams.payment_method_data.ideal.bank`, `PaymentIntentUpdateParams.payment_method_data.ideal.bank`, `PaymentMethodCreateParams.ideal.bank`, `SetupIntentConfirmParams.payment_method_data.ideal.bank`, `SetupIntentCreateParams.payment_method_data.ideal.bank`, and `SetupIntentUpdateParams.payment_method_data.ideal.bank`
   * Add support for `features` on `ProductCreateParams`, `ProductUpdateParams`, and `Product`
   * Remove support for value `invoiceitem.updated` from enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-* [#1646](https://github.com/stripe/stripe-java/pull/1646) Fix EphemeralKeyService.create
 
 ## 23.3.0 - 2023-08-31
 * [#1640](https://github.com/stripe/stripe-java/pull/1640) Update generated code
@@ -1561,20 +1572,43 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `balance_transaction` on `CustomerCashBalanceTransaction.adjusted_for_overdraft`
 
 ## 23.1.1 - 2023-08-21
-* [#1638](https://github.com/stripe/stripe-java/pull/1638) Set default API endpoints in StripeClient builder
 * [#1636](https://github.com/stripe/stripe-java/pull/1636) Update v23.0.0 Changelog
+* [#1638](https://github.com/stripe/stripe-java/pull/1638) Set default API endpoints in StripeClient builder
 
 ## 23.1.0 - 2023-08-17
 * [#1634](https://github.com/stripe/stripe-java/pull/1634) Update generated code
   * Add support for `flat_amount` on `tax.TransactionCreateReversalParams`
 
 ## 23.0.0 - 2023-08-16
-* This release changes the pinned API version to `2023-08-16`. Please read the [API Changelog](https://docs.stripe.com/changelog/2023-08-16) and carefully review the API changes before upgrading `stripe-java`.
-* More information is available in the [stripe-java v23 migration guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v23)
+This release changes the pinned API version to `2023-08-16`.
 
 "⚠️" symbol highlights breaking changes.
 
-* [#1632](https://github.com/stripe/stripe-java/pull/1632) Update generated code
+* ⚠️ [#1622](https://github.com/stripe/stripe-java/pull/1622) StripeClient
+  * Introduces `StripeClient` and the service-based pattern, a new interface for calling the Stripe API with many benefits over the existing resource-based paradigm.
+    * No global config: you can simultaneously use multiple clients with different configuration options (such as API keys)
+    * No extra API calls. All API endpoints can be accessed with a single method call. You don't have to call `retrieve` before doing an `update`.
+    * No static methods. Much easier mocking.
+    * Visit the [migration guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v23) to learn more.
+  * **Removals**
+    * ⚠️ `ApiResource.request()`, `requestStream()`, `requestCollection()`, `requestSearchResult()` methods removed.
+    * ⚠️ `StripeResponseGetter.oauthRequest(...)` was removed. OAuth requests are now performed via `StripeResponseGetter.request` with `ApiMode.OAuth`.
+    * ⚠️ Deprecated `ApiResource.className()`  `singleClassUrl()`, `classUrl()`, `instanceUrl()`, `subresourceUrl()` methods removed.
+  * **Type changes**
+    * ⚠️ `StripeResponseGetter.request(...)`, `streamRequest(...)` signatures changed.
+      * `BaseAddress` parameter added.
+      * `url` renamed to `path` and is a relative to the base address
+      * `apiMode` parameter added to control how request is sent and response is handled, `V1` and `OAuth` are supported values.
+      * ⚠️ `RequestOptions.getReadTimeout()`, `getConnectTimeout()`, `getMaxNetworkRetries()` now return `Integer` instead of `int`.
+  * **Renames**
+    * ⚠️ `addFullNameAliase` renamed to `addFullNameAlias` in `AccountCreateParams`, `AccountUpdateParams`, `PersonCollectionCreateParams`, `TokenCreateParams`, `PersonCollectionCreateParams`, `PersonUpdateParams`.
+    * ⚠️ `addLookupKeys` renamed to `addLookupKey` in `PriceListParams`
+  * **Behavior Changes**
+    * ⚠️ `RequestOptions.getDefault()` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
+    * ⚠️ `RequestOptionsBuilder` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
+* More information is available in the [stripe-java v23 migration guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v23)
+* Please read the [API Changelog](https://docs.stripe.com/changelog/2023-08-16) and carefully review the API changes before upgrading `stripe-java`.
+* ⚠️ [#1632](https://github.com/stripe/stripe-java/pull/1632) Update generated code
   * ⚠️Remove support for values `custom_account_update` and `custom_account_verification` from enum `AccountLinkCreateParams.type`
     * These values are not fully operational. Please use `account_update` and `account_onboarding` instead (see [API reference](https://stripe.com/docs/api/account_links/create#create_account_link-type)).
   * ⚠️Remove support for `available_on` on `BalanceTransactionListParams`
@@ -1598,28 +1632,8 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * ⚠️Remove support for `attributes`, `caption`, and `deactivate_on` on `ProductCreateParams`, `ProductUpdateParams`, and `Product`
     * These fields are not fully operational.
   * Add support for new value `2023-08-16` on enum `WebhookEndpointCreateParams.api_version`
-* [#1622](https://github.com/stripe/stripe-java/pull/1622) - StripeClient
-  * Introduces `StripeClient` and the service-based pattern, a new interface for calling the Stripe API with many benefits over the existing resource-based paradigm.
-    * No global config: you can simultaneously use multiple clients with different configuration options (such as API keys)
-    * No extra API calls. All API endpoints can be accessed with a single method call. You don't have to call `retrieve` before doing an `update`.
-    * No static methods. Much easier mocking.
-    * Visit the [migration guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v23) to learn more.
-  * **Removals**
-    * ⚠️ `ApiResource.request()`, `requestStream()`, `requestCollection()`, `requestSearchResult()` methods removed.
-    * ⚠️ `StripeResponseGetter.oauthRequest(...)` was removed. OAuth requests are now performed via `StripeResponseGetter.request` with `ApiMode.OAuth`.
-    * ⚠️ Deprecated `ApiResource.className()`  `singleClassUrl()`, `classUrl()`, `instanceUrl()`, `subresourceUrl()` methods removed.
-  * **Type changes**
-    * ⚠️ `StripeResponseGetter.request(...)`, `streamRequest(...)` signatures changed.
-      * `BaseAddress` parameter added.
-      * `url` renamed to `path` and is a relative to the base address
-      * `apiMode` parameter added to control how request is sent and response is handled, `V1` and `OAuth` are supported values.
-      * ⚠️ `RequestOptions.getReadTimeout()`, `getConnectTimeout()`, `getMaxNetworkRetries()` now return `Integer` instead of `int`.
-  * **Renames**
-    * ⚠️ `addFullNameAliase` renamed to `addFullNameAlias` in `AccountCreateParams`, `AccountUpdateParams`, `PersonCollectionCreateParams`, `TokenCreateParams`, `PersonCollectionCreateParams`, `PersonUpdateParams`.
-    * ⚠️ `addLookupKeys` renamed to `addLookupKey` in `PriceListParams`
-  * **Behavior Changes**
-    * ⚠️ `RequestOptions.getDefault()` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
-    * ⚠️ `RequestOptionsBuilder` does not apply global configuration options from `Stripe` class, all fields are initialized to `null`.
+
+## 22.31.0 - 2023-08-10
 
 ## 22.30.0 - 2023-08-03
 * [#1620](https://github.com/stripe/stripe-java/pull/1620) Update generated code
@@ -1633,6 +1647,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `monthly_estimated_revenue` on `Account.business_profile`, `AccountCreateParams.business_profile`, and `AccountUpdateParams.business_profile`
 
 ## 22.28.0 - 2023-07-20
+* [#1610](https://github.com/stripe/stripe-java/pull/1610) Changelog: fix namespaced param names
 * [#1611](https://github.com/stripe/stripe-java/pull/1611) Update generated code
   * Add support for new value `ro_tin` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, and `tax.CalculationCreateParams.customer_details.tax_ids[].type`
   * Add support for `use_stripe_sdk` on `SetupIntentConfirmParams` and `SetupIntentCreateParams`
@@ -1641,7 +1656,6 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for new value `ro_tin` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, and `tax.CalculationCreateParams.customer_details.tax_ids[].type`
   * Add support for `use_stripe_sdk` on `SetupIntentConfirmParams` and `SetupIntentCreateParams`
   * Add support for new value `service_tax` on enums `TaxRateCreateParams.tax_type` and `TaxRateUpdateParams.tax_type`
-* [#1610](https://github.com/stripe/stripe-java/pull/1610) Changelog: fix namespaced param names
 
 ## 22.27.0 - 2023-07-13
 * [#1606](https://github.com/stripe/stripe-java/pull/1606) Update generated code
@@ -1674,6 +1688,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `taxability_reason` on `Tax.Calculation.tax_breakdown[]`
 
 ## 22.22.0 - 2023-06-01
+* [#1572](https://github.com/stripe/stripe-java/pull/1572) Move deserializeStripeObject to StripeObject
 * [#1569](https://github.com/stripe/stripe-java/pull/1569) Update generated code
   * Add support for `numeric` and `text` on `checkout.SessionCreateParams.custom_fields[]`, `PaymentLinkCreateParams.custom_fields[]`, and `PaymentLinkUpdateParams.custom_fields[]`
   * Add support for new values `aba` and `swift` on enums `checkout.SessionCreateParams.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`, `PaymentIntentConfirmParams.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`, `PaymentIntentCreateParams.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`, and `PaymentIntentUpdateParams.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`
@@ -1682,7 +1697,6 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `preferred_locales` on `Issuing.Cardholder`, `issuing.CardholderCreateParams`, and `issuing.CardholderUpdateParams`
   * Add support for `description`, `iin`, and `issuer` on `PaymentMethod.card_present` and `PaymentMethod.interac_present`
   * Add support for `payer_email` on `PaymentMethod.paypal`
-* [#1572](https://github.com/stripe/stripe-java/pull/1572) Move deserializeStripeObject to StripeObject
 
 ## 22.21.0 - 2023-05-25
 * [#1566](https://github.com/stripe/stripe-java/pull/1566) Update generated code
@@ -1722,15 +1736,14 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `brand`, `country`, `description`, `exp_month`, `exp_year`, `fingerprint`, `funding`, `iin`, `issuer`, `last4`, `network`, and `wallet` on `SetupAttempt.payment_method_details.card`
 
 ## 22.17.0 - 2023-04-27
+* [#1544](https://github.com/stripe/stripe-java/pull/1544) Update generated code
+* [#1547](https://github.com/stripe/stripe-java/pull/1547) Update generated code
 * [#1551](https://github.com/stripe/stripe-java/pull/1551) Update generated code
   * Add support for `billing_cycle_anchor` and `proration_behavior` on `checkout.SessionCreateParams.subscription_data`
   * Add support for `terminal_id` on `Issuing.Authorization.merchant_data` and `Issuing.Transaction.merchant_data`
   * Add support for `metadata` on `PaymentIntentCaptureParams`
   * Add support for `checks` on `SetupAttempt.payment_method_details.card`
   * Add support for `tax_breakdown` on `Tax.Calculation.shipping_cost` and `Tax.Transaction.shipping_cost`
-* [#1547](https://github.com/stripe/stripe-java/pull/1547) Update generated code
-* [#1544](https://github.com/stripe/stripe-java/pull/1544) Update generated code
-
 
 ## 22.16.0 - 2023-04-06
 * [#1540](https://github.com/stripe/stripe-java/pull/1540) Update generated code
@@ -1738,12 +1751,12 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `status_details` on `PaymentMethod.us_bank_account`
 
 ## 22.15.0 - 2023-03-30
+* [#1538](https://github.com/stripe/stripe-java/pull/1538) Add missing file purpose terminal_reader_splashscreen
 * [#1536](https://github.com/stripe/stripe-java/pull/1536) Update generated code
   * Remove support for `create` method on resource `Tax.Transaction`
     * This is not a breaking change, as this method was deprecated before the Tax Transactions API was released in favor of the `createFromCalculation` method.
   * Add support for `export_license_id` and `export_purpose_code` on `Account.company`, `AccountCreateParams.company`, `AccountUpdateParams.company`, and `TokenCreateParams.account.company`
   * Add support for `amount_tip` on `terminal.ReaderPresentPaymentMethodParams`
-* [#1538](https://github.com/stripe/stripe-java/pull/1538) Add missing file purpose terminal_reader_splashscreen
 
 ## 22.14.0 - 2023-03-23
 * [#1531](https://github.com/stripe/stripe-java/pull/1531) Update generated code
@@ -1756,6 +1769,8 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `automatic_payment_methods` on `SetupIntentCreateParams` and `SetupIntent`
 
 ## 22.13.0 - 2023-03-16
+* [#1526](https://github.com/stripe/stripe-java/pull/1526) Update generated code (new)
+  Release specs are identical.
 * [#1529](https://github.com/stripe/stripe-java/pull/1529) API Updates
   * Add support for `cashapp_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
   * Add support for `future_requirements` and `requirements` on `BankAccount`
@@ -1765,10 +1780,6 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `preferred_locale` on `PaymentIntent.payment_method_options.affirm`, `PaymentIntentConfirmParams.payment_method_options.affirm`, `PaymentIntentCreateParams.payment_method_options.affirm`, and `PaymentIntentUpdateParams.payment_method_options.affirm`
   * Add support for `cashapp_handle_redirect_or_display_qr_code` on `PaymentIntent.next_action` and `SetupIntent.next_action`
   * Add support for new value `payout.reconciliation_completed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-
-
-* [#1526](https://github.com/stripe/stripe-java/pull/1526) Update generated code (new)
-  Release specs are identical.
 
 ## 22.12.0 - 2023-03-09
 * [#1523](https://github.com/stripe/stripe-java/pull/1523) API Updates
@@ -1823,20 +1834,20 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
 * [#1505](https://github.com/stripe/stripe-java/pull/1505) Bump Gson to 2.10.1
 
 ## 22.5.0 - 2023-01-05
-* [#1502](https://github.com/stripe/stripe-java/pull/1502) API Updates
-  * Add support for `card_issuing` on `Issuing.Cardholder.individual`
-* [#1501](https://github.com/stripe/stripe-java/pull/1501) Add fix for per-request ApiBase
-* [#1476](https://github.com/stripe/stripe-java/pull/1476) Solution For "Regarding ability to override stripe api url per API re…
+* [#1499](https://github.com/stripe/stripe-java/pull/1499) Fix publish command
 * [#1500](https://github.com/stripe/stripe-java/pull/1500) Deprecate ApiResource.classUrl, etc.
   * Mark `ApiResource.className`, `ApiResource.singleClassUrl`, `ApiResource.classUrl`, `ApiResource.instanceUrl`, and `ApiResource.subresourceUrl` as deprecated
-* [#1499](https://github.com/stripe/stripe-java/pull/1499) Fix publish command
+* [#1476](https://github.com/stripe/stripe-java/pull/1476) Solution For "Regarding ability to override stripe api url per API re…
+* [#1501](https://github.com/stripe/stripe-java/pull/1501) Add fix for per-request ApiBase
+* [#1502](https://github.com/stripe/stripe-java/pull/1502) API Updates
+  * Add support for `card_issuing` on `Issuing.Cardholder.individual`
 
 ## 22.4.0 - 2022-12-22
+* [#1491](https://github.com/stripe/stripe-java/pull/1491) Don't delombok sources
+* [#1496](https://github.com/stripe/stripe-java/pull/1496) Replace ReflectionCheckingTypeAdapterFactory with a ReflectionAccessFilter
 * [#1497](https://github.com/stripe/stripe-java/pull/1497) API Updates
   * Add support for new value `merchant_default` on enums `CashBalanceUpdateParams.settings.reconciliation_mode`, `CustomerCreateParams.cash_balance.settings.reconciliation_mode`, and `CustomerUpdateParams.cash_balance.settings.reconciliation_mode`
   * Add support for `using_merchant_default` on `CashBalance.settings`
-* [#1496](https://github.com/stripe/stripe-java/pull/1496) Replace ReflectionCheckingTypeAdapterFactory with a ReflectionAccessFilter
-* [#1491](https://github.com/stripe/stripe-java/pull/1491) Don't delombok sources
 
 ## 22.3.0 - 2022-12-08
 * [#1487](https://github.com/stripe/stripe-java/pull/1487) API Updates
@@ -1861,20 +1872,11 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `hosted_instructions_url` on `PaymentIntent.next_action.paynow_display_qr_code`
 
 ## 22.0.0 - 2022-11-16
-* [#1471](https://github.com/stripe/stripe-java/pull/1471) Next major release changes
+This release changes the pinned API version to `2022-11-15`.
 
 Breaking changes that arose during code generation of the library that we postponed for the next major version. For changes to the Stripe products, read more at https://docs.stripe.com/changelog/2022-11-15.
 
 "⚠️" symbol highlights breaking changes.
-
-- ⚠️ Inline several "shared" classes for consistency (#1455)
-- ⚠️ Removed `LineItem.Product` property that was released by mistake. (#1456)
-- ⚠️ Removed `Charges` property on `PaymentIntent` and replace it with `LatestCharge` (#1473)
-- ⚠️ Removed deprecated `Amount`, `Currency`, `Description`, `Images`, `Name` properties from `SessionCreateParams.LineItem` (#1473)
-- ⚠️ Remove support for `tos_shown_and_accepted` on `checkout.SessionCreateParams.payment_method_options.paynow` (#1473)
-- ⚠️ Removed deprecated `Sku` resource (#1459)
-- ⚠️ Removed deprecated `EphemeralKey.associatedObjects` field. ([#1470](https://github.com/stripe/stripe-java/pull/1470))
-- ⚠️ Removed `RequestOptions.getStripeVersionOverride`, `RequestOptions.setStripeVersionOverride`,  and `RequestOptions.clearStripeVersionOverride` (#1464)
 
 Use of `setStripeVersionOverride` is discouraged and can lead to unexpected errors during service calls because Java SDK class shapes are not guaranteed to match API responses on arbitrary versions.
 
@@ -1893,9 +1895,18 @@ builder.setApiKey(...)
 
 RequestOptionsBuilder.unsafeSetStripeVersionOverride(builder, "2022-11-15");
 ```
-* [#1474](https://github.com/stripe/stripe-java/pull/1474) API Updates
-  * ⚠️ Remove support for `tos_shown_and_accepted` on `checkout.SessionCreateParams.payment_method_options.paynow`. The property was mistakenly released and never worked.
 
+* ⚠️ [#1456](https://github.com/stripe/stripe-java/pull/1456) Removed `LineItem.Product` property that was released by mistake.
+* ⚠️ [#1455](https://github.com/stripe/stripe-java/pull/1455) Inline several "shared" classes for consistency
+* ⚠️ [#1459](https://github.com/stripe/stripe-java/pull/1459) Removed deprecated `Sku` resource
+* ⚠️ [#1464](https://github.com/stripe/stripe-java/pull/1464) Removed `RequestOptions.getStripeVersionOverride`, `RequestOptions.setStripeVersionOverride`,  and `RequestOptions.clearStripeVersionOverride`
+* ⚠️ [#1470](https://github.com/stripe/stripe-java/pull/1470) Removed deprecated `EphemeralKey.associatedObjects` field.
+* ⚠️ [#1473](https://github.com/stripe/stripe-java/pull/1473) Remove support for `tos_shown_and_accepted` on `checkout.SessionCreateParams.payment_method_options.paynow`
+* ⚠️ [#1473](https://github.com/stripe/stripe-java/pull/1473) Removed `Charges` property on `PaymentIntent` and replace it with `LatestCharge`
+* ⚠️ [#1473](https://github.com/stripe/stripe-java/pull/1473) Removed deprecated `Amount`, `Currency`, `Description`, `Images`, `Name` properties from `SessionCreateParams.LineItem`
+* ⚠️ [#1474](https://github.com/stripe/stripe-java/pull/1474) API Updates
+  * ⚠️ Remove support for `tos_shown_and_accepted` on `checkout.SessionCreateParams.payment_method_options.paynow`. The property was mistakenly released and never worked.
+* [#1471](https://github.com/stripe/stripe-java/pull/1471) Next major release changes
 
 ## 21.15.0 - 2022-11-08
 * [#1472](https://github.com/stripe/stripe-java/pull/1472) API Updates
@@ -1919,11 +1930,11 @@ RequestOptionsBuilder.unsafeSetStripeVersionOverride(builder, "2022-11-15");
   * Add support for `network_data` on `Issuing.Authorization`
 
 ## 21.11.0 - 2022-10-06
+* [#1450](https://github.com/stripe/stripe-java/pull/1450) Set JDK to 17 LTS
 * [#1451](https://github.com/stripe/stripe-java/pull/1451) API Updates
   * Add support for new value `bank_of_china` on enums `PaymentIntentConfirmParams.payment_method_data.fpx.bank`, `PaymentIntentCreateParams.payment_method_data.fpx.bank`, `PaymentIntentUpdateParams.payment_method_data.fpx.bank`, `PaymentMethodCreateParams.fpx.bank`, `SetupIntentConfirmParams.payment_method_data.fpx.bank`, `SetupIntentCreateParams.payment_method_data.fpx.bank`, and `SetupIntentUpdateParams.payment_method_data.fpx.bank`
   * Add support for new values `America/Nuuk`, `Europe/Kyiv`, and `Pacific/Kanton` on enum `reporting.ReportRunCreateParams.parameters.timezone`
   * Add support for `klarna` on `SetupAttempt.payment_method_details`
-* [#1450](https://github.com/stripe/stripe-java/pull/1450) Set JDK to 17 LTS
 
 ## 21.10.0 - 2022-09-29
 * [#1448](https://github.com/stripe/stripe-java/pull/1448) API Updates
@@ -1931,9 +1942,8 @@ RequestOptionsBuilder.unsafeSetStripeVersionOverride(builder, "2022-11-15");
   * Add support for `setup_future_usage` on `PaymentIntent.payment_method_options.pix`, `PaymentIntentConfirmParams.payment_method_options.pix`, `PaymentIntentCreateParams.payment_method_options.pix`, and `PaymentIntentUpdateParams.payment_method_options.pix`
   * Deprecate `SessionCreateParams.subscription_data.items` (use the `line_items` param instead). This will be removed in the next major version.
 
-
 ## 21.9.0 - 2022-09-22
-* [#1445](https://github.com/stripe/stripe-java/pull/1445) API Updates
+* ⚠️ [#1445](https://github.com/stripe/stripe-java/pull/1445) API Updates
   * Add support for `terms_of_service` on `Checkout.Session.consent_collection`, `Checkout.Session.consent`, `checkout.SessionCreateParams.consent_collection`, `PaymentLink.consent_collection`, and `PaymentLinkCreateParams.consent_collection`
   * ⚠️ Remove support for `plan` on `checkout.SessionCreateParams.payment_method_options.card.installments`. The property was mistakenly released and never worked.
   * Add support for `amount` on `issuing.DisputeCreateParams` and `issuing.DisputeUpdateParams`
@@ -1962,24 +1972,29 @@ RequestOptionsBuilder.unsafeSetStripeVersionOverride(builder, "2022-11-15");
   * Add support for new value `terminal_reader_splashscreen` on enum `FileListParams.purpose`
   * Fix `LineItem.Discount.discount` to reference the correct `Discount` class (`com.stripe.model.Discount`)
 
-
 ## 21.5.0 - 2022-08-31
+* [#1431](https://github.com/stripe/stripe-java/pull/1431) Update coveralls to only run for one java version
+* [#1432](https://github.com/stripe/stripe-java/pull/1432) Update README badge
 * [#1433](https://github.com/stripe/stripe-java/pull/1433) API Updates
   * Add support for new values `de-CH`, `en-CH`, `en-PL`, `en-PT`, `fr-CH`, `it-CH`, `pl-PL`, and `pt-PT` on enums `OrderCreateParams.payment.settings.payment_method_options.klarna.preferred_locale`, `OrderUpdateParams.payment.settings.payment_method_options.klarna.preferred_locale`, `PaymentIntentConfirmParams.payment_method_options.klarna.preferred_locale`, `PaymentIntentCreateParams.payment_method_options.klarna.preferred_locale`, and `PaymentIntentUpdateParams.payment_method_options.klarna.preferred_locale`
   * Add support for `description` on `PaymentLink.subscription_data` and `PaymentLinkCreateParams.subscription_data`
-* [#1432](https://github.com/stripe/stripe-java/pull/1432) Update README badge
-* [#1431](https://github.com/stripe/stripe-java/pull/1431) Update coveralls to only run for one java version
 
 ## 21.4.0 - 2022-08-26
+* [#1428](https://github.com/stripe/stripe-java/pull/1428) Show test coverage in README
+* [#1427](https://github.com/stripe/stripe-java/pull/1427) Update README.md to clarify that API version can only be change in beta
 * [#1430](https://github.com/stripe/stripe-java/pull/1430) API Updates
   * Add support for `login_page` on `BillingPortal.Configuration`, `billingportal.ConfigurationCreateParams`, and `billingportal.ConfigurationUpdateParams`
   * Add support for `customs` and `phone_number` on `Issuing.Card.shipping` and `issuing.CardCreateParams.shipping`
   * Add support for new value `deutsche_bank_ag` on enums `PaymentIntentConfirmParams.payment_method_data.eps.bank`, `PaymentIntentCreateParams.payment_method_data.eps.bank`, `PaymentIntentUpdateParams.payment_method_data.eps.bank`, `PaymentMethodCreateParams.eps.bank`, `SetupIntentConfirmParams.payment_method_data.eps.bank`, `SetupIntentCreateParams.payment_method_data.eps.bank`, and `SetupIntentUpdateParams.payment_method_data.eps.bank`
   * Add support for `description` on `Quote.subscription_data`, `QuoteCreateParams.subscription_data`, `QuoteUpdateParams.subscription_data`, `SubscriptionSchedule.default_settings`, `SubscriptionSchedule.phases[]`, `SubscriptionScheduleCreateParams.default_settings`, `SubscriptionScheduleCreateParams.phases[]`, `SubscriptionScheduleUpdateParams.default_settings`, and `SubscriptionScheduleUpdateParams.phases[]`
-* [#1428](https://github.com/stripe/stripe-java/pull/1428) Show test coverage in README
-* [#1427](https://github.com/stripe/stripe-java/pull/1427) Update README.md to clarify that API version can only be change in beta
 
 ## 21.3.0 - 2022-08-23
+* [#1418](https://github.com/stripe/stripe-java/pull/1418) Fix latest JAR hyperlink and related tests
+* [#1419](https://github.com/stripe/stripe-java/pull/1419) Fix makefile indentation and improve regex
+* [#1420](https://github.com/stripe/stripe-java/pull/1420) Fix outdated test comment
+* [#1421](https://github.com/stripe/stripe-java/pull/1421) Add a support section to the readme
+* [#1423](https://github.com/stripe/stripe-java/pull/1423) chore: Remove unused variable from SearchPagingIteratorTest.
+* [#1425](https://github.com/stripe/stripe-java/pull/1425) Add beta readme.md section
 * [#1422](https://github.com/stripe/stripe-java/pull/1422) API Updates
   * Add support for new resource `CustomerCashBalanceTransaction`
   * Remove support for value `paypal` from enums `OrderCreateParams.payment.settings.payment_method_types[]` and `OrderUpdateParams.payment.settings.payment_method_types[]`
@@ -1989,85 +2004,75 @@ RequestOptionsBuilder.unsafeSetStripeVersionOverride(builder, "2022-11-15");
   * Add support for new value `customer_cash_balance_transaction.created` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
   * Change the return type of `Customer.fundCashBalance` test helper from `CustomerBalanceTransaction` to `CustomerCashBalanceTransaction`.
     * This would generally be considered a breaking change, but we've worked with all existing users to migrate and are comfortable releasing this as a minor as it is solely a test helper method. This was essentially broken prior to this change.
-* [#1425](https://github.com/stripe/stripe-java/pull/1425) Add beta readme.md section
-* [#1423](https://github.com/stripe/stripe-java/pull/1423) chore: Remove unused variable from SearchPagingIteratorTest.
-* [#1421](https://github.com/stripe/stripe-java/pull/1421) Add a support section to the readme
-* [#1420](https://github.com/stripe/stripe-java/pull/1420) Fix outdated test comment
-* [#1418](https://github.com/stripe/stripe-java/pull/1418) Fix latest JAR hyperlink and related tests
-* [#1419](https://github.com/stripe/stripe-java/pull/1419) Fix makefile indentation and improve regex
 
 ## 21.2.0 - 2022-08-11
+* [#1414](https://github.com/stripe/stripe-java/pull/1414) Stop publishing javadoc for beta Java SDKs
 * [#1416](https://github.com/stripe/stripe-java/pull/1416) API Updates
   * Add support for `payment_method_collection` on `Checkout.Session`, `checkout.SessionCreateParams`, `PaymentLinkCreateParams`, `PaymentLinkUpdateParams`, and `PaymentLink`
 
-* [#1414](https://github.com/stripe/stripe-java/pull/1414) Stop publishing javadoc for beta Java SDKs
-
 ## 21.1.0 - 2022-08-09
-* [#1413](https://github.com/stripe/stripe-java/pull/1413) API Updates
-  * Add support for `process_config` on `Terminal.Reader.action.process_payment_intent`
 * [#1412](https://github.com/stripe/stripe-java/pull/1412) API Updates
   * Add support for `expires_at` on `Apps.Secret` and `apps.SecretCreateParams`
+* [#1413](https://github.com/stripe/stripe-java/pull/1413) API Updates
+  * Add support for `process_config` on `Terminal.Reader.action.process_payment_intent`
 
 ## 21.0.0 - 2022-08-02
+This release changes the pinned API version to `2022-08-01`.
 
 This release includes breaking changes resulting from:
 
-* Moving to use the new API version "2022-08-01". To learn more about these changes to Stripe products, see https://docs.stripe.com/changelog/2022-08-01
-* Cleaning up the SDK to remove deprecated/unused APIs and rename classes/methods/properties to sync with product APIs. Read more detailed description at https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v21.
-
 "⚠️" symbol highlights breaking changes.
 
-* [#1409](https://github.com/stripe/stripe-java/pull/1409) API Updates
+* Cleaning up the SDK to remove deprecated/unused APIs and rename classes/methods/properties to sync with product APIs. Read more detailed description at https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v21.
+* Moving to use the new API version "2022-08-01". To learn more about these changes to Stripe products, see https://docs.stripe.com/changelog/2022-08-01
 * [#1407](https://github.com/stripe/stripe-java/pull/1407) Next major release changes
+* [#1409](https://github.com/stripe/stripe-java/pull/1409) API Updates
 
 ### Added
 * Add `ApiKeyMissingException`.
+* Add `shippingCost`, `shippingDetails`, and `shippingOptions` properties to `checkout.Session` resource.
+* Add support for new value `2022-08-01` on enum `WebhookEndpointCreateParams.api_version`
+* Add support for `shipping_cost` and `shipping_details` on `Checkout.Session`
 * Add `validate` field to `CustomerCreateParams`.
 * Add `validate` field to `CustomerUpdateParams`.
 * Add `validate` field to `PaymentSourceCollectionCreateParams`.
-* Add `shippingCost`, `shippingDetails`, and `shippingOptions` properties to `checkout.Session` resource.
-* Add support for `shipping_cost` and `shipping_details` on `Checkout.Session`
-* Add support for new value `2022-08-01` on enum `WebhookEndpointCreateParams.api_version`
-
-### ⚠️ Removed
-
-- Removed deprecated `AlipayAccount` and related classes.
-- Removed deprecated `BitcoinReceiver` and related classes.
-- Removed deprecated `BitcoinTransaction` and related classes.
-- Removed deprecated `Recipient` and related classes.
-- Removed deprecated `IssuerFraudRecord` and related classes.
-- Removed deprecated `Order` and related classes.
-- Removed deprecated `ThreeDSecure` and related classes.
-- Removed unused `QuoteFinalizeParams`, `QuoteCollectionListParams` classes.
-- Removed unused `BillingDetails` class.
-- Removed `CashBalance.retrieveCashBalance` method. Prefer `CashBalance.retrieve`.
-- Removed `Rule.getDeleted` method. The property was never populated and always had the default value of `false`.
-- Removed `LineItem.getDeleted` method. The property was never populated and always had the default value of `false`.
-- Removed public constructors from `TestHelper` inner classes and made them static.
-- Removed instance `Account.refresh`, `Account.disconnect` methods.
-- Removed deprecated `TREASURY__RECEIVED_CREDIT__REVERSED`, `TREASURY__RECEIVED_DEBIT__CREATED`, `ORDER__UPDATED`, `ORDER_RETURN__CREATED`, `ORDER__PAYMENT_SUCCEEDED`, `TRANSFER__FAILED`, `TRANSFER__PAID` webhook events.
-- Removed deprecated `LoginLink.redirectUrl` property.
-- Removed deprecated `Charge.order` property.
-- Removed deprecated `Card.recipient` property.
-- Removed `defaultCurrency` property from `Customer` resource. Please use `Currency` property instead.
-- Removed `shipping` and `shippingOptions` properties from `checkout.Session` resource. Please use `shippingCost`, `shippingDetails`, and `shippingOptions` properties instead.
-- Removed `InitiatingPaymentMethodDetails` class
 
 ### ⚠️ Changed
+* ⚠️ Changed `CashBalance.retrieve` method from an instance to a static.
+* ⚠️ Changed type of `businessType` field in `AccountCreateParams` from `Object` to `BusinessType`
+* ⚠️ Check that apiKey is set (either globally or via request options) in `StripeCollection.autoPagingIterable` and `StripeSearchResult.autoPagingIterable`, and throw an exception if it is not.
+* ⚠️ Default API version changed to "2022-07-28".
+* ⚠️ Renamed `PaymentIntent.FinancialAddresses` class to `FinancialAddress`.
 
-- Default API version changed to "2022-07-28".
-- Changed `CashBalance.retrieve` method from an instance to a static.
-- Renamed `PaymentIntent.FinancialAddresses` class to `FinancialAddress`.
-- Check that apiKey is set (either globally or via request options) in `StripeCollection.autoPagingIterable` and `StripeSearchResult.autoPagingIterable`, and throw an exception if it is not.
-- Changed type of `businessType` field in `AccountCreateParams` from `Object` to `BusinessType`
-
+### ⚠️ Removed
+* ⚠️ Removed `CashBalance.retrieveCashBalance` method. Prefer `CashBalance.retrieve`.
+* ⚠️ Removed `defaultCurrency` property from `Customer` resource. Please use `Currency` property instead.
+* ⚠️ Removed deprecated `AlipayAccount` and related classes.
+* ⚠️ Removed deprecated `BitcoinReceiver` and related classes.
+* ⚠️ Removed deprecated `BitcoinTransaction` and related classes.
+* ⚠️ Removed deprecated `Card.recipient` property.
+* ⚠️ Removed deprecated `Charge.order` property.
+* ⚠️ Removed deprecated `IssuerFraudRecord` and related classes.
+* ⚠️ Removed deprecated `LoginLink.redirectUrl` property.
+* ⚠️ Removed deprecated `Order` and related classes.
+* ⚠️ Removed deprecated `Recipient` and related classes.
+* ⚠️ Removed deprecated `ThreeDSecure` and related classes.
+* ⚠️ Removed deprecated `TREASURY__RECEIVED_CREDIT__REVERSED`, `TREASURY__RECEIVED_DEBIT__CREATED`, `ORDER__UPDATED`, `ORDER_RETURN__CREATED`, `ORDER__PAYMENT_SUCCEEDED`, `TRANSFER__FAILED`, `TRANSFER__PAID` webhook events.
+* ⚠️ Removed `InitiatingPaymentMethodDetails` class
+* ⚠️ Removed instance `Account.refresh`, `Account.disconnect` methods.
+* ⚠️ Removed `LineItem.getDeleted` method. The property was never populated and always had the default value of `false`.
+* ⚠️ Removed public constructors from `TestHelper` inner classes and made them static.
+* ⚠️ Removed `Rule.getDeleted` method. The property was never populated and always had the default value of `false`.
+* ⚠️ Removed `shipping` and `shippingOptions` properties from `checkout.Session` resource. Please use `shippingCost`, `shippingDetails`, and `shippingOptions` properties instead.
+* ⚠️ Removed unused `BillingDetails` class.
+* ⚠️ Removed unused `QuoteFinalizeParams`, `QuoteCollectionListParams` classes.
 
 ## 20.136.0 - 2022-07-26
+* [#1405](https://github.com/stripe/stripe-java/pull/1405) chore: Update gson version in README.
 * [#1406](https://github.com/stripe/stripe-java/pull/1406) API Updates
   * Add support for `customer_balance` on `Checkout.Session.payment_method_options` and `checkout.SessionCreateParams.payment_method_options`
   * Add support for new value `customer_balance` on enum `checkout.SessionCreateParams.payment_method_types[]`
   * Add support for new values `en-CA` and `fr-CA` on enums `OrderCreateParams.payment.settings.payment_method_options.klarna.preferred_locale`, `OrderUpdateParams.payment.settings.payment_method_options.klarna.preferred_locale`, `PaymentIntentConfirmParams.payment_method_options.klarna.preferred_locale`, `PaymentIntentCreateParams.payment_method_options.klarna.preferred_locale`, and `PaymentIntentUpdateParams.payment_method_options.klarna.preferred_locale`
-* [#1405](https://github.com/stripe/stripe-java/pull/1405) chore: Update gson version in README.
 
 ## 20.135.0 - 2022-07-25
 * [#1402](https://github.com/stripe/stripe-java/pull/1402) API Updates
@@ -2076,7 +2081,6 @@ This release includes breaking changes resulting from:
   * Add support for `currency` on `InvoiceCreateParams`
   * Add support for `default_mandate` on `Invoice.payment_settings`, `InvoiceCreateParams.payment_settings`, and `InvoiceUpdateParams.payment_settings`
   * Add support for `mandate` on `InvoicePayParams`
-
 
 ## 20.134.0 - 2022-07-18
 * [#1391](https://github.com/stripe/stripe-java/pull/1391) API Updates
@@ -2094,16 +2098,16 @@ This release includes breaking changes resulting from:
   * Add support for `customer_details` on `checkout.SessionListParams`
 
 ## 20.132.0 - 2022-07-07
+* [#1386](https://github.com/stripe/stripe-java/pull/1386) Support serializing nested objects in map
+* [#1387](https://github.com/stripe/stripe-java/pull/1387) API Updates
+  * Add support for `customer` on `checkout.SessionListParams` and `RefundCreateParams`
+  * Add support for `currency` and `origin` on `RefundCreateParams`
+  * Add support for new values `financial_connections.account.created`, `financial_connections.account.deactivated`, `financial_connections.account.disconnected`, `financial_connections.account.reactivated`, and `financial_connections.account.refreshed_balance` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 * [#1388](https://github.com/stripe/stripe-java/pull/1388) API Updates
   * Add support for `currency` on `checkout.SessionCreateParams`, `InvoiceUpcomingLinesParams`, `InvoiceUpcomingParams`, `PaymentLinkCreateParams`, `SubscriptionCreateParams`, `SubscriptionSchedule.phases[]`, `SubscriptionScheduleCreateParams.phases[]`, `SubscriptionScheduleUpdateParams.phases[]`, and `Subscription`
   * Add support for `currency_options` on `checkout.SessionCreateParams.shipping_options[].shipping_rate_data.fixed_amount`, `CouponCreateParams`, `CouponUpdateParams`, `Coupon`, `OrderCreateParams.shipping_cost.shipping_rate_data.fixed_amount`, `OrderUpdateParams.shipping_cost.shipping_rate_data.fixed_amount`, `PriceCreateParams`, `PriceUpdateParams`, `Price`, `ProductCreateParams.default_price_data`, `PromotionCode.restrictions`, `PromotionCodeCreateParams.restrictions`, `ShippingRate.fixed_amount`, and `ShippingRateCreateParams.fixed_amount`
   * Add support for `restrictions` on `PromotionCodeUpdateParams`
   * Add support for `fixed_amount` and `tax_behavior` on `ShippingRateUpdateParams`
-* [#1387](https://github.com/stripe/stripe-java/pull/1387) API Updates
-  * Add support for `customer` on `checkout.SessionListParams` and `RefundCreateParams`
-  * Add support for `currency` and `origin` on `RefundCreateParams`
-  * Add support for new values `financial_connections.account.created`, `financial_connections.account.deactivated`, `financial_connections.account.disconnected`, `financial_connections.account.reactivated`, and `financial_connections.account.refreshed_balance` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-* [#1386](https://github.com/stripe/stripe-java/pull/1386) Support serializing nested objects in map
 
 ## 20.131.0 - 2022-06-29
 * [#1384](https://github.com/stripe/stripe-java/pull/1384) API Updates
@@ -2112,6 +2116,8 @@ This release includes breaking changes resulting from:
   * Add support for `hosted_regulatory_receipt_url` on `Treasury.ReceivedCredit` and `Treasury.ReceivedDebit`
 
 ## 20.130.0 - 2022-06-23
+* [#1376](https://github.com/stripe/stripe-java/pull/1376) Document how to access unsupported parameters and properties
+* [#1379](https://github.com/stripe/stripe-java/pull/1379) Use the generated API version
 * [#1380](https://github.com/stripe/stripe-java/pull/1380) API Updates
   * Add support for `capture_method` on `PaymentIntentConfirmParams` and `PaymentIntentUpdateParams`
 * [#1378](https://github.com/stripe/stripe-java/pull/1378) API Updates
@@ -2128,10 +2134,10 @@ This release includes breaking changes resulting from:
   * Add support for new value `promptpay` on enums `PaymentIntentConfirmParams.payment_method_data.type`, `PaymentIntentCreateParams.payment_method_data.type`, `PaymentIntentUpdateParams.payment_method_data.type`, `SetupIntentConfirmParams.payment_method_data.type`, `SetupIntentCreateParams.payment_method_data.type`, and `SetupIntentUpdateParams.payment_method_data.type`
   * Add support for `promptpay_display_qr_code` on `PaymentIntent.next_action`
   * Add support for new value `promptpay` on enum `PaymentMethodCreateParams.type`
-* [#1379](https://github.com/stripe/stripe-java/pull/1379) Use the generated API version
-* [#1376](https://github.com/stripe/stripe-java/pull/1376) Document how to access unsupported parameters and properties
 
 ## 20.129.0 - 2022-06-17
+* [#1372](https://github.com/stripe/stripe-java/pull/1372) Update readme example to use typed params.
+* [#1373](https://github.com/stripe/stripe-java/pull/1373) Trigger workflows on beta branches
 * [#1375](https://github.com/stripe/stripe-java/pull/1375) API Updates
   * Add support for `fund_cash_balance` test helper method on resource `Customer`
   * Add support for `statement_descriptor_prefix_kana` and `statement_descriptor_prefix_kanji` on `Account.settings.card_payments`, `Account.settings.payments`, `AccountCreateParams.settings.card_payments`, and `AccountUpdateParams.settings.card_payments`
@@ -2139,8 +2145,6 @@ This release includes breaking changes resulting from:
   * Add support for `total_excluding_tax` on `CreditNote`
   * Change type of `CustomerCreateParams.invoice_settings.rendering_options` and `CustomerUpdateParams.invoice_settings.rendering_options` from `rendering_options_param` to `emptyStringable(rendering_options_param)`
   * Add support for `rendering_options` on `Customer.invoice_settings` and `Invoice`
-* [#1373](https://github.com/stripe/stripe-java/pull/1373) Trigger workflows on beta branches
-* [#1372](https://github.com/stripe/stripe-java/pull/1372) Update readme example to use typed params.
 
 ## 20.128.0 - 2022-06-09
 * [#1370](https://github.com/stripe/stripe-java/pull/1370) API Updates
@@ -2177,6 +2181,9 @@ This release includes breaking changes resulting from:
   * Add support for new value `simulated_wisepos_e` on enum `terminal.ReaderListParams.device_type`
 
 ## 20.124.0 - 2022-05-26
+* [#1361](https://github.com/stripe/stripe-java/pull/1361) Fix version update script and the version in README.md
+* [#1360](https://github.com/stripe/stripe-java/pull/1360) API Updates
+  * Add support for `treasury` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
 * [#1363](https://github.com/stripe/stripe-java/pull/1363) API Updates
   * Add support for `affirm_payments` and `link_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
   * Add support for `id_number_secondary` on `AccountCreateParams.individual`, `AccountUpdateParams.individual`, `PersonCreateParams`, `PersonUpdateParams`, `TokenCreateParams.account.individual`, and `TokenCreateParams.person`
@@ -2185,15 +2192,14 @@ This release includes breaking changes resulting from:
   * Add support for `id_number_secondary_provided` on `Person`
   * Add support for `card_issuing` on `treasury.FinancialAccountCreateParams.features`, `treasury.FinancialAccountUpdateFeaturesParams`, and `treasury.FinancialAccountUpdateParams.features`
 
-* [#1361](https://github.com/stripe/stripe-java/pull/1361) Fix version update script and the version in README.md
-* [#1360](https://github.com/stripe/stripe-java/pull/1360) API Updates
-  * Add support for `treasury` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
-
 ## 20.123.0 - 2022-05-23
 * [#1360](https://github.com/stripe/stripe-java/pull/1360) API Updates
   * Add support for `treasury` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
 
 ## 20.122.0 - 2022-05-23
+* [#1357](https://github.com/stripe/stripe-java/pull/1357) Revert master trigger
+* [#1356](https://github.com/stripe/stripe-java/pull/1356) Temporary allow triggering docs push from master
+* [#1355](https://github.com/stripe/stripe-java/pull/1355) Use github.actor as GRGIT_USER
 * [#1359](https://github.com/stripe/stripe-java/pull/1359) API Updates
   * Add support for new resource `Apps.Secret`
   * Add support for `affirm` on `Charge.payment_method_details`, `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentMethodCreateParams`, `PaymentMethodUpdateParams`, `PaymentMethod`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentCreateParams.payment_method_data`, and `SetupIntentUpdateParams.payment_method_data`
@@ -2202,13 +2208,12 @@ This release includes breaking changes resulting from:
   * Add support for new value `link` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]`
   * Add support for new values `affirm` and `link` on enums `PaymentIntentConfirmParams.payment_method_data.type`, `PaymentIntentCreateParams.payment_method_data.type`, `PaymentIntentUpdateParams.payment_method_data.type`, `SetupIntentConfirmParams.payment_method_data.type`, `SetupIntentCreateParams.payment_method_data.type`, and `SetupIntentUpdateParams.payment_method_data.type`
   * Add support for new values `affirm` and `link` on enum `PaymentMethodCreateParams.type`
-* [#1357](https://github.com/stripe/stripe-java/pull/1357) Revert master trigger
-* [#1356](https://github.com/stripe/stripe-java/pull/1356) Temporary allow triggering docs push from master
-* [#1355](https://github.com/stripe/stripe-java/pull/1355) Use github.actor as GRGIT_USER
 
 ## 20.121.0 - 2022-05-19
+* [#1340](https://github.com/stripe/stripe-java/pull/1340) Publish Java package from Github actions
+* [#1352](https://github.com/stripe/stripe-java/pull/1352) Finish automated Java releases
+* [#1353](https://github.com/stripe/stripe-java/pull/1353) Update readme with new jar download URL
 * [#1354](https://github.com/stripe/stripe-java/pull/1354) API Updates
-
   * Add support for new resources `Treasury.CreditReversal`, `Treasury.DebitReversal`, `Treasury.FinancialAccountFeatures`, `Treasury.FinancialAccount`, `Treasury.FlowDetails`, `Treasury.InboundTransfer`, `Treasury.OutboundPayment`, `Treasury.OutboundTransfer`, `Treasury.ReceivedCredit`, `Treasury.ReceivedDebit`, `Treasury.TransactionEntry`, and `Treasury.Transaction`
   * Add support for `retrieve_payment_method` method on resource `Customer`
   * Add support for `list_owners` and `list` methods on resource `FinancialConnections.Account`
@@ -2222,9 +2227,6 @@ This release includes breaking changes resulting from:
   * Add support for `save_default_payment_method` on `Subscription.payment_settings`, `SubscriptionCreateParams.payment_settings`, and `SubscriptionUpdateParams.payment_settings`
   * Add support for `czk` on `Terminal.Configuration.tipping`, `terminal.ConfigurationCreateParams.tipping`, and `terminal.ConfigurationUpdateParams.tipping`
   * Add support for new values `treasury.credit_reversal.created`, `treasury.credit_reversal.posted`, `treasury.debit_reversal.completed`, `treasury.debit_reversal.created`, `treasury.debit_reversal.initial_credit_granted`, `treasury.financial_account.closed`, `treasury.financial_account.created`, `treasury.financial_account.features_status_updated`, `treasury.inbound_transfer.canceled`, `treasury.inbound_transfer.created`, `treasury.inbound_transfer.failed`, `treasury.inbound_transfer.succeeded`, `treasury.outbound_payment.canceled`, `treasury.outbound_payment.created`, `treasury.outbound_payment.expected_arrival_date_updated`, `treasury.outbound_payment.failed`, `treasury.outbound_payment.posted`, `treasury.outbound_payment.returned`, `treasury.outbound_transfer.canceled`, `treasury.outbound_transfer.created`, `treasury.outbound_transfer.expected_arrival_date_updated`, `treasury.outbound_transfer.failed`, `treasury.outbound_transfer.posted`, `treasury.outbound_transfer.returned`, `treasury.received_credit.created`, `treasury.received_credit.failed`, `treasury.received_credit.reversed`, `treasury.received_credit.succeeded`, and `treasury.received_debit.created` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-* [#1353](https://github.com/stripe/stripe-java/pull/1353) Update readme with new jar download URL
-* [#1352](https://github.com/stripe/stripe-java/pull/1352) Finish automated Java releases
-* [#1340](https://github.com/stripe/stripe-java/pull/1340) Publish Java package from Github actions
 
 ## 20.120.0 - 2022-05-11
 * [#1351](https://github.com/stripe/stripe-java/pull/1351) API Updates
@@ -2236,23 +2238,20 @@ This release includes breaking changes resulting from:
 * [#1350](https://github.com/stripe/stripe-java/pull/1350) API Updates
   * Add support for `amount_discount`, `amount_tax`, and `product` on `LineItem`
 
-
 ## 20.119.0 - 2022-05-05
 * [#1349](https://github.com/stripe/stripe-java/pull/1349) API Updates
   * Add support for `default_price_data` on `ProductCreateParams`
   * Add support for `default_price` on `ProductUpdateParams` and `Product`
   * Add support for `instructions_email` on `RefundCreateParams` and `Refund`
 
-
 ## 20.118.0 - 2022-05-05
+* [#1347](https://github.com/stripe/stripe-java/pull/1347) API Updates
+  * Add support for `registered_address` on `AccountCreateParams.individual`, `AccountUpdateParams.individual`, `PersonCreateParams`, `PersonUpdateParams`, `Person`, `TokenCreateParams.account.individual`, and `TokenCreateParams.person`
+  * Add support for `payment_method_data` on `SetupIntentConfirmParams`, `SetupIntentCreateParams`, and `SetupIntentUpdateParams`
 * [#1348](https://github.com/stripe/stripe-java/pull/1348) API Updates
   * Add support for new resources `FinancialConnections.AccountOwner`, `FinancialConnections.AccountOwnership`, `FinancialConnections.Account`, and `FinancialConnections.Session`
   * Add support for `financial_connections` on `Checkout.Session.payment_method_options.us_bank_account`, `checkout.SessionCreateParams.payment_method_options.us_bank_account`, `Invoice.payment_settings.payment_method_options.us_bank_account`, `InvoiceCreateParams.payment_settings.payment_method_options.us_bank_account`, `InvoiceUpdateParams.payment_settings.payment_method_options.us_bank_account`, `PaymentIntent.payment_method_options.us_bank_account`, `PaymentIntentConfirmParams.payment_method_options.us_bank_account`, `PaymentIntentCreateParams.payment_method_options.us_bank_account`, `PaymentIntentUpdateParams.payment_method_options.us_bank_account`, `SetupIntent.payment_method_options.us_bank_account`, `SetupIntentConfirmParams.payment_method_options.us_bank_account`, `SetupIntentCreateParams.payment_method_options.us_bank_account`, `SetupIntentUpdateParams.payment_method_options.us_bank_account`, `Subscription.payment_settings.payment_method_options.us_bank_account`, `SubscriptionCreateParams.payment_settings.payment_method_options.us_bank_account`, and `SubscriptionUpdateParams.payment_settings.payment_method_options.us_bank_account`
   * Add support for `financial_connections_account` on `PaymentIntentConfirmParams.payment_method_data.us_bank_account`, `PaymentIntentCreateParams.payment_method_data.us_bank_account`, `PaymentIntentUpdateParams.payment_method_data.us_bank_account`, `PaymentMethod.us_bank_account`, `PaymentMethodCreateParams.us_bank_account`, `SetupIntentConfirmParams.payment_method_data.us_bank_account`, `SetupIntentCreateParams.payment_method_data.us_bank_account`, and `SetupIntentUpdateParams.payment_method_data.us_bank_account`
-
-* [#1347](https://github.com/stripe/stripe-java/pull/1347) API Updates
-  * Add support for `registered_address` on `AccountCreateParams.individual`, `AccountUpdateParams.individual`, `PersonCreateParams`, `PersonUpdateParams`, `Person`, `TokenCreateParams.account.individual`, and `TokenCreateParams.person`
-  * Add support for `payment_method_data` on `SetupIntentConfirmParams`, `SetupIntentCreateParams`, and `SetupIntentUpdateParams`
 
 ## 20.117.0 - 2022-05-03
 * [#1346](https://github.com/stripe/stripe-java/pull/1346) API Updates
@@ -2263,13 +2262,12 @@ This release includes breaking changes resulting from:
   * Add support for `cash_balance` on `Customer`
   * Add support for `application` on `Invoice`, `Quote`, `SubscriptionSchedule`, and `Subscription`
 
-
 ## 20.116.0 - 2022-04-21
+* [#1342](https://github.com/stripe/stripe-java/pull/1342) Add null checks before streaming expandable IDs in setters.
 * [#1345](https://github.com/stripe/stripe-java/pull/1345) API Updates
   * Add support for `expire` test helper method on resource `Refund`
   * Change type of `BillingPortal.Configuration.application` from `string` to `expandable($Application)`
   * Change `issuing.DisputeCreateParams.transaction` to be optional
-* [#1342](https://github.com/stripe/stripe-java/pull/1342) Add null checks before streaming expandable IDs in setters.
 
 ## 20.115.0 - 2022-04-20
 * [#1339](https://github.com/stripe/stripe-java/pull/1339) API Updates
@@ -2296,6 +2294,8 @@ This release includes breaking changes resulting from:
   * Add support for new value `cash_balance.funds_available` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 
 ## 20.112.0 - 2022-04-01
+* [#1331](https://github.com/stripe/stripe-java/pull/1331) Pin JDK version and always build using Java 18
+  * This only impacts development and it's not a breaking change for users. We still support Java 1.8 and later.
 * [#1333](https://github.com/stripe/stripe-java/pull/1333) API Updates
   * Add support for `bank_transfer_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
   * Add support for `capture_before` on `Charge.payment_method_details.card_present`
@@ -2304,9 +2304,6 @@ This release includes breaking changes resulting from:
   * Add support for new value `customer_balance` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]`
   * Add support for `request_extended_authorization` on `PaymentIntent.payment_method_options.card_present`, `PaymentIntentConfirmParams.payment_method_options.card_present`, `PaymentIntentCreateParams.payment_method_options.card_present`, and `PaymentIntentUpdateParams.payment_method_options.card_present`
   * Add support for new values `payment_intent.partially_funded`, `terminal.reader.action_failed`, and `terminal.reader.action_succeeded` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-
-* [#1331](https://github.com/stripe/stripe-java/pull/1331) Pin JDK version and always build using Java 18
-  * This only impacts development and it's not a breaking change for users. We still support Java 1.8 and later.
 
 ## 20.111.0 - 2022-03-30
 * [#1332](https://github.com/stripe/stripe-java/pull/1332) API Updates
@@ -2366,21 +2363,20 @@ This release includes breaking changes resulting from:
   * Add support for `test_clock` on `QuoteListParams`
   * Add support for new values `test_helpers.test_clock.advancing`, `test_helpers.test_clock.created`, `test_helpers.test_clock.deleted`, `test_helpers.test_clock.internal_failure`, and `test_helpers.test_clock.ready` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
 
-
 ## 20.107.0 - 2022-03-18
+* [#1326](https://github.com/stripe/stripe-java/pull/1326) Update SearchResult pagination to match new API shape. This is a breaking change but the object shape is not exposed in the API currently and is therefore not being used.
+* [#1322](https://github.com/stripe/stripe-java/pull/1322) Upgrade GSON dependency to 2.9.0
 * [#1327](https://github.com/stripe/stripe-java/pull/1327) API Updates
   * Add support for `status` on `Card`
-* [#1322](https://github.com/stripe/stripe-java/pull/1322) Upgrade GSON dependency to 2.9.0
-* [#1326](https://github.com/stripe/stripe-java/pull/1326) Update SearchResult pagination to match new API shape. This is a breaking change but the object shape is not exposed in the API currently and is therefore not being used.
 
 ## 20.106.0 - 2022-03-11
+* [#1321](https://github.com/stripe/stripe-java/pull/1321) Delete PaymentIntentTypeSpecificPaymentMethodOptionsClient.java
 * [#1324](https://github.com/stripe/stripe-java/pull/1324) API Updates
   * Add support for `mandate` on `Charge.payment_method_details.card`
   * Add support for `mandate_options` on `PaymentIntentCreateParams.payment_method_options.card`, `PaymentIntentUpdateParams.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntent.payment_method_options.card`, `SetupIntentCreateParams.payment_method_options.card`, `SetupIntentUpdateParams.payment_method_options.card`, `SetupIntentConfirmParams.payment_method_options.card`, and `SetupIntent.payment_method_options.card`
   * Add support for `card_await_notification` on `PaymentIntent.next_action`
   * Add support for `customer_notification` on `PaymentIntent.processing.card`
   * Change `PaymentLinkCreateParams.line_items` to be required
-* [#1321](https://github.com/stripe/stripe-java/pull/1321) Delete PaymentIntentTypeSpecificPaymentMethodOptionsClient.java
 
 ## 20.105.0 - 2022-03-09
 * [#1323](https://github.com/stripe/stripe-java/pull/1323) API Updates
@@ -2410,7 +2406,6 @@ This release includes breaking changes resulting from:
   * Add support for .payment_method_options.konbini on the checkout.Session API
   * Add support for `konbini_display_details` on `PaymentIntent.next_action`
 
-
 ## 20.101.0 - 2022-02-23
 * [#1313](https://github.com/stripe/stripe-java/pull/1313) API Updates
   * Add support for `setup_future_usage` on `PaymentIntentCreateParams.payment_method_options.acss_debit`, `PaymentIntentCreateParams.payment_method_options.afterpay_clearpay`, `PaymentIntentCreateParams.payment_method_options.alipay`, `PaymentIntentCreateParams.payment_method_options.au_becs_debit`, `PaymentIntentCreateParams.payment_method_options.bacs_debit`, `PaymentIntentCreateParams.payment_method_options.bancontact`, `PaymentIntentCreateParams.payment_method_options.boleto`, `PaymentIntentCreateParams.payment_method_options.eps`, `PaymentIntentCreateParams.payment_method_options.fpx`, `PaymentIntentCreateParams.payment_method_options.giropay`, `PaymentIntentCreateParams.payment_method_options.grabpay`, `PaymentIntentCreateParams.payment_method_options.ideal`, `PaymentIntentCreateParams.payment_method_options.klarna`, `PaymentIntentCreateParams.payment_method_options.oxxo`, `PaymentIntentCreateParams.payment_method_options.p24`, `PaymentIntentCreateParams.payment_method_options.sepa_debit`, `PaymentIntentCreateParams.payment_method_options.sofort`, `PaymentIntentCreateParams.payment_method_options.wechat_pay`, `PaymentIntentUpdateParams.payment_method_options.acss_debit`, `PaymentIntentUpdateParams.payment_method_options.afterpay_clearpay`, `PaymentIntentUpdateParams.payment_method_options.alipay`, `PaymentIntentUpdateParams.payment_method_options.au_becs_debit`, `PaymentIntentUpdateParams.payment_method_options.bacs_debit`, `PaymentIntentUpdateParams.payment_method_options.bancontact`, `PaymentIntentUpdateParams.payment_method_options.boleto`, `PaymentIntentUpdateParams.payment_method_options.eps`, `PaymentIntentUpdateParams.payment_method_options.fpx`, `PaymentIntentUpdateParams.payment_method_options.giropay`, `PaymentIntentUpdateParams.payment_method_options.grabpay`, `PaymentIntentUpdateParams.payment_method_options.ideal`, `PaymentIntentUpdateParams.payment_method_options.klarna`, `PaymentIntentUpdateParams.payment_method_options.oxxo`, `PaymentIntentUpdateParams.payment_method_options.p24`, `PaymentIntentUpdateParams.payment_method_options.sepa_debit`, `PaymentIntentUpdateParams.payment_method_options.sofort`, `PaymentIntentUpdateParams.payment_method_options.wechat_pay`, `PaymentIntentConfirmParams.payment_method_options.acss_debit`, `PaymentIntentConfirmParams.payment_method_options.afterpay_clearpay`, `PaymentIntentConfirmParams.payment_method_options.alipay`, `PaymentIntentConfirmParams.payment_method_options.au_becs_debit`, `PaymentIntentConfirmParams.payment_method_options.bacs_debit`, `PaymentIntentConfirmParams.payment_method_options.bancontact`, `PaymentIntentConfirmParams.payment_method_options.boleto`, `PaymentIntentConfirmParams.payment_method_options.eps`, `PaymentIntentConfirmParams.payment_method_options.fpx`, `PaymentIntentConfirmParams.payment_method_options.giropay`, `PaymentIntentConfirmParams.payment_method_options.grabpay`, `PaymentIntentConfirmParams.payment_method_options.ideal`, `PaymentIntentConfirmParams.payment_method_options.klarna`, `PaymentIntentConfirmParams.payment_method_options.oxxo`, `PaymentIntentConfirmParams.payment_method_options.p24`, `PaymentIntentConfirmParams.payment_method_options.sepa_debit`, `PaymentIntentConfirmParams.payment_method_options.sofort`, `PaymentIntentConfirmParams.payment_method_options.wechat_pay`, `PaymentIntent.payment_method_options.acss_debit`, `PaymentIntent.payment_method_options.afterpay_clearpay`, `PaymentIntent.payment_method_options.alipay`, `PaymentIntent.payment_method_options.au_becs_debit`, `PaymentIntent.payment_method_options.bacs_debit`, `PaymentIntent.payment_method_options.bancontact`, `PaymentIntent.payment_method_options.boleto`, `PaymentIntent.payment_method_options.eps`, `PaymentIntent.payment_method_options.fpx`, `PaymentIntent.payment_method_options.giropay`, `PaymentIntent.payment_method_options.grabpay`, `PaymentIntent.payment_method_options.ideal`, `PaymentIntent.payment_method_options.klarna`, `PaymentIntent.payment_method_options.oxxo`, `PaymentIntent.payment_method_options.p24`, `PaymentIntent.payment_method_options.sepa_debit`, `PaymentIntent.payment_method_options.sofort`, and `PaymentIntent.payment_method_options.wechat_pay`
@@ -2418,13 +2413,13 @@ This release includes breaking changes resulting from:
   * Add generated test for the endpoints introduced in #1312
 
 ## 20.100.0 - 2022-02-16
+* [#1311](https://github.com/stripe/stripe-java/pull/1311) Pin grgit version to 4.1.1.
+* [#1310](https://github.com/stripe/stripe-java/pull/1310) API Updates
+  * Add support for `pin` on `issuing.CardUpdateParams`
 * [#1312](https://github.com/stripe/stripe-java/pull/1312) API Updates
   * Add support for `verify_microdeposits` method on resources `PaymentIntent` and `SetupIntent`
   * Add support for new value `grabpay` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]
   `
-* [#1311](https://github.com/stripe/stripe-java/pull/1311) Pin grgit version to 4.1.1.
-* [#1310](https://github.com/stripe/stripe-java/pull/1310) API Updates
-  * Add support for `pin` on `issuing.CardUpdateParams`
 
 ## 20.99.0 - 2022-02-03
 * [#1307](https://github.com/stripe/stripe-java/pull/1307) API Updates
@@ -2435,7 +2430,6 @@ This release includes breaking changes resulting from:
   * Add support for `phone_number_collection` on `PaymentLinkCreateParams` and `PaymentLink`
   * Add support for new values `payment_link.created` and `payment_link.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
   * Add support for new value `is_vat` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, and `TaxIdCreateParams.type`
-
 
 ## 20.97.0 - 2022-01-20
 * [#1304](https://github.com/stripe/stripe-java/pull/1304) API Updates
@@ -2456,15 +2450,13 @@ This release includes breaking changes resulting from:
   * Add support for `mandate_options` on `SubscriptionCreateParams.payment_settings.payment_method_options.card`, `SubscriptionUpdateParams.payment_settings.payment_method_options.card`, and `Subscription.payment_settings.payment_method_options.card`
 
 ## 20.94.0 - 2021-12-22
+* [#1297](https://github.com/stripe/stripe-java/pull/1297) API Updates
+  * Add support for `processing` on `PaymentIntent`
 * [#1299](https://github.com/stripe/stripe-java/pull/1299) API Updates
   * Add support for `au_becs_debit` on `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_options`, and `PaymentIntent.payment_method_options`
-
 * [#1298](https://github.com/stripe/stripe-java/pull/1298) API Updates
   * Add support for new values `en-FR`, `es-US`, and `fr-FR` on enums `PaymentIntentCreateParams.payment_method_options.klarna.preferred_locale`, `PaymentIntentUpdateParams.payment_method_options.klarna.preferred_locale`, and `PaymentIntentConfirmParams.payment_method_options.klarna.preferred_locale`
   * Add support for `boleto` on `SetupAttempt.payment_method_details`
-
-* [#1297](https://github.com/stripe/stripe-java/pull/1297) API Updates
-  * Add support for `processing` on `PaymentIntent`
 
 ## 20.93.0 - 2021-12-15
 * [#1296](https://github.com/stripe/stripe-java/pull/1296) API Updates
@@ -2476,14 +2468,14 @@ This release includes breaking changes resulting from:
   * Add support for `metadata` on `billingportal.ConfigurationCreateParams`, `billingportal.ConfigurationUpdateParams`, and `BillingPortal.Configuration`
 
 ## 20.91.0 - 2021-12-09
+* [#1290](https://github.com/stripe/stripe-java/pull/1290) Update Javadoc task to not use module directories.
+* [#1292](https://github.com/stripe/stripe-java/pull/1292) Pass credentials to nexusStaging rule.
+* [#1291](https://github.com/stripe/stripe-java/pull/1291) Test Java 16 and 17
 * [#1294](https://github.com/stripe/stripe-java/pull/1294) API Updates
   * Add support for new values `ge_vat` and `ua_vat` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, and `TaxIdCreateParams.type`
   * Change type of `PaymentIntentCreateParams.payment_method_data.billing_details.email`, `PaymentIntentUpdateParams.payment_method_data.billing_details.email`, `PaymentIntentConfirmParams.payment_method_data.billing_details.email`, `PaymentMethodCreateParams.billing_details.email`, and `PaymentMethodUpdateParams.billing_details.email` from `string` to `emptyStringable(string)`
   * Add support for `giropay` on `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_options`, and `PaymentIntent.payment_method_options`
   * Add support for new value `en-IE` on enums `PaymentIntentCreateParams.payment_method_options.klarna.preferred_locale`, `PaymentIntentUpdateParams.payment_method_options.klarna.preferred_locale`, and `PaymentIntentConfirmParams.payment_method_options.klarna.preferred_locale`
-* [#1291](https://github.com/stripe/stripe-java/pull/1291) Test Java 16 and 17
-* [#1292](https://github.com/stripe/stripe-java/pull/1292) Pass credentials to nexusStaging rule.
-* [#1290](https://github.com/stripe/stripe-java/pull/1290) Update Javadoc task to not use module directories.
 
 ## 20.90.0 - 2021-11-19
 * [#1289](https://github.com/stripe/stripe-java/pull/1289) API Updates
@@ -2557,11 +2549,10 @@ This release includes breaking changes resulting from:
   * Add support for `klarna_payments` on `AccountUpdateParams.capabilities`, `AccountCreateParams.capabilities`, and `Account.capabilities`
 
 ## 20.78.0 - 2021-09-24
+* [#1209](https://github.com/stripe/stripe-java/pull/1209) Fix typo in README.md
+* [#1261](https://github.com/stripe/stripe-java/pull/1261) Upgrade Gradle
 * [#1265](https://github.com/stripe/stripe-java/pull/1265) API Updates
   * Add support for `amount_authorized` and `overcapture_supported` on `Charge.payment_method_details.card_present`
-
-* [#1261](https://github.com/stripe/stripe-java/pull/1261) Upgrade Gradle
-* [#1209](https://github.com/stripe/stripe-java/pull/1209) Fix typo in README.md
 
 ## 20.77.0 - 2021-09-16
 * [#1264](https://github.com/stripe/stripe-java/pull/1264) API Updates
@@ -2573,7 +2564,6 @@ This release includes breaking changes resulting from:
   * Add support for `acss_debit` on `InvoiceCreateParams.payment_settings.payment_method_options`, `InvoiceUpdateParams.payment_settings.payment_method_options`, `Invoice.payment_settings.payment_method_options`, `SubscriptionCreateParams.payment_settings.payment_method_options`, `SubscriptionUpdateParams.payment_settings.payment_method_options`, and `Subscription.payment_settings.payment_method_options`
   * Add support for new value `acss_debit` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]`
   * Add support for `livemode` on `Reporting.ReportType`
-
 
 ## 20.75.0 - 2021-09-09
 * [#1259](https://github.com/stripe/stripe-java/pull/1259) Add missing constant for `account_requirement` as a `purpose` on File create and List APIs
@@ -2589,10 +2579,10 @@ This release includes breaking changes resulting from:
   * Add support for `alternatives` on `Account.requirements`, `Capability.requirements`, and `Person.requirements`
 
 ## 20.72.0 - 2021-09-01
+* [#1252](https://github.com/stripe/stripe-java/pull/1252) Add support for auto-paginatable `SearchResult` type
 * [#1254](https://github.com/stripe/stripe-java/pull/1254) API Updates
   * Add support for `after_expiration`, `consent_collection`, and `expires_at` on `checkout.SessionCreateParams` and `Checkout.Session`
   * Add support for `consent` and `recovered_from` on `Checkout.Session`
-* [#1252](https://github.com/stripe/stripe-java/pull/1252) Add support for auto-paginatable `SearchResult` type
 
 ## 20.71.0 - 2021-08-27
 * [#1250](https://github.com/stripe/stripe-java/pull/1250) API Updates
@@ -2612,10 +2602,10 @@ This release includes breaking changes resulting from:
   * Change type of `PaymentIntentCreateParams.payment_method_options.sofort.preferred_language`, `PaymentIntentUpdateParams.payment_method_options.sofort.preferred_language`, and `PaymentIntentConfirmParams.payment_method_options.sofort.preferred_language` from `enum` to `emptyStringable(enum)`
 
 ## 20.67.0 - 2021-07-28
-* [#1242](https://github.com/stripe/stripe-java/pull/1242) API Updates
-  * Add support for `account_type` on `BankAccount`, `ExternalAccountUpdateParams`, and `TokenCreateParams.bank_account`
 * [#1241](https://github.com/stripe/stripe-java/pull/1241) API Updates
   * Add support for `category_code` on `Issuing.Authorization.merchant_data` and `Issuing.Transaction.merchant_data`
+* [#1242](https://github.com/stripe/stripe-java/pull/1242) API Updates
+  * Add support for `account_type` on `BankAccount`, `ExternalAccountUpdateParams`, and `TokenCreateParams.bank_account`
 
 ## 20.66.0 - 2021-07-22
 * [#1239](https://github.com/stripe/stripe-java/pull/1239) API Updates
@@ -2652,18 +2642,18 @@ This release includes breaking changes resulting from:
   * Add support for `wechat_pay_display_qr_code`, `wechat_pay_redirect_to_android_app`, and `wechat_pay_redirect_to_ios_app` on `PaymentIntent.next_action`
 
 ## 20.60.0 - 2021-06-29
+* [#1207](https://github.com/stripe/stripe-java/pull/1207) Streaming requests
 * [#1227](https://github.com/stripe/stripe-java/pull/1227) API Updates
   * Added support for `boleto_payments` on `Account.capabilities`
   * Added support for `boleto` and `oxxo` on `SessionCreateParams` and `Session`
-* [#1207](https://github.com/stripe/stripe-java/pull/1207) Streaming requests
 
 ## 20.59.0 - 2021-06-25
+* [#1218](https://github.com/stripe/stripe-java/pull/1218) Remove Travis CI
 * [#1225](https://github.com/stripe/stripe-java/pull/1225) API Updates
   * Added support for `boleto` on `PaymentMethodCreateParams`, `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_data`, `Charge.payment_method_details` and `PaymentMethod`
   * `PaymentMethodListParams.type`, `PaymentMethodCreateParams.type`, `PaymentIntentConfirmParams.payment_method_data.type`, `PaymentIntentUpdateParams.payment_method_data.type`, `PaymentIntentCreateParams.payment_method_data.type`  added new enum members: `boleto`
   * Added support for `boleto_display_details` on `PaymentIntent.next_action`
   * `TaxIdCreateParams.type`, `InvoiceLineItemListUpcomingParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, and `CustomerCreateParams.tax_id_data[].type`, added new enum members: `il_vat`.
-* [#1218](https://github.com/stripe/stripe-java/pull/1218) Remove Travis CI
 
 ## 20.58.0 - 2021-06-18
 * [#1222](https://github.com/stripe/stripe-java/pull/1222) API Updates
@@ -2709,16 +2699,16 @@ This release includes breaking changes resulting from:
   * Added support for `documents` on `PersonUpdateParams`, `PersonCollectionCreateParams` and `TokenCreateParams.person`
 
 ## 20.51.0 - 2021-05-19
-* [#1211](https://github.com/stripe/stripe-java/pull/1211), [#1205](https://github.com/stripe/stripe-java/pull/1205) API Updates
+* [#1211](https://github.com/stripe/stripe-java/pull/1211) , [#1205](https://github.com/stripe/stripe-java/pull/1205) API Updates
   * Add support for the `Identity.VerificationSession` and `Identity.VerificationReport` APIs.
 * [#1206](https://github.com/stripe/stripe-java/pull/1206) API Updates
   * Add support for setting `AccountUpdateParams.business_profile.support_url` and `AccountCreateParams.support_url` to `EmptyParam`.
 
 ## 20.50.0 - 2021-05-06
+* [#1203](https://github.com/stripe/stripe-java/pull/1203) Fix flaky test: no telemetry by default in test suite
 * [#1204](https://github.com/stripe/stripe-java/pull/1204) API Updates
   * Add support for `reference` on `Charge.payment_method_details.afterpay_clearpay`
   * Add support for `afterpay_clearpay` on `PaymentIntent.payment_method_options`
-* [#1203](https://github.com/stripe/stripe-java/pull/1203) Fix flaky test: no telemetry by default in test suite
 
 ## 20.49.0 - 2021-05-05
 * [#1202](https://github.com/stripe/stripe-java/pull/1202) API Updates
@@ -2757,7 +2747,6 @@ This release includes breaking changes resulting from:
 * [#1191](https://github.com/stripe/stripe-java/pull/1191) API Updates
   * Add support for new locale `th` on `SessionCreateParams`.
 
-
 ## 20.42.0 - 2021-03-22
 * [#1189](https://github.com/stripe/stripe-java/pull/1189) API Updates
   * Add support for `shipping_rates` on `Checkout.SessionCreateParams`
@@ -2771,7 +2760,6 @@ This release includes breaking changes resulting from:
 * [#1186](https://github.com/stripe/stripe-java/pull/1186) API Updates
   * Add support for `on_behalf_of` to `Invoice`
   * Add support `revolut` as an enum member on `PaymentMethodCreateParams.Ideal.Bank`, `PaymentIntentConfirmParams.Ideal.Bank`, `PaymentIntentUpdateParams.Ideal.Bank`, and `PaymentIntentCreateParams.Ideal.Bank`
-
 
 ## 20.39.0 - 2021-02-16
 * [#1185](https://github.com/stripe/stripe-java/pull/1185) API Updates
@@ -2789,10 +2777,10 @@ This release includes breaking changes resulting from:
   * Add support for `payment_settings` on `Invoice`
 
 ## 20.36.0 - 2021-02-03
-* [#1179](https://github.com/stripe/stripe-java/pull/1179)
+* [#1173](https://github.com/stripe/stripe-java/pull/1173) Add link to YouTube from readme
+* [#1179](https://github.com/stripe/stripe-java/pull/1179) Update generated code
   * Add support for `nationality` on `Person`, `PersonUpdateParams`, `PersonCreateParams` and `TokenCreateParams.person`
   * Add `gb_vat` to `TaxId.type` enum
-* [#1173](https://github.com/stripe/stripe-java/pull/1173) Add link to YouTube from readme
 
 ## 20.35.0 - 2021-01-14
 * [#1171](https://github.com/stripe/stripe-java/pull/1171) API Updates
@@ -2802,33 +2790,32 @@ This release includes breaking changes resulting from:
   * Add support for `country` and `state` on `TaxRateUpdateParams`, `TaxRateCreateParams` and `TaxRate`
 
 ## 20.34.0 - 2021-01-07
+* [#1167](https://github.com/stripe/stripe-java/pull/1167) Adding getUserMessage() to exceptions
 * [#1169](https://github.com/stripe/stripe-java/pull/1169) API Updates
   * Add support for `company_registration_verification`, `company_ministerial_decree`, `company_memorandum_of_association`, `company_license` and `company_tax_id_verification` on `AccountUpdateParams.documents` and `AccountCreateParams.documents`
-* [#1167](https://github.com/stripe/stripe-java/pull/1167) Adding getUserMessage() to exceptions
 
 ## 20.33.0 - 2020-12-15
+* [#1162](https://github.com/stripe/stripe-java/pull/1162) Pass mutated copy of params into oauth request
 * [#1165](https://github.com/stripe/stripe-java/pull/1165) API Updates
   * Add support for card_present on SetupAttempt.payment_method_details
-* [#1162](https://github.com/stripe/stripe-java/pull/1162) Pass mutated copy of params into oauth request
 
 ## 20.32.0 - 2020-12-10
 * [#1163](https://github.com/stripe/stripe-java/pull/1163) [codegen] Multiple API changes
   * Add support for `bank` on `PaymentMethod`
   * Add support for `tos_shown_and_accepted` to `payment_method_options[p24]` on `PaymentMethod`.
 
-
 ## 20.31.0 - 2020-12-03
 * [#1161](https://github.com/stripe/stripe-java/pull/1161) Add support for `documents` on `Account` create and update
 
 ## 20.30.0 - 2020-11-24
+* [#1158](https://github.com/stripe/stripe-java/pull/1158) Better log the error causing the JSON parsing to fail on deserialization
 * [#1159](https://github.com/stripe/stripe-java/pull/1159) Multiple API changes
   * Add support for `account_tax_ids` on `Invoice`
   * Add support for `payment_method_options[sepa_debit]` on `PaymentIntent`
-* [#1158](https://github.com/stripe/stripe-java/pull/1158) Better log the error causing the JSON parsing to fail on deserialization
 
 ## 20.29.0 - 2020-11-20
-* [#1157](https://github.com/stripe/stripe-java/pull/1157) Add support for `capabilities[grabpay_payments]` on `Account`
 * [#1156](https://github.com/stripe/stripe-java/pull/1156) Add support for `mandate_options` on `SetupIntent.payment_method_options.sepa_debit`
+* [#1157](https://github.com/stripe/stripe-java/pull/1157) Add support for `capabilities[grabpay_payments]` on `Account`
 
 ## 20.28.0 - 2020-11-18
 * [#1154](https://github.com/stripe/stripe-java/pull/1154) Add support for `grabpay` on `PaymentMethod`.
@@ -2836,6 +2823,12 @@ This release includes breaking changes resulting from:
 ## 20.27.0 - 2020-11-17
 * [#1152](https://github.com/stripe/stripe-java/pull/1152) Multiple API changes
   * Add support for sepa_debit on SetupIntentCreateParams, SetupIntentUpdateParams, and SetupIntentConfirmParams.
+
+## 7.63.1 - 2020-11-17
+* Identical to 7.29.0
+
+## 7.63.0 - 2020-11-17
+* Published in error. Do not use. This is identical to 20.27.0.
 
 ## 20.26.0 - 2020-11-09
 * [#1149](https://github.com/stripe/stripe-java/pull/1149) Add `invoice.finalization_error` as a `type` on `Event`
@@ -2859,12 +2852,12 @@ This release includes breaking changes resulting from:
 * [#1142](https://github.com/stripe/stripe-java/pull/1142) Add support for passing `p24[bank]` for P24 on `PaymentIntent` or `PaymentMethod`
 
 ## 20.21.0 - 2020-10-22
-* [#1141](https://github.com/stripe/stripe-java/pull/1141) Support passing `tax_rates` when creating invoice items through `Subscription` or `SubscriptionSchedule`
-* [#1134](https://github.com/stripe/stripe-java/pull/1134) Upgrade Gradle to 6.7
-* [#1138](https://github.com/stripe/stripe-java/pull/1138) Bump ErrorProne to latest version
-* [#1139](https://github.com/stripe/stripe-java/pull/1139) Upgrade Lombok plugin
 * [#1137](https://github.com/stripe/stripe-java/pull/1137) Bump Spotless plugin version
 * [#1135](https://github.com/stripe/stripe-java/pull/1135) Fix deprecation warning in test file
+* [#1138](https://github.com/stripe/stripe-java/pull/1138) Bump ErrorProne to latest version
+* [#1134](https://github.com/stripe/stripe-java/pull/1134) Upgrade Gradle to 6.7
+* [#1139](https://github.com/stripe/stripe-java/pull/1139) Upgrade Lombok plugin
+* [#1141](https://github.com/stripe/stripe-java/pull/1141) Support passing `tax_rates` when creating invoice items through `Subscription` or `SubscriptionSchedule`
 
 ## 20.20.0 - 2020-10-20
 * [#1133](https://github.com/stripe/stripe-java/pull/1133) Add support for `jp_rn` and `ru_kpp` as a `type` on `TaxId`
@@ -2875,17 +2868,19 @@ This release includes breaking changes resulting from:
 ## 20.18.0 - 2020-10-14
 * [#1129](https://github.com/stripe/stripe-java/pull/1129) Add support for the Payout Reverse API
 
+## 20.17.0 - 2020-10-12
+
 ## 20.16.0 - 2020-10-09
 * [#1126](https://github.com/stripe/stripe-java/pull/1126) Add support for internal-only `description`, `iin`, and `issuer` for `card_present` and `interac_present` on `Charge.payment_method_details`.
 
 ## 20.15.0 - 2020-10-08
-* Add support for `generated_sepa_debit` and `generated_sepa_debit_mandate` on `Charge.payment_method_details.ideal`, `Charge.payment_method_details.bancontact` and `Charge.payment_method_details.sofort`
 * Add support for `generated_from` on `PaymentMethod.sepa_debit`
+* Add support for `generated_sepa_debit` and `generated_sepa_debit_mandate` on `Charge.payment_method_details.ideal`, `Charge.payment_method_details.bancontact` and `Charge.payment_method_details.sofort`
 * Add support for `ideal`, `bancontact` and `sofort` on `SetupAttempt.payment_method_details`
 
 ## 20.14.0 - 2020-10-02
-* [#1120](https://github.com/stripe/stripe-java/pull/1120) Add support for `TosAcceptance.ServiceAgreement` on `Account`
 * [#1119](https://github.com/stripe/stripe-java/pull/1119) Add support for new payments capabilities on `Account`
+* [#1120](https://github.com/stripe/stripe-java/pull/1120) Add support for `TosAcceptance.ServiceAgreement` on `Account`
 
 ## 20.13.0 - 2020-09-29
 * [#1118](https://github.com/stripe/stripe-java/pull/1118) Add support for the `SetupAttempt` resource and List API
@@ -2943,6 +2938,7 @@ This release includes breaking changes resulting from:
 * [#1089](https://github.com/stripe/stripe-java/pull/1089) Add support for `payment_method.automatically_updated` on `WebhookEndpoint`
 
 ## 20.0.0 - 2020-08-31
+* [#1087](https://github.com/stripe/stripe-java/pull/1087) Fix retrieval of upcoming Invoice line items
 * [#1088](https://github.com/stripe/stripe-java/pull/1088) Multiple API changes
   * Pin to API version `2020-08-27`
   * Removed `authenticated` and `succeeded` on `payment_method_details[card][three_d_secure]` on `Charge`
@@ -2957,7 +2953,6 @@ This release includes breaking changes resulting from:
   * Removed `failure_url` and `success_url` from `AccountLink`, use `refresh_url` and `return_url` instead
   * Removed `invoice.payment_succeeded` and `payment_method.card_automatically_updated` events
   * `sources` and `tax_ids` on `Customer` are now includable sub-lists and not returned by default when retrieving a customer. You need to explicitly expand those properties to call `getTaxIds()` or `getSources()` now to create those sub-resources. Our API Reference has been updated to reflect this.
-* [#1087](https://github.com/stripe/stripe-java/pull/1087) Fix retrieval of upcoming Invoice line items
 
 ## 19.45.0 - 2020-08-19
 * [#1085](https://github.com/stripe/stripe-java/pull/1085) Add support for `expires_at` on `File`
@@ -2993,8 +2988,8 @@ This release includes breaking changes resulting from:
   * Add `payment_method_details[card_present][receipt][account_type]` on `Charge`
 
 ## 19.37.0 - 2020-07-31
-* [#1065](https://github.com/stripe/stripe-java/pull/1065) Support setting "proxy" per-request
 * [#1072](https://github.com/stripe/stripe-java/pull/1072) Socket timeout exceptions are now also subject to retries
+* [#1065](https://github.com/stripe/stripe-java/pull/1065) Support setting "proxy" per-request
 
 ## 19.36.0 - 2020-07-29
 * [#1070](https://github.com/stripe/stripe-java/pull/1070) Multiple API changes
@@ -3196,8 +3191,8 @@ This release includes breaking changes resulting from:
   * Add `cancellation_reason` and new enum values for `replacement_reason` on Issuing `Card`
 
 ## 18.13.1 - 2020-04-06
-* [#971](https://github.com/stripe/stripe-java/pull/971) Improve connection reuse
 * [#999](https://github.com/stripe/stripe-java/pull/999) Bump Gradle and other dependencies
+* [#971](https://github.com/stripe/stripe-java/pull/971) Improve connection reuse
 
 ## 18.13.0 - 2020-04-03
 * [#998](https://github.com/stripe/stripe-java/pull/998) Add support for `calculatedStatementDescriptor` on `Charge`
@@ -3288,8 +3283,8 @@ This release includes breaking changes resulting from:
   * Support updating `payment_method_options` on `PaymentIntent` and `SetupIntent`
 
 ## 17.9.1 - 2020-02-11
-* [#964](https://github.com/stripe/stripe-java/pull/964) Convert Markdown to HTML in Javadoc
 * [#965](https://github.com/stripe/stripe-java/pull/965) Add Gradle plugin for publishing JavaDoc to GitHub Pages
+* [#964](https://github.com/stripe/stripe-java/pull/964) Convert Markdown to HTML in Javadoc
 
 ## 17.9.0 - 2020-02-10
 * [#963](https://github.com/stripe/stripe-java/pull/963) Multiple API changes
@@ -3300,8 +3295,8 @@ This release includes breaking changes resulting from:
 * [#961](https://github.com/stripe/stripe-java/pull/961) Rename `sort_code` to `sender_sort_code` on `SourceTransaction` for BACS debit. (This is technically a breaking change.)
 
 ## 17.7.0 - 2020-02-03
-* [#960](https://github.com/stripe/stripe-java/pull/960) Add support for `error_on_requires_action` on `PaymentIntent`
 * [#957](https://github.com/stripe/stripe-java/pull/957) Add additional verification file purpose
+* [#960](https://github.com/stripe/stripe-java/pull/960) Add support for `error_on_requires_action` on `PaymentIntent`
 
 ## 17.6.0 - 2020-01-31
 * [#959](https://github.com/stripe/stripe-java/pull/959) Add support for `company.structure` on `Account` and new types of `TaxId`
@@ -3310,8 +3305,8 @@ This release includes breaking changes resulting from:
 * [#955](https://github.com/stripe/stripe-java/pull/955) Add support for FPX as a `PaymentMethod`
 
 ## 17.4.0 - 2020-01-28
-* [#953](https://github.com/stripe/stripe-java/pull/953) Add new type for `TaxId` and `sender_account_name` on `SourceTransaction`
 * [#949](https://github.com/stripe/stripe-java/pull/949) Move examples to Customer instead of Charge
+* [#953](https://github.com/stripe/stripe-java/pull/953) Add new type for `TaxId` and `sender_account_name` on `SourceTransaction`
 
 ## 17.3.0 - 2020-01-24
 * [#948](https://github.com/stripe/stripe-java/pull/948) Add support for `shipping.speed` on Issuing `Card` and new `TaxID` types
@@ -3323,43 +3318,42 @@ This release includes breaking changes resulting from:
 * [#944](https://github.com/stripe/stripe-java/pull/944) Improve docstrings for many properties and parameters
 
 ## 17.1.0 - 2020-01-17
-* [#943](https://github.com/stripe/stripe-java/pull/943) Add support for `metadata` on Checkout `Session`
 * [#940](https://github.com/stripe/stripe-java/pull/940) Add `StripeObjectInterface` interface
+* [#943](https://github.com/stripe/stripe-java/pull/943) Add support for `metadata` on Checkout `Session`
 
 ## 17.0.0 - 2020-01-15
-* [#869](https://github.com/stripe/stripe-java/pull/869)
-Major version release. Refer to our [migration guide for v17](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v17) for a list of new features and backwards incompatible changes to watch out for.
-
 Pull requests included in this release (cf. [#869](https://github.com/stripe/stripe-java/pull/869)) (⚠️ = breaking changes):
+
 * [#857](https://github.com/stripe/stripe-java/pull/857) Refactor form encoding
-* [#870](https://github.com/stripe/stripe-java/pull/870) ⚠️ Refactor request telemetry
+* ⚠️ [#870](https://github.com/stripe/stripe-java/pull/870) Refactor request telemetry
 * [#872](https://github.com/stripe/stripe-java/pull/872) Move HTTP request methods into new `HttpClient` class
-* [#878](https://github.com/stripe/stripe-java/pull/878) Add `StripeRequest` object
 * [#879](https://github.com/stripe/stripe-java/pull/879) Add `HttpClient` abstract class
-* [#880](https://github.com/stripe/stripe-java/pull/880) ⚠️ Stop disabling the DNS cache
+* [#878](https://github.com/stripe/stripe-java/pull/878) Add `StripeRequest` object
+* ⚠️ [#880](https://github.com/stripe/stripe-java/pull/880) Stop disabling the DNS cache
 * [#895](https://github.com/stripe/stripe-java/pull/895) Fix deprecation warnings
 * [#896](https://github.com/stripe/stripe-java/pull/896) Add `HttpContent` class
 * [#897](https://github.com/stripe/stripe-java/pull/897) Add `Stopwatch` class
 * [#898](https://github.com/stripe/stripe-java/pull/898) Move all request properties in `StripeRequest`
-* [#899](https://github.com/stripe/stripe-java/pull/899) ⚠️ Remove `ApiResource.RequestType`
+* ⚠️ [#899](https://github.com/stripe/stripe-java/pull/899) Remove `ApiResource.RequestType`
 * [#900](https://github.com/stripe/stripe-java/pull/900) Add support for automatic request retries
 * [#902](https://github.com/stripe/stripe-java/pull/902) Minor fixes
+* ⚠️ [#927](https://github.com/stripe/stripe-java/pull/927) Remove support for custom `URLStreamHandler`
 * [#928](https://github.com/stripe/stripe-java/pull/928) `StringUtils` class & better API key validation
-* [#927](https://github.com/stripe/stripe-java/pull/927) ⚠️ Remove support for custom `URLStreamHandler`
-* [#931](https://github.com/stripe/stripe-java/pull/931) ⚠️ Refactor HTTP headers handling
-* [#932](https://github.com/stripe/stripe-java/pull/932) ⚠️ Modernize `StripeResponse`
+* ⚠️ [#932](https://github.com/stripe/stripe-java/pull/932) Modernize `StripeResponse`
+* ⚠️ [#931](https://github.com/stripe/stripe-java/pull/931) Refactor HTTP headers handling
 * [#934](https://github.com/stripe/stripe-java/pull/934) Add `maxNetworkRetries` as a global and per-request setting
-* [#935](https://github.com/stripe/stripe-java/pull/935) ⚠️ Add `StreamUtils` class
-* [#936](https://github.com/stripe/stripe-java/pull/936) ⚠️ Remove support for `count` and `total_count` in list objects
-* [#938](https://github.com/stripe/stripe-java/pull/938) ⚠️ Remove deprecated properties and parameters
+* ⚠️ [#935](https://github.com/stripe/stripe-java/pull/935) Add `StreamUtils` class
+* [#869](https://github.com/stripe/stripe-java/pull/869) Major version release. Refer to our [migration guide for v17](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v17) for a list of new features and backwards incompatible changes to watch out for.
+* ⚠️ [#938](https://github.com/stripe/stripe-java/pull/938) Remove deprecated properties and parameters
+* ⚠️ [#936](https://github.com/stripe/stripe-java/pull/936) Remove support for `count` and `total_count` in list objects
 * [#939](https://github.com/stripe/stripe-java/pull/939) Update README
 
 ## 16.8.0 - 2020-01-15
 * [#937](https://github.com/stripe/stripe-java/pull/937) Adding missing events for pending updates on `Subscription`
 
 ## 16.7.0 - 2020-01-15
-* [#933](https://github.com/stripe/stripe-java/pull/933) Add support for `pending_update` on `Subscription`
 * [#930](https://github.com/stripe/stripe-java/pull/930) Bump stripe-mock to 0.79.0
+* [#933](https://github.com/stripe/stripe-java/pull/933) Add support for `pending_update` on `Subscription`
 
 ## 16.6.0 - 2020-01-14
 * [#929](https://github.com/stripe/stripe-java/pull/929) Add support for `CreditNoteLineItem`
@@ -3382,8 +3376,8 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * Adds `ms` as a valid locale on Checkout `Session`
 
 ## 16.2.0 - 2019-12-09
-* [#914](https://github.com/stripe/stripe-java/pull/914) Add support for AU BECS Debit on `PaymentMethod`
 * [#906](https://github.com/stripe/stripe-java/pull/906) Add documentation for enum values
+* [#914](https://github.com/stripe/stripe-java/pull/914) Add support for AU BECS Debit on `PaymentMethod`
 
 ## 16.1.0 - 2019-12-04
 * [#912](https://github.com/stripe/stripe-java/pull/912) Add support for `network` on `Charge` and `funding_method` on `SourceTransaction`
@@ -3409,15 +3403,15 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 * [#904](https://github.com/stripe/stripe-java/pull/904) Add support for `violated_authorization_controls` on Issuing `Authorization`
 
 ## 15.3.1 - 2019-11-18
-* [#903](https://github.com/stripe/stripe-java/pull/903) Serialize null values in all maps
-* [#901](https://github.com/stripe/stripe-java/pull/901) Minor code quality fixes
 * [#894](https://github.com/stripe/stripe-java/pull/894) Upgrade Gradle and other dependencies
+* [#901](https://github.com/stripe/stripe-java/pull/901) Minor code quality fixes
+* [#903](https://github.com/stripe/stripe-java/pull/903) Serialize null values in all maps
 
 ## 15.3.0 - 2019-11-07
+* [#891](https://github.com/stripe/stripe-java/pull/891) Replace Cobertura with JaCoCo
 * [#890](https://github.com/stripe/stripe-java/pull/890) Multiple API changes
   * Add `company` and `individual` to Issuing `Cardholder`
   * Add `sepa_debit` to `PaymentMethodUpdateParams`
-* [#891](https://github.com/stripe/stripe-java/pull/891) Replace Cobertura with JaCoCo
 
 ## 15.2.0 - 2019-11-06
 * [#889](https://github.com/stripe/stripe-java/pull/889) Multiple API changes:
@@ -3443,17 +3437,17 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 * [#877](https://github.com/stripe/stripe-java/pull/877) Fix docstring for a parameter to reflect the correct behaviour
 
 ## 14.4.0 - 2019-10-30
-* [#876](https://github.com/stripe/stripe-java/pull/876) Add support for `invoice_customer_balance_settings` on `Invoice`
 * [#873](https://github.com/stripe/stripe-java/pull/873) Suppress unchecked cast warnings in test
+* [#876](https://github.com/stripe/stripe-java/pull/876) Add support for `invoice_customer_balance_settings` on `Invoice`
 
 ## 14.3.0 - 2019-10-25
 * [#871](https://github.com/stripe/stripe-java/pull/871) Codegen for openapi d8f9ddf
   * Remove `max_amount` from Issuing `Card`. This is technically a breaking change but only one integration was using this feature which changed a while ago
 
 ## 14.2.0 - 2019-10-24
-* [#868](https://github.com/stripe/stripe-java/pull/868)
-  * Add support for typed parameters in `Event.retrieve` method
 * [#867](https://github.com/stripe/stripe-java/pull/867) Contributor Convenant
+* [#868](https://github.com/stripe/stripe-java/pull/868) Update generated code
+  * Add support for typed parameters in `Event.retrieve` method
 
 ## 14.1.0 - 2019-10-23
 * [#866](https://github.com/stripe/stripe-java/pull/866) Various API changes
@@ -3464,7 +3458,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * Add support for `next_pending_invoice_item_invoice` as a new `Capability`
 
 ## 14.0.1 - 2019-10-18
-* [#864](https://github.com/stripe/stripe-java/pull/864)
+* [#864](https://github.com/stripe/stripe-java/pull/864) Update generated code
   * Remove `renewal_behavior` on Subscription Schedule model class
   * Remove `renewal_interval` on Subscription Schedule parameter classes
   * The above are technically breaking changes and should have been released with 14.0.0.
@@ -3479,6 +3473,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * **Note:** This release was missing some breaking changes. Please use 14.0.1 instead.
 
 ## 13.3.0 - 2019-10-17
+* [#858](https://github.com/stripe/stripe-java/pull/858) Stop propagating UnsupportedEncodingException
 * [#862](https://github.com/stripe/stripe-java/pull/862) [codegen] Update API Resources
   * `requirements` on Issuing `Cardholder`
   * `payment_method_details[au_becs_debit][mandate]` on `Charge`
@@ -3486,13 +3481,12 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * `payment_behavior` on `Subscription` creation can now take the value `pending_if_incomplete`.
   * `payment_behavior` on `SubscriptionItem` creation and update is now supported.
   * `subscription_data[trial_from_plan]` is now supported on Checkout `Session` creation.
-* [#858](https://github.com/stripe/stripe-java/pull/858) Stop propagating UnsupportedEncodingException
 
 ## 13.2.0 - 2019-10-16
 * [#861](https://github.com/stripe/stripe-java/pull/861) Add getters to parameters classes
 
 ## 13.1.0 - 2019-10-09
-* [#854](https://github.com/stripe/stripe-java/pull/854)
+* [#854](https://github.com/stripe/stripe-java/pull/854) Update generated code
   * Add support for `description`, `iin` and `issuer` on `Source.Card`, `Source.CardPresent` and `Source.ThreeDSecure`
   * Add support for `deviceType` on `ReaderListParams`
 
@@ -3500,19 +3494,11 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 * [#853](https://github.com/stripe/stripe-java/pull/853) Upgrade to new API version [`2019-10-08`](https://docs.stripe.com/changelog/2019-10-08)
 
 ## 12.2.0 - 2019-10-08
-* [#852](https://github.com/stripe/stripe-java/pull/852) Setters for string properties in update params now all accept `EmptyParam`
-* [#835](https://github.com/stripe/stripe-java/pull/835) Bump dependencies
 * [#851](https://github.com/stripe/stripe-java/pull/851) Update `README.md`
+* [#835](https://github.com/stripe/stripe-java/pull/835) Bump dependencies
+* [#852](https://github.com/stripe/stripe-java/pull/852) Setters for string properties in update params now all accept `EmptyParam`
 
 ## 12.1.0 - 2019-09-27
-* [#850](https://github.com/stripe/stripe-java/pull/850) Codegen for openapi 4d4a107
-  * Add support for `mandate` on `Charge`.
-  * Add support for `reference` on `SourceTransaction`.
-  * Add support for `person` on `TokenCreateParams`.
-  * Add support for new event types `payment_intent.canceled` and `setup_intent.canceled`
-  * Add support for `metadata` on `AuthorizationApproveParams` and `AuthorizationDeclineParams`
-  * Add `setMetadata` method on `AuthorizationUpdateParams`
-  * Rename `chidrens_and_infants_wear_stores` to `childrens_and_infants_wear_stores`. This is technically a breaking change, but we've chosen to release this as a minor version as the previous name was virtually unused.
 * [#849](https://github.com/stripe/stripe-java/pull/849) Add add/addAll support for "emptyable" params
   * Add `addAttribute` and `addAllAttribute` methods to `ProductUpdateParams`
   * Add `addCustomField` and `addAllCustomField` methods to `CustomerCreateParams`, `CustomerUpdateParams`, `InvoiceCreateParams` and `InvoiceUpdateParams`
@@ -3521,19 +3507,27 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * Add `addItem` and `addAllItem` methods to `OrderReturnOrderParams`
   * Add `addSubscriptionDefaultTaxRate` and `addAllSubscriptionDefaultTaxRate` methods to `InvoiceUpcomingParams`
   * Add `addTaxRate` and `addAllTaxRate` methods to `InvoiceItemUpdateParams`, `InvoiceUpcomingParams`, `SubscriptionCreateParams`, `SubscriptionItemCreateParams`, `SubscriptionItemUpdateParams`, `SubscriptionScheduleCreateParams`, `SubscriptionScheduleUpdateParams` and `SubscriptionUpdateParams`
+* [#850](https://github.com/stripe/stripe-java/pull/850) Codegen for openapi 4d4a107
+  * Add support for `mandate` on `Charge`.
+  * Add support for `reference` on `SourceTransaction`.
+  * Add support for `person` on `TokenCreateParams`.
+  * Add support for new event types `payment_intent.canceled` and `setup_intent.canceled`
+  * Add support for `metadata` on `AuthorizationApproveParams` and `AuthorizationDeclineParams`
+  * Add `setMetadata` method on `AuthorizationUpdateParams`
+  * Rename `chidrens_and_infants_wear_stores` to `childrens_and_infants_wear_stores`. This is technically a breaking change, but we've chosen to release this as a minor version as the previous name was virtually unused.
 
 ## 12.0.0 - 2019-09-10
 * [#844](https://github.com/stripe/stripe-java/pull/844) Update to API version 2019-09-09
 
 ## 11.8.0 - 2019-09-09
-* [#842](https://github.com/stripe/stripe-java/pull/842)
+* [#842](https://github.com/stripe/stripe-java/pull/842) Update generated code
   * Add support for `company[verification]` on `Account`
   * Add support for `verification[additional_document]` on `Person`
 
 ## 11.7.0 - 2019-09-05
-* [#827](https://github.com/stripe/stripe-java/pull/827) Switch to new "prettier" codegen
-* [#841](https://github.com/stripe/stripe-java/pull/841)
+* [#841](https://github.com/stripe/stripe-java/pull/841) Update generated code
   * Just a trivial comment update
+* [#827](https://github.com/stripe/stripe-java/pull/827) Switch to new "prettier" codegen
 
 ## 11.6.1 - 2019-09-03
 * [#839](https://github.com/stripe/stripe-java/pull/839) Deprecate `total_count`
@@ -3551,11 +3545,11 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 * [#830](https://github.com/stripe/stripe-java/pull/830) Add support for `pendingVerification` on `Account`, `Person` and `Capability`
 
 ## 11.3.0 - 2019-08-23
-* [#829](https://github.com/stripe/stripe-java/pull/829)
+* [#829](https://github.com/stripe/stripe-java/pull/829) Update generated code
   * Release support for decimal values on Billing resources such as `Plan` or `InvoiceItem`
 
 ## 11.2.0 - 2019-08-21
-* [#828](https://github.com/stripe/stripe-java/pull/828)
+* [#828](https://github.com/stripe/stripe-java/pull/828) Update generated code
   * Add support for `schedule` on `Subscription`
   * Add support for `defaultPaymentMethod`, `invoiceSettings`, `collectionMethod` and `billingThresholds` to `SubscriptionSchedule` and its update and create APIs
   * Add support for `mode` and `setupIntent` on Checkout `Session` and its create API
@@ -3571,7 +3565,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * Introduce `executive` as a relationship on `Person`
 
 ## 10.15.0 - 2019-08-14
-* [#824](https://github.com/stripe/stripe-java/pull/824)
+* [#824](https://github.com/stripe/stripe-java/pull/824) Update generated code
   * Add support for `au_becs_debit` sources
   * Add support for `mandate` parameter in source creation and update requests
   * Add support for `amount` in source update requests
@@ -3579,12 +3573,12 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * Add support for `digital_goods_applications` category for Issuing
 
 ## 10.14.0 - 2019-08-08
-* [#820](https://github.com/stripe/stripe-java/pull/820)
+* [#820](https://github.com/stripe/stripe-java/pull/820) Update generated code
   * Add support for unsetting `receipt_email` on `PaymentIntent`
   * Remove support for `SubscriptionScheduleRevision`. This is technicall a breaking change, but we've chosen to release this as a minor version as this resource and its APIs were virtually unused.
 
 ## 10.13.0 - 2019-08-08
-* [#819](https://github.com/stripe/stripe-java/pull/819)
+* [#819](https://github.com/stripe/stripe-java/pull/819) Update generated code
   * Add support for `payment_method_details[card][moto]` on `Charge`
   * Add support for `statement_descriptor_suffix` on `Charge` and `PaymentIntent`
   * Add support `subscription_data[application_fee_percent]` on Checkout `Session`
@@ -3597,12 +3591,12 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 * [#812](https://github.com/stripe/stripe-java/pull/812) Fix potential `NullPointerException` when calling `getRawJsonObject()`
 
 ## 10.12.0 - 2019-07-22
-* [#809](https://github.com/stripe/stripe-java/pull/809)
+* [#809](https://github.com/stripe/stripe-java/pull/809) Update generated code
   * Add support for `statement_descriptor` on `PaymentIntent` capture
   * Add support for unsetting `setup_future_usage` on `PaymentIntent`
 
 ## 10.11.0 - 2019-07-19
-* [#808](https://github.com/stripe/stripe-java/pull/999)
+* [#999](https://github.com/stripe/stripe-java/pull/999) Update generated code
   * Add `off_session` to `SubscriptionItem` update
   * Add `customer` when listing `CreditNote`
   * Remove `challenge_only` enum value. This is technically a breaking change, but we've chosen to release this as a minor version in light of the fact that this value was virtually unused.
@@ -3618,12 +3612,12 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 * [#802](https://github.com/stripe/stripe-java/pull/802) Add support for `payment_method_options` on `PaymentIntent` and `SetupIntent`
 
 ## 10.8.0 - 2019-07-15
-* [#801](https://github.com/stripe/stripe-java/pull/801)
+* [#801](https://github.com/stripe/stripe-java/pull/801) Update generated code
   * Add support for `pending_setup_intent` on Subscription
   * Add support for `off_session` on Subscription creation and update and Invoice pay
 
 ## 10.7.0 - 2019-07-15
-* [#800](https://github.com/stripe/stripe-java/pull/800)
+* [#800](https://github.com/stripe/stripe-java/pull/800) Update generated code
   * Add support for Sources of type `klarna`
   * Add support for `payment_behavior` on Subscription and SubscriptionItem to control their behaviour on creation or update.
 
@@ -3631,7 +3625,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 * [#799](https://github.com/stripe/stripe-java/pull/799) Add `getRawJsonObject()` accessor
 
 ## 10.5.0 - 2019-07-09
-* [#798](https://github.com/stripe/stripe-java/pull/798)
+* [#798](https://github.com/stripe/stripe-java/pull/798) Update generated code
   * Add support for `transfer_data[amount]` on PaymentIntent
   * Add support for passing `setup_future_usage` on PaymentIntent Update and Confirm APIs
   * Add support for `confirm` and `return_url` on SetupIntent creation
@@ -3639,7 +3633,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * Add support for `subscription_start_date` on the Upcoming Invoice API
 
 ## 10.4.0 - 2019-07-01
-* [#796](https://github.com/stripe/stripe-java/pull/796)
+* [#796](https://github.com/stripe/stripe-java/pull/796) Update generated code
   * Add support for the `SetupIntent` resource and APIs
   * Add support for `PlatformTaxFee` resource
   * Add `unified_proration` on `InvoiceItem` and `InvoiceLineItem`
@@ -3649,14 +3643,14 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 * [#792](https://github.com/stripe/stripe-java/pull/792) Enable request latency telemetry by default
 
 ## 10.2.0 - 2019-06-24
-* [#794](https://github.com/stripe/stripe-java/pull/794)
+* [#794](https://github.com/stripe/stripe-java/pull/794) Update generated code
   * Add `collection_method` to `Invoice`, `Subscription` and `SubscriptionSchedule`
   * Add `unified_propration` to `InvoiceLineItem`
   * Support unsetting `dob` on an `Account`
   * Removed `native_url` from WeChat `Source`. While technically breaking, this field has never been used
 
 ## 10.1.0 - 2019-06-18
-* [#789](https://github.com/stripe/stripe-java/pull/789)
+* [#789](https://github.com/stripe/stripe-java/pull/789) Update generated code
   * Add support for SEPA Credit Transfer sources
   * Add support for `CustomerBalanceTransaction` resource and APIs
   * Add `balance` property on `Customer`
@@ -3674,33 +3668,32 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 * [#781](https://github.com/stripe/stripe-java/pull/781) Pin library to API version `2019-05-16`
 
 ## 9.13.0 - 2019-05-23
-* [#780](https://github.com/stripe/stripe-java/pull/780)
+* [#780](https://github.com/stripe/stripe-java/pull/780) Update generated code
   * Add support for new `radar.early_fraud_warning` resource and methods
   * Add new in_gst and no_vat tax ID types
   * Add `spending_limits_currency` attribute and parameter in Issuing resources
 
 ## 9.12.0 - 2019-05-14
-* [#777](https://github.com/stripe/stripe-java/pull/777)
+* [#777](https://github.com/stripe/stripe-java/pull/777) Update generated code
   * Add support for `Capability`
   * Add enum `off_session` for `PaymentIntentConfirmParams` and `PaymentIntentCreateParams`
   * Add enum `abandoned` for `PaymentIntentCancellationParams`.
   * Add support for `statementDescriptorKana` and `statementDescriptorKanji` in `Account.SettingsPayments`
 
 ## 9.11.0 - 2019-05-10
-* [#776](https://github.com/stripe/stripe-java/pull/776)
+* [#776](https://github.com/stripe/stripe-java/pull/776) Update generated code
   * Add support for `startDate` in `Subscription`
   * Removed one unsupported enum on `PaymentIntentCancelParams`
 
-
 ## 9.10.0 - 2019-05-06
-* [#773](https://github.com/stripe/stripe-java/pull/773)
+* [#773](https://github.com/stripe/stripe-java/pull/773) Update generated code
   * Add support for `extraParams` in all sub-classes of ApiRequestParams their nested classes
   * Add support for webhook event `payment_method.updated`
   * Add support for `payment_intent` filter when listing `Charge`
   * Add support for `legacy_payments` enum `RequestedCapability` in `AccountCreateParams` and `AccountUpdateParams`
 
 ## 9.9.0 - 2019-05-03
-* [#768](https://github.com/stripe/stripe-java/pull/768)
+* [#768](https://github.com/stripe/stripe-java/pull/768) Update generated code
   * Add support for `customer` filter when listing `PaymentIntent`
   * Add support for `replacement_for` and `replacement_reason` on Issuing `card` creation
 
@@ -3711,14 +3704,14 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 * [#761](https://github.com/stripe/stripe-java/pull/761) Add support for `TaxRate` resource and APIs
 
 ## 9.6.0 - 2019-04-24
-* [#756](https://github.com/stripe/stripe-java/pull/756) Fix form-encoding to support `Collection` in untyped params as array. Previously only `List` is form-encoded as array.
 * [#755](https://github.com/stripe/stripe-java/pull/755) Add support for `CARD_ISSUING` enum in `RequestedCapability` for Account create/update params.
+* [#756](https://github.com/stripe/stripe-java/pull/756) Fix form-encoding to support `Collection` in untyped params as array. Previously only `List` is form-encoded as array.
 
 ## 9.5.0 - 2019-04-22
 * [#750](https://github.com/stripe/stripe-java/pull/750) Add support for the `TaxId` resource and APIs
 
 ## 9.4.0 - 2019-04-18
-* [#748](https://github.com/stripe/stripe-java/pull/748)
+* [#748](https://github.com/stripe/stripe-java/pull/748) Update generated code
   * Add support for `address`, `name`, `phone` and `preferredLocales` on `Customer`
   * Add support for the `CreditNote` resource and APIs
   * Add support for account and customer related fields on the `Invoice` resource
@@ -3727,29 +3720,29 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 * [#745](https://github.com/stripe/stripe-java/pull/745) Add support for the Checkout `Session` resource and APIs
 
 ## 9.2.0 - 2019-04-15
-* [#744](https://github.com/stripe/stripe-java/pull/744)
+* [#744](https://github.com/stripe/stripe-java/pull/744) Update generated code
   * Make `paymentIntent` on `Invoice` expandable instead of full-model
   * Add support for issuing `SpendingLimit` in `Card` and `CardHolder`
   * Add support for fields in `PaymentMethodDetails.Card.ThreeDSecure`
 
 ## 9.1.0 - 2019-04-11
-* [#737](https://github.com/stripe/stripe-java/pull/737) Fix issue #736 on un-encoded ID in url path
-* [#739](https://github.com/stripe/stripe-java/pull/739) Add support for `ConfirmationMethod` in `PaymentIntentCreateParams`, `AuthorizationControls` in cardholders mode/params
 * [#735](https://github.com/stripe/stripe-java/pull/735) Fix encoding of nested parameters in multipart requests
 * [#734](https://github.com/stripe/stripe-java/pull/734) Upgrade Gradle to 5.3.1
+* [#739](https://github.com/stripe/stripe-java/pull/739) Add support for `ConfirmationMethod` in `PaymentIntentCreateParams`, `AuthorizationControls` in cardholders mode/params
+* [#737](https://github.com/stripe/stripe-java/pull/737) Fix issue #736 on un-encoded ID in url path
 
 ## 9.0.0 - 2019-04-09
-* [#700](https://github.com/stripe/stripe-java/pull/700) Major version release. Refer to our [migration guide for v9](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v9) for a list of backward incompatible changes to watch out for.
-Pull requests included in this release:
-* [#698](https://github.com/stripe/stripe-java/pull/698) Drop support for Java 1.7
-* [#723](https://github.com/stripe/stripe-java/pull/723) Use `Optional` for unsafe event data object deserialization
-* [#705](https://github.com/stripe/stripe-java/pull/705) Add support for typed parameters, change deserialization of array in `Event#previousAttributes` from `Object[]` to `List<Object>`
-* [#729](https://github.com/stripe/stripe-java/pull/729) Add missing Javadoc for non-autogenerated classes (`EphemeralKey`, `Event` and `File`)
-* [#730](https://github.com/stripe/stripe-java/pull/730) Add support for typed parameters for non-autogenerated classes (`EphemeralKey`, `Event` and `File`)
 * [#702](https://github.com/stripe/stripe-java/pull/702) Dev dependency version upgrades
 * [#706](https://github.com/stripe/stripe-java/pull/706) Dev dependency version upgrades (Junit 5)
-* [#728](https://github.com/stripe/stripe-java/pull/728) Dev dependency version upgrades
+* [#698](https://github.com/stripe/stripe-java/pull/698) Drop support for Java 1.7
+* [#705](https://github.com/stripe/stripe-java/pull/705) Add support for typed parameters, change deserialization of array in `Event#previousAttributes` from `Object[]` to `List<Object>`
+* [#723](https://github.com/stripe/stripe-java/pull/723) Use `Optional` for unsafe event data object deserialization
 * [#713](https://github.com/stripe/stripe-java/pull/713) Use ErrorProne in builds
+* [#730](https://github.com/stripe/stripe-java/pull/730) Add support for typed parameters for non-autogenerated classes (`EphemeralKey`, `Event` and `File`)
+* [#700](https://github.com/stripe/stripe-java/pull/700) Major version release. Refer to our [migration guide for v9](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v9) for a list of backward incompatible changes to watch out for.
+  Pull requests included in this release:
+* [#729](https://github.com/stripe/stripe-java/pull/729) Add missing Javadoc for non-autogenerated classes (`EphemeralKey`, `Event` and `File`)
+* [#728](https://github.com/stripe/stripe-java/pull/728) Dev dependency version upgrades
 
 ## 8.1.0 - 2019-03-25
 * [#710](https://github.com/stripe/stripe-java/pull/710) Add support for `PaymentMethod.BillingDetails` on `Charge`.
@@ -3764,18 +3757,12 @@ Pull requests included in this release:
 ## 8.0.0 - 2019-03-19
 * [#662](https://github.com/stripe/stripe-java/pull/662) Major version release. Supports a pinned API version [2019-03-14](https://docs.stripe.com/changelog/2019-03-14). Refer to our [migration guide for v8](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v8) for API upgrade guide and lists of backwards incompatible changes to watch out for.
 
-## 7.63.1 - 2020-17-11
-* Identical to 7.29.0
-
-## 7.63.0 - 2020-17-11
-* Published in error. Do not use. This is identical to 20.27.0.
-
 ## 7.29.0 - 2019-03-18
 * [#695](https://github.com/stripe/stripe-java/pull/695) Add support for `payment_intent` on `Charge`.
 
 ## 7.28.0 - 2019-03-18
-* [#688](https://github.com/stripe/stripe-python/pull/688) Add support for the `PaymentMethod` resource and APIs
-* [#691](https://github.com/stripe/stripe-python/pull/691) Add support for deleting a Terminal `Location` and `Reader`
+* [#691](https://github.com/stripe/stripe-java/pull/691) Add support for deleting a Terminal `Location` and `Reader`
+* [#688](https://github.com/stripe/stripe-java/pull/688) Add support for the `PaymentMethod` resource and APIs
 
 ## 7.27.0 - 2019-03-13
 * [#689](https://github.com/stripe/stripe-java/pull/689) Add support for `columns` on `ReportRun` and `default_columns` on `ReportType`.
@@ -3784,8 +3771,8 @@ Pull requests included in this release:
 * [#686](https://github.com/stripe/stripe-java/pull/686) Add support for `cancel_at` on `Subscription`.
 
 ## 7.25.0 - 2019-02-28
-* [#684](https://github.com/stripe/stripe-java/pull/684) Add support for `latest_invoice` on `Subscription`.
 * [#685](https://github.com/stripe/stripe-java/pull/685) Add `api_version` to the `WebhookEndpoint` resource.
+* [#684](https://github.com/stripe/stripe-java/pull/684) Add support for `latest_invoice` on `Subscription`.
 
 ## 7.24.0 - 2019-02-22
 * [#681](https://github.com/stripe/stripe-java/pull/681) Add support for `status_transitions` and marked `date` as deprecated on `Invoice`.
@@ -3804,8 +3791,8 @@ Pull requests included in this release:
   * `PaymentIntentSourceAction`, `PaymentIntentSourceActionValueAuthorizeWithUrl` and `next_source_action` are now depreacated. Use `PaymentIntent.NextAction`, `PaymentIntent.NextActionRedirectToUrl` and `next_action` instead.
   * `allowed_source_types` is now depreacated. Use `payment_method_types` instead.
 * [#673](https://github.com/stripe/stripe-java/pull/673) Add support for `SubscriptionSchedule` and `SubscriptionScheduleRevision`. Also add support for `invoice_settings` on `Customer`.
-* [#675](https://github.com/stripe/stripe-java/pull/675) The `customer` property is now expandable on `Invoice`.
 * [#677](https://github.com/stripe/stripe-java/pull/677) Add support for `transfer_data[amount]` on `Charge`.
+* [#675](https://github.com/stripe/stripe-java/pull/675) The `customer` property is now expandable on `Invoice`.
 
 ## 7.19.0 - 2019-02-06
 * [#661](https://github.com/stripe/stripe-java/pull/661) Add configurable telemetry to gather information on client-side request latency
@@ -3821,15 +3808,15 @@ Pull requests included in this release:
 * [#656](https://github.com/stripe/stripe-java/pull/656) Added `receipt_url` property to `Charge`.
 
 ## 7.16.0 - 2019-01-17
-* [#653](https://github.com/stripe/stripe-java/pull/653) Add support for `custom_fields` and `footer` on `Invoice`.
 * [#655](https://github.com/stripe/stripe-java/pull/655) Add support for billing thresholds.
+* [#653](https://github.com/stripe/stripe-java/pull/653) Add support for `custom_fields` and `footer` on `Invoice`.
 
 ## 7.15.0 - 2019-01-14
 * [#652](https://github.com/stripe/stripe-java/pull/652) Add support for expandable `transfer_data[destination]` on `Charge` and `PaymentIntent`.
 
 ## 7.14.0 - 2019-01-11
-* [#632](https://github.com/stripe/stripe-java/pull/632) Add support for `transfer_data` and `application_fee_amount` on `Charge` and `transfer_data[destination] on `PaymentIntent`.
 * [#647](https://github.com/stripe/stripe-java/pull/647) Add support for deserializing `IssuerFraudRecord` in events.
+* [#632](https://github.com/stripe/stripe-java/pull/632) Add support for `transfer_data` and `application_fee_amount` on `Charge` and `transfer_data[destination] on `PaymentIntent`.
 
 ## 7.13.0 - 2019-01-09
 * [#626](https://github.com/stripe/stripe-java/pull/626) Add support for the `AccountLink` APIs.
@@ -3858,7 +3845,7 @@ Pull requests included in this release:
 
 ## 7.6.0 - 2018-11-09
 * [#613](https://github.com/stripe/stripe-java/pull/613) Throw `ApiException` on malformed JSON responses
-    - Previously, the library would throw `com.google.gson.JsonSyntaxException` in this case. We've chosen to release this as a minor update because we assume that most users are already catching Stripe exceptions.
+  - Previously, the library would throw `com.google.gson.JsonSyntaxException` in this case. We've chosen to release this as a minor update because we assume that most users are already catching Stripe exceptions.
 
 ## 7.5.0 - 2018-11-08
 * [#604](https://github.com/stripe/stripe-java/pull/604) Add new API endpoints for the `Invoice` resource.
@@ -3868,8 +3855,10 @@ Pull requests included in this release:
 
 ## 7.3.0 - 2018-11-07
 * [#610](https://github.com/stripe/stripe-java/pull/610) Add `flatAmount` to `Plan.Tier`
-* [#611](https://github.com/stripe/stripe-java/pull/611) Add `supportedTransferCountries` to `CountrySpec`
 * [#611](https://github.com/stripe/stripe-java/pull/611) Add `supportAddress` to `Account`
+* [#611](https://github.com/stripe/stripe-java/pull/611) Add `supportedTransferCountries` to `CountrySpec`
+
+## 4.11.0 - 2018-11-07
 
 ## 7.2.0 - 2018-10-31
 * [#603](https://github.com/stripe/stripe-java/pull/603) Add support for the `Person` resource
@@ -3882,6 +3871,7 @@ Pull requests included in this release:
 Major version release. Refer to our [migration guide for v7](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v7) for a list of backwards incompatible changes to watch out for.
 
 Pull requests included in this release:
+
 * [#598](https://github.com/stripe/stripe-java/pull/598) Compatibility with latest API version
 * [#593](https://github.com/stripe/stripe-java/pull/593) Replace `FileUpload` class with `File` class
 * [#592](https://github.com/stripe/stripe-java/pull/592) Support for terminal endpoints
@@ -3900,8 +3890,8 @@ Pull requests included in this release:
 * [#581](https://github.com/stripe/stripe-java/pull/581) Add `Topup.cancel()` overload with no arguments
 
 ## 6.8.0 - 2018-08-28
-* [#577](https://github.com/stripe/stripe-java/pull/577) Update `Customer` and `Plan` models for API version [2018-08-23](https://docs.stripe.com/changelog/2018-08-23)
 * [#579](https://github.com/stripe/stripe-java/pull/579) Add `authorizationCode` to `Charge`
+* [#577](https://github.com/stripe/stripe-java/pull/577) Update `Customer` and `Plan` models for API version [2018-08-23](https://docs.stripe.com/changelog/2018-08-23)
 
 ## 6.7.0 - 2018-08-27
 * [#575](https://github.com/stripe/stripe-java/pull/575) Remove support for `BitcoinReceiver` write-actions
@@ -3923,8 +3913,8 @@ Pull requests included in this release:
 * [#567](https://github.com/stripe/stripe-java/pull/567) Use delomboked sources when creating sources JAR
 
 ## 6.2.0 - 2018-08-01
-* [#565](https://github.com/stripe/stripe-java/pull/565) Add a `retrieve()` method that accepts parameters (e.g. for expansion) to all resource classes
 * [#566](https://github.com/stripe/stripe-java/pull/566) Add `object` attribute and accessors to `StripeCollection`
+* [#565](https://github.com/stripe/stripe-java/pull/565) Add a `retrieve()` method that accepts parameters (e.g. for expansion) to all resource classes
 
 ## 6.1.0 - 2018-07-30
 * [#561](https://github.com/stripe/stripe-java/pull/561) Add `created` to `Account`
@@ -3933,9 +3923,10 @@ Pull requests included in this release:
 Major version release. Refer to our [migration guide for v6](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v6) for a list of backwards incompatible changes to watch out for.
 
 Pull requests included in this release:
+
 * [#532](https://github.com/stripe/stripe-java/pull/532) Remove deprecated methods
-* [#534](https://github.com/stripe/stripe-java/pull/534) Only capitalize the first letter of acronyms per Google's style rules
 * [#535](https://github.com/stripe/stripe-java/pull/535) Change signatures to throw StripeException
+* [#534](https://github.com/stripe/stripe-java/pull/534) Only capitalize the first letter of acronyms per Google's style rules
 * [#538](https://github.com/stripe/stripe-java/pull/538) Change all integer types to `Long` and all floating point types to `Double`
 * [#540](https://github.com/stripe/stripe-java/pull/540) Add support for idempotency errors
 * [#541](https://github.com/stripe/stripe-java/pull/541) Minor fixes
@@ -3996,9 +3987,9 @@ Pull requests included in this release:
 * [#516](https://github.com/stripe/stripe-java/pull/516) Add `active` property to `Plan` model
 
 ## 5.37.0 - 2018-06-06
+* [#302](https://github.com/stripe/stripe-java/pull/302) The library now uses Project Lombok. All API resource classes now have `equals` and `hashCode` methods.
 * [#513](https://github.com/stripe/stripe-java/pull/513) Add `on_behalf_of` property on `Charge` model
 * [#512](https://github.com/stripe/stripe-java/pull/512) Fix `update()` methods for `FeeRefund` and `Reversal`
-* [#302](https://github.com/stripe/stripe-java/pull/302) The library now uses Project Lombok. All API resource classes now have `equals` and `hashCode` methods.
 
 ## 5.36.0 - 2018-05-09
 * [#505](https://github.com/stripe/stripe-java/pull/505) Add support for issuer fraud records
@@ -4047,15 +4038,15 @@ Pull requests included in this release:
 * [#438](https://github.com/stripe/stripe-java/pull/438) Add support for passing parameters to `SubscriptionItem.delete()`
 
 ## 5.26.0 - 2017-12-18
-* [#436](https://github.com/stripe/stripe-java/pull/436) Fix bug where `options` were not being plumbed through in an account delete method
 * [#436](https://github.com/stripe/stripe-java/pull/436) Add the proper set of overloads for account reject method
+* [#436](https://github.com/stripe/stripe-java/pull/436) Fix bug where `options` were not being plumbed through in an account delete method
 
 ## 5.25.0 - 2017-12-06
 * [#432](https://github.com/stripe/stripe-java/pull/432) Make charge on `Dispute` expandable
 
 ## 5.24.0 - 2017-11-28
-* [#421](https://github.com/stripe/stripe-java/pull/421) Expose response objects
 * [#427](https://github.com/stripe/stripe-java/pull/427) Add `automatic` property on `Payout` model
+* [#421](https://github.com/stripe/stripe-java/pull/421) Expose response objects
 
 ## 5.23.1 - 2017-11-09
 * [#423](https://github.com/stripe/stripe-java/pull/423) Fix JSON encoding for expandable fields by adding customer encoder
@@ -4070,8 +4061,8 @@ Pull requests included in this release:
 * [#417](https://github.com/stripe/stripe-java/pull/417) Support for listing source transactions
 
 ## 5.21.0 - 2017-10-09
-* [#410](https://github.com/stripe/stripe-java/pull/410) Rename "verification" to "code verification" for sources (should have been unused up to this point)
 * [#412](https://github.com/stripe/stripe-java/pull/412) Add support for detaching sources from customers
+* [#410](https://github.com/stripe/stripe-java/pull/410) Rename "verification" to "code verification" for sources (should have been unused up to this point)
 * Note that some minor versions (5.11 through 5.20) were accidentally skipped for this release. I'm leaving as is to minimize churn, but please don't be alarmed!
 
 ## 5.10.0 - 2017-10-04
@@ -4145,10 +4136,10 @@ Pull requests included in this release:
 * Make `rule` under `ChargeOutcome` expandable
 
 ## 4.0.0 - 2017-03-13
-* Dispute on charge becomes expandable field (not expanded by default)
+* Add missing fields on order: `amountReturned`, `returns`, and `upstreamId`
 * Charge on order becomes expandable field (not expanded by default)
 * Customer on order becomes expandable field (not expanded by default)
-* Add missing fields on order: `amountReturned`, `returns`, and `upstreamId`
+* Dispute on charge becomes expandable field (not expanded by default)
 * Fix type of `OrderReturnCollection` (now actually an order return)
 
 ## 3.11.0 - 2017-02-22
@@ -4178,6 +4169,8 @@ Pull requests included in this release:
 
 ## 3.5.0 - 2016-12-08
 * Add expandable Charge to Invoice
+
+## 3.4.0 - 2016-12-08
 
 ## 3.3.0 - 2016-11-22
 * Add retrieve method for 3-D Secure resources
@@ -4231,21 +4224,21 @@ Pull requests included in this release:
 * Add `Outcome` to the `Charge` model
 
 ## 2.1.0 - 2016-04-12
-* Deprecate `getUser` and `setUser` on `ApplicationFee`
-* Deprecate `getCard` and `setCard` on `Charge`
 * Deprecate `getAccount` and `setAccount` on `Transfer`
+* Deprecate `getCard` and `setCard` on `Charge`
 * Deprecate `getOtherTransfers` and `setOtherTransfers` on `Transfer`
 * Deprecate `getSummary` and `setSummary` on `Transfer`
+* Deprecate `getUser` and `setUser` on `ApplicationFee`
 
 ## 2.0.0 - 2016-04-08
 * Change `getBusinessUrl` to `getBusinessURL` in `Account` model
 * Change `getSupportUrl` to `getSupportURL` in `Account` model
 * Change `getUrl` to `getURL` in `Product` model
-* Change `setUrl` to `setURL` in `Product` model
 * Change `getUrl` to `getURL` in `StripeCollection` model
+* Change `getUrl` to `getURL` in `StripeCollectionInterface`
+* Change `setUrl` to `setURL` in `Product` model
 * Change `setUrl` to `setURL` in `StripeCollection` model
 * Remove previously-deprecated `getUrl` in `StripeCollectionAPIResource` model
-* Change `getUrl` to `getURL` in `StripeCollectionInterface`
 
 ## 1.48.0 - 2016-03-29
 * Add accessors for `default_currency` to `CountrySpec` model
@@ -4254,8 +4247,8 @@ Pull requests included in this release:
 * Allow request params and options to be overridden for `autoPagingIterable`
 
 ## 1.46.0 - 2016-03-15
-* Expose creating bank accounts on customer
 * Add `reject` action on account
+* Expose creating bank accounts on customer
 
 ## 1.45.0 - 2016-02-18
 * Add `CountrySpec` model for looking up country payment information
@@ -4309,8 +4302,8 @@ Pull requests included in this release:
 * Added `retrieve`, `all`, `update`, `create` methods to `Refund`
 
 ## 1.33.0 - 2015-08-03
-* Added `retrieve`, `all`, `update` and `close` methods to `Dispute`
 * Added `delete` method to managed `Account`s
+* Added `retrieve`, `all`, `update` and `close` methods to `Dispute`
 
 ## 1.32.1 - 2015-07-24
 * Added `account` to `ApplicationFee`.
@@ -4319,10 +4312,10 @@ Pull requests included in this release:
 * Added `getRequestId` method to `StripeException`.
 
 ## 1.31.0 - 2015-06-01
-* `ConcretePaymentSource` and the `PaymentSource` interface have been combined into one `ExternalAccount` class
-* `PaymentSourceCollection` was renamed `ExternalAccountCollection`
 * `Account` now supports `getExternalAccounts`, which allows both `BankAccount` and `Card` attachment.
 * `BankAccount`s can now be deleted from `Customer`s (private beta feature) and `Account`s
+* `ConcretePaymentSource` and the `PaymentSource` interface have been combined into one `ExternalAccount` class
+* `PaymentSourceCollection` was renamed `ExternalAccountCollection`
 
 ## 1.30.0 - 2015-05-28
 * Add decline_code, charge to CardException
@@ -4332,18 +4325,18 @@ Pull requests included in this release:
 * Added tax and tax percent fields to invoices
 
 ## 1.28.0 - 2015-05-08
-* Added support for Alipay accounts
 * Added default source when type is unknown
+* Added support for Alipay accounts
 * Added support dynamicLast4 on Card for Apple Pay integrations
 
 ## 1.27.1 - 2015-03-30
 * Charge objects now support status
 
-## 1.27.0 - 2015-02-19
-* Added support for transfer reversals
-* Added support for account creation/updating/retrieval by ID
-* Customer objects now support currency
+## 1.27.0 - 2015-03-19
 * Added STRIPE-ACCOUNT header options in RequestOptions
+* Added support for account creation/updating/retrieval by ID
+* Added support for transfer reversals
+* Customer objects now support currency
 
 ## 1.26.0 - 2015-02-19
 * Added Update and Delete for Bitcoin Receivers
@@ -4353,46 +4346,44 @@ Pull requests included in this release:
 ## 1.25.1 - 2015-01-23
 * Test of new stripe-java release process.
 
-## 1.25.0 - 2015-01-21
+## 1.25.0 - 2015-01-22
 * Support making bitcoin charges through BitcoinReceiver source object
 
 ## 1.24.1 - 2015-01-05
 * Support for fraud reporting methods was added
 
-## 1.24.0 - 2014-12-18
+## 1.24.0 - 2014-12-23
 * The ability to post multipart/form-data was added
 * Requests can now hit different base endpoints, by passing in `apiBase` when creating URLs
 * Support for the file upload endpoints was added. Documentation is available at https://stripe.com/docs/api#file_uploads
 * Support for fraud reporting (marking charges as safe or fraudulent) was added
 
 ## 1.23.0 - 2014-12-08
-* Java 1.5 support dropped. We strongly suggest using newer versions of Java due to runtime, VM, language, and syntax improvements
 * Dispute Evidence has been updated to reflect the new version of Dispute evidence format introduced as part of api version 2014-12-08. See https://docs.stripe.com/changelog/2014-12-08 for details
+* Java 1.5 support dropped. We strongly suggest using newer versions of Java due to runtime, VM, language, and syntax improvements
 
 ## 1.22.0 - 2014-12-03
+* Add shipping and address to the charge object
 * Convention is to call methods with a RequestOptions object, instead of an API Key directly
 * Support setting the stripe version on a per-request level, via the RequestOptions object
-* Add shipping and address to the charge object
 
 ### Deprecation
-
 * All requests that involve passing the apiKey directly to the method are now deprecated in favor of using RequestOptions instead. Use RequestOptions as follows:
-
-    RequestOptions.builder().setApiKey(apiKey).build()
+  RequestOptions.builder().setApiKey(apiKey).build()
 
 ## 1.21.0 - 2014-11-14
 * Created Charge.receiptEmail field
 * Created Charge.receiptNumber field
 
 ## 1.20.0 - 2014-11-06
+* Add id, currency, status, fingerprint, and defaultForCurrency to BankAccount
 * Change chargeEnabled to chargesEnabled
 * Change transferEnabled to transfersEnabled
-* Add id, currency, status, fingerprint, and defaultForCurrency to BankAccount
 
 ## 1.19.1 - 2014-10-02
 * Add back explict autoboxing for Google App Engine reflected HTTP method (fixes issue #106)
 
-## 1.19.0 - 2014-09-30
+## 1.19.0 - 2014-09-29
 * Add statementDescription field to transfer
 * A few non-breaking general cleanups
 
@@ -4402,15 +4393,15 @@ Pull requests included in this release:
 ## 1.17.0 - 2014-08-19
 * Added metadata to Coupons
 
-## 1.16.0 - 2014-07-26
+## 1.16.0 - 2014-07-29
 * Application Fee refunds now a list instead of array
 
 ## 1.15.1 - 2014-06-25
 * Added brand and funding to Card
 
 ## 1.15.0 - 2014-06-17
-* Added metadata to Refund
 * Added metadata to Dispute
+* Added metadata to Refund
 * Fixed incorrect return types for certain collection resources
 
 ## 1.14.1 - 2014-06-04
@@ -4429,15 +4420,15 @@ Pull requests included in this release:
 * Test SSL certificate against blacklist
 
 ## 1.11.0 - 2014-04-07
-* Upgrade customer, charge, and coupon collections to new pagination style
 * Add missing fields to Account object
+* Upgrade customer, charge, and coupon collections to new pagination style
 
 ## 1.10.0 - 2014-03-28
 * Support for newstyle pagination API (https://groups.google.com/a/lists.stripe.com/forum/#!topic/api-announce/29sLxmICA9E)
 
 ## 1.9.0 - 2014-03-17
-* Support for dynamic statement descriptions
 * Preserve original 'threaqd null ids through to requests' behavior
+* Support for dynamic statement descriptions
 
 ## 1.8.0 - 2014-03-12
 * Upgrade Google GSON to 2.2.4
@@ -4449,38 +4440,40 @@ Pull requests included in this release:
 ## 1.7.1 - 2014-01-31
 * Fix Subscription cancel method call
 * Miscellaneous field fixups
-    * Discount on Subscription is an expanded Discount, not string
-    * Add missing application_fee_percent field on Subscription
-    * Add missing application_fee field on Invoice
+  * Discount on Subscription is an expanded Discount, not string
+  * Add missing application_fee_percent field on Subscription
+  * Add missing application_fee field on Invoice
 
 ## 1.7.0 - 2014-01-29
 * Add support for multiple subscriptions per customer
 
 ## 1.6.5 - 2014-01-22
-* Fixed url to refund application fees (fixes #60)
 * DRY'd some of the application fee urls
+* Fixed url to refund application fees (fixes #60)
 
 ## 1.6.4 - 2014-01-16
 * Added metadata to InvoiceItem and InvoiceLineItem (fixes #59)
 
 ## 1.6.3 - 2014-01-13
-* Support overriding base url (for testing) (user request)
 * Add default currency to Account object (fixes #46)
 * Add metadata to plan object (thanks, desirable-objects)
 * Remove plan from Customer (fixes #42)
 * Style improvements (see #30) (thanks, steve-nester-uk)
+* Support overriding base url (for testing) (user request)
 
 ## 1.6.2 - 2014-01-08
 * Fix return type of Coupon.getRedeemBy
 
-## 1.6.1 - 2013-12-02
+## 1.6.1 - 2013-12-04
 * Add ApplicationFee API resource
 
 ## 1.5.1 - 2013-10-17
 * Added field transfer_enabled to Account API object (thanks, kurguzov)
 
-## 1.5.0 - 2013-10-01
+## 1.5.0 - 2013-10-17
 * Add support for metadata API
+
+## 1.4.3 - 2013-09-18
 
 ## 1.4.2 - 2013-09-18
 * Add support for closing disputes
@@ -4492,13 +4485,13 @@ Pull requests included in this release:
 * Tweak card create to align it with docs
 
 ## 1.3.2 - 2013-08-30
-* Add missing `retrieve` method to `BalanceTransaction`
-* Add missing fields to `BalanceTransaction`
-    * `id`
-    * `fee`
-    * `fee_details`
-    * `description`
 * Add `id` field to `Subscription`
+* Add missing fields to `BalanceTransaction`
+  * `id`
+  * `fee`
+  * `fee_details`
+  * `description`
+* Add missing `retrieve` method to `BalanceTransaction`
 
 ## 1.3.1 - 2013-08-21
 * Patch release with missing field, added tests
@@ -4507,9 +4500,9 @@ Pull requests included in this release:
 * Add BalanceTransaction API resource
 * Add Refund resource
 * Resource updates
-    * Remove `fee`, `feeDetails` from Transfer and Charge resources
-    * Add `balanceTransaction` to Transfer, Charge, and Dispute resources
-    * Add `refunds` to Charge resource
+  * Remove `fee`, `feeDetails` from Transfer and Charge resources
+  * Add `balanceTransaction` to Transfer, Charge, and Dispute resources
+  * Add `refunds` to Charge resource
 
 ## 1.2.8 - 2013-08-12
 * Add support for unsetting attributes by updating with a null value. Setting properties to a blank string is now an error.
@@ -4519,19 +4512,19 @@ Pull requests included in this release:
 
 ## 1.2.6 - 2013-07-30
 * Add 'createCard' to Customer
-* Update card collections bindings
 * Parse card objects when receiving customer.card.created events
+* Update card collections bindings
 
 ## 1.2.5 - 2013-07-15
-* Add support for new cards API.
-    * You will probably need to upgrade the Stripe API version on your account to 2013-07-05 or explicitly specify an API version with com.stripe.Stripe.apiVersion when you switch to this release of the bindings. More information about the relevant changes can be found at https://docs.stripe.com/changelog/2013-07-05 and http://bit.ly/13miHM8
-* Add a StripeRawJsonObject type for deserializing webhook events we don't recognize
 * Add a Money class for representing account balances in individual currencies
+* Add a StripeRawJsonObject type for deserializing webhook events we don't recognize
+* Add support for new cards API.
+  * You will probably need to upgrade the Stripe API version on your account to 2013-07-05 or explicitly specify an API version with com.stripe.Stripe.apiVersion when you switch to this release of the bindings. More information about the relevant changes can be found at https://docs.stripe.com/changelog/2013-07-05 and http://bit.ly/13miHM8
 
-## 1.2.4 - 2013-06-21
+## 1.2.4 - 2013-06-22
 * Add more Balance API resource, and add to deserializer.
 
-## 1.2.3 - 2013-05-7
+## 1.2.3 - 2013-05-07
 * Rename BankAccount property `valid` to `validated`
 
 ## 1.2.2 - 2013-04-25
@@ -4540,11 +4533,11 @@ Pull requests included in this release:
 ## 1.2.1 - 2013-04-20
 * Fix TransferTransaction fee retrieval
 
-## 1.2.0 - 2013-04-11
-* Allow Transfers to be creatable
+## 1.2.0 - 2013-04-20
 * Add new Recipient resource
+* Allow Transfers to be creatable
 
-## 1.1.18 - 2013-03-19
+## 1.1.18 - 2013-03-18
 * Add support for charge capture.
 
 ## 1.1.17 - 2013-02-18
@@ -4555,8 +4548,8 @@ Pull requests included in this release:
 * Fix off-by-one error in deserializing events (github issue #27).
 
 ## 1.1.15 - 2013-02-01
-* List all checked exceptions throws by methods.
 * Add support for plan interval count.
+* List all checked exceptions throws by methods.
 
 ## 1.1.14 - 2013-01-15
 * Add support for setting Stripe API version override.
@@ -4572,8 +4565,8 @@ Pull requests included in this release:
 * Explict cast to javax.net.ssl.HttpsURLConnection to prevent issues with user imports
 
 ## 1.1.10 - 2012-11-15
-* Add currency to Invoice resource
 * Add amountOff and currency to Coupon resource
+* Add currency to Invoice resource
 
 ## 1.1.9 - 2012-11-08
 * Add new Dispute resource
@@ -4583,7 +4576,7 @@ Pull requests included in this release:
 * Add support for creating invoices
 * Add support for new Invoice.lines return format
 
-## 1.1.7 - 2012-10-15
+## 1.1.7 - 2012-10-24
 * Add quantity to Subscription
 
 ## 1.1.6 - 2012-10-15
@@ -4595,7 +4588,7 @@ Pull requests included in this release:
 ## 1.1.4 - 2012-08-31
 * Add update and pay methods for Invoice resource
 
-## 1.1.3 - 2012-08-15
+## 1.1.3 - 2012-08-17
 * Add the Account API resource
 
 ## 1.1.2 - 2012-08-06
@@ -4605,10 +4598,42 @@ Pull requests included in this release:
 * Use String.length() == 0 instead of String.isEmpty() for compatibility with JDK 1.5 (needed for Android 2.2)
 
 ## 1.1.0 - 2012-05-16
-* Change type of cvcCheck, addressZipCheck, and addressLine1Check attributes on com.stripe.model.Card; values of those fields will be "pass", "fail", "unchecked", or null (github issue #11)
-* Remove code and percentOff attributes from com.stripe.model.Discount. Stripe never returned these values for Discount objects, so they would previously always be null
 * Add missing fields to Charge, Coupon, Discount, Event, and Invoice models (github issue #12)
-* Include parameters passed to any object's delete method in actual API requests (github issue #10)
 * Add new deleteDiscount method to com.stripe.model.Customer
-* Switch from using HTTP Basic auth to Bearer auth. (Note: Stripe will support Basic auth for the indefinite future, but recommends Bearer auth when possible going forward)
+* Change type of cvcCheck, addressZipCheck, and addressLine1Check attributes on com.stripe.model.Card; values of those fields will be "pass", "fail", "unchecked", or null (github issue #11)
+* Include parameters passed to any object's delete method in actual API requests (github issue #10)
 * Numerous test suite improvements
+* Remove code and percentOff attributes from com.stripe.model.Discount. Stripe never returned these values for Discount objects, so they would previously always be null
+* Switch from using HTTP Basic auth to Bearer auth. (Note: Stripe will support Basic auth for the indefinite future, but recommends Bearer auth when possible going forward)
+
+## 1.0.16 - 2012-05-09
+
+## 1.0.15 - 2012-04-11
+
+## 1.0.14 - 2012-03-16
+
+## 1.0.13 - 2012-03-02
+
+## 1.0.12 - 2012-01-30
+
+## 1.0.11 - 2012-01-20
+
+## 1.0.9 - 2011-12-13
+
+## 1.0.8 - 2011-12-11
+
+## 1.0.7 - 2011-11-29
+
+## 1.0.6 - 2011-11-23
+
+## 1.0.5 - 2011-11-20
+
+## 1.0.4 - 2011-11-11
+
+## 1.0.3 - 2011-11-03
+
+## 1.0.2 - 2011-10-27
+
+## 1.0.1 - 2011-10-14
+
+## 1.0.0 - 2011-10-09

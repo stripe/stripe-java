@@ -1,0 +1,9 @@
+---
+title: API Updates
+pr_url: https://github.com/stripe/stripe-java/pull/1474
+is_breaking: true
+is_stripe_api_change: true
+released_in_version: 22.0.0
+---
+
+* ⚠️ Remove support for `tos_shown_and_accepted` on `checkout.SessionCreateParams.payment_method_options.paynow`. The property was mistakenly released and never worked.
