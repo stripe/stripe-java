@@ -1,6 +1,6 @@
 ---
 title: generate private-preview SDK w/ mid Sept changes
-pr_link: https://github.com/stripe/stripe-java/pull/2042
+pr_url: https://github.com/stripe/stripe-java/pull/2042
 is_stripe_api_change: true
 released_in_version: 29.6.0-alpha.2
 ---

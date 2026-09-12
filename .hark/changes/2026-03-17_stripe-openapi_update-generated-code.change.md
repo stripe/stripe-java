@@ -1,6 +1,6 @@
 ---
 title: Update generated code for private-preview
-pr_link: https://github.com/stripe/stripe-java/pull/2183
+pr_url: https://github.com/stripe/stripe-java/pull/2183
 is_stripe_api_change: true
 released_in_version: 31.5.0-alpha.4
 ---
