@@ -1,6 +1,6 @@
 ---
 title: Fix type bounds on request
-pr_link: https://github.com/stripe/stripe-java/pull/2037
+pr_url: https://github.com/stripe/stripe-java/pull/2037
 is_breaking: true
 released_in_version: 30.0.0
 ---

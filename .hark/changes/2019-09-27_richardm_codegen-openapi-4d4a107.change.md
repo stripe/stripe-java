@@ -1,6 +1,6 @@
 ---
 title: Codegen for openapi 4d4a107
-pr_link: https://github.com/stripe/stripe-java/pull/850
+pr_url: https://github.com/stripe/stripe-java/pull/850
 released_in_version: 12.1.0
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Change Automatic-Module-Name to com.stripe
-pr_link: https://github.com/stripe/stripe-java/pull/2181
+pr_url: https://github.com/stripe/stripe-java/pull/2181
 is_breaking: true
 released_in_version: 32.0.0
 ---

@@ -1,6 +1,6 @@
 ---
 title: Added deprecated annotation to builder methods
-pr_link: https://github.com/stripe/stripe-java/pull/1804
+pr_url: https://github.com/stripe/stripe-java/pull/1804
 released_in_version: 25.8.0
 ---
 

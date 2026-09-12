@@ -1,6 +1,6 @@
 ---
 title: Add support for ACSS Debit
-pr_link: https://github.com/stripe/stripe-java/pull/1195
+pr_url: https://github.com/stripe/stripe-java/pull/1195
 is_stripe_api_change: true
 released_in_version: 20.47.0
 ---

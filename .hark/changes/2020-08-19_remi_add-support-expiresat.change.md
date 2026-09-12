@@ -1,5 +1,5 @@
 ---
 title: Add support for `expires_at` on `File`
-pr_link: https://github.com/stripe/stripe-java/pull/1085
+pr_url: https://github.com/stripe/stripe-java/pull/1085
 released_in_version: 19.45.0
 ---

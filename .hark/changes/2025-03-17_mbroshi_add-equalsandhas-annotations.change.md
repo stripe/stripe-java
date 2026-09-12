@@ -1,6 +1,6 @@
 ---
 title: Add @EqualsAndHashCode annotations
-pr_link: https://github.com/stripe/stripe-java/pull/1955
+pr_url: https://github.com/stripe/stripe-java/pull/1955
 released_in_version: 29.0.0
 ---
 

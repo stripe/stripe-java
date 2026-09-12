@@ -1,6 +1,6 @@
 ---
 title: Codegen for openapi d8f9ddf
-pr_link: https://github.com/stripe/stripe-java/pull/871
+pr_url: https://github.com/stripe/stripe-java/pull/871
 released_in_version: 14.3.0
 ---
 

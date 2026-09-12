@@ -1,6 +1,6 @@
 ---
 title: Report usage of `stripe_client`
-pr_link: https://github.com/stripe/stripe-java/pull/1721
+pr_url: https://github.com/stripe/stripe-java/pull/1721
 released_in_version: 24.12.0
 ---
 

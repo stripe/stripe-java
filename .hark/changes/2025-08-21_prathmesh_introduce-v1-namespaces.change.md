@@ -1,6 +1,6 @@
 ---
 title: Introduce V1 namespaces in StripeClient
-pr_link: https://github.com/stripe/stripe-java/pull/2032
+pr_url: https://github.com/stripe/stripe-java/pull/2032
 released_in_version: 29.5.0
 ---
 

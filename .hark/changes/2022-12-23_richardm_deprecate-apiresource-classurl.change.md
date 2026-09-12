@@ -1,6 +1,6 @@
 ---
 title: Deprecate ApiResource.classUrl, etc.
-pr_link: https://github.com/stripe/stripe-java/pull/1500
+pr_url: https://github.com/stripe/stripe-java/pull/1500
 released_in_version: 22.5.0
 ---
 

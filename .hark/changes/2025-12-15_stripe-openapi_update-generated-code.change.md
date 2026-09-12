@@ -1,6 +1,6 @@
 ---
 title: Update generated code
-pr_link: https://github.com/stripe/stripe-java/pull/2126
+pr_url: https://github.com/stripe/stripe-java/pull/2126
 is_stripe_api_change: true
 released_in_version: 31.1.0
 ---

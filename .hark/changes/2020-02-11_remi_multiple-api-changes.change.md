@@ -1,6 +1,6 @@
 ---
 title: Multiple API changes
-pr_link: https://github.com/stripe/stripe-java/pull/963
+pr_url: https://github.com/stripe/stripe-java/pull/963
 is_stripe_api_change: true
 released_in_version: 17.9.0
 ---

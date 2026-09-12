@@ -1,5 +1,5 @@
 ---
 title: Add `StripeObjectInterface` interface
-pr_link: https://github.com/stripe/stripe-java/pull/940
+pr_url: https://github.com/stripe/stripe-java/pull/940
 released_in_version: 17.1.0
 ---

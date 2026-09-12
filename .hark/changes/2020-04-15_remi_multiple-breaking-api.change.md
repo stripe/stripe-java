@@ -1,6 +1,6 @@
 ---
 title: "Multiple breaking API changes while removing deprecated Issuing features:"
-pr_link: https://github.com/stripe/stripe-java/pull/1009
+pr_url: https://github.com/stripe/stripe-java/pull/1009
 released_in_version: 19.0.0
 ---
 

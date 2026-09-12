@@ -1,6 +1,6 @@
 ---
 title: "Multiple API changes:"
-pr_link: https://github.com/stripe/stripe-java/pull/889
+pr_url: https://github.com/stripe/stripe-java/pull/889
 released_in_version: 15.2.0
 ---
 

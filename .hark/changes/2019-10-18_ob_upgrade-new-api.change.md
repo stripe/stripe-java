@@ -1,6 +1,6 @@
 ---
 title: Upgrade to new API version [`2019-10-17`](https://docs.stripe.com/changelog/2019-10-17)
-pr_link: https://github.com/stripe/stripe-java/pull/863
+pr_url: https://github.com/stripe/stripe-java/pull/863
 released_in_version: 14.0.0
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Multiple API changes
-pr_link: https://github.com/stripe/stripe-java/pull/1098
+pr_url: https://github.com/stripe/stripe-java/pull/1098
 is_stripe_api_change: true
 released_in_version: 20.4.0
 ---

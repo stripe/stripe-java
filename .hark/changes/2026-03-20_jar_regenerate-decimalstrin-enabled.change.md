@@ -1,6 +1,6 @@
 ---
 title: Regenerate with decimal_string enabled for v2 APIs
-pr_link: https://github.com/stripe/stripe-java/pull/2187
+pr_url: https://github.com/stripe/stripe-java/pull/2187
 is_breaking: true
 released_in_version: 32.0.0
 ---

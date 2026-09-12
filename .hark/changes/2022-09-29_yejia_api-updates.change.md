@@ -1,6 +1,6 @@
 ---
 title: API Updates
-pr_link: https://github.com/stripe/stripe-java/pull/1448
+pr_url: https://github.com/stripe/stripe-java/pull/1448
 is_stripe_api_change: true
 released_in_version: 21.10.0
 ---

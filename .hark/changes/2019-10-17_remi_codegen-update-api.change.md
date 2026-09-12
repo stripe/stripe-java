@@ -1,6 +1,6 @@
 ---
 title: "[codegen] Update API Resources"
-pr_link: https://github.com/stripe/stripe-java/pull/862
+pr_url: https://github.com/stripe/stripe-java/pull/862
 released_in_version: 13.3.0
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Deprecate Java params based on OpenAPI spec
-pr_link: https://github.com/stripe/stripe-java/pull/1787
+pr_url: https://github.com/stripe/stripe-java/pull/1787
 released_in_version: 25.5.0
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Move to the latest API version and add new changes
-pr_link: https://github.com/stripe/stripe-java/pull/886
+pr_url: https://github.com/stripe/stripe-java/pull/886
 released_in_version: 15.0.0
 ---
 

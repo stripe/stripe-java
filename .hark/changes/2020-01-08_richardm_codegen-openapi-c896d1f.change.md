@@ -1,6 +1,6 @@
 ---
 title: Codegen for openapi c896d1f
-pr_link: https://github.com/stripe/stripe-java/pull/922
+pr_url: https://github.com/stripe/stripe-java/pull/922
 is_stripe_api_change: true
 released_in_version: 16.5.0
 ---

@@ -1,6 +1,6 @@
 ---
 title: Update webhook API version validation
-pr_link: https://github.com/stripe/stripe-java/pull/1906
+pr_url: https://github.com/stripe/stripe-java/pull/1906
 released_in_version: 27.1.2
 ---
 

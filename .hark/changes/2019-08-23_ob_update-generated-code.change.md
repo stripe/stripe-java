@@ -1,6 +1,6 @@
 ---
 title: Update generated code
-pr_link: https://github.com/stripe/stripe-java/pull/829
+pr_url: https://github.com/stripe/stripe-java/pull/829
 released_in_version: 11.3.0
 ---
 

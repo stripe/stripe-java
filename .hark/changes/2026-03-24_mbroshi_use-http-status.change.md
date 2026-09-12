@@ -1,6 +1,6 @@
 ---
 title: Use HTTP status code in V2 errors
-pr_link: https://github.com/stripe/stripe-java/pull/2131
+pr_url: https://github.com/stripe/stripe-java/pull/2131
 is_breaking: true
 released_in_version: 32.0.0
 ---

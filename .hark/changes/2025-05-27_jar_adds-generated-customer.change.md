@@ -1,6 +1,6 @@
 ---
 title: Adds generated Customer retrievePaymentMethod overload
-pr_link: https://github.com/stripe/stripe-java/pull/2002
+pr_url: https://github.com/stripe/stripe-java/pull/2002
 released_in_version: 29.2.0
 ---
 

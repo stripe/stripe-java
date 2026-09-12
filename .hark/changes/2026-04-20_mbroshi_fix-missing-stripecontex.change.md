@@ -1,6 +1,6 @@
 ---
 title: Fix missing stripeContext in RequestOptions.toBuilderFullCopy()
-pr_link: https://github.com/stripe/stripe-java/pull/2208
+pr_url: https://github.com/stripe/stripe-java/pull/2208
 released_in_version: 32.1.0
 ---
 

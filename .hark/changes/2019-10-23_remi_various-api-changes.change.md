@@ -1,6 +1,6 @@
 ---
 title: Various API changes
-pr_link: https://github.com/stripe/stripe-java/pull/866
+pr_url: https://github.com/stripe/stripe-java/pull/866
 is_stripe_api_change: true
 released_in_version: 14.1.0
 ---

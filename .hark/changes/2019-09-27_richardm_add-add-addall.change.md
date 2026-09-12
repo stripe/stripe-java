@@ -1,6 +1,6 @@
 ---
 title: Add add/addAll support for "emptyable" params
-pr_link: https://github.com/stripe/stripe-java/pull/849
+pr_url: https://github.com/stripe/stripe-java/pull/849
 released_in_version: 12.1.0
 ---
 

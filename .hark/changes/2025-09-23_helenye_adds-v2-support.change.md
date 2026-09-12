@@ -1,6 +1,6 @@
 ---
 title: Adds v2 support to RateLimitException
-pr_link: https://github.com/stripe/stripe-java/pull/2046
+pr_url: https://github.com/stripe/stripe-java/pull/2046
 is_breaking: true
 released_in_version: 30.0.0
 ---

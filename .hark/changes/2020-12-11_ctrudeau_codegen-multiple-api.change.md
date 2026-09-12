@@ -1,6 +1,6 @@
 ---
 title: "[codegen] Multiple API changes"
-pr_link: https://github.com/stripe/stripe-java/pull/1163
+pr_url: https://github.com/stripe/stripe-java/pull/1163
 released_in_version: 20.32.0
 ---
 

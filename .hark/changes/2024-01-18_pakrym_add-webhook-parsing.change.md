@@ -1,6 +1,6 @@
 ---
 title: Add webhook parsing method on StripeClient
-pr_link: https://github.com/stripe/stripe-java/pull/1724
+pr_url: https://github.com/stripe/stripe-java/pull/1724
 released_in_version: 24.12.0
 ---
 
