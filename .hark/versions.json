@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "language": "java",
+    "channel": "beta"
+  },
   "versions": [
     {
       "version": "33.5.0-beta.1",
