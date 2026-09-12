@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "language": "java",
+    "channel": "ga"
+  },
   "versions": [
     {
       "version": "33.4.2",
