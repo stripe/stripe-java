@@ -3,7 +3,7 @@
     "language": "java",
     "channel": "beta"
   },
-  "versions": [
+  "releases": [
     {
       "version": "33.5.0-beta.1",
       "released_on": "2026-08-26",
