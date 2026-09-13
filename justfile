@@ -38,3 +38,7 @@ update-version version:
     perl -pi -e 's|<version>[.\d\-\w]+<\/version>|<version>{{ version }}</version>|' README.md
     perl -pi -e 's|VERSION_NAME=[.\d\-\w]+|VERSION_NAME={{ version }}|' gradle.properties
     perl -pi -e 's|public static final String VERSION = "[.\d\-\w]+";|public static final String VERSION = "{{ version }}";|' src/main/java/com/stripe/Stripe.java
+
+# the lowest JDK this SDK supports, for the changelog
+minimum-runtime-version:
+    rg -N --color never -o 'sourceCompatibility = JavaVersion.VERSION_(\S+)' --replace '$1' build.gradle | tr '_' '.'
