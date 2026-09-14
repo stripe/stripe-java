@@ -1,6 +1,6 @@
 ---
 title: "Generated changes from [#2170](https://github.com/stripe/stripe-java/pull/2170), [#2193](https://github.com/stripe/stripe-java/pull/2193), [#2191](https://github.com/stripe/stripe-java/pull/2191)"
-is_breaking: true
+semver_level: major
 is_stripe_api_change: true
 section: ⚠️ Breaking changes due to changes in the Stripe API
 released_in_version: 32.0.0

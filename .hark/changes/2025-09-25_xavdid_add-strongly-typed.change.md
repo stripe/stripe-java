@@ -1,7 +1,7 @@
 ---
 title: Add strongly typed EventNotifications
 pr_url: https://github.com/stripe/stripe-java/pull/2036
-is_breaking: true
+semver_level: major
 released_in_version: 30.0.0
 ---
 

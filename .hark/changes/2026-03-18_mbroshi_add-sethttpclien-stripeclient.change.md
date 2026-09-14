@@ -1,7 +1,7 @@
 ---
 title: Add setHttpClient to StripeClientBuilder; clean up apiKey/authenticator coupling
 pr_url: https://github.com/stripe/stripe-java/pull/2182
-is_breaking: true
+semver_level: major
 released_in_version: 32.0.0
 ---
 

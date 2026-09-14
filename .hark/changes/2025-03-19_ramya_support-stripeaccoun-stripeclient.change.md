@@ -1,7 +1,7 @@
 ---
 title: Support for StripeAccount in StripeClient, and StripeContext on V1
 pr_url: https://github.com/stripe/stripe-java/pull/1958
-is_breaking: true
+semver_level: major
 released_in_version: 29.0.0
 ---
 

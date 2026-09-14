@@ -1,6 +1,6 @@
 ---
 title: Changed type of `businessType` field in `AccountCreateParams` from `Object` to `BusinessType`
-is_breaking: true
+semver_level: major
 section: ⚠️ Changed
 released_in_version: 21.0.0
 ---

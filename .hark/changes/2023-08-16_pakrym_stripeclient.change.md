@@ -1,7 +1,7 @@
 ---
 title: StripeClient
 pr_url: https://github.com/stripe/stripe-java/pull/1622
-is_breaking: true
+semver_level: major
 released_in_version: 23.0.0
 ---
 

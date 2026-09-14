@@ -1,6 +1,6 @@
 ---
 title: Removed deprecated `AlipayAccount` and related classes.
-is_breaking: true
+semver_level: major
 section: ⚠️ Removed
 released_in_version: 21.0.0
 ---
