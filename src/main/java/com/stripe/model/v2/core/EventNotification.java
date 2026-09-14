@@ -9,6 +9,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObject;
 import com.stripe.model.v2.EventNotificationClassLookup;
 import com.stripe.model.v2.core.Event.RelatedObject;
+import com.stripe.model.v2.core.Event.RelatedSingletonObject;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiResource.RequestMethod;
@@ -162,8 +163,19 @@ public abstract class EventNotification {
       return null;
     }
 
-    String relativeUrl = relatedObject.getUrl();
+    return fetchRelatedObjectByUrl(relatedObject.getUrl());
+  }
 
+  protected StripeObject fetchRelatedObject(RelatedSingletonObject relatedObject)
+      throws StripeException {
+    if (relatedObject == null) {
+      return null;
+    }
+
+    return fetchRelatedObjectByUrl(relatedObject.getUrl());
+  }
+
+  private StripeObject fetchRelatedObjectByUrl(String relativeUrl) throws StripeException {
     StripeResponse response =
         client.rawRequest(RequestMethod.GET, relativeUrl, null, getRequestOptions());
 
