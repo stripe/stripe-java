@@ -18,7 +18,7 @@ public class LiveStripeResponseGetterNoticeTest {
   public void testTellsHumansHowToSuppressNotices() {
     assertEquals(
         Optional.of(
-            "test notice\nTo suppress Stripe notices in test and sandbox environments, set STRIPE_SUPPRESS_NOTICES=true."),
+            "test notice\nTo suppress Stripe notices in test and sandbox environments, set the STRIPE_SUPPRESS_NOTICES environment variable to true."),
         LiveStripeResponseGetter.buildStripeNoticeMessage(NOTICE_HEADERS, key -> null));
   }
 
@@ -37,7 +37,7 @@ public class LiveStripeResponseGetterNoticeTest {
     for (String value : new String[] {"", "false", "1", "invalid"}) {
       assertEquals(
           Optional.of(
-              "test notice\nTo suppress Stripe notices in test and sandbox environments, set STRIPE_SUPPRESS_NOTICES=true."),
+              "test notice\nTo suppress Stripe notices in test and sandbox environments, set the STRIPE_SUPPRESS_NOTICES environment variable to true."),
           LiveStripeResponseGetter.buildStripeNoticeMessage(
               NOTICE_HEADERS, environmentWith("STRIPE_SUPPRESS_NOTICES", value)));
     }

@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static final Logger logger = Logger.getLogger("Stripe");
   private static final String STRIPE_NOTICE_SUPPRESSION_MESSAGE =
-      "To suppress Stripe notices in test and sandbox environments, set STRIPE_SUPPRESS_NOTICES=true.";
+      "To suppress Stripe notices in test and sandbox environments, set the STRIPE_SUPPRESS_NOTICES environment variable to true.";
 
   private final HttpClient httpClient;
   private final StripeResponseGetterOptions options;
