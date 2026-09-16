@@ -71,16 +71,18 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   Object plan;
 
   /**
-   * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-   * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code quantity}
-   * parameter is provided.
+   * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+   * both, to set or change this item's price. If you're updating an existing item without changing
+   * its price, omit both. When changing a subscription item's price, {@code quantity} is set to 1
+   * unless a {@code quantity} parameter is provided.
    */
   @SerializedName("price")
   Object price;
 
   /**
    * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-   * inline. One of {@code price} or {@code price_data} is required.
+   * inline. You can use either {@code price} or {@code price_data}, but not both, to set or change
+   * this item's price. If you're updating an existing item without changing its price, omit both.
    */
   @SerializedName("price_data")
   PriceData priceData;
@@ -404,9 +406,10 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-     * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code quantity}
-     * parameter is provided.
+     * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+     * both, to set or change this item's price. If you're updating an existing item without
+     * changing its price, omit both. When changing a subscription item's price, {@code quantity} is
+     * set to 1 unless a {@code quantity} parameter is provided.
      */
     public Builder setPrice(String price) {
       this.price = price;
@@ -414,9 +417,10 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-     * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code quantity}
-     * parameter is provided.
+     * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+     * both, to set or change this item's price. If you're updating an existing item without
+     * changing its price, omit both. When changing a subscription item's price, {@code quantity} is
+     * set to 1 unless a {@code quantity} parameter is provided.
      */
     public Builder setPrice(EmptyParam price) {
       this.price = price;
@@ -425,7 +429,9 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
     /**
      * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-     * inline. One of {@code price} or {@code price_data} is required.
+     * inline. You can use either {@code price} or {@code price_data}, but not both, to set or
+     * change this item's price. If you're updating an existing item without changing its price,
+     * omit both.
      */
     public Builder setPriceData(SubscriptionItemUpdateParams.PriceData priceData) {
       this.priceData = priceData;

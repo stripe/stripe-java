@@ -44,9 +44,7 @@ public final class V2CoreHealthEventGenerationFailureResolvedEvent extends Event
       String eventType;
       /** The related object details. */
       @SerializedName("related_object")
-      com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEvent.EventData.Impact
-              .RelatedObject
-          relatedObject;
+      RelatedObject relatedObject;
 
       public static final class RelatedObject {
         /** The ID of the related object (e.g., &quot;pi_...&quot;). */

@@ -72,6 +72,13 @@ public class PayoutCreateParams extends ApiRequestParams {
   String payoutMethod;
 
   /**
+   * Additional options that complement the payout_method. The keys in this dictionary identify the
+   * type of payout method the options apply to.
+   */
+  @SerializedName("payout_method_options")
+  PayoutMethodOptions payoutMethodOptions;
+
+  /**
    * The balance type of your Stripe balance to draw this payout from. Balances for different
    * payment sources are kept separately. You can find the amounts with the Balances API. One of
    * {@code bank_account}, {@code card}, or {@code fpx}.
@@ -100,6 +107,7 @@ public class PayoutCreateParams extends ApiRequestParams {
       Map<String, String> metadata,
       Method method,
       String payoutMethod,
+      PayoutMethodOptions payoutMethodOptions,
       SourceType sourceType,
       String statementDescriptor) {
     this.amount = amount;
@@ -111,6 +119,7 @@ public class PayoutCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.method = method;
     this.payoutMethod = payoutMethod;
+    this.payoutMethodOptions = payoutMethodOptions;
     this.sourceType = sourceType;
     this.statementDescriptor = statementDescriptor;
   }
@@ -138,6 +147,8 @@ public class PayoutCreateParams extends ApiRequestParams {
 
     private String payoutMethod;
 
+    private PayoutMethodOptions payoutMethodOptions;
+
     private SourceType sourceType;
 
     private String statementDescriptor;
@@ -154,6 +165,7 @@ public class PayoutCreateParams extends ApiRequestParams {
           this.metadata,
           this.method,
           this.payoutMethod,
+          this.payoutMethodOptions,
           this.sourceType,
           this.statementDescriptor);
     }
@@ -285,6 +297,16 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Additional options that complement the payout_method. The keys in this dictionary identify
+     * the type of payout method the options apply to.
+     */
+    public Builder setPayoutMethodOptions(
+        PayoutCreateParams.PayoutMethodOptions payoutMethodOptions) {
+      this.payoutMethodOptions = payoutMethodOptions;
+      return this;
+    }
+
+    /**
      * The balance type of your Stripe balance to draw this payout from. Balances for different
      * payment sources are kept separately. You can find the amounts with the Balances API. One of
      * {@code bank_account}, {@code card}, or {@code fpx}.
@@ -305,6 +327,163 @@ public class PayoutCreateParams extends ApiRequestParams {
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PayoutMethodOptions {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Additional options for a Financial Account payout method. Only valid when payout_method is a
+     * Financial Account ID.
+     */
+    @SerializedName("financial_account")
+    FinancialAccount financialAccount;
+
+    private PayoutMethodOptions(
+        Map<String, Object> extraParams, FinancialAccount financialAccount) {
+      this.extraParams = extraParams;
+      this.financialAccount = financialAccount;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private FinancialAccount financialAccount;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PayoutCreateParams.PayoutMethodOptions build() {
+        return new PayoutCreateParams.PayoutMethodOptions(this.extraParams, this.financialAccount);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PayoutCreateParams.PayoutMethodOptions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PayoutCreateParams.PayoutMethodOptions#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Additional options for a Financial Account payout method. Only valid when payout_method is
+       * a Financial Account ID.
+       */
+      public Builder setFinancialAccount(
+          PayoutCreateParams.PayoutMethodOptions.FinancialAccount financialAccount) {
+        this.financialAccount = financialAccount;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FinancialAccount {
+      /**
+       * Identifies the currency to credit in the destination Financial Account. Must be a currency
+       * supported by the target Financial Account. When omitted, the payout uses the currency
+       * parameter.
+       */
+      @SerializedName("destination_currency")
+      String destinationCurrency;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private FinancialAccount(String destinationCurrency, Map<String, Object> extraParams) {
+        this.destinationCurrency = destinationCurrency;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String destinationCurrency;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PayoutCreateParams.PayoutMethodOptions.FinancialAccount build() {
+          return new PayoutCreateParams.PayoutMethodOptions.FinancialAccount(
+              this.destinationCurrency, this.extraParams);
+        }
+
+        /**
+         * Identifies the currency to credit in the destination Financial Account. Must be a
+         * currency supported by the target Financial Account. When omitted, the payout uses the
+         * currency parameter.
+         */
+        public Builder setDestinationCurrency(String destinationCurrency) {
+          this.destinationCurrency = destinationCurrency;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PayoutCreateParams.PayoutMethodOptions.FinancialAccount#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PayoutCreateParams.PayoutMethodOptions.FinancialAccount#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
     }
   }
 

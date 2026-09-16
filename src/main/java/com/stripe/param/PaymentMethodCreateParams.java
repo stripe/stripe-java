@@ -51,12 +51,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   @SerializedName("allow_redisplay")
   AllowRedisplay allowRedisplay;
 
-  /** If this is a Alma PaymentMethod, this hash contains details about the Alma payment method. */
+  /** If this is an Alma PaymentMethod, this hash contains details about the Alma payment method. */
   @SerializedName("alma")
   Alma alma;
 
   /**
-   * If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
+   * If this is an AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
    * method.
    */
   @SerializedName("amazon_pay")
@@ -967,7 +967,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a Alma PaymentMethod, this hash contains details about the Alma payment method.
+     * If this is an Alma PaymentMethod, this hash contains details about the Alma payment method.
      */
     public Builder setAlma(PaymentMethodCreateParams.Alma alma) {
       this.alma = alma;
@@ -975,7 +975,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
+     * If this is an AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
      * method.
      */
     public Builder setAmazonPay(PaymentMethodCreateParams.AmazonPay amazonPay) {

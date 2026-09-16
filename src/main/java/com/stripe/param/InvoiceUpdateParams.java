@@ -2184,6 +2184,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Object acssDebit;
 
       /**
+       * If paying by {@code bacs_debit}, this sub-hash contains details about the Bacs Direct Debit
+       * payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("bacs_debit")
+      Object bacsDebit;
+
+      /**
        * If paying by {@code bancontact}, this sub-hash contains details about the Bancontact
        * payment method options to pass to the invoice’s PaymentIntent.
        */
@@ -2299,6 +2306,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       private PaymentMethodOptions(
           Object acssDebit,
+          Object bacsDebit,
           Object bancontact,
           Object billie,
           Object bizum,
@@ -2316,6 +2324,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           Object usBankAccount,
           Object wechatPay) {
         this.acssDebit = acssDebit;
+        this.bacsDebit = bacsDebit;
         this.bancontact = bancontact;
         this.billie = billie;
         this.bizum = bizum;
@@ -2340,6 +2349,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       public static class Builder {
         private Object acssDebit;
+
+        private Object bacsDebit;
 
         private Object bancontact;
 
@@ -2377,6 +2388,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions build() {
           return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions(
               this.acssDebit,
+              this.bacsDebit,
               this.bancontact,
               this.billie,
               this.bizum,
@@ -2411,6 +2423,25 @@ public class InvoiceUpdateParams extends ApiRequestParams {
          */
         public Builder setAcssDebit(EmptyParam acssDebit) {
           this.acssDebit = acssDebit;
+          return this;
+        }
+
+        /**
+         * If paying by {@code bacs_debit}, this sub-hash contains details about the Bacs Direct
+         * Debit payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setBacsDebit(
+            InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.BacsDebit bacsDebit) {
+          this.bacsDebit = bacsDebit;
+          return this;
+        }
+
+        /**
+         * If paying by {@code bacs_debit}, this sub-hash contains details about the Bacs Direct
+         * Debit payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setBacsDebit(EmptyParam bacsDebit) {
+          this.bacsDebit = bacsDebit;
           return this;
         }
 
@@ -2923,6 +2954,130 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
           @SerializedName("microdeposits")
           MICRODEPOSITS("microdeposits");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          VerificationMethod(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BacsDebit {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Controls when Stripe will attempt to debit the funds from the customer's account. The
+         * date must be a string in YYYY-MM-DD format. The date must be in the future and between 3
+         * and 15 calendar days from now.
+         */
+        @SerializedName("target_date")
+        Object targetDate;
+
+        @SerializedName("verification_method")
+        VerificationMethod verificationMethod;
+
+        private BacsDebit(
+            Map<String, Object> extraParams,
+            Object targetDate,
+            VerificationMethod verificationMethod) {
+          this.extraParams = extraParams;
+          this.targetDate = targetDate;
+          this.verificationMethod = verificationMethod;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object targetDate;
+
+          private VerificationMethod verificationMethod;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.BacsDebit build() {
+            return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.BacsDebit(
+                this.extraParams, this.targetDate, this.verificationMethod);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.BacsDebit#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.BacsDebit#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Controls when Stripe will attempt to debit the funds from the customer's account. The
+           * date must be a string in YYYY-MM-DD format. The date must be in the future and between
+           * 3 and 15 calendar days from now.
+           */
+          public Builder setTargetDate(String targetDate) {
+            this.targetDate = targetDate;
+            return this;
+          }
+
+          /**
+           * Controls when Stripe will attempt to debit the funds from the customer's account. The
+           * date must be a string in YYYY-MM-DD format. The date must be in the future and between
+           * 3 and 15 calendar days from now.
+           */
+          public Builder setTargetDate(EmptyParam targetDate) {
+            this.targetDate = targetDate;
+            return this;
+          }
+
+          public Builder setVerificationMethod(
+              InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.BacsDebit.VerificationMethod
+                  verificationMethod) {
+            this.verificationMethod = verificationMethod;
+            return this;
+          }
+        }
+
+        public enum VerificationMethod implements ApiRequestParams.EnumParam {
+          @SerializedName("automatic")
+          AUTOMATIC("automatic"),
+
+          @SerializedName("payer_name_verification")
+          PAYER_NAME_VERIFICATION("payer_name_verification");
 
           @Getter(onMethod_ = {@Override})
           private final String value;

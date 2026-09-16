@@ -403,8 +403,8 @@ public class OnrampSession extends ApiResource implements HasId {
      * crypto currency code. If {@code destination_currencies} is set, it must be a value in that
      * array.
      *
-     * <p>One of {@code avax}, {@code btc}, {@code eth}, {@code matic}, {@code sol}, {@code usdc},
-     * {@code usdt}, {@code wld}, or {@code xlm}.
+     * <p>One of {@code avax}, {@code btc}, {@code eth}, {@code matic}, {@code ripusd}, {@code sol},
+     * {@code usdc}, {@code usdt}, {@code wld}, or {@code xlm}.
      */
     @SerializedName("destination_currency")
     String destinationCurrency;
@@ -450,7 +450,7 @@ public class OnrampSession extends ApiResource implements HasId {
     /**
      * A fiat currency code
      *
-     * <p>One of {@code eur}, {@code gbp}, or {@code usd}.
+     * <p>One of {@code cad}, {@code cop}, {@code eur}, {@code gbp}, {@code php}, or {@code usd}.
      */
     @SerializedName("source_currency")
     String sourceCurrency;
