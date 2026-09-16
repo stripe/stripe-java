@@ -29080,6 +29080,112 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2CoreVaultNetworkTokenPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/network_tokens",
+        null,
+        null,
+        com.stripe.model.v2.core.vault.NetworkToken.class,
+        "{\"object\":\"v2.core.vault.network_token\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.vault.NetworkTokenCreateParams params =
+        com.stripe.param.v2.core.vault.NetworkTokenCreateParams.builder()
+            .setType(com.stripe.param.v2.core.vault.NetworkTokenCreateParams.Type.CARD)
+            .build();
+
+    com.stripe.model.v2.core.vault.NetworkToken networkToken =
+        client.v2().core().vault().networkTokens().create(params);
+    assertNotNull(networkToken);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/network_tokens",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreVaultNetworkTokenPost2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/network_tokens/create_from_credential",
+        null,
+        null,
+        com.stripe.model.v2.core.vault.NetworkToken.class,
+        "{\"object\":\"v2.core.vault.network_token\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.vault.NetworkTokenCreateFromCredentialParams params =
+        com.stripe.param.v2.core.vault.NetworkTokenCreateFromCredentialParams.builder()
+            .setType(
+                com.stripe.param.v2.core.vault.NetworkTokenCreateFromCredentialParams.Type.CARD)
+            .build();
+
+    com.stripe.model.v2.core.vault.NetworkToken networkToken =
+        client.v2().core().vault().networkTokens().createFromCredential(params);
+    assertNotNull(networkToken);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/network_tokens/create_from_credential",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreVaultNetworkTokenGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/vault/network_tokens/id_123",
+        null,
+        null,
+        com.stripe.model.v2.core.vault.NetworkToken.class,
+        "{\"object\":\"v2.core.vault.network_token\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.core.vault.NetworkToken networkToken =
+        client.v2().core().vault().networkTokens().retrieve("id_123");
+    assertNotNull(networkToken);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/vault/network_tokens/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2CoreVaultNetworkTokenPost3Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/network_tokens/id_123/generate_cryptogram",
+        null,
+        null,
+        com.stripe.model.v2.core.vault.NetworkToken.class,
+        "{\"object\":\"v2.core.vault.network_token\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"active\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.vault.NetworkTokenGenerateCryptogramParams params =
+        com.stripe.param.v2.core.vault.NetworkTokenGenerateCryptogramParams.builder().build();
+
+    com.stripe.model.v2.core.vault.NetworkToken networkToken =
+        client.v2().core().vault().networkTokens().generateCryptogram("id_123", params);
+    assertNotNull(networkToken);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/network_tokens/id_123/generate_cryptogram",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testV2CoreVaultUsBankAccountGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -30099,7 +30205,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.FinancialAddress>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.money_management.financial_address\",\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"failed\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.money_management.financial_address\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"failed\",\"type\":\"bank_account\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.FinancialAddressListParams params =
@@ -30125,15 +30231,14 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.FinancialAddress.class,
-        "{\"object\":\"v2.money_management.financial_address\",\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"failed\"}");
+        "{\"object\":\"v2.money_management.financial_address\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"failed\",\"type\":\"bank_account\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams params =
         com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams.builder()
             .setFinancialAccount("financial_account")
             .setType(
-                com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams.Type
-                    .CA_BANK_ACCOUNT)
+                com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams.Type.BANK_ACCOUNT)
             .build();
 
     com.stripe.model.v2.moneymanagement.FinancialAddress financialAddress =
@@ -30156,20 +30261,17 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.FinancialAddress.class,
-        "{\"object\":\"v2.money_management.financial_address\",\"created\":\"1970-01-12T21:42:34.472Z\",\"currency\":\"usd\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"failed\"}");
+        "{\"object\":\"v2.money_management.financial_address\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"failed\",\"type\":\"bank_account\"}");
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.moneymanagement.FinancialAddressRetrieveParams params =
-        com.stripe.param.v2.moneymanagement.FinancialAddressRetrieveParams.builder().build();
-
     com.stripe.model.v2.moneymanagement.FinancialAddress financialAddress =
-        client.v2().moneyManagement().financialAddresses().retrieve("id_123", params);
+        client.v2().moneyManagement().financialAddresses().retrieve("id_123");
     assertNotNull(financialAddress);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         "/v2/money_management/financial_addresses/id_123",
-        params.toMap(),
+        null,
         null);
   }
 
@@ -31136,7 +31238,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.ReceivedCredit>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.money_management.received_credit\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"returned\",\"type\":\"crypto_wallet_transfer\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.money_management.received_credit\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"amount_received\":{\"currency\":\"USD\",\"value\":60},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"returned\",\"type\":\"crypto_wallet_transfer\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.ReceivedCreditListParams params =
@@ -31162,7 +31264,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.ReceivedCredit.class,
-        "{\"object\":\"v2.money_management.received_credit\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"returned\",\"type\":\"crypto_wallet_transfer\"}");
+        "{\"object\":\"v2.money_management.received_credit\",\"amount\":{\"currency\":\"USD\",\"value\":96},\"amount_received\":{\"currency\":\"USD\",\"value\":60},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"returned\",\"type\":\"crypto_wallet_transfer\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.ReceivedCredit receivedCredit =
@@ -32336,13 +32438,12 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.AccountActivity.class,
-        "{\"object\":\"v2.signals.account_activity\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"occurred_at\":\"1970-01-10T01:49:44.717Z\",\"type\":\"account_restricted\"}");
+        "{\"object\":\"v2.signals.account_activity\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"occurred_at\":\"1970-01-10T01:49:44.717Z\",\"type\":\"login_attempt\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.signals.AccountActivityCreateParams params =
         com.stripe.param.v2.signals.AccountActivityCreateParams.builder()
-            .setType(
-                com.stripe.param.v2.signals.AccountActivityCreateParams.Type.ACCOUNT_RESTRICTED)
+            .setType(com.stripe.param.v2.signals.AccountActivityCreateParams.Type.LOGIN_ATTEMPT)
             .build();
 
     com.stripe.model.v2.signals.AccountActivity accountActivity =
@@ -32388,7 +32489,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.AccountActivity.class,
-        "{\"object\":\"v2.signals.account_activity\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"occurred_at\":\"1970-01-10T01:49:44.717Z\",\"type\":\"account_restricted\"}");
+        "{\"object\":\"v2.signals.account_activity\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"occurred_at\":\"1970-01-10T01:49:44.717Z\",\"type\":\"login_attempt\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.signals.AccountActivity accountActivity =
@@ -32546,7 +32647,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.PaymentRetryEvaluation.class,
-        "{\"object\":\"v2.signals.payment_retry_evaluation\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"latest_signal\":{\"object\":\"v2.signals.payment_retry_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"evaluation\":\"evaluation\",\"id\":\"obj_123\",\"livemode\":true,\"payment_record\":\"payment_record\",\"recommendation\":{\"action\":\"wait\",\"reason\":\"reason\"}},\"livemode\":true,\"status\":\"expired\"}");
+        "{\"object\":\"v2.signals.payment_retry_evaluation\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"latest_signal\":{\"object\":\"v2.signals.payment_retry_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"evaluation\":\"evaluation\",\"id\":\"obj_123\",\"livemode\":true,\"recommendation\":{\"action\":\"wait\",\"reason\":\"reason\"}},\"livemode\":true,\"status\":\"expired\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.signals.PaymentRetryEvaluationCreateParams params =
@@ -32572,7 +32673,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.PaymentRetryEvaluation.class,
-        "{\"object\":\"v2.signals.payment_retry_evaluation\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"latest_signal\":{\"object\":\"v2.signals.payment_retry_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"evaluation\":\"evaluation\",\"id\":\"obj_123\",\"livemode\":true,\"payment_record\":\"payment_record\",\"recommendation\":{\"action\":\"wait\",\"reason\":\"reason\"}},\"livemode\":true,\"status\":\"expired\"}");
+        "{\"object\":\"v2.signals.payment_retry_evaluation\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"latest_signal\":{\"object\":\"v2.signals.payment_retry_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"evaluation\":\"evaluation\",\"id\":\"obj_123\",\"livemode\":true,\"recommendation\":{\"action\":\"wait\",\"reason\":\"reason\"}},\"livemode\":true,\"status\":\"expired\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.signals.PaymentRetryEvaluation paymentRetryEvaluation =
@@ -32595,7 +32696,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.PaymentRetryEvaluation.class,
-        "{\"object\":\"v2.signals.payment_retry_evaluation\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"latest_signal\":{\"object\":\"v2.signals.payment_retry_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"evaluation\":\"evaluation\",\"id\":\"obj_123\",\"livemode\":true,\"payment_record\":\"payment_record\",\"recommendation\":{\"action\":\"wait\",\"reason\":\"reason\"}},\"livemode\":true,\"status\":\"expired\"}");
+        "{\"object\":\"v2.signals.payment_retry_evaluation\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"latest_signal\":{\"object\":\"v2.signals.payment_retry_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"evaluation\":\"evaluation\",\"id\":\"obj_123\",\"livemode\":true,\"recommendation\":{\"action\":\"wait\",\"reason\":\"reason\"}},\"livemode\":true,\"status\":\"expired\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.signals.PaymentRetryEvaluationUpdateParams params =
@@ -32621,7 +32722,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.PaymentRetryEvaluation.class,
-        "{\"object\":\"v2.signals.payment_retry_evaluation\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"latest_signal\":{\"object\":\"v2.signals.payment_retry_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"evaluation\":\"evaluation\",\"id\":\"obj_123\",\"livemode\":true,\"payment_record\":\"payment_record\",\"recommendation\":{\"action\":\"wait\",\"reason\":\"reason\"}},\"livemode\":true,\"status\":\"expired\"}");
+        "{\"object\":\"v2.signals.payment_retry_evaluation\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"latest_signal\":{\"object\":\"v2.signals.payment_retry_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"evaluation\":\"evaluation\",\"id\":\"obj_123\",\"livemode\":true,\"recommendation\":{\"action\":\"wait\",\"reason\":\"reason\"}},\"livemode\":true,\"status\":\"expired\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.signals.PaymentRetryEvaluationCancelParams params =
@@ -32647,7 +32748,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.PaymentRetrySignal.class,
-        "{\"object\":\"v2.signals.payment_retry_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"evaluation\":\"evaluation\",\"id\":\"obj_123\",\"livemode\":true,\"payment_record\":\"payment_record\",\"recommendation\":{\"action\":\"wait\",\"reason\":\"reason\"}}");
+        "{\"object\":\"v2.signals.payment_retry_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"evaluation\":\"evaluation\",\"id\":\"obj_123\",\"livemode\":true,\"recommendation\":{\"action\":\"wait\",\"reason\":\"reason\"}}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.signals.PaymentRetrySignal paymentRetrySignal =
@@ -33043,21 +33144,20 @@ class GeneratedExamples extends BaseStripeTest {
     stubRequestReturnError(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/core/vault/us_bank_accounts",
+        "/v2/core/vault/network_tokens",
         null,
         null,
         "{\"error\":{\"type\":\"blocked_by_stripe\",\"code\":\"blocked_payout_method\"}}",
         400);
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.core.vault.UsBankAccountCreateParams params =
-        com.stripe.param.v2.core.vault.UsBankAccountCreateParams.builder()
-            .setAccountNumber("account_number")
-            .setCurrency("usd")
+    com.stripe.param.v2.core.vault.NetworkTokenCreateParams params =
+        com.stripe.param.v2.core.vault.NetworkTokenCreateParams.builder()
+            .setType(com.stripe.param.v2.core.vault.NetworkTokenCreateParams.Type.CARD)
             .build();
 
     try {
-      client.v2().core().vault().usBankAccounts().create(params);
+      client.v2().core().vault().networkTokens().create(params);
     } catch (BlockedByStripeException e) {
 
     }
@@ -33065,7 +33165,7 @@ class GeneratedExamples extends BaseStripeTest {
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/core/vault/us_bank_accounts",
+        "/v2/core/vault/network_tokens",
         params.toMap(),
         null);
   }
@@ -33078,7 +33178,7 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/billing/contracts/id_123",
         null,
         null,
-        "{\"error\":{\"type\":\"cannot_proceed\",\"code\":\"default_payout_method_cannot_be_archived\"}}",
+        "{\"error\":{\"type\":\"cannot_proceed\",\"code\":\"card_brand_not_supported\"}}",
         400);
     StripeClient client = new StripeClient(networkSpy);
 
@@ -33206,8 +33306,7 @@ class GeneratedExamples extends BaseStripeTest {
         com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams.builder()
             .setFinancialAccount("financial_account")
             .setType(
-                com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams.Type
-                    .CA_BANK_ACCOUNT)
+                com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams.Type.BANK_ACCOUNT)
             .build();
 
     try {
@@ -33388,6 +33487,37 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testMerchantNotGatedErrorServices() throws StripeException {
+    stubRequestReturnError(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/network_tokens",
+        null,
+        null,
+        "{\"error\":{\"type\":\"merchant_not_gated\",\"code\":\"permission_denied\"}}",
+        400);
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.vault.NetworkTokenCreateParams params =
+        com.stripe.param.v2.core.vault.NetworkTokenCreateParams.builder()
+            .setType(com.stripe.param.v2.core.vault.NetworkTokenCreateParams.Type.CARD)
+            .build();
+
+    try {
+      client.v2().core().vault().networkTokens().create(params);
+    } catch (MerchantNotGatedException e) {
+
+    }
+    ;
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/network_tokens",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testNonZeroBalanceErrorServices() throws StripeException {
     stubRequestReturnError(
         BaseAddress.API,
@@ -33478,25 +33608,26 @@ class GeneratedExamples extends BaseStripeTest {
   public void testRateLimitErrorServices() throws StripeException {
     stubRequestReturnError(
         BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/core/accounts",
+        ApiResource.RequestMethod.DELETE,
+        "/v2/billing/contracts/id_123",
         null,
         null,
         "{\"error\":{\"type\":\"rate_limit\",\"code\":\"account_rate_limit_exceeded\"}}",
         400);
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.core.AccountListParams params =
-        com.stripe.param.v2.core.AccountListParams.builder().build();
-
     try {
-      client.v2().core().accounts().list(params);
+      client.v2().billing().contracts().delete("id_123");
     } catch (RateLimitException e) {
 
     }
     ;
     verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/accounts", params.toMap(), null);
+        BaseAddress.API,
+        ApiResource.RequestMethod.DELETE,
+        "/v2/billing/contracts/id_123",
+        null,
+        null);
   }
 
   @Test

@@ -34,7 +34,7 @@ public class OffSessionPayment extends StripeObject implements HasId {
   @SerializedName("amount_details")
   AmountDetails amountDetails;
 
-  /** The &quot;presentment amount&quot; to be collected from the customer. */
+  /** Amount intended to be collected by this payment. */
   @SerializedName("amount_requested")
   Amount amountRequested;
 
@@ -94,6 +94,10 @@ public class OffSessionPayment extends StripeObject implements HasId {
   /** Payment attempt record for the latest attempt, if one exists. */
   @SerializedName("latest_payment_attempt_record")
   String latestPaymentAttemptRecord;
+
+  /** Details from the latest Payment Attempt Record, if one exists. */
+  @SerializedName("latest_payment_attempt_record_details")
+  LatestPaymentAttemptRecordDetails latestPaymentAttemptRecordDetails;
 
   /**
    * Has the value true if the object exists in live mode or the value false if the object exists in
@@ -338,6 +342,90 @@ public class OffSessionPayment extends StripeObject implements HasId {
      */
     @SerializedName("capture_method")
     String captureMethod;
+  }
+
+  /** Details from the latest Payment Attempt Record, if one exists. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class LatestPaymentAttemptRecordDetails extends StripeObject {
+    /** Details about the failure for the latest payment attempt. */
+    @SerializedName("failure_details")
+    FailureDetails failureDetails;
+
+    /** Details about the payment method for the latest payment attempt. */
+    @SerializedName("payment_method_details")
+    PaymentMethodDetails paymentMethodDetails;
+
+    /** Details about the processor for the latest payment attempt. */
+    @SerializedName("processor_details")
+    ProcessorDetails processorDetails;
+
+    /** Details about the failure for the latest payment attempt. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FailureDetails extends StripeObject {
+      /** Code for the failure. */
+      @SerializedName("code")
+      String code;
+
+      /** Message describing the failure. */
+      @SerializedName("message")
+      String message;
+    }
+
+    /** Details about the payment method for the latest payment attempt. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentMethodDetails extends StripeObject {
+      /** Details about the card used for the latest payment attempt. */
+      @SerializedName("card")
+      Card card;
+
+      /** Details about the card used for the latest payment attempt. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Card extends StripeObject {
+        /** Authorization code returned by the card network. */
+        @SerializedName("authorization_code")
+        String authorizationCode;
+
+        /** Stripe decline code for the latest payment attempt. */
+        @SerializedName("decline_code")
+        String declineCode;
+
+        /** Advice code returned by the card network. */
+        @SerializedName("network_advice_code")
+        String networkAdviceCode;
+
+        /** Decline code returned by the card network. */
+        @SerializedName("network_decline_code")
+        String networkDeclineCode;
+      }
+    }
+
+    /** Details about the processor for the latest payment attempt. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ProcessorDetails extends StripeObject {
+      /** Details about Stripe as the processor. */
+      @SerializedName("stripe")
+      Stripe stripe;
+
+      /** Details about Stripe as the processor. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Stripe extends StripeObject {
+        /** ID of the Charge created for the latest payment attempt. */
+        @SerializedName("charge")
+        String charge;
+      }
+    }
   }
 
   /** Provides industry-specific information about the payment. */

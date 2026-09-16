@@ -213,9 +213,10 @@ public class InvoicePayment extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Payment extends StripeObject {
     /**
-     * ID of the successful charge for this payment when {@code type} is {@code charge}.Note: charge
-     * is only surfaced if the charge object is not associated with a payment intent. If the charge
-     * object does have a payment intent, the Invoice Payment surfaces the payment intent instead.
+     * ID of the successful charge for this payment when {@code type} is {@code charge}. Note:
+     * charge is only surfaced if the charge object is not associated with a payment intent. If the
+     * charge object does have a payment intent, the Invoice Payment surfaces the payment intent
+     * instead.
      */
     @SerializedName("charge")
     @Getter(lombok.AccessLevel.NONE)

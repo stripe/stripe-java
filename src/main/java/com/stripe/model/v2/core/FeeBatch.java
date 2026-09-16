@@ -88,17 +88,11 @@ public class FeeBatch extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class TaxAdjustment extends StripeObject {
-      /**
-       * A lowercase alpha3 currency code like &quot;usd&quot; For the taxonomy label choice, see
-       * SECURE_FRAMEWORKS-2849.
-       */
+      /** A lowercase alpha3 currency code like &quot;usd&quot;. */
       @SerializedName("currency")
       String currency;
 
-      /**
-       * In major units like &quot;1.23&quot; for 1.23 USD For the taxonomy label choice, see
-       * SECURE_FRAMEWORKS-2849.
-       */
+      /** In major units like &quot;1.23&quot; for 1.23 USD. */
       @SerializedName("value")
       String value;
     }
@@ -109,17 +103,11 @@ public class FeeBatch extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Amount extends StripeObject {
-    /**
-     * A lowercase alpha3 currency code like &quot;usd&quot; For the taxonomy label choice, see
-     * SECURE_FRAMEWORKS-2849.
-     */
+    /** A lowercase alpha3 currency code like &quot;usd&quot;. */
     @SerializedName("currency")
     String currency;
 
-    /**
-     * In major units like &quot;1.23&quot; for 1.23 USD For the taxonomy label choice, see
-     * SECURE_FRAMEWORKS-2849.
-     */
+    /** In major units like &quot;1.23&quot; for 1.23 USD. */
     @SerializedName("value")
     String value;
   }
@@ -188,17 +176,11 @@ public class FeeBatch extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Amount extends StripeObject {
-      /**
-       * A lowercase alpha3 currency code like &quot;usd&quot; For the taxonomy label choice, see
-       * SECURE_FRAMEWORKS-2849.
-       */
+      /** A lowercase alpha3 currency code like &quot;usd&quot;. */
       @SerializedName("currency")
       String currency;
 
-      /**
-       * In major units like &quot;1.23&quot; for 1.23 USD For the taxonomy label choice, see
-       * SECURE_FRAMEWORKS-2849.
-       */
+      /** In major units like &quot;1.23&quot; for 1.23 USD. */
       @SerializedName("value")
       String value;
     }
@@ -217,17 +199,11 @@ public class FeeBatch extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Amount extends StripeObject {
-        /**
-         * A lowercase alpha3 currency code like &quot;usd&quot; For the taxonomy label choice, see
-         * SECURE_FRAMEWORKS-2849.
-         */
+        /** A lowercase alpha3 currency code like &quot;usd&quot;. */
         @SerializedName("currency")
         String currency;
 
-        /**
-         * In major units like &quot;1.23&quot; for 1.23 USD For the taxonomy label choice, see
-         * SECURE_FRAMEWORKS-2849.
-         */
+        /** In major units like &quot;1.23&quot; for 1.23 USD. */
         @SerializedName("value")
         String value;
       }
@@ -258,17 +234,11 @@ public class FeeBatch extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Amount extends StripeObject {
-      /**
-       * A lowercase alpha3 currency code like &quot;usd&quot; For the taxonomy label choice, see
-       * SECURE_FRAMEWORKS-2849.
-       */
+      /** A lowercase alpha3 currency code like &quot;usd&quot;. */
       @SerializedName("currency")
       String currency;
 
-      /**
-       * In major units like &quot;1.23&quot; for 1.23 USD For the taxonomy label choice, see
-       * SECURE_FRAMEWORKS-2849.
-       */
+      /** In major units like &quot;1.23&quot; for 1.23 USD. */
       @SerializedName("value")
       String value;
     }

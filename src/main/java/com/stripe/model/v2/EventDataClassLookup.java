@@ -186,6 +186,8 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.core.vault.gb_bank_account", com.stripe.model.v2.core.vault.GbBankAccount.class);
     classLookup.put(
+        "v2.core.vault.network_token", com.stripe.model.v2.core.vault.NetworkToken.class);
+    classLookup.put(
         "v2.core.vault.us_bank_account", com.stripe.model.v2.core.vault.UsBankAccount.class);
 
     classLookup.put(

@@ -398,6 +398,10 @@ public class ContractUpdateParams extends ApiRequestParams {
       @SerializedName("lookup_key")
       Object lookupKey;
 
+      /** Metadata for the one-time fee. */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
       /** <strong>Required.</strong> The id of the product for this fee. */
       @SerializedName("product")
       Object product;
@@ -407,11 +411,13 @@ public class ContractUpdateParams extends ApiRequestParams {
           BillAt billAt,
           Map<String, Object> extraParams,
           Object lookupKey,
+          Map<String, String> metadata,
           Object product) {
         this.amount = amount;
         this.billAt = billAt;
         this.extraParams = extraParams;
         this.lookupKey = lookupKey;
+        this.metadata = metadata;
         this.product = product;
       }
 
@@ -428,12 +434,19 @@ public class ContractUpdateParams extends ApiRequestParams {
 
         private Object lookupKey;
 
+        private Map<String, String> metadata;
+
         private Object product;
 
         /** Finalize and obtain parameter instance from this builder. */
         public ContractUpdateParams.OneTimeFeeAction.Add build() {
           return new ContractUpdateParams.OneTimeFeeAction.Add(
-              this.amount, this.billAt, this.extraParams, this.lookupKey, this.product);
+              this.amount,
+              this.billAt,
+              this.extraParams,
+              this.lookupKey,
+              this.metadata,
+              this.product);
         }
 
         /** <strong>Required.</strong> The amount to bill. */
@@ -485,6 +498,33 @@ public class ContractUpdateParams extends ApiRequestParams {
         /** A user-provided lookup key. */
         public Builder setLookupKey(EmptyParam lookupKey) {
           this.lookupKey = lookupKey;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * ContractUpdateParams.OneTimeFeeAction.Add#metadata} for the field documentation.
+         */
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ContractUpdateParams.OneTimeFeeAction.Add#metadata} for the field
+         * documentation.
+         */
+        public Builder putAllMetadata(Map<String, String> map) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.putAll(map);
           return this;
         }
 
@@ -734,17 +774,23 @@ public class ContractUpdateParams extends ApiRequestParams {
       @SerializedName("lookup_key")
       Object lookupKey;
 
+      /** Metadata mutations to apply to the one-time fee. */
+      @SerializedName("metadata")
+      Map<String, Object> metadata;
+
       private Update(
           Amount amount,
           BillAt billAt,
           Map<String, Object> extraParams,
           Object id,
-          Object lookupKey) {
+          Object lookupKey,
+          Map<String, Object> metadata) {
         this.amount = amount;
         this.billAt = billAt;
         this.extraParams = extraParams;
         this.id = id;
         this.lookupKey = lookupKey;
+        this.metadata = metadata;
       }
 
       public static Builder builder() {
@@ -762,10 +808,12 @@ public class ContractUpdateParams extends ApiRequestParams {
 
         private Object lookupKey;
 
+        private Map<String, Object> metadata;
+
         /** Finalize and obtain parameter instance from this builder. */
         public ContractUpdateParams.OneTimeFeeAction.Update build() {
           return new ContractUpdateParams.OneTimeFeeAction.Update(
-              this.amount, this.billAt, this.extraParams, this.id, this.lookupKey);
+              this.amount, this.billAt, this.extraParams, this.id, this.lookupKey, this.metadata);
         }
 
         /** The updated amount to bill. */
@@ -829,6 +877,52 @@ public class ContractUpdateParams extends ApiRequestParams {
         /** The lookup key of the one-time fee to update. */
         public Builder setLookupKey(EmptyParam lookupKey) {
           this.lookupKey = lookupKey;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * ContractUpdateParams.OneTimeFeeAction.Update#metadata} for the field documentation.
+         */
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * ContractUpdateParams.OneTimeFeeAction.Update#metadata} for the field documentation.
+         */
+        public Builder putMetadata(String key, EmptyParam value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. Map values can only be one of the following types: `String`, `EmptyParam`. See
+         * {@link ContractUpdateParams.OneTimeFeeAction.Update#metadata} for the field
+         * documentation.
+         */
+        public Builder putAllMetadata(Map<String, Object> map) {
+          if (!map.values().stream()
+              .allMatch(v -> v instanceof String || v instanceof EmptyParam)) {
+            throw new IllegalArgumentException(
+                "All map values must one of the following types: String, EmptyParam");
+          }
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.putAll(map);
           return this;
         }
       }

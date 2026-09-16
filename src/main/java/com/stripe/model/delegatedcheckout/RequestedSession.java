@@ -1335,7 +1335,13 @@ public class RequestedSession extends ApiResource
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Profile> networkProfile;
 
-    /** The payment method types supported by the seller. */
+    /**
+     * The payment method types supported by the seller. Stripe sources these from a non-empty
+     * {@code allowed_payment_method_types} response from the seller's checkout customization hook
+     * when present. Otherwise, Stripe resolves them from the seller's active or default payment
+     * method configuration. Stripe might filter agent-facing displayable payment methods for
+     * compatibility.
+     */
     @SerializedName("payment_method_types")
     List<String> paymentMethodTypes;
 

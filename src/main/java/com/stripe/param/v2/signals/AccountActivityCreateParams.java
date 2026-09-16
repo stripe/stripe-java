@@ -29,6 +29,14 @@ public class AccountActivityCreateParams extends ApiRequestParams {
   AccountRestricted accountRestricted;
 
   /**
+   * Details for the account review. Provide only when type is account_reviewed. The activity
+   * requires an existing account_details.account or account_details.customer; inline data is
+   * unsupported.
+   */
+  @SerializedName("account_reviewed")
+  AccountReviewed accountReviewed;
+
+  /**
    * Details for the account suspension. Provide only when type is account_suspended. The activity
    * requires an existing account_details.customer; account_details.account and inline data are
    * unsupported.
@@ -77,6 +85,7 @@ public class AccountActivityCreateParams extends ApiRequestParams {
       AccountDetails accountDetails,
       String accountEvaluation,
       AccountRestricted accountRestricted,
+      AccountReviewed accountReviewed,
       AccountSuspended accountSuspended,
       Map<String, Object> extraParams,
       LoginAttempt loginAttempt,
@@ -89,6 +98,7 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     this.accountDetails = accountDetails;
     this.accountEvaluation = accountEvaluation;
     this.accountRestricted = accountRestricted;
+    this.accountReviewed = accountReviewed;
     this.accountSuspended = accountSuspended;
     this.extraParams = extraParams;
     this.loginAttempt = loginAttempt;
@@ -110,6 +120,8 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     private String accountEvaluation;
 
     private AccountRestricted accountRestricted;
+
+    private AccountReviewed accountReviewed;
 
     private AccountSuspended accountSuspended;
 
@@ -135,6 +147,7 @@ public class AccountActivityCreateParams extends ApiRequestParams {
           this.accountDetails,
           this.accountEvaluation,
           this.accountRestricted,
+          this.accountReviewed,
           this.accountSuspended,
           this.extraParams,
           this.loginAttempt,
@@ -166,6 +179,16 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     public Builder setAccountRestricted(
         AccountActivityCreateParams.AccountRestricted accountRestricted) {
       this.accountRestricted = accountRestricted;
+      return this;
+    }
+
+    /**
+     * Details for the account review. Provide only when type is account_reviewed. The activity
+     * requires an existing account_details.account or account_details.customer; inline data is
+     * unsupported.
+     */
+    public Builder setAccountReviewed(AccountActivityCreateParams.AccountReviewed accountReviewed) {
+      this.accountReviewed = accountReviewed;
       return this;
     }
 
@@ -869,6 +892,88 @@ public class AccountActivityCreateParams extends ApiRequestParams {
       private final String value;
 
       Reason(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AccountReviewed {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The outcome of the merchant review. */
+    @SerializedName("outcome")
+    Outcome outcome;
+
+    private AccountReviewed(Map<String, Object> extraParams, Outcome outcome) {
+      this.extraParams = extraParams;
+      this.outcome = outcome;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Outcome outcome;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountActivityCreateParams.AccountReviewed build() {
+        return new AccountActivityCreateParams.AccountReviewed(this.extraParams, this.outcome);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountActivityCreateParams.AccountReviewed#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountActivityCreateParams.AccountReviewed#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The outcome of the merchant review. */
+      public Builder setOutcome(AccountActivityCreateParams.AccountReviewed.Outcome outcome) {
+        this.outcome = outcome;
+        return this;
+      }
+    }
+
+    public enum Outcome implements ApiRequestParams.EnumParam {
+      @SerializedName("trusted")
+      TRUSTED("trusted");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Outcome(String value) {
         this.value = value;
       }
     }
@@ -1658,6 +1763,9 @@ public class AccountActivityCreateParams extends ApiRequestParams {
   public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("account_restricted")
     ACCOUNT_RESTRICTED("account_restricted"),
+
+    @SerializedName("account_reviewed")
+    ACCOUNT_REVIEWED("account_reviewed"),
 
     @SerializedName("account_suspended")
     ACCOUNT_SUSPENDED("account_suspended"),

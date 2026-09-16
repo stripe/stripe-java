@@ -10,35 +10,29 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A Financial Address contains information needed to transfer money to a Financial Account. A
+ * A FinancialAddress contains information needed to transfer money to a Financial Account. A
  * Financial Account can have more than one Financial Address.
  */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class FinancialAddress extends StripeObject implements HasId {
+  /** Bank account details for this FinancialAddress. */
+  @SerializedName("bank_account")
+  BankAccount bankAccount;
+
   /** The creation timestamp of the FinancialAddress. */
   @SerializedName("created")
   Instant created;
 
-  /**
-   * Object indicates the type of credentials that have been allocated and attached to the
-   * FinancialAddress. It contains all necessary banking details with which to perform money
-   * movements with the FinancialAddress. This field is only available for FinancialAddresses with
-   * an active status.
-   */
-  @SerializedName("credentials")
-  Credentials credentials;
+  @SerializedName("crypto_wallet")
+  CryptoWallet cryptoWallet;
 
-  /** Open Enum. The currency the FinancialAddress supports. */
-  @SerializedName("currency")
-  String currency;
-
-  /** A ID of the FinancialAccount this FinancialAddress corresponds to. */
+  /** The ID of the FinancialAccount this FinancialAddress corresponds to. */
   @SerializedName("financial_account")
   String financialAccount;
 
-  /** The ID of a FinancialAddress. */
+  /** The ID of the FinancialAddress. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -59,13 +53,11 @@ public class FinancialAddress extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** Open Enum. The currency the FinancialAddress settles into the FinancialAccount. */
   @SerializedName("settlement_currency")
   String settlementCurrency;
 
   /**
-   * Closed Enum. An enum representing the status of the FinancialAddress. This indicates whether or
-   * not the FinancialAddress can be used for any money movement flows.
+   * Closed Enum. The status of the FinancialAddress.
    *
    * <p>One of {@code active}, {@code archived}, {@code failed}, or {@code pending}.
    */
@@ -73,222 +65,57 @@ public class FinancialAddress extends StripeObject implements HasId {
   String status;
 
   /**
-   * Object indicates the type of credentials that have been allocated and attached to the
-   * FinancialAddress. It contains all necessary banking details with which to perform money
-   * movements with the FinancialAddress. This field is only available for FinancialAddresses with
-   * an active status.
+   * Open Enum. The type of FinancialAddress.
+   *
+   * <p>One of {@code bank_account}, or {@code crypto_wallet}.
    */
+  @SerializedName("type")
+  String type;
+
+  /** Bank account details for this FinancialAddress. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Credentials extends StripeObject {
-    /**
-     * The credentials of the Canadian Bank Account for the FinancialAddress. This contains unique
-     * banking details such as the account number, institution number, etc. of a Canadian bank
-     * account.
-     */
-    @SerializedName("ca_bank_account")
-    CaBankAccount caBankAccount;
+  public static class BankAccount extends StripeObject {
+    /** ABA bank account details (US). */
+    @SerializedName("aba")
+    Aba aba;
+
+    @SerializedName("clabe")
+    Clabe clabe;
+
+    /** The country of the bank account. */
+    @SerializedName("country")
+    String country;
+
+    @SerializedName("cpa")
+    Cpa cpa;
+
+    /** Open Enum. The currency of the bank account. */
+    @SerializedName("currency")
+    String currency;
+
+    /** IBAN bank account details. */
+    @SerializedName("iban")
+    Iban iban;
+
+    /** Sort code bank account details (UK). */
+    @SerializedName("sort_code")
+    SortCode sortCode;
 
     /**
-     * The credentials of the crypto wallet for the Financial Address. This contains unique details
-     * such as the blockchain network, wallet address, and memo of a crypto wallet.
-     */
-    @SerializedName("crypto_wallet")
-    CryptoWallet cryptoWallet;
-
-    /**
-     * The credentials of the UK Bank Account for the FinancialAddress. This contains unique banking
-     * details such as the sort code, account number, etc. of a UK bank account.
-     */
-    @SerializedName("gb_bank_account")
-    GbBankAccount gbBankAccount;
-
-    /**
-     * The credentials of the Mexican Bank Account for the FinancialAddress. This contains unique
-     * banking details such as the CLABE and account holder name of a Mexican bank account.
-     */
-    @SerializedName("mx_bank_account")
-    MxBankAccount mxBankAccount;
-
-    /**
-     * The credentials of the SEPA Bank Account for the FinancialAddress. This contains unique
-     * banking details such as the IBAN, BIC, etc. of a SEPA bank account.
-     */
-    @SerializedName("sepa_bank_account")
-    SepaBankAccount sepaBankAccount;
-
-    /**
-     * Open Enum. The type of Credentials that are provisioned for the FinancialAddress.
+     * Open Enum. The type of bank account details.
      *
-     * <p>One of {@code ca_bank_account}, {@code crypto_wallet}, {@code gb_bank_account}, {@code
-     * mx_bank_account}, {@code sepa_bank_account}, or {@code us_bank_account}.
+     * <p>One of {@code aba}, {@code clabe}, {@code cpa}, {@code iban}, or {@code sort_code}.
      */
     @SerializedName("type")
     String type;
 
-    /**
-     * The credentials of the US Bank Account for the FinancialAddress. This contains unique banking
-     * details such as the routing number, account number, etc. of a US bank account.
-     */
-    @SerializedName("us_bank_account")
-    UsBankAccount usBankAccount;
-
-    /**
-     * The credentials of the Canadian Bank Account for the FinancialAddress. This contains unique
-     * banking details such as the account number, institution number, etc. of a Canadian bank
-     * account.
-     */
+    /** ABA bank account details (US). */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CaBankAccount extends StripeObject {
-      /** The account holder name to be used during bank transfers. */
-      @SerializedName("account_holder_name")
-      String accountHolderName;
-
-      /** The account number of the Canadian Bank Account. */
-      @SerializedName("account_number")
-      String accountNumber;
-
-      /** The name of the Bank. */
-      @SerializedName("bank_name")
-      String bankName;
-
-      /** The institution number of the Canadian Bank Account. */
-      @SerializedName("institution_number")
-      String institutionNumber;
-
-      /**
-       * The last four digits of the Canadian Bank Account number. This will always be returned. To
-       * view the full account number when retrieving or listing FinancialAddresses, use the {@code
-       * include} request parameter.
-       */
-      @SerializedName("last4")
-      String last4;
-
-      /** The transit number of the Canadian Bank Account. */
-      @SerializedName("transit_number")
-      String transitNumber;
-    }
-
-    /**
-     * The credentials of the crypto wallet for the Financial Address. This contains unique details
-     * such as the blockchain network, wallet address, and memo of a crypto wallet.
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class CryptoWallet extends StripeObject {
-      /** The blockchain address of the crypto wallet. */
-      @SerializedName("address")
-      String address;
-
-      /** Required if the network supports memos (e.g. Stellar). */
-      @SerializedName("memo")
-      String memo;
-
-      /**
-       * The blockchain network of the crypto wallet.
-       *
-       * <p>One of {@code arbitrum}, {@code avalanche_c_chain}, {@code base}, {@code ethereum},
-       * {@code optimism}, {@code polygon}, {@code solana}, {@code stellar}, or {@code tempo}.
-       */
-      @SerializedName("network")
-      String network;
-    }
-
-    /**
-     * The credentials of the UK Bank Account for the FinancialAddress. This contains unique banking
-     * details such as the sort code, account number, etc. of a UK bank account.
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class GbBankAccount extends StripeObject {
-      /** The account holder name to be used during bank transference. */
-      @SerializedName("account_holder_name")
-      String accountHolderName;
-
-      /** The account number of the UK Bank Account. */
-      @SerializedName("account_number")
-      String accountNumber;
-
-      /**
-       * The last four digits of the UK Bank Account number. This will always be returned. To view
-       * the full account number when retrieving or listing FinancialAddresses, use the {@code
-       * include} request parameter.
-       */
-      @SerializedName("last4")
-      String last4;
-
-      /** The sort code of the UK Bank Account. */
-      @SerializedName("sort_code")
-      String sortCode;
-    }
-
-    /**
-     * The credentials of the Mexican Bank Account for the FinancialAddress. This contains unique
-     * banking details such as the CLABE and account holder name of a Mexican bank account.
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class MxBankAccount extends StripeObject {
-      /** The account holder name to be used during bank transfers. */
-      @SerializedName("account_holder_name")
-      String accountHolderName;
-
-      /** The CLABE (Clave Bancaria Estandarizada) of the Mexican Bank Account. */
-      @SerializedName("clabe")
-      String clabe;
-    }
-
-    /**
-     * The credentials of the SEPA Bank Account for the FinancialAddress. This contains unique
-     * banking details such as the IBAN, BIC, etc. of a SEPA bank account.
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class SepaBankAccount extends StripeObject {
-      /** The account holder name to be used during bank transfers. */
-      @SerializedName("account_holder_name")
-      String accountHolderName;
-
-      /** The name of the Bank. */
-      @SerializedName("bank_name")
-      String bankName;
-
-      /** The BIC of the SEPA Bank Account. */
-      @SerializedName("bic")
-      String bic;
-
-      /** The originating country of the SEPA Bank account. */
-      @SerializedName("country")
-      String country;
-
-      /** The IBAN of the SEPA Bank Account. */
-      @SerializedName("iban")
-      String iban;
-
-      /**
-       * The last four digits of the SEPA Bank Account number. This will always be returned. To view
-       * the full account number when retrieving or listing FinancialAddresses, use the {@code
-       * include} request parameter.
-       */
-      @SerializedName("last4")
-      String last4;
-    }
-
-    /**
-     * The credentials of the US Bank Account for the FinancialAddress. This contains unique banking
-     * details such as the routing number, account number, etc. of a US bank account.
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class UsBankAccount extends StripeObject {
+    public static class Aba extends StripeObject {
       /** The address of the account holder. */
       @SerializedName("account_holder_address")
       AccountHolderAddress accountHolderAddress;
@@ -297,27 +124,19 @@ public class FinancialAddress extends StripeObject implements HasId {
       @SerializedName("account_holder_name")
       String accountHolderName;
 
-      /** The account number of the US Bank Account. */
+      /** The full account number. */
       @SerializedName("account_number")
       String accountNumber;
 
-      /** The name of the Bank. */
+      /** The name of the bank. */
       @SerializedName("bank_name")
       String bankName;
 
-      /** The BIC of the bank or financial institution. */
-      @SerializedName("bic")
-      String bic;
-
-      /**
-       * The last four digits of the US Bank Account number. This will always be returned. To view
-       * the full account number when retrieving or listing FinancialAddresses, use the {@code
-       * include} request parameter.
-       */
+      /** The last four digits of the account number. */
       @SerializedName("last4")
       String last4;
 
-      /** The routing number of the US Bank Account. */
+      /** The ABA routing number. */
       @SerializedName("routing_number")
       String routingNumber;
 
@@ -326,34 +145,142 @@ public class FinancialAddress extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class AccountHolderAddress extends StripeObject {
-        /** The city of the address. */
+        /** City. */
         @SerializedName("city")
         String city;
 
-        /** The country of the address. */
+        /** Country. */
         @SerializedName("country")
         String country;
 
-        /** The first line of the address. */
+        /** Address line 1. */
         @SerializedName("line1")
         String line1;
 
-        /** The second line of the address. */
+        /** Address line 2. */
         @SerializedName("line2")
         String line2;
 
-        /** The postal / zip code of the address. */
+        /** Postal code. */
         @SerializedName("postal_code")
         String postalCode;
 
-        /** The state of the address. */
+        /** State or province. */
         @SerializedName("state")
         String state;
 
-        /** The town of the address. */
+        /** Town or suburb. */
         @SerializedName("town")
         String town;
       }
     }
+
+    /**
+     * For more details about Clabe, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Clabe extends StripeObject {
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      @SerializedName("clabe")
+      String clabe;
+    }
+
+    /**
+     * For more details about Cpa, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Cpa extends StripeObject {
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      @SerializedName("account_number")
+      String accountNumber;
+
+      @SerializedName("bank_name")
+      String bankName;
+
+      @SerializedName("institution_number")
+      String institutionNumber;
+
+      @SerializedName("last4")
+      String last4;
+
+      @SerializedName("transit_number")
+      String transitNumber;
+    }
+
+    /** IBAN bank account details. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Iban extends StripeObject {
+      /** The name of the account holder. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The name of the bank. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** The country of the bank account. */
+      @SerializedName("country")
+      String country;
+
+      /** The full IBAN. */
+      @SerializedName("iban")
+      String iban;
+
+      /** The last four digits of the IBAN. */
+      @SerializedName("last4")
+      String last4;
+    }
+
+    /** Sort code bank account details (UK). */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SortCode extends StripeObject {
+      /** The name of the account holder. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The full account number. */
+      @SerializedName("account_number")
+      String accountNumber;
+
+      /** The last four digits of the account number. */
+      @SerializedName("last4")
+      String last4;
+
+      /** The sort code. */
+      @SerializedName("sort_code")
+      String sortCode;
+    }
+  }
+
+  /**
+   * For more details about CryptoWallet, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CryptoWallet extends StripeObject {
+    @SerializedName("address")
+    String address;
+
+    @SerializedName("memo")
+    String memo;
+
+    @SerializedName("network")
+    String network;
   }
 }

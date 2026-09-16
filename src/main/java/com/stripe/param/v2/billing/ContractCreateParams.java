@@ -1355,6 +1355,10 @@ public class ContractCreateParams extends ApiRequestParams {
     @SerializedName("lookup_key")
     String lookupKey;
 
+    /** Set of key-value pairs that you can attach to an object. */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
     /** <strong>Required.</strong> The id of the product for this fee. */
     @SerializedName("product")
     String product;
@@ -1364,11 +1368,13 @@ public class ContractCreateParams extends ApiRequestParams {
         BillAt billAt,
         Map<String, Object> extraParams,
         String lookupKey,
+        Map<String, String> metadata,
         String product) {
       this.amount = amount;
       this.billAt = billAt;
       this.extraParams = extraParams;
       this.lookupKey = lookupKey;
+      this.metadata = metadata;
       this.product = product;
     }
 
@@ -1385,12 +1391,19 @@ public class ContractCreateParams extends ApiRequestParams {
 
       private String lookupKey;
 
+      private Map<String, String> metadata;
+
       private String product;
 
       /** Finalize and obtain parameter instance from this builder. */
       public ContractCreateParams.OneTimeFee build() {
         return new ContractCreateParams.OneTimeFee(
-            this.amount, this.billAt, this.extraParams, this.lookupKey, this.product);
+            this.amount,
+            this.billAt,
+            this.extraParams,
+            this.lookupKey,
+            this.metadata,
+            this.product);
       }
 
       /** <strong>Required.</strong> The amount to bill. */
@@ -1434,6 +1447,32 @@ public class ContractCreateParams extends ApiRequestParams {
       /** A user-provided lookup key. */
       public Builder setLookupKey(String lookupKey) {
         this.lookupKey = lookupKey;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ContractCreateParams.OneTimeFee#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ContractCreateParams.OneTimeFee#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
         return this;
       }
 

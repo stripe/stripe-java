@@ -13,6 +13,10 @@ public final class VaultService extends ApiService {
     return new com.stripe.service.v2.core.vault.GbBankAccountService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.core.vault.NetworkTokenService networkTokens() {
+    return new com.stripe.service.v2.core.vault.NetworkTokenService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.core.vault.UsBankAccountService usBankAccounts() {
     return new com.stripe.service.v2.core.vault.UsBankAccountService(this.getResponseGetter());
   }

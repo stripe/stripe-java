@@ -123,6 +123,7 @@ public final class EventDataClassLookup {
     classLookup.put("transit_balance", com.stripe.model.TransitBalance.class);
     classLookup.put("webhook_endpoint", com.stripe.model.WebhookEndpoint.class);
 
+    classLookup.put("apps.install", com.stripe.model.apps.Install.class);
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);
 
     classLookup.put("billing.alert", com.stripe.model.billing.Alert.class);

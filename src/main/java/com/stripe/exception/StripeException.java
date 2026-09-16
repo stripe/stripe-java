@@ -152,6 +152,9 @@ public abstract class StripeException extends Exception {
       case "invalid_payout_method":
         return com.stripe.exception.InvalidPayoutMethodException.parse(
             body, statusCode, requestId, responseGetter);
+      case "merchant_not_gated":
+        return com.stripe.exception.MerchantNotGatedException.parse(
+            body, statusCode, requestId, responseGetter);
       case "non_zero_balance":
         return com.stripe.exception.NonZeroBalanceException.parse(
             body, statusCode, requestId, responseGetter);

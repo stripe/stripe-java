@@ -80,11 +80,14 @@ public class SessionUpdateParams extends ApiRequestParams {
   Object metadata;
 
   /**
-   * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
-   * payment} mode.
+   * A subset of parameters to apply to the PaymentIntent for Checkout Sessions in {@code payment}
+   * mode.
    *
    * <p>You can only update these parameters when {@code ui_mode} is {@code elements} and while the
-   * session is active.
+   * session is active. If the PaymentIntent requires customer action or confirmation, updating
+   * these parameters abandons the current payment attempt and returns the PaymentIntent to {@code
+   * requires_payment_method}. You can't update these parameters after the PaymentIntent begins
+   * processing, requires capture, succeeds, or is canceled.
    */
   @SerializedName("payment_intent_data")
   PaymentIntentData paymentIntentData;
@@ -362,11 +365,14 @@ public class SessionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
-     * payment} mode.
+     * A subset of parameters to apply to the PaymentIntent for Checkout Sessions in {@code payment}
+     * mode.
      *
      * <p>You can only update these parameters when {@code ui_mode} is {@code elements} and while
-     * the session is active.
+     * the session is active. If the PaymentIntent requires customer action or confirmation,
+     * updating these parameters abandons the current payment attempt and returns the PaymentIntent
+     * to {@code requires_payment_method}. You can't update these parameters after the PaymentIntent
+     * begins processing, requires capture, succeeds, or is canceled.
      */
     public Builder setPaymentIntentData(SessionUpdateParams.PaymentIntentData paymentIntentData) {
       this.paymentIntentData = paymentIntentData;
