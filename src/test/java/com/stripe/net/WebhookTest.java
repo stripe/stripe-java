@@ -171,6 +171,38 @@ public class WebhookTest extends BaseStripeTest {
   }
 
   @Test
+  public void testEmptySecret()
+      throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+    final String sigHeader = generateSigHeader();
+
+    Throwable exception =
+        assertThrows(
+            SignatureVerificationException.class,
+            () -> {
+              Webhook.Signature.verifyHeader(payload, sigHeader, "", 0, null);
+            });
+    assertEquals(
+        "No webhook secret value was provided. It should start with `whsec_`",
+        exception.getMessage());
+  }
+
+  @Test
+  public void testNullSecret()
+      throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
+    final String sigHeader = generateSigHeader();
+
+    Throwable exception =
+        assertThrows(
+            SignatureVerificationException.class,
+            () -> {
+              Webhook.Signature.verifyHeader(payload, sigHeader, null, 0, null);
+            });
+    assertEquals(
+        "No webhook secret value was provided. It should start with `whsec_`",
+        exception.getMessage());
+  }
+
+  @Test
   public void testNoValidSignatureForPayload()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
     final Map<String, Object> options = new HashMap<>();
