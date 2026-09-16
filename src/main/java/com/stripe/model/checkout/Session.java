@@ -2070,7 +2070,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Label extends StripeObject {
-      /** Custom text for the label, displayed to the customer. Up to 50 characters. */
+      /** Custom text for the label, displayed to the customer. Up to 100 characters. */
       @SerializedName("custom")
       String custom;
 
@@ -3385,6 +3385,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        */
       @SerializedName("target_date")
       String targetDate;
+
+      @SerializedName("verification_method")
+      String verificationMethod;
 
       /**
        * For more details about MandateOptions, please refer to the <a

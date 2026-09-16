@@ -17,21 +17,21 @@ public final class AuthorizationService extends ApiService {
     super(responseGetter);
   }
 
-  /** Retrieves the details of an Financial Connections {@code Authorization}. */
+  /** Retrieves the details of a Financial Connections {@code Authorization}. */
   public Authorization retrieve(String authorization, AuthorizationRetrieveParams params)
       throws StripeException {
     return retrieve(authorization, params, (RequestOptions) null);
   }
-  /** Retrieves the details of an Financial Connections {@code Authorization}. */
+  /** Retrieves the details of a Financial Connections {@code Authorization}. */
   public Authorization retrieve(String authorization, RequestOptions options)
       throws StripeException {
     return retrieve(authorization, (AuthorizationRetrieveParams) null, options);
   }
-  /** Retrieves the details of an Financial Connections {@code Authorization}. */
+  /** Retrieves the details of a Financial Connections {@code Authorization}. */
   public Authorization retrieve(String authorization) throws StripeException {
     return retrieve(authorization, (AuthorizationRetrieveParams) null, (RequestOptions) null);
   }
-  /** Retrieves the details of an Financial Connections {@code Authorization}. */
+  /** Retrieves the details of a Financial Connections {@code Authorization}. */
   public Authorization retrieve(
       String authorization, AuthorizationRetrieveParams params, RequestOptions options)
       throws StripeException {

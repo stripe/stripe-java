@@ -1893,8 +1893,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as {@code collection_method}, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, you can no
+   * longer change most of its details, including monetary values and {@code collection_method}. For
+   * most invoices, this also includes {@code description}.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -1908,8 +1909,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as {@code collection_method}, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, you can no
+   * longer change most of its details, including monetary values and {@code collection_method}. For
+   * most invoices, this also includes {@code description}.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -1926,8 +1928,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as {@code collection_method}, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, you can no
+   * longer change most of its details, including monetary values and {@code collection_method}. For
+   * most invoices, this also includes {@code description}.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -1940,8 +1943,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as {@code collection_method}, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, you can no
+   * longer change most of its details, including monetary values and {@code collection_method}. For
+   * most invoices, this also includes {@code description}.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -2660,6 +2664,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       AcssDebit acssDebit;
 
       /**
+       * If paying by {@code bacs_debit}, this sub-hash contains details about the Bacs Direct Debit
+       * payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("bacs_debit")
+      BacsDebit bacsDebit;
+
+      /**
        * If paying by {@code bancontact}, this sub-hash contains details about the Bancontact
        * payment method options to pass to the invoice’s PaymentIntent.
        */
@@ -2799,6 +2810,26 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
           @SerializedName("transaction_type")
           String transactionType;
         }
+      }
+
+      /**
+       * For more details about BacsDebit, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BacsDebit extends StripeObject {
+        /**
+         * Controls when Stripe will attempt to debit the funds from the customer's account. The
+         * date must be a string in YYYY-MM-DD format. The date must be in the future and between 3
+         * and 15 calendar days from now.
+         */
+        @SerializedName("target_date")
+        String targetDate;
+
+        @SerializedName("verification_method")
+        String verificationMethod;
       }
 
       /**
