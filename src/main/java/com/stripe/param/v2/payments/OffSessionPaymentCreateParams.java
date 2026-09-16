@@ -14,10 +14,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class OffSessionPaymentCreateParams extends ApiRequestParams {
-  /**
-   * <strong>Required.</strong> The &quot;presentment amount&quot; to be collected from the
-   * customer.
-   */
+  /** <strong>Required.</strong> Amount intended to be collected by this payment. */
   @SerializedName("amount")
   Amount amount;
 
@@ -56,6 +53,10 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
+
+  /** Additional fields to include in the response. */
+  @SerializedName("include")
+  List<OffSessionPaymentCreateParams.Include> include;
 
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
@@ -142,6 +143,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       String customer,
       String description,
       Map<String, Object> extraParams,
+      List<OffSessionPaymentCreateParams.Include> include,
       Map<String, String> metadata,
       String onBehalfOf,
       PaymentDetails paymentDetails,
@@ -163,6 +165,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     this.customer = customer;
     this.description = description;
     this.extraParams = extraParams;
+    this.include = include;
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
     this.paymentDetails = paymentDetails;
@@ -198,6 +201,8 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     private String description;
 
     private Map<String, Object> extraParams;
+
+    private List<OffSessionPaymentCreateParams.Include> include;
 
     private Map<String, String> metadata;
 
@@ -236,6 +241,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
           this.customer,
           this.description,
           this.extraParams,
+          this.include,
           this.metadata,
           this.onBehalfOf,
           this.paymentDetails,
@@ -251,10 +257,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
           this.transferData);
     }
 
-    /**
-     * <strong>Required.</strong> The &quot;presentment amount&quot; to be collected from the
-     * customer.
-     */
+    /** <strong>Required.</strong> Amount intended to be collected by this payment. */
     public Builder setAmount(Amount amount) {
       this.amount = amount;
       return this;
@@ -322,6 +325,32 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add an element to `include` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OffSessionPaymentCreateParams#include} for the field documentation.
+     */
+    public Builder addInclude(OffSessionPaymentCreateParams.Include element) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `include` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * OffSessionPaymentCreateParams#include} for the field documentation.
+     */
+    public Builder addAllInclude(List<OffSessionPaymentCreateParams.Include> elements) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.addAll(elements);
       return this;
     }
 
@@ -2209,6 +2238,18 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     private final String value;
 
     Cadence(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("latest_payment_attempt_record_details")
+    LATEST_PAYMENT_ATTEMPT_RECORD_DETAILS("latest_payment_attempt_record_details");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Include(String value) {
       this.value = value;
     }
   }

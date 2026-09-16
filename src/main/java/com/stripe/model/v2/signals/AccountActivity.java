@@ -32,6 +32,14 @@ public class AccountActivity extends StripeObject implements HasId {
   AccountRestricted accountRestricted;
 
   /**
+   * Details for the account review. Present only when type is account_reviewed. The activity
+   * requires an existing account_details.account or account_details.customer; inline data is
+   * unsupported.
+   */
+  @SerializedName("account_reviewed")
+  AccountReviewed accountReviewed;
+
+  /**
    * Details for the account suspension. Present only when type is account_suspended. The activity
    * requires an existing account_details.customer; account_details.account and inline data are
    * unsupported.
@@ -91,8 +99,9 @@ public class AccountActivity extends StripeObject implements HasId {
   /**
    * The type of activity.
    *
-   * <p>One of {@code account_restricted}, {@code account_suspended}, {@code login_attempt}, {@code
-   * login_decision}, {@code registration_attempt}, or {@code registration_decision}.
+   * <p>One of {@code account_restricted}, {@code account_reviewed}, {@code account_suspended},
+   * {@code login_attempt}, {@code login_decision}, {@code registration_attempt}, or {@code
+   * registration_decision}.
    */
   @SerializedName("type")
   String type;
@@ -193,6 +202,24 @@ public class AccountActivity extends StripeObject implements HasId {
      */
     @SerializedName("reason")
     String reason;
+  }
+
+  /**
+   * Details for the account review. Present only when type is account_reviewed. The activity
+   * requires an existing account_details.account or account_details.customer; inline data is
+   * unsupported.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AccountReviewed extends StripeObject {
+    /**
+     * The outcome of the merchant review.
+     *
+     * <p>Equal to {@code trusted}.
+     */
+    @SerializedName("outcome")
+    String outcome;
   }
 
   /**

@@ -4,6 +4,7 @@ package com.stripe.service.v2.billing;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.AlreadyExistsException;
 import com.stripe.exception.CannotProceedException;
+import com.stripe.exception.RateLimitException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.DeletedObject;
 import com.stripe.model.v2.StripeCollection;
@@ -71,11 +72,12 @@ public final class ContractService extends ApiService {
     return this.request(request, Contract.class);
   }
   /** Delete a draft contract. */
-  public DeletedObject delete(String id) throws StripeException {
+  public DeletedObject delete(String id) throws StripeException, RateLimitException {
     return delete(id, (RequestOptions) null);
   }
   /** Delete a draft contract. */
-  public DeletedObject delete(String id, RequestOptions options) throws StripeException {
+  public DeletedObject delete(String id, RequestOptions options)
+      throws StripeException, RateLimitException {
     String path = String.format("/v2/billing/contracts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
@@ -108,22 +110,22 @@ public final class ContractService extends ApiService {
   }
   /** Update a draft or active contract. */
   public Contract update(String id, ContractUpdateParams params)
-      throws StripeException, AlreadyExistsException, CannotProceedException {
+      throws StripeException, RateLimitException, AlreadyExistsException, CannotProceedException {
     return update(id, params, (RequestOptions) null);
   }
   /** Update a draft or active contract. */
   public Contract update(String id, RequestOptions options)
-      throws StripeException, AlreadyExistsException, CannotProceedException {
+      throws StripeException, RateLimitException, AlreadyExistsException, CannotProceedException {
     return update(id, (ContractUpdateParams) null, options);
   }
   /** Update a draft or active contract. */
   public Contract update(String id)
-      throws StripeException, AlreadyExistsException, CannotProceedException {
+      throws StripeException, RateLimitException, AlreadyExistsException, CannotProceedException {
     return update(id, (ContractUpdateParams) null, (RequestOptions) null);
   }
   /** Update a draft or active contract. */
   public Contract update(String id, ContractUpdateParams params, RequestOptions options)
-      throws StripeException, AlreadyExistsException, CannotProceedException {
+      throws StripeException, RateLimitException, AlreadyExistsException, CannotProceedException {
     String path = String.format("/v2/billing/contracts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
@@ -135,20 +137,22 @@ public final class ContractService extends ApiService {
     return this.request(request, Contract.class);
   }
   /** Activate a draft contract. */
-  public Contract activate(String id, ContractActivateParams params) throws StripeException {
+  public Contract activate(String id, ContractActivateParams params)
+      throws StripeException, RateLimitException {
     return activate(id, params, (RequestOptions) null);
   }
   /** Activate a draft contract. */
-  public Contract activate(String id, RequestOptions options) throws StripeException {
+  public Contract activate(String id, RequestOptions options)
+      throws StripeException, RateLimitException {
     return activate(id, (ContractActivateParams) null, options);
   }
   /** Activate a draft contract. */
-  public Contract activate(String id) throws StripeException {
+  public Contract activate(String id) throws StripeException, RateLimitException {
     return activate(id, (ContractActivateParams) null, (RequestOptions) null);
   }
   /** Activate a draft contract. */
   public Contract activate(String id, ContractActivateParams params, RequestOptions options)
-      throws StripeException {
+      throws StripeException, RateLimitException {
     String path = String.format("/v2/billing/contracts/%s/activate", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
@@ -160,20 +164,22 @@ public final class ContractService extends ApiService {
     return this.request(request, Contract.class);
   }
   /** Cancel an active contract. */
-  public Contract cancel(String id, ContractCancelParams params) throws StripeException {
+  public Contract cancel(String id, ContractCancelParams params)
+      throws StripeException, RateLimitException {
     return cancel(id, params, (RequestOptions) null);
   }
   /** Cancel an active contract. */
-  public Contract cancel(String id, RequestOptions options) throws StripeException {
+  public Contract cancel(String id, RequestOptions options)
+      throws StripeException, RateLimitException {
     return cancel(id, (ContractCancelParams) null, options);
   }
   /** Cancel an active contract. */
-  public Contract cancel(String id) throws StripeException {
+  public Contract cancel(String id) throws StripeException, RateLimitException {
     return cancel(id, (ContractCancelParams) null, (RequestOptions) null);
   }
   /** Cancel an active contract. */
   public Contract cancel(String id, ContractCancelParams params, RequestOptions options)
-      throws StripeException {
+      throws StripeException, RateLimitException {
     String path = String.format("/v2/billing/contracts/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(

@@ -4681,16 +4681,19 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Object plan;
 
     /**
-     * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-     * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code quantity}
-     * parameter is provided.
+     * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+     * both, to set or change this item's price. If you're updating an existing item without
+     * changing its price, omit both. When changing a subscription item's price, {@code quantity} is
+     * set to 1 unless a {@code quantity} parameter is provided.
      */
     @SerializedName("price")
     Object price;
 
     /**
      * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-     * inline. One of {@code price} or {@code price_data} is required.
+     * inline. You can use either {@code price} or {@code price_data}, but not both, to set or
+     * change this item's price. If you're updating an existing item without changing its price,
+     * omit both.
      */
     @SerializedName("price_data")
     PriceData priceData;
@@ -4979,9 +4982,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-       * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
-       * quantity} parameter is provided.
+       * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+       * both, to set or change this item's price. If you're updating an existing item without
+       * changing its price, omit both. When changing a subscription item's price, {@code quantity}
+       * is set to 1 unless a {@code quantity} parameter is provided.
        */
       public Builder setPrice(String price) {
         this.price = price;
@@ -4989,9 +4993,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-       * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
-       * quantity} parameter is provided.
+       * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+       * both, to set or change this item's price. If you're updating an existing item without
+       * changing its price, omit both. When changing a subscription item's price, {@code quantity}
+       * is set to 1 unless a {@code quantity} parameter is provided.
        */
       public Builder setPrice(EmptyParam price) {
         this.price = price;
@@ -5000,7 +5005,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       /**
        * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-       * inline. One of {@code price} or {@code price_data} is required.
+       * inline. You can use either {@code price} or {@code price_data}, but not both, to set or
+       * change this item's price. If you're updating an existing item without changing its price,
+       * omit both.
        */
       public Builder setPriceData(SubscriptionUpdateParams.Item.PriceData priceData) {
         this.priceData = priceData;
@@ -6698,6 +6705,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Object acssDebit;
 
       /**
+       * This sub-hash contains details about the Bacs Direct Debit payment method options to pass
+       * to the invoice’s PaymentIntent.
+       */
+      @SerializedName("bacs_debit")
+      Object bacsDebit;
+
+      /**
        * This sub-hash contains details about the Bancontact payment method options to pass to the
        * invoice’s PaymentIntent.
        */
@@ -6813,6 +6827,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       private PaymentMethodOptions(
           Object acssDebit,
+          Object bacsDebit,
           Object bancontact,
           Object billie,
           Object bizum,
@@ -6830,6 +6845,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           Object usBankAccount,
           Object wechatPay) {
         this.acssDebit = acssDebit;
+        this.bacsDebit = bacsDebit;
         this.bancontact = bancontact;
         this.billie = billie;
         this.bizum = bizum;
@@ -6854,6 +6870,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       public static class Builder {
         private Object acssDebit;
+
+        private Object bacsDebit;
 
         private Object bancontact;
 
@@ -6891,6 +6909,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions build() {
           return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions(
               this.acssDebit,
+              this.bacsDebit,
               this.bancontact,
               this.billie,
               this.bizum,
@@ -6925,6 +6944,25 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          */
         public Builder setAcssDebit(EmptyParam acssDebit) {
           this.acssDebit = acssDebit;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Bacs Direct Debit payment method options to pass
+         * to the invoice’s PaymentIntent.
+         */
+        public Builder setBacsDebit(
+            SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.BacsDebit bacsDebit) {
+          this.bacsDebit = bacsDebit;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Bacs Direct Debit payment method options to pass
+         * to the invoice’s PaymentIntent.
+         */
+        public Builder setBacsDebit(EmptyParam bacsDebit) {
+          this.bacsDebit = bacsDebit;
           return this;
         }
 
@@ -7446,6 +7484,119 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
           @SerializedName("microdeposits")
           MICRODEPOSITS("microdeposits");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          VerificationMethod(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BacsDebit {
+        /** Controls when the funds will be captured from the customer's account. */
+        @SerializedName("debit_behavior")
+        Object debitBehavior;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        @SerializedName("verification_method")
+        VerificationMethod verificationMethod;
+
+        private BacsDebit(
+            Object debitBehavior,
+            Map<String, Object> extraParams,
+            VerificationMethod verificationMethod) {
+          this.debitBehavior = debitBehavior;
+          this.extraParams = extraParams;
+          this.verificationMethod = verificationMethod;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object debitBehavior;
+
+          private Map<String, Object> extraParams;
+
+          private VerificationMethod verificationMethod;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.BacsDebit build() {
+            return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.BacsDebit(
+                this.debitBehavior, this.extraParams, this.verificationMethod);
+          }
+
+          /** Controls when the funds will be captured from the customer's account. */
+          public Builder setDebitBehavior(String debitBehavior) {
+            this.debitBehavior = debitBehavior;
+            return this;
+          }
+
+          /** Controls when the funds will be captured from the customer's account. */
+          public Builder setDebitBehavior(EmptyParam debitBehavior) {
+            this.debitBehavior = debitBehavior;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.BacsDebit#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.BacsDebit#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          public Builder setVerificationMethod(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.BacsDebit
+                      .VerificationMethod
+                  verificationMethod) {
+            this.verificationMethod = verificationMethod;
+            return this;
+          }
+        }
+
+        public enum VerificationMethod implements ApiRequestParams.EnumParam {
+          @SerializedName("automatic")
+          AUTOMATIC("automatic"),
+
+          @SerializedName("payer_name_verification")
+          PAYER_NAME_VERIFICATION("payer_name_verification");
 
           @Getter(onMethod_ = {@Override})
           private final String value;

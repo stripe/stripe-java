@@ -263,6 +263,10 @@ public class Contract extends StripeObject implements HasId {
       @SerializedName("lookup_key")
       String lookupKey;
 
+      /** Set of key-value pairs. */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
       /** The id of the product for this fee. */
       @SerializedName("product")
       String product;

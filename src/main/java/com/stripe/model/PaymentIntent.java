@@ -3527,6 +3527,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("data")
         String data;
 
+        /** The timestamp at which the QR code expires. */
+        @SerializedName("expires_at")
+        Long expiresAt;
+
         /** The image_url_png string used to render QR code. */
         @SerializedName("image_url_png")
         String imageUrlPng;

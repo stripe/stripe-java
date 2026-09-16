@@ -16,27 +16,26 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams;
 import com.stripe.param.v2.moneymanagement.FinancialAddressListParams;
-import com.stripe.param.v2.moneymanagement.FinancialAddressRetrieveParams;
 
 public final class FinancialAddressService extends ApiService {
   public FinancialAddressService(StripeResponseGetter responseGetter) {
     super(responseGetter);
   }
 
-  /** List all FinancialAddresses for a FinancialAccount. */
+  /** List all FinancialAddresses for a FinancialAccount (V2 shape). */
   public StripeCollection<FinancialAddress> list(FinancialAddressListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** List all FinancialAddresses for a FinancialAccount. */
+  /** List all FinancialAddresses for a FinancialAccount (V2 shape). */
   public StripeCollection<FinancialAddress> list(RequestOptions options) throws StripeException {
     return list((FinancialAddressListParams) null, options);
   }
-  /** List all FinancialAddresses for a FinancialAccount. */
+  /** List all FinancialAddresses for a FinancialAccount (V2 shape). */
   public StripeCollection<FinancialAddress> list() throws StripeException {
     return list((FinancialAddressListParams) null, (RequestOptions) null);
   }
-  /** List all FinancialAddresses for a FinancialAccount. */
+  /** List all FinancialAddresses for a FinancialAccount (V2 shape). */
   public StripeCollection<FinancialAddress> list(
       FinancialAddressListParams params, RequestOptions options) throws StripeException {
     String path = "/v2/money_management/financial_addresses";
@@ -49,12 +48,12 @@ public final class FinancialAddressService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<FinancialAddress>>() {}.getType());
   }
-  /** Create a new FinancialAddress for a FinancialAccount. */
+  /** Create a new FinancialAddress for a FinancialAccount (V2 shape). */
   public FinancialAddress create(FinancialAddressCreateParams params)
       throws StripeException, FinancialAccountNotOpenException, FeatureNotEnabledException {
     return create(params, (RequestOptions) null);
   }
-  /** Create a new FinancialAddress for a FinancialAccount. */
+  /** Create a new FinancialAddress for a FinancialAccount (V2 shape). */
   public FinancialAddress create(FinancialAddressCreateParams params, RequestOptions options)
       throws StripeException, FinancialAccountNotOpenException, FeatureNotEnabledException {
     String path = "/v2/money_management/financial_addresses";
@@ -67,44 +66,16 @@ public final class FinancialAddressService extends ApiService {
             options);
     return this.request(request, FinancialAddress.class);
   }
-  /**
-   * Retrieve a FinancialAddress. By default, the FinancialAddress will be returned in its
-   * unexpanded state, revealing only the last 4 digits of the account number.
-   */
-  public FinancialAddress retrieve(String id, FinancialAddressRetrieveParams params)
-      throws StripeException {
-    return retrieve(id, params, (RequestOptions) null);
-  }
-  /**
-   * Retrieve a FinancialAddress. By default, the FinancialAddress will be returned in its
-   * unexpanded state, revealing only the last 4 digits of the account number.
-   */
-  public FinancialAddress retrieve(String id, RequestOptions options) throws StripeException {
-    return retrieve(id, (FinancialAddressRetrieveParams) null, options);
-  }
-  /**
-   * Retrieve a FinancialAddress. By default, the FinancialAddress will be returned in its
-   * unexpanded state, revealing only the last 4 digits of the account number.
-   */
+  /** Retrieve a FinancialAddress (V2 shape). */
   public FinancialAddress retrieve(String id) throws StripeException {
-    return retrieve(id, (FinancialAddressRetrieveParams) null, (RequestOptions) null);
+    return retrieve(id, (RequestOptions) null);
   }
-  /**
-   * Retrieve a FinancialAddress. By default, the FinancialAddress will be returned in its
-   * unexpanded state, revealing only the last 4 digits of the account number.
-   */
-  public FinancialAddress retrieve(
-      String id, FinancialAddressRetrieveParams params, RequestOptions options)
-      throws StripeException {
+  /** Retrieve a FinancialAddress (V2 shape). */
+  public FinancialAddress retrieve(String id, RequestOptions options) throws StripeException {
     String path =
         String.format("/v2/money_management/financial_addresses/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
     return this.request(request, FinancialAddress.class);
   }
 }

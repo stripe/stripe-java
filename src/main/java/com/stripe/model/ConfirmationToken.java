@@ -117,7 +117,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
   /** Shipping information collected on this ConfirmationToken. */
   @SerializedName("shipping")
-  Shipping shipping;
+  ShippingDetails shipping;
 
   /**
    * Indicates whether the Stripe SDK is used to handle confirmation flow. Defaults to {@code true}
@@ -2812,26 +2812,6 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Zip extends StripeObject {}
-  }
-
-  /**
-   * For more details about Shipping, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Shipping extends StripeObject {
-    @SerializedName("address")
-    Address address;
-
-    /** Recipient name. */
-    @SerializedName("name")
-    String name;
-
-    /** Recipient phone (including extension). */
-    @SerializedName("phone")
-    String phone;
   }
 
   public static class TestHelpers {

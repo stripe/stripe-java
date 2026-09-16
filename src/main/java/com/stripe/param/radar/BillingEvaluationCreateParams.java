@@ -291,9 +291,9 @@ public class BillingEvaluationCreateParams extends ApiRequestParams {
     String customerAccount;
 
     /**
-     * Attributes of the customer being evaluated. Supply these when the customer isn't represented
-     * by a Customer or an Account. If {@code customer} or {@code customer_account} is also
-     * supplied, the attributes on that object are used and these are ignored.
+     * Attributes of the customer being evaluated. Exactly one of {@code customer}, {@code
+     * customer_account}, and {@code data} must be supplied: use {@code data} when the customer
+     * isn't represented by a Customer or an Account.
      */
     @SerializedName("data")
     Data data;
@@ -349,9 +349,9 @@ public class BillingEvaluationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Attributes of the customer being evaluated. Supply these when the customer isn't
-       * represented by a Customer or an Account. If {@code customer} or {@code customer_account} is
-       * also supplied, the attributes on that object are used and these are ignored.
+       * Attributes of the customer being evaluated. Exactly one of {@code customer}, {@code
+       * customer_account}, and {@code data} must be supplied: use {@code data} when the customer
+       * isn't represented by a Customer or an Account.
        */
       public Builder setData(BillingEvaluationCreateParams.CustomerDetails.Data data) {
         this.data = data;

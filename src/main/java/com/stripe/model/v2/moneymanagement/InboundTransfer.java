@@ -130,23 +130,31 @@ public class InboundTransfer extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TransferHistory extends StripeObject implements HasId {
-    /** The history entry for a failed InboundTransfer. */
+    /** The InboundTransfer failed. See {@code failure_reason} for more details. */
     @SerializedName("bank_debit_failed")
     BankDebitFailed bankDebitFailed;
 
-    /** The history entry for a processing InboundTransfer. */
+    /**
+     * The InboundTransfer was submitted to the scheme for processing. The debit is still in
+     * progress and can later succeed or fail.
+     */
     @SerializedName("bank_debit_processing")
     BankDebitProcessing bankDebitProcessing;
 
-    /** The history entry for a queued InboundTransfer. */
+    /**
+     * The InboundTransfer was created and is waiting to be submitted to the scheme for processing.
+     */
     @SerializedName("bank_debit_queued")
     BankDebitQueued bankDebitQueued;
 
-    /** The history entry for a returned InboundTransfer. */
+    /** The InboundTransfer was returned. The original transaction has been reversed. */
     @SerializedName("bank_debit_returned")
     BankDebitReturned bankDebitReturned;
 
-    /** The history entry for a succeeded InboundTransfer. */
+    /**
+     * The InboundTransfer succeeded. Funds might not yet be available; check the associated
+     * Transaction for availability.
+     */
     @SerializedName("bank_debit_succeeded")
     BankDebitSucceeded bankDebitSucceeded;
 
@@ -180,7 +188,7 @@ public class InboundTransfer extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
-    /** The history entry for a failed InboundTransfer. */
+    /** The InboundTransfer failed. See {@code failure_reason} for more details. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -196,19 +204,24 @@ public class InboundTransfer extends StripeObject implements HasId {
       String failureReason;
     }
 
-    /** The history entry for a processing InboundTransfer. */
+    /**
+     * The InboundTransfer was submitted to the scheme for processing. The debit is still in
+     * progress and can later succeed or fail.
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BankDebitProcessing extends StripeObject {}
 
-    /** The history entry for a queued InboundTransfer. */
+    /**
+     * The InboundTransfer was created and is waiting to be submitted to the scheme for processing.
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BankDebitQueued extends StripeObject {}
 
-    /** The history entry for a returned InboundTransfer. */
+    /** The InboundTransfer was returned. The original transaction has been reversed. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -224,7 +237,10 @@ public class InboundTransfer extends StripeObject implements HasId {
       String returnReason;
     }
 
-    /** The history entry for a succeeded InboundTransfer. */
+    /**
+     * The InboundTransfer succeeded. Funds might not yet be available; check the associated
+     * Transaction for availability.
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

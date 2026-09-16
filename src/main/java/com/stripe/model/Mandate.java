@@ -432,8 +432,8 @@ public class Mandate extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Blik extends StripeObject {
       /** Date at which the mandate expires. */
-      @SerializedName("expires_after")
-      Long expiresAfter;
+      @SerializedName("expires_at")
+      Long expiresAt;
 
       /**
        * Type of the mandate.

@@ -910,6 +910,9 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
         @SerializedName("account_restricted")
         ACCOUNT_RESTRICTED("account_restricted"),
 
+        @SerializedName("account_reviewed")
+        ACCOUNT_REVIEWED("account_reviewed"),
+
         @SerializedName("account_suspended")
         ACCOUNT_SUSPENDED("account_suspended"),
 

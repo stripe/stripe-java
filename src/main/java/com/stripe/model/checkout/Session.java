@@ -2070,7 +2070,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Label extends StripeObject {
-      /** Custom text for the label, displayed to the customer. Up to 50 characters. */
+      /** Custom text for the label, displayed to the customer. Up to 100 characters. */
       @SerializedName("custom")
       String custom;
 
@@ -2655,6 +2655,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class InnerItem extends StripeObject {
+        /** The trial offer applied to this subscription item. */
+        @SerializedName("current_trial")
+        CurrentTrial currentTrial;
+
         /** The price for this subscription item. */
         @SerializedName("price")
         @Getter(lombok.AccessLevel.NONE)
@@ -2681,6 +2685,19 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
         public void setPriceObject(Price expandableObject) {
           this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
+        }
+
+        /**
+         * For more details about CurrentTrial, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CurrentTrial extends StripeObject {
+          /** The ID of the trial offer applied to this subscription item. */
+          @SerializedName("trial_offer")
+          String trialOffer;
         }
       }
 
@@ -3385,6 +3402,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        */
       @SerializedName("target_date")
       String targetDate;
+
+      @SerializedName("verification_method")
+      String verificationMethod;
 
       /**
        * For more details about MandateOptions, please refer to the <a

@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.v2.moneymanagement;
+package com.stripe.param.v2.core.vault;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class FinancialAddressListParams extends ApiRequestParams {
+public class NetworkTokenGenerateCryptogramParams extends ApiRequestParams {
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -20,19 +20,13 @@ public class FinancialAddressListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The ID of the FinancialAccount for which FinancialAddresses are to be returned. */
-  @SerializedName("financial_account")
-  String financialAccount;
+  /** The cryptogram type. When omitted, token_cryptogram is used. */
+  @SerializedName("type")
+  Type type;
 
-  /** The page limit. */
-  @SerializedName("limit")
-  Long limit;
-
-  private FinancialAddressListParams(
-      Map<String, Object> extraParams, String financialAccount, Long limit) {
+  private NetworkTokenGenerateCryptogramParams(Map<String, Object> extraParams, Type type) {
     this.extraParams = extraParams;
-    this.financialAccount = financialAccount;
-    this.limit = limit;
+    this.type = type;
   }
 
   public static Builder builder() {
@@ -42,19 +36,17 @@ public class FinancialAddressListParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private String financialAccount;
-
-    private Long limit;
+    private Type type;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public FinancialAddressListParams build() {
-      return new FinancialAddressListParams(this.extraParams, this.financialAccount, this.limit);
+    public NetworkTokenGenerateCryptogramParams build() {
+      return new NetworkTokenGenerateCryptogramParams(this.extraParams, this.type);
     }
 
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * FinancialAddressListParams#extraParams} for the field documentation.
+     * NetworkTokenGenerateCryptogramParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -67,7 +59,7 @@ public class FinancialAddressListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link FinancialAddressListParams#extraParams} for the field documentation.
+     * See {@link NetworkTokenGenerateCryptogramParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -77,16 +69,22 @@ public class FinancialAddressListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the FinancialAccount for which FinancialAddresses are to be returned. */
-    public Builder setFinancialAccount(String financialAccount) {
-      this.financialAccount = financialAccount;
+    /** The cryptogram type. When omitted, token_cryptogram is used. */
+    public Builder setType(NetworkTokenGenerateCryptogramParams.Type type) {
+      this.type = type;
       return this;
     }
+  }
 
-    /** The page limit. */
-    public Builder setLimit(Long limit) {
-      this.limit = limit;
-      return this;
+  public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("token_cryptogram")
+    TOKEN_CRYPTOGRAM("token_cryptogram");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Type(String value) {
+      this.value = value;
     }
   }
 }

@@ -49,19 +49,19 @@ public final class AccountService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<Account>>() {}.getType());
   }
-  /** Retrieves the details of an Financial Connections {@code Account}. */
+  /** Retrieves the details of a Financial Connections {@code Account}. */
   public Account retrieve(String account, AccountRetrieveParams params) throws StripeException {
     return retrieve(account, params, (RequestOptions) null);
   }
-  /** Retrieves the details of an Financial Connections {@code Account}. */
+  /** Retrieves the details of a Financial Connections {@code Account}. */
   public Account retrieve(String account, RequestOptions options) throws StripeException {
     return retrieve(account, (AccountRetrieveParams) null, options);
   }
-  /** Retrieves the details of an Financial Connections {@code Account}. */
+  /** Retrieves the details of a Financial Connections {@code Account}. */
   public Account retrieve(String account) throws StripeException {
     return retrieve(account, (AccountRetrieveParams) null, (RequestOptions) null);
   }
-  /** Retrieves the details of an Financial Connections {@code Account}. */
+  /** Retrieves the details of a Financial Connections {@code Account}. */
   public Account retrieve(String account, AccountRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =

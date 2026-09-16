@@ -3,6 +3,7 @@ package com.stripe.model.radar;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Address;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
@@ -151,8 +152,8 @@ public class BillingEvaluation extends ApiResource implements HasId {
     String customerAccount;
 
     /**
-     * Attributes of the customer being evaluated. These are populated from the {@code customer} or
-     * {@code customer_account} object when one was supplied, and from the request otherwise.
+     * Attributes of the customer being evaluated, as supplied on the request. Null when the
+     * customer was identified by {@code customer} or {@code customer_account}.
      */
     @SerializedName("data")
     Data data;
@@ -295,42 +296,6 @@ public class BillingEvaluation extends ApiResource implements HasId {
         /** Billing phone number (including extension). */
         @SerializedName("phone")
         String phone;
-
-        /** Address data. */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Address extends StripeObject {
-          /** City, district, suburb, town, or village. */
-          @SerializedName("city")
-          String city;
-
-          /**
-           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-           * 3166-1 alpha-2</a>).
-           */
-          @SerializedName("country")
-          String country;
-
-          /** Address line 1, such as the street, PO Box, or company name. */
-          @SerializedName("line1")
-          String line1;
-
-          /** Address line 2, such as the apartment, suite, unit, or building. */
-          @SerializedName("line2")
-          String line2;
-
-          /** ZIP or postal code. */
-          @SerializedName("postal_code")
-          String postalCode;
-
-          /**
-           * State, county, province, or region (<a
-           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
-           */
-          @SerializedName("state")
-          String state;
-        }
       }
     }
 
@@ -350,42 +315,6 @@ public class BillingEvaluation extends ApiResource implements HasId {
       /** Shipping phone number. */
       @SerializedName("phone")
       String phone;
-
-      /** Address data. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Address extends StripeObject {
-        /** City, district, suburb, town, or village. */
-        @SerializedName("city")
-        String city;
-
-        /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-         * 3166-1 alpha-2</a>).
-         */
-        @SerializedName("country")
-        String country;
-
-        /** Address line 1, such as the street, PO Box, or company name. */
-        @SerializedName("line1")
-        String line1;
-
-        /** Address line 2, such as the apartment, suite, unit, or building. */
-        @SerializedName("line2")
-        String line2;
-
-        /** ZIP or postal code. */
-        @SerializedName("postal_code")
-        String postalCode;
-
-        /**
-         * State, county, province, or region (<a
-         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
-         */
-        @SerializedName("state")
-        String state;
-      }
     }
   }
 
