@@ -1,7 +1,7 @@
 ---
 title: Require breaking changes to target the next-major branch
 pr_url: https://github.com/stripe/stripe-java/pull/2296
-semver_level: major
+semver_level: patch
 ---
 
 <!--
