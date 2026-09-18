@@ -51,7 +51,7 @@ jobs:
             echo "::error::Failed to query pull request files: $files"
             exit 1
           fi
-          if ! paths=$(jq -sc             '[.[] | select(.status == "added") | .filename | select(test("^\.hark/changes/[^/]+\.change\.md$"))]'             <<< "$files" 2>&1); then
+          if ! paths=$(jq -sc             '[.[] | select(.status == "added") | .filename | select(test("^[.]hark/changes/[^/]+[.]change[.]md$"))]'             <<< "$files" 2>&1); then
             echo "::error::Failed to select newly added Hark changefiles: $paths"
             exit 1
           fi
