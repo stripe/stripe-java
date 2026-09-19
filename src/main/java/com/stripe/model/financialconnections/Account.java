@@ -402,22 +402,22 @@ public class Account extends ApiResource implements HasId {
   }
 
   /** Retrieves the details of a Financial Connections {@code Account}. */
-  public static com.stripe.model.financialconnections.Account retrieve(String account)
+  public static com.stripe.model.financialconnections.Account retrieve(String id)
       throws StripeException {
-    return retrieve(account, (Map<String, Object>) null, (RequestOptions) null);
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the details of a Financial Connections {@code Account}. */
   public static com.stripe.model.financialconnections.Account retrieve(
-      String account, RequestOptions options) throws StripeException {
-    return retrieve(account, (Map<String, Object>) null, options);
+      String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the details of a Financial Connections {@code Account}. */
   public static com.stripe.model.financialconnections.Account retrieve(
-      String account, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
-        String.format("/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account));
+        String.format("/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter()
@@ -426,9 +426,9 @@ public class Account extends ApiResource implements HasId {
 
   /** Retrieves the details of a Financial Connections {@code Account}. */
   public static com.stripe.model.financialconnections.Account retrieve(
-      String account, AccountRetrieveParams params, RequestOptions options) throws StripeException {
+      String id, AccountRetrieveParams params, RequestOptions options) throws StripeException {
     String path =
-        String.format("/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account));
+        String.format("/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -651,7 +651,7 @@ public class Account extends ApiResource implements HasId {
     /**
      * Whether the account number is currently active and usable for transactions.
      *
-     * <p>One of {@code deactivated}, or {@code transactable}.
+     * <p>One of {@code deactivated}, {@code expired}, or {@code transactable}.
      */
     @SerializedName("status")
     String status;

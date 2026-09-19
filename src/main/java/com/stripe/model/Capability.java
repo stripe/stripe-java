@@ -92,20 +92,20 @@ public class Capability extends ApiResource implements HasId {
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
    * requested} parameter.
    */
-  public Capability update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public Capability update(String accountId, Map<String, Object> params) throws StripeException {
+    return update(accountId, params, (RequestOptions) null);
   }
 
   /**
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
    * requested} parameter.
    */
-  public Capability update(Map<String, Object> params, RequestOptions options)
+  public Capability update(String accountId, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/accounts/%s/capabilities/%s",
-            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Capability.class);
@@ -115,20 +115,20 @@ public class Capability extends ApiResource implements HasId {
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
    * requested} parameter.
    */
-  public Capability update(CapabilityUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public Capability update(String accountId, CapabilityUpdateParams params) throws StripeException {
+    return update(accountId, params, (RequestOptions) null);
   }
 
   /**
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
    * requested} parameter.
    */
-  public Capability update(CapabilityUpdateParams params, RequestOptions options)
+  public Capability update(String accountId, CapabilityUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/accounts/%s/capabilities/%s",
-            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -252,8 +252,9 @@ public class Capability extends ApiResource implements HasId {
        * The code for the type of error.
        *
        * <p>One of {@code external_request}, {@code information_missing}, {@code
-       * invalid_address_city_state_postal_code}, {@code invalid_address_highway_contract_box},
-       * {@code invalid_address_private_mailbox}, {@code invalid_business_profile_name}, {@code
+       * invalid_address_city_state_postal_code}, {@code invalid_address_cmra_address}, {@code
+       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+       * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
        * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted}, {@code
        * invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
        * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
@@ -494,8 +495,9 @@ public class Capability extends ApiResource implements HasId {
        * The code for the type of error.
        *
        * <p>One of {@code external_request}, {@code information_missing}, {@code
-       * invalid_address_city_state_postal_code}, {@code invalid_address_highway_contract_box},
-       * {@code invalid_address_private_mailbox}, {@code invalid_business_profile_name}, {@code
+       * invalid_address_city_state_postal_code}, {@code invalid_address_cmra_address}, {@code
+       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+       * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
        * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted}, {@code
        * invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
        * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code

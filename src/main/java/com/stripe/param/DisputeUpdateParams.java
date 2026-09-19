@@ -261,6 +261,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
     @SerializedName("access_activity_log")
     Object accessActivityLog;
 
+    /** Evidence to submit when appealing a dispute. */
+    @SerializedName("appeal")
+    Object appeal;
+
     /** The billing address provided by the customer. */
     @SerializedName("billing_address")
     Object billingAddress;
@@ -449,6 +453,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
     private Evidence(
         Object accessActivityLog,
+        Object appeal,
         Object billingAddress,
         Object cancellationPolicy,
         Object cancellationPolicyDisclosure,
@@ -478,6 +483,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
         Object uncategorizedFile,
         Object uncategorizedText) {
       this.accessActivityLog = accessActivityLog;
+      this.appeal = appeal;
       this.billingAddress = billingAddress;
       this.cancellationPolicy = cancellationPolicy;
       this.cancellationPolicyDisclosure = cancellationPolicyDisclosure;
@@ -514,6 +520,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
     public static class Builder {
       private Object accessActivityLog;
+
+      private Object appeal;
 
       private Object billingAddress;
 
@@ -575,6 +583,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
       public DisputeUpdateParams.Evidence build() {
         return new DisputeUpdateParams.Evidence(
             this.accessActivityLog,
+            this.appeal,
             this.billingAddress,
             this.cancellationPolicy,
             this.cancellationPolicyDisclosure,
@@ -622,6 +631,18 @@ public class DisputeUpdateParams extends ApiRequestParams {
        */
       public Builder setAccessActivityLog(EmptyParam accessActivityLog) {
         this.accessActivityLog = accessActivityLog;
+        return this;
+      }
+
+      /** Evidence to submit when appealing a dispute. */
+      public Builder setAppeal(DisputeUpdateParams.Evidence.Appeal appeal) {
+        this.appeal = appeal;
+        return this;
+      }
+
+      /** Evidence to submit when appealing a dispute. */
+      public Builder setAppeal(EmptyParam appeal) {
+        this.appeal = appeal;
         return this;
       }
 
@@ -1112,6 +1133,224 @@ public class DisputeUpdateParams extends ApiRequestParams {
       public Builder setUncategorizedText(EmptyParam uncategorizedText) {
         this.uncategorizedText = uncategorizedText;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Appeal {
+      /** Evidence for a card dispute appeal. */
+      @SerializedName("card")
+      Object card;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Appeal(Object card, Map<String, Object> extraParams) {
+        this.card = card;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object card;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public DisputeUpdateParams.Evidence.Appeal build() {
+          return new DisputeUpdateParams.Evidence.Appeal(this.card, this.extraParams);
+        }
+
+        /** Evidence for a card dispute appeal. */
+        public Builder setCard(DisputeUpdateParams.Evidence.Appeal.Card card) {
+          this.card = card;
+          return this;
+        }
+
+        /** Evidence for a card dispute appeal. */
+        public Builder setCard(EmptyParam card) {
+          this.card = card;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link DisputeUpdateParams.Evidence.Appeal#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link DisputeUpdateParams.Evidence.Appeal#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Card {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** An explanation of the reason for filing the appeal. */
+        @SerializedName("reason_for_filing")
+        Object reasonForFiling;
+
+        /**
+         * One or more document IDs returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code dispute_evidence} to support the appeal.
+         */
+        @SerializedName("supporting_files")
+        Object supportingFiles;
+
+        private Card(
+            Map<String, Object> extraParams, Object reasonForFiling, Object supportingFiles) {
+          this.extraParams = extraParams;
+          this.reasonForFiling = reasonForFiling;
+          this.supportingFiles = supportingFiles;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object reasonForFiling;
+
+          private Object supportingFiles;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public DisputeUpdateParams.Evidence.Appeal.Card build() {
+            return new DisputeUpdateParams.Evidence.Appeal.Card(
+                this.extraParams, this.reasonForFiling, this.supportingFiles);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link DisputeUpdateParams.Evidence.Appeal.Card#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link DisputeUpdateParams.Evidence.Appeal.Card#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** An explanation of the reason for filing the appeal. */
+          public Builder setReasonForFiling(String reasonForFiling) {
+            this.reasonForFiling = reasonForFiling;
+            return this;
+          }
+
+          /** An explanation of the reason for filing the appeal. */
+          public Builder setReasonForFiling(EmptyParam reasonForFiling) {
+            this.reasonForFiling = reasonForFiling;
+            return this;
+          }
+
+          /**
+           * Add an element to `supportingFiles` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link DisputeUpdateParams.Evidence.Appeal.Card#supportingFiles} for the field
+           * documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addSupportingFile(String element) {
+            if (this.supportingFiles == null || this.supportingFiles instanceof EmptyParam) {
+              this.supportingFiles = new ArrayList<String>();
+            }
+            ((List<String>) this.supportingFiles).add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `supportingFiles` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link DisputeUpdateParams.Evidence.Appeal.Card#supportingFiles} for the field
+           * documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addAllSupportingFile(List<String> elements) {
+            if (this.supportingFiles == null || this.supportingFiles instanceof EmptyParam) {
+              this.supportingFiles = new ArrayList<String>();
+            }
+            ((List<String>) this.supportingFiles).addAll(elements);
+            return this;
+          }
+
+          /**
+           * One or more document IDs returned by a <a
+           * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+           * value of {@code dispute_evidence} to support the appeal.
+           */
+          public Builder setSupportingFiles(EmptyParam supportingFiles) {
+            this.supportingFiles = supportingFiles;
+            return this;
+          }
+
+          /**
+           * One or more document IDs returned by a <a
+           * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+           * value of {@code dispute_evidence} to support the appeal.
+           */
+          public Builder setSupportingFiles(List<String> supportingFiles) {
+            this.supportingFiles = supportingFiles;
+            return this;
+          }
+        }
       }
     }
 

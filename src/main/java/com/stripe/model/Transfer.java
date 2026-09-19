@@ -24,7 +24,7 @@ import lombok.Setter;
  *
  * <p>Before April 6, 2017, transfers also represented movement of funds from a Stripe account to a
  * card or bank account. This behavior has since been split out into a <a
- * href="https://api.stripe.com#payout_object">Payout</a> object, with corresponding payout
+ * href="https://docs.stripe.com/api#payout_object">Payout</a> object, with corresponding payout
  * endpoints. For more information, read about the <a
  * href="https://docs.stripe.com/transfer-payout-split">transfer/payout split</a>.
  *
@@ -355,8 +355,8 @@ public class Transfer extends ApiResource
    * transfer creation request or the transfer list, and Stripe will return the corresponding
    * transfer information.
    */
-  public static Transfer retrieve(String transfer) throws StripeException {
-    return retrieve(transfer, (Map<String, Object>) null, (RequestOptions) null);
+  public static Transfer retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
@@ -364,8 +364,8 @@ public class Transfer extends ApiResource
    * transfer creation request or the transfer list, and Stripe will return the corresponding
    * transfer information.
    */
-  public static Transfer retrieve(String transfer, RequestOptions options) throws StripeException {
-    return retrieve(transfer, (Map<String, Object>) null, options);
+  public static Transfer retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -373,9 +373,9 @@ public class Transfer extends ApiResource
    * transfer creation request or the transfer list, and Stripe will return the corresponding
    * transfer information.
    */
-  public static Transfer retrieve(
-      String transfer, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
+  public static Transfer retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Transfer.class);
@@ -386,10 +386,9 @@ public class Transfer extends ApiResource
    * transfer creation request or the transfer list, and Stripe will return the corresponding
    * transfer information.
    */
-  public static Transfer retrieve(
-      String transfer, TransferRetrieveParams params, RequestOptions options)
+  public static Transfer retrieve(String id, TransferRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
+    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

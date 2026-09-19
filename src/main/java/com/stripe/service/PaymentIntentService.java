@@ -111,9 +111,9 @@ public final class PaymentIntentService extends ApiService {
    * properties. Refer to the <a href="https://stripe.com/api/payment_intents/object">payment
    * intent</a> object reference for more details.
    */
-  public PaymentIntent retrieve(String intent, PaymentIntentRetrieveParams params)
+  public PaymentIntent retrieve(String id, PaymentIntentRetrieveParams params)
       throws StripeException {
-    return retrieve(intent, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves the details of a PaymentIntent that has previously been created.
@@ -125,8 +125,8 @@ public final class PaymentIntentService extends ApiService {
    * properties. Refer to the <a href="https://stripe.com/api/payment_intents/object">payment
    * intent</a> object reference for more details.
    */
-  public PaymentIntent retrieve(String intent, RequestOptions options) throws StripeException {
-    return retrieve(intent, (PaymentIntentRetrieveParams) null, options);
+  public PaymentIntent retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (PaymentIntentRetrieveParams) null, options);
   }
   /**
    * Retrieves the details of a PaymentIntent that has previously been created.
@@ -138,8 +138,8 @@ public final class PaymentIntentService extends ApiService {
    * properties. Refer to the <a href="https://stripe.com/api/payment_intents/object">payment
    * intent</a> object reference for more details.
    */
-  public PaymentIntent retrieve(String intent) throws StripeException {
-    return retrieve(intent, (PaymentIntentRetrieveParams) null, (RequestOptions) null);
+  public PaymentIntent retrieve(String id) throws StripeException {
+    return retrieve(id, (PaymentIntentRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves the details of a PaymentIntent that has previously been created.
@@ -152,9 +152,9 @@ public final class PaymentIntentService extends ApiService {
    * intent</a> object reference for more details.
    */
   public PaymentIntent retrieve(
-      String intent, PaymentIntentRetrieveParams params, RequestOptions options)
+      String id, PaymentIntentRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -173,47 +173,45 @@ public final class PaymentIntentService extends ApiService {
    * updating properties through the <a
    * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
    */
-  public PaymentIntent update(String intent, PaymentIntentUpdateParams params)
+  public PaymentIntent update(String id, PaymentIntentUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /**
+   * Updates properties on a PaymentIntent object without confirming.
+   *
+   * <p>Depending on which properties you update, you might need to confirm the PaymentIntent again.
+   * For example, updating the {@code payment_method} always requires you to confirm the
+   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
+   * updating properties through the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
+   */
+  public PaymentIntent update(String id, RequestOptions options) throws StripeException {
+    return update(id, (PaymentIntentUpdateParams) null, options);
+  }
+  /**
+   * Updates properties on a PaymentIntent object without confirming.
+   *
+   * <p>Depending on which properties you update, you might need to confirm the PaymentIntent again.
+   * For example, updating the {@code payment_method} always requires you to confirm the
+   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
+   * updating properties through the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
+   */
+  public PaymentIntent update(String id) throws StripeException {
+    return update(id, (PaymentIntentUpdateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Updates properties on a PaymentIntent object without confirming.
+   *
+   * <p>Depending on which properties you update, you might need to confirm the PaymentIntent again.
+   * For example, updating the {@code payment_method} always requires you to confirm the
+   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
+   * updating properties through the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
+   */
+  public PaymentIntent update(String id, PaymentIntentUpdateParams params, RequestOptions options)
       throws StripeException {
-    return update(intent, params, (RequestOptions) null);
-  }
-  /**
-   * Updates properties on a PaymentIntent object without confirming.
-   *
-   * <p>Depending on which properties you update, you might need to confirm the PaymentIntent again.
-   * For example, updating the {@code payment_method} always requires you to confirm the
-   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
-   * updating properties through the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
-   */
-  public PaymentIntent update(String intent, RequestOptions options) throws StripeException {
-    return update(intent, (PaymentIntentUpdateParams) null, options);
-  }
-  /**
-   * Updates properties on a PaymentIntent object without confirming.
-   *
-   * <p>Depending on which properties you update, you might need to confirm the PaymentIntent again.
-   * For example, updating the {@code payment_method} always requires you to confirm the
-   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
-   * updating properties through the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
-   */
-  public PaymentIntent update(String intent) throws StripeException {
-    return update(intent, (PaymentIntentUpdateParams) null, (RequestOptions) null);
-  }
-  /**
-   * Updates properties on a PaymentIntent object without confirming.
-   *
-   * <p>Depending on which properties you update, you might need to confirm the PaymentIntent again.
-   * For example, updating the {@code payment_method} always requires you to confirm the
-   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
-   * updating properties through the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
-   */
-  public PaymentIntent update(
-      String intent, PaymentIntentUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -257,26 +255,25 @@ public final class PaymentIntentService extends ApiService {
   }
   /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance(
-      String intent, PaymentIntentApplyCustomerBalanceParams params) throws StripeException {
-    return applyCustomerBalance(intent, params, (RequestOptions) null);
+      String id, PaymentIntentApplyCustomerBalanceParams params) throws StripeException {
+    return applyCustomerBalance(id, params, (RequestOptions) null);
   }
   /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
-  public PaymentIntent applyCustomerBalance(String intent, RequestOptions options)
+  public PaymentIntent applyCustomerBalance(String id, RequestOptions options)
       throws StripeException {
-    return applyCustomerBalance(intent, (PaymentIntentApplyCustomerBalanceParams) null, options);
+    return applyCustomerBalance(id, (PaymentIntentApplyCustomerBalanceParams) null, options);
   }
   /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
-  public PaymentIntent applyCustomerBalance(String intent) throws StripeException {
+  public PaymentIntent applyCustomerBalance(String id) throws StripeException {
     return applyCustomerBalance(
-        intent, (PaymentIntentApplyCustomerBalanceParams) null, (RequestOptions) null);
+        id, (PaymentIntentApplyCustomerBalanceParams) null, (RequestOptions) null);
   }
   /** Manually reconcile the remaining amount for a {@code customer_balance} PaymentIntent. */
   public PaymentIntent applyCustomerBalance(
-      String intent, PaymentIntentApplyCustomerBalanceParams params, RequestOptions options)
+      String id, PaymentIntentApplyCustomerBalanceParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/payment_intents/%s/apply_customer_balance", ApiResource.urlEncodeId(intent));
+        String.format("/v1/payment_intents/%s/apply_customer_balance", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -300,62 +297,60 @@ public final class PaymentIntentService extends ApiService {
    * has a status of {@code requires_capture}. Otherwise, you must <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>.
    */
-  public PaymentIntent cancel(String intent, PaymentIntentCancelParams params)
+  public PaymentIntent cancel(String id, PaymentIntentCancelParams params) throws StripeException {
+    return cancel(id, params, (RequestOptions) null);
+  }
+  /**
+   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
+   * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
+   * {@code processing}.
+   *
+   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
+   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
+   *
+   * <p>You can directly cancel the PaymentIntent for a Checkout Session only when the PaymentIntent
+   * has a status of {@code requires_capture}. Otherwise, you must <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>.
+   */
+  public PaymentIntent cancel(String id, RequestOptions options) throws StripeException {
+    return cancel(id, (PaymentIntentCancelParams) null, options);
+  }
+  /**
+   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
+   * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
+   * {@code processing}.
+   *
+   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
+   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
+   *
+   * <p>You can directly cancel the PaymentIntent for a Checkout Session only when the PaymentIntent
+   * has a status of {@code requires_capture}. Otherwise, you must <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>.
+   */
+  public PaymentIntent cancel(String id) throws StripeException {
+    return cancel(id, (PaymentIntentCancelParams) null, (RequestOptions) null);
+  }
+  /**
+   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
+   * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
+   * {@code processing}.
+   *
+   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
+   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
+   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
+   *
+   * <p>You can directly cancel the PaymentIntent for a Checkout Session only when the PaymentIntent
+   * has a status of {@code requires_capture}. Otherwise, you must <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>.
+   */
+  public PaymentIntent cancel(String id, PaymentIntentCancelParams params, RequestOptions options)
       throws StripeException {
-    return cancel(intent, params, (RequestOptions) null);
-  }
-  /**
-   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
-   * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
-   * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
-   * {@code processing}.
-   *
-   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
-   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
-   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
-   *
-   * <p>You can directly cancel the PaymentIntent for a Checkout Session only when the PaymentIntent
-   * has a status of {@code requires_capture}. Otherwise, you must <a
-   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>.
-   */
-  public PaymentIntent cancel(String intent, RequestOptions options) throws StripeException {
-    return cancel(intent, (PaymentIntentCancelParams) null, options);
-  }
-  /**
-   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
-   * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
-   * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
-   * {@code processing}.
-   *
-   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
-   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
-   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
-   *
-   * <p>You can directly cancel the PaymentIntent for a Checkout Session only when the PaymentIntent
-   * has a status of {@code requires_capture}. Otherwise, you must <a
-   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>.
-   */
-  public PaymentIntent cancel(String intent) throws StripeException {
-    return cancel(intent, (PaymentIntentCancelParams) null, (RequestOptions) null);
-  }
-  /**
-   * You can cancel a PaymentIntent object when it’s in one of these statuses: {@code
-   * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
-   * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
-   * {@code processing}.
-   *
-   * <p>After it’s canceled, no additional charges are made by the PaymentIntent and any operations
-   * on the PaymentIntent fail with an error. For PaymentIntents with a {@code status} of {@code
-   * requires_capture}, the remaining {@code amount_capturable} is automatically refunded.
-   *
-   * <p>You can directly cancel the PaymentIntent for a Checkout Session only when the PaymentIntent
-   * has a status of {@code requires_capture}. Otherwise, you must <a
-   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>.
-   */
-  public PaymentIntent cancel(
-      String intent, PaymentIntentCancelParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/payment_intents/%s/cancel", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/payment_intents/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -375,9 +370,9 @@ public final class PaymentIntentService extends ApiService {
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
    */
-  public PaymentIntent capture(String intent, PaymentIntentCaptureParams params)
+  public PaymentIntent capture(String id, PaymentIntentCaptureParams params)
       throws StripeException {
-    return capture(intent, params, (RequestOptions) null);
+    return capture(id, params, (RequestOptions) null);
   }
   /**
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
@@ -389,8 +384,8 @@ public final class PaymentIntentService extends ApiService {
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
    */
-  public PaymentIntent capture(String intent, RequestOptions options) throws StripeException {
-    return capture(intent, (PaymentIntentCaptureParams) null, options);
+  public PaymentIntent capture(String id, RequestOptions options) throws StripeException {
+    return capture(id, (PaymentIntentCaptureParams) null, options);
   }
   /**
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
@@ -402,8 +397,8 @@ public final class PaymentIntentService extends ApiService {
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
    */
-  public PaymentIntent capture(String intent) throws StripeException {
-    return capture(intent, (PaymentIntentCaptureParams) null, (RequestOptions) null);
+  public PaymentIntent capture(String id) throws StripeException {
+    return capture(id, (PaymentIntentCaptureParams) null, (RequestOptions) null);
   }
   /**
    * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
@@ -415,10 +410,9 @@ public final class PaymentIntentService extends ApiService {
    * <p>Learn more about <a href="https://stripe.com/docs/payments/capture-later">separate
    * authorization and capture</a>.
    */
-  public PaymentIntent capture(
-      String intent, PaymentIntentCaptureParams params, RequestOptions options)
+  public PaymentIntent capture(String id, PaymentIntentCaptureParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/payment_intents/%s/capture", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/payment_intents/%s/capture", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -457,9 +451,9 @@ public final class PaymentIntentService extends ApiService {
    * this limit is reached, any further calls to this endpoint will transition the PaymentIntent to
    * the {@code canceled} state.
    */
-  public PaymentIntent confirm(String intent, PaymentIntentConfirmParams params)
+  public PaymentIntent confirm(String id, PaymentIntentConfirmParams params)
       throws StripeException {
-    return confirm(intent, params, (RequestOptions) null);
+    return confirm(id, params, (RequestOptions) null);
   }
   /**
    * Confirm that your customer intends to pay with current or provided payment method. Upon
@@ -490,8 +484,8 @@ public final class PaymentIntentService extends ApiService {
    * this limit is reached, any further calls to this endpoint will transition the PaymentIntent to
    * the {@code canceled} state.
    */
-  public PaymentIntent confirm(String intent, RequestOptions options) throws StripeException {
-    return confirm(intent, (PaymentIntentConfirmParams) null, options);
+  public PaymentIntent confirm(String id, RequestOptions options) throws StripeException {
+    return confirm(id, (PaymentIntentConfirmParams) null, options);
   }
   /**
    * Confirm that your customer intends to pay with current or provided payment method. Upon
@@ -522,8 +516,8 @@ public final class PaymentIntentService extends ApiService {
    * this limit is reached, any further calls to this endpoint will transition the PaymentIntent to
    * the {@code canceled} state.
    */
-  public PaymentIntent confirm(String intent) throws StripeException {
-    return confirm(intent, (PaymentIntentConfirmParams) null, (RequestOptions) null);
+  public PaymentIntent confirm(String id) throws StripeException {
+    return confirm(id, (PaymentIntentConfirmParams) null, (RequestOptions) null);
   }
   /**
    * Confirm that your customer intends to pay with current or provided payment method. Upon
@@ -554,10 +548,9 @@ public final class PaymentIntentService extends ApiService {
    * this limit is reached, any further calls to this endpoint will transition the PaymentIntent to
    * the {@code canceled} state.
    */
-  public PaymentIntent confirm(
-      String intent, PaymentIntentConfirmParams params, RequestOptions options)
+  public PaymentIntent confirm(String id, PaymentIntentConfirmParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/payment_intents/%s/confirm", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/payment_intents/%s/confirm", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -587,8 +580,8 @@ public final class PaymentIntentService extends ApiService {
    * decremented.
    */
   public PaymentIntent decrementAuthorization(
-      String intent, PaymentIntentDecrementAuthorizationParams params) throws StripeException {
-    return decrementAuthorization(intent, params, (RequestOptions) null);
+      String id, PaymentIntentDecrementAuthorizationParams params) throws StripeException {
+    return decrementAuthorization(id, params, (RequestOptions) null);
   }
   /**
    * Perform a decremental authorization on an eligible <a
@@ -610,11 +603,11 @@ public final class PaymentIntentService extends ApiService {
    * decremented.
    */
   public PaymentIntent decrementAuthorization(
-      String intent, PaymentIntentDecrementAuthorizationParams params, RequestOptions options)
+      String id, PaymentIntentDecrementAuthorizationParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/payment_intents/%s/decrement_authorization", ApiResource.urlEncodeId(intent));
+            "/v1/payment_intents/%s/decrement_authorization", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -654,8 +647,8 @@ public final class PaymentIntentService extends ApiService {
    * payments</a>.
    */
   public PaymentIntent incrementAuthorization(
-      String intent, PaymentIntentIncrementAuthorizationParams params) throws StripeException {
-    return incrementAuthorization(intent, params, (RequestOptions) null);
+      String id, PaymentIntentIncrementAuthorizationParams params) throws StripeException {
+    return incrementAuthorization(id, params, (RequestOptions) null);
   }
   /**
    * Perform an incremental authorization on an eligible <a
@@ -687,11 +680,11 @@ public final class PaymentIntentService extends ApiService {
    * payments</a>.
    */
   public PaymentIntent incrementAuthorization(
-      String intent, PaymentIntentIncrementAuthorizationParams params, RequestOptions options)
+      String id, PaymentIntentIncrementAuthorizationParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/payment_intents/%s/increment_authorization", ApiResource.urlEncodeId(intent));
+            "/v1/payment_intents/%s/increment_authorization", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -713,9 +706,9 @@ public final class PaymentIntentService extends ApiService {
    * <p>This is useful for retail and ecommerce scenarios with delayed shipments where authorization
    * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
    */
-  public PaymentIntent reauthorize(String intent, PaymentIntentReauthorizeParams params)
+  public PaymentIntent reauthorize(String id, PaymentIntentReauthorizeParams params)
       throws StripeException {
-    return reauthorize(intent, params, (RequestOptions) null);
+    return reauthorize(id, params, (RequestOptions) null);
   }
   /**
    * Reauthorize a PaymentIntent to obtain a new valid authorization after the initial authorization
@@ -729,8 +722,8 @@ public final class PaymentIntentService extends ApiService {
    * <p>This is useful for retail and ecommerce scenarios with delayed shipments where authorization
    * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
    */
-  public PaymentIntent reauthorize(String intent, RequestOptions options) throws StripeException {
-    return reauthorize(intent, (PaymentIntentReauthorizeParams) null, options);
+  public PaymentIntent reauthorize(String id, RequestOptions options) throws StripeException {
+    return reauthorize(id, (PaymentIntentReauthorizeParams) null, options);
   }
   /**
    * Reauthorize a PaymentIntent to obtain a new valid authorization after the initial authorization
@@ -744,8 +737,8 @@ public final class PaymentIntentService extends ApiService {
    * <p>This is useful for retail and ecommerce scenarios with delayed shipments where authorization
    * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
    */
-  public PaymentIntent reauthorize(String intent) throws StripeException {
-    return reauthorize(intent, (PaymentIntentReauthorizeParams) null, (RequestOptions) null);
+  public PaymentIntent reauthorize(String id) throws StripeException {
+    return reauthorize(id, (PaymentIntentReauthorizeParams) null, (RequestOptions) null);
   }
   /**
    * Reauthorize a PaymentIntent to obtain a new valid authorization after the initial authorization
@@ -760,10 +753,9 @@ public final class PaymentIntentService extends ApiService {
    * validity periods (typically 7 days) expire before the merchant is ready to capture payment.
    */
   public PaymentIntent reauthorize(
-      String intent, PaymentIntentReauthorizeParams params, RequestOptions options)
+      String id, PaymentIntentReauthorizeParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/payment_intents/%s/reauthorize", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/payment_intents/%s/reauthorize", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -777,18 +769,18 @@ public final class PaymentIntentService extends ApiService {
    * Updates the refund address for a static crypto deposit PaymentIntent on the specified network.
    */
   public PaymentIntent updateCryptoRefundAddress(
-      String intent, PaymentIntentUpdateCryptoRefundAddressParams params) throws StripeException {
-    return updateCryptoRefundAddress(intent, params, (RequestOptions) null);
+      String id, PaymentIntentUpdateCryptoRefundAddressParams params) throws StripeException {
+    return updateCryptoRefundAddress(id, params, (RequestOptions) null);
   }
   /**
    * Updates the refund address for a static crypto deposit PaymentIntent on the specified network.
    */
   public PaymentIntent updateCryptoRefundAddress(
-      String intent, PaymentIntentUpdateCryptoRefundAddressParams params, RequestOptions options)
+      String id, PaymentIntentUpdateCryptoRefundAddressParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/payment_intents/%s/update_crypto_refund_address", ApiResource.urlEncodeId(intent));
+            "/v1/payment_intents/%s/update_crypto_refund_address", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -799,27 +791,26 @@ public final class PaymentIntentService extends ApiService {
     return this.request(request, PaymentIntent.class);
   }
   /** Verifies microdeposits on a PaymentIntent object. */
-  public PaymentIntent verifyMicrodeposits(
-      String intent, PaymentIntentVerifyMicrodepositsParams params) throws StripeException {
-    return verifyMicrodeposits(intent, params, (RequestOptions) null);
-  }
-  /** Verifies microdeposits on a PaymentIntent object. */
-  public PaymentIntent verifyMicrodeposits(String intent, RequestOptions options)
+  public PaymentIntent verifyMicrodeposits(String id, PaymentIntentVerifyMicrodepositsParams params)
       throws StripeException {
-    return verifyMicrodeposits(intent, (PaymentIntentVerifyMicrodepositsParams) null, options);
+    return verifyMicrodeposits(id, params, (RequestOptions) null);
   }
   /** Verifies microdeposits on a PaymentIntent object. */
-  public PaymentIntent verifyMicrodeposits(String intent) throws StripeException {
+  public PaymentIntent verifyMicrodeposits(String id, RequestOptions options)
+      throws StripeException {
+    return verifyMicrodeposits(id, (PaymentIntentVerifyMicrodepositsParams) null, options);
+  }
+  /** Verifies microdeposits on a PaymentIntent object. */
+  public PaymentIntent verifyMicrodeposits(String id) throws StripeException {
     return verifyMicrodeposits(
-        intent, (PaymentIntentVerifyMicrodepositsParams) null, (RequestOptions) null);
+        id, (PaymentIntentVerifyMicrodepositsParams) null, (RequestOptions) null);
   }
   /** Verifies microdeposits on a PaymentIntent object. */
   public PaymentIntent verifyMicrodeposits(
-      String intent, PaymentIntentVerifyMicrodepositsParams params, RequestOptions options)
+      String id, PaymentIntentVerifyMicrodepositsParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/payment_intents/%s/verify_microdeposits", ApiResource.urlEncodeId(intent));
+        String.format("/v1/payment_intents/%s/verify_microdeposits", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -830,17 +821,16 @@ public final class PaymentIntentService extends ApiService {
     return this.request(request, PaymentIntent.class);
   }
   /** Trigger an external action on a PaymentIntent. */
-  public PaymentIntent triggerAction(String intent, PaymentIntentTriggerActionParams params)
+  public PaymentIntent triggerAction(String id, PaymentIntentTriggerActionParams params)
       throws StripeException {
-    return triggerAction(intent, params, (RequestOptions) null);
+    return triggerAction(id, params, (RequestOptions) null);
   }
   /** Trigger an external action on a PaymentIntent. */
   public PaymentIntent triggerAction(
-      String intent, PaymentIntentTriggerActionParams params, RequestOptions options)
+      String id, PaymentIntentTriggerActionParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/test/payment_intents/%s/trigger_action", ApiResource.urlEncodeId(intent));
+        String.format("/v1/test/payment_intents/%s/trigger_action", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

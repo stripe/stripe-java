@@ -65,23 +65,21 @@ public final class PaymentLinkService extends ApiService {
     return this.request(request, PaymentLink.class);
   }
   /** Retrieve a payment link. */
-  public PaymentLink retrieve(String paymentLink, PaymentLinkRetrieveParams params)
+  public PaymentLink retrieve(String id, PaymentLinkRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /** Retrieve a payment link. */
+  public PaymentLink retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (PaymentLinkRetrieveParams) null, options);
+  }
+  /** Retrieve a payment link. */
+  public PaymentLink retrieve(String id) throws StripeException {
+    return retrieve(id, (PaymentLinkRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieve a payment link. */
+  public PaymentLink retrieve(String id, PaymentLinkRetrieveParams params, RequestOptions options)
       throws StripeException {
-    return retrieve(paymentLink, params, (RequestOptions) null);
-  }
-  /** Retrieve a payment link. */
-  public PaymentLink retrieve(String paymentLink, RequestOptions options) throws StripeException {
-    return retrieve(paymentLink, (PaymentLinkRetrieveParams) null, options);
-  }
-  /** Retrieve a payment link. */
-  public PaymentLink retrieve(String paymentLink) throws StripeException {
-    return retrieve(paymentLink, (PaymentLinkRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieve a payment link. */
-  public PaymentLink retrieve(
-      String paymentLink, PaymentLinkRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink));
+    String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -92,23 +90,21 @@ public final class PaymentLinkService extends ApiService {
     return this.request(request, PaymentLink.class);
   }
   /** Updates a payment link. */
-  public PaymentLink update(String paymentLink, PaymentLinkUpdateParams params)
+  public PaymentLink update(String id, PaymentLinkUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /** Updates a payment link. */
+  public PaymentLink update(String id, RequestOptions options) throws StripeException {
+    return update(id, (PaymentLinkUpdateParams) null, options);
+  }
+  /** Updates a payment link. */
+  public PaymentLink update(String id) throws StripeException {
+    return update(id, (PaymentLinkUpdateParams) null, (RequestOptions) null);
+  }
+  /** Updates a payment link. */
+  public PaymentLink update(String id, PaymentLinkUpdateParams params, RequestOptions options)
       throws StripeException {
-    return update(paymentLink, params, (RequestOptions) null);
-  }
-  /** Updates a payment link. */
-  public PaymentLink update(String paymentLink, RequestOptions options) throws StripeException {
-    return update(paymentLink, (PaymentLinkUpdateParams) null, options);
-  }
-  /** Updates a payment link. */
-  public PaymentLink update(String paymentLink) throws StripeException {
-    return update(paymentLink, (PaymentLinkUpdateParams) null, (RequestOptions) null);
-  }
-  /** Updates a payment link. */
-  public PaymentLink update(
-      String paymentLink, PaymentLinkUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink));
+    String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

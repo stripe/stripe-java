@@ -717,8 +717,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * that was returned from your previous request, and Stripe will return the corresponding charge
    * information. The same information is returned when creating or refunding the charge.
    */
-  public static Charge retrieve(String charge) throws StripeException {
-    return retrieve(charge, (Map<String, Object>) null, (RequestOptions) null);
+  public static Charge retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
@@ -726,8 +726,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * that was returned from your previous request, and Stripe will return the corresponding charge
    * information. The same information is returned when creating or refunding the charge.
    */
-  public static Charge retrieve(String charge, RequestOptions options) throws StripeException {
-    return retrieve(charge, (Map<String, Object>) null, options);
+  public static Charge retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -735,9 +735,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * that was returned from your previous request, and Stripe will return the corresponding charge
    * information. The same information is returned when creating or refunding the charge.
    */
-  public static Charge retrieve(String charge, Map<String, Object> params, RequestOptions options)
+  public static Charge retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
+    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Charge.class);
@@ -748,9 +748,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * that was returned from your previous request, and Stripe will return the corresponding charge
    * information. The same information is returned when creating or refunding the charge.
    */
-  public static Charge retrieve(String charge, ChargeRetrieveParams params, RequestOptions options)
+  public static Charge retrieve(String id, ChargeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
+    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -1922,8 +1922,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The Electronic Commerce Indicator (ECI) returned by the card network in the authorization
        * response. Indicates the level of authentication used. Only populated for Visa and
-       * Mastercard transactions. The response value is the source of truth; it may differ from the
-       * request value if the network downgraded the transaction.
+       * Mastercard transactions. This is the network's final ECI and can differ from the request
+       * value. An authenticated ECI alone doesn't determine liability shift.
        */
       @SerializedName("electronic_commerce_indicator")
       String electronicCommerceIndicator;
@@ -2050,6 +2050,22 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("regulated_status")
       String regulatedStatus;
+
+      /**
+       * The payment_method_options.card.setup_credential_usage value that was passed when
+       * setup_future_usage was present at confirmation, one of {@code recurring}, {@code
+       * unscheduled}, or {@code installment}.
+       */
+      @SerializedName("setup_credential_usage")
+      String setupCredentialUsage;
+
+      /**
+       * The payment_method_options.card.stored_credential_usage value that was passed for an off
+       * session, merchant-initiated transaction, one of {@code recurring}, {@code unscheduled},
+       * {@code on_session}, or {@code installment}.
+       */
+      @SerializedName("stored_credential_usage")
+      String storedCredentialUsage;
 
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")

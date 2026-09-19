@@ -303,29 +303,28 @@ public class GiftCard extends ApiResource implements HasId {
   }
 
   /** Retrieves a third-party gift card object. */
-  public static GiftCard retrieve(String giftCard) throws StripeException {
-    return retrieve(giftCard, (Map<String, Object>) null, (RequestOptions) null);
+  public static GiftCard retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a third-party gift card object. */
-  public static GiftCard retrieve(String giftCard, RequestOptions options) throws StripeException {
-    return retrieve(giftCard, (Map<String, Object>) null, options);
+  public static GiftCard retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a third-party gift card object. */
-  public static GiftCard retrieve(
-      String giftCard, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/gift_cards/%s", ApiResource.urlEncodeId(giftCard));
+  public static GiftCard retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/gift_cards/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, GiftCard.class);
   }
 
   /** Retrieves a third-party gift card object. */
-  public static GiftCard retrieve(
-      String giftCard, GiftCardRetrieveParams params, RequestOptions options)
+  public static GiftCard retrieve(String id, GiftCardRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/gift_cards/%s", ApiResource.urlEncodeId(giftCard));
+    String path = String.format("/v1/gift_cards/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

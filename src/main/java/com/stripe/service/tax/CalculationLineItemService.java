@@ -23,34 +23,33 @@ public final class CalculationLineItemService extends ApiService {
    * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
    * expired.
    */
-  public StripeCollection<CalculationLineItem> list(
-      String calculation, CalculationLineItemListParams params) throws StripeException {
-    return list(calculation, params, (RequestOptions) null);
-  }
-  /**
-   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
-   * expired.
-   */
-  public StripeCollection<CalculationLineItem> list(String calculation, RequestOptions options)
+  public StripeCollection<CalculationLineItem> list(String id, CalculationLineItemListParams params)
       throws StripeException {
-    return list(calculation, (CalculationLineItemListParams) null, options);
+    return list(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
    * expired.
    */
-  public StripeCollection<CalculationLineItem> list(String calculation) throws StripeException {
-    return list(calculation, (CalculationLineItemListParams) null, (RequestOptions) null);
+  public StripeCollection<CalculationLineItem> list(String id, RequestOptions options)
+      throws StripeException {
+    return list(id, (CalculationLineItemListParams) null, options);
+  }
+  /**
+   * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
+   * expired.
+   */
+  public StripeCollection<CalculationLineItem> list(String id) throws StripeException {
+    return list(id, (CalculationLineItemListParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves the line items of a tax calculation as a collection, if the calculation hasn’t
    * expired.
    */
   public StripeCollection<CalculationLineItem> list(
-      String calculation, CalculationLineItemListParams params, RequestOptions options)
+      String id, CalculationLineItemListParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(calculation));
+    String path = String.format("/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

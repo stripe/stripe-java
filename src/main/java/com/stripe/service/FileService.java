@@ -91,33 +91,33 @@ public final class FileService extends ApiService {
    * returns the corresponding file object. Learn how to <a
    * href="https://stripe.com/docs/file-upload#download-file-contents">access file contents</a>.
    */
-  public File retrieve(String file, FileRetrieveParams params) throws StripeException {
-    return retrieve(file, params, (RequestOptions) null);
+  public File retrieve(String id, FileRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an existing file object. After you supply a unique file ID, Stripe
    * returns the corresponding file object. Learn how to <a
    * href="https://stripe.com/docs/file-upload#download-file-contents">access file contents</a>.
    */
-  public File retrieve(String file, RequestOptions options) throws StripeException {
-    return retrieve(file, (FileRetrieveParams) null, options);
+  public File retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (FileRetrieveParams) null, options);
   }
   /**
    * Retrieves the details of an existing file object. After you supply a unique file ID, Stripe
    * returns the corresponding file object. Learn how to <a
    * href="https://stripe.com/docs/file-upload#download-file-contents">access file contents</a>.
    */
-  public File retrieve(String file) throws StripeException {
-    return retrieve(file, (FileRetrieveParams) null, (RequestOptions) null);
+  public File retrieve(String id) throws StripeException {
+    return retrieve(id, (FileRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an existing file object. After you supply a unique file ID, Stripe
    * returns the corresponding file object. Learn how to <a
    * href="https://stripe.com/docs/file-upload#download-file-contents">access file contents</a>.
    */
-  public File retrieve(String file, FileRetrieveParams params, RequestOptions options)
+  public File retrieve(String id, FileRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/files/%s", ApiResource.urlEncodeId(file));
+    String path = String.format("/v1/files/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

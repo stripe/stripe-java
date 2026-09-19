@@ -569,8 +569,8 @@ public class VerificationSession extends ApiResource
    * <p>When the session status is {@code requires_input}, you can use this method to retrieve a
    * valid {@code client_secret} or {@code url} to allow re-submission.
    */
-  public static VerificationSession retrieve(String session) throws StripeException {
-    return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
+  public static VerificationSession retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
@@ -579,9 +579,9 @@ public class VerificationSession extends ApiResource
    * <p>When the session status is {@code requires_input}, you can use this method to retrieve a
    * valid {@code client_secret} or {@code url} to allow re-submission.
    */
-  public static VerificationSession retrieve(String session, RequestOptions options)
+  public static VerificationSession retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(session, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -591,9 +591,9 @@ public class VerificationSession extends ApiResource
    * valid {@code client_secret} or {@code url} to allow re-submission.
    */
   public static VerificationSession retrieve(
-      String session, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
-        String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session));
+        String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, VerificationSession.class);
@@ -606,10 +606,10 @@ public class VerificationSession extends ApiResource
    * valid {@code client_secret} or {@code url} to allow re-submission.
    */
   public static VerificationSession retrieve(
-      String session, VerificationSessionRetrieveParams params, RequestOptions options)
+      String id, VerificationSessionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session));
+        String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

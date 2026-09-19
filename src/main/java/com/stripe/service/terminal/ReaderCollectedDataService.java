@@ -18,27 +18,24 @@ public final class ReaderCollectedDataService extends ApiService {
   }
 
   /** Retrieve data collected using Reader hardware. */
-  public ReaderCollectedData retrieve(
-      String readerCollectedData, ReaderCollectedDataRetrieveParams params) throws StripeException {
-    return retrieve(readerCollectedData, params, (RequestOptions) null);
-  }
-  /** Retrieve data collected using Reader hardware. */
-  public ReaderCollectedData retrieve(String readerCollectedData, RequestOptions options)
+  public ReaderCollectedData retrieve(String id, ReaderCollectedDataRetrieveParams params)
       throws StripeException {
-    return retrieve(readerCollectedData, (ReaderCollectedDataRetrieveParams) null, options);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieve data collected using Reader hardware. */
-  public ReaderCollectedData retrieve(String readerCollectedData) throws StripeException {
-    return retrieve(
-        readerCollectedData, (ReaderCollectedDataRetrieveParams) null, (RequestOptions) null);
+  public ReaderCollectedData retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ReaderCollectedDataRetrieveParams) null, options);
+  }
+  /** Retrieve data collected using Reader hardware. */
+  public ReaderCollectedData retrieve(String id) throws StripeException {
+    return retrieve(id, (ReaderCollectedDataRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieve data collected using Reader hardware. */
   public ReaderCollectedData retrieve(
-      String readerCollectedData, ReaderCollectedDataRetrieveParams params, RequestOptions options)
+      String id, ReaderCollectedDataRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/terminal/reader_collected_data/%s", ApiResource.urlEncodeId(readerCollectedData));
+        String.format("/v1/terminal/reader_collected_data/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

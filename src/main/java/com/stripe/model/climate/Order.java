@@ -350,28 +350,28 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   /** Retrieves the details of a Climate order object with the given ID. */
-  public static Order retrieve(String order) throws StripeException {
-    return retrieve(order, (Map<String, Object>) null, (RequestOptions) null);
+  public static Order retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the details of a Climate order object with the given ID. */
-  public static Order retrieve(String order, RequestOptions options) throws StripeException {
-    return retrieve(order, (Map<String, Object>) null, options);
+  public static Order retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the details of a Climate order object with the given ID. */
-  public static Order retrieve(String order, Map<String, Object> params, RequestOptions options)
+  public static Order retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(order));
+    String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Order.class);
   }
 
   /** Retrieves the details of a Climate order object with the given ID. */
-  public static Order retrieve(String order, OrderRetrieveParams params, RequestOptions options)
+  public static Order retrieve(String id, OrderRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(order));
+    String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

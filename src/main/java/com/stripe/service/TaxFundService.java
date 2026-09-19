@@ -46,21 +46,21 @@ public final class TaxFundService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<TaxFund>>() {}.getType());
   }
   /** Retrieves a tax fund object by its ID. */
-  public TaxFund retrieve(String taxFund, TaxFundRetrieveParams params) throws StripeException {
-    return retrieve(taxFund, params, (RequestOptions) null);
+  public TaxFund retrieve(String id, TaxFundRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a tax fund object by its ID. */
-  public TaxFund retrieve(String taxFund, RequestOptions options) throws StripeException {
-    return retrieve(taxFund, (TaxFundRetrieveParams) null, options);
+  public TaxFund retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (TaxFundRetrieveParams) null, options);
   }
   /** Retrieves a tax fund object by its ID. */
-  public TaxFund retrieve(String taxFund) throws StripeException {
-    return retrieve(taxFund, (TaxFundRetrieveParams) null, (RequestOptions) null);
+  public TaxFund retrieve(String id) throws StripeException {
+    return retrieve(id, (TaxFundRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a tax fund object by its ID. */
-  public TaxFund retrieve(String taxFund, TaxFundRetrieveParams params, RequestOptions options)
+  public TaxFund retrieve(String id, TaxFundRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/tax_funds/%s", ApiResource.urlEncodeId(taxFund));
+    String path = String.format("/v1/tax_funds/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

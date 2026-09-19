@@ -104,23 +104,20 @@ public class AccountEvaluation extends ApiResource implements HasId {
   }
 
   /** Retrieves an {@code AccountEvaluation} object. */
-  public static AccountEvaluation retrieve(String accountEvaluation) throws StripeException {
-    return retrieve(accountEvaluation, (Map<String, Object>) null, (RequestOptions) null);
+  public static AccountEvaluation retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an {@code AccountEvaluation} object. */
-  public static AccountEvaluation retrieve(String accountEvaluation, RequestOptions options)
+  public static AccountEvaluation retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(accountEvaluation, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an {@code AccountEvaluation} object. */
   public static AccountEvaluation retrieve(
-      String accountEvaluation, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/radar/account_evaluations/%s", ApiResource.urlEncodeId(accountEvaluation));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/radar/account_evaluations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, AccountEvaluation.class);
@@ -128,11 +125,9 @@ public class AccountEvaluation extends ApiResource implements HasId {
 
   /** Retrieves an {@code AccountEvaluation} object. */
   public static AccountEvaluation retrieve(
-      String accountEvaluation, AccountEvaluationRetrieveParams params, RequestOptions options)
+      String id, AccountEvaluationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/radar/account_evaluations/%s", ApiResource.urlEncodeId(accountEvaluation));
+    String path = String.format("/v1/radar/account_evaluations/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

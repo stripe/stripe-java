@@ -21,26 +21,25 @@ public final class AccountInferredBalanceService extends ApiService {
 
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
   public StripeCollection<AccountInferredBalance> list(
-      String account, AccountInferredBalanceListParams params) throws StripeException {
-    return list(account, params, (RequestOptions) null);
+      String id, AccountInferredBalanceListParams params) throws StripeException {
+    return list(id, params, (RequestOptions) null);
   }
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
-  public StripeCollection<AccountInferredBalance> list(String account, RequestOptions options)
+  public StripeCollection<AccountInferredBalance> list(String id, RequestOptions options)
       throws StripeException {
-    return list(account, (AccountInferredBalanceListParams) null, options);
+    return list(id, (AccountInferredBalanceListParams) null, options);
   }
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
-  public StripeCollection<AccountInferredBalance> list(String account) throws StripeException {
-    return list(account, (AccountInferredBalanceListParams) null, (RequestOptions) null);
+  public StripeCollection<AccountInferredBalance> list(String id) throws StripeException {
+    return list(id, (AccountInferredBalanceListParams) null, (RequestOptions) null);
   }
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
   public StripeCollection<AccountInferredBalance> list(
-      String account, AccountInferredBalanceListParams params, RequestOptions options)
+      String id, AccountInferredBalanceListParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/financial_connections/accounts/%s/inferred_balances",
-            ApiResource.urlEncodeId(account));
+            "/v1/financial_connections/accounts/%s/inferred_balances", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

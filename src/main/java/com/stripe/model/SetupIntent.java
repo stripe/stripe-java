@@ -26,7 +26,7 @@ import lombok.Setter;
  * A SetupIntent guides you through the process of setting up and saving a customer's payment
  * credentials for future payments. For example, you can use a SetupIntent to set up and save your
  * customer's card without immediately collecting a payment. Later, you can use <a
- * href="https://api.stripe.com#payment_intents">PaymentIntents</a> to drive the payment flow.
+ * href="https://docs.stripe.com/api#payment_intents">PaymentIntents</a> to drive the payment flow.
  *
  * <p>Create a SetupIntent when you're ready to collect your customer's payment credentials. Don't
  * maintain long-lived, unconfirmed SetupIntents because they might not be valid. The SetupIntent
@@ -40,11 +40,13 @@ import lombok.Setter;
  * be run through <a href="https://docs.stripe.com/strong-customer-authentication">Strong Customer
  * Authentication</a> during payment method collection to streamline later <a
  * href="https://docs.stripe.com/payments/setup-intents">off-session payments</a>. If you use the
- * SetupIntent with a <a href="https://api.stripe.com#setup_intent_object-customer">Customer</a>, it
- * automatically attaches the resulting payment method to that Customer after successful setup. We
- * recommend using SetupIntents or <a
- * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a> on
- * PaymentIntents to save payment methods to prevent saving invalid or unoptimized payment methods.
+ * SetupIntent with a <a
+ * href="https://docs.stripe.com/api#setup_intent_object-customer">Customer</a>, it automatically
+ * attaches the resulting payment method to that Customer after successful setup. We recommend using
+ * SetupIntents or <a
+ * href="https://docs.stripe.com/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
+ * on PaymentIntents to save payment methods to prevent saving invalid or unoptimized payment
+ * methods.
  *
  * <p>By using SetupIntents, you can reduce friction for your customers, even as regulations change
  * over time.
@@ -710,8 +712,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
    * reference for more details.
    */
-  public static SetupIntent retrieve(String intent) throws StripeException {
-    return retrieve(intent, (Map<String, Object>) null, (RequestOptions) null);
+  public static SetupIntent retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
@@ -724,8 +726,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
    * reference for more details.
    */
-  public static SetupIntent retrieve(String intent, RequestOptions options) throws StripeException {
-    return retrieve(intent, (Map<String, Object>) null, options);
+  public static SetupIntent retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -738,9 +740,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
    * reference for more details.
    */
-  public static SetupIntent retrieve(
-      String intent, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent));
+  public static SetupIntent retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, SetupIntent.class);
@@ -757,9 +759,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * reference for more details.
    */
   public static SetupIntent retrieve(
-      String intent, SetupIntentRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent));
+      String id, SetupIntentRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -1174,6 +1175,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("bizum")
     Bizum bizum;
 
+    @SerializedName("blik")
+    Blik blik;
+
     @SerializedName("card")
     Card card;
 
@@ -1326,6 +1330,39 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     public static class Bizum extends StripeObject {}
 
     /**
+     * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Blik extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** Date at which the mandate expires. */
+        @SerializedName("expires_at")
+        Long expiresAt;
+
+        /**
+         * Type of the mandate.
+         *
+         * <p>Equal to {@code off_session}.
+         */
+        @SerializedName("type")
+        String type;
+      }
+    }
+
+    /**
      * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -1359,6 +1396,14 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
        */
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;
+
+      /**
+       * Set to indicate the future transaction type usage for the card being set up.
+       *
+       * <p>One of {@code recurring}, or {@code unscheduled}.
+       */
+      @SerializedName("setup_credential_usage")
+      String setupCredentialUsage;
 
       /**
        * For more details about MandateOptions, please refer to the <a

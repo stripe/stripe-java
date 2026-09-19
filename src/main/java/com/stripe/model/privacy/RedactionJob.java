@@ -239,19 +239,19 @@ public class RedactionJob extends ApiResource implements HasId {
   }
 
   /** Retrieves the details of a previously created redaction job. */
-  public static RedactionJob retrieve(String job) throws StripeException {
-    return retrieve(job, (Map<String, Object>) null, (RequestOptions) null);
+  public static RedactionJob retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the details of a previously created redaction job. */
-  public static RedactionJob retrieve(String job, RequestOptions options) throws StripeException {
-    return retrieve(job, (Map<String, Object>) null, options);
+  public static RedactionJob retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the details of a previously created redaction job. */
-  public static RedactionJob retrieve(
-      String job, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/privacy/redaction_jobs/%s", ApiResource.urlEncodeId(job));
+  public static RedactionJob retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/privacy/redaction_jobs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, RedactionJob.class);
@@ -259,9 +259,8 @@ public class RedactionJob extends ApiResource implements HasId {
 
   /** Retrieves the details of a previously created redaction job. */
   public static RedactionJob retrieve(
-      String job, RedactionJobRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/privacy/redaction_jobs/%s", ApiResource.urlEncodeId(job));
+      String id, RedactionJobRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/privacy/redaction_jobs/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

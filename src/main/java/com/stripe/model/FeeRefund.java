@@ -121,9 +121,8 @@ public class FeeRefund extends ApiResource
    *
    * <p>This request only accepts metadata as an argument.
    */
-  @Override
-  public FeeRefund update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public FeeRefund update(String feeId, Map<String, Object> params) throws StripeException {
+    return update(feeId, params, (RequestOptions) null);
   }
 
   /**
@@ -132,13 +131,12 @@ public class FeeRefund extends ApiResource
    *
    * <p>This request only accepts metadata as an argument.
    */
-  @Override
-  public FeeRefund update(Map<String, Object> params, RequestOptions options)
+  public FeeRefund update(String feeId, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/application_fees/%s/refunds/%s",
-            ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(feeId), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, FeeRefund.class);
@@ -150,8 +148,8 @@ public class FeeRefund extends ApiResource
    *
    * <p>This request only accepts metadata as an argument.
    */
-  public FeeRefund update(FeeRefundUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public FeeRefund update(String feeId, FeeRefundUpdateParams params) throws StripeException {
+    return update(feeId, params, (RequestOptions) null);
   }
 
   /**
@@ -160,12 +158,12 @@ public class FeeRefund extends ApiResource
    *
    * <p>This request only accepts metadata as an argument.
    */
-  public FeeRefund update(FeeRefundUpdateParams params, RequestOptions options)
+  public FeeRefund update(String feeId, FeeRefundUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/application_fees/%s/refunds/%s",
-            ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(feeId), ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

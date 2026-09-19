@@ -66,34 +66,25 @@ public final class CreditUnderwritingRecordService extends ApiService {
         request, new TypeToken<StripeCollection<CreditUnderwritingRecord>>() {}.getType());
   }
   /** Retrieves a {@code CreditUnderwritingRecord} object. */
-  public CreditUnderwritingRecord retrieve(
-      String creditUnderwritingRecord, CreditUnderwritingRecordRetrieveParams params)
+  public CreditUnderwritingRecord retrieve(String id, CreditUnderwritingRecordRetrieveParams params)
       throws StripeException {
-    return retrieve(creditUnderwritingRecord, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a {@code CreditUnderwritingRecord} object. */
-  public CreditUnderwritingRecord retrieve(String creditUnderwritingRecord, RequestOptions options)
+  public CreditUnderwritingRecord retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(
-        creditUnderwritingRecord, (CreditUnderwritingRecordRetrieveParams) null, options);
+    return retrieve(id, (CreditUnderwritingRecordRetrieveParams) null, options);
   }
   /** Retrieves a {@code CreditUnderwritingRecord} object. */
-  public CreditUnderwritingRecord retrieve(String creditUnderwritingRecord) throws StripeException {
-    return retrieve(
-        creditUnderwritingRecord,
-        (CreditUnderwritingRecordRetrieveParams) null,
-        (RequestOptions) null);
+  public CreditUnderwritingRecord retrieve(String id) throws StripeException {
+    return retrieve(id, (CreditUnderwritingRecordRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a {@code CreditUnderwritingRecord} object. */
   public CreditUnderwritingRecord retrieve(
-      String creditUnderwritingRecord,
-      CreditUnderwritingRecordRetrieveParams params,
-      RequestOptions options)
+      String id, CreditUnderwritingRecordRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/credit_underwriting_records/%s",
-            ApiResource.urlEncodeId(creditUnderwritingRecord));
+        String.format("/v1/issuing/credit_underwriting_records/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -104,33 +95,26 @@ public final class CreditUnderwritingRecordService extends ApiService {
     return this.request(request, CreditUnderwritingRecord.class);
   }
   /** Update a {@code CreditUnderwritingRecord} object to correct mistakes. */
-  public CreditUnderwritingRecord correct(
-      String creditUnderwritingRecord, CreditUnderwritingRecordCorrectParams params)
+  public CreditUnderwritingRecord correct(String id, CreditUnderwritingRecordCorrectParams params)
       throws StripeException {
-    return correct(creditUnderwritingRecord, params, (RequestOptions) null);
+    return correct(id, params, (RequestOptions) null);
   }
   /** Update a {@code CreditUnderwritingRecord} object to correct mistakes. */
-  public CreditUnderwritingRecord correct(String creditUnderwritingRecord, RequestOptions options)
+  public CreditUnderwritingRecord correct(String id, RequestOptions options)
       throws StripeException {
-    return correct(creditUnderwritingRecord, (CreditUnderwritingRecordCorrectParams) null, options);
+    return correct(id, (CreditUnderwritingRecordCorrectParams) null, options);
   }
   /** Update a {@code CreditUnderwritingRecord} object to correct mistakes. */
-  public CreditUnderwritingRecord correct(String creditUnderwritingRecord) throws StripeException {
-    return correct(
-        creditUnderwritingRecord,
-        (CreditUnderwritingRecordCorrectParams) null,
-        (RequestOptions) null);
+  public CreditUnderwritingRecord correct(String id) throws StripeException {
+    return correct(id, (CreditUnderwritingRecordCorrectParams) null, (RequestOptions) null);
   }
   /** Update a {@code CreditUnderwritingRecord} object to correct mistakes. */
   public CreditUnderwritingRecord correct(
-      String creditUnderwritingRecord,
-      CreditUnderwritingRecordCorrectParams params,
-      RequestOptions options)
+      String id, CreditUnderwritingRecordCorrectParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/issuing/credit_underwriting_records/%s/correct",
-            ApiResource.urlEncodeId(creditUnderwritingRecord));
+            "/v1/issuing/credit_underwriting_records/%s/correct", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -144,22 +128,19 @@ public final class CreditUnderwritingRecordService extends ApiService {
    * Update a {@code CreditUnderwritingRecord} object from a decision made on a credit application.
    */
   public CreditUnderwritingRecord reportDecision(
-      String creditUnderwritingRecord, CreditUnderwritingRecordReportDecisionParams params)
-      throws StripeException {
-    return reportDecision(creditUnderwritingRecord, params, (RequestOptions) null);
+      String id, CreditUnderwritingRecordReportDecisionParams params) throws StripeException {
+    return reportDecision(id, params, (RequestOptions) null);
   }
   /**
    * Update a {@code CreditUnderwritingRecord} object from a decision made on a credit application.
    */
   public CreditUnderwritingRecord reportDecision(
-      String creditUnderwritingRecord,
-      CreditUnderwritingRecordReportDecisionParams params,
-      RequestOptions options)
+      String id, CreditUnderwritingRecordReportDecisionParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/issuing/credit_underwriting_records/%s/report_decision",
-            ApiResource.urlEncodeId(creditUnderwritingRecord));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -174,45 +155,38 @@ public final class CreditUnderwritingRecordService extends ApiService {
    * accepted.
    */
   public CreditUnderwritingRecord reportOfferAcceptance(
-      String creditUnderwritingRecord, CreditUnderwritingRecordReportOfferAcceptanceParams params)
+      String id, CreditUnderwritingRecordReportOfferAcceptanceParams params)
       throws StripeException {
-    return reportOfferAcceptance(creditUnderwritingRecord, params, (RequestOptions) null);
+    return reportOfferAcceptance(id, params, (RequestOptions) null);
+  }
+  /**
+   * Update a {@code CreditUnderwritingRecord} object to report that a credit offer has been
+   * accepted.
+   */
+  public CreditUnderwritingRecord reportOfferAcceptance(String id, RequestOptions options)
+      throws StripeException {
+    return reportOfferAcceptance(
+        id, (CreditUnderwritingRecordReportOfferAcceptanceParams) null, options);
+  }
+  /**
+   * Update a {@code CreditUnderwritingRecord} object to report that a credit offer has been
+   * accepted.
+   */
+  public CreditUnderwritingRecord reportOfferAcceptance(String id) throws StripeException {
+    return reportOfferAcceptance(
+        id, (CreditUnderwritingRecordReportOfferAcceptanceParams) null, (RequestOptions) null);
   }
   /**
    * Update a {@code CreditUnderwritingRecord} object to report that a credit offer has been
    * accepted.
    */
   public CreditUnderwritingRecord reportOfferAcceptance(
-      String creditUnderwritingRecord, RequestOptions options) throws StripeException {
-    return reportOfferAcceptance(
-        creditUnderwritingRecord,
-        (CreditUnderwritingRecordReportOfferAcceptanceParams) null,
-        options);
-  }
-  /**
-   * Update a {@code CreditUnderwritingRecord} object to report that a credit offer has been
-   * accepted.
-   */
-  public CreditUnderwritingRecord reportOfferAcceptance(String creditUnderwritingRecord)
-      throws StripeException {
-    return reportOfferAcceptance(
-        creditUnderwritingRecord,
-        (CreditUnderwritingRecordReportOfferAcceptanceParams) null,
-        (RequestOptions) null);
-  }
-  /**
-   * Update a {@code CreditUnderwritingRecord} object to report that a credit offer has been
-   * accepted.
-   */
-  public CreditUnderwritingRecord reportOfferAcceptance(
-      String creditUnderwritingRecord,
-      CreditUnderwritingRecordReportOfferAcceptanceParams params,
-      RequestOptions options)
+      String id, CreditUnderwritingRecordReportOfferAcceptanceParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/issuing/credit_underwriting_records/%s/report_offer_acceptance",
-            ApiResource.urlEncodeId(creditUnderwritingRecord));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

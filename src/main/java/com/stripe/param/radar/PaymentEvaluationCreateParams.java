@@ -814,10 +814,7 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * <strong>Required.</strong> Describes the type of money movement. Currently only {@code
-       * card} is supported.
-       */
+      /** <strong>Required.</strong> Describes the type of money movement. */
       @SerializedName("money_movement_type")
       MoneyMovementType moneyMovementType;
 
@@ -882,10 +879,7 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * <strong>Required.</strong> Describes the type of money movement. Currently only {@code
-         * card} is supported.
-         */
+        /** <strong>Required.</strong> Describes the type of money movement. */
         public Builder setMoneyMovementType(
             PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.MoneyMovementType
                 moneyMovementType) {

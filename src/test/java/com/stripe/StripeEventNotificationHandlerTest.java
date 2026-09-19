@@ -17,6 +17,7 @@ import com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification;
 import com.stripe.events.V2CoreAccountCreatedEventNotification;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.v2.core.EventNotification;
+import com.stripe.net.LiveStripeResponseGetter;
 import com.stripe.net.Webhook;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -46,6 +47,7 @@ public class StripeEventNotificationHandlerTest {
     stripeClient =
         StripeClient.builder()
             .setApiKey("sk_test_1234")
+            .setStripeAccount("acct_123")
             .setStripeContext("original_context_123")
             .build();
 
@@ -270,9 +272,13 @@ public class StripeEventNotificationHandlerTest {
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
     // Test that the handler receives a client with stripe_context from the event
     AtomicReference<String> receivedContext = new AtomicReference<>();
+    AtomicReference<String> receivedAccount = new AtomicReference<>();
 
     EventNotificationCallback<V1BillingMeterErrorReportTriggeredEventNotification> handler =
         (event, client) -> {
+          LiveStripeResponseGetter responseGetter =
+              (LiveStripeResponseGetter) client.getResponseGetter();
+          receivedAccount.set(responseGetter.getOptions().getStripeAccount());
           receivedContext.set(client.getContext());
         };
 
@@ -284,6 +290,7 @@ public class StripeEventNotificationHandlerTest {
     eventNotificationHandler.handle(v1BillingMeterPayload, sigHeader);
 
     assertEquals("event_context_456", receivedContext.get());
+    assertNull(receivedAccount.get());
   }
 
   @Test

@@ -163,23 +163,20 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
   }
 
   /** Retrieves the details of an existing payment method domain. */
-  public static PaymentMethodDomain retrieve(String paymentMethodDomain) throws StripeException {
-    return retrieve(paymentMethodDomain, (Map<String, Object>) null, (RequestOptions) null);
+  public static PaymentMethodDomain retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the details of an existing payment method domain. */
-  public static PaymentMethodDomain retrieve(String paymentMethodDomain, RequestOptions options)
+  public static PaymentMethodDomain retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(paymentMethodDomain, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the details of an existing payment method domain. */
   public static PaymentMethodDomain retrieve(
-      String paymentMethodDomain, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/payment_method_domains/%s", ApiResource.urlEncodeId(paymentMethodDomain));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/payment_method_domains/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PaymentMethodDomain.class);
@@ -187,11 +184,9 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
 
   /** Retrieves the details of an existing payment method domain. */
   public static PaymentMethodDomain retrieve(
-      String paymentMethodDomain, PaymentMethodDomainRetrieveParams params, RequestOptions options)
+      String id, PaymentMethodDomainRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/payment_method_domains/%s", ApiResource.urlEncodeId(paymentMethodDomain));
+    String path = String.format("/v1/payment_method_domains/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

@@ -24,26 +24,25 @@ public final class PaymentLinkLineItemService extends ApiService {
    * containing the first handful of those items. There is also a URL where you can retrieve the
    * full (paginated) list of line items.
    */
-  public StripeCollection<LineItem> list(String paymentLink, PaymentLinkLineItemListParams params)
+  public StripeCollection<LineItem> list(String id, PaymentLinkLineItemListParams params)
       throws StripeException {
-    return list(paymentLink, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
   /**
    * When retrieving a payment link, there is an includable <strong>line_items</strong> property
    * containing the first handful of those items. There is also a URL where you can retrieve the
    * full (paginated) list of line items.
    */
-  public StripeCollection<LineItem> list(String paymentLink, RequestOptions options)
-      throws StripeException {
-    return list(paymentLink, (PaymentLinkLineItemListParams) null, options);
+  public StripeCollection<LineItem> list(String id, RequestOptions options) throws StripeException {
+    return list(id, (PaymentLinkLineItemListParams) null, options);
   }
   /**
    * When retrieving a payment link, there is an includable <strong>line_items</strong> property
    * containing the first handful of those items. There is also a URL where you can retrieve the
    * full (paginated) list of line items.
    */
-  public StripeCollection<LineItem> list(String paymentLink) throws StripeException {
-    return list(paymentLink, (PaymentLinkLineItemListParams) null, (RequestOptions) null);
+  public StripeCollection<LineItem> list(String id) throws StripeException {
+    return list(id, (PaymentLinkLineItemListParams) null, (RequestOptions) null);
   }
   /**
    * When retrieving a payment link, there is an includable <strong>line_items</strong> property
@@ -51,10 +50,9 @@ public final class PaymentLinkLineItemService extends ApiService {
    * full (paginated) list of line items.
    */
   public StripeCollection<LineItem> list(
-      String paymentLink, PaymentLinkLineItemListParams params, RequestOptions options)
+      String id, PaymentLinkLineItemListParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/payment_links/%s/line_items", ApiResource.urlEncodeId(paymentLink));
+    String path = String.format("/v1/payment_links/%s/line_items", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

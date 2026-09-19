@@ -165,28 +165,28 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   }
 
   /** Retrieves the file link with the given ID. */
-  public static FileLink retrieve(String link) throws StripeException {
-    return retrieve(link, (Map<String, Object>) null, (RequestOptions) null);
+  public static FileLink retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the file link with the given ID. */
-  public static FileLink retrieve(String link, RequestOptions options) throws StripeException {
-    return retrieve(link, (Map<String, Object>) null, options);
+  public static FileLink retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the file link with the given ID. */
-  public static FileLink retrieve(String link, Map<String, Object> params, RequestOptions options)
+  public static FileLink retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/file_links/%s", ApiResource.urlEncodeId(link));
+    String path = String.format("/v1/file_links/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, FileLink.class);
   }
 
   /** Retrieves the file link with the given ID. */
-  public static FileLink retrieve(
-      String link, FileLinkRetrieveParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/file_links/%s", ApiResource.urlEncodeId(link));
+  public static FileLink retrieve(String id, FileLinkRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/file_links/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

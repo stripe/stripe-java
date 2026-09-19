@@ -560,6 +560,9 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         @SerializedName("customer")
         CUSTOMER("customer"),
 
+        @SerializedName("developer")
+        DEVELOPER("developer"),
+
         @SerializedName("merchant")
         MERCHANT("merchant"),
 
@@ -890,6 +893,9 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       public enum Configuration implements ApiRequestParams.EnumParam {
         @SerializedName("customer")
         CUSTOMER("customer"),
+
+        @SerializedName("developer")
+        DEVELOPER("developer"),
 
         @SerializedName("merchant")
         MERCHANT("merchant"),

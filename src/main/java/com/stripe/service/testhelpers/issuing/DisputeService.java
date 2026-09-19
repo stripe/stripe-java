@@ -22,15 +22,14 @@ public final class DisputeService extends ApiService {
   }
 
   /** Test helper: closes a test-mode Issuing dispute as won or lost. */
-  public Dispute close(String dispute, DisputeCloseParams params) throws StripeException {
-    return close(dispute, params, (RequestOptions) null);
+  public Dispute close(String id, DisputeCloseParams params) throws StripeException {
+    return close(id, params, (RequestOptions) null);
   }
   /** Test helper: closes a test-mode Issuing dispute as won or lost. */
-  public Dispute close(String dispute, DisputeCloseParams params, RequestOptions options)
+  public Dispute close(String id, DisputeCloseParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/test_helpers/issuing/disputes/%s/close", ApiResource.urlEncodeId(dispute));
+        String.format("/v1/test_helpers/issuing/disputes/%s/close", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -45,25 +44,25 @@ public final class DisputeService extends ApiService {
    * test-mode Issuing dispute’s provisional credit, allowing tests to simulate timer-driven status
    * transitions without waiting for real regulatory deadlines to pass.
    */
-  public Dispute provisionalCredit(String dispute, DisputeProvisionalCreditParams params)
+  public Dispute provisionalCredit(String id, DisputeProvisionalCreditParams params)
       throws StripeException {
-    return provisionalCredit(dispute, params, (RequestOptions) null);
+    return provisionalCredit(id, params, (RequestOptions) null);
   }
   /**
    * Test helper: overrides the {@code grant_deadline} and {@code revocable_after} timestamps on a
    * test-mode Issuing dispute’s provisional credit, allowing tests to simulate timer-driven status
    * transitions without waiting for real regulatory deadlines to pass.
    */
-  public Dispute provisionalCredit(String dispute, RequestOptions options) throws StripeException {
-    return provisionalCredit(dispute, (DisputeProvisionalCreditParams) null, options);
+  public Dispute provisionalCredit(String id, RequestOptions options) throws StripeException {
+    return provisionalCredit(id, (DisputeProvisionalCreditParams) null, options);
   }
   /**
    * Test helper: overrides the {@code grant_deadline} and {@code revocable_after} timestamps on a
    * test-mode Issuing dispute’s provisional credit, allowing tests to simulate timer-driven status
    * transitions without waiting for real regulatory deadlines to pass.
    */
-  public Dispute provisionalCredit(String dispute) throws StripeException {
-    return provisionalCredit(dispute, (DisputeProvisionalCreditParams) null, (RequestOptions) null);
+  public Dispute provisionalCredit(String id) throws StripeException {
+    return provisionalCredit(id, (DisputeProvisionalCreditParams) null, (RequestOptions) null);
   }
   /**
    * Test helper: overrides the {@code grant_deadline} and {@code revocable_after} timestamps on a
@@ -71,12 +70,11 @@ public final class DisputeService extends ApiService {
    * transitions without waiting for real regulatory deadlines to pass.
    */
   public Dispute provisionalCredit(
-      String dispute, DisputeProvisionalCreditParams params, RequestOptions options)
+      String id, DisputeProvisionalCreditParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/test_helpers/issuing/disputes/%s/provisional_credit",
-            ApiResource.urlEncodeId(dispute));
+            "/v1/test_helpers/issuing/disputes/%s/provisional_credit", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -91,23 +89,23 @@ public final class DisputeService extends ApiService {
    * Dispute using placeholder file tokens. Only supported for Visa disputes.
    */
   public Dispute simulateNetworkLifecycleDisputeResponse(
-      String dispute, DisputeSimulateNetworkLifecycleDisputeResponseParams params)
+      String id, DisputeSimulateNetworkLifecycleDisputeResponseParams params)
       throws StripeException {
-    return simulateNetworkLifecycleDisputeResponse(dispute, params, (RequestOptions) null);
+    return simulateNetworkLifecycleDisputeResponse(id, params, (RequestOptions) null);
   }
   /**
    * Test helper: populates {@code network_lifecycle.dispute_response} on a test-mode Visa Issuing
    * Dispute using placeholder file tokens. Only supported for Visa disputes.
    */
   public Dispute simulateNetworkLifecycleDisputeResponse(
-      String dispute,
+      String id,
       DisputeSimulateNetworkLifecycleDisputeResponseParams params,
       RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/test_helpers/issuing/disputes/%s/simulate_network_lifecycle_dispute_response",
-            ApiResource.urlEncodeId(dispute));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -123,9 +121,9 @@ public final class DisputeService extends ApiService {
    * collaboration flow.
    */
   public Dispute simulateNetworkLifecyclePreArbitrationResponse(
-      String dispute, DisputeSimulateNetworkLifecyclePreArbitrationResponseParams params)
+      String id, DisputeSimulateNetworkLifecyclePreArbitrationResponseParams params)
       throws StripeException {
-    return simulateNetworkLifecyclePreArbitrationResponse(dispute, params, (RequestOptions) null);
+    return simulateNetworkLifecyclePreArbitrationResponse(id, params, (RequestOptions) null);
   }
   /**
    * Test helper: populates {@code network_lifecycle.pre_arbitration_response} on a test-mode Visa
@@ -133,14 +131,14 @@ public final class DisputeService extends ApiService {
    * collaboration flow.
    */
   public Dispute simulateNetworkLifecyclePreArbitrationResponse(
-      String dispute,
+      String id,
       DisputeSimulateNetworkLifecyclePreArbitrationResponseParams params,
       RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/test_helpers/issuing/disputes/%s/simulate_network_lifecycle_pre_arbitration_response",
-            ApiResource.urlEncodeId(dispute));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -155,23 +153,23 @@ public final class DisputeService extends ApiService {
    * Issuing Dispute using placeholder file tokens. Only supported for Visa disputes.
    */
   public Dispute simulateNetworkLifecyclePreArbitrationSubmission(
-      String dispute, DisputeSimulateNetworkLifecyclePreArbitrationSubmissionParams params)
+      String id, DisputeSimulateNetworkLifecyclePreArbitrationSubmissionParams params)
       throws StripeException {
-    return simulateNetworkLifecyclePreArbitrationSubmission(dispute, params, (RequestOptions) null);
+    return simulateNetworkLifecyclePreArbitrationSubmission(id, params, (RequestOptions) null);
   }
   /**
    * Test helper: populates {@code network_lifecycle.pre_arbitration_submission} on a test-mode Visa
    * Issuing Dispute using placeholder file tokens. Only supported for Visa disputes.
    */
   public Dispute simulateNetworkLifecyclePreArbitrationSubmission(
-      String dispute,
+      String id,
       DisputeSimulateNetworkLifecyclePreArbitrationSubmissionParams params,
       RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/test_helpers/issuing/disputes/%s/simulate_network_lifecycle_pre_arbitration_submission",
-            ApiResource.urlEncodeId(dispute));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

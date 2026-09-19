@@ -212,8 +212,8 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
    * customer-facing {@code code} use <a
    * href="https://stripe.com/docs/api/promotion_codes/list">list</a> with the desired {@code code}.
    */
-  public static PromotionCode retrieve(String promotionCode) throws StripeException {
-    return retrieve(promotionCode, (Map<String, Object>) null, (RequestOptions) null);
+  public static PromotionCode retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
@@ -221,9 +221,8 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
    * customer-facing {@code code} use <a
    * href="https://stripe.com/docs/api/promotion_codes/list">list</a> with the desired {@code code}.
    */
-  public static PromotionCode retrieve(String promotionCode, RequestOptions options)
-      throws StripeException {
-    return retrieve(promotionCode, (Map<String, Object>) null, options);
+  public static PromotionCode retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -232,9 +231,8 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
    * href="https://stripe.com/docs/api/promotion_codes/list">list</a> with the desired {@code code}.
    */
   public static PromotionCode retrieve(
-      String promotionCode, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PromotionCode.class);
@@ -246,9 +244,9 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
    * href="https://stripe.com/docs/api/promotion_codes/list">list</a> with the desired {@code code}.
    */
   public static PromotionCode retrieve(
-      String promotionCode, PromotionCodeRetrieveParams params, RequestOptions options)
+      String id, PromotionCodeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode));
+    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

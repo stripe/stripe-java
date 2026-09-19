@@ -121,8 +121,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
    * href="https://docs.stripe.com/payments/payment-methods/transitioning#compatibility">compatible
    * Source</a> object) to attach to this PaymentIntent. If the payment method is attached to a
    * Customer, it must match the <a
-   * href="https://api.stripe.com#create_payment_intent-customer">customer</a> that is set on this
-   * PaymentIntent.
+   * href="https://docs.stripe.com/api#create_payment_intent-customer">customer</a> that is set on
+   * this PaymentIntent.
    */
   @SerializedName("payment_method")
   String paymentMethod;
@@ -620,8 +620,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      * href="https://docs.stripe.com/payments/payment-methods/transitioning#compatibility">compatible
      * Source</a> object) to attach to this PaymentIntent. If the payment method is attached to a
      * Customer, it must match the <a
-     * href="https://api.stripe.com#create_payment_intent-customer">customer</a> that is set on this
-     * PaymentIntent.
+     * href="https://docs.stripe.com/api#create_payment_intent-customer">customer</a> that is set on
+     * this PaymentIntent.
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -2015,11 +2015,29 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             }
 
             public enum ProductType implements ApiRequestParams.EnumParam {
+              @SerializedName("additive_dosage")
+              ADDITIVE_DOSAGE("additive_dosage"),
+
+              @SerializedName("additized_diesel_2")
+              ADDITIZED_DIESEL_2("additized_diesel_2"),
+
+              @SerializedName("additized_diesel_3")
+              ADDITIZED_DIESEL_3("additized_diesel_3"),
+
               @SerializedName("air_conditioning_service")
               AIR_CONDITIONING_SERVICE("air_conditioning_service"),
 
+              @SerializedName("air_filter")
+              AIR_FILTER("air_filter"),
+
               @SerializedName("alcohol")
               ALCOHOL("alcohol"),
+
+              @SerializedName("antifreeze")
+              ANTIFREEZE("antifreeze"),
+
+              @SerializedName("automotive_merchandise")
+              AUTOMOTIVE_MERCHANDISE("automotive_merchandise"),
 
               @SerializedName("aviation_fuel_premium")
               AVIATION_FUEL_PREMIUM("aviation_fuel_premium"),
@@ -2027,14 +2045,74 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               @SerializedName("aviation_fuel_regular")
               AVIATION_FUEL_REGULAR("aviation_fuel_regular"),
 
+              @SerializedName("batteries")
+              BATTERIES("batteries"),
+
+              @SerializedName("biodiesel_b1")
+              BIODIESEL_B1("biodiesel_b1"),
+
+              @SerializedName("biodiesel_b10")
+              BIODIESEL_B10("biodiesel_b10"),
+
+              @SerializedName("biodiesel_b100")
+              BIODIESEL_B100("biodiesel_b100"),
+
+              @SerializedName("biodiesel_b11")
+              BIODIESEL_B11("biodiesel_b11"),
+
+              @SerializedName("biodiesel_b15")
+              BIODIESEL_B15("biodiesel_b15"),
+
+              @SerializedName("biodiesel_b2")
+              BIODIESEL_B2("biodiesel_b2"),
+
+              @SerializedName("biodiesel_b20")
+              BIODIESEL_B20("biodiesel_b20"),
+
+              @SerializedName("biodiesel_b5")
+              BIODIESEL_B5("biodiesel_b5"),
+
+              @SerializedName("biodiesel_b75")
+              BIODIESEL_B75("biodiesel_b75"),
+
+              @SerializedName("biodiesel_b99")
+              BIODIESEL_B99("biodiesel_b99"),
+
+              @SerializedName("blended_diesel_1_and_2")
+              BLENDED_DIESEL_1_AND_2("blended_diesel_1_and_2"),
+
+              @SerializedName("body_work")
+              BODY_WORK("body_work"),
+
+              @SerializedName("brake_fluid")
+              BRAKE_FLUID("brake_fluid"),
+
+              @SerializedName("brake_service")
+              BRAKE_SERVICE("brake_service"),
+
               @SerializedName("car_care_detailing")
               CAR_CARE_DETAILING("car_care_detailing"),
+
+              @SerializedName("car_wash")
+              CAR_WASH("car_wash"),
 
               @SerializedName("compressed_natural_gas")
               COMPRESSED_NATURAL_GAS("compressed_natural_gas"),
 
+              @SerializedName("def_at_pump")
+              DEF_AT_PUMP("def_at_pump"),
+
               @SerializedName("deli")
               DELI("deli"),
+
+              @SerializedName("e85")
+              E85("e85"),
+
+              @SerializedName("engine_service")
+              ENGINE_SERVICE("engine_service"),
+
+              @SerializedName("ethanol_e16_to_e84")
+              ETHANOL_E16_TO_E84("ethanol_e16_to_e84"),
 
               @SerializedName("ev_battery_exchanges")
               EV_BATTERY_EXCHANGES("ev_battery_exchanges"),
@@ -2057,8 +2135,20 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               @SerializedName("evc_level_5")
               EVC_LEVEL_5("evc_level_5"),
 
+              @SerializedName("exhaust_service")
+              EXHAUST_SERVICE("exhaust_service"),
+
+              @SerializedName("federal_tire_excise_tax")
+              FEDERAL_TIRE_EXCISE_TAX("federal_tire_excise_tax"),
+
               @SerializedName("food_service")
               FOOD_SERVICE("food_service"),
+
+              @SerializedName("fuel_additive_treatment")
+              FUEL_ADDITIVE_TREATMENT("fuel_additive_treatment"),
+
+              @SerializedName("fuel_system")
+              FUEL_SYSTEM("fuel_system"),
 
               @SerializedName("green_gasoline_mid_plus")
               GREEN_GASOLINE_MID_PLUS("green_gasoline_mid_plus"),
@@ -2072,6 +2162,39 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               @SerializedName("grocery")
               GROCERY("grocery"),
 
+              @SerializedName("heating_oil")
+              HEATING_OIL("heating_oil"),
+
+              @SerializedName("hoses")
+              HOSES("hoses"),
+
+              @SerializedName("hydrogen_h35")
+              HYDROGEN_H35("hydrogen_h35"),
+
+              @SerializedName("hydrogen_h70")
+              HYDROGEN_H70("hydrogen_h70"),
+
+              @SerializedName("inspection")
+              INSPECTION("inspection"),
+
+              @SerializedName("kerosene_low_sulfur")
+              KEROSENE_LOW_SULFUR("kerosene_low_sulfur"),
+
+              @SerializedName("kerosene_low_sulfur_non_taxable")
+              KEROSENE_LOW_SULFUR_NON_TAXABLE("kerosene_low_sulfur_non_taxable"),
+
+              @SerializedName("kerosene_ultra_low_sulfur")
+              KEROSENE_ULTRA_LOW_SULFUR("kerosene_ultra_low_sulfur"),
+
+              @SerializedName("kerosene_ultra_low_sulfur_non_taxable")
+              KEROSENE_ULTRA_LOW_SULFUR_NON_TAXABLE("kerosene_ultra_low_sulfur_non_taxable"),
+
+              @SerializedName("labor")
+              LABOR("labor"),
+
+              @SerializedName("lamps")
+              LAMPS("lamps"),
+
               @SerializedName("liquid_natural_gas")
               LIQUID_NATURAL_GAS("liquid_natural_gas"),
 
@@ -2081,11 +2204,35 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               @SerializedName("lodging")
               LODGING("lodging"),
 
+              @SerializedName("low_octane_unleaded")
+              LOW_OCTANE_UNLEADED("low_octane_unleaded"),
+
+              @SerializedName("lube")
+              LUBE("lube"),
+
               @SerializedName("marine_diesel")
               MARINE_DIESEL("marine_diesel"),
 
               @SerializedName("marine_fuel")
               MARINE_FUEL("marine_fuel"),
+
+              @SerializedName("marine_fuel_1")
+              MARINE_FUEL_1("marine_fuel_1"),
+
+              @SerializedName("marine_fuel_2")
+              MARINE_FUEL_2("marine_fuel_2"),
+
+              @SerializedName("marine_fuel_3")
+              MARINE_FUEL_3("marine_fuel_3"),
+
+              @SerializedName("marine_fuel_4")
+              MARINE_FUEL_4("marine_fuel_4"),
+
+              @SerializedName("marine_fuel_5")
+              MARINE_FUEL_5("marine_fuel_5"),
+
+              @SerializedName("marine_other")
+              MARINE_OTHER("marine_other"),
 
               @SerializedName("merchandise")
               MERCHANDISE("merchandise"),
@@ -2093,8 +2240,29 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               @SerializedName("mid_plus")
               MID_PLUS("mid_plus"),
 
+              @SerializedName("mid_plus_2")
+              MID_PLUS_2("mid_plus_2"),
+
+              @SerializedName("mid_plus_2_10")
+              MID_PLUS_2_10("mid_plus_2_10"),
+
+              @SerializedName("mid_plus_2_e15")
+              MID_PLUS_2_E15("mid_plus_2_e15"),
+
+              @SerializedName("mid_plus_2_reformulated")
+              MID_PLUS_2_REFORMULATED("mid_plus_2_reformulated"),
+
+              @SerializedName("mid_plus_e10")
+              MID_PLUS_E10("mid_plus_e10"),
+
+              @SerializedName("mid_plus_e15")
+              MID_PLUS_E15("mid_plus_e15"),
+
               @SerializedName("mid_plus_ethanol")
               MID_PLUS_ETHANOL("mid_plus_ethanol"),
+
+              @SerializedName("mid_plus_reformulated")
+              MID_PLUS_REFORMULATED("mid_plus_reformulated"),
 
               @SerializedName("miscellaneous_aviation_products_services")
               MISCELLANEOUS_AVIATION_PRODUCTS_SERVICES("miscellaneous_aviation_products_services"),
@@ -2108,20 +2276,134 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               @SerializedName("miscellaneous_vehicle_products_services")
               MISCELLANEOUS_VEHICLE_PRODUCTS_SERVICES("miscellaneous_vehicle_products_services"),
 
+              @SerializedName("motor_oil")
+              MOTOR_OIL("motor_oil"),
+
+              @SerializedName("off_road_b1")
+              OFF_ROAD_B1("off_road_b1"),
+
+              @SerializedName("off_road_b10")
+              OFF_ROAD_B10("off_road_b10"),
+
+              @SerializedName("off_road_b100")
+              OFF_ROAD_B100("off_road_b100"),
+
+              @SerializedName("off_road_b11")
+              OFF_ROAD_B11("off_road_b11"),
+
+              @SerializedName("off_road_b15")
+              OFF_ROAD_B15("off_road_b15"),
+
+              @SerializedName("off_road_b2")
+              OFF_ROAD_B2("off_road_b2"),
+
+              @SerializedName("off_road_b20")
+              OFF_ROAD_B20("off_road_b20"),
+
+              @SerializedName("off_road_b5")
+              OFF_ROAD_B5("off_road_b5"),
+
+              @SerializedName("off_road_b75")
+              OFF_ROAD_B75("off_road_b75"),
+
+              @SerializedName("off_road_b99")
+              OFF_ROAD_B99("off_road_b99"),
+
+              @SerializedName("off_road_biodiesel")
+              OFF_ROAD_BIODIESEL("off_road_biodiesel"),
+
+              @SerializedName("off_road_diesel_1")
+              OFF_ROAD_DIESEL_1("off_road_diesel_1"),
+
+              @SerializedName("off_road_diesel_2")
+              OFF_ROAD_DIESEL_2("off_road_diesel_2"),
+
+              @SerializedName("off_road_mid_plus")
+              OFF_ROAD_MID_PLUS("off_road_mid_plus"),
+
+              @SerializedName("off_road_mid_plus_2")
+              OFF_ROAD_MID_PLUS_2("off_road_mid_plus_2"),
+
+              @SerializedName("off_road_premium_diesel_1")
+              OFF_ROAD_PREMIUM_DIESEL_1("off_road_premium_diesel_1"),
+
+              @SerializedName("off_road_premium_diesel_2")
+              OFF_ROAD_PREMIUM_DIESEL_2("off_road_premium_diesel_2"),
+
+              @SerializedName("off_road_premium_super")
+              OFF_ROAD_PREMIUM_SUPER("off_road_premium_super"),
+
+              @SerializedName("off_road_premium_super_2")
+              OFF_ROAD_PREMIUM_SUPER_2("off_road_premium_super_2"),
+
+              @SerializedName("off_road_regular")
+              OFF_ROAD_REGULAR("off_road_regular"),
+
+              @SerializedName("off_road_renewable_diesel_b6_to_b20")
+              OFF_ROAD_RENEWABLE_DIESEL_B6_TO_B20("off_road_renewable_diesel_b6_to_b20"),
+
+              @SerializedName("off_road_renewable_diesel_r95")
+              OFF_ROAD_RENEWABLE_DIESEL_R95("off_road_renewable_diesel_r95"),
+
+              @SerializedName("oil_change")
+              OIL_CHANGE("oil_change"),
+
+              @SerializedName("oil_filter")
+              OIL_FILTER("oil_filter"),
+
+              @SerializedName("other_lubricants")
+              OTHER_LUBRICANTS("other_lubricants"),
+
               @SerializedName("packaged_beverage")
               PACKAGED_BEVERAGE("packaged_beverage"),
 
               @SerializedName("premium_diesel")
               PREMIUM_DIESEL("premium_diesel"),
 
+              @SerializedName("premium_diesel_2")
+              PREMIUM_DIESEL_2("premium_diesel_2"),
+
+              @SerializedName("premium_diesel_b20_plus")
+              PREMIUM_DIESEL_B20_PLUS("premium_diesel_b20_plus"),
+
+              @SerializedName("premium_diesel_under_b20")
+              PREMIUM_DIESEL_UNDER_B20("premium_diesel_under_b20"),
+
               @SerializedName("premium_super")
               PREMIUM_SUPER("premium_super"),
+
+              @SerializedName("premium_super_2")
+              PREMIUM_SUPER_2("premium_super_2"),
+
+              @SerializedName("premium_super_2_10")
+              PREMIUM_SUPER_2_10("premium_super_2_10"),
+
+              @SerializedName("premium_super_2_e15")
+              PREMIUM_SUPER_2_E15("premium_super_2_e15"),
+
+              @SerializedName("premium_super_2_reformulated")
+              PREMIUM_SUPER_2_REFORMULATED("premium_super_2_reformulated"),
+
+              @SerializedName("premium_super_e10")
+              PREMIUM_SUPER_E10("premium_super_e10"),
+
+              @SerializedName("premium_super_e15")
+              PREMIUM_SUPER_E15("premium_super_e15"),
 
               @SerializedName("premium_super_ethanol")
               PREMIUM_SUPER_ETHANOL("premium_super_ethanol"),
 
+              @SerializedName("premium_super_reformulated")
+              PREMIUM_SUPER_REFORMULATED("premium_super_reformulated"),
+
               @SerializedName("preventative_maintenance")
               PREVENTATIVE_MAINTENANCE("preventative_maintenance"),
+
+              @SerializedName("racing_fuel")
+              RACING_FUEL("racing_fuel"),
+
+              @SerializedName("recreational_fuel_90_octane")
+              RECREATIONAL_FUEL_90_OCTANE("recreational_fuel_90_octane"),
 
               @SerializedName("regular")
               REGULAR("regular"),
@@ -2129,14 +2411,44 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               @SerializedName("regular_diesel")
               REGULAR_DIESEL("regular_diesel"),
 
+              @SerializedName("regular_diesel_2")
+              REGULAR_DIESEL_2("regular_diesel_2"),
+
+              @SerializedName("regular_e10")
+              REGULAR_E10("regular_e10"),
+
+              @SerializedName("regular_e15")
+              REGULAR_E15("regular_e15"),
+
               @SerializedName("regular_ethanol")
               REGULAR_ETHANOL("regular_ethanol"),
+
+              @SerializedName("regular_reformulated")
+              REGULAR_REFORMULATED("regular_reformulated"),
+
+              @SerializedName("renewable_diesel_b6_to_b20")
+              RENEWABLE_DIESEL_B6_TO_B20("renewable_diesel_b6_to_b20"),
+
+              @SerializedName("renewable_diesel_r95")
+              RENEWABLE_DIESEL_R95("renewable_diesel_r95"),
 
               @SerializedName("repairs")
               REPAIRS("repairs"),
 
+              @SerializedName("road_service")
+              ROAD_SERVICE("road_service"),
+
+              @SerializedName("rv_dump_fee")
+              RV_DUMP_FEE("rv_dump_fee"),
+
+              @SerializedName("scales")
+              SCALES("scales"),
+
               @SerializedName("self_service_car_wash")
               SELF_SERVICE_CAR_WASH("self_service_car_wash"),
+
+              @SerializedName("service_package")
+              SERVICE_PACKAGE("service_package"),
 
               @SerializedName("shower")
               SHOWER("shower"),
@@ -2144,11 +2456,44 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               @SerializedName("store_service")
               STORE_SERVICE("store_service"),
 
+              @SerializedName("synthetic_oil")
+              SYNTHETIC_OIL("synthetic_oil"),
+
+              @SerializedName("tire_related")
+              TIRE_RELATED("tire_related"),
+
+              @SerializedName("tire_repair")
+              TIRE_REPAIR("tire_repair"),
+
+              @SerializedName("tire_rotation")
+              TIRE_ROTATION("tire_rotation"),
+
+              @SerializedName("tires")
+              TIRES("tires"),
+
               @SerializedName("tobacco")
               TOBACCO("tobacco"),
 
+              @SerializedName("toll_payments")
+              TOLL_PAYMENTS("toll_payments"),
+
+              @SerializedName("towing")
+              TOWING("towing"),
+
+              @SerializedName("trailer_wash")
+              TRAILER_WASH("trailer_wash"),
+
+              @SerializedName("transmission_service")
+              TRANSMISSION_SERVICE("transmission_service"),
+
+              @SerializedName("truck_tank_cleaning")
+              TRUCK_TANK_CLEANING("truck_tank_cleaning"),
+
               @SerializedName("vehicle_accessories")
               VEHICLE_ACCESSORIES("vehicle_accessories"),
+
+              @SerializedName("vehicle_glass")
+              VEHICLE_GLASS("vehicle_glass"),
 
               @SerializedName("vehicle_parking")
               VEHICLE_PARKING("vehicle_parking"),
@@ -2156,8 +2501,26 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               @SerializedName("vehicle_parts")
               VEHICLE_PARTS("vehicle_parts"),
 
+              @SerializedName("vehicle_prep")
+              VEHICLE_PREP("vehicle_prep"),
+
+              @SerializedName("vehicle_rental")
+              VEHICLE_RENTAL("vehicle_rental"),
+
+              @SerializedName("vehicle_work_order")
+              VEHICLE_WORK_ORDER("vehicle_work_order"),
+
               @SerializedName("wash_out")
-              WASH_OUT("wash_out");
+              WASH_OUT("wash_out"),
+
+              @SerializedName("washer_fluid")
+              WASHER_FLUID("washer_fluid"),
+
+              @SerializedName("white_gas")
+              WHITE_GAS("white_gas"),
+
+              @SerializedName("wipers")
+              WIPERS("wipers");
 
               @Getter(onMethod_ = {@Override})
               private final String value;
@@ -17070,6 +17433,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    /**
+     * If this is a SeQura PaymentMethod, this hash contains details about the SeQura payment
+     * method.
+     */
+    @SerializedName("sequra")
+    Sequra sequra;
+
     /** ID of the SharedPaymentGrantedToken used to confirm this PaymentIntent. */
     @SerializedName("shared_payment_granted_token")
     String sharedPaymentGrantedToken;
@@ -17220,6 +17590,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Satispay satispay,
         Scalapay scalapay,
         SepaDebit sepaDebit,
+        Sequra sequra,
         String sharedPaymentGrantedToken,
         Shopeepay shopeepay,
         Sofort sofort,
@@ -17291,6 +17662,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.satispay = satispay;
       this.scalapay = scalapay;
       this.sepaDebit = sepaDebit;
+      this.sequra = sequra;
       this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
       this.shopeepay = shopeepay;
       this.sofort = sofort;
@@ -17426,6 +17798,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private SepaDebit sepaDebit;
 
+      private Sequra sequra;
+
       private String sharedPaymentGrantedToken;
 
       private Shopeepay shopeepay;
@@ -17514,6 +17888,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.satispay,
             this.scalapay,
             this.sepaDebit,
+            this.sequra,
             this.sharedPaymentGrantedToken,
             this.shopeepay,
             this.sofort,
@@ -18097,6 +18472,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       public Builder setSepaDebit(
           PaymentIntentConfirmParams.PaymentMethodData.SepaDebit sepaDebit) {
         this.sepaDebit = sepaDebit;
+        return this;
+      }
+
+      /**
+       * If this is a SeQura PaymentMethod, this hash contains details about the SeQura payment
+       * method.
+       */
+      public Builder setSequra(PaymentIntentConfirmParams.PaymentMethodData.Sequra sequra) {
+        this.sequra = sequra;
         return this;
       }
 
@@ -22659,6 +23043,64 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Sequra {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Sequra(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodData.Sequra build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Sequra(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Sequra#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Sequra#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Shopeepay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -24298,6 +24740,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Object sepaDebit;
 
     /**
+     * If this is a {@code sequra} PaymentMethod, this sub-hash contains details about the SeQura
+     * payment method options.
+     */
+    @SerializedName("sequra")
+    Object sequra;
+
+    /**
      * If this is a {@code shopeepay} PaymentMethod, this sub-hash contains details about the
      * ShopeePay payment method options.
      */
@@ -24430,6 +24879,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Object satispay,
         Object scalapay,
         Object sepaDebit,
+        Object sequra,
         Object shopeepay,
         Object sofort,
         Object stripeBalance,
@@ -24496,6 +24946,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.satispay = satispay;
       this.scalapay = scalapay;
       this.sepaDebit = sepaDebit;
+      this.sequra = sequra;
       this.shopeepay = shopeepay;
       this.sofort = sofort;
       this.stripeBalance = stripeBalance;
@@ -24624,6 +25075,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Object sepaDebit;
 
+      private Object sequra;
+
       private Object shopeepay;
 
       private Object sofort;
@@ -24704,6 +25157,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.satispay,
             this.scalapay,
             this.sepaDebit,
+            this.sequra,
             this.shopeepay,
             this.sofort,
             this.stripeBalance,
@@ -25731,6 +26185,24 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setSepaDebit(EmptyParam sepaDebit) {
         this.sepaDebit = sepaDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code sequra} PaymentMethod, this sub-hash contains details about the SeQura
+       * payment method options.
+       */
+      public Builder setSequra(PaymentIntentConfirmParams.PaymentMethodOptions.Sequra sequra) {
+        this.sequra = sequra;
+        return this;
+      }
+
+      /**
+       * If this is a {@code sequra} PaymentMethod, this sub-hash contains details about the SeQura
+       * payment method options.
+       */
+      public Builder setSequra(EmptyParam sequra) {
+        this.sequra = sequra;
         return this;
       }
 
@@ -28614,6 +29086,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Details of the BLIK mandate. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -28643,9 +29119,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private Blik(
           String code,
           Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
           ApiRequestParams.EnumParam setupFutureUsage) {
         this.code = code;
         this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
       }
 
@@ -28658,12 +29136,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private MandateOptions mandateOptions;
+
         private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentConfirmParams.PaymentMethodOptions.Blik build() {
           return new PaymentIntentConfirmParams.PaymentMethodOptions.Blik(
-              this.code, this.extraParams, this.setupFutureUsage);
+              this.code, this.extraParams, this.mandateOptions, this.setupFutureUsage);
         }
 
         /**
@@ -28700,6 +29180,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Details of the BLIK mandate. */
+        public Builder setMandateOptions(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Blik.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
           return this;
         }
 
@@ -28764,9 +29251,87 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
       }
 
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions {
+        /** Expiry date of the mandate. */
+        @SerializedName("expires_at")
+        Long expiresAt;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private MandateOptions(Long expiresAt, Map<String, Object> extraParams) {
+          this.expiresAt = expiresAt;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long expiresAt;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentConfirmParams.PaymentMethodOptions.Blik.MandateOptions build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.Blik.MandateOptions(
+                this.expiresAt, this.extraParams);
+          }
+
+          /** Expiry date of the mandate. */
+          public Builder setExpiresAt(Long expiresAt) {
+            this.expiresAt = expiresAt;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Blik.MandateOptions#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Blik.MandateOptions#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
         @SerializedName("none")
-        NONE("none");
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -29122,6 +29687,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("require_cvc_recollection")
       Boolean requireCvcRecollection;
 
+      /** Set to indicate the future transaction type usage for the card being set up. */
+      @SerializedName("setup_credential_usage")
+      SetupCredentialUsage setupCredentialUsage;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -29176,6 +29745,23 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Object statementDetails;
 
       /**
+       * Use this parameter in scenarios where you collect card details and <a
+       * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
+       *
+       * <p>When making an off session payment with a previously saved card (that was saved with a
+       * SetupIntent or with a PaymentIntent with {@code setup_future_usage}), set this parameter to
+       * indicate the type of transaction.
+       *
+       * <p>You can set this parameter at any time before or during PaymentIntent confirmation, and
+       * confirm this PaymentIntent with {@code off_session=true}.
+       *
+       * <p>Note that this parameter is currently unsupported with the {@code setup_future_usage}
+       * parameter.
+       */
+      @SerializedName("stored_credential_usage")
+      StoredCredentialUsage storedCredentialUsage;
+
+      /**
        * If 3D Secure authentication was performed with a third-party provider, the authentication
        * details to use for this payment.
        */
@@ -29202,10 +29788,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           RequestReauthorization requestReauthorization,
           RequestThreeDSecure requestThreeDSecure,
           Boolean requireCvcRecollection,
+          SetupCredentialUsage setupCredentialUsage,
           ApiRequestParams.EnumParam setupFutureUsage,
           Object statementDescriptorSuffixKana,
           Object statementDescriptorSuffixKanji,
           Object statementDetails,
+          StoredCredentialUsage storedCredentialUsage,
           ThreeDSecure threeDSecure) {
         this.captureBy = captureBy;
         this.captureDelay = captureDelay;
@@ -29226,10 +29814,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         this.requestReauthorization = requestReauthorization;
         this.requestThreeDSecure = requestThreeDSecure;
         this.requireCvcRecollection = requireCvcRecollection;
+        this.setupCredentialUsage = setupCredentialUsage;
         this.setupFutureUsage = setupFutureUsage;
         this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
         this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
         this.statementDetails = statementDetails;
+        this.storedCredentialUsage = storedCredentialUsage;
         this.threeDSecure = threeDSecure;
       }
 
@@ -29276,6 +29866,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private Boolean requireCvcRecollection;
 
+        private SetupCredentialUsage setupCredentialUsage;
+
         private ApiRequestParams.EnumParam setupFutureUsage;
 
         private Object statementDescriptorSuffixKana;
@@ -29283,6 +29875,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Object statementDescriptorSuffixKanji;
 
         private Object statementDetails;
+
+        private StoredCredentialUsage storedCredentialUsage;
 
         private ThreeDSecure threeDSecure;
 
@@ -29308,10 +29902,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.requestReauthorization,
               this.requestThreeDSecure,
               this.requireCvcRecollection,
+              this.setupCredentialUsage,
               this.setupFutureUsage,
               this.statementDescriptorSuffixKana,
               this.statementDescriptorSuffixKanji,
               this.statementDetails,
+              this.storedCredentialUsage,
               this.threeDSecure);
         }
 
@@ -29560,6 +30156,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
+        /** Set to indicate the future transaction type usage for the card being set up. */
+        public Builder setSetupCredentialUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Card.SetupCredentialUsage
+                setupCredentialUsage) {
+          this.setupCredentialUsage = setupCredentialUsage;
+          return this;
+        }
+
         /**
          * Indicates that you intend to make future payments with this PaymentIntent's payment
          * method.
@@ -29686,6 +30290,27 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          */
         public Builder setStatementDetails(EmptyParam statementDetails) {
           this.statementDetails = statementDetails;
+          return this;
+        }
+
+        /**
+         * Use this parameter in scenarios where you collect card details and <a
+         * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
+         *
+         * <p>When making an off session payment with a previously saved card (that was saved with a
+         * SetupIntent or with a PaymentIntent with {@code setup_future_usage}), set this parameter
+         * to indicate the type of transaction.
+         *
+         * <p>You can set this parameter at any time before or during PaymentIntent confirmation,
+         * and confirm this PaymentIntent with {@code off_session=true}.
+         *
+         * <p>Note that this parameter is currently unsupported with the {@code setup_future_usage}
+         * parameter.
+         */
+        public Builder setStoredCredentialUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Card.StoredCredentialUsage
+                storedCredentialUsage) {
+          this.storedCredentialUsage = storedCredentialUsage;
           return this;
         }
 
@@ -31673,6 +32298,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
       }
 
+      public enum SetupCredentialUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("recurring")
+        RECURRING("recurring"),
+
+        @SerializedName("unscheduled")
+        UNSCHEDULED("unscheduled");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupCredentialUsage(String value) {
+          this.value = value;
+        }
+      }
+
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
         @SerializedName("none")
         NONE("none"),
@@ -31687,6 +32327,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private final String value;
 
         SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum StoredCredentialUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("recurring")
+        RECURRING("recurring"),
+
+        @SerializedName("unscheduled")
+        UNSCHEDULED("unscheduled");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        StoredCredentialUsage(String value) {
           this.value = value;
         }
       }
@@ -45925,19 +46580,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Paypay {
       /**
-       * Controls when the funds are captured from the customer's account.
-       *
-       * <p>If provided, this parameter overrides the behavior of the top-level <a
-       * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
-       * for this payment method type when finalizing the payment with this payment method type.
-       *
-       * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty value
-       * for this parameter unsets the stored value for this payment method type.
-       */
-      @SerializedName("capture_method")
-      ApiRequestParams.EnumParam captureMethod;
-
-      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -45968,11 +46610,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       ApiRequestParams.EnumParam setupFutureUsage;
 
-      private Paypay(
-          ApiRequestParams.EnumParam captureMethod,
-          Map<String, Object> extraParams,
-          ApiRequestParams.EnumParam setupFutureUsage) {
-        this.captureMethod = captureMethod;
+      private Paypay(Map<String, Object> extraParams, ApiRequestParams.EnumParam setupFutureUsage) {
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
       }
@@ -45982,8 +46620,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private ApiRequestParams.EnumParam captureMethod;
-
         private Map<String, Object> extraParams;
 
         private ApiRequestParams.EnumParam setupFutureUsage;
@@ -45991,38 +46627,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentConfirmParams.PaymentMethodOptions.Paypay build() {
           return new PaymentIntentConfirmParams.PaymentMethodOptions.Paypay(
-              this.captureMethod, this.extraParams, this.setupFutureUsage);
-        }
-
-        /**
-         * Controls when the funds are captured from the customer's account.
-         *
-         * <p>If provided, this parameter overrides the behavior of the top-level <a
-         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
-         * for this payment method type when finalizing the payment with this payment method type.
-         *
-         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
-         * value for this parameter unsets the stored value for this payment method type.
-         */
-        public Builder setCaptureMethod(
-            PaymentIntentConfirmParams.PaymentMethodOptions.Paypay.CaptureMethod captureMethod) {
-          this.captureMethod = captureMethod;
-          return this;
-        }
-
-        /**
-         * Controls when the funds are captured from the customer's account.
-         *
-         * <p>If provided, this parameter overrides the behavior of the top-level <a
-         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
-         * for this payment method type when finalizing the payment with this payment method type.
-         *
-         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
-         * value for this parameter unsets the stored value for this payment method type.
-         */
-        public Builder setCaptureMethod(EmptyParam captureMethod) {
-          this.captureMethod = captureMethod;
-          return this;
+              this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -46103,18 +46708,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
-        }
-      }
-
-      public enum CaptureMethod implements ApiRequestParams.EnumParam {
-        @SerializedName("manual")
-        MANUAL("manual");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        CaptureMethod(String value) {
-          this.value = value;
         }
       }
 
@@ -48502,6 +49095,199 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         @SerializedName("on_session")
         ON_SESSION("on_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sequra {
+      /**
+       * Controls when the funds are captured from the customer's account.
+       *
+       * <p>If provided, this parameter overrides the behavior of the top-level <a
+       * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+       * for this payment method type when finalizing the payment with this payment method type.
+       *
+       * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty value
+       * for this parameter unsets the stored value for this payment method type.
+       */
+      @SerializedName("capture_method")
+      ApiRequestParams.EnumParam captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If you've already set {@code setup_future_usage} and you're performing a request using a
+       * publishable key, you can only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Sequra(
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private ApiRequestParams.EnumParam captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Sequra build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Sequra(
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Controls when the funds are captured from the customer's account.
+         *
+         * <p>If provided, this parameter overrides the behavior of the top-level <a
+         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+         * for this payment method type when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter unsets the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Sequra.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Controls when the funds are captured from the customer's account.
+         *
+         * <p>If provided, this parameter overrides the behavior of the top-level <a
+         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+         * for this payment method type when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter unsets the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(EmptyParam captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Sequra#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Sequra#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If you've already set {@code setup_future_usage} and you're performing a request using
+         * a publishable key, you can only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Sequra.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -52196,6 +52982,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     @SerializedName("card")
     CARD("card"),
 
+    @SerializedName("card_present")
+    CARD_PRESENT("card_present"),
+
     @SerializedName("cashapp")
     CASHAPP("cashapp"),
 
@@ -52255,6 +53044,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     @SerializedName("ideal")
     IDEAL("ideal"),
+
+    @SerializedName("interac_present")
+    INTERAC_PRESENT("interac_present"),
 
     @SerializedName("kakao_pay")
     KAKAO_PAY("kakao_pay"),

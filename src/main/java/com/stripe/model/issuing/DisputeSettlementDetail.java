@@ -147,25 +147,21 @@ public class DisputeSettlementDetail extends ApiResource implements HasId {
   }
 
   /** Retrieves an Issuing {@code DisputeSettlementDetail} object. */
-  public static DisputeSettlementDetail retrieve(String disputeSettlementDetail)
+  public static DisputeSettlementDetail retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves an Issuing {@code DisputeSettlementDetail} object. */
+  public static DisputeSettlementDetail retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(disputeSettlementDetail, (Map<String, Object>) null, (RequestOptions) null);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an Issuing {@code DisputeSettlementDetail} object. */
   public static DisputeSettlementDetail retrieve(
-      String disputeSettlementDetail, RequestOptions options) throws StripeException {
-    return retrieve(disputeSettlementDetail, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves an Issuing {@code DisputeSettlementDetail} object. */
-  public static DisputeSettlementDetail retrieve(
-      String disputeSettlementDetail, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/dispute_settlement_details/%s",
-            ApiResource.urlEncodeId(disputeSettlementDetail));
+        String.format("/v1/issuing/dispute_settlement_details/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, DisputeSettlementDetail.class);
@@ -173,14 +169,10 @@ public class DisputeSettlementDetail extends ApiResource implements HasId {
 
   /** Retrieves an Issuing {@code DisputeSettlementDetail} object. */
   public static DisputeSettlementDetail retrieve(
-      String disputeSettlementDetail,
-      DisputeSettlementDetailRetrieveParams params,
-      RequestOptions options)
+      String id, DisputeSettlementDetailRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/dispute_settlement_details/%s",
-            ApiResource.urlEncodeId(disputeSettlementDetail));
+        String.format("/v1/issuing/dispute_settlement_details/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

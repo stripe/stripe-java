@@ -204,17 +204,17 @@ public class InvoiceRenderingTemplate extends ApiResource implements HasId {
    * Retrieves an invoice rendering template with the given ID. It by default returns the latest
    * version of the template. Optionally, specify a version to see previous versions.
    */
-  public static InvoiceRenderingTemplate retrieve(String template) throws StripeException {
-    return retrieve(template, (Map<String, Object>) null, (RequestOptions) null);
+  public static InvoiceRenderingTemplate retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
    * Retrieves an invoice rendering template with the given ID. It by default returns the latest
    * version of the template. Optionally, specify a version to see previous versions.
    */
-  public static InvoiceRenderingTemplate retrieve(String template, RequestOptions options)
+  public static InvoiceRenderingTemplate retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(template, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -222,9 +222,8 @@ public class InvoiceRenderingTemplate extends ApiResource implements HasId {
    * version of the template. Optionally, specify a version to see previous versions.
    */
   public static InvoiceRenderingTemplate retrieve(
-      String template, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path =
-        String.format("/v1/invoice_rendering_templates/%s", ApiResource.urlEncodeId(template));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/invoice_rendering_templates/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, InvoiceRenderingTemplate.class);
@@ -235,10 +234,9 @@ public class InvoiceRenderingTemplate extends ApiResource implements HasId {
    * version of the template. Optionally, specify a version to see previous versions.
    */
   public static InvoiceRenderingTemplate retrieve(
-      String template, InvoiceRenderingTemplateRetrieveParams params, RequestOptions options)
+      String id, InvoiceRenderingTemplateRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/invoice_rendering_templates/%s", ApiResource.urlEncodeId(template));
+    String path = String.format("/v1/invoice_rendering_templates/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

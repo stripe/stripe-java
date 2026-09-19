@@ -1,0 +1,124 @@
+// File generated from our OpenAPI spec
+package com.stripe.param.v2.provisioning;
+
+import com.google.gson.annotations.SerializedName;
+import com.stripe.net.ApiRequestParams;
+import java.util.HashMap;
+import java.util.Map;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
+@Getter
+@EqualsAndHashCode(callSuper = false)
+public class ProviderConnectionRequestSubmitInformationParams extends ApiRequestParams {
+  /**
+   * Secret used to confirm the request when submitting on behalf of a resource without an
+   * authenticated session.
+   */
+  @SerializedName("confirmation_secret")
+  String confirmationSecret;
+
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  /**
+   * <strong>Required.</strong> Information requested by the provider, matching the connection's
+   * needs_information_schema.
+   */
+  @SerializedName("information")
+  Map<String, Object> information;
+
+  private ProviderConnectionRequestSubmitInformationParams(
+      String confirmationSecret, Map<String, Object> extraParams, Map<String, Object> information) {
+    this.confirmationSecret = confirmationSecret;
+    this.extraParams = extraParams;
+    this.information = information;
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  public static class Builder {
+    private String confirmationSecret;
+
+    private Map<String, Object> extraParams;
+
+    private Map<String, Object> information;
+
+    /** Finalize and obtain parameter instance from this builder. */
+    public ProviderConnectionRequestSubmitInformationParams build() {
+      return new ProviderConnectionRequestSubmitInformationParams(
+          this.confirmationSecret, this.extraParams, this.information);
+    }
+
+    /**
+     * Secret used to confirm the request when submitting on behalf of a resource without an
+     * authenticated session.
+     */
+    public Builder setConfirmationSecret(String confirmationSecret) {
+      this.confirmationSecret = confirmationSecret;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ProviderConnectionRequestSubmitInformationParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ProviderConnectionRequestSubmitInformationParams#extraParams} for the field
+     * documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `information` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ProviderConnectionRequestSubmitInformationParams#information} for the field documentation.
+     */
+    public Builder putInformation(String key, Object value) {
+      if (this.information == null) {
+        this.information = new HashMap<>();
+      }
+      this.information.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `information` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ProviderConnectionRequestSubmitInformationParams#information} for the field
+     * documentation.
+     */
+    public Builder putAllInformation(Map<String, Object> map) {
+      if (this.information == null) {
+        this.information = new HashMap<>();
+      }
+      this.information.putAll(map);
+      return this;
+    }
+  }
+}

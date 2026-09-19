@@ -259,6 +259,14 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class Storage {
     /**
+     * Crypto-specific storage configuration. Only populated when {@code storage.crypto} is passed
+     * in the {@code include} parameter and the FinancialAccount stores crypto assets. Fiat
+     * currencies remain configured only through {@code holds_currencies}.
+     */
+    @SerializedName("crypto")
+    Crypto crypto;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -279,9 +287,11 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     List<String> holdsCurrencies;
 
     private Storage(
+        Crypto crypto,
         Map<String, Object> extraParams,
         FundsUsageType fundsUsageType,
         List<String> holdsCurrencies) {
+      this.crypto = crypto;
       this.extraParams = extraParams;
       this.fundsUsageType = fundsUsageType;
       this.holdsCurrencies = holdsCurrencies;
@@ -292,6 +302,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Crypto crypto;
+
       private Map<String, Object> extraParams;
 
       private FundsUsageType fundsUsageType;
@@ -301,7 +313,17 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public FinancialAccountCreateParams.Storage build() {
         return new FinancialAccountCreateParams.Storage(
-            this.extraParams, this.fundsUsageType, this.holdsCurrencies);
+            this.crypto, this.extraParams, this.fundsUsageType, this.holdsCurrencies);
+      }
+
+      /**
+       * Crypto-specific storage configuration. Only populated when {@code storage.crypto} is passed
+       * in the {@code include} parameter and the FinancialAccount stores crypto assets. Fiat
+       * currencies remain configured only through {@code holds_currencies}.
+       */
+      public Builder setCrypto(FinancialAccountCreateParams.Storage.Crypto crypto) {
+        this.crypto = crypto;
+        return this;
       }
 
       /**
@@ -364,6 +386,156 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         }
         this.holdsCurrencies.addAll(elements);
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Crypto {
+      /**
+       * <strong>Required.</strong> The blockchain network configured for each crypto currency. Keys
+       * are lowercase currency codes and must identify crypto currencies also present in {@code
+       * holds_currencies}.
+       */
+      @SerializedName("currency_networks")
+      Map<String, FinancialAccountCreateParams.Storage.Crypto.CurrencyNetwork> currencyNetworks;
+
+      /**
+       * <strong>Required.</strong> Describes who controls the private keys for the crypto storage.
+       */
+      @SerializedName("custody_model")
+      CustodyModel custodyModel;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Crypto(
+          Map<String, FinancialAccountCreateParams.Storage.Crypto.CurrencyNetwork> currencyNetworks,
+          CustodyModel custodyModel,
+          Map<String, Object> extraParams) {
+        this.currencyNetworks = currencyNetworks;
+        this.custodyModel = custodyModel;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, FinancialAccountCreateParams.Storage.Crypto.CurrencyNetwork>
+            currencyNetworks;
+
+        private CustodyModel custodyModel;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public FinancialAccountCreateParams.Storage.Crypto build() {
+          return new FinancialAccountCreateParams.Storage.Crypto(
+              this.currencyNetworks, this.custodyModel, this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `currencyNetworks` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link FinancialAccountCreateParams.Storage.Crypto#currencyNetworks} for the
+         * field documentation.
+         */
+        public Builder putCurrencyNetwork(
+            String key, FinancialAccountCreateParams.Storage.Crypto.CurrencyNetwork value) {
+          if (this.currencyNetworks == null) {
+            this.currencyNetworks = new HashMap<>();
+          }
+          this.currencyNetworks.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `currencyNetworks` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link FinancialAccountCreateParams.Storage.Crypto#currencyNetworks} for the
+         * field documentation.
+         */
+        public Builder putAllCurrencyNetwork(
+            Map<String, FinancialAccountCreateParams.Storage.Crypto.CurrencyNetwork> map) {
+          if (this.currencyNetworks == null) {
+            this.currencyNetworks = new HashMap<>();
+          }
+          this.currencyNetworks.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Describes who controls the private keys for the crypto
+         * storage.
+         */
+        public Builder setCustodyModel(
+            FinancialAccountCreateParams.Storage.Crypto.CustodyModel custodyModel) {
+          this.custodyModel = custodyModel;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link FinancialAccountCreateParams.Storage.Crypto#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link FinancialAccountCreateParams.Storage.Crypto#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum CurrencyNetwork implements ApiRequestParams.EnumParam {
+        @SerializedName("tempo")
+        TEMPO("tempo");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CurrencyNetwork(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum CustodyModel implements ApiRequestParams.EnumParam {
+        @SerializedName("self")
+        SELF("self"),
+
+        @SerializedName("stripe")
+        STRIPE("stripe");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CustodyModel(String value) {
+          this.value = value;
+        }
       }
     }
 

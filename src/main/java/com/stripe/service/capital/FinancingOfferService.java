@@ -56,25 +56,23 @@ public final class FinancingOfferService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<FinancingOffer>>() {}.getType());
   }
   /** Get the details of the financing offer. */
-  public FinancingOffer retrieve(String financingOffer, FinancingOfferRetrieveParams params)
+  public FinancingOffer retrieve(String id, FinancingOfferRetrieveParams params)
       throws StripeException {
-    return retrieve(financingOffer, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Get the details of the financing offer. */
-  public FinancingOffer retrieve(String financingOffer, RequestOptions options)
-      throws StripeException {
-    return retrieve(financingOffer, (FinancingOfferRetrieveParams) null, options);
+  public FinancingOffer retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (FinancingOfferRetrieveParams) null, options);
   }
   /** Get the details of the financing offer. */
-  public FinancingOffer retrieve(String financingOffer) throws StripeException {
-    return retrieve(financingOffer, (FinancingOfferRetrieveParams) null, (RequestOptions) null);
+  public FinancingOffer retrieve(String id) throws StripeException {
+    return retrieve(id, (FinancingOfferRetrieveParams) null, (RequestOptions) null);
   }
   /** Get the details of the financing offer. */
   public FinancingOffer retrieve(
-      String financingOffer, FinancingOfferRetrieveParams params, RequestOptions options)
+      String id, FinancingOfferRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/capital/financing_offers/%s", ApiResource.urlEncodeId(financingOffer));
+    String path = String.format("/v1/capital/financing_offers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -88,37 +86,34 @@ public final class FinancingOfferService extends ApiService {
    * Acknowledges that platform has received and delivered the financing_offer to the intended
    * merchant recipient.
    */
-  public FinancingOffer markDelivered(
-      String financingOffer, FinancingOfferMarkDeliveredParams params) throws StripeException {
-    return markDelivered(financingOffer, params, (RequestOptions) null);
-  }
-  /**
-   * Acknowledges that platform has received and delivered the financing_offer to the intended
-   * merchant recipient.
-   */
-  public FinancingOffer markDelivered(String financingOffer, RequestOptions options)
+  public FinancingOffer markDelivered(String id, FinancingOfferMarkDeliveredParams params)
       throws StripeException {
-    return markDelivered(financingOffer, (FinancingOfferMarkDeliveredParams) null, options);
+    return markDelivered(id, params, (RequestOptions) null);
   }
   /**
    * Acknowledges that platform has received and delivered the financing_offer to the intended
    * merchant recipient.
    */
-  public FinancingOffer markDelivered(String financingOffer) throws StripeException {
-    return markDelivered(
-        financingOffer, (FinancingOfferMarkDeliveredParams) null, (RequestOptions) null);
+  public FinancingOffer markDelivered(String id, RequestOptions options) throws StripeException {
+    return markDelivered(id, (FinancingOfferMarkDeliveredParams) null, options);
+  }
+  /**
+   * Acknowledges that platform has received and delivered the financing_offer to the intended
+   * merchant recipient.
+   */
+  public FinancingOffer markDelivered(String id) throws StripeException {
+    return markDelivered(id, (FinancingOfferMarkDeliveredParams) null, (RequestOptions) null);
   }
   /**
    * Acknowledges that platform has received and delivered the financing_offer to the intended
    * merchant recipient.
    */
   public FinancingOffer markDelivered(
-      String financingOffer, FinancingOfferMarkDeliveredParams params, RequestOptions options)
+      String id, FinancingOfferMarkDeliveredParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/capital/financing_offers/%s/mark_delivered",
-            ApiResource.urlEncodeId(financingOffer));
+            "/v1/capital/financing_offers/%s/mark_delivered", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -19,22 +19,22 @@ public final class SessionService extends ApiService {
   }
 
   /** Retrieves the details of a Financial Connections {@code Session}. */
-  public Session retrieve(String session, SessionRetrieveParams params) throws StripeException {
-    return retrieve(session, params, (RequestOptions) null);
+  public Session retrieve(String id, SessionRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of a Financial Connections {@code Session}. */
-  public Session retrieve(String session, RequestOptions options) throws StripeException {
-    return retrieve(session, (SessionRetrieveParams) null, options);
+  public Session retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (SessionRetrieveParams) null, options);
   }
   /** Retrieves the details of a Financial Connections {@code Session}. */
-  public Session retrieve(String session) throws StripeException {
-    return retrieve(session, (SessionRetrieveParams) null, (RequestOptions) null);
+  public Session retrieve(String id) throws StripeException {
+    return retrieve(id, (SessionRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the details of a Financial Connections {@code Session}. */
-  public Session retrieve(String session, SessionRetrieveParams params, RequestOptions options)
+  public Session retrieve(String id, SessionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session));
+        String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

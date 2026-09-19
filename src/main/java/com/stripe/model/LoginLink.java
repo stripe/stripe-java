@@ -49,8 +49,8 @@ public class LoginLink extends ApiResource {
    * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
    * your platform</strong>.
    */
-  public static LoginLink createOnAccount(String account) throws StripeException {
-    return createOnAccount(account, (Map<String, Object>) null, (RequestOptions) null);
+  public static LoginLink createOnAccount(String id) throws StripeException {
+    return createOnAccount(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
@@ -60,9 +60,9 @@ public class LoginLink extends ApiResource {
    * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
    * your platform</strong>.
    */
-  public static LoginLink createOnAccount(String account, RequestOptions options)
+  public static LoginLink createOnAccount(String id, RequestOptions options)
       throws StripeException {
-    return createOnAccount(account, (Map<String, Object>) null, options);
+    return createOnAccount(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -72,9 +72,9 @@ public class LoginLink extends ApiResource {
    * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
    * your platform</strong>.
    */
-  public static LoginLink createOnAccount(String account, Map<String, Object> params)
+  public static LoginLink createOnAccount(String id, Map<String, Object> params)
       throws StripeException {
-    return createOnAccount(account, params, (RequestOptions) null);
+    return createOnAccount(id, params, (RequestOptions) null);
   }
 
   /**
@@ -85,8 +85,8 @@ public class LoginLink extends ApiResource {
    * your platform</strong>.
    */
   public static LoginLink createOnAccount(
-      String account, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, LoginLink.class);
@@ -99,9 +99,9 @@ public class LoginLink extends ApiResource {
    * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
    * your platform</strong>.
    */
-  public static LoginLink createOnAccount(String account, LoginLinkCreateOnAccountParams params)
+  public static LoginLink createOnAccount(String id, LoginLinkCreateOnAccountParams params)
       throws StripeException {
-    return createOnAccount(account, params, (RequestOptions) null);
+    return createOnAccount(id, params, (RequestOptions) null);
   }
 
   /**
@@ -112,9 +112,9 @@ public class LoginLink extends ApiResource {
    * your platform</strong>.
    */
   public static LoginLink createOnAccount(
-      String account, LoginLinkCreateOnAccountParams params, RequestOptions options)
+      String id, LoginLinkCreateOnAccountParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

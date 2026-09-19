@@ -23,8 +23,8 @@ import lombok.Setter;
 
 /**
  * Prices define the unit cost, currency, and (optional) billing cycle for both recurring and
- * one-time purchases of products. <a href="https://api.stripe.com#products">Products</a> help you
- * track inventory or provisioning, and prices help you track payment terms. Different physical
+ * one-time purchases of products. <a href="https://docs.stripe.com/api#products">Products</a> help
+ * you track inventory or provisioning, and prices help you track payment terms. Different physical
  * goods or levels of service should be represented by products, and pricing options should be
  * represented by prices. This approach lets you change prices without having to change your
  * provisioning scheme.
@@ -325,28 +325,28 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   }
 
   /** Retrieves the price with the given ID. */
-  public static Price retrieve(String price) throws StripeException {
-    return retrieve(price, (Map<String, Object>) null, (RequestOptions) null);
+  public static Price retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the price with the given ID. */
-  public static Price retrieve(String price, RequestOptions options) throws StripeException {
-    return retrieve(price, (Map<String, Object>) null, options);
+  public static Price retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the price with the given ID. */
-  public static Price retrieve(String price, Map<String, Object> params, RequestOptions options)
+  public static Price retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
+    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Price.class);
   }
 
   /** Retrieves the price with the given ID. */
-  public static Price retrieve(String price, PriceRetrieveParams params, RequestOptions options)
+  public static Price retrieve(String id, PriceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
+    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

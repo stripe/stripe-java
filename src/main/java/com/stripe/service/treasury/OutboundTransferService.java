@@ -61,35 +61,32 @@ public final class OutboundTransferService extends ApiService {
    * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID
    * from either the OutboundTransfer creation request or OutboundTransfer list.
    */
-  public OutboundTransfer retrieve(String outboundTransfer, OutboundTransferRetrieveParams params)
+  public OutboundTransfer retrieve(String id, OutboundTransferRetrieveParams params)
       throws StripeException {
-    return retrieve(outboundTransfer, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID
    * from either the OutboundTransfer creation request or OutboundTransfer list.
    */
-  public OutboundTransfer retrieve(String outboundTransfer, RequestOptions options)
-      throws StripeException {
-    return retrieve(outboundTransfer, (OutboundTransferRetrieveParams) null, options);
+  public OutboundTransfer retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (OutboundTransferRetrieveParams) null, options);
   }
   /**
    * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID
    * from either the OutboundTransfer creation request or OutboundTransfer list.
    */
-  public OutboundTransfer retrieve(String outboundTransfer) throws StripeException {
-    return retrieve(outboundTransfer, (OutboundTransferRetrieveParams) null, (RequestOptions) null);
+  public OutboundTransfer retrieve(String id) throws StripeException {
+    return retrieve(id, (OutboundTransferRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID
    * from either the OutboundTransfer creation request or OutboundTransfer list.
    */
   public OutboundTransfer retrieve(
-      String outboundTransfer, OutboundTransferRetrieveParams params, RequestOptions options)
+      String id, OutboundTransferRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(outboundTransfer));
+    String path = String.format("/v1/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -100,26 +97,24 @@ public final class OutboundTransferService extends ApiService {
     return this.request(request, OutboundTransfer.class);
   }
   /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
-  public OutboundTransfer cancel(String outboundTransfer, OutboundTransferCancelParams params)
+  public OutboundTransfer cancel(String id, OutboundTransferCancelParams params)
       throws StripeException {
-    return cancel(outboundTransfer, params, (RequestOptions) null);
+    return cancel(id, params, (RequestOptions) null);
   }
   /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
-  public OutboundTransfer cancel(String outboundTransfer, RequestOptions options)
-      throws StripeException {
-    return cancel(outboundTransfer, (OutboundTransferCancelParams) null, options);
+  public OutboundTransfer cancel(String id, RequestOptions options) throws StripeException {
+    return cancel(id, (OutboundTransferCancelParams) null, options);
   }
   /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
-  public OutboundTransfer cancel(String outboundTransfer) throws StripeException {
-    return cancel(outboundTransfer, (OutboundTransferCancelParams) null, (RequestOptions) null);
+  public OutboundTransfer cancel(String id) throws StripeException {
+    return cancel(id, (OutboundTransferCancelParams) null, (RequestOptions) null);
   }
   /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
   public OutboundTransfer cancel(
-      String outboundTransfer, OutboundTransferCancelParams params, RequestOptions options)
+      String id, OutboundTransferCancelParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/treasury/outbound_transfers/%s/cancel", ApiResource.urlEncodeId(outboundTransfer));
+        String.format("/v1/treasury/outbound_transfers/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

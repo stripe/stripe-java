@@ -173,28 +173,28 @@ public class Token extends ApiResource implements HasId {
   }
 
   /** Retrieves an Issuing {@code Token} object. */
-  public static Token retrieve(String token) throws StripeException {
-    return retrieve(token, (Map<String, Object>) null, (RequestOptions) null);
+  public static Token retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an Issuing {@code Token} object. */
-  public static Token retrieve(String token, RequestOptions options) throws StripeException {
-    return retrieve(token, (Map<String, Object>) null, options);
+  public static Token retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an Issuing {@code Token} object. */
-  public static Token retrieve(String token, Map<String, Object> params, RequestOptions options)
+  public static Token retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(token));
+    String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Token.class);
   }
 
   /** Retrieves an Issuing {@code Token} object. */
-  public static Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
+  public static Token retrieve(String id, TokenRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(token));
+    String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -351,7 +351,7 @@ public class Token extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Mastercard extends StripeObject {
-      /** A unique reference ID from MasterCard to represent the card account number. */
+      /** A unique reference ID from Mastercard to represent the card account number. */
       @SerializedName("card_reference_id")
       String cardReferenceId;
 
@@ -359,13 +359,13 @@ public class Token extends ApiResource implements HasId {
       @SerializedName("token_reference_id")
       String tokenReferenceId;
 
-      /** The ID of the entity requesting tokenization, specific to MasterCard. */
+      /** The ID of the entity requesting tokenization, specific to Mastercard. */
       @SerializedName("token_requestor_id")
       String tokenRequestorId;
 
       /**
        * The name of the entity requesting tokenization, if known. This is directly provided from
-       * MasterCard.
+       * Mastercard.
        */
       @SerializedName("token_requestor_name")
       String tokenRequestorName;

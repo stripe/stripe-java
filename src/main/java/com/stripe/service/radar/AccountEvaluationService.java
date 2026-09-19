@@ -20,27 +20,23 @@ public final class AccountEvaluationService extends ApiService {
   }
 
   /** Retrieves an {@code AccountEvaluation} object. */
-  public AccountEvaluation retrieve(
-      String accountEvaluation, AccountEvaluationRetrieveParams params) throws StripeException {
-    return retrieve(accountEvaluation, params, (RequestOptions) null);
-  }
-  /** Retrieves an {@code AccountEvaluation} object. */
-  public AccountEvaluation retrieve(String accountEvaluation, RequestOptions options)
+  public AccountEvaluation retrieve(String id, AccountEvaluationRetrieveParams params)
       throws StripeException {
-    return retrieve(accountEvaluation, (AccountEvaluationRetrieveParams) null, options);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves an {@code AccountEvaluation} object. */
-  public AccountEvaluation retrieve(String accountEvaluation) throws StripeException {
-    return retrieve(
-        accountEvaluation, (AccountEvaluationRetrieveParams) null, (RequestOptions) null);
+  public AccountEvaluation retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (AccountEvaluationRetrieveParams) null, options);
+  }
+  /** Retrieves an {@code AccountEvaluation} object. */
+  public AccountEvaluation retrieve(String id) throws StripeException {
+    return retrieve(id, (AccountEvaluationRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves an {@code AccountEvaluation} object. */
   public AccountEvaluation retrieve(
-      String accountEvaluation, AccountEvaluationRetrieveParams params, RequestOptions options)
+      String id, AccountEvaluationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/radar/account_evaluations/%s", ApiResource.urlEncodeId(accountEvaluation));
+    String path = String.format("/v1/radar/account_evaluations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -68,18 +64,16 @@ public final class AccountEvaluationService extends ApiService {
     return this.request(request, AccountEvaluation.class);
   }
   /** Reports an event on an {@code AccountEvaluation} object. */
-  public AccountEvaluation update(String accountEvaluation, AccountEvaluationUpdateParams params)
+  public AccountEvaluation update(String id, AccountEvaluationUpdateParams params)
       throws StripeException {
-    return update(accountEvaluation, params, (RequestOptions) null);
+    return update(id, params, (RequestOptions) null);
   }
   /** Reports an event on an {@code AccountEvaluation} object. */
   public AccountEvaluation update(
-      String accountEvaluation, AccountEvaluationUpdateParams params, RequestOptions options)
+      String id, AccountEvaluationUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/radar/account_evaluations/%s/report_event",
-            ApiResource.urlEncodeId(accountEvaluation));
+        String.format("/v1/radar/account_evaluations/%s/report_event", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

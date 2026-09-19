@@ -258,22 +258,19 @@ public class FinancingOffer extends ApiResource implements HasId {
   }
 
   /** Get the details of the financing offer. */
-  public static FinancingOffer retrieve(String financingOffer) throws StripeException {
-    return retrieve(financingOffer, (Map<String, Object>) null, (RequestOptions) null);
+  public static FinancingOffer retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Get the details of the financing offer. */
-  public static FinancingOffer retrieve(String financingOffer, RequestOptions options)
-      throws StripeException {
-    return retrieve(financingOffer, (Map<String, Object>) null, options);
+  public static FinancingOffer retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Get the details of the financing offer. */
   public static FinancingOffer retrieve(
-      String financingOffer, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/capital/financing_offers/%s", ApiResource.urlEncodeId(financingOffer));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/capital/financing_offers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, FinancingOffer.class);
@@ -281,10 +278,9 @@ public class FinancingOffer extends ApiResource implements HasId {
 
   /** Get the details of the financing offer. */
   public static FinancingOffer retrieve(
-      String financingOffer, FinancingOfferRetrieveParams params, RequestOptions options)
+      String id, FinancingOfferRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/capital/financing_offers/%s", ApiResource.urlEncodeId(financingOffer));
+    String path = String.format("/v1/capital/financing_offers/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -325,6 +321,13 @@ public class FinancingOffer extends ApiResource implements HasId {
      */
     @SerializedName("previous_financing_fee_discount_amount")
     Long previousFinancingFeeDiscountAmount;
+
+    /**
+     * Total amount due for the financing independent of what's already been paid, in minor units.
+     * For example, 100 USD is represented as 10000.
+     */
+    @SerializedName("total_due_amount")
+    Long totalDueAmount;
 
     /** Per-transaction rate at which Stripe withholds funds to repay the financing. */
     @SerializedName("withhold_rate")

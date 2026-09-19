@@ -23,37 +23,34 @@ public final class ConfigurationService extends ApiService {
   }
 
   /** Deletes a {@code Configuration} object. */
-  public Configuration delete(String configuration) throws StripeException {
-    return delete(configuration, (RequestOptions) null);
+  public Configuration delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /** Deletes a {@code Configuration} object. */
-  public Configuration delete(String configuration, RequestOptions options) throws StripeException {
-    String path =
-        String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
+  public Configuration delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Configuration.class);
   }
   /** Retrieves a {@code Configuration} object. */
-  public Configuration retrieve(String configuration, ConfigurationRetrieveParams params)
+  public Configuration retrieve(String id, ConfigurationRetrieveParams params)
       throws StripeException {
-    return retrieve(configuration, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a {@code Configuration} object. */
-  public Configuration retrieve(String configuration, RequestOptions options)
-      throws StripeException {
-    return retrieve(configuration, (ConfigurationRetrieveParams) null, options);
+  public Configuration retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ConfigurationRetrieveParams) null, options);
   }
   /** Retrieves a {@code Configuration} object. */
-  public Configuration retrieve(String configuration) throws StripeException {
-    return retrieve(configuration, (ConfigurationRetrieveParams) null, (RequestOptions) null);
+  public Configuration retrieve(String id) throws StripeException {
+    return retrieve(id, (ConfigurationRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a {@code Configuration} object. */
   public Configuration retrieve(
-      String configuration, ConfigurationRetrieveParams params, RequestOptions options)
+      String id, ConfigurationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
+    String path = String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -64,24 +61,21 @@ public final class ConfigurationService extends ApiService {
     return this.request(request, Configuration.class);
   }
   /** Updates a new {@code Configuration} object. */
-  public Configuration update(String configuration, ConfigurationUpdateParams params)
+  public Configuration update(String id, ConfigurationUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /** Updates a new {@code Configuration} object. */
+  public Configuration update(String id, RequestOptions options) throws StripeException {
+    return update(id, (ConfigurationUpdateParams) null, options);
+  }
+  /** Updates a new {@code Configuration} object. */
+  public Configuration update(String id) throws StripeException {
+    return update(id, (ConfigurationUpdateParams) null, (RequestOptions) null);
+  }
+  /** Updates a new {@code Configuration} object. */
+  public Configuration update(String id, ConfigurationUpdateParams params, RequestOptions options)
       throws StripeException {
-    return update(configuration, params, (RequestOptions) null);
-  }
-  /** Updates a new {@code Configuration} object. */
-  public Configuration update(String configuration, RequestOptions options) throws StripeException {
-    return update(configuration, (ConfigurationUpdateParams) null, options);
-  }
-  /** Updates a new {@code Configuration} object. */
-  public Configuration update(String configuration) throws StripeException {
-    return update(configuration, (ConfigurationUpdateParams) null, (RequestOptions) null);
-  }
-  /** Updates a new {@code Configuration} object. */
-  public Configuration update(
-      String configuration, ConfigurationUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
+    String path = String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

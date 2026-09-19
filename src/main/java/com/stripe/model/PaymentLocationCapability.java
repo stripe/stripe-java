@@ -25,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentLocationCapability extends ApiResource implements HasId {
+public class PaymentLocationCapability extends ApiResource {
   /** The account that the capability enables functionality for. */
   @SerializedName("account")
   String account;
@@ -113,22 +113,21 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
   }
 
   /** Retrieves a {@code payment_location} capability. */
-  public static PaymentLocationCapability retrieve(String capability) throws StripeException {
-    return retrieve(capability, (Map<String, Object>) null, (RequestOptions) null);
+  public static PaymentLocationCapability retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a {@code payment_location} capability. */
-  public static PaymentLocationCapability retrieve(String capability, RequestOptions options)
+  public static PaymentLocationCapability retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(capability, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a {@code payment_location} capability. */
   public static PaymentLocationCapability retrieve(
-      String capability, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
-        String.format("/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(capability));
+        String.format("/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PaymentLocationCapability.class);
@@ -136,10 +135,10 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
 
   /** Retrieves a {@code payment_location} capability. */
   public static PaymentLocationCapability retrieve(
-      String capability, PaymentLocationCapabilityRetrieveParams params, RequestOptions options)
+      String id, PaymentLocationCapabilityRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(capability));
+        String.format("/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -155,19 +154,19 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
    * Updates a {@code payment_location} capability. Request or remove a {@code payment_location}
    * capability by updating its {@code requested} parameter.
    */
-  public PaymentLocationCapability update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public PaymentLocationCapability update(String id, Map<String, Object> params)
+      throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
 
   /**
    * Updates a {@code payment_location} capability. Request or remove a {@code payment_location}
    * capability by updating its {@code requested} parameter.
    */
-  public PaymentLocationCapability update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public PaymentLocationCapability update(
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
-        String.format(
-            "/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(this.getCapability()));
+        String.format("/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, PaymentLocationCapability.class);
@@ -177,9 +176,9 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
    * Updates a {@code payment_location} capability. Request or remove a {@code payment_location}
    * capability by updating its {@code requested} parameter.
    */
-  public PaymentLocationCapability update(PaymentLocationCapabilityUpdateParams params)
+  public PaymentLocationCapability update(String id, PaymentLocationCapabilityUpdateParams params)
       throws StripeException {
-    return update(params, (RequestOptions) null);
+    return update(id, params, (RequestOptions) null);
   }
 
   /**
@@ -187,10 +186,10 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
    * capability by updating its {@code requested} parameter.
    */
   public PaymentLocationCapability update(
-      PaymentLocationCapabilityUpdateParams params, RequestOptions options) throws StripeException {
+      String id, PaymentLocationCapabilityUpdateParams params, RequestOptions options)
+      throws StripeException {
     String path =
-        String.format(
-            "/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(this.getCapability()));
+        String.format("/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -200,11 +199,6 @@ public class PaymentLocationCapability extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, PaymentLocationCapability.class);
-  }
-
-  @Override
-  public String getId() {
-    return this.capability;
   }
 
   /**

@@ -58,18 +58,17 @@ public class AccountInferredBalance extends ApiResource implements HasId {
   String object;
 
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
-  public static AccountInferredBalanceCollection list(String account, Map<String, Object> params)
+  public static AccountInferredBalanceCollection list(String id, Map<String, Object> params)
       throws StripeException {
-    return list(account, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
 
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
   public static AccountInferredBalanceCollection list(
-      String account, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
         String.format(
-            "/v1/financial_connections/accounts/%s/inferred_balances",
-            ApiResource.urlEncodeId(account));
+            "/v1/financial_connections/accounts/%s/inferred_balances", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, AccountInferredBalanceCollection.class);
@@ -77,18 +76,17 @@ public class AccountInferredBalance extends ApiResource implements HasId {
 
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
   public static AccountInferredBalanceCollection list(
-      String account, AccountInferredBalanceListParams params) throws StripeException {
-    return list(account, params, (RequestOptions) null);
+      String id, AccountInferredBalanceListParams params) throws StripeException {
+    return list(id, params, (RequestOptions) null);
   }
 
   /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
   public static AccountInferredBalanceCollection list(
-      String account, AccountInferredBalanceListParams params, RequestOptions options)
+      String id, AccountInferredBalanceListParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/financial_connections/accounts/%s/inferred_balances",
-            ApiResource.urlEncodeId(account));
+            "/v1/financial_connections/accounts/%s/inferred_balances", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

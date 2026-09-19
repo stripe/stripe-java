@@ -268,9 +268,9 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
    * endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only
    * possible before the invoice is finalized.
    */
-  @Override
-  public InvoiceLineItem update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public InvoiceLineItem update(String invoiceId, Map<String, Object> params)
+      throws StripeException {
+    return update(invoiceId, params, (RequestOptions) null);
   }
 
   /**
@@ -280,13 +280,12 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
    * endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only
    * possible before the invoice is finalized.
    */
-  @Override
-  public InvoiceLineItem update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public InvoiceLineItem update(
+      String invoiceId, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
         String.format(
             "/v1/invoices/%s/lines/%s",
-            ApiResource.urlEncodeId(this.getInvoice()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(invoiceId), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, InvoiceLineItem.class);
@@ -299,8 +298,9 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
    * endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only
    * possible before the invoice is finalized.
    */
-  public InvoiceLineItem update(InvoiceLineItemUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public InvoiceLineItem update(String invoiceId, InvoiceLineItemUpdateParams params)
+      throws StripeException {
+    return update(invoiceId, params, (RequestOptions) null);
   }
 
   /**
@@ -310,12 +310,13 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
    * endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only
    * possible before the invoice is finalized.
    */
-  public InvoiceLineItem update(InvoiceLineItemUpdateParams params, RequestOptions options)
+  public InvoiceLineItem update(
+      String invoiceId, InvoiceLineItemUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/invoices/%s/lines/%s",
-            ApiResource.urlEncodeId(this.getInvoice()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(invoiceId), ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

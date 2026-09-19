@@ -19,21 +19,21 @@ public final class EphemeralKeyService extends ApiService {
   }
 
   /** Invalidates a short-lived API key for a given resource. */
-  public EphemeralKey delete(String key, EphemeralKeyDeleteParams params) throws StripeException {
-    return delete(key, params, (RequestOptions) null);
+  public EphemeralKey delete(String id, EphemeralKeyDeleteParams params) throws StripeException {
+    return delete(id, params, (RequestOptions) null);
   }
   /** Invalidates a short-lived API key for a given resource. */
-  public EphemeralKey delete(String key, RequestOptions options) throws StripeException {
-    return delete(key, (EphemeralKeyDeleteParams) null, options);
+  public EphemeralKey delete(String id, RequestOptions options) throws StripeException {
+    return delete(id, (EphemeralKeyDeleteParams) null, options);
   }
   /** Invalidates a short-lived API key for a given resource. */
-  public EphemeralKey delete(String key) throws StripeException {
-    return delete(key, (EphemeralKeyDeleteParams) null, (RequestOptions) null);
+  public EphemeralKey delete(String id) throws StripeException {
+    return delete(id, (EphemeralKeyDeleteParams) null, (RequestOptions) null);
   }
   /** Invalidates a short-lived API key for a given resource. */
-  public EphemeralKey delete(String key, EphemeralKeyDeleteParams params, RequestOptions options)
+  public EphemeralKey delete(String id, EphemeralKeyDeleteParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(key));
+    String path = String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

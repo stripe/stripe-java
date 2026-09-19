@@ -23,36 +23,32 @@ public final class TestClockService extends ApiService {
   }
 
   /** Deletes a test clock. */
-  public TestClock delete(String testClock) throws StripeException {
-    return delete(testClock, (RequestOptions) null);
+  public TestClock delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /** Deletes a test clock. */
-  public TestClock delete(String testClock, RequestOptions options) throws StripeException {
-    String path =
-        String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
+  public TestClock delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, TestClock.class);
   }
   /** Retrieves a test clock. */
-  public TestClock retrieve(String testClock, TestClockRetrieveParams params)
+  public TestClock retrieve(String id, TestClockRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /** Retrieves a test clock. */
+  public TestClock retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (TestClockRetrieveParams) null, options);
+  }
+  /** Retrieves a test clock. */
+  public TestClock retrieve(String id) throws StripeException {
+    return retrieve(id, (TestClockRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves a test clock. */
+  public TestClock retrieve(String id, TestClockRetrieveParams params, RequestOptions options)
       throws StripeException {
-    return retrieve(testClock, params, (RequestOptions) null);
-  }
-  /** Retrieves a test clock. */
-  public TestClock retrieve(String testClock, RequestOptions options) throws StripeException {
-    return retrieve(testClock, (TestClockRetrieveParams) null, options);
-  }
-  /** Retrieves a test clock. */
-  public TestClock retrieve(String testClock) throws StripeException {
-    return retrieve(testClock, (TestClockRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves a test clock. */
-  public TestClock retrieve(
-      String testClock, TestClockRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
+    String path = String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -108,18 +104,17 @@ public final class TestClockService extends ApiService {
    * Starts advancing a test clock to a specified time in the future. Advancement is done when
    * status changes to {@code Ready}.
    */
-  public TestClock advance(String testClock, TestClockAdvanceParams params) throws StripeException {
-    return advance(testClock, params, (RequestOptions) null);
+  public TestClock advance(String id, TestClockAdvanceParams params) throws StripeException {
+    return advance(id, params, (RequestOptions) null);
   }
   /**
    * Starts advancing a test clock to a specified time in the future. Advancement is done when
    * status changes to {@code Ready}.
    */
-  public TestClock advance(String testClock, TestClockAdvanceParams params, RequestOptions options)
+  public TestClock advance(String id, TestClockAdvanceParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/test_helpers/test_clocks/%s/advance", ApiResource.urlEncodeId(testClock));
+        String.format("/v1/test_helpers/test_clocks/%s/advance", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

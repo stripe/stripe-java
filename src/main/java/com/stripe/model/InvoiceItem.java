@@ -466,21 +466,19 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   }
 
   /** Retrieves the invoice item with the given ID. */
-  public static InvoiceItem retrieve(String invoiceitem) throws StripeException {
-    return retrieve(invoiceitem, (Map<String, Object>) null, (RequestOptions) null);
+  public static InvoiceItem retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the invoice item with the given ID. */
-  public static InvoiceItem retrieve(String invoiceitem, RequestOptions options)
-      throws StripeException {
-    return retrieve(invoiceitem, (Map<String, Object>) null, options);
+  public static InvoiceItem retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the invoice item with the given ID. */
-  public static InvoiceItem retrieve(
-      String invoiceitem, Map<String, Object> params, RequestOptions options)
+  public static InvoiceItem retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
+    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, InvoiceItem.class);
@@ -488,9 +486,8 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
 
   /** Retrieves the invoice item with the given ID. */
   public static InvoiceItem retrieve(
-      String invoiceitem, InvoiceItemRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
+      String id, InvoiceItemRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

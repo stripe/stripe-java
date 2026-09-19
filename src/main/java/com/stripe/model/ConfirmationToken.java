@@ -127,22 +127,20 @@ public class ConfirmationToken extends ApiResource implements HasId {
   Boolean useStripeSdk;
 
   /** Retrieves an existing ConfirmationToken object. */
-  public static ConfirmationToken retrieve(String confirmationToken) throws StripeException {
-    return retrieve(confirmationToken, (Map<String, Object>) null, (RequestOptions) null);
+  public static ConfirmationToken retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an existing ConfirmationToken object. */
-  public static ConfirmationToken retrieve(String confirmationToken, RequestOptions options)
+  public static ConfirmationToken retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(confirmationToken, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an existing ConfirmationToken object. */
   public static ConfirmationToken retrieve(
-      String confirmationToken, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/confirmation_tokens/%s", ApiResource.urlEncodeId(confirmationToken));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/confirmation_tokens/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ConfirmationToken.class);
@@ -150,10 +148,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
 
   /** Retrieves an existing ConfirmationToken object. */
   public static ConfirmationToken retrieve(
-      String confirmationToken, ConfirmationTokenRetrieveParams params, RequestOptions options)
+      String id, ConfirmationTokenRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/confirmation_tokens/%s", ApiResource.urlEncodeId(confirmationToken));
+    String path = String.format("/v1/confirmation_tokens/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

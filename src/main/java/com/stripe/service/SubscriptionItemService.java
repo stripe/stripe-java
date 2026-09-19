@@ -28,32 +28,32 @@ public final class SubscriptionItemService extends ApiService {
    * Deletes an item from the subscription. Removing a subscription item from a subscription will
    * not cancel the subscription.
    */
-  public SubscriptionItem delete(String item, SubscriptionItemDeleteParams params)
+  public SubscriptionItem delete(String id, SubscriptionItemDeleteParams params)
       throws StripeException {
-    return delete(item, params, (RequestOptions) null);
+    return delete(id, params, (RequestOptions) null);
   }
   /**
    * Deletes an item from the subscription. Removing a subscription item from a subscription will
    * not cancel the subscription.
    */
-  public SubscriptionItem delete(String item, RequestOptions options) throws StripeException {
-    return delete(item, (SubscriptionItemDeleteParams) null, options);
+  public SubscriptionItem delete(String id, RequestOptions options) throws StripeException {
+    return delete(id, (SubscriptionItemDeleteParams) null, options);
   }
   /**
    * Deletes an item from the subscription. Removing a subscription item from a subscription will
    * not cancel the subscription.
    */
-  public SubscriptionItem delete(String item) throws StripeException {
-    return delete(item, (SubscriptionItemDeleteParams) null, (RequestOptions) null);
+  public SubscriptionItem delete(String id) throws StripeException {
+    return delete(id, (SubscriptionItemDeleteParams) null, (RequestOptions) null);
   }
   /**
    * Deletes an item from the subscription. Removing a subscription item from a subscription will
    * not cancel the subscription.
    */
   public SubscriptionItem delete(
-      String item, SubscriptionItemDeleteParams params, RequestOptions options)
+      String id, SubscriptionItemDeleteParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
+    String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -64,23 +64,23 @@ public final class SubscriptionItemService extends ApiService {
     return this.request(request, SubscriptionItem.class);
   }
   /** Retrieves the subscription item with the given ID. */
-  public SubscriptionItem retrieve(String item, SubscriptionItemRetrieveParams params)
+  public SubscriptionItem retrieve(String id, SubscriptionItemRetrieveParams params)
       throws StripeException {
-    return retrieve(item, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the subscription item with the given ID. */
-  public SubscriptionItem retrieve(String item, RequestOptions options) throws StripeException {
-    return retrieve(item, (SubscriptionItemRetrieveParams) null, options);
+  public SubscriptionItem retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (SubscriptionItemRetrieveParams) null, options);
   }
   /** Retrieves the subscription item with the given ID. */
-  public SubscriptionItem retrieve(String item) throws StripeException {
-    return retrieve(item, (SubscriptionItemRetrieveParams) null, (RequestOptions) null);
+  public SubscriptionItem retrieve(String id) throws StripeException {
+    return retrieve(id, (SubscriptionItemRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the subscription item with the given ID. */
   public SubscriptionItem retrieve(
-      String item, SubscriptionItemRetrieveParams params, RequestOptions options)
+      String id, SubscriptionItemRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
+    String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -91,23 +91,23 @@ public final class SubscriptionItemService extends ApiService {
     return this.request(request, SubscriptionItem.class);
   }
   /** Updates the plan or quantity of an item on a current subscription. */
-  public SubscriptionItem update(String item, SubscriptionItemUpdateParams params)
+  public SubscriptionItem update(String id, SubscriptionItemUpdateParams params)
       throws StripeException {
-    return update(item, params, (RequestOptions) null);
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates the plan or quantity of an item on a current subscription. */
-  public SubscriptionItem update(String item, RequestOptions options) throws StripeException {
-    return update(item, (SubscriptionItemUpdateParams) null, options);
+  public SubscriptionItem update(String id, RequestOptions options) throws StripeException {
+    return update(id, (SubscriptionItemUpdateParams) null, options);
   }
   /** Updates the plan or quantity of an item on a current subscription. */
-  public SubscriptionItem update(String item) throws StripeException {
-    return update(item, (SubscriptionItemUpdateParams) null, (RequestOptions) null);
+  public SubscriptionItem update(String id) throws StripeException {
+    return update(id, (SubscriptionItemUpdateParams) null, (RequestOptions) null);
   }
   /** Updates the plan or quantity of an item on a current subscription. */
   public SubscriptionItem update(
-      String item, SubscriptionItemUpdateParams params, RequestOptions options)
+      String id, SubscriptionItemUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item));
+    String path = String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -153,20 +153,20 @@ public final class SubscriptionItemService extends ApiService {
     return this.request(request, SubscriptionItem.class);
   }
   /** Serializes a SubscriptionItem delete request into a batch job JSONL line. */
-  public String serializeBatchDelete(String item, SubscriptionItemDeleteParams params)
+  public String serializeBatchDelete(String id, SubscriptionItemDeleteParams params)
       throws StripeException {
-    return serializeBatchDelete(item, params, (RequestOptions) null);
+    return serializeBatchDelete(id, params, (RequestOptions) null);
   }
   /** Serializes a SubscriptionItem delete request into a batch job JSONL line. */
   public String serializeBatchDelete(
-      String item, SubscriptionItemDeleteParams params, RequestOptions options)
+      String id, SubscriptionItemDeleteParams params, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("item", item);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -178,20 +178,20 @@ public final class SubscriptionItemService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a SubscriptionItem update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(String item, SubscriptionItemUpdateParams params)
+  public String serializeBatchUpdate(String id, SubscriptionItemUpdateParams params)
       throws StripeException {
-    return serializeBatchUpdate(item, params, (RequestOptions) null);
+    return serializeBatchUpdate(id, params, (RequestOptions) null);
   }
   /** Serializes a SubscriptionItem update request into a batch job JSONL line. */
   public String serializeBatchUpdate(
-      String item, SubscriptionItemUpdateParams params, RequestOptions options)
+      String id, SubscriptionItemUpdateParams params, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("item", item);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

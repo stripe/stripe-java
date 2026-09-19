@@ -109,21 +109,21 @@ public final class DisputeService extends ApiService {
     return this.request(request, Dispute.class);
   }
   /** Retrieves an Issuing {@code Dispute} object. */
-  public Dispute retrieve(String dispute, DisputeRetrieveParams params) throws StripeException {
-    return retrieve(dispute, params, (RequestOptions) null);
+  public Dispute retrieve(String id, DisputeRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves an Issuing {@code Dispute} object. */
-  public Dispute retrieve(String dispute, RequestOptions options) throws StripeException {
-    return retrieve(dispute, (DisputeRetrieveParams) null, options);
+  public Dispute retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (DisputeRetrieveParams) null, options);
   }
   /** Retrieves an Issuing {@code Dispute} object. */
-  public Dispute retrieve(String dispute) throws StripeException {
-    return retrieve(dispute, (DisputeRetrieveParams) null, (RequestOptions) null);
+  public Dispute retrieve(String id) throws StripeException {
+    return retrieve(id, (DisputeRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves an Issuing {@code Dispute} object. */
-  public Dispute retrieve(String dispute, DisputeRetrieveParams params, RequestOptions options)
+  public Dispute retrieve(String id, DisputeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(dispute));
+    String path = String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -138,33 +138,33 @@ public final class DisputeService extends ApiService {
    * passed. Any parameters not provided will be left unchanged. Properties on the {@code evidence}
    * object can be unset by passing in an empty string.
    */
-  public Dispute update(String dispute, DisputeUpdateParams params) throws StripeException {
-    return update(dispute, params, (RequestOptions) null);
+  public Dispute update(String id, DisputeUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates the specified Issuing {@code Dispute} object by setting the values of the parameters
    * passed. Any parameters not provided will be left unchanged. Properties on the {@code evidence}
    * object can be unset by passing in an empty string.
    */
-  public Dispute update(String dispute, RequestOptions options) throws StripeException {
-    return update(dispute, (DisputeUpdateParams) null, options);
+  public Dispute update(String id, RequestOptions options) throws StripeException {
+    return update(id, (DisputeUpdateParams) null, options);
   }
   /**
    * Updates the specified Issuing {@code Dispute} object by setting the values of the parameters
    * passed. Any parameters not provided will be left unchanged. Properties on the {@code evidence}
    * object can be unset by passing in an empty string.
    */
-  public Dispute update(String dispute) throws StripeException {
-    return update(dispute, (DisputeUpdateParams) null, (RequestOptions) null);
+  public Dispute update(String id) throws StripeException {
+    return update(id, (DisputeUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the specified Issuing {@code Dispute} object by setting the values of the parameters
    * passed. Any parameters not provided will be left unchanged. Properties on the {@code evidence}
    * object can be unset by passing in an empty string.
    */
-  public Dispute update(String dispute, DisputeUpdateParams params, RequestOptions options)
+  public Dispute update(String id, DisputeUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(dispute));
+    String path = String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -180,8 +180,8 @@ public final class DisputeService extends ApiService {
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a>.
    */
-  public Dispute submit(String dispute, DisputeSubmitParams params) throws StripeException {
-    return submit(dispute, params, (RequestOptions) null);
+  public Dispute submit(String id, DisputeSubmitParams params) throws StripeException {
+    return submit(id, params, (RequestOptions) null);
   }
   /**
    * Submits an Issuing {@code Dispute} to the card network. Stripe validates that all evidence
@@ -189,8 +189,8 @@ public final class DisputeService extends ApiService {
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a>.
    */
-  public Dispute submit(String dispute, RequestOptions options) throws StripeException {
-    return submit(dispute, (DisputeSubmitParams) null, options);
+  public Dispute submit(String id, RequestOptions options) throws StripeException {
+    return submit(id, (DisputeSubmitParams) null, options);
   }
   /**
    * Submits an Issuing {@code Dispute} to the card network. Stripe validates that all evidence
@@ -198,8 +198,8 @@ public final class DisputeService extends ApiService {
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a>.
    */
-  public Dispute submit(String dispute) throws StripeException {
-    return submit(dispute, (DisputeSubmitParams) null, (RequestOptions) null);
+  public Dispute submit(String id) throws StripeException {
+    return submit(id, (DisputeSubmitParams) null, (RequestOptions) null);
   }
   /**
    * Submits an Issuing {@code Dispute} to the card network. Stripe validates that all evidence
@@ -207,9 +207,9 @@ public final class DisputeService extends ApiService {
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a>.
    */
-  public Dispute submit(String dispute, DisputeSubmitParams params, RequestOptions options)
+  public Dispute submit(String id, DisputeSubmitParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/disputes/%s/submit", ApiResource.urlEncodeId(dispute));
+    String path = String.format("/v1/issuing/disputes/%s/submit", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -59,23 +59,21 @@ public class ReaderCollectedData extends ApiResource implements HasId {
   String type;
 
   /** Retrieve data collected using Reader hardware. */
-  public static ReaderCollectedData retrieve(String readerCollectedData) throws StripeException {
-    return retrieve(readerCollectedData, (Map<String, Object>) null, (RequestOptions) null);
+  public static ReaderCollectedData retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieve data collected using Reader hardware. */
-  public static ReaderCollectedData retrieve(String readerCollectedData, RequestOptions options)
+  public static ReaderCollectedData retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(readerCollectedData, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieve data collected using Reader hardware. */
   public static ReaderCollectedData retrieve(
-      String readerCollectedData, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
-        String.format(
-            "/v1/terminal/reader_collected_data/%s", ApiResource.urlEncodeId(readerCollectedData));
+        String.format("/v1/terminal/reader_collected_data/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ReaderCollectedData.class);
@@ -83,11 +81,10 @@ public class ReaderCollectedData extends ApiResource implements HasId {
 
   /** Retrieve data collected using Reader hardware. */
   public static ReaderCollectedData retrieve(
-      String readerCollectedData, ReaderCollectedDataRetrieveParams params, RequestOptions options)
+      String id, ReaderCollectedDataRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/terminal/reader_collected_data/%s", ApiResource.urlEncodeId(readerCollectedData));
+        String.format("/v1/terminal/reader_collected_data/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

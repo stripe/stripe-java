@@ -160,24 +160,19 @@ public class IssuedToken extends ApiResource implements HasId {
   }
 
   /** Retrieves an existing SharedPaymentIssuedToken object. */
-  public static IssuedToken retrieve(String sharedPaymentIssuedToken) throws StripeException {
-    return retrieve(sharedPaymentIssuedToken, (Map<String, Object>) null, (RequestOptions) null);
+  public static IssuedToken retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an existing SharedPaymentIssuedToken object. */
-  public static IssuedToken retrieve(String sharedPaymentIssuedToken, RequestOptions options)
-      throws StripeException {
-    return retrieve(sharedPaymentIssuedToken, (Map<String, Object>) null, options);
+  public static IssuedToken retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an existing SharedPaymentIssuedToken object. */
-  public static IssuedToken retrieve(
-      String sharedPaymentIssuedToken, Map<String, Object> params, RequestOptions options)
+  public static IssuedToken retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/shared_payment/issued_tokens/%s",
-            ApiResource.urlEncodeId(sharedPaymentIssuedToken));
+    String path = String.format("/v1/shared_payment/issued_tokens/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, IssuedToken.class);
@@ -185,12 +180,8 @@ public class IssuedToken extends ApiResource implements HasId {
 
   /** Retrieves an existing SharedPaymentIssuedToken object. */
   public static IssuedToken retrieve(
-      String sharedPaymentIssuedToken, IssuedTokenRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/shared_payment/issued_tokens/%s",
-            ApiResource.urlEncodeId(sharedPaymentIssuedToken));
+      String id, IssuedTokenRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/shared_payment/issued_tokens/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

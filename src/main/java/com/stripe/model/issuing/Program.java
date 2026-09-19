@@ -130,28 +130,28 @@ public class Program extends ApiResource implements HasId, MetadataStore<Program
   }
 
   /** Retrieves the program specified by the given id. */
-  public static Program retrieve(String program) throws StripeException {
-    return retrieve(program, (Map<String, Object>) null, (RequestOptions) null);
+  public static Program retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the program specified by the given id. */
-  public static Program retrieve(String program, RequestOptions options) throws StripeException {
-    return retrieve(program, (Map<String, Object>) null, options);
+  public static Program retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the program specified by the given id. */
-  public static Program retrieve(String program, Map<String, Object> params, RequestOptions options)
+  public static Program retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/programs/%s", ApiResource.urlEncodeId(program));
+    String path = String.format("/v1/issuing/programs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Program.class);
   }
 
   /** Retrieves the program specified by the given id. */
-  public static Program retrieve(
-      String program, ProgramRetrieveParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/issuing/programs/%s", ApiResource.urlEncodeId(program));
+  public static Program retrieve(String id, ProgramRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/issuing/programs/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

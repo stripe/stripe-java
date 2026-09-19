@@ -29,8 +29,8 @@ public final class CouponService extends ApiService {
    * customers who have already applied the coupon; it means that new customers can’t redeem the
    * coupon. You can also delete coupons via the API.
    */
-  public Coupon delete(String coupon) throws StripeException {
-    return delete(coupon, (RequestOptions) null);
+  public Coupon delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /**
    * You can delete coupons via the <a href="https://dashboard.stripe.com/coupons">coupon
@@ -38,28 +38,28 @@ public final class CouponService extends ApiService {
    * customers who have already applied the coupon; it means that new customers can’t redeem the
    * coupon. You can also delete coupons via the API.
    */
-  public Coupon delete(String coupon, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
+  public Coupon delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Coupon.class);
   }
   /** Retrieves the coupon with the given ID. */
-  public Coupon retrieve(String coupon, CouponRetrieveParams params) throws StripeException {
-    return retrieve(coupon, params, (RequestOptions) null);
+  public Coupon retrieve(String id, CouponRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the coupon with the given ID. */
-  public Coupon retrieve(String coupon, RequestOptions options) throws StripeException {
-    return retrieve(coupon, (CouponRetrieveParams) null, options);
+  public Coupon retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (CouponRetrieveParams) null, options);
   }
   /** Retrieves the coupon with the given ID. */
-  public Coupon retrieve(String coupon) throws StripeException {
-    return retrieve(coupon, (CouponRetrieveParams) null, (RequestOptions) null);
+  public Coupon retrieve(String id) throws StripeException {
+    return retrieve(id, (CouponRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the coupon with the given ID. */
-  public Coupon retrieve(String coupon, CouponRetrieveParams params, RequestOptions options)
+  public Coupon retrieve(String id, CouponRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -73,30 +73,30 @@ public final class CouponService extends ApiService {
    * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
    * design, not editable.
    */
-  public Coupon update(String coupon, CouponUpdateParams params) throws StripeException {
-    return update(coupon, params, (RequestOptions) null);
+  public Coupon update(String id, CouponUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
    * design, not editable.
    */
-  public Coupon update(String coupon, RequestOptions options) throws StripeException {
-    return update(coupon, (CouponUpdateParams) null, options);
+  public Coupon update(String id, RequestOptions options) throws StripeException {
+    return update(id, (CouponUpdateParams) null, options);
   }
   /**
    * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
    * design, not editable.
    */
-  public Coupon update(String coupon) throws StripeException {
-    return update(coupon, (CouponUpdateParams) null, (RequestOptions) null);
+  public Coupon update(String id) throws StripeException {
+    return update(id, (CouponUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
    * design, not editable.
    */
-  public Coupon update(String coupon, CouponUpdateParams params, RequestOptions options)
+  public Coupon update(String id, CouponUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -196,17 +196,17 @@ public final class CouponService extends ApiService {
     return this.request(request, Coupon.class);
   }
   /** Serializes a Coupon delete request into a batch job JSONL line. */
-  public String serializeBatchDelete(String coupon) throws StripeException {
-    return serializeBatchDelete(coupon, (RequestOptions) null);
+  public String serializeBatchDelete(String id) throws StripeException {
+    return serializeBatchDelete(id, (RequestOptions) null);
   }
   /** Serializes a Coupon delete request into a batch job JSONL line. */
-  public String serializeBatchDelete(String coupon, RequestOptions options) throws StripeException {
+  public String serializeBatchDelete(String id, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("coupon", coupon);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -218,19 +218,18 @@ public final class CouponService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a Coupon update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(String coupon, CouponUpdateParams params)
-      throws StripeException {
-    return serializeBatchUpdate(coupon, params, (RequestOptions) null);
+  public String serializeBatchUpdate(String id, CouponUpdateParams params) throws StripeException {
+    return serializeBatchUpdate(id, params, (RequestOptions) null);
   }
   /** Serializes a Coupon update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(
-      String coupon, CouponUpdateParams params, RequestOptions options) throws StripeException {
+  public String serializeBatchUpdate(String id, CouponUpdateParams params, RequestOptions options)
+      throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("coupon", coupon);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

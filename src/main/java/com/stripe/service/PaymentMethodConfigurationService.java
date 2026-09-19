@@ -79,27 +79,24 @@ public final class PaymentMethodConfigurationService extends ApiService {
   }
   /** Retrieve payment method configuration. */
   public PaymentMethodConfiguration retrieve(
-      String configuration, PaymentMethodConfigurationRetrieveParams params)
-      throws StripeException {
-    return retrieve(configuration, params, (RequestOptions) null);
+      String id, PaymentMethodConfigurationRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieve payment method configuration. */
-  public PaymentMethodConfiguration retrieve(String configuration, RequestOptions options)
+  public PaymentMethodConfiguration retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(configuration, (PaymentMethodConfigurationRetrieveParams) null, options);
+    return retrieve(id, (PaymentMethodConfigurationRetrieveParams) null, options);
   }
   /** Retrieve payment method configuration. */
-  public PaymentMethodConfiguration retrieve(String configuration) throws StripeException {
-    return retrieve(
-        configuration, (PaymentMethodConfigurationRetrieveParams) null, (RequestOptions) null);
+  public PaymentMethodConfiguration retrieve(String id) throws StripeException {
+    return retrieve(id, (PaymentMethodConfigurationRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieve payment method configuration. */
   public PaymentMethodConfiguration retrieve(
-      String configuration, PaymentMethodConfigurationRetrieveParams params, RequestOptions options)
+      String id, PaymentMethodConfigurationRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(configuration));
+        String.format("/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -110,27 +107,25 @@ public final class PaymentMethodConfigurationService extends ApiService {
     return this.request(request, PaymentMethodConfiguration.class);
   }
   /** Update payment method configuration. */
-  public PaymentMethodConfiguration update(
-      String configuration, PaymentMethodConfigurationUpdateParams params) throws StripeException {
-    return update(configuration, params, (RequestOptions) null);
-  }
-  /** Update payment method configuration. */
-  public PaymentMethodConfiguration update(String configuration, RequestOptions options)
+  public PaymentMethodConfiguration update(String id, PaymentMethodConfigurationUpdateParams params)
       throws StripeException {
-    return update(configuration, (PaymentMethodConfigurationUpdateParams) null, options);
+    return update(id, params, (RequestOptions) null);
   }
   /** Update payment method configuration. */
-  public PaymentMethodConfiguration update(String configuration) throws StripeException {
-    return update(
-        configuration, (PaymentMethodConfigurationUpdateParams) null, (RequestOptions) null);
+  public PaymentMethodConfiguration update(String id, RequestOptions options)
+      throws StripeException {
+    return update(id, (PaymentMethodConfigurationUpdateParams) null, options);
+  }
+  /** Update payment method configuration. */
+  public PaymentMethodConfiguration update(String id) throws StripeException {
+    return update(id, (PaymentMethodConfigurationUpdateParams) null, (RequestOptions) null);
   }
   /** Update payment method configuration. */
   public PaymentMethodConfiguration update(
-      String configuration, PaymentMethodConfigurationUpdateParams params, RequestOptions options)
+      String id, PaymentMethodConfigurationUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(configuration));
+        String.format("/v1/payment_method_configurations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

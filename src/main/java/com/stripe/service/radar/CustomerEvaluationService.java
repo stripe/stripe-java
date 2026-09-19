@@ -20,27 +20,23 @@ public final class CustomerEvaluationService extends ApiService {
   }
 
   /** Retrieves an {@code CustomerEvaluation} object. */
-  public CustomerEvaluation retrieve(
-      String customerEvaluation, CustomerEvaluationRetrieveParams params) throws StripeException {
-    return retrieve(customerEvaluation, params, (RequestOptions) null);
-  }
-  /** Retrieves an {@code CustomerEvaluation} object. */
-  public CustomerEvaluation retrieve(String customerEvaluation, RequestOptions options)
+  public CustomerEvaluation retrieve(String id, CustomerEvaluationRetrieveParams params)
       throws StripeException {
-    return retrieve(customerEvaluation, (CustomerEvaluationRetrieveParams) null, options);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves an {@code CustomerEvaluation} object. */
-  public CustomerEvaluation retrieve(String customerEvaluation) throws StripeException {
-    return retrieve(
-        customerEvaluation, (CustomerEvaluationRetrieveParams) null, (RequestOptions) null);
+  public CustomerEvaluation retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (CustomerEvaluationRetrieveParams) null, options);
+  }
+  /** Retrieves an {@code CustomerEvaluation} object. */
+  public CustomerEvaluation retrieve(String id) throws StripeException {
+    return retrieve(id, (CustomerEvaluationRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves an {@code CustomerEvaluation} object. */
   public CustomerEvaluation retrieve(
-      String customerEvaluation, CustomerEvaluationRetrieveParams params, RequestOptions options)
+      String id, CustomerEvaluationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/radar/customer_evaluations/%s", ApiResource.urlEncodeId(customerEvaluation));
+    String path = String.format("/v1/radar/customer_evaluations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -68,27 +64,24 @@ public final class CustomerEvaluationService extends ApiService {
     return this.request(request, CustomerEvaluation.class);
   }
   /** Reports an event on a {@code CustomerEvaluation} object. */
-  public CustomerEvaluation update(String customerEvaluation, CustomerEvaluationUpdateParams params)
+  public CustomerEvaluation update(String id, CustomerEvaluationUpdateParams params)
       throws StripeException {
-    return update(customerEvaluation, params, (RequestOptions) null);
+    return update(id, params, (RequestOptions) null);
   }
   /** Reports an event on a {@code CustomerEvaluation} object. */
-  public CustomerEvaluation update(String customerEvaluation, RequestOptions options)
-      throws StripeException {
-    return update(customerEvaluation, (CustomerEvaluationUpdateParams) null, options);
+  public CustomerEvaluation update(String id, RequestOptions options) throws StripeException {
+    return update(id, (CustomerEvaluationUpdateParams) null, options);
   }
   /** Reports an event on a {@code CustomerEvaluation} object. */
-  public CustomerEvaluation update(String customerEvaluation) throws StripeException {
-    return update(customerEvaluation, (CustomerEvaluationUpdateParams) null, (RequestOptions) null);
+  public CustomerEvaluation update(String id) throws StripeException {
+    return update(id, (CustomerEvaluationUpdateParams) null, (RequestOptions) null);
   }
   /** Reports an event on a {@code CustomerEvaluation} object. */
   public CustomerEvaluation update(
-      String customerEvaluation, CustomerEvaluationUpdateParams params, RequestOptions options)
+      String id, CustomerEvaluationUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/radar/customer_evaluations/%s/report",
-            ApiResource.urlEncodeId(customerEvaluation));
+        String.format("/v1/radar/customer_evaluations/%s/report", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

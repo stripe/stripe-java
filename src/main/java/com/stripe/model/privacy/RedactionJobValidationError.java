@@ -59,17 +59,17 @@ public class RedactionJobValidationError extends ApiResource implements HasId {
   String object;
 
   /** Returns a list of validation errors for the specified redaction job. */
-  public static RedactionJobValidationErrorCollection list(String job, Map<String, Object> params)
+  public static RedactionJobValidationErrorCollection list(String id, Map<String, Object> params)
       throws StripeException {
-    return list(job, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
 
   /** Returns a list of validation errors for the specified redaction job. */
   public static RedactionJobValidationErrorCollection list(
-      String job, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
         String.format(
-            "/v1/privacy/redaction_jobs/%s/validation_errors", ApiResource.urlEncodeId(job));
+            "/v1/privacy/redaction_jobs/%s/validation_errors", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, RedactionJobValidationErrorCollection.class);
@@ -77,17 +77,17 @@ public class RedactionJobValidationError extends ApiResource implements HasId {
 
   /** Returns a list of validation errors for the specified redaction job. */
   public static RedactionJobValidationErrorCollection list(
-      String job, RedactionJobValidationErrorListParams params) throws StripeException {
-    return list(job, params, (RequestOptions) null);
+      String id, RedactionJobValidationErrorListParams params) throws StripeException {
+    return list(id, params, (RequestOptions) null);
   }
 
   /** Returns a list of validation errors for the specified redaction job. */
   public static RedactionJobValidationErrorCollection list(
-      String job, RedactionJobValidationErrorListParams params, RequestOptions options)
+      String id, RedactionJobValidationErrorListParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/privacy/redaction_jobs/%s/validation_errors", ApiResource.urlEncodeId(job));
+            "/v1/privacy/redaction_jobs/%s/validation_errors", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

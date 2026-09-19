@@ -52,20 +52,19 @@ public class AccountSignals extends ApiResource {
   String object;
 
   /** Retrieves the account’s Signal objects. */
-  public static AccountSignals retrieve(String accountId) throws StripeException {
-    return retrieve(accountId, (Map<String, Object>) null, (RequestOptions) null);
+  public static AccountSignals retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the account’s Signal objects. */
-  public static AccountSignals retrieve(String accountId, RequestOptions options)
-      throws StripeException {
-    return retrieve(accountId, (Map<String, Object>) null, options);
+  public static AccountSignals retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the account’s Signal objects. */
   public static AccountSignals retrieve(
-      String accountId, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/accounts/%s/signals", ApiResource.urlEncodeId(accountId));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/accounts/%s/signals", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, AccountSignals.class);
@@ -73,9 +72,9 @@ public class AccountSignals extends ApiResource {
 
   /** Retrieves the account’s Signal objects. */
   public static AccountSignals retrieve(
-      String accountId, AccountSignalsRetrieveParams params, RequestOptions options)
+      String id, AccountSignalsRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/accounts/%s/signals", ApiResource.urlEncodeId(accountId));
+    String path = String.format("/v1/accounts/%s/signals", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

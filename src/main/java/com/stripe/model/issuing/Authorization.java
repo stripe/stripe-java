@@ -576,22 +576,19 @@ public class Authorization extends ApiResource
   }
 
   /** Retrieves an Issuing {@code Authorization} object. */
-  public static Authorization retrieve(String authorization) throws StripeException {
-    return retrieve(authorization, (Map<String, Object>) null, (RequestOptions) null);
+  public static Authorization retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an Issuing {@code Authorization} object. */
-  public static Authorization retrieve(String authorization, RequestOptions options)
-      throws StripeException {
-    return retrieve(authorization, (Map<String, Object>) null, options);
+  public static Authorization retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an Issuing {@code Authorization} object. */
   public static Authorization retrieve(
-      String authorization, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Authorization.class);
@@ -599,10 +596,9 @@ public class Authorization extends ApiResource
 
   /** Retrieves an Issuing {@code Authorization} object. */
   public static Authorization retrieve(
-      String authorization, AuthorizationRetrieveParams params, RequestOptions options)
+      String id, AuthorizationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization));
+    String path = String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

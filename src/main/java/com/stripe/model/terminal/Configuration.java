@@ -205,22 +205,19 @@ public class Configuration extends ApiResource implements HasId {
   }
 
   /** Retrieves a {@code Configuration} object. */
-  public static Configuration retrieve(String configuration) throws StripeException {
-    return retrieve(configuration, (Map<String, Object>) null, (RequestOptions) null);
+  public static Configuration retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a {@code Configuration} object. */
-  public static Configuration retrieve(String configuration, RequestOptions options)
-      throws StripeException {
-    return retrieve(configuration, (Map<String, Object>) null, options);
+  public static Configuration retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a {@code Configuration} object. */
   public static Configuration retrieve(
-      String configuration, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Configuration.class);
@@ -228,10 +225,9 @@ public class Configuration extends ApiResource implements HasId {
 
   /** Retrieves a {@code Configuration} object. */
   public static Configuration retrieve(
-      String configuration, ConfigurationRetrieveParams params, RequestOptions options)
+      String id, ConfigurationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration));
+    String path = String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

@@ -46,23 +46,21 @@ public final class CountrySpecService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<CountrySpec>>() {}.getType());
   }
   /** Returns a Country Spec for a given Country code. */
-  public CountrySpec retrieve(String country, CountrySpecRetrieveParams params)
+  public CountrySpec retrieve(String id, CountrySpecRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /** Returns a Country Spec for a given Country code. */
+  public CountrySpec retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (CountrySpecRetrieveParams) null, options);
+  }
+  /** Returns a Country Spec for a given Country code. */
+  public CountrySpec retrieve(String id) throws StripeException {
+    return retrieve(id, (CountrySpecRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Returns a Country Spec for a given Country code. */
+  public CountrySpec retrieve(String id, CountrySpecRetrieveParams params, RequestOptions options)
       throws StripeException {
-    return retrieve(country, params, (RequestOptions) null);
-  }
-  /** Returns a Country Spec for a given Country code. */
-  public CountrySpec retrieve(String country, RequestOptions options) throws StripeException {
-    return retrieve(country, (CountrySpecRetrieveParams) null, options);
-  }
-  /** Returns a Country Spec for a given Country code. */
-  public CountrySpec retrieve(String country) throws StripeException {
-    return retrieve(country, (CountrySpecRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Returns a Country Spec for a given Country code. */
-  public CountrySpec retrieve(
-      String country, CountrySpecRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country));
+    String path = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

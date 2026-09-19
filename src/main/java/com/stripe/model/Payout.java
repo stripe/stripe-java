@@ -170,6 +170,9 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   @SerializedName("payout_method")
   String payoutMethod;
 
+  @SerializedName("payout_method_options")
+  PayoutMethodOptions payoutMethodOptions;
+
   /**
    * If {@code completed}, you can use the <a
    * href="https://docs.stripe.com/api/balance_transactions/list#balance_transaction_list-payout">Balance
@@ -529,25 +532,25 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
    * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
    * creation request or the payout list. Stripe returns the corresponding payout information.
    */
-  public static Payout retrieve(String payout) throws StripeException {
-    return retrieve(payout, (Map<String, Object>) null, (RequestOptions) null);
+  public static Payout retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
    * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
    * creation request or the payout list. Stripe returns the corresponding payout information.
    */
-  public static Payout retrieve(String payout, RequestOptions options) throws StripeException {
-    return retrieve(payout, (Map<String, Object>) null, options);
+  public static Payout retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
    * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
    * creation request or the payout list. Stripe returns the corresponding payout information.
    */
-  public static Payout retrieve(String payout, Map<String, Object> params, RequestOptions options)
+  public static Payout retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
+    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Payout.class);
@@ -557,9 +560,9 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
    * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
    * creation request or the payout list. Stripe returns the corresponding payout information.
    */
-  public static Payout retrieve(String payout, PayoutRetrieveParams params, RequestOptions options)
+  public static Payout retrieve(String id, PayoutRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
+    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -708,6 +711,31 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
+   * For more details about PayoutMethodOptions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PayoutMethodOptions extends StripeObject {
+    @SerializedName("financial_account")
+    FinancialAccount financialAccount;
+
+    /**
+     * For more details about FinancialAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FinancialAccount extends StripeObject {
+      /** The currency credited to the destination Financial Account. */
+      @SerializedName("destination_currency")
+      String destinationCurrency;
+    }
+  }
+
+  /**
    * For more details about TraceId, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -741,6 +769,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
     trySetResponseGetter(destination, responseGetter);
     trySetResponseGetter(failureBalanceTransaction, responseGetter);
     trySetResponseGetter(originalPayout, responseGetter);
+    trySetResponseGetter(payoutMethodOptions, responseGetter);
     trySetResponseGetter(reversedBy, responseGetter);
     trySetResponseGetter(traceId, responseGetter);
   }

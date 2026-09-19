@@ -374,28 +374,28 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   }
 
   /** Retrieves an Issuing {@code Card} object. */
-  public static Card retrieve(String card) throws StripeException {
-    return retrieve(card, (Map<String, Object>) null, (RequestOptions) null);
+  public static Card retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an Issuing {@code Card} object. */
-  public static Card retrieve(String card, RequestOptions options) throws StripeException {
-    return retrieve(card, (Map<String, Object>) null, options);
+  public static Card retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an Issuing {@code Card} object. */
-  public static Card retrieve(String card, Map<String, Object> params, RequestOptions options)
+  public static Card retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/cards/%s", ApiResource.urlEncodeId(card));
+    String path = String.format("/v1/issuing/cards/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Card.class);
   }
 
   /** Retrieves an Issuing {@code Card} object. */
-  public static Card retrieve(String card, CardRetrieveParams params, RequestOptions options)
+  public static Card retrieve(String id, CardRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/cards/%s", ApiResource.urlEncodeId(card));
+    String path = String.format("/v1/issuing/cards/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

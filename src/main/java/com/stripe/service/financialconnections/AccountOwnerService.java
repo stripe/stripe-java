@@ -20,17 +20,15 @@ public final class AccountOwnerService extends ApiService {
   }
 
   /** Lists all owners for a given {@code Account}. */
-  public StripeCollection<AccountOwner> list(String account, AccountOwnerListParams params)
+  public StripeCollection<AccountOwner> list(String id, AccountOwnerListParams params)
       throws StripeException {
-    return list(account, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
   /** Lists all owners for a given {@code Account}. */
   public StripeCollection<AccountOwner> list(
-      String account, AccountOwnerListParams params, RequestOptions options)
-      throws StripeException {
+      String id, AccountOwnerListParams params, RequestOptions options) throws StripeException {
     String path =
-        String.format(
-            "/v1/financial_connections/accounts/%s/owners", ApiResource.urlEncodeId(account));
+        String.format("/v1/financial_connections/accounts/%s/owners", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -60,27 +60,24 @@ public final class FraudLiabilityDebitService extends ApiService {
         request, new TypeToken<StripeCollection<FraudLiabilityDebit>>() {}.getType());
   }
   /** Retrieves an Issuing {@code FraudLiabilityDebit} object. */
-  public FraudLiabilityDebit retrieve(
-      String fraudLiabilityDebit, FraudLiabilityDebitRetrieveParams params) throws StripeException {
-    return retrieve(fraudLiabilityDebit, params, (RequestOptions) null);
-  }
-  /** Retrieves an Issuing {@code FraudLiabilityDebit} object. */
-  public FraudLiabilityDebit retrieve(String fraudLiabilityDebit, RequestOptions options)
+  public FraudLiabilityDebit retrieve(String id, FraudLiabilityDebitRetrieveParams params)
       throws StripeException {
-    return retrieve(fraudLiabilityDebit, (FraudLiabilityDebitRetrieveParams) null, options);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves an Issuing {@code FraudLiabilityDebit} object. */
-  public FraudLiabilityDebit retrieve(String fraudLiabilityDebit) throws StripeException {
-    return retrieve(
-        fraudLiabilityDebit, (FraudLiabilityDebitRetrieveParams) null, (RequestOptions) null);
+  public FraudLiabilityDebit retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (FraudLiabilityDebitRetrieveParams) null, options);
+  }
+  /** Retrieves an Issuing {@code FraudLiabilityDebit} object. */
+  public FraudLiabilityDebit retrieve(String id) throws StripeException {
+    return retrieve(id, (FraudLiabilityDebitRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves an Issuing {@code FraudLiabilityDebit} object. */
   public FraudLiabilityDebit retrieve(
-      String fraudLiabilityDebit, FraudLiabilityDebitRetrieveParams params, RequestOptions options)
+      String id, FraudLiabilityDebitRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/fraud_liability_debits/%s", ApiResource.urlEncodeId(fraudLiabilityDebit));
+        String.format("/v1/issuing/fraud_liability_debits/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

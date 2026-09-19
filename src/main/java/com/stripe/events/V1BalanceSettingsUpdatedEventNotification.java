@@ -4,7 +4,7 @@ package com.stripe.events;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceSettings;
-import com.stripe.model.v2.core.Event.RelatedObject;
+import com.stripe.model.v2.core.Event.RelatedSingletonObject;
 import com.stripe.model.v2.core.EventNotification;
 import lombok.Getter;
 
@@ -13,7 +13,7 @@ public final class V1BalanceSettingsUpdatedEventNotification extends EventNotifi
   @SerializedName("related_object")
 
   /** Object containing the reference to API resource relevant to the event. */
-  RelatedObject relatedObject;
+  RelatedSingletonObject relatedObject;
 
   /** Retrieves the related object from the API. Make an API request on every call. */
   public BalanceSettings fetchRelatedObject() throws StripeException {

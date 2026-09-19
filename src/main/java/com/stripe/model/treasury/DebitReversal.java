@@ -21,7 +21,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * You can reverse some <a href="https://api.stripe.com#received_debits">ReceivedDebits</a>
+ * You can reverse some <a href="https://docs.stripe.com/api#received_debits">ReceivedDebits</a>
  * depending on their network and source flow. Reversing a ReceivedDebit leads to the creation of a
  * new object known as a DebitReversal.
  */
@@ -205,22 +205,19 @@ public class DebitReversal extends ApiResource implements HasId {
   }
 
   /** Retrieves a DebitReversal object. */
-  public static DebitReversal retrieve(String debitReversal) throws StripeException {
-    return retrieve(debitReversal, (Map<String, Object>) null, (RequestOptions) null);
+  public static DebitReversal retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a DebitReversal object. */
-  public static DebitReversal retrieve(String debitReversal, RequestOptions options)
-      throws StripeException {
-    return retrieve(debitReversal, (Map<String, Object>) null, options);
+  public static DebitReversal retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a DebitReversal object. */
   public static DebitReversal retrieve(
-      String debitReversal, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(debitReversal));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, DebitReversal.class);
@@ -228,10 +225,9 @@ public class DebitReversal extends ApiResource implements HasId {
 
   /** Retrieves a DebitReversal object. */
   public static DebitReversal retrieve(
-      String debitReversal, DebitReversalRetrieveParams params, RequestOptions options)
+      String id, DebitReversalRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(debitReversal));
+    String path = String.format("/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

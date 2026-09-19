@@ -18,26 +18,24 @@ public final class AuthorizationService extends ApiService {
   }
 
   /** Retrieves the details of a Financial Connections {@code Authorization}. */
-  public Authorization retrieve(String authorization, AuthorizationRetrieveParams params)
+  public Authorization retrieve(String id, AuthorizationRetrieveParams params)
       throws StripeException {
-    return retrieve(authorization, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of a Financial Connections {@code Authorization}. */
-  public Authorization retrieve(String authorization, RequestOptions options)
-      throws StripeException {
-    return retrieve(authorization, (AuthorizationRetrieveParams) null, options);
+  public Authorization retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (AuthorizationRetrieveParams) null, options);
   }
   /** Retrieves the details of a Financial Connections {@code Authorization}. */
-  public Authorization retrieve(String authorization) throws StripeException {
-    return retrieve(authorization, (AuthorizationRetrieveParams) null, (RequestOptions) null);
+  public Authorization retrieve(String id) throws StripeException {
+    return retrieve(id, (AuthorizationRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the details of a Financial Connections {@code Authorization}. */
   public Authorization retrieve(
-      String authorization, AuthorizationRetrieveParams params, RequestOptions options)
+      String id, AuthorizationRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/financial_connections/authorizations/%s", ApiResource.urlEncodeId(authorization));
+        String.format("/v1/financial_connections/authorizations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

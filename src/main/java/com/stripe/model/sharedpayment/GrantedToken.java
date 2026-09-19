@@ -96,24 +96,20 @@ public class GrantedToken extends ApiResource implements HasId {
   UsageLimits usageLimits;
 
   /** Retrieves an existing SharedPaymentGrantedToken object. */
-  public static GrantedToken retrieve(String sharedPaymentGrantedToken) throws StripeException {
-    return retrieve(sharedPaymentGrantedToken, (Map<String, Object>) null, (RequestOptions) null);
+  public static GrantedToken retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an existing SharedPaymentGrantedToken object. */
-  public static GrantedToken retrieve(String sharedPaymentGrantedToken, RequestOptions options)
-      throws StripeException {
-    return retrieve(sharedPaymentGrantedToken, (Map<String, Object>) null, options);
+  public static GrantedToken retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an existing SharedPaymentGrantedToken object. */
-  public static GrantedToken retrieve(
-      String sharedPaymentGrantedToken, Map<String, Object> params, RequestOptions options)
+  public static GrantedToken retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/shared_payment/granted_tokens/%s",
-            ApiResource.urlEncodeId(sharedPaymentGrantedToken));
+        String.format("/v1/shared_payment/granted_tokens/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, GrantedToken.class);
@@ -121,12 +117,9 @@ public class GrantedToken extends ApiResource implements HasId {
 
   /** Retrieves an existing SharedPaymentGrantedToken object. */
   public static GrantedToken retrieve(
-      String sharedPaymentGrantedToken, GrantedTokenRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String id, GrantedTokenRetrieveParams params, RequestOptions options) throws StripeException {
     String path =
-        String.format(
-            "/v1/shared_payment/granted_tokens/%s",
-            ApiResource.urlEncodeId(sharedPaymentGrantedToken));
+        String.format("/v1/shared_payment/granted_tokens/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

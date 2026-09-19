@@ -20,23 +20,23 @@ public final class CustomerCashBalanceService extends ApiService {
   }
 
   /** Retrieves a customer’s cash balance. */
-  public CashBalance retrieve(String customer, CustomerCashBalanceRetrieveParams params)
+  public CashBalance retrieve(String id, CustomerCashBalanceRetrieveParams params)
       throws StripeException {
-    return retrieve(customer, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a customer’s cash balance. */
-  public CashBalance retrieve(String customer, RequestOptions options) throws StripeException {
-    return retrieve(customer, (CustomerCashBalanceRetrieveParams) null, options);
+  public CashBalance retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (CustomerCashBalanceRetrieveParams) null, options);
   }
   /** Retrieves a customer’s cash balance. */
-  public CashBalance retrieve(String customer) throws StripeException {
-    return retrieve(customer, (CustomerCashBalanceRetrieveParams) null, (RequestOptions) null);
+  public CashBalance retrieve(String id) throws StripeException {
+    return retrieve(id, (CustomerCashBalanceRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a customer’s cash balance. */
   public CashBalance retrieve(
-      String customer, CustomerCashBalanceRetrieveParams params, RequestOptions options)
+      String id, CustomerCashBalanceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -47,23 +47,23 @@ public final class CustomerCashBalanceService extends ApiService {
     return this.request(request, CashBalance.class);
   }
   /** Changes the settings on a customer’s cash balance. */
-  public CashBalance update(String customer, CustomerCashBalanceUpdateParams params)
+  public CashBalance update(String id, CustomerCashBalanceUpdateParams params)
       throws StripeException {
-    return update(customer, params, (RequestOptions) null);
+    return update(id, params, (RequestOptions) null);
   }
   /** Changes the settings on a customer’s cash balance. */
-  public CashBalance update(String customer, RequestOptions options) throws StripeException {
-    return update(customer, (CustomerCashBalanceUpdateParams) null, options);
+  public CashBalance update(String id, RequestOptions options) throws StripeException {
+    return update(id, (CustomerCashBalanceUpdateParams) null, options);
   }
   /** Changes the settings on a customer’s cash balance. */
-  public CashBalance update(String customer) throws StripeException {
-    return update(customer, (CustomerCashBalanceUpdateParams) null, (RequestOptions) null);
+  public CashBalance update(String id) throws StripeException {
+    return update(id, (CustomerCashBalanceUpdateParams) null, (RequestOptions) null);
   }
   /** Changes the settings on a customer’s cash balance. */
   public CashBalance update(
-      String customer, CustomerCashBalanceUpdateParams params, RequestOptions options)
+      String id, CustomerCashBalanceUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -74,20 +74,20 @@ public final class CustomerCashBalanceService extends ApiService {
     return this.request(request, CashBalance.class);
   }
   /** Serializes a CustomerCashBalance update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(String customer, CustomerCashBalanceUpdateParams params)
+  public String serializeBatchUpdate(String id, CustomerCashBalanceUpdateParams params)
       throws StripeException {
-    return serializeBatchUpdate(customer, params, (RequestOptions) null);
+    return serializeBatchUpdate(id, params, (RequestOptions) null);
   }
   /** Serializes a CustomerCashBalance update request into a batch job JSONL line. */
   public String serializeBatchUpdate(
-      String customer, CustomerCashBalanceUpdateParams params, RequestOptions options)
+      String id, CustomerCashBalanceUpdateParams params, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("customer", customer);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

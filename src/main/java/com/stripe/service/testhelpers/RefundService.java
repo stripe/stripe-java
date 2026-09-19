@@ -18,22 +18,21 @@ public final class RefundService extends ApiService {
   }
 
   /** Expire a refund with a status of {@code requires_action}. */
-  public Refund expire(String refund, RefundExpireParams params) throws StripeException {
-    return expire(refund, params, (RequestOptions) null);
+  public Refund expire(String id, RefundExpireParams params) throws StripeException {
+    return expire(id, params, (RequestOptions) null);
   }
   /** Expire a refund with a status of {@code requires_action}. */
-  public Refund expire(String refund, RequestOptions options) throws StripeException {
-    return expire(refund, (RefundExpireParams) null, options);
+  public Refund expire(String id, RequestOptions options) throws StripeException {
+    return expire(id, (RefundExpireParams) null, options);
   }
   /** Expire a refund with a status of {@code requires_action}. */
-  public Refund expire(String refund) throws StripeException {
-    return expire(refund, (RefundExpireParams) null, (RequestOptions) null);
+  public Refund expire(String id) throws StripeException {
+    return expire(id, (RefundExpireParams) null, (RequestOptions) null);
   }
   /** Expire a refund with a status of {@code requires_action}. */
-  public Refund expire(String refund, RefundExpireParams params, RequestOptions options)
+  public Refund expire(String id, RefundExpireParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/test_helpers/refunds/%s/expire", ApiResource.urlEncodeId(refund));
+    String path = String.format("/v1/test_helpers/refunds/%s/expire", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -21,7 +21,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * You can reverse some <a href="https://api.stripe.com#received_credits">ReceivedCredits</a>
+ * You can reverse some <a href="https://docs.stripe.com/api#received_credits">ReceivedCredits</a>
  * depending on their network and source flow. Reversing a ReceivedCredit leads to the creation of a
  * new object known as a CreditReversal.
  */
@@ -204,17 +204,16 @@ public class CreditReversal extends ApiResource implements HasId {
    * Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID
    * from either the CreditReversal creation request or CreditReversal list.
    */
-  public static CreditReversal retrieve(String creditReversal) throws StripeException {
-    return retrieve(creditReversal, (Map<String, Object>) null, (RequestOptions) null);
+  public static CreditReversal retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
    * Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID
    * from either the CreditReversal creation request or CreditReversal list.
    */
-  public static CreditReversal retrieve(String creditReversal, RequestOptions options)
-      throws StripeException {
-    return retrieve(creditReversal, (Map<String, Object>) null, options);
+  public static CreditReversal retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -222,10 +221,8 @@ public class CreditReversal extends ApiResource implements HasId {
    * from either the CreditReversal creation request or CreditReversal list.
    */
   public static CreditReversal retrieve(
-      String creditReversal, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(creditReversal));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, CreditReversal.class);
@@ -236,10 +233,9 @@ public class CreditReversal extends ApiResource implements HasId {
    * from either the CreditReversal creation request or CreditReversal list.
    */
   public static CreditReversal retrieve(
-      String creditReversal, CreditReversalRetrieveParams params, RequestOptions options)
+      String id, CreditReversalRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(creditReversal));
+    String path = String.format("/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** A Tax Calculation Line Item represents a single item in a tax calculation. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

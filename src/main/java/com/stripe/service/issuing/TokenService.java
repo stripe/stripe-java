@@ -39,21 +39,21 @@ public final class TokenService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Token>>() {}.getType());
   }
   /** Retrieves an Issuing {@code Token} object. */
-  public Token retrieve(String token, TokenRetrieveParams params) throws StripeException {
-    return retrieve(token, params, (RequestOptions) null);
+  public Token retrieve(String id, TokenRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves an Issuing {@code Token} object. */
-  public Token retrieve(String token, RequestOptions options) throws StripeException {
-    return retrieve(token, (TokenRetrieveParams) null, options);
+  public Token retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (TokenRetrieveParams) null, options);
   }
   /** Retrieves an Issuing {@code Token} object. */
-  public Token retrieve(String token) throws StripeException {
-    return retrieve(token, (TokenRetrieveParams) null, (RequestOptions) null);
+  public Token retrieve(String id) throws StripeException {
+    return retrieve(id, (TokenRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves an Issuing {@code Token} object. */
-  public Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
+  public Token retrieve(String id, TokenRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(token));
+    String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -64,13 +64,13 @@ public final class TokenService extends ApiService {
     return this.request(request, Token.class);
   }
   /** Attempts to update the specified Issuing {@code Token} object to the status specified. */
-  public Token update(String token, TokenUpdateParams params) throws StripeException {
-    return update(token, params, (RequestOptions) null);
+  public Token update(String id, TokenUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /** Attempts to update the specified Issuing {@code Token} object to the status specified. */
-  public Token update(String token, TokenUpdateParams params, RequestOptions options)
+  public Token update(String id, TokenUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(token));
+    String path = String.format("/v1/issuing/tokens/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

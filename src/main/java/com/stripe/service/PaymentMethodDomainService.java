@@ -68,27 +68,23 @@ public final class PaymentMethodDomainService extends ApiService {
     return this.request(request, PaymentMethodDomain.class);
   }
   /** Retrieves the details of an existing payment method domain. */
-  public PaymentMethodDomain retrieve(
-      String paymentMethodDomain, PaymentMethodDomainRetrieveParams params) throws StripeException {
-    return retrieve(paymentMethodDomain, params, (RequestOptions) null);
-  }
-  /** Retrieves the details of an existing payment method domain. */
-  public PaymentMethodDomain retrieve(String paymentMethodDomain, RequestOptions options)
+  public PaymentMethodDomain retrieve(String id, PaymentMethodDomainRetrieveParams params)
       throws StripeException {
-    return retrieve(paymentMethodDomain, (PaymentMethodDomainRetrieveParams) null, options);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of an existing payment method domain. */
-  public PaymentMethodDomain retrieve(String paymentMethodDomain) throws StripeException {
-    return retrieve(
-        paymentMethodDomain, (PaymentMethodDomainRetrieveParams) null, (RequestOptions) null);
+  public PaymentMethodDomain retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (PaymentMethodDomainRetrieveParams) null, options);
+  }
+  /** Retrieves the details of an existing payment method domain. */
+  public PaymentMethodDomain retrieve(String id) throws StripeException {
+    return retrieve(id, (PaymentMethodDomainRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the details of an existing payment method domain. */
   public PaymentMethodDomain retrieve(
-      String paymentMethodDomain, PaymentMethodDomainRetrieveParams params, RequestOptions options)
+      String id, PaymentMethodDomainRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/payment_method_domains/%s", ApiResource.urlEncodeId(paymentMethodDomain));
+    String path = String.format("/v1/payment_method_domains/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -99,27 +95,23 @@ public final class PaymentMethodDomainService extends ApiService {
     return this.request(request, PaymentMethodDomain.class);
   }
   /** Updates an existing payment method domain. */
-  public PaymentMethodDomain update(
-      String paymentMethodDomain, PaymentMethodDomainUpdateParams params) throws StripeException {
-    return update(paymentMethodDomain, params, (RequestOptions) null);
-  }
-  /** Updates an existing payment method domain. */
-  public PaymentMethodDomain update(String paymentMethodDomain, RequestOptions options)
+  public PaymentMethodDomain update(String id, PaymentMethodDomainUpdateParams params)
       throws StripeException {
-    return update(paymentMethodDomain, (PaymentMethodDomainUpdateParams) null, options);
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates an existing payment method domain. */
-  public PaymentMethodDomain update(String paymentMethodDomain) throws StripeException {
-    return update(
-        paymentMethodDomain, (PaymentMethodDomainUpdateParams) null, (RequestOptions) null);
+  public PaymentMethodDomain update(String id, RequestOptions options) throws StripeException {
+    return update(id, (PaymentMethodDomainUpdateParams) null, options);
+  }
+  /** Updates an existing payment method domain. */
+  public PaymentMethodDomain update(String id) throws StripeException {
+    return update(id, (PaymentMethodDomainUpdateParams) null, (RequestOptions) null);
   }
   /** Updates an existing payment method domain. */
   public PaymentMethodDomain update(
-      String paymentMethodDomain, PaymentMethodDomainUpdateParams params, RequestOptions options)
+      String id, PaymentMethodDomainUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/payment_method_domains/%s", ApiResource.urlEncodeId(paymentMethodDomain));
+    String path = String.format("/v1/payment_method_domains/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -143,27 +135,9 @@ public final class PaymentMethodDomainService extends ApiService {
    * href="https://stripe.com/docs/payments/payment-methods/pmd-registration">Payment method
    * domains</a>.
    */
-  public PaymentMethodDomain validate(
-      String paymentMethodDomain, PaymentMethodDomainValidateParams params) throws StripeException {
-    return validate(paymentMethodDomain, params, (RequestOptions) null);
-  }
-  /**
-   * Some payment methods might require additional steps to register a domain. If the requirements
-   * weren’t satisfied when the domain was created, the payment method will be inactive on the
-   * domain. The payment method doesn’t appear in Elements or Embedded Checkout for this domain
-   * until it is active.
-   *
-   * <p>To activate a payment method on an existing payment method domain, complete the required
-   * registration steps specific to the payment method, and then validate the payment method domain
-   * with this endpoint.
-   *
-   * <p>Related guides: <a
-   * href="https://stripe.com/docs/payments/payment-methods/pmd-registration">Payment method
-   * domains</a>.
-   */
-  public PaymentMethodDomain validate(String paymentMethodDomain, RequestOptions options)
+  public PaymentMethodDomain validate(String id, PaymentMethodDomainValidateParams params)
       throws StripeException {
-    return validate(paymentMethodDomain, (PaymentMethodDomainValidateParams) null, options);
+    return validate(id, params, (RequestOptions) null);
   }
   /**
    * Some payment methods might require additional steps to register a domain. If the requirements
@@ -179,9 +153,25 @@ public final class PaymentMethodDomainService extends ApiService {
    * href="https://stripe.com/docs/payments/payment-methods/pmd-registration">Payment method
    * domains</a>.
    */
-  public PaymentMethodDomain validate(String paymentMethodDomain) throws StripeException {
-    return validate(
-        paymentMethodDomain, (PaymentMethodDomainValidateParams) null, (RequestOptions) null);
+  public PaymentMethodDomain validate(String id, RequestOptions options) throws StripeException {
+    return validate(id, (PaymentMethodDomainValidateParams) null, options);
+  }
+  /**
+   * Some payment methods might require additional steps to register a domain. If the requirements
+   * weren’t satisfied when the domain was created, the payment method will be inactive on the
+   * domain. The payment method doesn’t appear in Elements or Embedded Checkout for this domain
+   * until it is active.
+   *
+   * <p>To activate a payment method on an existing payment method domain, complete the required
+   * registration steps specific to the payment method, and then validate the payment method domain
+   * with this endpoint.
+   *
+   * <p>Related guides: <a
+   * href="https://stripe.com/docs/payments/payment-methods/pmd-registration">Payment method
+   * domains</a>.
+   */
+  public PaymentMethodDomain validate(String id) throws StripeException {
+    return validate(id, (PaymentMethodDomainValidateParams) null, (RequestOptions) null);
   }
   /**
    * Some payment methods might require additional steps to register a domain. If the requirements
@@ -198,11 +188,10 @@ public final class PaymentMethodDomainService extends ApiService {
    * domains</a>.
    */
   public PaymentMethodDomain validate(
-      String paymentMethodDomain, PaymentMethodDomainValidateParams params, RequestOptions options)
+      String id, PaymentMethodDomainValidateParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/payment_method_domains/%s/validate", ApiResource.urlEncodeId(paymentMethodDomain));
+        String.format("/v1/payment_method_domains/%s/validate", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

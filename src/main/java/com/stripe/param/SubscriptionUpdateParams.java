@@ -8487,8 +8487,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
            * Date when the mandate expires and no further payments will be charged. If not provided,
            * the mandate will be set to be indefinite.
            */
-          @SerializedName("expires_after")
-          Long expiresAfter;
+          @SerializedName("expires_at")
+          Long expiresAt;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -8500,8 +8500,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          private MandateOptions(Long expiresAfter, Map<String, Object> extraParams) {
-            this.expiresAfter = expiresAfter;
+          private MandateOptions(Long expiresAt, Map<String, Object> extraParams) {
+            this.expiresAt = expiresAt;
             this.extraParams = extraParams;
           }
 
@@ -8510,7 +8510,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private Long expiresAfter;
+            private Long expiresAt;
 
             private Map<String, Object> extraParams;
 
@@ -8518,15 +8518,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik.MandateOptions
                 build() {
               return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik
-                  .MandateOptions(this.expiresAfter, this.extraParams);
+                  .MandateOptions(this.expiresAt, this.extraParams);
             }
 
             /**
              * Date when the mandate expires and no further payments will be charged. If not
              * provided, the mandate will be set to be indefinite.
              */
-            public Builder setExpiresAfter(Long expiresAfter) {
-              this.expiresAfter = expiresAfter;
+            public Builder setExpiresAt(Long expiresAt) {
+              this.expiresAt = expiresAt;
               return this;
             }
 
@@ -11034,6 +11034,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @SerializedName("swish")
       SWISH("swish"),
 
+      @SerializedName("touch_n_go")
+      TOUCH_N_GO("touch_n_go"),
+
       @SerializedName("truemoney")
       TRUEMONEY("truemoney"),
 
@@ -11502,8 +11505,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> Indicates how the subscription should change when the trial ends
-       * if the user did not provide a payment method.
+       * Indicates how the subscription should change when the trial ends if the user did not
+       * provide a payment method.
        */
       @SerializedName("missing_payment_method")
       MissingPaymentMethod missingPaymentMethod;
@@ -11574,8 +11577,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> Indicates how the subscription should change when the trial
-         * ends if the user did not provide a payment method.
+         * Indicates how the subscription should change when the trial ends if the user did not
+         * provide a payment method.
          */
         public Builder setMissingPaymentMethod(
             SubscriptionUpdateParams.TrialSettings.EndBehavior.MissingPaymentMethod

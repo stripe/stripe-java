@@ -221,21 +221,19 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   }
 
   /** Retrieves an Issuing {@code Cardholder} object. */
-  public static Cardholder retrieve(String cardholder) throws StripeException {
-    return retrieve(cardholder, (Map<String, Object>) null, (RequestOptions) null);
+  public static Cardholder retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an Issuing {@code Cardholder} object. */
-  public static Cardholder retrieve(String cardholder, RequestOptions options)
-      throws StripeException {
-    return retrieve(cardholder, (Map<String, Object>) null, options);
+  public static Cardholder retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an Issuing {@code Cardholder} object. */
-  public static Cardholder retrieve(
-      String cardholder, Map<String, Object> params, RequestOptions options)
+  public static Cardholder retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
+    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Cardholder.class);
@@ -243,9 +241,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
 
   /** Retrieves an Issuing {@code Cardholder} object. */
   public static Cardholder retrieve(
-      String cardholder, CardholderRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
+      String id, CardholderRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -451,8 +448,9 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       @EqualsAndHashCode(callSuper = false)
       public static class Document extends StripeObject {
         /**
-         * The back of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code identity_document}.
+         * The back of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code identity_document}.
          */
         @SerializedName("back")
         @Getter(lombok.AccessLevel.NONE)
@@ -460,8 +458,9 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
         ExpandableField<File> back;
 
         /**
-         * The front of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code identity_document}.
+         * The front of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code identity_document}.
          */
         @SerializedName("front")
         @Getter(lombok.AccessLevel.NONE)

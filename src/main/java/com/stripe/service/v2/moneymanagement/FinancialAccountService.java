@@ -161,4 +161,10 @@ public final class FinancialAccountService extends ApiService {
     return new com.stripe.service.v2.moneymanagement.financialaccounts.StatementService(
         this.getResponseGetter());
   }
+
+  public com.stripe.service.v2.moneymanagement.financialaccounts.WalletExportService
+      walletExport() {
+    return new com.stripe.service.v2.moneymanagement.financialaccounts.WalletExportService(
+        this.getResponseGetter());
+  }
 }

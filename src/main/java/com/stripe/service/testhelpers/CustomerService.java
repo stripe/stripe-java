@@ -19,16 +19,16 @@ public final class CustomerService extends ApiService {
 
   /** Create an incoming testmode bank transfer. */
   public CustomerCashBalanceTransaction fundCashBalance(
-      String customer, CustomerFundCashBalanceParams params) throws StripeException {
-    return fundCashBalance(customer, params, (RequestOptions) null);
+      String id, CustomerFundCashBalanceParams params) throws StripeException {
+    return fundCashBalance(id, params, (RequestOptions) null);
   }
   /** Create an incoming testmode bank transfer. */
   public CustomerCashBalanceTransaction fundCashBalance(
-      String customer, CustomerFundCashBalanceParams params, RequestOptions options)
+      String id, CustomerFundCashBalanceParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/test_helpers/customers/%s/fund_cash_balance", ApiResource.urlEncodeId(customer));
+            "/v1/test_helpers/customers/%s/fund_cash_balance", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

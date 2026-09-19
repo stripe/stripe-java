@@ -49,6 +49,10 @@ public final class V2Services extends ApiService {
     return new com.stripe.service.v2.PaymentsService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.ProvisioningService provisioning() {
+    return new com.stripe.service.v2.ProvisioningService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.ReportingService reporting() {
     return new com.stripe.service.v2.ReportingService(this.getResponseGetter());
   }

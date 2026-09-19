@@ -189,19 +189,19 @@ public class ValueListItem extends ApiResource implements HasId {
   }
 
   /** Retrieves a {@code ValueListItem} object. */
-  public static ValueListItem retrieve(String item) throws StripeException {
-    return retrieve(item, (Map<String, Object>) null, (RequestOptions) null);
+  public static ValueListItem retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a {@code ValueListItem} object. */
-  public static ValueListItem retrieve(String item, RequestOptions options) throws StripeException {
-    return retrieve(item, (Map<String, Object>) null, options);
+  public static ValueListItem retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a {@code ValueListItem} object. */
   public static ValueListItem retrieve(
-      String item, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ValueListItem.class);
@@ -209,9 +209,9 @@ public class ValueListItem extends ApiResource implements HasId {
 
   /** Retrieves a {@code ValueListItem} object. */
   public static ValueListItem retrieve(
-      String item, ValueListItemRetrieveParams params, RequestOptions options)
+      String id, ValueListItemRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item));
+    String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

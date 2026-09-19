@@ -96,33 +96,32 @@ public final class SubscriptionScheduleService extends ApiService {
    * Retrieves the details of an existing subscription schedule. You only need to supply the unique
    * subscription schedule identifier that was returned upon subscription schedule creation.
    */
-  public SubscriptionSchedule retrieve(String schedule, SubscriptionScheduleRetrieveParams params)
+  public SubscriptionSchedule retrieve(String id, SubscriptionScheduleRetrieveParams params)
       throws StripeException {
-    return retrieve(schedule, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an existing subscription schedule. You only need to supply the unique
    * subscription schedule identifier that was returned upon subscription schedule creation.
    */
-  public SubscriptionSchedule retrieve(String schedule, RequestOptions options)
-      throws StripeException {
-    return retrieve(schedule, (SubscriptionScheduleRetrieveParams) null, options);
+  public SubscriptionSchedule retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (SubscriptionScheduleRetrieveParams) null, options);
   }
   /**
    * Retrieves the details of an existing subscription schedule. You only need to supply the unique
    * subscription schedule identifier that was returned upon subscription schedule creation.
    */
-  public SubscriptionSchedule retrieve(String schedule) throws StripeException {
-    return retrieve(schedule, (SubscriptionScheduleRetrieveParams) null, (RequestOptions) null);
+  public SubscriptionSchedule retrieve(String id) throws StripeException {
+    return retrieve(id, (SubscriptionScheduleRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an existing subscription schedule. You only need to supply the unique
    * subscription schedule identifier that was returned upon subscription schedule creation.
    */
   public SubscriptionSchedule retrieve(
-      String schedule, SubscriptionScheduleRetrieveParams params, RequestOptions options)
+      String id, SubscriptionScheduleRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule));
+    String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -133,24 +132,23 @@ public final class SubscriptionScheduleService extends ApiService {
     return this.request(request, SubscriptionSchedule.class);
   }
   /** Updates an existing subscription schedule. */
-  public SubscriptionSchedule update(String schedule, SubscriptionScheduleUpdateParams params)
+  public SubscriptionSchedule update(String id, SubscriptionScheduleUpdateParams params)
       throws StripeException {
-    return update(schedule, params, (RequestOptions) null);
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates an existing subscription schedule. */
-  public SubscriptionSchedule update(String schedule, RequestOptions options)
-      throws StripeException {
-    return update(schedule, (SubscriptionScheduleUpdateParams) null, options);
+  public SubscriptionSchedule update(String id, RequestOptions options) throws StripeException {
+    return update(id, (SubscriptionScheduleUpdateParams) null, options);
   }
   /** Updates an existing subscription schedule. */
-  public SubscriptionSchedule update(String schedule) throws StripeException {
-    return update(schedule, (SubscriptionScheduleUpdateParams) null, (RequestOptions) null);
+  public SubscriptionSchedule update(String id) throws StripeException {
+    return update(id, (SubscriptionScheduleUpdateParams) null, (RequestOptions) null);
   }
   /** Updates an existing subscription schedule. */
   public SubscriptionSchedule update(
-      String schedule, SubscriptionScheduleUpdateParams params, RequestOptions options)
+      String id, SubscriptionScheduleUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule));
+    String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -161,25 +159,23 @@ public final class SubscriptionScheduleService extends ApiService {
     return this.request(request, SubscriptionSchedule.class);
   }
   /** Amends an existing subscription schedule. */
-  public SubscriptionSchedule amend(String schedule, SubscriptionScheduleAmendParams params)
+  public SubscriptionSchedule amend(String id, SubscriptionScheduleAmendParams params)
       throws StripeException {
-    return amend(schedule, params, (RequestOptions) null);
+    return amend(id, params, (RequestOptions) null);
   }
   /** Amends an existing subscription schedule. */
-  public SubscriptionSchedule amend(String schedule, RequestOptions options)
-      throws StripeException {
-    return amend(schedule, (SubscriptionScheduleAmendParams) null, options);
+  public SubscriptionSchedule amend(String id, RequestOptions options) throws StripeException {
+    return amend(id, (SubscriptionScheduleAmendParams) null, options);
   }
   /** Amends an existing subscription schedule. */
-  public SubscriptionSchedule amend(String schedule) throws StripeException {
-    return amend(schedule, (SubscriptionScheduleAmendParams) null, (RequestOptions) null);
+  public SubscriptionSchedule amend(String id) throws StripeException {
+    return amend(id, (SubscriptionScheduleAmendParams) null, (RequestOptions) null);
   }
   /** Amends an existing subscription schedule. */
   public SubscriptionSchedule amend(
-      String schedule, SubscriptionScheduleAmendParams params, RequestOptions options)
+      String id, SubscriptionScheduleAmendParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/subscription_schedules/%s/amend", ApiResource.urlEncodeId(schedule));
+    String path = String.format("/v1/subscription_schedules/%s/amend", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -194,26 +190,25 @@ public final class SubscriptionScheduleService extends ApiService {
    * subscription schedule has an active subscription). A subscription schedule can only be canceled
    * if its status is {@code not_started} or {@code active}.
    */
-  public SubscriptionSchedule cancel(String schedule, SubscriptionScheduleCancelParams params)
+  public SubscriptionSchedule cancel(String id, SubscriptionScheduleCancelParams params)
       throws StripeException {
-    return cancel(schedule, params, (RequestOptions) null);
+    return cancel(id, params, (RequestOptions) null);
   }
   /**
    * Cancels a subscription schedule and its associated subscription immediately (if the
    * subscription schedule has an active subscription). A subscription schedule can only be canceled
    * if its status is {@code not_started} or {@code active}.
    */
-  public SubscriptionSchedule cancel(String schedule, RequestOptions options)
-      throws StripeException {
-    return cancel(schedule, (SubscriptionScheduleCancelParams) null, options);
+  public SubscriptionSchedule cancel(String id, RequestOptions options) throws StripeException {
+    return cancel(id, (SubscriptionScheduleCancelParams) null, options);
   }
   /**
    * Cancels a subscription schedule and its associated subscription immediately (if the
    * subscription schedule has an active subscription). A subscription schedule can only be canceled
    * if its status is {@code not_started} or {@code active}.
    */
-  public SubscriptionSchedule cancel(String schedule) throws StripeException {
-    return cancel(schedule, (SubscriptionScheduleCancelParams) null, (RequestOptions) null);
+  public SubscriptionSchedule cancel(String id) throws StripeException {
+    return cancel(id, (SubscriptionScheduleCancelParams) null, (RequestOptions) null);
   }
   /**
    * Cancels a subscription schedule and its associated subscription immediately (if the
@@ -221,10 +216,10 @@ public final class SubscriptionScheduleService extends ApiService {
    * if its status is {@code not_started} or {@code active}.
    */
   public SubscriptionSchedule cancel(
-      String schedule, SubscriptionScheduleCancelParams params, RequestOptions options)
+      String id, SubscriptionScheduleCancelParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(schedule));
+        String.format("/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -241,9 +236,9 @@ public final class SubscriptionScheduleService extends ApiService {
    * with a subscription, releasing it will remove its {@code subscription} property and set the
    * subscription’s ID to the {@code released_subscription} property.
    */
-  public SubscriptionSchedule release(String schedule, SubscriptionScheduleReleaseParams params)
+  public SubscriptionSchedule release(String id, SubscriptionScheduleReleaseParams params)
       throws StripeException {
-    return release(schedule, params, (RequestOptions) null);
+    return release(id, params, (RequestOptions) null);
   }
   /**
    * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
@@ -252,9 +247,8 @@ public final class SubscriptionScheduleService extends ApiService {
    * with a subscription, releasing it will remove its {@code subscription} property and set the
    * subscription’s ID to the {@code released_subscription} property.
    */
-  public SubscriptionSchedule release(String schedule, RequestOptions options)
-      throws StripeException {
-    return release(schedule, (SubscriptionScheduleReleaseParams) null, options);
+  public SubscriptionSchedule release(String id, RequestOptions options) throws StripeException {
+    return release(id, (SubscriptionScheduleReleaseParams) null, options);
   }
   /**
    * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
@@ -263,8 +257,8 @@ public final class SubscriptionScheduleService extends ApiService {
    * with a subscription, releasing it will remove its {@code subscription} property and set the
    * subscription’s ID to the {@code released_subscription} property.
    */
-  public SubscriptionSchedule release(String schedule) throws StripeException {
-    return release(schedule, (SubscriptionScheduleReleaseParams) null, (RequestOptions) null);
+  public SubscriptionSchedule release(String id) throws StripeException {
+    return release(id, (SubscriptionScheduleReleaseParams) null, (RequestOptions) null);
   }
   /**
    * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
@@ -274,10 +268,10 @@ public final class SubscriptionScheduleService extends ApiService {
    * subscription’s ID to the {@code released_subscription} property.
    */
   public SubscriptionSchedule release(
-      String schedule, SubscriptionScheduleReleaseParams params, RequestOptions options)
+      String id, SubscriptionScheduleReleaseParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(schedule));
+        String.format("/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -309,20 +303,20 @@ public final class SubscriptionScheduleService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a SubscriptionSchedule update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(String schedule, SubscriptionScheduleUpdateParams params)
+  public String serializeBatchUpdate(String id, SubscriptionScheduleUpdateParams params)
       throws StripeException {
-    return serializeBatchUpdate(schedule, params, (RequestOptions) null);
+    return serializeBatchUpdate(id, params, (RequestOptions) null);
   }
   /** Serializes a SubscriptionSchedule update request into a batch job JSONL line. */
   public String serializeBatchUpdate(
-      String schedule, SubscriptionScheduleUpdateParams params, RequestOptions options)
+      String id, SubscriptionScheduleUpdateParams params, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("schedule", schedule);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -334,20 +328,20 @@ public final class SubscriptionScheduleService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a SubscriptionSchedule cancel request into a batch job JSONL line. */
-  public String serializeBatchCancel(String schedule, SubscriptionScheduleCancelParams params)
+  public String serializeBatchCancel(String id, SubscriptionScheduleCancelParams params)
       throws StripeException {
-    return serializeBatchCancel(schedule, params, (RequestOptions) null);
+    return serializeBatchCancel(id, params, (RequestOptions) null);
   }
   /** Serializes a SubscriptionSchedule cancel request into a batch job JSONL line. */
   public String serializeBatchCancel(
-      String schedule, SubscriptionScheduleCancelParams params, RequestOptions options)
+      String id, SubscriptionScheduleCancelParams params, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("schedule", schedule);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -359,20 +353,20 @@ public final class SubscriptionScheduleService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a SubscriptionSchedule release request into a batch job JSONL line. */
-  public String serializeBatchRelease(String schedule, SubscriptionScheduleReleaseParams params)
+  public String serializeBatchRelease(String id, SubscriptionScheduleReleaseParams params)
       throws StripeException {
-    return serializeBatchRelease(schedule, params, (RequestOptions) null);
+    return serializeBatchRelease(id, params, (RequestOptions) null);
   }
   /** Serializes a SubscriptionSchedule release request into a batch job JSONL line. */
   public String serializeBatchRelease(
-      String schedule, SubscriptionScheduleReleaseParams params, RequestOptions options)
+      String id, SubscriptionScheduleReleaseParams params, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("schedule", schedule);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

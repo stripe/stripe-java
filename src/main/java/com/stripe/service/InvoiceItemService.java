@@ -27,37 +27,35 @@ public final class InvoiceItemService extends ApiService {
    * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
    * when they’re not attached to invoices, or if it’s attached to a draft invoice.
    */
-  public InvoiceItem delete(String invoiceitem) throws StripeException {
-    return delete(invoiceitem, (RequestOptions) null);
+  public InvoiceItem delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /**
    * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
    * when they’re not attached to invoices, or if it’s attached to a draft invoice.
    */
-  public InvoiceItem delete(String invoiceitem, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
+  public InvoiceItem delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, InvoiceItem.class);
   }
   /** Retrieves the invoice item with the given ID. */
-  public InvoiceItem retrieve(String invoiceitem, InvoiceItemRetrieveParams params)
+  public InvoiceItem retrieve(String id, InvoiceItemRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /** Retrieves the invoice item with the given ID. */
+  public InvoiceItem retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (InvoiceItemRetrieveParams) null, options);
+  }
+  /** Retrieves the invoice item with the given ID. */
+  public InvoiceItem retrieve(String id) throws StripeException {
+    return retrieve(id, (InvoiceItemRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves the invoice item with the given ID. */
+  public InvoiceItem retrieve(String id, InvoiceItemRetrieveParams params, RequestOptions options)
       throws StripeException {
-    return retrieve(invoiceitem, params, (RequestOptions) null);
-  }
-  /** Retrieves the invoice item with the given ID. */
-  public InvoiceItem retrieve(String invoiceitem, RequestOptions options) throws StripeException {
-    return retrieve(invoiceitem, (InvoiceItemRetrieveParams) null, options);
-  }
-  /** Retrieves the invoice item with the given ID. */
-  public InvoiceItem retrieve(String invoiceitem) throws StripeException {
-    return retrieve(invoiceitem, (InvoiceItemRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves the invoice item with the given ID. */
-  public InvoiceItem retrieve(
-      String invoiceitem, InvoiceItemRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
+    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -71,32 +69,30 @@ public final class InvoiceItemService extends ApiService {
    * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
    * invoice item is only possible before the invoice it’s attached to is closed.
    */
-  public InvoiceItem update(String invoiceitem, InvoiceItemUpdateParams params)
+  public InvoiceItem update(String id, InvoiceItemUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /**
+   * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
+   * invoice item is only possible before the invoice it’s attached to is closed.
+   */
+  public InvoiceItem update(String id, RequestOptions options) throws StripeException {
+    return update(id, (InvoiceItemUpdateParams) null, options);
+  }
+  /**
+   * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
+   * invoice item is only possible before the invoice it’s attached to is closed.
+   */
+  public InvoiceItem update(String id) throws StripeException {
+    return update(id, (InvoiceItemUpdateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
+   * invoice item is only possible before the invoice it’s attached to is closed.
+   */
+  public InvoiceItem update(String id, InvoiceItemUpdateParams params, RequestOptions options)
       throws StripeException {
-    return update(invoiceitem, params, (RequestOptions) null);
-  }
-  /**
-   * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
-   * invoice item is only possible before the invoice it’s attached to is closed.
-   */
-  public InvoiceItem update(String invoiceitem, RequestOptions options) throws StripeException {
-    return update(invoiceitem, (InvoiceItemUpdateParams) null, options);
-  }
-  /**
-   * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
-   * invoice item is only possible before the invoice it’s attached to is closed.
-   */
-  public InvoiceItem update(String invoiceitem) throws StripeException {
-    return update(invoiceitem, (InvoiceItemUpdateParams) null, (RequestOptions) null);
-  }
-  /**
-   * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
-   * invoice item is only possible before the invoice it’s attached to is closed.
-   */
-  public InvoiceItem update(
-      String invoiceitem, InvoiceItemUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem));
+    String path = String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -181,18 +177,17 @@ public final class InvoiceItemService extends ApiService {
     return this.request(request, InvoiceItem.class);
   }
   /** Serializes an InvoiceItem delete request into a batch job JSONL line. */
-  public String serializeBatchDelete(String invoiceitem) throws StripeException {
-    return serializeBatchDelete(invoiceitem, (RequestOptions) null);
+  public String serializeBatchDelete(String id) throws StripeException {
+    return serializeBatchDelete(id, (RequestOptions) null);
   }
   /** Serializes an InvoiceItem delete request into a batch job JSONL line. */
-  public String serializeBatchDelete(String invoiceitem, RequestOptions options)
-      throws StripeException {
+  public String serializeBatchDelete(String id, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("invoiceitem", invoiceitem);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -204,20 +199,19 @@ public final class InvoiceItemService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes an InvoiceItem update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(String invoiceitem, InvoiceItemUpdateParams params)
+  public String serializeBatchUpdate(String id, InvoiceItemUpdateParams params)
       throws StripeException {
-    return serializeBatchUpdate(invoiceitem, params, (RequestOptions) null);
+    return serializeBatchUpdate(id, params, (RequestOptions) null);
   }
   /** Serializes an InvoiceItem update request into a batch job JSONL line. */
   public String serializeBatchUpdate(
-      String invoiceitem, InvoiceItemUpdateParams params, RequestOptions options)
-      throws StripeException {
+      String id, InvoiceItemUpdateParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("invoiceitem", invoiceitem);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

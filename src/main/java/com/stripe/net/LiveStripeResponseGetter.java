@@ -26,6 +26,8 @@ import java.util.logging.Logger;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static final Logger logger = Logger.getLogger("Stripe");
+  private static final String STRIPE_NOTICE_SUPPRESSION_MESSAGE =
+      "To suppress Stripe notices in test and sandbox environments, set the STRIPE_SUPPRESS_NOTICES environment variable to true.";
 
   private final HttpClient httpClient;
   private final StripeResponseGetterOptions options;
@@ -283,7 +285,24 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   private static void maybeEmitStripeNotice(HttpHeaders headers) {
-    headers.firstValue("Stripe-Notice").ifPresent(logger::warning);
+    buildStripeNoticeMessage(headers, System::getenv).ifPresent(logger::warning);
+  }
+
+  static Optional<String> buildStripeNoticeMessage(
+      HttpHeaders headers, Function<String, String> getEnv) {
+    Optional<String> notice = headers.firstValue("Stripe-Notice");
+    if (!notice.isPresent()) {
+      return Optional.empty();
+    }
+
+    String aiAgent = HttpClient.detectAIAgent(getEnv);
+    if (aiAgent.isEmpty() && "true".equalsIgnoreCase(getEnv.apply("STRIPE_SUPPRESS_NOTICES"))) {
+      return Optional.empty();
+    }
+
+    return aiAgent.isEmpty()
+        ? Optional.of(notice.get() + "\n" + STRIPE_NOTICE_SUPPRESSION_MESSAGE)
+        : notice;
   }
 
   private static HttpClient buildDefaultHttpClient() {

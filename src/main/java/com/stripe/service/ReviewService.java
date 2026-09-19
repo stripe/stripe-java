@@ -63,21 +63,21 @@ public final class ReviewService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Review>>() {}.getType());
   }
   /** Retrieves a {@code Review} object. */
-  public Review retrieve(String review, ReviewRetrieveParams params) throws StripeException {
-    return retrieve(review, params, (RequestOptions) null);
+  public Review retrieve(String id, ReviewRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a {@code Review} object. */
-  public Review retrieve(String review, RequestOptions options) throws StripeException {
-    return retrieve(review, (ReviewRetrieveParams) null, options);
+  public Review retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ReviewRetrieveParams) null, options);
   }
   /** Retrieves a {@code Review} object. */
-  public Review retrieve(String review) throws StripeException {
-    return retrieve(review, (ReviewRetrieveParams) null, (RequestOptions) null);
+  public Review retrieve(String id) throws StripeException {
+    return retrieve(id, (ReviewRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a {@code Review} object. */
-  public Review retrieve(String review, ReviewRetrieveParams params, RequestOptions options)
+  public Review retrieve(String id, ReviewRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review));
+    String path = String.format("/v1/reviews/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -88,21 +88,21 @@ public final class ReviewService extends ApiService {
     return this.request(request, Review.class);
   }
   /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
-  public Review approve(String review, ReviewApproveParams params) throws StripeException {
-    return approve(review, params, (RequestOptions) null);
+  public Review approve(String id, ReviewApproveParams params) throws StripeException {
+    return approve(id, params, (RequestOptions) null);
   }
   /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
-  public Review approve(String review, RequestOptions options) throws StripeException {
-    return approve(review, (ReviewApproveParams) null, options);
+  public Review approve(String id, RequestOptions options) throws StripeException {
+    return approve(id, (ReviewApproveParams) null, options);
   }
   /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
-  public Review approve(String review) throws StripeException {
-    return approve(review, (ReviewApproveParams) null, (RequestOptions) null);
+  public Review approve(String id) throws StripeException {
+    return approve(id, (ReviewApproveParams) null, (RequestOptions) null);
   }
   /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
-  public Review approve(String review, ReviewApproveParams params, RequestOptions options)
+  public Review approve(String id, ReviewApproveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(review));
+    String path = String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

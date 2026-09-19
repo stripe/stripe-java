@@ -46,21 +46,21 @@ public final class SupplierService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Supplier>>() {}.getType());
   }
   /** Retrieves a Climate supplier object. */
-  public Supplier retrieve(String supplier, SupplierRetrieveParams params) throws StripeException {
-    return retrieve(supplier, params, (RequestOptions) null);
+  public Supplier retrieve(String id, SupplierRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a Climate supplier object. */
-  public Supplier retrieve(String supplier, RequestOptions options) throws StripeException {
-    return retrieve(supplier, (SupplierRetrieveParams) null, options);
+  public Supplier retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (SupplierRetrieveParams) null, options);
   }
   /** Retrieves a Climate supplier object. */
-  public Supplier retrieve(String supplier) throws StripeException {
-    return retrieve(supplier, (SupplierRetrieveParams) null, (RequestOptions) null);
+  public Supplier retrieve(String id) throws StripeException {
+    return retrieve(id, (SupplierRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a Climate supplier object. */
-  public Supplier retrieve(String supplier, SupplierRetrieveParams params, RequestOptions options)
+  public Supplier retrieve(String id, SupplierRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/climate/suppliers/%s", ApiResource.urlEncodeId(supplier));
+    String path = String.format("/v1/climate/suppliers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

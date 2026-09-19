@@ -304,8 +304,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
    * that was returned from your previous request, and Stripe will return the corresponding top-up
    * information.
    */
-  public static Topup retrieve(String topup) throws StripeException {
-    return retrieve(topup, (Map<String, Object>) null, (RequestOptions) null);
+  public static Topup retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
@@ -313,8 +313,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
    * that was returned from your previous request, and Stripe will return the corresponding top-up
    * information.
    */
-  public static Topup retrieve(String topup, RequestOptions options) throws StripeException {
-    return retrieve(topup, (Map<String, Object>) null, options);
+  public static Topup retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -322,9 +322,9 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
    * that was returned from your previous request, and Stripe will return the corresponding top-up
    * information.
    */
-  public static Topup retrieve(String topup, Map<String, Object> params, RequestOptions options)
+  public static Topup retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(topup));
+    String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Topup.class);
@@ -335,9 +335,9 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
    * that was returned from your previous request, and Stripe will return the corresponding top-up
    * information.
    */
-  public static Topup retrieve(String topup, TopupRetrieveParams params, RequestOptions options)
+  public static Topup retrieve(String id, TopupRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(topup));
+    String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

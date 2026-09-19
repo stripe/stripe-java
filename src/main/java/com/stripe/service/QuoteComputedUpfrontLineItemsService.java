@@ -25,19 +25,9 @@ public final class QuoteComputedUpfrontLineItemsService extends ApiService {
    * property containing the first handful of those items. There is also a URL where you can
    * retrieve the full (paginated) list of upfront line items.
    */
-  public StripeCollection<LineItem> list(
-      String quote, QuoteComputedUpfrontLineItemsListParams params) throws StripeException {
-    return list(quote, params, (RequestOptions) null);
-  }
-  /**
-   * When retrieving a quote, there is an includable <a
-   * href="https://stripe.com/docs/api/quotes/object#quote_object-computed-upfront-line_items"><strong>computed.upfront.line_items</strong></a>
-   * property containing the first handful of those items. There is also a URL where you can
-   * retrieve the full (paginated) list of upfront line items.
-   */
-  public StripeCollection<LineItem> list(String quote, RequestOptions options)
+  public StripeCollection<LineItem> list(String id, QuoteComputedUpfrontLineItemsListParams params)
       throws StripeException {
-    return list(quote, (QuoteComputedUpfrontLineItemsListParams) null, options);
+    return list(id, params, (RequestOptions) null);
   }
   /**
    * When retrieving a quote, there is an includable <a
@@ -45,8 +35,17 @@ public final class QuoteComputedUpfrontLineItemsService extends ApiService {
    * property containing the first handful of those items. There is also a URL where you can
    * retrieve the full (paginated) list of upfront line items.
    */
-  public StripeCollection<LineItem> list(String quote) throws StripeException {
-    return list(quote, (QuoteComputedUpfrontLineItemsListParams) null, (RequestOptions) null);
+  public StripeCollection<LineItem> list(String id, RequestOptions options) throws StripeException {
+    return list(id, (QuoteComputedUpfrontLineItemsListParams) null, options);
+  }
+  /**
+   * When retrieving a quote, there is an includable <a
+   * href="https://stripe.com/docs/api/quotes/object#quote_object-computed-upfront-line_items"><strong>computed.upfront.line_items</strong></a>
+   * property containing the first handful of those items. There is also a URL where you can
+   * retrieve the full (paginated) list of upfront line items.
+   */
+  public StripeCollection<LineItem> list(String id) throws StripeException {
+    return list(id, (QuoteComputedUpfrontLineItemsListParams) null, (RequestOptions) null);
   }
   /**
    * When retrieving a quote, there is an includable <a
@@ -55,10 +54,10 @@ public final class QuoteComputedUpfrontLineItemsService extends ApiService {
    * retrieve the full (paginated) list of upfront line items.
    */
   public StripeCollection<LineItem> list(
-      String quote, QuoteComputedUpfrontLineItemsListParams params, RequestOptions options)
+      String id, QuoteComputedUpfrontLineItemsListParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/quotes/%s/computed_upfront_line_items", ApiResource.urlEncodeId(quote));
+        String.format("/v1/quotes/%s/computed_upfront_line_items", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

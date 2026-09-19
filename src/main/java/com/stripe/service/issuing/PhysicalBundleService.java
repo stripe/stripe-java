@@ -59,25 +59,23 @@ public final class PhysicalBundleService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<PhysicalBundle>>() {}.getType());
   }
   /** Retrieves a physical bundle object. */
-  public PhysicalBundle retrieve(String physicalBundle, PhysicalBundleRetrieveParams params)
+  public PhysicalBundle retrieve(String id, PhysicalBundleRetrieveParams params)
       throws StripeException {
-    return retrieve(physicalBundle, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a physical bundle object. */
-  public PhysicalBundle retrieve(String physicalBundle, RequestOptions options)
-      throws StripeException {
-    return retrieve(physicalBundle, (PhysicalBundleRetrieveParams) null, options);
+  public PhysicalBundle retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (PhysicalBundleRetrieveParams) null, options);
   }
   /** Retrieves a physical bundle object. */
-  public PhysicalBundle retrieve(String physicalBundle) throws StripeException {
-    return retrieve(physicalBundle, (PhysicalBundleRetrieveParams) null, (RequestOptions) null);
+  public PhysicalBundle retrieve(String id) throws StripeException {
+    return retrieve(id, (PhysicalBundleRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a physical bundle object. */
   public PhysicalBundle retrieve(
-      String physicalBundle, PhysicalBundleRetrieveParams params, RequestOptions options)
+      String id, PhysicalBundleRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/issuing/physical_bundles/%s", ApiResource.urlEncodeId(physicalBundle));
+    String path = String.format("/v1/issuing/physical_bundles/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

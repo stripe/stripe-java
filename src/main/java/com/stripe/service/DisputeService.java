@@ -49,21 +49,21 @@ public final class DisputeService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Dispute>>() {}.getType());
   }
   /** Retrieves the dispute with the given ID. */
-  public Dispute retrieve(String dispute, DisputeRetrieveParams params) throws StripeException {
-    return retrieve(dispute, params, (RequestOptions) null);
+  public Dispute retrieve(String id, DisputeRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the dispute with the given ID. */
-  public Dispute retrieve(String dispute, RequestOptions options) throws StripeException {
-    return retrieve(dispute, (DisputeRetrieveParams) null, options);
+  public Dispute retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (DisputeRetrieveParams) null, options);
   }
   /** Retrieves the dispute with the given ID. */
-  public Dispute retrieve(String dispute) throws StripeException {
-    return retrieve(dispute, (DisputeRetrieveParams) null, (RequestOptions) null);
+  public Dispute retrieve(String id) throws StripeException {
+    return retrieve(id, (DisputeRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the dispute with the given ID. */
-  public Dispute retrieve(String dispute, DisputeRetrieveParams params, RequestOptions options)
+  public Dispute retrieve(String id, DisputeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute));
+    String path = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -83,8 +83,8 @@ public final class DisputeService extends ApiService {
    * winning your dispute. To figure out which evidence fields to provide, see our <a
    * href="https://stripe.com/docs/disputes/categories">guide to dispute types</a>.
    */
-  public Dispute update(String dispute, DisputeUpdateParams params) throws StripeException {
-    return update(dispute, params, (RequestOptions) null);
+  public Dispute update(String id, DisputeUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * When you get a dispute, contacting your customer is always the best first step. If that doesn’t
@@ -96,8 +96,8 @@ public final class DisputeService extends ApiService {
    * winning your dispute. To figure out which evidence fields to provide, see our <a
    * href="https://stripe.com/docs/disputes/categories">guide to dispute types</a>.
    */
-  public Dispute update(String dispute, RequestOptions options) throws StripeException {
-    return update(dispute, (DisputeUpdateParams) null, options);
+  public Dispute update(String id, RequestOptions options) throws StripeException {
+    return update(id, (DisputeUpdateParams) null, options);
   }
   /**
    * When you get a dispute, contacting your customer is always the best first step. If that doesn’t
@@ -109,8 +109,8 @@ public final class DisputeService extends ApiService {
    * winning your dispute. To figure out which evidence fields to provide, see our <a
    * href="https://stripe.com/docs/disputes/categories">guide to dispute types</a>.
    */
-  public Dispute update(String dispute) throws StripeException {
-    return update(dispute, (DisputeUpdateParams) null, (RequestOptions) null);
+  public Dispute update(String id) throws StripeException {
+    return update(id, (DisputeUpdateParams) null, (RequestOptions) null);
   }
   /**
    * When you get a dispute, contacting your customer is always the best first step. If that doesn’t
@@ -122,9 +122,9 @@ public final class DisputeService extends ApiService {
    * winning your dispute. To figure out which evidence fields to provide, see our <a
    * href="https://stripe.com/docs/disputes/categories">guide to dispute types</a>.
    */
-  public Dispute update(String dispute, DisputeUpdateParams params, RequestOptions options)
+  public Dispute update(String id, DisputeUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute));
+    String path = String.format("/v1/disputes/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -141,8 +141,8 @@ public final class DisputeService extends ApiService {
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
    */
-  public Dispute close(String dispute, DisputeCloseParams params) throws StripeException {
-    return close(dispute, params, (RequestOptions) null);
+  public Dispute close(String id, DisputeCloseParams params) throws StripeException {
+    return close(id, params, (RequestOptions) null);
   }
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
@@ -151,8 +151,8 @@ public final class DisputeService extends ApiService {
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
    */
-  public Dispute close(String dispute, RequestOptions options) throws StripeException {
-    return close(dispute, (DisputeCloseParams) null, options);
+  public Dispute close(String id, RequestOptions options) throws StripeException {
+    return close(id, (DisputeCloseParams) null, options);
   }
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
@@ -161,8 +161,8 @@ public final class DisputeService extends ApiService {
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
    */
-  public Dispute close(String dispute) throws StripeException {
-    return close(dispute, (DisputeCloseParams) null, (RequestOptions) null);
+  public Dispute close(String id) throws StripeException {
+    return close(id, (DisputeCloseParams) null, (RequestOptions) null);
   }
   /**
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
@@ -171,9 +171,9 @@ public final class DisputeService extends ApiService {
    * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
    */
-  public Dispute close(String dispute, DisputeCloseParams params, RequestOptions options)
+  public Dispute close(String id, DisputeCloseParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(dispute));
+    String path = String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -184,19 +184,18 @@ public final class DisputeService extends ApiService {
     return this.request(request, Dispute.class);
   }
   /** Serializes a Dispute close request into a batch job JSONL line. */
-  public String serializeBatchClose(String dispute, DisputeCloseParams params)
-      throws StripeException {
-    return serializeBatchClose(dispute, params, (RequestOptions) null);
+  public String serializeBatchClose(String id, DisputeCloseParams params) throws StripeException {
+    return serializeBatchClose(id, params, (RequestOptions) null);
   }
   /** Serializes a Dispute close request into a batch job JSONL line. */
-  public String serializeBatchClose(
-      String dispute, DisputeCloseParams params, RequestOptions options) throws StripeException {
+  public String serializeBatchClose(String id, DisputeCloseParams params, RequestOptions options)
+      throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("dispute", dispute);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

@@ -236,25 +236,21 @@ public class PersonalizationDesign extends ApiResource
   }
 
   /** Retrieves a personalization design object. */
-  public static PersonalizationDesign retrieve(String personalizationDesign)
-      throws StripeException {
-    return retrieve(personalizationDesign, (Map<String, Object>) null, (RequestOptions) null);
+  public static PersonalizationDesign retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a personalization design object. */
-  public static PersonalizationDesign retrieve(String personalizationDesign, RequestOptions options)
+  public static PersonalizationDesign retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(personalizationDesign, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a personalization design object. */
   public static PersonalizationDesign retrieve(
-      String personalizationDesign, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/personalization_designs/%s",
-            ApiResource.urlEncodeId(personalizationDesign));
+        String.format("/v1/issuing/personalization_designs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PersonalizationDesign.class);
@@ -262,14 +258,10 @@ public class PersonalizationDesign extends ApiResource
 
   /** Retrieves a personalization design object. */
   public static PersonalizationDesign retrieve(
-      String personalizationDesign,
-      PersonalizationDesignRetrieveParams params,
-      RequestOptions options)
+      String id, PersonalizationDesignRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/personalization_designs/%s",
-            ApiResource.urlEncodeId(personalizationDesign));
+        String.format("/v1/issuing/personalization_designs/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

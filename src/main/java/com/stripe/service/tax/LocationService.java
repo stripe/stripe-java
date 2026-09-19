@@ -25,8 +25,8 @@ public final class LocationService extends ApiService {
    * Retrieve a list of all tax locations. Tax locations can represent the venues for services,
    * tickets, or other product types.
    *
-   * <p>The response includes detailed information for each tax location, such as its address, name,
-   * description, and current operational status.
+   * <p>The response includes detailed information for each tax location, such as its address, type,
+   * and description.
    *
    * <p>You can paginate through the list by using the {@code limit} parameter to control the number
    * of results returned in each request.
@@ -38,8 +38,8 @@ public final class LocationService extends ApiService {
    * Retrieve a list of all tax locations. Tax locations can represent the venues for services,
    * tickets, or other product types.
    *
-   * <p>The response includes detailed information for each tax location, such as its address, name,
-   * description, and current operational status.
+   * <p>The response includes detailed information for each tax location, such as its address, type,
+   * and description.
    *
    * <p>You can paginate through the list by using the {@code limit} parameter to control the number
    * of results returned in each request.
@@ -58,16 +58,16 @@ public final class LocationService extends ApiService {
   }
   /**
    * Create a tax location to use in calculating taxes for a service, ticket, or other type of
-   * product. The resulting object contains the id, address, name, description, and current
-   * operational status of the tax location.
+   * product. The resulting object contains the ID, address, type, and description of the tax
+   * location.
    */
   public Location create(LocationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
    * Create a tax location to use in calculating taxes for a service, ticket, or other type of
-   * product. The resulting object contains the id, address, name, description, and current
-   * operational status of the tax location.
+   * product. The resulting object contains the ID, address, type, and description of the tax
+   * location.
    */
   public Location create(LocationCreateParams params, RequestOptions options)
       throws StripeException {
@@ -87,8 +87,8 @@ public final class LocationService extends ApiService {
    * customer address. For more details, check the <a
    * href="https://docs.stripe.com/tax/tax-for-tickets/integration-guide">integration guide</a>.
    */
-  public Location retrieve(String location, LocationRetrieveParams params) throws StripeException {
-    return retrieve(location, params, (RequestOptions) null);
+  public Location retrieve(String id, LocationRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Fetch the details of a specific tax location using its unique identifier. Use a tax location to
@@ -96,8 +96,8 @@ public final class LocationService extends ApiService {
    * customer address. For more details, check the <a
    * href="https://docs.stripe.com/tax/tax-for-tickets/integration-guide">integration guide</a>.
    */
-  public Location retrieve(String location, RequestOptions options) throws StripeException {
-    return retrieve(location, (LocationRetrieveParams) null, options);
+  public Location retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (LocationRetrieveParams) null, options);
   }
   /**
    * Fetch the details of a specific tax location using its unique identifier. Use a tax location to
@@ -105,8 +105,8 @@ public final class LocationService extends ApiService {
    * customer address. For more details, check the <a
    * href="https://docs.stripe.com/tax/tax-for-tickets/integration-guide">integration guide</a>.
    */
-  public Location retrieve(String location) throws StripeException {
-    return retrieve(location, (LocationRetrieveParams) null, (RequestOptions) null);
+  public Location retrieve(String id) throws StripeException {
+    return retrieve(id, (LocationRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Fetch the details of a specific tax location using its unique identifier. Use a tax location to
@@ -114,9 +114,9 @@ public final class LocationService extends ApiService {
    * customer address. For more details, check the <a
    * href="https://docs.stripe.com/tax/tax-for-tickets/integration-guide">integration guide</a>.
    */
-  public Location retrieve(String location, LocationRetrieveParams params, RequestOptions options)
+  public Location retrieve(String id, LocationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/tax/locations/%s", ApiResource.urlEncodeId(location));
+    String path = String.format("/v1/tax/locations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

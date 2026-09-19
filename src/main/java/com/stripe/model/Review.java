@@ -238,28 +238,28 @@ public class Review extends ApiResource implements HasId {
   }
 
   /** Retrieves a {@code Review} object. */
-  public static Review retrieve(String review) throws StripeException {
-    return retrieve(review, (Map<String, Object>) null, (RequestOptions) null);
+  public static Review retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a {@code Review} object. */
-  public static Review retrieve(String review, RequestOptions options) throws StripeException {
-    return retrieve(review, (Map<String, Object>) null, options);
+  public static Review retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a {@code Review} object. */
-  public static Review retrieve(String review, Map<String, Object> params, RequestOptions options)
+  public static Review retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review));
+    String path = String.format("/v1/reviews/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Review.class);
   }
 
   /** Retrieves a {@code Review} object. */
-  public static Review retrieve(String review, ReviewRetrieveParams params, RequestOptions options)
+  public static Review retrieve(String id, ReviewRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review));
+    String path = String.format("/v1/reviews/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

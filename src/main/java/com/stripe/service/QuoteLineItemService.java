@@ -24,26 +24,25 @@ public final class QuoteLineItemService extends ApiService {
    * the first handful of those items. There is also a URL where you can retrieve the full
    * (paginated) list of line items.
    */
-  public StripeCollection<LineItem> list(String quote, QuoteLineItemListParams params)
+  public StripeCollection<LineItem> list(String id, QuoteLineItemListParams params)
       throws StripeException {
-    return list(quote, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
   /**
    * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
    * the first handful of those items. There is also a URL where you can retrieve the full
    * (paginated) list of line items.
    */
-  public StripeCollection<LineItem> list(String quote, RequestOptions options)
-      throws StripeException {
-    return list(quote, (QuoteLineItemListParams) null, options);
+  public StripeCollection<LineItem> list(String id, RequestOptions options) throws StripeException {
+    return list(id, (QuoteLineItemListParams) null, options);
   }
   /**
    * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
    * the first handful of those items. There is also a URL where you can retrieve the full
    * (paginated) list of line items.
    */
-  public StripeCollection<LineItem> list(String quote) throws StripeException {
-    return list(quote, (QuoteLineItemListParams) null, (RequestOptions) null);
+  public StripeCollection<LineItem> list(String id) throws StripeException {
+    return list(id, (QuoteLineItemListParams) null, (RequestOptions) null);
   }
   /**
    * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
@@ -51,8 +50,8 @@ public final class QuoteLineItemService extends ApiService {
    * (paginated) list of line items.
    */
   public StripeCollection<LineItem> list(
-      String quote, QuoteLineItemListParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/quotes/%s/line_items", ApiResource.urlEncodeId(quote));
+      String id, QuoteLineItemListParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/quotes/%s/line_items", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

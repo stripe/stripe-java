@@ -26,37 +26,35 @@ public final class ValueListService extends ApiService {
    * Deletes a {@code ValueList} object, also deleting any items contained within the value list. To
    * be deleted, a value list must not be referenced in any rules.
    */
-  public ValueList delete(String valueList) throws StripeException {
-    return delete(valueList, (RequestOptions) null);
+  public ValueList delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /**
    * Deletes a {@code ValueList} object, also deleting any items contained within the value list. To
    * be deleted, a value list must not be referenced in any rules.
    */
-  public ValueList delete(String valueList, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
+  public ValueList delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, ValueList.class);
   }
   /** Retrieves a {@code ValueList} object. */
-  public ValueList retrieve(String valueList, ValueListRetrieveParams params)
+  public ValueList retrieve(String id, ValueListRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /** Retrieves a {@code ValueList} object. */
+  public ValueList retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ValueListRetrieveParams) null, options);
+  }
+  /** Retrieves a {@code ValueList} object. */
+  public ValueList retrieve(String id) throws StripeException {
+    return retrieve(id, (ValueListRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves a {@code ValueList} object. */
+  public ValueList retrieve(String id, ValueListRetrieveParams params, RequestOptions options)
       throws StripeException {
-    return retrieve(valueList, params, (RequestOptions) null);
-  }
-  /** Retrieves a {@code ValueList} object. */
-  public ValueList retrieve(String valueList, RequestOptions options) throws StripeException {
-    return retrieve(valueList, (ValueListRetrieveParams) null, options);
-  }
-  /** Retrieves a {@code ValueList} object. */
-  public ValueList retrieve(String valueList) throws StripeException {
-    return retrieve(valueList, (ValueListRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves a {@code ValueList} object. */
-  public ValueList retrieve(
-      String valueList, ValueListRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -70,30 +68,30 @@ public final class ValueListService extends ApiService {
    * Updates a {@code ValueList} object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged. Note that {@code item_type} is immutable.
    */
-  public ValueList update(String valueList, ValueListUpdateParams params) throws StripeException {
-    return update(valueList, params, (RequestOptions) null);
+  public ValueList update(String id, ValueListUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates a {@code ValueList} object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged. Note that {@code item_type} is immutable.
    */
-  public ValueList update(String valueList, RequestOptions options) throws StripeException {
-    return update(valueList, (ValueListUpdateParams) null, options);
+  public ValueList update(String id, RequestOptions options) throws StripeException {
+    return update(id, (ValueListUpdateParams) null, options);
   }
   /**
    * Updates a {@code ValueList} object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged. Note that {@code item_type} is immutable.
    */
-  public ValueList update(String valueList) throws StripeException {
-    return update(valueList, (ValueListUpdateParams) null, (RequestOptions) null);
+  public ValueList update(String id) throws StripeException {
+    return update(id, (ValueListUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates a {@code ValueList} object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged. Note that {@code item_type} is immutable.
    */
-  public ValueList update(String valueList, ValueListUpdateParams params, RequestOptions options)
+  public ValueList update(String id, ValueListUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

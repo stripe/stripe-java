@@ -246,22 +246,19 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
   }
 
   /** Retrieves the webhook endpoint with the given ID. */
-  public static WebhookEndpoint retrieve(String webhookEndpoint) throws StripeException {
-    return retrieve(webhookEndpoint, (Map<String, Object>) null, (RequestOptions) null);
+  public static WebhookEndpoint retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the webhook endpoint with the given ID. */
-  public static WebhookEndpoint retrieve(String webhookEndpoint, RequestOptions options)
-      throws StripeException {
-    return retrieve(webhookEndpoint, (Map<String, Object>) null, options);
+  public static WebhookEndpoint retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the webhook endpoint with the given ID. */
   public static WebhookEndpoint retrieve(
-      String webhookEndpoint, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, WebhookEndpoint.class);
@@ -269,10 +266,9 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
 
   /** Retrieves the webhook endpoint with the given ID. */
   public static WebhookEndpoint retrieve(
-      String webhookEndpoint, WebhookEndpointRetrieveParams params, RequestOptions options)
+      String id, WebhookEndpointRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
+    String path = String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

@@ -23,32 +23,32 @@ public final class LocationService extends ApiService {
   }
 
   /** Deletes a {@code Location} object. */
-  public Location delete(String location) throws StripeException {
-    return delete(location, (RequestOptions) null);
+  public Location delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /** Deletes a {@code Location} object. */
-  public Location delete(String location, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
+  public Location delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Location.class);
   }
   /** Retrieves a {@code Location} object. */
-  public Location retrieve(String location, LocationRetrieveParams params) throws StripeException {
-    return retrieve(location, params, (RequestOptions) null);
+  public Location retrieve(String id, LocationRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a {@code Location} object. */
-  public Location retrieve(String location, RequestOptions options) throws StripeException {
-    return retrieve(location, (LocationRetrieveParams) null, options);
+  public Location retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (LocationRetrieveParams) null, options);
   }
   /** Retrieves a {@code Location} object. */
-  public Location retrieve(String location) throws StripeException {
-    return retrieve(location, (LocationRetrieveParams) null, (RequestOptions) null);
+  public Location retrieve(String id) throws StripeException {
+    return retrieve(id, (LocationRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a {@code Location} object. */
-  public Location retrieve(String location, LocationRetrieveParams params, RequestOptions options)
+  public Location retrieve(String id, LocationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -62,30 +62,30 @@ public final class LocationService extends ApiService {
    * Updates a {@code Location} object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged.
    */
-  public Location update(String location, LocationUpdateParams params) throws StripeException {
-    return update(location, params, (RequestOptions) null);
+  public Location update(String id, LocationUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates a {@code Location} object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged.
    */
-  public Location update(String location, RequestOptions options) throws StripeException {
-    return update(location, (LocationUpdateParams) null, options);
+  public Location update(String id, RequestOptions options) throws StripeException {
+    return update(id, (LocationUpdateParams) null, options);
   }
   /**
    * Updates a {@code Location} object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged.
    */
-  public Location update(String location) throws StripeException {
-    return update(location, (LocationUpdateParams) null, (RequestOptions) null);
+  public Location update(String id) throws StripeException {
+    return update(id, (LocationUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates a {@code Location} object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged.
    */
-  public Location update(String location, LocationUpdateParams params, RequestOptions options)
+  public Location update(String id, LocationUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location));
+    String path = String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

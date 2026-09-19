@@ -22,43 +22,47 @@ public final class CustomerTaxExemptionService extends ApiService {
   }
 
   /** Delete a location specific tax exemption for a customer. */
-  public CustomerTaxExemption delete(String customer, String id) throws StripeException {
-    return delete(customer, id, (RequestOptions) null);
+  public CustomerTaxExemption delete(String customerId, String id) throws StripeException {
+    return delete(customerId, id, (RequestOptions) null);
   }
   /** Delete a location specific tax exemption for a customer. */
-  public CustomerTaxExemption delete(String customer, String id, RequestOptions options)
+  public CustomerTaxExemption delete(String customerId, String id, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/tax_exemptions/%s",
-            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, CustomerTaxExemption.class);
   }
   /** Retrieve a location specific tax exemption for a customer. */
   public CustomerTaxExemption retrieve(
-      String customer, String id, CustomerTaxExemptionRetrieveParams params)
+      String customerId, String id, CustomerTaxExemptionRetrieveParams params)
       throws StripeException {
-    return retrieve(customer, id, params, (RequestOptions) null);
+    return retrieve(customerId, id, params, (RequestOptions) null);
   }
   /** Retrieve a location specific tax exemption for a customer. */
-  public CustomerTaxExemption retrieve(String customer, String id, RequestOptions options)
+  public CustomerTaxExemption retrieve(String customerId, String id, RequestOptions options)
       throws StripeException {
-    return retrieve(customer, id, (CustomerTaxExemptionRetrieveParams) null, options);
+    return retrieve(customerId, id, (CustomerTaxExemptionRetrieveParams) null, options);
   }
   /** Retrieve a location specific tax exemption for a customer. */
-  public CustomerTaxExemption retrieve(String customer, String id) throws StripeException {
-    return retrieve(customer, id, (CustomerTaxExemptionRetrieveParams) null, (RequestOptions) null);
+  public CustomerTaxExemption retrieve(String customerId, String id) throws StripeException {
+    return retrieve(
+        customerId, id, (CustomerTaxExemptionRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieve a location specific tax exemption for a customer. */
   public CustomerTaxExemption retrieve(
-      String customer, String id, CustomerTaxExemptionRetrieveParams params, RequestOptions options)
+      String customerId,
+      String id,
+      CustomerTaxExemptionRetrieveParams params,
+      RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/tax_exemptions/%s",
-            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -70,24 +74,23 @@ public final class CustomerTaxExemptionService extends ApiService {
   }
   /** List all location specific tax exemptions for a customer. */
   public StripeCollection<CustomerTaxExemption> list(
-      String customer, CustomerTaxExemptionListParams params) throws StripeException {
-    return list(customer, params, (RequestOptions) null);
+      String id, CustomerTaxExemptionListParams params) throws StripeException {
+    return list(id, params, (RequestOptions) null);
   }
   /** List all location specific tax exemptions for a customer. */
-  public StripeCollection<CustomerTaxExemption> list(String customer, RequestOptions options)
+  public StripeCollection<CustomerTaxExemption> list(String id, RequestOptions options)
       throws StripeException {
-    return list(customer, (CustomerTaxExemptionListParams) null, options);
+    return list(id, (CustomerTaxExemptionListParams) null, options);
   }
   /** List all location specific tax exemptions for a customer. */
-  public StripeCollection<CustomerTaxExemption> list(String customer) throws StripeException {
-    return list(customer, (CustomerTaxExemptionListParams) null, (RequestOptions) null);
+  public StripeCollection<CustomerTaxExemption> list(String id) throws StripeException {
+    return list(id, (CustomerTaxExemptionListParams) null, (RequestOptions) null);
   }
   /** List all location specific tax exemptions for a customer. */
   public StripeCollection<CustomerTaxExemption> list(
-      String customer, CustomerTaxExemptionListParams params, RequestOptions options)
+      String id, CustomerTaxExemptionListParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/customers/%s/tax_exemptions", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/tax_exemptions", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -99,16 +102,15 @@ public final class CustomerTaxExemptionService extends ApiService {
         request, new TypeToken<StripeCollection<CustomerTaxExemption>>() {}.getType());
   }
   /** Create a location specific tax exemption for a customer. */
-  public CustomerTaxExemption create(String customer, CustomerTaxExemptionCreateParams params)
+  public CustomerTaxExemption create(String id, CustomerTaxExemptionCreateParams params)
       throws StripeException {
-    return create(customer, params, (RequestOptions) null);
+    return create(id, params, (RequestOptions) null);
   }
   /** Create a location specific tax exemption for a customer. */
   public CustomerTaxExemption create(
-      String customer, CustomerTaxExemptionCreateParams params, RequestOptions options)
+      String id, CustomerTaxExemptionCreateParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/customers/%s/tax_exemptions", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/tax_exemptions", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

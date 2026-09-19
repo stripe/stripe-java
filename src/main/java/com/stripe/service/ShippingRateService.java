@@ -65,25 +65,22 @@ public final class ShippingRateService extends ApiService {
     return this.request(request, ShippingRate.class);
   }
   /** Returns the shipping rate object with the given ID. */
-  public ShippingRate retrieve(String shippingRateToken, ShippingRateRetrieveParams params)
+  public ShippingRate retrieve(String id, ShippingRateRetrieveParams params)
       throws StripeException {
-    return retrieve(shippingRateToken, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Returns the shipping rate object with the given ID. */
-  public ShippingRate retrieve(String shippingRateToken, RequestOptions options)
-      throws StripeException {
-    return retrieve(shippingRateToken, (ShippingRateRetrieveParams) null, options);
+  public ShippingRate retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ShippingRateRetrieveParams) null, options);
   }
   /** Returns the shipping rate object with the given ID. */
-  public ShippingRate retrieve(String shippingRateToken) throws StripeException {
-    return retrieve(shippingRateToken, (ShippingRateRetrieveParams) null, (RequestOptions) null);
+  public ShippingRate retrieve(String id) throws StripeException {
+    return retrieve(id, (ShippingRateRetrieveParams) null, (RequestOptions) null);
   }
   /** Returns the shipping rate object with the given ID. */
-  public ShippingRate retrieve(
-      String shippingRateToken, ShippingRateRetrieveParams params, RequestOptions options)
+  public ShippingRate retrieve(String id, ShippingRateRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken));
+    String path = String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -94,25 +91,21 @@ public final class ShippingRateService extends ApiService {
     return this.request(request, ShippingRate.class);
   }
   /** Updates an existing shipping rate object. */
-  public ShippingRate update(String shippingRateToken, ShippingRateUpdateParams params)
-      throws StripeException {
-    return update(shippingRateToken, params, (RequestOptions) null);
+  public ShippingRate update(String id, ShippingRateUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates an existing shipping rate object. */
-  public ShippingRate update(String shippingRateToken, RequestOptions options)
-      throws StripeException {
-    return update(shippingRateToken, (ShippingRateUpdateParams) null, options);
+  public ShippingRate update(String id, RequestOptions options) throws StripeException {
+    return update(id, (ShippingRateUpdateParams) null, options);
   }
   /** Updates an existing shipping rate object. */
-  public ShippingRate update(String shippingRateToken) throws StripeException {
-    return update(shippingRateToken, (ShippingRateUpdateParams) null, (RequestOptions) null);
+  public ShippingRate update(String id) throws StripeException {
+    return update(id, (ShippingRateUpdateParams) null, (RequestOptions) null);
   }
   /** Updates an existing shipping rate object. */
-  public ShippingRate update(
-      String shippingRateToken, ShippingRateUpdateParams params, RequestOptions options)
+  public ShippingRate update(String id, ShippingRateUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken));
+    String path = String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

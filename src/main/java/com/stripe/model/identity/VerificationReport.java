@@ -152,21 +152,21 @@ public class VerificationReport extends ApiResource implements HasId {
   }
 
   /** Retrieves an existing VerificationReport. */
-  public static VerificationReport retrieve(String report) throws StripeException {
-    return retrieve(report, (Map<String, Object>) null, (RequestOptions) null);
+  public static VerificationReport retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an existing VerificationReport. */
-  public static VerificationReport retrieve(String report, RequestOptions options)
+  public static VerificationReport retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(report, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an existing VerificationReport. */
   public static VerificationReport retrieve(
-      String report, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
-        String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report));
+        String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, VerificationReport.class);
@@ -174,10 +174,10 @@ public class VerificationReport extends ApiResource implements HasId {
 
   /** Retrieves an existing VerificationReport. */
   public static VerificationReport retrieve(
-      String report, VerificationReportRetrieveParams params, RequestOptions options)
+      String id, VerificationReportRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report));
+        String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

@@ -39,16 +39,16 @@ public class Transaction extends StripeObject implements HasId {
    * <p>One of {@code adjustment}, {@code advance}, {@code anticipation_repayment}, {@code
    * balance_transfer}, {@code climate_order_purchase}, {@code climate_order_refund}, {@code
    * connect_collection_transfer}, {@code connect_reserved_funds}, {@code contribution}, {@code
-   * currency_conversion}, {@code debit_dispute}, {@code dispute}, {@code dispute_reversal}, {@code
-   * financing_paydown}, {@code financing_paydown_reversal}, {@code inbound_payment}, {@code
-   * inbound_payment_failure}, {@code inbound_transfer}, {@code inbound_transfer_reversal}, {@code
-   * india_mdr_processing_fee}, {@code issuing_authorization}, {@code issuing_dispute}, {@code
-   * issuing_dispute_fraud_liability_debit}, {@code issuing_dispute_provisional_credit}, {@code
-   * issuing_dispute_provisional_credit_reversal}, {@code issuing_transaction}, {@code
-   * minimum_balance_hold}, {@code network_cost}, {@code obligation}, {@code outbound_payment},
-   * {@code outbound_payment_reversal}, {@code outbound_transfer}, {@code
-   * outbound_transfer_reversal}, {@code partial_capture_reversal}, {@code
-   * payment_method_passthrough_fee}, {@code payment_network_reserved_funds}, {@code
+   * crypto_wallet_export}, {@code currency_conversion}, {@code debit_dispute}, {@code dispute},
+   * {@code dispute_reversal}, {@code financing_paydown}, {@code financing_paydown_reversal}, {@code
+   * inbound_payment}, {@code inbound_payment_failure}, {@code inbound_transfer}, {@code
+   * inbound_transfer_reversal}, {@code india_mdr_processing_fee}, {@code issuing_authorization},
+   * {@code issuing_dispute}, {@code issuing_dispute_fraud_liability_debit}, {@code
+   * issuing_dispute_provisional_credit}, {@code issuing_dispute_provisional_credit_reversal},
+   * {@code issuing_transaction}, {@code minimum_balance_hold}, {@code network_cost}, {@code
+   * obligation}, {@code outbound_payment}, {@code outbound_payment_reversal}, {@code
+   * outbound_transfer}, {@code outbound_transfer_reversal}, {@code partial_capture_reversal},
+   * {@code payment_method_passthrough_fee}, {@code payment_network_reserved_funds}, {@code
    * platform_earning}, {@code platform_earning_refund}, {@code platform_fee}, {@code
    * platform_funded_credit_transaction}, {@code received_credit}, {@code received_credit_reversal},
    * {@code received_debit}, {@code received_debit_reversal}, {@code refund}, {@code

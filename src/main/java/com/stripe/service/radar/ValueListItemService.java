@@ -23,34 +23,34 @@ public final class ValueListItemService extends ApiService {
   }
 
   /** Deletes a {@code ValueListItem} object, removing it from its parent value list. */
-  public ValueListItem delete(String item) throws StripeException {
-    return delete(item, (RequestOptions) null);
+  public ValueListItem delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /** Deletes a {@code ValueListItem} object, removing it from its parent value list. */
-  public ValueListItem delete(String item, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item));
+  public ValueListItem delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, ValueListItem.class);
   }
   /** Retrieves a {@code ValueListItem} object. */
-  public ValueListItem retrieve(String item, ValueListItemRetrieveParams params)
+  public ValueListItem retrieve(String id, ValueListItemRetrieveParams params)
       throws StripeException {
-    return retrieve(item, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a {@code ValueListItem} object. */
-  public ValueListItem retrieve(String item, RequestOptions options) throws StripeException {
-    return retrieve(item, (ValueListItemRetrieveParams) null, options);
+  public ValueListItem retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ValueListItemRetrieveParams) null, options);
   }
   /** Retrieves a {@code ValueListItem} object. */
-  public ValueListItem retrieve(String item) throws StripeException {
-    return retrieve(item, (ValueListItemRetrieveParams) null, (RequestOptions) null);
+  public ValueListItem retrieve(String id) throws StripeException {
+    return retrieve(id, (ValueListItemRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a {@code ValueListItem} object. */
   public ValueListItem retrieve(
-      String item, ValueListItemRetrieveParams params, RequestOptions options)
+      String id, ValueListItemRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item));
+    String path = String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

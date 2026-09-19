@@ -21,23 +21,21 @@ public final class TransactionService extends ApiService {
   }
 
   /** Retrieves a Tax {@code Transaction} object. */
-  public Transaction retrieve(String transaction, TransactionRetrieveParams params)
+  public Transaction retrieve(String id, TransactionRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /** Retrieves a Tax {@code Transaction} object. */
+  public Transaction retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (TransactionRetrieveParams) null, options);
+  }
+  /** Retrieves a Tax {@code Transaction} object. */
+  public Transaction retrieve(String id) throws StripeException {
+    return retrieve(id, (TransactionRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves a Tax {@code Transaction} object. */
+  public Transaction retrieve(String id, TransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    return retrieve(transaction, params, (RequestOptions) null);
-  }
-  /** Retrieves a Tax {@code Transaction} object. */
-  public Transaction retrieve(String transaction, RequestOptions options) throws StripeException {
-    return retrieve(transaction, (TransactionRetrieveParams) null, options);
-  }
-  /** Retrieves a Tax {@code Transaction} object. */
-  public Transaction retrieve(String transaction) throws StripeException {
-    return retrieve(transaction, (TransactionRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves a Tax {@code Transaction} object. */
-  public Transaction retrieve(
-      String transaction, TransactionRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/tax/transactions/%s", ApiResource.urlEncodeId(transaction));
+    String path = String.format("/v1/tax/transactions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

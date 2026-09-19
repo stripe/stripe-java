@@ -19,28 +19,24 @@ public final class FinancialAccountFeaturesService extends ApiService {
   }
 
   /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures update(
-      String financialAccount, FinancialAccountFeaturesUpdateParams params) throws StripeException {
-    return update(financialAccount, params, (RequestOptions) null);
-  }
-  /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures update(String financialAccount, RequestOptions options)
+  public FinancialAccountFeatures update(String id, FinancialAccountFeaturesUpdateParams params)
       throws StripeException {
-    return update(financialAccount, (FinancialAccountFeaturesUpdateParams) null, options);
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures update(String financialAccount) throws StripeException {
-    return update(
-        financialAccount, (FinancialAccountFeaturesUpdateParams) null, (RequestOptions) null);
+  public FinancialAccountFeatures update(String id, RequestOptions options) throws StripeException {
+    return update(id, (FinancialAccountFeaturesUpdateParams) null, options);
+  }
+  /** Updates the Features associated with a FinancialAccount. */
+  public FinancialAccountFeatures update(String id) throws StripeException {
+    return update(id, (FinancialAccountFeaturesUpdateParams) null, (RequestOptions) null);
   }
   /** Updates the Features associated with a FinancialAccount. */
   public FinancialAccountFeatures update(
-      String financialAccount, FinancialAccountFeaturesUpdateParams params, RequestOptions options)
+      String id, FinancialAccountFeaturesUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/treasury/financial_accounts/%s/features",
-            ApiResource.urlEncodeId(financialAccount));
+        String.format("/v1/treasury/financial_accounts/%s/features", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -51,31 +47,25 @@ public final class FinancialAccountFeaturesService extends ApiService {
     return this.request(request, FinancialAccountFeatures.class);
   }
   /** Retrieves Features information associated with the FinancialAccount. */
-  public FinancialAccountFeatures retrieve(
-      String financialAccount, FinancialAccountFeaturesRetrieveParams params)
+  public FinancialAccountFeatures retrieve(String id, FinancialAccountFeaturesRetrieveParams params)
       throws StripeException {
-    return retrieve(financialAccount, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves Features information associated with the FinancialAccount. */
-  public FinancialAccountFeatures retrieve(String financialAccount, RequestOptions options)
+  public FinancialAccountFeatures retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(financialAccount, (FinancialAccountFeaturesRetrieveParams) null, options);
+    return retrieve(id, (FinancialAccountFeaturesRetrieveParams) null, options);
   }
   /** Retrieves Features information associated with the FinancialAccount. */
-  public FinancialAccountFeatures retrieve(String financialAccount) throws StripeException {
-    return retrieve(
-        financialAccount, (FinancialAccountFeaturesRetrieveParams) null, (RequestOptions) null);
+  public FinancialAccountFeatures retrieve(String id) throws StripeException {
+    return retrieve(id, (FinancialAccountFeaturesRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves Features information associated with the FinancialAccount. */
   public FinancialAccountFeatures retrieve(
-      String financialAccount,
-      FinancialAccountFeaturesRetrieveParams params,
-      RequestOptions options)
+      String id, FinancialAccountFeaturesRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/treasury/financial_accounts/%s/features",
-            ApiResource.urlEncodeId(financialAccount));
+        String.format("/v1/treasury/financial_accounts/%s/features", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

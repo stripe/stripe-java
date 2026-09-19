@@ -1170,22 +1170,19 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /** Retrieves the subscription with the given ID. */
-  public static Subscription retrieve(String subscriptionExposedId) throws StripeException {
-    return retrieve(subscriptionExposedId, (Map<String, Object>) null, (RequestOptions) null);
+  public static Subscription retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the subscription with the given ID. */
-  public static Subscription retrieve(String subscriptionExposedId, RequestOptions options)
-      throws StripeException {
-    return retrieve(subscriptionExposedId, (Map<String, Object>) null, options);
+  public static Subscription retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the subscription with the given ID. */
-  public static Subscription retrieve(
-      String subscriptionExposedId, Map<String, Object> params, RequestOptions options)
+  public static Subscription retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId));
+    String path = String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Subscription.class);
@@ -1193,10 +1190,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /** Retrieves the subscription with the given ID. */
   public static Subscription retrieve(
-      String subscriptionExposedId, SubscriptionRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId));
+      String id, SubscriptionRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -2853,6 +2848,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("billing_cycle_anchor")
     Long billingCycleAnchor;
+
+    /**
+     * Indicates whether this subscription should cancel at the end of the current period if the
+     * update is applied.
+     */
+    @SerializedName("cancel_at_period_end")
+    Boolean cancelAtPeriodEnd;
 
     /**
      * The pending subscription-level discount that will be applied when the pending update is

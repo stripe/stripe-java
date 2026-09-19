@@ -20,26 +20,23 @@ public final class TransactionService extends ApiService {
   }
 
   /** Refund a test-mode Transaction. */
-  public Transaction refund(String transaction, TransactionRefundParams params)
-      throws StripeException {
-    return refund(transaction, params, (RequestOptions) null);
+  public Transaction refund(String id, TransactionRefundParams params) throws StripeException {
+    return refund(id, params, (RequestOptions) null);
   }
   /** Refund a test-mode Transaction. */
-  public Transaction refund(String transaction, RequestOptions options) throws StripeException {
-    return refund(transaction, (TransactionRefundParams) null, options);
+  public Transaction refund(String id, RequestOptions options) throws StripeException {
+    return refund(id, (TransactionRefundParams) null, options);
   }
   /** Refund a test-mode Transaction. */
-  public Transaction refund(String transaction) throws StripeException {
-    return refund(transaction, (TransactionRefundParams) null, (RequestOptions) null);
+  public Transaction refund(String id) throws StripeException {
+    return refund(id, (TransactionRefundParams) null, (RequestOptions) null);
   }
   /** Refund a test-mode Transaction. */
-  public Transaction refund(
-      String transaction, TransactionRefundParams params, RequestOptions options)
+  public Transaction refund(String id, TransactionRefundParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/test_helpers/issuing/transactions/%s/refund",
-            ApiResource.urlEncodeId(transaction));
+            "/v1/test_helpers/issuing/transactions/%s/refund", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

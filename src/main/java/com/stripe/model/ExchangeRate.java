@@ -151,8 +151,8 @@ public class ExchangeRate extends ApiResource implements HasId {
    * <p>Retrieves the exchange rates from the given currency to every supported currency.
    */
   @Deprecated
-  public static ExchangeRate retrieve(String rateId) throws StripeException {
-    return retrieve(rateId, (Map<String, Object>) null, (RequestOptions) null);
+  public static ExchangeRate retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
@@ -163,22 +163,21 @@ public class ExchangeRate extends ApiResource implements HasId {
    * <p>Retrieves the exchange rates from the given currency to every supported currency.
    */
   @Deprecated
-  public static ExchangeRate retrieve(String rateId, RequestOptions options)
+  public static ExchangeRate retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /**
+   * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
+   * href="https://docs.stripe.com/payments/currencies/localize-prices/fx-quotes-api">FX Quotes
+   * API</a> instead.
+   *
+   * <p>Retrieves the exchange rates from the given currency to every supported currency.
+   */
+  @Deprecated
+  public static ExchangeRate retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return retrieve(rateId, (Map<String, Object>) null, options);
-  }
-
-  /**
-   * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
-   * href="https://docs.stripe.com/payments/currencies/localize-prices/fx-quotes-api">FX Quotes
-   * API</a> instead.
-   *
-   * <p>Retrieves the exchange rates from the given currency to every supported currency.
-   */
-  @Deprecated
-  public static ExchangeRate retrieve(
-      String rateId, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
+    String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ExchangeRate.class);
@@ -193,9 +192,8 @@ public class ExchangeRate extends ApiResource implements HasId {
    */
   @Deprecated
   public static ExchangeRate retrieve(
-      String rateId, ExchangeRateRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
+      String id, ExchangeRateRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

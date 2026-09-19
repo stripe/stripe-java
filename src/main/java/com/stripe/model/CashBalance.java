@@ -60,20 +60,19 @@ public class CashBalance extends ApiResource {
   Settings settings;
 
   /** Retrieves a customer’s cash balance. */
-  public static CashBalance retrieve(String customer) throws StripeException {
-    return retrieve(customer, (Map<String, Object>) null, (RequestOptions) null);
+  public static CashBalance retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a customer’s cash balance. */
-  public static CashBalance retrieve(String customer, RequestOptions options)
+  public static CashBalance retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a customer’s cash balance. */
+  public static CashBalance retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return retrieve(customer, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves a customer’s cash balance. */
-  public static CashBalance retrieve(
-      String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, CashBalance.class);
@@ -81,9 +80,8 @@ public class CashBalance extends ApiResource {
 
   /** Retrieves a customer’s cash balance. */
   public static CashBalance retrieve(
-      String customer, CashBalanceRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer));
+      String id, CashBalanceRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -96,30 +94,28 @@ public class CashBalance extends ApiResource {
   }
 
   /** Changes the settings on a customer’s cash balance. */
-  public CashBalance update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public CashBalance update(String id, Map<String, Object> params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
 
   /** Changes the settings on a customer’s cash balance. */
-  public CashBalance update(Map<String, Object> params, RequestOptions options)
+  public CashBalance update(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(this.getCustomer()));
+    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, CashBalance.class);
   }
 
   /** Changes the settings on a customer’s cash balance. */
-  public CashBalance update(CashBalanceUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public CashBalance update(String id, CashBalanceUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
 
   /** Changes the settings on a customer’s cash balance. */
-  public CashBalance update(CashBalanceUpdateParams params, RequestOptions options)
+  public CashBalance update(String id, CashBalanceUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(this.getCustomer()));
+    String path = String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

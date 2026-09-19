@@ -269,37 +269,44 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   }
 
   /** Delete a specified source for a given customer. */
-  public Source detach() throws StripeException {
-    return detach((Map<String, Object>) null, (RequestOptions) null);
+  public Source detach(String customerId) throws StripeException {
+    return detach(customerId, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Delete a specified source for a given customer. */
-  public Source detach(Map<String, Object> params) throws StripeException {
-    return detach(params, (RequestOptions) null);
+  public Source detach(String customerId, RequestOptions options) throws StripeException {
+    return detach(customerId, (Map<String, Object>) null, options);
   }
 
   /** Delete a specified source for a given customer. */
-  public Source detach(Map<String, Object> params, RequestOptions options) throws StripeException {
+  public Source detach(String customerId, Map<String, Object> params) throws StripeException {
+    return detach(customerId, params, (RequestOptions) null);
+  }
+
+  /** Delete a specified source for a given customer. */
+  public Source detach(String customerId, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/sources/%s",
-            ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
     return getResponseGetter().request(request, Source.class);
   }
 
   /** Delete a specified source for a given customer. */
-  public Source detach(SourceDetachParams params) throws StripeException {
-    return detach(params, (RequestOptions) null);
+  public Source detach(String customerId, SourceDetachParams params) throws StripeException {
+    return detach(customerId, params, (RequestOptions) null);
   }
 
   /** Delete a specified source for a given customer. */
-  public Source detach(SourceDetachParams params, RequestOptions options) throws StripeException {
+  public Source detach(String customerId, SourceDetachParams params, RequestOptions options)
+      throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/sources/%s",
-            ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -315,25 +322,25 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
    * Retrieves an existing source object. Supply the unique source ID from a source creation request
    * and Stripe will return the corresponding up-to-date source object information.
    */
-  public static Source retrieve(String source) throws StripeException {
-    return retrieve(source, (Map<String, Object>) null, (RequestOptions) null);
+  public static Source retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
    * Retrieves an existing source object. Supply the unique source ID from a source creation request
    * and Stripe will return the corresponding up-to-date source object information.
    */
-  public static Source retrieve(String source, RequestOptions options) throws StripeException {
-    return retrieve(source, (Map<String, Object>) null, options);
+  public static Source retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
    * Retrieves an existing source object. Supply the unique source ID from a source creation request
    * and Stripe will return the corresponding up-to-date source object information.
    */
-  public static Source retrieve(String source, Map<String, Object> params, RequestOptions options)
+  public static Source retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/sources/%s", ApiResource.urlEncodeId(source));
+    String path = String.format("/v1/sources/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Source.class);
@@ -343,9 +350,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
    * Retrieves an existing source object. Supply the unique source ID from a source creation request
    * and Stripe will return the corresponding up-to-date source object information.
    */
-  public static Source retrieve(String source, SourceRetrieveParams params, RequestOptions options)
+  public static Source retrieve(String id, SourceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/sources/%s", ApiResource.urlEncodeId(source));
+    String path = String.format("/v1/sources/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

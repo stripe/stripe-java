@@ -30,6 +30,13 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * Forwarding settings for a closed FinancialAccount. Post-close forwarding updates are not yet
+   * implemented.
+   */
+  @SerializedName("forwarding_settings")
+  ForwardingSettings forwardingSettings;
+
   /** Metadata associated with the FinancialAccount. */
   @SerializedName("metadata")
   Map<String, Object> metadata;
@@ -41,10 +48,12 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
   private FinancialAccountUpdateParams(
       Object displayName,
       Map<String, Object> extraParams,
+      ForwardingSettings forwardingSettings,
       Map<String, Object> metadata,
       Storage storage) {
     this.displayName = displayName;
     this.extraParams = extraParams;
+    this.forwardingSettings = forwardingSettings;
     this.metadata = metadata;
     this.storage = storage;
   }
@@ -58,6 +67,8 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private ForwardingSettings forwardingSettings;
+
     private Map<String, Object> metadata;
 
     private Storage storage;
@@ -65,7 +76,7 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAccountUpdateParams build() {
       return new FinancialAccountUpdateParams(
-          this.displayName, this.extraParams, this.metadata, this.storage);
+          this.displayName, this.extraParams, this.forwardingSettings, this.metadata, this.storage);
     }
 
     /**
@@ -109,6 +120,16 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Forwarding settings for a closed FinancialAccount. Post-close forwarding updates are not yet
+     * implemented.
+     */
+    public Builder setForwardingSettings(
+        FinancialAccountUpdateParams.ForwardingSettings forwardingSettings) {
+      this.forwardingSettings = forwardingSettings;
       return this;
     }
 
@@ -165,7 +186,136 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class ForwardingSettings {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The address to send forwarded payments to. */
+    @SerializedName("payment_method")
+    Object paymentMethod;
+
+    /** The address to send forwarded payouts to. */
+    @SerializedName("payout_method")
+    Object payoutMethod;
+
+    /**
+     * Whether to skip forwarding exportable self-custodied wallet balances. Defaults to false. This
+     * does not skip non-exportable or fiat balances, inbound-pending checks, or negative-balance
+     * requirements.
+     */
+    @SerializedName("skip_exportable_balances")
+    Boolean skipExportableBalances;
+
+    private ForwardingSettings(
+        Map<String, Object> extraParams,
+        Object paymentMethod,
+        Object payoutMethod,
+        Boolean skipExportableBalances) {
+      this.extraParams = extraParams;
+      this.paymentMethod = paymentMethod;
+      this.payoutMethod = payoutMethod;
+      this.skipExportableBalances = skipExportableBalances;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object paymentMethod;
+
+      private Object payoutMethod;
+
+      private Boolean skipExportableBalances;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public FinancialAccountUpdateParams.ForwardingSettings build() {
+        return new FinancialAccountUpdateParams.ForwardingSettings(
+            this.extraParams, this.paymentMethod, this.payoutMethod, this.skipExportableBalances);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * FinancialAccountUpdateParams.ForwardingSettings#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link FinancialAccountUpdateParams.ForwardingSettings#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The address to send forwarded payments to. */
+      public Builder setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+        return this;
+      }
+
+      /** The address to send forwarded payments to. */
+      public Builder setPaymentMethod(EmptyParam paymentMethod) {
+        this.paymentMethod = paymentMethod;
+        return this;
+      }
+
+      /** The address to send forwarded payouts to. */
+      public Builder setPayoutMethod(String payoutMethod) {
+        this.payoutMethod = payoutMethod;
+        return this;
+      }
+
+      /** The address to send forwarded payouts to. */
+      public Builder setPayoutMethod(EmptyParam payoutMethod) {
+        this.payoutMethod = payoutMethod;
+        return this;
+      }
+
+      /**
+       * Whether to skip forwarding exportable self-custodied wallet balances. Defaults to false.
+       * This does not skip non-exportable or fiat balances, inbound-pending checks, or
+       * negative-balance requirements.
+       */
+      public Builder setSkipExportableBalances(Boolean skipExportableBalances) {
+        this.skipExportableBalances = skipExportableBalances;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Storage {
+    /**
+     * Crypto-specific storage configuration used when adding crypto to a fiat-only
+     * FinancialAccount. {@code custody_model} is required for the initial crypto update and cannot
+     * be changed afterward.
+     */
+    @SerializedName("crypto")
+    Crypto crypto;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -183,7 +333,8 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
     @SerializedName("holds_currencies")
     List<String> holdsCurrencies;
 
-    private Storage(Map<String, Object> extraParams, List<String> holdsCurrencies) {
+    private Storage(Crypto crypto, Map<String, Object> extraParams, List<String> holdsCurrencies) {
+      this.crypto = crypto;
       this.extraParams = extraParams;
       this.holdsCurrencies = holdsCurrencies;
     }
@@ -193,13 +344,26 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Crypto crypto;
+
       private Map<String, Object> extraParams;
 
       private List<String> holdsCurrencies;
 
       /** Finalize and obtain parameter instance from this builder. */
       public FinancialAccountUpdateParams.Storage build() {
-        return new FinancialAccountUpdateParams.Storage(this.extraParams, this.holdsCurrencies);
+        return new FinancialAccountUpdateParams.Storage(
+            this.crypto, this.extraParams, this.holdsCurrencies);
+      }
+
+      /**
+       * Crypto-specific storage configuration used when adding crypto to a fiat-only
+       * FinancialAccount. {@code custody_model} is required for the initial crypto update and
+       * cannot be changed afterward.
+       */
+      public Builder setCrypto(FinancialAccountUpdateParams.Storage.Crypto crypto) {
+        this.crypto = crypto;
+        return this;
       }
 
       /**
@@ -252,6 +416,156 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
         }
         this.holdsCurrencies.addAll(elements);
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Crypto {
+      /**
+       * <strong>Required.</strong> The blockchain network configured for each crypto currency. Keys
+       * are lowercase currency codes and must identify crypto currencies also present in {@code
+       * holds_currencies}.
+       */
+      @SerializedName("currency_networks")
+      Map<String, FinancialAccountUpdateParams.Storage.Crypto.CurrencyNetwork> currencyNetworks;
+
+      /**
+       * <strong>Required.</strong> Describes who controls the private keys for the crypto storage.
+       */
+      @SerializedName("custody_model")
+      CustodyModel custodyModel;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Crypto(
+          Map<String, FinancialAccountUpdateParams.Storage.Crypto.CurrencyNetwork> currencyNetworks,
+          CustodyModel custodyModel,
+          Map<String, Object> extraParams) {
+        this.currencyNetworks = currencyNetworks;
+        this.custodyModel = custodyModel;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, FinancialAccountUpdateParams.Storage.Crypto.CurrencyNetwork>
+            currencyNetworks;
+
+        private CustodyModel custodyModel;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public FinancialAccountUpdateParams.Storage.Crypto build() {
+          return new FinancialAccountUpdateParams.Storage.Crypto(
+              this.currencyNetworks, this.custodyModel, this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `currencyNetworks` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link FinancialAccountUpdateParams.Storage.Crypto#currencyNetworks} for the
+         * field documentation.
+         */
+        public Builder putCurrencyNetwork(
+            String key, FinancialAccountUpdateParams.Storage.Crypto.CurrencyNetwork value) {
+          if (this.currencyNetworks == null) {
+            this.currencyNetworks = new HashMap<>();
+          }
+          this.currencyNetworks.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `currencyNetworks` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link FinancialAccountUpdateParams.Storage.Crypto#currencyNetworks} for the
+         * field documentation.
+         */
+        public Builder putAllCurrencyNetwork(
+            Map<String, FinancialAccountUpdateParams.Storage.Crypto.CurrencyNetwork> map) {
+          if (this.currencyNetworks == null) {
+            this.currencyNetworks = new HashMap<>();
+          }
+          this.currencyNetworks.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Describes who controls the private keys for the crypto
+         * storage.
+         */
+        public Builder setCustodyModel(
+            FinancialAccountUpdateParams.Storage.Crypto.CustodyModel custodyModel) {
+          this.custodyModel = custodyModel;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link FinancialAccountUpdateParams.Storage.Crypto#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link FinancialAccountUpdateParams.Storage.Crypto#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum CurrencyNetwork implements ApiRequestParams.EnumParam {
+        @SerializedName("tempo")
+        TEMPO("tempo");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CurrencyNetwork(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum CustodyModel implements ApiRequestParams.EnumParam {
+        @SerializedName("self")
+        SELF("self"),
+
+        @SerializedName("stripe")
+        STRIPE("stripe");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CustodyModel(String value) {
+          this.value = value;
+        }
       }
     }
   }

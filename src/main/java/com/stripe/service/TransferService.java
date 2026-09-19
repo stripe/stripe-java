@@ -89,33 +89,33 @@ public final class TransferService extends ApiService {
    * transfer creation request or the transfer list, and Stripe will return the corresponding
    * transfer information.
    */
-  public Transfer retrieve(String transfer, TransferRetrieveParams params) throws StripeException {
-    return retrieve(transfer, params, (RequestOptions) null);
+  public Transfer retrieve(String id, TransferRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an existing transfer. Supply the unique transfer ID from either a
    * transfer creation request or the transfer list, and Stripe will return the corresponding
    * transfer information.
    */
-  public Transfer retrieve(String transfer, RequestOptions options) throws StripeException {
-    return retrieve(transfer, (TransferRetrieveParams) null, options);
+  public Transfer retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (TransferRetrieveParams) null, options);
   }
   /**
    * Retrieves the details of an existing transfer. Supply the unique transfer ID from either a
    * transfer creation request or the transfer list, and Stripe will return the corresponding
    * transfer information.
    */
-  public Transfer retrieve(String transfer) throws StripeException {
-    return retrieve(transfer, (TransferRetrieveParams) null, (RequestOptions) null);
+  public Transfer retrieve(String id) throws StripeException {
+    return retrieve(id, (TransferRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an existing transfer. Supply the unique transfer ID from either a
    * transfer creation request or the transfer list, and Stripe will return the corresponding
    * transfer information.
    */
-  public Transfer retrieve(String transfer, TransferRetrieveParams params, RequestOptions options)
+  public Transfer retrieve(String id, TransferRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
+    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -131,8 +131,8 @@ public final class TransferService extends ApiService {
    *
    * <p>This request accepts only metadata as an argument.
    */
-  public Transfer update(String transfer, TransferUpdateParams params) throws StripeException {
-    return update(transfer, params, (RequestOptions) null);
+  public Transfer update(String id, TransferUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates the specified transfer by setting the values of the parameters passed. Any parameters
@@ -140,8 +140,8 @@ public final class TransferService extends ApiService {
    *
    * <p>This request accepts only metadata as an argument.
    */
-  public Transfer update(String transfer, RequestOptions options) throws StripeException {
-    return update(transfer, (TransferUpdateParams) null, options);
+  public Transfer update(String id, RequestOptions options) throws StripeException {
+    return update(id, (TransferUpdateParams) null, options);
   }
   /**
    * Updates the specified transfer by setting the values of the parameters passed. Any parameters
@@ -149,8 +149,8 @@ public final class TransferService extends ApiService {
    *
    * <p>This request accepts only metadata as an argument.
    */
-  public Transfer update(String transfer) throws StripeException {
-    return update(transfer, (TransferUpdateParams) null, (RequestOptions) null);
+  public Transfer update(String id) throws StripeException {
+    return update(id, (TransferUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the specified transfer by setting the values of the parameters passed. Any parameters
@@ -158,9 +158,9 @@ public final class TransferService extends ApiService {
    *
    * <p>This request accepts only metadata as an argument.
    */
-  public Transfer update(String transfer, TransferUpdateParams params, RequestOptions options)
+  public Transfer update(String id, TransferUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer));
+    String path = String.format("/v1/transfers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -23,27 +23,27 @@ public final class SourceService extends ApiService {
   }
 
   /** Delete a specified source for a given customer. */
-  public PaymentSource detach(String customer, String id, SourceDetachParams params)
+  public PaymentSource detach(String customerId, String id, SourceDetachParams params)
       throws StripeException {
-    return detach(customer, id, params, (RequestOptions) null);
+    return detach(customerId, id, params, (RequestOptions) null);
   }
   /** Delete a specified source for a given customer. */
-  public PaymentSource detach(String customer, String id, RequestOptions options)
+  public PaymentSource detach(String customerId, String id, RequestOptions options)
       throws StripeException {
-    return detach(customer, id, (SourceDetachParams) null, options);
+    return detach(customerId, id, (SourceDetachParams) null, options);
   }
   /** Delete a specified source for a given customer. */
-  public PaymentSource detach(String customer, String id) throws StripeException {
-    return detach(customer, id, (SourceDetachParams) null, (RequestOptions) null);
+  public PaymentSource detach(String customerId, String id) throws StripeException {
+    return detach(customerId, id, (SourceDetachParams) null, (RequestOptions) null);
   }
   /** Delete a specified source for a given customer. */
   public PaymentSource detach(
-      String customer, String id, SourceDetachParams params, RequestOptions options)
+      String customerId, String id, SourceDetachParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/sources/%s",
-            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -57,30 +57,30 @@ public final class SourceService extends ApiService {
    * Retrieves an existing source object. Supply the unique source ID from a source creation request
    * and Stripe will return the corresponding up-to-date source object information.
    */
-  public Source retrieve(String source, SourceRetrieveParams params) throws StripeException {
-    return retrieve(source, params, (RequestOptions) null);
+  public Source retrieve(String id, SourceRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves an existing source object. Supply the unique source ID from a source creation request
    * and Stripe will return the corresponding up-to-date source object information.
    */
-  public Source retrieve(String source, RequestOptions options) throws StripeException {
-    return retrieve(source, (SourceRetrieveParams) null, options);
+  public Source retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (SourceRetrieveParams) null, options);
   }
   /**
    * Retrieves an existing source object. Supply the unique source ID from a source creation request
    * and Stripe will return the corresponding up-to-date source object information.
    */
-  public Source retrieve(String source) throws StripeException {
-    return retrieve(source, (SourceRetrieveParams) null, (RequestOptions) null);
+  public Source retrieve(String id) throws StripeException {
+    return retrieve(id, (SourceRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves an existing source object. Supply the unique source ID from a source creation request
    * and Stripe will return the corresponding up-to-date source object information.
    */
-  public Source retrieve(String source, SourceRetrieveParams params, RequestOptions options)
+  public Source retrieve(String id, SourceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/sources/%s", ApiResource.urlEncodeId(source));
+    String path = String.format("/v1/sources/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -98,8 +98,8 @@ public final class SourceService extends ApiService {
    * possible to update type specific information for selected payment methods. Please refer to our
    * <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
    */
-  public Source update(String source, SourceUpdateParams params) throws StripeException {
-    return update(source, params, (RequestOptions) null);
+  public Source update(String id, SourceUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates the specified source by setting the values of the parameters passed. Any parameters not
@@ -109,8 +109,8 @@ public final class SourceService extends ApiService {
    * possible to update type specific information for selected payment methods. Please refer to our
    * <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
    */
-  public Source update(String source, RequestOptions options) throws StripeException {
-    return update(source, (SourceUpdateParams) null, options);
+  public Source update(String id, RequestOptions options) throws StripeException {
+    return update(id, (SourceUpdateParams) null, options);
   }
   /**
    * Updates the specified source by setting the values of the parameters passed. Any parameters not
@@ -120,8 +120,8 @@ public final class SourceService extends ApiService {
    * possible to update type specific information for selected payment methods. Please refer to our
    * <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
    */
-  public Source update(String source) throws StripeException {
-    return update(source, (SourceUpdateParams) null, (RequestOptions) null);
+  public Source update(String id) throws StripeException {
+    return update(id, (SourceUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the specified source by setting the values of the parameters passed. Any parameters not
@@ -131,9 +131,9 @@ public final class SourceService extends ApiService {
    * possible to update type specific information for selected payment methods. Please refer to our
    * <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
    */
-  public Source update(String source, SourceUpdateParams params, RequestOptions options)
+  public Source update(String id, SourceUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/sources/%s", ApiResource.urlEncodeId(source));
+    String path = String.format("/v1/sources/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -168,13 +168,13 @@ public final class SourceService extends ApiService {
     return this.request(request, Source.class);
   }
   /** Verify a given source. */
-  public Source verify(String source, SourceVerifyParams params) throws StripeException {
-    return verify(source, params, (RequestOptions) null);
+  public Source verify(String id, SourceVerifyParams params) throws StripeException {
+    return verify(id, params, (RequestOptions) null);
   }
   /** Verify a given source. */
-  public Source verify(String source, SourceVerifyParams params, RequestOptions options)
+  public Source verify(String id, SourceVerifyParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/sources/%s/verify", ApiResource.urlEncodeId(source));
+    String path = String.format("/v1/sources/%s/verify", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

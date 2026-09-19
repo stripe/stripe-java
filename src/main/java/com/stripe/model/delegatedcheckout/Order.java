@@ -79,30 +79,28 @@ public class Order extends ApiResource implements HasId {
   Totals totals;
 
   /** Retrieves a delegated checkout order. */
-  public static Order retrieve(String orderId) throws StripeException {
-    return retrieve(orderId, (Map<String, Object>) null, (RequestOptions) null);
+  public static Order retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a delegated checkout order. */
-  public static Order retrieve(String orderId, RequestOptions options) throws StripeException {
-    return retrieve(orderId, (Map<String, Object>) null, options);
+  public static Order retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a delegated checkout order. */
-  public static Order retrieve(String orderId, Map<String, Object> params, RequestOptions options)
+  public static Order retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/delegated_checkout/orders/%s", ApiResource.urlEncodeId(orderId));
+    String path = String.format("/v1/delegated_checkout/orders/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Order.class);
   }
 
   /** Retrieves a delegated checkout order. */
-  public static Order retrieve(String orderId, OrderRetrieveParams params, RequestOptions options)
+  public static Order retrieve(String id, OrderRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/delegated_checkout/orders/%s", ApiResource.urlEncodeId(orderId));
+    String path = String.format("/v1/delegated_checkout/orders/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

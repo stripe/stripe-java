@@ -98,21 +98,21 @@ public final class QuoteService extends ApiService {
     return this.request(request, Quote.class);
   }
   /** Retrieves the quote with the given ID. */
-  public Quote retrieve(String quote, QuoteRetrieveParams params) throws StripeException {
-    return retrieve(quote, params, (RequestOptions) null);
+  public Quote retrieve(String id, QuoteRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the quote with the given ID. */
-  public Quote retrieve(String quote, RequestOptions options) throws StripeException {
-    return retrieve(quote, (QuoteRetrieveParams) null, options);
+  public Quote retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (QuoteRetrieveParams) null, options);
   }
   /** Retrieves the quote with the given ID. */
-  public Quote retrieve(String quote) throws StripeException {
-    return retrieve(quote, (QuoteRetrieveParams) null, (RequestOptions) null);
+  public Quote retrieve(String id) throws StripeException {
+    return retrieve(id, (QuoteRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the quote with the given ID. */
-  public Quote retrieve(String quote, QuoteRetrieveParams params, RequestOptions options)
+  public Quote retrieve(String id, QuoteRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/quotes/%s", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -123,21 +123,21 @@ public final class QuoteService extends ApiService {
     return this.request(request, Quote.class);
   }
   /** A quote models prices and services for a customer. */
-  public Quote update(String quote, QuoteUpdateParams params) throws StripeException {
-    return update(quote, params, (RequestOptions) null);
+  public Quote update(String id, QuoteUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /** A quote models prices and services for a customer. */
-  public Quote update(String quote, RequestOptions options) throws StripeException {
-    return update(quote, (QuoteUpdateParams) null, options);
+  public Quote update(String id, RequestOptions options) throws StripeException {
+    return update(id, (QuoteUpdateParams) null, options);
   }
   /** A quote models prices and services for a customer. */
-  public Quote update(String quote) throws StripeException {
-    return update(quote, (QuoteUpdateParams) null, (RequestOptions) null);
+  public Quote update(String id) throws StripeException {
+    return update(id, (QuoteUpdateParams) null, (RequestOptions) null);
   }
   /** A quote models prices and services for a customer. */
-  public Quote update(String quote, QuoteUpdateParams params, RequestOptions options)
+  public Quote update(String id, QuoteUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/quotes/%s", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -148,21 +148,21 @@ public final class QuoteService extends ApiService {
     return this.request(request, Quote.class);
   }
   /** Accepts the specified quote. */
-  public Quote accept(String quote, QuoteAcceptParams params) throws StripeException {
-    return accept(quote, params, (RequestOptions) null);
+  public Quote accept(String id, QuoteAcceptParams params) throws StripeException {
+    return accept(id, params, (RequestOptions) null);
   }
   /** Accepts the specified quote. */
-  public Quote accept(String quote, RequestOptions options) throws StripeException {
-    return accept(quote, (QuoteAcceptParams) null, options);
+  public Quote accept(String id, RequestOptions options) throws StripeException {
+    return accept(id, (QuoteAcceptParams) null, options);
   }
   /** Accepts the specified quote. */
-  public Quote accept(String quote) throws StripeException {
-    return accept(quote, (QuoteAcceptParams) null, (RequestOptions) null);
+  public Quote accept(String id) throws StripeException {
+    return accept(id, (QuoteAcceptParams) null, (RequestOptions) null);
   }
   /** Accepts the specified quote. */
-  public Quote accept(String quote, QuoteAcceptParams params, RequestOptions options)
+  public Quote accept(String id, QuoteAcceptParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/quotes/%s/accept", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s/accept", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -173,21 +173,21 @@ public final class QuoteService extends ApiService {
     return this.request(request, Quote.class);
   }
   /** Cancels the quote. */
-  public Quote cancel(String quote, QuoteCancelParams params) throws StripeException {
-    return cancel(quote, params, (RequestOptions) null);
+  public Quote cancel(String id, QuoteCancelParams params) throws StripeException {
+    return cancel(id, params, (RequestOptions) null);
   }
   /** Cancels the quote. */
-  public Quote cancel(String quote, RequestOptions options) throws StripeException {
-    return cancel(quote, (QuoteCancelParams) null, options);
+  public Quote cancel(String id, RequestOptions options) throws StripeException {
+    return cancel(id, (QuoteCancelParams) null, options);
   }
   /** Cancels the quote. */
-  public Quote cancel(String quote) throws StripeException {
-    return cancel(quote, (QuoteCancelParams) null, (RequestOptions) null);
+  public Quote cancel(String id) throws StripeException {
+    return cancel(id, (QuoteCancelParams) null, (RequestOptions) null);
   }
   /** Cancels the quote. */
-  public Quote cancel(String quote, QuoteCancelParams params, RequestOptions options)
+  public Quote cancel(String id, QuoteCancelParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/quotes/%s/cancel", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -198,21 +198,21 @@ public final class QuoteService extends ApiService {
     return this.request(request, Quote.class);
   }
   /** Finalizes the quote. */
-  public Quote finalizeQuote(String quote, QuoteFinalizeQuoteParams params) throws StripeException {
-    return finalizeQuote(quote, params, (RequestOptions) null);
+  public Quote finalizeQuote(String id, QuoteFinalizeQuoteParams params) throws StripeException {
+    return finalizeQuote(id, params, (RequestOptions) null);
   }
   /** Finalizes the quote. */
-  public Quote finalizeQuote(String quote, RequestOptions options) throws StripeException {
-    return finalizeQuote(quote, (QuoteFinalizeQuoteParams) null, options);
+  public Quote finalizeQuote(String id, RequestOptions options) throws StripeException {
+    return finalizeQuote(id, (QuoteFinalizeQuoteParams) null, options);
   }
   /** Finalizes the quote. */
-  public Quote finalizeQuote(String quote) throws StripeException {
-    return finalizeQuote(quote, (QuoteFinalizeQuoteParams) null, (RequestOptions) null);
+  public Quote finalizeQuote(String id) throws StripeException {
+    return finalizeQuote(id, (QuoteFinalizeQuoteParams) null, (RequestOptions) null);
   }
   /** Finalizes the quote. */
-  public Quote finalizeQuote(String quote, QuoteFinalizeQuoteParams params, RequestOptions options)
+  public Quote finalizeQuote(String id, QuoteFinalizeQuoteParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/quotes/%s/finalize", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s/finalize", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -223,21 +223,21 @@ public final class QuoteService extends ApiService {
     return this.request(request, Quote.class);
   }
   /** Converts a stale quote to draft. */
-  public Quote markDraft(String quote, QuoteMarkDraftParams params) throws StripeException {
-    return markDraft(quote, params, (RequestOptions) null);
+  public Quote markDraft(String id, QuoteMarkDraftParams params) throws StripeException {
+    return markDraft(id, params, (RequestOptions) null);
   }
   /** Converts a stale quote to draft. */
-  public Quote markDraft(String quote, RequestOptions options) throws StripeException {
-    return markDraft(quote, (QuoteMarkDraftParams) null, options);
+  public Quote markDraft(String id, RequestOptions options) throws StripeException {
+    return markDraft(id, (QuoteMarkDraftParams) null, options);
   }
   /** Converts a stale quote to draft. */
-  public Quote markDraft(String quote) throws StripeException {
-    return markDraft(quote, (QuoteMarkDraftParams) null, (RequestOptions) null);
+  public Quote markDraft(String id) throws StripeException {
+    return markDraft(id, (QuoteMarkDraftParams) null, (RequestOptions) null);
   }
   /** Converts a stale quote to draft. */
-  public Quote markDraft(String quote, QuoteMarkDraftParams params, RequestOptions options)
+  public Quote markDraft(String id, QuoteMarkDraftParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/quotes/%s/mark_draft", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s/mark_draft", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -248,21 +248,21 @@ public final class QuoteService extends ApiService {
     return this.request(request, Quote.class);
   }
   /** Converts a draft or open quote to stale. */
-  public Quote markStale(String quote, QuoteMarkStaleParams params) throws StripeException {
-    return markStale(quote, params, (RequestOptions) null);
+  public Quote markStale(String id, QuoteMarkStaleParams params) throws StripeException {
+    return markStale(id, params, (RequestOptions) null);
   }
   /** Converts a draft or open quote to stale. */
-  public Quote markStale(String quote, RequestOptions options) throws StripeException {
-    return markStale(quote, (QuoteMarkStaleParams) null, options);
+  public Quote markStale(String id, RequestOptions options) throws StripeException {
+    return markStale(id, (QuoteMarkStaleParams) null, options);
   }
   /** Converts a draft or open quote to stale. */
-  public Quote markStale(String quote) throws StripeException {
-    return markStale(quote, (QuoteMarkStaleParams) null, (RequestOptions) null);
+  public Quote markStale(String id) throws StripeException {
+    return markStale(id, (QuoteMarkStaleParams) null, (RequestOptions) null);
   }
   /** Converts a draft or open quote to stale. */
-  public Quote markStale(String quote, QuoteMarkStaleParams params, RequestOptions options)
+  public Quote markStale(String id, QuoteMarkStaleParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/quotes/%s/mark_stale", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s/mark_stale", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -273,21 +273,21 @@ public final class QuoteService extends ApiService {
     return this.request(request, Quote.class);
   }
   /** Recompute the upcoming invoice estimate for the quote. */
-  public Quote reestimate(String quote, QuoteReestimateParams params) throws StripeException {
-    return reestimate(quote, params, (RequestOptions) null);
+  public Quote reestimate(String id, QuoteReestimateParams params) throws StripeException {
+    return reestimate(id, params, (RequestOptions) null);
   }
   /** Recompute the upcoming invoice estimate for the quote. */
-  public Quote reestimate(String quote, RequestOptions options) throws StripeException {
-    return reestimate(quote, (QuoteReestimateParams) null, options);
+  public Quote reestimate(String id, RequestOptions options) throws StripeException {
+    return reestimate(id, (QuoteReestimateParams) null, options);
   }
   /** Recompute the upcoming invoice estimate for the quote. */
-  public Quote reestimate(String quote) throws StripeException {
-    return reestimate(quote, (QuoteReestimateParams) null, (RequestOptions) null);
+  public Quote reestimate(String id) throws StripeException {
+    return reestimate(id, (QuoteReestimateParams) null, (RequestOptions) null);
   }
   /** Recompute the upcoming invoice estimate for the quote. */
-  public Quote reestimate(String quote, QuoteReestimateParams params, RequestOptions options)
+  public Quote reestimate(String id, QuoteReestimateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/quotes/%s/reestimate", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s/reestimate", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -301,30 +301,30 @@ public final class QuoteService extends ApiService {
    * Download the PDF for a finalized quote. Explanation for special handling can be found <a
    * href="https://docs.stripe.com/quotes/overview#quote_pdf">here</a>
    */
-  public InputStream pdf(String quote, QuotePdfParams params) throws StripeException {
-    return pdf(quote, params, (RequestOptions) null);
+  public InputStream pdf(String id, QuotePdfParams params) throws StripeException {
+    return pdf(id, params, (RequestOptions) null);
   }
   /**
    * Download the PDF for a finalized quote. Explanation for special handling can be found <a
    * href="https://docs.stripe.com/quotes/overview#quote_pdf">here</a>
    */
-  public InputStream pdf(String quote, RequestOptions options) throws StripeException {
-    return pdf(quote, (QuotePdfParams) null, options);
+  public InputStream pdf(String id, RequestOptions options) throws StripeException {
+    return pdf(id, (QuotePdfParams) null, options);
   }
   /**
    * Download the PDF for a finalized quote. Explanation for special handling can be found <a
    * href="https://docs.stripe.com/quotes/overview#quote_pdf">here</a>
    */
-  public InputStream pdf(String quote) throws StripeException {
-    return pdf(quote, (QuotePdfParams) null, (RequestOptions) null);
+  public InputStream pdf(String id) throws StripeException {
+    return pdf(id, (QuotePdfParams) null, (RequestOptions) null);
   }
   /**
    * Download the PDF for a finalized quote. Explanation for special handling can be found <a
    * href="https://docs.stripe.com/quotes/overview#quote_pdf">here</a>
    */
-  public InputStream pdf(String quote, QuotePdfParams params, RequestOptions options)
+  public InputStream pdf(String id, QuotePdfParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(quote));
+    String path = String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.FILES,
@@ -336,33 +336,28 @@ public final class QuoteService extends ApiService {
   }
   /** Preview the invoice line items that would be generated by accepting the quote. */
   public StripeCollection<InvoiceLineItem> listPreviewInvoiceLines(
-      String quote, String previewInvoice, QuoteListPreviewInvoiceLinesParams params)
+      String quoteId, String id, QuoteListPreviewInvoiceLinesParams params) throws StripeException {
+    return listPreviewInvoiceLines(quoteId, id, params, (RequestOptions) null);
+  }
+  /** Preview the invoice line items that would be generated by accepting the quote. */
+  public StripeCollection<InvoiceLineItem> listPreviewInvoiceLines(
+      String quoteId, String id, RequestOptions options) throws StripeException {
+    return listPreviewInvoiceLines(quoteId, id, (QuoteListPreviewInvoiceLinesParams) null, options);
+  }
+  /** Preview the invoice line items that would be generated by accepting the quote. */
+  public StripeCollection<InvoiceLineItem> listPreviewInvoiceLines(String quoteId, String id)
       throws StripeException {
-    return listPreviewInvoiceLines(quote, previewInvoice, params, (RequestOptions) null);
-  }
-  /** Preview the invoice line items that would be generated by accepting the quote. */
-  public StripeCollection<InvoiceLineItem> listPreviewInvoiceLines(
-      String quote, String previewInvoice, RequestOptions options) throws StripeException {
     return listPreviewInvoiceLines(
-        quote, previewInvoice, (QuoteListPreviewInvoiceLinesParams) null, options);
+        quoteId, id, (QuoteListPreviewInvoiceLinesParams) null, (RequestOptions) null);
   }
   /** Preview the invoice line items that would be generated by accepting the quote. */
   public StripeCollection<InvoiceLineItem> listPreviewInvoiceLines(
-      String quote, String previewInvoice) throws StripeException {
-    return listPreviewInvoiceLines(
-        quote, previewInvoice, (QuoteListPreviewInvoiceLinesParams) null, (RequestOptions) null);
-  }
-  /** Preview the invoice line items that would be generated by accepting the quote. */
-  public StripeCollection<InvoiceLineItem> listPreviewInvoiceLines(
-      String quote,
-      String previewInvoice,
-      QuoteListPreviewInvoiceLinesParams params,
-      RequestOptions options)
+      String quoteId, String id, QuoteListPreviewInvoiceLinesParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/quotes/%s/preview_invoices/%s/lines",
-            ApiResource.urlEncodeId(quote), ApiResource.urlEncodeId(previewInvoice));
+            ApiResource.urlEncodeId(quoteId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

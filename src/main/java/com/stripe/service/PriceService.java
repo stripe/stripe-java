@@ -91,21 +91,21 @@ public final class PriceService extends ApiService {
     return this.request(request, Price.class);
   }
   /** Retrieves the price with the given ID. */
-  public Price retrieve(String price, PriceRetrieveParams params) throws StripeException {
-    return retrieve(price, params, (RequestOptions) null);
+  public Price retrieve(String id, PriceRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the price with the given ID. */
-  public Price retrieve(String price, RequestOptions options) throws StripeException {
-    return retrieve(price, (PriceRetrieveParams) null, options);
+  public Price retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (PriceRetrieveParams) null, options);
   }
   /** Retrieves the price with the given ID. */
-  public Price retrieve(String price) throws StripeException {
-    return retrieve(price, (PriceRetrieveParams) null, (RequestOptions) null);
+  public Price retrieve(String id) throws StripeException {
+    return retrieve(id, (PriceRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the price with the given ID. */
-  public Price retrieve(String price, PriceRetrieveParams params, RequestOptions options)
+  public Price retrieve(String id, PriceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
+    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -119,30 +119,30 @@ public final class PriceService extends ApiService {
    * Updates the specified price by setting the values of the parameters passed. Any parameters not
    * provided are left unchanged.
    */
-  public Price update(String price, PriceUpdateParams params) throws StripeException {
-    return update(price, params, (RequestOptions) null);
+  public Price update(String id, PriceUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates the specified price by setting the values of the parameters passed. Any parameters not
    * provided are left unchanged.
    */
-  public Price update(String price, RequestOptions options) throws StripeException {
-    return update(price, (PriceUpdateParams) null, options);
+  public Price update(String id, RequestOptions options) throws StripeException {
+    return update(id, (PriceUpdateParams) null, options);
   }
   /**
    * Updates the specified price by setting the values of the parameters passed. Any parameters not
    * provided are left unchanged.
    */
-  public Price update(String price) throws StripeException {
-    return update(price, (PriceUpdateParams) null, (RequestOptions) null);
+  public Price update(String id) throws StripeException {
+    return update(id, (PriceUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the specified price by setting the values of the parameters passed. Any parameters not
    * provided are left unchanged.
    */
-  public Price update(String price, PriceUpdateParams params, RequestOptions options)
+  public Price update(String id, PriceUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(price));
+    String path = String.format("/v1/prices/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -204,19 +204,18 @@ public final class PriceService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a Price update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(String price, PriceUpdateParams params)
-      throws StripeException {
-    return serializeBatchUpdate(price, params, (RequestOptions) null);
+  public String serializeBatchUpdate(String id, PriceUpdateParams params) throws StripeException {
+    return serializeBatchUpdate(id, params, (RequestOptions) null);
   }
   /** Serializes a Price update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(String price, PriceUpdateParams params, RequestOptions options)
+  public String serializeBatchUpdate(String id, PriceUpdateParams params, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("price", price);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

@@ -24,9 +24,9 @@ public final class CustomerFundingInstructionsService extends ApiService {
    * already been created for a given customer, the same funding instructions will be retrieved. In
    * other words, we will return the same funding instructions each time.
    */
-  public FundingInstructions create(String customer, CustomerFundingInstructionsCreateParams params)
+  public FundingInstructions create(String id, CustomerFundingInstructionsCreateParams params)
       throws StripeException {
-    return create(customer, params, (RequestOptions) null);
+    return create(id, params, (RequestOptions) null);
   }
   /**
    * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
@@ -35,10 +35,10 @@ public final class CustomerFundingInstructionsService extends ApiService {
    * other words, we will return the same funding instructions each time.
    */
   public FundingInstructions create(
-      String customer, CustomerFundingInstructionsCreateParams params, RequestOptions options)
+      String id, CustomerFundingInstructionsCreateParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/customers/%s/funding_instructions", ApiResource.urlEncodeId(customer));
+        String.format("/v1/customers/%s/funding_instructions", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -50,19 +50,19 @@ public final class CustomerFundingInstructionsService extends ApiService {
   }
   /** Serializes a CustomerFundingInstructions create request into a batch job JSONL line. */
   public String serializeBatchCreateFundingInstructions(
-      String customer, CustomerFundingInstructionsCreateParams params) throws StripeException {
-    return serializeBatchCreateFundingInstructions(customer, params, (RequestOptions) null);
+      String id, CustomerFundingInstructionsCreateParams params) throws StripeException {
+    return serializeBatchCreateFundingInstructions(id, params, (RequestOptions) null);
   }
   /** Serializes a CustomerFundingInstructions create request into a batch job JSONL line. */
   public String serializeBatchCreateFundingInstructions(
-      String customer, CustomerFundingInstructionsCreateParams params, RequestOptions options)
+      String id, CustomerFundingInstructionsCreateParams params, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("customer", customer);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

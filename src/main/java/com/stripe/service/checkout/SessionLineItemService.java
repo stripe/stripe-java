@@ -24,26 +24,25 @@ public final class SessionLineItemService extends ApiService {
    * containing the first handful of those items. There is also a URL where you can retrieve the
    * full (paginated) list of line items.
    */
-  public StripeCollection<LineItem> list(String session, SessionLineItemListParams params)
+  public StripeCollection<LineItem> list(String id, SessionLineItemListParams params)
       throws StripeException {
-    return list(session, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
   /**
    * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
    * containing the first handful of those items. There is also a URL where you can retrieve the
    * full (paginated) list of line items.
    */
-  public StripeCollection<LineItem> list(String session, RequestOptions options)
-      throws StripeException {
-    return list(session, (SessionLineItemListParams) null, options);
+  public StripeCollection<LineItem> list(String id, RequestOptions options) throws StripeException {
+    return list(id, (SessionLineItemListParams) null, options);
   }
   /**
    * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
    * containing the first handful of those items. There is also a URL where you can retrieve the
    * full (paginated) list of line items.
    */
-  public StripeCollection<LineItem> list(String session) throws StripeException {
-    return list(session, (SessionLineItemListParams) null, (RequestOptions) null);
+  public StripeCollection<LineItem> list(String id) throws StripeException {
+    return list(id, (SessionLineItemListParams) null, (RequestOptions) null);
   }
   /**
    * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
@@ -51,10 +50,8 @@ public final class SessionLineItemService extends ApiService {
    * full (paginated) list of line items.
    */
   public StripeCollection<LineItem> list(
-      String session, SessionLineItemListParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(session));
+      String id, SessionLineItemListParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

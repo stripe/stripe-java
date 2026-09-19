@@ -114,28 +114,28 @@ public class Product extends ApiResource implements HasId {
   }
 
   /** Retrieves the details of a Climate product with the given ID. */
-  public static Product retrieve(String product) throws StripeException {
-    return retrieve(product, (Map<String, Object>) null, (RequestOptions) null);
+  public static Product retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the details of a Climate product with the given ID. */
-  public static Product retrieve(String product, RequestOptions options) throws StripeException {
-    return retrieve(product, (Map<String, Object>) null, options);
+  public static Product retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the details of a Climate product with the given ID. */
-  public static Product retrieve(String product, Map<String, Object> params, RequestOptions options)
+  public static Product retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/climate/products/%s", ApiResource.urlEncodeId(product));
+    String path = String.format("/v1/climate/products/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Product.class);
   }
 
   /** Retrieves the details of a Climate product with the given ID. */
-  public static Product retrieve(
-      String product, ProductRetrieveParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/climate/products/%s", ApiResource.urlEncodeId(product));
+  public static Product retrieve(String id, ProductRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/climate/products/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

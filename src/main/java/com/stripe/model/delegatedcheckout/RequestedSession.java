@@ -370,24 +370,21 @@ public class RequestedSession extends ApiResource
   }
 
   /** Retrieves a requested session. */
-  public static RequestedSession retrieve(String requestedSession) throws StripeException {
-    return retrieve(requestedSession, (Map<String, Object>) null, (RequestOptions) null);
+  public static RequestedSession retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a requested session. */
-  public static RequestedSession retrieve(String requestedSession, RequestOptions options)
+  public static RequestedSession retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(requestedSession, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a requested session. */
   public static RequestedSession retrieve(
-      String requestedSession, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
-        String.format(
-            "/v1/delegated_checkout/requested_sessions/%s",
-            ApiResource.urlEncodeId(requestedSession));
+        String.format("/v1/delegated_checkout/requested_sessions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, RequestedSession.class);
@@ -395,12 +392,10 @@ public class RequestedSession extends ApiResource
 
   /** Retrieves a requested session. */
   public static RequestedSession retrieve(
-      String requestedSession, RequestedSessionRetrieveParams params, RequestOptions options)
+      String id, RequestedSessionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/delegated_checkout/requested_sessions/%s",
-            ApiResource.urlEncodeId(requestedSession));
+        String.format("/v1/delegated_checkout/requested_sessions/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

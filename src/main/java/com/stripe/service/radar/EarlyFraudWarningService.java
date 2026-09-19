@@ -52,19 +52,9 @@ public final class EarlyFraudWarningService extends ApiService {
    * <p>Please refer to the <a href="https://stripe.com/docs/api#early_fraud_warning_object">early
    * fraud warning</a> object reference for more details.
    */
-  public EarlyFraudWarning retrieve(
-      String earlyFraudWarning, EarlyFraudWarningRetrieveParams params) throws StripeException {
-    return retrieve(earlyFraudWarning, params, (RequestOptions) null);
-  }
-  /**
-   * Retrieves the details of an early fraud warning that has previously been created.
-   *
-   * <p>Please refer to the <a href="https://stripe.com/docs/api#early_fraud_warning_object">early
-   * fraud warning</a> object reference for more details.
-   */
-  public EarlyFraudWarning retrieve(String earlyFraudWarning, RequestOptions options)
+  public EarlyFraudWarning retrieve(String id, EarlyFraudWarningRetrieveParams params)
       throws StripeException {
-    return retrieve(earlyFraudWarning, (EarlyFraudWarningRetrieveParams) null, options);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an early fraud warning that has previously been created.
@@ -72,9 +62,17 @@ public final class EarlyFraudWarningService extends ApiService {
    * <p>Please refer to the <a href="https://stripe.com/docs/api#early_fraud_warning_object">early
    * fraud warning</a> object reference for more details.
    */
-  public EarlyFraudWarning retrieve(String earlyFraudWarning) throws StripeException {
-    return retrieve(
-        earlyFraudWarning, (EarlyFraudWarningRetrieveParams) null, (RequestOptions) null);
+  public EarlyFraudWarning retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (EarlyFraudWarningRetrieveParams) null, options);
+  }
+  /**
+   * Retrieves the details of an early fraud warning that has previously been created.
+   *
+   * <p>Please refer to the <a href="https://stripe.com/docs/api#early_fraud_warning_object">early
+   * fraud warning</a> object reference for more details.
+   */
+  public EarlyFraudWarning retrieve(String id) throws StripeException {
+    return retrieve(id, (EarlyFraudWarningRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an early fraud warning that has previously been created.
@@ -83,11 +81,9 @@ public final class EarlyFraudWarningService extends ApiService {
    * fraud warning</a> object reference for more details.
    */
   public EarlyFraudWarning retrieve(
-      String earlyFraudWarning, EarlyFraudWarningRetrieveParams params, RequestOptions options)
+      String id, EarlyFraudWarningRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(earlyFraudWarning));
+    String path = String.format("/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
