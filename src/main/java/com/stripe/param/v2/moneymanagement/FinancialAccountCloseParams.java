@@ -98,11 +98,23 @@ public class FinancialAccountCloseParams extends ApiRequestParams {
     @SerializedName("payout_method")
     String payoutMethod;
 
+    /**
+     * Whether to skip forwarding exportable self-custodied wallet balances. Defaults to false. This
+     * does not skip non-exportable or fiat balances, inbound-pending checks, or negative-balance
+     * requirements.
+     */
+    @SerializedName("skip_exportable_balances")
+    Boolean skipExportableBalances;
+
     private ForwardingSettings(
-        Map<String, Object> extraParams, String paymentMethod, String payoutMethod) {
+        Map<String, Object> extraParams,
+        String paymentMethod,
+        String payoutMethod,
+        Boolean skipExportableBalances) {
       this.extraParams = extraParams;
       this.paymentMethod = paymentMethod;
       this.payoutMethod = payoutMethod;
+      this.skipExportableBalances = skipExportableBalances;
     }
 
     public static Builder builder() {
@@ -116,10 +128,12 @@ public class FinancialAccountCloseParams extends ApiRequestParams {
 
       private String payoutMethod;
 
+      private Boolean skipExportableBalances;
+
       /** Finalize and obtain parameter instance from this builder. */
       public FinancialAccountCloseParams.ForwardingSettings build() {
         return new FinancialAccountCloseParams.ForwardingSettings(
-            this.extraParams, this.paymentMethod, this.payoutMethod);
+            this.extraParams, this.paymentMethod, this.payoutMethod, this.skipExportableBalances);
       }
 
       /**
@@ -158,6 +172,16 @@ public class FinancialAccountCloseParams extends ApiRequestParams {
       /** The address to send forwarded payouts to. */
       public Builder setPayoutMethod(String payoutMethod) {
         this.payoutMethod = payoutMethod;
+        return this;
+      }
+
+      /**
+       * Whether to skip forwarding exportable self-custodied wallet balances. Defaults to false.
+       * This does not skip non-exportable or fiat balances, inbound-pending checks, or
+       * negative-balance requirements.
+       */
+      public Builder setSkipExportableBalances(Boolean skipExportableBalances) {
+        this.skipExportableBalances = skipExportableBalances;
         return this;
       }
     }

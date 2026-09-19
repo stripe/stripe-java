@@ -18,28 +18,23 @@ public final class GrantedTokenService extends ApiService {
   }
 
   /** Retrieves an existing SharedPaymentGrantedToken object. */
-  public GrantedToken retrieve(String sharedPaymentGrantedToken, GrantedTokenRetrieveParams params)
+  public GrantedToken retrieve(String id, GrantedTokenRetrieveParams params)
       throws StripeException {
-    return retrieve(sharedPaymentGrantedToken, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves an existing SharedPaymentGrantedToken object. */
-  public GrantedToken retrieve(String sharedPaymentGrantedToken, RequestOptions options)
-      throws StripeException {
-    return retrieve(sharedPaymentGrantedToken, (GrantedTokenRetrieveParams) null, options);
+  public GrantedToken retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (GrantedTokenRetrieveParams) null, options);
   }
   /** Retrieves an existing SharedPaymentGrantedToken object. */
-  public GrantedToken retrieve(String sharedPaymentGrantedToken) throws StripeException {
-    return retrieve(
-        sharedPaymentGrantedToken, (GrantedTokenRetrieveParams) null, (RequestOptions) null);
+  public GrantedToken retrieve(String id) throws StripeException {
+    return retrieve(id, (GrantedTokenRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves an existing SharedPaymentGrantedToken object. */
-  public GrantedToken retrieve(
-      String sharedPaymentGrantedToken, GrantedTokenRetrieveParams params, RequestOptions options)
+  public GrantedToken retrieve(String id, GrantedTokenRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/shared_payment/granted_tokens/%s",
-            ApiResource.urlEncodeId(sharedPaymentGrantedToken));
+        String.format("/v1/shared_payment/granted_tokens/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

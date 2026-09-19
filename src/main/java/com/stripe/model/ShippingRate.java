@@ -192,22 +192,19 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   }
 
   /** Returns the shipping rate object with the given ID. */
-  public static ShippingRate retrieve(String shippingRateToken) throws StripeException {
-    return retrieve(shippingRateToken, (Map<String, Object>) null, (RequestOptions) null);
+  public static ShippingRate retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Returns the shipping rate object with the given ID. */
-  public static ShippingRate retrieve(String shippingRateToken, RequestOptions options)
-      throws StripeException {
-    return retrieve(shippingRateToken, (Map<String, Object>) null, options);
+  public static ShippingRate retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Returns the shipping rate object with the given ID. */
-  public static ShippingRate retrieve(
-      String shippingRateToken, Map<String, Object> params, RequestOptions options)
+  public static ShippingRate retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken));
+    String path = String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ShippingRate.class);
@@ -215,10 +212,8 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
 
   /** Returns the shipping rate object with the given ID. */
   public static ShippingRate retrieve(
-      String shippingRateToken, ShippingRateRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken));
+      String id, ShippingRateRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

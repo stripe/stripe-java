@@ -137,35 +137,35 @@ public final class TransferReversalService extends ApiService {
    * but you can also retrieve details about a specific reversal stored on the transfer.
    */
   public TransferReversal retrieve(
-      String transfer, String id, TransferReversalRetrieveParams params) throws StripeException {
-    return retrieve(transfer, id, params, (RequestOptions) null);
+      String transferId, String id, TransferReversalRetrieveParams params) throws StripeException {
+    return retrieve(transferId, id, params, (RequestOptions) null);
   }
   /**
    * By default, you can see the 10 most recent reversals stored directly on the transfer object,
    * but you can also retrieve details about a specific reversal stored on the transfer.
    */
-  public TransferReversal retrieve(String transfer, String id, RequestOptions options)
+  public TransferReversal retrieve(String transferId, String id, RequestOptions options)
       throws StripeException {
-    return retrieve(transfer, id, (TransferReversalRetrieveParams) null, options);
+    return retrieve(transferId, id, (TransferReversalRetrieveParams) null, options);
   }
   /**
    * By default, you can see the 10 most recent reversals stored directly on the transfer object,
    * but you can also retrieve details about a specific reversal stored on the transfer.
    */
-  public TransferReversal retrieve(String transfer, String id) throws StripeException {
-    return retrieve(transfer, id, (TransferReversalRetrieveParams) null, (RequestOptions) null);
+  public TransferReversal retrieve(String transferId, String id) throws StripeException {
+    return retrieve(transferId, id, (TransferReversalRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * By default, you can see the 10 most recent reversals stored directly on the transfer object,
    * but you can also retrieve details about a specific reversal stored on the transfer.
    */
   public TransferReversal retrieve(
-      String transfer, String id, TransferReversalRetrieveParams params, RequestOptions options)
+      String transferId, String id, TransferReversalRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/transfers/%s/reversals/%s",
-            ApiResource.urlEncodeId(transfer), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(transferId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -181,9 +181,9 @@ public final class TransferReversalService extends ApiService {
    *
    * <p>This request only accepts metadata and description as arguments.
    */
-  public TransferReversal update(String transfer, String id, TransferReversalUpdateParams params)
+  public TransferReversal update(String transferId, String id, TransferReversalUpdateParams params)
       throws StripeException {
-    return update(transfer, id, params, (RequestOptions) null);
+    return update(transferId, id, params, (RequestOptions) null);
   }
   /**
    * Updates the specified reversal by setting the values of the parameters passed. Any parameters
@@ -191,9 +191,9 @@ public final class TransferReversalService extends ApiService {
    *
    * <p>This request only accepts metadata and description as arguments.
    */
-  public TransferReversal update(String transfer, String id, RequestOptions options)
+  public TransferReversal update(String transferId, String id, RequestOptions options)
       throws StripeException {
-    return update(transfer, id, (TransferReversalUpdateParams) null, options);
+    return update(transferId, id, (TransferReversalUpdateParams) null, options);
   }
   /**
    * Updates the specified reversal by setting the values of the parameters passed. Any parameters
@@ -201,8 +201,8 @@ public final class TransferReversalService extends ApiService {
    *
    * <p>This request only accepts metadata and description as arguments.
    */
-  public TransferReversal update(String transfer, String id) throws StripeException {
-    return update(transfer, id, (TransferReversalUpdateParams) null, (RequestOptions) null);
+  public TransferReversal update(String transferId, String id) throws StripeException {
+    return update(transferId, id, (TransferReversalUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the specified reversal by setting the values of the parameters passed. Any parameters
@@ -211,12 +211,12 @@ public final class TransferReversalService extends ApiService {
    * <p>This request only accepts metadata and description as arguments.
    */
   public TransferReversal update(
-      String transfer, String id, TransferReversalUpdateParams params, RequestOptions options)
+      String transferId, String id, TransferReversalUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/transfers/%s/reversals/%s",
-            ApiResource.urlEncodeId(transfer), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(transferId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

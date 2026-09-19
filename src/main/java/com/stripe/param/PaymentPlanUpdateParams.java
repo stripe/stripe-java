@@ -159,7 +159,10 @@ public class PaymentPlanUpdateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Schedule {
-    /** <strong>Required.</strong> Required when type is 'amounts_due'. */
+    /**
+     * <strong>Required.</strong> Required when type is 'amounts_due'. Must contain at least 2
+     * installment entries.
+     */
     @SerializedName("amounts_due")
     AmountsDue amountsDue;
 
@@ -198,7 +201,10 @@ public class PaymentPlanUpdateParams extends ApiRequestParams {
         return new PaymentPlanUpdateParams.Schedule(this.amountsDue, this.extraParams, this.type);
       }
 
-      /** <strong>Required.</strong> Required when type is 'amounts_due'. */
+      /**
+       * <strong>Required.</strong> Required when type is 'amounts_due'. Must contain at least 2
+       * installment entries.
+       */
       public Builder setAmountsDue(PaymentPlanUpdateParams.Schedule.AmountsDue amountsDue) {
         this.amountsDue = amountsDue;
         return this;
@@ -242,7 +248,10 @@ public class PaymentPlanUpdateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class AmountsDue {
-      /** <strong>Required.</strong> The list of installment entries. */
+      /**
+       * <strong>Required.</strong> The list of installment entries. Must contain at least 2
+       * entries.
+       */
       @SerializedName("amounts")
       List<PaymentPlanUpdateParams.Schedule.AmountsDue.Amount> amounts;
 

@@ -21,26 +21,26 @@ public final class PaymentIntentAmountDetailsLineItemService extends ApiService 
 
   /** Lists all LineItems of a given PaymentIntent. */
   public StripeCollection<PaymentIntentAmountDetailsLineItem> list(
-      String intent, PaymentIntentAmountDetailsLineItemListParams params) throws StripeException {
-    return list(intent, params, (RequestOptions) null);
+      String id, PaymentIntentAmountDetailsLineItemListParams params) throws StripeException {
+    return list(id, params, (RequestOptions) null);
   }
   /** Lists all LineItems of a given PaymentIntent. */
   public StripeCollection<PaymentIntentAmountDetailsLineItem> list(
-      String intent, RequestOptions options) throws StripeException {
-    return list(intent, (PaymentIntentAmountDetailsLineItemListParams) null, options);
+      String id, RequestOptions options) throws StripeException {
+    return list(id, (PaymentIntentAmountDetailsLineItemListParams) null, options);
   }
   /** Lists all LineItems of a given PaymentIntent. */
-  public StripeCollection<PaymentIntentAmountDetailsLineItem> list(String intent)
+  public StripeCollection<PaymentIntentAmountDetailsLineItem> list(String id)
       throws StripeException {
-    return list(intent, (PaymentIntentAmountDetailsLineItemListParams) null, (RequestOptions) null);
+    return list(id, (PaymentIntentAmountDetailsLineItemListParams) null, (RequestOptions) null);
   }
   /** Lists all LineItems of a given PaymentIntent. */
   public StripeCollection<PaymentIntentAmountDetailsLineItem> list(
-      String intent, PaymentIntentAmountDetailsLineItemListParams params, RequestOptions options)
+      String id, PaymentIntentAmountDetailsLineItemListParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/payment_intents/%s/amount_details_line_items", ApiResource.urlEncodeId(intent));
+            "/v1/payment_intents/%s/amount_details_line_items", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

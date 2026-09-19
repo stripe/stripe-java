@@ -38,8 +38,8 @@ import lombok.Setter;
  * Invoices are statements of amounts owed by a customer, and are either generated one-off, or
  * generated periodically from a subscription.
  *
- * <p>They contain <a href="https://api.stripe.com#invoiceitems">invoice items</a>, and proration
- * adjustments that may be caused by subscription upgrades/downgrades (if necessary).
+ * <p>They contain <a href="https://docs.stripe.com/api#invoiceitems">invoice items</a>, and
+ * proration adjustments that may be caused by subscription upgrades/downgrades (if necessary).
  *
  * <p>If your invoice is configured to be billed through automatic charges, Stripe automatically
  * finalizes your invoice and attempts payment. Note that finalizing the invoice, <a
@@ -1698,28 +1698,28 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /** Retrieves the invoice with the given ID. */
-  public static Invoice retrieve(String invoice) throws StripeException {
-    return retrieve(invoice, (Map<String, Object>) null, (RequestOptions) null);
+  public static Invoice retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the invoice with the given ID. */
-  public static Invoice retrieve(String invoice, RequestOptions options) throws StripeException {
-    return retrieve(invoice, (Map<String, Object>) null, options);
+  public static Invoice retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the invoice with the given ID. */
-  public static Invoice retrieve(String invoice, Map<String, Object> params, RequestOptions options)
+  public static Invoice retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Invoice.class);
   }
 
   /** Retrieves the invoice with the given ID. */
-  public static Invoice retrieve(
-      String invoice, InvoiceRetrieveParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
+  public static Invoice retrieve(String id, InvoiceRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

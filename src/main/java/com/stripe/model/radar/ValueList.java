@@ -209,20 +209,19 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   }
 
   /** Retrieves a {@code ValueList} object. */
-  public static ValueList retrieve(String valueList) throws StripeException {
-    return retrieve(valueList, (Map<String, Object>) null, (RequestOptions) null);
+  public static ValueList retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a {@code ValueList} object. */
-  public static ValueList retrieve(String valueList, RequestOptions options)
+  public static ValueList retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a {@code ValueList} object. */
+  public static ValueList retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return retrieve(valueList, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves a {@code ValueList} object. */
-  public static ValueList retrieve(
-      String valueList, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ValueList.class);
@@ -230,9 +229,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
 
   /** Retrieves a {@code ValueList} object. */
   public static ValueList retrieve(
-      String valueList, ValueListRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList));
+      String id, ValueListRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

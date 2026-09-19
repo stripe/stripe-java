@@ -76,34 +76,26 @@ public final class PaymentAttemptRecordService extends ApiService {
   }
   /** Report that the specified Payment Attempt Record was authenticated. */
   public PaymentAttemptRecord reportAuthenticated(
-      String paymentAttemptRecord, PaymentAttemptRecordReportAuthenticatedParams params)
+      String id, PaymentAttemptRecordReportAuthenticatedParams params) throws StripeException {
+    return reportAuthenticated(id, params, (RequestOptions) null);
+  }
+  /** Report that the specified Payment Attempt Record was authenticated. */
+  public PaymentAttemptRecord reportAuthenticated(String id, RequestOptions options)
       throws StripeException {
-    return reportAuthenticated(paymentAttemptRecord, params, (RequestOptions) null);
+    return reportAuthenticated(id, (PaymentAttemptRecordReportAuthenticatedParams) null, options);
+  }
+  /** Report that the specified Payment Attempt Record was authenticated. */
+  public PaymentAttemptRecord reportAuthenticated(String id) throws StripeException {
+    return reportAuthenticated(
+        id, (PaymentAttemptRecordReportAuthenticatedParams) null, (RequestOptions) null);
   }
   /** Report that the specified Payment Attempt Record was authenticated. */
   public PaymentAttemptRecord reportAuthenticated(
-      String paymentAttemptRecord, RequestOptions options) throws StripeException {
-    return reportAuthenticated(
-        paymentAttemptRecord, (PaymentAttemptRecordReportAuthenticatedParams) null, options);
-  }
-  /** Report that the specified Payment Attempt Record was authenticated. */
-  public PaymentAttemptRecord reportAuthenticated(String paymentAttemptRecord)
-      throws StripeException {
-    return reportAuthenticated(
-        paymentAttemptRecord,
-        (PaymentAttemptRecordReportAuthenticatedParams) null,
-        (RequestOptions) null);
-  }
-  /** Report that the specified Payment Attempt Record was authenticated. */
-  public PaymentAttemptRecord reportAuthenticated(
-      String paymentAttemptRecord,
-      PaymentAttemptRecordReportAuthenticatedParams params,
-      RequestOptions options)
+      String id, PaymentAttemptRecordReportAuthenticatedParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/payment_attempt_records/%s/report_authenticated",
-            ApiResource.urlEncodeId(paymentAttemptRecord));
+            "/v1/payment_attempt_records/%s/report_authenticated", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -115,33 +107,26 @@ public final class PaymentAttemptRecordService extends ApiService {
   }
   /** Report that the specified Payment Attempt Record was authorized. */
   public PaymentAttemptRecord reportAuthorized(
-      String paymentAttemptRecord, PaymentAttemptRecordReportAuthorizedParams params)
-      throws StripeException {
-    return reportAuthorized(paymentAttemptRecord, params, (RequestOptions) null);
+      String id, PaymentAttemptRecordReportAuthorizedParams params) throws StripeException {
+    return reportAuthorized(id, params, (RequestOptions) null);
   }
   /** Report that the specified Payment Attempt Record was authorized. */
-  public PaymentAttemptRecord reportAuthorized(String paymentAttemptRecord, RequestOptions options)
+  public PaymentAttemptRecord reportAuthorized(String id, RequestOptions options)
       throws StripeException {
-    return reportAuthorized(
-        paymentAttemptRecord, (PaymentAttemptRecordReportAuthorizedParams) null, options);
+    return reportAuthorized(id, (PaymentAttemptRecordReportAuthorizedParams) null, options);
   }
   /** Report that the specified Payment Attempt Record was authorized. */
-  public PaymentAttemptRecord reportAuthorized(String paymentAttemptRecord) throws StripeException {
+  public PaymentAttemptRecord reportAuthorized(String id) throws StripeException {
     return reportAuthorized(
-        paymentAttemptRecord,
-        (PaymentAttemptRecordReportAuthorizedParams) null,
-        (RequestOptions) null);
+        id, (PaymentAttemptRecordReportAuthorizedParams) null, (RequestOptions) null);
   }
   /** Report that the specified Payment Attempt Record was authorized. */
   public PaymentAttemptRecord reportAuthorized(
-      String paymentAttemptRecord,
-      PaymentAttemptRecordReportAuthorizedParams params,
-      RequestOptions options)
+      String id, PaymentAttemptRecordReportAuthorizedParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/payment_attempt_records/%s/report_authorized",
-            ApiResource.urlEncodeId(paymentAttemptRecord));
+            "/v1/payment_attempt_records/%s/report_authorized", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -153,33 +138,26 @@ public final class PaymentAttemptRecordService extends ApiService {
   }
   /** Report that the specified Payment Attempt Record was canceled. */
   public PaymentAttemptRecord reportCanceled(
-      String paymentAttemptRecord, PaymentAttemptRecordReportCanceledParams params)
-      throws StripeException {
-    return reportCanceled(paymentAttemptRecord, params, (RequestOptions) null);
+      String id, PaymentAttemptRecordReportCanceledParams params) throws StripeException {
+    return reportCanceled(id, params, (RequestOptions) null);
   }
   /** Report that the specified Payment Attempt Record was canceled. */
-  public PaymentAttemptRecord reportCanceled(String paymentAttemptRecord, RequestOptions options)
+  public PaymentAttemptRecord reportCanceled(String id, RequestOptions options)
       throws StripeException {
-    return reportCanceled(
-        paymentAttemptRecord, (PaymentAttemptRecordReportCanceledParams) null, options);
+    return reportCanceled(id, (PaymentAttemptRecordReportCanceledParams) null, options);
   }
   /** Report that the specified Payment Attempt Record was canceled. */
-  public PaymentAttemptRecord reportCanceled(String paymentAttemptRecord) throws StripeException {
+  public PaymentAttemptRecord reportCanceled(String id) throws StripeException {
     return reportCanceled(
-        paymentAttemptRecord,
-        (PaymentAttemptRecordReportCanceledParams) null,
-        (RequestOptions) null);
+        id, (PaymentAttemptRecordReportCanceledParams) null, (RequestOptions) null);
   }
   /** Report that the specified Payment Attempt Record was canceled. */
   public PaymentAttemptRecord reportCanceled(
-      String paymentAttemptRecord,
-      PaymentAttemptRecordReportCanceledParams params,
-      RequestOptions options)
+      String id, PaymentAttemptRecordReportCanceledParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/payment_attempt_records/%s/report_canceled",
-            ApiResource.urlEncodeId(paymentAttemptRecord));
+            "/v1/payment_attempt_records/%s/report_canceled", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -191,20 +169,17 @@ public final class PaymentAttemptRecordService extends ApiService {
   }
   /** Report that the specified Payment Attempt Record received an early fraud warning. */
   public PaymentAttemptRecord reportEarlyFraudWarning(
-      String paymentAttemptRecord, PaymentAttemptRecordReportEarlyFraudWarningParams params)
-      throws StripeException {
-    return reportEarlyFraudWarning(paymentAttemptRecord, params, (RequestOptions) null);
+      String id, PaymentAttemptRecordReportEarlyFraudWarningParams params) throws StripeException {
+    return reportEarlyFraudWarning(id, params, (RequestOptions) null);
   }
   /** Report that the specified Payment Attempt Record received an early fraud warning. */
   public PaymentAttemptRecord reportEarlyFraudWarning(
-      String paymentAttemptRecord,
-      PaymentAttemptRecordReportEarlyFraudWarningParams params,
-      RequestOptions options)
+      String id, PaymentAttemptRecordReportEarlyFraudWarningParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/payment_attempt_records/%s/report_early_fraud_warning",
-            ApiResource.urlEncodeId(paymentAttemptRecord));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -215,32 +190,25 @@ public final class PaymentAttemptRecordService extends ApiService {
     return this.request(request, PaymentAttemptRecord.class);
   }
   /** Report that the specified Payment Attempt Record failed. */
-  public PaymentAttemptRecord reportFailed(
-      String paymentAttemptRecord, PaymentAttemptRecordReportFailedParams params)
+  public PaymentAttemptRecord reportFailed(String id, PaymentAttemptRecordReportFailedParams params)
       throws StripeException {
-    return reportFailed(paymentAttemptRecord, params, (RequestOptions) null);
+    return reportFailed(id, params, (RequestOptions) null);
   }
   /** Report that the specified Payment Attempt Record failed. */
-  public PaymentAttemptRecord reportFailed(String paymentAttemptRecord, RequestOptions options)
+  public PaymentAttemptRecord reportFailed(String id, RequestOptions options)
       throws StripeException {
-    return reportFailed(
-        paymentAttemptRecord, (PaymentAttemptRecordReportFailedParams) null, options);
+    return reportFailed(id, (PaymentAttemptRecordReportFailedParams) null, options);
   }
   /** Report that the specified Payment Attempt Record failed. */
-  public PaymentAttemptRecord reportFailed(String paymentAttemptRecord) throws StripeException {
-    return reportFailed(
-        paymentAttemptRecord, (PaymentAttemptRecordReportFailedParams) null, (RequestOptions) null);
+  public PaymentAttemptRecord reportFailed(String id) throws StripeException {
+    return reportFailed(id, (PaymentAttemptRecordReportFailedParams) null, (RequestOptions) null);
   }
   /** Report that the specified Payment Attempt Record failed. */
   public PaymentAttemptRecord reportFailed(
-      String paymentAttemptRecord,
-      PaymentAttemptRecordReportFailedParams params,
-      RequestOptions options)
+      String id, PaymentAttemptRecordReportFailedParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/payment_attempt_records/%s/report_failed",
-            ApiResource.urlEncodeId(paymentAttemptRecord));
+        String.format("/v1/payment_attempt_records/%s/report_failed", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -252,33 +220,26 @@ public final class PaymentAttemptRecordService extends ApiService {
   }
   /** Report that the specified Payment Attempt Record was guaranteed. */
   public PaymentAttemptRecord reportGuaranteed(
-      String paymentAttemptRecord, PaymentAttemptRecordReportGuaranteedParams params)
-      throws StripeException {
-    return reportGuaranteed(paymentAttemptRecord, params, (RequestOptions) null);
+      String id, PaymentAttemptRecordReportGuaranteedParams params) throws StripeException {
+    return reportGuaranteed(id, params, (RequestOptions) null);
   }
   /** Report that the specified Payment Attempt Record was guaranteed. */
-  public PaymentAttemptRecord reportGuaranteed(String paymentAttemptRecord, RequestOptions options)
+  public PaymentAttemptRecord reportGuaranteed(String id, RequestOptions options)
       throws StripeException {
-    return reportGuaranteed(
-        paymentAttemptRecord, (PaymentAttemptRecordReportGuaranteedParams) null, options);
+    return reportGuaranteed(id, (PaymentAttemptRecordReportGuaranteedParams) null, options);
   }
   /** Report that the specified Payment Attempt Record was guaranteed. */
-  public PaymentAttemptRecord reportGuaranteed(String paymentAttemptRecord) throws StripeException {
+  public PaymentAttemptRecord reportGuaranteed(String id) throws StripeException {
     return reportGuaranteed(
-        paymentAttemptRecord,
-        (PaymentAttemptRecordReportGuaranteedParams) null,
-        (RequestOptions) null);
+        id, (PaymentAttemptRecordReportGuaranteedParams) null, (RequestOptions) null);
   }
   /** Report that the specified Payment Attempt Record was guaranteed. */
   public PaymentAttemptRecord reportGuaranteed(
-      String paymentAttemptRecord,
-      PaymentAttemptRecordReportGuaranteedParams params,
-      RequestOptions options)
+      String id, PaymentAttemptRecordReportGuaranteedParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/payment_attempt_records/%s/report_guaranteed",
-            ApiResource.urlEncodeId(paymentAttemptRecord));
+            "/v1/payment_attempt_records/%s/report_guaranteed", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -290,34 +251,26 @@ public final class PaymentAttemptRecordService extends ApiService {
   }
   /** Report informational updates on the specified Payment Attempt Record. */
   public PaymentAttemptRecord reportInformational(
-      String paymentAttemptRecord, PaymentAttemptRecordReportInformationalParams params)
+      String id, PaymentAttemptRecordReportInformationalParams params) throws StripeException {
+    return reportInformational(id, params, (RequestOptions) null);
+  }
+  /** Report informational updates on the specified Payment Attempt Record. */
+  public PaymentAttemptRecord reportInformational(String id, RequestOptions options)
       throws StripeException {
-    return reportInformational(paymentAttemptRecord, params, (RequestOptions) null);
+    return reportInformational(id, (PaymentAttemptRecordReportInformationalParams) null, options);
+  }
+  /** Report informational updates on the specified Payment Attempt Record. */
+  public PaymentAttemptRecord reportInformational(String id) throws StripeException {
+    return reportInformational(
+        id, (PaymentAttemptRecordReportInformationalParams) null, (RequestOptions) null);
   }
   /** Report informational updates on the specified Payment Attempt Record. */
   public PaymentAttemptRecord reportInformational(
-      String paymentAttemptRecord, RequestOptions options) throws StripeException {
-    return reportInformational(
-        paymentAttemptRecord, (PaymentAttemptRecordReportInformationalParams) null, options);
-  }
-  /** Report informational updates on the specified Payment Attempt Record. */
-  public PaymentAttemptRecord reportInformational(String paymentAttemptRecord)
-      throws StripeException {
-    return reportInformational(
-        paymentAttemptRecord,
-        (PaymentAttemptRecordReportInformationalParams) null,
-        (RequestOptions) null);
-  }
-  /** Report informational updates on the specified Payment Attempt Record. */
-  public PaymentAttemptRecord reportInformational(
-      String paymentAttemptRecord,
-      PaymentAttemptRecordReportInformationalParams params,
-      RequestOptions options)
+      String id, PaymentAttemptRecordReportInformationalParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/payment_attempt_records/%s/report_informational",
-            ApiResource.urlEncodeId(paymentAttemptRecord));
+            "/v1/payment_attempt_records/%s/report_informational", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -328,21 +281,16 @@ public final class PaymentAttemptRecordService extends ApiService {
     return this.request(request, PaymentAttemptRecord.class);
   }
   /** Report that the specified Payment Attempt Record was refunded. */
-  public PaymentAttemptRecord reportRefund(
-      String paymentAttemptRecord, PaymentAttemptRecordReportRefundParams params)
+  public PaymentAttemptRecord reportRefund(String id, PaymentAttemptRecordReportRefundParams params)
       throws StripeException {
-    return reportRefund(paymentAttemptRecord, params, (RequestOptions) null);
+    return reportRefund(id, params, (RequestOptions) null);
   }
   /** Report that the specified Payment Attempt Record was refunded. */
   public PaymentAttemptRecord reportRefund(
-      String paymentAttemptRecord,
-      PaymentAttemptRecordReportRefundParams params,
-      RequestOptions options)
+      String id, PaymentAttemptRecordReportRefundParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/payment_attempt_records/%s/report_refund",
-            ApiResource.urlEncodeId(paymentAttemptRecord));
+        String.format("/v1/payment_attempt_records/%s/report_refund", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

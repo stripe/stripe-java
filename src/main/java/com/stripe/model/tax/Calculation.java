@@ -205,21 +205,19 @@ public class Calculation extends ApiResource implements HasId {
   }
 
   /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
-  public static Calculation retrieve(String calculation) throws StripeException {
-    return retrieve(calculation, (Map<String, Object>) null, (RequestOptions) null);
+  public static Calculation retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
-  public static Calculation retrieve(String calculation, RequestOptions options)
-      throws StripeException {
-    return retrieve(calculation, (Map<String, Object>) null, options);
+  public static Calculation retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
-  public static Calculation retrieve(
-      String calculation, Map<String, Object> params, RequestOptions options)
+  public static Calculation retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/tax/calculations/%s", ApiResource.urlEncodeId(calculation));
+    String path = String.format("/v1/tax/calculations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Calculation.class);
@@ -227,9 +225,8 @@ public class Calculation extends ApiResource implements HasId {
 
   /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
   public static Calculation retrieve(
-      String calculation, CalculationRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/tax/calculations/%s", ApiResource.urlEncodeId(calculation));
+      String id, CalculationRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/tax/calculations/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

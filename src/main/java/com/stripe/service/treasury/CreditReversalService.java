@@ -60,34 +60,32 @@ public final class CreditReversalService extends ApiService {
    * Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID
    * from either the CreditReversal creation request or CreditReversal list.
    */
-  public CreditReversal retrieve(String creditReversal, CreditReversalRetrieveParams params)
+  public CreditReversal retrieve(String id, CreditReversalRetrieveParams params)
       throws StripeException {
-    return retrieve(creditReversal, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID
    * from either the CreditReversal creation request or CreditReversal list.
    */
-  public CreditReversal retrieve(String creditReversal, RequestOptions options)
-      throws StripeException {
-    return retrieve(creditReversal, (CreditReversalRetrieveParams) null, options);
+  public CreditReversal retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (CreditReversalRetrieveParams) null, options);
   }
   /**
    * Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID
    * from either the CreditReversal creation request or CreditReversal list.
    */
-  public CreditReversal retrieve(String creditReversal) throws StripeException {
-    return retrieve(creditReversal, (CreditReversalRetrieveParams) null, (RequestOptions) null);
+  public CreditReversal retrieve(String id) throws StripeException {
+    return retrieve(id, (CreditReversalRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID
    * from either the CreditReversal creation request or CreditReversal list.
    */
   public CreditReversal retrieve(
-      String creditReversal, CreditReversalRetrieveParams params, RequestOptions options)
+      String id, CreditReversalRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(creditReversal));
+    String path = String.format("/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

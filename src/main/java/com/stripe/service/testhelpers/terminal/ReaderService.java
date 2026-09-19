@@ -23,36 +23,35 @@ public final class ReaderService extends ApiService {
    * Presents a payment method on a simulated reader. Can be used to simulate accepting a payment,
    * saving a card or refunding a transaction.
    */
-  public Reader presentPaymentMethod(String reader, ReaderPresentPaymentMethodParams params)
+  public Reader presentPaymentMethod(String id, ReaderPresentPaymentMethodParams params)
       throws StripeException {
-    return presentPaymentMethod(reader, params, (RequestOptions) null);
+    return presentPaymentMethod(id, params, (RequestOptions) null);
   }
   /**
    * Presents a payment method on a simulated reader. Can be used to simulate accepting a payment,
    * saving a card or refunding a transaction.
    */
-  public Reader presentPaymentMethod(String reader, RequestOptions options) throws StripeException {
-    return presentPaymentMethod(reader, (ReaderPresentPaymentMethodParams) null, options);
+  public Reader presentPaymentMethod(String id, RequestOptions options) throws StripeException {
+    return presentPaymentMethod(id, (ReaderPresentPaymentMethodParams) null, options);
   }
   /**
    * Presents a payment method on a simulated reader. Can be used to simulate accepting a payment,
    * saving a card or refunding a transaction.
    */
-  public Reader presentPaymentMethod(String reader) throws StripeException {
-    return presentPaymentMethod(
-        reader, (ReaderPresentPaymentMethodParams) null, (RequestOptions) null);
+  public Reader presentPaymentMethod(String id) throws StripeException {
+    return presentPaymentMethod(id, (ReaderPresentPaymentMethodParams) null, (RequestOptions) null);
   }
   /**
    * Presents a payment method on a simulated reader. Can be used to simulate accepting a payment,
    * saving a card or refunding a transaction.
    */
   public Reader presentPaymentMethod(
-      String reader, ReaderPresentPaymentMethodParams params, RequestOptions options)
+      String id, ReaderPresentPaymentMethodParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/test_helpers/terminal/readers/%s/present_payment_method",
-            ApiResource.urlEncodeId(reader));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -63,28 +62,27 @@ public final class ReaderService extends ApiService {
     return this.request(request, Reader.class);
   }
   /** Use this endpoint to trigger a successful input collection on a simulated reader. */
-  public Reader succeedInputCollection(String reader, ReaderSucceedInputCollectionParams params)
+  public Reader succeedInputCollection(String id, ReaderSucceedInputCollectionParams params)
       throws StripeException {
-    return succeedInputCollection(reader, params, (RequestOptions) null);
+    return succeedInputCollection(id, params, (RequestOptions) null);
   }
   /** Use this endpoint to trigger a successful input collection on a simulated reader. */
-  public Reader succeedInputCollection(String reader, RequestOptions options)
-      throws StripeException {
-    return succeedInputCollection(reader, (ReaderSucceedInputCollectionParams) null, options);
+  public Reader succeedInputCollection(String id, RequestOptions options) throws StripeException {
+    return succeedInputCollection(id, (ReaderSucceedInputCollectionParams) null, options);
   }
   /** Use this endpoint to trigger a successful input collection on a simulated reader. */
-  public Reader succeedInputCollection(String reader) throws StripeException {
+  public Reader succeedInputCollection(String id) throws StripeException {
     return succeedInputCollection(
-        reader, (ReaderSucceedInputCollectionParams) null, (RequestOptions) null);
+        id, (ReaderSucceedInputCollectionParams) null, (RequestOptions) null);
   }
   /** Use this endpoint to trigger a successful input collection on a simulated reader. */
   public Reader succeedInputCollection(
-      String reader, ReaderSucceedInputCollectionParams params, RequestOptions options)
+      String id, ReaderSucceedInputCollectionParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/test_helpers/terminal/readers/%s/succeed_input_collection",
-            ApiResource.urlEncodeId(reader));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -97,34 +95,33 @@ public final class ReaderService extends ApiService {
   /**
    * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
    */
-  public Reader timeoutInputCollection(String reader, ReaderTimeoutInputCollectionParams params)
+  public Reader timeoutInputCollection(String id, ReaderTimeoutInputCollectionParams params)
       throws StripeException {
-    return timeoutInputCollection(reader, params, (RequestOptions) null);
+    return timeoutInputCollection(id, params, (RequestOptions) null);
   }
   /**
    * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
    */
-  public Reader timeoutInputCollection(String reader, RequestOptions options)
-      throws StripeException {
-    return timeoutInputCollection(reader, (ReaderTimeoutInputCollectionParams) null, options);
+  public Reader timeoutInputCollection(String id, RequestOptions options) throws StripeException {
+    return timeoutInputCollection(id, (ReaderTimeoutInputCollectionParams) null, options);
   }
   /**
    * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
    */
-  public Reader timeoutInputCollection(String reader) throws StripeException {
+  public Reader timeoutInputCollection(String id) throws StripeException {
     return timeoutInputCollection(
-        reader, (ReaderTimeoutInputCollectionParams) null, (RequestOptions) null);
+        id, (ReaderTimeoutInputCollectionParams) null, (RequestOptions) null);
   }
   /**
    * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
    */
   public Reader timeoutInputCollection(
-      String reader, ReaderTimeoutInputCollectionParams params, RequestOptions options)
+      String id, ReaderTimeoutInputCollectionParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/test_helpers/terminal/readers/%s/timeout_input_collection",
-            ApiResource.urlEncodeId(reader));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

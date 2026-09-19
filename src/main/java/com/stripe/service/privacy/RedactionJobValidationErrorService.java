@@ -21,25 +21,25 @@ public final class RedactionJobValidationErrorService extends ApiService {
 
   /** Returns a list of validation errors for the specified redaction job. */
   public StripeCollection<RedactionJobValidationError> list(
-      String job, RedactionJobValidationErrorListParams params) throws StripeException {
-    return list(job, params, (RequestOptions) null);
+      String id, RedactionJobValidationErrorListParams params) throws StripeException {
+    return list(id, params, (RequestOptions) null);
   }
   /** Returns a list of validation errors for the specified redaction job. */
-  public StripeCollection<RedactionJobValidationError> list(String job, RequestOptions options)
+  public StripeCollection<RedactionJobValidationError> list(String id, RequestOptions options)
       throws StripeException {
-    return list(job, (RedactionJobValidationErrorListParams) null, options);
+    return list(id, (RedactionJobValidationErrorListParams) null, options);
   }
   /** Returns a list of validation errors for the specified redaction job. */
-  public StripeCollection<RedactionJobValidationError> list(String job) throws StripeException {
-    return list(job, (RedactionJobValidationErrorListParams) null, (RequestOptions) null);
+  public StripeCollection<RedactionJobValidationError> list(String id) throws StripeException {
+    return list(id, (RedactionJobValidationErrorListParams) null, (RequestOptions) null);
   }
   /** Returns a list of validation errors for the specified redaction job. */
   public StripeCollection<RedactionJobValidationError> list(
-      String job, RedactionJobValidationErrorListParams params, RequestOptions options)
+      String id, RedactionJobValidationErrorListParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/privacy/redaction_jobs/%s/validation_errors", ApiResource.urlEncodeId(job));
+            "/v1/privacy/redaction_jobs/%s/validation_errors", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

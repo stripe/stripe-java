@@ -27,42 +27,38 @@ public final class WebhookEndpointService extends ApiService {
    * href="https://dashboard.stripe.com/account/webhooks">webhook endpoint management</a> page of
    * the Stripe dashboard.
    */
-  public WebhookEndpoint delete(String webhookEndpoint) throws StripeException {
-    return delete(webhookEndpoint, (RequestOptions) null);
+  public WebhookEndpoint delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /**
    * You can also delete webhook endpoints via the <a
    * href="https://dashboard.stripe.com/account/webhooks">webhook endpoint management</a> page of
    * the Stripe dashboard.
    */
-  public WebhookEndpoint delete(String webhookEndpoint, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
+  public WebhookEndpoint delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, WebhookEndpoint.class);
   }
   /** Retrieves the webhook endpoint with the given ID. */
-  public WebhookEndpoint retrieve(String webhookEndpoint, WebhookEndpointRetrieveParams params)
+  public WebhookEndpoint retrieve(String id, WebhookEndpointRetrieveParams params)
       throws StripeException {
-    return retrieve(webhookEndpoint, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the webhook endpoint with the given ID. */
-  public WebhookEndpoint retrieve(String webhookEndpoint, RequestOptions options)
-      throws StripeException {
-    return retrieve(webhookEndpoint, (WebhookEndpointRetrieveParams) null, options);
+  public WebhookEndpoint retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (WebhookEndpointRetrieveParams) null, options);
   }
   /** Retrieves the webhook endpoint with the given ID. */
-  public WebhookEndpoint retrieve(String webhookEndpoint) throws StripeException {
-    return retrieve(webhookEndpoint, (WebhookEndpointRetrieveParams) null, (RequestOptions) null);
+  public WebhookEndpoint retrieve(String id) throws StripeException {
+    return retrieve(id, (WebhookEndpointRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the webhook endpoint with the given ID. */
   public WebhookEndpoint retrieve(
-      String webhookEndpoint, WebhookEndpointRetrieveParams params, RequestOptions options)
+      String id, WebhookEndpointRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
+    String path = String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -76,34 +72,32 @@ public final class WebhookEndpointService extends ApiService {
    * Updates the webhook endpoint. You may edit the {@code url}, the list of {@code enabled_events},
    * and the status of your endpoint.
    */
-  public WebhookEndpoint update(String webhookEndpoint, WebhookEndpointUpdateParams params)
+  public WebhookEndpoint update(String id, WebhookEndpointUpdateParams params)
       throws StripeException {
-    return update(webhookEndpoint, params, (RequestOptions) null);
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates the webhook endpoint. You may edit the {@code url}, the list of {@code enabled_events},
    * and the status of your endpoint.
    */
-  public WebhookEndpoint update(String webhookEndpoint, RequestOptions options)
-      throws StripeException {
-    return update(webhookEndpoint, (WebhookEndpointUpdateParams) null, options);
+  public WebhookEndpoint update(String id, RequestOptions options) throws StripeException {
+    return update(id, (WebhookEndpointUpdateParams) null, options);
   }
   /**
    * Updates the webhook endpoint. You may edit the {@code url}, the list of {@code enabled_events},
    * and the status of your endpoint.
    */
-  public WebhookEndpoint update(String webhookEndpoint) throws StripeException {
-    return update(webhookEndpoint, (WebhookEndpointUpdateParams) null, (RequestOptions) null);
+  public WebhookEndpoint update(String id) throws StripeException {
+    return update(id, (WebhookEndpointUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the webhook endpoint. You may edit the {@code url}, the list of {@code enabled_events},
    * and the status of your endpoint.
    */
   public WebhookEndpoint update(
-      String webhookEndpoint, WebhookEndpointUpdateParams params, RequestOptions options)
+      String id, WebhookEndpointUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint));
+    String path = String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -25,21 +25,21 @@ public final class GiftCardService extends ApiService {
   }
 
   /** Retrieves a third-party gift card object. */
-  public GiftCard retrieve(String giftCard, GiftCardRetrieveParams params) throws StripeException {
-    return retrieve(giftCard, params, (RequestOptions) null);
+  public GiftCard retrieve(String id, GiftCardRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a third-party gift card object. */
-  public GiftCard retrieve(String giftCard, RequestOptions options) throws StripeException {
-    return retrieve(giftCard, (GiftCardRetrieveParams) null, options);
+  public GiftCard retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (GiftCardRetrieveParams) null, options);
   }
   /** Retrieves a third-party gift card object. */
-  public GiftCard retrieve(String giftCard) throws StripeException {
-    return retrieve(giftCard, (GiftCardRetrieveParams) null, (RequestOptions) null);
+  public GiftCard retrieve(String id) throws StripeException {
+    return retrieve(id, (GiftCardRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a third-party gift card object. */
-  public GiftCard retrieve(String giftCard, GiftCardRetrieveParams params, RequestOptions options)
+  public GiftCard retrieve(String id, GiftCardRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/gift_cards/%s", ApiResource.urlEncodeId(giftCard));
+    String path = String.format("/v1/gift_cards/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -67,24 +67,22 @@ public final class GiftCardService extends ApiService {
     return this.request(request, GiftCard.class);
   }
   /** Activates a third-party gift card and optionally sets its balance. */
-  public GiftCardOperation activate(String giftCard, GiftCardActivateParams params)
+  public GiftCardOperation activate(String id, GiftCardActivateParams params)
       throws StripeException {
-    return activate(giftCard, params, (RequestOptions) null);
+    return activate(id, params, (RequestOptions) null);
   }
   /** Activates a third-party gift card and optionally sets its balance. */
-  public GiftCardOperation activate(String giftCard, RequestOptions options)
-      throws StripeException {
-    return activate(giftCard, (GiftCardActivateParams) null, options);
+  public GiftCardOperation activate(String id, RequestOptions options) throws StripeException {
+    return activate(id, (GiftCardActivateParams) null, options);
   }
   /** Activates a third-party gift card and optionally sets its balance. */
-  public GiftCardOperation activate(String giftCard) throws StripeException {
-    return activate(giftCard, (GiftCardActivateParams) null, (RequestOptions) null);
+  public GiftCardOperation activate(String id) throws StripeException {
+    return activate(id, (GiftCardActivateParams) null, (RequestOptions) null);
   }
   /** Activates a third-party gift card and optionally sets its balance. */
   public GiftCardOperation activate(
-      String giftCard, GiftCardActivateParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/gift_cards/%s/activate", ApiResource.urlEncodeId(giftCard));
+      String id, GiftCardActivateParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/gift_cards/%s/activate", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -95,23 +93,21 @@ public final class GiftCardService extends ApiService {
     return this.request(request, GiftCardOperation.class);
   }
   /** Cashout a third-party gift card by zeroing its balance. */
-  public GiftCardOperation cashout(String giftCard, GiftCardCashoutParams params)
+  public GiftCardOperation cashout(String id, GiftCardCashoutParams params) throws StripeException {
+    return cashout(id, params, (RequestOptions) null);
+  }
+  /** Cashout a third-party gift card by zeroing its balance. */
+  public GiftCardOperation cashout(String id, RequestOptions options) throws StripeException {
+    return cashout(id, (GiftCardCashoutParams) null, options);
+  }
+  /** Cashout a third-party gift card by zeroing its balance. */
+  public GiftCardOperation cashout(String id) throws StripeException {
+    return cashout(id, (GiftCardCashoutParams) null, (RequestOptions) null);
+  }
+  /** Cashout a third-party gift card by zeroing its balance. */
+  public GiftCardOperation cashout(String id, GiftCardCashoutParams params, RequestOptions options)
       throws StripeException {
-    return cashout(giftCard, params, (RequestOptions) null);
-  }
-  /** Cashout a third-party gift card by zeroing its balance. */
-  public GiftCardOperation cashout(String giftCard, RequestOptions options) throws StripeException {
-    return cashout(giftCard, (GiftCardCashoutParams) null, options);
-  }
-  /** Cashout a third-party gift card by zeroing its balance. */
-  public GiftCardOperation cashout(String giftCard) throws StripeException {
-    return cashout(giftCard, (GiftCardCashoutParams) null, (RequestOptions) null);
-  }
-  /** Cashout a third-party gift card by zeroing its balance. */
-  public GiftCardOperation cashout(
-      String giftCard, GiftCardCashoutParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/gift_cards/%s/cashout", ApiResource.urlEncodeId(giftCard));
+    String path = String.format("/v1/gift_cards/%s/cashout", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -122,25 +118,22 @@ public final class GiftCardService extends ApiService {
     return this.request(request, GiftCardOperation.class);
   }
   /** Checks the balance of a third-party gift card. */
-  public GiftCardOperation checkBalance(String giftCard, GiftCardCheckBalanceParams params)
+  public GiftCardOperation checkBalance(String id, GiftCardCheckBalanceParams params)
       throws StripeException {
-    return checkBalance(giftCard, params, (RequestOptions) null);
+    return checkBalance(id, params, (RequestOptions) null);
   }
   /** Checks the balance of a third-party gift card. */
-  public GiftCardOperation checkBalance(String giftCard, RequestOptions options)
-      throws StripeException {
-    return checkBalance(giftCard, (GiftCardCheckBalanceParams) null, options);
+  public GiftCardOperation checkBalance(String id, RequestOptions options) throws StripeException {
+    return checkBalance(id, (GiftCardCheckBalanceParams) null, options);
   }
   /** Checks the balance of a third-party gift card. */
-  public GiftCardOperation checkBalance(String giftCard) throws StripeException {
-    return checkBalance(giftCard, (GiftCardCheckBalanceParams) null, (RequestOptions) null);
+  public GiftCardOperation checkBalance(String id) throws StripeException {
+    return checkBalance(id, (GiftCardCheckBalanceParams) null, (RequestOptions) null);
   }
   /** Checks the balance of a third-party gift card. */
   public GiftCardOperation checkBalance(
-      String giftCard, GiftCardCheckBalanceParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/gift_cards/%s/check_balance", ApiResource.urlEncodeId(giftCard));
+      String id, GiftCardCheckBalanceParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/gift_cards/%s/check_balance", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -151,14 +144,13 @@ public final class GiftCardService extends ApiService {
     return this.request(request, GiftCardOperation.class);
   }
   /** Reloads a third-party gift card by adding the specified amount to its balance. */
-  public GiftCardOperation reload(String giftCard, GiftCardReloadParams params)
-      throws StripeException {
-    return reload(giftCard, params, (RequestOptions) null);
+  public GiftCardOperation reload(String id, GiftCardReloadParams params) throws StripeException {
+    return reload(id, params, (RequestOptions) null);
   }
   /** Reloads a third-party gift card by adding the specified amount to its balance. */
-  public GiftCardOperation reload(
-      String giftCard, GiftCardReloadParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/gift_cards/%s/reload", ApiResource.urlEncodeId(giftCard));
+  public GiftCardOperation reload(String id, GiftCardReloadParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/gift_cards/%s/reload", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -169,16 +161,15 @@ public final class GiftCardService extends ApiService {
     return this.request(request, GiftCardOperation.class);
   }
   /** Voids a previously performed gift card operation. */
-  public GiftCardOperation voidOperation(String giftCard, GiftCardVoidOperationParams params)
+  public GiftCardOperation voidOperation(String id, GiftCardVoidOperationParams params)
       throws StripeException {
-    return voidOperation(giftCard, params, (RequestOptions) null);
+    return voidOperation(id, params, (RequestOptions) null);
   }
   /** Voids a previously performed gift card operation. */
   public GiftCardOperation voidOperation(
-      String giftCard, GiftCardVoidOperationParams params, RequestOptions options)
+      String id, GiftCardVoidOperationParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/gift_cards/%s/void_operation", ApiResource.urlEncodeId(giftCard));
+    String path = String.format("/v1/gift_cards/%s/void_operation", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

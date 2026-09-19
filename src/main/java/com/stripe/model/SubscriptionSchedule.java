@@ -579,17 +579,17 @@ public class SubscriptionSchedule extends ApiResource
    * Retrieves the details of an existing subscription schedule. You only need to supply the unique
    * subscription schedule identifier that was returned upon subscription schedule creation.
    */
-  public static SubscriptionSchedule retrieve(String schedule) throws StripeException {
-    return retrieve(schedule, (Map<String, Object>) null, (RequestOptions) null);
+  public static SubscriptionSchedule retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
    * Retrieves the details of an existing subscription schedule. You only need to supply the unique
    * subscription schedule identifier that was returned upon subscription schedule creation.
    */
-  public static SubscriptionSchedule retrieve(String schedule, RequestOptions options)
+  public static SubscriptionSchedule retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(schedule, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -597,8 +597,8 @@ public class SubscriptionSchedule extends ApiResource
    * subscription schedule identifier that was returned upon subscription schedule creation.
    */
   public static SubscriptionSchedule retrieve(
-      String schedule, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, SubscriptionSchedule.class);
@@ -609,9 +609,9 @@ public class SubscriptionSchedule extends ApiResource
    * subscription schedule identifier that was returned upon subscription schedule creation.
    */
   public static SubscriptionSchedule retrieve(
-      String schedule, SubscriptionScheduleRetrieveParams params, RequestOptions options)
+      String id, SubscriptionScheduleRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule));
+    String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

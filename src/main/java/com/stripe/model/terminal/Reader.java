@@ -845,28 +845,28 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   }
 
   /** Retrieves a {@code Reader} object. */
-  public static Reader retrieve(String reader) throws StripeException {
-    return retrieve(reader, (Map<String, Object>) null, (RequestOptions) null);
+  public static Reader retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a {@code Reader} object. */
-  public static Reader retrieve(String reader, RequestOptions options) throws StripeException {
-    return retrieve(reader, (Map<String, Object>) null, options);
+  public static Reader retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a {@code Reader} object. */
-  public static Reader retrieve(String reader, Map<String, Object> params, RequestOptions options)
+  public static Reader retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader));
+    String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Reader.class);
   }
 
   /** Retrieves a {@code Reader} object. */
-  public static Reader retrieve(String reader, ReaderRetrieveParams params, RequestOptions options)
+  public static Reader retrieve(String id, ReaderRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader));
+    String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

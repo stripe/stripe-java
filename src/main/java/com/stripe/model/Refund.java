@@ -553,28 +553,28 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   }
 
   /** Retrieves the details of an existing refund. */
-  public static Refund retrieve(String refund) throws StripeException {
-    return retrieve(refund, (Map<String, Object>) null, (RequestOptions) null);
+  public static Refund retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the details of an existing refund. */
-  public static Refund retrieve(String refund, RequestOptions options) throws StripeException {
-    return retrieve(refund, (Map<String, Object>) null, options);
+  public static Refund retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the details of an existing refund. */
-  public static Refund retrieve(String refund, Map<String, Object> params, RequestOptions options)
+  public static Refund retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund));
+    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Refund.class);
   }
 
   /** Retrieves the details of an existing refund. */
-  public static Refund retrieve(String refund, RefundRetrieveParams params, RequestOptions options)
+  public static Refund retrieve(String id, RefundRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund));
+    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

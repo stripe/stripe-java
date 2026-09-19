@@ -62,25 +62,23 @@ public final class AuthorizationService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Authorization>>() {}.getType());
   }
   /** Retrieves an Issuing {@code Authorization} object. */
-  public Authorization retrieve(String authorization, AuthorizationRetrieveParams params)
+  public Authorization retrieve(String id, AuthorizationRetrieveParams params)
       throws StripeException {
-    return retrieve(authorization, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves an Issuing {@code Authorization} object. */
-  public Authorization retrieve(String authorization, RequestOptions options)
-      throws StripeException {
-    return retrieve(authorization, (AuthorizationRetrieveParams) null, options);
+  public Authorization retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (AuthorizationRetrieveParams) null, options);
   }
   /** Retrieves an Issuing {@code Authorization} object. */
-  public Authorization retrieve(String authorization) throws StripeException {
-    return retrieve(authorization, (AuthorizationRetrieveParams) null, (RequestOptions) null);
+  public Authorization retrieve(String id) throws StripeException {
+    return retrieve(id, (AuthorizationRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves an Issuing {@code Authorization} object. */
   public Authorization retrieve(
-      String authorization, AuthorizationRetrieveParams params, RequestOptions options)
+      String id, AuthorizationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization));
+    String path = String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -94,33 +92,30 @@ public final class AuthorizationService extends ApiService {
    * Updates the specified Issuing {@code Authorization} object by setting the values of the
    * parameters passed. Any parameters not provided will be left unchanged.
    */
-  public Authorization update(String authorization, AuthorizationUpdateParams params)
+  public Authorization update(String id, AuthorizationUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /**
+   * Updates the specified Issuing {@code Authorization} object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Authorization update(String id, RequestOptions options) throws StripeException {
+    return update(id, (AuthorizationUpdateParams) null, options);
+  }
+  /**
+   * Updates the specified Issuing {@code Authorization} object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Authorization update(String id) throws StripeException {
+    return update(id, (AuthorizationUpdateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Updates the specified Issuing {@code Authorization} object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Authorization update(String id, AuthorizationUpdateParams params, RequestOptions options)
       throws StripeException {
-    return update(authorization, params, (RequestOptions) null);
-  }
-  /**
-   * Updates the specified Issuing {@code Authorization} object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
-   */
-  public Authorization update(String authorization, RequestOptions options) throws StripeException {
-    return update(authorization, (AuthorizationUpdateParams) null, options);
-  }
-  /**
-   * Updates the specified Issuing {@code Authorization} object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
-   */
-  public Authorization update(String authorization) throws StripeException {
-    return update(authorization, (AuthorizationUpdateParams) null, (RequestOptions) null);
-  }
-  /**
-   * Updates the specified Issuing {@code Authorization} object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
-   */
-  public Authorization update(
-      String authorization, AuthorizationUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization));
+    String path = String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -138,9 +133,9 @@ public final class AuthorizationService extends ApiService {
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
    * directly to the webhook request to approve an authorization</a>.
    */
-  public Authorization approve(String authorization, AuthorizationApproveParams params)
+  public Authorization approve(String id, AuthorizationApproveParams params)
       throws StripeException {
-    return approve(authorization, params, (RequestOptions) null);
+    return approve(id, params, (RequestOptions) null);
   }
   /**
    * [Deprecated] Approves a pending Issuing {@code Authorization} object. This request should be
@@ -150,9 +145,8 @@ public final class AuthorizationService extends ApiService {
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
    * directly to the webhook request to approve an authorization</a>.
    */
-  public Authorization approve(String authorization, RequestOptions options)
-      throws StripeException {
-    return approve(authorization, (AuthorizationApproveParams) null, options);
+  public Authorization approve(String id, RequestOptions options) throws StripeException {
+    return approve(id, (AuthorizationApproveParams) null, options);
   }
   /**
    * [Deprecated] Approves a pending Issuing {@code Authorization} object. This request should be
@@ -162,8 +156,8 @@ public final class AuthorizationService extends ApiService {
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
    * directly to the webhook request to approve an authorization</a>.
    */
-  public Authorization approve(String authorization) throws StripeException {
-    return approve(authorization, (AuthorizationApproveParams) null, (RequestOptions) null);
+  public Authorization approve(String id) throws StripeException {
+    return approve(id, (AuthorizationApproveParams) null, (RequestOptions) null);
   }
   /**
    * [Deprecated] Approves a pending Issuing {@code Authorization} object. This request should be
@@ -173,12 +167,10 @@ public final class AuthorizationService extends ApiService {
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
    * directly to the webhook request to approve an authorization</a>.
    */
-  public Authorization approve(
-      String authorization, AuthorizationApproveParams params, RequestOptions options)
+  public Authorization approve(String id, AuthorizationApproveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(authorization));
+        String.format("/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -196,9 +188,9 @@ public final class AuthorizationService extends ApiService {
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
    * directly to the webhook request to decline an authorization</a>.
    */
-  public Authorization decline(String authorization, AuthorizationDeclineParams params)
+  public Authorization decline(String id, AuthorizationDeclineParams params)
       throws StripeException {
-    return decline(authorization, params, (RequestOptions) null);
+    return decline(id, params, (RequestOptions) null);
   }
   /**
    * [Deprecated] Declines a pending Issuing {@code Authorization} object. This request should be
@@ -208,9 +200,8 @@ public final class AuthorizationService extends ApiService {
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
    * directly to the webhook request to decline an authorization</a>.
    */
-  public Authorization decline(String authorization, RequestOptions options)
-      throws StripeException {
-    return decline(authorization, (AuthorizationDeclineParams) null, options);
+  public Authorization decline(String id, RequestOptions options) throws StripeException {
+    return decline(id, (AuthorizationDeclineParams) null, options);
   }
   /**
    * [Deprecated] Declines a pending Issuing {@code Authorization} object. This request should be
@@ -220,8 +211,8 @@ public final class AuthorizationService extends ApiService {
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
    * directly to the webhook request to decline an authorization</a>.
    */
-  public Authorization decline(String authorization) throws StripeException {
-    return decline(authorization, (AuthorizationDeclineParams) null, (RequestOptions) null);
+  public Authorization decline(String id) throws StripeException {
+    return decline(id, (AuthorizationDeclineParams) null, (RequestOptions) null);
   }
   /**
    * [Deprecated] Declines a pending Issuing {@code Authorization} object. This request should be
@@ -231,12 +222,10 @@ public final class AuthorizationService extends ApiService {
    * href="https://stripe.com/docs/issuing/controls/real-time-authorizations#authorization-handling">respond
    * directly to the webhook request to decline an authorization</a>.
    */
-  public Authorization decline(
-      String authorization, AuthorizationDeclineParams params, RequestOptions options)
+  public Authorization decline(String id, AuthorizationDeclineParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(authorization));
+        String.format("/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -226,21 +226,19 @@ public class TestClock extends ApiResource implements HasId {
   }
 
   /** Retrieves a test clock. */
-  public static TestClock retrieve(String testClock) throws StripeException {
-    return retrieve(testClock, (Map<String, Object>) null, (RequestOptions) null);
+  public static TestClock retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a test clock. */
-  public static TestClock retrieve(String testClock, RequestOptions options)
+  public static TestClock retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a test clock. */
+  public static TestClock retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return retrieve(testClock, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves a test clock. */
-  public static TestClock retrieve(
-      String testClock, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path =
-        String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
+    String path = String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, TestClock.class);
@@ -248,10 +246,8 @@ public class TestClock extends ApiResource implements HasId {
 
   /** Retrieves a test clock. */
   public static TestClock retrieve(
-      String testClock, TestClockRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock));
+      String id, TestClockRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

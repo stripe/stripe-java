@@ -6158,6 +6158,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("swish")
       SWISH("swish"),
 
+      @SerializedName("touch_n_go")
+      TOUCH_N_GO("touch_n_go"),
+
       @SerializedName("truemoney")
       TRUEMONEY("truemoney"),
 

@@ -47,27 +47,23 @@ public final class ScheduledQueryRunService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<ScheduledQueryRun>>() {}.getType());
   }
   /** Retrieves the details of an scheduled query run. */
-  public ScheduledQueryRun retrieve(
-      String scheduledQueryRun, ScheduledQueryRunRetrieveParams params) throws StripeException {
-    return retrieve(scheduledQueryRun, params, (RequestOptions) null);
-  }
-  /** Retrieves the details of an scheduled query run. */
-  public ScheduledQueryRun retrieve(String scheduledQueryRun, RequestOptions options)
+  public ScheduledQueryRun retrieve(String id, ScheduledQueryRunRetrieveParams params)
       throws StripeException {
-    return retrieve(scheduledQueryRun, (ScheduledQueryRunRetrieveParams) null, options);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of an scheduled query run. */
-  public ScheduledQueryRun retrieve(String scheduledQueryRun) throws StripeException {
-    return retrieve(
-        scheduledQueryRun, (ScheduledQueryRunRetrieveParams) null, (RequestOptions) null);
+  public ScheduledQueryRun retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ScheduledQueryRunRetrieveParams) null, options);
+  }
+  /** Retrieves the details of an scheduled query run. */
+  public ScheduledQueryRun retrieve(String id) throws StripeException {
+    return retrieve(id, (ScheduledQueryRunRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the details of an scheduled query run. */
   public ScheduledQueryRun retrieve(
-      String scheduledQueryRun, ScheduledQueryRunRetrieveParams params, RequestOptions options)
+      String id, ScheduledQueryRunRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun));
+    String path = String.format("/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

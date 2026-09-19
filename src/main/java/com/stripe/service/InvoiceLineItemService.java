@@ -26,26 +26,26 @@ public final class InvoiceLineItemService extends ApiService {
    * count of line items and the first handful of those items. There is also a URL where you can
    * retrieve the full (paginated) list of line items.
    */
-  public StripeCollection<InvoiceLineItem> list(String invoice, InvoiceLineItemListParams params)
+  public StripeCollection<InvoiceLineItem> list(String id, InvoiceLineItemListParams params)
       throws StripeException {
-    return list(invoice, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
   /**
    * When retrieving an invoice, you’ll get a <strong>lines</strong> property containing the total
    * count of line items and the first handful of those items. There is also a URL where you can
    * retrieve the full (paginated) list of line items.
    */
-  public StripeCollection<InvoiceLineItem> list(String invoice, RequestOptions options)
+  public StripeCollection<InvoiceLineItem> list(String id, RequestOptions options)
       throws StripeException {
-    return list(invoice, (InvoiceLineItemListParams) null, options);
+    return list(id, (InvoiceLineItemListParams) null, options);
   }
   /**
    * When retrieving an invoice, you’ll get a <strong>lines</strong> property containing the total
    * count of line items and the first handful of those items. There is also a URL where you can
    * retrieve the full (paginated) list of line items.
    */
-  public StripeCollection<InvoiceLineItem> list(String invoice) throws StripeException {
-    return list(invoice, (InvoiceLineItemListParams) null, (RequestOptions) null);
+  public StripeCollection<InvoiceLineItem> list(String id) throws StripeException {
+    return list(id, (InvoiceLineItemListParams) null, (RequestOptions) null);
   }
   /**
    * When retrieving an invoice, you’ll get a <strong>lines</strong> property containing the total
@@ -53,9 +53,8 @@ public final class InvoiceLineItemService extends ApiService {
    * retrieve the full (paginated) list of line items.
    */
   public StripeCollection<InvoiceLineItem> list(
-      String invoice, InvoiceLineItemListParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/invoices/%s/lines", ApiResource.urlEncodeId(invoice));
+      String id, InvoiceLineItemListParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/invoices/%s/lines", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -72,10 +71,9 @@ public final class InvoiceLineItemService extends ApiService {
    * endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only
    * possible before the invoice is finalized.
    */
-  public InvoiceLineItem update(
-      String invoice, String lineItemId, InvoiceLineItemUpdateParams params)
+  public InvoiceLineItem update(String invoiceId, String id, InvoiceLineItemUpdateParams params)
       throws StripeException {
-    return update(invoice, lineItemId, params, (RequestOptions) null);
+    return update(invoiceId, id, params, (RequestOptions) null);
   }
   /**
    * Updates an invoice’s line item. Some fields, such as {@code tax_amounts}, only live on the
@@ -84,9 +82,9 @@ public final class InvoiceLineItemService extends ApiService {
    * endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only
    * possible before the invoice is finalized.
    */
-  public InvoiceLineItem update(String invoice, String lineItemId, RequestOptions options)
+  public InvoiceLineItem update(String invoiceId, String id, RequestOptions options)
       throws StripeException {
-    return update(invoice, lineItemId, (InvoiceLineItemUpdateParams) null, options);
+    return update(invoiceId, id, (InvoiceLineItemUpdateParams) null, options);
   }
   /**
    * Updates an invoice’s line item. Some fields, such as {@code tax_amounts}, only live on the
@@ -95,8 +93,8 @@ public final class InvoiceLineItemService extends ApiService {
    * endpoint will propagate to the invoice item as well. Updating an invoice’s line item is only
    * possible before the invoice is finalized.
    */
-  public InvoiceLineItem update(String invoice, String lineItemId) throws StripeException {
-    return update(invoice, lineItemId, (InvoiceLineItemUpdateParams) null, (RequestOptions) null);
+  public InvoiceLineItem update(String invoiceId, String id) throws StripeException {
+    return update(invoiceId, id, (InvoiceLineItemUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates an invoice’s line item. Some fields, such as {@code tax_amounts}, only live on the
@@ -106,12 +104,12 @@ public final class InvoiceLineItemService extends ApiService {
    * possible before the invoice is finalized.
    */
   public InvoiceLineItem update(
-      String invoice, String lineItemId, InvoiceLineItemUpdateParams params, RequestOptions options)
+      String invoiceId, String id, InvoiceLineItemUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/invoices/%s/lines/%s",
-            ApiResource.urlEncodeId(invoice), ApiResource.urlEncodeId(lineItemId));
+            ApiResource.urlEncodeId(invoiceId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -123,21 +121,20 @@ public final class InvoiceLineItemService extends ApiService {
   }
   /** Serializes an InvoiceLineItem update request into a batch job JSONL line. */
   public String serializeBatchUpdate(
-      String invoice, String lineItemId, InvoiceLineItemUpdateParams params)
-      throws StripeException {
-    return serializeBatchUpdate(invoice, lineItemId, params, (RequestOptions) null);
+      String invoiceId, String id, InvoiceLineItemUpdateParams params) throws StripeException {
+    return serializeBatchUpdate(invoiceId, id, params, (RequestOptions) null);
   }
   /** Serializes an InvoiceLineItem update request into a batch job JSONL line. */
   public String serializeBatchUpdate(
-      String invoice, String lineItemId, InvoiceLineItemUpdateParams params, RequestOptions options)
+      String invoiceId, String id, InvoiceLineItemUpdateParams params, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("invoice", invoice);
-    pathParams.put("line_item_id", lineItemId);
+    pathParams.put("invoice_id", invoiceId);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

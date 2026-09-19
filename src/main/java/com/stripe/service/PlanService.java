@@ -23,32 +23,32 @@ public final class PlanService extends ApiService {
   }
 
   /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
-  public Plan delete(String plan) throws StripeException {
-    return delete(plan, (RequestOptions) null);
+  public Plan delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
-  public Plan delete(String plan, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
+  public Plan delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Plan.class);
   }
   /** Retrieves the plan with the given ID. */
-  public Plan retrieve(String plan, PlanRetrieveParams params) throws StripeException {
-    return retrieve(plan, params, (RequestOptions) null);
+  public Plan retrieve(String id, PlanRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the plan with the given ID. */
-  public Plan retrieve(String plan, RequestOptions options) throws StripeException {
-    return retrieve(plan, (PlanRetrieveParams) null, options);
+  public Plan retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (PlanRetrieveParams) null, options);
   }
   /** Retrieves the plan with the given ID. */
-  public Plan retrieve(String plan) throws StripeException {
-    return retrieve(plan, (PlanRetrieveParams) null, (RequestOptions) null);
+  public Plan retrieve(String id) throws StripeException {
+    return retrieve(id, (PlanRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the plan with the given ID. */
-  public Plan retrieve(String plan, PlanRetrieveParams params, RequestOptions options)
+  public Plan retrieve(String id, PlanRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -63,33 +63,33 @@ public final class PlanService extends ApiService {
    * provided are left unchanged. By design, you cannot change a plan’s ID, amount, currency, or
    * billing cycle.
    */
-  public Plan update(String plan, PlanUpdateParams params) throws StripeException {
-    return update(plan, params, (RequestOptions) null);
+  public Plan update(String id, PlanUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates the specified plan by setting the values of the parameters passed. Any parameters not
    * provided are left unchanged. By design, you cannot change a plan’s ID, amount, currency, or
    * billing cycle.
    */
-  public Plan update(String plan, RequestOptions options) throws StripeException {
-    return update(plan, (PlanUpdateParams) null, options);
+  public Plan update(String id, RequestOptions options) throws StripeException {
+    return update(id, (PlanUpdateParams) null, options);
   }
   /**
    * Updates the specified plan by setting the values of the parameters passed. Any parameters not
    * provided are left unchanged. By design, you cannot change a plan’s ID, amount, currency, or
    * billing cycle.
    */
-  public Plan update(String plan) throws StripeException {
-    return update(plan, (PlanUpdateParams) null, (RequestOptions) null);
+  public Plan update(String id) throws StripeException {
+    return update(id, (PlanUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the specified plan by setting the values of the parameters passed. Any parameters not
    * provided are left unchanged. By design, you cannot change a plan’s ID, amount, currency, or
    * billing cycle.
    */
-  public Plan update(String plan, PlanUpdateParams params, RequestOptions options)
+  public Plan update(String id, PlanUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

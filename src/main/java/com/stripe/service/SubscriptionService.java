@@ -49,9 +49,8 @@ public final class SubscriptionService extends ApiService {
    * the invoices manually after subscription cancellation to have us proceed. Or, you could check
    * for unpaid invoices before allowing the customer to cancel the subscription at all.
    */
-  public Subscription cancel(String subscriptionExposedId, SubscriptionCancelParams params)
-      throws StripeException {
-    return cancel(subscriptionExposedId, params, (RequestOptions) null);
+  public Subscription cancel(String id, SubscriptionCancelParams params) throws StripeException {
+    return cancel(id, params, (RequestOptions) null);
   }
   /**
    * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
@@ -71,9 +70,8 @@ public final class SubscriptionService extends ApiService {
    * the invoices manually after subscription cancellation to have us proceed. Or, you could check
    * for unpaid invoices before allowing the customer to cancel the subscription at all.
    */
-  public Subscription cancel(String subscriptionExposedId, RequestOptions options)
-      throws StripeException {
-    return cancel(subscriptionExposedId, (SubscriptionCancelParams) null, options);
+  public Subscription cancel(String id, RequestOptions options) throws StripeException {
+    return cancel(id, (SubscriptionCancelParams) null, options);
   }
   /**
    * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
@@ -93,8 +91,8 @@ public final class SubscriptionService extends ApiService {
    * the invoices manually after subscription cancellation to have us proceed. Or, you could check
    * for unpaid invoices before allowing the customer to cancel the subscription at all.
    */
-  public Subscription cancel(String subscriptionExposedId) throws StripeException {
-    return cancel(subscriptionExposedId, (SubscriptionCancelParams) null, (RequestOptions) null);
+  public Subscription cancel(String id) throws StripeException {
+    return cancel(id, (SubscriptionCancelParams) null, (RequestOptions) null);
   }
   /**
    * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
@@ -114,11 +112,9 @@ public final class SubscriptionService extends ApiService {
    * the invoices manually after subscription cancellation to have us proceed. Or, you could check
    * for unpaid invoices before allowing the customer to cancel the subscription at all.
    */
-  public Subscription cancel(
-      String subscriptionExposedId, SubscriptionCancelParams params, RequestOptions options)
+  public Subscription cancel(String id, SubscriptionCancelParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId));
+    String path = String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -129,26 +125,22 @@ public final class SubscriptionService extends ApiService {
     return this.request(request, Subscription.class);
   }
   /** Retrieves the subscription with the given ID. */
-  public Subscription retrieve(String subscriptionExposedId, SubscriptionRetrieveParams params)
+  public Subscription retrieve(String id, SubscriptionRetrieveParams params)
       throws StripeException {
-    return retrieve(subscriptionExposedId, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the subscription with the given ID. */
-  public Subscription retrieve(String subscriptionExposedId, RequestOptions options)
-      throws StripeException {
-    return retrieve(subscriptionExposedId, (SubscriptionRetrieveParams) null, options);
+  public Subscription retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (SubscriptionRetrieveParams) null, options);
   }
   /** Retrieves the subscription with the given ID. */
-  public Subscription retrieve(String subscriptionExposedId) throws StripeException {
-    return retrieve(
-        subscriptionExposedId, (SubscriptionRetrieveParams) null, (RequestOptions) null);
+  public Subscription retrieve(String id) throws StripeException {
+    return retrieve(id, (SubscriptionRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the subscription with the given ID. */
-  public Subscription retrieve(
-      String subscriptionExposedId, SubscriptionRetrieveParams params, RequestOptions options)
+  public Subscription retrieve(String id, SubscriptionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId));
+    String path = String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -209,9 +201,8 @@ public final class SubscriptionService extends ApiService {
    * href="https://stripe.com/docs/billing/subscriptions/usage-based">usage-based billing</a>
    * instead.
    */
-  public Subscription update(String subscriptionExposedId, SubscriptionUpdateParams params)
-      throws StripeException {
-    return update(subscriptionExposedId, params, (RequestOptions) null);
+  public Subscription update(String id, SubscriptionUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates an existing subscription to match the specified parameters. When changing prices or
@@ -264,9 +255,8 @@ public final class SubscriptionService extends ApiService {
    * href="https://stripe.com/docs/billing/subscriptions/usage-based">usage-based billing</a>
    * instead.
    */
-  public Subscription update(String subscriptionExposedId, RequestOptions options)
-      throws StripeException {
-    return update(subscriptionExposedId, (SubscriptionUpdateParams) null, options);
+  public Subscription update(String id, RequestOptions options) throws StripeException {
+    return update(id, (SubscriptionUpdateParams) null, options);
   }
   /**
    * Updates an existing subscription to match the specified parameters. When changing prices or
@@ -319,8 +309,8 @@ public final class SubscriptionService extends ApiService {
    * href="https://stripe.com/docs/billing/subscriptions/usage-based">usage-based billing</a>
    * instead.
    */
-  public Subscription update(String subscriptionExposedId) throws StripeException {
-    return update(subscriptionExposedId, (SubscriptionUpdateParams) null, (RequestOptions) null);
+  public Subscription update(String id) throws StripeException {
+    return update(id, (SubscriptionUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates an existing subscription to match the specified parameters. When changing prices or
@@ -373,11 +363,9 @@ public final class SubscriptionService extends ApiService {
    * href="https://stripe.com/docs/billing/subscriptions/usage-based">usage-based billing</a>
    * instead.
    */
-  public Subscription update(
-      String subscriptionExposedId, SubscriptionUpdateParams params, RequestOptions options)
+  public Subscription update(String id, SubscriptionUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId));
+    String path = String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -388,15 +376,12 @@ public final class SubscriptionService extends ApiService {
     return this.request(request, Subscription.class);
   }
   /** Removes the currently applied discount on a subscription. */
-  public Discount deleteDiscount(String subscriptionExposedId) throws StripeException {
-    return deleteDiscount(subscriptionExposedId, (RequestOptions) null);
+  public Discount deleteDiscount(String id) throws StripeException {
+    return deleteDiscount(id, (RequestOptions) null);
   }
   /** Removes the currently applied discount on a subscription. */
-  public Discount deleteDiscount(String subscriptionExposedId, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/subscriptions/%s/discount", ApiResource.urlEncodeId(subscriptionExposedId));
+  public Discount deleteDiscount(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/subscriptions/%s/discount", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Discount.class);
@@ -552,9 +537,9 @@ public final class SubscriptionService extends ApiService {
    * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
    * Billing Cadence.
    */
-  public Subscription attachCadence(String subscription, SubscriptionAttachCadenceParams params)
+  public Subscription attachCadence(String id, SubscriptionAttachCadenceParams params)
       throws StripeException {
-    return attachCadence(subscription, params, (RequestOptions) null);
+    return attachCadence(id, params, (RequestOptions) null);
   }
   /**
    * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
@@ -562,10 +547,9 @@ public final class SubscriptionService extends ApiService {
    * Billing Cadence.
    */
   public Subscription attachCadence(
-      String subscription, SubscriptionAttachCadenceParams params, RequestOptions options)
+      String id, SubscriptionAttachCadenceParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s/attach_cadence", ApiResource.urlEncodeId(subscription));
+    String path = String.format("/v1/subscriptions/%s/attach_cadence", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -576,16 +560,13 @@ public final class SubscriptionService extends ApiService {
     return this.request(request, Subscription.class);
   }
   /** Upgrade the billing_mode of an existing subscription. */
-  public Subscription migrate(String subscription, SubscriptionMigrateParams params)
-      throws StripeException {
-    return migrate(subscription, params, (RequestOptions) null);
+  public Subscription migrate(String id, SubscriptionMigrateParams params) throws StripeException {
+    return migrate(id, params, (RequestOptions) null);
   }
   /** Upgrade the billing_mode of an existing subscription. */
-  public Subscription migrate(
-      String subscription, SubscriptionMigrateParams params, RequestOptions options)
+  public Subscription migrate(String id, SubscriptionMigrateParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s/migrate", ApiResource.urlEncodeId(subscription));
+    String path = String.format("/v1/subscriptions/%s/migrate", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -600,36 +581,33 @@ public final class SubscriptionService extends ApiService {
    * generate invoices and will not advance to new billing periods. The subscription can be resumed
    * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
    */
-  public Subscription pause(String subscription, SubscriptionPauseParams params)
+  public Subscription pause(String id, SubscriptionPauseParams params) throws StripeException {
+    return pause(id, params, (RequestOptions) null);
+  }
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(String id, RequestOptions options) throws StripeException {
+    return pause(id, (SubscriptionPauseParams) null, options);
+  }
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(String id) throws StripeException {
+    return pause(id, (SubscriptionPauseParams) null, (RequestOptions) null);
+  }
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(String id, SubscriptionPauseParams params, RequestOptions options)
       throws StripeException {
-    return pause(subscription, params, (RequestOptions) null);
-  }
-  /**
-   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
-   * generate invoices and will not advance to new billing periods. The subscription can be resumed
-   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
-   */
-  public Subscription pause(String subscription, RequestOptions options) throws StripeException {
-    return pause(subscription, (SubscriptionPauseParams) null, options);
-  }
-  /**
-   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
-   * generate invoices and will not advance to new billing periods. The subscription can be resumed
-   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
-   */
-  public Subscription pause(String subscription) throws StripeException {
-    return pause(subscription, (SubscriptionPauseParams) null, (RequestOptions) null);
-  }
-  /**
-   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
-   * generate invoices and will not advance to new billing periods. The subscription can be resumed
-   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
-   */
-  public Subscription pause(
-      String subscription, SubscriptionPauseParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s/pause", ApiResource.urlEncodeId(subscription));
+    String path = String.format("/v1/subscriptions/%s/pause", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -651,57 +629,54 @@ public final class SubscriptionService extends ApiService {
    * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
    * subscriptions</a>.
    */
-  public Subscription resume(String subscription, SubscriptionResumeParams params)
+  public Subscription resume(String id, SubscriptionResumeParams params) throws StripeException {
+    return resume(id, params, (RequestOptions) null);
+  }
+  /**
+   * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
+   * and creating prorations. Resume is only available for subscriptions that use {@code
+   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
+   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
+   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
+   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
+   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
+   * subscription stays {@code paused}. Learn more about <a
+   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
+   * subscriptions</a>.
+   */
+  public Subscription resume(String id, RequestOptions options) throws StripeException {
+    return resume(id, (SubscriptionResumeParams) null, options);
+  }
+  /**
+   * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
+   * and creating prorations. Resume is only available for subscriptions that use {@code
+   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
+   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
+   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
+   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
+   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
+   * subscription stays {@code paused}. Learn more about <a
+   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
+   * subscriptions</a>.
+   */
+  public Subscription resume(String id) throws StripeException {
+    return resume(id, (SubscriptionResumeParams) null, (RequestOptions) null);
+  }
+  /**
+   * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
+   * and creating prorations. Resume is only available for subscriptions that use {@code
+   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
+   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
+   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
+   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
+   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
+   * subscription stays {@code paused}. Learn more about <a
+   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
+   * subscriptions</a>.
+   */
+  public Subscription resume(String id, SubscriptionResumeParams params, RequestOptions options)
       throws StripeException {
-    return resume(subscription, params, (RequestOptions) null);
-  }
-  /**
-   * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. Resume is only available for subscriptions that use {@code
-   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
-   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
-   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
-   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
-   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
-   * subscription stays {@code paused}. Learn more about <a
-   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
-   * subscriptions</a>.
-   */
-  public Subscription resume(String subscription, RequestOptions options) throws StripeException {
-    return resume(subscription, (SubscriptionResumeParams) null, options);
-  }
-  /**
-   * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. Resume is only available for subscriptions that use {@code
-   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
-   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
-   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
-   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
-   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
-   * subscription stays {@code paused}. Learn more about <a
-   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
-   * subscriptions</a>.
-   */
-  public Subscription resume(String subscription) throws StripeException {
-    return resume(subscription, (SubscriptionResumeParams) null, (RequestOptions) null);
-  }
-  /**
-   * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
-   * and creating prorations. Resume is only available for subscriptions that use {@code
-   * charge_automatically} collection. If Stripe doesn’t generate a resumption invoice, the
-   * subscription becomes {@code active} immediately. When a resumption invoice is generated, Stripe
-   * finalizes it immediately. If the invoice is paid or marked uncollectible, the subscription
-   * becomes {@code active}. If the invoice is manually voided, the subscription stays {@code
-   * paused}. If there is no payment attempt within 23 hours, Stripe voids the invoice and the
-   * subscription stays {@code paused}. Learn more about <a
-   * href="https://stripe.com/docs/billing/subscriptions/pause#resume-subscriptions">resuming
-   * subscriptions</a>.
-   */
-  public Subscription resume(
-      String subscription, SubscriptionResumeParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s/resume", ApiResource.urlEncodeId(subscription));
+    String path = String.format("/v1/subscriptions/%s/resume", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -712,20 +687,19 @@ public final class SubscriptionService extends ApiService {
     return this.request(request, Subscription.class);
   }
   /** Serializes a Subscription cancel request into a batch job JSONL line. */
-  public String serializeBatchCancel(String subscriptionExposedId, SubscriptionCancelParams params)
+  public String serializeBatchCancel(String id, SubscriptionCancelParams params)
       throws StripeException {
-    return serializeBatchCancel(subscriptionExposedId, params, (RequestOptions) null);
+    return serializeBatchCancel(id, params, (RequestOptions) null);
   }
   /** Serializes a Subscription cancel request into a batch job JSONL line. */
   public String serializeBatchCancel(
-      String subscriptionExposedId, SubscriptionCancelParams params, RequestOptions options)
-      throws StripeException {
+      String id, SubscriptionCancelParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("subscription_exposed_id", subscriptionExposedId);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -737,20 +711,19 @@ public final class SubscriptionService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a Subscription update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(String subscriptionExposedId, SubscriptionUpdateParams params)
+  public String serializeBatchUpdate(String id, SubscriptionUpdateParams params)
       throws StripeException {
-    return serializeBatchUpdate(subscriptionExposedId, params, (RequestOptions) null);
+    return serializeBatchUpdate(id, params, (RequestOptions) null);
   }
   /** Serializes a Subscription update request into a batch job JSONL line. */
   public String serializeBatchUpdate(
-      String subscriptionExposedId, SubscriptionUpdateParams params, RequestOptions options)
-      throws StripeException {
+      String id, SubscriptionUpdateParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("subscription_exposed_id", subscriptionExposedId);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -782,20 +755,19 @@ public final class SubscriptionService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a Subscription migrate request into a batch job JSONL line. */
-  public String serializeBatchMigrate(String subscription, SubscriptionMigrateParams params)
+  public String serializeBatchMigrate(String id, SubscriptionMigrateParams params)
       throws StripeException {
-    return serializeBatchMigrate(subscription, params, (RequestOptions) null);
+    return serializeBatchMigrate(id, params, (RequestOptions) null);
   }
   /** Serializes a Subscription migrate request into a batch job JSONL line. */
   public String serializeBatchMigrate(
-      String subscription, SubscriptionMigrateParams params, RequestOptions options)
-      throws StripeException {
+      String id, SubscriptionMigrateParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("subscription", subscription);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -807,20 +779,19 @@ public final class SubscriptionService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a Subscription pause request into a batch job JSONL line. */
-  public String serializeBatchPause(String subscription, SubscriptionPauseParams params)
+  public String serializeBatchPause(String id, SubscriptionPauseParams params)
       throws StripeException {
-    return serializeBatchPause(subscription, params, (RequestOptions) null);
+    return serializeBatchPause(id, params, (RequestOptions) null);
   }
   /** Serializes a Subscription pause request into a batch job JSONL line. */
   public String serializeBatchPause(
-      String subscription, SubscriptionPauseParams params, RequestOptions options)
-      throws StripeException {
+      String id, SubscriptionPauseParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("subscription", subscription);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -832,20 +803,19 @@ public final class SubscriptionService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a Subscription resume request into a batch job JSONL line. */
-  public String serializeBatchResume(String subscription, SubscriptionResumeParams params)
+  public String serializeBatchResume(String id, SubscriptionResumeParams params)
       throws StripeException {
-    return serializeBatchResume(subscription, params, (RequestOptions) null);
+    return serializeBatchResume(id, params, (RequestOptions) null);
   }
   /** Serializes a Subscription resume request into a batch job JSONL line. */
   public String serializeBatchResume(
-      String subscription, SubscriptionResumeParams params, RequestOptions options)
-      throws StripeException {
+      String id, SubscriptionResumeParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("subscription", subscription);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

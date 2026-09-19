@@ -19,7 +19,7 @@ import lombok.Setter;
 /**
  * Invoice Payments represent payments made against invoices. Invoice Payments can be accessed in
  * two ways: 1. By expanding the {@code payments} field on the <a
- * href="https://api.stripe.com#invoice">Invoice</a> resource. 2. By using the Invoice Payment
+ * href="https://docs.stripe.com/api#invoice">Invoice</a> resource. 2. By using the Invoice Payment
  * retrieve and list endpoints.
  *
  * <p>Invoice Payments include the mapping between payment objects, such as Payment Intent, and
@@ -168,21 +168,19 @@ public class InvoicePayment extends ApiResource implements HasId {
   }
 
   /** Retrieves the invoice payment with the given ID. */
-  public static InvoicePayment retrieve(String invoicePayment) throws StripeException {
-    return retrieve(invoicePayment, (Map<String, Object>) null, (RequestOptions) null);
+  public static InvoicePayment retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the invoice payment with the given ID. */
-  public static InvoicePayment retrieve(String invoicePayment, RequestOptions options)
-      throws StripeException {
-    return retrieve(invoicePayment, (Map<String, Object>) null, options);
+  public static InvoicePayment retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the invoice payment with the given ID. */
   public static InvoicePayment retrieve(
-      String invoicePayment, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/invoice_payments/%s", ApiResource.urlEncodeId(invoicePayment));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/invoice_payments/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, InvoicePayment.class);
@@ -190,9 +188,9 @@ public class InvoicePayment extends ApiResource implements HasId {
 
   /** Retrieves the invoice payment with the given ID. */
   public static InvoicePayment retrieve(
-      String invoicePayment, InvoicePaymentRetrieveParams params, RequestOptions options)
+      String id, InvoicePaymentRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/invoice_payments/%s", ApiResource.urlEncodeId(invoicePayment));
+    String path = String.format("/v1/invoice_payments/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

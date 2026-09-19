@@ -42,8 +42,8 @@ public final class InvoiceService extends ApiService {
    * invoice is for a subscription, it must be <a
    * href="https://stripe.com/api/invoices/void">voided</a>.
    */
-  public Invoice delete(String invoice) throws StripeException {
-    return delete(invoice, (RequestOptions) null);
+  public Invoice delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /**
    * Permanently deletes a one-off invoice draft. This cannot be undone. Attempts to delete invoices
@@ -51,28 +51,28 @@ public final class InvoiceService extends ApiService {
    * invoice is for a subscription, it must be <a
    * href="https://stripe.com/api/invoices/void">voided</a>.
    */
-  public Invoice delete(String invoice, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
+  public Invoice delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Invoice.class);
   }
   /** Retrieves the invoice with the given ID. */
-  public Invoice retrieve(String invoice, InvoiceRetrieveParams params) throws StripeException {
-    return retrieve(invoice, params, (RequestOptions) null);
+  public Invoice retrieve(String id, InvoiceRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the invoice with the given ID. */
-  public Invoice retrieve(String invoice, RequestOptions options) throws StripeException {
-    return retrieve(invoice, (InvoiceRetrieveParams) null, options);
+  public Invoice retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (InvoiceRetrieveParams) null, options);
   }
   /** Retrieves the invoice with the given ID. */
-  public Invoice retrieve(String invoice) throws StripeException {
-    return retrieve(invoice, (InvoiceRetrieveParams) null, (RequestOptions) null);
+  public Invoice retrieve(String id) throws StripeException {
+    return retrieve(id, (InvoiceRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the invoice with the given ID. */
-  public Invoice retrieve(String invoice, InvoiceRetrieveParams params, RequestOptions options)
+  public Invoice retrieve(String id, InvoiceRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -93,8 +93,8 @@ public final class InvoiceService extends ApiService {
    * href="https://stripe.com/docs/billing/invoices/reconciliation">automatically reconciling</a>
    * invoices, pass {@code auto_advance=false}.
    */
-  public Invoice update(String invoice, InvoiceUpdateParams params) throws StripeException {
-    return update(invoice, params, (RequestOptions) null);
+  public Invoice update(String id, InvoiceUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Draft invoices are fully editable. Once an invoice is <a
@@ -107,8 +107,8 @@ public final class InvoiceService extends ApiService {
    * href="https://stripe.com/docs/billing/invoices/reconciliation">automatically reconciling</a>
    * invoices, pass {@code auto_advance=false}.
    */
-  public Invoice update(String invoice, RequestOptions options) throws StripeException {
-    return update(invoice, (InvoiceUpdateParams) null, options);
+  public Invoice update(String id, RequestOptions options) throws StripeException {
+    return update(id, (InvoiceUpdateParams) null, options);
   }
   /**
    * Draft invoices are fully editable. Once an invoice is <a
@@ -121,8 +121,8 @@ public final class InvoiceService extends ApiService {
    * href="https://stripe.com/docs/billing/invoices/reconciliation">automatically reconciling</a>
    * invoices, pass {@code auto_advance=false}.
    */
-  public Invoice update(String invoice) throws StripeException {
-    return update(invoice, (InvoiceUpdateParams) null, (RequestOptions) null);
+  public Invoice update(String id) throws StripeException {
+    return update(id, (InvoiceUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Draft invoices are fully editable. Once an invoice is <a
@@ -135,9 +135,9 @@ public final class InvoiceService extends ApiService {
    * href="https://stripe.com/docs/billing/invoices/reconciliation">automatically reconciling</a>
    * invoices, pass {@code auto_advance=false}.
    */
-  public Invoice update(String invoice, InvoiceUpdateParams params, RequestOptions options)
+  public Invoice update(String id, InvoiceUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -262,15 +262,15 @@ public final class InvoiceService extends ApiService {
   /**
    * Adds multiple line items to an invoice. This is only possible when an invoice is still a draft.
    */
-  public Invoice addLines(String invoice, InvoiceAddLinesParams params) throws StripeException {
-    return addLines(invoice, params, (RequestOptions) null);
+  public Invoice addLines(String id, InvoiceAddLinesParams params) throws StripeException {
+    return addLines(id, params, (RequestOptions) null);
   }
   /**
    * Adds multiple line items to an invoice. This is only possible when an invoice is still a draft.
    */
-  public Invoice addLines(String invoice, InvoiceAddLinesParams params, RequestOptions options)
+  public Invoice addLines(String id, InvoiceAddLinesParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/invoices/%s/add_lines", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/add_lines", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -294,9 +294,9 @@ public final class InvoiceService extends ApiService {
    * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
    * learn more.
    */
-  public Invoice attachPayment(String invoice, InvoiceAttachPaymentParams params)
+  public Invoice attachPayment(String id, InvoiceAttachPaymentParams params)
       throws StripeException {
-    return attachPayment(invoice, params, (RequestOptions) null);
+    return attachPayment(id, params, (RequestOptions) null);
   }
   /**
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
@@ -312,8 +312,8 @@ public final class InvoiceService extends ApiService {
    * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
    * learn more.
    */
-  public Invoice attachPayment(String invoice, RequestOptions options) throws StripeException {
-    return attachPayment(invoice, (InvoiceAttachPaymentParams) null, options);
+  public Invoice attachPayment(String id, RequestOptions options) throws StripeException {
+    return attachPayment(id, (InvoiceAttachPaymentParams) null, options);
   }
   /**
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
@@ -329,8 +329,8 @@ public final class InvoiceService extends ApiService {
    * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
    * learn more.
    */
-  public Invoice attachPayment(String invoice) throws StripeException {
-    return attachPayment(invoice, (InvoiceAttachPaymentParams) null, (RequestOptions) null);
+  public Invoice attachPayment(String id) throws StripeException {
+    return attachPayment(id, (InvoiceAttachPaymentParams) null, (RequestOptions) null);
   }
   /**
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
@@ -346,10 +346,9 @@ public final class InvoiceService extends ApiService {
    * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
    * learn more.
    */
-  public Invoice attachPayment(
-      String invoice, InvoiceAttachPaymentParams params, RequestOptions options)
+  public Invoice attachPayment(String id, InvoiceAttachPaymentParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/invoices/%s/attach_payment", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/attach_payment", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -360,23 +359,22 @@ public final class InvoiceService extends ApiService {
     return this.request(request, Invoice.class);
   }
   /** Detaches a payment from the invoice, removing it from the list of {@code payments}. */
-  public Invoice detachPayment(String invoice, InvoiceDetachPaymentParams params)
+  public Invoice detachPayment(String id, InvoiceDetachPaymentParams params)
       throws StripeException {
-    return detachPayment(invoice, params, (RequestOptions) null);
+    return detachPayment(id, params, (RequestOptions) null);
   }
   /** Detaches a payment from the invoice, removing it from the list of {@code payments}. */
-  public Invoice detachPayment(String invoice, RequestOptions options) throws StripeException {
-    return detachPayment(invoice, (InvoiceDetachPaymentParams) null, options);
+  public Invoice detachPayment(String id, RequestOptions options) throws StripeException {
+    return detachPayment(id, (InvoiceDetachPaymentParams) null, options);
   }
   /** Detaches a payment from the invoice, removing it from the list of {@code payments}. */
-  public Invoice detachPayment(String invoice) throws StripeException {
-    return detachPayment(invoice, (InvoiceDetachPaymentParams) null, (RequestOptions) null);
+  public Invoice detachPayment(String id) throws StripeException {
+    return detachPayment(id, (InvoiceDetachPaymentParams) null, (RequestOptions) null);
   }
   /** Detaches a payment from the invoice, removing it from the list of {@code payments}. */
-  public Invoice detachPayment(
-      String invoice, InvoiceDetachPaymentParams params, RequestOptions options)
+  public Invoice detachPayment(String id, InvoiceDetachPaymentParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/invoices/%s/detach_payment", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/detach_payment", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -390,32 +388,32 @@ public final class InvoiceService extends ApiService {
    * Stripe automatically finalizes drafts before sending and attempting payment on invoices.
    * However, if you’d like to finalize a draft invoice manually, you can do so using this method.
    */
-  public Invoice finalizeInvoice(String invoice, InvoiceFinalizeInvoiceParams params)
+  public Invoice finalizeInvoice(String id, InvoiceFinalizeInvoiceParams params)
       throws StripeException {
-    return finalizeInvoice(invoice, params, (RequestOptions) null);
+    return finalizeInvoice(id, params, (RequestOptions) null);
   }
   /**
    * Stripe automatically finalizes drafts before sending and attempting payment on invoices.
    * However, if you’d like to finalize a draft invoice manually, you can do so using this method.
    */
-  public Invoice finalizeInvoice(String invoice, RequestOptions options) throws StripeException {
-    return finalizeInvoice(invoice, (InvoiceFinalizeInvoiceParams) null, options);
+  public Invoice finalizeInvoice(String id, RequestOptions options) throws StripeException {
+    return finalizeInvoice(id, (InvoiceFinalizeInvoiceParams) null, options);
   }
   /**
    * Stripe automatically finalizes drafts before sending and attempting payment on invoices.
    * However, if you’d like to finalize a draft invoice manually, you can do so using this method.
    */
-  public Invoice finalizeInvoice(String invoice) throws StripeException {
-    return finalizeInvoice(invoice, (InvoiceFinalizeInvoiceParams) null, (RequestOptions) null);
+  public Invoice finalizeInvoice(String id) throws StripeException {
+    return finalizeInvoice(id, (InvoiceFinalizeInvoiceParams) null, (RequestOptions) null);
   }
   /**
    * Stripe automatically finalizes drafts before sending and attempting payment on invoices.
    * However, if you’d like to finalize a draft invoice manually, you can do so using this method.
    */
   public Invoice finalizeInvoice(
-      String invoice, InvoiceFinalizeInvoiceParams params, RequestOptions options)
+      String id, InvoiceFinalizeInvoiceParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/invoices/%s/finalize", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/finalize", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -429,33 +427,32 @@ public final class InvoiceService extends ApiService {
    * Marking an invoice as uncollectible is useful for keeping track of bad debts that can be
    * written off for accounting purposes.
    */
-  public Invoice markUncollectible(String invoice, InvoiceMarkUncollectibleParams params)
+  public Invoice markUncollectible(String id, InvoiceMarkUncollectibleParams params)
       throws StripeException {
-    return markUncollectible(invoice, params, (RequestOptions) null);
+    return markUncollectible(id, params, (RequestOptions) null);
   }
   /**
    * Marking an invoice as uncollectible is useful for keeping track of bad debts that can be
    * written off for accounting purposes.
    */
-  public Invoice markUncollectible(String invoice, RequestOptions options) throws StripeException {
-    return markUncollectible(invoice, (InvoiceMarkUncollectibleParams) null, options);
+  public Invoice markUncollectible(String id, RequestOptions options) throws StripeException {
+    return markUncollectible(id, (InvoiceMarkUncollectibleParams) null, options);
   }
   /**
    * Marking an invoice as uncollectible is useful for keeping track of bad debts that can be
    * written off for accounting purposes.
    */
-  public Invoice markUncollectible(String invoice) throws StripeException {
-    return markUncollectible(invoice, (InvoiceMarkUncollectibleParams) null, (RequestOptions) null);
+  public Invoice markUncollectible(String id) throws StripeException {
+    return markUncollectible(id, (InvoiceMarkUncollectibleParams) null, (RequestOptions) null);
   }
   /**
    * Marking an invoice as uncollectible is useful for keeping track of bad debts that can be
    * written off for accounting purposes.
    */
   public Invoice markUncollectible(
-      String invoice, InvoiceMarkUncollectibleParams params, RequestOptions options)
+      String id, InvoiceMarkUncollectibleParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/invoices/%s/mark_uncollectible", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/mark_uncollectible", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -472,8 +469,8 @@ public final class InvoiceService extends ApiService {
    * However, if you’d like to attempt payment on an invoice out of the normal collection schedule
    * or for some other reason, you can do so.
    */
-  public Invoice pay(String invoice, InvoicePayParams params) throws StripeException {
-    return pay(invoice, params, (RequestOptions) null);
+  public Invoice pay(String id, InvoicePayParams params) throws StripeException {
+    return pay(id, params, (RequestOptions) null);
   }
   /**
    * Stripe automatically creates and then attempts to collect payment on invoices for customers on
@@ -482,8 +479,8 @@ public final class InvoiceService extends ApiService {
    * However, if you’d like to attempt payment on an invoice out of the normal collection schedule
    * or for some other reason, you can do so.
    */
-  public Invoice pay(String invoice, RequestOptions options) throws StripeException {
-    return pay(invoice, (InvoicePayParams) null, options);
+  public Invoice pay(String id, RequestOptions options) throws StripeException {
+    return pay(id, (InvoicePayParams) null, options);
   }
   /**
    * Stripe automatically creates and then attempts to collect payment on invoices for customers on
@@ -492,8 +489,8 @@ public final class InvoiceService extends ApiService {
    * However, if you’d like to attempt payment on an invoice out of the normal collection schedule
    * or for some other reason, you can do so.
    */
-  public Invoice pay(String invoice) throws StripeException {
-    return pay(invoice, (InvoicePayParams) null, (RequestOptions) null);
+  public Invoice pay(String id) throws StripeException {
+    return pay(id, (InvoicePayParams) null, (RequestOptions) null);
   }
   /**
    * Stripe automatically creates and then attempts to collect payment on invoices for customers on
@@ -502,9 +499,9 @@ public final class InvoiceService extends ApiService {
    * However, if you’d like to attempt payment on an invoice out of the normal collection schedule
    * or for some other reason, you can do so.
    */
-  public Invoice pay(String invoice, InvoicePayParams params, RequestOptions options)
+  public Invoice pay(String id, InvoicePayParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/invoices/%s/pay", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/pay", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -518,18 +515,16 @@ public final class InvoiceService extends ApiService {
    * Removes multiple line items from an invoice. This is only possible when an invoice is still a
    * draft.
    */
-  public Invoice removeLines(String invoice, InvoiceRemoveLinesParams params)
-      throws StripeException {
-    return removeLines(invoice, params, (RequestOptions) null);
+  public Invoice removeLines(String id, InvoiceRemoveLinesParams params) throws StripeException {
+    return removeLines(id, params, (RequestOptions) null);
   }
   /**
    * Removes multiple line items from an invoice. This is only possible when an invoice is still a
    * draft.
    */
-  public Invoice removeLines(
-      String invoice, InvoiceRemoveLinesParams params, RequestOptions options)
+  public Invoice removeLines(String id, InvoiceRemoveLinesParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/invoices/%s/remove_lines", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/remove_lines", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -549,50 +544,48 @@ public final class InvoiceService extends ApiService {
    * <p>Requests made in test-mode result in no emails being sent, despite sending an {@code
    * invoice.sent} event.
    */
-  public Invoice sendInvoice(String invoice, InvoiceSendInvoiceParams params)
+  public Invoice sendInvoice(String id, InvoiceSendInvoiceParams params) throws StripeException {
+    return sendInvoice(id, params, (RequestOptions) null);
+  }
+  /**
+   * Stripe will automatically send invoices to customers according to your <a
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to manually send an invoice to your customer out of the normal schedule,
+   * you can do so. When sending invoices that have already been paid, there will be no reference to
+   * the payment in the email.
+   *
+   * <p>Requests made in test-mode result in no emails being sent, despite sending an {@code
+   * invoice.sent} event.
+   */
+  public Invoice sendInvoice(String id, RequestOptions options) throws StripeException {
+    return sendInvoice(id, (InvoiceSendInvoiceParams) null, options);
+  }
+  /**
+   * Stripe will automatically send invoices to customers according to your <a
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to manually send an invoice to your customer out of the normal schedule,
+   * you can do so. When sending invoices that have already been paid, there will be no reference to
+   * the payment in the email.
+   *
+   * <p>Requests made in test-mode result in no emails being sent, despite sending an {@code
+   * invoice.sent} event.
+   */
+  public Invoice sendInvoice(String id) throws StripeException {
+    return sendInvoice(id, (InvoiceSendInvoiceParams) null, (RequestOptions) null);
+  }
+  /**
+   * Stripe will automatically send invoices to customers according to your <a
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to manually send an invoice to your customer out of the normal schedule,
+   * you can do so. When sending invoices that have already been paid, there will be no reference to
+   * the payment in the email.
+   *
+   * <p>Requests made in test-mode result in no emails being sent, despite sending an {@code
+   * invoice.sent} event.
+   */
+  public Invoice sendInvoice(String id, InvoiceSendInvoiceParams params, RequestOptions options)
       throws StripeException {
-    return sendInvoice(invoice, params, (RequestOptions) null);
-  }
-  /**
-   * Stripe will automatically send invoices to customers according to your <a
-   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
-   * However, if you’d like to manually send an invoice to your customer out of the normal schedule,
-   * you can do so. When sending invoices that have already been paid, there will be no reference to
-   * the payment in the email.
-   *
-   * <p>Requests made in test-mode result in no emails being sent, despite sending an {@code
-   * invoice.sent} event.
-   */
-  public Invoice sendInvoice(String invoice, RequestOptions options) throws StripeException {
-    return sendInvoice(invoice, (InvoiceSendInvoiceParams) null, options);
-  }
-  /**
-   * Stripe will automatically send invoices to customers according to your <a
-   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
-   * However, if you’d like to manually send an invoice to your customer out of the normal schedule,
-   * you can do so. When sending invoices that have already been paid, there will be no reference to
-   * the payment in the email.
-   *
-   * <p>Requests made in test-mode result in no emails being sent, despite sending an {@code
-   * invoice.sent} event.
-   */
-  public Invoice sendInvoice(String invoice) throws StripeException {
-    return sendInvoice(invoice, (InvoiceSendInvoiceParams) null, (RequestOptions) null);
-  }
-  /**
-   * Stripe will automatically send invoices to customers according to your <a
-   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
-   * However, if you’d like to manually send an invoice to your customer out of the normal schedule,
-   * you can do so. When sending invoices that have already been paid, there will be no reference to
-   * the payment in the email.
-   *
-   * <p>Requests made in test-mode result in no emails being sent, despite sending an {@code
-   * invoice.sent} event.
-   */
-  public Invoice sendInvoice(
-      String invoice, InvoiceSendInvoiceParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/invoices/%s/send", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/send", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -606,18 +599,16 @@ public final class InvoiceService extends ApiService {
    * Updates multiple line items on an invoice. This is only possible when an invoice is still a
    * draft.
    */
-  public Invoice updateLines(String invoice, InvoiceUpdateLinesParams params)
-      throws StripeException {
-    return updateLines(invoice, params, (RequestOptions) null);
+  public Invoice updateLines(String id, InvoiceUpdateLinesParams params) throws StripeException {
+    return updateLines(id, params, (RequestOptions) null);
   }
   /**
    * Updates multiple line items on an invoice. This is only possible when an invoice is still a
    * draft.
    */
-  public Invoice updateLines(
-      String invoice, InvoiceUpdateLinesParams params, RequestOptions options)
+  public Invoice updateLines(String id, InvoiceUpdateLinesParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/invoices/%s/update_lines", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/update_lines", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -638,53 +629,51 @@ public final class InvoiceService extends ApiService {
    * href="https://stripe.com/api/credit_notes/create">credit note</a> instead. Stripe recommends
    * that you consult with your legal counsel for advice specific to your business.
    */
-  public Invoice voidInvoice(String invoice, InvoiceVoidInvoiceParams params)
+  public Invoice voidInvoice(String id, InvoiceVoidInvoiceParams params) throws StripeException {
+    return voidInvoice(id, params, (RequestOptions) null);
+  }
+  /**
+   * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
+   * href="https://stripe.com/api/invoices/delete">deletion</a>, however it only applies to
+   * finalized invoices and maintains a papertrail where the invoice can still be found.
+   *
+   * <p>Consult with local regulations to determine whether and how an invoice might be amended,
+   * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
+   * href="https://stripe.com/api/invoices/create">issue another invoice</a> or <a
+   * href="https://stripe.com/api/credit_notes/create">credit note</a> instead. Stripe recommends
+   * that you consult with your legal counsel for advice specific to your business.
+   */
+  public Invoice voidInvoice(String id, RequestOptions options) throws StripeException {
+    return voidInvoice(id, (InvoiceVoidInvoiceParams) null, options);
+  }
+  /**
+   * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
+   * href="https://stripe.com/api/invoices/delete">deletion</a>, however it only applies to
+   * finalized invoices and maintains a papertrail where the invoice can still be found.
+   *
+   * <p>Consult with local regulations to determine whether and how an invoice might be amended,
+   * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
+   * href="https://stripe.com/api/invoices/create">issue another invoice</a> or <a
+   * href="https://stripe.com/api/credit_notes/create">credit note</a> instead. Stripe recommends
+   * that you consult with your legal counsel for advice specific to your business.
+   */
+  public Invoice voidInvoice(String id) throws StripeException {
+    return voidInvoice(id, (InvoiceVoidInvoiceParams) null, (RequestOptions) null);
+  }
+  /**
+   * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
+   * href="https://stripe.com/api/invoices/delete">deletion</a>, however it only applies to
+   * finalized invoices and maintains a papertrail where the invoice can still be found.
+   *
+   * <p>Consult with local regulations to determine whether and how an invoice might be amended,
+   * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
+   * href="https://stripe.com/api/invoices/create">issue another invoice</a> or <a
+   * href="https://stripe.com/api/credit_notes/create">credit note</a> instead. Stripe recommends
+   * that you consult with your legal counsel for advice specific to your business.
+   */
+  public Invoice voidInvoice(String id, InvoiceVoidInvoiceParams params, RequestOptions options)
       throws StripeException {
-    return voidInvoice(invoice, params, (RequestOptions) null);
-  }
-  /**
-   * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
-   * href="https://stripe.com/api/invoices/delete">deletion</a>, however it only applies to
-   * finalized invoices and maintains a papertrail where the invoice can still be found.
-   *
-   * <p>Consult with local regulations to determine whether and how an invoice might be amended,
-   * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
-   * href="https://stripe.com/api/invoices/create">issue another invoice</a> or <a
-   * href="https://stripe.com/api/credit_notes/create">credit note</a> instead. Stripe recommends
-   * that you consult with your legal counsel for advice specific to your business.
-   */
-  public Invoice voidInvoice(String invoice, RequestOptions options) throws StripeException {
-    return voidInvoice(invoice, (InvoiceVoidInvoiceParams) null, options);
-  }
-  /**
-   * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
-   * href="https://stripe.com/api/invoices/delete">deletion</a>, however it only applies to
-   * finalized invoices and maintains a papertrail where the invoice can still be found.
-   *
-   * <p>Consult with local regulations to determine whether and how an invoice might be amended,
-   * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
-   * href="https://stripe.com/api/invoices/create">issue another invoice</a> or <a
-   * href="https://stripe.com/api/credit_notes/create">credit note</a> instead. Stripe recommends
-   * that you consult with your legal counsel for advice specific to your business.
-   */
-  public Invoice voidInvoice(String invoice) throws StripeException {
-    return voidInvoice(invoice, (InvoiceVoidInvoiceParams) null, (RequestOptions) null);
-  }
-  /**
-   * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
-   * href="https://stripe.com/api/invoices/delete">deletion</a>, however it only applies to
-   * finalized invoices and maintains a papertrail where the invoice can still be found.
-   *
-   * <p>Consult with local regulations to determine whether and how an invoice might be amended,
-   * canceled, or voided in the jurisdiction you’re doing business in. You might need to <a
-   * href="https://stripe.com/api/invoices/create">issue another invoice</a> or <a
-   * href="https://stripe.com/api/credit_notes/create">credit note</a> instead. Stripe recommends
-   * that you consult with your legal counsel for advice specific to your business.
-   */
-  public Invoice voidInvoice(
-      String invoice, InvoiceVoidInvoiceParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/invoices/%s/void", ApiResource.urlEncodeId(invoice));
+    String path = String.format("/v1/invoices/%s/void", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -812,18 +801,17 @@ public final class InvoiceService extends ApiService {
     return this.request(request, Invoice.class);
   }
   /** Serializes an Invoice delete request into a batch job JSONL line. */
-  public String serializeBatchDelete(String invoice) throws StripeException {
-    return serializeBatchDelete(invoice, (RequestOptions) null);
+  public String serializeBatchDelete(String id) throws StripeException {
+    return serializeBatchDelete(id, (RequestOptions) null);
   }
   /** Serializes an Invoice delete request into a batch job JSONL line. */
-  public String serializeBatchDelete(String invoice, RequestOptions options)
-      throws StripeException {
+  public String serializeBatchDelete(String id, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("invoice", invoice);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -835,19 +823,18 @@ public final class InvoiceService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes an Invoice update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(String invoice, InvoiceUpdateParams params)
-      throws StripeException {
-    return serializeBatchUpdate(invoice, params, (RequestOptions) null);
+  public String serializeBatchUpdate(String id, InvoiceUpdateParams params) throws StripeException {
+    return serializeBatchUpdate(id, params, (RequestOptions) null);
   }
   /** Serializes an Invoice update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(
-      String invoice, InvoiceUpdateParams params, RequestOptions options) throws StripeException {
+  public String serializeBatchUpdate(String id, InvoiceUpdateParams params, RequestOptions options)
+      throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("invoice", invoice);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -879,19 +866,19 @@ public final class InvoiceService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes an Invoice add_lines request into a batch job JSONL line. */
-  public String serializeBatchAddLines(String invoice, InvoiceAddLinesParams params)
+  public String serializeBatchAddLines(String id, InvoiceAddLinesParams params)
       throws StripeException {
-    return serializeBatchAddLines(invoice, params, (RequestOptions) null);
+    return serializeBatchAddLines(id, params, (RequestOptions) null);
   }
   /** Serializes an Invoice add_lines request into a batch job JSONL line. */
   public String serializeBatchAddLines(
-      String invoice, InvoiceAddLinesParams params, RequestOptions options) throws StripeException {
+      String id, InvoiceAddLinesParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("invoice", invoice);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -903,20 +890,20 @@ public final class InvoiceService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes an Invoice finalize_invoice request into a batch job JSONL line. */
-  public String serializeBatchFinalizeInvoice(String invoice, InvoiceFinalizeInvoiceParams params)
+  public String serializeBatchFinalizeInvoice(String id, InvoiceFinalizeInvoiceParams params)
       throws StripeException {
-    return serializeBatchFinalizeInvoice(invoice, params, (RequestOptions) null);
+    return serializeBatchFinalizeInvoice(id, params, (RequestOptions) null);
   }
   /** Serializes an Invoice finalize_invoice request into a batch job JSONL line. */
   public String serializeBatchFinalizeInvoice(
-      String invoice, InvoiceFinalizeInvoiceParams params, RequestOptions options)
+      String id, InvoiceFinalizeInvoiceParams params, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("invoice", invoice);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -928,20 +915,20 @@ public final class InvoiceService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes an Invoice mark_uncollectible request into a batch job JSONL line. */
-  public String serializeBatchMarkUncollectible(
-      String invoice, InvoiceMarkUncollectibleParams params) throws StripeException {
-    return serializeBatchMarkUncollectible(invoice, params, (RequestOptions) null);
+  public String serializeBatchMarkUncollectible(String id, InvoiceMarkUncollectibleParams params)
+      throws StripeException {
+    return serializeBatchMarkUncollectible(id, params, (RequestOptions) null);
   }
   /** Serializes an Invoice mark_uncollectible request into a batch job JSONL line. */
   public String serializeBatchMarkUncollectible(
-      String invoice, InvoiceMarkUncollectibleParams params, RequestOptions options)
+      String id, InvoiceMarkUncollectibleParams params, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("invoice", invoice);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -953,18 +940,18 @@ public final class InvoiceService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes an Invoice pay request into a batch job JSONL line. */
-  public String serializeBatchPay(String invoice, InvoicePayParams params) throws StripeException {
-    return serializeBatchPay(invoice, params, (RequestOptions) null);
+  public String serializeBatchPay(String id, InvoicePayParams params) throws StripeException {
+    return serializeBatchPay(id, params, (RequestOptions) null);
   }
   /** Serializes an Invoice pay request into a batch job JSONL line. */
-  public String serializeBatchPay(String invoice, InvoicePayParams params, RequestOptions options)
+  public String serializeBatchPay(String id, InvoicePayParams params, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("invoice", invoice);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -976,20 +963,19 @@ public final class InvoiceService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes an Invoice remove_lines request into a batch job JSONL line. */
-  public String serializeBatchRemoveLines(String invoice, InvoiceRemoveLinesParams params)
+  public String serializeBatchRemoveLines(String id, InvoiceRemoveLinesParams params)
       throws StripeException {
-    return serializeBatchRemoveLines(invoice, params, (RequestOptions) null);
+    return serializeBatchRemoveLines(id, params, (RequestOptions) null);
   }
   /** Serializes an Invoice remove_lines request into a batch job JSONL line. */
   public String serializeBatchRemoveLines(
-      String invoice, InvoiceRemoveLinesParams params, RequestOptions options)
-      throws StripeException {
+      String id, InvoiceRemoveLinesParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("invoice", invoice);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -1001,20 +987,19 @@ public final class InvoiceService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes an Invoice send_invoice request into a batch job JSONL line. */
-  public String serializeBatchSendInvoice(String invoice, InvoiceSendInvoiceParams params)
+  public String serializeBatchSendInvoice(String id, InvoiceSendInvoiceParams params)
       throws StripeException {
-    return serializeBatchSendInvoice(invoice, params, (RequestOptions) null);
+    return serializeBatchSendInvoice(id, params, (RequestOptions) null);
   }
   /** Serializes an Invoice send_invoice request into a batch job JSONL line. */
   public String serializeBatchSendInvoice(
-      String invoice, InvoiceSendInvoiceParams params, RequestOptions options)
-      throws StripeException {
+      String id, InvoiceSendInvoiceParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("invoice", invoice);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -1026,20 +1011,19 @@ public final class InvoiceService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes an Invoice update_lines request into a batch job JSONL line. */
-  public String serializeBatchUpdateLines(String invoice, InvoiceUpdateLinesParams params)
+  public String serializeBatchUpdateLines(String id, InvoiceUpdateLinesParams params)
       throws StripeException {
-    return serializeBatchUpdateLines(invoice, params, (RequestOptions) null);
+    return serializeBatchUpdateLines(id, params, (RequestOptions) null);
   }
   /** Serializes an Invoice update_lines request into a batch job JSONL line. */
   public String serializeBatchUpdateLines(
-      String invoice, InvoiceUpdateLinesParams params, RequestOptions options)
-      throws StripeException {
+      String id, InvoiceUpdateLinesParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("invoice", invoice);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -1051,20 +1035,19 @@ public final class InvoiceService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes an Invoice void_invoice request into a batch job JSONL line. */
-  public String serializeBatchVoidInvoice(String invoice, InvoiceVoidInvoiceParams params)
+  public String serializeBatchVoidInvoice(String id, InvoiceVoidInvoiceParams params)
       throws StripeException {
-    return serializeBatchVoidInvoice(invoice, params, (RequestOptions) null);
+    return serializeBatchVoidInvoice(id, params, (RequestOptions) null);
   }
   /** Serializes an Invoice void_invoice request into a batch job JSONL line. */
   public String serializeBatchVoidInvoice(
-      String invoice, InvoiceVoidInvoiceParams params, RequestOptions options)
-      throws StripeException {
+      String id, InvoiceVoidInvoiceParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("invoice", invoice);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

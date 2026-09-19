@@ -24,26 +24,26 @@ public final class QuoteLineService extends ApiService {
    * to create new subscription schedules or update existing subscription schedules when the quote
    * is accepted.
    */
-  public StripeCollection<QuoteLine> list(String quote, QuoteLineListParams params)
+  public StripeCollection<QuoteLine> list(String id, QuoteLineListParams params)
       throws StripeException {
-    return list(quote, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves a paginated list of lines for a quote. These lines describe changes that will be used
    * to create new subscription schedules or update existing subscription schedules when the quote
    * is accepted.
    */
-  public StripeCollection<QuoteLine> list(String quote, RequestOptions options)
+  public StripeCollection<QuoteLine> list(String id, RequestOptions options)
       throws StripeException {
-    return list(quote, (QuoteLineListParams) null, options);
+    return list(id, (QuoteLineListParams) null, options);
   }
   /**
    * Retrieves a paginated list of lines for a quote. These lines describe changes that will be used
    * to create new subscription schedules or update existing subscription schedules when the quote
    * is accepted.
    */
-  public StripeCollection<QuoteLine> list(String quote) throws StripeException {
-    return list(quote, (QuoteLineListParams) null, (RequestOptions) null);
+  public StripeCollection<QuoteLine> list(String id) throws StripeException {
+    return list(id, (QuoteLineListParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves a paginated list of lines for a quote. These lines describe changes that will be used
@@ -51,8 +51,8 @@ public final class QuoteLineService extends ApiService {
    * is accepted.
    */
   public StripeCollection<QuoteLine> list(
-      String quote, QuoteLineListParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/quotes/%s/lines", ApiResource.urlEncodeId(quote));
+      String id, QuoteLineListParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/quotes/%s/lines", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

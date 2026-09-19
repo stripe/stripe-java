@@ -28,8 +28,8 @@ public final class AccountPersonService extends ApiService {
    * representative}. If your integration is using the {@code executive} parameter, you cannot
    * delete the only verified {@code executive} on file.
    */
-  public Person delete(String account, String person) throws StripeException {
-    return delete(account, person, (RequestOptions) null);
+  public Person delete(String accountId, String id) throws StripeException {
+    return delete(accountId, id, (RequestOptions) null);
   }
   /**
    * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
@@ -37,38 +37,37 @@ public final class AccountPersonService extends ApiService {
    * representative}. If your integration is using the {@code executive} parameter, you cannot
    * delete the only verified {@code executive} on file.
    */
-  public Person delete(String account, String person, RequestOptions options)
-      throws StripeException {
+  public Person delete(String accountId, String id, RequestOptions options) throws StripeException {
     String path =
         String.format(
             "/v1/accounts/%s/persons/%s",
-            ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(person));
+            ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Person.class);
   }
   /** Retrieves an existing person. */
-  public Person retrieve(String account, String person, AccountPersonRetrieveParams params)
+  public Person retrieve(String accountId, String id, AccountPersonRetrieveParams params)
       throws StripeException {
-    return retrieve(account, person, params, (RequestOptions) null);
+    return retrieve(accountId, id, params, (RequestOptions) null);
   }
   /** Retrieves an existing person. */
-  public Person retrieve(String account, String person, RequestOptions options)
+  public Person retrieve(String accountId, String id, RequestOptions options)
       throws StripeException {
-    return retrieve(account, person, (AccountPersonRetrieveParams) null, options);
+    return retrieve(accountId, id, (AccountPersonRetrieveParams) null, options);
   }
   /** Retrieves an existing person. */
-  public Person retrieve(String account, String person) throws StripeException {
-    return retrieve(account, person, (AccountPersonRetrieveParams) null, (RequestOptions) null);
+  public Person retrieve(String accountId, String id) throws StripeException {
+    return retrieve(accountId, id, (AccountPersonRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves an existing person. */
   public Person retrieve(
-      String account, String person, AccountPersonRetrieveParams params, RequestOptions options)
+      String accountId, String id, AccountPersonRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/accounts/%s/persons/%s",
-            ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(person));
+            ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -79,27 +78,26 @@ public final class AccountPersonService extends ApiService {
     return this.request(request, Person.class);
   }
   /** Updates an existing person. */
-  public Person update(String account, String person, AccountPersonUpdateParams params)
+  public Person update(String accountId, String id, AccountPersonUpdateParams params)
       throws StripeException {
-    return update(account, person, params, (RequestOptions) null);
+    return update(accountId, id, params, (RequestOptions) null);
   }
   /** Updates an existing person. */
-  public Person update(String account, String person, RequestOptions options)
-      throws StripeException {
-    return update(account, person, (AccountPersonUpdateParams) null, options);
+  public Person update(String accountId, String id, RequestOptions options) throws StripeException {
+    return update(accountId, id, (AccountPersonUpdateParams) null, options);
   }
   /** Updates an existing person. */
-  public Person update(String account, String person) throws StripeException {
-    return update(account, person, (AccountPersonUpdateParams) null, (RequestOptions) null);
+  public Person update(String accountId, String id) throws StripeException {
+    return update(accountId, id, (AccountPersonUpdateParams) null, (RequestOptions) null);
   }
   /** Updates an existing person. */
   public Person update(
-      String account, String person, AccountPersonUpdateParams params, RequestOptions options)
+      String accountId, String id, AccountPersonUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/accounts/%s/persons/%s",
-            ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(person));
+            ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -113,33 +111,31 @@ public final class AccountPersonService extends ApiService {
    * Returns a list of people associated with the account’s legal entity. The people are returned
    * sorted by creation date, with the most recent people appearing first.
    */
-  public StripeCollection<Person> list(String account, AccountPersonListParams params)
+  public StripeCollection<Person> list(String id, AccountPersonListParams params)
       throws StripeException {
-    return list(account, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
   /**
    * Returns a list of people associated with the account’s legal entity. The people are returned
    * sorted by creation date, with the most recent people appearing first.
    */
-  public StripeCollection<Person> list(String account, RequestOptions options)
-      throws StripeException {
-    return list(account, (AccountPersonListParams) null, options);
+  public StripeCollection<Person> list(String id, RequestOptions options) throws StripeException {
+    return list(id, (AccountPersonListParams) null, options);
   }
   /**
    * Returns a list of people associated with the account’s legal entity. The people are returned
    * sorted by creation date, with the most recent people appearing first.
    */
-  public StripeCollection<Person> list(String account) throws StripeException {
-    return list(account, (AccountPersonListParams) null, (RequestOptions) null);
+  public StripeCollection<Person> list(String id) throws StripeException {
+    return list(id, (AccountPersonListParams) null, (RequestOptions) null);
   }
   /**
    * Returns a list of people associated with the account’s legal entity. The people are returned
    * sorted by creation date, with the most recent people appearing first.
    */
   public StripeCollection<Person> list(
-      String account, AccountPersonListParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(account));
+      String id, AccountPersonListParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -150,21 +146,21 @@ public final class AccountPersonService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Person>>() {}.getType());
   }
   /** Creates a new person. */
-  public Person create(String account, AccountPersonCreateParams params) throws StripeException {
-    return create(account, params, (RequestOptions) null);
+  public Person create(String id, AccountPersonCreateParams params) throws StripeException {
+    return create(id, params, (RequestOptions) null);
   }
   /** Creates a new person. */
-  public Person create(String account, RequestOptions options) throws StripeException {
-    return create(account, (AccountPersonCreateParams) null, options);
+  public Person create(String id, RequestOptions options) throws StripeException {
+    return create(id, (AccountPersonCreateParams) null, options);
   }
   /** Creates a new person. */
-  public Person create(String account) throws StripeException {
-    return create(account, (AccountPersonCreateParams) null, (RequestOptions) null);
+  public Person create(String id) throws StripeException {
+    return create(id, (AccountPersonCreateParams) null, (RequestOptions) null);
   }
   /** Creates a new person. */
-  public Person create(String account, AccountPersonCreateParams params, RequestOptions options)
+  public Person create(String id, AccountPersonCreateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

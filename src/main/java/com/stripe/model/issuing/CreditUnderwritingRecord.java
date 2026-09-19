@@ -442,25 +442,21 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
   }
 
   /** Retrieves a {@code CreditUnderwritingRecord} object. */
-  public static CreditUnderwritingRecord retrieve(String creditUnderwritingRecord)
+  public static CreditUnderwritingRecord retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a {@code CreditUnderwritingRecord} object. */
+  public static CreditUnderwritingRecord retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(creditUnderwritingRecord, (Map<String, Object>) null, (RequestOptions) null);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a {@code CreditUnderwritingRecord} object. */
   public static CreditUnderwritingRecord retrieve(
-      String creditUnderwritingRecord, RequestOptions options) throws StripeException {
-    return retrieve(creditUnderwritingRecord, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves a {@code CreditUnderwritingRecord} object. */
-  public static CreditUnderwritingRecord retrieve(
-      String creditUnderwritingRecord, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/credit_underwriting_records/%s",
-            ApiResource.urlEncodeId(creditUnderwritingRecord));
+        String.format("/v1/issuing/credit_underwriting_records/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, CreditUnderwritingRecord.class);
@@ -468,14 +464,10 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
 
   /** Retrieves a {@code CreditUnderwritingRecord} object. */
   public static CreditUnderwritingRecord retrieve(
-      String creditUnderwritingRecord,
-      CreditUnderwritingRecordRetrieveParams params,
-      RequestOptions options)
+      String id, CreditUnderwritingRecordRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/credit_underwriting_records/%s",
-            ApiResource.urlEncodeId(creditUnderwritingRecord));
+        String.format("/v1/issuing/credit_underwriting_records/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

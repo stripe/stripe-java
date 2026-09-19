@@ -24,21 +24,20 @@ public final class OutboundTransferService extends ApiService {
    * Updates a test mode created OutboundTransfer with tracking details. The OutboundTransfer must
    * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
    */
-  public OutboundTransfer update(String outboundTransfer, OutboundTransferUpdateParams params)
+  public OutboundTransfer update(String id, OutboundTransferUpdateParams params)
       throws StripeException {
-    return update(outboundTransfer, params, (RequestOptions) null);
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates a test mode created OutboundTransfer with tracking details. The OutboundTransfer must
    * not be cancelable, and cannot be in the {@code canceled} or {@code failed} states.
    */
   public OutboundTransfer update(
-      String outboundTransfer, OutboundTransferUpdateParams params, RequestOptions options)
+      String id, OutboundTransferUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/test_helpers/treasury/outbound_transfers/%s",
-            ApiResource.urlEncodeId(outboundTransfer));
+            "/v1/test_helpers/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -52,36 +51,33 @@ public final class OutboundTransferService extends ApiService {
    * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
    * OutboundTransfer must already be in the {@code processing} state.
    */
-  public OutboundTransfer fail(String outboundTransfer, OutboundTransferFailParams params)
+  public OutboundTransfer fail(String id, OutboundTransferFailParams params)
       throws StripeException {
-    return fail(outboundTransfer, params, (RequestOptions) null);
+    return fail(id, params, (RequestOptions) null);
   }
   /**
    * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
    * OutboundTransfer must already be in the {@code processing} state.
    */
-  public OutboundTransfer fail(String outboundTransfer, RequestOptions options)
-      throws StripeException {
-    return fail(outboundTransfer, (OutboundTransferFailParams) null, options);
+  public OutboundTransfer fail(String id, RequestOptions options) throws StripeException {
+    return fail(id, (OutboundTransferFailParams) null, options);
   }
   /**
    * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
    * OutboundTransfer must already be in the {@code processing} state.
    */
-  public OutboundTransfer fail(String outboundTransfer) throws StripeException {
-    return fail(outboundTransfer, (OutboundTransferFailParams) null, (RequestOptions) null);
+  public OutboundTransfer fail(String id) throws StripeException {
+    return fail(id, (OutboundTransferFailParams) null, (RequestOptions) null);
   }
   /**
    * Transitions a test mode created OutboundTransfer to the {@code failed} status. The
    * OutboundTransfer must already be in the {@code processing} state.
    */
-  public OutboundTransfer fail(
-      String outboundTransfer, OutboundTransferFailParams params, RequestOptions options)
+  public OutboundTransfer fail(String id, OutboundTransferFailParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/test_helpers/treasury/outbound_transfers/%s/fail",
-            ApiResource.urlEncodeId(outboundTransfer));
+            "/v1/test_helpers/treasury/outbound_transfers/%s/fail", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -95,36 +91,33 @@ public final class OutboundTransferService extends ApiService {
    * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
    * OutboundTransfer must already be in the {@code processing} state.
    */
-  public OutboundTransfer post(String outboundTransfer, OutboundTransferPostParams params)
+  public OutboundTransfer post(String id, OutboundTransferPostParams params)
       throws StripeException {
-    return post(outboundTransfer, params, (RequestOptions) null);
+    return post(id, params, (RequestOptions) null);
   }
   /**
    * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
    * OutboundTransfer must already be in the {@code processing} state.
    */
-  public OutboundTransfer post(String outboundTransfer, RequestOptions options)
-      throws StripeException {
-    return post(outboundTransfer, (OutboundTransferPostParams) null, options);
+  public OutboundTransfer post(String id, RequestOptions options) throws StripeException {
+    return post(id, (OutboundTransferPostParams) null, options);
   }
   /**
    * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
    * OutboundTransfer must already be in the {@code processing} state.
    */
-  public OutboundTransfer post(String outboundTransfer) throws StripeException {
-    return post(outboundTransfer, (OutboundTransferPostParams) null, (RequestOptions) null);
+  public OutboundTransfer post(String id) throws StripeException {
+    return post(id, (OutboundTransferPostParams) null, (RequestOptions) null);
   }
   /**
    * Transitions a test mode created OutboundTransfer to the {@code posted} status. The
    * OutboundTransfer must already be in the {@code processing} state.
    */
-  public OutboundTransfer post(
-      String outboundTransfer, OutboundTransferPostParams params, RequestOptions options)
+  public OutboundTransfer post(String id, OutboundTransferPostParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/test_helpers/treasury/outbound_transfers/%s/post",
-            ApiResource.urlEncodeId(outboundTransfer));
+            "/v1/test_helpers/treasury/outbound_transfers/%s/post", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -139,42 +132,35 @@ public final class OutboundTransferService extends ApiService {
    * OutboundTransfer must already be in the {@code processing} state.
    */
   public OutboundTransfer returnOutboundTransfer(
-      String outboundTransfer, OutboundTransferReturnOutboundTransferParams params)
-      throws StripeException {
-    return returnOutboundTransfer(outboundTransfer, params, (RequestOptions) null);
+      String id, OutboundTransferReturnOutboundTransferParams params) throws StripeException {
+    return returnOutboundTransfer(id, params, (RequestOptions) null);
   }
   /**
    * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
    * OutboundTransfer must already be in the {@code processing} state.
    */
-  public OutboundTransfer returnOutboundTransfer(String outboundTransfer, RequestOptions options)
+  public OutboundTransfer returnOutboundTransfer(String id, RequestOptions options)
       throws StripeException {
-    return returnOutboundTransfer(
-        outboundTransfer, (OutboundTransferReturnOutboundTransferParams) null, options);
+    return returnOutboundTransfer(id, (OutboundTransferReturnOutboundTransferParams) null, options);
   }
   /**
    * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
    * OutboundTransfer must already be in the {@code processing} state.
    */
-  public OutboundTransfer returnOutboundTransfer(String outboundTransfer) throws StripeException {
+  public OutboundTransfer returnOutboundTransfer(String id) throws StripeException {
     return returnOutboundTransfer(
-        outboundTransfer,
-        (OutboundTransferReturnOutboundTransferParams) null,
-        (RequestOptions) null);
+        id, (OutboundTransferReturnOutboundTransferParams) null, (RequestOptions) null);
   }
   /**
    * Transitions a test mode created OutboundTransfer to the {@code returned} status. The
    * OutboundTransfer must already be in the {@code processing} state.
    */
   public OutboundTransfer returnOutboundTransfer(
-      String outboundTransfer,
-      OutboundTransferReturnOutboundTransferParams params,
-      RequestOptions options)
+      String id, OutboundTransferReturnOutboundTransferParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/test_helpers/treasury/outbound_transfers/%s/return",
-            ApiResource.urlEncodeId(outboundTransfer));
+            "/v1/test_helpers/treasury/outbound_transfers/%s/return", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -69,33 +69,33 @@ public final class TopupService extends ApiService {
    * that was returned from your previous request, and Stripe will return the corresponding top-up
    * information.
    */
-  public Topup retrieve(String topup, TopupRetrieveParams params) throws StripeException {
-    return retrieve(topup, params, (RequestOptions) null);
+  public Topup retrieve(String id, TopupRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves the details of a top-up that has previously been created. Supply the unique top-up ID
    * that was returned from your previous request, and Stripe will return the corresponding top-up
    * information.
    */
-  public Topup retrieve(String topup, RequestOptions options) throws StripeException {
-    return retrieve(topup, (TopupRetrieveParams) null, options);
+  public Topup retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (TopupRetrieveParams) null, options);
   }
   /**
    * Retrieves the details of a top-up that has previously been created. Supply the unique top-up ID
    * that was returned from your previous request, and Stripe will return the corresponding top-up
    * information.
    */
-  public Topup retrieve(String topup) throws StripeException {
-    return retrieve(topup, (TopupRetrieveParams) null, (RequestOptions) null);
+  public Topup retrieve(String id) throws StripeException {
+    return retrieve(id, (TopupRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves the details of a top-up that has previously been created. Supply the unique top-up ID
    * that was returned from your previous request, and Stripe will return the corresponding top-up
    * information.
    */
-  public Topup retrieve(String topup, TopupRetrieveParams params, RequestOptions options)
+  public Topup retrieve(String id, TopupRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(topup));
+    String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -106,21 +106,21 @@ public final class TopupService extends ApiService {
     return this.request(request, Topup.class);
   }
   /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
-  public Topup update(String topup, TopupUpdateParams params) throws StripeException {
-    return update(topup, params, (RequestOptions) null);
+  public Topup update(String id, TopupUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
-  public Topup update(String topup, RequestOptions options) throws StripeException {
-    return update(topup, (TopupUpdateParams) null, options);
+  public Topup update(String id, RequestOptions options) throws StripeException {
+    return update(id, (TopupUpdateParams) null, options);
   }
   /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
-  public Topup update(String topup) throws StripeException {
-    return update(topup, (TopupUpdateParams) null, (RequestOptions) null);
+  public Topup update(String id) throws StripeException {
+    return update(id, (TopupUpdateParams) null, (RequestOptions) null);
   }
   /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
-  public Topup update(String topup, TopupUpdateParams params, RequestOptions options)
+  public Topup update(String id, TopupUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(topup));
+    String path = String.format("/v1/topups/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -131,21 +131,21 @@ public final class TopupService extends ApiService {
     return this.request(request, Topup.class);
   }
   /** Cancels a top-up. Only pending top-ups can be canceled. */
-  public Topup cancel(String topup, TopupCancelParams params) throws StripeException {
-    return cancel(topup, params, (RequestOptions) null);
+  public Topup cancel(String id, TopupCancelParams params) throws StripeException {
+    return cancel(id, params, (RequestOptions) null);
   }
   /** Cancels a top-up. Only pending top-ups can be canceled. */
-  public Topup cancel(String topup, RequestOptions options) throws StripeException {
-    return cancel(topup, (TopupCancelParams) null, options);
+  public Topup cancel(String id, RequestOptions options) throws StripeException {
+    return cancel(id, (TopupCancelParams) null, options);
   }
   /** Cancels a top-up. Only pending top-ups can be canceled. */
-  public Topup cancel(String topup) throws StripeException {
-    return cancel(topup, (TopupCancelParams) null, (RequestOptions) null);
+  public Topup cancel(String id) throws StripeException {
+    return cancel(id, (TopupCancelParams) null, (RequestOptions) null);
   }
   /** Cancels a top-up. Only pending top-ups can be canceled. */
-  public Topup cancel(String topup, TopupCancelParams params, RequestOptions options)
+  public Topup cancel(String id, TopupCancelParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/topups/%s/cancel", ApiResource.urlEncodeId(topup));
+    String path = String.format("/v1/topups/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

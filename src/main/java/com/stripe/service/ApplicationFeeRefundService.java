@@ -27,25 +27,26 @@ public final class ApplicationFeeRefundService extends ApiService {
    * object, but you can also retrieve details about a specific refund stored on the application
    * fee.
    */
-  public FeeRefund retrieve(String fee, String id, ApplicationFeeRefundRetrieveParams params)
+  public FeeRefund retrieve(String feeId, String id, ApplicationFeeRefundRetrieveParams params)
       throws StripeException {
-    return retrieve(fee, id, params, (RequestOptions) null);
+    return retrieve(feeId, id, params, (RequestOptions) null);
   }
   /**
    * By default, you can see the 10 most recent refunds stored directly on the application fee
    * object, but you can also retrieve details about a specific refund stored on the application
    * fee.
    */
-  public FeeRefund retrieve(String fee, String id, RequestOptions options) throws StripeException {
-    return retrieve(fee, id, (ApplicationFeeRefundRetrieveParams) null, options);
+  public FeeRefund retrieve(String feeId, String id, RequestOptions options)
+      throws StripeException {
+    return retrieve(feeId, id, (ApplicationFeeRefundRetrieveParams) null, options);
   }
   /**
    * By default, you can see the 10 most recent refunds stored directly on the application fee
    * object, but you can also retrieve details about a specific refund stored on the application
    * fee.
    */
-  public FeeRefund retrieve(String fee, String id) throws StripeException {
-    return retrieve(fee, id, (ApplicationFeeRefundRetrieveParams) null, (RequestOptions) null);
+  public FeeRefund retrieve(String feeId, String id) throws StripeException {
+    return retrieve(feeId, id, (ApplicationFeeRefundRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * By default, you can see the 10 most recent refunds stored directly on the application fee
@@ -53,12 +54,12 @@ public final class ApplicationFeeRefundService extends ApiService {
    * fee.
    */
   public FeeRefund retrieve(
-      String fee, String id, ApplicationFeeRefundRetrieveParams params, RequestOptions options)
+      String feeId, String id, ApplicationFeeRefundRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/application_fees/%s/refunds/%s",
-            ApiResource.urlEncodeId(fee), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(feeId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -74,9 +75,9 @@ public final class ApplicationFeeRefundService extends ApiService {
    *
    * <p>This request only accepts metadata as an argument.
    */
-  public FeeRefund update(String fee, String id, ApplicationFeeRefundUpdateParams params)
+  public FeeRefund update(String feeId, String id, ApplicationFeeRefundUpdateParams params)
       throws StripeException {
-    return update(fee, id, params, (RequestOptions) null);
+    return update(feeId, id, params, (RequestOptions) null);
   }
   /**
    * Updates the specified application fee refund by setting the values of the parameters passed.
@@ -84,8 +85,8 @@ public final class ApplicationFeeRefundService extends ApiService {
    *
    * <p>This request only accepts metadata as an argument.
    */
-  public FeeRefund update(String fee, String id, RequestOptions options) throws StripeException {
-    return update(fee, id, (ApplicationFeeRefundUpdateParams) null, options);
+  public FeeRefund update(String feeId, String id, RequestOptions options) throws StripeException {
+    return update(feeId, id, (ApplicationFeeRefundUpdateParams) null, options);
   }
   /**
    * Updates the specified application fee refund by setting the values of the parameters passed.
@@ -93,8 +94,8 @@ public final class ApplicationFeeRefundService extends ApiService {
    *
    * <p>This request only accepts metadata as an argument.
    */
-  public FeeRefund update(String fee, String id) throws StripeException {
-    return update(fee, id, (ApplicationFeeRefundUpdateParams) null, (RequestOptions) null);
+  public FeeRefund update(String feeId, String id) throws StripeException {
+    return update(feeId, id, (ApplicationFeeRefundUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the specified application fee refund by setting the values of the parameters passed.
@@ -103,12 +104,12 @@ public final class ApplicationFeeRefundService extends ApiService {
    * <p>This request only accepts metadata as an argument.
    */
   public FeeRefund update(
-      String fee, String id, ApplicationFeeRefundUpdateParams params, RequestOptions options)
+      String feeId, String id, ApplicationFeeRefundUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/application_fees/%s/refunds/%s",
-            ApiResource.urlEncodeId(fee), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(feeId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

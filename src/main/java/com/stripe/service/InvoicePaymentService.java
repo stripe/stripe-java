@@ -63,24 +63,23 @@ public final class InvoicePaymentService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<InvoicePayment>>() {}.getType());
   }
   /** Retrieves the invoice payment with the given ID. */
-  public InvoicePayment retrieve(String invoicePayment, InvoicePaymentRetrieveParams params)
+  public InvoicePayment retrieve(String id, InvoicePaymentRetrieveParams params)
       throws StripeException {
-    return retrieve(invoicePayment, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the invoice payment with the given ID. */
-  public InvoicePayment retrieve(String invoicePayment, RequestOptions options)
-      throws StripeException {
-    return retrieve(invoicePayment, (InvoicePaymentRetrieveParams) null, options);
+  public InvoicePayment retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (InvoicePaymentRetrieveParams) null, options);
   }
   /** Retrieves the invoice payment with the given ID. */
-  public InvoicePayment retrieve(String invoicePayment) throws StripeException {
-    return retrieve(invoicePayment, (InvoicePaymentRetrieveParams) null, (RequestOptions) null);
+  public InvoicePayment retrieve(String id) throws StripeException {
+    return retrieve(id, (InvoicePaymentRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the invoice payment with the given ID. */
   public InvoicePayment retrieve(
-      String invoicePayment, InvoicePaymentRetrieveParams params, RequestOptions options)
+      String id, InvoicePaymentRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/invoice_payments/%s", ApiResource.urlEncodeId(invoicePayment));
+    String path = String.format("/v1/invoice_payments/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

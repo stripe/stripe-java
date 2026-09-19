@@ -46,25 +46,22 @@ public final class InstitutionService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Institution>>() {}.getType());
   }
   /** Retrieves the details of a Financial Connections {@code Institution}. */
-  public Institution retrieve(String institution, InstitutionRetrieveParams params)
-      throws StripeException {
-    return retrieve(institution, params, (RequestOptions) null);
+  public Institution retrieve(String id, InstitutionRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of a Financial Connections {@code Institution}. */
-  public Institution retrieve(String institution, RequestOptions options) throws StripeException {
-    return retrieve(institution, (InstitutionRetrieveParams) null, options);
+  public Institution retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (InstitutionRetrieveParams) null, options);
   }
   /** Retrieves the details of a Financial Connections {@code Institution}. */
-  public Institution retrieve(String institution) throws StripeException {
-    return retrieve(institution, (InstitutionRetrieveParams) null, (RequestOptions) null);
+  public Institution retrieve(String id) throws StripeException {
+    return retrieve(id, (InstitutionRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the details of a Financial Connections {@code Institution}. */
-  public Institution retrieve(
-      String institution, InstitutionRetrieveParams params, RequestOptions options)
+  public Institution retrieve(String id, InstitutionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/financial_connections/institutions/%s", ApiResource.urlEncodeId(institution));
+        String.format("/v1/financial_connections/institutions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

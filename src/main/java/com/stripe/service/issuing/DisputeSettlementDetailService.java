@@ -61,33 +61,25 @@ public final class DisputeSettlementDetailService extends ApiService {
         request, new TypeToken<StripeCollection<DisputeSettlementDetail>>() {}.getType());
   }
   /** Retrieves an Issuing {@code DisputeSettlementDetail} object. */
-  public DisputeSettlementDetail retrieve(
-      String disputeSettlementDetail, DisputeSettlementDetailRetrieveParams params)
+  public DisputeSettlementDetail retrieve(String id, DisputeSettlementDetailRetrieveParams params)
       throws StripeException {
-    return retrieve(disputeSettlementDetail, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves an Issuing {@code DisputeSettlementDetail} object. */
-  public DisputeSettlementDetail retrieve(String disputeSettlementDetail, RequestOptions options)
+  public DisputeSettlementDetail retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(disputeSettlementDetail, (DisputeSettlementDetailRetrieveParams) null, options);
+    return retrieve(id, (DisputeSettlementDetailRetrieveParams) null, options);
   }
   /** Retrieves an Issuing {@code DisputeSettlementDetail} object. */
-  public DisputeSettlementDetail retrieve(String disputeSettlementDetail) throws StripeException {
-    return retrieve(
-        disputeSettlementDetail,
-        (DisputeSettlementDetailRetrieveParams) null,
-        (RequestOptions) null);
+  public DisputeSettlementDetail retrieve(String id) throws StripeException {
+    return retrieve(id, (DisputeSettlementDetailRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves an Issuing {@code DisputeSettlementDetail} object. */
   public DisputeSettlementDetail retrieve(
-      String disputeSettlementDetail,
-      DisputeSettlementDetailRetrieveParams params,
-      RequestOptions options)
+      String id, DisputeSettlementDetailRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/dispute_settlement_details/%s",
-            ApiResource.urlEncodeId(disputeSettlementDetail));
+        String.format("/v1/issuing/dispute_settlement_details/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

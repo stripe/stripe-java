@@ -66,26 +66,24 @@ public final class ConfigurationService extends ApiService {
     return this.request(request, Configuration.class);
   }
   /** Retrieves a configuration that describes the functionality of the customer portal. */
-  public Configuration retrieve(String configuration, ConfigurationRetrieveParams params)
+  public Configuration retrieve(String id, ConfigurationRetrieveParams params)
       throws StripeException {
-    return retrieve(configuration, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a configuration that describes the functionality of the customer portal. */
-  public Configuration retrieve(String configuration, RequestOptions options)
-      throws StripeException {
-    return retrieve(configuration, (ConfigurationRetrieveParams) null, options);
+  public Configuration retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ConfigurationRetrieveParams) null, options);
   }
   /** Retrieves a configuration that describes the functionality of the customer portal. */
-  public Configuration retrieve(String configuration) throws StripeException {
-    return retrieve(configuration, (ConfigurationRetrieveParams) null, (RequestOptions) null);
+  public Configuration retrieve(String id) throws StripeException {
+    return retrieve(id, (ConfigurationRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a configuration that describes the functionality of the customer portal. */
   public Configuration retrieve(
-      String configuration, ConfigurationRetrieveParams params, RequestOptions options)
+      String id, ConfigurationRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(configuration));
+        String.format("/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -96,25 +94,22 @@ public final class ConfigurationService extends ApiService {
     return this.request(request, Configuration.class);
   }
   /** Updates a configuration that describes the functionality of the customer portal. */
-  public Configuration update(String configuration, ConfigurationUpdateParams params)
-      throws StripeException {
-    return update(configuration, params, (RequestOptions) null);
+  public Configuration update(String id, ConfigurationUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates a configuration that describes the functionality of the customer portal. */
-  public Configuration update(String configuration, RequestOptions options) throws StripeException {
-    return update(configuration, (ConfigurationUpdateParams) null, options);
+  public Configuration update(String id, RequestOptions options) throws StripeException {
+    return update(id, (ConfigurationUpdateParams) null, options);
   }
   /** Updates a configuration that describes the functionality of the customer portal. */
-  public Configuration update(String configuration) throws StripeException {
-    return update(configuration, (ConfigurationUpdateParams) null, (RequestOptions) null);
+  public Configuration update(String id) throws StripeException {
+    return update(id, (ConfigurationUpdateParams) null, (RequestOptions) null);
   }
   /** Updates a configuration that describes the functionality of the customer portal. */
-  public Configuration update(
-      String configuration, ConfigurationUpdateParams params, RequestOptions options)
+  public Configuration update(String id, ConfigurationUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(configuration));
+        String.format("/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -23,42 +23,42 @@ public final class ProductFeatureService extends ApiService {
   }
 
   /** Deletes the feature attachment to a product. */
-  public ProductFeature delete(String product, String id) throws StripeException {
-    return delete(product, id, (RequestOptions) null);
+  public ProductFeature delete(String productId, String id) throws StripeException {
+    return delete(productId, id, (RequestOptions) null);
   }
   /** Deletes the feature attachment to a product. */
-  public ProductFeature delete(String product, String id, RequestOptions options)
+  public ProductFeature delete(String productId, String id, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/products/%s/features/%s",
-            ApiResource.urlEncodeId(product), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(productId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, ProductFeature.class);
   }
   /** Retrieves a product_feature, which represents a feature attachment to a product. */
-  public ProductFeature retrieve(String product, String id, ProductFeatureRetrieveParams params)
+  public ProductFeature retrieve(String productId, String id, ProductFeatureRetrieveParams params)
       throws StripeException {
-    return retrieve(product, id, params, (RequestOptions) null);
+    return retrieve(productId, id, params, (RequestOptions) null);
   }
   /** Retrieves a product_feature, which represents a feature attachment to a product. */
-  public ProductFeature retrieve(String product, String id, RequestOptions options)
+  public ProductFeature retrieve(String productId, String id, RequestOptions options)
       throws StripeException {
-    return retrieve(product, id, (ProductFeatureRetrieveParams) null, options);
+    return retrieve(productId, id, (ProductFeatureRetrieveParams) null, options);
   }
   /** Retrieves a product_feature, which represents a feature attachment to a product. */
-  public ProductFeature retrieve(String product, String id) throws StripeException {
-    return retrieve(product, id, (ProductFeatureRetrieveParams) null, (RequestOptions) null);
+  public ProductFeature retrieve(String productId, String id) throws StripeException {
+    return retrieve(productId, id, (ProductFeatureRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a product_feature, which represents a feature attachment to a product. */
   public ProductFeature retrieve(
-      String product, String id, ProductFeatureRetrieveParams params, RequestOptions options)
+      String productId, String id, ProductFeatureRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/products/%s/features/%s",
-            ApiResource.urlEncodeId(product), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(productId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -69,24 +69,23 @@ public final class ProductFeatureService extends ApiService {
     return this.request(request, ProductFeature.class);
   }
   /** Retrieve a list of features for a product. */
-  public StripeCollection<ProductFeature> list(String product, ProductFeatureListParams params)
+  public StripeCollection<ProductFeature> list(String id, ProductFeatureListParams params)
       throws StripeException {
-    return list(product, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
   /** Retrieve a list of features for a product. */
-  public StripeCollection<ProductFeature> list(String product, RequestOptions options)
+  public StripeCollection<ProductFeature> list(String id, RequestOptions options)
       throws StripeException {
-    return list(product, (ProductFeatureListParams) null, options);
+    return list(id, (ProductFeatureListParams) null, options);
   }
   /** Retrieve a list of features for a product. */
-  public StripeCollection<ProductFeature> list(String product) throws StripeException {
-    return list(product, (ProductFeatureListParams) null, (RequestOptions) null);
+  public StripeCollection<ProductFeature> list(String id) throws StripeException {
+    return list(id, (ProductFeatureListParams) null, (RequestOptions) null);
   }
   /** Retrieve a list of features for a product. */
   public StripeCollection<ProductFeature> list(
-      String product, ProductFeatureListParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(product));
+      String id, ProductFeatureListParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -97,15 +96,14 @@ public final class ProductFeatureService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<ProductFeature>>() {}.getType());
   }
   /** Creates a product_feature, which represents a feature attachment to a product. */
-  public ProductFeature create(String product, ProductFeatureCreateParams params)
+  public ProductFeature create(String id, ProductFeatureCreateParams params)
       throws StripeException {
-    return create(product, params, (RequestOptions) null);
+    return create(id, params, (RequestOptions) null);
   }
   /** Creates a product_feature, which represents a feature attachment to a product. */
-  public ProductFeature create(
-      String product, ProductFeatureCreateParams params, RequestOptions options)
+  public ProductFeature create(String id, ProductFeatureCreateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(product));
+    String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -116,18 +114,18 @@ public final class ProductFeatureService extends ApiService {
     return this.request(request, ProductFeature.class);
   }
   /** Serializes a ProductFeature delete request into a batch job JSONL line. */
-  public String serializeBatchDelete(String product, String id) throws StripeException {
-    return serializeBatchDelete(product, id, (RequestOptions) null);
+  public String serializeBatchDelete(String productId, String id) throws StripeException {
+    return serializeBatchDelete(productId, id, (RequestOptions) null);
   }
   /** Serializes a ProductFeature delete request into a batch job JSONL line. */
-  public String serializeBatchDelete(String product, String id, RequestOptions options)
+  public String serializeBatchDelete(String productId, String id, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("product", product);
+    pathParams.put("product_id", productId);
     pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
@@ -140,20 +138,19 @@ public final class ProductFeatureService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a ProductFeature create request into a batch job JSONL line. */
-  public String serializeBatchCreate(String product, ProductFeatureCreateParams params)
+  public String serializeBatchCreate(String id, ProductFeatureCreateParams params)
       throws StripeException {
-    return serializeBatchCreate(product, params, (RequestOptions) null);
+    return serializeBatchCreate(id, params, (RequestOptions) null);
   }
   /** Serializes a ProductFeature create request into a batch job JSONL line. */
   public String serializeBatchCreate(
-      String product, ProductFeatureCreateParams params, RequestOptions options)
-      throws StripeException {
+      String id, ProductFeatureCreateParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("product", product);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

@@ -18,26 +18,23 @@ public final class ConfirmationTokenService extends ApiService {
   }
 
   /** Retrieves an existing ConfirmationToken object. */
-  public ConfirmationToken retrieve(
-      String confirmationToken, ConfirmationTokenRetrieveParams params) throws StripeException {
-    return retrieve(confirmationToken, params, (RequestOptions) null);
-  }
-  /** Retrieves an existing ConfirmationToken object. */
-  public ConfirmationToken retrieve(String confirmationToken, RequestOptions options)
+  public ConfirmationToken retrieve(String id, ConfirmationTokenRetrieveParams params)
       throws StripeException {
-    return retrieve(confirmationToken, (ConfirmationTokenRetrieveParams) null, options);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves an existing ConfirmationToken object. */
-  public ConfirmationToken retrieve(String confirmationToken) throws StripeException {
-    return retrieve(
-        confirmationToken, (ConfirmationTokenRetrieveParams) null, (RequestOptions) null);
+  public ConfirmationToken retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ConfirmationTokenRetrieveParams) null, options);
+  }
+  /** Retrieves an existing ConfirmationToken object. */
+  public ConfirmationToken retrieve(String id) throws StripeException {
+    return retrieve(id, (ConfirmationTokenRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves an existing ConfirmationToken object. */
   public ConfirmationToken retrieve(
-      String confirmationToken, ConfirmationTokenRetrieveParams params, RequestOptions options)
+      String id, ConfirmationTokenRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/confirmation_tokens/%s", ApiResource.urlEncodeId(confirmationToken));
+    String path = String.format("/v1/confirmation_tokens/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -413,6 +413,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentRecord> paymentRecord;
 
+  /** The ID of the Payment Reservation for this Checkout Session. */
+  @SerializedName("payment_reservation")
+  String paymentReservation;
+
   /**
    * The payment status of the Checkout Session, one of {@code paid}, {@code unpaid}, or {@code
    * no_payment_required}. You can use this value to decide when to fulfill your customer's order.
@@ -944,28 +948,28 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /** Retrieves a Checkout Session object. */
-  public static Session retrieve(String session) throws StripeException {
-    return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
+  public static Session retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a Checkout Session object. */
-  public static Session retrieve(String session, RequestOptions options) throws StripeException {
-    return retrieve(session, (Map<String, Object>) null, options);
+  public static Session retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a Checkout Session object. */
-  public static Session retrieve(String session, Map<String, Object> params, RequestOptions options)
+  public static Session retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
+    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
   /** Retrieves a Checkout Session object. */
-  public static Session retrieve(
-      String session, SessionRetrieveParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
+  public static Session retrieve(String id, SessionRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -1752,6 +1756,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("card")
       Card card;
 
+      @SerializedName("custom")
+      Custom custom;
+
       @SerializedName("link")
       Link link;
 
@@ -1897,6 +1904,19 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
           @SerializedName("type")
           String type;
         }
+      }
+
+      /**
+       * For more details about Custom, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Custom extends StripeObject {
+        /** ID of the Dashboard-only CustomPaymentMethodType. Not expandable. */
+        @SerializedName("type")
+        String type;
       }
 
       /**
@@ -2561,7 +2581,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("key")
     String key;
 
-    /** Details on the subscription for this item. */
     @SerializedName("subscription")
     com.stripe.model.checkout.Session.Item.Subscription subscription;
 
@@ -5713,9 +5732,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
         /**
          * A discount represents the actual application of a <a
-         * href="https://api.stripe.com#coupons">coupon</a> or <a
-         * href="https://api.stripe.com#promotion_codes">promotion code</a>. It contains information
-         * about when the discount began, when it will end, and what it is applied to.
+         * href="https://docs.stripe.com/api#coupons">coupon</a> or <a
+         * href="https://docs.stripe.com/api#promotion_codes">promotion code</a>. It contains
+         * information about when the discount began, when it will end, and what it is applied to.
          *
          * <p>Related guide: <a
          * href="https://docs.stripe.com/billing/subscriptions/discounts">Applying discounts to

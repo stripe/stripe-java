@@ -77,23 +77,21 @@ public final class CardholderService extends ApiService {
     return this.request(request, Cardholder.class);
   }
   /** Retrieves an Issuing {@code Cardholder} object. */
-  public Cardholder retrieve(String cardholder, CardholderRetrieveParams params)
+  public Cardholder retrieve(String id, CardholderRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /** Retrieves an Issuing {@code Cardholder} object. */
+  public Cardholder retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (CardholderRetrieveParams) null, options);
+  }
+  /** Retrieves an Issuing {@code Cardholder} object. */
+  public Cardholder retrieve(String id) throws StripeException {
+    return retrieve(id, (CardholderRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves an Issuing {@code Cardholder} object. */
+  public Cardholder retrieve(String id, CardholderRetrieveParams params, RequestOptions options)
       throws StripeException {
-    return retrieve(cardholder, params, (RequestOptions) null);
-  }
-  /** Retrieves an Issuing {@code Cardholder} object. */
-  public Cardholder retrieve(String cardholder, RequestOptions options) throws StripeException {
-    return retrieve(cardholder, (CardholderRetrieveParams) null, options);
-  }
-  /** Retrieves an Issuing {@code Cardholder} object. */
-  public Cardholder retrieve(String cardholder) throws StripeException {
-    return retrieve(cardholder, (CardholderRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves an Issuing {@code Cardholder} object. */
-  public Cardholder retrieve(
-      String cardholder, CardholderRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
+    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -107,31 +105,30 @@ public final class CardholderService extends ApiService {
    * Updates the specified Issuing {@code Cardholder} object by setting the values of the parameters
    * passed. Any parameters not provided will be left unchanged.
    */
-  public Cardholder update(String cardholder, CardholderUpdateParams params)
+  public Cardholder update(String id, CardholderUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /**
+   * Updates the specified Issuing {@code Cardholder} object by setting the values of the parameters
+   * passed. Any parameters not provided will be left unchanged.
+   */
+  public Cardholder update(String id, RequestOptions options) throws StripeException {
+    return update(id, (CardholderUpdateParams) null, options);
+  }
+  /**
+   * Updates the specified Issuing {@code Cardholder} object by setting the values of the parameters
+   * passed. Any parameters not provided will be left unchanged.
+   */
+  public Cardholder update(String id) throws StripeException {
+    return update(id, (CardholderUpdateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Updates the specified Issuing {@code Cardholder} object by setting the values of the parameters
+   * passed. Any parameters not provided will be left unchanged.
+   */
+  public Cardholder update(String id, CardholderUpdateParams params, RequestOptions options)
       throws StripeException {
-    return update(cardholder, params, (RequestOptions) null);
-  }
-  /**
-   * Updates the specified Issuing {@code Cardholder} object by setting the values of the parameters
-   * passed. Any parameters not provided will be left unchanged.
-   */
-  public Cardholder update(String cardholder, RequestOptions options) throws StripeException {
-    return update(cardholder, (CardholderUpdateParams) null, options);
-  }
-  /**
-   * Updates the specified Issuing {@code Cardholder} object by setting the values of the parameters
-   * passed. Any parameters not provided will be left unchanged.
-   */
-  public Cardholder update(String cardholder) throws StripeException {
-    return update(cardholder, (CardholderUpdateParams) null, (RequestOptions) null);
-  }
-  /**
-   * Updates the specified Issuing {@code Cardholder} object by setting the values of the parameters
-   * passed. Any parameters not provided will be left unchanged.
-   */
-  public Cardholder update(String cardholder, CardholderUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder));
+    String path = String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

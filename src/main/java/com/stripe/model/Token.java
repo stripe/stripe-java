@@ -166,28 +166,28 @@ public class Token extends ApiResource implements HasId {
   }
 
   /** Retrieves the token with the given ID. */
-  public static Token retrieve(String token) throws StripeException {
-    return retrieve(token, (Map<String, Object>) null, (RequestOptions) null);
+  public static Token retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the token with the given ID. */
-  public static Token retrieve(String token, RequestOptions options) throws StripeException {
-    return retrieve(token, (Map<String, Object>) null, options);
+  public static Token retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the token with the given ID. */
-  public static Token retrieve(String token, Map<String, Object> params, RequestOptions options)
+  public static Token retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
+    String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Token.class);
   }
 
   /** Retrieves the token with the given ID. */
-  public static Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
+  public static Token retrieve(String id, TokenRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
+    String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

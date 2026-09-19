@@ -22,14 +22,14 @@ import lombok.Setter;
 
 /**
  * You can now model subscriptions more flexibly using the <a
- * href="https://api.stripe.com#prices">Prices API</a>. It replaces the Plans API and is backwards
- * compatible to simplify your migration.
+ * href="https://docs.stripe.com/api#prices">Prices API</a>. It replaces the Plans API and is
+ * backwards compatible to simplify your migration.
  *
  * <p>Plans define the base price, currency, and billing cycle for recurring purchases of products.
- * <a href="https://api.stripe.com#products">Products</a> help you track inventory or provisioning,
- * and plans help you track pricing. Different physical goods or levels of service should be
- * represented by products, and pricing options should be represented by plans. This approach lets
- * you change prices without having to change your provisioning scheme.
+ * <a href="https://docs.stripe.com/api#products">Products</a> help you track inventory or
+ * provisioning, and plans help you track pricing. Different physical goods or levels of service
+ * should be represented by products, and pricing options should be represented by plans. This
+ * approach lets you change prices without having to change your provisioning scheme.
  *
  * <p>For example, you might have a single &quot;gold&quot; product that has plans for $10/month,
  * $100/year, €9/month, and €90/year.
@@ -314,28 +314,28 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   }
 
   /** Retrieves the plan with the given ID. */
-  public static Plan retrieve(String plan) throws StripeException {
-    return retrieve(plan, (Map<String, Object>) null, (RequestOptions) null);
+  public static Plan retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the plan with the given ID. */
-  public static Plan retrieve(String plan, RequestOptions options) throws StripeException {
-    return retrieve(plan, (Map<String, Object>) null, options);
+  public static Plan retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the plan with the given ID. */
-  public static Plan retrieve(String plan, Map<String, Object> params, RequestOptions options)
+  public static Plan retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Plan.class);
   }
 
   /** Retrieves the plan with the given ID. */
-  public static Plan retrieve(String plan, PlanRetrieveParams params, RequestOptions options)
+  public static Plan retrieve(String id, PlanRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan));
+    String path = String.format("/v1/plans/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

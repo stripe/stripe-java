@@ -137,28 +137,28 @@ public class Mandate extends ApiResource implements HasId {
   }
 
   /** Retrieves a Mandate object. */
-  public static Mandate retrieve(String mandate) throws StripeException {
-    return retrieve(mandate, (Map<String, Object>) null, (RequestOptions) null);
+  public static Mandate retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a Mandate object. */
-  public static Mandate retrieve(String mandate, RequestOptions options) throws StripeException {
-    return retrieve(mandate, (Map<String, Object>) null, options);
+  public static Mandate retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a Mandate object. */
-  public static Mandate retrieve(String mandate, Map<String, Object> params, RequestOptions options)
+  public static Mandate retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
+    String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Mandate.class);
   }
 
   /** Retrieves a Mandate object. */
-  public static Mandate retrieve(
-      String mandate, MandateRetrieveParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
+  public static Mandate retrieve(String id, MandateRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -438,7 +438,7 @@ public class Mandate extends ApiResource implements HasId {
       /**
        * Type of the mandate.
        *
-       * <p>One of {@code off_session}, or {@code on_session}.
+       * <p>Equal to {@code off_session}.
        */
       @SerializedName("type")
       String type;

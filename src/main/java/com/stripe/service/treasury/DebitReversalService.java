@@ -57,25 +57,23 @@ public final class DebitReversalService extends ApiService {
     return this.request(request, DebitReversal.class);
   }
   /** Retrieves a DebitReversal object. */
-  public DebitReversal retrieve(String debitReversal, DebitReversalRetrieveParams params)
+  public DebitReversal retrieve(String id, DebitReversalRetrieveParams params)
       throws StripeException {
-    return retrieve(debitReversal, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a DebitReversal object. */
-  public DebitReversal retrieve(String debitReversal, RequestOptions options)
-      throws StripeException {
-    return retrieve(debitReversal, (DebitReversalRetrieveParams) null, options);
+  public DebitReversal retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (DebitReversalRetrieveParams) null, options);
   }
   /** Retrieves a DebitReversal object. */
-  public DebitReversal retrieve(String debitReversal) throws StripeException {
-    return retrieve(debitReversal, (DebitReversalRetrieveParams) null, (RequestOptions) null);
+  public DebitReversal retrieve(String id) throws StripeException {
+    return retrieve(id, (DebitReversalRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a DebitReversal object. */
   public DebitReversal retrieve(
-      String debitReversal, DebitReversalRetrieveParams params, RequestOptions options)
+      String id, DebitReversalRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(debitReversal));
+    String path = String.format("/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -38,21 +38,21 @@ public final class MandateService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Mandate>>() {}.getType());
   }
   /** Retrieves a Mandate object. */
-  public Mandate retrieve(String mandate, MandateRetrieveParams params) throws StripeException {
-    return retrieve(mandate, params, (RequestOptions) null);
+  public Mandate retrieve(String id, MandateRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a Mandate object. */
-  public Mandate retrieve(String mandate, RequestOptions options) throws StripeException {
-    return retrieve(mandate, (MandateRetrieveParams) null, options);
+  public Mandate retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (MandateRetrieveParams) null, options);
   }
   /** Retrieves a Mandate object. */
-  public Mandate retrieve(String mandate) throws StripeException {
-    return retrieve(mandate, (MandateRetrieveParams) null, (RequestOptions) null);
+  public Mandate retrieve(String id) throws StripeException {
+    return retrieve(id, (MandateRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a Mandate object. */
-  public Mandate retrieve(String mandate, MandateRetrieveParams params, RequestOptions options)
+  public Mandate retrieve(String id, MandateRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate));
+    String path = String.format("/v1/mandates/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

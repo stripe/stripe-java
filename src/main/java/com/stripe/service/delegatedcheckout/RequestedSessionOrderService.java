@@ -20,27 +20,25 @@ public final class RequestedSessionOrderService extends ApiService {
   }
 
   /** Lists orders for a delegated checkout requested session. */
-  public StripeCollection<Order> list(
-      String requestedSession, RequestedSessionOrderListParams params) throws StripeException {
-    return list(requestedSession, params, (RequestOptions) null);
-  }
-  /** Lists orders for a delegated checkout requested session. */
-  public StripeCollection<Order> list(String requestedSession, RequestOptions options)
+  public StripeCollection<Order> list(String id, RequestedSessionOrderListParams params)
       throws StripeException {
-    return list(requestedSession, (RequestedSessionOrderListParams) null, options);
+    return list(id, params, (RequestOptions) null);
   }
   /** Lists orders for a delegated checkout requested session. */
-  public StripeCollection<Order> list(String requestedSession) throws StripeException {
-    return list(requestedSession, (RequestedSessionOrderListParams) null, (RequestOptions) null);
+  public StripeCollection<Order> list(String id, RequestOptions options) throws StripeException {
+    return list(id, (RequestedSessionOrderListParams) null, options);
+  }
+  /** Lists orders for a delegated checkout requested session. */
+  public StripeCollection<Order> list(String id) throws StripeException {
+    return list(id, (RequestedSessionOrderListParams) null, (RequestOptions) null);
   }
   /** Lists orders for a delegated checkout requested session. */
   public StripeCollection<Order> list(
-      String requestedSession, RequestedSessionOrderListParams params, RequestOptions options)
+      String id, RequestedSessionOrderListParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/delegated_checkout/requested_sessions/%s/orders",
-            ApiResource.urlEncodeId(requestedSession));
+            "/v1/delegated_checkout/requested_sessions/%s/orders", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

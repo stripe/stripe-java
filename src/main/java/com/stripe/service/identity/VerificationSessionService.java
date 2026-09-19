@@ -126,9 +126,9 @@ public final class VerificationSessionService extends ApiService {
    * <p>When the session status is {@code requires_input}, you can use this method to retrieve a
    * valid {@code client_secret} or {@code url} to allow re-submission.
    */
-  public VerificationSession retrieve(String session, VerificationSessionRetrieveParams params)
+  public VerificationSession retrieve(String id, VerificationSessionRetrieveParams params)
       throws StripeException {
-    return retrieve(session, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves the details of a VerificationSession that was previously created.
@@ -136,9 +136,8 @@ public final class VerificationSessionService extends ApiService {
    * <p>When the session status is {@code requires_input}, you can use this method to retrieve a
    * valid {@code client_secret} or {@code url} to allow re-submission.
    */
-  public VerificationSession retrieve(String session, RequestOptions options)
-      throws StripeException {
-    return retrieve(session, (VerificationSessionRetrieveParams) null, options);
+  public VerificationSession retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (VerificationSessionRetrieveParams) null, options);
   }
   /**
    * Retrieves the details of a VerificationSession that was previously created.
@@ -146,8 +145,8 @@ public final class VerificationSessionService extends ApiService {
    * <p>When the session status is {@code requires_input}, you can use this method to retrieve a
    * valid {@code client_secret} or {@code url} to allow re-submission.
    */
-  public VerificationSession retrieve(String session) throws StripeException {
-    return retrieve(session, (VerificationSessionRetrieveParams) null, (RequestOptions) null);
+  public VerificationSession retrieve(String id) throws StripeException {
+    return retrieve(id, (VerificationSessionRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves the details of a VerificationSession that was previously created.
@@ -156,10 +155,10 @@ public final class VerificationSessionService extends ApiService {
    * valid {@code client_secret} or {@code url} to allow re-submission.
    */
   public VerificationSession retrieve(
-      String session, VerificationSessionRetrieveParams params, RequestOptions options)
+      String id, VerificationSessionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session));
+        String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -175,9 +174,9 @@ public final class VerificationSessionService extends ApiService {
    * <p>When the session status is {@code requires_input}, you can use this method to update the
    * verification check and options.
    */
-  public VerificationSession update(String session, VerificationSessionUpdateParams params)
+  public VerificationSession update(String id, VerificationSessionUpdateParams params)
       throws StripeException {
-    return update(session, params, (RequestOptions) null);
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates a VerificationSession object.
@@ -185,8 +184,8 @@ public final class VerificationSessionService extends ApiService {
    * <p>When the session status is {@code requires_input}, you can use this method to update the
    * verification check and options.
    */
-  public VerificationSession update(String session, RequestOptions options) throws StripeException {
-    return update(session, (VerificationSessionUpdateParams) null, options);
+  public VerificationSession update(String id, RequestOptions options) throws StripeException {
+    return update(id, (VerificationSessionUpdateParams) null, options);
   }
   /**
    * Updates a VerificationSession object.
@@ -194,8 +193,8 @@ public final class VerificationSessionService extends ApiService {
    * <p>When the session status is {@code requires_input}, you can use this method to update the
    * verification check and options.
    */
-  public VerificationSession update(String session) throws StripeException {
-    return update(session, (VerificationSessionUpdateParams) null, (RequestOptions) null);
+  public VerificationSession update(String id) throws StripeException {
+    return update(id, (VerificationSessionUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates a VerificationSession object.
@@ -204,10 +203,10 @@ public final class VerificationSessionService extends ApiService {
    * verification check and options.
    */
   public VerificationSession update(
-      String session, VerificationSessionUpdateParams params, RequestOptions options)
+      String id, VerificationSessionUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session));
+        String.format("/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -224,9 +223,9 @@ public final class VerificationSessionService extends ApiService {
    * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
    * href="https://stripe.com/docs/identity/verification-sessions#cancel">Learn more</a>.
    */
-  public VerificationSession cancel(String session, VerificationSessionCancelParams params)
+  public VerificationSession cancel(String id, VerificationSessionCancelParams params)
       throws StripeException {
-    return cancel(session, params, (RequestOptions) null);
+    return cancel(id, params, (RequestOptions) null);
   }
   /**
    * A VerificationSession object can be canceled when it is in {@code requires_input} <a
@@ -235,8 +234,8 @@ public final class VerificationSessionService extends ApiService {
    * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
    * href="https://stripe.com/docs/identity/verification-sessions#cancel">Learn more</a>.
    */
-  public VerificationSession cancel(String session, RequestOptions options) throws StripeException {
-    return cancel(session, (VerificationSessionCancelParams) null, options);
+  public VerificationSession cancel(String id, RequestOptions options) throws StripeException {
+    return cancel(id, (VerificationSessionCancelParams) null, options);
   }
   /**
    * A VerificationSession object can be canceled when it is in {@code requires_input} <a
@@ -245,8 +244,8 @@ public final class VerificationSessionService extends ApiService {
    * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
    * href="https://stripe.com/docs/identity/verification-sessions#cancel">Learn more</a>.
    */
-  public VerificationSession cancel(String session) throws StripeException {
-    return cancel(session, (VerificationSessionCancelParams) null, (RequestOptions) null);
+  public VerificationSession cancel(String id) throws StripeException {
+    return cancel(id, (VerificationSessionCancelParams) null, (RequestOptions) null);
   }
   /**
    * A VerificationSession object can be canceled when it is in {@code requires_input} <a
@@ -256,11 +255,10 @@ public final class VerificationSessionService extends ApiService {
    * href="https://stripe.com/docs/identity/verification-sessions#cancel">Learn more</a>.
    */
   public VerificationSession cancel(
-      String session, VerificationSessionCancelParams params, RequestOptions options)
+      String id, VerificationSessionCancelParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/identity/verification_sessions/%s/cancel", ApiResource.urlEncodeId(session));
+        String.format("/v1/identity/verification_sessions/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -291,9 +289,9 @@ public final class VerificationSessionService extends ApiService {
    *
    * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
-  public VerificationSession redact(String session, VerificationSessionRedactParams params)
+  public VerificationSession redact(String id, VerificationSessionRedactParams params)
       throws StripeException {
-    return redact(session, params, (RequestOptions) null);
+    return redact(id, params, (RequestOptions) null);
   }
   /**
    * Redact a VerificationSession to remove all collected information from Stripe. This will redact
@@ -316,8 +314,8 @@ public final class VerificationSessionService extends ApiService {
    *
    * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
-  public VerificationSession redact(String session, RequestOptions options) throws StripeException {
-    return redact(session, (VerificationSessionRedactParams) null, options);
+  public VerificationSession redact(String id, RequestOptions options) throws StripeException {
+    return redact(id, (VerificationSessionRedactParams) null, options);
   }
   /**
    * Redact a VerificationSession to remove all collected information from Stripe. This will redact
@@ -340,8 +338,8 @@ public final class VerificationSessionService extends ApiService {
    *
    * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
-  public VerificationSession redact(String session) throws StripeException {
-    return redact(session, (VerificationSessionRedactParams) null, (RequestOptions) null);
+  public VerificationSession redact(String id) throws StripeException {
+    return redact(id, (VerificationSessionRedactParams) null, (RequestOptions) null);
   }
   /**
    * Redact a VerificationSession to remove all collected information from Stripe. This will redact
@@ -365,11 +363,10 @@ public final class VerificationSessionService extends ApiService {
    * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
   public VerificationSession redact(
-      String session, VerificationSessionRedactParams params, RequestOptions options)
+      String id, VerificationSessionRedactParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/identity/verification_sessions/%s/redact", ApiResource.urlEncodeId(session));
+        String.format("/v1/identity/verification_sessions/%s/redact", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

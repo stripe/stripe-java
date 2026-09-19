@@ -46,21 +46,21 @@ public final class ProductService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Product>>() {}.getType());
   }
   /** Retrieves the details of a Climate product with the given ID. */
-  public Product retrieve(String product, ProductRetrieveParams params) throws StripeException {
-    return retrieve(product, params, (RequestOptions) null);
+  public Product retrieve(String id, ProductRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of a Climate product with the given ID. */
-  public Product retrieve(String product, RequestOptions options) throws StripeException {
-    return retrieve(product, (ProductRetrieveParams) null, options);
+  public Product retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ProductRetrieveParams) null, options);
   }
   /** Retrieves the details of a Climate product with the given ID. */
-  public Product retrieve(String product) throws StripeException {
-    return retrieve(product, (ProductRetrieveParams) null, (RequestOptions) null);
+  public Product retrieve(String id) throws StripeException {
+    return retrieve(id, (ProductRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the details of a Climate product with the given ID. */
-  public Product retrieve(String product, ProductRetrieveParams params, RequestOptions options)
+  public Product retrieve(String id, ProductRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/climate/products/%s", ApiResource.urlEncodeId(product));
+    String path = String.format("/v1/climate/products/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

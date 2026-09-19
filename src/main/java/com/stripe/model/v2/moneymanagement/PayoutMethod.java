@@ -19,6 +19,10 @@ public class PayoutMethod extends StripeObject implements HasId {
   @SerializedName("alternative_reference")
   AlternativeReference alternativeReference;
 
+  /** The PayoutMethodApplePay object details. */
+  @SerializedName("apple_pay")
+  ApplePay applePay;
+
   /** A set of available payout speeds for this payout method. */
   @SerializedName("available_payout_speeds")
   List<String> availablePayoutSpeeds;
@@ -78,8 +82,8 @@ public class PayoutMethod extends StripeObject implements HasId {
   /**
    * Open Enum. The type of payout method.
    *
-   * <p>One of {@code bank_account}, {@code card}, {@code crypto_wallet}, or {@code
-   * network_business_profile_wallet}.
+   * <p>One of {@code apple_pay}, {@code bank_account}, {@code card}, {@code crypto_wallet}, or
+   * {@code network_business_profile_wallet}.
    */
   @SerializedName("type")
   String type;
@@ -108,6 +112,40 @@ public class PayoutMethod extends StripeObject implements HasId {
      */
     @SerializedName("type")
     String type;
+  }
+
+  /** The PayoutMethodApplePay object details. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ApplePay extends StripeObject {
+    /** The last four digits of the device account number (DPAN). */
+    @SerializedName("dynamic_last4")
+    String dynamicLast4;
+
+    /** The month the card expires. */
+    @SerializedName("exp_month")
+    String expMonth;
+
+    /** The year the card expires. */
+    @SerializedName("exp_year")
+    String expYear;
+
+    /**
+     * Uniquely identifies this particular Apple-Pay-registered DPAN (Device PAN). Refer to
+     * https://support.stripe.com/questions/how-do-card-numbers-work-with-apple-pay-and-google-pay-and-what-is-dynamic-last4
+     * for more info on DPANs.
+     */
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    /** The last 4 digits of the card number. */
+    @SerializedName("last4")
+    String last4;
+
+    /** The list of currencies supported by this card. */
+    @SerializedName("supported_currencies")
+    List<String> supportedCurrencies;
   }
 
   /** The PayoutMethodBankAccount object details. */

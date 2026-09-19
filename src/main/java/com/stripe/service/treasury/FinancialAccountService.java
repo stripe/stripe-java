@@ -73,26 +73,23 @@ public final class FinancialAccountService extends ApiService {
     return this.request(request, FinancialAccount.class);
   }
   /** Retrieves the details of a FinancialAccount. */
-  public FinancialAccount retrieve(String financialAccount, FinancialAccountRetrieveParams params)
+  public FinancialAccount retrieve(String id, FinancialAccountRetrieveParams params)
       throws StripeException {
-    return retrieve(financialAccount, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of a FinancialAccount. */
-  public FinancialAccount retrieve(String financialAccount, RequestOptions options)
-      throws StripeException {
-    return retrieve(financialAccount, (FinancialAccountRetrieveParams) null, options);
+  public FinancialAccount retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (FinancialAccountRetrieveParams) null, options);
   }
   /** Retrieves the details of a FinancialAccount. */
-  public FinancialAccount retrieve(String financialAccount) throws StripeException {
-    return retrieve(financialAccount, (FinancialAccountRetrieveParams) null, (RequestOptions) null);
+  public FinancialAccount retrieve(String id) throws StripeException {
+    return retrieve(id, (FinancialAccountRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the details of a FinancialAccount. */
   public FinancialAccount retrieve(
-      String financialAccount, FinancialAccountRetrieveParams params, RequestOptions options)
+      String id, FinancialAccountRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
+    String path = String.format("/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -103,26 +100,23 @@ public final class FinancialAccountService extends ApiService {
     return this.request(request, FinancialAccount.class);
   }
   /** Updates the details of a FinancialAccount. */
-  public FinancialAccount update(String financialAccount, FinancialAccountUpdateParams params)
+  public FinancialAccount update(String id, FinancialAccountUpdateParams params)
       throws StripeException {
-    return update(financialAccount, params, (RequestOptions) null);
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates the details of a FinancialAccount. */
-  public FinancialAccount update(String financialAccount, RequestOptions options)
-      throws StripeException {
-    return update(financialAccount, (FinancialAccountUpdateParams) null, options);
+  public FinancialAccount update(String id, RequestOptions options) throws StripeException {
+    return update(id, (FinancialAccountUpdateParams) null, options);
   }
   /** Updates the details of a FinancialAccount. */
-  public FinancialAccount update(String financialAccount) throws StripeException {
-    return update(financialAccount, (FinancialAccountUpdateParams) null, (RequestOptions) null);
+  public FinancialAccount update(String id) throws StripeException {
+    return update(id, (FinancialAccountUpdateParams) null, (RequestOptions) null);
   }
   /** Updates the details of a FinancialAccount. */
   public FinancialAccount update(
-      String financialAccount, FinancialAccountUpdateParams params, RequestOptions options)
+      String id, FinancialAccountUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
+    String path = String.format("/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -136,35 +130,33 @@ public final class FinancialAccountService extends ApiService {
    * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
    * no pending InboundTransfers, and has canceled all attached Issuing cards.
    */
-  public FinancialAccount close(String financialAccount, FinancialAccountCloseParams params)
+  public FinancialAccount close(String id, FinancialAccountCloseParams params)
       throws StripeException {
-    return close(financialAccount, params, (RequestOptions) null);
+    return close(id, params, (RequestOptions) null);
   }
   /**
    * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
    * no pending InboundTransfers, and has canceled all attached Issuing cards.
    */
-  public FinancialAccount close(String financialAccount, RequestOptions options)
-      throws StripeException {
-    return close(financialAccount, (FinancialAccountCloseParams) null, options);
+  public FinancialAccount close(String id, RequestOptions options) throws StripeException {
+    return close(id, (FinancialAccountCloseParams) null, options);
   }
   /**
    * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
    * no pending InboundTransfers, and has canceled all attached Issuing cards.
    */
-  public FinancialAccount close(String financialAccount) throws StripeException {
-    return close(financialAccount, (FinancialAccountCloseParams) null, (RequestOptions) null);
+  public FinancialAccount close(String id) throws StripeException {
+    return close(id, (FinancialAccountCloseParams) null, (RequestOptions) null);
   }
   /**
    * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
    * no pending InboundTransfers, and has canceled all attached Issuing cards.
    */
   public FinancialAccount close(
-      String financialAccount, FinancialAccountCloseParams params, RequestOptions options)
+      String id, FinancialAccountCloseParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/treasury/financial_accounts/%s/close", ApiResource.urlEncodeId(financialAccount));
+        String.format("/v1/treasury/financial_accounts/%s/close", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

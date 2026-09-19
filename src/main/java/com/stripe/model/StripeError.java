@@ -220,7 +220,8 @@ public class StripeError extends StripeObject {
    * A SetupIntent guides you through the process of setting up and saving a customer's payment
    * credentials for future payments. For example, you can use a SetupIntent to set up and save your
    * customer's card without immediately collecting a payment. Later, you can use <a
-   * href="https://api.stripe.com#payment_intents">PaymentIntents</a> to drive the payment flow.
+   * href="https://docs.stripe.com/api#payment_intents">PaymentIntents</a> to drive the payment
+   * flow.
    *
    * <p>Create a SetupIntent when you're ready to collect your customer's payment credentials. Don't
    * maintain long-lived, unconfirmed SetupIntents because they might not be valid. The SetupIntent
@@ -234,10 +235,11 @@ public class StripeError extends StripeObject {
    * to be run through <a href="https://docs.stripe.com/strong-customer-authentication">Strong
    * Customer Authentication</a> during payment method collection to streamline later <a
    * href="https://docs.stripe.com/payments/setup-intents">off-session payments</a>. If you use the
-   * SetupIntent with a <a href="https://api.stripe.com#setup_intent_object-customer">Customer</a>,
-   * it automatically attaches the resulting payment method to that Customer after successful setup.
-   * We recommend using SetupIntents or <a
-   * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
+   * SetupIntent with a <a
+   * href="https://docs.stripe.com/api#setup_intent_object-customer">Customer</a>, it automatically
+   * attaches the resulting payment method to that Customer after successful setup. We recommend
+   * using SetupIntents or <a
+   * href="https://docs.stripe.com/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
    * on PaymentIntents to save payment methods to prevent saving invalid or unoptimized payment
    * methods.
    *

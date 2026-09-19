@@ -35,32 +35,32 @@ public final class ReaderService extends ApiService {
   }
 
   /** Deletes a {@code Reader} object. */
-  public Reader delete(String reader) throws StripeException {
-    return delete(reader, (RequestOptions) null);
+  public Reader delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /** Deletes a {@code Reader} object. */
-  public Reader delete(String reader, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader));
+  public Reader delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Reader.class);
   }
   /** Retrieves a {@code Reader} object. */
-  public Reader retrieve(String reader, ReaderRetrieveParams params) throws StripeException {
-    return retrieve(reader, params, (RequestOptions) null);
+  public Reader retrieve(String id, ReaderRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a {@code Reader} object. */
-  public Reader retrieve(String reader, RequestOptions options) throws StripeException {
-    return retrieve(reader, (ReaderRetrieveParams) null, options);
+  public Reader retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ReaderRetrieveParams) null, options);
   }
   /** Retrieves a {@code Reader} object. */
-  public Reader retrieve(String reader) throws StripeException {
-    return retrieve(reader, (ReaderRetrieveParams) null, (RequestOptions) null);
+  public Reader retrieve(String id) throws StripeException {
+    return retrieve(id, (ReaderRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a {@code Reader} object. */
-  public Reader retrieve(String reader, ReaderRetrieveParams params, RequestOptions options)
+  public Reader retrieve(String id, ReaderRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader));
+    String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -74,30 +74,30 @@ public final class ReaderService extends ApiService {
    * Updates a {@code Reader} object by setting the values of the parameters passed. Any parameters
    * not provided will be left unchanged.
    */
-  public Reader update(String reader, ReaderUpdateParams params) throws StripeException {
-    return update(reader, params, (RequestOptions) null);
+  public Reader update(String id, ReaderUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates a {@code Reader} object by setting the values of the parameters passed. Any parameters
    * not provided will be left unchanged.
    */
-  public Reader update(String reader, RequestOptions options) throws StripeException {
-    return update(reader, (ReaderUpdateParams) null, options);
+  public Reader update(String id, RequestOptions options) throws StripeException {
+    return update(id, (ReaderUpdateParams) null, options);
   }
   /**
    * Updates a {@code Reader} object by setting the values of the parameters passed. Any parameters
    * not provided will be left unchanged.
    */
-  public Reader update(String reader) throws StripeException {
-    return update(reader, (ReaderUpdateParams) null, (RequestOptions) null);
+  public Reader update(String id) throws StripeException {
+    return update(id, (ReaderUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates a {@code Reader} object by setting the values of the parameters passed. Any parameters
    * not provided will be left unchanged.
    */
-  public Reader update(String reader, ReaderUpdateParams params, RequestOptions options)
+  public Reader update(String id, ReaderUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader));
+    String path = String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -149,17 +149,16 @@ public final class ReaderService extends ApiService {
     return this.request(request, Reader.class);
   }
   /** Initiates a gift card activation flow on a Reader and optionally sets its balance. */
-  public Reader activateGiftCard(String reader, ReaderActivateGiftCardParams params)
+  public Reader activateGiftCard(String id, ReaderActivateGiftCardParams params)
       throws StripeException {
-    return activateGiftCard(reader, params, (RequestOptions) null);
+    return activateGiftCard(id, params, (RequestOptions) null);
   }
   /** Initiates a gift card activation flow on a Reader and optionally sets its balance. */
   public Reader activateGiftCard(
-      String reader, ReaderActivateGiftCardParams params, RequestOptions options)
+      String id, ReaderActivateGiftCardParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/terminal/readers/%s/activate_gift_card", ApiResource.urlEncodeId(reader));
+        String.format("/v1/terminal/readers/%s/activate_gift_card", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -174,35 +173,34 @@ public final class ReaderService extends ApiService {
    * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
    * Cancellation</a> for more details.
    */
-  public Reader cancelAction(String reader, ReaderCancelActionParams params)
-      throws StripeException {
-    return cancelAction(reader, params, (RequestOptions) null);
+  public Reader cancelAction(String id, ReaderCancelActionParams params) throws StripeException {
+    return cancelAction(id, params, (RequestOptions) null);
   }
   /**
    * Cancels the current reader action. See <a
    * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
    * Cancellation</a> for more details.
    */
-  public Reader cancelAction(String reader, RequestOptions options) throws StripeException {
-    return cancelAction(reader, (ReaderCancelActionParams) null, options);
+  public Reader cancelAction(String id, RequestOptions options) throws StripeException {
+    return cancelAction(id, (ReaderCancelActionParams) null, options);
   }
   /**
    * Cancels the current reader action. See <a
    * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
    * Cancellation</a> for more details.
    */
-  public Reader cancelAction(String reader) throws StripeException {
-    return cancelAction(reader, (ReaderCancelActionParams) null, (RequestOptions) null);
+  public Reader cancelAction(String id) throws StripeException {
+    return cancelAction(id, (ReaderCancelActionParams) null, (RequestOptions) null);
   }
   /**
    * Cancels the current reader action. See <a
    * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
    * Cancellation</a> for more details.
    */
-  public Reader cancelAction(String reader, ReaderCancelActionParams params, RequestOptions options)
+  public Reader cancelAction(String id, ReaderCancelActionParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(reader));
+        String.format("/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -213,16 +211,16 @@ public final class ReaderService extends ApiService {
     return this.request(request, Reader.class);
   }
   /** Initiates a gift card cashout flow on a Reader. A cashout sets the gift card balance to 0. */
-  public Reader cashoutGiftCard(String reader, ReaderCashoutGiftCardParams params)
+  public Reader cashoutGiftCard(String id, ReaderCashoutGiftCardParams params)
       throws StripeException {
-    return cashoutGiftCard(reader, params, (RequestOptions) null);
+    return cashoutGiftCard(id, params, (RequestOptions) null);
   }
   /** Initiates a gift card cashout flow on a Reader. A cashout sets the gift card balance to 0. */
   public Reader cashoutGiftCard(
-      String reader, ReaderCashoutGiftCardParams params, RequestOptions options)
+      String id, ReaderCashoutGiftCardParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/terminal/readers/%s/cashout_gift_card", ApiResource.urlEncodeId(reader));
+        String.format("/v1/terminal/readers/%s/cashout_gift_card", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -233,17 +231,17 @@ public final class ReaderService extends ApiService {
     return this.request(request, Reader.class);
   }
   /** Initiates a gift card balance check flow on a Reader. */
-  public Reader checkGiftCardBalance(String reader, ReaderCheckGiftCardBalanceParams params)
+  public Reader checkGiftCardBalance(String id, ReaderCheckGiftCardBalanceParams params)
       throws StripeException {
-    return checkGiftCardBalance(reader, params, (RequestOptions) null);
+    return checkGiftCardBalance(id, params, (RequestOptions) null);
   }
   /** Initiates a gift card balance check flow on a Reader. */
   public Reader checkGiftCardBalance(
-      String reader, ReaderCheckGiftCardBalanceParams params, RequestOptions options)
+      String id, ReaderCheckGiftCardBalanceParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/terminal/readers/%s/check_gift_card_balance", ApiResource.urlEncodeId(reader));
+            "/v1/terminal/readers/%s/check_gift_card_balance", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -258,20 +256,18 @@ public final class ReaderService extends ApiService {
    * collection flow</a> on a Reader to display input forms and collect information from your
    * customers.
    */
-  public Reader collectInputs(String reader, ReaderCollectInputsParams params)
-      throws StripeException {
-    return collectInputs(reader, params, (RequestOptions) null);
+  public Reader collectInputs(String id, ReaderCollectInputsParams params) throws StripeException {
+    return collectInputs(id, params, (RequestOptions) null);
   }
   /**
    * Initiates an <a href="https://stripe.com/docs/terminal/features/collect-inputs">input
    * collection flow</a> on a Reader to display input forms and collect information from your
    * customers.
    */
-  public Reader collectInputs(
-      String reader, ReaderCollectInputsParams params, RequestOptions options)
+  public Reader collectInputs(String id, ReaderCollectInputsParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(reader));
+        String.format("/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -287,9 +283,9 @@ public final class ReaderService extends ApiService {
    * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#collect-a-paymentmethod">Collecting
    * a Payment method</a> for more details.
    */
-  public Reader collectPaymentMethod(String reader, ReaderCollectPaymentMethodParams params)
+  public Reader collectPaymentMethod(String id, ReaderCollectPaymentMethodParams params)
       throws StripeException {
-    return collectPaymentMethod(reader, params, (RequestOptions) null);
+    return collectPaymentMethod(id, params, (RequestOptions) null);
   }
   /**
    * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
@@ -298,11 +294,11 @@ public final class ReaderService extends ApiService {
    * a Payment method</a> for more details.
    */
   public Reader collectPaymentMethod(
-      String reader, ReaderCollectPaymentMethodParams params, RequestOptions options)
+      String id, ReaderCollectPaymentMethodParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/terminal/readers/%s/collect_payment_method", ApiResource.urlEncodeId(reader));
+            "/v1/terminal/readers/%s/collect_payment_method", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -317,9 +313,9 @@ public final class ReaderService extends ApiService {
    * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#confirm-the-paymentintent">Confirming
    * a Payment</a> for more details.
    */
-  public Reader confirmPaymentIntent(String reader, ReaderConfirmPaymentIntentParams params)
+  public Reader confirmPaymentIntent(String id, ReaderConfirmPaymentIntentParams params)
       throws StripeException {
-    return confirmPaymentIntent(reader, params, (RequestOptions) null);
+    return confirmPaymentIntent(id, params, (RequestOptions) null);
   }
   /**
    * Finalizes a payment on a Reader. See <a
@@ -327,11 +323,11 @@ public final class ReaderService extends ApiService {
    * a Payment</a> for more details.
    */
   public Reader confirmPaymentIntent(
-      String reader, ReaderConfirmPaymentIntentParams params, RequestOptions options)
+      String id, ReaderConfirmPaymentIntentParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/terminal/readers/%s/confirm_payment_intent", ApiResource.urlEncodeId(reader));
+            "/v1/terminal/readers/%s/confirm_payment_intent", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -346,9 +342,9 @@ public final class ReaderService extends ApiService {
    * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=immediately#process-payment">process
    * the payment</a> for more details.
    */
-  public Reader processPaymentIntent(String reader, ReaderProcessPaymentIntentParams params)
+  public Reader processPaymentIntent(String id, ReaderProcessPaymentIntentParams params)
       throws StripeException {
-    return processPaymentIntent(reader, params, (RequestOptions) null);
+    return processPaymentIntent(id, params, (RequestOptions) null);
   }
   /**
    * Initiates a payment flow on a Reader. See <a
@@ -356,11 +352,11 @@ public final class ReaderService extends ApiService {
    * the payment</a> for more details.
    */
   public Reader processPaymentIntent(
-      String reader, ReaderProcessPaymentIntentParams params, RequestOptions options)
+      String id, ReaderProcessPaymentIntentParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/terminal/readers/%s/process_payment_intent", ApiResource.urlEncodeId(reader));
+            "/v1/terminal/readers/%s/process_payment_intent", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -375,9 +371,9 @@ public final class ReaderService extends ApiService {
    * href="https://stripe.com/docs/terminal/features/saving-payment-details/save-directly">Save
    * directly without charging</a> for more details.
    */
-  public Reader processSetupIntent(String reader, ReaderProcessSetupIntentParams params)
+  public Reader processSetupIntent(String id, ReaderProcessSetupIntentParams params)
       throws StripeException {
-    return processSetupIntent(reader, params, (RequestOptions) null);
+    return processSetupIntent(id, params, (RequestOptions) null);
   }
   /**
    * Initiates a SetupIntent flow on a Reader. See <a
@@ -385,11 +381,10 @@ public final class ReaderService extends ApiService {
    * directly without charging</a> for more details.
    */
   public Reader processSetupIntent(
-      String reader, ReaderProcessSetupIntentParams params, RequestOptions options)
+      String id, ReaderProcessSetupIntentParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/terminal/readers/%s/process_setup_intent", ApiResource.urlEncodeId(reader));
+        String.format("/v1/terminal/readers/%s/process_setup_intent", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -404,36 +399,34 @@ public final class ReaderService extends ApiService {
    * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
    * an Interac Payment</a> for more details.
    */
-  public Reader refundPayment(String reader, ReaderRefundPaymentParams params)
-      throws StripeException {
-    return refundPayment(reader, params, (RequestOptions) null);
+  public Reader refundPayment(String id, ReaderRefundPaymentParams params) throws StripeException {
+    return refundPayment(id, params, (RequestOptions) null);
   }
   /**
    * Initiates an in-person refund on a Reader. See <a
    * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
    * an Interac Payment</a> for more details.
    */
-  public Reader refundPayment(String reader, RequestOptions options) throws StripeException {
-    return refundPayment(reader, (ReaderRefundPaymentParams) null, options);
+  public Reader refundPayment(String id, RequestOptions options) throws StripeException {
+    return refundPayment(id, (ReaderRefundPaymentParams) null, options);
   }
   /**
    * Initiates an in-person refund on a Reader. See <a
    * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
    * an Interac Payment</a> for more details.
    */
-  public Reader refundPayment(String reader) throws StripeException {
-    return refundPayment(reader, (ReaderRefundPaymentParams) null, (RequestOptions) null);
+  public Reader refundPayment(String id) throws StripeException {
+    return refundPayment(id, (ReaderRefundPaymentParams) null, (RequestOptions) null);
   }
   /**
    * Initiates an in-person refund on a Reader. See <a
    * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
    * an Interac Payment</a> for more details.
    */
-  public Reader refundPayment(
-      String reader, ReaderRefundPaymentParams params, RequestOptions options)
+  public Reader refundPayment(String id, ReaderRefundPaymentParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/terminal/readers/%s/refund_payment", ApiResource.urlEncodeId(reader));
+        String.format("/v1/terminal/readers/%s/refund_payment", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -446,18 +439,17 @@ public final class ReaderService extends ApiService {
   /**
    * Initiates a gift card reload flow on a Reader by adding the specified amount to its balance.
    */
-  public Reader reloadGiftCard(String reader, ReaderReloadGiftCardParams params)
+  public Reader reloadGiftCard(String id, ReaderReloadGiftCardParams params)
       throws StripeException {
-    return reloadGiftCard(reader, params, (RequestOptions) null);
+    return reloadGiftCard(id, params, (RequestOptions) null);
   }
   /**
    * Initiates a gift card reload flow on a Reader by adding the specified amount to its balance.
    */
-  public Reader reloadGiftCard(
-      String reader, ReaderReloadGiftCardParams params, RequestOptions options)
+  public Reader reloadGiftCard(String id, ReaderReloadGiftCardParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/terminal/readers/%s/reload_gift_card", ApiResource.urlEncodeId(reader));
+        String.format("/v1/terminal/readers/%s/reload_gift_card", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -471,20 +463,19 @@ public final class ReaderService extends ApiService {
    * Sets the reader display to show <a
    * href="https://stripe.com/docs/terminal/features/display">cart details</a>.
    */
-  public Reader setReaderDisplay(String reader, ReaderSetReaderDisplayParams params)
+  public Reader setReaderDisplay(String id, ReaderSetReaderDisplayParams params)
       throws StripeException {
-    return setReaderDisplay(reader, params, (RequestOptions) null);
+    return setReaderDisplay(id, params, (RequestOptions) null);
   }
   /**
    * Sets the reader display to show <a
    * href="https://stripe.com/docs/terminal/features/display">cart details</a>.
    */
   public Reader setReaderDisplay(
-      String reader, ReaderSetReaderDisplayParams params, RequestOptions options)
+      String id, ReaderSetReaderDisplayParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/terminal/readers/%s/set_reader_display", ApiResource.urlEncodeId(reader));
+        String.format("/v1/terminal/readers/%s/set_reader_display", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

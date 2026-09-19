@@ -60,31 +60,30 @@ public class ProductFeature extends ApiResource implements HasId {
   String object;
 
   /** Creates a product_feature, which represents a feature attachment to a product. */
-  public static ProductFeature create(String product, Map<String, Object> params)
+  public static ProductFeature create(String id, Map<String, Object> params)
       throws StripeException {
-    return create(product, params, (RequestOptions) null);
+    return create(id, params, (RequestOptions) null);
   }
 
   /** Creates a product_feature, which represents a feature attachment to a product. */
-  public static ProductFeature create(
-      String product, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(product));
+  public static ProductFeature create(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getGlobalResponseGetter().request(request, ProductFeature.class);
   }
 
   /** Creates a product_feature, which represents a feature attachment to a product. */
-  public static ProductFeature create(String product, ProductFeatureCreateParams params)
+  public static ProductFeature create(String id, ProductFeatureCreateParams params)
       throws StripeException {
-    return create(product, params, (RequestOptions) null);
+    return create(id, params, (RequestOptions) null);
   }
 
   /** Creates a product_feature, which represents a feature attachment to a product. */
   public static ProductFeature create(
-      String product, ProductFeatureCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(product));
+      String id, ProductFeatureCreateParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -97,58 +96,58 @@ public class ProductFeature extends ApiResource implements HasId {
   }
 
   /** Deletes the feature attachment to a product. */
-  public ProductFeature delete(String product) throws StripeException {
-    return delete(product, (Map<String, Object>) null, (RequestOptions) null);
+  public ProductFeature delete(String productId) throws StripeException {
+    return delete(productId, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Deletes the feature attachment to a product. */
-  public ProductFeature delete(String product, RequestOptions options) throws StripeException {
-    return delete(product, (Map<String, Object>) null, options);
+  public ProductFeature delete(String productId, RequestOptions options) throws StripeException {
+    return delete(productId, (Map<String, Object>) null, options);
   }
 
   /** Deletes the feature attachment to a product. */
-  public ProductFeature delete(String product, Map<String, Object> params) throws StripeException {
-    return delete(product, params, (RequestOptions) null);
+  public ProductFeature delete(String productId, Map<String, Object> params)
+      throws StripeException {
+    return delete(productId, params, (RequestOptions) null);
   }
 
   /** Deletes the feature attachment to a product. */
-  public ProductFeature delete(String product, Map<String, Object> params, RequestOptions options)
+  public ProductFeature delete(String productId, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/products/%s/features/%s",
-            ApiResource.urlEncodeId(product), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(productId), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
     return getResponseGetter().request(request, ProductFeature.class);
   }
 
   /** Retrieve a list of features for a product. */
-  public static ProductFeatureCollection list(String product, Map<String, Object> params)
+  public static ProductFeatureCollection list(String id, Map<String, Object> params)
       throws StripeException {
-    return list(product, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
 
   /** Retrieve a list of features for a product. */
   public static ProductFeatureCollection list(
-      String product, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(product));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ProductFeatureCollection.class);
   }
 
   /** Retrieve a list of features for a product. */
-  public static ProductFeatureCollection list(String product, ProductFeatureListParams params)
+  public static ProductFeatureCollection list(String id, ProductFeatureListParams params)
       throws StripeException {
-    return list(product, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
 
   /** Retrieve a list of features for a product. */
   public static ProductFeatureCollection list(
-      String product, ProductFeatureListParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(product));
+      String id, ProductFeatureListParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/products/%s/features", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -161,24 +160,24 @@ public class ProductFeature extends ApiResource implements HasId {
   }
 
   /** Retrieves a product_feature, which represents a feature attachment to a product. */
-  public static ProductFeature retrieve(String product, String id) throws StripeException {
-    return retrieve(product, id, (Map<String, Object>) null, (RequestOptions) null);
+  public static ProductFeature retrieve(String productId, String id) throws StripeException {
+    return retrieve(productId, id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a product_feature, which represents a feature attachment to a product. */
-  public static ProductFeature retrieve(String product, String id, RequestOptions options)
+  public static ProductFeature retrieve(String productId, String id, RequestOptions options)
       throws StripeException {
-    return retrieve(product, id, (Map<String, Object>) null, options);
+    return retrieve(productId, id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a product_feature, which represents a feature attachment to a product. */
   public static ProductFeature retrieve(
-      String product, String id, Map<String, Object> params, RequestOptions options)
+      String productId, String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/products/%s/features/%s",
-            ApiResource.urlEncodeId(product), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(productId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ProductFeature.class);
@@ -186,12 +185,12 @@ public class ProductFeature extends ApiResource implements HasId {
 
   /** Retrieves a product_feature, which represents a feature attachment to a product. */
   public static ProductFeature retrieve(
-      String product, String id, ProductFeatureRetrieveParams params, RequestOptions options)
+      String productId, String id, ProductFeatureRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/products/%s/features/%s",
-            ApiResource.urlEncodeId(product), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(productId), ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

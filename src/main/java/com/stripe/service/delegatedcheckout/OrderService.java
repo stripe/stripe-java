@@ -18,22 +18,21 @@ public final class OrderService extends ApiService {
   }
 
   /** Retrieves a delegated checkout order. */
-  public Order retrieve(String orderId, OrderRetrieveParams params) throws StripeException {
-    return retrieve(orderId, params, (RequestOptions) null);
+  public Order retrieve(String id, OrderRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a delegated checkout order. */
-  public Order retrieve(String orderId, RequestOptions options) throws StripeException {
-    return retrieve(orderId, (OrderRetrieveParams) null, options);
+  public Order retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (OrderRetrieveParams) null, options);
   }
   /** Retrieves a delegated checkout order. */
-  public Order retrieve(String orderId) throws StripeException {
-    return retrieve(orderId, (OrderRetrieveParams) null, (RequestOptions) null);
+  public Order retrieve(String id) throws StripeException {
+    return retrieve(id, (OrderRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a delegated checkout order. */
-  public Order retrieve(String orderId, OrderRetrieveParams params, RequestOptions options)
+  public Order retrieve(String id, OrderRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/delegated_checkout/orders/%s", ApiResource.urlEncodeId(orderId));
+    String path = String.format("/v1/delegated_checkout/orders/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

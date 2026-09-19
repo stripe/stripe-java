@@ -24,29 +24,29 @@ public final class CardService extends ApiService {
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code delivered}.
    */
-  public Card deliverCard(String card, CardDeliverCardParams params) throws StripeException {
-    return deliverCard(card, params, (RequestOptions) null);
+  public Card deliverCard(String id, CardDeliverCardParams params) throws StripeException {
+    return deliverCard(id, params, (RequestOptions) null);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code delivered}.
    */
-  public Card deliverCard(String card, RequestOptions options) throws StripeException {
-    return deliverCard(card, (CardDeliverCardParams) null, options);
+  public Card deliverCard(String id, RequestOptions options) throws StripeException {
+    return deliverCard(id, (CardDeliverCardParams) null, options);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code delivered}.
    */
-  public Card deliverCard(String card) throws StripeException {
-    return deliverCard(card, (CardDeliverCardParams) null, (RequestOptions) null);
+  public Card deliverCard(String id) throws StripeException {
+    return deliverCard(id, (CardDeliverCardParams) null, (RequestOptions) null);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code delivered}.
    */
-  public Card deliverCard(String card, CardDeliverCardParams params, RequestOptions options)
+  public Card deliverCard(String id, CardDeliverCardParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/test_helpers/issuing/cards/%s/shipping/deliver", ApiResource.urlEncodeId(card));
+            "/v1/test_helpers/issuing/cards/%s/shipping/deliver", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -59,29 +59,29 @@ public final class CardService extends ApiService {
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
    */
-  public Card failCard(String card, CardFailCardParams params) throws StripeException {
-    return failCard(card, params, (RequestOptions) null);
+  public Card failCard(String id, CardFailCardParams params) throws StripeException {
+    return failCard(id, params, (RequestOptions) null);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
    */
-  public Card failCard(String card, RequestOptions options) throws StripeException {
-    return failCard(card, (CardFailCardParams) null, options);
+  public Card failCard(String id, RequestOptions options) throws StripeException {
+    return failCard(id, (CardFailCardParams) null, options);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
    */
-  public Card failCard(String card) throws StripeException {
-    return failCard(card, (CardFailCardParams) null, (RequestOptions) null);
+  public Card failCard(String id) throws StripeException {
+    return failCard(id, (CardFailCardParams) null, (RequestOptions) null);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
    */
-  public Card failCard(String card, CardFailCardParams params, RequestOptions options)
+  public Card failCard(String id, CardFailCardParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/test_helpers/issuing/cards/%s/shipping/fail", ApiResource.urlEncodeId(card));
+            "/v1/test_helpers/issuing/cards/%s/shipping/fail", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -94,29 +94,29 @@ public final class CardService extends ApiService {
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code returned}.
    */
-  public Card returnCard(String card, CardReturnCardParams params) throws StripeException {
-    return returnCard(card, params, (RequestOptions) null);
+  public Card returnCard(String id, CardReturnCardParams params) throws StripeException {
+    return returnCard(id, params, (RequestOptions) null);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code returned}.
    */
-  public Card returnCard(String card, RequestOptions options) throws StripeException {
-    return returnCard(card, (CardReturnCardParams) null, options);
+  public Card returnCard(String id, RequestOptions options) throws StripeException {
+    return returnCard(id, (CardReturnCardParams) null, options);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code returned}.
    */
-  public Card returnCard(String card) throws StripeException {
-    return returnCard(card, (CardReturnCardParams) null, (RequestOptions) null);
+  public Card returnCard(String id) throws StripeException {
+    return returnCard(id, (CardReturnCardParams) null, (RequestOptions) null);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code returned}.
    */
-  public Card returnCard(String card, CardReturnCardParams params, RequestOptions options)
+  public Card returnCard(String id, CardReturnCardParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/test_helpers/issuing/cards/%s/shipping/return", ApiResource.urlEncodeId(card));
+            "/v1/test_helpers/issuing/cards/%s/shipping/return", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -129,29 +129,29 @@ public final class CardService extends ApiService {
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
    */
-  public Card shipCard(String card, CardShipCardParams params) throws StripeException {
-    return shipCard(card, params, (RequestOptions) null);
+  public Card shipCard(String id, CardShipCardParams params) throws StripeException {
+    return shipCard(id, params, (RequestOptions) null);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
    */
-  public Card shipCard(String card, RequestOptions options) throws StripeException {
-    return shipCard(card, (CardShipCardParams) null, options);
+  public Card shipCard(String id, RequestOptions options) throws StripeException {
+    return shipCard(id, (CardShipCardParams) null, options);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
    */
-  public Card shipCard(String card) throws StripeException {
-    return shipCard(card, (CardShipCardParams) null, (RequestOptions) null);
+  public Card shipCard(String id) throws StripeException {
+    return shipCard(id, (CardShipCardParams) null, (RequestOptions) null);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
    */
-  public Card shipCard(String card, CardShipCardParams params, RequestOptions options)
+  public Card shipCard(String id, CardShipCardParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/test_helpers/issuing/cards/%s/shipping/ship", ApiResource.urlEncodeId(card));
+            "/v1/test_helpers/issuing/cards/%s/shipping/ship", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -165,32 +165,32 @@ public final class CardService extends ApiService {
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code submitted}.
    * This method requires Stripe Version ‘2024-09-30.acacia’ or later.
    */
-  public Card submitCard(String card, CardSubmitCardParams params) throws StripeException {
-    return submitCard(card, params, (RequestOptions) null);
+  public Card submitCard(String id, CardSubmitCardParams params) throws StripeException {
+    return submitCard(id, params, (RequestOptions) null);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code submitted}.
    * This method requires Stripe Version ‘2024-09-30.acacia’ or later.
    */
-  public Card submitCard(String card, RequestOptions options) throws StripeException {
-    return submitCard(card, (CardSubmitCardParams) null, options);
+  public Card submitCard(String id, RequestOptions options) throws StripeException {
+    return submitCard(id, (CardSubmitCardParams) null, options);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code submitted}.
    * This method requires Stripe Version ‘2024-09-30.acacia’ or later.
    */
-  public Card submitCard(String card) throws StripeException {
-    return submitCard(card, (CardSubmitCardParams) null, (RequestOptions) null);
+  public Card submitCard(String id) throws StripeException {
+    return submitCard(id, (CardSubmitCardParams) null, (RequestOptions) null);
   }
   /**
    * Updates the shipping status of the specified Issuing {@code Card} object to {@code submitted}.
    * This method requires Stripe Version ‘2024-09-30.acacia’ or later.
    */
-  public Card submitCard(String card, CardSubmitCardParams params, RequestOptions options)
+  public Card submitCard(String id, CardSubmitCardParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/test_helpers/issuing/cards/%s/shipping/submit", ApiResource.urlEncodeId(card));
+            "/v1/test_helpers/issuing/cards/%s/shipping/submit", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -174,28 +174,28 @@ public class Margin extends ApiResource implements HasId, MetadataStore<Margin> 
   }
 
   /** Retrieve a margin object with the given ID. */
-  public static Margin retrieve(String margin) throws StripeException {
-    return retrieve(margin, (Map<String, Object>) null, (RequestOptions) null);
+  public static Margin retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieve a margin object with the given ID. */
-  public static Margin retrieve(String margin, RequestOptions options) throws StripeException {
-    return retrieve(margin, (Map<String, Object>) null, options);
+  public static Margin retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieve a margin object with the given ID. */
-  public static Margin retrieve(String margin, Map<String, Object> params, RequestOptions options)
+  public static Margin retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(margin));
+    String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Margin.class);
   }
 
   /** Retrieve a margin object with the given ID. */
-  public static Margin retrieve(String margin, MarginRetrieveParams params, RequestOptions options)
+  public static Margin retrieve(String id, MarginRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(margin));
+    String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

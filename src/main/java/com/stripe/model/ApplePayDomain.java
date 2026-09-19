@@ -145,20 +145,19 @@ public class ApplePayDomain extends ApiResource implements HasId {
   }
 
   /** Retrieve an apple pay domain. */
-  public static ApplePayDomain retrieve(String domain) throws StripeException {
-    return retrieve(domain, (Map<String, Object>) null, (RequestOptions) null);
+  public static ApplePayDomain retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieve an apple pay domain. */
-  public static ApplePayDomain retrieve(String domain, RequestOptions options)
-      throws StripeException {
-    return retrieve(domain, (Map<String, Object>) null, options);
+  public static ApplePayDomain retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieve an apple pay domain. */
   public static ApplePayDomain retrieve(
-      String domain, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ApplePayDomain.class);
@@ -166,9 +165,9 @@ public class ApplePayDomain extends ApiResource implements HasId {
 
   /** Retrieve an apple pay domain. */
   public static ApplePayDomain retrieve(
-      String domain, ApplePayDomainRetrieveParams params, RequestOptions options)
+      String id, ApplePayDomainRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain));
+    String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

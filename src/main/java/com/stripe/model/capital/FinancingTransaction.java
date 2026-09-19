@@ -127,23 +127,21 @@ public class FinancingTransaction extends ApiResource implements HasId {
   }
 
   /** Retrieves a financing transaction for a financing offer. */
-  public static FinancingTransaction retrieve(String financingTransaction) throws StripeException {
-    return retrieve(financingTransaction, (Map<String, Object>) null, (RequestOptions) null);
+  public static FinancingTransaction retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a financing transaction for a financing offer. */
-  public static FinancingTransaction retrieve(String financingTransaction, RequestOptions options)
+  public static FinancingTransaction retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(financingTransaction, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a financing transaction for a financing offer. */
   public static FinancingTransaction retrieve(
-      String financingTransaction, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
-        String.format(
-            "/v1/capital/financing_transactions/%s", ApiResource.urlEncodeId(financingTransaction));
+        String.format("/v1/capital/financing_transactions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, FinancingTransaction.class);
@@ -151,13 +149,10 @@ public class FinancingTransaction extends ApiResource implements HasId {
 
   /** Retrieves a financing transaction for a financing offer. */
   public static FinancingTransaction retrieve(
-      String financingTransaction,
-      FinancingTransactionRetrieveParams params,
-      RequestOptions options)
+      String id, FinancingTransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/capital/financing_transactions/%s", ApiResource.urlEncodeId(financingTransaction));
+        String.format("/v1/capital/financing_transactions/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

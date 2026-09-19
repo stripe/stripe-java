@@ -22,34 +22,34 @@ public final class ApplePayDomainService extends ApiService {
   }
 
   /** Delete an apple pay domain. */
-  public ApplePayDomain delete(String domain) throws StripeException {
-    return delete(domain, (RequestOptions) null);
+  public ApplePayDomain delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /** Delete an apple pay domain. */
-  public ApplePayDomain delete(String domain, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain));
+  public ApplePayDomain delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, ApplePayDomain.class);
   }
   /** Retrieve an apple pay domain. */
-  public ApplePayDomain retrieve(String domain, ApplePayDomainRetrieveParams params)
+  public ApplePayDomain retrieve(String id, ApplePayDomainRetrieveParams params)
       throws StripeException {
-    return retrieve(domain, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieve an apple pay domain. */
-  public ApplePayDomain retrieve(String domain, RequestOptions options) throws StripeException {
-    return retrieve(domain, (ApplePayDomainRetrieveParams) null, options);
+  public ApplePayDomain retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ApplePayDomainRetrieveParams) null, options);
   }
   /** Retrieve an apple pay domain. */
-  public ApplePayDomain retrieve(String domain) throws StripeException {
-    return retrieve(domain, (ApplePayDomainRetrieveParams) null, (RequestOptions) null);
+  public ApplePayDomain retrieve(String id) throws StripeException {
+    return retrieve(id, (ApplePayDomainRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieve an apple pay domain. */
   public ApplePayDomain retrieve(
-      String domain, ApplePayDomainRetrieveParams params, RequestOptions options)
+      String id, ApplePayDomainRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain));
+    String path = String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

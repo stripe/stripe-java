@@ -142,21 +142,21 @@ public final class RefundService extends ApiService {
     return this.request(request, Refund.class);
   }
   /** Retrieves the details of an existing refund. */
-  public Refund retrieve(String refund, RefundRetrieveParams params) throws StripeException {
-    return retrieve(refund, params, (RequestOptions) null);
+  public Refund retrieve(String id, RefundRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of an existing refund. */
-  public Refund retrieve(String refund, RequestOptions options) throws StripeException {
-    return retrieve(refund, (RefundRetrieveParams) null, options);
+  public Refund retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (RefundRetrieveParams) null, options);
   }
   /** Retrieves the details of an existing refund. */
-  public Refund retrieve(String refund) throws StripeException {
-    return retrieve(refund, (RefundRetrieveParams) null, (RequestOptions) null);
+  public Refund retrieve(String id) throws StripeException {
+    return retrieve(id, (RefundRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the details of an existing refund. */
-  public Refund retrieve(String refund, RefundRetrieveParams params, RequestOptions options)
+  public Refund retrieve(String id, RefundRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund));
+    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -172,8 +172,8 @@ public final class RefundService extends ApiService {
    *
    * <p>This request only accepts {@code metadata} as an argument.
    */
-  public Refund update(String refund, RefundUpdateParams params) throws StripeException {
-    return update(refund, params, (RequestOptions) null);
+  public Refund update(String id, RefundUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates the refund that you specify by setting the values of the passed parameters. Any
@@ -181,8 +181,8 @@ public final class RefundService extends ApiService {
    *
    * <p>This request only accepts {@code metadata} as an argument.
    */
-  public Refund update(String refund, RequestOptions options) throws StripeException {
-    return update(refund, (RefundUpdateParams) null, options);
+  public Refund update(String id, RequestOptions options) throws StripeException {
+    return update(id, (RefundUpdateParams) null, options);
   }
   /**
    * Updates the refund that you specify by setting the values of the passed parameters. Any
@@ -190,8 +190,8 @@ public final class RefundService extends ApiService {
    *
    * <p>This request only accepts {@code metadata} as an argument.
    */
-  public Refund update(String refund) throws StripeException {
-    return update(refund, (RefundUpdateParams) null, (RequestOptions) null);
+  public Refund update(String id) throws StripeException {
+    return update(id, (RefundUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the refund that you specify by setting the values of the passed parameters. Any
@@ -199,9 +199,9 @@ public final class RefundService extends ApiService {
    *
    * <p>This request only accepts {@code metadata} as an argument.
    */
-  public Refund update(String refund, RefundUpdateParams params, RequestOptions options)
+  public Refund update(String id, RefundUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund));
+    String path = String.format("/v1/refunds/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -217,8 +217,8 @@ public final class RefundService extends ApiService {
    * <p>You can’t cancel refunds in other states. Only refunds for payment methods that require
    * customer action can enter the {@code requires_action} state.
    */
-  public Refund cancel(String refund, RefundCancelParams params) throws StripeException {
-    return cancel(refund, params, (RequestOptions) null);
+  public Refund cancel(String id, RefundCancelParams params) throws StripeException {
+    return cancel(id, params, (RequestOptions) null);
   }
   /**
    * Cancels a refund with a status of {@code requires_action}.
@@ -226,8 +226,8 @@ public final class RefundService extends ApiService {
    * <p>You can’t cancel refunds in other states. Only refunds for payment methods that require
    * customer action can enter the {@code requires_action} state.
    */
-  public Refund cancel(String refund, RequestOptions options) throws StripeException {
-    return cancel(refund, (RefundCancelParams) null, options);
+  public Refund cancel(String id, RequestOptions options) throws StripeException {
+    return cancel(id, (RefundCancelParams) null, options);
   }
   /**
    * Cancels a refund with a status of {@code requires_action}.
@@ -235,8 +235,8 @@ public final class RefundService extends ApiService {
    * <p>You can’t cancel refunds in other states. Only refunds for payment methods that require
    * customer action can enter the {@code requires_action} state.
    */
-  public Refund cancel(String refund) throws StripeException {
-    return cancel(refund, (RefundCancelParams) null, (RequestOptions) null);
+  public Refund cancel(String id) throws StripeException {
+    return cancel(id, (RefundCancelParams) null, (RequestOptions) null);
   }
   /**
    * Cancels a refund with a status of {@code requires_action}.
@@ -244,9 +244,9 @@ public final class RefundService extends ApiService {
    * <p>You can’t cancel refunds in other states. Only refunds for payment methods that require
    * customer action can enter the {@code requires_action} state.
    */
-  public Refund cancel(String refund, RefundCancelParams params, RequestOptions options)
+  public Refund cancel(String id, RefundCancelParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/refunds/%s/cancel", ApiResource.urlEncodeId(refund));
+    String path = String.format("/v1/refunds/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -277,19 +277,18 @@ public final class RefundService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a Refund cancel request into a batch job JSONL line. */
-  public String serializeBatchCancel(String refund, RefundCancelParams params)
-      throws StripeException {
-    return serializeBatchCancel(refund, params, (RequestOptions) null);
+  public String serializeBatchCancel(String id, RefundCancelParams params) throws StripeException {
+    return serializeBatchCancel(id, params, (RequestOptions) null);
   }
   /** Serializes a Refund cancel request into a batch job JSONL line. */
-  public String serializeBatchCancel(
-      String refund, RefundCancelParams params, RequestOptions options) throws StripeException {
+  public String serializeBatchCancel(String id, RefundCancelParams params, RequestOptions options)
+      throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("refund", refund);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

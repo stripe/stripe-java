@@ -64,21 +64,21 @@ public final class ProgramService extends ApiService {
     return this.request(request, Program.class);
   }
   /** Retrieves the program specified by the given id. */
-  public Program retrieve(String program, ProgramRetrieveParams params) throws StripeException {
-    return retrieve(program, params, (RequestOptions) null);
+  public Program retrieve(String id, ProgramRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the program specified by the given id. */
-  public Program retrieve(String program, RequestOptions options) throws StripeException {
-    return retrieve(program, (ProgramRetrieveParams) null, options);
+  public Program retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ProgramRetrieveParams) null, options);
   }
   /** Retrieves the program specified by the given id. */
-  public Program retrieve(String program) throws StripeException {
-    return retrieve(program, (ProgramRetrieveParams) null, (RequestOptions) null);
+  public Program retrieve(String id) throws StripeException {
+    return retrieve(id, (ProgramRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the program specified by the given id. */
-  public Program retrieve(String program, ProgramRetrieveParams params, RequestOptions options)
+  public Program retrieve(String id, ProgramRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/programs/%s", ApiResource.urlEncodeId(program));
+    String path = String.format("/v1/issuing/programs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -89,21 +89,21 @@ public final class ProgramService extends ApiService {
     return this.request(request, Program.class);
   }
   /** Updates a {@code Program} object. */
-  public Program update(String program, ProgramUpdateParams params) throws StripeException {
-    return update(program, params, (RequestOptions) null);
+  public Program update(String id, ProgramUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates a {@code Program} object. */
-  public Program update(String program, RequestOptions options) throws StripeException {
-    return update(program, (ProgramUpdateParams) null, options);
+  public Program update(String id, RequestOptions options) throws StripeException {
+    return update(id, (ProgramUpdateParams) null, options);
   }
   /** Updates a {@code Program} object. */
-  public Program update(String program) throws StripeException {
-    return update(program, (ProgramUpdateParams) null, (RequestOptions) null);
+  public Program update(String id) throws StripeException {
+    return update(id, (ProgramUpdateParams) null, (RequestOptions) null);
   }
   /** Updates a {@code Program} object. */
-  public Program update(String program, ProgramUpdateParams params, RequestOptions options)
+  public Program update(String id, ProgramUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/programs/%s", ApiResource.urlEncodeId(program));
+    String path = String.format("/v1/issuing/programs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

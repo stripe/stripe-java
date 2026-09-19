@@ -213,22 +213,22 @@ public class CustomerBalanceTransaction extends ApiResource
    * Most credit balance transaction fields are immutable, but you may update its {@code
    * description} and {@code metadata}.
    */
-  @Override
-  public CustomerBalanceTransaction update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public CustomerBalanceTransaction update(String customerId, Map<String, Object> params)
+      throws StripeException {
+    return update(customerId, params, (RequestOptions) null);
   }
 
   /**
    * Most credit balance transaction fields are immutable, but you may update its {@code
    * description} and {@code metadata}.
    */
-  @Override
-  public CustomerBalanceTransaction update(Map<String, Object> params, RequestOptions options)
+  public CustomerBalanceTransaction update(
+      String customerId, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/balance_transactions/%s",
-            ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, CustomerBalanceTransaction.class);
@@ -238,9 +238,9 @@ public class CustomerBalanceTransaction extends ApiResource
    * Most credit balance transaction fields are immutable, but you may update its {@code
    * description} and {@code metadata}.
    */
-  public CustomerBalanceTransaction update(CustomerBalanceTransactionUpdateParams params)
-      throws StripeException {
-    return update(params, (RequestOptions) null);
+  public CustomerBalanceTransaction update(
+      String customerId, CustomerBalanceTransactionUpdateParams params) throws StripeException {
+    return update(customerId, params, (RequestOptions) null);
   }
 
   /**
@@ -248,12 +248,12 @@ public class CustomerBalanceTransaction extends ApiResource
    * description} and {@code metadata}.
    */
   public CustomerBalanceTransaction update(
-      CustomerBalanceTransactionUpdateParams params, RequestOptions options)
+      String customerId, CustomerBalanceTransactionUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/balance_transactions/%s",
-            ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

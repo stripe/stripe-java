@@ -21,25 +21,24 @@ public final class CustomerPaymentMethodService extends ApiService {
   }
 
   /** Returns a list of PaymentMethods for a given Customer. */
-  public StripeCollection<PaymentMethod> list(
-      String customer, CustomerPaymentMethodListParams params) throws StripeException {
-    return list(customer, params, (RequestOptions) null);
-  }
-  /** Returns a list of PaymentMethods for a given Customer. */
-  public StripeCollection<PaymentMethod> list(String customer, RequestOptions options)
+  public StripeCollection<PaymentMethod> list(String id, CustomerPaymentMethodListParams params)
       throws StripeException {
-    return list(customer, (CustomerPaymentMethodListParams) null, options);
+    return list(id, params, (RequestOptions) null);
   }
   /** Returns a list of PaymentMethods for a given Customer. */
-  public StripeCollection<PaymentMethod> list(String customer) throws StripeException {
-    return list(customer, (CustomerPaymentMethodListParams) null, (RequestOptions) null);
+  public StripeCollection<PaymentMethod> list(String id, RequestOptions options)
+      throws StripeException {
+    return list(id, (CustomerPaymentMethodListParams) null, options);
+  }
+  /** Returns a list of PaymentMethods for a given Customer. */
+  public StripeCollection<PaymentMethod> list(String id) throws StripeException {
+    return list(id, (CustomerPaymentMethodListParams) null, (RequestOptions) null);
   }
   /** Returns a list of PaymentMethods for a given Customer. */
   public StripeCollection<PaymentMethod> list(
-      String customer, CustomerPaymentMethodListParams params, RequestOptions options)
+      String id, CustomerPaymentMethodListParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/customers/%s/payment_methods", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/payment_methods", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -51,31 +50,31 @@ public final class CustomerPaymentMethodService extends ApiService {
   }
   /** Retrieves a PaymentMethod object for a given Customer. */
   public PaymentMethod retrieve(
-      String customer, String paymentMethod, CustomerPaymentMethodRetrieveParams params)
+      String customerId, String id, CustomerPaymentMethodRetrieveParams params)
       throws StripeException {
-    return retrieve(customer, paymentMethod, params, (RequestOptions) null);
+    return retrieve(customerId, id, params, (RequestOptions) null);
   }
   /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrieve(String customer, String paymentMethod, RequestOptions options)
+  public PaymentMethod retrieve(String customerId, String id, RequestOptions options)
       throws StripeException {
-    return retrieve(customer, paymentMethod, (CustomerPaymentMethodRetrieveParams) null, options);
+    return retrieve(customerId, id, (CustomerPaymentMethodRetrieveParams) null, options);
   }
   /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrieve(String customer, String paymentMethod) throws StripeException {
+  public PaymentMethod retrieve(String customerId, String id) throws StripeException {
     return retrieve(
-        customer, paymentMethod, (CustomerPaymentMethodRetrieveParams) null, (RequestOptions) null);
+        customerId, id, (CustomerPaymentMethodRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a PaymentMethod object for a given Customer. */
   public PaymentMethod retrieve(
-      String customer,
-      String paymentMethod,
+      String customerId,
+      String id,
       CustomerPaymentMethodRetrieveParams params,
       RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/payment_methods/%s",
-            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(paymentMethod));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

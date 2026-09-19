@@ -18,27 +18,24 @@ public final class PaymentAttemptService extends ApiService {
   }
 
   /** Retrieves orchestration information for the given payment attempt record (e.g. return url). */
-  public PaymentAttempt retrieve(String paymentAttemptRecord, PaymentAttemptRetrieveParams params)
+  public PaymentAttempt retrieve(String id, PaymentAttemptRetrieveParams params)
       throws StripeException {
-    return retrieve(paymentAttemptRecord, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves orchestration information for the given payment attempt record (e.g. return url). */
-  public PaymentAttempt retrieve(String paymentAttemptRecord, RequestOptions options)
-      throws StripeException {
-    return retrieve(paymentAttemptRecord, (PaymentAttemptRetrieveParams) null, options);
+  public PaymentAttempt retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (PaymentAttemptRetrieveParams) null, options);
   }
   /** Retrieves orchestration information for the given payment attempt record (e.g. return url). */
-  public PaymentAttempt retrieve(String paymentAttemptRecord) throws StripeException {
-    return retrieve(
-        paymentAttemptRecord, (PaymentAttemptRetrieveParams) null, (RequestOptions) null);
+  public PaymentAttempt retrieve(String id) throws StripeException {
+    return retrieve(id, (PaymentAttemptRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves orchestration information for the given payment attempt record (e.g. return url). */
   public PaymentAttempt retrieve(
-      String paymentAttemptRecord, PaymentAttemptRetrieveParams params, RequestOptions options)
+      String id, PaymentAttemptRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/orchestration/payment_attempts/%s", ApiResource.urlEncodeId(paymentAttemptRecord));
+        String.format("/v1/orchestration/payment_attempts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -388,22 +388,19 @@ public class Transaction extends ApiResource
   }
 
   /** Retrieves an Issuing {@code Transaction} object. */
-  public static Transaction retrieve(String transaction) throws StripeException {
-    return retrieve(transaction, (Map<String, Object>) null, (RequestOptions) null);
+  public static Transaction retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an Issuing {@code Transaction} object. */
-  public static Transaction retrieve(String transaction, RequestOptions options)
-      throws StripeException {
-    return retrieve(transaction, (Map<String, Object>) null, options);
+  public static Transaction retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an Issuing {@code Transaction} object. */
-  public static Transaction retrieve(
-      String transaction, Map<String, Object> params, RequestOptions options)
+  public static Transaction retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
+    String path = String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Transaction.class);
@@ -411,10 +408,8 @@ public class Transaction extends ApiResource
 
   /** Retrieves an Issuing {@code Transaction} object. */
   public static Transaction retrieve(
-      String transaction, TransactionRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
+      String id, TransactionRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

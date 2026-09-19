@@ -19,21 +19,21 @@ public final class TokenService extends ApiService {
   }
 
   /** Retrieves the token with the given ID. */
-  public Token retrieve(String token, TokenRetrieveParams params) throws StripeException {
-    return retrieve(token, params, (RequestOptions) null);
+  public Token retrieve(String id, TokenRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the token with the given ID. */
-  public Token retrieve(String token, RequestOptions options) throws StripeException {
-    return retrieve(token, (TokenRetrieveParams) null, options);
+  public Token retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (TokenRetrieveParams) null, options);
   }
   /** Retrieves the token with the given ID. */
-  public Token retrieve(String token) throws StripeException {
-    return retrieve(token, (TokenRetrieveParams) null, (RequestOptions) null);
+  public Token retrieve(String id) throws StripeException {
+    return retrieve(id, (TokenRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the token with the given ID. */
-  public Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
+  public Token retrieve(String id, TokenRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token));
+    String path = String.format("/v1/tokens/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -278,28 +278,28 @@ public class Dispute extends ApiResource
   }
 
   /** Retrieves an Issuing {@code Dispute} object. */
-  public static Dispute retrieve(String dispute) throws StripeException {
-    return retrieve(dispute, (Map<String, Object>) null, (RequestOptions) null);
+  public static Dispute retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an Issuing {@code Dispute} object. */
-  public static Dispute retrieve(String dispute, RequestOptions options) throws StripeException {
-    return retrieve(dispute, (Map<String, Object>) null, options);
+  public static Dispute retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an Issuing {@code Dispute} object. */
-  public static Dispute retrieve(String dispute, Map<String, Object> params, RequestOptions options)
+  public static Dispute retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(dispute));
+    String path = String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Dispute.class);
   }
 
   /** Retrieves an Issuing {@code Dispute} object. */
-  public static Dispute retrieve(
-      String dispute, DisputeRetrieveParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(dispute));
+  public static Dispute retrieve(String id, DisputeRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

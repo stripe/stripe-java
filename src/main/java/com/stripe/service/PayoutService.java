@@ -109,30 +109,30 @@ public final class PayoutService extends ApiService {
    * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
    * creation request or the payout list. Stripe returns the corresponding payout information.
    */
-  public Payout retrieve(String payout, PayoutRetrieveParams params) throws StripeException {
-    return retrieve(payout, params, (RequestOptions) null);
+  public Payout retrieve(String id, PayoutRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
    * creation request or the payout list. Stripe returns the corresponding payout information.
    */
-  public Payout retrieve(String payout, RequestOptions options) throws StripeException {
-    return retrieve(payout, (PayoutRetrieveParams) null, options);
+  public Payout retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (PayoutRetrieveParams) null, options);
   }
   /**
    * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
    * creation request or the payout list. Stripe returns the corresponding payout information.
    */
-  public Payout retrieve(String payout) throws StripeException {
-    return retrieve(payout, (PayoutRetrieveParams) null, (RequestOptions) null);
+  public Payout retrieve(String id) throws StripeException {
+    return retrieve(id, (PayoutRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
    * creation request or the payout list. Stripe returns the corresponding payout information.
    */
-  public Payout retrieve(String payout, PayoutRetrieveParams params, RequestOptions options)
+  public Payout retrieve(String id, PayoutRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
+    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -146,30 +146,30 @@ public final class PayoutService extends ApiService {
    * Updates the specified payout by setting the values of the parameters you pass. We don’t change
    * parameters that you don’t provide. This request only accepts the metadata as arguments.
    */
-  public Payout update(String payout, PayoutUpdateParams params) throws StripeException {
-    return update(payout, params, (RequestOptions) null);
+  public Payout update(String id, PayoutUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates the specified payout by setting the values of the parameters you pass. We don’t change
    * parameters that you don’t provide. This request only accepts the metadata as arguments.
    */
-  public Payout update(String payout, RequestOptions options) throws StripeException {
-    return update(payout, (PayoutUpdateParams) null, options);
+  public Payout update(String id, RequestOptions options) throws StripeException {
+    return update(id, (PayoutUpdateParams) null, options);
   }
   /**
    * Updates the specified payout by setting the values of the parameters you pass. We don’t change
    * parameters that you don’t provide. This request only accepts the metadata as arguments.
    */
-  public Payout update(String payout) throws StripeException {
-    return update(payout, (PayoutUpdateParams) null, (RequestOptions) null);
+  public Payout update(String id) throws StripeException {
+    return update(id, (PayoutUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the specified payout by setting the values of the parameters you pass. We don’t change
    * parameters that you don’t provide. This request only accepts the metadata as arguments.
    */
-  public Payout update(String payout, PayoutUpdateParams params, RequestOptions options)
+  public Payout update(String id, PayoutUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout));
+    String path = String.format("/v1/payouts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -183,30 +183,30 @@ public final class PayoutService extends ApiService {
    * You can cancel a previously created payout if its status is {@code pending}. Stripe refunds the
    * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
-  public Payout cancel(String payout, PayoutCancelParams params) throws StripeException {
-    return cancel(payout, params, (RequestOptions) null);
+  public Payout cancel(String id, PayoutCancelParams params) throws StripeException {
+    return cancel(id, params, (RequestOptions) null);
   }
   /**
    * You can cancel a previously created payout if its status is {@code pending}. Stripe refunds the
    * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
-  public Payout cancel(String payout, RequestOptions options) throws StripeException {
-    return cancel(payout, (PayoutCancelParams) null, options);
+  public Payout cancel(String id, RequestOptions options) throws StripeException {
+    return cancel(id, (PayoutCancelParams) null, options);
   }
   /**
    * You can cancel a previously created payout if its status is {@code pending}. Stripe refunds the
    * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
-  public Payout cancel(String payout) throws StripeException {
-    return cancel(payout, (PayoutCancelParams) null, (RequestOptions) null);
+  public Payout cancel(String id) throws StripeException {
+    return cancel(id, (PayoutCancelParams) null, (RequestOptions) null);
   }
   /**
    * You can cancel a previously created payout if its status is {@code pending}. Stripe refunds the
    * funds to your available balance. You can’t cancel automatic Stripe payouts.
    */
-  public Payout cancel(String payout, PayoutCancelParams params, RequestOptions options)
+  public Payout cancel(String id, PayoutCancelParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(payout));
+    String path = String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -225,8 +225,8 @@ public final class PayoutService extends ApiService {
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
    * that no other authorization is required.
    */
-  public Payout reverse(String payout, PayoutReverseParams params) throws StripeException {
-    return reverse(payout, params, (RequestOptions) null);
+  public Payout reverse(String id, PayoutReverseParams params) throws StripeException {
+    return reverse(id, params, (RequestOptions) null);
   }
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
@@ -237,8 +237,8 @@ public final class PayoutService extends ApiService {
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
    * that no other authorization is required.
    */
-  public Payout reverse(String payout, RequestOptions options) throws StripeException {
-    return reverse(payout, (PayoutReverseParams) null, options);
+  public Payout reverse(String id, RequestOptions options) throws StripeException {
+    return reverse(id, (PayoutReverseParams) null, options);
   }
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
@@ -249,8 +249,8 @@ public final class PayoutService extends ApiService {
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
    * that no other authorization is required.
    */
-  public Payout reverse(String payout) throws StripeException {
-    return reverse(payout, (PayoutReverseParams) null, (RequestOptions) null);
+  public Payout reverse(String id) throws StripeException {
+    return reverse(id, (PayoutReverseParams) null, (RequestOptions) null);
   }
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
@@ -261,9 +261,9 @@ public final class PayoutService extends ApiService {
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
    * that no other authorization is required.
    */
-  public Payout reverse(String payout, PayoutReverseParams params, RequestOptions options)
+  public Payout reverse(String id, PayoutReverseParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/payouts/%s/reverse", ApiResource.urlEncodeId(payout));
+    String path = String.format("/v1/payouts/%s/reverse", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

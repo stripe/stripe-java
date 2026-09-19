@@ -70,23 +70,21 @@ public final class ReportRunService extends ApiService {
     return this.request(request, ReportRun.class);
   }
   /** Retrieves the details of an existing Report Run. */
-  public ReportRun retrieve(String reportRun, ReportRunRetrieveParams params)
+  public ReportRun retrieve(String id, ReportRunRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /** Retrieves the details of an existing Report Run. */
+  public ReportRun retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ReportRunRetrieveParams) null, options);
+  }
+  /** Retrieves the details of an existing Report Run. */
+  public ReportRun retrieve(String id) throws StripeException {
+    return retrieve(id, (ReportRunRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves the details of an existing Report Run. */
+  public ReportRun retrieve(String id, ReportRunRetrieveParams params, RequestOptions options)
       throws StripeException {
-    return retrieve(reportRun, params, (RequestOptions) null);
-  }
-  /** Retrieves the details of an existing Report Run. */
-  public ReportRun retrieve(String reportRun, RequestOptions options) throws StripeException {
-    return retrieve(reportRun, (ReportRunRetrieveParams) null, options);
-  }
-  /** Retrieves the details of an existing Report Run. */
-  public ReportRun retrieve(String reportRun) throws StripeException {
-    return retrieve(reportRun, (ReportRunRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves the details of an existing Report Run. */
-  public ReportRun retrieve(
-      String reportRun, ReportRunRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun));
+    String path = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -385,6 +385,18 @@ public class CustomerSession extends ApiResource {
         List<String> paymentMethodAllowRedisplayFilters;
 
         /**
+         * The ID of a saved payment method to select when the Payment Element renders, for example
+         * {@code pm_1MqLiJLkdIwHu7ixUEgbFdYF}. Takes precedence over the customer's default payment
+         * method. If the ID doesn't match one of the payment methods the Element is displaying, the
+         * Element selects a payment method as it normally would and no error is returned.
+         * Preselecting a payment method never changes which payment methods the Element displays,
+         * and never modifies the payment method, the customer, or this session. Customer Sessions
+         * can't be updated, so create a new one to change the preselection.
+         */
+        @SerializedName("payment_method_preselect")
+        String paymentMethodPreselect;
+
+        /**
          * Controls whether or not the Payment Element shows saved payment methods. This parameter
          * defaults to {@code disabled}.
          *

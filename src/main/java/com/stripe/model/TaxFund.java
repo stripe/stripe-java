@@ -110,28 +110,28 @@ public class TaxFund extends ApiResource implements HasId {
   }
 
   /** Retrieves a tax fund object by its ID. */
-  public static TaxFund retrieve(String taxFund) throws StripeException {
-    return retrieve(taxFund, (Map<String, Object>) null, (RequestOptions) null);
+  public static TaxFund retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a tax fund object by its ID. */
-  public static TaxFund retrieve(String taxFund, RequestOptions options) throws StripeException {
-    return retrieve(taxFund, (Map<String, Object>) null, options);
+  public static TaxFund retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a tax fund object by its ID. */
-  public static TaxFund retrieve(String taxFund, Map<String, Object> params, RequestOptions options)
+  public static TaxFund retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/tax_funds/%s", ApiResource.urlEncodeId(taxFund));
+    String path = String.format("/v1/tax_funds/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, TaxFund.class);
   }
 
   /** Retrieves a tax fund object by its ID. */
-  public static TaxFund retrieve(
-      String taxFund, TaxFundRetrieveParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/tax_funds/%s", ApiResource.urlEncodeId(taxFund));
+  public static TaxFund retrieve(String id, TaxFundRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/tax_funds/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

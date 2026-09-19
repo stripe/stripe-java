@@ -37,7 +37,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Customer extends ApiResource implements HasId, MetadataStore<Customer> {
-  /** The customer's address. */
+  /** The customer's billing address. */
   @SerializedName("address")
   Address address;
 
@@ -640,29 +640,28 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   }
 
   /** Retrieves a Customer object. */
-  public static Customer retrieve(String customer) throws StripeException {
-    return retrieve(customer, (Map<String, Object>) null, (RequestOptions) null);
+  public static Customer retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a Customer object. */
-  public static Customer retrieve(String customer, RequestOptions options) throws StripeException {
-    return retrieve(customer, (Map<String, Object>) null, options);
+  public static Customer retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a Customer object. */
-  public static Customer retrieve(
-      String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
+  public static Customer retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Customer.class);
   }
 
   /** Retrieves a Customer object. */
-  public static Customer retrieve(
-      String customer, CustomerRetrieveParams params, RequestOptions options)
+  public static Customer retrieve(String id, CustomerRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -675,30 +674,30 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   }
 
   /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrievePaymentMethod(String paymentMethod) throws StripeException {
-    return retrievePaymentMethod(paymentMethod, (Map<String, Object>) null, (RequestOptions) null);
+  public PaymentMethod retrievePaymentMethod(String customerId) throws StripeException {
+    return retrievePaymentMethod(customerId, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrievePaymentMethod(String paymentMethod, RequestOptions options)
+  public PaymentMethod retrievePaymentMethod(String customerId, RequestOptions options)
       throws StripeException {
-    return retrievePaymentMethod(paymentMethod, (Map<String, Object>) null, options);
+    return retrievePaymentMethod(customerId, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrievePaymentMethod(String paymentMethod, Map<String, Object> params)
+  public PaymentMethod retrievePaymentMethod(String customerId, Map<String, Object> params)
       throws StripeException {
-    return retrievePaymentMethod(paymentMethod, params, (RequestOptions) null);
+    return retrievePaymentMethod(customerId, params, (RequestOptions) null);
   }
 
   /** Retrieves a PaymentMethod object for a given Customer. */
   public PaymentMethod retrievePaymentMethod(
-      String paymentMethod, Map<String, Object> params, RequestOptions options)
+      String customerId, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/payment_methods/%s",
-            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(paymentMethod));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getResponseGetter().request(request, PaymentMethod.class);
@@ -706,18 +705,18 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /** Retrieves a PaymentMethod object for a given Customer. */
   public PaymentMethod retrievePaymentMethod(
-      String paymentMethod, CustomerRetrievePaymentMethodParams params) throws StripeException {
-    return retrievePaymentMethod(paymentMethod, params, (RequestOptions) null);
+      String customerId, CustomerRetrievePaymentMethodParams params) throws StripeException {
+    return retrievePaymentMethod(customerId, params, (RequestOptions) null);
   }
 
   /** Retrieves a PaymentMethod object for a given Customer. */
   public PaymentMethod retrievePaymentMethod(
-      String paymentMethod, CustomerRetrievePaymentMethodParams params, RequestOptions options)
+      String customerId, CustomerRetrievePaymentMethodParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/payment_methods/%s",
-            ApiResource.urlEncodeId(this.getId()), ApiResource.urlEncodeId(paymentMethod));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

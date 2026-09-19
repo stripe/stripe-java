@@ -728,8 +728,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
    * PaymentMethods</a>
    */
-  public static PaymentMethod retrieve(String paymentMethod) throws StripeException {
-    return retrieve(paymentMethod, (Map<String, Object>) null, (RequestOptions) null);
+  public static PaymentMethod retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
@@ -738,9 +738,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
    * PaymentMethods</a>
    */
-  public static PaymentMethod retrieve(String paymentMethod, RequestOptions options)
-      throws StripeException {
-    return retrieve(paymentMethod, (Map<String, Object>) null, options);
+  public static PaymentMethod retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -750,9 +749,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * PaymentMethods</a>
    */
   public static PaymentMethod retrieve(
-      String paymentMethod, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PaymentMethod.class);
@@ -765,9 +763,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * PaymentMethods</a>
    */
   public static PaymentMethod retrieve(
-      String paymentMethod, PaymentMethodRetrieveParams params, RequestOptions options)
+      String id, PaymentMethodRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod));
+    String path = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

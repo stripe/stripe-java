@@ -22,27 +22,24 @@ public final class RequestedSessionService extends ApiService {
   }
 
   /** Retrieves a requested session. */
-  public RequestedSession retrieve(String requestedSession, RequestedSessionRetrieveParams params)
+  public RequestedSession retrieve(String id, RequestedSessionRetrieveParams params)
       throws StripeException {
-    return retrieve(requestedSession, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a requested session. */
-  public RequestedSession retrieve(String requestedSession, RequestOptions options)
-      throws StripeException {
-    return retrieve(requestedSession, (RequestedSessionRetrieveParams) null, options);
+  public RequestedSession retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (RequestedSessionRetrieveParams) null, options);
   }
   /** Retrieves a requested session. */
-  public RequestedSession retrieve(String requestedSession) throws StripeException {
-    return retrieve(requestedSession, (RequestedSessionRetrieveParams) null, (RequestOptions) null);
+  public RequestedSession retrieve(String id) throws StripeException {
+    return retrieve(id, (RequestedSessionRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a requested session. */
   public RequestedSession retrieve(
-      String requestedSession, RequestedSessionRetrieveParams params, RequestOptions options)
+      String id, RequestedSessionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/delegated_checkout/requested_sessions/%s",
-            ApiResource.urlEncodeId(requestedSession));
+        String.format("/v1/delegated_checkout/requested_sessions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -53,27 +50,24 @@ public final class RequestedSessionService extends ApiService {
     return this.request(request, RequestedSession.class);
   }
   /** Updates a requested session. */
-  public RequestedSession update(String requestedSession, RequestedSessionUpdateParams params)
+  public RequestedSession update(String id, RequestedSessionUpdateParams params)
       throws StripeException {
-    return update(requestedSession, params, (RequestOptions) null);
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates a requested session. */
-  public RequestedSession update(String requestedSession, RequestOptions options)
-      throws StripeException {
-    return update(requestedSession, (RequestedSessionUpdateParams) null, options);
+  public RequestedSession update(String id, RequestOptions options) throws StripeException {
+    return update(id, (RequestedSessionUpdateParams) null, options);
   }
   /** Updates a requested session. */
-  public RequestedSession update(String requestedSession) throws StripeException {
-    return update(requestedSession, (RequestedSessionUpdateParams) null, (RequestOptions) null);
+  public RequestedSession update(String id) throws StripeException {
+    return update(id, (RequestedSessionUpdateParams) null, (RequestOptions) null);
   }
   /** Updates a requested session. */
   public RequestedSession update(
-      String requestedSession, RequestedSessionUpdateParams params, RequestOptions options)
+      String id, RequestedSessionUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/delegated_checkout/requested_sessions/%s",
-            ApiResource.urlEncodeId(requestedSession));
+        String.format("/v1/delegated_checkout/requested_sessions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -101,27 +95,25 @@ public final class RequestedSessionService extends ApiService {
     return this.request(request, RequestedSession.class);
   }
   /** Confirms a requested session. */
-  public RequestedSession confirm(String requestedSession, RequestedSessionConfirmParams params)
+  public RequestedSession confirm(String id, RequestedSessionConfirmParams params)
       throws StripeException {
-    return confirm(requestedSession, params, (RequestOptions) null);
+    return confirm(id, params, (RequestOptions) null);
   }
   /** Confirms a requested session. */
-  public RequestedSession confirm(String requestedSession, RequestOptions options)
-      throws StripeException {
-    return confirm(requestedSession, (RequestedSessionConfirmParams) null, options);
+  public RequestedSession confirm(String id, RequestOptions options) throws StripeException {
+    return confirm(id, (RequestedSessionConfirmParams) null, options);
   }
   /** Confirms a requested session. */
-  public RequestedSession confirm(String requestedSession) throws StripeException {
-    return confirm(requestedSession, (RequestedSessionConfirmParams) null, (RequestOptions) null);
+  public RequestedSession confirm(String id) throws StripeException {
+    return confirm(id, (RequestedSessionConfirmParams) null, (RequestOptions) null);
   }
   /** Confirms a requested session. */
   public RequestedSession confirm(
-      String requestedSession, RequestedSessionConfirmParams params, RequestOptions options)
+      String id, RequestedSessionConfirmParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/delegated_checkout/requested_sessions/%s/confirm",
-            ApiResource.urlEncodeId(requestedSession));
+            "/v1/delegated_checkout/requested_sessions/%s/confirm", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -132,27 +124,25 @@ public final class RequestedSessionService extends ApiService {
     return this.request(request, RequestedSession.class);
   }
   /** Expires a requested session. */
-  public RequestedSession expire(String requestedSession, RequestedSessionExpireParams params)
+  public RequestedSession expire(String id, RequestedSessionExpireParams params)
       throws StripeException {
-    return expire(requestedSession, params, (RequestOptions) null);
+    return expire(id, params, (RequestOptions) null);
   }
   /** Expires a requested session. */
-  public RequestedSession expire(String requestedSession, RequestOptions options)
-      throws StripeException {
-    return expire(requestedSession, (RequestedSessionExpireParams) null, options);
+  public RequestedSession expire(String id, RequestOptions options) throws StripeException {
+    return expire(id, (RequestedSessionExpireParams) null, options);
   }
   /** Expires a requested session. */
-  public RequestedSession expire(String requestedSession) throws StripeException {
-    return expire(requestedSession, (RequestedSessionExpireParams) null, (RequestOptions) null);
+  public RequestedSession expire(String id) throws StripeException {
+    return expire(id, (RequestedSessionExpireParams) null, (RequestOptions) null);
   }
   /** Expires a requested session. */
   public RequestedSession expire(
-      String requestedSession, RequestedSessionExpireParams params, RequestOptions options)
+      String id, RequestedSessionExpireParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/delegated_checkout/requested_sessions/%s/expire",
-            ApiResource.urlEncodeId(requestedSession));
+            "/v1/delegated_checkout/requested_sessions/%s/expire", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

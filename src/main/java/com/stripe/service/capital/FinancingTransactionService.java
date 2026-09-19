@@ -61,30 +61,24 @@ public final class FinancingTransactionService extends ApiService {
         request, new TypeToken<StripeCollection<FinancingTransaction>>() {}.getType());
   }
   /** Retrieves a financing transaction for a financing offer. */
-  public FinancingTransaction retrieve(
-      String financingTransaction, FinancingTransactionRetrieveParams params)
+  public FinancingTransaction retrieve(String id, FinancingTransactionRetrieveParams params)
       throws StripeException {
-    return retrieve(financingTransaction, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a financing transaction for a financing offer. */
-  public FinancingTransaction retrieve(String financingTransaction, RequestOptions options)
-      throws StripeException {
-    return retrieve(financingTransaction, (FinancingTransactionRetrieveParams) null, options);
+  public FinancingTransaction retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (FinancingTransactionRetrieveParams) null, options);
   }
   /** Retrieves a financing transaction for a financing offer. */
-  public FinancingTransaction retrieve(String financingTransaction) throws StripeException {
-    return retrieve(
-        financingTransaction, (FinancingTransactionRetrieveParams) null, (RequestOptions) null);
+  public FinancingTransaction retrieve(String id) throws StripeException {
+    return retrieve(id, (FinancingTransactionRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a financing transaction for a financing offer. */
   public FinancingTransaction retrieve(
-      String financingTransaction,
-      FinancingTransactionRetrieveParams params,
-      RequestOptions options)
+      String id, FinancingTransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/capital/financing_transactions/%s", ApiResource.urlEncodeId(financingTransaction));
+        String.format("/v1/capital/financing_transactions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

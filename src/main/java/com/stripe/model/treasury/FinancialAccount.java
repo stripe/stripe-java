@@ -289,23 +289,20 @@ public class FinancialAccount extends ApiResource
   }
 
   /** Retrieves the details of a FinancialAccount. */
-  public static FinancialAccount retrieve(String financialAccount) throws StripeException {
-    return retrieve(financialAccount, (Map<String, Object>) null, (RequestOptions) null);
+  public static FinancialAccount retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the details of a FinancialAccount. */
-  public static FinancialAccount retrieve(String financialAccount, RequestOptions options)
+  public static FinancialAccount retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(financialAccount, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the details of a FinancialAccount. */
   public static FinancialAccount retrieve(
-      String financialAccount, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, FinancialAccount.class);
@@ -313,11 +310,9 @@ public class FinancialAccount extends ApiResource
 
   /** Retrieves the details of a FinancialAccount. */
   public static FinancialAccount retrieve(
-      String financialAccount, FinancialAccountRetrieveParams params, RequestOptions options)
+      String id, FinancialAccountRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
+    String path = String.format("/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

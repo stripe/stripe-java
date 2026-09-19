@@ -101,16 +101,16 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
 
   /** Lists all LineItems of a given PaymentIntent. */
   public static PaymentIntentAmountDetailsLineItemCollection list(
-      String intent, Map<String, Object> params) throws StripeException {
-    return list(intent, params, (RequestOptions) null);
+      String id, Map<String, Object> params) throws StripeException {
+    return list(id, params, (RequestOptions) null);
   }
 
   /** Lists all LineItems of a given PaymentIntent. */
   public static PaymentIntentAmountDetailsLineItemCollection list(
-      String intent, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
         String.format(
-            "/v1/payment_intents/%s/amount_details_line_items", ApiResource.urlEncodeId(intent));
+            "/v1/payment_intents/%s/amount_details_line_items", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter()
@@ -119,17 +119,17 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
 
   /** Lists all LineItems of a given PaymentIntent. */
   public static PaymentIntentAmountDetailsLineItemCollection list(
-      String intent, PaymentIntentAmountDetailsLineItemListParams params) throws StripeException {
-    return list(intent, params, (RequestOptions) null);
+      String id, PaymentIntentAmountDetailsLineItemListParams params) throws StripeException {
+    return list(id, params, (RequestOptions) null);
   }
 
   /** Lists all LineItems of a given PaymentIntent. */
   public static PaymentIntentAmountDetailsLineItemCollection list(
-      String intent, PaymentIntentAmountDetailsLineItemListParams params, RequestOptions options)
+      String id, PaymentIntentAmountDetailsLineItemListParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/payment_intents/%s/amount_details_line_items", ApiResource.urlEncodeId(intent));
+            "/v1/payment_intents/%s/amount_details_line_items", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -317,12 +317,12 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
   @EqualsAndHashCode(callSuper = false)
   public static class Tax extends StripeObject {
     /**
-     * The total amount of tax on the transaction represented in the <a
+     * The total amount of tax on a single line item represented in the <a
      * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. Required
-     * for L2 rates. An integer greater than or equal to 0.
+     * for L3 rates. An integer greater than or equal to 0.
      *
-     * <p>This field is mutually exclusive with the {@code
-     * amount_details[line_items][#][tax][total_tax_amount]} field.
+     * <p>This field is mutually exclusive with the {@code amount_details[tax][total_tax_amount]}
+     * field.
      */
     @SerializedName("total_tax_amount")
     Long totalTaxAmount;

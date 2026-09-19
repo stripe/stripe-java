@@ -124,9 +124,9 @@ public final class PaymentMethodService extends ApiService {
    * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
    * PaymentMethods</a>
    */
-  public PaymentMethod retrieve(String paymentMethod, PaymentMethodRetrieveParams params)
+  public PaymentMethod retrieve(String id, PaymentMethodRetrieveParams params)
       throws StripeException {
-    return retrieve(paymentMethod, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
@@ -134,9 +134,8 @@ public final class PaymentMethodService extends ApiService {
    * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
    * PaymentMethods</a>
    */
-  public PaymentMethod retrieve(String paymentMethod, RequestOptions options)
-      throws StripeException {
-    return retrieve(paymentMethod, (PaymentMethodRetrieveParams) null, options);
+  public PaymentMethod retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (PaymentMethodRetrieveParams) null, options);
   }
   /**
    * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
@@ -144,8 +143,8 @@ public final class PaymentMethodService extends ApiService {
    * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
    * PaymentMethods</a>
    */
-  public PaymentMethod retrieve(String paymentMethod) throws StripeException {
-    return retrieve(paymentMethod, (PaymentMethodRetrieveParams) null, (RequestOptions) null);
+  public PaymentMethod retrieve(String id) throws StripeException {
+    return retrieve(id, (PaymentMethodRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
@@ -154,9 +153,9 @@ public final class PaymentMethodService extends ApiService {
    * PaymentMethods</a>
    */
   public PaymentMethod retrieve(
-      String paymentMethod, PaymentMethodRetrieveParams params, RequestOptions options)
+      String id, PaymentMethodRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod));
+    String path = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -169,29 +168,27 @@ public final class PaymentMethodService extends ApiService {
   /**
    * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
    */
-  public PaymentMethod update(String paymentMethod, PaymentMethodUpdateParams params)
+  public PaymentMethod update(String id, PaymentMethodUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /**
+   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
+   */
+  public PaymentMethod update(String id, RequestOptions options) throws StripeException {
+    return update(id, (PaymentMethodUpdateParams) null, options);
+  }
+  /**
+   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
+   */
+  public PaymentMethod update(String id) throws StripeException {
+    return update(id, (PaymentMethodUpdateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
+   */
+  public PaymentMethod update(String id, PaymentMethodUpdateParams params, RequestOptions options)
       throws StripeException {
-    return update(paymentMethod, params, (RequestOptions) null);
-  }
-  /**
-   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
-   */
-  public PaymentMethod update(String paymentMethod, RequestOptions options) throws StripeException {
-    return update(paymentMethod, (PaymentMethodUpdateParams) null, options);
-  }
-  /**
-   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
-   */
-  public PaymentMethod update(String paymentMethod) throws StripeException {
-    return update(paymentMethod, (PaymentMethodUpdateParams) null, (RequestOptions) null);
-  }
-  /**
-   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
-   */
-  public PaymentMethod update(
-      String paymentMethod, PaymentMethodUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod));
+    String path = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -218,72 +215,69 @@ public final class PaymentMethodService extends ApiService {
    * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
    * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
    */
-  public PaymentMethod attach(String paymentMethod, PaymentMethodAttachParams params)
+  public PaymentMethod attach(String id, PaymentMethodAttachParams params) throws StripeException {
+    return attach(id, params, (RequestOptions) null);
+  }
+  /**
+   * Attaches a PaymentMethod object to a Customer.
+   *
+   * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
+   * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
+   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
+   * These approaches will perform any necessary steps to set up the PaymentMethod for future
+   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
+   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
+   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
+   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
+   * future payments</a> for more information about setting up future payments.
+   *
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
+   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
+   */
+  public PaymentMethod attach(String id, RequestOptions options) throws StripeException {
+    return attach(id, (PaymentMethodAttachParams) null, options);
+  }
+  /**
+   * Attaches a PaymentMethod object to a Customer.
+   *
+   * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
+   * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
+   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
+   * These approaches will perform any necessary steps to set up the PaymentMethod for future
+   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
+   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
+   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
+   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
+   * future payments</a> for more information about setting up future payments.
+   *
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
+   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
+   */
+  public PaymentMethod attach(String id) throws StripeException {
+    return attach(id, (PaymentMethodAttachParams) null, (RequestOptions) null);
+  }
+  /**
+   * Attaches a PaymentMethod object to a Customer.
+   *
+   * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
+   * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
+   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
+   * These approaches will perform any necessary steps to set up the PaymentMethod for future
+   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
+   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
+   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
+   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
+   * future payments</a> for more information about setting up future payments.
+   *
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
+   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
+   */
+  public PaymentMethod attach(String id, PaymentMethodAttachParams params, RequestOptions options)
       throws StripeException {
-    return attach(paymentMethod, params, (RequestOptions) null);
-  }
-  /**
-   * Attaches a PaymentMethod object to a Customer.
-   *
-   * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
-   * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
-   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
-   * These approaches will perform any necessary steps to set up the PaymentMethod for future
-   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
-   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
-   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
-   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
-   * future payments</a> for more information about setting up future payments.
-   *
-   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
-   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
-   */
-  public PaymentMethod attach(String paymentMethod, RequestOptions options) throws StripeException {
-    return attach(paymentMethod, (PaymentMethodAttachParams) null, options);
-  }
-  /**
-   * Attaches a PaymentMethod object to a Customer.
-   *
-   * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
-   * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
-   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
-   * These approaches will perform any necessary steps to set up the PaymentMethod for future
-   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
-   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
-   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
-   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
-   * future payments</a> for more information about setting up future payments.
-   *
-   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
-   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
-   */
-  public PaymentMethod attach(String paymentMethod) throws StripeException {
-    return attach(paymentMethod, (PaymentMethodAttachParams) null, (RequestOptions) null);
-  }
-  /**
-   * Attaches a PaymentMethod object to a Customer.
-   *
-   * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
-   * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
-   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
-   * These approaches will perform any necessary steps to set up the PaymentMethod for future
-   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
-   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
-   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
-   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
-   * future payments</a> for more information about setting up future payments.
-   *
-   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
-   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
-   */
-  public PaymentMethod attach(
-      String paymentMethod, PaymentMethodAttachParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/payment_methods/%s/attach", ApiResource.urlEncodeId(paymentMethod));
+    String path = String.format("/v1/payment_methods/%s/attach", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -294,27 +288,25 @@ public final class PaymentMethodService extends ApiService {
     return this.request(request, PaymentMethod.class);
   }
   /** Retrieves a PaymentMethod’s Balance. */
-  public PaymentMethodBalance checkBalance(
-      String paymentMethod, PaymentMethodCheckBalanceParams params) throws StripeException {
-    return checkBalance(paymentMethod, params, (RequestOptions) null);
-  }
-  /** Retrieves a PaymentMethod’s Balance. */
-  public PaymentMethodBalance checkBalance(String paymentMethod, RequestOptions options)
+  public PaymentMethodBalance checkBalance(String id, PaymentMethodCheckBalanceParams params)
       throws StripeException {
-    return checkBalance(paymentMethod, (PaymentMethodCheckBalanceParams) null, options);
+    return checkBalance(id, params, (RequestOptions) null);
   }
   /** Retrieves a PaymentMethod’s Balance. */
-  public PaymentMethodBalance checkBalance(String paymentMethod) throws StripeException {
-    return checkBalance(
-        paymentMethod, (PaymentMethodCheckBalanceParams) null, (RequestOptions) null);
+  public PaymentMethodBalance checkBalance(String id, RequestOptions options)
+      throws StripeException {
+    return checkBalance(id, (PaymentMethodCheckBalanceParams) null, options);
+  }
+  /** Retrieves a PaymentMethod’s Balance. */
+  public PaymentMethodBalance checkBalance(String id) throws StripeException {
+    return checkBalance(id, (PaymentMethodCheckBalanceParams) null, (RequestOptions) null);
   }
   /** Retrieves a PaymentMethod’s Balance. */
   public PaymentMethodBalance checkBalance(
-      String paymentMethod, PaymentMethodCheckBalanceParams params, RequestOptions options)
+      String id, PaymentMethodCheckBalanceParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/payment_methods/%s/check_balance", ApiResource.urlEncodeId(paymentMethod));
+        String.format("/v1/payment_methods/%s/check_balance", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -328,33 +320,30 @@ public final class PaymentMethodService extends ApiService {
    * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
    * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
    */
-  public PaymentMethod detach(String paymentMethod, PaymentMethodDetachParams params)
+  public PaymentMethod detach(String id, PaymentMethodDetachParams params) throws StripeException {
+    return detach(id, params, (RequestOptions) null);
+  }
+  /**
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
+   */
+  public PaymentMethod detach(String id, RequestOptions options) throws StripeException {
+    return detach(id, (PaymentMethodDetachParams) null, options);
+  }
+  /**
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
+   */
+  public PaymentMethod detach(String id) throws StripeException {
+    return detach(id, (PaymentMethodDetachParams) null, (RequestOptions) null);
+  }
+  /**
+   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
+   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
+   */
+  public PaymentMethod detach(String id, PaymentMethodDetachParams params, RequestOptions options)
       throws StripeException {
-    return detach(paymentMethod, params, (RequestOptions) null);
-  }
-  /**
-   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
-   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
-   */
-  public PaymentMethod detach(String paymentMethod, RequestOptions options) throws StripeException {
-    return detach(paymentMethod, (PaymentMethodDetachParams) null, options);
-  }
-  /**
-   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
-   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
-   */
-  public PaymentMethod detach(String paymentMethod) throws StripeException {
-    return detach(paymentMethod, (PaymentMethodDetachParams) null, (RequestOptions) null);
-  }
-  /**
-   * Detaches a PaymentMethod object from a Customer. Detachment is permanent and irreversible —
-   * once detached, a PaymentMethod can no longer be used for payments or re-attached to a Customer.
-   */
-  public PaymentMethod detach(
-      String paymentMethod, PaymentMethodDetachParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(paymentMethod));
+    String path = String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -365,20 +354,19 @@ public final class PaymentMethodService extends ApiService {
     return this.request(request, PaymentMethod.class);
   }
   /** Serializes a PaymentMethod attach request into a batch job JSONL line. */
-  public String serializeBatchAttach(String paymentMethod, PaymentMethodAttachParams params)
+  public String serializeBatchAttach(String id, PaymentMethodAttachParams params)
       throws StripeException {
-    return serializeBatchAttach(paymentMethod, params, (RequestOptions) null);
+    return serializeBatchAttach(id, params, (RequestOptions) null);
   }
   /** Serializes a PaymentMethod attach request into a batch job JSONL line. */
   public String serializeBatchAttach(
-      String paymentMethod, PaymentMethodAttachParams params, RequestOptions options)
-      throws StripeException {
+      String id, PaymentMethodAttachParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("payment_method", paymentMethod);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

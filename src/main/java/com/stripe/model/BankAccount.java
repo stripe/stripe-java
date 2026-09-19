@@ -219,44 +219,46 @@ public class BankAccount extends ApiResource
   }
 
   /** Verify a specified bank account for a given customer. */
-  public BankAccount verify() throws StripeException {
-    return verify((Map<String, Object>) null, (RequestOptions) null);
+  public BankAccount verify(String customerId) throws StripeException {
+    return verify(customerId, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Verify a specified bank account for a given customer. */
-  public BankAccount verify(RequestOptions options) throws StripeException {
-    return verify((Map<String, Object>) null, options);
+  public BankAccount verify(String customerId, RequestOptions options) throws StripeException {
+    return verify(customerId, (Map<String, Object>) null, options);
   }
 
   /** Verify a specified bank account for a given customer. */
-  public BankAccount verify(Map<String, Object> params) throws StripeException {
-    return verify(params, (RequestOptions) null);
+  public BankAccount verify(String customerId, Map<String, Object> params) throws StripeException {
+    return verify(customerId, params, (RequestOptions) null);
   }
 
   /** Verify a specified bank account for a given customer. */
-  public BankAccount verify(Map<String, Object> params, RequestOptions options)
+  public BankAccount verify(String customerId, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/sources/%s/verify",
-            ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, BankAccount.class);
   }
 
   /** Verify a specified bank account for a given customer. */
-  public BankAccount verify(BankAccountVerifyParams params) throws StripeException {
-    return verify(params, (RequestOptions) null);
+  public BankAccount verify(String customerId, BankAccountVerifyParams params)
+      throws StripeException {
+    return verify(customerId, params, (RequestOptions) null);
   }
 
   /** Verify a specified bank account for a given customer. */
-  public BankAccount verify(BankAccountVerifyParams params, RequestOptions options)
+  public BankAccount verify(
+      String customerId, BankAccountVerifyParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/sources/%s/verify",
-            ApiResource.urlEncodeId(this.getCustomer()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -557,8 +559,9 @@ public class BankAccount extends ApiResource
        * The code for the type of error.
        *
        * <p>One of {@code external_request}, {@code information_missing}, {@code
-       * invalid_address_city_state_postal_code}, {@code invalid_address_highway_contract_box},
-       * {@code invalid_address_private_mailbox}, {@code invalid_business_profile_name}, {@code
+       * invalid_address_city_state_postal_code}, {@code invalid_address_cmra_address}, {@code
+       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+       * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
        * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted}, {@code
        * invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
        * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
@@ -702,8 +705,9 @@ public class BankAccount extends ApiResource
        * The code for the type of error.
        *
        * <p>One of {@code external_request}, {@code information_missing}, {@code
-       * invalid_address_city_state_postal_code}, {@code invalid_address_highway_contract_box},
-       * {@code invalid_address_private_mailbox}, {@code invalid_business_profile_name}, {@code
+       * invalid_address_city_state_postal_code}, {@code invalid_address_cmra_address}, {@code
+       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+       * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
        * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted}, {@code
        * invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
        * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code

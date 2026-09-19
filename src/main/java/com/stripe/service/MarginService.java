@@ -76,21 +76,21 @@ public final class MarginService extends ApiService {
     return this.request(request, Margin.class);
   }
   /** Retrieve a margin object with the given ID. */
-  public Margin retrieve(String margin, MarginRetrieveParams params) throws StripeException {
-    return retrieve(margin, params, (RequestOptions) null);
+  public Margin retrieve(String id, MarginRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieve a margin object with the given ID. */
-  public Margin retrieve(String margin, RequestOptions options) throws StripeException {
-    return retrieve(margin, (MarginRetrieveParams) null, options);
+  public Margin retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (MarginRetrieveParams) null, options);
   }
   /** Retrieve a margin object with the given ID. */
-  public Margin retrieve(String margin) throws StripeException {
-    return retrieve(margin, (MarginRetrieveParams) null, (RequestOptions) null);
+  public Margin retrieve(String id) throws StripeException {
+    return retrieve(id, (MarginRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieve a margin object with the given ID. */
-  public Margin retrieve(String margin, MarginRetrieveParams params, RequestOptions options)
+  public Margin retrieve(String id, MarginRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(margin));
+    String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -101,21 +101,21 @@ public final class MarginService extends ApiService {
     return this.request(request, Margin.class);
   }
   /** Update the specified margin object. Certain fields of the margin object are not editable. */
-  public Margin update(String margin, MarginUpdateParams params) throws StripeException {
-    return update(margin, params, (RequestOptions) null);
+  public Margin update(String id, MarginUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /** Update the specified margin object. Certain fields of the margin object are not editable. */
-  public Margin update(String margin, RequestOptions options) throws StripeException {
-    return update(margin, (MarginUpdateParams) null, options);
+  public Margin update(String id, RequestOptions options) throws StripeException {
+    return update(id, (MarginUpdateParams) null, options);
   }
   /** Update the specified margin object. Certain fields of the margin object are not editable. */
-  public Margin update(String margin) throws StripeException {
-    return update(margin, (MarginUpdateParams) null, (RequestOptions) null);
+  public Margin update(String id) throws StripeException {
+    return update(id, (MarginUpdateParams) null, (RequestOptions) null);
   }
   /** Update the specified margin object. Certain fields of the margin object are not editable. */
-  public Margin update(String margin, MarginUpdateParams params, RequestOptions options)
+  public Margin update(String id, MarginUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(margin));
+    String path = String.format("/v1/billing/margins/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

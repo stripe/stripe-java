@@ -129,28 +129,25 @@ public class ReportType extends ApiResource implements HasId {
    * Retrieves the details of a Report Type. (Certain report types require a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
-  public static ReportType retrieve(String reportType) throws StripeException {
-    return retrieve(reportType, (Map<String, Object>) null, (RequestOptions) null);
+  public static ReportType retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
    * Retrieves the details of a Report Type. (Certain report types require a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
-  public static ReportType retrieve(String reportType, RequestOptions options)
-      throws StripeException {
-    return retrieve(reportType, (Map<String, Object>) null, options);
+  public static ReportType retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
    * Retrieves the details of a Report Type. (Certain report types require a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
-  public static ReportType retrieve(
-      String reportType, Map<String, Object> params, RequestOptions options)
+  public static ReportType retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType));
+    String path = String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ReportType.class);
@@ -161,10 +158,8 @@ public class ReportType extends ApiResource implements HasId {
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
   public static ReportType retrieve(
-      String reportType, ReportTypeRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType));
+      String id, ReportTypeRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

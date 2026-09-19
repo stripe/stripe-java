@@ -150,21 +150,19 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
   }
 
   /** Retrieves an {@code AccountNotice} object. */
-  public static AccountNotice retrieve(String accountNotice) throws StripeException {
-    return retrieve(accountNotice, (Map<String, Object>) null, (RequestOptions) null);
+  public static AccountNotice retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an {@code AccountNotice} object. */
-  public static AccountNotice retrieve(String accountNotice, RequestOptions options)
-      throws StripeException {
-    return retrieve(accountNotice, (Map<String, Object>) null, options);
+  public static AccountNotice retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an {@code AccountNotice} object. */
   public static AccountNotice retrieve(
-      String accountNotice, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(accountNotice));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, AccountNotice.class);
@@ -172,9 +170,9 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
 
   /** Retrieves an {@code AccountNotice} object. */
   public static AccountNotice retrieve(
-      String accountNotice, AccountNoticeRetrieveParams params, RequestOptions options)
+      String id, AccountNoticeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(accountNotice));
+    String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

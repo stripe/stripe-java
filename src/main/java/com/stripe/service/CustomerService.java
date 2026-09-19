@@ -30,35 +30,35 @@ public final class CustomerService extends ApiService {
    * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
    * subscriptions on the customer.
    */
-  public Customer delete(String customer) throws StripeException {
-    return delete(customer, (RequestOptions) null);
+  public Customer delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /**
    * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
    * subscriptions on the customer.
    */
-  public Customer delete(String customer, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
+  public Customer delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Customer.class);
   }
   /** Retrieves a Customer object. */
-  public Customer retrieve(String customer, CustomerRetrieveParams params) throws StripeException {
-    return retrieve(customer, params, (RequestOptions) null);
+  public Customer retrieve(String id, CustomerRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a Customer object. */
-  public Customer retrieve(String customer, RequestOptions options) throws StripeException {
-    return retrieve(customer, (CustomerRetrieveParams) null, options);
+  public Customer retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (CustomerRetrieveParams) null, options);
   }
   /** Retrieves a Customer object. */
-  public Customer retrieve(String customer) throws StripeException {
-    return retrieve(customer, (CustomerRetrieveParams) null, (RequestOptions) null);
+  public Customer retrieve(String id) throws StripeException {
+    return retrieve(id, (CustomerRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a Customer object. */
-  public Customer retrieve(String customer, CustomerRetrieveParams params, RequestOptions options)
+  public Customer retrieve(String id, CustomerRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -82,8 +82,8 @@ public final class CustomerService extends ApiService {
    *
    * <p>This request accepts mostly the same arguments as the customer creation call.
    */
-  public Customer update(String customer, CustomerUpdateParams params) throws StripeException {
-    return update(customer, params, (RequestOptions) null);
+  public Customer update(String id, CustomerUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates the specified customer by setting the values of the parameters passed. Any parameters
@@ -99,8 +99,8 @@ public final class CustomerService extends ApiService {
    *
    * <p>This request accepts mostly the same arguments as the customer creation call.
    */
-  public Customer update(String customer, RequestOptions options) throws StripeException {
-    return update(customer, (CustomerUpdateParams) null, options);
+  public Customer update(String id, RequestOptions options) throws StripeException {
+    return update(id, (CustomerUpdateParams) null, options);
   }
   /**
    * Updates the specified customer by setting the values of the parameters passed. Any parameters
@@ -116,8 +116,8 @@ public final class CustomerService extends ApiService {
    *
    * <p>This request accepts mostly the same arguments as the customer creation call.
    */
-  public Customer update(String customer) throws StripeException {
-    return update(customer, (CustomerUpdateParams) null, (RequestOptions) null);
+  public Customer update(String id) throws StripeException {
+    return update(id, (CustomerUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the specified customer by setting the values of the parameters passed. Any parameters
@@ -133,9 +133,9 @@ public final class CustomerService extends ApiService {
    *
    * <p>This request accepts mostly the same arguments as the customer creation call.
    */
-  public Customer update(String customer, CustomerUpdateParams params, RequestOptions options)
+  public Customer update(String id, CustomerUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -146,12 +146,12 @@ public final class CustomerService extends ApiService {
     return this.request(request, Customer.class);
   }
   /** Removes the currently applied discount on a customer. */
-  public Discount deleteDiscount(String customer) throws StripeException {
-    return deleteDiscount(customer, (RequestOptions) null);
+  public Discount deleteDiscount(String id) throws StripeException {
+    return deleteDiscount(id, (RequestOptions) null);
   }
   /** Removes the currently applied discount on a customer. */
-  public Discount deleteDiscount(String customer, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/customers/%s/discount", ApiResource.urlEncodeId(customer));
+  public Discount deleteDiscount(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/customers/%s/discount", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Discount.class);
@@ -250,18 +250,17 @@ public final class CustomerService extends ApiService {
     return this.request(request, new TypeToken<StripeSearchResult<Customer>>() {}.getType());
   }
   /** Serializes a Customer delete request into a batch job JSONL line. */
-  public String serializeBatchDelete(String customer) throws StripeException {
-    return serializeBatchDelete(customer, (RequestOptions) null);
+  public String serializeBatchDelete(String id) throws StripeException {
+    return serializeBatchDelete(id, (RequestOptions) null);
   }
   /** Serializes a Customer delete request into a batch job JSONL line. */
-  public String serializeBatchDelete(String customer, RequestOptions options)
-      throws StripeException {
+  public String serializeBatchDelete(String id, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("customer", customer);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -273,19 +272,19 @@ public final class CustomerService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a Customer update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(String customer, CustomerUpdateParams params)
+  public String serializeBatchUpdate(String id, CustomerUpdateParams params)
       throws StripeException {
-    return serializeBatchUpdate(customer, params, (RequestOptions) null);
+    return serializeBatchUpdate(id, params, (RequestOptions) null);
   }
   /** Serializes a Customer update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(
-      String customer, CustomerUpdateParams params, RequestOptions options) throws StripeException {
+  public String serializeBatchUpdate(String id, CustomerUpdateParams params, RequestOptions options)
+      throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("customer", customer);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -297,18 +296,18 @@ public final class CustomerService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a Customer delete_discount request into a batch job JSONL line. */
-  public String serializeBatchDeleteDiscount(String customer) throws StripeException {
-    return serializeBatchDeleteDiscount(customer, (RequestOptions) null);
+  public String serializeBatchDeleteDiscount(String id) throws StripeException {
+    return serializeBatchDeleteDiscount(id, (RequestOptions) null);
   }
   /** Serializes a Customer delete_discount request into a batch job JSONL line. */
-  public String serializeBatchDeleteDiscount(String customer, RequestOptions options)
+  public String serializeBatchDeleteDiscount(String id, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("customer", customer);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

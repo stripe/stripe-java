@@ -19,23 +19,21 @@ public final class CalculationService extends ApiService {
   }
 
   /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
-  public Calculation retrieve(String calculation, CalculationRetrieveParams params)
+  public Calculation retrieve(String id, CalculationRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
+  public Calculation retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (CalculationRetrieveParams) null, options);
+  }
+  /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
+  public Calculation retrieve(String id) throws StripeException {
+    return retrieve(id, (CalculationRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
+  public Calculation retrieve(String id, CalculationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    return retrieve(calculation, params, (RequestOptions) null);
-  }
-  /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
-  public Calculation retrieve(String calculation, RequestOptions options) throws StripeException {
-    return retrieve(calculation, (CalculationRetrieveParams) null, options);
-  }
-  /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
-  public Calculation retrieve(String calculation) throws StripeException {
-    return retrieve(calculation, (CalculationRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves a Tax {@code Calculation} object, if the calculation hasn’t expired. */
-  public Calculation retrieve(
-      String calculation, CalculationRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/tax/calculations/%s", ApiResource.urlEncodeId(calculation));
+    String path = String.format("/v1/tax/calculations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

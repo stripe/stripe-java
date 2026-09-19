@@ -19,9 +19,9 @@ import lombok.Setter;
 
 /**
  * This object represents files hosted on Stripe's servers. You can upload files with the <a
- * href="https://api.stripe.com#create_file">create file</a> request (for example, when uploading
- * dispute evidence). Stripe also creates files independently (for example, the results of a <a
- * href="https://stripe.com/docs/api#scheduled_queries">Sigma scheduled query</a>).
+ * href="https://docs.stripe.com/api#create_file">create file</a> request (for example, when
+ * uploading dispute evidence). Stripe also creates files independently (for example, the results of
+ * a <a href="https://stripe.com/docs/api#scheduled_queries">Sigma scheduled query</a>).
  *
  * <p>Related guide: <a href="https://docs.stripe.com/file-upload">File upload guide</a>
  */
@@ -47,7 +47,8 @@ public class File extends ApiResource implements HasId {
   String id;
 
   /**
-   * A list of <a href="https://api.stripe.com#file_links">file links</a> that point at this file.
+   * A list of <a href="https://docs.stripe.com/api#file_links">file links</a> that point at this
+   * file.
    */
   @SerializedName("links")
   FileLinkCollection links;
@@ -203,8 +204,8 @@ public class File extends ApiResource implements HasId {
    * returns the corresponding file object. Learn how to <a
    * href="https://stripe.com/docs/file-upload#download-file-contents">access file contents</a>.
    */
-  public static File retrieve(String file) throws StripeException {
-    return retrieve(file, (Map<String, Object>) null, (RequestOptions) null);
+  public static File retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
@@ -212,8 +213,8 @@ public class File extends ApiResource implements HasId {
    * returns the corresponding file object. Learn how to <a
    * href="https://stripe.com/docs/file-upload#download-file-contents">access file contents</a>.
    */
-  public static File retrieve(String file, RequestOptions options) throws StripeException {
-    return retrieve(file, (Map<String, Object>) null, options);
+  public static File retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -221,9 +222,9 @@ public class File extends ApiResource implements HasId {
    * returns the corresponding file object. Learn how to <a
    * href="https://stripe.com/docs/file-upload#download-file-contents">access file contents</a>.
    */
-  public static File retrieve(String file, Map<String, Object> params, RequestOptions options)
+  public static File retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/files/%s", ApiResource.urlEncodeId(file));
+    String path = String.format("/v1/files/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, File.class);
@@ -234,9 +235,9 @@ public class File extends ApiResource implements HasId {
    * returns the corresponding file object. Learn how to <a
    * href="https://stripe.com/docs/file-upload#download-file-contents">access file contents</a>.
    */
-  public static File retrieve(String file, FileRetrieveParams params, RequestOptions options)
+  public static File retrieve(String id, FileRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/files/%s", ApiResource.urlEncodeId(file));
+    String path = String.format("/v1/files/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

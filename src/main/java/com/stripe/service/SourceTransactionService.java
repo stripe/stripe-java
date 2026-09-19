@@ -20,25 +20,24 @@ public final class SourceTransactionService extends ApiService {
   }
 
   /** List source transactions for a given source. */
-  public StripeCollection<SourceTransaction> list(String source, SourceTransactionListParams params)
+  public StripeCollection<SourceTransaction> list(String id, SourceTransactionListParams params)
       throws StripeException {
-    return list(source, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
   /** List source transactions for a given source. */
-  public StripeCollection<SourceTransaction> list(String source, RequestOptions options)
+  public StripeCollection<SourceTransaction> list(String id, RequestOptions options)
       throws StripeException {
-    return list(source, (SourceTransactionListParams) null, options);
+    return list(id, (SourceTransactionListParams) null, options);
   }
   /** List source transactions for a given source. */
-  public StripeCollection<SourceTransaction> list(String source) throws StripeException {
-    return list(source, (SourceTransactionListParams) null, (RequestOptions) null);
+  public StripeCollection<SourceTransaction> list(String id) throws StripeException {
+    return list(id, (SourceTransactionListParams) null, (RequestOptions) null);
   }
   /** List source transactions for a given source. */
   public StripeCollection<SourceTransaction> list(
-      String source, SourceTransactionListParams params, RequestOptions options)
+      String id, SourceTransactionListParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(source));
+    String path = String.format("/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

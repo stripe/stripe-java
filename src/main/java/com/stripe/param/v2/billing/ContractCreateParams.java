@@ -1593,7 +1593,7 @@ public class ContractCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class PricingLine {
-    /** <strong>Required.</strong> When the pricing line ends. */
+    /** When the pricing line ends. */
     @SerializedName("ends_at")
     EndsAt endsAt;
 
@@ -1665,7 +1665,7 @@ public class ContractCreateParams extends ApiRequestParams {
             this.startsAt);
       }
 
-      /** <strong>Required.</strong> When the pricing line ends. */
+      /** When the pricing line ends. */
       public Builder setEndsAt(ContractCreateParams.PricingLine.EndsAt endsAt) {
         this.endsAt = endsAt;
         return this;
@@ -1827,6 +1827,9 @@ public class ContractCreateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("never")
+        NEVER("never"),
+
         @SerializedName("timestamp")
         TIMESTAMP("timestamp");
 
@@ -2386,6 +2389,9 @@ public class ContractCreateParams extends ApiRequestParams {
             }
 
             public enum Type implements ApiRequestParams.EnumParam {
+              @SerializedName("never")
+              NEVER("never"),
+
               @SerializedName("timestamp")
               TIMESTAMP("timestamp");
 
@@ -2913,7 +2919,7 @@ public class ContractCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class PricingOverride {
-    /** <strong>Required.</strong> When the pricing override ends. */
+    /** When the pricing override ends. */
     @SerializedName("ends_at")
     EndsAt endsAt;
 
@@ -3009,7 +3015,7 @@ public class ContractCreateParams extends ApiRequestParams {
             this.type);
       }
 
-      /** <strong>Required.</strong> When the pricing override ends. */
+      /** When the pricing override ends. */
       public Builder setEndsAt(ContractCreateParams.PricingOverride.EndsAt endsAt) {
         this.endsAt = endsAt;
         return this;
@@ -3190,6 +3196,9 @@ public class ContractCreateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("never")
+        NEVER("never"),
+
         @SerializedName("timestamp")
         TIMESTAMP("timestamp");
 

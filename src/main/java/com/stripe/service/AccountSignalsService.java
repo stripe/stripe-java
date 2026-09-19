@@ -18,23 +18,23 @@ public final class AccountSignalsService extends ApiService {
   }
 
   /** Retrieves the account’s Signal objects. */
-  public AccountSignals retrieve(String accountId, AccountSignalsRetrieveParams params)
+  public AccountSignals retrieve(String id, AccountSignalsRetrieveParams params)
       throws StripeException {
-    return retrieve(accountId, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the account’s Signal objects. */
-  public AccountSignals retrieve(String accountId, RequestOptions options) throws StripeException {
-    return retrieve(accountId, (AccountSignalsRetrieveParams) null, options);
+  public AccountSignals retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (AccountSignalsRetrieveParams) null, options);
   }
   /** Retrieves the account’s Signal objects. */
-  public AccountSignals retrieve(String accountId) throws StripeException {
-    return retrieve(accountId, (AccountSignalsRetrieveParams) null, (RequestOptions) null);
+  public AccountSignals retrieve(String id) throws StripeException {
+    return retrieve(id, (AccountSignalsRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the account’s Signal objects. */
   public AccountSignals retrieve(
-      String accountId, AccountSignalsRetrieveParams params, RequestOptions options)
+      String id, AccountSignalsRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/accounts/%s/signals", ApiResource.urlEncodeId(accountId));
+    String path = String.format("/v1/accounts/%s/signals", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -420,7 +420,8 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     /**
      * Indicates the outcome of the payment evaluation.
      *
-     * <p>One of {@code failed}, {@code merchant_blocked}, {@code rejected}, or {@code succeeded}.
+     * <p>One of {@code failed}, {@code merchant_blocked}, {@code rejected}, {@code rerouted}, or
+     * {@code succeeded}.
      */
     @SerializedName("type")
     String type;
@@ -589,7 +590,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       Card card;
 
       /**
-       * Describes the type of money movement. Currently only {@code card} is supported.
+       * Describes the type of money movement.
        *
        * <p>Equal to {@code card}.
        */

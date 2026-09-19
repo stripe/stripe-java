@@ -25,33 +25,33 @@ public final class AccountCapabilityService extends ApiService {
    * Returns a list of capabilities associated with the account. The capabilities are returned
    * sorted by creation date, with the most recent capability appearing first.
    */
-  public StripeCollection<Capability> list(String account, AccountCapabilityListParams params)
+  public StripeCollection<Capability> list(String id, AccountCapabilityListParams params)
       throws StripeException {
-    return list(account, params, (RequestOptions) null);
+    return list(id, params, (RequestOptions) null);
   }
   /**
    * Returns a list of capabilities associated with the account. The capabilities are returned
    * sorted by creation date, with the most recent capability appearing first.
    */
-  public StripeCollection<Capability> list(String account, RequestOptions options)
+  public StripeCollection<Capability> list(String id, RequestOptions options)
       throws StripeException {
-    return list(account, (AccountCapabilityListParams) null, options);
+    return list(id, (AccountCapabilityListParams) null, options);
   }
   /**
    * Returns a list of capabilities associated with the account. The capabilities are returned
    * sorted by creation date, with the most recent capability appearing first.
    */
-  public StripeCollection<Capability> list(String account) throws StripeException {
-    return list(account, (AccountCapabilityListParams) null, (RequestOptions) null);
+  public StripeCollection<Capability> list(String id) throws StripeException {
+    return list(id, (AccountCapabilityListParams) null, (RequestOptions) null);
   }
   /**
    * Returns a list of capabilities associated with the account. The capabilities are returned
    * sorted by creation date, with the most recent capability appearing first.
    */
   public StripeCollection<Capability> list(
-      String account, AccountCapabilityListParams params, RequestOptions options)
+      String id, AccountCapabilityListParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -62,32 +62,27 @@ public final class AccountCapabilityService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Capability>>() {}.getType());
   }
   /** Retrieves information about the specified Account Capability. */
-  public Capability retrieve(
-      String account, String capability, AccountCapabilityRetrieveParams params)
+  public Capability retrieve(String accountId, String id, AccountCapabilityRetrieveParams params)
       throws StripeException {
-    return retrieve(account, capability, params, (RequestOptions) null);
+    return retrieve(accountId, id, params, (RequestOptions) null);
   }
   /** Retrieves information about the specified Account Capability. */
-  public Capability retrieve(String account, String capability, RequestOptions options)
+  public Capability retrieve(String accountId, String id, RequestOptions options)
       throws StripeException {
-    return retrieve(account, capability, (AccountCapabilityRetrieveParams) null, options);
+    return retrieve(accountId, id, (AccountCapabilityRetrieveParams) null, options);
   }
   /** Retrieves information about the specified Account Capability. */
-  public Capability retrieve(String account, String capability) throws StripeException {
-    return retrieve(
-        account, capability, (AccountCapabilityRetrieveParams) null, (RequestOptions) null);
+  public Capability retrieve(String accountId, String id) throws StripeException {
+    return retrieve(accountId, id, (AccountCapabilityRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves information about the specified Account Capability. */
   public Capability retrieve(
-      String account,
-      String capability,
-      AccountCapabilityRetrieveParams params,
-      RequestOptions options)
+      String accountId, String id, AccountCapabilityRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/accounts/%s/capabilities/%s",
-            ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(capability));
+            ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -101,39 +96,36 @@ public final class AccountCapabilityService extends ApiService {
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
    * requested} parameter.
    */
-  public Capability update(String account, String capability, AccountCapabilityUpdateParams params)
+  public Capability update(String accountId, String id, AccountCapabilityUpdateParams params)
       throws StripeException {
-    return update(account, capability, params, (RequestOptions) null);
+    return update(accountId, id, params, (RequestOptions) null);
   }
   /**
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
    * requested} parameter.
    */
-  public Capability update(String account, String capability, RequestOptions options)
+  public Capability update(String accountId, String id, RequestOptions options)
       throws StripeException {
-    return update(account, capability, (AccountCapabilityUpdateParams) null, options);
+    return update(accountId, id, (AccountCapabilityUpdateParams) null, options);
   }
   /**
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
    * requested} parameter.
    */
-  public Capability update(String account, String capability) throws StripeException {
-    return update(account, capability, (AccountCapabilityUpdateParams) null, (RequestOptions) null);
+  public Capability update(String accountId, String id) throws StripeException {
+    return update(accountId, id, (AccountCapabilityUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates an existing Account Capability. Request or remove a capability by updating its {@code
    * requested} parameter.
    */
   public Capability update(
-      String account,
-      String capability,
-      AccountCapabilityUpdateParams params,
-      RequestOptions options)
+      String accountId, String id, AccountCapabilityUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/accounts/%s/capabilities/%s",
-            ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(capability));
+            ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -107,20 +107,19 @@ public class CountrySpec extends ApiResource implements HasId {
   }
 
   /** Returns a Country Spec for a given Country code. */
-  public static CountrySpec retrieve(String country) throws StripeException {
-    return retrieve(country, (Map<String, Object>) null, (RequestOptions) null);
+  public static CountrySpec retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Returns a Country Spec for a given Country code. */
-  public static CountrySpec retrieve(String country, RequestOptions options)
+  public static CountrySpec retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Returns a Country Spec for a given Country code. */
+  public static CountrySpec retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return retrieve(country, (Map<String, Object>) null, options);
-  }
-
-  /** Returns a Country Spec for a given Country code. */
-  public static CountrySpec retrieve(
-      String country, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country));
+    String path = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, CountrySpec.class);
@@ -128,9 +127,8 @@ public class CountrySpec extends ApiResource implements HasId {
 
   /** Returns a Country Spec for a given Country code. */
   public static CountrySpec retrieve(
-      String country, CountrySpecRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country));
+      String id, CountrySpecRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

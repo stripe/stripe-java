@@ -74,21 +74,21 @@ public final class SessionService extends ApiService {
     return this.request(request, Session.class);
   }
   /** Retrieves a Checkout Session object. */
-  public Session retrieve(String session, SessionRetrieveParams params) throws StripeException {
-    return retrieve(session, params, (RequestOptions) null);
+  public Session retrieve(String id, SessionRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a Checkout Session object. */
-  public Session retrieve(String session, RequestOptions options) throws StripeException {
-    return retrieve(session, (SessionRetrieveParams) null, options);
+  public Session retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (SessionRetrieveParams) null, options);
   }
   /** Retrieves a Checkout Session object. */
-  public Session retrieve(String session) throws StripeException {
-    return retrieve(session, (SessionRetrieveParams) null, (RequestOptions) null);
+  public Session retrieve(String id) throws StripeException {
+    return retrieve(id, (SessionRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a Checkout Session object. */
-  public Session retrieve(String session, SessionRetrieveParams params, RequestOptions options)
+  public Session retrieve(String id, SessionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
+    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -104,8 +104,8 @@ public final class SessionService extends ApiService {
    * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
    * update a Checkout Session</a>.
    */
-  public Session update(String session, SessionUpdateParams params) throws StripeException {
-    return update(session, params, (RequestOptions) null);
+  public Session update(String id, SessionUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates a Checkout Session object.
@@ -113,8 +113,8 @@ public final class SessionService extends ApiService {
    * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
    * update a Checkout Session</a>.
    */
-  public Session update(String session, RequestOptions options) throws StripeException {
-    return update(session, (SessionUpdateParams) null, options);
+  public Session update(String id, RequestOptions options) throws StripeException {
+    return update(id, (SessionUpdateParams) null, options);
   }
   /**
    * Updates a Checkout Session object.
@@ -122,8 +122,8 @@ public final class SessionService extends ApiService {
    * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
    * update a Checkout Session</a>.
    */
-  public Session update(String session) throws StripeException {
-    return update(session, (SessionUpdateParams) null, (RequestOptions) null);
+  public Session update(String id) throws StripeException {
+    return update(id, (SessionUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates a Checkout Session object.
@@ -131,9 +131,9 @@ public final class SessionService extends ApiService {
    * <p>Related guide: <a href="https://stripe.com/payments/advanced/dynamic-updates">Dynamically
    * update a Checkout Session</a>.
    */
-  public Session update(String session, SessionUpdateParams params, RequestOptions options)
+  public Session update(String id, SessionUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
+    String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -147,17 +147,16 @@ public final class SessionService extends ApiService {
    * Approves a customer’s attempt to pay for a Checkout Session with {@code approval_method} set to
    * {@code manual}.
    */
-  public Session approve(String session, SessionApproveParams params) throws StripeException {
-    return approve(session, params, (RequestOptions) null);
+  public Session approve(String id, SessionApproveParams params) throws StripeException {
+    return approve(id, params, (RequestOptions) null);
   }
   /**
    * Approves a customer’s attempt to pay for a Checkout Session with {@code approval_method} set to
    * {@code manual}.
    */
-  public Session approve(String session, SessionApproveParams params, RequestOptions options)
+  public Session approve(String id, SessionApproveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/checkout/sessions/%s/approve", ApiResource.urlEncodeId(session));
+    String path = String.format("/v1/checkout/sessions/%s/approve", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -173,8 +172,8 @@ public final class SessionService extends ApiService {
    * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
    * Checkout Session see a message saying the Checkout Session is expired.
    */
-  public Session expire(String session, SessionExpireParams params) throws StripeException {
-    return expire(session, params, (RequestOptions) null);
+  public Session expire(String id, SessionExpireParams params) throws StripeException {
+    return expire(id, params, (RequestOptions) null);
   }
   /**
    * A Checkout Session can be expired when it is in one of these statuses: {@code open}
@@ -182,8 +181,8 @@ public final class SessionService extends ApiService {
    * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
    * Checkout Session see a message saying the Checkout Session is expired.
    */
-  public Session expire(String session, RequestOptions options) throws StripeException {
-    return expire(session, (SessionExpireParams) null, options);
+  public Session expire(String id, RequestOptions options) throws StripeException {
+    return expire(id, (SessionExpireParams) null, options);
   }
   /**
    * A Checkout Session can be expired when it is in one of these statuses: {@code open}
@@ -191,8 +190,8 @@ public final class SessionService extends ApiService {
    * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
    * Checkout Session see a message saying the Checkout Session is expired.
    */
-  public Session expire(String session) throws StripeException {
-    return expire(session, (SessionExpireParams) null, (RequestOptions) null);
+  public Session expire(String id) throws StripeException {
+    return expire(id, (SessionExpireParams) null, (RequestOptions) null);
   }
   /**
    * A Checkout Session can be expired when it is in one of these statuses: {@code open}
@@ -200,10 +199,9 @@ public final class SessionService extends ApiService {
    * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
    * Checkout Session see a message saying the Checkout Session is expired.
    */
-  public Session expire(String session, SessionExpireParams params, RequestOptions options)
+  public Session expire(String id, SessionExpireParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(session));
+    String path = String.format("/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

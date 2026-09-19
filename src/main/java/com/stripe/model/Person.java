@@ -243,8 +243,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
    * representative}. If your integration is using the {@code executive} parameter, you cannot
    * delete the only verified {@code executive} on file.
    */
-  public Person delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
+  public Person delete(String accountId) throws StripeException {
+    return delete(accountId, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
@@ -253,8 +253,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
    * representative}. If your integration is using the {@code executive} parameter, you cannot
    * delete the only verified {@code executive} on file.
    */
-  public Person delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
+  public Person delete(String accountId, RequestOptions options) throws StripeException {
+    return delete(accountId, (Map<String, Object>) null, options);
   }
 
   /**
@@ -263,8 +263,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
    * representative}. If your integration is using the {@code executive} parameter, you cannot
    * delete the only verified {@code executive} on file.
    */
-  public Person delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
+  public Person delete(String accountId, Map<String, Object> params) throws StripeException {
+    return delete(accountId, params, (RequestOptions) null);
   }
 
   /**
@@ -273,45 +273,46 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
    * representative}. If your integration is using the {@code executive} parameter, you cannot
    * delete the only verified {@code executive} on file.
    */
-  public Person delete(Map<String, Object> params, RequestOptions options) throws StripeException {
+  public Person delete(String accountId, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String path =
         String.format(
             "/v1/accounts/%s/persons/%s",
-            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
     return getResponseGetter().request(request, Person.class);
   }
 
   /** Updates an existing person. */
-  @Override
-  public Person update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public Person update(String accountId, Map<String, Object> params) throws StripeException {
+    return update(accountId, params, (RequestOptions) null);
   }
 
   /** Updates an existing person. */
-  @Override
-  public Person update(Map<String, Object> params, RequestOptions options) throws StripeException {
+  public Person update(String accountId, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String path =
         String.format(
             "/v1/accounts/%s/persons/%s",
-            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, Person.class);
   }
 
   /** Updates an existing person. */
-  public Person update(PersonUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public Person update(String accountId, PersonUpdateParams params) throws StripeException {
+    return update(accountId, params, (RequestOptions) null);
   }
 
   /** Updates an existing person. */
-  public Person update(PersonUpdateParams params, RequestOptions options) throws StripeException {
+  public Person update(String accountId, PersonUpdateParams params, RequestOptions options)
+      throws StripeException {
     String path =
         String.format(
             "/v1/accounts/%s/persons/%s",
-            ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -553,8 +554,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
        * The code for the type of error.
        *
        * <p>One of {@code external_request}, {@code information_missing}, {@code
-       * invalid_address_city_state_postal_code}, {@code invalid_address_highway_contract_box},
-       * {@code invalid_address_private_mailbox}, {@code invalid_business_profile_name}, {@code
+       * invalid_address_city_state_postal_code}, {@code invalid_address_cmra_address}, {@code
+       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+       * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
        * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted}, {@code
        * invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
        * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
@@ -789,8 +791,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
        * The code for the type of error.
        *
        * <p>One of {@code external_request}, {@code information_missing}, {@code
-       * invalid_address_city_state_postal_code}, {@code invalid_address_highway_contract_box},
-       * {@code invalid_address_private_mailbox}, {@code invalid_business_profile_name}, {@code
+       * invalid_address_city_state_postal_code}, {@code invalid_address_cmra_address}, {@code
+       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+       * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
        * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted}, {@code
        * invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
        * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
@@ -1032,7 +1035,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @EqualsAndHashCode(callSuper = false)
     public static class AdditionalDocument extends StripeObject {
       /**
-       * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+       * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}.
        */
       @SerializedName("back")
@@ -1062,7 +1065,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       String detailsCode;
 
       /**
-       * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+       * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}.
        */
       @SerializedName("front")
@@ -1116,7 +1119,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @EqualsAndHashCode(callSuper = false)
     public static class Document extends StripeObject {
       /**
-       * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+       * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}.
        */
       @SerializedName("back")
@@ -1146,7 +1149,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       String detailsCode;
 
       /**
-       * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+       * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}.
        */
       @SerializedName("front")

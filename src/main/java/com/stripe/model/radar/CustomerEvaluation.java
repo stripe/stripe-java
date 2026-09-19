@@ -110,23 +110,20 @@ public class CustomerEvaluation extends ApiResource implements HasId {
   }
 
   /** Retrieves an {@code CustomerEvaluation} object. */
-  public static CustomerEvaluation retrieve(String customerEvaluation) throws StripeException {
-    return retrieve(customerEvaluation, (Map<String, Object>) null, (RequestOptions) null);
+  public static CustomerEvaluation retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an {@code CustomerEvaluation} object. */
-  public static CustomerEvaluation retrieve(String customerEvaluation, RequestOptions options)
+  public static CustomerEvaluation retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(customerEvaluation, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an {@code CustomerEvaluation} object. */
   public static CustomerEvaluation retrieve(
-      String customerEvaluation, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/radar/customer_evaluations/%s", ApiResource.urlEncodeId(customerEvaluation));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/radar/customer_evaluations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, CustomerEvaluation.class);
@@ -134,11 +131,9 @@ public class CustomerEvaluation extends ApiResource implements HasId {
 
   /** Retrieves an {@code CustomerEvaluation} object. */
   public static CustomerEvaluation retrieve(
-      String customerEvaluation, CustomerEvaluationRetrieveParams params, RequestOptions options)
+      String id, CustomerEvaluationRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/radar/customer_evaluations/%s", ApiResource.urlEncodeId(customerEvaluation));
+    String path = String.format("/v1/radar/customer_evaluations/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

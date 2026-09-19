@@ -59,24 +59,21 @@ public final class TransactionService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
   }
   /** Retrieves an Issuing {@code Transaction} object. */
-  public Transaction retrieve(String transaction, TransactionRetrieveParams params)
+  public Transaction retrieve(String id, TransactionRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /** Retrieves an Issuing {@code Transaction} object. */
+  public Transaction retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (TransactionRetrieveParams) null, options);
+  }
+  /** Retrieves an Issuing {@code Transaction} object. */
+  public Transaction retrieve(String id) throws StripeException {
+    return retrieve(id, (TransactionRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves an Issuing {@code Transaction} object. */
+  public Transaction retrieve(String id, TransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
-    return retrieve(transaction, params, (RequestOptions) null);
-  }
-  /** Retrieves an Issuing {@code Transaction} object. */
-  public Transaction retrieve(String transaction, RequestOptions options) throws StripeException {
-    return retrieve(transaction, (TransactionRetrieveParams) null, options);
-  }
-  /** Retrieves an Issuing {@code Transaction} object. */
-  public Transaction retrieve(String transaction) throws StripeException {
-    return retrieve(transaction, (TransactionRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieves an Issuing {@code Transaction} object. */
-  public Transaction retrieve(
-      String transaction, TransactionRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
+    String path = String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -90,33 +87,30 @@ public final class TransactionService extends ApiService {
    * Updates the specified Issuing {@code Transaction} object by setting the values of the
    * parameters passed. Any parameters not provided will be left unchanged.
    */
-  public Transaction update(String transaction, TransactionUpdateParams params)
+  public Transaction update(String id, TransactionUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /**
+   * Updates the specified Issuing {@code Transaction} object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Transaction update(String id, RequestOptions options) throws StripeException {
+    return update(id, (TransactionUpdateParams) null, options);
+  }
+  /**
+   * Updates the specified Issuing {@code Transaction} object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Transaction update(String id) throws StripeException {
+    return update(id, (TransactionUpdateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Updates the specified Issuing {@code Transaction} object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Transaction update(String id, TransactionUpdateParams params, RequestOptions options)
       throws StripeException {
-    return update(transaction, params, (RequestOptions) null);
-  }
-  /**
-   * Updates the specified Issuing {@code Transaction} object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
-   */
-  public Transaction update(String transaction, RequestOptions options) throws StripeException {
-    return update(transaction, (TransactionUpdateParams) null, options);
-  }
-  /**
-   * Updates the specified Issuing {@code Transaction} object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
-   */
-  public Transaction update(String transaction) throws StripeException {
-    return update(transaction, (TransactionUpdateParams) null, (RequestOptions) null);
-  }
-  /**
-   * Updates the specified Issuing {@code Transaction} object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
-   */
-  public Transaction update(
-      String transaction, TransactionUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction));
+    String path = String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

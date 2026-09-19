@@ -27,24 +27,24 @@ public final class CustomerPaymentSourceService extends ApiService {
   }
 
   /** List sources for a specified customer. */
-  public StripeCollection<PaymentSource> list(
-      String customer, CustomerPaymentSourceListParams params) throws StripeException {
-    return list(customer, params, (RequestOptions) null);
-  }
-  /** List sources for a specified customer. */
-  public StripeCollection<PaymentSource> list(String customer, RequestOptions options)
+  public StripeCollection<PaymentSource> list(String id, CustomerPaymentSourceListParams params)
       throws StripeException {
-    return list(customer, (CustomerPaymentSourceListParams) null, options);
+    return list(id, params, (RequestOptions) null);
   }
   /** List sources for a specified customer. */
-  public StripeCollection<PaymentSource> list(String customer) throws StripeException {
-    return list(customer, (CustomerPaymentSourceListParams) null, (RequestOptions) null);
+  public StripeCollection<PaymentSource> list(String id, RequestOptions options)
+      throws StripeException {
+    return list(id, (CustomerPaymentSourceListParams) null, options);
+  }
+  /** List sources for a specified customer. */
+  public StripeCollection<PaymentSource> list(String id) throws StripeException {
+    return list(id, (CustomerPaymentSourceListParams) null, (RequestOptions) null);
   }
   /** List sources for a specified customer. */
   public StripeCollection<PaymentSource> list(
-      String customer, CustomerPaymentSourceListParams params, RequestOptions options)
+      String id, CustomerPaymentSourceListParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/customers/%s/sources", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/sources", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -63,9 +63,9 @@ public final class CustomerPaymentSourceService extends ApiService {
    * <a href="https://stripe.com/api/customers/update">update the customer</a> to have a new {@code
    * default_source}.
    */
-  public PaymentSource create(String customer, CustomerPaymentSourceCreateParams params)
+  public PaymentSource create(String id, CustomerPaymentSourceCreateParams params)
       throws StripeException {
-    return create(customer, params, (RequestOptions) null);
+    return create(id, params, (RequestOptions) null);
   }
   /**
    * When you create a new credit card, you must specify a customer or recipient on which to create
@@ -77,9 +77,9 @@ public final class CustomerPaymentSourceService extends ApiService {
    * default_source}.
    */
   public PaymentSource create(
-      String customer, CustomerPaymentSourceCreateParams params, RequestOptions options)
+      String id, CustomerPaymentSourceCreateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/customers/%s/sources", ApiResource.urlEncodeId(customer));
+    String path = String.format("/v1/customers/%s/sources", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -91,23 +91,23 @@ public final class CustomerPaymentSourceService extends ApiService {
   }
   /** Retrieve a specified source for a given customer. */
   public PaymentSource retrieve(
-      String customer, String id, CustomerPaymentSourceRetrieveParams params)
+      String customerId, String id, CustomerPaymentSourceRetrieveParams params)
       throws StripeException {
-    return retrieve(customer, id, params, (RequestOptions) null);
+    return retrieve(customerId, id, params, (RequestOptions) null);
   }
   /** Retrieve a specified source for a given customer. */
-  public PaymentSource retrieve(String customer, String id, RequestOptions options)
+  public PaymentSource retrieve(String customerId, String id, RequestOptions options)
       throws StripeException {
-    return retrieve(customer, id, (CustomerPaymentSourceRetrieveParams) null, options);
+    return retrieve(customerId, id, (CustomerPaymentSourceRetrieveParams) null, options);
   }
   /** Retrieve a specified source for a given customer. */
-  public PaymentSource retrieve(String customer, String id) throws StripeException {
+  public PaymentSource retrieve(String customerId, String id) throws StripeException {
     return retrieve(
-        customer, id, (CustomerPaymentSourceRetrieveParams) null, (RequestOptions) null);
+        customerId, id, (CustomerPaymentSourceRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieve a specified source for a given customer. */
   public PaymentSource retrieve(
-      String customer,
+      String customerId,
       String id,
       CustomerPaymentSourceRetrieveParams params,
       RequestOptions options)
@@ -115,7 +115,7 @@ public final class CustomerPaymentSourceService extends ApiService {
     String path =
         String.format(
             "/v1/customers/%s/sources/%s",
-            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -126,27 +126,31 @@ public final class CustomerPaymentSourceService extends ApiService {
     return this.request(request, PaymentSource.class);
   }
   /** Update a specified source for a given customer. */
-  public PaymentSource update(String customer, String id, CustomerPaymentSourceUpdateParams params)
+  public PaymentSource update(
+      String customerId, String id, CustomerPaymentSourceUpdateParams params)
       throws StripeException {
-    return update(customer, id, params, (RequestOptions) null);
+    return update(customerId, id, params, (RequestOptions) null);
   }
   /** Update a specified source for a given customer. */
-  public PaymentSource update(String customer, String id, RequestOptions options)
+  public PaymentSource update(String customerId, String id, RequestOptions options)
       throws StripeException {
-    return update(customer, id, (CustomerPaymentSourceUpdateParams) null, options);
+    return update(customerId, id, (CustomerPaymentSourceUpdateParams) null, options);
   }
   /** Update a specified source for a given customer. */
-  public PaymentSource update(String customer, String id) throws StripeException {
-    return update(customer, id, (CustomerPaymentSourceUpdateParams) null, (RequestOptions) null);
+  public PaymentSource update(String customerId, String id) throws StripeException {
+    return update(customerId, id, (CustomerPaymentSourceUpdateParams) null, (RequestOptions) null);
   }
   /** Update a specified source for a given customer. */
   public PaymentSource update(
-      String customer, String id, CustomerPaymentSourceUpdateParams params, RequestOptions options)
+      String customerId,
+      String id,
+      CustomerPaymentSourceUpdateParams params,
+      RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/sources/%s",
-            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -157,27 +161,31 @@ public final class CustomerPaymentSourceService extends ApiService {
     return this.request(request, PaymentSource.class);
   }
   /** Delete a specified source for a given customer. */
-  public PaymentSource delete(String customer, String id, CustomerPaymentSourceDeleteParams params)
+  public PaymentSource delete(
+      String customerId, String id, CustomerPaymentSourceDeleteParams params)
       throws StripeException {
-    return delete(customer, id, params, (RequestOptions) null);
+    return delete(customerId, id, params, (RequestOptions) null);
   }
   /** Delete a specified source for a given customer. */
-  public PaymentSource delete(String customer, String id, RequestOptions options)
+  public PaymentSource delete(String customerId, String id, RequestOptions options)
       throws StripeException {
-    return delete(customer, id, (CustomerPaymentSourceDeleteParams) null, options);
+    return delete(customerId, id, (CustomerPaymentSourceDeleteParams) null, options);
   }
   /** Delete a specified source for a given customer. */
-  public PaymentSource delete(String customer, String id) throws StripeException {
-    return delete(customer, id, (CustomerPaymentSourceDeleteParams) null, (RequestOptions) null);
+  public PaymentSource delete(String customerId, String id) throws StripeException {
+    return delete(customerId, id, (CustomerPaymentSourceDeleteParams) null, (RequestOptions) null);
   }
   /** Delete a specified source for a given customer. */
   public PaymentSource delete(
-      String customer, String id, CustomerPaymentSourceDeleteParams params, RequestOptions options)
+      String customerId,
+      String id,
+      CustomerPaymentSourceDeleteParams params,
+      RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/sources/%s",
-            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -188,27 +196,30 @@ public final class CustomerPaymentSourceService extends ApiService {
     return this.request(request, PaymentSource.class);
   }
   /** Verify a specified bank account for a given customer. */
-  public BankAccount verify(String customer, String id, CustomerPaymentSourceVerifyParams params)
+  public BankAccount verify(String customerId, String id, CustomerPaymentSourceVerifyParams params)
       throws StripeException {
-    return verify(customer, id, params, (RequestOptions) null);
+    return verify(customerId, id, params, (RequestOptions) null);
   }
   /** Verify a specified bank account for a given customer. */
-  public BankAccount verify(String customer, String id, RequestOptions options)
+  public BankAccount verify(String customerId, String id, RequestOptions options)
       throws StripeException {
-    return verify(customer, id, (CustomerPaymentSourceVerifyParams) null, options);
+    return verify(customerId, id, (CustomerPaymentSourceVerifyParams) null, options);
   }
   /** Verify a specified bank account for a given customer. */
-  public BankAccount verify(String customer, String id) throws StripeException {
-    return verify(customer, id, (CustomerPaymentSourceVerifyParams) null, (RequestOptions) null);
+  public BankAccount verify(String customerId, String id) throws StripeException {
+    return verify(customerId, id, (CustomerPaymentSourceVerifyParams) null, (RequestOptions) null);
   }
   /** Verify a specified bank account for a given customer. */
   public BankAccount verify(
-      String customer, String id, CustomerPaymentSourceVerifyParams params, RequestOptions options)
+      String customerId,
+      String id,
+      CustomerPaymentSourceVerifyParams params,
+      RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/sources/%s/verify",
-            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -219,20 +230,20 @@ public final class CustomerPaymentSourceService extends ApiService {
     return this.request(request, BankAccount.class);
   }
   /** Serializes a CustomerPaymentSource create request into a batch job JSONL line. */
-  public String serializeBatchCreate(String customer, CustomerPaymentSourceCreateParams params)
+  public String serializeBatchCreate(String id, CustomerPaymentSourceCreateParams params)
       throws StripeException {
-    return serializeBatchCreate(customer, params, (RequestOptions) null);
+    return serializeBatchCreate(id, params, (RequestOptions) null);
   }
   /** Serializes a CustomerPaymentSource create request into a batch job JSONL line. */
   public String serializeBatchCreate(
-      String customer, CustomerPaymentSourceCreateParams params, RequestOptions options)
+      String id, CustomerPaymentSourceCreateParams params, RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("customer", customer);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -245,19 +256,23 @@ public final class CustomerPaymentSourceService extends ApiService {
   }
   /** Serializes a CustomerPaymentSource update request into a batch job JSONL line. */
   public String serializeBatchUpdate(
-      String customer, String id, CustomerPaymentSourceUpdateParams params) throws StripeException {
-    return serializeBatchUpdate(customer, id, params, (RequestOptions) null);
+      String customerId, String id, CustomerPaymentSourceUpdateParams params)
+      throws StripeException {
+    return serializeBatchUpdate(customerId, id, params, (RequestOptions) null);
   }
   /** Serializes a CustomerPaymentSource update request into a batch job JSONL line. */
   public String serializeBatchUpdate(
-      String customer, String id, CustomerPaymentSourceUpdateParams params, RequestOptions options)
+      String customerId,
+      String id,
+      CustomerPaymentSourceUpdateParams params,
+      RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("customer", customer);
+    pathParams.put("customer_id", customerId);
     pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
@@ -271,19 +286,23 @@ public final class CustomerPaymentSourceService extends ApiService {
   }
   /** Serializes a CustomerPaymentSource delete request into a batch job JSONL line. */
   public String serializeBatchDelete(
-      String customer, String id, CustomerPaymentSourceDeleteParams params) throws StripeException {
-    return serializeBatchDelete(customer, id, params, (RequestOptions) null);
+      String customerId, String id, CustomerPaymentSourceDeleteParams params)
+      throws StripeException {
+    return serializeBatchDelete(customerId, id, params, (RequestOptions) null);
   }
   /** Serializes a CustomerPaymentSource delete request into a batch job JSONL line. */
   public String serializeBatchDelete(
-      String customer, String id, CustomerPaymentSourceDeleteParams params, RequestOptions options)
+      String customerId,
+      String id,
+      CustomerPaymentSourceDeleteParams params,
+      RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("customer", customer);
+    pathParams.put("customer_id", customerId);
     pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
@@ -297,19 +316,23 @@ public final class CustomerPaymentSourceService extends ApiService {
   }
   /** Serializes a CustomerPaymentSource verify request into a batch job JSONL line. */
   public String serializeBatchVerify(
-      String customer, String id, CustomerPaymentSourceVerifyParams params) throws StripeException {
-    return serializeBatchVerify(customer, id, params, (RequestOptions) null);
+      String customerId, String id, CustomerPaymentSourceVerifyParams params)
+      throws StripeException {
+    return serializeBatchVerify(customerId, id, params, (RequestOptions) null);
   }
   /** Serializes a CustomerPaymentSource verify request into a batch job JSONL line. */
   public String serializeBatchVerify(
-      String customer, String id, CustomerPaymentSourceVerifyParams params, RequestOptions options)
+      String customerId,
+      String id,
+      CustomerPaymentSourceVerifyParams params,
+      RequestOptions options)
       throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("customer", customer);
+    pathParams.put("customer_id", customerId);
     pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);

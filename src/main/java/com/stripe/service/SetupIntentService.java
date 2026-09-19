@@ -109,50 +109,48 @@ public final class SetupIntentService extends ApiService {
    * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
    * reference for more details.
    */
-  public SetupIntent retrieve(String intent, SetupIntentRetrieveParams params)
+  public SetupIntent retrieve(String id, SetupIntentRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
+  }
+  /**
+   * Retrieves the details of a SetupIntent that has previously been created.
+   *
+   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
+   * provided in the query string.
+   *
+   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
+   * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
+   * reference for more details.
+   */
+  public SetupIntent retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (SetupIntentRetrieveParams) null, options);
+  }
+  /**
+   * Retrieves the details of a SetupIntent that has previously been created.
+   *
+   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
+   * provided in the query string.
+   *
+   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
+   * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
+   * reference for more details.
+   */
+  public SetupIntent retrieve(String id) throws StripeException {
+    return retrieve(id, (SetupIntentRetrieveParams) null, (RequestOptions) null);
+  }
+  /**
+   * Retrieves the details of a SetupIntent that has previously been created.
+   *
+   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
+   * provided in the query string.
+   *
+   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
+   * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
+   * reference for more details.
+   */
+  public SetupIntent retrieve(String id, SetupIntentRetrieveParams params, RequestOptions options)
       throws StripeException {
-    return retrieve(intent, params, (RequestOptions) null);
-  }
-  /**
-   * Retrieves the details of a SetupIntent that has previously been created.
-   *
-   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
-   * provided in the query string.
-   *
-   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
-   * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
-   * reference for more details.
-   */
-  public SetupIntent retrieve(String intent, RequestOptions options) throws StripeException {
-    return retrieve(intent, (SetupIntentRetrieveParams) null, options);
-  }
-  /**
-   * Retrieves the details of a SetupIntent that has previously been created.
-   *
-   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
-   * provided in the query string.
-   *
-   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
-   * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
-   * reference for more details.
-   */
-  public SetupIntent retrieve(String intent) throws StripeException {
-    return retrieve(intent, (SetupIntentRetrieveParams) null, (RequestOptions) null);
-  }
-  /**
-   * Retrieves the details of a SetupIntent that has previously been created.
-   *
-   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
-   * provided in the query string.
-   *
-   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
-   * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
-   * reference for more details.
-   */
-  public SetupIntent retrieve(
-      String intent, SetupIntentRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -163,21 +161,21 @@ public final class SetupIntentService extends ApiService {
     return this.request(request, SetupIntent.class);
   }
   /** Updates a SetupIntent object. */
-  public SetupIntent update(String intent, SetupIntentUpdateParams params) throws StripeException {
-    return update(intent, params, (RequestOptions) null);
+  public SetupIntent update(String id, SetupIntentUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates a SetupIntent object. */
-  public SetupIntent update(String intent, RequestOptions options) throws StripeException {
-    return update(intent, (SetupIntentUpdateParams) null, options);
+  public SetupIntent update(String id, RequestOptions options) throws StripeException {
+    return update(id, (SetupIntentUpdateParams) null, options);
   }
   /** Updates a SetupIntent object. */
-  public SetupIntent update(String intent) throws StripeException {
-    return update(intent, (SetupIntentUpdateParams) null, (RequestOptions) null);
+  public SetupIntent update(String id) throws StripeException {
+    return update(id, (SetupIntentUpdateParams) null, (RequestOptions) null);
   }
   /** Updates a SetupIntent object. */
-  public SetupIntent update(String intent, SetupIntentUpdateParams params, RequestOptions options)
+  public SetupIntent update(String id, SetupIntentUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -196,8 +194,8 @@ public final class SetupIntentService extends ApiService {
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
-  public SetupIntent cancel(String intent, SetupIntentCancelParams params) throws StripeException {
-    return cancel(intent, params, (RequestOptions) null);
+  public SetupIntent cancel(String id, SetupIntentCancelParams params) throws StripeException {
+    return cancel(id, params, (RequestOptions) null);
   }
   /**
    * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
@@ -208,8 +206,8 @@ public final class SetupIntentService extends ApiService {
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
-  public SetupIntent cancel(String intent, RequestOptions options) throws StripeException {
-    return cancel(intent, (SetupIntentCancelParams) null, options);
+  public SetupIntent cancel(String id, RequestOptions options) throws StripeException {
+    return cancel(id, (SetupIntentCancelParams) null, options);
   }
   /**
    * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
@@ -220,8 +218,8 @@ public final class SetupIntentService extends ApiService {
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
-  public SetupIntent cancel(String intent) throws StripeException {
-    return cancel(intent, (SetupIntentCancelParams) null, (RequestOptions) null);
+  public SetupIntent cancel(String id) throws StripeException {
+    return cancel(id, (SetupIntentCancelParams) null, (RequestOptions) null);
   }
   /**
    * You can cancel a SetupIntent object when it’s in one of these statuses: {@code
@@ -232,9 +230,9 @@ public final class SetupIntentService extends ApiService {
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
    * instead.
    */
-  public SetupIntent cancel(String intent, SetupIntentCancelParams params, RequestOptions options)
+  public SetupIntent cancel(String id, SetupIntentCancelParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -257,58 +255,57 @@ public final class SetupIntentService extends ApiService {
    * requires_payment_method} status or the {@code canceled} status if the confirmation limit is
    * reached.
    */
-  public SetupIntent confirm(String intent, SetupIntentConfirmParams params)
+  public SetupIntent confirm(String id, SetupIntentConfirmParams params) throws StripeException {
+    return confirm(id, params, (RequestOptions) null);
+  }
+  /**
+   * Confirm that your customer intends to set up the current or provided payment method. For
+   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
+   * method management page on your website.
+   *
+   * <p>If the selected payment method does not require any additional steps from the customer, the
+   * SetupIntent will transition to the {@code succeeded} status.
+   *
+   * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
+   * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
+   * requires_payment_method} status or the {@code canceled} status if the confirmation limit is
+   * reached.
+   */
+  public SetupIntent confirm(String id, RequestOptions options) throws StripeException {
+    return confirm(id, (SetupIntentConfirmParams) null, options);
+  }
+  /**
+   * Confirm that your customer intends to set up the current or provided payment method. For
+   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
+   * method management page on your website.
+   *
+   * <p>If the selected payment method does not require any additional steps from the customer, the
+   * SetupIntent will transition to the {@code succeeded} status.
+   *
+   * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
+   * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
+   * requires_payment_method} status or the {@code canceled} status if the confirmation limit is
+   * reached.
+   */
+  public SetupIntent confirm(String id) throws StripeException {
+    return confirm(id, (SetupIntentConfirmParams) null, (RequestOptions) null);
+  }
+  /**
+   * Confirm that your customer intends to set up the current or provided payment method. For
+   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
+   * method management page on your website.
+   *
+   * <p>If the selected payment method does not require any additional steps from the customer, the
+   * SetupIntent will transition to the {@code succeeded} status.
+   *
+   * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
+   * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
+   * requires_payment_method} status or the {@code canceled} status if the confirmation limit is
+   * reached.
+   */
+  public SetupIntent confirm(String id, SetupIntentConfirmParams params, RequestOptions options)
       throws StripeException {
-    return confirm(intent, params, (RequestOptions) null);
-  }
-  /**
-   * Confirm that your customer intends to set up the current or provided payment method. For
-   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
-   * method management page on your website.
-   *
-   * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the {@code succeeded} status.
-   *
-   * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
-   * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
-   * requires_payment_method} status or the {@code canceled} status if the confirmation limit is
-   * reached.
-   */
-  public SetupIntent confirm(String intent, RequestOptions options) throws StripeException {
-    return confirm(intent, (SetupIntentConfirmParams) null, options);
-  }
-  /**
-   * Confirm that your customer intends to set up the current or provided payment method. For
-   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
-   * method management page on your website.
-   *
-   * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the {@code succeeded} status.
-   *
-   * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
-   * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
-   * requires_payment_method} status or the {@code canceled} status if the confirmation limit is
-   * reached.
-   */
-  public SetupIntent confirm(String intent) throws StripeException {
-    return confirm(intent, (SetupIntentConfirmParams) null, (RequestOptions) null);
-  }
-  /**
-   * Confirm that your customer intends to set up the current or provided payment method. For
-   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
-   * method management page on your website.
-   *
-   * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the {@code succeeded} status.
-   *
-   * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
-   * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
-   * requires_payment_method} status or the {@code canceled} status if the confirmation limit is
-   * reached.
-   */
-  public SetupIntent confirm(String intent, SetupIntentConfirmParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(intent));
+    String path = String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -319,26 +316,25 @@ public final class SetupIntentService extends ApiService {
     return this.request(request, SetupIntent.class);
   }
   /** Verifies microdeposits on a SetupIntent object. */
-  public SetupIntent verifyMicrodeposits(String intent, SetupIntentVerifyMicrodepositsParams params)
+  public SetupIntent verifyMicrodeposits(String id, SetupIntentVerifyMicrodepositsParams params)
       throws StripeException {
-    return verifyMicrodeposits(intent, params, (RequestOptions) null);
+    return verifyMicrodeposits(id, params, (RequestOptions) null);
   }
   /** Verifies microdeposits on a SetupIntent object. */
-  public SetupIntent verifyMicrodeposits(String intent, RequestOptions options)
-      throws StripeException {
-    return verifyMicrodeposits(intent, (SetupIntentVerifyMicrodepositsParams) null, options);
+  public SetupIntent verifyMicrodeposits(String id, RequestOptions options) throws StripeException {
+    return verifyMicrodeposits(id, (SetupIntentVerifyMicrodepositsParams) null, options);
   }
   /** Verifies microdeposits on a SetupIntent object. */
-  public SetupIntent verifyMicrodeposits(String intent) throws StripeException {
+  public SetupIntent verifyMicrodeposits(String id) throws StripeException {
     return verifyMicrodeposits(
-        intent, (SetupIntentVerifyMicrodepositsParams) null, (RequestOptions) null);
+        id, (SetupIntentVerifyMicrodepositsParams) null, (RequestOptions) null);
   }
   /** Verifies microdeposits on a SetupIntent object. */
   public SetupIntent verifyMicrodeposits(
-      String intent, SetupIntentVerifyMicrodepositsParams params, RequestOptions options)
+      String id, SetupIntentVerifyMicrodepositsParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/setup_intents/%s/verify_microdeposits", ApiResource.urlEncodeId(intent));
+        String.format("/v1/setup_intents/%s/verify_microdeposits", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

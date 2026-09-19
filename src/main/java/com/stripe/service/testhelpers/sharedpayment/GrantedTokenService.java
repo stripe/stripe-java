@@ -45,37 +45,33 @@ public final class GrantedTokenService extends ApiService {
    * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
    * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
    */
-  public GrantedToken revoke(String sharedPaymentGrantedToken, GrantedTokenRevokeParams params)
-      throws StripeException {
-    return revoke(sharedPaymentGrantedToken, params, (RequestOptions) null);
+  public GrantedToken revoke(String id, GrantedTokenRevokeParams params) throws StripeException {
+    return revoke(id, params, (RequestOptions) null);
   }
   /**
    * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
    * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
    */
-  public GrantedToken revoke(String sharedPaymentGrantedToken, RequestOptions options)
-      throws StripeException {
-    return revoke(sharedPaymentGrantedToken, (GrantedTokenRevokeParams) null, options);
+  public GrantedToken revoke(String id, RequestOptions options) throws StripeException {
+    return revoke(id, (GrantedTokenRevokeParams) null, options);
   }
   /**
    * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
    * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
    */
-  public GrantedToken revoke(String sharedPaymentGrantedToken) throws StripeException {
-    return revoke(
-        sharedPaymentGrantedToken, (GrantedTokenRevokeParams) null, (RequestOptions) null);
+  public GrantedToken revoke(String id) throws StripeException {
+    return revoke(id, (GrantedTokenRevokeParams) null, (RequestOptions) null);
   }
   /**
    * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
    * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
    */
-  public GrantedToken revoke(
-      String sharedPaymentGrantedToken, GrantedTokenRevokeParams params, RequestOptions options)
+  public GrantedToken revoke(String id, GrantedTokenRevokeParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/test_helpers/shared_payment/granted_tokens/%s/revoke",
-            ApiResource.urlEncodeId(sharedPaymentGrantedToken));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

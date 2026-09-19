@@ -187,30 +187,30 @@ public class TaxId extends ApiResource implements HasId {
   }
 
   /** Deletes an existing {@code tax_id} object. */
-  public static TaxId delete(String customer, String id) throws StripeException {
-    return delete(customer, id, (Map<String, Object>) null, (RequestOptions) null);
+  public static TaxId delete(String customerId, String id) throws StripeException {
+    return delete(customerId, id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Deletes an existing {@code tax_id} object. */
-  public static TaxId delete(String customer, String id, RequestOptions options)
+  public static TaxId delete(String customerId, String id, RequestOptions options)
       throws StripeException {
-    return delete(customer, id, (Map<String, Object>) null, options);
+    return delete(customerId, id, (Map<String, Object>) null, options);
   }
 
   /** Deletes an existing {@code tax_id} object. */
-  public static TaxId delete(String customer, String id, Map<String, Object> params)
+  public static TaxId delete(String customerId, String id, Map<String, Object> params)
       throws StripeException {
-    return delete(customer, id, params, (RequestOptions) null);
+    return delete(customerId, id, params, (RequestOptions) null);
   }
 
   /** Deletes an existing {@code tax_id} object. */
   public static TaxId delete(
-      String customer, String id, Map<String, Object> params, RequestOptions options)
+      String customerId, String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/customers/%s/tax_ids/%s",
-            ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(customerId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
     return getGlobalResponseGetter().request(request, TaxId.class);

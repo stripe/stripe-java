@@ -181,20 +181,19 @@ public class ReportRun extends ApiResource implements HasId {
   }
 
   /** Retrieves the details of an existing Report Run. */
-  public static ReportRun retrieve(String reportRun) throws StripeException {
-    return retrieve(reportRun, (Map<String, Object>) null, (RequestOptions) null);
+  public static ReportRun retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the details of an existing Report Run. */
-  public static ReportRun retrieve(String reportRun, RequestOptions options)
+  public static ReportRun retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves the details of an existing Report Run. */
+  public static ReportRun retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return retrieve(reportRun, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves the details of an existing Report Run. */
-  public static ReportRun retrieve(
-      String reportRun, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun));
+    String path = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, ReportRun.class);
@@ -202,9 +201,8 @@ public class ReportRun extends ApiResource implements HasId {
 
   /** Retrieves the details of an existing Report Run. */
   public static ReportRun retrieve(
-      String reportRun, ReportRunRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun));
+      String id, ReportRunRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

@@ -116,23 +116,20 @@ public class Institution extends ApiResource implements HasId {
   }
 
   /** Retrieves the details of a Financial Connections {@code Institution}. */
-  public static Institution retrieve(String institution) throws StripeException {
-    return retrieve(institution, (Map<String, Object>) null, (RequestOptions) null);
+  public static Institution retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the details of a Financial Connections {@code Institution}. */
-  public static Institution retrieve(String institution, RequestOptions options)
-      throws StripeException {
-    return retrieve(institution, (Map<String, Object>) null, options);
+  public static Institution retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the details of a Financial Connections {@code Institution}. */
-  public static Institution retrieve(
-      String institution, Map<String, Object> params, RequestOptions options)
+  public static Institution retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/financial_connections/institutions/%s", ApiResource.urlEncodeId(institution));
+        String.format("/v1/financial_connections/institutions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Institution.class);
@@ -140,11 +137,9 @@ public class Institution extends ApiResource implements HasId {
 
   /** Retrieves the details of a Financial Connections {@code Institution}. */
   public static Institution retrieve(
-      String institution, InstitutionRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String id, InstitutionRetrieveParams params, RequestOptions options) throws StripeException {
     String path =
-        String.format(
-            "/v1/financial_connections/institutions/%s", ApiResource.urlEncodeId(institution));
+        String.format("/v1/financial_connections/institutions/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

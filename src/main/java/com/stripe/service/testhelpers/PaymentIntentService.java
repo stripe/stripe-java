@@ -25,8 +25,8 @@ public final class PaymentIntentService extends ApiService {
    * your integration</a>.
    */
   public PaymentIntent simulateCryptoDeposit(
-      String intent, PaymentIntentSimulateCryptoDepositParams params) throws StripeException {
-    return simulateCryptoDeposit(intent, params, (RequestOptions) null);
+      String id, PaymentIntentSimulateCryptoDepositParams params) throws StripeException {
+    return simulateCryptoDeposit(id, params, (RequestOptions) null);
   }
   /**
    * Simulate an incoming crypto deposit for a testmode PaymentIntent with {@code
@@ -36,12 +36,12 @@ public final class PaymentIntentService extends ApiService {
    * your integration</a>.
    */
   public PaymentIntent simulateCryptoDeposit(
-      String intent, PaymentIntentSimulateCryptoDepositParams params, RequestOptions options)
+      String id, PaymentIntentSimulateCryptoDepositParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/test_helpers/payment_intents/%s/simulate_crypto_deposit",
-            ApiResource.urlEncodeId(intent));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

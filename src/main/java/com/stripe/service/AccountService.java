@@ -40,8 +40,8 @@ public final class AccountService extends ApiService {
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
    * settings</a> instead.
    */
-  public Account delete(String account) throws StripeException {
-    return delete(account, (RequestOptions) null);
+  public Account delete(String id) throws StripeException {
+    return delete(id, (RequestOptions) null);
   }
   /**
    * With <a href="https://stripe.com/connect">Connect</a>, you can delete accounts you manage.
@@ -57,28 +57,28 @@ public final class AccountService extends ApiService {
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
    * settings</a> instead.
    */
-  public Account delete(String account, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
+  public Account delete(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Account.class);
   }
   /** Retrieves the details of an account. */
-  public Account retrieve(String account, AccountRetrieveParams params) throws StripeException {
-    return retrieve(account, params, (RequestOptions) null);
+  public Account retrieve(String id, AccountRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of an account. */
-  public Account retrieve(String account, RequestOptions options) throws StripeException {
-    return retrieve(account, (AccountRetrieveParams) null, options);
+  public Account retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (AccountRetrieveParams) null, options);
   }
   /** Retrieves the details of an account. */
-  public Account retrieve(String account) throws StripeException {
-    return retrieve(account, (AccountRetrieveParams) null, (RequestOptions) null);
+  public Account retrieve(String id) throws StripeException {
+    return retrieve(id, (AccountRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the details of an account. */
-  public Account retrieve(String account, AccountRetrieveParams params, RequestOptions options)
+  public Account retrieve(String id, AccountRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -109,8 +109,8 @@ public final class AccountService extends ApiService {
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
-  public Account update(String account, AccountUpdateParams params) throws StripeException {
-    return update(account, params, (RequestOptions) null);
+  public Account update(String id, AccountUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates a <a href="https://stripe.com/connect/accounts">connected account</a> by setting the
@@ -133,8 +133,8 @@ public final class AccountService extends ApiService {
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
-  public Account update(String account, RequestOptions options) throws StripeException {
-    return update(account, (AccountUpdateParams) null, options);
+  public Account update(String id, RequestOptions options) throws StripeException {
+    return update(id, (AccountUpdateParams) null, options);
   }
   /**
    * Updates a <a href="https://stripe.com/connect/accounts">connected account</a> by setting the
@@ -157,8 +157,8 @@ public final class AccountService extends ApiService {
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
-  public Account update(String account) throws StripeException {
-    return update(account, (AccountUpdateParams) null, (RequestOptions) null);
+  public Account update(String id) throws StripeException {
+    return update(id, (AccountUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates a <a href="https://stripe.com/connect/accounts">connected account</a> by setting the
@@ -181,9 +181,9 @@ public final class AccountService extends ApiService {
    * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
    * more about updating accounts.
    */
-  public Account update(String account, AccountUpdateParams params, RequestOptions options)
+  public Account update(String id, AccountUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -330,8 +330,8 @@ public final class AccountService extends ApiService {
    * <p>Only accounts where your platform is liable for negative account balances, which includes
    * Custom and Express accounts, can be rejected.
    */
-  public Account reject(String account, AccountRejectParams params) throws StripeException {
-    return reject(account, params, (RequestOptions) null);
+  public Account reject(String id, AccountRejectParams params) throws StripeException {
+    return reject(id, params, (RequestOptions) null);
   }
   /**
    * With <a href="https://stripe.com/connect">Connect</a>, you can reject accounts that you have
@@ -340,9 +340,9 @@ public final class AccountService extends ApiService {
    * <p>Only accounts where your platform is liable for negative account balances, which includes
    * Custom and Express accounts, can be rejected.
    */
-  public Account reject(String account, AccountRejectParams params, RequestOptions options)
+  public Account reject(String id, AccountRejectParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -362,8 +362,8 @@ public final class AccountService extends ApiService {
    * than those placed by a previous rejection. If you have separately paused charges and/or payouts
    * outside of rejection, those pauses will remain in place after unrejection.
    */
-  public Account unreject(String account, AccountUnrejectParams params) throws StripeException {
-    return unreject(account, params, (RequestOptions) null);
+  public Account unreject(String id, AccountUnrejectParams params) throws StripeException {
+    return unreject(id, params, (RequestOptions) null);
   }
   /**
    * With Connect, you can unreject accounts that you have previously rejected.
@@ -375,8 +375,8 @@ public final class AccountService extends ApiService {
    * than those placed by a previous rejection. If you have separately paused charges and/or payouts
    * outside of rejection, those pauses will remain in place after unrejection.
    */
-  public Account unreject(String account, RequestOptions options) throws StripeException {
-    return unreject(account, (AccountUnrejectParams) null, options);
+  public Account unreject(String id, RequestOptions options) throws StripeException {
+    return unreject(id, (AccountUnrejectParams) null, options);
   }
   /**
    * With Connect, you can unreject accounts that you have previously rejected.
@@ -388,8 +388,8 @@ public final class AccountService extends ApiService {
    * than those placed by a previous rejection. If you have separately paused charges and/or payouts
    * outside of rejection, those pauses will remain in place after unrejection.
    */
-  public Account unreject(String account) throws StripeException {
-    return unreject(account, (AccountUnrejectParams) null, (RequestOptions) null);
+  public Account unreject(String id) throws StripeException {
+    return unreject(id, (AccountUnrejectParams) null, (RequestOptions) null);
   }
   /**
    * With Connect, you can unreject accounts that you have previously rejected.
@@ -401,9 +401,9 @@ public final class AccountService extends ApiService {
    * than those placed by a previous rejection. If you have separately paused charges and/or payouts
    * outside of rejection, those pauses will remain in place after unrejection.
    */
-  public Account unreject(String account, AccountUnrejectParams params, RequestOptions options)
+  public Account unreject(String id, AccountUnrejectParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/accounts/%s/unreject", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/unreject", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -414,18 +414,17 @@ public final class AccountService extends ApiService {
     return this.request(request, Account.class);
   }
   /** Serializes an Account delete request into a batch job JSONL line. */
-  public String serializeBatchDelete(String account) throws StripeException {
-    return serializeBatchDelete(account, (RequestOptions) null);
+  public String serializeBatchDelete(String id) throws StripeException {
+    return serializeBatchDelete(id, (RequestOptions) null);
   }
   /** Serializes an Account delete request into a batch job JSONL line. */
-  public String serializeBatchDelete(String account, RequestOptions options)
-      throws StripeException {
+  public String serializeBatchDelete(String id, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("account", account);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
@@ -437,19 +436,18 @@ public final class AccountService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes an Account update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(String account, AccountUpdateParams params)
-      throws StripeException {
-    return serializeBatchUpdate(account, params, (RequestOptions) null);
+  public String serializeBatchUpdate(String id, AccountUpdateParams params) throws StripeException {
+    return serializeBatchUpdate(id, params, (RequestOptions) null);
   }
   /** Serializes an Account update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(
-      String account, AccountUpdateParams params, RequestOptions options) throws StripeException {
+  public String serializeBatchUpdate(String id, AccountUpdateParams params, RequestOptions options)
+      throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("account", account);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

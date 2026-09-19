@@ -23,40 +23,35 @@ public final class PersonalizationDesignService extends ApiService {
    * Updates the {@code status} of the specified testmode personalization design object to {@code
    * active}.
    */
-  public PersonalizationDesign activate(
-      String personalizationDesign, PersonalizationDesignActivateParams params)
+  public PersonalizationDesign activate(String id, PersonalizationDesignActivateParams params)
       throws StripeException {
-    return activate(personalizationDesign, params, (RequestOptions) null);
+    return activate(id, params, (RequestOptions) null);
   }
   /**
    * Updates the {@code status} of the specified testmode personalization design object to {@code
    * active}.
    */
-  public PersonalizationDesign activate(String personalizationDesign, RequestOptions options)
-      throws StripeException {
-    return activate(personalizationDesign, (PersonalizationDesignActivateParams) null, options);
+  public PersonalizationDesign activate(String id, RequestOptions options) throws StripeException {
+    return activate(id, (PersonalizationDesignActivateParams) null, options);
   }
   /**
    * Updates the {@code status} of the specified testmode personalization design object to {@code
    * active}.
    */
-  public PersonalizationDesign activate(String personalizationDesign) throws StripeException {
-    return activate(
-        personalizationDesign, (PersonalizationDesignActivateParams) null, (RequestOptions) null);
+  public PersonalizationDesign activate(String id) throws StripeException {
+    return activate(id, (PersonalizationDesignActivateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the {@code status} of the specified testmode personalization design object to {@code
    * active}.
    */
   public PersonalizationDesign activate(
-      String personalizationDesign,
-      PersonalizationDesignActivateParams params,
-      RequestOptions options)
+      String id, PersonalizationDesignActivateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/test_helpers/issuing/personalization_designs/%s/activate",
-            ApiResource.urlEncodeId(personalizationDesign));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -70,40 +65,36 @@ public final class PersonalizationDesignService extends ApiService {
    * Updates the {@code status} of the specified testmode personalization design object to {@code
    * inactive}.
    */
-  public PersonalizationDesign deactivate(
-      String personalizationDesign, PersonalizationDesignDeactivateParams params)
+  public PersonalizationDesign deactivate(String id, PersonalizationDesignDeactivateParams params)
       throws StripeException {
-    return deactivate(personalizationDesign, params, (RequestOptions) null);
+    return deactivate(id, params, (RequestOptions) null);
   }
   /**
    * Updates the {@code status} of the specified testmode personalization design object to {@code
    * inactive}.
    */
-  public PersonalizationDesign deactivate(String personalizationDesign, RequestOptions options)
+  public PersonalizationDesign deactivate(String id, RequestOptions options)
       throws StripeException {
-    return deactivate(personalizationDesign, (PersonalizationDesignDeactivateParams) null, options);
+    return deactivate(id, (PersonalizationDesignDeactivateParams) null, options);
   }
   /**
    * Updates the {@code status} of the specified testmode personalization design object to {@code
    * inactive}.
    */
-  public PersonalizationDesign deactivate(String personalizationDesign) throws StripeException {
-    return deactivate(
-        personalizationDesign, (PersonalizationDesignDeactivateParams) null, (RequestOptions) null);
+  public PersonalizationDesign deactivate(String id) throws StripeException {
+    return deactivate(id, (PersonalizationDesignDeactivateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the {@code status} of the specified testmode personalization design object to {@code
    * inactive}.
    */
   public PersonalizationDesign deactivate(
-      String personalizationDesign,
-      PersonalizationDesignDeactivateParams params,
-      RequestOptions options)
+      String id, PersonalizationDesignDeactivateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/test_helpers/issuing/personalization_designs/%s/deactivate",
-            ApiResource.urlEncodeId(personalizationDesign));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -117,24 +108,21 @@ public final class PersonalizationDesignService extends ApiService {
    * Updates the {@code status} of the specified testmode personalization design object to {@code
    * rejected}.
    */
-  public PersonalizationDesign reject(
-      String personalizationDesign, PersonalizationDesignRejectParams params)
+  public PersonalizationDesign reject(String id, PersonalizationDesignRejectParams params)
       throws StripeException {
-    return reject(personalizationDesign, params, (RequestOptions) null);
+    return reject(id, params, (RequestOptions) null);
   }
   /**
    * Updates the {@code status} of the specified testmode personalization design object to {@code
    * rejected}.
    */
   public PersonalizationDesign reject(
-      String personalizationDesign,
-      PersonalizationDesignRejectParams params,
-      RequestOptions options)
+      String id, PersonalizationDesignRejectParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/test_helpers/issuing/personalization_designs/%s/reject",
-            ApiResource.urlEncodeId(personalizationDesign));
+            ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

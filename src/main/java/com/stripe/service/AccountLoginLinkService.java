@@ -24,41 +24,39 @@ public final class AccountLoginLinkService extends ApiService {
    * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
    * your platform</strong>.
    */
-  public LoginLink create(String account, AccountLoginLinkCreateParams params)
+  public LoginLink create(String id, AccountLoginLinkCreateParams params) throws StripeException {
+    return create(id, params, (RequestOptions) null);
+  }
+  /**
+   * Creates a login link for a connected account to access the Express Dashboard.
+   *
+   * <p><strong>You can only create login links for accounts that use the <a
+   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
+   * your platform</strong>.
+   */
+  public LoginLink create(String id, RequestOptions options) throws StripeException {
+    return create(id, (AccountLoginLinkCreateParams) null, options);
+  }
+  /**
+   * Creates a login link for a connected account to access the Express Dashboard.
+   *
+   * <p><strong>You can only create login links for accounts that use the <a
+   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
+   * your platform</strong>.
+   */
+  public LoginLink create(String id) throws StripeException {
+    return create(id, (AccountLoginLinkCreateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Creates a login link for a connected account to access the Express Dashboard.
+   *
+   * <p><strong>You can only create login links for accounts that use the <a
+   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
+   * your platform</strong>.
+   */
+  public LoginLink create(String id, AccountLoginLinkCreateParams params, RequestOptions options)
       throws StripeException {
-    return create(account, params, (RequestOptions) null);
-  }
-  /**
-   * Creates a login link for a connected account to access the Express Dashboard.
-   *
-   * <p><strong>You can only create login links for accounts that use the <a
-   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
-   * your platform</strong>.
-   */
-  public LoginLink create(String account, RequestOptions options) throws StripeException {
-    return create(account, (AccountLoginLinkCreateParams) null, options);
-  }
-  /**
-   * Creates a login link for a connected account to access the Express Dashboard.
-   *
-   * <p><strong>You can only create login links for accounts that use the <a
-   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
-   * your platform</strong>.
-   */
-  public LoginLink create(String account) throws StripeException {
-    return create(account, (AccountLoginLinkCreateParams) null, (RequestOptions) null);
-  }
-  /**
-   * Creates a login link for a connected account to access the Express Dashboard.
-   *
-   * <p><strong>You can only create login links for accounts that use the <a
-   * href="https://stripe.com/connect/express-dashboard">Express Dashboard</a> and are connected to
-   * your platform</strong>.
-   */
-  public LoginLink create(
-      String account, AccountLoginLinkCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

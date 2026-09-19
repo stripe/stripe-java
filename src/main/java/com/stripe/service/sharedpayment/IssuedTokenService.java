@@ -20,28 +20,21 @@ public final class IssuedTokenService extends ApiService {
   }
 
   /** Retrieves an existing SharedPaymentIssuedToken object. */
-  public IssuedToken retrieve(String sharedPaymentIssuedToken, IssuedTokenRetrieveParams params)
-      throws StripeException {
-    return retrieve(sharedPaymentIssuedToken, params, (RequestOptions) null);
+  public IssuedToken retrieve(String id, IssuedTokenRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves an existing SharedPaymentIssuedToken object. */
-  public IssuedToken retrieve(String sharedPaymentIssuedToken, RequestOptions options)
-      throws StripeException {
-    return retrieve(sharedPaymentIssuedToken, (IssuedTokenRetrieveParams) null, options);
+  public IssuedToken retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (IssuedTokenRetrieveParams) null, options);
   }
   /** Retrieves an existing SharedPaymentIssuedToken object. */
-  public IssuedToken retrieve(String sharedPaymentIssuedToken) throws StripeException {
-    return retrieve(
-        sharedPaymentIssuedToken, (IssuedTokenRetrieveParams) null, (RequestOptions) null);
+  public IssuedToken retrieve(String id) throws StripeException {
+    return retrieve(id, (IssuedTokenRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves an existing SharedPaymentIssuedToken object. */
-  public IssuedToken retrieve(
-      String sharedPaymentIssuedToken, IssuedTokenRetrieveParams params, RequestOptions options)
+  public IssuedToken retrieve(String id, IssuedTokenRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/shared_payment/issued_tokens/%s",
-            ApiResource.urlEncodeId(sharedPaymentIssuedToken));
+    String path = String.format("/v1/shared_payment/issued_tokens/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -69,27 +62,22 @@ public final class IssuedTokenService extends ApiService {
     return this.request(request, IssuedToken.class);
   }
   /** Revokes a SharedPaymentIssuedToken. */
-  public IssuedToken revoke(String sharedPaymentIssuedToken, IssuedTokenRevokeParams params)
-      throws StripeException {
-    return revoke(sharedPaymentIssuedToken, params, (RequestOptions) null);
+  public IssuedToken revoke(String id, IssuedTokenRevokeParams params) throws StripeException {
+    return revoke(id, params, (RequestOptions) null);
   }
   /** Revokes a SharedPaymentIssuedToken. */
-  public IssuedToken revoke(String sharedPaymentIssuedToken, RequestOptions options)
-      throws StripeException {
-    return revoke(sharedPaymentIssuedToken, (IssuedTokenRevokeParams) null, options);
+  public IssuedToken revoke(String id, RequestOptions options) throws StripeException {
+    return revoke(id, (IssuedTokenRevokeParams) null, options);
   }
   /** Revokes a SharedPaymentIssuedToken. */
-  public IssuedToken revoke(String sharedPaymentIssuedToken) throws StripeException {
-    return revoke(sharedPaymentIssuedToken, (IssuedTokenRevokeParams) null, (RequestOptions) null);
+  public IssuedToken revoke(String id) throws StripeException {
+    return revoke(id, (IssuedTokenRevokeParams) null, (RequestOptions) null);
   }
   /** Revokes a SharedPaymentIssuedToken. */
-  public IssuedToken revoke(
-      String sharedPaymentIssuedToken, IssuedTokenRevokeParams params, RequestOptions options)
+  public IssuedToken revoke(String id, IssuedTokenRevokeParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/shared_payment/issued_tokens/%s/revoke",
-            ApiResource.urlEncodeId(sharedPaymentIssuedToken));
+        String.format("/v1/shared_payment/issued_tokens/%s/revoke", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -107,33 +107,33 @@ public final class ChargeService extends ApiService {
    * that was returned from your previous request, and Stripe will return the corresponding charge
    * information. The same information is returned when creating or refunding the charge.
    */
-  public Charge retrieve(String charge, ChargeRetrieveParams params) throws StripeException {
-    return retrieve(charge, params, (RequestOptions) null);
+  public Charge retrieve(String id, ChargeRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
    * that was returned from your previous request, and Stripe will return the corresponding charge
    * information. The same information is returned when creating or refunding the charge.
    */
-  public Charge retrieve(String charge, RequestOptions options) throws StripeException {
-    return retrieve(charge, (ChargeRetrieveParams) null, options);
+  public Charge retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ChargeRetrieveParams) null, options);
   }
   /**
    * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
    * that was returned from your previous request, and Stripe will return the corresponding charge
    * information. The same information is returned when creating or refunding the charge.
    */
-  public Charge retrieve(String charge) throws StripeException {
-    return retrieve(charge, (ChargeRetrieveParams) null, (RequestOptions) null);
+  public Charge retrieve(String id) throws StripeException {
+    return retrieve(id, (ChargeRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
    * that was returned from your previous request, and Stripe will return the corresponding charge
    * information. The same information is returned when creating or refunding the charge.
    */
-  public Charge retrieve(String charge, ChargeRetrieveParams params, RequestOptions options)
+  public Charge retrieve(String id, ChargeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
+    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -147,30 +147,30 @@ public final class ChargeService extends ApiService {
    * Updates the specified charge by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    */
-  public Charge update(String charge, ChargeUpdateParams params) throws StripeException {
-    return update(charge, params, (RequestOptions) null);
+  public Charge update(String id, ChargeUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates the specified charge by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    */
-  public Charge update(String charge, RequestOptions options) throws StripeException {
-    return update(charge, (ChargeUpdateParams) null, options);
+  public Charge update(String id, RequestOptions options) throws StripeException {
+    return update(id, (ChargeUpdateParams) null, options);
   }
   /**
    * Updates the specified charge by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    */
-  public Charge update(String charge) throws StripeException {
-    return update(charge, (ChargeUpdateParams) null, (RequestOptions) null);
+  public Charge update(String id) throws StripeException {
+    return update(id, (ChargeUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the specified charge by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    */
-  public Charge update(String charge, ChargeUpdateParams params, RequestOptions options)
+  public Charge update(String id, ChargeUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge));
+    String path = String.format("/v1/charges/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -216,33 +216,33 @@ public final class ChargeService extends ApiService {
    * update it to use a different payment flow, such as <a
    * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
-  public Charge capture(String charge, ChargeCaptureParams params) throws StripeException {
-    return capture(charge, params, (RequestOptions) null);
+  public Charge capture(String id, ChargeCaptureParams params) throws StripeException {
+    return capture(id, params, (RequestOptions) null);
   }
   /**
    * This method is deprecated and will be removed soon. If your integration uses it, you need to
    * update it to use a different payment flow, such as <a
    * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
-  public Charge capture(String charge, RequestOptions options) throws StripeException {
-    return capture(charge, (ChargeCaptureParams) null, options);
+  public Charge capture(String id, RequestOptions options) throws StripeException {
+    return capture(id, (ChargeCaptureParams) null, options);
   }
   /**
    * This method is deprecated and will be removed soon. If your integration uses it, you need to
    * update it to use a different payment flow, such as <a
    * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
-  public Charge capture(String charge) throws StripeException {
-    return capture(charge, (ChargeCaptureParams) null, (RequestOptions) null);
+  public Charge capture(String id) throws StripeException {
+    return capture(id, (ChargeCaptureParams) null, (RequestOptions) null);
   }
   /**
    * This method is deprecated and will be removed soon. If your integration uses it, you need to
    * update it to use a different payment flow, such as <a
    * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
-  public Charge capture(String charge, ChargeCaptureParams params, RequestOptions options)
+  public Charge capture(String id, ChargeCaptureParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(charge));
+    String path = String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

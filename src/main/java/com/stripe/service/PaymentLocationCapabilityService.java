@@ -42,15 +42,15 @@ public final class PaymentLocationCapabilityService extends ApiService {
   }
   /** Retrieves a {@code payment_location} capability. */
   public PaymentLocationCapability retrieve(
-      String capability, PaymentLocationCapabilityRetrieveParams params) throws StripeException {
-    return retrieve(capability, params, (RequestOptions) null);
+      String id, PaymentLocationCapabilityRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a {@code payment_location} capability. */
   public PaymentLocationCapability retrieve(
-      String capability, PaymentLocationCapabilityRetrieveParams params, RequestOptions options)
+      String id, PaymentLocationCapabilityRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(capability));
+        String.format("/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -64,19 +64,19 @@ public final class PaymentLocationCapabilityService extends ApiService {
    * Updates a {@code payment_location} capability. Request or remove a {@code payment_location}
    * capability by updating its {@code requested} parameter.
    */
-  public PaymentLocationCapability update(
-      String capability, PaymentLocationCapabilityUpdateParams params) throws StripeException {
-    return update(capability, params, (RequestOptions) null);
+  public PaymentLocationCapability update(String id, PaymentLocationCapabilityUpdateParams params)
+      throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates a {@code payment_location} capability. Request or remove a {@code payment_location}
    * capability by updating its {@code requested} parameter.
    */
   public PaymentLocationCapability update(
-      String capability, PaymentLocationCapabilityUpdateParams params, RequestOptions options)
+      String id, PaymentLocationCapabilityUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(capability));
+        String.format("/v1/payment_location_capabilities/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -419,21 +419,19 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   }
 
   /** Retrieve a payment link. */
-  public static PaymentLink retrieve(String paymentLink) throws StripeException {
-    return retrieve(paymentLink, (Map<String, Object>) null, (RequestOptions) null);
+  public static PaymentLink retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieve a payment link. */
-  public static PaymentLink retrieve(String paymentLink, RequestOptions options)
-      throws StripeException {
-    return retrieve(paymentLink, (Map<String, Object>) null, options);
+  public static PaymentLink retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieve a payment link. */
-  public static PaymentLink retrieve(
-      String paymentLink, Map<String, Object> params, RequestOptions options)
+  public static PaymentLink retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink));
+    String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PaymentLink.class);
@@ -441,9 +439,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
 
   /** Retrieve a payment link. */
   public static PaymentLink retrieve(
-      String paymentLink, PaymentLinkRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink));
+      String id, PaymentLinkRetrieveParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

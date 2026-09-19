@@ -20,25 +20,24 @@ public final class TransactionLineItemService extends ApiService {
   }
 
   /** Retrieves the line items of a committed standalone transaction as a collection. */
-  public StripeCollection<TransactionLineItem> list(
-      String transaction, TransactionLineItemListParams params) throws StripeException {
-    return list(transaction, params, (RequestOptions) null);
-  }
-  /** Retrieves the line items of a committed standalone transaction as a collection. */
-  public StripeCollection<TransactionLineItem> list(String transaction, RequestOptions options)
+  public StripeCollection<TransactionLineItem> list(String id, TransactionLineItemListParams params)
       throws StripeException {
-    return list(transaction, (TransactionLineItemListParams) null, options);
+    return list(id, params, (RequestOptions) null);
   }
   /** Retrieves the line items of a committed standalone transaction as a collection. */
-  public StripeCollection<TransactionLineItem> list(String transaction) throws StripeException {
-    return list(transaction, (TransactionLineItemListParams) null, (RequestOptions) null);
+  public StripeCollection<TransactionLineItem> list(String id, RequestOptions options)
+      throws StripeException {
+    return list(id, (TransactionLineItemListParams) null, options);
+  }
+  /** Retrieves the line items of a committed standalone transaction as a collection. */
+  public StripeCollection<TransactionLineItem> list(String id) throws StripeException {
+    return list(id, (TransactionLineItemListParams) null, (RequestOptions) null);
   }
   /** Retrieves the line items of a committed standalone transaction as a collection. */
   public StripeCollection<TransactionLineItem> list(
-      String transaction, TransactionLineItemListParams params, RequestOptions options)
+      String id, TransactionLineItemListParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(transaction));
+    String path = String.format("/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -36,18 +36,16 @@ public final class FinancingOfferService extends ApiService {
     return this.request(request, FinancingOffer.class);
   }
   /** Refills a test financing offer for a connected account. */
-  public FinancingOffer refill(String financingOffer, FinancingOfferRefillParams params)
+  public FinancingOffer refill(String id, FinancingOfferRefillParams params)
       throws StripeException {
-    return refill(financingOffer, params, (RequestOptions) null);
+    return refill(id, params, (RequestOptions) null);
   }
   /** Refills a test financing offer for a connected account. */
-  public FinancingOffer refill(
-      String financingOffer, FinancingOfferRefillParams params, RequestOptions options)
+  public FinancingOffer refill(String id, FinancingOfferRefillParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
-            "/v1/test_helpers/capital/financing_offers/%s/refill",
-            ApiResource.urlEncodeId(financingOffer));
+            "/v1/test_helpers/capital/financing_offers/%s/refill", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

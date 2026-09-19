@@ -23,39 +23,39 @@ public final class AccountExternalAccountService extends ApiService {
   }
 
   /** Delete a specified external account for a given account. */
-  public ExternalAccount delete(String account, String id) throws StripeException {
-    return delete(account, id, (RequestOptions) null);
+  public ExternalAccount delete(String accountId, String id) throws StripeException {
+    return delete(accountId, id, (RequestOptions) null);
   }
   /** Delete a specified external account for a given account. */
-  public ExternalAccount delete(String account, String id, RequestOptions options)
+  public ExternalAccount delete(String accountId, String id, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/accounts/%s/external_accounts/%s",
-            ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, ExternalAccount.class);
   }
   /** Retrieve a specified external account for a given account. */
   public ExternalAccount retrieve(
-      String account, String id, AccountExternalAccountRetrieveParams params)
+      String accountId, String id, AccountExternalAccountRetrieveParams params)
       throws StripeException {
-    return retrieve(account, id, params, (RequestOptions) null);
+    return retrieve(accountId, id, params, (RequestOptions) null);
   }
   /** Retrieve a specified external account for a given account. */
-  public ExternalAccount retrieve(String account, String id, RequestOptions options)
+  public ExternalAccount retrieve(String accountId, String id, RequestOptions options)
       throws StripeException {
-    return retrieve(account, id, (AccountExternalAccountRetrieveParams) null, options);
+    return retrieve(accountId, id, (AccountExternalAccountRetrieveParams) null, options);
   }
   /** Retrieve a specified external account for a given account. */
-  public ExternalAccount retrieve(String account, String id) throws StripeException {
+  public ExternalAccount retrieve(String accountId, String id) throws StripeException {
     return retrieve(
-        account, id, (AccountExternalAccountRetrieveParams) null, (RequestOptions) null);
+        accountId, id, (AccountExternalAccountRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieve a specified external account for a given account. */
   public ExternalAccount retrieve(
-      String account,
+      String accountId,
       String id,
       AccountExternalAccountRetrieveParams params,
       RequestOptions options)
@@ -63,7 +63,7 @@ public final class AccountExternalAccountService extends ApiService {
     String path =
         String.format(
             "/v1/accounts/%s/external_accounts/%s",
-            ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -87,25 +87,9 @@ public final class AccountExternalAccountService extends ApiService {
    * arguments or changes.
    */
   public ExternalAccount update(
-      String account, String id, AccountExternalAccountUpdateParams params) throws StripeException {
-    return update(account, id, params, (RequestOptions) null);
-  }
-  /**
-   * Updates the metadata, account holder name, account holder type of a bank account belonging to a
-   * connected account and optionally sets it as the default for its currency. Other bank account
-   * details are not editable by design.
-   *
-   * <p>You can only update bank accounts when <a
-   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">account.controller.requirement_collection</a>
-   * is {@code application}, which includes <a
-   * href="https://stripe.com/connect/custom-accounts">Custom accounts</a>.
-   *
-   * <p>You can re-enable a disabled bank account by performing an update call without providing any
-   * arguments or changes.
-   */
-  public ExternalAccount update(String account, String id, RequestOptions options)
+      String accountId, String id, AccountExternalAccountUpdateParams params)
       throws StripeException {
-    return update(account, id, (AccountExternalAccountUpdateParams) null, options);
+    return update(accountId, id, params, (RequestOptions) null);
   }
   /**
    * Updates the metadata, account holder name, account holder type of a bank account belonging to a
@@ -120,8 +104,25 @@ public final class AccountExternalAccountService extends ApiService {
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
    */
-  public ExternalAccount update(String account, String id) throws StripeException {
-    return update(account, id, (AccountExternalAccountUpdateParams) null, (RequestOptions) null);
+  public ExternalAccount update(String accountId, String id, RequestOptions options)
+      throws StripeException {
+    return update(accountId, id, (AccountExternalAccountUpdateParams) null, options);
+  }
+  /**
+   * Updates the metadata, account holder name, account holder type of a bank account belonging to a
+   * connected account and optionally sets it as the default for its currency. Other bank account
+   * details are not editable by design.
+   *
+   * <p>You can only update bank accounts when <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">account.controller.requirement_collection</a>
+   * is {@code application}, which includes <a
+   * href="https://stripe.com/connect/custom-accounts">Custom accounts</a>.
+   *
+   * <p>You can re-enable a disabled bank account by performing an update call without providing any
+   * arguments or changes.
+   */
+  public ExternalAccount update(String accountId, String id) throws StripeException {
+    return update(accountId, id, (AccountExternalAccountUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the metadata, account holder name, account holder type of a bank account belonging to a
@@ -137,12 +138,15 @@ public final class AccountExternalAccountService extends ApiService {
    * arguments or changes.
    */
   public ExternalAccount update(
-      String account, String id, AccountExternalAccountUpdateParams params, RequestOptions options)
+      String accountId,
+      String id,
+      AccountExternalAccountUpdateParams params,
+      RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/accounts/%s/external_accounts/%s",
-            ApiResource.urlEncodeId(account), ApiResource.urlEncodeId(id));
+            ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -153,25 +157,24 @@ public final class AccountExternalAccountService extends ApiService {
     return this.request(request, ExternalAccount.class);
   }
   /** List external accounts for an account. */
-  public StripeCollection<ExternalAccount> list(
-      String account, AccountExternalAccountListParams params) throws StripeException {
-    return list(account, params, (RequestOptions) null);
-  }
-  /** List external accounts for an account. */
-  public StripeCollection<ExternalAccount> list(String account, RequestOptions options)
+  public StripeCollection<ExternalAccount> list(String id, AccountExternalAccountListParams params)
       throws StripeException {
-    return list(account, (AccountExternalAccountListParams) null, options);
+    return list(id, params, (RequestOptions) null);
   }
   /** List external accounts for an account. */
-  public StripeCollection<ExternalAccount> list(String account) throws StripeException {
-    return list(account, (AccountExternalAccountListParams) null, (RequestOptions) null);
+  public StripeCollection<ExternalAccount> list(String id, RequestOptions options)
+      throws StripeException {
+    return list(id, (AccountExternalAccountListParams) null, options);
+  }
+  /** List external accounts for an account. */
+  public StripeCollection<ExternalAccount> list(String id) throws StripeException {
+    return list(id, (AccountExternalAccountListParams) null, (RequestOptions) null);
   }
   /** List external accounts for an account. */
   public StripeCollection<ExternalAccount> list(
-      String account, AccountExternalAccountListParams params, RequestOptions options)
+      String id, AccountExternalAccountListParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -182,16 +185,15 @@ public final class AccountExternalAccountService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<ExternalAccount>>() {}.getType());
   }
   /** Create an external account for a given account. */
-  public ExternalAccount create(String account, AccountExternalAccountCreateParams params)
+  public ExternalAccount create(String id, AccountExternalAccountCreateParams params)
       throws StripeException {
-    return create(account, params, (RequestOptions) null);
+    return create(id, params, (RequestOptions) null);
   }
   /** Create an external account for a given account. */
   public ExternalAccount create(
-      String account, AccountExternalAccountCreateParams params, RequestOptions options)
+      String id, AccountExternalAccountCreateParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(account));
+    String path = String.format("/v1/accounts/%s/external_accounts", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

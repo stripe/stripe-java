@@ -147,23 +147,21 @@ public class FraudLiabilityDebit extends ApiResource implements HasId {
   }
 
   /** Retrieves an Issuing {@code FraudLiabilityDebit} object. */
-  public static FraudLiabilityDebit retrieve(String fraudLiabilityDebit) throws StripeException {
-    return retrieve(fraudLiabilityDebit, (Map<String, Object>) null, (RequestOptions) null);
+  public static FraudLiabilityDebit retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an Issuing {@code FraudLiabilityDebit} object. */
-  public static FraudLiabilityDebit retrieve(String fraudLiabilityDebit, RequestOptions options)
+  public static FraudLiabilityDebit retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(fraudLiabilityDebit, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an Issuing {@code FraudLiabilityDebit} object. */
   public static FraudLiabilityDebit retrieve(
-      String fraudLiabilityDebit, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/fraud_liability_debits/%s", ApiResource.urlEncodeId(fraudLiabilityDebit));
+        String.format("/v1/issuing/fraud_liability_debits/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, FraudLiabilityDebit.class);
@@ -171,11 +169,10 @@ public class FraudLiabilityDebit extends ApiResource implements HasId {
 
   /** Retrieves an Issuing {@code FraudLiabilityDebit} object. */
   public static FraudLiabilityDebit retrieve(
-      String fraudLiabilityDebit, FraudLiabilityDebitRetrieveParams params, RequestOptions options)
+      String id, FraudLiabilityDebitRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/fraud_liability_debits/%s", ApiResource.urlEncodeId(fraudLiabilityDebit));
+        String.format("/v1/issuing/fraud_liability_debits/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

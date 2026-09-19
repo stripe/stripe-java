@@ -23,11 +23,11 @@ import lombok.Setter;
 /**
  * A coupon contains information about a percent-off or amount-off discount you might want to apply
  * to a customer. Coupons may be applied to <a
- * href="https://api.stripe.com#subscriptions">subscriptions</a>, <a
- * href="https://api.stripe.com#invoices">invoices</a>, <a
+ * href="https://docs.stripe.com/api#subscriptions">subscriptions</a>, <a
+ * href="https://docs.stripe.com/api#invoices">invoices</a>, <a
  * href="https://docs.stripe.com/api/checkout/sessions">checkout sessions</a>, <a
- * href="https://api.stripe.com#quotes">quotes</a>, and more. Coupons do not work with conventional
- * one-off <a href="https://stripe.com/api/charges/create">charges</a> or <a
+ * href="https://docs.stripe.com/api#quotes">quotes</a>, and more. Coupons do not work with
+ * conventional one-off <a href="https://stripe.com/api/charges/create">charges</a> or <a
  * href="https://docs.stripe.com/api/payment_intents">payment intents</a>.
  */
 @Getter
@@ -315,28 +315,28 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   }
 
   /** Retrieves the coupon with the given ID. */
-  public static Coupon retrieve(String coupon) throws StripeException {
-    return retrieve(coupon, (Map<String, Object>) null, (RequestOptions) null);
+  public static Coupon retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the coupon with the given ID. */
-  public static Coupon retrieve(String coupon, RequestOptions options) throws StripeException {
-    return retrieve(coupon, (Map<String, Object>) null, options);
+  public static Coupon retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the coupon with the given ID. */
-  public static Coupon retrieve(String coupon, Map<String, Object> params, RequestOptions options)
+  public static Coupon retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Coupon.class);
   }
 
   /** Retrieves the coupon with the given ID. */
-  public static Coupon retrieve(String coupon, CouponRetrieveParams params, RequestOptions options)
+  public static Coupon retrieve(String id, CouponRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon));
+    String path = String.format("/v1/coupons/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

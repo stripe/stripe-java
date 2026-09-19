@@ -180,9 +180,9 @@ public class TransferReversal extends ApiResource
    *
    * <p>This request only accepts metadata and description as arguments.
    */
-  @Override
-  public TransferReversal update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public TransferReversal update(String transferId, Map<String, Object> params)
+      throws StripeException {
+    return update(transferId, params, (RequestOptions) null);
   }
 
   /**
@@ -191,13 +191,13 @@ public class TransferReversal extends ApiResource
    *
    * <p>This request only accepts metadata and description as arguments.
    */
-  @Override
-  public TransferReversal update(Map<String, Object> params, RequestOptions options)
+  public TransferReversal update(
+      String transferId, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/transfers/%s/reversals/%s",
-            ApiResource.urlEncodeId(this.getTransfer()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(transferId), ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
     return getResponseGetter().request(request, TransferReversal.class);
@@ -209,8 +209,9 @@ public class TransferReversal extends ApiResource
    *
    * <p>This request only accepts metadata and description as arguments.
    */
-  public TransferReversal update(TransferReversalUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public TransferReversal update(String transferId, TransferReversalUpdateParams params)
+      throws StripeException {
+    return update(transferId, params, (RequestOptions) null);
   }
 
   /**
@@ -219,12 +220,13 @@ public class TransferReversal extends ApiResource
    *
    * <p>This request only accepts metadata and description as arguments.
    */
-  public TransferReversal update(TransferReversalUpdateParams params, RequestOptions options)
+  public TransferReversal update(
+      String transferId, TransferReversalUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
             "/v1/transfers/%s/reversals/%s",
-            ApiResource.urlEncodeId(this.getTransfer()), ApiResource.urlEncodeId(this.getId()));
+            ApiResource.urlEncodeId(transferId), ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

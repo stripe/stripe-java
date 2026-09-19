@@ -1524,11 +1524,29 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
             }
 
             public enum ProductType implements ApiRequestParams.EnumParam {
+              @SerializedName("additive_dosage")
+              ADDITIVE_DOSAGE("additive_dosage"),
+
+              @SerializedName("additized_diesel_2")
+              ADDITIZED_DIESEL_2("additized_diesel_2"),
+
+              @SerializedName("additized_diesel_3")
+              ADDITIZED_DIESEL_3("additized_diesel_3"),
+
               @SerializedName("air_conditioning_service")
               AIR_CONDITIONING_SERVICE("air_conditioning_service"),
 
+              @SerializedName("air_filter")
+              AIR_FILTER("air_filter"),
+
               @SerializedName("alcohol")
               ALCOHOL("alcohol"),
+
+              @SerializedName("antifreeze")
+              ANTIFREEZE("antifreeze"),
+
+              @SerializedName("automotive_merchandise")
+              AUTOMOTIVE_MERCHANDISE("automotive_merchandise"),
 
               @SerializedName("aviation_fuel_premium")
               AVIATION_FUEL_PREMIUM("aviation_fuel_premium"),
@@ -1536,14 +1554,74 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
               @SerializedName("aviation_fuel_regular")
               AVIATION_FUEL_REGULAR("aviation_fuel_regular"),
 
+              @SerializedName("batteries")
+              BATTERIES("batteries"),
+
+              @SerializedName("biodiesel_b1")
+              BIODIESEL_B1("biodiesel_b1"),
+
+              @SerializedName("biodiesel_b10")
+              BIODIESEL_B10("biodiesel_b10"),
+
+              @SerializedName("biodiesel_b100")
+              BIODIESEL_B100("biodiesel_b100"),
+
+              @SerializedName("biodiesel_b11")
+              BIODIESEL_B11("biodiesel_b11"),
+
+              @SerializedName("biodiesel_b15")
+              BIODIESEL_B15("biodiesel_b15"),
+
+              @SerializedName("biodiesel_b2")
+              BIODIESEL_B2("biodiesel_b2"),
+
+              @SerializedName("biodiesel_b20")
+              BIODIESEL_B20("biodiesel_b20"),
+
+              @SerializedName("biodiesel_b5")
+              BIODIESEL_B5("biodiesel_b5"),
+
+              @SerializedName("biodiesel_b75")
+              BIODIESEL_B75("biodiesel_b75"),
+
+              @SerializedName("biodiesel_b99")
+              BIODIESEL_B99("biodiesel_b99"),
+
+              @SerializedName("blended_diesel_1_and_2")
+              BLENDED_DIESEL_1_AND_2("blended_diesel_1_and_2"),
+
+              @SerializedName("body_work")
+              BODY_WORK("body_work"),
+
+              @SerializedName("brake_fluid")
+              BRAKE_FLUID("brake_fluid"),
+
+              @SerializedName("brake_service")
+              BRAKE_SERVICE("brake_service"),
+
               @SerializedName("car_care_detailing")
               CAR_CARE_DETAILING("car_care_detailing"),
+
+              @SerializedName("car_wash")
+              CAR_WASH("car_wash"),
 
               @SerializedName("compressed_natural_gas")
               COMPRESSED_NATURAL_GAS("compressed_natural_gas"),
 
+              @SerializedName("def_at_pump")
+              DEF_AT_PUMP("def_at_pump"),
+
               @SerializedName("deli")
               DELI("deli"),
+
+              @SerializedName("e85")
+              E85("e85"),
+
+              @SerializedName("engine_service")
+              ENGINE_SERVICE("engine_service"),
+
+              @SerializedName("ethanol_e16_to_e84")
+              ETHANOL_E16_TO_E84("ethanol_e16_to_e84"),
 
               @SerializedName("ev_battery_exchanges")
               EV_BATTERY_EXCHANGES("ev_battery_exchanges"),
@@ -1566,8 +1644,20 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
               @SerializedName("evc_level_5")
               EVC_LEVEL_5("evc_level_5"),
 
+              @SerializedName("exhaust_service")
+              EXHAUST_SERVICE("exhaust_service"),
+
+              @SerializedName("federal_tire_excise_tax")
+              FEDERAL_TIRE_EXCISE_TAX("federal_tire_excise_tax"),
+
               @SerializedName("food_service")
               FOOD_SERVICE("food_service"),
+
+              @SerializedName("fuel_additive_treatment")
+              FUEL_ADDITIVE_TREATMENT("fuel_additive_treatment"),
+
+              @SerializedName("fuel_system")
+              FUEL_SYSTEM("fuel_system"),
 
               @SerializedName("green_gasoline_mid_plus")
               GREEN_GASOLINE_MID_PLUS("green_gasoline_mid_plus"),
@@ -1581,6 +1671,39 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
               @SerializedName("grocery")
               GROCERY("grocery"),
 
+              @SerializedName("heating_oil")
+              HEATING_OIL("heating_oil"),
+
+              @SerializedName("hoses")
+              HOSES("hoses"),
+
+              @SerializedName("hydrogen_h35")
+              HYDROGEN_H35("hydrogen_h35"),
+
+              @SerializedName("hydrogen_h70")
+              HYDROGEN_H70("hydrogen_h70"),
+
+              @SerializedName("inspection")
+              INSPECTION("inspection"),
+
+              @SerializedName("kerosene_low_sulfur")
+              KEROSENE_LOW_SULFUR("kerosene_low_sulfur"),
+
+              @SerializedName("kerosene_low_sulfur_non_taxable")
+              KEROSENE_LOW_SULFUR_NON_TAXABLE("kerosene_low_sulfur_non_taxable"),
+
+              @SerializedName("kerosene_ultra_low_sulfur")
+              KEROSENE_ULTRA_LOW_SULFUR("kerosene_ultra_low_sulfur"),
+
+              @SerializedName("kerosene_ultra_low_sulfur_non_taxable")
+              KEROSENE_ULTRA_LOW_SULFUR_NON_TAXABLE("kerosene_ultra_low_sulfur_non_taxable"),
+
+              @SerializedName("labor")
+              LABOR("labor"),
+
+              @SerializedName("lamps")
+              LAMPS("lamps"),
+
               @SerializedName("liquid_natural_gas")
               LIQUID_NATURAL_GAS("liquid_natural_gas"),
 
@@ -1590,11 +1713,35 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
               @SerializedName("lodging")
               LODGING("lodging"),
 
+              @SerializedName("low_octane_unleaded")
+              LOW_OCTANE_UNLEADED("low_octane_unleaded"),
+
+              @SerializedName("lube")
+              LUBE("lube"),
+
               @SerializedName("marine_diesel")
               MARINE_DIESEL("marine_diesel"),
 
               @SerializedName("marine_fuel")
               MARINE_FUEL("marine_fuel"),
+
+              @SerializedName("marine_fuel_1")
+              MARINE_FUEL_1("marine_fuel_1"),
+
+              @SerializedName("marine_fuel_2")
+              MARINE_FUEL_2("marine_fuel_2"),
+
+              @SerializedName("marine_fuel_3")
+              MARINE_FUEL_3("marine_fuel_3"),
+
+              @SerializedName("marine_fuel_4")
+              MARINE_FUEL_4("marine_fuel_4"),
+
+              @SerializedName("marine_fuel_5")
+              MARINE_FUEL_5("marine_fuel_5"),
+
+              @SerializedName("marine_other")
+              MARINE_OTHER("marine_other"),
 
               @SerializedName("merchandise")
               MERCHANDISE("merchandise"),
@@ -1602,8 +1749,29 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
               @SerializedName("mid_plus")
               MID_PLUS("mid_plus"),
 
+              @SerializedName("mid_plus_2")
+              MID_PLUS_2("mid_plus_2"),
+
+              @SerializedName("mid_plus_2_10")
+              MID_PLUS_2_10("mid_plus_2_10"),
+
+              @SerializedName("mid_plus_2_e15")
+              MID_PLUS_2_E15("mid_plus_2_e15"),
+
+              @SerializedName("mid_plus_2_reformulated")
+              MID_PLUS_2_REFORMULATED("mid_plus_2_reformulated"),
+
+              @SerializedName("mid_plus_e10")
+              MID_PLUS_E10("mid_plus_e10"),
+
+              @SerializedName("mid_plus_e15")
+              MID_PLUS_E15("mid_plus_e15"),
+
               @SerializedName("mid_plus_ethanol")
               MID_PLUS_ETHANOL("mid_plus_ethanol"),
+
+              @SerializedName("mid_plus_reformulated")
+              MID_PLUS_REFORMULATED("mid_plus_reformulated"),
 
               @SerializedName("miscellaneous_aviation_products_services")
               MISCELLANEOUS_AVIATION_PRODUCTS_SERVICES("miscellaneous_aviation_products_services"),
@@ -1617,20 +1785,134 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
               @SerializedName("miscellaneous_vehicle_products_services")
               MISCELLANEOUS_VEHICLE_PRODUCTS_SERVICES("miscellaneous_vehicle_products_services"),
 
+              @SerializedName("motor_oil")
+              MOTOR_OIL("motor_oil"),
+
+              @SerializedName("off_road_b1")
+              OFF_ROAD_B1("off_road_b1"),
+
+              @SerializedName("off_road_b10")
+              OFF_ROAD_B10("off_road_b10"),
+
+              @SerializedName("off_road_b100")
+              OFF_ROAD_B100("off_road_b100"),
+
+              @SerializedName("off_road_b11")
+              OFF_ROAD_B11("off_road_b11"),
+
+              @SerializedName("off_road_b15")
+              OFF_ROAD_B15("off_road_b15"),
+
+              @SerializedName("off_road_b2")
+              OFF_ROAD_B2("off_road_b2"),
+
+              @SerializedName("off_road_b20")
+              OFF_ROAD_B20("off_road_b20"),
+
+              @SerializedName("off_road_b5")
+              OFF_ROAD_B5("off_road_b5"),
+
+              @SerializedName("off_road_b75")
+              OFF_ROAD_B75("off_road_b75"),
+
+              @SerializedName("off_road_b99")
+              OFF_ROAD_B99("off_road_b99"),
+
+              @SerializedName("off_road_biodiesel")
+              OFF_ROAD_BIODIESEL("off_road_biodiesel"),
+
+              @SerializedName("off_road_diesel_1")
+              OFF_ROAD_DIESEL_1("off_road_diesel_1"),
+
+              @SerializedName("off_road_diesel_2")
+              OFF_ROAD_DIESEL_2("off_road_diesel_2"),
+
+              @SerializedName("off_road_mid_plus")
+              OFF_ROAD_MID_PLUS("off_road_mid_plus"),
+
+              @SerializedName("off_road_mid_plus_2")
+              OFF_ROAD_MID_PLUS_2("off_road_mid_plus_2"),
+
+              @SerializedName("off_road_premium_diesel_1")
+              OFF_ROAD_PREMIUM_DIESEL_1("off_road_premium_diesel_1"),
+
+              @SerializedName("off_road_premium_diesel_2")
+              OFF_ROAD_PREMIUM_DIESEL_2("off_road_premium_diesel_2"),
+
+              @SerializedName("off_road_premium_super")
+              OFF_ROAD_PREMIUM_SUPER("off_road_premium_super"),
+
+              @SerializedName("off_road_premium_super_2")
+              OFF_ROAD_PREMIUM_SUPER_2("off_road_premium_super_2"),
+
+              @SerializedName("off_road_regular")
+              OFF_ROAD_REGULAR("off_road_regular"),
+
+              @SerializedName("off_road_renewable_diesel_b6_to_b20")
+              OFF_ROAD_RENEWABLE_DIESEL_B6_TO_B20("off_road_renewable_diesel_b6_to_b20"),
+
+              @SerializedName("off_road_renewable_diesel_r95")
+              OFF_ROAD_RENEWABLE_DIESEL_R95("off_road_renewable_diesel_r95"),
+
+              @SerializedName("oil_change")
+              OIL_CHANGE("oil_change"),
+
+              @SerializedName("oil_filter")
+              OIL_FILTER("oil_filter"),
+
+              @SerializedName("other_lubricants")
+              OTHER_LUBRICANTS("other_lubricants"),
+
               @SerializedName("packaged_beverage")
               PACKAGED_BEVERAGE("packaged_beverage"),
 
               @SerializedName("premium_diesel")
               PREMIUM_DIESEL("premium_diesel"),
 
+              @SerializedName("premium_diesel_2")
+              PREMIUM_DIESEL_2("premium_diesel_2"),
+
+              @SerializedName("premium_diesel_b20_plus")
+              PREMIUM_DIESEL_B20_PLUS("premium_diesel_b20_plus"),
+
+              @SerializedName("premium_diesel_under_b20")
+              PREMIUM_DIESEL_UNDER_B20("premium_diesel_under_b20"),
+
               @SerializedName("premium_super")
               PREMIUM_SUPER("premium_super"),
+
+              @SerializedName("premium_super_2")
+              PREMIUM_SUPER_2("premium_super_2"),
+
+              @SerializedName("premium_super_2_10")
+              PREMIUM_SUPER_2_10("premium_super_2_10"),
+
+              @SerializedName("premium_super_2_e15")
+              PREMIUM_SUPER_2_E15("premium_super_2_e15"),
+
+              @SerializedName("premium_super_2_reformulated")
+              PREMIUM_SUPER_2_REFORMULATED("premium_super_2_reformulated"),
+
+              @SerializedName("premium_super_e10")
+              PREMIUM_SUPER_E10("premium_super_e10"),
+
+              @SerializedName("premium_super_e15")
+              PREMIUM_SUPER_E15("premium_super_e15"),
 
               @SerializedName("premium_super_ethanol")
               PREMIUM_SUPER_ETHANOL("premium_super_ethanol"),
 
+              @SerializedName("premium_super_reformulated")
+              PREMIUM_SUPER_REFORMULATED("premium_super_reformulated"),
+
               @SerializedName("preventative_maintenance")
               PREVENTATIVE_MAINTENANCE("preventative_maintenance"),
+
+              @SerializedName("racing_fuel")
+              RACING_FUEL("racing_fuel"),
+
+              @SerializedName("recreational_fuel_90_octane")
+              RECREATIONAL_FUEL_90_OCTANE("recreational_fuel_90_octane"),
 
               @SerializedName("regular")
               REGULAR("regular"),
@@ -1638,14 +1920,44 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
               @SerializedName("regular_diesel")
               REGULAR_DIESEL("regular_diesel"),
 
+              @SerializedName("regular_diesel_2")
+              REGULAR_DIESEL_2("regular_diesel_2"),
+
+              @SerializedName("regular_e10")
+              REGULAR_E10("regular_e10"),
+
+              @SerializedName("regular_e15")
+              REGULAR_E15("regular_e15"),
+
               @SerializedName("regular_ethanol")
               REGULAR_ETHANOL("regular_ethanol"),
+
+              @SerializedName("regular_reformulated")
+              REGULAR_REFORMULATED("regular_reformulated"),
+
+              @SerializedName("renewable_diesel_b6_to_b20")
+              RENEWABLE_DIESEL_B6_TO_B20("renewable_diesel_b6_to_b20"),
+
+              @SerializedName("renewable_diesel_r95")
+              RENEWABLE_DIESEL_R95("renewable_diesel_r95"),
 
               @SerializedName("repairs")
               REPAIRS("repairs"),
 
+              @SerializedName("road_service")
+              ROAD_SERVICE("road_service"),
+
+              @SerializedName("rv_dump_fee")
+              RV_DUMP_FEE("rv_dump_fee"),
+
+              @SerializedName("scales")
+              SCALES("scales"),
+
               @SerializedName("self_service_car_wash")
               SELF_SERVICE_CAR_WASH("self_service_car_wash"),
+
+              @SerializedName("service_package")
+              SERVICE_PACKAGE("service_package"),
 
               @SerializedName("shower")
               SHOWER("shower"),
@@ -1653,11 +1965,44 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
               @SerializedName("store_service")
               STORE_SERVICE("store_service"),
 
+              @SerializedName("synthetic_oil")
+              SYNTHETIC_OIL("synthetic_oil"),
+
+              @SerializedName("tire_related")
+              TIRE_RELATED("tire_related"),
+
+              @SerializedName("tire_repair")
+              TIRE_REPAIR("tire_repair"),
+
+              @SerializedName("tire_rotation")
+              TIRE_ROTATION("tire_rotation"),
+
+              @SerializedName("tires")
+              TIRES("tires"),
+
               @SerializedName("tobacco")
               TOBACCO("tobacco"),
 
+              @SerializedName("toll_payments")
+              TOLL_PAYMENTS("toll_payments"),
+
+              @SerializedName("towing")
+              TOWING("towing"),
+
+              @SerializedName("trailer_wash")
+              TRAILER_WASH("trailer_wash"),
+
+              @SerializedName("transmission_service")
+              TRANSMISSION_SERVICE("transmission_service"),
+
+              @SerializedName("truck_tank_cleaning")
+              TRUCK_TANK_CLEANING("truck_tank_cleaning"),
+
               @SerializedName("vehicle_accessories")
               VEHICLE_ACCESSORIES("vehicle_accessories"),
+
+              @SerializedName("vehicle_glass")
+              VEHICLE_GLASS("vehicle_glass"),
 
               @SerializedName("vehicle_parking")
               VEHICLE_PARKING("vehicle_parking"),
@@ -1665,8 +2010,26 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
               @SerializedName("vehicle_parts")
               VEHICLE_PARTS("vehicle_parts"),
 
+              @SerializedName("vehicle_prep")
+              VEHICLE_PREP("vehicle_prep"),
+
+              @SerializedName("vehicle_rental")
+              VEHICLE_RENTAL("vehicle_rental"),
+
+              @SerializedName("vehicle_work_order")
+              VEHICLE_WORK_ORDER("vehicle_work_order"),
+
               @SerializedName("wash_out")
-              WASH_OUT("wash_out");
+              WASH_OUT("wash_out"),
+
+              @SerializedName("washer_fluid")
+              WASHER_FLUID("washer_fluid"),
+
+              @SerializedName("white_gas")
+              WHITE_GAS("white_gas"),
+
+              @SerializedName("wipers")
+              WIPERS("wipers");
 
               @Getter(onMethod_ = {@Override})
               private final String value;

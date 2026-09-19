@@ -15,6 +15,7 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   @SerializedName("bank_account")
   BankAccount bankAccount;
 
+  /** Properties for creating a crypto wallet FinancialAddress. */
   @SerializedName("crypto_wallet")
   CryptoWallet cryptoWallet;
 
@@ -34,6 +35,7 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   @SerializedName("financial_account")
   String financialAccount;
 
+  /** Open Enum. The currency the FinancialAddress settles into the FinancialAccount. */
   @SerializedName("settlement_currency")
   String settlementCurrency;
 
@@ -93,6 +95,7 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Properties for creating a crypto wallet FinancialAddress. */
     public Builder setCryptoWallet(FinancialAddressCreateParams.CryptoWallet cryptoWallet) {
       this.cryptoWallet = cryptoWallet;
       return this;
@@ -133,6 +136,7 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Open Enum. The currency the FinancialAddress settles into the FinancialAccount. */
     public Builder setSettlementCurrency(String settlementCurrency) {
       this.settlementCurrency = settlementCurrency;
       return this;

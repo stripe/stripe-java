@@ -117,22 +117,19 @@ public class PhysicalBundle extends ApiResource implements HasId {
   }
 
   /** Retrieves a physical bundle object. */
-  public static PhysicalBundle retrieve(String physicalBundle) throws StripeException {
-    return retrieve(physicalBundle, (Map<String, Object>) null, (RequestOptions) null);
+  public static PhysicalBundle retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves a physical bundle object. */
-  public static PhysicalBundle retrieve(String physicalBundle, RequestOptions options)
-      throws StripeException {
-    return retrieve(physicalBundle, (Map<String, Object>) null, options);
+  public static PhysicalBundle retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves a physical bundle object. */
   public static PhysicalBundle retrieve(
-      String physicalBundle, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/issuing/physical_bundles/%s", ApiResource.urlEncodeId(physicalBundle));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/issuing/physical_bundles/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PhysicalBundle.class);
@@ -140,10 +137,9 @@ public class PhysicalBundle extends ApiResource implements HasId {
 
   /** Retrieves a physical bundle object. */
   public static PhysicalBundle retrieve(
-      String physicalBundle, PhysicalBundleRetrieveParams params, RequestOptions options)
+      String id, PhysicalBundleRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format("/v1/issuing/physical_bundles/%s", ApiResource.urlEncodeId(physicalBundle));
+    String path = String.format("/v1/issuing/physical_bundles/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

@@ -131,23 +131,20 @@ public class Transaction extends ApiResource implements HasId {
   }
 
   /** Retrieves the details of a Financial Connections {@code Transaction}. */
-  public static Transaction retrieve(String transaction) throws StripeException {
-    return retrieve(transaction, (Map<String, Object>) null, (RequestOptions) null);
+  public static Transaction retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the details of a Financial Connections {@code Transaction}. */
-  public static Transaction retrieve(String transaction, RequestOptions options)
-      throws StripeException {
-    return retrieve(transaction, (Map<String, Object>) null, options);
+  public static Transaction retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the details of a Financial Connections {@code Transaction}. */
-  public static Transaction retrieve(
-      String transaction, Map<String, Object> params, RequestOptions options)
+  public static Transaction retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/financial_connections/transactions/%s", ApiResource.urlEncodeId(transaction));
+        String.format("/v1/financial_connections/transactions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Transaction.class);
@@ -155,11 +152,9 @@ public class Transaction extends ApiResource implements HasId {
 
   /** Retrieves the details of a Financial Connections {@code Transaction}. */
   public static Transaction retrieve(
-      String transaction, TransactionRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String id, TransactionRetrieveParams params, RequestOptions options) throws StripeException {
     String path =
-        String.format(
-            "/v1/financial_connections/transactions/%s", ApiResource.urlEncodeId(transaction));
+        String.format("/v1/financial_connections/transactions/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -179,8 +174,8 @@ public class Transaction extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Classification extends StripeObject {
-    @SerializedName("credit")
-    Credit credit;
+    @SerializedName("financial_activity")
+    FinancialActivity financialActivity;
 
     @SerializedName("money_movement")
     MoneyMovement moneyMovement;
@@ -193,13 +188,13 @@ public class Transaction extends ApiResource implements HasId {
     String type;
 
     /**
-     * For more details about Credit, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
+     * For more details about FinancialActivity, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
      */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Credit extends StripeObject {
+    public static class FinancialActivity extends StripeObject {
       /**
        * Stripe's confidence in this classification.
        *

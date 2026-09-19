@@ -48,24 +48,24 @@ public final class VerificationReportService extends ApiService {
         request, new TypeToken<StripeCollection<VerificationReport>>() {}.getType());
   }
   /** Retrieves an existing VerificationReport. */
-  public VerificationReport retrieve(String report, VerificationReportRetrieveParams params)
+  public VerificationReport retrieve(String id, VerificationReportRetrieveParams params)
       throws StripeException {
-    return retrieve(report, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves an existing VerificationReport. */
-  public VerificationReport retrieve(String report, RequestOptions options) throws StripeException {
-    return retrieve(report, (VerificationReportRetrieveParams) null, options);
+  public VerificationReport retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (VerificationReportRetrieveParams) null, options);
   }
   /** Retrieves an existing VerificationReport. */
-  public VerificationReport retrieve(String report) throws StripeException {
-    return retrieve(report, (VerificationReportRetrieveParams) null, (RequestOptions) null);
+  public VerificationReport retrieve(String id) throws StripeException {
+    return retrieve(id, (VerificationReportRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves an existing VerificationReport. */
   public VerificationReport retrieve(
-      String report, VerificationReportRetrieveParams params, RequestOptions options)
+      String id, VerificationReportRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report));
+        String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -45,23 +45,20 @@ public class PaymentAttempt extends ApiResource implements HasId {
   String returnUrl;
 
   /** Retrieves orchestration information for the given payment attempt record (e.g. return url). */
-  public static PaymentAttempt retrieve(String paymentAttemptRecord) throws StripeException {
-    return retrieve(paymentAttemptRecord, (Map<String, Object>) null, (RequestOptions) null);
+  public static PaymentAttempt retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves orchestration information for the given payment attempt record (e.g. return url). */
-  public static PaymentAttempt retrieve(String paymentAttemptRecord, RequestOptions options)
-      throws StripeException {
-    return retrieve(paymentAttemptRecord, (Map<String, Object>) null, options);
+  public static PaymentAttempt retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves orchestration information for the given payment attempt record (e.g. return url). */
   public static PaymentAttempt retrieve(
-      String paymentAttemptRecord, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
-        String.format(
-            "/v1/orchestration/payment_attempts/%s", ApiResource.urlEncodeId(paymentAttemptRecord));
+        String.format("/v1/orchestration/payment_attempts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, PaymentAttempt.class);
@@ -69,11 +66,10 @@ public class PaymentAttempt extends ApiResource implements HasId {
 
   /** Retrieves orchestration information for the given payment attempt record (e.g. return url). */
   public static PaymentAttempt retrieve(
-      String paymentAttemptRecord, PaymentAttemptRetrieveParams params, RequestOptions options)
+      String id, PaymentAttemptRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/orchestration/payment_attempts/%s", ApiResource.urlEncodeId(paymentAttemptRecord));
+        String.format("/v1/orchestration/payment_attempts/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

@@ -83,21 +83,21 @@ public final class OrderService extends ApiService {
     return this.request(request, Order.class);
   }
   /** Retrieves the details of a Climate order object with the given ID. */
-  public Order retrieve(String order, OrderRetrieveParams params) throws StripeException {
-    return retrieve(order, params, (RequestOptions) null);
+  public Order retrieve(String id, OrderRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of a Climate order object with the given ID. */
-  public Order retrieve(String order, RequestOptions options) throws StripeException {
-    return retrieve(order, (OrderRetrieveParams) null, options);
+  public Order retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (OrderRetrieveParams) null, options);
   }
   /** Retrieves the details of a Climate order object with the given ID. */
-  public Order retrieve(String order) throws StripeException {
-    return retrieve(order, (OrderRetrieveParams) null, (RequestOptions) null);
+  public Order retrieve(String id) throws StripeException {
+    return retrieve(id, (OrderRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the details of a Climate order object with the given ID. */
-  public Order retrieve(String order, OrderRetrieveParams params, RequestOptions options)
+  public Order retrieve(String id, OrderRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(order));
+    String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -108,21 +108,21 @@ public final class OrderService extends ApiService {
     return this.request(request, Order.class);
   }
   /** Updates the specified order by setting the values of the parameters passed. */
-  public Order update(String order, OrderUpdateParams params) throws StripeException {
-    return update(order, params, (RequestOptions) null);
+  public Order update(String id, OrderUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates the specified order by setting the values of the parameters passed. */
-  public Order update(String order, RequestOptions options) throws StripeException {
-    return update(order, (OrderUpdateParams) null, options);
+  public Order update(String id, RequestOptions options) throws StripeException {
+    return update(id, (OrderUpdateParams) null, options);
   }
   /** Updates the specified order by setting the values of the parameters passed. */
-  public Order update(String order) throws StripeException {
-    return update(order, (OrderUpdateParams) null, (RequestOptions) null);
+  public Order update(String id) throws StripeException {
+    return update(id, (OrderUpdateParams) null, (RequestOptions) null);
   }
   /** Updates the specified order by setting the values of the parameters passed. */
-  public Order update(String order, OrderUpdateParams params, RequestOptions options)
+  public Order update(String id, OrderUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(order));
+    String path = String.format("/v1/climate/orders/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -139,8 +139,8 @@ public final class OrderService extends ApiService {
    * cancels the reservation, Stripe provides 90 days advance notice and refunds the {@code
    * amount_total}.
    */
-  public Order cancel(String order, OrderCancelParams params) throws StripeException {
-    return cancel(order, params, (RequestOptions) null);
+  public Order cancel(String id, OrderCancelParams params) throws StripeException {
+    return cancel(id, params, (RequestOptions) null);
   }
   /**
    * Cancels a Climate order. You can cancel an order within 24 hours of creation. Stripe refunds
@@ -149,8 +149,8 @@ public final class OrderService extends ApiService {
    * cancels the reservation, Stripe provides 90 days advance notice and refunds the {@code
    * amount_total}.
    */
-  public Order cancel(String order, RequestOptions options) throws StripeException {
-    return cancel(order, (OrderCancelParams) null, options);
+  public Order cancel(String id, RequestOptions options) throws StripeException {
+    return cancel(id, (OrderCancelParams) null, options);
   }
   /**
    * Cancels a Climate order. You can cancel an order within 24 hours of creation. Stripe refunds
@@ -159,8 +159,8 @@ public final class OrderService extends ApiService {
    * cancels the reservation, Stripe provides 90 days advance notice and refunds the {@code
    * amount_total}.
    */
-  public Order cancel(String order) throws StripeException {
-    return cancel(order, (OrderCancelParams) null, (RequestOptions) null);
+  public Order cancel(String id) throws StripeException {
+    return cancel(id, (OrderCancelParams) null, (RequestOptions) null);
   }
   /**
    * Cancels a Climate order. You can cancel an order within 24 hours of creation. Stripe refunds
@@ -169,9 +169,9 @@ public final class OrderService extends ApiService {
    * cancels the reservation, Stripe provides 90 days advance notice and refunds the {@code
    * amount_total}.
    */
-  public Order cancel(String order, OrderCancelParams params, RequestOptions options)
+  public Order cancel(String id, OrderCancelParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/climate/orders/%s/cancel", ApiResource.urlEncodeId(order));
+    String path = String.format("/v1/climate/orders/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

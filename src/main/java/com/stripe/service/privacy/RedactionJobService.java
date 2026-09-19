@@ -68,23 +68,22 @@ public final class RedactionJobService extends ApiService {
     return this.request(request, RedactionJob.class);
   }
   /** Retrieves the details of a previously created redaction job. */
-  public RedactionJob retrieve(String job, RedactionJobRetrieveParams params)
+  public RedactionJob retrieve(String id, RedactionJobRetrieveParams params)
       throws StripeException {
-    return retrieve(job, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of a previously created redaction job. */
-  public RedactionJob retrieve(String job, RequestOptions options) throws StripeException {
-    return retrieve(job, (RedactionJobRetrieveParams) null, options);
+  public RedactionJob retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (RedactionJobRetrieveParams) null, options);
   }
   /** Retrieves the details of a previously created redaction job. */
-  public RedactionJob retrieve(String job) throws StripeException {
-    return retrieve(job, (RedactionJobRetrieveParams) null, (RequestOptions) null);
+  public RedactionJob retrieve(String id) throws StripeException {
+    return retrieve(id, (RedactionJobRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the details of a previously created redaction job. */
-  public RedactionJob retrieve(
-      String job, RedactionJobRetrieveParams params, RequestOptions options)
+  public RedactionJob retrieve(String id, RedactionJobRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/privacy/redaction_jobs/%s", ApiResource.urlEncodeId(job));
+    String path = String.format("/v1/privacy/redaction_jobs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -100,8 +99,8 @@ public final class RedactionJobService extends ApiService {
    * <p>If the job to update is in a {@code failed} status, it will not automatically start to
    * validate. Once you applied all of the changes, use the validate API to start validation again.
    */
-  public RedactionJob update(String job, RedactionJobUpdateParams params) throws StripeException {
-    return update(job, params, (RequestOptions) null);
+  public RedactionJob update(String id, RedactionJobUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /**
    * Updates the properties of a redaction job without running or canceling the job.
@@ -109,8 +108,8 @@ public final class RedactionJobService extends ApiService {
    * <p>If the job to update is in a {@code failed} status, it will not automatically start to
    * validate. Once you applied all of the changes, use the validate API to start validation again.
    */
-  public RedactionJob update(String job, RequestOptions options) throws StripeException {
-    return update(job, (RedactionJobUpdateParams) null, options);
+  public RedactionJob update(String id, RequestOptions options) throws StripeException {
+    return update(id, (RedactionJobUpdateParams) null, options);
   }
   /**
    * Updates the properties of a redaction job without running or canceling the job.
@@ -118,8 +117,8 @@ public final class RedactionJobService extends ApiService {
    * <p>If the job to update is in a {@code failed} status, it will not automatically start to
    * validate. Once you applied all of the changes, use the validate API to start validation again.
    */
-  public RedactionJob update(String job) throws StripeException {
-    return update(job, (RedactionJobUpdateParams) null, (RequestOptions) null);
+  public RedactionJob update(String id) throws StripeException {
+    return update(id, (RedactionJobUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates the properties of a redaction job without running or canceling the job.
@@ -127,9 +126,9 @@ public final class RedactionJobService extends ApiService {
    * <p>If the job to update is in a {@code failed} status, it will not automatically start to
    * validate. Once you applied all of the changes, use the validate API to start validation again.
    */
-  public RedactionJob update(String job, RedactionJobUpdateParams params, RequestOptions options)
+  public RedactionJob update(String id, RedactionJobUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/privacy/redaction_jobs/%s", ApiResource.urlEncodeId(job));
+    String path = String.format("/v1/privacy/redaction_jobs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -146,8 +145,8 @@ public final class RedactionJobService extends ApiService {
    * <p>Canceling the redaction job will abandon its attempt to redact the configured objects. A
    * canceled job cannot be used again.
    */
-  public RedactionJob cancel(String job, RedactionJobCancelParams params) throws StripeException {
-    return cancel(job, params, (RequestOptions) null);
+  public RedactionJob cancel(String id, RedactionJobCancelParams params) throws StripeException {
+    return cancel(id, params, (RequestOptions) null);
   }
   /**
    * You can cancel a redaction job when it’s in one of these statuses: {@code ready}, {@code
@@ -156,8 +155,8 @@ public final class RedactionJobService extends ApiService {
    * <p>Canceling the redaction job will abandon its attempt to redact the configured objects. A
    * canceled job cannot be used again.
    */
-  public RedactionJob cancel(String job, RequestOptions options) throws StripeException {
-    return cancel(job, (RedactionJobCancelParams) null, options);
+  public RedactionJob cancel(String id, RequestOptions options) throws StripeException {
+    return cancel(id, (RedactionJobCancelParams) null, options);
   }
   /**
    * You can cancel a redaction job when it’s in one of these statuses: {@code ready}, {@code
@@ -166,8 +165,8 @@ public final class RedactionJobService extends ApiService {
    * <p>Canceling the redaction job will abandon its attempt to redact the configured objects. A
    * canceled job cannot be used again.
    */
-  public RedactionJob cancel(String job) throws StripeException {
-    return cancel(job, (RedactionJobCancelParams) null, (RequestOptions) null);
+  public RedactionJob cancel(String id) throws StripeException {
+    return cancel(id, (RedactionJobCancelParams) null, (RequestOptions) null);
   }
   /**
    * You can cancel a redaction job when it’s in one of these statuses: {@code ready}, {@code
@@ -176,10 +175,10 @@ public final class RedactionJobService extends ApiService {
    * <p>Canceling the redaction job will abandon its attempt to redact the configured objects. A
    * canceled job cannot be used again.
    */
-  public RedactionJob cancel(String job, RedactionJobCancelParams params, RequestOptions options)
+  public RedactionJob cancel(String id, RedactionJobCancelParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/privacy/redaction_jobs/%s/cancel", ApiResource.urlEncodeId(job));
+        String.format("/v1/privacy/redaction_jobs/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -199,8 +198,8 @@ public final class RedactionJobService extends ApiService {
    * the status will become {@code succeeded}. If the job’s {@code validation_behavior} is set to
    * {@code fix}, the automatic fixes will be applied to objects at this step.
    */
-  public RedactionJob run(String job, RedactionJobRunParams params) throws StripeException {
-    return run(job, params, (RequestOptions) null);
+  public RedactionJob run(String id, RedactionJobRunParams params) throws StripeException {
+    return run(id, params, (RequestOptions) null);
   }
   /**
    * Run a redaction job in a {@code ready} status.
@@ -212,8 +211,8 @@ public final class RedactionJobService extends ApiService {
    * the status will become {@code succeeded}. If the job’s {@code validation_behavior} is set to
    * {@code fix}, the automatic fixes will be applied to objects at this step.
    */
-  public RedactionJob run(String job, RequestOptions options) throws StripeException {
-    return run(job, (RedactionJobRunParams) null, options);
+  public RedactionJob run(String id, RequestOptions options) throws StripeException {
+    return run(id, (RedactionJobRunParams) null, options);
   }
   /**
    * Run a redaction job in a {@code ready} status.
@@ -225,8 +224,8 @@ public final class RedactionJobService extends ApiService {
    * the status will become {@code succeeded}. If the job’s {@code validation_behavior} is set to
    * {@code fix}, the automatic fixes will be applied to objects at this step.
    */
-  public RedactionJob run(String job) throws StripeException {
-    return run(job, (RedactionJobRunParams) null, (RequestOptions) null);
+  public RedactionJob run(String id) throws StripeException {
+    return run(id, (RedactionJobRunParams) null, (RequestOptions) null);
   }
   /**
    * Run a redaction job in a {@code ready} status.
@@ -238,9 +237,9 @@ public final class RedactionJobService extends ApiService {
    * the status will become {@code succeeded}. If the job’s {@code validation_behavior} is set to
    * {@code fix}, the automatic fixes will be applied to objects at this step.
    */
-  public RedactionJob run(String job, RedactionJobRunParams params, RequestOptions options)
+  public RedactionJob run(String id, RedactionJobRunParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/privacy/redaction_jobs/%s/run", ApiResource.urlEncodeId(job));
+    String path = String.format("/v1/privacy/redaction_jobs/%s/run", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -261,9 +260,9 @@ public final class RedactionJobService extends ApiService {
    * validated, the status of the job will become {@code ready}. If there are any validation errors
    * preventing the job from running, the status will become {@code failed}.
    */
-  public RedactionJob validate(String job, RedactionJobValidateParams params)
+  public RedactionJob validate(String id, RedactionJobValidateParams params)
       throws StripeException {
-    return validate(job, params, (RequestOptions) null);
+    return validate(id, params, (RequestOptions) null);
   }
   /**
    * Validate a redaction job when it is in a {@code failed} status.
@@ -276,8 +275,8 @@ public final class RedactionJobService extends ApiService {
    * validated, the status of the job will become {@code ready}. If there are any validation errors
    * preventing the job from running, the status will become {@code failed}.
    */
-  public RedactionJob validate(String job, RequestOptions options) throws StripeException {
-    return validate(job, (RedactionJobValidateParams) null, options);
+  public RedactionJob validate(String id, RequestOptions options) throws StripeException {
+    return validate(id, (RedactionJobValidateParams) null, options);
   }
   /**
    * Validate a redaction job when it is in a {@code failed} status.
@@ -290,8 +289,8 @@ public final class RedactionJobService extends ApiService {
    * validated, the status of the job will become {@code ready}. If there are any validation errors
    * preventing the job from running, the status will become {@code failed}.
    */
-  public RedactionJob validate(String job) throws StripeException {
-    return validate(job, (RedactionJobValidateParams) null, (RequestOptions) null);
+  public RedactionJob validate(String id) throws StripeException {
+    return validate(id, (RedactionJobValidateParams) null, (RequestOptions) null);
   }
   /**
    * Validate a redaction job when it is in a {@code failed} status.
@@ -304,11 +303,10 @@ public final class RedactionJobService extends ApiService {
    * validated, the status of the job will become {@code ready}. If there are any validation errors
    * preventing the job from running, the status will become {@code failed}.
    */
-  public RedactionJob validate(
-      String job, RedactionJobValidateParams params, RequestOptions options)
+  public RedactionJob validate(String id, RedactionJobValidateParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/privacy/redaction_jobs/%s/validate", ApiResource.urlEncodeId(job));
+        String.format("/v1/privacy/redaction_jobs/%s/validate", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

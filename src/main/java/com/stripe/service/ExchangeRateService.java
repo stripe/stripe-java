@@ -80,9 +80,9 @@ public final class ExchangeRateService extends ApiService {
    *
    * <p>Retrieves the exchange rates from the given currency to every supported currency.
    */
-  public ExchangeRate retrieve(String rateId, ExchangeRateRetrieveParams params)
+  public ExchangeRate retrieve(String id, ExchangeRateRetrieveParams params)
       throws StripeException {
-    return retrieve(rateId, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
@@ -91,8 +91,8 @@ public final class ExchangeRateService extends ApiService {
    *
    * <p>Retrieves the exchange rates from the given currency to every supported currency.
    */
-  public ExchangeRate retrieve(String rateId, RequestOptions options) throws StripeException {
-    return retrieve(rateId, (ExchangeRateRetrieveParams) null, options);
+  public ExchangeRate retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (ExchangeRateRetrieveParams) null, options);
   }
   /**
    * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
@@ -101,8 +101,8 @@ public final class ExchangeRateService extends ApiService {
    *
    * <p>Retrieves the exchange rates from the given currency to every supported currency.
    */
-  public ExchangeRate retrieve(String rateId) throws StripeException {
-    return retrieve(rateId, (ExchangeRateRetrieveParams) null, (RequestOptions) null);
+  public ExchangeRate retrieve(String id) throws StripeException {
+    return retrieve(id, (ExchangeRateRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
@@ -111,10 +111,9 @@ public final class ExchangeRateService extends ApiService {
    *
    * <p>Retrieves the exchange rates from the given currency to every supported currency.
    */
-  public ExchangeRate retrieve(
-      String rateId, ExchangeRateRetrieveParams params, RequestOptions options)
+  public ExchangeRate retrieve(String id, ExchangeRateRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
+    String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -77,26 +77,25 @@ public final class PromotionCodeService extends ApiService {
    * customer-facing {@code code} use <a
    * href="https://stripe.com/docs/api/promotion_codes/list">list</a> with the desired {@code code}.
    */
-  public PromotionCode retrieve(String promotionCode, PromotionCodeRetrieveParams params)
+  public PromotionCode retrieve(String id, PromotionCodeRetrieveParams params)
       throws StripeException {
-    return retrieve(promotionCode, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /**
    * Retrieves the promotion code with the given ID. In order to retrieve a promotion code by the
    * customer-facing {@code code} use <a
    * href="https://stripe.com/docs/api/promotion_codes/list">list</a> with the desired {@code code}.
    */
-  public PromotionCode retrieve(String promotionCode, RequestOptions options)
-      throws StripeException {
-    return retrieve(promotionCode, (PromotionCodeRetrieveParams) null, options);
+  public PromotionCode retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (PromotionCodeRetrieveParams) null, options);
   }
   /**
    * Retrieves the promotion code with the given ID. In order to retrieve a promotion code by the
    * customer-facing {@code code} use <a
    * href="https://stripe.com/docs/api/promotion_codes/list">list</a> with the desired {@code code}.
    */
-  public PromotionCode retrieve(String promotionCode) throws StripeException {
-    return retrieve(promotionCode, (PromotionCodeRetrieveParams) null, (RequestOptions) null);
+  public PromotionCode retrieve(String id) throws StripeException {
+    return retrieve(id, (PromotionCodeRetrieveParams) null, (RequestOptions) null);
   }
   /**
    * Retrieves the promotion code with the given ID. In order to retrieve a promotion code by the
@@ -104,9 +103,9 @@ public final class PromotionCodeService extends ApiService {
    * href="https://stripe.com/docs/api/promotion_codes/list">list</a> with the desired {@code code}.
    */
   public PromotionCode retrieve(
-      String promotionCode, PromotionCodeRetrieveParams params, RequestOptions options)
+      String id, PromotionCodeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode));
+    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -120,32 +119,30 @@ public final class PromotionCodeService extends ApiService {
    * Updates the specified promotion code by setting the values of the parameters passed. Most
    * fields are, by design, not editable.
    */
-  public PromotionCode update(String promotionCode, PromotionCodeUpdateParams params)
+  public PromotionCode update(String id, PromotionCodeUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /**
+   * Updates the specified promotion code by setting the values of the parameters passed. Most
+   * fields are, by design, not editable.
+   */
+  public PromotionCode update(String id, RequestOptions options) throws StripeException {
+    return update(id, (PromotionCodeUpdateParams) null, options);
+  }
+  /**
+   * Updates the specified promotion code by setting the values of the parameters passed. Most
+   * fields are, by design, not editable.
+   */
+  public PromotionCode update(String id) throws StripeException {
+    return update(id, (PromotionCodeUpdateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Updates the specified promotion code by setting the values of the parameters passed. Most
+   * fields are, by design, not editable.
+   */
+  public PromotionCode update(String id, PromotionCodeUpdateParams params, RequestOptions options)
       throws StripeException {
-    return update(promotionCode, params, (RequestOptions) null);
-  }
-  /**
-   * Updates the specified promotion code by setting the values of the parameters passed. Most
-   * fields are, by design, not editable.
-   */
-  public PromotionCode update(String promotionCode, RequestOptions options) throws StripeException {
-    return update(promotionCode, (PromotionCodeUpdateParams) null, options);
-  }
-  /**
-   * Updates the specified promotion code by setting the values of the parameters passed. Most
-   * fields are, by design, not editable.
-   */
-  public PromotionCode update(String promotionCode) throws StripeException {
-    return update(promotionCode, (PromotionCodeUpdateParams) null, (RequestOptions) null);
-  }
-  /**
-   * Updates the specified promotion code by setting the values of the parameters passed. Most
-   * fields are, by design, not editable.
-   */
-  public PromotionCode update(
-      String promotionCode, PromotionCodeUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode));
+    String path = String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -176,20 +173,19 @@ public final class PromotionCodeService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a PromotionCode update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(String promotionCode, PromotionCodeUpdateParams params)
+  public String serializeBatchUpdate(String id, PromotionCodeUpdateParams params)
       throws StripeException {
-    return serializeBatchUpdate(promotionCode, params, (RequestOptions) null);
+    return serializeBatchUpdate(id, params, (RequestOptions) null);
   }
   /** Serializes a PromotionCode update request into a batch job JSONL line. */
   public String serializeBatchUpdate(
-      String promotionCode, PromotionCodeUpdateParams params, RequestOptions options)
-      throws StripeException {
+      String id, PromotionCodeUpdateParams params, RequestOptions options) throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("promotion_code", promotionCode);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);

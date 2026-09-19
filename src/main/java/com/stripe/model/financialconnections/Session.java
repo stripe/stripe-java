@@ -103,6 +103,9 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("permissions")
   List<String> permissions;
 
+  @SerializedName("pre_collected_consent")
+  PreCollectedConsent preCollectedConsent;
+
   /** Data features requested to be retrieved upon account creation. */
   @SerializedName("prefetch")
   List<String> prefetch;
@@ -194,30 +197,30 @@ public class Session extends ApiResource implements HasId {
   }
 
   /** Retrieves the details of a Financial Connections {@code Session}. */
-  public static Session retrieve(String session) throws StripeException {
-    return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
+  public static Session retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the details of a Financial Connections {@code Session}. */
-  public static Session retrieve(String session, RequestOptions options) throws StripeException {
-    return retrieve(session, (Map<String, Object>) null, options);
+  public static Session retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the details of a Financial Connections {@code Session}. */
-  public static Session retrieve(String session, Map<String, Object> params, RequestOptions options)
+  public static Session retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session));
+        String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
   /** Retrieves the details of a Financial Connections {@code Session}. */
-  public static Session retrieve(
-      String session, SessionRetrieveParams params, RequestOptions options) throws StripeException {
+  public static Session retrieve(String id, SessionRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String path =
-        String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session));
+        String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -397,6 +400,23 @@ public class Session extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about PreCollectedConsent, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PreCollectedConsent extends StripeObject {
+    /**
+     * The outcome of evaluating the pre-collected consent submitted for this Session.
+     *
+     * <p>One of {@code consent_accepted}, or {@code consent_required}.
+     */
+    @SerializedName("outcome")
+    String outcome;
+  }
+
+  /**
    * For more details about RelinkOptions, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -482,6 +502,7 @@ public class Session extends ApiResource implements HasId {
     trySetResponseGetter(hosted, responseGetter);
     trySetResponseGetter(limits, responseGetter);
     trySetResponseGetter(manualEntry, responseGetter);
+    trySetResponseGetter(preCollectedConsent, responseGetter);
     trySetResponseGetter(relinkOptions, responseGetter);
     trySetResponseGetter(relinkResult, responseGetter);
     trySetResponseGetter(statusDetails, responseGetter);

@@ -30,10 +30,11 @@ import lombok.Setter;
 /**
  * Use <a
  * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-transfers">OutboundTransfers</a>
- * to transfer funds from a <a href="https://api.stripe.com#financial_accounts">FinancialAccount</a>
- * to a PaymentMethod belonging to the same entity. To send funds to a different party, use <a
- * href="https://api.stripe.com#outbound_payments">OutboundPayments</a> instead. You can send funds
- * over ACH rails or through a domestic wire transfer to a user's own external bank account.
+ * to transfer funds from a <a
+ * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a> to a PaymentMethod
+ * belonging to the same entity. To send funds to a different party, use <a
+ * href="https://docs.stripe.com/api#outbound_payments">OutboundPayments</a> instead. You can send
+ * funds over ACH rails or through a domestic wire transfer to a user's own external bank account.
  *
  * <p>Simulate OutboundTransfer state changes with the {@code
  * /v1/test_helpers/treasury/outbound_transfers} endpoints. These methods can only be called on test
@@ -300,17 +301,17 @@ public class OutboundTransfer extends ApiResource implements HasId {
    * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID
    * from either the OutboundTransfer creation request or OutboundTransfer list.
    */
-  public static OutboundTransfer retrieve(String outboundTransfer) throws StripeException {
-    return retrieve(outboundTransfer, (Map<String, Object>) null, (RequestOptions) null);
+  public static OutboundTransfer retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
    * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID
    * from either the OutboundTransfer creation request or OutboundTransfer list.
    */
-  public static OutboundTransfer retrieve(String outboundTransfer, RequestOptions options)
+  public static OutboundTransfer retrieve(String id, RequestOptions options)
       throws StripeException {
-    return retrieve(outboundTransfer, (Map<String, Object>) null, options);
+    return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
@@ -318,11 +319,8 @@ public class OutboundTransfer extends ApiResource implements HasId {
    * from either the OutboundTransfer creation request or OutboundTransfer list.
    */
   public static OutboundTransfer retrieve(
-      String outboundTransfer, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(outboundTransfer));
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
     return getGlobalResponseGetter().request(request, OutboundTransfer.class);
@@ -333,11 +331,9 @@ public class OutboundTransfer extends ApiResource implements HasId {
    * from either the OutboundTransfer creation request or OutboundTransfer list.
    */
   public static OutboundTransfer retrieve(
-      String outboundTransfer, OutboundTransferRetrieveParams params, RequestOptions options)
+      String id, OutboundTransferRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path =
-        String.format(
-            "/v1/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(outboundTransfer));
+    String path = String.format("/v1/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(id));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

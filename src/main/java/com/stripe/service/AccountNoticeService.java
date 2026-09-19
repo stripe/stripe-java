@@ -60,24 +60,23 @@ public final class AccountNoticeService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<AccountNotice>>() {}.getType());
   }
   /** Retrieves an {@code AccountNotice} object. */
-  public AccountNotice retrieve(String accountNotice, AccountNoticeRetrieveParams params)
+  public AccountNotice retrieve(String id, AccountNoticeRetrieveParams params)
       throws StripeException {
-    return retrieve(accountNotice, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves an {@code AccountNotice} object. */
-  public AccountNotice retrieve(String accountNotice, RequestOptions options)
-      throws StripeException {
-    return retrieve(accountNotice, (AccountNoticeRetrieveParams) null, options);
+  public AccountNotice retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (AccountNoticeRetrieveParams) null, options);
   }
   /** Retrieves an {@code AccountNotice} object. */
-  public AccountNotice retrieve(String accountNotice) throws StripeException {
-    return retrieve(accountNotice, (AccountNoticeRetrieveParams) null, (RequestOptions) null);
+  public AccountNotice retrieve(String id) throws StripeException {
+    return retrieve(id, (AccountNoticeRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves an {@code AccountNotice} object. */
   public AccountNotice retrieve(
-      String accountNotice, AccountNoticeRetrieveParams params, RequestOptions options)
+      String id, AccountNoticeRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(accountNotice));
+    String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -88,15 +87,13 @@ public final class AccountNoticeService extends ApiService {
     return this.request(request, AccountNotice.class);
   }
   /** Updates an {@code AccountNotice} object. */
-  public AccountNotice update(String accountNotice, AccountNoticeUpdateParams params)
-      throws StripeException {
-    return update(accountNotice, params, (RequestOptions) null);
+  public AccountNotice update(String id, AccountNoticeUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates an {@code AccountNotice} object. */
-  public AccountNotice update(
-      String accountNotice, AccountNoticeUpdateParams params, RequestOptions options)
+  public AccountNotice update(String id, AccountNoticeUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(accountNotice));
+    String path = String.format("/v1/account_notices/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

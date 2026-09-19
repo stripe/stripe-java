@@ -81,31 +81,24 @@ public final class PersonalizationDesignService extends ApiService {
     return this.request(request, PersonalizationDesign.class);
   }
   /** Retrieves a personalization design object. */
-  public PersonalizationDesign retrieve(
-      String personalizationDesign, PersonalizationDesignRetrieveParams params)
+  public PersonalizationDesign retrieve(String id, PersonalizationDesignRetrieveParams params)
       throws StripeException {
-    return retrieve(personalizationDesign, params, (RequestOptions) null);
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a personalization design object. */
-  public PersonalizationDesign retrieve(String personalizationDesign, RequestOptions options)
-      throws StripeException {
-    return retrieve(personalizationDesign, (PersonalizationDesignRetrieveParams) null, options);
+  public PersonalizationDesign retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (PersonalizationDesignRetrieveParams) null, options);
   }
   /** Retrieves a personalization design object. */
-  public PersonalizationDesign retrieve(String personalizationDesign) throws StripeException {
-    return retrieve(
-        personalizationDesign, (PersonalizationDesignRetrieveParams) null, (RequestOptions) null);
+  public PersonalizationDesign retrieve(String id) throws StripeException {
+    return retrieve(id, (PersonalizationDesignRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a personalization design object. */
   public PersonalizationDesign retrieve(
-      String personalizationDesign,
-      PersonalizationDesignRetrieveParams params,
-      RequestOptions options)
+      String id, PersonalizationDesignRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/personalization_designs/%s",
-            ApiResource.urlEncodeId(personalizationDesign));
+        String.format("/v1/issuing/personalization_designs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -116,31 +109,24 @@ public final class PersonalizationDesignService extends ApiService {
     return this.request(request, PersonalizationDesign.class);
   }
   /** Updates a card personalization object. */
-  public PersonalizationDesign update(
-      String personalizationDesign, PersonalizationDesignUpdateParams params)
+  public PersonalizationDesign update(String id, PersonalizationDesignUpdateParams params)
       throws StripeException {
-    return update(personalizationDesign, params, (RequestOptions) null);
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates a card personalization object. */
-  public PersonalizationDesign update(String personalizationDesign, RequestOptions options)
-      throws StripeException {
-    return update(personalizationDesign, (PersonalizationDesignUpdateParams) null, options);
+  public PersonalizationDesign update(String id, RequestOptions options) throws StripeException {
+    return update(id, (PersonalizationDesignUpdateParams) null, options);
   }
   /** Updates a card personalization object. */
-  public PersonalizationDesign update(String personalizationDesign) throws StripeException {
-    return update(
-        personalizationDesign, (PersonalizationDesignUpdateParams) null, (RequestOptions) null);
+  public PersonalizationDesign update(String id) throws StripeException {
+    return update(id, (PersonalizationDesignUpdateParams) null, (RequestOptions) null);
   }
   /** Updates a card personalization object. */
   public PersonalizationDesign update(
-      String personalizationDesign,
-      PersonalizationDesignUpdateParams params,
-      RequestOptions options)
+      String id, PersonalizationDesignUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/issuing/personalization_designs/%s",
-            ApiResource.urlEncodeId(personalizationDesign));
+        String.format("/v1/issuing/personalization_designs/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

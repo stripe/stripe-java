@@ -85,26 +85,24 @@ public final class InboundTransferService extends ApiService {
     return this.request(request, InboundTransfer.class);
   }
   /** Cancels an InboundTransfer. */
-  public InboundTransfer cancel(String inboundTransfer, InboundTransferCancelParams params)
+  public InboundTransfer cancel(String id, InboundTransferCancelParams params)
       throws StripeException {
-    return cancel(inboundTransfer, params, (RequestOptions) null);
+    return cancel(id, params, (RequestOptions) null);
   }
   /** Cancels an InboundTransfer. */
-  public InboundTransfer cancel(String inboundTransfer, RequestOptions options)
-      throws StripeException {
-    return cancel(inboundTransfer, (InboundTransferCancelParams) null, options);
+  public InboundTransfer cancel(String id, RequestOptions options) throws StripeException {
+    return cancel(id, (InboundTransferCancelParams) null, options);
   }
   /** Cancels an InboundTransfer. */
-  public InboundTransfer cancel(String inboundTransfer) throws StripeException {
-    return cancel(inboundTransfer, (InboundTransferCancelParams) null, (RequestOptions) null);
+  public InboundTransfer cancel(String id) throws StripeException {
+    return cancel(id, (InboundTransferCancelParams) null, (RequestOptions) null);
   }
   /** Cancels an InboundTransfer. */
   public InboundTransfer cancel(
-      String inboundTransfer, InboundTransferCancelParams params, RequestOptions options)
+      String id, InboundTransferCancelParams params, RequestOptions options)
       throws StripeException {
     String path =
-        String.format(
-            "/v1/treasury/inbound_transfers/%s/cancel", ApiResource.urlEncodeId(inboundTransfer));
+        String.format("/v1/treasury/inbound_transfers/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -77,21 +77,21 @@ public final class TaxRateService extends ApiService {
     return this.request(request, TaxRate.class);
   }
   /** Retrieves a tax rate with the given ID. */
-  public TaxRate retrieve(String taxRate, TaxRateRetrieveParams params) throws StripeException {
-    return retrieve(taxRate, params, (RequestOptions) null);
+  public TaxRate retrieve(String id, TaxRateRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves a tax rate with the given ID. */
-  public TaxRate retrieve(String taxRate, RequestOptions options) throws StripeException {
-    return retrieve(taxRate, (TaxRateRetrieveParams) null, options);
+  public TaxRate retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (TaxRateRetrieveParams) null, options);
   }
   /** Retrieves a tax rate with the given ID. */
-  public TaxRate retrieve(String taxRate) throws StripeException {
-    return retrieve(taxRate, (TaxRateRetrieveParams) null, (RequestOptions) null);
+  public TaxRate retrieve(String id) throws StripeException {
+    return retrieve(id, (TaxRateRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves a tax rate with the given ID. */
-  public TaxRate retrieve(String taxRate, TaxRateRetrieveParams params, RequestOptions options)
+  public TaxRate retrieve(String id, TaxRateRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(taxRate));
+    String path = String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -102,21 +102,21 @@ public final class TaxRateService extends ApiService {
     return this.request(request, TaxRate.class);
   }
   /** Updates an existing tax rate. */
-  public TaxRate update(String taxRate, TaxRateUpdateParams params) throws StripeException {
-    return update(taxRate, params, (RequestOptions) null);
+  public TaxRate update(String id, TaxRateUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
   }
   /** Updates an existing tax rate. */
-  public TaxRate update(String taxRate, RequestOptions options) throws StripeException {
-    return update(taxRate, (TaxRateUpdateParams) null, options);
+  public TaxRate update(String id, RequestOptions options) throws StripeException {
+    return update(id, (TaxRateUpdateParams) null, options);
   }
   /** Updates an existing tax rate. */
-  public TaxRate update(String taxRate) throws StripeException {
-    return update(taxRate, (TaxRateUpdateParams) null, (RequestOptions) null);
+  public TaxRate update(String id) throws StripeException {
+    return update(id, (TaxRateUpdateParams) null, (RequestOptions) null);
   }
   /** Updates an existing tax rate. */
-  public TaxRate update(String taxRate, TaxRateUpdateParams params, RequestOptions options)
+  public TaxRate update(String id, TaxRateUpdateParams params, RequestOptions options)
       throws StripeException {
-    String path = String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(taxRate));
+    String path = String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -147,19 +147,18 @@ public final class TaxRateService extends ApiService {
     return ApiResource.GSON.toJson(requestBody);
   }
   /** Serializes a TaxRate update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(String taxRate, TaxRateUpdateParams params)
-      throws StripeException {
-    return serializeBatchUpdate(taxRate, params, (RequestOptions) null);
+  public String serializeBatchUpdate(String id, TaxRateUpdateParams params) throws StripeException {
+    return serializeBatchUpdate(id, params, (RequestOptions) null);
   }
   /** Serializes a TaxRate update request into a batch job JSONL line. */
-  public String serializeBatchUpdate(
-      String taxRate, TaxRateUpdateParams params, RequestOptions options) throws StripeException {
+  public String serializeBatchUpdate(String id, TaxRateUpdateParams params, RequestOptions options)
+      throws StripeException {
     String requestId = java.util.UUID.randomUUID().toString();
     String stripeVersion = Stripe.API_VERSION;
     String stripeContext = (options != null) ? options.getStripeContext() : null;
 
     java.util.Map<String, String> pathParams = new java.util.LinkedHashMap<String, String>();
-    pathParams.put("tax_rate", taxRate);
+    pathParams.put("id", id);
     java.util.Map<String, Object> requestBody = new java.util.LinkedHashMap<>();
     requestBody.put("id", requestId);
     requestBody.put("path_params", pathParams);
