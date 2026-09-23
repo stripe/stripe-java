@@ -169,6 +169,9 @@ public class AccountListParams extends ApiRequestParams {
     @SerializedName("customer")
     CUSTOMER("customer"),
 
+    @SerializedName("developer")
+    DEVELOPER("developer"),
+
     @SerializedName("merchant")
     MERCHANT("merchant"),
 

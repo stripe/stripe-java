@@ -16,8 +16,8 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class AccountUpdateParams extends ApiRequestParams {
   /**
-   * An <a href="https://api.stripe.com#create_account_token">account token</a>, used to securely
-   * provide details to the account.
+   * An <a href="https://docs.stripe.com/api#create_account_token">account token</a>, used to
+   * securely provide details to the account.
    */
   @SerializedName("account_token")
   Object accountToken;
@@ -267,8 +267,8 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * An <a href="https://api.stripe.com#create_account_token">account token</a>, used to securely
-     * provide details to the account.
+     * An <a href="https://docs.stripe.com/api#create_account_token">account token</a>, used to
+     * securely provide details to the account.
      */
     public Builder setAccountToken(String accountToken) {
       this.accountToken = accountToken;
@@ -276,8 +276,8 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * An <a href="https://api.stripe.com#create_account_token">account token</a>, used to securely
-     * provide details to the account.
+     * An <a href="https://docs.stripe.com/api#create_account_token">account token</a>, used to
+     * securely provide details to the account.
      */
     public Builder setAccountToken(EmptyParam accountToken) {
       this.accountToken = accountToken;
@@ -11435,10 +11435,11 @@ public class AccountUpdateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Document {
         /**
-         * The back of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code additional_verification}. The uploaded
-         * file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
-         * format, and less than 10 MB in size.
+         * The back of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}. The uploaded file needs to be a color image
+         * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+         * size.
          */
         @SerializedName("back")
         Object back;
@@ -11454,10 +11455,11 @@ public class AccountUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code additional_verification}. The uploaded
-         * file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
-         * format, and less than 10 MB in size.
+         * The front of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}. The uploaded file needs to be a color image
+         * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+         * size.
          */
         @SerializedName("front")
         Object front;
@@ -11486,10 +11488,11 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of a document returned by a <a href="https://api.stripe.com#create_file">file
-           * upload</a> with a {@code purpose} value of {@code additional_verification}. The
-           * uploaded file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG,
-           * or PDF format, and less than 10 MB in size.
+           * The back of a document returned by a <a
+           * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+           * value of {@code additional_verification}. The uploaded file needs to be a color image
+           * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+           * size.
            */
           public Builder setBack(String back) {
             this.back = back;
@@ -11497,10 +11500,11 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of a document returned by a <a href="https://api.stripe.com#create_file">file
-           * upload</a> with a {@code purpose} value of {@code additional_verification}. The
-           * uploaded file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG,
-           * or PDF format, and less than 10 MB in size.
+           * The back of a document returned by a <a
+           * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+           * value of {@code additional_verification}. The uploaded file needs to be a color image
+           * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+           * size.
            */
           public Builder setBack(EmptyParam back) {
             this.back = back;
@@ -11536,10 +11540,11 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of a document returned by a <a href="https://api.stripe.com#create_file">file
-           * upload</a> with a {@code purpose} value of {@code additional_verification}. The
-           * uploaded file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG,
-           * or PDF format, and less than 10 MB in size.
+           * The front of a document returned by a <a
+           * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+           * value of {@code additional_verification}. The uploaded file needs to be a color image
+           * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+           * size.
            */
           public Builder setFront(String front) {
             this.front = front;
@@ -11547,10 +11552,11 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of a document returned by a <a href="https://api.stripe.com#create_file">file
-           * upload</a> with a {@code purpose} value of {@code additional_verification}. The
-           * uploaded file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG,
-           * or PDF format, and less than 10 MB in size.
+           * The front of a document returned by a <a
+           * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+           * value of {@code additional_verification}. The uploaded file needs to be a color image
+           * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+           * size.
            */
           public Builder setFront(EmptyParam front) {
             this.front = front;
@@ -11908,8 +11914,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12008,8 +12015,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12102,8 +12110,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12199,8 +12208,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12296,8 +12306,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12395,8 +12406,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12492,8 +12504,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12586,8 +12599,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12774,8 +12788,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -15327,7 +15342,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class AdditionalDocument {
         /**
-         * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -15346,7 +15361,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -15378,7 +15393,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -15389,7 +15404,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -15430,7 +15445,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -15441,7 +15456,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -15457,7 +15472,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Document {
         /**
-         * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -15476,7 +15491,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -15508,7 +15523,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -15519,7 +15534,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -15558,7 +15573,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -15569,7 +15584,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.

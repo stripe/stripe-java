@@ -106,6 +106,9 @@ public class AccountRetrieveParams extends ApiRequestParams {
     @SerializedName("configuration.customer")
     CONFIGURATION__CUSTOMER("configuration.customer"),
 
+    @SerializedName("configuration.developer")
+    CONFIGURATION__DEVELOPER("configuration.developer"),
+
     @SerializedName("configuration.merchant")
     CONFIGURATION__MERCHANT("configuration.merchant"),
 

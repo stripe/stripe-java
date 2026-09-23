@@ -225,6 +225,10 @@ import com.stripe.events.V2BillingCadenceCanceledEventNotification;
 import com.stripe.events.V2BillingCadenceCreatedEventNotification;
 import com.stripe.events.V2BillingContractActivatedEventNotification;
 import com.stripe.events.V2BillingContractCanceledEventNotification;
+import com.stripe.events.V2BillingContractCollectionBlockedEventNotification;
+import com.stripe.events.V2BillingContractCollectionCurrentEventNotification;
+import com.stripe.events.V2BillingContractCollectionPastDueEventNotification;
+import com.stripe.events.V2BillingContractCollectionUnpaidEventNotification;
 import com.stripe.events.V2BillingContractCreatedEventNotification;
 import com.stripe.events.V2BillingContractEndedEventNotification;
 import com.stripe.events.V2BillingContractUpdatedEventNotification;
@@ -340,6 +344,11 @@ import com.stripe.events.V2CoreHealthTrafficVolumeDropFiringEventNotification;
 import com.stripe.events.V2CoreHealthTrafficVolumeDropResolvedEventNotification;
 import com.stripe.events.V2CoreHealthWebhookLatencyFiringEventNotification;
 import com.stripe.events.V2CoreHealthWebhookLatencyResolvedEventNotification;
+import com.stripe.events.V2CoreVaultNetworkTokenActivatedEventNotification;
+import com.stripe.events.V2CoreVaultNetworkTokenAuthorizationRequirementsChangedEventNotification;
+import com.stripe.events.V2CoreVaultNetworkTokenDeactivatedEventNotification;
+import com.stripe.events.V2CoreVaultNetworkTokenDetailsUpdatedEventNotification;
+import com.stripe.events.V2CoreVaultNetworkTokenSuspendedEventNotification;
 import com.stripe.events.V2DataReportingQueryRunCreatedEventNotification;
 import com.stripe.events.V2DataReportingQueryRunFailedEventNotification;
 import com.stripe.events.V2DataReportingQueryRunSucceededEventNotification;
@@ -368,6 +377,9 @@ import com.stripe.events.V2MoneyManagementFinancialAccountCreatedEventNotificati
 import com.stripe.events.V2MoneyManagementFinancialAccountStatementCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountStatementRestatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountUpdatedEventNotification;
+import com.stripe.events.V2MoneyManagementFinancialAccountWalletExportCompletedEventNotification;
+import com.stripe.events.V2MoneyManagementFinancialAccountWalletExportPendingEventNotification;
+import com.stripe.events.V2MoneyManagementFinancialAccountWalletExportReadyEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAddressActivatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAddressFailedEventNotification;
 import com.stripe.events.V2MoneyManagementInboundTransferAvailableEventNotification;
@@ -1883,6 +1895,30 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV2BillingContractCollectionBlocked(
+      EventNotificationCallback<V2BillingContractCollectionBlockedEventNotification> callback) {
+    this.register("v2.billing.contract.collection_blocked", callback);
+    return self();
+  }
+
+  public T onV2BillingContractCollectionCurrent(
+      EventNotificationCallback<V2BillingContractCollectionCurrentEventNotification> callback) {
+    this.register("v2.billing.contract.collection_current", callback);
+    return self();
+  }
+
+  public T onV2BillingContractCollectionPastDue(
+      EventNotificationCallback<V2BillingContractCollectionPastDueEventNotification> callback) {
+    this.register("v2.billing.contract.collection_past_due", callback);
+    return self();
+  }
+
+  public T onV2BillingContractCollectionUnpaid(
+      EventNotificationCallback<V2BillingContractCollectionUnpaidEventNotification> callback) {
+    this.register("v2.billing.contract.collection_unpaid", callback);
+    return self();
+  }
+
   public T onV2BillingContractCreated(
       EventNotificationCallback<V2BillingContractCreatedEventNotification> callback) {
     this.register("v2.billing.contract.created", callback);
@@ -2637,6 +2673,38 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV2CoreVaultNetworkTokenActivated(
+      EventNotificationCallback<V2CoreVaultNetworkTokenActivatedEventNotification> callback) {
+    this.register("v2.core.vault.network_token.activated", callback);
+    return self();
+  }
+
+  public T onV2CoreVaultNetworkTokenAuthorizationRequirementsChanged(
+      EventNotificationCallback<
+              V2CoreVaultNetworkTokenAuthorizationRequirementsChangedEventNotification>
+          callback) {
+    this.register("v2.core.vault.network_token.authorization_requirements_changed", callback);
+    return self();
+  }
+
+  public T onV2CoreVaultNetworkTokenDeactivated(
+      EventNotificationCallback<V2CoreVaultNetworkTokenDeactivatedEventNotification> callback) {
+    this.register("v2.core.vault.network_token.deactivated", callback);
+    return self();
+  }
+
+  public T onV2CoreVaultNetworkTokenDetailsUpdated(
+      EventNotificationCallback<V2CoreVaultNetworkTokenDetailsUpdatedEventNotification> callback) {
+    this.register("v2.core.vault.network_token.details_updated", callback);
+    return self();
+  }
+
+  public T onV2CoreVaultNetworkTokenSuspended(
+      EventNotificationCallback<V2CoreVaultNetworkTokenSuspendedEventNotification> callback) {
+    this.register("v2.core.vault.network_token.suspended", callback);
+    return self();
+  }
+
   public T onV2DataReportingQueryRunCreated(
       EventNotificationCallback<V2DataReportingQueryRunCreatedEventNotification> callback) {
     this.register("v2.data.reporting.query_run.created", callback);
@@ -2792,6 +2860,29 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
       EventNotificationCallback<V2MoneyManagementFinancialAccountUpdatedEventNotification>
           callback) {
     this.register("v2.money_management.financial_account.updated", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementFinancialAccountWalletExportCompleted(
+      EventNotificationCallback<
+              V2MoneyManagementFinancialAccountWalletExportCompletedEventNotification>
+          callback) {
+    this.register("v2.money_management.financial_account.wallet_export.completed", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementFinancialAccountWalletExportPending(
+      EventNotificationCallback<
+              V2MoneyManagementFinancialAccountWalletExportPendingEventNotification>
+          callback) {
+    this.register("v2.money_management.financial_account.wallet_export.pending", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementFinancialAccountWalletExportReady(
+      EventNotificationCallback<V2MoneyManagementFinancialAccountWalletExportReadyEventNotification>
+          callback) {
+    this.register("v2.money_management.financial_account.wallet_export.ready", callback);
     return self();
   }
 

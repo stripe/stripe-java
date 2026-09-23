@@ -170,6 +170,9 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   @SerializedName("payout_method")
   String payoutMethod;
 
+  @SerializedName("payout_method_options")
+  PayoutMethodOptions payoutMethodOptions;
+
   /**
    * If {@code completed}, you can use the <a
    * href="https://docs.stripe.com/api/balance_transactions/list#balance_transaction_list-payout">Balance
@@ -708,6 +711,31 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
+   * For more details about PayoutMethodOptions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PayoutMethodOptions extends StripeObject {
+    @SerializedName("financial_account")
+    FinancialAccount financialAccount;
+
+    /**
+     * For more details about FinancialAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FinancialAccount extends StripeObject {
+      /** The currency credited to the destination Financial Account. */
+      @SerializedName("destination_currency")
+      String destinationCurrency;
+    }
+  }
+
+  /**
    * For more details about TraceId, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -741,6 +769,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
     trySetResponseGetter(destination, responseGetter);
     trySetResponseGetter(failureBalanceTransaction, responseGetter);
     trySetResponseGetter(originalPayout, responseGetter);
+    trySetResponseGetter(payoutMethodOptions, responseGetter);
     trySetResponseGetter(reversedBy, responseGetter);
     trySetResponseGetter(traceId, responseGetter);
   }

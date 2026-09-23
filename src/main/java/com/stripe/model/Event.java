@@ -112,8 +112,9 @@ public class Event extends ApiResource implements HasId {
    * {@code account.external_account.created}, {@code account.external_account.deleted}, {@code
    * account.external_account.updated}, {@code account.updated}, {@code account_notice.created},
    * {@code account_notice.updated}, {@code application_fee.created}, {@code
-   * application_fee.refund.updated}, {@code application_fee.refunded}, {@code balance.available},
-   * {@code balance_settings.updated}, {@code billing.alert.recovered}, {@code
+   * application_fee.refund.updated}, {@code application_fee.refunded}, {@code
+   * apps.install.created}, {@code apps.install.deleted}, {@code apps.install.updated}, {@code
+   * balance.available}, {@code balance_settings.updated}, {@code billing.alert.recovered}, {@code
    * billing.alert.triggered}, {@code billing.credit_balance_transaction.created}, {@code
    * billing.credit_grant.created}, {@code billing.credit_grant.updated}, {@code
    * billing.meter.created}, {@code billing.meter.deactivated}, {@code billing.meter.reactivated},

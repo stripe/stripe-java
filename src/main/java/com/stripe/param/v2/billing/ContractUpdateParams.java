@@ -1166,7 +1166,7 @@ public class ContractUpdateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Add {
-      /** <strong>Required.</strong> The end time for the pricing line. */
+      /** The end time for the pricing line. */
       @SerializedName("ends_at")
       EndsAt endsAt;
 
@@ -1238,7 +1238,7 @@ public class ContractUpdateParams extends ApiRequestParams {
               this.startsAt);
         }
 
-        /** <strong>Required.</strong> The end time for the pricing line. */
+        /** The end time for the pricing line. */
         public Builder setEndsAt(ContractUpdateParams.PricingLineAction.Add.EndsAt endsAt) {
           this.endsAt = endsAt;
           return this;
@@ -1410,6 +1410,12 @@ public class ContractUpdateParams extends ApiRequestParams {
         }
 
         public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("never")
+          NEVER("never"),
+
+          @SerializedName("now")
+          NOW("now"),
+
           @SerializedName("timestamp")
           TIMESTAMP("timestamp");
 
@@ -2009,6 +2015,9 @@ public class ContractUpdateParams extends ApiRequestParams {
               }
 
               public enum Type implements ApiRequestParams.EnumParam {
+                @SerializedName("never")
+                NEVER("never"),
+
                 @SerializedName("timestamp")
                 TIMESTAMP("timestamp");
 
@@ -2892,6 +2901,12 @@ public class ContractUpdateParams extends ApiRequestParams {
         }
 
         public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("never")
+          NEVER("never"),
+
+          @SerializedName("now")
+          NOW("now"),
+
           @SerializedName("timestamp")
           TIMESTAMP("timestamp");
 
@@ -3282,7 +3297,7 @@ public class ContractUpdateParams extends ApiRequestParams {
             @Getter
             @EqualsAndHashCode(callSuper = false)
             public static class Add {
-              /** <strong>Required.</strong> The end time for the override. */
+              /** The end time for the override. */
               @SerializedName("ends_at")
               EndsAt endsAt;
 
@@ -3382,7 +3397,7 @@ public class ContractUpdateParams extends ApiRequestParams {
                       this.type);
                 }
 
-                /** <strong>Required.</strong> The end time for the override. */
+                /** The end time for the override. */
                 public Builder setEndsAt(
                     ContractUpdateParams.PricingLineAction.Update.Pricing.PriceDetails
                             .PricingOverrideAction.Add.EndsAt
@@ -3597,6 +3612,12 @@ public class ContractUpdateParams extends ApiRequestParams {
                 }
 
                 public enum Type implements ApiRequestParams.EnumParam {
+                  @SerializedName("never")
+                  NEVER("never"),
+
+                  @SerializedName("now")
+                  NOW("now"),
+
                   @SerializedName("timestamp")
                   TIMESTAMP("timestamp");
 
@@ -4118,6 +4139,12 @@ public class ContractUpdateParams extends ApiRequestParams {
                 }
 
                 public enum Type implements ApiRequestParams.EnumParam {
+                  @SerializedName("never")
+                  NEVER("never"),
+
+                  @SerializedName("now")
+                  NOW("now"),
+
                   @SerializedName("timestamp")
                   TIMESTAMP("timestamp");
 
@@ -4796,7 +4823,7 @@ public class ContractUpdateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Add {
-      /** <strong>Required.</strong> The end time for the pricing override. */
+      /** The end time for the pricing override. */
       @SerializedName("ends_at")
       EndsAt endsAt;
 
@@ -4895,7 +4922,7 @@ public class ContractUpdateParams extends ApiRequestParams {
               this.type);
         }
 
-        /** <strong>Required.</strong> The end time for the pricing override. */
+        /** The end time for the pricing override. */
         public Builder setEndsAt(ContractUpdateParams.PricingOverrideAction.Add.EndsAt endsAt) {
           this.endsAt = endsAt;
           return this;
@@ -5090,6 +5117,12 @@ public class ContractUpdateParams extends ApiRequestParams {
         }
 
         public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("never")
+          NEVER("never"),
+
+          @SerializedName("now")
+          NOW("now"),
+
           @SerializedName("timestamp")
           TIMESTAMP("timestamp");
 
@@ -5941,6 +5974,12 @@ public class ContractUpdateParams extends ApiRequestParams {
         }
 
         public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("never")
+          NEVER("never"),
+
+          @SerializedName("now")
+          NOW("now"),
+
           @SerializedName("timestamp")
           TIMESTAMP("timestamp");
 

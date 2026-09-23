@@ -210,6 +210,12 @@ public class ReceivedCredit extends StripeObject implements HasId {
     @SerializedName("mx_bank_account")
     MxBankAccount mxBankAccount;
 
+    /**
+     * Network-level detail for the transfer that created this ReceivedCredit. Present only for ACH.
+     */
+    @SerializedName("network_details")
+    NetworkDetails networkDetails;
+
     /** Hash containing the originating bank account details and type for this bank transfer. */
     @SerializedName("originating_bank_account")
     OriginatingBankAccount originatingBankAccount;
@@ -339,6 +345,61 @@ public class ReceivedCredit extends StripeObject implements HasId {
        */
       @SerializedName("network")
       String network;
+    }
+
+    /**
+     * Network-level detail for the transfer that created this ReceivedCredit. Present only for ACH.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NetworkDetails extends StripeObject {
+      /** NACHA details for the ACH entry that created this ReceivedCredit. */
+      @SerializedName("ach")
+      Ach ach;
+
+      /** NACHA details for the ACH entry that created this ReceivedCredit. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Ach extends StripeObject {
+        /** Payment-related information from the ACH addenda record, up to 80 characters. */
+        @SerializedName("addenda")
+        String addenda;
+
+        /** Company Entry Description from the ACH batch header, e.g. &quot;HCCLAIMPMT&quot;. */
+        @SerializedName("originator_company_entry_description")
+        String originatorCompanyEntryDescription;
+
+        /** Company Identification from the ACH batch header. */
+        @SerializedName("originator_company_id")
+        String originatorCompanyId;
+
+        /** Company Name from the ACH batch header -- the business that sent the funds. */
+        @SerializedName("originator_company_name")
+        String originatorCompanyName;
+
+        /** Identification Number from the ACH entry detail record. */
+        @SerializedName("receiver_id_number")
+        String receiverIdNumber;
+
+        /** Individual Name from the ACH entry detail record. */
+        @SerializedName("receiver_name")
+        String receiverName;
+
+        /**
+         * Open Enum. Standard Entry Class code of the ACH entry.
+         *
+         * <p>One of {@code ccd}, {@code cie}, {@code ctx}, {@code iat}, {@code pos}, {@code ppd},
+         * {@code tel}, or {@code web}.
+         */
+        @SerializedName("standard_entry_class_code")
+        String standardEntryClassCode;
+
+        /** Trace Number from the ACH entry detail record. */
+        @SerializedName("trace_id")
+        String traceId;
+      }
     }
 
     /** Hash containing the originating bank account details and type for this bank transfer. */

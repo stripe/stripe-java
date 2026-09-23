@@ -38,7 +38,7 @@ public class FileCreateParams extends ApiRequestParams {
 
   /**
    * Optional parameters that automatically create a <a
-   * href="https://api.stripe.com#file_links">file link</a> for the newly created file.
+   * href="https://docs.stripe.com/api#file_links">file link</a> for the newly created file.
    */
   @SerializedName("file_link_data")
   FileLinkData fileLinkData;
@@ -156,7 +156,7 @@ public class FileCreateParams extends ApiRequestParams {
 
     /**
      * Optional parameters that automatically create a <a
-     * href="https://api.stripe.com#file_links">file link</a> for the newly created file.
+     * href="https://docs.stripe.com/api#file_links">file link</a> for the newly created file.
      */
     public Builder setFileLinkData(FileCreateParams.FileLinkData fileLinkData) {
       this.fileLinkData = fileLinkData;

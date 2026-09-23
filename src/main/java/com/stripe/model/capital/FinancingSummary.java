@@ -155,6 +155,13 @@ public class FinancingSummary extends ApiResource {
     @SerializedName("repayments_begin_at")
     BigDecimal repaymentsBeginAt;
 
+    /**
+     * Total amount to be paid, independent of what's already been paid, in minor units. For
+     * example, 100 USD is represented as 10000.
+     */
+    @SerializedName("total_due_amount")
+    Long totalDueAmount;
+
     /** Per-transaction rate at which Stripe withholds funds to repay the financing. */
     @SerializedName("withhold_rate")
     BigDecimal withholdRate;
@@ -173,6 +180,13 @@ public class FinancingSummary extends ApiResource {
       BigDecimal dueAt;
 
       /**
+       * The balance for the current repayment interval, in minor units. This does not account for
+       * any amount paid down during the interval.
+       */
+      @SerializedName("incremental_interval_target_amount")
+      Long incrementalIntervalTargetAmount;
+
+      /**
        * The amount that has already been paid in the current repayment interval, in minor units.
        * For example, 100 USD is represented as 10000.
        */
@@ -185,6 +199,13 @@ public class FinancingSummary extends ApiResource {
        */
       @SerializedName("remaining_amount")
       Long remainingAmount;
+
+      /**
+       * The time at which the current repayment interval started. Given in seconds since unix
+       * epoch.
+       */
+      @SerializedName("starts_at")
+      Long startsAt;
     }
   }
 

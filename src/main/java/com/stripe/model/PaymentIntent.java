@@ -186,7 +186,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * <p>Payment methods attached to other Customers cannot be used with this PaymentIntent.
    *
    * <p>If <a
-   * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
+   * href="https://docs.stripe.com/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
    * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
    * method attaches to the Customer after the PaymentIntent has been confirmed and any required
    * actions from the user are complete. If the payment method is {@code card_present} and isn't a
@@ -205,7 +205,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * <p>Payment methods attached to other Accounts cannot be used with this PaymentIntent.
    *
    * <p>If <a
-   * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
+   * href="https://docs.stripe.com/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
    * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
    * method attaches to the Account after the PaymentIntent has been confirmed and any required
    * actions from the user are complete. If the payment method is {@code card_present} and isn't a
@@ -6265,6 +6265,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Blik extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -6284,10 +6287,31 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        * with regional legislation and network rules, such as <a
        * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
-       * <p>Equal to {@code none}.
+       * <p>One of {@code none}, or {@code off_session}.
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** Date at which the mandate expires. */
+        @SerializedName("expires_at")
+        Long expiresAt;
+
+        /**
+         * Type of the mandate.
+         *
+         * <p>Equal to {@code off_session}.
+         */
+        @SerializedName("type")
+        String type;
+      }
     }
 
     /**
@@ -6471,6 +6495,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       Boolean requireCvcRecollection;
 
       /**
+       * Set to indicate the future transaction type usage for the card being set up.
+       *
+       * <p>One of {@code installment}, {@code recurring}, or {@code unscheduled}.
+       */
+      @SerializedName("setup_credential_usage")
+      String setupCredentialUsage;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
@@ -6516,6 +6548,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
       @SerializedName("statement_details")
       StatementDetails statementDetails;
+
+      /**
+       * Selected usage to indicate the transaction type of the off-session payment.
+       *
+       * <p>One of {@code installment}, {@code recurring}, or {@code unscheduled}.
+       */
+      @SerializedName("stored_credential_usage")
+      String storedCredentialUsage;
 
       /**
        * For more details about CaptureDelay, please refer to the <a

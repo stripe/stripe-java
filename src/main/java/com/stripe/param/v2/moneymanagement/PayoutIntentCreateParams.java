@@ -893,6 +893,10 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
           @Getter
           @EqualsAndHashCode(callSuper = false)
           public static class Ach {
+            /** Freeform ACH addenda (max 80 characters) included in the NACHA submission. */
+            @SerializedName("addenda")
+            String addenda;
+
             /**
              * Map of extra parameters for custom features not available in this client library. The
              * content in this map is not serialized under this field's {@code @SerializedName}
@@ -912,9 +916,11 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
             TransactionPurpose transactionPurpose;
 
             private Ach(
+                String addenda,
                 Map<String, Object> extraParams,
                 Submission submission,
                 TransactionPurpose transactionPurpose) {
+              this.addenda = addenda;
               this.extraParams = extraParams;
               this.submission = submission;
               this.transactionPurpose = transactionPurpose;
@@ -925,6 +931,8 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
             }
 
             public static class Builder {
+              private String addenda;
+
               private Map<String, Object> extraParams;
 
               private Submission submission;
@@ -937,7 +945,13 @@ public class PayoutIntentCreateParams extends ApiRequestParams {
                   build() {
                 return new PayoutIntentCreateParams.To.PayoutMethodOptions.BankAccount
                     .PreferredNetworkOptions.Ach(
-                    this.extraParams, this.submission, this.transactionPurpose);
+                    this.addenda, this.extraParams, this.submission, this.transactionPurpose);
+              }
+
+              /** Freeform ACH addenda (max 80 characters) included in the NACHA submission. */
+              public Builder setAddenda(String addenda) {
+                this.addenda = addenda;
+                return this;
               }
 
               /**

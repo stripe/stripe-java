@@ -317,12 +317,12 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
   @EqualsAndHashCode(callSuper = false)
   public static class Tax extends StripeObject {
     /**
-     * The total amount of tax on the transaction represented in the <a
+     * The total amount of tax on a single line item represented in the <a
      * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. Required
-     * for L2 rates. An integer greater than or equal to 0.
+     * for L3 rates. An integer greater than or equal to 0.
      *
-     * <p>This field is mutually exclusive with the {@code
-     * amount_details[line_items][#][tax][total_tax_amount]} field.
+     * <p>This field is mutually exclusive with the {@code amount_details[tax][total_tax_amount]}
+     * field.
      */
     @SerializedName("total_tax_amount")
     Long totalTaxAmount;

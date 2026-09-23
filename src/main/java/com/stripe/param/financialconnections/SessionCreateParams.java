@@ -462,7 +462,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("account_subcategories")
     List<SessionCreateParams.Filters.AccountSubcategory> accountSubcategories;
 
-    /** List of countries from which to collect accounts. */
+    /** List of countries from which to filter accounts. */
     @SerializedName("countries")
     List<String> countries;
 

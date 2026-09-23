@@ -26,6 +26,21 @@ public class Contract extends StripeObject implements HasId {
   @SerializedName("billing_settings")
   BillingSettings billingSettings;
 
+  /**
+   * The collection status of the contract that indicates whether there are any outstanding invoices
+   * for the contract.
+   *
+   * <p>One of {@code blocked}, {@code current}, {@code past_due}, or {@code unpaid}.
+   */
+  @SerializedName("collection_status")
+  String collectionStatus;
+
+  /**
+   * Historical timestamps of when the contract's collection status transitioned into each status.
+   */
+  @SerializedName("collection_status_transitions")
+  CollectionStatusTransitions collectionStatusTransitions;
+
   /** A unique user-provided contract number e.g. C-2026-0001. */
   @SerializedName("contract_number")
   String contractNumber;
@@ -224,6 +239,30 @@ public class Contract extends StripeObject implements HasId {
       @SerializedName("payment_method_configuration")
       String paymentMethodConfiguration;
     }
+  }
+
+  /**
+   * Historical timestamps of when the contract's collection status transitioned into each status.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CollectionStatusTransitions extends StripeObject {
+    /** The timestamp when the contract's collection status transitioned to blocked. */
+    @SerializedName("blocked_at")
+    Instant blockedAt;
+
+    /** The timestamp when the contract's collection status transitioned to current. */
+    @SerializedName("current_at")
+    Instant currentAt;
+
+    /** The timestamp when the contract's collection status transitioned to past due. */
+    @SerializedName("past_due_at")
+    Instant pastDueAt;
+
+    /** The timestamp when the contract's collection status transitioned to unpaid. */
+    @SerializedName("unpaid_at")
+    Instant unpaidAt;
   }
 
   /**

@@ -9,7 +9,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** An object representing an app installation. */
+/**
+ * An app install represents a Stripe App that is installed on an account. It reports the
+ * permissions, content security policy entries, and endpoints that the installing account has
+ * authorized, along with any that the app's latest version requests but the account has not
+ * authorized yet. Use the Install API to install, reauthorize, and uninstall apps, and to check the
+ * state of existing installs.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -24,7 +30,8 @@ public class Install extends StripeObject implements HasId {
 
   /**
    * Whether the installer must authorize pending permissions, content security policy entries, or
-   * endpoints.
+   * endpoints. For private apps, {@code approval_required} stays {@code false}. Install a new
+   * version from the Dashboard to grant its permissions.
    */
   @SerializedName("approval_required")
   Boolean approvalRequired;
@@ -140,9 +147,11 @@ public class Install extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class ContentSecurityPolicyGranted extends StripeObject {
+    /** The URLs that the app can make network requests to. */
     @SerializedName("connect_src")
     List<String> connectSrc;
 
+    /** The URLs that the app can load images from. */
     @SerializedName("image_src")
     List<String> imageSrc;
   }
@@ -155,9 +164,11 @@ public class Install extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class ContentSecurityPolicyPending extends StripeObject {
+    /** The URLs that the app can make network requests to. */
     @SerializedName("connect_src")
     List<String> connectSrc;
 
+    /** The URLs that the app can load images from. */
     @SerializedName("image_src")
     List<String> imageSrc;
   }

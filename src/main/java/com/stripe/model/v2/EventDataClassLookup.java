@@ -218,6 +218,12 @@ public final class EventDataClassLookup {
         "v2.money_management.financial_account_statement",
         com.stripe.model.v2.moneymanagement.FinancialAccountStatement.class);
     classLookup.put(
+        "v2.money_management.financial_account_wallet_export",
+        com.stripe.model.v2.moneymanagement.FinancialAccountWalletExport.class);
+    classLookup.put(
+        "v2.money_management.financial_account_wallet_export_credentials",
+        com.stripe.model.v2.moneymanagement.FinancialAccountWalletExportCredentials.class);
+    classLookup.put(
         "v2.money_management.financial_address",
         com.stripe.model.v2.moneymanagement.FinancialAddress.class);
     classLookup.put(
@@ -280,6 +286,26 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.payments.settlement_allocation_intent_split",
         com.stripe.model.v2.payments.SettlementAllocationIntentSplit.class);
+
+    classLookup.put(
+        "v2.provisioning.eligibility", com.stripe.model.v2.provisioning.Eligibility.class);
+    classLookup.put(
+        "v2.provisioning.payment_method_request",
+        com.stripe.model.v2.provisioning.PaymentMethodRequest.class);
+    classLookup.put(
+        "v2.provisioning.payment_profile", com.stripe.model.v2.provisioning.PaymentProfile.class);
+    classLookup.put("v2.provisioning.project", com.stripe.model.v2.provisioning.Project.class);
+    classLookup.put("v2.provisioning.provider", com.stripe.model.v2.provisioning.Provider.class);
+    classLookup.put(
+        "v2.provisioning.provider_connection",
+        com.stripe.model.v2.provisioning.ProviderConnection.class);
+    classLookup.put(
+        "v2.provisioning.provider_connection_request",
+        com.stripe.model.v2.provisioning.ProviderConnectionRequest.class);
+    classLookup.put(
+        "v2.provisioning.provider_service_detail",
+        com.stripe.model.v2.provisioning.ProviderServiceDetail.class);
+    classLookup.put("v2.provisioning.resource", com.stripe.model.v2.provisioning.Resource.class);
 
     classLookup.put("v2.reporting.report", com.stripe.model.v2.reporting.Report.class);
     classLookup.put("v2.reporting.report_run", com.stripe.model.v2.reporting.ReportRun.class);
@@ -767,6 +793,18 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.billing.contract.canceled", com.stripe.events.V2BillingContractCanceledEvent.class);
     eventClassLookup.put(
+        "v2.billing.contract.collection_blocked",
+        com.stripe.events.V2BillingContractCollectionBlockedEvent.class);
+    eventClassLookup.put(
+        "v2.billing.contract.collection_current",
+        com.stripe.events.V2BillingContractCollectionCurrentEvent.class);
+    eventClassLookup.put(
+        "v2.billing.contract.collection_past_due",
+        com.stripe.events.V2BillingContractCollectionPastDueEvent.class);
+    eventClassLookup.put(
+        "v2.billing.contract.collection_unpaid",
+        com.stripe.events.V2BillingContractCollectionUnpaidEvent.class);
+    eventClassLookup.put(
         "v2.billing.contract.created", com.stripe.events.V2BillingContractCreatedEvent.class);
     eventClassLookup.put(
         "v2.billing.contract.ended", com.stripe.events.V2BillingContractEndedEvent.class);
@@ -1095,6 +1133,21 @@ public final class EventDataClassLookup {
         "v2.core.health.webhook_latency.resolved",
         com.stripe.events.V2CoreHealthWebhookLatencyResolvedEvent.class);
     eventClassLookup.put(
+        "v2.core.vault.network_token.activated",
+        com.stripe.events.V2CoreVaultNetworkTokenActivatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.vault.network_token.authorization_requirements_changed",
+        com.stripe.events.V2CoreVaultNetworkTokenAuthorizationRequirementsChangedEvent.class);
+    eventClassLookup.put(
+        "v2.core.vault.network_token.deactivated",
+        com.stripe.events.V2CoreVaultNetworkTokenDeactivatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.vault.network_token.details_updated",
+        com.stripe.events.V2CoreVaultNetworkTokenDetailsUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.vault.network_token.suspended",
+        com.stripe.events.V2CoreVaultNetworkTokenSuspendedEvent.class);
+    eventClassLookup.put(
         "v2.data.reporting.query_run.created",
         com.stripe.events.V2DataReportingQueryRunCreatedEvent.class);
     eventClassLookup.put(
@@ -1161,6 +1214,15 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.money_management.financial_account.updated",
         com.stripe.events.V2MoneyManagementFinancialAccountUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.financial_account.wallet_export.completed",
+        com.stripe.events.V2MoneyManagementFinancialAccountWalletExportCompletedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.financial_account.wallet_export.pending",
+        com.stripe.events.V2MoneyManagementFinancialAccountWalletExportPendingEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.financial_account.wallet_export.ready",
+        com.stripe.events.V2MoneyManagementFinancialAccountWalletExportReadyEvent.class);
     eventClassLookup.put(
         "v2.money_management.financial_account_statement.created",
         com.stripe.events.V2MoneyManagementFinancialAccountStatementCreatedEvent.class);

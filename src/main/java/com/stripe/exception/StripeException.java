@@ -170,6 +170,9 @@ public abstract class StripeException extends Exception {
       case "recipient_not_notifiable":
         return com.stripe.exception.RecipientNotNotifiableException.parse(
             body, statusCode, requestId, responseGetter);
+      case "service_unavailable":
+        return com.stripe.exception.ServiceUnavailableException.parse(
+            body, statusCode, requestId, responseGetter);
       case "temporary_session_expired":
         return com.stripe.exception.TemporarySessionExpiredException.parse(
             body, statusCode, requestId, responseGetter);

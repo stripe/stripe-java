@@ -221,6 +221,10 @@ public class BalanceSettings extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class AutomaticTransferRulesByCurrency extends StripeObject {
+        /** The currency of the FinancialAccount balance that receives the automatic transfer. */
+        @SerializedName("destination_currency")
+        String destinationCurrency;
+
         /**
          * The ID of the FinancialAccount that funds will be transferred to during automatic
          * transfers.

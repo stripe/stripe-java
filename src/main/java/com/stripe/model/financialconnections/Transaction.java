@@ -179,8 +179,8 @@ public class Transaction extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Classification extends StripeObject {
-    @SerializedName("credit")
-    Credit credit;
+    @SerializedName("financial_activity")
+    FinancialActivity financialActivity;
 
     @SerializedName("money_movement")
     MoneyMovement moneyMovement;
@@ -193,13 +193,13 @@ public class Transaction extends ApiResource implements HasId {
     String type;
 
     /**
-     * For more details about Credit, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
+     * For more details about FinancialActivity, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
      */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Credit extends StripeObject {
+    public static class FinancialActivity extends StripeObject {
       /**
        * Stripe's confidence in this classification.
        *

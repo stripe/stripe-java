@@ -589,6 +589,18 @@ public final class EventNotificationClassLookup {
         "v2.billing.contract.canceled",
         com.stripe.events.V2BillingContractCanceledEventNotification.class);
     eventClassLookup.put(
+        "v2.billing.contract.collection_blocked",
+        com.stripe.events.V2BillingContractCollectionBlockedEventNotification.class);
+    eventClassLookup.put(
+        "v2.billing.contract.collection_current",
+        com.stripe.events.V2BillingContractCollectionCurrentEventNotification.class);
+    eventClassLookup.put(
+        "v2.billing.contract.collection_past_due",
+        com.stripe.events.V2BillingContractCollectionPastDueEventNotification.class);
+    eventClassLookup.put(
+        "v2.billing.contract.collection_unpaid",
+        com.stripe.events.V2BillingContractCollectionUnpaidEventNotification.class);
+    eventClassLookup.put(
         "v2.billing.contract.created",
         com.stripe.events.V2BillingContractCreatedEventNotification.class);
     eventClassLookup.put(
@@ -956,6 +968,22 @@ public final class EventNotificationClassLookup {
         "v2.core.health.webhook_latency.resolved",
         com.stripe.events.V2CoreHealthWebhookLatencyResolvedEventNotification.class);
     eventClassLookup.put(
+        "v2.core.vault.network_token.activated",
+        com.stripe.events.V2CoreVaultNetworkTokenActivatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.vault.network_token.authorization_requirements_changed",
+        com.stripe.events.V2CoreVaultNetworkTokenAuthorizationRequirementsChangedEventNotification
+            .class);
+    eventClassLookup.put(
+        "v2.core.vault.network_token.deactivated",
+        com.stripe.events.V2CoreVaultNetworkTokenDeactivatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.vault.network_token.details_updated",
+        com.stripe.events.V2CoreVaultNetworkTokenDetailsUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.vault.network_token.suspended",
+        com.stripe.events.V2CoreVaultNetworkTokenSuspendedEventNotification.class);
+    eventClassLookup.put(
         "v2.data.reporting.query_run.created",
         com.stripe.events.V2DataReportingQueryRunCreatedEventNotification.class);
     eventClassLookup.put(
@@ -1029,6 +1057,18 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.money_management.financial_account.updated",
         com.stripe.events.V2MoneyManagementFinancialAccountUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.financial_account.wallet_export.completed",
+        com.stripe.events.V2MoneyManagementFinancialAccountWalletExportCompletedEventNotification
+            .class);
+    eventClassLookup.put(
+        "v2.money_management.financial_account.wallet_export.pending",
+        com.stripe.events.V2MoneyManagementFinancialAccountWalletExportPendingEventNotification
+            .class);
+    eventClassLookup.put(
+        "v2.money_management.financial_account.wallet_export.ready",
+        com.stripe.events.V2MoneyManagementFinancialAccountWalletExportReadyEventNotification
+            .class);
     eventClassLookup.put(
         "v2.money_management.financial_account_statement.created",
         com.stripe.events.V2MoneyManagementFinancialAccountStatementCreatedEventNotification.class);

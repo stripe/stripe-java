@@ -574,6 +574,13 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class AutomaticTransferRulesByCurrency {
         /**
+         * The currency of the FinancialAccount balance that receives the automatic transfer. If
+         * specified, funds are converted from the source currency before transfer.
+         */
+        @SerializedName("destination_currency")
+        Object destinationCurrency;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -602,10 +609,12 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
         Type type;
 
         private AutomaticTransferRulesByCurrency(
+            Object destinationCurrency,
             Map<String, Object> extraParams,
             Object payoutMethod,
             Long transferUpToAmount,
             Type type) {
+          this.destinationCurrency = destinationCurrency;
           this.extraParams = extraParams;
           this.payoutMethod = payoutMethod;
           this.transferUpToAmount = transferUpToAmount;
@@ -617,6 +626,8 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Object destinationCurrency;
+
           private Map<String, Object> extraParams;
 
           private Object payoutMethod;
@@ -630,7 +641,29 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
               build() {
             return new BalanceSettingsUpdateParams.Payments.Payouts
                 .AutomaticTransferRulesByCurrency(
-                this.extraParams, this.payoutMethod, this.transferUpToAmount, this.type);
+                this.destinationCurrency,
+                this.extraParams,
+                this.payoutMethod,
+                this.transferUpToAmount,
+                this.type);
+          }
+
+          /**
+           * The currency of the FinancialAccount balance that receives the automatic transfer. If
+           * specified, funds are converted from the source currency before transfer.
+           */
+          public Builder setDestinationCurrency(String destinationCurrency) {
+            this.destinationCurrency = destinationCurrency;
+            return this;
+          }
+
+          /**
+           * The currency of the FinancialAccount balance that receives the automatic transfer. If
+           * specified, funds are converted from the source currency before transfer.
+           */
+          public Builder setDestinationCurrency(EmptyParam destinationCurrency) {
+            this.destinationCurrency = destinationCurrency;
+            return this;
           }
 
           /**

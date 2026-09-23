@@ -451,6 +451,14 @@ public class FinancialAccount extends StripeObject implements HasId {
         /** The address to send forwarded payouts to. */
         @SerializedName("payout_method")
         String payoutMethod;
+
+        /**
+         * Whether to skip forwarding exportable self-custodied wallet balances. Defaults to false.
+         * This does not skip non-exportable or fiat balances, inbound-pending checks, or
+         * negative-balance requirements.
+         */
+        @SerializedName("skip_exportable_balances")
+        Boolean skipExportableBalances;
       }
     }
   }
@@ -464,6 +472,14 @@ public class FinancialAccount extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Storage extends StripeObject {
     /**
+     * Crypto-specific storage configuration. Only populated when {@code storage.crypto} is passed
+     * in the {@code include} parameter and the FinancialAccount stores crypto assets. Fiat
+     * currencies remain configured only through {@code holds_currencies}.
+     */
+    @SerializedName("crypto")
+    Crypto crypto;
+
+    /**
      * The usage type for funds in this FinancialAccount. Can be used to specify that the funds are
      * for Consumer activity.
      */
@@ -473,5 +489,30 @@ public class FinancialAccount extends StripeObject implements HasId {
     /** The currencies that this FinancialAccount can hold. */
     @SerializedName("holds_currencies")
     List<String> holdsCurrencies;
+
+    /**
+     * Crypto-specific storage configuration. Only populated when {@code storage.crypto} is passed
+     * in the {@code include} parameter and the FinancialAccount stores crypto assets. Fiat
+     * currencies remain configured only through {@code holds_currencies}.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Crypto extends StripeObject {
+      /**
+       * The blockchain network configured for each crypto currency. Keys are lowercase currency
+       * codes and must identify crypto currencies also present in {@code holds_currencies}.
+       */
+      @SerializedName("currency_networks")
+      Map<String, String> currencyNetworks;
+
+      /**
+       * Describes who controls the private keys for the crypto storage.
+       *
+       * <p>One of {@code self}, or {@code stripe}.
+       */
+      @SerializedName("custody_model")
+      String custodyModel;
+    }
   }
 }

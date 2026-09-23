@@ -26,7 +26,7 @@ import lombok.Setter;
  * A SetupIntent guides you through the process of setting up and saving a customer's payment
  * credentials for future payments. For example, you can use a SetupIntent to set up and save your
  * customer's card without immediately collecting a payment. Later, you can use <a
- * href="https://api.stripe.com#payment_intents">PaymentIntents</a> to drive the payment flow.
+ * href="https://docs.stripe.com/api#payment_intents">PaymentIntents</a> to drive the payment flow.
  *
  * <p>Create a SetupIntent when you're ready to collect your customer's payment credentials. Don't
  * maintain long-lived, unconfirmed SetupIntents because they might not be valid. The SetupIntent
@@ -40,11 +40,13 @@ import lombok.Setter;
  * be run through <a href="https://docs.stripe.com/strong-customer-authentication">Strong Customer
  * Authentication</a> during payment method collection to streamline later <a
  * href="https://docs.stripe.com/payments/setup-intents">off-session payments</a>. If you use the
- * SetupIntent with a <a href="https://api.stripe.com#setup_intent_object-customer">Customer</a>, it
- * automatically attaches the resulting payment method to that Customer after successful setup. We
- * recommend using SetupIntents or <a
- * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a> on
- * PaymentIntents to save payment methods to prevent saving invalid or unoptimized payment methods.
+ * SetupIntent with a <a
+ * href="https://docs.stripe.com/api#setup_intent_object-customer">Customer</a>, it automatically
+ * attaches the resulting payment method to that Customer after successful setup. We recommend using
+ * SetupIntents or <a
+ * href="https://docs.stripe.com/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
+ * on PaymentIntents to save payment methods to prevent saving invalid or unoptimized payment
+ * methods.
  *
  * <p>By using SetupIntents, you can reduce friction for your customers, even as regulations change
  * over time.
@@ -1174,6 +1176,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("bizum")
     Bizum bizum;
 
+    @SerializedName("blik")
+    Blik blik;
+
     @SerializedName("card")
     Card card;
 
@@ -1326,6 +1331,39 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     public static class Bizum extends StripeObject {}
 
     /**
+     * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Blik extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** Date at which the mandate expires. */
+        @SerializedName("expires_at")
+        Long expiresAt;
+
+        /**
+         * Type of the mandate.
+         *
+         * <p>Equal to {@code off_session}.
+         */
+        @SerializedName("type")
+        String type;
+      }
+    }
+
+    /**
      * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -1359,6 +1397,14 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
        */
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;
+
+      /**
+       * Set to indicate the future transaction type usage for the card being set up.
+       *
+       * <p>One of {@code installment}, {@code recurring}, or {@code unscheduled}.
+       */
+      @SerializedName("setup_credential_usage")
+      String setupCredentialUsage;
 
       /**
        * For more details about MandateOptions, please refer to the <a

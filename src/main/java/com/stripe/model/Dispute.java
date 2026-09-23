@@ -817,9 +817,9 @@ public class Dispute extends ApiResource
         String reasonForFiling;
 
         /**
-         * One or more document IDs returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code dispute_evidence} to support the
-         * appeal.
+         * One or more document IDs returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code dispute_evidence} to support the appeal.
          */
         @SerializedName("supporting_files")
         List<String> supportingFiles;

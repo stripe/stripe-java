@@ -311,9 +311,33 @@ public class OutboundTransfer extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class BankAccount extends StripeObject {
+        /** Per-network configuration options. */
+        @SerializedName("preferred_network_options")
+        PreferredNetworkOptions preferredNetworkOptions;
+
         /** The preferred networks to use for this OutboundTransfer. */
         @SerializedName("preferred_networks")
         List<String> preferredNetworks;
+
+        /** Per-network configuration options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PreferredNetworkOptions extends StripeObject {
+          /** ACH-specific network options. */
+          @SerializedName("ach")
+          Ach ach;
+
+          /** ACH-specific network options. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Ach extends StripeObject {
+            /** Freeform ACH addenda (max 80 characters) included in the NACHA submission. */
+            @SerializedName("addenda")
+            String addenda;
+          }
+        }
       }
     }
   }

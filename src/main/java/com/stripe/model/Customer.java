@@ -37,7 +37,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Customer extends ApiResource implements HasId, MetadataStore<Customer> {
-  /** The customer's address. */
+  /** The customer's billing address. */
   @SerializedName("address")
   Address address;
 

@@ -1681,6 +1681,13 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @SerializedName("network_transaction_id")
       String networkTransactionId;
 
+      /**
+       * The transaction type that was passed for an off-session, Merchant-Initiated transaction,
+       * one of {@code recurring} or {@code unscheduled}.
+       */
+      @SerializedName("stored_credential_usage")
+      String storedCredentialUsage;
+
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;

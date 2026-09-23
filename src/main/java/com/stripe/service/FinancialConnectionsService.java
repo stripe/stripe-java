@@ -18,6 +18,10 @@ public final class FinancialConnectionsService extends ApiService {
         this.getResponseGetter());
   }
 
+  public com.stripe.service.financialconnections.ConsentService consents() {
+    return new com.stripe.service.financialconnections.ConsentService(this.getResponseGetter());
+  }
+
   public com.stripe.service.financialconnections.InstitutionService institutions() {
     return new com.stripe.service.financialconnections.InstitutionService(this.getResponseGetter());
   }

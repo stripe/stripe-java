@@ -32,7 +32,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore<WebhookEndpoint> {
-  /** The API version events are rendered as for this webhook endpoint. */
+  /**
+   * The API version that events are rendered as for this webhook endpoint. You can't change this
+   * value after you create the endpoint.
+   */
   @SerializedName("api_version")
   String apiVersion;
 
