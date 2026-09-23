@@ -202,6 +202,8 @@ public final class EventDataClassLookup {
         "financial_connections.authorization",
         com.stripe.model.financialconnections.Authorization.class);
     classLookup.put(
+        "financial_connections.consent", com.stripe.model.financialconnections.Consent.class);
+    classLookup.put(
         "financial_connections.institution",
         com.stripe.model.financialconnections.Institution.class);
     classLookup.put(
@@ -250,7 +252,6 @@ public final class EventDataClassLookup {
         "product_catalog.trial_offer", com.stripe.model.productcatalog.TrialOffer.class);
 
     classLookup.put("radar.account_evaluation", com.stripe.model.radar.AccountEvaluation.class);
-    classLookup.put("radar.billing_evaluation", com.stripe.model.radar.BillingEvaluation.class);
     classLookup.put("radar.customer_evaluation", com.stripe.model.radar.CustomerEvaluation.class);
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);
     classLookup.put(

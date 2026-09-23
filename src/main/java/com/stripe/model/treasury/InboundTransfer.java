@@ -29,8 +29,9 @@ import lombok.Setter;
 /**
  * Use <a
  * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">InboundTransfers</a>
- * to add funds to your <a href="https://api.stripe.com#financial_accounts">FinancialAccount</a> via
- * a PaymentMethod that is owned by you. The funds will be transferred via an ACH debit.
+ * to add funds to your <a
+ * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a> via a PaymentMethod
+ * that is owned by you. The funds will be transferred via an ACH debit.
  *
  * <p>Related guide: <a
  * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">Moving
@@ -63,7 +64,10 @@ public class InboundTransfer extends ApiResource implements HasId {
   @SerializedName("description")
   String description;
 
-  /** Details about this InboundTransfer's failure. Only set when status is {@code failed}. */
+  /**
+   * Details about this InboundTransfer's failure. Will be set when {@code status=failed} or {@code
+   * returned=true}.
+   */
   @SerializedName("failure_details")
   FailureDetails failureDetails;
 
@@ -425,6 +429,10 @@ public class InboundTransfer extends ApiResource implements HasId {
       @SerializedName("account_type")
       String accountType;
 
+      /** Details about an ACH transaction. */
+      @SerializedName("ach")
+      Ach ach;
+
       /** Name of the bank associated with the bank account. */
       @SerializedName("bank_name")
       String bankName;
@@ -476,6 +484,19 @@ public class InboundTransfer extends ApiResource implements HasId {
 
       public void setMandateObject(Mandate expandableObject) {
         this.mandate = new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
+      }
+
+      /**
+       * For more details about Ach, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Ach extends StripeObject {
+        /** Freeform payment-related information transmitted in the ACH addenda record. */
+        @SerializedName("addenda")
+        String addenda;
       }
     }
   }

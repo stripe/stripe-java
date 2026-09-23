@@ -33,9 +33,9 @@ import lombok.Setter;
 public class Balance extends ApiResource {
   /**
    * Available funds that you can transfer or pay out automatically by Stripe or explicitly through
-   * the <a href="https://api.stripe.com#transfers">Transfers API</a> or <a
-   * href="https://api.stripe.com#payouts">Payouts API</a>. You can find the available balance for
-   * each currency and payment type in the {@code source_types} property.
+   * the <a href="https://docs.stripe.com/api#transfers">Transfers API</a> or <a
+   * href="https://docs.stripe.com/api#payouts">Payouts API</a>. You can find the available balance
+   * for each currency and payment type in the {@code source_types} property.
    */
   @SerializedName("available")
   List<Balance.Available> available;
@@ -291,6 +291,10 @@ public class Balance extends ApiResource {
       /** ID of the external account for this net balance (not expandable). */
       @SerializedName("destination")
       String destination;
+
+      /** ID of the v2 Payout Method for this net balance (not expandable). */
+      @SerializedName("payout_method")
+      String payoutMethod;
 
       @SerializedName("source_types")
       SourceTypes sourceTypes;

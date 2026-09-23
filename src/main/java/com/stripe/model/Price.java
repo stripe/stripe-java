@@ -23,8 +23,8 @@ import lombok.Setter;
 
 /**
  * Prices define the unit cost, currency, and (optional) billing cycle for both recurring and
- * one-time purchases of products. <a href="https://api.stripe.com#products">Products</a> help you
- * track inventory or provisioning, and prices help you track payment terms. Different physical
+ * one-time purchases of products. <a href="https://docs.stripe.com/api#products">Products</a> help
+ * you track inventory or provisioning, and prices help you track payment terms. Different physical
  * goods or levels of service should be represented by products, and pricing options should be
  * represented by prices. This approach lets you change prices without having to change your
  * provisioning scheme.

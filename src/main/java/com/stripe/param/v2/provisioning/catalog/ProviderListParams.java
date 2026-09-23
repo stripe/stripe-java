@@ -1,0 +1,129 @@
+// File generated from our OpenAPI spec
+package com.stripe.param.v2.provisioning.catalog;
+
+import com.google.gson.annotations.SerializedName;
+import com.stripe.net.ApiRequestParams;
+import java.util.HashMap;
+import java.util.Map;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
+@Getter
+@EqualsAndHashCode(callSuper = false)
+public class ProviderListParams extends ApiRequestParams {
+  /** Catalog partition to list providers from. */
+  @SerializedName("catalog")
+  Catalog catalog;
+
+  /**
+   * When {@code true}, list development-only providers. When unset or {@code false}, development
+   * providers are excluded.
+   */
+  @SerializedName("development")
+  Boolean development;
+
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  /** Maximum number of providers to return. */
+  @SerializedName("limit")
+  Long limit;
+
+  private ProviderListParams(
+      Catalog catalog, Boolean development, Map<String, Object> extraParams, Long limit) {
+    this.catalog = catalog;
+    this.development = development;
+    this.extraParams = extraParams;
+    this.limit = limit;
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  public static class Builder {
+    private Catalog catalog;
+
+    private Boolean development;
+
+    private Map<String, Object> extraParams;
+
+    private Long limit;
+
+    /** Finalize and obtain parameter instance from this builder. */
+    public ProviderListParams build() {
+      return new ProviderListParams(this.catalog, this.development, this.extraParams, this.limit);
+    }
+
+    /** Catalog partition to list providers from. */
+    public Builder setCatalog(ProviderListParams.Catalog catalog) {
+      this.catalog = catalog;
+      return this;
+    }
+
+    /**
+     * When {@code true}, list development-only providers. When unset or {@code false}, development
+     * providers are excluded.
+     */
+    public Builder setDevelopment(Boolean development) {
+      this.development = development;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ProviderListParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ProviderListParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Maximum number of providers to return. */
+    public Builder setLimit(Long limit) {
+      this.limit = limit;
+      return this;
+    }
+  }
+
+  public enum Catalog implements ApiRequestParams.EnumParam {
+    @SerializedName("dev")
+    DEV("dev"),
+
+    @SerializedName("prod")
+    PROD("prod"),
+
+    @SerializedName("testing")
+    TESTING("testing");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Catalog(String value) {
+      this.value = value;
+    }
+  }
+}

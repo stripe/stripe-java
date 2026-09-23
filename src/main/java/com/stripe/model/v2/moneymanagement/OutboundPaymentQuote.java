@@ -262,6 +262,10 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
           @Setter
           @EqualsAndHashCode(callSuper = false)
           public static class Ach extends StripeObject {
+            /** Freeform ACH addenda (max 80 characters) included in the NACHA submission. */
+            @SerializedName("addenda")
+            String addenda;
+
             /**
              * Open Enum. ACH submission timing.
              *

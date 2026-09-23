@@ -413,6 +413,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentRecord> paymentRecord;
 
+  /** The ID of the Payment Reservation for this Checkout Session. */
+  @SerializedName("payment_reservation")
+  String paymentReservation;
+
   /**
    * The payment status of the Checkout Session, one of {@code paid}, {@code unpaid}, or {@code
    * no_payment_required}. You can use this value to decide when to fulfill your customer's order.
@@ -1222,7 +1226,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @EqualsAndHashCode(callSuper = false)
       public static class IntegrationConfigurationDisabledReason extends StripeObject {
         /**
-         * The parameter that prevented {@code automatic_tax} from being enabled (e.g. {@code
+         * The parameter that prevented {@code automatic_tax} from being enabled (for example {@code
          * line_items[][tax_rates]}).
          */
         @SerializedName("conflicting_field")
@@ -1752,6 +1756,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("card")
       Card card;
 
+      @SerializedName("custom")
+      Custom custom;
+
       @SerializedName("link")
       Link link;
 
@@ -1897,6 +1904,19 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
           @SerializedName("type")
           String type;
         }
+      }
+
+      /**
+       * For more details about Custom, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Custom extends StripeObject {
+        /** ID of the Dashboard-only CustomPaymentMethodType. Not expandable. */
+        @SerializedName("type")
+        String type;
       }
 
       /**
@@ -2561,7 +2581,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("key")
     String key;
 
-    /** Details on the subscription for this item. */
     @SerializedName("subscription")
     com.stripe.model.checkout.Session.Item.Subscription subscription;
 
@@ -5713,9 +5732,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
         /**
          * A discount represents the actual application of a <a
-         * href="https://api.stripe.com#coupons">coupon</a> or <a
-         * href="https://api.stripe.com#promotion_codes">promotion code</a>. It contains information
-         * about when the discount began, when it will end, and what it is applied to.
+         * href="https://docs.stripe.com/api#coupons">coupon</a> or <a
+         * href="https://docs.stripe.com/api#promotion_codes">promotion code</a>. It contains
+         * information about when the discount began, when it will end, and what it is applied to.
          *
          * <p>Related guide: <a
          * href="https://docs.stripe.com/billing/subscriptions/discounts">Applying discounts to

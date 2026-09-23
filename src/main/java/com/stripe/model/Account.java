@@ -1100,6 +1100,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String blikPayments;
 
     /**
+     * The status of the BLIK recurring payments capability of the account, or whether the account
+     * can accept recurring and subscription BLIK payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("blik_recurring_payments")
+    String blikRecurringPayments;
+
+    /**
      * The status of the boleto payments capability of the account, or whether the account can
      * directly process boleto charges.
      *
@@ -2050,10 +2059,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @EqualsAndHashCode(callSuper = false)
       public static class Document extends StripeObject {
         /**
-         * The back of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code additional_verification}. Note that
-         * {@code additional_verification} files are <a
-         * href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
+         * The back of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}. Note that {@code additional_verification} files
+         * are <a href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
          */
         @SerializedName("back")
         @Getter(lombok.AccessLevel.NONE)
@@ -2077,10 +2086,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         String detailsCode;
 
         /**
-         * The front of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code additional_verification}. Note that
-         * {@code additional_verification} files are <a
-         * href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
+         * The front of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}. Note that {@code additional_verification} files
+         * are <a href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
          */
         @SerializedName("front")
         @Getter(lombok.AccessLevel.NONE)
@@ -2313,14 +2322,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<String> currentlyDue;
 
     /**
-     * This is typed as an enum for consistency with {@code requirements.disabled_reason}.
-     *
-     * <p>One of {@code action_required.requested_capabilities}, {@code listed}, {@code other},
-     * {@code platform_paused}, {@code rejected.fraud}, {@code rejected.incomplete_verification},
-     * {@code rejected.listed}, {@code rejected.other}, {@code rejected.platform_fraud}, {@code
-     * rejected.platform_other}, {@code rejected.platform_terms_of_service}, {@code
-     * rejected.terms_of_service}, {@code requirements.past_due}, {@code
-     * requirements.pending_verification}, or {@code under_review}.
+     * If the account is disabled, this string describes why the account can’t create charges or
+     * receive payouts. Can be {@code rejected.fraud}, {@code rejected.terms_of_service}, {@code
+     * rejected.listed}, {@code rejected.other}, {@code fields_needed}, {@code listed}, {@code
+     * under_review}, or {@code other}.
      */
     @SerializedName("disabled_reason")
     String disabledReason;
@@ -2389,8 +2394,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * The code for the type of error.
        *
        * <p>One of {@code external_request}, {@code information_missing}, {@code
-       * invalid_address_city_state_postal_code}, {@code invalid_address_highway_contract_box},
-       * {@code invalid_address_private_mailbox}, {@code invalid_business_profile_name}, {@code
+       * invalid_address_city_state_postal_code}, {@code invalid_address_cmra_address}, {@code
+       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+       * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
        * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted}, {@code
        * invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
        * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
@@ -2534,16 +2540,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<String> currentlyDue;
 
     /**
-     * If the account is disabled, this enum describes why. <a
-     * href="https://docs.stripe.com/connect/handling-api-verification">Learn more about handling
-     * verification issues</a>.
-     *
-     * <p>One of {@code action_required.requested_capabilities}, {@code listed}, {@code other},
-     * {@code platform_paused}, {@code rejected.fraud}, {@code rejected.incomplete_verification},
-     * {@code rejected.listed}, {@code rejected.other}, {@code rejected.platform_fraud}, {@code
-     * rejected.platform_other}, {@code rejected.platform_terms_of_service}, {@code
-     * rejected.terms_of_service}, {@code requirements.past_due}, {@code
-     * requirements.pending_verification}, or {@code under_review}.
+     * If the account is disabled, this string describes why the account can’t create charges or
+     * receive payouts. Can be {@code rejected.fraud}, {@code rejected.terms_of_service}, {@code
+     * rejected.listed}, {@code rejected.other}, {@code fields_needed}, {@code listed}, {@code
+     * under_review}, or {@code other}.
      */
     @SerializedName("disabled_reason")
     String disabledReason;
@@ -2611,8 +2611,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * The code for the type of error.
        *
        * <p>One of {@code external_request}, {@code information_missing}, {@code
-       * invalid_address_city_state_postal_code}, {@code invalid_address_highway_contract_box},
-       * {@code invalid_address_private_mailbox}, {@code invalid_business_profile_name}, {@code
+       * invalid_address_city_state_postal_code}, {@code invalid_address_cmra_address}, {@code
+       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+       * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
        * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted}, {@code
        * invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
        * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
@@ -2774,6 +2775,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("branding")
     Branding branding;
 
+    @SerializedName("capital")
+    Capital capital;
+
     @SerializedName("card_issuing")
     CardIssuing cardIssuing;
 
@@ -2925,6 +2929,23 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       public void setLogoObject(File expandableObject) {
         this.logo = new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+    }
+
+    /**
+     * For more details about Capital, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Capital extends StripeObject {
+      /** The payout destinations allowed for Capital financing payouts. */
+      @SerializedName("allowed_payout_destinations")
+      List<String> allowedPayoutDestinations;
+
+      /** The payout destinations excluded from Capital financing payouts. */
+      @SerializedName("excluded_payout_destinations")
+      List<String> excludedPayoutDestinations;
     }
 
     /**

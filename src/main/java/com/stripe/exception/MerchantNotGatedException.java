@@ -6,7 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/** Errors Returned when raw card input is not enabled for the account. */
+/** Returned when raw PAN permissions are not enabled for the account. */
 public final class MerchantNotGatedException extends ApiException {
   private static final long serialVersionUID = 2L;
 

@@ -2855,6 +2855,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     Long billingCycleAnchor;
 
     /**
+     * Indicates whether this subscription should cancel at the end of the current period if the
+     * update is applied.
+     */
+    @SerializedName("cancel_at_period_end")
+    Boolean cancelAtPeriodEnd;
+
+    /**
      * The pending subscription-level discount that will be applied when the pending update is
      * applied.
      */

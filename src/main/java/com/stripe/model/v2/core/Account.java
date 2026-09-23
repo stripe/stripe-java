@@ -147,6 +147,10 @@ public class Account extends StripeObject implements HasId {
     @SerializedName("customer")
     Customer customer;
 
+    /** The Developer Configuration allows the Account to use developer tooling. */
+    @SerializedName("developer")
+    Developer developer;
+
     /**
      * Enables the Account to act as a connected account and collect payments facilitated by a
      * Connect platform. You must onboard your platform to Connect before you can add this
@@ -2101,6 +2105,124 @@ public class Account extends StripeObject implements HasId {
           /** State, county, province, or region. */
           @SerializedName("state")
           String state;
+        }
+      }
+    }
+
+    /** The Developer Configuration allows the Account to use developer tooling. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Developer extends StripeObject {
+      /** Indicates whether the Developer Configuration is active. */
+      @SerializedName("applied")
+      Boolean applied;
+
+      /** Capabilities that have been requested on the Developer Configuration. */
+      @SerializedName("capabilities")
+      Capabilities capabilities;
+
+      /** Capabilities that have been requested on the Developer Configuration. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Capabilities extends StripeObject {
+        /** Enables the Account to use Stripe developer tooling. */
+        @SerializedName("projects")
+        Projects projects;
+
+        /** Enables the Account to use Stripe developer tooling. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Projects extends StripeObject {
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<Account.Configuration.Developer.Capabilities.Projects.StatusDetail> statusDetails;
+
+          /**
+           * Protections applied to this capability, keyed by protection type (e.g.
+           * &quot;psp_migration&quot;).
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections extends StripeObject {
+            /** Protection details for PSP migration. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            /** Protection details for PSP migration. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration extends StripeObject {
+              /** The time until which the protection will expire, as a Unix timestamp. */
+              @SerializedName("expires_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long expiresAt;
+
+              /** The time at which the protection was requested, as a Unix timestamp. */
+              @SerializedName("requested_at")
+              @JsonAdapter(StringInt64TypeAdapter.class)
+              Long requestedAt;
+
+              /**
+               * The current status of the protection.
+               *
+               * <p>One of {@code active}, {@code disrupted}, {@code expired}, or {@code inactive}.
+               */
+              @SerializedName("status")
+              String status;
+            }
+          }
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+             * requirements_pending_verification}, {@code restricted_other}, {@code
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
         }
       }
     }
@@ -12319,47 +12441,48 @@ public class Account extends StripeObject implements HasId {
          * Closed Enum. The payout method type of the default outbound destination.
          *
          * <p>One of {@code ae_bank_account}, {@code ag_bank_account}, {@code al_bank_account},
-         * {@code am_bank_account}, {@code ao_bank_account}, {@code ar_bank_account}, {@code
-         * at_bank_account}, {@code au_bank_account}, {@code az_bank_account}, {@code
-         * ba_bank_account}, {@code bd_bank_account}, {@code be_bank_account}, {@code
-         * bg_bank_account}, {@code bh_bank_account}, {@code bj_bank_account}, {@code
-         * bn_bank_account}, {@code bo_bank_account}, {@code br_bank_account}, {@code
-         * bs_bank_account}, {@code bt_bank_account}, {@code bw_bank_account}, {@code card}, {@code
-         * ca_bank_account}, {@code ch_bank_account}, {@code ci_bank_account}, {@code
-         * cl_bank_account}, {@code cn_bank_account}, {@code co_bank_account}, {@code
-         * crypto_wallet}, {@code cr_bank_account}, {@code cy_bank_account}, {@code
-         * cz_bank_account}, {@code de_bank_account}, {@code dk_bank_account}, {@code
-         * do_bank_account}, {@code dz_bank_account}, {@code ec_bank_account}, {@code
-         * ee_bank_account}, {@code eg_bank_account}, {@code es_bank_account}, {@code
-         * et_bank_account}, {@code fi_bank_account}, {@code fr_bank_account}, {@code
-         * ga_bank_account}, {@code gb_bank_account}, {@code gh_bank_account}, {@code
-         * gi_bank_account}, {@code gm_bank_account}, {@code gr_bank_account}, {@code
-         * gt_bank_account}, {@code gy_bank_account}, {@code hk_bank_account}, {@code
-         * hn_bank_account}, {@code hr_bank_account}, {@code hu_bank_account}, {@code
-         * id_bank_account}, {@code ie_bank_account}, {@code il_bank_account}, {@code
-         * in_bank_account}, {@code is_bank_account}, {@code it_bank_account}, {@code
-         * jm_bank_account}, {@code jo_bank_account}, {@code jp_bank_account}, {@code
-         * ke_bank_account}, {@code kh_bank_account}, {@code kr_bank_account}, {@code
-         * kw_bank_account}, {@code kz_bank_account}, {@code la_bank_account}, {@code
-         * lc_bank_account}, {@code li_bank_account}, {@code lk_bank_account}, {@code
-         * lt_bank_account}, {@code lu_bank_account}, {@code lv_bank_account}, {@code
-         * ma_bank_account}, {@code mc_bank_account}, {@code md_bank_account}, {@code
-         * mg_bank_account}, {@code mk_bank_account}, {@code mn_bank_account}, {@code
-         * mo_bank_account}, {@code mt_bank_account}, {@code mu_bank_account}, {@code
-         * mx_bank_account}, {@code my_bank_account}, {@code mz_bank_account}, {@code
-         * na_bank_account}, {@code network_business_profile_wallet}, {@code ne_bank_account},
-         * {@code ng_bank_account}, {@code ni_bank_account}, {@code nl_bank_account}, {@code
-         * no_bank_account}, {@code nz_bank_account}, {@code om_bank_account}, {@code
-         * pa_bank_account}, {@code pe_bank_account}, {@code ph_bank_account}, {@code
-         * pk_bank_account}, {@code pl_bank_account}, {@code pt_bank_account}, {@code
-         * py_bank_account}, {@code qa_bank_account}, {@code ro_bank_account}, {@code
-         * rs_bank_account}, {@code rw_bank_account}, {@code sa_bank_account}, {@code
-         * se_bank_account}, {@code sg_bank_account}, {@code si_bank_account}, {@code
-         * sk_bank_account}, {@code sm_bank_account}, {@code sn_bank_account}, {@code
-         * sv_bank_account}, {@code th_bank_account}, {@code tn_bank_account}, {@code
-         * tr_bank_account}, {@code tt_bank_account}, {@code tw_bank_account}, {@code
-         * tz_bank_account}, {@code us_bank_account}, {@code uy_bank_account}, {@code
-         * uz_bank_account}, {@code vn_bank_account}, or {@code za_bank_account}.
+         * {@code am_bank_account}, {@code ao_bank_account}, {@code apple_pay}, {@code
+         * ar_bank_account}, {@code at_bank_account}, {@code au_bank_account}, {@code
+         * az_bank_account}, {@code ba_bank_account}, {@code bd_bank_account}, {@code
+         * be_bank_account}, {@code bg_bank_account}, {@code bh_bank_account}, {@code
+         * bj_bank_account}, {@code bn_bank_account}, {@code bo_bank_account}, {@code
+         * br_bank_account}, {@code bs_bank_account}, {@code bt_bank_account}, {@code
+         * bw_bank_account}, {@code card}, {@code ca_bank_account}, {@code ch_bank_account}, {@code
+         * ci_bank_account}, {@code cl_bank_account}, {@code cn_bank_account}, {@code
+         * co_bank_account}, {@code crypto_wallet}, {@code cr_bank_account}, {@code
+         * cy_bank_account}, {@code cz_bank_account}, {@code de_bank_account}, {@code
+         * dk_bank_account}, {@code do_bank_account}, {@code dz_bank_account}, {@code
+         * ec_bank_account}, {@code ee_bank_account}, {@code eg_bank_account}, {@code
+         * es_bank_account}, {@code et_bank_account}, {@code fi_bank_account}, {@code
+         * fr_bank_account}, {@code ga_bank_account}, {@code gb_bank_account}, {@code
+         * gh_bank_account}, {@code gi_bank_account}, {@code gm_bank_account}, {@code
+         * gr_bank_account}, {@code gt_bank_account}, {@code gy_bank_account}, {@code
+         * hk_bank_account}, {@code hn_bank_account}, {@code hr_bank_account}, {@code
+         * hu_bank_account}, {@code id_bank_account}, {@code ie_bank_account}, {@code
+         * il_bank_account}, {@code in_bank_account}, {@code is_bank_account}, {@code
+         * it_bank_account}, {@code jm_bank_account}, {@code jo_bank_account}, {@code
+         * jp_bank_account}, {@code ke_bank_account}, {@code kh_bank_account}, {@code
+         * kr_bank_account}, {@code kw_bank_account}, {@code kz_bank_account}, {@code
+         * la_bank_account}, {@code lc_bank_account}, {@code li_bank_account}, {@code
+         * lk_bank_account}, {@code lt_bank_account}, {@code lu_bank_account}, {@code
+         * lv_bank_account}, {@code ma_bank_account}, {@code mc_bank_account}, {@code
+         * md_bank_account}, {@code mg_bank_account}, {@code mk_bank_account}, {@code
+         * mn_bank_account}, {@code mo_bank_account}, {@code mt_bank_account}, {@code
+         * mu_bank_account}, {@code mx_bank_account}, {@code my_bank_account}, {@code
+         * mz_bank_account}, {@code na_bank_account}, {@code network_business_profile_wallet},
+         * {@code ne_bank_account}, {@code ng_bank_account}, {@code ni_bank_account}, {@code
+         * nl_bank_account}, {@code no_bank_account}, {@code nz_bank_account}, {@code
+         * om_bank_account}, {@code pa_bank_account}, {@code pe_bank_account}, {@code
+         * ph_bank_account}, {@code pk_bank_account}, {@code pl_bank_account}, {@code
+         * pt_bank_account}, {@code py_bank_account}, {@code qa_bank_account}, {@code
+         * ro_bank_account}, {@code rs_bank_account}, {@code rw_bank_account}, {@code
+         * sa_bank_account}, {@code se_bank_account}, {@code sg_bank_account}, {@code
+         * si_bank_account}, {@code sk_bank_account}, {@code sm_bank_account}, {@code
+         * sn_bank_account}, {@code sv_bank_account}, {@code th_bank_account}, {@code
+         * tn_bank_account}, {@code tr_bank_account}, {@code tt_bank_account}, {@code
+         * tw_bank_account}, {@code tz_bank_account}, {@code us_bank_account}, {@code
+         * uy_bank_account}, {@code uz_bank_account}, {@code vn_bank_account}, or {@code
+         * za_bank_account}.
          */
         @SerializedName("type")
         String type;
@@ -12669,7 +12792,7 @@ public class Account extends StripeObject implements HasId {
            * outbound_payments.paper_checks}, {@code outbound_transfers.bank_accounts}, {@code
            * outbound_transfers.financial_accounts}, {@code oxxo_payments}, {@code p24_payments},
            * {@code paper_checks}, {@code payco_payments}, {@code paynow_payments}, {@code
-           * pay_by_bank_payments}, {@code promptpay_payments}, {@code
+           * pay_by_bank_payments}, {@code projects}, {@code promptpay_payments}, {@code
            * received_credits.bank_accounts}, {@code received_debits.bank_accounts}, {@code
            * revolut_pay_payments}, {@code samsung_pay_payments}, {@code
            * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
@@ -12683,8 +12806,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The configuration which specifies the Capability which will be restricted.
            *
-           * <p>One of {@code card_creator}, {@code customer}, {@code merchant}, {@code
-           * money_manager}, {@code recipient}, or {@code storer}.
+           * <p>One of {@code card_creator}, {@code customer}, {@code developer}, {@code merchant},
+           * {@code money_manager}, {@code recipient}, or {@code storer}.
            */
           @SerializedName("configuration")
           String configuration;
@@ -16689,7 +16812,7 @@ public class Account extends StripeObject implements HasId {
            * outbound_payments.paper_checks}, {@code outbound_transfers.bank_accounts}, {@code
            * outbound_transfers.financial_accounts}, {@code oxxo_payments}, {@code p24_payments},
            * {@code paper_checks}, {@code payco_payments}, {@code paynow_payments}, {@code
-           * pay_by_bank_payments}, {@code promptpay_payments}, {@code
+           * pay_by_bank_payments}, {@code projects}, {@code promptpay_payments}, {@code
            * received_credits.bank_accounts}, {@code received_debits.bank_accounts}, {@code
            * revolut_pay_payments}, {@code samsung_pay_payments}, {@code
            * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
@@ -16703,8 +16826,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The configuration which specifies the Capability which will be restricted.
            *
-           * <p>One of {@code card_creator}, {@code customer}, {@code merchant}, {@code
-           * money_manager}, {@code recipient}, or {@code storer}.
+           * <p>One of {@code card_creator}, {@code customer}, {@code developer}, {@code merchant},
+           * {@code money_manager}, {@code recipient}, or {@code storer}.
            */
           @SerializedName("configuration")
           String configuration;

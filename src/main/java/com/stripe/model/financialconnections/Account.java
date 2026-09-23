@@ -651,7 +651,7 @@ public class Account extends ApiResource implements HasId {
     /**
      * Whether the account number is currently active and usable for transactions.
      *
-     * <p>One of {@code deactivated}, or {@code transactable}.
+     * <p>One of {@code deactivated}, {@code expired}, {@code pending}, or {@code transactable}.
      */
     @SerializedName("status")
     String status;

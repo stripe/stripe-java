@@ -438,7 +438,7 @@ public class Mandate extends ApiResource implements HasId {
       /**
        * Type of the mandate.
        *
-       * <p>One of {@code off_session}, or {@code on_session}.
+       * <p>Equal to {@code off_session}.
        */
       @SerializedName("type")
       String type;

@@ -326,6 +326,13 @@ public class FinancingOffer extends ApiResource implements HasId {
     @SerializedName("previous_financing_fee_discount_amount")
     Long previousFinancingFeeDiscountAmount;
 
+    /**
+     * Total amount due for the financing independent of what's already been paid, in minor units.
+     * For example, 100 USD is represented as 10000.
+     */
+    @SerializedName("total_due_amount")
+    Long totalDueAmount;
+
     /** Per-transaction rate at which Stripe withholds funds to repay the financing. */
     @SerializedName("withhold_rate")
     BigDecimal withholdRate;

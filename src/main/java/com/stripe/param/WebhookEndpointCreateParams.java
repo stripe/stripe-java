@@ -710,6 +710,15 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("application_fee.refunded")
     APPLICATION_FEE__REFUNDED("application_fee.refunded"),
 
+    @SerializedName("apps.install.created")
+    APPS__INSTALL__CREATED("apps.install.created"),
+
+    @SerializedName("apps.install.deleted")
+    APPS__INSTALL__DELETED("apps.install.deleted"),
+
+    @SerializedName("apps.install.updated")
+    APPS__INSTALL__UPDATED("apps.install.updated"),
+
     @SerializedName("balance.available")
     BALANCE__AVAILABLE("balance.available"),
 

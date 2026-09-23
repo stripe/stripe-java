@@ -309,6 +309,22 @@ public class CustomerCashBalanceTransaction extends StripeObject
         @SerializedName("account_number_last4")
         String accountNumberLast4;
 
+        /** The BIC of the bank of the sender of the funding. */
+        @SerializedName("bic")
+        String bic;
+
+        /** The last 4 digits of the IBAN of the sender of the funding. */
+        @SerializedName("iban_last4")
+        String ibanLast4;
+
+        /**
+         * The banking network used for this funding.
+         *
+         * <p>One of {@code bacs}, {@code chaps}, {@code fps}, or {@code swift}.
+         */
+        @SerializedName("network")
+        String network;
+
         /** The full name of the sender, as supplied by the sending bank. */
         @SerializedName("sender_name")
         String senderName;
