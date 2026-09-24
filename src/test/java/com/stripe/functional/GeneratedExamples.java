@@ -1246,7 +1246,7 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsRejectPost() throws StripeException {
     Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
 
-    AccountRejectParams params = AccountRejectParams.builder().setReason("fraud").build();
+    AccountRejectParams params = AccountRejectParams.builder().setReason("fraud_other").build();
 
     Account account = resource.reject(params);
     assertNotNull(account);
@@ -1263,7 +1263,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.AccountRejectParams params =
-        com.stripe.param.AccountRejectParams.builder().setReason("fraud").build();
+        com.stripe.param.AccountRejectParams.builder().setReason("fraud_other").build();
 
     com.stripe.model.Account account = client.v1().accounts().reject("acct_xxxxxxxxxxxxx", params);
     assertNotNull(account);
@@ -1280,7 +1280,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.AccountRejectParams params =
-        com.stripe.param.AccountRejectParams.builder().setReason("fraud").build();
+        com.stripe.param.AccountRejectParams.builder().setReason("fraud_other").build();
 
     com.stripe.model.Account account = client.accounts().reject("acct_xxxxxxxxxxxxx", params);
     assertNotNull(account);
