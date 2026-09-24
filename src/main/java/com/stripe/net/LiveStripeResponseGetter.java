@@ -26,6 +26,8 @@ import java.util.logging.Logger;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static final Logger logger = Logger.getLogger("Stripe");
+  private static final String STRIPE_NOTICE_SUPPRESSION_MESSAGE =
+      "To suppress Stripe notices in test and sandbox environments, set the STRIPE_SUPPRESS_NOTICES environment variable to true.";
 
   private final HttpClient httpClient;
   private final StripeResponseGetterOptions options;
@@ -283,7 +285,24 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   private static void maybeEmitStripeNotice(HttpHeaders headers) {
-    headers.firstValue("Stripe-Notice").ifPresent(logger::warning);
+    buildStripeNoticeMessage(headers, System::getenv).ifPresent(logger::warning);
+  }
+
+  static Optional<String> buildStripeNoticeMessage(
+      HttpHeaders headers, Function<String, String> getEnv) {
+    Optional<String> notice = headers.firstValue("Stripe-Notice");
+    if (!notice.isPresent()) {
+      return Optional.empty();
+    }
+
+    String aiAgent = HttpClient.detectAIAgent(getEnv);
+    if (aiAgent.isEmpty() && "true".equalsIgnoreCase(getEnv.apply("STRIPE_SUPPRESS_NOTICES"))) {
+      return Optional.empty();
+    }
+
+    return aiAgent.isEmpty()
+        ? Optional.of(notice.get() + "\n" + STRIPE_NOTICE_SUPPRESSION_MESSAGE)
+        : notice;
   }
 
   private static HttpClient buildDefaultHttpClient() {
@@ -475,6 +494,27 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
   }
 
+  /**
+   * Asserts that a request path is origin-relative: that it begins with a single {@code "/"}.
+   *
+   * <p>The absolute URL is built by concatenating a base URL onto this path, and no base URL ends
+   * in a slash. A path like {@code "@evil.example/v1/x"} or {@code ".evil.example/v1/x"} would
+   * modify the resulting host and direct the request (including the API key) to a non-Stripe host.
+   *
+   * <p>Because some relative urls arrive from potentially untrusted sources (like webhook bodies),
+   * we have to be a little defensive.
+   *
+   * <p>So, we require that a path starts with a leading slash. Deliberately not using {@link
+   * java.net.URI} to parse -- it enforces RFC 2396 strictly and would reject paths containing
+   * characters that callers have always been able to send.
+   */
+  static void validatePath(String path) {
+    if (path == null || !path.startsWith("/") || path.startsWith("//")) {
+      throw new IllegalArgumentException(
+          "Request path must begin with a single \"/\", got: " + path);
+    }
+  }
+
   private String fullUrl(BaseApiRequest apiRequest) {
     BaseAddress baseAddress = apiRequest.getBaseAddress();
     RequestOptions options = apiRequest.getOptions();
@@ -499,6 +539,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     if (options != null && options.getBaseUrl() != null) {
       baseUrl = options.getBaseUrl();
     }
+    validatePath(relativeUrl);
     return String.format("%s%s", baseUrl, relativeUrl);
   }
 }
