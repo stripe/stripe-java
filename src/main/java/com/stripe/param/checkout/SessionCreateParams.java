@@ -34,6 +34,16 @@ public class SessionCreateParams extends ApiRequestParams {
   Boolean allowPromotionCodes;
 
   /**
+   * A list of the types of payment methods (e.g., {@code card}) this Checkout Session can accept.
+   *
+   * <p>Unlike {@code payment_method_types}, this acts as a filter on the dynamically computed set
+   * of eligible payment methods rather than an explicit static list. Only payment methods that are
+   * both dynamically eligible and present in this list will be offered to the customer.
+   */
+  @SerializedName("allowed_payment_method_types")
+  List<SessionCreateParams.AllowedPaymentMethodType> allowedPaymentMethodTypes;
+
+  /**
    * Determines whether the customer's attempt to pay must be manually approved.
    *
    * <p>Default is {@code auto}, when the customer's attempt to pay is approved automatically with
@@ -366,24 +376,6 @@ public class SessionCreateParams extends ApiRequestParams {
   PaymentMethodOptions paymentMethodOptions;
 
   /**
-   * A list of the types of payment methods (e.g., {@code card}) this Checkout Session can accept.
-   *
-   * <p>You can omit this attribute to manage your payment methods from the <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>. See <a
-   * href="https://docs.stripe.com/payments/payment-methods/integration-options#using-dynamic-payment-methods">Dynamic
-   * Payment Methods</a> for more details.
-   *
-   * <p>Read more about the supported payment methods and their requirements in our <a
-   * href="https://stripe.com/docs/payments/checkout/payment-methods">payment method details
-   * guide</a>.
-   *
-   * <p>If multiple payment methods are passed, Checkout will dynamically reorder them to prioritize
-   * the most relevant payment methods based on the customer's location and other characteristics.
-   */
-  @SerializedName("payment_method_types")
-  List<SessionCreateParams.PaymentMethodType> paymentMethodTypes;
-
-  /**
    * This property is used to set up permissions for various actions (e.g., update) on the
    * CheckoutSession object. Can only be set when creating {@code embedded} or {@code custom}
    * sessions.
@@ -488,6 +480,7 @@ public class SessionCreateParams extends ApiRequestParams {
       AdaptivePricing adaptivePricing,
       AfterExpiration afterExpiration,
       Boolean allowPromotionCodes,
+      List<SessionCreateParams.AllowedPaymentMethodType> allowedPaymentMethodTypes,
       ApprovalMethod approvalMethod,
       AutomaticSurcharge automaticSurcharge,
       AutomaticTax automaticTax,
@@ -527,7 +520,6 @@ public class SessionCreateParams extends ApiRequestParams {
       String paymentMethodConfiguration,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
-      List<SessionCreateParams.PaymentMethodType> paymentMethodTypes,
       Permissions permissions,
       PhoneNumberCollection phoneNumberCollection,
       RedirectOnCompletion redirectOnCompletion,
@@ -545,6 +537,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.adaptivePricing = adaptivePricing;
     this.afterExpiration = afterExpiration;
     this.allowPromotionCodes = allowPromotionCodes;
+    this.allowedPaymentMethodTypes = allowedPaymentMethodTypes;
     this.approvalMethod = approvalMethod;
     this.automaticSurcharge = automaticSurcharge;
     this.automaticTax = automaticTax;
@@ -584,7 +577,6 @@ public class SessionCreateParams extends ApiRequestParams {
     this.paymentMethodConfiguration = paymentMethodConfiguration;
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
-    this.paymentMethodTypes = paymentMethodTypes;
     this.permissions = permissions;
     this.phoneNumberCollection = phoneNumberCollection;
     this.redirectOnCompletion = redirectOnCompletion;
@@ -611,6 +603,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private AfterExpiration afterExpiration;
 
     private Boolean allowPromotionCodes;
+
+    private List<SessionCreateParams.AllowedPaymentMethodType> allowedPaymentMethodTypes;
 
     private ApprovalMethod approvalMethod;
 
@@ -690,8 +684,6 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private PaymentMethodOptions paymentMethodOptions;
 
-    private List<SessionCreateParams.PaymentMethodType> paymentMethodTypes;
-
     private Permissions permissions;
 
     private PhoneNumberCollection phoneNumberCollection;
@@ -726,6 +718,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.adaptivePricing,
           this.afterExpiration,
           this.allowPromotionCodes,
+          this.allowedPaymentMethodTypes,
           this.approvalMethod,
           this.automaticSurcharge,
           this.automaticTax,
@@ -765,7 +758,6 @@ public class SessionCreateParams extends ApiRequestParams {
           this.paymentMethodConfiguration,
           this.paymentMethodData,
           this.paymentMethodOptions,
-          this.paymentMethodTypes,
           this.permissions,
           this.phoneNumberCollection,
           this.redirectOnCompletion,
@@ -803,6 +795,34 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Enables user redeemable promotion codes. */
     public Builder setAllowPromotionCodes(Boolean allowPromotionCodes) {
       this.allowPromotionCodes = allowPromotionCodes;
+      return this;
+    }
+
+    /**
+     * Add an element to `allowedPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SessionCreateParams#allowedPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllowedPaymentMethodType(
+        SessionCreateParams.AllowedPaymentMethodType element) {
+      if (this.allowedPaymentMethodTypes == null) {
+        this.allowedPaymentMethodTypes = new ArrayList<>();
+      }
+      this.allowedPaymentMethodTypes.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `allowedPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SessionCreateParams#allowedPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllAllowedPaymentMethodType(
+        List<SessionCreateParams.AllowedPaymentMethodType> elements) {
+      if (this.allowedPaymentMethodTypes == null) {
+        this.allowedPaymentMethodTypes = new ArrayList<>();
+      }
+      this.allowedPaymentMethodTypes.addAll(elements);
       return this;
     }
 
@@ -1384,32 +1404,6 @@ public class SessionCreateParams extends ApiRequestParams {
     public Builder setPaymentMethodOptions(
         SessionCreateParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
-      return this;
-    }
-
-    /**
-     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * SessionCreateParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addPaymentMethodType(SessionCreateParams.PaymentMethodType element) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link SessionCreateParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addAllPaymentMethodType(List<SessionCreateParams.PaymentMethodType> elements) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.addAll(elements);
       return this;
     }
 
@@ -7930,6 +7924,13 @@ public class SessionCreateParams extends ApiRequestParams {
         @EqualsAndHashCode(callSuper = false)
         public static class EndBehavior {
           /**
+           * Indicates how the subscription's billing cycle anchor is reset when a trial ends.
+           * Defaults to {@code now}.
+           */
+          @SerializedName("billing_cycle_anchor")
+          BillingCycleAnchor billingCycleAnchor;
+
+          /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
            * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -7947,7 +7948,10 @@ public class SessionCreateParams extends ApiRequestParams {
           MissingPaymentMethod missingPaymentMethod;
 
           private EndBehavior(
-              Map<String, Object> extraParams, MissingPaymentMethod missingPaymentMethod) {
+              BillingCycleAnchor billingCycleAnchor,
+              Map<String, Object> extraParams,
+              MissingPaymentMethod missingPaymentMethod) {
+            this.billingCycleAnchor = billingCycleAnchor;
             this.extraParams = extraParams;
             this.missingPaymentMethod = missingPaymentMethod;
           }
@@ -7957,6 +7961,8 @@ public class SessionCreateParams extends ApiRequestParams {
           }
 
           public static class Builder {
+            private BillingCycleAnchor billingCycleAnchor;
+
             private Map<String, Object> extraParams;
 
             private MissingPaymentMethod missingPaymentMethod;
@@ -7964,7 +7970,18 @@ public class SessionCreateParams extends ApiRequestParams {
             /** Finalize and obtain parameter instance from this builder. */
             public SessionCreateParams.Item.Subscription.TrialSettings.EndBehavior build() {
               return new SessionCreateParams.Item.Subscription.TrialSettings.EndBehavior(
-                  this.extraParams, this.missingPaymentMethod);
+                  this.billingCycleAnchor, this.extraParams, this.missingPaymentMethod);
+            }
+
+            /**
+             * Indicates how the subscription's billing cycle anchor is reset when a trial ends.
+             * Defaults to {@code now}.
+             */
+            public Builder setBillingCycleAnchor(
+                SessionCreateParams.Item.Subscription.TrialSettings.EndBehavior.BillingCycleAnchor
+                    billingCycleAnchor) {
+              this.billingCycleAnchor = billingCycleAnchor;
+              return this;
             }
 
             /**
@@ -8006,6 +8023,21 @@ public class SessionCreateParams extends ApiRequestParams {
                     missingPaymentMethod) {
               this.missingPaymentMethod = missingPaymentMethod;
               return this;
+            }
+          }
+
+          public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
+            @SerializedName("now")
+            NOW("now"),
+
+            @SerializedName("unchanged")
+            UNCHANGED("unchanged");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            BillingCycleAnchor(String value) {
+              this.value = value;
             }
           }
 
@@ -10813,6 +10845,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    /** contains details about the SeQura payment method options. */
+    @SerializedName("sequra")
+    Sequra sequra;
+
     /** contains details about the Sofort payment method options. */
     @SerializedName("sofort")
     Sofort sofort;
@@ -10887,6 +10923,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Satispay satispay,
         Scalapay scalapay,
         SepaDebit sepaDebit,
+        Sequra sequra,
         Sofort sofort,
         Sunbit sunbit,
         Swish swish,
@@ -10939,6 +10976,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.satispay = satispay;
       this.scalapay = scalapay;
       this.sepaDebit = sepaDebit;
+      this.sequra = sequra;
       this.sofort = sofort;
       this.sunbit = sunbit;
       this.swish = swish;
@@ -11043,6 +11081,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private SepaDebit sepaDebit;
 
+      private Sequra sequra;
+
       private Sofort sofort;
 
       private Sunbit sunbit;
@@ -11105,6 +11145,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.satispay,
             this.scalapay,
             this.sepaDebit,
+            this.sequra,
             this.sofort,
             this.sunbit,
             this.swish,
@@ -11411,6 +11452,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Sepa Debit payment method options. */
       public Builder setSepaDebit(SessionCreateParams.PaymentMethodOptions.SepaDebit sepaDebit) {
         this.sepaDebit = sepaDebit;
+        return this;
+      }
+
+      /** contains details about the SeQura payment method options. */
+      public Builder setSequra(SessionCreateParams.PaymentMethodOptions.Sequra sequra) {
+        this.sequra = sequra;
         return this;
       }
 
@@ -13164,7 +13211,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
         @SerializedName("none")
-        NONE("none");
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -13494,8 +13544,8 @@ public class SessionCreateParams extends ApiRequestParams {
          * Date when the mandate expires and no further payments will be charged. If not provided,
          * the mandate will be set to be indefinite.
          */
-        @SerializedName("expires_after")
-        Long expiresAfter;
+        @SerializedName("expires_at")
+        Long expiresAt;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -13507,8 +13557,8 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private MandateOptions(Long expiresAfter, Map<String, Object> extraParams) {
-          this.expiresAfter = expiresAfter;
+        private MandateOptions(Long expiresAt, Map<String, Object> extraParams) {
+          this.expiresAt = expiresAt;
           this.extraParams = extraParams;
         }
 
@@ -13517,22 +13567,22 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private Long expiresAfter;
+          private Long expiresAt;
 
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
           public SessionCreateParams.PaymentMethodOptions.Blik.MandateOptions build() {
             return new SessionCreateParams.PaymentMethodOptions.Blik.MandateOptions(
-                this.expiresAfter, this.extraParams);
+                this.expiresAt, this.extraParams);
           }
 
           /**
            * Date when the mandate expires and no further payments will be charged. If not provided,
            * the mandate will be set to be indefinite.
            */
-          public Builder setExpiresAfter(Long expiresAfter) {
-            this.expiresAfter = expiresAfter;
+          public Builder setExpiresAt(Long expiresAt) {
+            this.expiresAt = expiresAt;
             return this;
           }
 
@@ -13573,10 +13623,7 @@ public class SessionCreateParams extends ApiRequestParams {
         NONE("none"),
 
         @SerializedName("off_session")
-        OFF_SESSION("off_session"),
-
-        @SerializedName("on_session")
-        ON_SESSION("on_session");
+        OFF_SESSION("off_session");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -20233,6 +20280,91 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Sequra {
+      /** Controls when the funds will be captured from the customer's account. */
+      @SerializedName("capture_method")
+      CaptureMethod captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Sequra(CaptureMethod captureMethod, Map<String, Object> extraParams) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private CaptureMethod captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Sequra build() {
+          return new SessionCreateParams.PaymentMethodOptions.Sequra(
+              this.captureMethod, this.extraParams);
+        }
+
+        /** Controls when the funds will be captured from the customer's account. */
+        public Builder setCaptureMethod(
+            SessionCreateParams.PaymentMethodOptions.Sequra.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Sequra#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Sequra#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Sofort {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -22017,6 +22149,19 @@ public class SessionCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * The ID of a saved payment method to select when the Payment Element renders, for example
+     * {@code pm_1MqLiJLkdIwHu7ixUEgbFdYF}. Takes precedence over the customer's default payment
+     * method. If the ID doesn't match one of the payment methods the Element is displaying, the
+     * Element selects a payment method as it normally would and no error is returned. Preselecting
+     * a payment method never changes which payment methods the Element displays, and never modifies
+     * the payment method, the customer, or this session. The preselection is fixed once set. To
+     * preselect a different payment method, create a new session. An Element that's already on the
+     * page keeps its current selection.
+     */
+    @SerializedName("payment_method_preselect")
+    String paymentMethodPreselect;
+
+    /**
      * Enable customers to choose if they wish to remove their saved payment methods. Disabled by
      * default.
      */
@@ -22034,10 +22179,12 @@ public class SessionCreateParams extends ApiRequestParams {
         List<SessionCreateParams.SavedPaymentMethodOptions.AllowRedisplayFilter>
             allowRedisplayFilters,
         Map<String, Object> extraParams,
+        String paymentMethodPreselect,
         PaymentMethodRemove paymentMethodRemove,
         PaymentMethodSave paymentMethodSave) {
       this.allowRedisplayFilters = allowRedisplayFilters;
       this.extraParams = extraParams;
+      this.paymentMethodPreselect = paymentMethodPreselect;
       this.paymentMethodRemove = paymentMethodRemove;
       this.paymentMethodSave = paymentMethodSave;
     }
@@ -22052,6 +22199,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private String paymentMethodPreselect;
+
       private PaymentMethodRemove paymentMethodRemove;
 
       private PaymentMethodSave paymentMethodSave;
@@ -22061,6 +22210,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return new SessionCreateParams.SavedPaymentMethodOptions(
             this.allowRedisplayFilters,
             this.extraParams,
+            this.paymentMethodPreselect,
             this.paymentMethodRemove,
             this.paymentMethodSave);
       }
@@ -22119,6 +22269,21 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * The ID of a saved payment method to select when the Payment Element renders, for example
+       * {@code pm_1MqLiJLkdIwHu7ixUEgbFdYF}. Takes precedence over the customer's default payment
+       * method. If the ID doesn't match one of the payment methods the Element is displaying, the
+       * Element selects a payment method as it normally would and no error is returned.
+       * Preselecting a payment method never changes which payment methods the Element displays, and
+       * never modifies the payment method, the customer, or this session. The preselection is fixed
+       * once set. To preselect a different payment method, create a new session. An Element that's
+       * already on the page keeps its current selection.
+       */
+      public Builder setPaymentMethodPreselect(String paymentMethodPreselect) {
+        this.paymentMethodPreselect = paymentMethodPreselect;
         return this;
       }
 
@@ -25356,6 +25521,13 @@ public class SessionCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class EndBehavior {
         /**
+         * Indicates how the subscription's billing cycle anchor is reset when a trial ends.
+         * Defaults to {@code now}.
+         */
+        @SerializedName("billing_cycle_anchor")
+        BillingCycleAnchor billingCycleAnchor;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -25373,7 +25545,10 @@ public class SessionCreateParams extends ApiRequestParams {
         MissingPaymentMethod missingPaymentMethod;
 
         private EndBehavior(
-            Map<String, Object> extraParams, MissingPaymentMethod missingPaymentMethod) {
+            BillingCycleAnchor billingCycleAnchor,
+            Map<String, Object> extraParams,
+            MissingPaymentMethod missingPaymentMethod) {
+          this.billingCycleAnchor = billingCycleAnchor;
           this.extraParams = extraParams;
           this.missingPaymentMethod = missingPaymentMethod;
         }
@@ -25383,6 +25558,8 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private BillingCycleAnchor billingCycleAnchor;
+
           private Map<String, Object> extraParams;
 
           private MissingPaymentMethod missingPaymentMethod;
@@ -25390,7 +25567,18 @@ public class SessionCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public SessionCreateParams.SubscriptionData.TrialSettings.EndBehavior build() {
             return new SessionCreateParams.SubscriptionData.TrialSettings.EndBehavior(
-                this.extraParams, this.missingPaymentMethod);
+                this.billingCycleAnchor, this.extraParams, this.missingPaymentMethod);
+          }
+
+          /**
+           * Indicates how the subscription's billing cycle anchor is reset when a trial ends.
+           * Defaults to {@code now}.
+           */
+          public Builder setBillingCycleAnchor(
+              SessionCreateParams.SubscriptionData.TrialSettings.EndBehavior.BillingCycleAnchor
+                  billingCycleAnchor) {
+            this.billingCycleAnchor = billingCycleAnchor;
+            return this;
           }
 
           /**
@@ -25432,6 +25620,21 @@ public class SessionCreateParams extends ApiRequestParams {
                   missingPaymentMethod) {
             this.missingPaymentMethod = missingPaymentMethod;
             return this;
+          }
+        }
+
+        public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
+          @SerializedName("now")
+          NOW("now"),
+
+          @SerializedName("unchanged")
+          UNCHANGED("unchanged");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          BillingCycleAnchor(String value) {
+            this.value = value;
           }
         }
 
@@ -25746,6 +25949,195 @@ public class SessionCreateParams extends ApiRequestParams {
     }
   }
 
+  public enum AllowedPaymentMethodType implements ApiRequestParams.EnumParam {
+    @SerializedName("acss_debit")
+    ACSS_DEBIT("acss_debit"),
+
+    @SerializedName("affirm")
+    AFFIRM("affirm"),
+
+    @SerializedName("afterpay_clearpay")
+    AFTERPAY_CLEARPAY("afterpay_clearpay"),
+
+    @SerializedName("alipay")
+    ALIPAY("alipay"),
+
+    @SerializedName("alma")
+    ALMA("alma"),
+
+    @SerializedName("amazon_pay")
+    AMAZON_PAY("amazon_pay"),
+
+    @SerializedName("au_becs_debit")
+    AU_BECS_DEBIT("au_becs_debit"),
+
+    @SerializedName("bacs_debit")
+    BACS_DEBIT("bacs_debit"),
+
+    @SerializedName("bancontact")
+    BANCONTACT("bancontact"),
+
+    @SerializedName("billie")
+    BILLIE("billie"),
+
+    @SerializedName("bizum")
+    BIZUM("bizum"),
+
+    @SerializedName("blik")
+    BLIK("blik"),
+
+    @SerializedName("boleto")
+    BOLETO("boleto"),
+
+    @SerializedName("card")
+    CARD("card"),
+
+    @SerializedName("cashapp")
+    CASHAPP("cashapp"),
+
+    @SerializedName("crypto")
+    CRYPTO("crypto"),
+
+    @SerializedName("customer_balance")
+    CUSTOMER_BALANCE("customer_balance"),
+
+    @SerializedName("eps")
+    EPS("eps"),
+
+    @SerializedName("fpx")
+    FPX("fpx"),
+
+    @SerializedName("giropay")
+    GIROPAY("giropay"),
+
+    @SerializedName("gopay")
+    GOPAY("gopay"),
+
+    @SerializedName("grabpay")
+    GRABPAY("grabpay"),
+
+    @SerializedName("ideal")
+    IDEAL("ideal"),
+
+    @SerializedName("kakao_pay")
+    KAKAO_PAY("kakao_pay"),
+
+    @SerializedName("klarna")
+    KLARNA("klarna"),
+
+    @SerializedName("konbini")
+    KONBINI("konbini"),
+
+    @SerializedName("kr_card")
+    KR_CARD("kr_card"),
+
+    @SerializedName("link")
+    LINK("link"),
+
+    @SerializedName("mb_way")
+    MB_WAY("mb_way"),
+
+    @SerializedName("mobilepay")
+    MOBILEPAY("mobilepay"),
+
+    @SerializedName("multibanco")
+    MULTIBANCO("multibanco"),
+
+    @SerializedName("naver_pay")
+    NAVER_PAY("naver_pay"),
+
+    @SerializedName("nz_bank_account")
+    NZ_BANK_ACCOUNT("nz_bank_account"),
+
+    @SerializedName("oxxo")
+    OXXO("oxxo"),
+
+    @SerializedName("p24")
+    P24("p24"),
+
+    @SerializedName("pay_by_bank")
+    PAY_BY_BANK("pay_by_bank"),
+
+    @SerializedName("payco")
+    PAYCO("payco"),
+
+    @SerializedName("paynow")
+    PAYNOW("paynow"),
+
+    @SerializedName("paypal")
+    PAYPAL("paypal"),
+
+    @SerializedName("paypay")
+    PAYPAY("paypay"),
+
+    @SerializedName("payto")
+    PAYTO("payto"),
+
+    @SerializedName("pix")
+    PIX("pix"),
+
+    @SerializedName("promptpay")
+    PROMPTPAY("promptpay"),
+
+    @SerializedName("qris")
+    QRIS("qris"),
+
+    @SerializedName("rechnung")
+    RECHNUNG("rechnung"),
+
+    @SerializedName("revolut_pay")
+    REVOLUT_PAY("revolut_pay"),
+
+    @SerializedName("samsung_pay")
+    SAMSUNG_PAY("samsung_pay"),
+
+    @SerializedName("satispay")
+    SATISPAY("satispay"),
+
+    @SerializedName("scalapay")
+    SCALAPAY("scalapay"),
+
+    @SerializedName("sepa_debit")
+    SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
+
+    @SerializedName("shopeepay")
+    SHOPEEPAY("shopeepay"),
+
+    @SerializedName("sofort")
+    SOFORT("sofort"),
+
+    @SerializedName("sunbit")
+    SUNBIT("sunbit"),
+
+    @SerializedName("swish")
+    SWISH("swish"),
+
+    @SerializedName("twint")
+    TWINT("twint"),
+
+    @SerializedName("upi")
+    UPI("upi"),
+
+    @SerializedName("us_bank_account")
+    US_BANK_ACCOUNT("us_bank_account"),
+
+    @SerializedName("wechat_pay")
+    WECHAT_PAY("wechat_pay"),
+
+    @SerializedName("zip")
+    ZIP("zip");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    AllowedPaymentMethodType(String value) {
+      this.value = value;
+    }
+  }
+
   public enum ApprovalMethod implements ApiRequestParams.EnumParam {
     @SerializedName("auto")
     AUTO("auto"),
@@ -25938,6 +26330,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),
@@ -26150,195 +26545,6 @@ public class SessionCreateParams extends ApiRequestParams {
     private final String value;
 
     PaymentMethodCollection(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum PaymentMethodType implements ApiRequestParams.EnumParam {
-    @SerializedName("acss_debit")
-    ACSS_DEBIT("acss_debit"),
-
-    @SerializedName("affirm")
-    AFFIRM("affirm"),
-
-    @SerializedName("afterpay_clearpay")
-    AFTERPAY_CLEARPAY("afterpay_clearpay"),
-
-    @SerializedName("alipay")
-    ALIPAY("alipay"),
-
-    @SerializedName("alma")
-    ALMA("alma"),
-
-    @SerializedName("amazon_pay")
-    AMAZON_PAY("amazon_pay"),
-
-    @SerializedName("au_becs_debit")
-    AU_BECS_DEBIT("au_becs_debit"),
-
-    @SerializedName("bacs_debit")
-    BACS_DEBIT("bacs_debit"),
-
-    @SerializedName("bancontact")
-    BANCONTACT("bancontact"),
-
-    @SerializedName("billie")
-    BILLIE("billie"),
-
-    @SerializedName("bizum")
-    BIZUM("bizum"),
-
-    @SerializedName("blik")
-    BLIK("blik"),
-
-    @SerializedName("boleto")
-    BOLETO("boleto"),
-
-    @SerializedName("card")
-    CARD("card"),
-
-    @SerializedName("cashapp")
-    CASHAPP("cashapp"),
-
-    @SerializedName("crypto")
-    CRYPTO("crypto"),
-
-    @SerializedName("customer_balance")
-    CUSTOMER_BALANCE("customer_balance"),
-
-    @SerializedName("eps")
-    EPS("eps"),
-
-    @SerializedName("fpx")
-    FPX("fpx"),
-
-    @SerializedName("giropay")
-    GIROPAY("giropay"),
-
-    @SerializedName("gopay")
-    GOPAY("gopay"),
-
-    @SerializedName("grabpay")
-    GRABPAY("grabpay"),
-
-    @SerializedName("ideal")
-    IDEAL("ideal"),
-
-    @SerializedName("kakao_pay")
-    KAKAO_PAY("kakao_pay"),
-
-    @SerializedName("klarna")
-    KLARNA("klarna"),
-
-    @SerializedName("konbini")
-    KONBINI("konbini"),
-
-    @SerializedName("kr_card")
-    KR_CARD("kr_card"),
-
-    @SerializedName("link")
-    LINK("link"),
-
-    @SerializedName("mb_way")
-    MB_WAY("mb_way"),
-
-    @SerializedName("mobilepay")
-    MOBILEPAY("mobilepay"),
-
-    @SerializedName("multibanco")
-    MULTIBANCO("multibanco"),
-
-    @SerializedName("naver_pay")
-    NAVER_PAY("naver_pay"),
-
-    @SerializedName("nz_bank_account")
-    NZ_BANK_ACCOUNT("nz_bank_account"),
-
-    @SerializedName("oxxo")
-    OXXO("oxxo"),
-
-    @SerializedName("p24")
-    P24("p24"),
-
-    @SerializedName("pay_by_bank")
-    PAY_BY_BANK("pay_by_bank"),
-
-    @SerializedName("payco")
-    PAYCO("payco"),
-
-    @SerializedName("paynow")
-    PAYNOW("paynow"),
-
-    @SerializedName("paypal")
-    PAYPAL("paypal"),
-
-    @SerializedName("paypay")
-    PAYPAY("paypay"),
-
-    @SerializedName("payto")
-    PAYTO("payto"),
-
-    @SerializedName("pix")
-    PIX("pix"),
-
-    @SerializedName("promptpay")
-    PROMPTPAY("promptpay"),
-
-    @SerializedName("qris")
-    QRIS("qris"),
-
-    @SerializedName("rechnung")
-    RECHNUNG("rechnung"),
-
-    @SerializedName("revolut_pay")
-    REVOLUT_PAY("revolut_pay"),
-
-    @SerializedName("samsung_pay")
-    SAMSUNG_PAY("samsung_pay"),
-
-    @SerializedName("satispay")
-    SATISPAY("satispay"),
-
-    @SerializedName("scalapay")
-    SCALAPAY("scalapay"),
-
-    @SerializedName("sepa_debit")
-    SEPA_DEBIT("sepa_debit"),
-
-    @SerializedName("sequra")
-    SEQURA("sequra"),
-
-    @SerializedName("shopeepay")
-    SHOPEEPAY("shopeepay"),
-
-    @SerializedName("sofort")
-    SOFORT("sofort"),
-
-    @SerializedName("sunbit")
-    SUNBIT("sunbit"),
-
-    @SerializedName("swish")
-    SWISH("swish"),
-
-    @SerializedName("twint")
-    TWINT("twint"),
-
-    @SerializedName("upi")
-    UPI("upi"),
-
-    @SerializedName("us_bank_account")
-    US_BANK_ACCOUNT("us_bank_account"),
-
-    @SerializedName("wechat_pay")
-    WECHAT_PAY("wechat_pay"),
-
-    @SerializedName("zip")
-    ZIP("zip");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    PaymentMethodType(String value) {
       this.value = value;
     }
   }

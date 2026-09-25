@@ -238,7 +238,10 @@ public class PaymentAttemptRecordReportCanceledParams extends ApiRequestParams {
     BLOCKED_FOR_FRAUD("blocked_for_fraud"),
 
     @SerializedName("merchant_canceled")
-    MERCHANT_CANCELED("merchant_canceled");
+    MERCHANT_CANCELED("merchant_canceled"),
+
+    @SerializedName("rerouted")
+    REROUTED("rerouted");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

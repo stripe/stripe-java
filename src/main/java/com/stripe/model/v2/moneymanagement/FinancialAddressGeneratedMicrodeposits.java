@@ -1,20 +1,26 @@
 // File generated from our OpenAPI spec
-package com.stripe.model.v2;
+package com.stripe.model.v2.moneymanagement;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Credit Simulations represent simulated credit transactions applied to financial addresses for
- * testing purposes.
+ * Generated Microdeposits represent verification deposits sent to a financial address for ownership
+ * verification, containing the deposited amounts and status.
  */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class FinancialAddressCreditSimulation extends StripeObject {
+public class FinancialAddressGeneratedMicrodeposits extends StripeObject {
+  /** The amounts of the microdeposits that were generated. */
+  @SerializedName("amounts")
+  List<Amount> amounts;
+
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
@@ -26,12 +32,16 @@ public class FinancialAddressCreditSimulation extends StripeObject {
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *
-   * <p>Equal to {@code financial_address_credit_simulation}.
+   * <p>Equal to {@code v2.money_management.financial_address_generated_microdeposits}.
    */
   @SerializedName("object")
   String object;
 
-  /** The status of the request, signifying whether a simulated credit was initiated. */
+  /**
+   * Closed Enum. The status of the request.
+   *
+   * <p>Equal to {@code accepted}.
+   */
   @SerializedName("status")
   String status;
 }

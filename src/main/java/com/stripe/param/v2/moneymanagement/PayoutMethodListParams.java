@@ -224,6 +224,9 @@ public class PayoutMethodListParams extends ApiRequestParams {
       @SerializedName("eligible")
       ELIGIBLE("eligible"),
 
+      @SerializedName("ineligible")
+      INELIGIBLE("ineligible"),
+
       @SerializedName("invalid")
       INVALID("invalid"),
 
@@ -244,6 +247,9 @@ public class PayoutMethodListParams extends ApiRequestParams {
 
       @SerializedName("eligible")
       ELIGIBLE("eligible"),
+
+      @SerializedName("ineligible")
+      INELIGIBLE("ineligible"),
 
       @SerializedName("invalid")
       INVALID("invalid"),

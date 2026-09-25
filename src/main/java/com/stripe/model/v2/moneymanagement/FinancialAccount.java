@@ -479,6 +479,10 @@ public class FinancialAccount extends StripeObject implements HasId {
     @SerializedName("crypto")
     Crypto crypto;
 
+    /** Array of eligibility objects, segmented by bank name and deposit insurance scheme. */
+    @SerializedName("deposit_insurance_eligibility")
+    List<FinancialAccount.Storage.DepositInsuranceEligibility> depositInsuranceEligibility;
+
     /**
      * The usage type for funds in this FinancialAccount. Can be used to specify that the funds are
      * for Consumer activity.
@@ -513,6 +517,35 @@ public class FinancialAccount extends StripeObject implements HasId {
        */
       @SerializedName("custody_model")
       String custodyModel;
+    }
+
+    /**
+     * For more details about DepositInsuranceEligibility, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DepositInsuranceEligibility extends StripeObject {
+      /**
+       * The bank where funds are stored.
+       *
+       * <p>Equal to {@code fifth_third}.
+       */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** Currencies eligible for deposit insurance at this bank under this scheme. */
+      @SerializedName("currencies")
+      List<String> currencies;
+
+      /**
+       * The deposit insurance scheme.
+       *
+       * <p>One of {@code fdic}, or {@code fdic_passthrough}.
+       */
+      @SerializedName("type")
+      String type;
     }
   }
 }

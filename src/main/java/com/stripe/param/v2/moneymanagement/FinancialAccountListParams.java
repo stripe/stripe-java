@@ -194,7 +194,10 @@ public class FinancialAccountListParams extends ApiRequestParams {
     PAYMENTS__BALANCE_BY_FUNDS_TYPE("payments.balance_by_funds_type"),
 
     @SerializedName("storage.crypto")
-    STORAGE__CRYPTO("storage.crypto");
+    STORAGE__CRYPTO("storage.crypto"),
+
+    @SerializedName("storage.deposit_insurance_eligibility")
+    STORAGE__DEPOSIT_INSURANCE_ELIGIBILITY("storage.deposit_insurance_eligibility");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

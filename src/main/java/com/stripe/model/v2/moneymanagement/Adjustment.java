@@ -105,8 +105,8 @@ public class Adjustment extends StripeObject implements HasId {
     String receivedDebit;
 
     /**
-     * Closed Enum. If applicable, the type of flow linked to this Adjustment. The field matching
-     * this value will contain the ID of the flow.
+     * Open Enum. If applicable, the type of flow linked to this Adjustment. The field matching this
+     * value will contain the ID of the flow.
      *
      * <p>One of {@code adjustment}, {@code balance_exchange}, {@code inbound_payment}, {@code
      * inbound_transfer}, {@code outbound_payment}, {@code outbound_transfer}, {@code

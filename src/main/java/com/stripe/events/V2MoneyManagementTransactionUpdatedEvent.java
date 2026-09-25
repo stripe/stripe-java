@@ -7,9 +7,22 @@ import com.stripe.model.v2.core.Event;
 import com.stripe.model.v2.core.Event.RelatedObject;
 import com.stripe.model.v2.moneymanagement.Transaction;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public final class V2MoneyManagementTransactionUpdatedEvent extends Event {
+  /** Data for the v2.money_management.transaction.updated event. */
+  @SerializedName("data")
+  V2MoneyManagementTransactionUpdatedEvent.EventData data;
+
+  @Getter
+  @Setter
+  public static final class EventData {
+    /** Id of the v1 Treasury Transaction corresponding to this Transaction. */
+    @SerializedName("treasury_transaction")
+    String treasuryTransaction;
+  }
+
   @SerializedName("related_object")
 
   /** Object containing the reference to API resource relevant to the event. */

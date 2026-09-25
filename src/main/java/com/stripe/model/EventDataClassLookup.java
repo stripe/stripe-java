@@ -252,6 +252,7 @@ public final class EventDataClassLookup {
         "product_catalog.trial_offer", com.stripe.model.productcatalog.TrialOffer.class);
 
     classLookup.put("radar.account_evaluation", com.stripe.model.radar.AccountEvaluation.class);
+    classLookup.put("radar.billing_evaluation", com.stripe.model.radar.BillingEvaluation.class);
     classLookup.put("radar.customer_evaluation", com.stripe.model.radar.CustomerEvaluation.class);
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);
     classLookup.put(
@@ -294,6 +295,9 @@ public final class EventDataClassLookup {
         "terminal.reader_collected_data", com.stripe.model.terminal.ReaderCollectedData.class);
 
     classLookup.put("test_helpers.test_clock", com.stripe.model.testhelpers.TestClock.class);
+
+    classLookup.put(
+        "three_d_secure.authentication", com.stripe.model.threedsecure.Authentication.class);
 
     classLookup.put("treasury.credit_reversal", com.stripe.model.treasury.CreditReversal.class);
     classLookup.put("treasury.debit_reversal", com.stripe.model.treasury.DebitReversal.class);

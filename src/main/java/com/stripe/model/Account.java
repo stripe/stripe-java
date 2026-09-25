@@ -2322,10 +2322,14 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<String> currentlyDue;
 
     /**
-     * If the account is disabled, this string describes why the account can’t create charges or
-     * receive payouts. Can be {@code rejected.fraud}, {@code rejected.terms_of_service}, {@code
-     * rejected.listed}, {@code rejected.other}, {@code fields_needed}, {@code listed}, {@code
-     * under_review}, or {@code other}.
+     * This is typed as an enum for consistency with {@code requirements.disabled_reason}.
+     *
+     * <p>One of {@code action_required.requested_capabilities}, {@code listed}, {@code other},
+     * {@code platform_paused}, {@code rejected.fraud}, {@code rejected.incomplete_verification},
+     * {@code rejected.listed}, {@code rejected.other}, {@code rejected.platform_fraud}, {@code
+     * rejected.platform_other}, {@code rejected.platform_terms_of_service}, {@code
+     * rejected.terms_of_service}, {@code requirements.past_due}, {@code
+     * requirements.pending_verification}, or {@code under_review}.
      */
     @SerializedName("disabled_reason")
     String disabledReason;
@@ -2540,10 +2544,16 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<String> currentlyDue;
 
     /**
-     * If the account is disabled, this string describes why the account can’t create charges or
-     * receive payouts. Can be {@code rejected.fraud}, {@code rejected.terms_of_service}, {@code
-     * rejected.listed}, {@code rejected.other}, {@code fields_needed}, {@code listed}, {@code
-     * under_review}, or {@code other}.
+     * If the account is disabled, this enum describes why. <a
+     * href="https://docs.stripe.com/connect/handling-api-verification">Learn more about handling
+     * verification issues</a>.
+     *
+     * <p>One of {@code action_required.requested_capabilities}, {@code listed}, {@code other},
+     * {@code platform_paused}, {@code rejected.fraud}, {@code rejected.incomplete_verification},
+     * {@code rejected.listed}, {@code rejected.other}, {@code rejected.platform_fraud}, {@code
+     * rejected.platform_other}, {@code rejected.platform_terms_of_service}, {@code
+     * rejected.terms_of_service}, {@code requirements.past_due}, {@code
+     * requirements.pending_verification}, or {@code under_review}.
      */
     @SerializedName("disabled_reason")
     String disabledReason;

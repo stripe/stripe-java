@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.v2.testhelpers;
+package com.stripe.param.v2.moneymanagement.testhelpers;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;

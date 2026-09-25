@@ -172,14 +172,6 @@ public class InboundTransfer extends StripeObject implements HasId {
     String id;
 
     /**
-     * Open Enum. The Level of the HistoryEntry.
-     *
-     * <p>One of {@code canonical}, or {@code debug}.
-     */
-    @SerializedName("level")
-    String level;
-
-    /**
      * Open Enum. The type of the HistoryEntry.
      *
      * <p>One of {@code bank_debit_failed}, {@code bank_debit_processing}, {@code

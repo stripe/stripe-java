@@ -92,7 +92,7 @@ public class AccountTest extends BaseStripeTest {
     final Account account = getAccountFixture();
 
     final Map<String, Object> params = new HashMap<>();
-    params.put("reason", "fraud");
+    params.put("reason", "fraud_other");
 
     Account rejectedAccount = account.reject(params);
 

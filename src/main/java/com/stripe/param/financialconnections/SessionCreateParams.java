@@ -462,9 +462,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("account_subcategories")
     List<SessionCreateParams.Filters.AccountSubcategory> accountSubcategories;
 
-    /** List of countries from which to filter accounts. */
-    @SerializedName("countries")
-    List<String> countries;
+    /** Country from which to collect accounts. */
+    @SerializedName("country")
+    String country;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -488,12 +488,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private Filters(
         List<SessionCreateParams.Filters.AccountSubcategory> accountSubcategories,
-        List<String> countries,
+        String country,
         Map<String, Object> extraParams,
         String institution,
         RequirePaymentMethodSupport requirePaymentMethodSupport) {
       this.accountSubcategories = accountSubcategories;
-      this.countries = countries;
+      this.country = country;
       this.extraParams = extraParams;
       this.institution = institution;
       this.requirePaymentMethodSupport = requirePaymentMethodSupport;
@@ -506,7 +506,7 @@ public class SessionCreateParams extends ApiRequestParams {
     public static class Builder {
       private List<SessionCreateParams.Filters.AccountSubcategory> accountSubcategories;
 
-      private List<String> countries;
+      private String country;
 
       private Map<String, Object> extraParams;
 
@@ -518,7 +518,7 @@ public class SessionCreateParams extends ApiRequestParams {
       public SessionCreateParams.Filters build() {
         return new SessionCreateParams.Filters(
             this.accountSubcategories,
-            this.countries,
+            this.country,
             this.extraParams,
             this.institution,
             this.requirePaymentMethodSupport);
@@ -551,29 +551,9 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Add an element to `countries` list. A list is initialized for the first `add/addAll` call,
-       * and subsequent calls adds additional elements to the original list. See {@link
-       * SessionCreateParams.Filters#countries} for the field documentation.
-       */
-      public Builder addCountry(String element) {
-        if (this.countries == null) {
-          this.countries = new ArrayList<>();
-        }
-        this.countries.add(element);
-        return this;
-      }
-
-      /**
-       * Add all elements to `countries` list. A list is initialized for the first `add/addAll`
-       * call, and subsequent calls adds additional elements to the original list. See {@link
-       * SessionCreateParams.Filters#countries} for the field documentation.
-       */
-      public Builder addAllCountry(List<String> elements) {
-        if (this.countries == null) {
-          this.countries = new ArrayList<>();
-        }
-        this.countries.addAll(elements);
+      /** Country from which to collect accounts. */
+      public Builder setCountry(String country) {
+        this.country = country;
         return this;
       }
 

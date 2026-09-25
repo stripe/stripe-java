@@ -55,6 +55,10 @@ public class FormListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
+  /** Filter forms by draft or finalized status. */
+  @SerializedName("status")
+  Status status;
+
   /**
    * An optional filter on the list, based on the object {@code type} field. Without the filter, the
    * list includes all current and future tax form types. If your integration expects only one type
@@ -70,6 +74,7 @@ public class FormListParams extends ApiRequestParams {
       Long limit,
       Payee payee,
       String startingAfter,
+      Status status,
       Type type) {
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -77,6 +82,7 @@ public class FormListParams extends ApiRequestParams {
     this.limit = limit;
     this.payee = payee;
     this.startingAfter = startingAfter;
+    this.status = status;
     this.type = type;
   }
 
@@ -97,6 +103,8 @@ public class FormListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    private Status status;
+
     private Type type;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -108,6 +116,7 @@ public class FormListParams extends ApiRequestParams {
           this.limit,
           this.payee,
           this.startingAfter,
+          this.status,
           this.type);
     }
 
@@ -197,6 +206,12 @@ public class FormListParams extends ApiRequestParams {
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
+      return this;
+    }
+
+    /** Filter forms by draft or finalized status. */
+    public Builder setStatus(FormListParams.Status status) {
+      this.status = status;
       return this;
     }
 
@@ -320,6 +335,21 @@ public class FormListParams extends ApiRequestParams {
       Type(String value) {
         this.value = value;
       }
+    }
+  }
+
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("draft")
+    DRAFT("draft"),
+
+    @SerializedName("finalized")
+    FINALIZED("finalized");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
+      this.value = value;
     }
   }
 

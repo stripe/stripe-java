@@ -128,9 +128,6 @@ public abstract class StripeException extends Exception {
       case "controlled_by_alternate_resource":
         return com.stripe.exception.ControlledByAlternateResourceException.parse(
             body, statusCode, requestId, responseGetter);
-      case "controlled_by_dashboard":
-        return com.stripe.exception.ControlledByDashboardException.parse(
-            body, statusCode, requestId, responseGetter);
       case "feature_not_enabled":
         return com.stripe.exception.FeatureNotEnabledException.parse(
             body, statusCode, requestId, responseGetter);
@@ -151,6 +148,9 @@ public abstract class StripeException extends Exception {
             body, statusCode, requestId, responseGetter);
       case "invalid_payout_method":
         return com.stripe.exception.InvalidPayoutMethodException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "invalid_vaulted_credential":
+        return com.stripe.exception.InvalidVaultedCredentialException.parse(
             body, statusCode, requestId, responseGetter);
       case "merchant_not_gated":
         return com.stripe.exception.MerchantNotGatedException.parse(
@@ -175,6 +175,15 @@ public abstract class StripeException extends Exception {
             body, statusCode, requestId, responseGetter);
       case "temporary_session_expired":
         return com.stripe.exception.TemporarySessionExpiredException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "verification_attempt_failed":
+        return com.stripe.exception.VerificationAttemptFailedException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "verification_expired":
+        return com.stripe.exception.VerificationExpiredException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "verification_not_initiated":
+        return com.stripe.exception.VerificationNotInitiatedException.parse(
             body, statusCode, requestId, responseGetter);
         // The end of the section generated from our OpenAPI spec
     }

@@ -107,6 +107,13 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
     Amount amount;
 
     /**
+     * Details about the network and options associated with this fee. Present when type is
+     * network_fee.
+     */
+    @SerializedName("network_fee_details")
+    NetworkFeeDetails networkFeeDetails;
+
+    /**
      * Tax charged for this fee, if applicable. Value expressed as a decimal string in major units.
      */
     @SerializedName("tax_amount")
@@ -116,11 +123,57 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
      * The fee type.
      *
      * <p>One of {@code cross_border_payout_fee}, {@code foreign_exchange_fee}, {@code
-     * instant_payout_fee}, {@code next_day_payout_fee}, {@code real_time_payout_fee}, {@code
-     * standard_payout_fee}, or {@code wire_payout_fee}.
+     * instant_payout_fee}, {@code network_fee}, {@code next_day_payout_fee}, {@code
+     * real_time_payout_fee}, {@code standard_payout_fee}, or {@code wire_payout_fee}.
      */
     @SerializedName("type")
     String type;
+
+    /**
+     * Details about the network and options associated with this fee. Present when type is
+     * network_fee.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NetworkFeeDetails extends StripeObject {
+      /**
+       * The network associated with the fee.
+       *
+       * <p>One of {@code ach}, {@code becs}, {@code eft}, {@code fedwire}, {@code fps}, {@code
+       * local}, {@code npp}, {@code rtp}, {@code sepa}, {@code sepa_instant}, or {@code swift}.
+       */
+      @SerializedName("network")
+      String network;
+
+      /** Per-network options that affect the fee. */
+      @SerializedName("network_options")
+      NetworkOptions networkOptions;
+
+      /** Per-network options that affect the fee. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class NetworkOptions extends StripeObject {
+        /** ACH-specific network fee options. */
+        @SerializedName("ach")
+        Ach ach;
+
+        /** ACH-specific network fee options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Ach extends StripeObject {
+          /**
+           * Open Enum. ACH submission timing.
+           *
+           * <p>One of {@code next_day}, or {@code same_day}.
+           */
+          @SerializedName("submission")
+          String submission;
+        }
+      }
+    }
 
     /**
      * Tax charged for this fee, if applicable. Value expressed as a decimal string in major units.

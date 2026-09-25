@@ -592,7 +592,10 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
       BLOCKED_FOR_FRAUD("blocked_for_fraud"),
 
       @SerializedName("merchant_canceled")
-      MERCHANT_CANCELED("merchant_canceled");
+      MERCHANT_CANCELED("merchant_canceled"),
+
+      @SerializedName("rerouted")
+      REROUTED("rerouted");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
@@ -2661,6 +2664,9 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
   }
 
   public enum Outcome implements ApiRequestParams.EnumParam {
+    @SerializedName("canceled")
+    CANCELED("canceled"),
+
     @SerializedName("failed")
     FAILED("failed"),
 

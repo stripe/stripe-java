@@ -73,13 +73,6 @@ public final class EventDataClassLookup {
     classLookup.put("climate.product", com.stripe.model.climate.Product.class);
 
     classLookup.put(
-        "financial_address_credit_simulation",
-        com.stripe.model.v2.FinancialAddressCreditSimulation.class);
-    classLookup.put(
-        "financial_address_generated_microdeposits",
-        com.stripe.model.v2.FinancialAddressGeneratedMicrodeposits.class);
-
-    classLookup.put(
         "financial_connections.account", com.stripe.model.financialconnections.Account.class);
 
     classLookup.put(
@@ -212,6 +205,12 @@ public final class EventDataClassLookup {
         "v2.money_management.debit_dispute",
         com.stripe.model.v2.moneymanagement.DebitDispute.class);
     classLookup.put(
+        "v2.money_management.earned_credit",
+        com.stripe.model.v2.moneymanagement.EarnedCredit.class);
+    classLookup.put(
+        "v2.money_management.earned_credit_simulation",
+        com.stripe.model.v2.moneymanagement.EarnedCreditSimulation.class);
+    classLookup.put(
         "v2.money_management.financial_account",
         com.stripe.model.v2.moneymanagement.FinancialAccount.class);
     classLookup.put(
@@ -227,8 +226,14 @@ public final class EventDataClassLookup {
         "v2.money_management.financial_address",
         com.stripe.model.v2.moneymanagement.FinancialAddress.class);
     classLookup.put(
+        "v2.money_management.financial_address_credit_simulation",
+        com.stripe.model.v2.moneymanagement.FinancialAddressCreditSimulation.class);
+    classLookup.put(
         "v2.money_management.financial_address_debit_simulation",
         com.stripe.model.v2.moneymanagement.FinancialAddressDebitSimulation.class);
+    classLookup.put(
+        "v2.money_management.financial_address_generated_microdeposits",
+        com.stripe.model.v2.moneymanagement.FinancialAddressGeneratedMicrodeposits.class);
     classLookup.put(
         "v2.money_management.inbound_transfer",
         com.stripe.model.v2.moneymanagement.InboundTransfer.class);
@@ -1208,6 +1213,9 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.money_management.debit_dispute.succeeded",
         com.stripe.events.V2MoneyManagementDebitDisputeSucceededEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.earned_credit.succeeded",
+        com.stripe.events.V2MoneyManagementEarnedCreditSucceededEvent.class);
     eventClassLookup.put(
         "v2.money_management.financial_account.created",
         com.stripe.events.V2MoneyManagementFinancialAccountCreatedEvent.class);

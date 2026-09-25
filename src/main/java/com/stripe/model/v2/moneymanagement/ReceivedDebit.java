@@ -173,6 +173,10 @@ public class ReceivedDebit extends StripeObject implements HasId {
     @SerializedName("gb_bank_account")
     GbBankAccount gbBankAccount;
 
+    /** Network-specific details about the bank transfer. */
+    @SerializedName("network_details")
+    NetworkDetails networkDetails;
+
     /**
      * Open Enum. Indicates the origin type through which this debit was initiated.
      *
@@ -235,6 +239,59 @@ public class ReceivedDebit extends StripeObject implements HasId {
       /** The sort code of the bank that originated the debit. */
       @SerializedName("sort_code")
       String sortCode;
+    }
+
+    /** Network-specific details about the bank transfer. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NetworkDetails extends StripeObject {
+      /** ACH-specific network details. */
+      @SerializedName("ach")
+      Ach ach;
+
+      /** ACH-specific network details. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Ach extends StripeObject {
+        /** Additional information included with the ACH debit. */
+        @SerializedName("addenda")
+        String addenda;
+
+        /** The entry description supplied by the company that originated the ACH debit. */
+        @SerializedName("originator_company_entry_description")
+        String originatorCompanyEntryDescription;
+
+        /** The identifier of the company that originated the ACH debit. */
+        @SerializedName("originator_company_id")
+        String originatorCompanyId;
+
+        /** The name of the company that originated the ACH debit. */
+        @SerializedName("originator_company_name")
+        String originatorCompanyName;
+
+        /** The identifier assigned to the receiver of the ACH debit. */
+        @SerializedName("receiver_id_number")
+        String receiverIdNumber;
+
+        /** The name of the receiver of the ACH debit. */
+        @SerializedName("receiver_name")
+        String receiverName;
+
+        /**
+         * Open Enum. The standard entry class code for the ACH debit.
+         *
+         * <p>One of {@code ccd}, {@code cie}, {@code ctx}, {@code iat}, {@code pos}, {@code ppd},
+         * {@code tel}, or {@code web}.
+         */
+        @SerializedName("standard_entry_class_code")
+        String standardEntryClassCode;
+
+        /** The trace identifier for the ACH debit. */
+        @SerializedName("trace_id")
+        String traceId;
+      }
     }
 
     /**

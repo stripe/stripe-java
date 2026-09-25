@@ -444,6 +444,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   SepaDebit sepaDebit;
 
   /**
+   * If this is a SeQura PaymentMethod, this hash contains details about the SeQura payment method.
+   */
+  @SerializedName("sequra")
+  Sequra sequra;
+
+  /**
    * If this is a Shopeepay PaymentMethod, this hash contains details about the Shopeepay payment
    * method.
    */
@@ -593,6 +599,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       Satispay satispay,
       Scalapay scalapay,
       SepaDebit sepaDebit,
+      Sequra sequra,
       Shopeepay shopeepay,
       Sofort sofort,
       StripeBalance stripeBalance,
@@ -668,6 +675,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.satispay = satispay;
     this.scalapay = scalapay;
     this.sepaDebit = sepaDebit;
+    this.sequra = sequra;
     this.shopeepay = shopeepay;
     this.sofort = sofort;
     this.stripeBalance = stripeBalance;
@@ -812,6 +820,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private SepaDebit sepaDebit;
 
+    private Sequra sequra;
+
     private Shopeepay shopeepay;
 
     private Sofort sofort;
@@ -903,6 +913,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.satispay,
           this.scalapay,
           this.sepaDebit,
+          this.sequra,
           this.shopeepay,
           this.sofort,
           this.stripeBalance,
@@ -1536,6 +1547,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      */
     public Builder setSepaDebit(PaymentMethodCreateParams.SepaDebit sepaDebit) {
       this.sepaDebit = sepaDebit;
+      return this;
+    }
+
+    /**
+     * If this is a SeQura PaymentMethod, this hash contains details about the SeQura payment
+     * method.
+     */
+    public Builder setSequra(PaymentMethodCreateParams.Sequra sequra) {
+      this.sequra = sequra;
       return this;
     }
 
@@ -6260,6 +6280,62 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       /** <strong>Required.</strong> IBAN of the bank account. */
       public Builder setIban(String iban) {
         this.iban = iban;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Sequra {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Sequra(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodCreateParams.Sequra build() {
+        return new PaymentMethodCreateParams.Sequra(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Sequra#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Sequra#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }
