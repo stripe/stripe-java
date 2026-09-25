@@ -840,6 +840,9 @@ public class PaymentRecord extends ApiResource implements HasId {
     @SerializedName("mobilepay")
     Mobilepay mobilepay;
 
+    @SerializedName("momo")
+    Momo momo;
+
     @SerializedName("multibanco")
     Multibanco multibanco;
 
@@ -906,6 +909,9 @@ public class PaymentRecord extends ApiResource implements HasId {
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
+
+    @SerializedName("sequra")
+    Sequra sequra;
 
     @SerializedName("shopeepay")
     Shopeepay shopeepay;
@@ -1424,7 +1430,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     public static class BillingDetails extends StripeObject {
       /** A representation of a physical address. */
       @SerializedName("address")
-      com.stripe.model.PaymentRecord.PaymentMethodDetails.BillingDetails.Address address;
+      com.stripe.model.Address address;
 
       /** The billing email associated with the method of payment. */
       @SerializedName("email")
@@ -1437,42 +1443,6 @@ public class PaymentRecord extends ApiResource implements HasId {
       /** The billing phone number associated with the method of payment. */
       @SerializedName("phone")
       String phone;
-
-      /** A representation of a physical address. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Address extends StripeObject {
-        /** City, district, suburb, town, or village. */
-        @SerializedName("city")
-        String city;
-
-        /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-         * 3166-1 alpha-2</a>).
-         */
-        @SerializedName("country")
-        String country;
-
-        /** Address line 1, such as the street, PO Box, or company name. */
-        @SerializedName("line1")
-        String line1;
-
-        /** Address line 2, such as the apartment, suite, unit, or building. */
-        @SerializedName("line2")
-        String line2;
-
-        /** ZIP or postal code. */
-        @SerializedName("postal_code")
-        String postalCode;
-
-        /**
-         * State, county, province, or region (<a
-         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
-         */
-        @SerializedName("state")
-        String state;
-      }
     }
 
     /**
@@ -1640,6 +1610,13 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("network_transaction_id")
       String networkTransactionId;
 
+      /**
+       * The transaction type that was passed for an off-session, Merchant-Initiated transaction,
+       * one of {@code recurring} or {@code unscheduled}.
+       */
+      @SerializedName("stored_credential_usage")
+      String storedCredentialUsage;
+
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;
@@ -1802,7 +1779,7 @@ public class PaymentRecord extends ApiResource implements HasId {
         /**
          * The version of 3D Secure that was used.
          *
-         * <p>One of {@code 1.0.2}, {@code 2.1.0}, or {@code 2.2.0}.
+         * <p>One of {@code 1.0.2}, {@code 2.1.0}, {@code 2.2.0}, {@code 2.3.0}, or {@code 2.3.1}.
          */
         @SerializedName("version")
         String version;
@@ -1826,10 +1803,13 @@ public class PaymentRecord extends ApiResource implements HasId {
         @SerializedName("google_pay")
         GooglePay googlePay;
 
+        @SerializedName("link")
+        Link link;
+
         /**
-         * The type of the card wallet, one of {@code apple_pay} or {@code google_pay}. An
-         * additional hash is included on the Wallet subhash with a name matching this value. It
-         * contains additional information specific to the card wallet type.
+         * The type of the card wallet, one of {@code apple_pay}, {@code google_pay}, or {@code
+         * link}. An additional hash is included on the Wallet subhash with a name matching this
+         * value. It contains additional information specific to the card wallet type.
          */
         @SerializedName("type")
         String type;
@@ -1857,6 +1837,15 @@ public class PaymentRecord extends ApiResource implements HasId {
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class GooglePay extends StripeObject {}
+
+        /**
+         * For more details about Link, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Link extends StripeObject {}
       }
     }
 
@@ -2884,6 +2873,13 @@ public class PaymentRecord extends ApiResource implements HasId {
        */
       @SerializedName("country")
       String country;
+
+      /**
+       * The <a href="https://docs.stripe.com/payments/link/link-payment-methods">funding source
+       * group code</a> applied to this Link payment at confirmation time.
+       */
+      @SerializedName("funding_source_group")
+      String fundingSourceGroup;
     }
 
     /**
@@ -2935,6 +2931,26 @@ public class PaymentRecord extends ApiResource implements HasId {
         @SerializedName("last4")
         String last4;
       }
+    }
+
+    /**
+     * For more details about Momo, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Momo extends StripeObject {
+      /**
+       * Uniquely identifies this particular MoMo account. You can use this attribute to check
+       * whether two MoMo accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /** ID of the multi-use Mandate created by, or used to make, this MoMo payment. */
+      @SerializedName("mandate")
+      String mandate;
     }
 
     /**
@@ -3495,6 +3511,19 @@ public class PaymentRecord extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sequra extends StripeObject {
+      /** The SeQura transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+    }
+
+    /**
      * For more details about Shopeepay, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -3862,7 +3891,7 @@ public class PaymentRecord extends ApiResource implements HasId {
   public static class ShippingDetails extends StripeObject {
     /** A representation of a physical address. */
     @SerializedName("address")
-    com.stripe.model.PaymentRecord.ShippingDetails.Address address;
+    com.stripe.model.Address address;
 
     /** The shipping recipient's name. */
     @SerializedName("name")
@@ -3871,42 +3900,6 @@ public class PaymentRecord extends ApiResource implements HasId {
     /** The shipping recipient's phone number. */
     @SerializedName("phone")
     String phone;
-
-    /** A representation of a physical address. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Address extends StripeObject {
-      /** City, district, suburb, town, or village. */
-      @SerializedName("city")
-      String city;
-
-      /**
-       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-       * 3166-1 alpha-2</a>).
-       */
-      @SerializedName("country")
-      String country;
-
-      /** Address line 1, such as the street, PO Box, or company name. */
-      @SerializedName("line1")
-      String line1;
-
-      /** Address line 2, such as the apartment, suite, unit, or building. */
-      @SerializedName("line2")
-      String line2;
-
-      /** ZIP or postal code. */
-      @SerializedName("postal_code")
-      String postalCode;
-
-      /**
-       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
-       * 3166-2</a>).
-       */
-      @SerializedName("state")
-      String state;
-    }
   }
 
   @Override

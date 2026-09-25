@@ -11,6 +11,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.reserve.PlanListParams;
 import com.stripe.param.reserve.PlanRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -46,6 +47,14 @@ public class Plan extends ApiResource implements HasId {
   @SerializedName("currency")
   String currency;
 
+  /**
+   * The balance destination to which the reserved funds are sent.
+   *
+   * <p>One of {@code other}, {@code risk_reserved}, or {@code settlement_reserved}.
+   */
+  @SerializedName("destination")
+  String destination;
+
   /** Time at which the ReservePlan was disabled. */
   @SerializedName("disabled_at")
   Long disabledAt;
@@ -64,6 +73,9 @@ public class Plan extends ApiResource implements HasId {
    */
   @SerializedName("livemode")
   Boolean livemode;
+
+  @SerializedName("manual_release")
+  ManualRelease manualRelease;
 
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
@@ -92,7 +104,7 @@ public class Plan extends ApiResource implements HasId {
    * The current status of the ReservePlan. The ReservePlan only affects charges if it is {@code
    * active}.
    *
-   * <p>One of {@code active}, {@code disabled}, or {@code expired}.
+   * <p>One of {@code active}, {@code disabled}, {@code expired}, or {@code other}.
    */
   @SerializedName("status")
   String status;
@@ -100,10 +112,57 @@ public class Plan extends ApiResource implements HasId {
   /**
    * The type of the ReservePlan.
    *
-   * <p>One of {@code fixed_release}, or {@code rolling_release}.
+   * <p>One of {@code fixed_release}, {@code manual_release}, {@code other}, or {@code
+   * rolling_release}.
    */
   @SerializedName("type")
   String type;
+
+  /**
+   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
+   * order, with the most recent ReservePlans appearing first.
+   */
+  public static PlanCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
+   * order, with the most recent ReservePlans appearing first.
+   */
+  public static PlanCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/reserve/plans";
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, PlanCollection.class);
+  }
+
+  /**
+   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
+   * order, with the most recent ReservePlans appearing first.
+   */
+  public static PlanCollection list(PlanListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of ReservePlans previously created. The ReservePlans are returned in sorted
+   * order, with the most recent ReservePlans appearing first.
+   */
+  public static PlanCollection list(PlanListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/reserve/plans";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, PlanCollection.class);
+  }
 
   /** Retrieve a ReservePlan. */
   public static Plan retrieve(String id) throws StripeException {
@@ -160,6 +219,15 @@ public class Plan extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about ManualRelease, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManualRelease extends StripeObject {}
+
+  /**
    * For more details about RollingRelease, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -180,6 +248,7 @@ public class Plan extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(fixedRelease, responseGetter);
+    trySetResponseGetter(manualRelease, responseGetter);
     trySetResponseGetter(rollingRelease, responseGetter);
   }
 }

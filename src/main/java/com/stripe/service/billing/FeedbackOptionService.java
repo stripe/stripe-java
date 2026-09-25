@@ -23,20 +23,20 @@ public final class FeedbackOptionService extends ApiService {
     super(responseGetter);
   }
 
-  /** An API method for listing the feedback options model. */
+  /** Returns a list of your feedback options. */
   public StripeCollection<FeedbackOption> list(FeedbackOptionListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** An API method for listing the feedback options model. */
+  /** Returns a list of your feedback options. */
   public StripeCollection<FeedbackOption> list(RequestOptions options) throws StripeException {
     return list((FeedbackOptionListParams) null, options);
   }
-  /** An API method for listing the feedback options model. */
+  /** Returns a list of your feedback options. */
   public StripeCollection<FeedbackOption> list() throws StripeException {
     return list((FeedbackOptionListParams) null, (RequestOptions) null);
   }
-  /** An API method for listing the feedback options model. */
+  /** Returns a list of your feedback options. */
   public StripeCollection<FeedbackOption> list(
       FeedbackOptionListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/billing/feedback_options";
@@ -66,20 +66,20 @@ public final class FeedbackOptionService extends ApiService {
             options);
     return this.request(request, FeedbackOption.class);
   }
-  /** Retrieves a feedback options object given an ID. */
+  /** Retrieves a feedback option object given an ID. */
   public FeedbackOption retrieve(String id, FeedbackOptionRetrieveParams params)
       throws StripeException {
     return retrieve(id, params, (RequestOptions) null);
   }
-  /** Retrieves a feedback options object given an ID. */
+  /** Retrieves a feedback option object given an ID. */
   public FeedbackOption retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (FeedbackOptionRetrieveParams) null, options);
   }
-  /** Retrieves a feedback options object given an ID. */
+  /** Retrieves a feedback option object given an ID. */
   public FeedbackOption retrieve(String id) throws StripeException {
     return retrieve(id, (FeedbackOptionRetrieveParams) null, (RequestOptions) null);
   }
-  /** Retrieves a feedback options object given an ID. */
+  /** Retrieves a feedback option object given an ID. */
   public FeedbackOption retrieve(
       String id, FeedbackOptionRetrieveParams params, RequestOptions options)
       throws StripeException {

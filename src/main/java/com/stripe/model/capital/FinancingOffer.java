@@ -55,8 +55,9 @@ public class FinancingOffer extends ApiResource implements HasId {
    * disclaimer text to use for each disclaimer_variant value can be found in the <a
    * href="https://docs.stripe.com/capital/marketing">marketing docs</a>.
    *
-   * <p>One of {@code celtic_us_loan}, {@code fundbox_au_financing}, {@code youlend_de_financing},
-   * {@code youlend_fr_financing}, {@code youlend_uk_mca}, or {@code youlend_us_mca}.
+   * <p>One of {@code celtic_us_loan}, {@code fundbox_au_financing}, {@code fundbox_ca_financing},
+   * {@code youlend_de_financing}, {@code youlend_fr_financing}, {@code youlend_uk_mca}, or {@code
+   * youlend_us_mca}.
    */
   @SerializedName("disclaimer_variant")
   String disclaimerVariant;

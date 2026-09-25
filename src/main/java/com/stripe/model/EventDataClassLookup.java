@@ -109,6 +109,7 @@ public final class EventDataClassLookup {
     classLookup.put("transfer_reversal", com.stripe.model.TransferReversal.class);
     classLookup.put("webhook_endpoint", com.stripe.model.WebhookEndpoint.class);
 
+    classLookup.put("apps.install", com.stripe.model.apps.Install.class);
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);
 
     classLookup.put("billing.alert", com.stripe.model.billing.Alert.class);
@@ -212,6 +213,7 @@ public final class EventDataClassLookup {
     classLookup.put(
         "product_catalog.trial_offer", com.stripe.model.productcatalog.TrialOffer.class);
 
+    classLookup.put("radar.billing_evaluation", com.stripe.model.radar.BillingEvaluation.class);
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);
     classLookup.put("radar.payment_evaluation", com.stripe.model.radar.PaymentEvaluation.class);
     classLookup.put("radar.value_list", com.stripe.model.radar.ValueList.class);
@@ -250,6 +252,9 @@ public final class EventDataClassLookup {
         "terminal.reader_collected_data", com.stripe.model.terminal.ReaderCollectedData.class);
 
     classLookup.put("test_helpers.test_clock", com.stripe.model.testhelpers.TestClock.class);
+
+    classLookup.put(
+        "three_d_secure.authentication", com.stripe.model.threedsecure.Authentication.class);
 
     classLookup.put("treasury.credit_reversal", com.stripe.model.treasury.CreditReversal.class);
     classLookup.put("treasury.debit_reversal", com.stripe.model.treasury.DebitReversal.class);

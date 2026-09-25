@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** A Tax Calculation Line Item represents a single item in a tax calculation. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -216,11 +217,12 @@ public class CalculationLineItem extends StripeObject implements HasId {
        * The tax type, such as {@code vat} or {@code sales_tax}.
        *
        * <p>One of {@code admissions_tax}, {@code amusement_tax}, {@code attendance_tax}, {@code
-       * communications_tax}, {@code entertainment_tax}, {@code gross_receipts_tax}, {@code gst},
-       * {@code hospitality_tax}, {@code hst}, {@code igst}, {@code jct}, {@code lease_tax}, {@code
-       * luxury_tax}, {@code mass_transit_parking_tax}, {@code parking_tax}, {@code pst}, {@code
-       * qst}, {@code resort_tax}, {@code retail_delivery_fee}, {@code rst}, {@code sales_tax},
-       * {@code service_tax}, {@code tourism_tax}, or {@code vat}.
+       * communications_tax}, {@code digital_excise_tax}, {@code entertainment_tax}, {@code
+       * gross_receipts_tax}, {@code gst}, {@code hospitality_tax}, {@code hst}, {@code igst},
+       * {@code jct}, {@code lease_tax}, {@code luxury_tax}, {@code mass_transit_parking_tax},
+       * {@code parking_tax}, {@code pst}, {@code qst}, {@code recycling_fee}, {@code resort_tax},
+       * {@code retail_delivery_fee}, {@code rst}, {@code sales_tax}, {@code service_tax}, {@code
+       * tourism_tax}, {@code utility_users_tax}, or {@code vat}.
        */
       @SerializedName("tax_type")
       String taxType;

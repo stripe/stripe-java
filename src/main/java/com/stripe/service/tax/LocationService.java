@@ -25,8 +25,8 @@ public final class LocationService extends ApiService {
    * Retrieve a list of all tax locations. Tax locations can represent the venues for services,
    * tickets, or other product types.
    *
-   * <p>The response includes detailed information for each tax location, such as its address, name,
-   * description, and current operational status.
+   * <p>The response includes detailed information for each tax location, such as its address, type,
+   * and description.
    *
    * <p>You can paginate through the list by using the {@code limit} parameter to control the number
    * of results returned in each request.
@@ -38,8 +38,8 @@ public final class LocationService extends ApiService {
    * Retrieve a list of all tax locations. Tax locations can represent the venues for services,
    * tickets, or other product types.
    *
-   * <p>The response includes detailed information for each tax location, such as its address, name,
-   * description, and current operational status.
+   * <p>The response includes detailed information for each tax location, such as its address, type,
+   * and description.
    *
    * <p>You can paginate through the list by using the {@code limit} parameter to control the number
    * of results returned in each request.
@@ -58,16 +58,16 @@ public final class LocationService extends ApiService {
   }
   /**
    * Create a tax location to use in calculating taxes for a service, ticket, or other type of
-   * product. The resulting object contains the id, address, name, description, and current
-   * operational status of the tax location.
+   * product. The resulting object contains the ID, address, type, and description of the tax
+   * location.
    */
   public Location create(LocationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
    * Create a tax location to use in calculating taxes for a service, ticket, or other type of
-   * product. The resulting object contains the id, address, name, description, and current
-   * operational status of the tax location.
+   * product. The resulting object contains the ID, address, type, and description of the tax
+   * location.
    */
   public Location create(LocationCreateParams params, RequestOptions options)
       throws StripeException {

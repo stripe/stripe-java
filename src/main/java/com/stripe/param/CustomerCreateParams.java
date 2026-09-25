@@ -71,7 +71,7 @@ public class CustomerCreateParams extends ApiRequestParams {
   Object individualName;
 
   /**
-   * The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase
+   * The prefix for the customer used to generate unique invoice numbers. Must be 1–12 uppercase
    * letters or numbers.
    */
   @SerializedName("invoice_prefix")
@@ -400,7 +400,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase
+     * The prefix for the customer used to generate unique invoice numbers. Must be 1–12 uppercase
      * letters or numbers.
      */
     public Builder setInvoicePrefix(String invoicePrefix) {

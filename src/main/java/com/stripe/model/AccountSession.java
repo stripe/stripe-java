@@ -73,7 +73,7 @@ public class AccountSession extends ApiResource {
   String object;
 
   /**
-   * Creates a AccountSession object that includes a single-use token that the platform can use on
+   * Creates an AccountSession object that includes a single-use token that the platform can use on
    * their front-end to grant client-side API access.
    */
   public static AccountSession create(Map<String, Object> params) throws StripeException {
@@ -81,7 +81,7 @@ public class AccountSession extends ApiResource {
   }
 
   /**
-   * Creates a AccountSession object that includes a single-use token that the platform can use on
+   * Creates an AccountSession object that includes a single-use token that the platform can use on
    * their front-end to grant client-side API access.
    */
   public static AccountSession create(Map<String, Object> params, RequestOptions options)
@@ -93,7 +93,7 @@ public class AccountSession extends ApiResource {
   }
 
   /**
-   * Creates a AccountSession object that includes a single-use token that the platform can use on
+   * Creates an AccountSession object that includes a single-use token that the platform can use on
    * their front-end to grant client-side API access.
    */
   public static AccountSession create(AccountSessionCreateParams params) throws StripeException {
@@ -101,7 +101,7 @@ public class AccountSession extends ApiResource {
   }
 
   /**
-   * Creates a AccountSession object that includes a single-use token that the platform can use on
+   * Creates an AccountSession object that includes a single-use token that the platform can use on
    * their front-end to grant client-side API access.
    */
   public static AccountSession create(AccountSessionCreateParams params, RequestOptions options)
