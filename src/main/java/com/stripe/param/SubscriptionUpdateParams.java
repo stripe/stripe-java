@@ -41,9 +41,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * Either {@code now} or {@code unchanged}. Setting the value to {@code now} resets the
-   * subscription's billing cycle anchor to the current time (in UTC). For more information, see the
-   * billing cycle <a
+   * Controls how the subscription's billing cycle anchor changes. Set {@code type} to {@code now}
+   * to reset the billing cycle anchor to the current time (in UTC), or {@code unchanged} to
+   * preserve it. For more information, see the billing cycle <a
    * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
    */
   @SerializedName("billing_cycle_anchor")
@@ -511,9 +511,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Either {@code now} or {@code unchanged}. Setting the value to {@code now} resets the
-     * subscription's billing cycle anchor to the current time (in UTC). For more information, see
-     * the billing cycle <a
+     * Controls how the subscription's billing cycle anchor changes. Set {@code type} to {@code now}
+     * to reset the billing cycle anchor to the current time (in UTC), or {@code unchanged} to
+     * preserve it. For more information, see the billing cycle <a
      * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
      */
     public Builder setBillingCycleAnchor(
@@ -2292,6 +2292,97 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class BillingCycleAnchor {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> Determines how the billing cycle anchor changes when the
+     * subscription is updated.
+     */
+    @SerializedName("type")
+    Type type;
+
+    private BillingCycleAnchor(Map<String, Object> extraParams, Type type) {
+      this.extraParams = extraParams;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SubscriptionUpdateParams.BillingCycleAnchor build() {
+        return new SubscriptionUpdateParams.BillingCycleAnchor(this.extraParams, this.type);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionUpdateParams.BillingCycleAnchor#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionUpdateParams.BillingCycleAnchor#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Determines how the billing cycle anchor changes when the
+       * subscription is updated.
+       */
+      public Builder setType(SubscriptionUpdateParams.BillingCycleAnchor.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("now")
+      NOW("now"),
+
+      @SerializedName("unchanged")
+      UNCHANGED("unchanged");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class BillingSchedule {
     /** Configure billing schedule differently for individual subscription items. */
     @SerializedName("applies_to")
@@ -3634,6 +3725,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     @SerializedName("clear_usage")
     Boolean clearUsage;
 
+    /** The trial offer to apply to this subscription item. */
+    @SerializedName("current_trial")
+    CurrentTrial currentTrial;
+
     /** A flag that, if set to {@code true}, will delete the specified item. */
     @SerializedName("deleted")
     Boolean deleted;
@@ -3674,16 +3769,19 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Object plan;
 
     /**
-     * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-     * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code quantity}
-     * parameter is provided.
+     * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+     * both, to set or change this item's price. If you're updating an existing item without
+     * changing its price, omit both. When changing a subscription item's price, {@code quantity} is
+     * set to 1 unless a {@code quantity} parameter is provided.
      */
     @SerializedName("price")
     Object price;
 
     /**
      * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-     * inline. One of {@code price} or {@code price_data} is required.
+     * inline. You can use either {@code price} or {@code price_data}, but not both, to set or
+     * change this item's price. If you're updating an existing item without changing its price,
+     * omit both.
      */
     @SerializedName("price_data")
     PriceData priceData;
@@ -3705,6 +3803,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private Item(
         Object billingThresholds,
         Boolean clearUsage,
+        CurrentTrial currentTrial,
         Boolean deleted,
         Object discounts,
         Map<String, Object> extraParams,
@@ -3717,6 +3816,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         Object taxRates) {
       this.billingThresholds = billingThresholds;
       this.clearUsage = clearUsage;
+      this.currentTrial = currentTrial;
       this.deleted = deleted;
       this.discounts = discounts;
       this.extraParams = extraParams;
@@ -3737,6 +3837,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private Object billingThresholds;
 
       private Boolean clearUsage;
+
+      private CurrentTrial currentTrial;
 
       private Boolean deleted;
 
@@ -3763,6 +3865,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         return new SubscriptionUpdateParams.Item(
             this.billingThresholds,
             this.clearUsage,
+            this.currentTrial,
             this.deleted,
             this.discounts,
             this.extraParams,
@@ -3801,6 +3904,12 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        */
       public Builder setClearUsage(Boolean clearUsage) {
         this.clearUsage = clearUsage;
+        return this;
+      }
+
+      /** The trial offer to apply to this subscription item. */
+      public Builder setCurrentTrial(SubscriptionUpdateParams.Item.CurrentTrial currentTrial) {
+        this.currentTrial = currentTrial;
         return this;
       }
 
@@ -3961,9 +4070,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-       * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
-       * quantity} parameter is provided.
+       * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+       * both, to set or change this item's price. If you're updating an existing item without
+       * changing its price, omit both. When changing a subscription item's price, {@code quantity}
+       * is set to 1 unless a {@code quantity} parameter is provided.
        */
       public Builder setPrice(String price) {
         this.price = price;
@@ -3971,9 +4081,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-       * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
-       * quantity} parameter is provided.
+       * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+       * both, to set or change this item's price. If you're updating an existing item without
+       * changing its price, omit both. When changing a subscription item's price, {@code quantity}
+       * is set to 1 unless a {@code quantity} parameter is provided.
        */
       public Builder setPrice(EmptyParam price) {
         this.price = price;
@@ -3982,7 +4093,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       /**
        * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-       * inline. One of {@code price} or {@code price_data} is required.
+       * inline. You can use either {@code price} or {@code price_data}, but not both, to set or
+       * change this item's price. If you're updating an existing item without changing its price,
+       * omit both.
        */
       public Builder setPriceData(SubscriptionUpdateParams.Item.PriceData priceData) {
         this.priceData = priceData;
@@ -4125,6 +4238,87 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          */
         public Builder setUsageGte(Long usageGte) {
           this.usageGte = usageGte;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CurrentTrial {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The ID of the trial offer to apply to the subscription item. */
+      @SerializedName("trial_offer")
+      Object trialOffer;
+
+      private CurrentTrial(Map<String, Object> extraParams, Object trialOffer) {
+        this.extraParams = extraParams;
+        this.trialOffer = trialOffer;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Object trialOffer;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionUpdateParams.Item.CurrentTrial build() {
+          return new SubscriptionUpdateParams.Item.CurrentTrial(this.extraParams, this.trialOffer);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionUpdateParams.Item.CurrentTrial#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionUpdateParams.Item.CurrentTrial#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The ID of the trial offer to apply to the subscription item.
+         */
+        public Builder setTrialOffer(String trialOffer) {
+          this.trialOffer = trialOffer;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The ID of the trial offer to apply to the subscription item.
+         */
+        public Builder setTrialOffer(EmptyParam trialOffer) {
+          this.trialOffer = trialOffer;
           return this;
         }
       }
@@ -4930,6 +5124,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Object billie;
 
       /**
+       * This sub-hash contains details about the Blik payment method options to pass to the
+       * invoice’s PaymentIntent.
+       */
+      @SerializedName("blik")
+      Object blik;
+
+      /**
        * This sub-hash contains details about the Card payment method options to pass to the
        * invoice’s PaymentIntent.
        */
@@ -4998,6 +5199,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           Object acssDebit,
           Object bancontact,
           Object billie,
+          Object blik,
           Object card,
           Object customerBalance,
           Map<String, Object> extraParams,
@@ -5010,6 +5212,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
         this.billie = billie;
+        this.blik = blik;
         this.card = card;
         this.customerBalance = customerBalance;
         this.extraParams = extraParams;
@@ -5031,6 +5234,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         private Object bancontact;
 
         private Object billie;
+
+        private Object blik;
 
         private Object card;
 
@@ -5056,6 +5261,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
               this.acssDebit,
               this.bancontact,
               this.billie,
+              this.blik,
               this.card,
               this.customerBalance,
               this.extraParams,
@@ -5121,6 +5327,25 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          */
         public Builder setBillie(EmptyParam billie) {
           this.billie = billie;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Blik payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setBlik(
+            SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik blik) {
+          this.blik = blik;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Blik payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setBlik(EmptyParam blik) {
+          this.blik = blik;
           return this;
         }
 
@@ -5626,6 +5851,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Billie {
+        /** Registration details about the buyer's organization. */
+        @SerializedName("company_details")
+        Object companyDetails;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -5636,7 +5865,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private Billie(Map<String, Object> extraParams) {
+        private Billie(Object companyDetails, Map<String, Object> extraParams) {
+          this.companyDetails = companyDetails;
           this.extraParams = extraParams;
         }
 
@@ -5645,12 +5875,28 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Object companyDetails;
+
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie build() {
             return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie(
-                this.extraParams);
+                this.companyDetails, this.extraParams);
+          }
+
+          /** Registration details about the buyer's organization. */
+          public Builder setCompanyDetails(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails
+                  companyDetails) {
+            this.companyDetails = companyDetails;
+            return this;
+          }
+
+          /** Registration details about the buyer's organization. */
+          public Builder setCompanyDetails(EmptyParam companyDetails) {
+            this.companyDetails = companyDetails;
+            return this;
           }
 
           /**
@@ -5681,6 +5927,585 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             }
             this.extraParams.putAll(map);
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CompanyDetails {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** The address the company or entity is registered with. */
+          @SerializedName("registered_address")
+          Object registeredAddress;
+
+          /** Company or entity name. */
+          @SerializedName("registered_name")
+          Object registeredName;
+
+          /** The official registration number for the given registration type. */
+          @SerializedName("registration_number")
+          Object registrationNumber;
+
+          /** Type of registration the company or entity holds in their registered country. */
+          @SerializedName("registration_type")
+          ApiRequestParams.EnumParam registrationType;
+
+          /** VAT ID number. */
+          @SerializedName("vat")
+          Object vat;
+
+          private CompanyDetails(
+              Map<String, Object> extraParams,
+              Object registeredAddress,
+              Object registeredName,
+              Object registrationNumber,
+              ApiRequestParams.EnumParam registrationType,
+              Object vat) {
+            this.extraParams = extraParams;
+            this.registeredAddress = registeredAddress;
+            this.registeredName = registeredName;
+            this.registrationNumber = registrationNumber;
+            this.registrationType = registrationType;
+            this.vat = vat;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Object registeredAddress;
+
+            private Object registeredName;
+
+            private Object registrationNumber;
+
+            private ApiRequestParams.EnumParam registrationType;
+
+            private Object vat;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie
+                    .CompanyDetails
+                build() {
+              return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie
+                  .CompanyDetails(
+                  this.extraParams,
+                  this.registeredAddress,
+                  this.registeredName,
+                  this.registrationNumber,
+                  this.registrationType,
+                  this.vat);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** The address the company or entity is registered with. */
+            public Builder setRegisteredAddress(
+                SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails
+                        .RegisteredAddress
+                    registeredAddress) {
+              this.registeredAddress = registeredAddress;
+              return this;
+            }
+
+            /** The address the company or entity is registered with. */
+            public Builder setRegisteredAddress(EmptyParam registeredAddress) {
+              this.registeredAddress = registeredAddress;
+              return this;
+            }
+
+            /** Company or entity name. */
+            public Builder setRegisteredName(String registeredName) {
+              this.registeredName = registeredName;
+              return this;
+            }
+
+            /** Company or entity name. */
+            public Builder setRegisteredName(EmptyParam registeredName) {
+              this.registeredName = registeredName;
+              return this;
+            }
+
+            /** The official registration number for the given registration type. */
+            public Builder setRegistrationNumber(String registrationNumber) {
+              this.registrationNumber = registrationNumber;
+              return this;
+            }
+
+            /** The official registration number for the given registration type. */
+            public Builder setRegistrationNumber(EmptyParam registrationNumber) {
+              this.registrationNumber = registrationNumber;
+              return this;
+            }
+
+            /** Type of registration the company or entity holds in their registered country. */
+            public Builder setRegistrationType(
+                SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails
+                        .RegistrationType
+                    registrationType) {
+              this.registrationType = registrationType;
+              return this;
+            }
+
+            /** Type of registration the company or entity holds in their registered country. */
+            public Builder setRegistrationType(EmptyParam registrationType) {
+              this.registrationType = registrationType;
+              return this;
+            }
+
+            /** VAT ID number. */
+            public Builder setVat(String vat) {
+              this.vat = vat;
+              return this;
+            }
+
+            /** VAT ID number. */
+            public Builder setVat(EmptyParam vat) {
+              this.vat = vat;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class RegisteredAddress {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            Object city;
+
+            /** Two-letter country code. */
+            @SerializedName("country")
+            Object country;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Address line 1 (for example, street, PO Box, or company name). */
+            @SerializedName("line1")
+            Object line1;
+
+            /** Address line 2 (for example, apartment, suite, unit, or building). */
+            @SerializedName("line2")
+            Object line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            Object postalCode;
+
+            /** State, county, province, or region. */
+            @SerializedName("state")
+            Object state;
+
+            private RegisteredAddress(
+                Object city,
+                Object country,
+                Map<String, Object> extraParams,
+                Object line1,
+                Object line2,
+                Object postalCode,
+                Object state) {
+              this.city = city;
+              this.country = country;
+              this.extraParams = extraParams;
+              this.line1 = line1;
+              this.line2 = line2;
+              this.postalCode = postalCode;
+              this.state = state;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Object city;
+
+              private Object country;
+
+              private Map<String, Object> extraParams;
+
+              private Object line1;
+
+              private Object line2;
+
+              private Object postalCode;
+
+              private Object state;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie
+                      .CompanyDetails.RegisteredAddress
+                  build() {
+                return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie
+                    .CompanyDetails.RegisteredAddress(
+                    this.city,
+                    this.country,
+                    this.extraParams,
+                    this.line1,
+                    this.line2,
+                    this.postalCode,
+                    this.state);
+              }
+
+              /** City, district, suburb, town, or village. */
+              public Builder setCity(String city) {
+                this.city = city;
+                return this;
+              }
+
+              /** City, district, suburb, town, or village. */
+              public Builder setCity(EmptyParam city) {
+                this.city = city;
+                return this;
+              }
+
+              /** Two-letter country code. */
+              public Builder setCountry(String country) {
+                this.country = country;
+                return this;
+              }
+
+              /** Two-letter country code. */
+              public Builder setCountry(EmptyParam country) {
+                this.country = country;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails.RegisteredAddress#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Billie.CompanyDetails.RegisteredAddress#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Address line 1 (for example, street, PO Box, or company name). */
+              public Builder setLine1(String line1) {
+                this.line1 = line1;
+                return this;
+              }
+
+              /** Address line 1 (for example, street, PO Box, or company name). */
+              public Builder setLine1(EmptyParam line1) {
+                this.line1 = line1;
+                return this;
+              }
+
+              /** Address line 2 (for example, apartment, suite, unit, or building). */
+              public Builder setLine2(String line2) {
+                this.line2 = line2;
+                return this;
+              }
+
+              /** Address line 2 (for example, apartment, suite, unit, or building). */
+              public Builder setLine2(EmptyParam line2) {
+                this.line2 = line2;
+                return this;
+              }
+
+              /** ZIP or postal code. */
+              public Builder setPostalCode(String postalCode) {
+                this.postalCode = postalCode;
+                return this;
+              }
+
+              /** ZIP or postal code. */
+              public Builder setPostalCode(EmptyParam postalCode) {
+                this.postalCode = postalCode;
+                return this;
+              }
+
+              /** State, county, province, or region. */
+              public Builder setState(String state) {
+                this.state = state;
+                return this;
+              }
+
+              /** State, county, province, or region. */
+              public Builder setState(EmptyParam state) {
+                this.state = state;
+                return this;
+              }
+            }
+          }
+
+          public enum RegistrationType implements ApiRequestParams.EnumParam {
+            @SerializedName("ch_ein")
+            CH_EIN("ch_ein"),
+
+            @SerializedName("de_hrb")
+            DE_HRB("de_hrb"),
+
+            @SerializedName("dk_cvr")
+            DK_CVR("dk_cvr"),
+
+            @SerializedName("es_cif")
+            ES_CIF("es_cif"),
+
+            @SerializedName("fi_tunnus")
+            FI_TUNNUS("fi_tunnus"),
+
+            @SerializedName("fr_siren")
+            FR_SIREN("fr_siren"),
+
+            @SerializedName("fr_siret")
+            FR_SIRET("fr_siret"),
+
+            @SerializedName("it_rea")
+            IT_REA("it_rea"),
+
+            @SerializedName("nl_kvk")
+            NL_KVK("nl_kvk"),
+
+            @SerializedName("no_org_number")
+            NO_ORG_NUMBER("no_org_number"),
+
+            @SerializedName("no_pno")
+            NO_PNO("no_pno"),
+
+            @SerializedName("se_org_number")
+            SE_ORG_NUMBER("se_org_number"),
+
+            @SerializedName("se_pno")
+            SE_PNO("se_pno"),
+
+            @SerializedName("uk_crn")
+            UK_CRN("uk_crn");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            RegistrationType(String value) {
+              this.value = value;
+            }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Blik {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Configuration options for setting up a mandate. */
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        private Blik(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+          this.extraParams = extraParams;
+          this.mandateOptions = mandateOptions;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private MandateOptions mandateOptions;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik build() {
+            return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik(
+                this.extraParams, this.mandateOptions);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Configuration options for setting up a mandate. */
+          public Builder setMandateOptions(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik.MandateOptions
+                  mandateOptions) {
+            this.mandateOptions = mandateOptions;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions {
+          /**
+           * Date when the mandate expires and no further payments will be charged. If not provided,
+           * the mandate will be set to be indefinite.
+           */
+          @SerializedName("expires_at")
+          Long expiresAt;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private MandateOptions(Long expiresAt, Map<String, Object> extraParams) {
+            this.expiresAt = expiresAt;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long expiresAt;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik.MandateOptions
+                build() {
+              return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik
+                  .MandateOptions(this.expiresAt, this.extraParams);
+            }
+
+            /**
+             * Date when the mandate expires and no further payments will be charged. If not
+             * provided, the mandate will be set to be indefinite.
+             */
+            public Builder setExpiresAt(Long expiresAt) {
+              this.expiresAt = expiresAt;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
           }
         }
       }
@@ -7753,6 +8578,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @SerializedName("billie")
       BILLIE("billie"),
 
+      @SerializedName("blik")
+      BLIK("blik"),
+
       @SerializedName("boleto")
       BOLETO("boleto"),
 
@@ -8193,6 +9021,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class EndBehavior {
       /**
+       * Indicates how the subscription's billing cycle anchor is reset when a trial ends. Defaults
+       * to {@code now}.
+       */
+      @SerializedName("billing_cycle_anchor")
+      BillingCycleAnchor billingCycleAnchor;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -8202,14 +9037,17 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> Indicates how the subscription should change when the trial ends
-       * if the user did not provide a payment method.
+       * Indicates how the subscription should change when the trial ends if the user did not
+       * provide a payment method.
        */
       @SerializedName("missing_payment_method")
       MissingPaymentMethod missingPaymentMethod;
 
       private EndBehavior(
-          Map<String, Object> extraParams, MissingPaymentMethod missingPaymentMethod) {
+          BillingCycleAnchor billingCycleAnchor,
+          Map<String, Object> extraParams,
+          MissingPaymentMethod missingPaymentMethod) {
+        this.billingCycleAnchor = billingCycleAnchor;
         this.extraParams = extraParams;
         this.missingPaymentMethod = missingPaymentMethod;
       }
@@ -8219,6 +9057,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private BillingCycleAnchor billingCycleAnchor;
+
         private Map<String, Object> extraParams;
 
         private MissingPaymentMethod missingPaymentMethod;
@@ -8226,7 +9066,18 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionUpdateParams.TrialSettings.EndBehavior build() {
           return new SubscriptionUpdateParams.TrialSettings.EndBehavior(
-              this.extraParams, this.missingPaymentMethod);
+              this.billingCycleAnchor, this.extraParams, this.missingPaymentMethod);
+        }
+
+        /**
+         * Indicates how the subscription's billing cycle anchor is reset when a trial ends.
+         * Defaults to {@code now}.
+         */
+        public Builder setBillingCycleAnchor(
+            SubscriptionUpdateParams.TrialSettings.EndBehavior.BillingCycleAnchor
+                billingCycleAnchor) {
+          this.billingCycleAnchor = billingCycleAnchor;
+          return this;
         }
 
         /**
@@ -8258,14 +9109,29 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> Indicates how the subscription should change when the trial
-         * ends if the user did not provide a payment method.
+         * Indicates how the subscription should change when the trial ends if the user did not
+         * provide a payment method.
          */
         public Builder setMissingPaymentMethod(
             SubscriptionUpdateParams.TrialSettings.EndBehavior.MissingPaymentMethod
                 missingPaymentMethod) {
           this.missingPaymentMethod = missingPaymentMethod;
           return this;
+        }
+      }
+
+      public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
+        @SerializedName("now")
+        NOW("now"),
+
+        @SerializedName("unchanged")
+        UNCHANGED("unchanged");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        BillingCycleAnchor(String value) {
+          this.value = value;
         }
       }
 
@@ -8286,21 +9152,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.value = value;
         }
       }
-    }
-  }
-
-  public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
-    @SerializedName("now")
-    NOW("now"),
-
-    @SerializedName("unchanged")
-    UNCHANGED("unchanged");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    BillingCycleAnchor(String value) {
-      this.value = value;
     }
   }
 

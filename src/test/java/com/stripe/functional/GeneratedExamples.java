@@ -1246,7 +1246,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsRejectPost() throws StripeException {
     Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
 
-    AccountRejectParams params = AccountRejectParams.builder().setReason("fraud_other").build();
+    AccountRejectParams params =
+        AccountRejectParams.builder().setReason(AccountRejectParams.Reason.FRAUD_OTHER).build();
 
     Account account = resource.reject(params);
     assertNotNull(account);
@@ -1263,7 +1264,9 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.AccountRejectParams params =
-        com.stripe.param.AccountRejectParams.builder().setReason("fraud_other").build();
+        com.stripe.param.AccountRejectParams.builder()
+            .setReason(com.stripe.param.AccountRejectParams.Reason.FRAUD_OTHER)
+            .build();
 
     com.stripe.model.Account account = client.v1().accounts().reject("acct_xxxxxxxxxxxxx", params);
     assertNotNull(account);
@@ -1280,7 +1283,9 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.AccountRejectParams params =
-        com.stripe.param.AccountRejectParams.builder().setReason("fraud_other").build();
+        com.stripe.param.AccountRejectParams.builder()
+            .setReason(com.stripe.param.AccountRejectParams.Reason.FRAUD_OTHER)
+            .build();
 
     com.stripe.model.Account account = client.accounts().reject("acct_xxxxxxxxxxxxx", params);
     assertNotNull(account);
@@ -6921,7 +6926,7 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.financialconnections.SessionCreateParams.Permission.BALANCES)
             .setFilters(
                 com.stripe.param.financialconnections.SessionCreateParams.Filters.builder()
-                    .addCountry("US")
+                    .setCountry("US")
                     .build())
             .build();
 
@@ -6955,7 +6960,7 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.financialconnections.SessionCreateParams.Permission.BALANCES)
             .setFilters(
                 com.stripe.param.financialconnections.SessionCreateParams.Filters.builder()
-                    .addCountry("US")
+                    .setCountry("US")
                     .build())
             .build();
 
@@ -6989,7 +6994,7 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.financialconnections.SessionCreateParams.Permission.BALANCES)
             .setFilters(
                 com.stripe.param.financialconnections.SessionCreateParams.Filters.builder()
-                    .addCountry("US")
+                    .setCountry("US")
                     .build())
             .build();
 

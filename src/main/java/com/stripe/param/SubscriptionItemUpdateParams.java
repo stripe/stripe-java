@@ -22,6 +22,10 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   @SerializedName("billing_thresholds")
   Object billingThresholds;
 
+  /** The trial offer to apply to this subscription item. */
+  @SerializedName("current_trial")
+  CurrentTrial currentTrial;
+
   /** The coupons to redeem into discounts for the subscription item. */
   @SerializedName("discounts")
   Object discounts;
@@ -67,16 +71,18 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   Object plan;
 
   /**
-   * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-   * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code quantity}
-   * parameter is provided.
+   * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+   * both, to set or change this item's price. If you're updating an existing item without changing
+   * its price, omit both. When changing a subscription item's price, {@code quantity} is set to 1
+   * unless a {@code quantity} parameter is provided.
    */
   @SerializedName("price")
   Object price;
 
   /**
    * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-   * inline. One of {@code price} or {@code price_data} is required.
+   * inline. You can use either {@code price} or {@code price_data}, but not both, to set or change
+   * this item's price. If you're updating an existing item without changing its price, omit both.
    */
   @SerializedName("price_data")
   PriceData priceData;
@@ -115,6 +121,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
   private SubscriptionItemUpdateParams(
       Object billingThresholds,
+      CurrentTrial currentTrial,
       Object discounts,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -129,6 +136,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       Long quantity,
       Object taxRates) {
     this.billingThresholds = billingThresholds;
+    this.currentTrial = currentTrial;
     this.discounts = discounts;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -150,6 +158,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
   public static class Builder {
     private Object billingThresholds;
+
+    private CurrentTrial currentTrial;
 
     private Object discounts;
 
@@ -181,6 +191,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     public SubscriptionItemUpdateParams build() {
       return new SubscriptionItemUpdateParams(
           this.billingThresholds,
+          this.currentTrial,
           this.discounts,
           this.expand,
           this.extraParams,
@@ -212,6 +223,12 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
      */
     public Builder setBillingThresholds(EmptyParam billingThresholds) {
       this.billingThresholds = billingThresholds;
+      return this;
+    }
+
+    /** The trial offer to apply to this subscription item. */
+    public Builder setCurrentTrial(SubscriptionItemUpdateParams.CurrentTrial currentTrial) {
+      this.currentTrial = currentTrial;
       return this;
     }
 
@@ -389,9 +406,10 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-     * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code quantity}
-     * parameter is provided.
+     * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+     * both, to set or change this item's price. If you're updating an existing item without
+     * changing its price, omit both. When changing a subscription item's price, {@code quantity} is
+     * set to 1 unless a {@code quantity} parameter is provided.
      */
     public Builder setPrice(String price) {
       this.price = price;
@@ -399,9 +417,10 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-     * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code quantity}
-     * parameter is provided.
+     * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+     * both, to set or change this item's price. If you're updating an existing item without
+     * changing its price, omit both. When changing a subscription item's price, {@code quantity} is
+     * set to 1 unless a {@code quantity} parameter is provided.
      */
     public Builder setPrice(EmptyParam price) {
       this.price = price;
@@ -410,7 +429,9 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
     /**
      * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-     * inline. One of {@code price} or {@code price_data} is required.
+     * inline. You can use either {@code price} or {@code price_data}, but not both, to set or
+     * change this item's price. If you're updating an existing item without changing its price,
+     * omit both.
      */
     public Builder setPriceData(SubscriptionItemUpdateParams.PriceData priceData) {
       this.priceData = priceData;
@@ -574,6 +595,82 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
        */
       public Builder setUsageGte(Long usageGte) {
         this.usageGte = usageGte;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CurrentTrial {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The ID of the trial offer to apply to the subscription item. */
+    @SerializedName("trial_offer")
+    Object trialOffer;
+
+    private CurrentTrial(Map<String, Object> extraParams, Object trialOffer) {
+      this.extraParams = extraParams;
+      this.trialOffer = trialOffer;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object trialOffer;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SubscriptionItemUpdateParams.CurrentTrial build() {
+        return new SubscriptionItemUpdateParams.CurrentTrial(this.extraParams, this.trialOffer);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionItemUpdateParams.CurrentTrial#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionItemUpdateParams.CurrentTrial#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The ID of the trial offer to apply to the subscription item. */
+      public Builder setTrialOffer(String trialOffer) {
+        this.trialOffer = trialOffer;
+        return this;
+      }
+
+      /** <strong>Required.</strong> The ID of the trial offer to apply to the subscription item. */
+      public Builder setTrialOffer(EmptyParam trialOffer) {
+        this.trialOffer = trialOffer;
         return this;
       }
     }

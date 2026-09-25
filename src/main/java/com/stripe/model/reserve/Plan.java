@@ -38,6 +38,14 @@ public class Plan extends StripeObject implements HasId {
   @SerializedName("currency")
   String currency;
 
+  /**
+   * The balance destination to which the reserved funds are sent.
+   *
+   * <p>One of {@code other}, {@code risk_reserved}, or {@code settlement_reserved}.
+   */
+  @SerializedName("destination")
+  String destination;
+
   /** Time at which the ReservePlan was disabled. */
   @SerializedName("disabled_at")
   Long disabledAt;
@@ -56,6 +64,9 @@ public class Plan extends StripeObject implements HasId {
    */
   @SerializedName("livemode")
   Boolean livemode;
+
+  @SerializedName("manual_release")
+  ManualRelease manualRelease;
 
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
@@ -84,7 +95,7 @@ public class Plan extends StripeObject implements HasId {
    * The current status of the ReservePlan. The ReservePlan only affects charges if it is {@code
    * active}.
    *
-   * <p>One of {@code active}, {@code disabled}, or {@code expired}.
+   * <p>One of {@code active}, {@code disabled}, {@code expired}, or {@code other}.
    */
   @SerializedName("status")
   String status;
@@ -92,7 +103,8 @@ public class Plan extends StripeObject implements HasId {
   /**
    * The type of the ReservePlan.
    *
-   * <p>One of {@code fixed_release}, or {@code rolling_release}.
+   * <p>One of {@code fixed_release}, {@code manual_release}, {@code other}, or {@code
+   * rolling_release}.
    */
   @SerializedName("type")
   String type;
@@ -116,6 +128,15 @@ public class Plan extends StripeObject implements HasId {
     @SerializedName("scheduled_release")
     Long scheduledRelease;
   }
+
+  /**
+   * For more details about ManualRelease, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManualRelease extends StripeObject {}
 
   /**
    * For more details about RollingRelease, please refer to the <a

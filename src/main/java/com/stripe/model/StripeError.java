@@ -48,12 +48,15 @@ public class StripeError extends StripeObject {
    * {@code country_code_invalid}, {@code country_unsupported}, {@code coupon_expired}, {@code
    * customer_max_payment_methods}, {@code customer_max_subscriptions}, {@code
    * customer_session_expired}, {@code customer_tax_location_invalid}, {@code debit_not_authorized},
-   * {@code email_invalid}, {@code expired_card}, {@code expired_payment_method}, {@code
-   * failed_tax_calculation}, {@code financial_account_balance_does_not_support_currency}, {@code
+   * {@code dispute_evidence_page_limit_exceeded}, {@code email_invalid}, {@code expired_card},
+   * {@code expired_payment_method}, {@code failed_tax_calculation}, {@code
+   * financial_account_balance_does_not_support_currency}, {@code
    * financial_account_capability_not_enabled}, {@code financial_account_capability_restricted},
    * {@code financial_connections_account_inactive}, {@code
    * financial_connections_account_pending_account_numbers}, {@code
    * financial_connections_account_unavailable_account_numbers}, {@code
+   * financial_connections_consent_locale_invalid}, {@code
+   * financial_connections_consent_locale_unsupported}, {@code
    * financial_connections_no_successful_transaction_refresh}, {@code forwarding_api_inactive},
    * {@code forwarding_api_invalid_parameter}, {@code forwarding_api_retryable_upstream_error},
    * {@code forwarding_api_upstream_connection_error}, {@code
@@ -76,9 +79,9 @@ public class StripeError extends StripeObject {
    * ownership_declaration_not_allowed}, {@code parameter_invalid_empty}, {@code
    * parameter_invalid_integer}, {@code parameter_invalid_string_blank}, {@code
    * parameter_invalid_string_empty}, {@code parameter_missing}, {@code parameter_unknown}, {@code
-   * parameters_exclusive}, {@code payment_intent_action_required}, {@code
-   * payment_intent_authentication_failure}, {@code payment_intent_incompatible_payment_method},
-   * {@code payment_intent_invalid_parameter}, {@code
+   * parameters_exclusive}, {@code payment_evaluation_on_api_version_not_supported}, {@code
+   * payment_intent_action_required}, {@code payment_intent_authentication_failure}, {@code
+   * payment_intent_incompatible_payment_method}, {@code payment_intent_invalid_parameter}, {@code
    * payment_intent_konbini_rejected_confirmation_number}, {@code payment_intent_mandate_invalid},
    * {@code payment_intent_payment_attempt_expired}, {@code payment_intent_payment_attempt_failed},
    * {@code payment_intent_rate_limit_exceeded}, {@code payment_intent_unexpected_state}, {@code
@@ -209,7 +212,8 @@ public class StripeError extends StripeObject {
    * A SetupIntent guides you through the process of setting up and saving a customer's payment
    * credentials for future payments. For example, you can use a SetupIntent to set up and save your
    * customer's card without immediately collecting a payment. Later, you can use <a
-   * href="https://api.stripe.com#payment_intents">PaymentIntents</a> to drive the payment flow.
+   * href="https://docs.stripe.com/api#payment_intents">PaymentIntents</a> to drive the payment
+   * flow.
    *
    * <p>Create a SetupIntent when you're ready to collect your customer's payment credentials. Don't
    * maintain long-lived, unconfirmed SetupIntents because they might not be valid. The SetupIntent
@@ -223,10 +227,11 @@ public class StripeError extends StripeObject {
    * to be run through <a href="https://docs.stripe.com/strong-customer-authentication">Strong
    * Customer Authentication</a> during payment method collection to streamline later <a
    * href="https://docs.stripe.com/payments/setup-intents">off-session payments</a>. If you use the
-   * SetupIntent with a <a href="https://api.stripe.com#setup_intent_object-customer">Customer</a>,
-   * it automatically attaches the resulting payment method to that Customer after successful setup.
-   * We recommend using SetupIntents or <a
-   * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
+   * SetupIntent with a <a
+   * href="https://docs.stripe.com/api#setup_intent_object-customer">Customer</a>, it automatically
+   * attaches the resulting payment method to that Customer after successful setup. We recommend
+   * using SetupIntents or <a
+   * href="https://docs.stripe.com/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
    * on PaymentIntents to save payment methods to prevent saving invalid or unoptimized payment
    * methods.
    *

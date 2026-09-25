@@ -74,6 +74,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("allow_promotion_codes")
   Boolean allowPromotionCodes;
 
+  /**
+   * A list of the types of payment methods (e.g., {@code card}) this Checkout Session can accept.
+   */
+  @SerializedName("allowed_payment_method_types")
+  List<String> allowedPaymentMethodTypes;
+
   /** Total of all items before discounts or taxes are applied. */
   @SerializedName("amount_subtotal")
   Long amountSubtotal;
@@ -1379,7 +1385,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Label extends StripeObject {
-      /** Custom text for the label, displayed to the customer. Up to 50 characters. */
+      /** Custom text for the label, displayed to the customer. Up to 100 characters. */
       @SerializedName("custom")
       String custom;
 
@@ -2120,6 +2126,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    @SerializedName("sequra")
+    Sequra sequra;
+
     @SerializedName("sofort")
     Sofort sofort;
 
@@ -2546,7 +2555,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * with regional legislation and network rules, such as <a
        * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
-       * <p>Equal to {@code none}.
+       * <p>One of {@code none}, or {@code off_session}.
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
@@ -3979,6 +3988,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
 
     /**
+     * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sequra extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+    }
+
+    /**
      * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -4624,9 +4650,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
         /**
          * A discount represents the actual application of a <a
-         * href="https://api.stripe.com#coupons">coupon</a> or <a
-         * href="https://api.stripe.com#promotion_codes">promotion code</a>. It contains information
-         * about when the discount began, when it will end, and what it is applied to.
+         * href="https://docs.stripe.com/api#coupons">coupon</a> or <a
+         * href="https://docs.stripe.com/api#promotion_codes">promotion code</a>. It contains
+         * information about when the discount began, when it will end, and what it is applied to.
          *
          * <p>Related guide: <a
          * href="https://docs.stripe.com/billing/subscriptions/discounts">Applying discounts to

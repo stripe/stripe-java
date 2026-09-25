@@ -1376,6 +1376,14 @@ public class SessionUpdateParams extends ApiRequestParams {
         Object taxCode;
 
         /**
+         * Tax details for this product, including the <a
+         * href="https://stripe.com/tax/tax-codes">tax code</a> and an optional performance
+         * location.
+         */
+        @SerializedName("tax_details")
+        TaxDetails taxDetails;
+
+        /**
          * A label that represents units of this product. When set, this will be included in
          * customers' receipts, invoices, Checkout, and the customer portal.
          */
@@ -1389,6 +1397,7 @@ public class SessionUpdateParams extends ApiRequestParams {
             Map<String, String> metadata,
             Object name,
             Object taxCode,
+            TaxDetails taxDetails,
             Object unitLabel) {
           this.description = description;
           this.extraParams = extraParams;
@@ -1396,6 +1405,7 @@ public class SessionUpdateParams extends ApiRequestParams {
           this.metadata = metadata;
           this.name = name;
           this.taxCode = taxCode;
+          this.taxDetails = taxDetails;
           this.unitLabel = unitLabel;
         }
 
@@ -1416,6 +1426,8 @@ public class SessionUpdateParams extends ApiRequestParams {
 
           private Object taxCode;
 
+          private TaxDetails taxDetails;
+
           private Object unitLabel;
 
           /** Finalize and obtain parameter instance from this builder. */
@@ -1427,6 +1439,7 @@ public class SessionUpdateParams extends ApiRequestParams {
                 this.metadata,
                 this.name,
                 this.taxCode,
+                this.taxDetails,
                 this.unitLabel);
           }
 
@@ -1561,6 +1574,17 @@ public class SessionUpdateParams extends ApiRequestParams {
           }
 
           /**
+           * Tax details for this product, including the <a
+           * href="https://stripe.com/tax/tax-codes">tax code</a> and an optional performance
+           * location.
+           */
+          public Builder setTaxDetails(
+              SessionUpdateParams.LineItem.PriceData.ProductData.TaxDetails taxDetails) {
+            this.taxDetails = taxDetails;
+            return this;
+          }
+
+          /**
            * A label that represents units of this product. When set, this will be included in
            * customers' receipts, invoices, Checkout, and the customer portal.
            */
@@ -1576,6 +1600,119 @@ public class SessionUpdateParams extends ApiRequestParams {
           public Builder setUnitLabel(EmptyParam unitLabel) {
             this.unitLabel = unitLabel;
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class TaxDetails {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * A tax location ID. Depending on the <a
+           * href="https://stripe.com/tax/tax-for-tickets/reference/tax-location-performance">tax
+           * code</a>, this is required, optional, or not supported.
+           */
+          @SerializedName("performance_location")
+          Object performanceLocation;
+
+          /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+          @SerializedName("tax_code")
+          Object taxCode;
+
+          private TaxDetails(
+              Map<String, Object> extraParams, Object performanceLocation, Object taxCode) {
+            this.extraParams = extraParams;
+            this.performanceLocation = performanceLocation;
+            this.taxCode = taxCode;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Object performanceLocation;
+
+            private Object taxCode;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SessionUpdateParams.LineItem.PriceData.ProductData.TaxDetails build() {
+              return new SessionUpdateParams.LineItem.PriceData.ProductData.TaxDetails(
+                  this.extraParams, this.performanceLocation, this.taxCode);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionUpdateParams.LineItem.PriceData.ProductData.TaxDetails#extraParams} for the
+             * field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionUpdateParams.LineItem.PriceData.ProductData.TaxDetails#extraParams} for the
+             * field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * A tax location ID. Depending on the <a
+             * href="https://stripe.com/tax/tax-for-tickets/reference/tax-location-performance">tax
+             * code</a>, this is required, optional, or not supported.
+             */
+            public Builder setPerformanceLocation(String performanceLocation) {
+              this.performanceLocation = performanceLocation;
+              return this;
+            }
+
+            /**
+             * A tax location ID. Depending on the <a
+             * href="https://stripe.com/tax/tax-for-tickets/reference/tax-location-performance">tax
+             * code</a>, this is required, optional, or not supported.
+             */
+            public Builder setPerformanceLocation(EmptyParam performanceLocation) {
+              this.performanceLocation = performanceLocation;
+              return this;
+            }
+
+            /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+            public Builder setTaxCode(String taxCode) {
+              this.taxCode = taxCode;
+              return this;
+            }
+
+            /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+            public Builder setTaxCode(EmptyParam taxCode) {
+              this.taxCode = taxCode;
+              return this;
+            }
           }
         }
       }

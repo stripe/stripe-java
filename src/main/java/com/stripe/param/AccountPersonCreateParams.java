@@ -1607,8 +1607,9 @@ public class AccountPersonCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -1704,8 +1705,9 @@ public class AccountPersonCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -1798,8 +1800,9 @@ public class AccountPersonCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -2778,7 +2781,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class AdditionalDocument {
       /**
-       * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+       * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
        * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
        * and less than 10 MB in size.
@@ -2796,7 +2799,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+       * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
        * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
        * and less than 10 MB in size.
@@ -2828,7 +2831,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -2867,7 +2870,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -2883,7 +2886,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Document {
       /**
-       * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+       * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
        * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
        * and less than 10 MB in size.
@@ -2901,7 +2904,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+       * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
        * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
        * and less than 10 MB in size.
@@ -2933,7 +2936,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -2972,7 +2975,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.

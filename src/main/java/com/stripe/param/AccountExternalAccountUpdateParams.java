@@ -557,8 +557,9 @@ public class AccountExternalAccountUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;

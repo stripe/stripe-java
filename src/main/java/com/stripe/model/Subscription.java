@@ -15,6 +15,7 @@ import com.stripe.param.SubscriptionCancelParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.stripe.param.SubscriptionListParams;
 import com.stripe.param.SubscriptionMigrateParams;
+import com.stripe.param.SubscriptionPauseParams;
 import com.stripe.param.SubscriptionResumeParams;
 import com.stripe.param.SubscriptionRetrieveParams;
 import com.stripe.param.SubscriptionSearchParams;
@@ -367,6 +368,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    */
   @SerializedName("status")
   String status;
+
+  /** Describes changes to the subscription's status. */
+  @SerializedName("status_details")
+  StatusDetails statusDetails;
 
   /** ID of the test clock this subscription belongs to. */
   @SerializedName("test_clock")
@@ -901,6 +906,76 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       throws StripeException {
     String path =
         String.format("/v1/subscriptions/%s/migrate", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Subscription.class);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause() throws StripeException {
+    return pause((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(RequestOptions options) throws StripeException {
+    return pause((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(Map<String, Object> params) throws StripeException {
+    return pause(params, (RequestOptions) null);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscriptions/%s/pause", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Subscription.class);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(SubscriptionPauseParams params) throws StripeException {
+    return pause(params, (RequestOptions) null);
+  }
+
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(SubscriptionPauseParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscriptions/%s/pause", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -1923,6 +1998,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       Billie billie;
 
       /**
+       * This sub-hash contains details about the Blik payment method options to pass to invoices
+       * created by the subscription.
+       */
+      @SerializedName("blik")
+      Blik blik;
+
+      /**
        * This sub-hash contains details about the Card payment method options to pass to invoices
        * created by the subscription.
        */
@@ -2040,7 +2122,106 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Billie extends StripeObject {}
+      public static class Billie extends StripeObject {
+        @SerializedName("company_details")
+        CompanyDetails companyDetails;
+
+        /**
+         * For more details about CompanyDetails, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CompanyDetails extends StripeObject {
+          @SerializedName("registered_address")
+          RegisteredAddress registeredAddress;
+
+          /** Company or entity name. */
+          @SerializedName("registered_name")
+          String registeredName;
+
+          /** The official registration number for the given registration type. */
+          @SerializedName("registration_number")
+          String registrationNumber;
+
+          /**
+           * Type of registration the company or entity holds in their registered country.
+           *
+           * <p>One of {@code ch_ein}, {@code de_hrb}, {@code dk_cvr}, {@code es_cif}, {@code
+           * fi_tunnus}, {@code fr_siren}, {@code fr_siret}, {@code it_rea}, {@code nl_kvk}, {@code
+           * no_org_number}, {@code no_pno}, {@code se_org_number}, {@code se_pno}, or {@code
+           * uk_crn}.
+           */
+          @SerializedName("registration_type")
+          String registrationType;
+
+          /** VAT ID number. */
+          @SerializedName("vat")
+          String vat;
+
+          /**
+           * For more details about RegisteredAddress, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class RegisteredAddress extends StripeObject {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            String city;
+
+            /** Two-letter country code. */
+            @SerializedName("country")
+            String country;
+
+            /** Address line 1 (for example, street, PO Box, or company name). */
+            @SerializedName("line1")
+            String line1;
+
+            /** Address line 2 (for example, apartment, suite, unit, or building). */
+            @SerializedName("line2")
+            String line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            String postalCode;
+
+            /** State, county, province, or region. */
+            @SerializedName("state")
+            String state;
+          }
+        }
+      }
+
+      /**
+       * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Blik extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /**
+           * Date when the mandate expires and no further payments will be charged. If not provided,
+           * the mandate will be set to be indefinite.
+           */
+          @SerializedName("expires_at")
+          Long expiresAt;
+        }
+      }
 
       /**
        * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
@@ -2432,6 +2613,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     Long billingCycleAnchor;
 
     /**
+     * Indicates whether this subscription should cancel at the end of the current period if the
+     * update is applied.
+     */
+    @SerializedName("cancel_at_period_end")
+    Boolean cancelAtPeriodEnd;
+
+    /**
      * The pending subscription-level discount that will be applied when the pending update is
      * applied.
      */
@@ -2539,6 +2727,55 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     String presentmentCurrency;
   }
 
+  /** Describes changes to the subscription's status. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusDetails extends StripeObject {
+    /** Indicates when and why the subscription transitioned to the paused status. */
+    @SerializedName("paused")
+    Paused paused;
+
+    /** Indicates when and why the subscription transitioned to the paused status. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paused extends StripeObject {
+      /** Information on the {@code type=subscription} pause. */
+      @SerializedName("subscription")
+      InnerSubscription subscription;
+
+      /**
+       * Unix timestamp in seconds of when the subscription status transitioned to {@code paused}.
+       */
+      @SerializedName("transitioned_at")
+      Long transitionedAt;
+
+      /**
+       * The type of pause.
+       *
+       * <p>Equal to {@code subscription}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Information on the {@code type=subscription} pause. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class InnerSubscription extends StripeObject {
+        /**
+         * The reason that the subscription was paused.
+         *
+         * <p>One of {@code pause_requested}, {@code system}, or {@code
+         * trial_end_without_payment_method}.
+         */
+        @SerializedName("type")
+        String type;
+      }
+    }
+  }
+
   /**
    * For more details about TransferData, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
@@ -2595,6 +2832,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @EqualsAndHashCode(callSuper = false)
     public static class EndBehavior extends StripeObject {
       /**
+       * Indicates how the subscription's billing cycle anchor is reset when a trial ends. If not
+       * set, the default is {@code now}.
+       *
+       * <p>One of {@code now}, or {@code unchanged}.
+       */
+      @SerializedName("billing_cycle_anchor")
+      String billingCycleAnchor;
+
+      /**
        * Indicates how the subscription should change when the trial ends if the user did not
        * provide a payment method.
        *
@@ -2629,6 +2875,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     trySetResponseGetter(pendingUpdate, responseGetter);
     trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(schedule, responseGetter);
+    trySetResponseGetter(statusDetails, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
     trySetResponseGetter(transferData, responseGetter);
     trySetResponseGetter(trialSettings, responseGetter);

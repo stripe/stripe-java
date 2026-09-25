@@ -34,6 +34,16 @@ public class SessionCreateParams extends ApiRequestParams {
   Boolean allowPromotionCodes;
 
   /**
+   * A list of the types of payment methods (e.g., {@code card}) this Checkout Session can accept.
+   *
+   * <p>Unlike {@code payment_method_types}, this acts as a filter on the dynamically computed set
+   * of eligible payment methods rather than an explicit static list. Only payment methods that are
+   * both dynamically eligible and present in this list will be offered to the customer.
+   */
+  @SerializedName("allowed_payment_method_types")
+  List<SessionCreateParams.AllowedPaymentMethodType> allowedPaymentMethodTypes;
+
+  /**
    * Settings for automatic tax lookup for this session and resulting payments, invoices, and
    * subscriptions.
    */
@@ -280,7 +290,7 @@ public class SessionCreateParams extends ApiRequestParams {
    * <p>For {@code subscription} mode, there is a maximum of 20 line items and optional items with
    * recurring Prices and 20 line items and optional items with one-time Prices.
    *
-   * <p>You can't set this parameter if {@code ui_mode} is {@code custom}.
+   * <p>You can't set this parameter if {@code ui_mode} is {@code elements} or {@code form}.
    */
   @SerializedName("optional_items")
   List<SessionCreateParams.OptionalItem> optionalItems;
@@ -328,24 +338,6 @@ public class SessionCreateParams extends ApiRequestParams {
   /** Payment-method-specific configuration. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
-
-  /**
-   * A list of the types of payment methods (e.g., {@code card}) this Checkout Session can accept.
-   *
-   * <p>You can omit this attribute to manage your payment methods from the <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>. See <a
-   * href="https://docs.stripe.com/payments/payment-methods/integration-options#using-dynamic-payment-methods">Dynamic
-   * Payment Methods</a> for more details.
-   *
-   * <p>Read more about the supported payment methods and their requirements in our <a
-   * href="https://stripe.com/docs/payments/checkout/payment-methods">payment method details
-   * guide</a>.
-   *
-   * <p>If multiple payment methods are passed, Checkout will dynamically reorder them to prioritize
-   * the most relevant payment methods based on the customer's location and other characteristics.
-   */
-  @SerializedName("payment_method_types")
-  List<SessionCreateParams.PaymentMethodType> paymentMethodTypes;
 
   /**
    * This property is used to set up permissions for various actions (e.g., update) on the
@@ -452,6 +444,7 @@ public class SessionCreateParams extends ApiRequestParams {
       AdaptivePricing adaptivePricing,
       AfterExpiration afterExpiration,
       Boolean allowPromotionCodes,
+      List<SessionCreateParams.AllowedPaymentMethodType> allowedPaymentMethodTypes,
       AutomaticTax automaticTax,
       BillingAddressCollection billingAddressCollection,
       BrandingSettings brandingSettings,
@@ -486,7 +479,6 @@ public class SessionCreateParams extends ApiRequestParams {
       String paymentMethodConfiguration,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
-      List<SessionCreateParams.PaymentMethodType> paymentMethodTypes,
       Permissions permissions,
       PhoneNumberCollection phoneNumberCollection,
       RedirectOnCompletion redirectOnCompletion,
@@ -504,6 +496,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.adaptivePricing = adaptivePricing;
     this.afterExpiration = afterExpiration;
     this.allowPromotionCodes = allowPromotionCodes;
+    this.allowedPaymentMethodTypes = allowedPaymentMethodTypes;
     this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
     this.brandingSettings = brandingSettings;
@@ -538,7 +531,6 @@ public class SessionCreateParams extends ApiRequestParams {
     this.paymentMethodConfiguration = paymentMethodConfiguration;
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
-    this.paymentMethodTypes = paymentMethodTypes;
     this.permissions = permissions;
     this.phoneNumberCollection = phoneNumberCollection;
     this.redirectOnCompletion = redirectOnCompletion;
@@ -565,6 +557,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private AfterExpiration afterExpiration;
 
     private Boolean allowPromotionCodes;
+
+    private List<SessionCreateParams.AllowedPaymentMethodType> allowedPaymentMethodTypes;
 
     private AutomaticTax automaticTax;
 
@@ -634,8 +628,6 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private PaymentMethodOptions paymentMethodOptions;
 
-    private List<SessionCreateParams.PaymentMethodType> paymentMethodTypes;
-
     private Permissions permissions;
 
     private PhoneNumberCollection phoneNumberCollection;
@@ -670,6 +662,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.adaptivePricing,
           this.afterExpiration,
           this.allowPromotionCodes,
+          this.allowedPaymentMethodTypes,
           this.automaticTax,
           this.billingAddressCollection,
           this.brandingSettings,
@@ -704,7 +697,6 @@ public class SessionCreateParams extends ApiRequestParams {
           this.paymentMethodConfiguration,
           this.paymentMethodData,
           this.paymentMethodOptions,
-          this.paymentMethodTypes,
           this.permissions,
           this.phoneNumberCollection,
           this.redirectOnCompletion,
@@ -742,6 +734,34 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Enables user redeemable promotion codes. */
     public Builder setAllowPromotionCodes(Boolean allowPromotionCodes) {
       this.allowPromotionCodes = allowPromotionCodes;
+      return this;
+    }
+
+    /**
+     * Add an element to `allowedPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SessionCreateParams#allowedPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllowedPaymentMethodType(
+        SessionCreateParams.AllowedPaymentMethodType element) {
+      if (this.allowedPaymentMethodTypes == null) {
+        this.allowedPaymentMethodTypes = new ArrayList<>();
+      }
+      this.allowedPaymentMethodTypes.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `allowedPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SessionCreateParams#allowedPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllAllowedPaymentMethodType(
+        List<SessionCreateParams.AllowedPaymentMethodType> elements) {
+      if (this.allowedPaymentMethodTypes == null) {
+        this.allowedPaymentMethodTypes = new ArrayList<>();
+      }
+      this.allowedPaymentMethodTypes.addAll(elements);
       return this;
     }
 
@@ -1224,32 +1244,6 @@ public class SessionCreateParams extends ApiRequestParams {
     public Builder setPaymentMethodOptions(
         SessionCreateParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
-      return this;
-    }
-
-    /**
-     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * SessionCreateParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addPaymentMethodType(SessionCreateParams.PaymentMethodType element) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link SessionCreateParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addAllPaymentMethodType(List<SessionCreateParams.PaymentMethodType> elements) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.addAll(elements);
       return this;
     }
 
@@ -3103,7 +3097,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Label {
       /**
-       * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
+       * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 100
        * characters.
        */
       @SerializedName("custom")
@@ -3146,8 +3140,8 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
-         * characters.
+         * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to
+         * 100 characters.
          */
         public Builder setCustom(String custom) {
           this.custom = custom;
@@ -5414,6 +5408,14 @@ public class SessionCreateParams extends ApiRequestParams {
         String taxCode;
 
         /**
+         * Tax details for this product, including the <a
+         * href="https://stripe.com/tax/tax-codes">tax code</a> and an optional performance
+         * location.
+         */
+        @SerializedName("tax_details")
+        TaxDetails taxDetails;
+
+        /**
          * A label that represents units of this product. When set, this will be included in
          * customers' receipts, invoices, Checkout, and the customer portal.
          */
@@ -5427,6 +5429,7 @@ public class SessionCreateParams extends ApiRequestParams {
             Map<String, String> metadata,
             String name,
             String taxCode,
+            TaxDetails taxDetails,
             String unitLabel) {
           this.description = description;
           this.extraParams = extraParams;
@@ -5434,6 +5437,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.metadata = metadata;
           this.name = name;
           this.taxCode = taxCode;
+          this.taxDetails = taxDetails;
           this.unitLabel = unitLabel;
         }
 
@@ -5454,6 +5458,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
           private String taxCode;
 
+          private TaxDetails taxDetails;
+
           private String unitLabel;
 
           /** Finalize and obtain parameter instance from this builder. */
@@ -5465,6 +5471,7 @@ public class SessionCreateParams extends ApiRequestParams {
                 this.metadata,
                 this.name,
                 this.taxCode,
+                this.taxDetails,
                 this.unitLabel);
           }
 
@@ -5575,12 +5582,126 @@ public class SessionCreateParams extends ApiRequestParams {
           }
 
           /**
+           * Tax details for this product, including the <a
+           * href="https://stripe.com/tax/tax-codes">tax code</a> and an optional performance
+           * location.
+           */
+          public Builder setTaxDetails(
+              SessionCreateParams.LineItem.PriceData.ProductData.TaxDetails taxDetails) {
+            this.taxDetails = taxDetails;
+            return this;
+          }
+
+          /**
            * A label that represents units of this product. When set, this will be included in
            * customers' receipts, invoices, Checkout, and the customer portal.
            */
           public Builder setUnitLabel(String unitLabel) {
             this.unitLabel = unitLabel;
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class TaxDetails {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * A tax location ID. Depending on the <a
+           * href="https://stripe.com/tax/tax-for-tickets/reference/tax-location-performance">tax
+           * code</a>, this is required, optional, or not supported.
+           */
+          @SerializedName("performance_location")
+          String performanceLocation;
+
+          /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+          @SerializedName("tax_code")
+          Object taxCode;
+
+          private TaxDetails(
+              Map<String, Object> extraParams, String performanceLocation, Object taxCode) {
+            this.extraParams = extraParams;
+            this.performanceLocation = performanceLocation;
+            this.taxCode = taxCode;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private String performanceLocation;
+
+            private Object taxCode;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SessionCreateParams.LineItem.PriceData.ProductData.TaxDetails build() {
+              return new SessionCreateParams.LineItem.PriceData.ProductData.TaxDetails(
+                  this.extraParams, this.performanceLocation, this.taxCode);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.LineItem.PriceData.ProductData.TaxDetails#extraParams} for the
+             * field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.LineItem.PriceData.ProductData.TaxDetails#extraParams} for the
+             * field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * A tax location ID. Depending on the <a
+             * href="https://stripe.com/tax/tax-for-tickets/reference/tax-location-performance">tax
+             * code</a>, this is required, optional, or not supported.
+             */
+            public Builder setPerformanceLocation(String performanceLocation) {
+              this.performanceLocation = performanceLocation;
+              return this;
+            }
+
+            /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+            public Builder setTaxCode(String taxCode) {
+              this.taxCode = taxCode;
+              return this;
+            }
+
+            /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+            public Builder setTaxCode(EmptyParam taxCode) {
+              this.taxCode = taxCode;
+              return this;
+            }
           }
         }
       }
@@ -7287,6 +7408,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("billie")
     Billie billie;
 
+    /** contains details about the BLIK payment method options. */
+    @SerializedName("blik")
+    Blik blik;
+
     /** contains details about the Boleto payment method options. */
     @SerializedName("boleto")
     Boleto boleto;
@@ -7427,6 +7552,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    /** contains details about the SeQura payment method options. */
+    @SerializedName("sequra")
+    Sequra sequra;
+
     /** contains details about the Sofort payment method options. */
     @SerializedName("sofort")
     Sofort sofort;
@@ -7466,6 +7595,7 @@ public class SessionCreateParams extends ApiRequestParams {
         BacsDebit bacsDebit,
         Bancontact bancontact,
         Billie billie,
+        Blik blik,
         Boleto boleto,
         Card card,
         Cashapp cashapp,
@@ -7499,6 +7629,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Satispay satispay,
         Scalapay scalapay,
         SepaDebit sepaDebit,
+        Sequra sequra,
         Sofort sofort,
         Sunbit sunbit,
         Swish swish,
@@ -7516,6 +7647,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
       this.billie = billie;
+      this.blik = blik;
       this.boleto = boleto;
       this.card = card;
       this.cashapp = cashapp;
@@ -7549,6 +7681,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.satispay = satispay;
       this.scalapay = scalapay;
       this.sepaDebit = sepaDebit;
+      this.sequra = sequra;
       this.sofort = sofort;
       this.sunbit = sunbit;
       this.swish = swish;
@@ -7582,6 +7715,8 @@ public class SessionCreateParams extends ApiRequestParams {
       private Bancontact bancontact;
 
       private Billie billie;
+
+      private Blik blik;
 
       private Boleto boleto;
 
@@ -7649,6 +7784,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private SepaDebit sepaDebit;
 
+      private Sequra sequra;
+
       private Sofort sofort;
 
       private Sunbit sunbit;
@@ -7676,6 +7813,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.bacsDebit,
             this.bancontact,
             this.billie,
+            this.blik,
             this.boleto,
             this.card,
             this.cashapp,
@@ -7709,6 +7847,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.satispay,
             this.scalapay,
             this.sepaDebit,
+            this.sequra,
             this.sofort,
             this.sunbit,
             this.swish,
@@ -7780,6 +7919,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Billie payment method options. */
       public Builder setBillie(SessionCreateParams.PaymentMethodOptions.Billie billie) {
         this.billie = billie;
+        return this;
+      }
+
+      /** contains details about the BLIK payment method options. */
+      public Builder setBlik(SessionCreateParams.PaymentMethodOptions.Blik blik) {
+        this.blik = blik;
         return this;
       }
 
@@ -8003,6 +8148,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Sepa Debit payment method options. */
       public Builder setSepaDebit(SessionCreateParams.PaymentMethodOptions.SepaDebit sepaDebit) {
         this.sepaDebit = sepaDebit;
+        return this;
+      }
+
+      /** contains details about the SeQura payment method options. */
+      public Builder setSequra(SessionCreateParams.PaymentMethodOptions.Sequra sequra) {
+        this.sequra = sequra;
         return this;
       }
 
@@ -9723,7 +9874,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
         @SerializedName("none")
-        NONE("none");
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -9814,6 +9968,195 @@ public class SessionCreateParams extends ApiRequestParams {
         private final String value;
 
         CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Blik {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Additional fields for Mandate creation. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      private Blik(
+          Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
+          ApiRequestParams.EnumParam setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private MandateOptions mandateOptions;
+
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Blik build() {
+          return new SessionCreateParams.PaymentMethodOptions.Blik(
+              this.extraParams, this.mandateOptions, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Blik#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Blik#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Additional fields for Mandate creation. */
+        public Builder setMandateOptions(
+            SessionCreateParams.PaymentMethodOptions.Blik.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
+          return this;
+        }
+
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.Blik.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions {
+        /**
+         * Date when the mandate expires and no further payments will be charged. If not provided,
+         * the mandate will be set to be indefinite.
+         */
+        @SerializedName("expires_at")
+        Long expiresAt;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private MandateOptions(Long expiresAt, Map<String, Object> extraParams) {
+          this.expiresAt = expiresAt;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long expiresAt;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.PaymentMethodOptions.Blik.MandateOptions build() {
+            return new SessionCreateParams.PaymentMethodOptions.Blik.MandateOptions(
+                this.expiresAt, this.extraParams);
+          }
+
+          /**
+           * Date when the mandate expires and no further payments will be charged. If not provided,
+           * the mandate will be set to be indefinite.
+           */
+          public Builder setExpiresAt(Long expiresAt) {
+            this.expiresAt = expiresAt;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.Blik.MandateOptions#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.Blik.MandateOptions#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
           this.value = value;
         }
       }
@@ -16364,6 +16707,91 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Sequra {
+      /** Controls when the funds will be captured from the customer's account. */
+      @SerializedName("capture_method")
+      CaptureMethod captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Sequra(CaptureMethod captureMethod, Map<String, Object> extraParams) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private CaptureMethod captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Sequra build() {
+          return new SessionCreateParams.PaymentMethodOptions.Sequra(
+              this.captureMethod, this.extraParams);
+        }
+
+        /** Controls when the funds will be captured from the customer's account. */
+        public Builder setCaptureMethod(
+            SessionCreateParams.PaymentMethodOptions.Sequra.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Sequra#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Sequra#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Sofort {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -21567,6 +21995,183 @@ public class SessionCreateParams extends ApiRequestParams {
     }
   }
 
+  public enum AllowedPaymentMethodType implements ApiRequestParams.EnumParam {
+    @SerializedName("acss_debit")
+    ACSS_DEBIT("acss_debit"),
+
+    @SerializedName("affirm")
+    AFFIRM("affirm"),
+
+    @SerializedName("afterpay_clearpay")
+    AFTERPAY_CLEARPAY("afterpay_clearpay"),
+
+    @SerializedName("alipay")
+    ALIPAY("alipay"),
+
+    @SerializedName("alma")
+    ALMA("alma"),
+
+    @SerializedName("amazon_pay")
+    AMAZON_PAY("amazon_pay"),
+
+    @SerializedName("au_becs_debit")
+    AU_BECS_DEBIT("au_becs_debit"),
+
+    @SerializedName("bacs_debit")
+    BACS_DEBIT("bacs_debit"),
+
+    @SerializedName("bancontact")
+    BANCONTACT("bancontact"),
+
+    @SerializedName("billie")
+    BILLIE("billie"),
+
+    @SerializedName("bizum")
+    BIZUM("bizum"),
+
+    @SerializedName("blik")
+    BLIK("blik"),
+
+    @SerializedName("boleto")
+    BOLETO("boleto"),
+
+    @SerializedName("card")
+    CARD("card"),
+
+    @SerializedName("cashapp")
+    CASHAPP("cashapp"),
+
+    @SerializedName("crypto")
+    CRYPTO("crypto"),
+
+    @SerializedName("customer_balance")
+    CUSTOMER_BALANCE("customer_balance"),
+
+    @SerializedName("eps")
+    EPS("eps"),
+
+    @SerializedName("fpx")
+    FPX("fpx"),
+
+    @SerializedName("giropay")
+    GIROPAY("giropay"),
+
+    @SerializedName("grabpay")
+    GRABPAY("grabpay"),
+
+    @SerializedName("ideal")
+    IDEAL("ideal"),
+
+    @SerializedName("kakao_pay")
+    KAKAO_PAY("kakao_pay"),
+
+    @SerializedName("klarna")
+    KLARNA("klarna"),
+
+    @SerializedName("konbini")
+    KONBINI("konbini"),
+
+    @SerializedName("kr_card")
+    KR_CARD("kr_card"),
+
+    @SerializedName("link")
+    LINK("link"),
+
+    @SerializedName("mb_way")
+    MB_WAY("mb_way"),
+
+    @SerializedName("mobilepay")
+    MOBILEPAY("mobilepay"),
+
+    @SerializedName("multibanco")
+    MULTIBANCO("multibanco"),
+
+    @SerializedName("naver_pay")
+    NAVER_PAY("naver_pay"),
+
+    @SerializedName("nz_bank_account")
+    NZ_BANK_ACCOUNT("nz_bank_account"),
+
+    @SerializedName("oxxo")
+    OXXO("oxxo"),
+
+    @SerializedName("p24")
+    P24("p24"),
+
+    @SerializedName("pay_by_bank")
+    PAY_BY_BANK("pay_by_bank"),
+
+    @SerializedName("payco")
+    PAYCO("payco"),
+
+    @SerializedName("paynow")
+    PAYNOW("paynow"),
+
+    @SerializedName("paypal")
+    PAYPAL("paypal"),
+
+    @SerializedName("paypay")
+    PAYPAY("paypay"),
+
+    @SerializedName("payto")
+    PAYTO("payto"),
+
+    @SerializedName("pix")
+    PIX("pix"),
+
+    @SerializedName("promptpay")
+    PROMPTPAY("promptpay"),
+
+    @SerializedName("revolut_pay")
+    REVOLUT_PAY("revolut_pay"),
+
+    @SerializedName("samsung_pay")
+    SAMSUNG_PAY("samsung_pay"),
+
+    @SerializedName("satispay")
+    SATISPAY("satispay"),
+
+    @SerializedName("scalapay")
+    SCALAPAY("scalapay"),
+
+    @SerializedName("sepa_debit")
+    SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
+
+    @SerializedName("sofort")
+    SOFORT("sofort"),
+
+    @SerializedName("sunbit")
+    SUNBIT("sunbit"),
+
+    @SerializedName("swish")
+    SWISH("swish"),
+
+    @SerializedName("twint")
+    TWINT("twint"),
+
+    @SerializedName("upi")
+    UPI("upi"),
+
+    @SerializedName("us_bank_account")
+    US_BANK_ACCOUNT("us_bank_account"),
+
+    @SerializedName("wechat_pay")
+    WECHAT_PAY("wechat_pay"),
+
+    @SerializedName("zip")
+    ZIP("zip");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    AllowedPaymentMethodType(String value) {
+      this.value = value;
+    }
+  }
+
   public enum BillingAddressCollection implements ApiRequestParams.EnumParam {
     @SerializedName("auto")
     AUTO("auto"),
@@ -21709,6 +22314,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("paypal")
     PAYPAL("paypal"),
 
+    @SerializedName("paypay")
+    PAYPAY("paypay"),
+
     @SerializedName("payto")
     PAYTO("payto"),
 
@@ -21732,6 +22340,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("sofort")
     SOFORT("sofort"),
@@ -21941,177 +22552,6 @@ public class SessionCreateParams extends ApiRequestParams {
     private final String value;
 
     PaymentMethodCollection(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum PaymentMethodType implements ApiRequestParams.EnumParam {
-    @SerializedName("acss_debit")
-    ACSS_DEBIT("acss_debit"),
-
-    @SerializedName("affirm")
-    AFFIRM("affirm"),
-
-    @SerializedName("afterpay_clearpay")
-    AFTERPAY_CLEARPAY("afterpay_clearpay"),
-
-    @SerializedName("alipay")
-    ALIPAY("alipay"),
-
-    @SerializedName("alma")
-    ALMA("alma"),
-
-    @SerializedName("amazon_pay")
-    AMAZON_PAY("amazon_pay"),
-
-    @SerializedName("au_becs_debit")
-    AU_BECS_DEBIT("au_becs_debit"),
-
-    @SerializedName("bacs_debit")
-    BACS_DEBIT("bacs_debit"),
-
-    @SerializedName("bancontact")
-    BANCONTACT("bancontact"),
-
-    @SerializedName("billie")
-    BILLIE("billie"),
-
-    @SerializedName("bizum")
-    BIZUM("bizum"),
-
-    @SerializedName("blik")
-    BLIK("blik"),
-
-    @SerializedName("boleto")
-    BOLETO("boleto"),
-
-    @SerializedName("card")
-    CARD("card"),
-
-    @SerializedName("cashapp")
-    CASHAPP("cashapp"),
-
-    @SerializedName("crypto")
-    CRYPTO("crypto"),
-
-    @SerializedName("customer_balance")
-    CUSTOMER_BALANCE("customer_balance"),
-
-    @SerializedName("eps")
-    EPS("eps"),
-
-    @SerializedName("fpx")
-    FPX("fpx"),
-
-    @SerializedName("giropay")
-    GIROPAY("giropay"),
-
-    @SerializedName("grabpay")
-    GRABPAY("grabpay"),
-
-    @SerializedName("ideal")
-    IDEAL("ideal"),
-
-    @SerializedName("kakao_pay")
-    KAKAO_PAY("kakao_pay"),
-
-    @SerializedName("klarna")
-    KLARNA("klarna"),
-
-    @SerializedName("konbini")
-    KONBINI("konbini"),
-
-    @SerializedName("kr_card")
-    KR_CARD("kr_card"),
-
-    @SerializedName("link")
-    LINK("link"),
-
-    @SerializedName("mb_way")
-    MB_WAY("mb_way"),
-
-    @SerializedName("mobilepay")
-    MOBILEPAY("mobilepay"),
-
-    @SerializedName("multibanco")
-    MULTIBANCO("multibanco"),
-
-    @SerializedName("naver_pay")
-    NAVER_PAY("naver_pay"),
-
-    @SerializedName("nz_bank_account")
-    NZ_BANK_ACCOUNT("nz_bank_account"),
-
-    @SerializedName("oxxo")
-    OXXO("oxxo"),
-
-    @SerializedName("p24")
-    P24("p24"),
-
-    @SerializedName("pay_by_bank")
-    PAY_BY_BANK("pay_by_bank"),
-
-    @SerializedName("payco")
-    PAYCO("payco"),
-
-    @SerializedName("paynow")
-    PAYNOW("paynow"),
-
-    @SerializedName("paypal")
-    PAYPAL("paypal"),
-
-    @SerializedName("payto")
-    PAYTO("payto"),
-
-    @SerializedName("pix")
-    PIX("pix"),
-
-    @SerializedName("promptpay")
-    PROMPTPAY("promptpay"),
-
-    @SerializedName("revolut_pay")
-    REVOLUT_PAY("revolut_pay"),
-
-    @SerializedName("samsung_pay")
-    SAMSUNG_PAY("samsung_pay"),
-
-    @SerializedName("satispay")
-    SATISPAY("satispay"),
-
-    @SerializedName("scalapay")
-    SCALAPAY("scalapay"),
-
-    @SerializedName("sepa_debit")
-    SEPA_DEBIT("sepa_debit"),
-
-    @SerializedName("sofort")
-    SOFORT("sofort"),
-
-    @SerializedName("sunbit")
-    SUNBIT("sunbit"),
-
-    @SerializedName("swish")
-    SWISH("swish"),
-
-    @SerializedName("twint")
-    TWINT("twint"),
-
-    @SerializedName("upi")
-    UPI("upi"),
-
-    @SerializedName("us_bank_account")
-    US_BANK_ACCOUNT("us_bank_account"),
-
-    @SerializedName("wechat_pay")
-    WECHAT_PAY("wechat_pay"),
-
-    @SerializedName("zip")
-    ZIP("zip");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    PaymentMethodType(String value) {
       this.value = value;
     }
   }

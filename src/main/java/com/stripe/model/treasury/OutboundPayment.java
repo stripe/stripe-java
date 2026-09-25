@@ -31,9 +31,9 @@ import lombok.Setter;
  * Use <a
  * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments">OutboundPayments</a>
  * to send funds to another party's external bank account or <a
- * href="https://api.stripe.com#financial_accounts">FinancialAccount</a>. To send money to an
+ * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a>. To send money to an
  * account belonging to the same user, use an <a
- * href="https://api.stripe.com#outbound_transfers">OutboundTransfer</a>.
+ * href="https://docs.stripe.com/api#outbound_transfers">OutboundTransfer</a>.
  *
  * <p>Simulate OutboundPayment state changes with the {@code
  * /v1/test_helpers/treasury/outbound_payments} endpoints. These methods can only be called on test
