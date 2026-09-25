@@ -4,7 +4,6 @@ package com.stripe.model.v2.core;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,11 +48,17 @@ public class AccountLink extends StripeObject {
   @SerializedName("url")
   String url;
 
-  /** Hash containing usage options. */
+  /**
+   * Describes the Stripe-hosted flow for this Account Link, including its type and flow-specific
+   * configuration.
+   */
   @SerializedName("use_case")
   UseCase useCase;
 
-  /** Hash containing usage options. */
+  /**
+   * Describes the Stripe-hosted flow for this Account Link, including its type and flow-specific
+   * configuration.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -105,14 +110,6 @@ public class AccountLink extends StripeObject {
        */
       @SerializedName("collection_options")
       CollectionOptions collectionOptions;
-
-      /**
-       * Open Enum. A v2/core/account can be configured to enable certain functionality. The
-       * configuration param targets the v2/core/account_link to collect information for the
-       * specified v2/core/account configuration/s.
-       */
-      @SerializedName("configurations")
-      List<String> configurations;
 
       /**
        * The URL the user will be redirected to if the AccountLink is expired, has been used, or is
@@ -175,14 +172,6 @@ public class AccountLink extends StripeObject {
       CollectionOptions collectionOptions;
 
       /**
-       * Open Enum. A v2/account can be configured to enable certain functionality. The
-       * configuration param targets the v2/account_link to collect information for the specified
-       * v2/account configuration/s.
-       */
-      @SerializedName("configurations")
-      List<String> configurations;
-
-      /**
        * The URL the user will be redirected to if the Account Link is expired, has been used, or is
        * otherwise invalid. The URL you specify should attempt to generate a new Account Link with
        * the same parameters used to create the original Account Link, then redirect the user to the
@@ -243,14 +232,6 @@ public class AccountLink extends StripeObject {
       CollectionOptions collectionOptions;
 
       /**
-       * Open Enum. A v2/core/account can be configured to enable certain functionality. The
-       * configuration param targets the v2/core/account_link to collect information for the
-       * specified v2/core/account configuration/s.
-       */
-      @SerializedName("configurations")
-      List<String> configurations;
-
-      /**
        * The URL the user will be redirected to if the AccountLink is expired, has been used, or is
        * otherwise invalid. The URL you specify should attempt to generate a new AccountLink with
        * the same parameters used to create the original AccountLink, then redirect the user to the
@@ -308,14 +289,6 @@ public class AccountLink extends StripeObject {
        */
       @SerializedName("collection_options")
       CollectionOptions collectionOptions;
-
-      /**
-       * Open Enum. A v2/account can be configured to enable certain functionality. The
-       * configuration param targets the v2/account_link to collect information for the specified
-       * v2/account configuration/s.
-       */
-      @SerializedName("configurations")
-      List<String> configurations;
 
       /**
        * The URL the user will be redirected to if the Account Link is expired, has been used, or is

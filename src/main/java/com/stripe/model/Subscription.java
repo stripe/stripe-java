@@ -362,7 +362,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * active} when the trial period is over.
    *
    * <p>A subscription can only enter a {@code paused} status <a
-   * href="https://docs.stripe.com/billing/subscriptions/trials#create-free-trials-without-payment">when
+   * href="https://docs.stripe.com/billing/subscriptions/trials/free-trials#create-free-trials-without-payment">when
    * a trial ends without a payment method</a>. A {@code paused} subscription doesn't generate
    * invoices and can be resumed after your customer adds their payment method. The {@code paused}
    * status is different from <a
@@ -2912,8 +2912,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      * Indicates if a plan's {@code trial_period_days} should be applied to the subscription.
      * Setting {@code trial_end} per subscription is preferred, and this defaults to {@code false}.
      * Setting this flag to {@code true} together with {@code trial_end} is not allowed. See <a
-     * href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
-     * subscriptions</a> to learn more.
+     * href="https://docs.stripe.com/billing/subscriptions/trials/free-trials">Using trial periods
+     * on subscriptions</a> to learn more.
      */
     @SerializedName("trial_from_plan")
     Boolean trialFromPlan;

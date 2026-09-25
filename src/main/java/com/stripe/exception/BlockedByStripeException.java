@@ -6,7 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/** Returned when the payout method cannot be used due to suspicious activity. */
+/** Returned in cases where the bank account cannot be used due to suspicious activity. */
 public final class BlockedByStripeException extends ApiException {
   private static final long serialVersionUID = 2L;
 

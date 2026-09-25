@@ -31,7 +31,7 @@ public final class AccountActivityService extends ApiService {
    */
   public AccountActivity create(AccountActivityCreateParams params, RequestOptions options)
       throws StripeException {
-    String path = "/v2/signals/account_activity";
+    String path = "/v2/signals/account_activities";
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
@@ -47,7 +47,7 @@ public final class AccountActivityService extends ApiService {
   }
   /** Deletes an AccountActivity by its ID. */
   public DeletedObject delete(String id, RequestOptions options) throws StripeException {
-    String path = String.format("/v2/signals/account_activity/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v2/signals/account_activities/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, DeletedObject.class);
@@ -58,7 +58,7 @@ public final class AccountActivityService extends ApiService {
   }
   /** Retrieves an AccountActivity by its ID. */
   public AccountActivity retrieve(String id, RequestOptions options) throws StripeException {
-    String path = String.format("/v2/signals/account_activity/%s", ApiResource.urlEncodeId(id));
+    String path = String.format("/v2/signals/account_activities/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
     return this.request(request, AccountActivity.class);

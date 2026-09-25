@@ -357,6 +357,10 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.TestHelpersService(this.getResponseGetter());
   }
 
+  public com.stripe.service.ThreeDSecureService threeDSecure() {
+    return new com.stripe.service.ThreeDSecureService(this.getResponseGetter());
+  }
+
   public com.stripe.service.TokenService tokens() {
     return new com.stripe.service.TokenService(this.getResponseGetter());
   }

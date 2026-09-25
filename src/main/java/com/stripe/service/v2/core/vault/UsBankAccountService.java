@@ -5,10 +5,12 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.BlockedByStripeException;
 import com.stripe.exception.CannotProceedException;
 import com.stripe.exception.ControlledByAlternateResourceException;
-import com.stripe.exception.ControlledByDashboardException;
 import com.stripe.exception.InvalidPaymentMethodException;
 import com.stripe.exception.QuotaExceededException;
 import com.stripe.exception.StripeException;
+import com.stripe.exception.VerificationAttemptFailedException;
+import com.stripe.exception.VerificationExpiredException;
+import com.stripe.exception.VerificationNotInitiatedException;
 import com.stripe.model.v2.StripeCollection;
 import com.stripe.model.v2.core.vault.UsBankAccount;
 import com.stripe.net.ApiRequest;
@@ -57,13 +59,13 @@ public final class UsBankAccountService extends ApiService {
   /** Create a USBankAccount object. */
   public UsBankAccount create(UsBankAccountCreateParams params)
       throws StripeException, BlockedByStripeException, InvalidPaymentMethodException,
-          QuotaExceededException {
+          QuotaExceededException, CannotProceedException {
     return create(params, (RequestOptions) null);
   }
   /** Create a USBankAccount object. */
   public UsBankAccount create(UsBankAccountCreateParams params, RequestOptions options)
       throws StripeException, BlockedByStripeException, InvalidPaymentMethodException,
-          QuotaExceededException {
+          QuotaExceededException, CannotProceedException {
     String path = "/v2/core/vault/us_bank_accounts";
     ApiRequest request =
         new ApiRequest(
@@ -91,7 +93,7 @@ public final class UsBankAccountService extends ApiService {
    */
   public UsBankAccount update(String id, UsBankAccountUpdateParams params)
       throws StripeException, BlockedByStripeException, InvalidPaymentMethodException,
-          QuotaExceededException {
+          QuotaExceededException, CannotProceedException {
     return update(id, params, (RequestOptions) null);
   }
   /**
@@ -100,7 +102,7 @@ public final class UsBankAccountService extends ApiService {
    */
   public UsBankAccount update(String id, RequestOptions options)
       throws StripeException, BlockedByStripeException, InvalidPaymentMethodException,
-          QuotaExceededException {
+          QuotaExceededException, CannotProceedException {
     return update(id, (UsBankAccountUpdateParams) null, options);
   }
   /**
@@ -109,7 +111,7 @@ public final class UsBankAccountService extends ApiService {
    */
   public UsBankAccount update(String id)
       throws StripeException, BlockedByStripeException, InvalidPaymentMethodException,
-          QuotaExceededException {
+          QuotaExceededException, CannotProceedException {
     return update(id, (UsBankAccountUpdateParams) null, (RequestOptions) null);
   }
   /**
@@ -118,7 +120,7 @@ public final class UsBankAccountService extends ApiService {
    */
   public UsBankAccount update(String id, UsBankAccountUpdateParams params, RequestOptions options)
       throws StripeException, BlockedByStripeException, InvalidPaymentMethodException,
-          QuotaExceededException {
+          QuotaExceededException, CannotProceedException {
     String path = String.format("/v2/core/vault/us_bank_accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
@@ -135,7 +137,7 @@ public final class UsBankAccountService extends ApiService {
    * appear in the outbound destination list.
    */
   public UsBankAccount archive(String id)
-      throws StripeException, CannotProceedException, ControlledByDashboardException {
+      throws StripeException, CannotProceedException, ControlledByAlternateResourceException {
     return archive(id, (RequestOptions) null);
   }
   /**
@@ -144,7 +146,7 @@ public final class UsBankAccountService extends ApiService {
    * appear in the outbound destination list.
    */
   public UsBankAccount archive(String id, RequestOptions options)
-      throws StripeException, CannotProceedException, ControlledByDashboardException {
+      throws StripeException, CannotProceedException, ControlledByAlternateResourceException {
     String path =
         String.format("/v2/core/vault/us_bank_accounts/%s/archive", ApiResource.urlEncodeId(id));
     ApiRequest request =
@@ -158,7 +160,9 @@ public final class UsBankAccountService extends ApiService {
    */
   public UsBankAccount confirmMicrodeposits(
       String id, UsBankAccountConfirmMicrodepositsParams params)
-      throws StripeException, ControlledByAlternateResourceException {
+      throws StripeException, VerificationAttemptFailedException,
+          ControlledByAlternateResourceException, VerificationNotInitiatedException,
+          VerificationExpiredException {
     return confirmMicrodeposits(id, params, (RequestOptions) null);
   }
   /**
@@ -167,7 +171,9 @@ public final class UsBankAccountService extends ApiService {
    * and eligible to transfer funds with.
    */
   public UsBankAccount confirmMicrodeposits(String id, RequestOptions options)
-      throws StripeException, ControlledByAlternateResourceException {
+      throws StripeException, VerificationAttemptFailedException,
+          ControlledByAlternateResourceException, VerificationNotInitiatedException,
+          VerificationExpiredException {
     return confirmMicrodeposits(id, (UsBankAccountConfirmMicrodepositsParams) null, options);
   }
   /**
@@ -176,7 +182,9 @@ public final class UsBankAccountService extends ApiService {
    * and eligible to transfer funds with.
    */
   public UsBankAccount confirmMicrodeposits(String id)
-      throws StripeException, ControlledByAlternateResourceException {
+      throws StripeException, VerificationAttemptFailedException,
+          ControlledByAlternateResourceException, VerificationNotInitiatedException,
+          VerificationExpiredException {
     return confirmMicrodeposits(
         id, (UsBankAccountConfirmMicrodepositsParams) null, (RequestOptions) null);
   }
@@ -187,7 +195,9 @@ public final class UsBankAccountService extends ApiService {
    */
   public UsBankAccount confirmMicrodeposits(
       String id, UsBankAccountConfirmMicrodepositsParams params, RequestOptions options)
-      throws StripeException, ControlledByAlternateResourceException {
+      throws StripeException, VerificationAttemptFailedException,
+          ControlledByAlternateResourceException, VerificationNotInitiatedException,
+          VerificationExpiredException {
     String path =
         String.format(
             "/v2/core/vault/us_bank_accounts/%s/confirm_microdeposits",

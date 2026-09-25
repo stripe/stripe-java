@@ -40,15 +40,16 @@ public class Transaction extends StripeObject implements HasId {
    * balance_transfer}, {@code climate_order_purchase}, {@code climate_order_refund}, {@code
    * connect_collection_transfer}, {@code connect_reserved_funds}, {@code contribution}, {@code
    * crypto_wallet_export}, {@code currency_conversion}, {@code debit_dispute}, {@code dispute},
-   * {@code dispute_reversal}, {@code financing_paydown}, {@code financing_paydown_reversal}, {@code
-   * inbound_payment}, {@code inbound_payment_failure}, {@code inbound_transfer}, {@code
-   * inbound_transfer_reversal}, {@code india_mdr_processing_fee}, {@code issuing_authorization},
-   * {@code issuing_dispute}, {@code issuing_dispute_fraud_liability_debit}, {@code
-   * issuing_dispute_provisional_credit}, {@code issuing_dispute_provisional_credit_reversal},
-   * {@code issuing_transaction}, {@code minimum_balance_hold}, {@code network_cost}, {@code
-   * obligation}, {@code outbound_payment}, {@code outbound_payment_reversal}, {@code
-   * outbound_transfer}, {@code outbound_transfer_reversal}, {@code partial_capture_reversal},
-   * {@code payment_method_passthrough_fee}, {@code payment_network_reserved_funds}, {@code
+   * {@code dispute_reversal}, {@code earned_credit}, {@code financing_paydown}, {@code
+   * financing_paydown_reversal}, {@code inbound_payment}, {@code inbound_payment_failure}, {@code
+   * inbound_transfer}, {@code inbound_transfer_reversal}, {@code india_mdr_processing_fee}, {@code
+   * issuing_authorization}, {@code issuing_dispute}, {@code issuing_dispute_fraud_liability_debit},
+   * {@code issuing_dispute_provisional_credit}, {@code
+   * issuing_dispute_provisional_credit_reversal}, {@code issuing_transaction}, {@code
+   * minimum_balance_hold}, {@code network_cost}, {@code obligation}, {@code outbound_payment},
+   * {@code outbound_payment_reversal}, {@code outbound_transfer}, {@code
+   * outbound_transfer_reversal}, {@code partial_capture_reversal}, {@code
+   * payment_method_passthrough_fee}, {@code payment_network_reserved_funds}, {@code
    * platform_earning}, {@code platform_earning_refund}, {@code platform_fee}, {@code
    * platform_funded_credit_transaction}, {@code received_credit}, {@code received_credit_reversal},
    * {@code received_debit}, {@code received_debit_reversal}, {@code refund}, {@code
@@ -205,6 +206,10 @@ public class Transaction extends StripeObject implements HasId {
     @SerializedName("dispute")
     String dispute;
 
+    /** If applicable, the ID of the EarnedCredit that created this Transaction. */
+    @SerializedName("earned_credit")
+    String earnedCredit;
+
     /** If applicable, the ID of the FeeTransaction that created this Transaction. */
     @SerializedName("fee_transaction")
     String feeTransaction;
@@ -311,15 +316,15 @@ public class Transaction extends StripeObject implements HasId {
      *
      * <p>One of {@code adjustment}, {@code application_fee}, {@code application_fee_refund}, {@code
      * charge}, {@code currency_conversion}, {@code debit_dispute}, {@code dispute}, {@code
-     * fee_transaction}, {@code inbound_transfer}, {@code issuing_authorization}, {@code
-     * issuing_dispute}, {@code issuing_transaction}, {@code outbound_payment}, {@code
-     * outbound_transfer}, {@code payout}, {@code received_credit}, {@code received_debit}, {@code
-     * refund}, {@code reserve_hold}, {@code reserve_release}, {@code tax_fund}, {@code topup},
-     * {@code transfer}, {@code transfer_reversal}, {@code treasury_credit_reversal}, {@code
-     * treasury_debit_reversal}, {@code treasury_inbound_transfer}, {@code
-     * treasury_issuing_authorization}, {@code treasury_other}, {@code treasury_outbound_payment},
-     * {@code treasury_outbound_transfer}, {@code treasury_received_credit}, or {@code
-     * treasury_received_debit}.
+     * earned_credit}, {@code fee_transaction}, {@code inbound_transfer}, {@code
+     * issuing_authorization}, {@code issuing_dispute}, {@code issuing_transaction}, {@code
+     * outbound_payment}, {@code outbound_transfer}, {@code payout}, {@code received_credit}, {@code
+     * received_debit}, {@code refund}, {@code reserve_hold}, {@code reserve_release}, {@code
+     * tax_fund}, {@code topup}, {@code transfer}, {@code transfer_reversal}, {@code
+     * treasury_credit_reversal}, {@code treasury_debit_reversal}, {@code
+     * treasury_inbound_transfer}, {@code treasury_issuing_authorization}, {@code treasury_other},
+     * {@code treasury_outbound_payment}, {@code treasury_outbound_transfer}, {@code
+     * treasury_received_credit}, or {@code treasury_received_debit}.
      */
     @SerializedName("type")
     String type;

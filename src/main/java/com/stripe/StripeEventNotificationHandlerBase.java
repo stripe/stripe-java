@@ -373,6 +373,7 @@ import com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementDebitDisputeFailedEventNotification;
 import com.stripe.events.V2MoneyManagementDebitDisputeSubmittedEventNotification;
 import com.stripe.events.V2MoneyManagementDebitDisputeSucceededEventNotification;
+import com.stripe.events.V2MoneyManagementEarnedCreditSucceededEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountStatementCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountStatementRestatedEventNotification;
@@ -2846,6 +2847,12 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV2MoneyManagementDebitDisputeSucceeded(
       EventNotificationCallback<V2MoneyManagementDebitDisputeSucceededEventNotification> callback) {
     this.register("v2.money_management.debit_dispute.succeeded", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementEarnedCreditSucceeded(
+      EventNotificationCallback<V2MoneyManagementEarnedCreditSucceededEventNotification> callback) {
+    this.register("v2.money_management.earned_credit.succeeded", callback);
     return self();
   }
 

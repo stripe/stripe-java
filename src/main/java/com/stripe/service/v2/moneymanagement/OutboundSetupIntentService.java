@@ -3,6 +3,7 @@ package com.stripe.service.v2.moneymanagement;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.BlockedByStripeException;
+import com.stripe.exception.CannotProceedException;
 import com.stripe.exception.ControlledByAlternateResourceException;
 import com.stripe.exception.InvalidPayoutMethodException;
 import com.stripe.exception.QuotaExceededException;
@@ -54,26 +55,30 @@ public final class OutboundSetupIntentService extends ApiService {
   }
   /** Create an OutboundSetupIntent object. */
   public OutboundSetupIntent create(OutboundSetupIntentCreateParams params)
-      throws StripeException, BlockedByStripeException, InvalidPayoutMethodException,
-          QuotaExceededException, ControlledByAlternateResourceException {
+      throws StripeException, BlockedByStripeException, CannotProceedException,
+          InvalidPayoutMethodException, QuotaExceededException,
+          ControlledByAlternateResourceException {
     return create(params, (RequestOptions) null);
   }
   /** Create an OutboundSetupIntent object. */
   public OutboundSetupIntent create(RequestOptions options)
-      throws StripeException, BlockedByStripeException, InvalidPayoutMethodException,
-          QuotaExceededException, ControlledByAlternateResourceException {
+      throws StripeException, BlockedByStripeException, CannotProceedException,
+          InvalidPayoutMethodException, QuotaExceededException,
+          ControlledByAlternateResourceException {
     return create((OutboundSetupIntentCreateParams) null, options);
   }
   /** Create an OutboundSetupIntent object. */
   public OutboundSetupIntent create()
-      throws StripeException, BlockedByStripeException, InvalidPayoutMethodException,
-          QuotaExceededException, ControlledByAlternateResourceException {
+      throws StripeException, BlockedByStripeException, CannotProceedException,
+          InvalidPayoutMethodException, QuotaExceededException,
+          ControlledByAlternateResourceException {
     return create((OutboundSetupIntentCreateParams) null, (RequestOptions) null);
   }
   /** Create an OutboundSetupIntent object. */
   public OutboundSetupIntent create(OutboundSetupIntentCreateParams params, RequestOptions options)
-      throws StripeException, BlockedByStripeException, InvalidPayoutMethodException,
-          QuotaExceededException, ControlledByAlternateResourceException {
+      throws StripeException, BlockedByStripeException, CannotProceedException,
+          InvalidPayoutMethodException, QuotaExceededException,
+          ControlledByAlternateResourceException {
     String path = "/v2/money_management/outbound_setup_intents";
     ApiRequest request =
         new ApiRequest(

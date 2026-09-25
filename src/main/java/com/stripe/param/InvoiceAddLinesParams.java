@@ -2275,6 +2275,9 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
           @SerializedName("communications_tax")
           COMMUNICATIONS_TAX("communications_tax"),
 
+          @SerializedName("digital_excise_tax")
+          DIGITAL_EXCISE_TAX("digital_excise_tax"),
+
           @SerializedName("gst")
           GST("gst"),
 
@@ -2313,6 +2316,9 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
 
           @SerializedName("service_tax")
           SERVICE_TAX("service_tax"),
+
+          @SerializedName("utility_users_tax")
+          UTILITY_USERS_TAX("utility_users_tax"),
 
           @SerializedName("vat")
           VAT("vat");

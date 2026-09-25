@@ -23,28 +23,28 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class EventDestination extends StripeObject implements HasId {
-  /** Amazon EventBridge configuration. */
+  /** Configuration for delivering events through an Amazon EventBridge partner event source. */
   @SerializedName("amazon_eventbridge")
   AmazonEventbridge amazonEventbridge;
 
-  /** Azure Event Grid configuration. */
+  /** Configuration for delivering events through an Azure Event Grid partner topic. */
   @SerializedName("azure_event_grid")
   AzureEventGrid azureEventGrid;
 
-  /** Time at which the object was created. */
+  /** The time when the destination was created. */
   @SerializedName("created")
   Instant created;
 
-  /** An optional description of what the event destination is used for. */
+  /** An optional user-defined description of the destination's purpose. */
   @SerializedName("description")
   String description;
 
-  /** The list of events to enable for this endpoint. */
+  /** The list of event types enabled for delivery to this destination. */
   @SerializedName("enabled_events")
   List<String> enabledEvents;
 
   /**
-   * Payload type of events being subscribed to.
+   * Whether to deliver as snapshot or thin events.
    *
    * <p>One of {@code snapshot}, or {@code thin}.
    */
@@ -74,11 +74,14 @@ public class EventDestination extends StripeObject implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** Metadata. */
+  /**
+   * User-defined key/value data for the destination; it has no effect on event matching or
+   * delivery.
+   */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** Event destination name. */
+  /** A user-defined label for identifying the destination in Stripe. */
   @SerializedName("name")
   String name;
 
@@ -91,53 +94,62 @@ public class EventDestination extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** If using the snapshot event payload, the API version events are rendered as. */
+  /**
+   * For snapshot events only, the Stripe API version used to render event objects. You can't change
+   * this value after you create the event destination. Thin events are not pinned to an API
+   * version.
+   */
   @SerializedName("snapshot_api_version")
   String snapshotApiVersion;
 
   /**
-   * Status. It can be set to either enabled or disabled.
+   * Whether Stripe currently attempts delivery. Stripe attempts delivery to enabled destinations
+   * when their provider configuration is active; disabled destinations do not receive delivery
+   * attempts.
    *
    * <p>One of {@code disabled}, or {@code enabled}.
    */
   @SerializedName("status")
   String status;
 
-  /** Additional information about event destination status. */
+  /** Additional lifecycle context for the destination status, when available. */
   @SerializedName("status_details")
   StatusDetails statusDetails;
 
   /**
-   * Event destination type.
+   * The delivery transport. Chosen when the destination is created and cannot be changed by update.
    *
    * <p>One of {@code amazon_eventbridge}, {@code azure_event_grid}, or {@code webhook_endpoint}.
    */
   @SerializedName("type")
   String type;
 
-  /** Time at which the object was last updated. */
+  /** The time when the destination object was last updated. */
   @SerializedName("updated")
   Instant updated;
 
-  /** Webhook endpoint configuration. */
+  /**
+   * Configuration for delivering events to a webhook endpoint. Live mode requires HTTPS; sandbox
+   * mode also supports HTTP.
+   */
   @SerializedName("webhook_endpoint")
   WebhookEndpoint webhookEndpoint;
 
-  /** Amazon EventBridge configuration. */
+  /** Configuration for delivering events through an Amazon EventBridge partner event source. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AmazonEventbridge extends StripeObject {
-    /** The AWS account ID. */
+    /** The AWS account ID that owns the event bus receiving events. */
     @SerializedName("aws_account_id")
     String awsAccountId;
 
-    /** The ARN of the AWS event source. */
+    /** The ARN of the Stripe-created partner event source in your AWS account. */
     @SerializedName("aws_event_source_arn")
     String awsEventSourceArn;
 
     /**
-     * The state of the AWS event source.
+     * The AWS-reported lifecycle state of the partner event source.
      *
      * <p>One of {@code active}, {@code deleted}, {@code pending}, or {@code unknown}.
      */
@@ -145,46 +157,52 @@ public class EventDestination extends StripeObject implements HasId {
     String awsEventSourceStatus;
   }
 
-  /** Azure Event Grid configuration. */
+  /** Configuration for delivering events through an Azure Event Grid partner topic. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AzureEventGrid extends StripeObject {
-    /** The name of the Azure partner topic. */
+    /** The name of the Stripe-created partner topic that receives events. */
     @SerializedName("azure_partner_topic_name")
     String azurePartnerTopicName;
 
     /**
-     * The status of the Azure partner topic.
+     * The Azure-reported lifecycle state of the partner topic.
      *
      * <p>One of {@code activated}, {@code deleted}, {@code never_activated}, or {@code unknown}.
      */
     @SerializedName("azure_partner_topic_status")
     String azurePartnerTopicStatus;
 
-    /** The Azure region. */
+    /** The Azure region where the partner topic is located. */
     @SerializedName("azure_region")
     String azureRegion;
 
-    /** The name of the Azure resource group. */
+    /** The Azure resource group containing the partner topic. */
     @SerializedName("azure_resource_group_name")
     String azureResourceGroupName;
 
-    /** The Azure subscription ID. */
+    /** The Azure subscription containing the resource group and partner topic. */
     @SerializedName("azure_subscription_id")
     String azureSubscriptionId;
   }
 
-  /** Additional information about event destination status. */
+  /** Additional lifecycle context for the destination status, when available. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusDetails extends StripeObject {
-    /** Details about why the event destination has been disabled. */
+    /**
+     * Present when the destination was disabled; identifies the cause, time, and provider-side
+     * object involved when available.
+     */
     @SerializedName("disabled")
     Disabled disabled;
 
-    /** Details about why the event destination has been disabled. */
+    /**
+     * Present when the destination was disabled; identifies the cause, time, and provider-side
+     * object involved when available.
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -200,16 +218,25 @@ public class EventDestination extends StripeObject implements HasId {
     }
   }
 
-  /** Webhook endpoint configuration. */
+  /**
+   * Configuration for delivering events to a webhook endpoint. Live mode requires HTTPS; sandbox
+   * mode also supports HTTP.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class WebhookEndpoint extends StripeObject {
-    /** The signing secret of the webhook endpoint, only includable on creation. */
+    /**
+     * The secret used to verify Stripe signatures on delivered events. Returned only in the create
+     * response when explicitly included; public API clients cannot retrieve it later.
+     */
     @SerializedName("signing_secret")
     String signingSecret;
 
-    /** The URL of the webhook endpoint, includable. */
+    /**
+     * The URL where Stripe sends matching events. Live mode requires HTTPS; sandbox mode also
+     * supports HTTP. Returned only when explicitly included.
+     */
     @SerializedName("url")
     String url;
   }

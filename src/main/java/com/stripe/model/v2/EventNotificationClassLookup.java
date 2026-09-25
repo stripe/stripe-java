@@ -1052,6 +1052,9 @@ public final class EventNotificationClassLookup {
         "v2.money_management.debit_dispute.succeeded",
         com.stripe.events.V2MoneyManagementDebitDisputeSucceededEventNotification.class);
     eventClassLookup.put(
+        "v2.money_management.earned_credit.succeeded",
+        com.stripe.events.V2MoneyManagementEarnedCreditSucceededEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.financial_account.created",
         com.stripe.events.V2MoneyManagementFinancialAccountCreatedEventNotification.class);
     eventClassLookup.put(

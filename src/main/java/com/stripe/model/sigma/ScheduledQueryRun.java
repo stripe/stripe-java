@@ -119,18 +119,18 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, ScheduledQueryRunCollection.class);
   }
 
-  /** Retrieves the details of an scheduled query run. */
+  /** Retrieves the details of a scheduled query run. */
   public static ScheduledQueryRun retrieve(String scheduledQueryRun) throws StripeException {
     return retrieve(scheduledQueryRun, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the details of an scheduled query run. */
+  /** Retrieves the details of a scheduled query run. */
   public static ScheduledQueryRun retrieve(String scheduledQueryRun, RequestOptions options)
       throws StripeException {
     return retrieve(scheduledQueryRun, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the details of an scheduled query run. */
+  /** Retrieves the details of a scheduled query run. */
   public static ScheduledQueryRun retrieve(
       String scheduledQueryRun, Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -142,7 +142,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, ScheduledQueryRun.class);
   }
 
-  /** Retrieves the details of an scheduled query run. */
+  /** Retrieves the details of a scheduled query run. */
   public static ScheduledQueryRun retrieve(
       String scheduledQueryRun, ScheduledQueryRunRetrieveParams params, RequestOptions options)
       throws StripeException {

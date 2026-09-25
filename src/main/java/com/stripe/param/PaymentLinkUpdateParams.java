@@ -6781,6 +6781,13 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class EndBehavior {
         /**
+         * Indicates how the subscription's billing cycle anchor is reset when a trial ends.
+         * Defaults to {@code now}.
+         */
+        @SerializedName("billing_cycle_anchor")
+        BillingCycleAnchor billingCycleAnchor;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -6798,7 +6805,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         MissingPaymentMethod missingPaymentMethod;
 
         private EndBehavior(
-            Map<String, Object> extraParams, MissingPaymentMethod missingPaymentMethod) {
+            BillingCycleAnchor billingCycleAnchor,
+            Map<String, Object> extraParams,
+            MissingPaymentMethod missingPaymentMethod) {
+          this.billingCycleAnchor = billingCycleAnchor;
           this.extraParams = extraParams;
           this.missingPaymentMethod = missingPaymentMethod;
         }
@@ -6808,6 +6818,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private BillingCycleAnchor billingCycleAnchor;
+
           private Map<String, Object> extraParams;
 
           private MissingPaymentMethod missingPaymentMethod;
@@ -6815,7 +6827,18 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentLinkUpdateParams.SubscriptionData.TrialSettings.EndBehavior build() {
             return new PaymentLinkUpdateParams.SubscriptionData.TrialSettings.EndBehavior(
-                this.extraParams, this.missingPaymentMethod);
+                this.billingCycleAnchor, this.extraParams, this.missingPaymentMethod);
+          }
+
+          /**
+           * Indicates how the subscription's billing cycle anchor is reset when a trial ends.
+           * Defaults to {@code now}.
+           */
+          public Builder setBillingCycleAnchor(
+              PaymentLinkUpdateParams.SubscriptionData.TrialSettings.EndBehavior.BillingCycleAnchor
+                  billingCycleAnchor) {
+            this.billingCycleAnchor = billingCycleAnchor;
+            return this;
           }
 
           /**
@@ -6858,6 +6881,21 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
                   missingPaymentMethod) {
             this.missingPaymentMethod = missingPaymentMethod;
             return this;
+          }
+        }
+
+        public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
+          @SerializedName("now")
+          NOW("now"),
+
+          @SerializedName("unchanged")
+          UNCHANGED("unchanged");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          BillingCycleAnchor(String value) {
+            this.value = value;
           }
         }
 
@@ -7262,6 +7300,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),

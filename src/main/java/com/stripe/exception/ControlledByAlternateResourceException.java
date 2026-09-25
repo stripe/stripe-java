@@ -7,8 +7,7 @@ import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
 /**
- * Returned when the PayoutMethod object is controlled by an alternate resource so cannot be
- * archived.
+ * Returned when the GB Bank Account is controlled by an alternate resource and cannot be archived.
  */
 public final class ControlledByAlternateResourceException extends ApiException {
   private static final long serialVersionUID = 2L;

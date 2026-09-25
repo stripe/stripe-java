@@ -76,6 +76,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("allow_promotion_codes")
   Boolean allowPromotionCodes;
 
+  /**
+   * A list of the types of payment methods (e.g., {@code card}) this Checkout Session can accept.
+   */
+  @SerializedName("allowed_payment_method_types")
+  List<String> allowedPaymentMethodTypes;
+
   /** Total of all items before discounts or taxes are applied. */
   @SerializedName("amount_subtotal")
   Long amountSubtotal;
@@ -2760,6 +2766,15 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class EndBehavior extends StripeObject {
+          /**
+           * Indicates how the subscription's billing cycle anchor is reset when a trial ends. If
+           * not set, the default is {@code now}.
+           *
+           * <p>One of {@code now}, or {@code unchanged}.
+           */
+          @SerializedName("billing_cycle_anchor")
+          String billingCycleAnchor;
+
           /**
            * Indicates how the subscription should change when the trial ends if the user did not
            * provide a payment method.
@@ -5462,6 +5477,19 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
      */
     @SerializedName("allow_redisplay_filters")
     List<String> allowRedisplayFilters;
+
+    /**
+     * The ID of a saved payment method to select when the Payment Element renders, for example
+     * {@code pm_1MqLiJLkdIwHu7ixUEgbFdYF}. Takes precedence over the customer's default payment
+     * method. If the ID doesn't match one of the payment methods the Element is displaying, the
+     * Element selects a payment method as it normally would and no error is returned. Preselecting
+     * a payment method never changes which payment methods the Element displays, and never modifies
+     * the payment method, the customer, or this session. The preselection is fixed once set. To
+     * preselect a different payment method, create a new session. An Element that's already on the
+     * page keeps its current selection.
+     */
+    @SerializedName("payment_method_preselect")
+    String paymentMethodPreselect;
 
     /**
      * Enable customers to choose if they wish to remove their saved payment methods. Disabled by

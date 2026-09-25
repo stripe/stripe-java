@@ -22,9 +22,7 @@ public class EventDestinationListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * Additional fields to include in the response. Currently supports {@code webhook_endpoint.url}.
-   */
+  /** Include the normally redacted {@code webhook_endpoint.url} in each returned destination. */
   @SerializedName("include")
   List<EventDestinationListParams.Include> include;
 
