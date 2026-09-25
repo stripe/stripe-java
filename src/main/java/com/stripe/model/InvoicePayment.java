@@ -19,7 +19,7 @@ import lombok.Setter;
 /**
  * Invoice Payments represent payments made against invoices. Invoice Payments can be accessed in
  * two ways: 1. By expanding the {@code payments} field on the <a
- * href="https://api.stripe.com#invoice">Invoice</a> resource. 2. By using the Invoice Payment
+ * href="https://docs.stripe.com/api#invoice">Invoice</a> resource. 2. By using the Invoice Payment
  * retrieve and list endpoints.
  *
  * <p>Invoice Payments include the mapping between payment objects, such as Payment Intent, and
@@ -213,9 +213,10 @@ public class InvoicePayment extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Payment extends StripeObject {
     /**
-     * ID of the successful charge for this payment when {@code type} is {@code charge}.Note: charge
-     * is only surfaced if the charge object is not associated with a payment intent. If the charge
-     * object does have a payment intent, the Invoice Payment surfaces the payment intent instead.
+     * ID of the successful charge for this payment when {@code type} is {@code charge}. Note:
+     * charge is only surfaced if the charge object is not associated with a payment intent. If the
+     * charge object does have a payment intent, the Invoice Payment surfaces the payment intent
+     * instead.
      */
     @SerializedName("charge")
     @Getter(lombok.AccessLevel.NONE)

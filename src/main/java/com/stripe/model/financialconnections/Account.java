@@ -393,19 +393,19 @@ public class Account extends ApiResource implements HasId {
         .request(request, com.stripe.model.financialconnections.Account.class);
   }
 
-  /** Retrieves the details of an Financial Connections {@code Account}. */
+  /** Retrieves the details of a Financial Connections {@code Account}. */
   public static com.stripe.model.financialconnections.Account retrieve(String account)
       throws StripeException {
     return retrieve(account, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the details of an Financial Connections {@code Account}. */
+  /** Retrieves the details of a Financial Connections {@code Account}. */
   public static com.stripe.model.financialconnections.Account retrieve(
       String account, RequestOptions options) throws StripeException {
     return retrieve(account, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the details of an Financial Connections {@code Account}. */
+  /** Retrieves the details of a Financial Connections {@code Account}. */
   public static com.stripe.model.financialconnections.Account retrieve(
       String account, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
@@ -416,7 +416,7 @@ public class Account extends ApiResource implements HasId {
         .request(request, com.stripe.model.financialconnections.Account.class);
   }
 
-  /** Retrieves the details of an Financial Connections {@code Account}. */
+  /** Retrieves the details of a Financial Connections {@code Account}. */
   public static com.stripe.model.financialconnections.Account retrieve(
       String account, AccountRetrieveParams params, RequestOptions options) throws StripeException {
     String path =
@@ -643,7 +643,7 @@ public class Account extends ApiResource implements HasId {
     /**
      * Whether the account number is currently active and usable for transactions.
      *
-     * <p>One of {@code deactivated}, or {@code transactable}.
+     * <p>One of {@code deactivated}, {@code expired}, {@code pending}, or {@code transactable}.
      */
     @SerializedName("status")
     String status;

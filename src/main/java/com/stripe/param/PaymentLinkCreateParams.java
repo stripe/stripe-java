@@ -1977,7 +1977,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Label {
       /**
-       * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
+       * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 100
        * characters.
        */
       @SerializedName("custom")
@@ -2020,8 +2020,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
-         * characters.
+         * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to
+         * 100 characters.
          */
         public Builder setCustom(String custom) {
           this.custom = custom;
@@ -7629,6 +7629,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),

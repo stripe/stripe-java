@@ -29,8 +29,9 @@ import lombok.Setter;
 /**
  * Use <a
  * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">InboundTransfers</a>
- * to add funds to your <a href="https://api.stripe.com#financial_accounts">FinancialAccount</a> via
- * a PaymentMethod that is owned by you. The funds will be transferred via an ACH debit.
+ * to add funds to your <a
+ * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a> via a PaymentMethod
+ * that is owned by you. The funds will be transferred via an ACH debit.
  *
  * <p>Related guide: <a
  * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">Moving
@@ -63,7 +64,10 @@ public class InboundTransfer extends ApiResource implements HasId {
   @SerializedName("description")
   String description;
 
-  /** Details about this InboundTransfer's failure. Only set when status is {@code failed}. */
+  /**
+   * Details about this InboundTransfer's failure. Will be set when {@code status=failed} or {@code
+   * returned=true}.
+   */
   @SerializedName("failure_details")
   FailureDetails failureDetails;
 

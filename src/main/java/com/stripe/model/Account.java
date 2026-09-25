@@ -1096,6 +1096,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String blikPayments;
 
     /**
+     * The status of the BLIK recurring payments capability of the account, or whether the account
+     * can accept recurring and subscription BLIK payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("blik_recurring_payments")
+    String blikRecurringPayments;
+
+    /**
      * The status of the boleto payments capability of the account, or whether the account can
      * directly process boleto charges.
      *
@@ -1524,6 +1533,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("sepa_debit_payments")
     String sepaDebitPayments;
+
+    /**
+     * The status of the SeQura capability of the account, or whether the account can directly
+     * process SeQura payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("sequra_payments")
+    String sequraPayments;
 
     /**
      * The status of the ShopeePay capability of the account, or whether the account can directly
@@ -2037,10 +2055,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @EqualsAndHashCode(callSuper = false)
       public static class Document extends StripeObject {
         /**
-         * The back of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code additional_verification}. Note that
-         * {@code additional_verification} files are <a
-         * href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
+         * The back of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}. Note that {@code additional_verification} files
+         * are <a href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
          */
         @SerializedName("back")
         @Getter(lombok.AccessLevel.NONE)
@@ -2064,10 +2082,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         String detailsCode;
 
         /**
-         * The front of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code additional_verification}. Note that
-         * {@code additional_verification} files are <a
-         * href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
+         * The front of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}. Note that {@code additional_verification} files
+         * are <a href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
          */
         @SerializedName("front")
         @Getter(lombok.AccessLevel.NONE)
@@ -2376,8 +2394,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * The code for the type of error.
        *
        * <p>One of {@code external_request}, {@code information_missing}, {@code
-       * invalid_address_city_state_postal_code}, {@code invalid_address_highway_contract_box},
-       * {@code invalid_address_private_mailbox}, {@code invalid_business_profile_name}, {@code
+       * invalid_address_city_state_postal_code}, {@code invalid_address_cmra_address}, {@code
+       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+       * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
        * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted}, {@code
        * invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
        * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
@@ -2582,8 +2601,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * The code for the type of error.
        *
        * <p>One of {@code external_request}, {@code information_missing}, {@code
-       * invalid_address_city_state_postal_code}, {@code invalid_address_highway_contract_box},
-       * {@code invalid_address_private_mailbox}, {@code invalid_business_profile_name}, {@code
+       * invalid_address_city_state_postal_code}, {@code invalid_address_cmra_address}, {@code
+       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+       * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
        * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted}, {@code
        * invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
        * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code

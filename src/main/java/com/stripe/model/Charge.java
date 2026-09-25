@@ -25,7 +25,9 @@ import lombok.Setter;
  * The {@code Charge} object represents a single attempt to move money into your Stripe account.
  * PaymentIntent confirmation is the most common way to create Charges, but <a
  * href="https://docs.stripe.com/connect/account-debits">Account Debits</a> may also create Charges.
- * Some legacy payment flows create Charges directly, which is not recommended for new integrations.
+ * The create and capture methods are deprecated and will be deleted soon. If your integration uses
+ * either of them, you need to update it to use a different payment flow, such as <a
+ * href="https://docs.stripe.com/payments/payment-intents">the Payment Intents API</a>.
  */
 @Getter
 @Setter
@@ -545,60 +547,36 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
-   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
-   * option set to false.
-   *
-   * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
-   * marked as refunded and capture attempts will fail.
-   *
-   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
-   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge capture() throws StripeException {
     return capture((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
-   * option set to false.
-   *
-   * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
-   * marked as refunded and capture attempts will fail.
-   *
-   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
-   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge capture(RequestOptions options) throws StripeException {
     return capture((Map<String, Object>) null, options);
   }
 
   /**
-   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
-   * option set to false.
-   *
-   * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
-   * marked as refunded and capture attempts will fail.
-   *
-   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
-   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge capture(Map<String, Object> params) throws StripeException {
     return capture(params, (RequestOptions) null);
   }
 
   /**
-   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
-   * option set to false.
-   *
-   * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
-   * marked as refunded and capture attempts will fail.
-   *
-   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
-   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge capture(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(this.getId()));
@@ -608,30 +586,18 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
-   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
-   * option set to false.
-   *
-   * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
-   * marked as refunded and capture attempts will fail.
-   *
-   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
-   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge capture(ChargeCaptureParams params) throws StripeException {
     return capture(params, (RequestOptions) null);
   }
 
   /**
-   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
-   * option set to false.
-   *
-   * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
-   * marked as refunded and capture attempts will fail.
-   *
-   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
-   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge capture(ChargeCaptureParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(this.getId()));
@@ -647,20 +613,18 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
-   * This method is no longer recommended—use the <a
-   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
-   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
-   * request payment.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public static Charge create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * This method is no longer recommended—use the <a
-   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
-   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
-   * request payment.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public static Charge create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -671,20 +635,18 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
-   * This method is no longer recommended—use the <a
-   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
-   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
-   * request payment.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public static Charge create(ChargeCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * This method is no longer recommended—use the <a
-   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
-   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
-   * request payment.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public static Charge create(ChargeCreateParams params, RequestOptions options)
       throws StripeException {
@@ -1322,6 +1284,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    @SerializedName("sequra")
+    Sequra sequra;
+
     @SerializedName("shopeepay")
     Shopeepay shopeepay;
 
@@ -1934,6 +1899,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("description")
       String description;
 
+      /**
+       * The Electronic Commerce Indicator (ECI) returned by the card network in the authorization
+       * response. Indicates the level of authentication used. Only populated for Visa and
+       * Mastercard transactions. This is the network's final ECI and can differ from the request
+       * value. An authenticated ECI alone doesn't determine liability shift.
+       */
+      @SerializedName("electronic_commerce_indicator")
+      String electronicCommerceIndicator;
+
       /** Two-digit number representing the card's expiration month. */
       @SerializedName("exp_month")
       Long expMonth;
@@ -1996,7 +1970,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
       /** ID of the mandate used to make this payment or created by it. */
       @SerializedName("mandate")
-      String mandate;
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Mandate> mandate;
 
       /** True if this payment was marked as MOTO and out of scope for SCA. */
       @SerializedName("moto")
@@ -2044,6 +2020,22 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("regulated_status")
       String regulatedStatus;
 
+      /**
+       * The payment_method_options.card.setup_credential_usage value that was passed when
+       * setup_future_usage was present at confirmation, one of {@code recurring}, {@code
+       * unscheduled}, or {@code installment}.
+       */
+      @SerializedName("setup_credential_usage")
+      String setupCredentialUsage;
+
+      /**
+       * The payment_method_options.card.stored_credential_usage value that was passed for an off
+       * session, merchant-initiated transaction, one of {@code recurring}, {@code unscheduled},
+       * {@code on_session}, or {@code installment}.
+       */
+      @SerializedName("stored_credential_usage")
+      String storedCredentialUsage;
+
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;
@@ -2060,6 +2052,24 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** If this Card is part of a card wallet, this contains the details of the card wallet. */
       @SerializedName("wallet")
       Wallet wallet;
+
+      /** Get ID of expandable {@code mandate} object. */
+      public String getMandate() {
+        return (this.mandate != null) ? this.mandate.getId() : null;
+      }
+
+      public void setMandate(String id) {
+        this.mandate = ApiResource.setExpandableFieldId(id, this.mandate);
+      }
+
+      /** Get expanded {@code mandate}. */
+      public Mandate getMandateObject() {
+        return (this.mandate != null) ? this.mandate.getExpanded() : null;
+      }
+
+      public void setMandateObject(Mandate expandableObject) {
+        this.mandate = new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
+      }
 
       /**
        * For more details about Checks, please refer to the <a
@@ -4135,6 +4145,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("mandate")
       String mandate;
+    }
+
+    /**
+     * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sequra extends StripeObject {
+      /** The SeQura transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**

@@ -1187,7 +1187,7 @@ public class CardholderCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Document {
         /**
-         * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}.
          */
         @SerializedName("back")
@@ -1204,7 +1204,7 @@ public class CardholderCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}.
          */
         @SerializedName("front")
@@ -1234,7 +1234,7 @@ public class CardholderCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}.
            */
           public Builder setBack(String back) {
@@ -1271,7 +1271,7 @@ public class CardholderCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}.
            */
           public Builder setFront(String front) {

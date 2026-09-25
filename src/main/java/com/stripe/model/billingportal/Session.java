@@ -37,6 +37,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Session extends ApiResource implements HasId {
+  /** Behavior after the portal session expires. */
+  @SerializedName("after_expiration")
+  AfterExpiration afterExpiration;
+
   /** The configuration used by this session, describing the features available. */
   @SerializedName("configuration")
   @Getter(lombok.AccessLevel.NONE)
@@ -173,6 +177,40 @@ public class Session extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, Session.class);
+  }
+
+  /**
+   * For more details about AfterExpiration, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AfterExpiration extends StripeObject {
+    /** Configuration for authenticating the customer after the session expires. */
+    @SerializedName("customer_login")
+    CustomerLogin customerLogin;
+
+    /**
+     * The behavior to apply when the session expires.
+     *
+     * <p>Equal to {@code customer_login}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about CustomerLogin, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomerLogin extends StripeObject {
+      /** The time after which the customer can no longer recover this session. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+    }
   }
 
   /**
@@ -415,6 +453,7 @@ public class Session extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(afterExpiration, responseGetter);
     trySetResponseGetter(configuration, responseGetter);
     trySetResponseGetter(flow, responseGetter);
   }

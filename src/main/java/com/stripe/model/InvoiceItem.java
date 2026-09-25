@@ -111,6 +111,13 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   ExpandableField<Invoice> invoice;
 
   /**
+   * The rules that control when this invoice item is eligible for invoicing. All rules must be
+   * satisfied for the item to be invoiced.
+   */
+  @SerializedName("invoicing_rules")
+  List<InvoiceItem.InvoicingRule> invoicingRules;
+
+  /**
    * If the object exists in live mode, the value is {@code true}. If the object exists in test
    * mode, the value is {@code false}.
    */
@@ -548,6 +555,23 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   }
 
   /**
+   * For more details about InvoicingRule, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class InvoicingRule extends StripeObject {
+    /**
+     * The type of invoicing rule.
+     *
+     * <p>Equal to {@code defer_until_credited_items_resolved}.
+     */
+    @SerializedName("type")
+    String type;
+  }
+
+  /**
    * For more details about Parent, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -684,7 +708,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     @SerializedName("credited_items")
     CreditedItems creditedItems;
 
-    /** Discount amounts applied when the proration was created. */
+    /**
+     * Discount amounts applied when the proration was created. This field is only populated for
+     * prorations created from subscriptions with {@code billing_mode=flexible}.
+     */
     @SerializedName("discount_amounts")
     List<InvoiceItem.ProrationDetails.DiscountAmount> discountAmounts;
 

@@ -52,6 +52,14 @@ public class Release extends ApiResource implements HasId {
   @SerializedName("currency")
   String currency;
 
+  /**
+   * The balance destination to which the released funds are sent.
+   *
+   * <p>One of {@code other}, or {@code payments}.
+   */
+  @SerializedName("destination")
+  String destination;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -83,8 +91,8 @@ public class Release extends ApiResource implements HasId {
   /**
    * The reason for the ReserveRelease, indicating why the funds were released.
    *
-   * <p>One of {@code bulk_hold_expiry}, {@code hold_released_early}, {@code hold_reversed}, or
-   * {@code plan_disabled}.
+   * <p>One of {@code hold_expired}, {@code hold_released_early}, {@code hold_reversed}, or {@code
+   * plan_disabled}.
    */
   @SerializedName("reason")
   String reason;

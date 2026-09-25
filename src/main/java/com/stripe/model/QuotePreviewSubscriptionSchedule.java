@@ -128,6 +128,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
   @SerializedName("object")
   String object;
 
+  /** The pause schedules for this subscription schedule. */
+  @SerializedName("pause_schedules")
+  List<QuotePreviewSubscriptionSchedule.PauseSchedule> pauseSchedules;
+
   /** Configuration for the subscription schedule's phases. */
   @SerializedName("phases")
   List<QuotePreviewSubscriptionSchedule.Phase> phases;
@@ -811,6 +815,252 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       /** The intended resulting price of the migration. */
       @SerializedName("target_price")
       String targetPrice;
+    }
+  }
+
+  /**
+   * For more details about PauseSchedule, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PauseSchedule extends StripeObject {
+    /** A unique identifier for this pause schedule. */
+    @SerializedName("key")
+    String key;
+
+    @SerializedName("pause")
+    Pause pause;
+
+    /** Details about when and how the subscription resumes. */
+    @SerializedName("resume")
+    Resume resume;
+
+    /**
+     * For more details about Pause, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pause extends StripeObject {
+      /** Time at which the subscription pauses. */
+      @SerializedName("pause_at")
+      Long pauseAt;
+
+      /** Settings controlling billing behavior during the pause. */
+      @SerializedName("settings")
+      Settings settings;
+
+      @SerializedName("status")
+      Status status;
+
+      /**
+       * For more details about Settings, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Settings extends StripeObject {
+        @SerializedName("bill_for")
+        BillFor billFor;
+
+        /**
+         * Determines how to handle debits and credits when pausing.
+         *
+         * <p>One of {@code invoice}, or {@code pending_invoice_item}.
+         */
+        @SerializedName("invoicing_behavior")
+        String invoicingBehavior;
+
+        /**
+         * The type of pause settings.
+         *
+         * <p>Equal to {@code subscription}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about BillFor, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BillFor extends StripeObject {
+          @SerializedName("outstanding_usage_through")
+          OutstandingUsageThrough outstandingUsageThrough;
+
+          @SerializedName("unused_time_from")
+          UnusedTimeFrom unusedTimeFrom;
+
+          /**
+           * For more details about OutstandingUsageThrough, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class OutstandingUsageThrough extends StripeObject {
+            /**
+             * The type of outstanding usage billing behavior.
+             *
+             * <p>One of {@code none}, or {@code pause_at}.
+             */
+            @SerializedName("type")
+            String type;
+          }
+
+          /**
+           * For more details about UnusedTimeFrom, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class UnusedTimeFrom extends StripeObject {
+            /**
+             * The type of unused time credit behavior.
+             *
+             * <p>One of {@code item_current_period_start}, {@code none}, or {@code pause_at}.
+             */
+            @SerializedName("type")
+            String type;
+          }
+        }
+      }
+
+      /**
+       * For more details about Status, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Status extends StripeObject {
+        @SerializedName("error")
+        Errors error;
+
+        /**
+         * The lifecycle state of the pause operation.
+         *
+         * <p>One of {@code error}, {@code scheduled}, or {@code succeeded}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about Errors, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Errors extends StripeObject {
+          /** A machine-readable error code. */
+          @SerializedName("code")
+          String code;
+
+          /** A description of the error. */
+          @SerializedName("message")
+          String message;
+        }
+      }
+    }
+
+    /**
+     * For more details about Resume, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Resume extends StripeObject {
+      /** Time at which the subscription resumes. */
+      @SerializedName("resume_at")
+      Long resumeAt;
+
+      @SerializedName("settings")
+      Settings settings;
+
+      @SerializedName("status")
+      Status status;
+
+      /**
+       * For more details about Settings, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Settings extends StripeObject {
+        /**
+         * The billing cycle anchor that applies when the subscription is resumed.
+         *
+         * <p>One of {@code resume_at}, or {@code unchanged}.
+         */
+        @SerializedName("billing_cycle_anchor")
+        String billingCycleAnchor;
+
+        /**
+         * Controls whether Stripe attempts payment on the resumption invoice and how that affects
+         * the subscription's status.
+         *
+         * <p>One of {@code resume_on_payment_attempt}, or {@code resume_on_payment_success}.
+         */
+        @SerializedName("payment_behavior")
+        String paymentBehavior;
+
+        /**
+         * Determines how to handle prorations resulting from the billing_cycle_anchor change on
+         * resume.
+         *
+         * <p>One of {@code always_invoice}, {@code create_prorations}, or {@code none}.
+         */
+        @SerializedName("proration_behavior")
+        String prorationBehavior;
+      }
+
+      /**
+       * For more details about Status, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Status extends StripeObject {
+        @SerializedName("error")
+        Errors error;
+
+        /**
+         * The lifecycle state of the resume operation.
+         *
+         * <p>One of {@code error}, {@code pending}, {@code requires_action}, {@code scheduled}, or
+         * {@code succeeded}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about Errors, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Errors extends StripeObject {
+          /** A machine-readable error code. */
+          @SerializedName("code")
+          String code;
+
+          /** A description of the error. */
+          @SerializedName("message")
+          String message;
+        }
+      }
     }
   }
 

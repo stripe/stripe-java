@@ -92,7 +92,11 @@ public class StripeClient {
               ClientStripeResponseGetterOptions existingOptions =
                   (ClientStripeResponseGetterOptions) options;
 
-              return existingOptions.toBuilder().stripeContext(contextString).build();
+              return existingOptions
+                  .toBuilder()
+                  .stripeAccount(null)
+                  .stripeContext(contextString)
+                  .build();
             });
 
     // Create and return a new StripeClient with the new response getter
@@ -1107,6 +1111,18 @@ public class StripeClient {
   @Deprecated
   public com.stripe.service.TestHelpersService testHelpers() {
     return new com.stripe.service.TestHelpersService(this.getResponseGetter());
+  }
+
+  /**
+   * @deprecated StripeClient.threeDSecure() is deprecated, use StripeClient.v1().threeDSecure()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().threeDSecure(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.ThreeDSecureService threeDSecure() {
+    return new com.stripe.service.ThreeDSecureService(this.getResponseGetter());
   }
 
   /**

@@ -596,7 +596,7 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class MoneyMovementDetails {
-      /** Describes card money movement details for the payment evaluation. */
+      /** Describes card money movement details. */
       @SerializedName("card")
       Card card;
 
@@ -609,10 +609,7 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * <strong>Required.</strong> Describes the type of money movement. Currently only {@code
-       * card} is supported.
-       */
+      /** <strong>Required.</strong> Describes the type of money movement. */
       @SerializedName("money_movement_type")
       MoneyMovementType moneyMovementType;
 
@@ -640,7 +637,7 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
               this.card, this.extraParams, this.moneyMovementType);
         }
 
-        /** Describes card money movement details for the payment evaluation. */
+        /** Describes card money movement details. */
         public Builder setCard(
             PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.Card card) {
           this.card = card;
@@ -677,10 +674,7 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * <strong>Required.</strong> Describes the type of money movement. Currently only {@code
-         * card} is supported.
-         */
+        /** <strong>Required.</strong> Describes the type of money movement. */
         public Builder setMoneyMovementType(
             PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.MoneyMovementType
                 moneyMovementType) {

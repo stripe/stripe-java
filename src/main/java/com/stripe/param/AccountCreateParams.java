@@ -16,8 +16,8 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class AccountCreateParams extends ApiRequestParams {
   /**
-   * An <a href="https://api.stripe.com#create_account_token">account token</a>, used to securely
-   * provide details to the account.
+   * An <a href="https://docs.stripe.com/api#create_account_token">account token</a>, used to
+   * securely provide details to the account.
    */
   @SerializedName("account_token")
   String accountToken;
@@ -306,8 +306,8 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * An <a href="https://api.stripe.com#create_account_token">account token</a>, used to securely
-     * provide details to the account.
+     * An <a href="https://docs.stripe.com/api#create_account_token">account token</a>, used to
+     * securely provide details to the account.
      */
     public Builder setAccountToken(String accountToken) {
       this.accountToken = accountToken;
@@ -1395,6 +1395,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("blik_payments")
     BlikPayments blikPayments;
 
+    /** The blik_recurring_payments capability. */
+    @SerializedName("blik_recurring_payments")
+    BlikRecurringPayments blikRecurringPayments;
+
     /** The boleto_payments capability. */
     @SerializedName("boleto_payments")
     BoletoPayments boletoPayments;
@@ -1596,6 +1600,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("sepa_debit_payments")
     SepaDebitPayments sepaDebitPayments;
 
+    /** The sequra_payments capability. */
+    @SerializedName("sequra_payments")
+    SequraPayments sequraPayments;
+
     /** The shopeepay_payments capability. */
     @SerializedName("shopeepay_payments")
     ShopeepayPayments shopeepayPayments;
@@ -1679,6 +1687,7 @@ public class AccountCreateParams extends ApiRequestParams {
         BilliePayments billiePayments,
         BizumPayments bizumPayments,
         BlikPayments blikPayments,
+        BlikRecurringPayments blikRecurringPayments,
         BoletoPayments boletoPayments,
         CardIssuing cardIssuing,
         CardPayments cardPayments,
@@ -1728,6 +1737,7 @@ public class AccountCreateParams extends ApiRequestParams {
         ScalapayPayments scalapayPayments,
         SepaBankTransferPayments sepaBankTransferPayments,
         SepaDebitPayments sepaDebitPayments,
+        SequraPayments sequraPayments,
         ShopeepayPayments shopeepayPayments,
         SofortPayments sofortPayments,
         StripeBalancePayments stripeBalancePayments,
@@ -1759,6 +1769,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.billiePayments = billiePayments;
       this.bizumPayments = bizumPayments;
       this.blikPayments = blikPayments;
+      this.blikRecurringPayments = blikRecurringPayments;
       this.boletoPayments = boletoPayments;
       this.cardIssuing = cardIssuing;
       this.cardPayments = cardPayments;
@@ -1808,6 +1819,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.scalapayPayments = scalapayPayments;
       this.sepaBankTransferPayments = sepaBankTransferPayments;
       this.sepaDebitPayments = sepaDebitPayments;
+      this.sequraPayments = sequraPayments;
       this.shopeepayPayments = shopeepayPayments;
       this.sofortPayments = sofortPayments;
       this.stripeBalancePayments = stripeBalancePayments;
@@ -1859,6 +1871,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private BizumPayments bizumPayments;
 
       private BlikPayments blikPayments;
+
+      private BlikRecurringPayments blikRecurringPayments;
 
       private BoletoPayments boletoPayments;
 
@@ -1958,6 +1972,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private SepaDebitPayments sepaDebitPayments;
 
+      private SequraPayments sequraPayments;
+
       private ShopeepayPayments shopeepayPayments;
 
       private SofortPayments sofortPayments;
@@ -2009,6 +2025,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.billiePayments,
             this.bizumPayments,
             this.blikPayments,
+            this.blikRecurringPayments,
             this.boletoPayments,
             this.cardIssuing,
             this.cardPayments,
@@ -2058,6 +2075,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.scalapayPayments,
             this.sepaBankTransferPayments,
             this.sepaDebitPayments,
+            this.sequraPayments,
             this.shopeepayPayments,
             this.sofortPayments,
             this.stripeBalancePayments,
@@ -2170,6 +2188,13 @@ public class AccountCreateParams extends ApiRequestParams {
       /** The blik_payments capability. */
       public Builder setBlikPayments(AccountCreateParams.Capabilities.BlikPayments blikPayments) {
         this.blikPayments = blikPayments;
+        return this;
+      }
+
+      /** The blik_recurring_payments capability. */
+      public Builder setBlikRecurringPayments(
+          AccountCreateParams.Capabilities.BlikRecurringPayments blikRecurringPayments) {
+        this.blikRecurringPayments = blikRecurringPayments;
         return this;
       }
 
@@ -2523,6 +2548,13 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setSepaDebitPayments(
           AccountCreateParams.Capabilities.SepaDebitPayments sepaDebitPayments) {
         this.sepaDebitPayments = sepaDebitPayments;
+        return this;
+      }
+
+      /** The sequra_payments capability. */
+      public Builder setSequraPayments(
+          AccountCreateParams.Capabilities.SequraPayments sequraPayments) {
+        this.sequraPayments = sequraPayments;
         return this;
       }
 
@@ -3741,6 +3773,86 @@ public class AccountCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.BlikPayments#extraParams} for the field
          * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BlikRecurringPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private BlikRecurringPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.BlikRecurringPayments build() {
+          return new AccountCreateParams.Capabilities.BlikRecurringPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.BlikRecurringPayments#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.BlikRecurringPayments#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -7600,6 +7712,86 @@ public class AccountCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class SequraPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private SequraPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.SequraPayments build() {
+          return new AccountCreateParams.Capabilities.SequraPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.SequraPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.SequraPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ShopeepayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10835,10 +11027,11 @@ public class AccountCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Document {
         /**
-         * The back of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code additional_verification}. The uploaded
-         * file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
-         * format, and less than 10 MB in size.
+         * The back of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}. The uploaded file needs to be a color image
+         * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+         * size.
          */
         @SerializedName("back")
         String back;
@@ -10854,10 +11047,11 @@ public class AccountCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code additional_verification}. The uploaded
-         * file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
-         * format, and less than 10 MB in size.
+         * The front of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}. The uploaded file needs to be a color image
+         * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+         * size.
          */
         @SerializedName("front")
         String front;
@@ -10886,10 +11080,11 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of a document returned by a <a href="https://api.stripe.com#create_file">file
-           * upload</a> with a {@code purpose} value of {@code additional_verification}. The
-           * uploaded file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG,
-           * or PDF format, and less than 10 MB in size.
+           * The back of a document returned by a <a
+           * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+           * value of {@code additional_verification}. The uploaded file needs to be a color image
+           * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+           * size.
            */
           public Builder setBack(String back) {
             this.back = back;
@@ -10925,10 +11120,11 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of a document returned by a <a href="https://api.stripe.com#create_file">file
-           * upload</a> with a {@code purpose} value of {@code additional_verification}. The
-           * uploaded file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG,
-           * or PDF format, and less than 10 MB in size.
+           * The front of a document returned by a <a
+           * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+           * value of {@code additional_verification}. The uploaded file needs to be a color image
+           * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+           * size.
            */
           public Builder setFront(String front) {
             this.front = front;
@@ -11933,8 +12129,9 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12033,8 +12230,9 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12127,8 +12325,9 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12224,8 +12423,9 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12321,8 +12521,9 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12420,8 +12621,9 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12517,8 +12719,9 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -12611,8 +12814,9 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
-       * upload</a> with a {@code purpose} value of {@code account_requirement}.
+       * One or more document ids returned by a <a
+       * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -14417,7 +14621,7 @@ public class AccountCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class AdditionalDocument {
         /**
-         * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -14436,7 +14640,7 @@ public class AccountCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -14468,7 +14672,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -14509,7 +14713,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -14525,7 +14729,7 @@ public class AccountCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Document {
         /**
-         * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -14544,7 +14748,7 @@ public class AccountCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+         * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -14576,7 +14780,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The back of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -14615,7 +14819,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+           * The front of an ID returned by a <a href="https://docs.stripe.com/api#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -14957,6 +15161,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("paypay_payments")
     PaypayPayments paypayPayments;
 
+    /** Settings specific to SEPA Direct Debit payments. */
+    @SerializedName("sepa_debit_payments")
+    SepaDebitPayments sepaDebitPayments;
+
     /** Settings specific to the account's use of Smart Disputes. */
     @SerializedName("smart_disputes")
     SmartDisputes smartDisputes;
@@ -14981,6 +15189,7 @@ public class AccountCreateParams extends ApiRequestParams {
         Payments payments,
         Payouts payouts,
         PaypayPayments paypayPayments,
+        SepaDebitPayments sepaDebitPayments,
         SmartDisputes smartDisputes,
         TaxForms taxForms,
         Treasury treasury) {
@@ -14995,6 +15204,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.payments = payments;
       this.payouts = payouts;
       this.paypayPayments = paypayPayments;
+      this.sepaDebitPayments = sepaDebitPayments;
       this.smartDisputes = smartDisputes;
       this.taxForms = taxForms;
       this.treasury = treasury;
@@ -15027,6 +15237,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private PaypayPayments paypayPayments;
 
+      private SepaDebitPayments sepaDebitPayments;
+
       private SmartDisputes smartDisputes;
 
       private TaxForms taxForms;
@@ -15047,6 +15259,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.payments,
             this.payouts,
             this.paypayPayments,
+            this.sepaDebitPayments,
             this.smartDisputes,
             this.taxForms,
             this.treasury);
@@ -15140,6 +15353,13 @@ public class AccountCreateParams extends ApiRequestParams {
       /** Settings specific to the PayPay payments method. */
       public Builder setPaypayPayments(AccountCreateParams.Settings.PaypayPayments paypayPayments) {
         this.paypayPayments = paypayPayments;
+        return this;
+      }
+
+      /** Settings specific to SEPA Direct Debit payments. */
+      public Builder setSepaDebitPayments(
+          AccountCreateParams.Settings.SepaDebitPayments sepaDebitPayments) {
+        this.sepaDebitPayments = sepaDebitPayments;
         return this;
       }
 
@@ -17338,6 +17558,78 @@ public class AccountCreateParams extends ApiRequestParams {
 
         GoodsType(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebitPayments {
+      /** The business creditor id for european payments. */
+      @SerializedName("creditor_id")
+      String creditorId;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private SepaDebitPayments(String creditorId, Map<String, Object> extraParams) {
+        this.creditorId = creditorId;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String creditorId;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Settings.SepaDebitPayments build() {
+          return new AccountCreateParams.Settings.SepaDebitPayments(
+              this.creditorId, this.extraParams);
+        }
+
+        /** The business creditor id for european payments. */
+        public Builder setCreditorId(String creditorId) {
+          this.creditorId = creditorId;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Settings.SepaDebitPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Settings.SepaDebitPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
