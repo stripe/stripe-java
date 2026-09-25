@@ -1181,6 +1181,14 @@ public class CalculationCreateParams extends ApiRequestParams {
     Map<String, String> metadata;
 
     /**
+     * A tax location ID. Depending on the <a
+     * href="https://stripe.com/tax/tax-for-tickets/reference/tax-location-performance">tax
+     * code</a>, this is required, optional, or not supported.
+     */
+    @SerializedName("performance_location")
+    String performanceLocation;
+
+    /**
      * If provided, the product's {@code tax_code} will be used as the line item's {@code tax_code}.
      */
     @SerializedName("product")
@@ -1219,6 +1227,7 @@ public class CalculationCreateParams extends ApiRequestParams {
         Long amount,
         Map<String, Object> extraParams,
         Map<String, String> metadata,
+        String performanceLocation,
         String product,
         Long quantity,
         String reference,
@@ -1227,6 +1236,7 @@ public class CalculationCreateParams extends ApiRequestParams {
       this.amount = amount;
       this.extraParams = extraParams;
       this.metadata = metadata;
+      this.performanceLocation = performanceLocation;
       this.product = product;
       this.quantity = quantity;
       this.reference = reference;
@@ -1245,6 +1255,8 @@ public class CalculationCreateParams extends ApiRequestParams {
 
       private Map<String, String> metadata;
 
+      private String performanceLocation;
+
       private String product;
 
       private Long quantity;
@@ -1261,6 +1273,7 @@ public class CalculationCreateParams extends ApiRequestParams {
             this.amount,
             this.extraParams,
             this.metadata,
+            this.performanceLocation,
             this.product,
             this.quantity,
             this.reference,
@@ -1328,6 +1341,16 @@ public class CalculationCreateParams extends ApiRequestParams {
           this.metadata = new HashMap<>();
         }
         this.metadata.putAll(map);
+        return this;
+      }
+
+      /**
+       * A tax location ID. Depending on the <a
+       * href="https://stripe.com/tax/tax-for-tickets/reference/tax-location-performance">tax
+       * code</a>, this is required, optional, or not supported.
+       */
+      public Builder setPerformanceLocation(String performanceLocation) {
+        this.performanceLocation = performanceLocation;
         return this;
       }
 

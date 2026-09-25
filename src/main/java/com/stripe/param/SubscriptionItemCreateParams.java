@@ -22,6 +22,10 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   @SerializedName("billing_thresholds")
   Object billingThresholds;
 
+  /** The trial offer to apply to this subscription item. */
+  @SerializedName("current_trial")
+  CurrentTrial currentTrial;
+
   /** The coupons to redeem into discounts for the subscription item. */
   @SerializedName("discounts")
   Object discounts;
@@ -108,6 +112,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
 
   private SubscriptionItemCreateParams(
       Object billingThresholds,
+      CurrentTrial currentTrial,
       Object discounts,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -122,6 +127,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       String subscription,
       Object taxRates) {
     this.billingThresholds = billingThresholds;
+    this.currentTrial = currentTrial;
     this.discounts = discounts;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -143,6 +149,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private Object billingThresholds;
+
+    private CurrentTrial currentTrial;
 
     private Object discounts;
 
@@ -174,6 +182,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     public SubscriptionItemCreateParams build() {
       return new SubscriptionItemCreateParams(
           this.billingThresholds,
+          this.currentTrial,
           this.discounts,
           this.expand,
           this.extraParams,
@@ -205,6 +214,12 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      */
     public Builder setBillingThresholds(EmptyParam billingThresholds) {
       this.billingThresholds = billingThresholds;
+      return this;
+    }
+
+    /** The trial offer to apply to this subscription item. */
+    public Builder setCurrentTrial(SubscriptionItemCreateParams.CurrentTrial currentTrial) {
+      this.currentTrial = currentTrial;
       return this;
     }
 
@@ -520,6 +535,76 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
        */
       public Builder setUsageGte(Long usageGte) {
         this.usageGte = usageGte;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CurrentTrial {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The ID of the trial offer to apply to the subscription item. */
+    @SerializedName("trial_offer")
+    String trialOffer;
+
+    private CurrentTrial(Map<String, Object> extraParams, String trialOffer) {
+      this.extraParams = extraParams;
+      this.trialOffer = trialOffer;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String trialOffer;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SubscriptionItemCreateParams.CurrentTrial build() {
+        return new SubscriptionItemCreateParams.CurrentTrial(this.extraParams, this.trialOffer);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionItemCreateParams.CurrentTrial#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionItemCreateParams.CurrentTrial#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The ID of the trial offer to apply to the subscription item. */
+      public Builder setTrialOffer(String trialOffer) {
+        this.trialOffer = trialOffer;
         return this;
       }
     }

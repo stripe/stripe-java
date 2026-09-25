@@ -14,6 +14,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
+  /** Information about the payment attempt cancelation. */
+  @SerializedName("canceled")
+  Canceled canceled;
+
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
@@ -68,6 +72,7 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
   ShippingDetails shippingDetails;
 
   private PaymentRecordReportPaymentAttemptParams(
+      Canceled canceled,
       String description,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -78,6 +83,7 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
       Outcome outcome,
       PaymentMethodDetails paymentMethodDetails,
       ShippingDetails shippingDetails) {
+    this.canceled = canceled;
     this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -95,6 +101,8 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Canceled canceled;
+
     private String description;
 
     private List<String> expand;
@@ -118,6 +126,7 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentRecordReportPaymentAttemptParams build() {
       return new PaymentRecordReportPaymentAttemptParams(
+          this.canceled,
           this.description,
           this.expand,
           this.extraParams,
@@ -128,6 +137,12 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
           this.outcome,
           this.paymentMethodDetails,
           this.shippingDetails);
+    }
+
+    /** Information about the payment attempt cancelation. */
+    public Builder setCanceled(PaymentRecordReportPaymentAttemptParams.Canceled canceled) {
+      this.canceled = canceled;
+      return this;
     }
 
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
@@ -277,6 +292,83 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
         PaymentRecordReportPaymentAttemptParams.ShippingDetails shippingDetails) {
       this.shippingDetails = shippingDetails;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Canceled {
+    /**
+     * <strong>Required.</strong> When the reported payment was canceled. Measured in seconds since
+     * the Unix epoch.
+     */
+    @SerializedName("canceled_at")
+    Long canceledAt;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Canceled(Long canceledAt, Map<String, Object> extraParams) {
+      this.canceledAt = canceledAt;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long canceledAt;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentRecordReportPaymentAttemptParams.Canceled build() {
+        return new PaymentRecordReportPaymentAttemptParams.Canceled(
+            this.canceledAt, this.extraParams);
+      }
+
+      /**
+       * <strong>Required.</strong> When the reported payment was canceled. Measured in seconds
+       * since the Unix epoch.
+       */
+      public Builder setCanceledAt(Long canceledAt) {
+        this.canceledAt = canceledAt;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentRecordReportPaymentAttemptParams.Canceled#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentRecordReportPaymentAttemptParams.Canceled#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
     }
   }
 
@@ -1217,6 +1309,9 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
   }
 
   public enum Outcome implements ApiRequestParams.EnumParam {
+    @SerializedName("canceled")
+    CANCELED("canceled"),
+
     @SerializedName("failed")
     FAILED("failed"),
 

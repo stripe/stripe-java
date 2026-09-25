@@ -444,8 +444,9 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       @EqualsAndHashCode(callSuper = false)
       public static class Document extends StripeObject {
         /**
-         * The back of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code identity_document}.
+         * The back of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code identity_document}.
          */
         @SerializedName("back")
         @Getter(lombok.AccessLevel.NONE)
@@ -453,8 +454,9 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
         ExpandableField<File> back;
 
         /**
-         * The front of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code identity_document}.
+         * The front of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code identity_document}.
          */
         @SerializedName("front")
         @Getter(lombok.AccessLevel.NONE)

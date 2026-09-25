@@ -385,6 +385,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("paypal")
     PAYPAL("paypal"),
 
+    @SerializedName("paypay")
+    PAYPAY("paypay"),
+
     @SerializedName("payto")
     PAYTO("payto"),
 
@@ -408,6 +411,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("sofort")
     SOFORT("sofort"),

@@ -282,10 +282,6 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("account_subcategories")
     List<String> accountSubcategories;
 
-    /** List of countries from which to filter accounts. */
-    @SerializedName("countries")
-    List<String> countries;
-
     /** Country from which to filter accounts. */
     @SerializedName("country")
     String country;

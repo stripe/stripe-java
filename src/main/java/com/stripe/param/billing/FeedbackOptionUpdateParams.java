@@ -14,6 +14,9 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class FeedbackOptionUpdateParams extends ApiRequestParams {
+  /**
+   * The text of the feedback option, which customers see when canceling. Maximum 100 characters.
+   */
   @SerializedName("description")
   Object description;
 
@@ -53,11 +56,17 @@ public class FeedbackOptionUpdateParams extends ApiRequestParams {
       return new FeedbackOptionUpdateParams(this.description, this.expand, this.extraParams);
     }
 
+    /**
+     * The text of the feedback option, which customers see when canceling. Maximum 100 characters.
+     */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
     }
 
+    /**
+     * The text of the feedback option, which customers see when canceling. Maximum 100 characters.
+     */
     public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;

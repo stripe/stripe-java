@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class PayoutCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> A positive integer in cents representing how much to payout. */
+  /** <strong>Required.</strong> A positive integer in cents representing how much to pay out. */
   @SerializedName("amount")
   Long amount;
 
@@ -158,7 +158,7 @@ public class PayoutCreateParams extends ApiRequestParams {
           this.statementDescriptor);
     }
 
-    /** <strong>Required.</strong> A positive integer in cents representing how much to payout. */
+    /** <strong>Required.</strong> A positive integer in cents representing how much to pay out. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
