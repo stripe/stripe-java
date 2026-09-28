@@ -10,6 +10,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObject;
 import com.stripe.model.v2.EventNotificationClassLookup;
 import com.stripe.model.v2.core.Event.RelatedObject;
+import com.stripe.model.v2.core.Event.RelatedSingletonObject;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiResource.RequestMethod;
@@ -144,9 +145,14 @@ public abstract class EventNotification {
 
   /* retrieves the full payload for an event. Protected because individual push classes use it, but type it correctly */
   protected Event fetchEvent() throws StripeException {
+    // `id` comes from the notification body, so encode it the way the generated
+    // services do -- otherwise it can inject extra path or query segments.
     StripeResponse response =
         client.rawRequest(
-            RequestMethod.GET, String.format("/v2/core/events/%s", id), null, getRequestOptions());
+            RequestMethod.GET,
+            String.format("/v2/core/events/%s", ApiResource.urlEncodeId(id)),
+            null,
+            getRequestOptions());
 
     return (Event) client.deserialize(response.body(), ApiMode.V2);
   }
@@ -158,8 +164,19 @@ public abstract class EventNotification {
       return null;
     }
 
-    String relativeUrl = relatedObject.getUrl();
+    return fetchRelatedObjectByUrl(relatedObject.getUrl());
+  }
 
+  protected StripeObject fetchRelatedObject(RelatedSingletonObject relatedObject)
+      throws StripeException {
+    if (relatedObject == null) {
+      return null;
+    }
+
+    return fetchRelatedObjectByUrl(relatedObject.getUrl());
+  }
+
+  private StripeObject fetchRelatedObjectByUrl(String relativeUrl) throws StripeException {
     StripeResponse response =
         client.rawRequest(RequestMethod.GET, relativeUrl, null, getRequestOptions());
 

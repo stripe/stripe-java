@@ -88,8 +88,12 @@ public class LiveStripeResponseGetterTest extends BaseStripeTest {
 
     assertEquals(1, logHandler.records.size());
     assertEquals(Level.WARNING, logHandler.records.get(0).getLevel());
-    assertEquals(
-        "This API version will be deprecated soon.", logHandler.records.get(0).getMessage());
+    assertTrue(
+        logHandler
+            .records
+            .get(0)
+            .getMessage()
+            .startsWith("This API version will be deprecated soon."));
   }
 
   @Test

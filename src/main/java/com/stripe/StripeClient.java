@@ -92,7 +92,11 @@ public class StripeClient {
               ClientStripeResponseGetterOptions existingOptions =
                   (ClientStripeResponseGetterOptions) options;
 
-              return existingOptions.toBuilder().stripeContext(contextString).build();
+              return existingOptions
+                  .toBuilder()
+                  .stripeAccount(null)
+                  .stripeContext(contextString)
+                  .build();
             });
 
     // Create and return a new StripeClient with the new response getter
