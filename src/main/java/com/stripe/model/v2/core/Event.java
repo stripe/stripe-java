@@ -90,12 +90,25 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
     if (relatedObject == null) {
       return null;
     }
-    if (relatedObject.getUrl() == null) {
+    return fetchRelatedObjectByTypeAndUrl(relatedObject.getType(), relatedObject.getUrl());
+  }
+
+  /** Retrieves the object associated with the event. */
+  protected StripeObject fetchRelatedObject(RelatedSingletonObject relatedObject)
+      throws StripeException {
+    if (relatedObject == null) {
+      return null;
+    }
+    return fetchRelatedObjectByTypeAndUrl(relatedObject.getType(), relatedObject.getUrl());
+  }
+
+  private StripeObject fetchRelatedObjectByTypeAndUrl(String type, String url)
+      throws StripeException {
+    if (url == null) {
       return null;
     }
 
-    Class<? extends StripeObject> objectClass =
-        EventDataClassLookup.classLookup.get(relatedObject.getType());
+    Class<? extends StripeObject> objectClass = EventDataClassLookup.classLookup.get(type);
     if (objectClass == null) {
       objectClass = StripeRawJsonObject.class;
     }
@@ -110,8 +123,7 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
     RequestOptions opts = optsBuilder.build();
 
     return this.responseGetter.request(
-        new ApiRequest(
-            BaseAddress.API, ApiResource.RequestMethod.GET, relatedObject.getUrl(), null, opts),
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, url, null, opts),
         objectClass);
   }
 
@@ -139,7 +151,21 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
     @SerializedName("type")
     String type;
 
+    /** URL to retrieve the resource. */
+    @SerializedName("url")
+    String url;
+  }
+
+  /** The related object map for a singleton object who has no {@code id}. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RelatedSingletonObject extends StripeObject {
     /** Type of the object relevant to the event. */
+    @SerializedName("type")
+    String type;
+
+    /** URL to retrieve the resource. */
     @SerializedName("url")
     String url;
   }

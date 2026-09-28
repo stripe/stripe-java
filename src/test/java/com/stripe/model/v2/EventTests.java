@@ -5,8 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.stripe.BaseStripeTest;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEvent;
 import com.stripe.exception.StripeException;
+import com.stripe.model.StripeObject;
 import com.stripe.model.billing.Meter;
 import com.stripe.model.v2.core.Event;
+import com.stripe.model.v2.core.Event.RelatedSingletonObject;
+import com.stripe.model.v2.core.EventNotification;
 import com.stripe.net.ApiResource;
 import com.stripe.net.HttpHeaders;
 import com.stripe.net.StripeResponse;
@@ -152,6 +155,46 @@ public class EventTests extends BaseStripeTest {
         req ->
             assertEquals(
                 "event=evt_234", req.headers().firstValue("Stripe-Request-Trigger").orElse(null)));
+  }
+
+  /**
+   * The type singleton events point at instead of {@link Event.RelatedObject}. There's no generated
+   * singleton event yet, so exercise the type directly.
+   */
+  @Test
+  public void deserializesRelatedSingletonObject() {
+    String json = "{\n" + "  \"type\": \"balance\",\n" + "  \"url\": \"/v1/balance\"\n" + "}";
+
+    RelatedSingletonObject relatedObject =
+        ApiResource.GSON.fromJson(json, RelatedSingletonObject.class);
+
+    assertEquals("balance", relatedObject.getType());
+    assertEquals("/v1/balance", relatedObject.getUrl());
+
+    // the whole point of the type: no `id` field, and so no accessor for one either
+    assertThrows(
+        NoSuchFieldException.class, () -> RelatedSingletonObject.class.getDeclaredField("id"));
+    assertThrows(
+        NoSuchMethodException.class, () -> RelatedSingletonObject.class.getMethod("getId"));
+  }
+
+  /**
+   * Generated singleton event classes call {@code super.fetchRelatedObject(this.relatedObject)}, so
+   * both base classes need an overload that takes the singleton type. Asserted reflectively because
+   * no generated singleton event exists to exercise it yet.
+   */
+  @Test
+  public void baseClassesAcceptRelatedSingletonObject() throws NoSuchMethodException {
+    assertEquals(
+        StripeObject.class,
+        Event.class
+            .getDeclaredMethod("fetchRelatedObject", RelatedSingletonObject.class)
+            .getReturnType());
+    assertEquals(
+        StripeObject.class,
+        EventNotification.class
+            .getDeclaredMethod("fetchRelatedObject", RelatedSingletonObject.class)
+            .getReturnType());
   }
 
   // FIXME (jar) this should no longer be possible; confirm this and remove before merge
