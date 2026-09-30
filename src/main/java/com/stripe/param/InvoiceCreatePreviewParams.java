@@ -13578,7 +13578,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
      * the value can only be set to {@code now} or {@code unchanged}.
      */
     @SerializedName("billing_cycle_anchor")
-    Object billingCycleAnchor;
+    BillingCycleAnchor billingCycleAnchor;
 
     /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
     @SerializedName("billing_mode")
@@ -13697,7 +13697,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     Object trialEnd;
 
     private SubscriptionDetails(
-        Object billingCycleAnchor,
+        BillingCycleAnchor billingCycleAnchor,
         BillingMode billingMode,
         Object billingSchedules,
         Object cancelAt,
@@ -13738,7 +13738,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Object billingCycleAnchor;
+      private BillingCycleAnchor billingCycleAnchor;
 
       private BillingMode billingMode;
 
@@ -13803,18 +13803,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        */
       public Builder setBillingCycleAnchor(
           InvoiceCreatePreviewParams.SubscriptionDetails.BillingCycleAnchor billingCycleAnchor) {
-        this.billingCycleAnchor = billingCycleAnchor;
-        return this;
-      }
-
-      /**
-       * For new subscriptions, a future timestamp to anchor the subscription's <a
-       * href="https://docs.stripe.com/subscriptions/billing-cycle">billing cycle</a>. This is used
-       * to determine the date of the first full invoice, and, for plans with {@code month} or
-       * {@code year} intervals, the day of the month for subsequent invoices. For existing
-       * subscriptions, the value can only be set to {@code now} or {@code unchanged}.
-       */
-      public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
         return this;
       }
@@ -14162,6 +14150,124 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       public Builder setTrialEnd(Long trialEnd) {
         this.trialEnd = trialEnd;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingCycleAnchor {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * A timestamp to use as the subscription's billing cycle anchor. Only valid when {@code type}
+       * is {@code timestamp}.
+       */
+      @SerializedName("timestamp")
+      Long timestamp;
+
+      /**
+       * <strong>Required.</strong> Determines how the subscription's billing cycle anchor behaves
+       * for the invoice preview.
+       */
+      @SerializedName("type")
+      Type type;
+
+      private BillingCycleAnchor(Map<String, Object> extraParams, Long timestamp, Type type) {
+        this.extraParams = extraParams;
+        this.timestamp = timestamp;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Long timestamp;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceCreatePreviewParams.SubscriptionDetails.BillingCycleAnchor build() {
+          return new InvoiceCreatePreviewParams.SubscriptionDetails.BillingCycleAnchor(
+              this.extraParams, this.timestamp, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * InvoiceCreatePreviewParams.SubscriptionDetails.BillingCycleAnchor#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * InvoiceCreatePreviewParams.SubscriptionDetails.BillingCycleAnchor#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * A timestamp to use as the subscription's billing cycle anchor. Only valid when {@code
+         * type} is {@code timestamp}.
+         */
+        public Builder setTimestamp(Long timestamp) {
+          this.timestamp = timestamp;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Determines how the subscription's billing cycle anchor behaves
+         * for the invoice preview.
+         */
+        public Builder setType(
+            InvoiceCreatePreviewParams.SubscriptionDetails.BillingCycleAnchor.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("now")
+        NOW("now"),
+
+        @SerializedName("timestamp")
+        TIMESTAMP("timestamp"),
+
+        @SerializedName("unchanged")
+        UNCHANGED("unchanged");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
 
@@ -14926,16 +15032,19 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       String plan;
 
       /**
-       * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-       * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
-       * quantity} parameter is provided.
+       * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+       * both, to set or change this item's price. If you're updating an existing item without
+       * changing its price, omit both. When changing a subscription item's price, {@code quantity}
+       * is set to 1 unless a {@code quantity} parameter is provided.
        */
       @SerializedName("price")
       String price;
 
       /**
        * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-       * inline. One of {@code price} or {@code price_data} is required.
+       * inline. You can use either {@code price} or {@code price_data}, but not both, to set or
+       * change this item's price. If you're updating an existing item without changing its price,
+       * omit both.
        */
       @SerializedName("price_data")
       PriceData priceData;
@@ -15222,9 +15331,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-         * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
-         * quantity} parameter is provided.
+         * The ID of the price object. You can use either {@code price} or {@code price_data}, but
+         * not both, to set or change this item's price. If you're updating an existing item without
+         * changing its price, omit both. When changing a subscription item's price, {@code
+         * quantity} is set to 1 unless a {@code quantity} parameter is provided.
          */
         public Builder setPrice(String price) {
           this.price = price;
@@ -15233,7 +15343,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         /**
          * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-         * inline. One of {@code price} or {@code price_data} is required.
+         * inline. You can use either {@code price} or {@code price_data}, but not both, to set or
+         * change this item's price. If you're updating an existing item without changing its price,
+         * omit both.
          */
         public Builder setPriceData(
             InvoiceCreatePreviewParams.SubscriptionDetails.Item.PriceData priceData) {
@@ -16726,21 +16838,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           this.iterations = iterations;
           return this;
         }
-      }
-    }
-
-    public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
-      @SerializedName("now")
-      NOW("now"),
-
-      @SerializedName("unchanged")
-      UNCHANGED("unchanged");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      BillingCycleAnchor(String value) {
-        this.value = value;
       }
     }
 

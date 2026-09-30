@@ -62,14 +62,14 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
   /**
    * Collect additional information from your customer using custom fields. Up to 3 fields are
-   * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
+   * supported. You can't set this parameter if {@code ui_mode} is {@code elements}.
    */
   @SerializedName("custom_fields")
   List<PaymentLinkCreateParams.CustomField> customFields;
 
   /**
    * Display additional text for your customers using custom text. You can't set this parameter if
-   * {@code ui_mode} is {@code custom}.
+   * {@code ui_mode} is {@code elements}.
    */
   @SerializedName("custom_text")
   CustomText customText;
@@ -505,7 +505,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     /**
      * Display additional text for your customers using custom text. You can't set this parameter if
-     * {@code ui_mode} is {@code custom}.
+     * {@code ui_mode} is {@code elements}.
      */
     public Builder setCustomText(PaymentLinkCreateParams.CustomText customText) {
       this.customText = customText;
@@ -1977,7 +1977,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Label {
       /**
-       * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
+       * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 100
        * characters.
        */
       @SerializedName("custom")
@@ -2020,8 +2020,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
-         * characters.
+         * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to
+         * 100 characters.
          */
         public Builder setCustom(String custom) {
           this.custom = custom;
@@ -7287,7 +7287,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     /**
      * Describes whether a tax ID is required during checkout. Defaults to {@code never}. You can't
-     * set this parameter if {@code ui_mode} is {@code custom}.
+     * set this parameter if {@code ui_mode} is {@code elements}.
      */
     @SerializedName("required")
     Required required;
@@ -7353,7 +7353,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       /**
        * Describes whether a tax ID is required during checkout. Defaults to {@code never}. You
-       * can't set this parameter if {@code ui_mode} is {@code custom}.
+       * can't set this parameter if {@code ui_mode} is {@code elements}.
        */
       public Builder setRequired(PaymentLinkCreateParams.TaxIdCollection.Required required) {
         this.required = required;
@@ -7629,6 +7629,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),

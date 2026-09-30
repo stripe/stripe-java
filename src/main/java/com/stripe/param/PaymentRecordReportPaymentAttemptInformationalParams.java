@@ -236,7 +236,7 @@ public class PaymentRecordReportPaymentAttemptInformationalParams extends ApiReq
     @SerializedName("customer")
     String customer;
 
-    /** The customer's phone number. */
+    /** The customer's email address. */
     @SerializedName("email")
     String email;
 
@@ -293,7 +293,7 @@ public class PaymentRecordReportPaymentAttemptInformationalParams extends ApiReq
         return this;
       }
 
-      /** The customer's phone number. */
+      /** The customer's email address. */
       public Builder setEmail(String email) {
         this.email = email;
         return this;

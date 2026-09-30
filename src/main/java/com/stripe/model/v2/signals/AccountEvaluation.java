@@ -97,6 +97,10 @@ public class AccountEvaluation extends StripeObject implements HasId {
       @SerializedName("defaults")
       Defaults defaults;
 
+      /** Identity data. */
+      @SerializedName("identity")
+      Identity identity;
+
       /** Default account settings. */
       @Getter
       @Setter
@@ -124,6 +128,26 @@ public class AccountEvaluation extends StripeObject implements HasId {
           String productDescription;
         }
       }
+
+      /** Identity data. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Identity extends StripeObject {
+        /** Business details for identity data. */
+        @SerializedName("business_details")
+        BusinessDetails businessDetails;
+
+        /** Business details for identity data. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BusinessDetails extends StripeObject {
+          /** Registered business name. */
+          @SerializedName("registered_name")
+          String registeredName;
+        }
+      }
     }
   }
 
@@ -132,6 +156,10 @@ public class AccountEvaluation extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class EvaluatedSignals extends StripeObject {
+    /** Fraudulent website result for the evaluation, when available. */
+    @SerializedName("fraudulent_website")
+    FraudulentWebsite fraudulentWebsite;
+
     /** User account-sharing result for the evaluation, when available. */
     @SerializedName("user_account_sharing")
     UserAccountSharing userAccountSharing;
@@ -139,6 +167,33 @@ public class AccountEvaluation extends StripeObject implements HasId {
     /** User multi-accounting result for the evaluation, when available. */
     @SerializedName("user_multi_accounting")
     UserMultiAccounting userMultiAccounting;
+
+    /** Fraudulent website result for the evaluation, when available. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FraudulentWebsite extends StripeObject {
+      /** Human-readable details about the fraudulent website evaluation, when available. */
+      @SerializedName("details")
+      String details;
+
+      /** Timestamp at which the signal was evaluated. */
+      @SerializedName("evaluated_at")
+      Instant evaluatedAt;
+
+      /**
+       * Categorical assessment of the fraudulent website risk.
+       *
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, or {@code
+       * unknown}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
+
+      /** The account signal ID containing the full fraudulent website signal result. */
+      @SerializedName("signal")
+      String signal;
+    }
 
     /** User account-sharing result for the evaluation, when available. */
     @Getter

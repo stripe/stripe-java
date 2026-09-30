@@ -352,7 +352,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * active} when the trial period is over.
    *
    * <p>A subscription can only enter a {@code paused} status <a
-   * href="https://docs.stripe.com/billing/subscriptions/trials#create-free-trials-without-payment">when
+   * href="https://docs.stripe.com/billing/subscriptions/trials/free-trials#create-free-trials-without-payment">when
    * a trial ends without a payment method</a>. A {@code paused} subscription doesn't generate
    * invoices and can be resumed after your customer adds their payment method. The {@code paused}
    * status is different from <a
@@ -2179,7 +2179,78 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Billie extends StripeObject {}
+      public static class Billie extends StripeObject {
+        @SerializedName("company_details")
+        CompanyDetails companyDetails;
+
+        /**
+         * For more details about CompanyDetails, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CompanyDetails extends StripeObject {
+          @SerializedName("registered_address")
+          RegisteredAddress registeredAddress;
+
+          /** Company or entity name. */
+          @SerializedName("registered_name")
+          String registeredName;
+
+          /** The official registration number for the given registration type. */
+          @SerializedName("registration_number")
+          String registrationNumber;
+
+          /**
+           * Type of registration the company or entity holds in their registered country.
+           *
+           * <p>One of {@code ch_ein}, {@code de_hrb}, {@code dk_cvr}, {@code es_cif}, {@code
+           * fi_tunnus}, {@code fr_siren}, {@code fr_siret}, {@code it_rea}, {@code nl_kvk}, {@code
+           * no_org_number}, {@code no_pno}, {@code se_org_number}, {@code se_pno}, or {@code
+           * uk_crn}.
+           */
+          @SerializedName("registration_type")
+          String registrationType;
+
+          /** VAT ID number. */
+          @SerializedName("vat")
+          String vat;
+
+          /**
+           * For more details about RegisteredAddress, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class RegisteredAddress extends StripeObject {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            String city;
+
+            /** Two-letter country code. */
+            @SerializedName("country")
+            String country;
+
+            /** Address line 1 (for example, street, PO Box, or company name). */
+            @SerializedName("line1")
+            String line1;
+
+            /** Address line 2 (for example, apartment, suite, unit, or building). */
+            @SerializedName("line2")
+            String line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            String postalCode;
+
+            /** State, county, province, or region. */
+            @SerializedName("state")
+            String state;
+          }
+        }
+      }
 
       /**
        * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
@@ -2204,8 +2275,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
            * Date when the mandate expires and no further payments will be charged. If not provided,
            * the mandate will be set to be indefinite.
            */
-          @SerializedName("expires_after")
-          Long expiresAfter;
+          @SerializedName("expires_at")
+          Long expiresAt;
         }
       }
 
@@ -2612,6 +2683,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     Long billingCycleAnchor;
 
     /**
+     * Indicates whether this subscription should cancel at the end of the current period if the
+     * update is applied.
+     */
+    @SerializedName("cancel_at_period_end")
+    Boolean cancelAtPeriodEnd;
+
+    /**
      * The pending subscription-level discount that will be applied when the pending update is
      * applied.
      */
@@ -2662,8 +2740,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      * Indicates if a plan's {@code trial_period_days} should be applied to the subscription.
      * Setting {@code trial_end} per subscription is preferred, and this defaults to {@code false}.
      * Setting this flag to {@code true} together with {@code trial_end} is not allowed. See <a
-     * href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
-     * subscriptions</a> to learn more.
+     * href="https://docs.stripe.com/billing/subscriptions/trials/free-trials">Using trial periods
+     * on subscriptions</a> to learn more.
      */
     @SerializedName("trial_from_plan")
     Boolean trialFromPlan;
@@ -2810,8 +2888,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         /**
          * The reason that the subscription was paused.
          *
-         * <p>One of {@code pause_requested}, {@code system}, or {@code
-         * trial_end_without_payment_method}.
+         * <p>One of {@code final_payment_failure}, {@code first_payment_failure}, {@code
+         * pause_requested}, {@code system}, or {@code trial_end_without_payment_method}.
          */
         @SerializedName("type")
         String type;

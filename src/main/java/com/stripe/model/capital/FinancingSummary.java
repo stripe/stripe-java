@@ -17,11 +17,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * A financing summary object describes a connected account's financing status in real time. A
- * financing status is either {@code accepted}, {@code delivered}, or {@code none}. You can read the
- * status of your connected accounts.
- */
+/** A financing summary object describes a connected account's financing details in real time. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -127,8 +123,9 @@ public class FinancingSummary extends ApiResource {
      * corresponding disclaimer text to use for each disclaimer_variant value can be found in the <a
      * href="https://docs.stripe.com/capital/regulatory-compliance">regulatory compliance docs</a>.
      *
-     * <p>One of {@code celtic_us_loan}, {@code fundbox_au_financing}, {@code youlend_de_financing},
-     * {@code youlend_fr_financing}, {@code youlend_uk_mca}, or {@code youlend_us_mca}.
+     * <p>One of {@code celtic_us_loan}, {@code fundbox_au_financing}, {@code fundbox_ca_financing},
+     * {@code youlend_de_financing}, {@code youlend_fr_financing}, {@code youlend_uk_mca}, or {@code
+     * youlend_us_mca}.
      */
     @SerializedName("disclaimer_variant")
     String disclaimerVariant;

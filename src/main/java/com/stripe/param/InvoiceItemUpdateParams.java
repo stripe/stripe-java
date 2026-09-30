@@ -59,6 +59,13 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * Pass an empty string to remove previously-defined invoicing rules. Setting invoicing rules is
+   * not supported.
+   */
+  @SerializedName("invoicing_rules")
+  EmptyParam invoicingRules;
+
+  /**
    * The ids of the margins to apply to the invoice item. When set, the {@code default_margins} on
    * the invoice do not apply to this invoice item.
    */
@@ -149,6 +156,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       Object discounts,
       List<String> expand,
       Map<String, Object> extraParams,
+      EmptyParam invoicingRules,
       Object margins,
       Object metadata,
       Period period,
@@ -166,6 +174,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     this.discounts = discounts;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.invoicingRules = invoicingRules;
     this.margins = margins;
     this.metadata = metadata;
     this.period = period;
@@ -195,6 +204,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private EmptyParam invoicingRules;
 
     private Object margins;
 
@@ -227,6 +238,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
           this.discounts,
           this.expand,
           this.extraParams,
+          this.invoicingRules,
           this.margins,
           this.metadata,
           this.period,
@@ -374,6 +386,15 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Pass an empty string to remove previously-defined invoicing rules. Setting invoicing rules is
+     * not supported.
+     */
+    public Builder setInvoicingRules(EmptyParam invoicingRules) {
+      this.invoicingRules = invoicingRules;
       return this;
     }
 

@@ -96,7 +96,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
 
   /**
    * Collect additional information from your customer using custom fields. Up to 3 fields are
-   * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
+   * supported. You can't set this parameter if {@code ui_mode} is {@code elements}.
    */
   @SerializedName("custom_fields")
   List<PaymentLink.CustomField> customFields;
@@ -740,7 +740,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Label extends StripeObject {
-      /** Custom text for the label, displayed to the customer. Up to 50 characters. */
+      /** Custom text for the label, displayed to the customer. Up to 100 characters. */
       @SerializedName("custom")
       String custom;
 

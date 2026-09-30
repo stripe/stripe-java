@@ -219,6 +219,12 @@ public class AccountSignalListParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("fraudulent_merchant")
+    FRAUDULENT_MERCHANT("fraudulent_merchant"),
+
+    @SerializedName("fraudulent_website")
+    FRAUDULENT_WEBSITE("fraudulent_website"),
+
     @SerializedName("user_account_sharing")
     USER_ACCOUNT_SHARING("user_account_sharing"),
 

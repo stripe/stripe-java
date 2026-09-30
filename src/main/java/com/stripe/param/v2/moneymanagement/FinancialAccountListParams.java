@@ -22,6 +22,10 @@ public class FinancialAccountListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Additional fields to include in the response. */
+  @SerializedName("include")
+  List<FinancialAccountListParams.Include> include;
+
   /** The page limit. */
   @SerializedName("limit")
   Long limit;
@@ -35,9 +39,11 @@ public class FinancialAccountListParams extends ApiRequestParams {
 
   private FinancialAccountListParams(
       Map<String, Object> extraParams,
+      List<FinancialAccountListParams.Include> include,
       Long limit,
       List<FinancialAccountListParams.Status> statuses) {
     this.extraParams = extraParams;
+    this.include = include;
     this.limit = limit;
     this.statuses = statuses;
   }
@@ -49,13 +55,16 @@ public class FinancialAccountListParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
+    private List<FinancialAccountListParams.Include> include;
+
     private Long limit;
 
     private List<FinancialAccountListParams.Status> statuses;
 
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAccountListParams build() {
-      return new FinancialAccountListParams(this.extraParams, this.limit, this.statuses);
+      return new FinancialAccountListParams(
+          this.extraParams, this.include, this.limit, this.statuses);
     }
 
     /**
@@ -81,6 +90,32 @@ public class FinancialAccountListParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add an element to `include` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * FinancialAccountListParams#include} for the field documentation.
+     */
+    public Builder addInclude(FinancialAccountListParams.Include element) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `include` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * FinancialAccountListParams#include} for the field documentation.
+     */
+    public Builder addAllInclude(List<FinancialAccountListParams.Include> elements) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.addAll(elements);
       return this;
     }
 
@@ -114,6 +149,18 @@ public class FinancialAccountListParams extends ApiRequestParams {
       }
       this.statuses.addAll(elements);
       return this;
+    }
+  }
+
+  public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("storage.deposit_insurance_eligibility")
+    STORAGE__DEPOSIT_INSURANCE_ELIGIBILITY("storage.deposit_insurance_eligibility");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Include(String value) {
+      this.value = value;
     }
   }
 

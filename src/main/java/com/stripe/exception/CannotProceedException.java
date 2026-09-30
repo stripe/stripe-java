@@ -8,7 +8,9 @@ import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 import lombok.Getter;
 
-/** Returned when the PayoutMethod object is set as default_for_currency and cannot be archived. */
+/**
+ * Returned when the GB Bank Account object is set as default_for_currency and cannot be archived.
+ */
 public final class CannotProceedException extends ApiException {
   private static final long serialVersionUID = 2L;
   @Getter String reason;

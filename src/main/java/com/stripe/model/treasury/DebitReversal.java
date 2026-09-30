@@ -21,7 +21,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * You can reverse some <a href="https://api.stripe.com#received_debits">ReceivedDebits</a>
+ * You can reverse some <a href="https://docs.stripe.com/api#received_debits">ReceivedDebits</a>
  * depending on their network and source flow. Reversing a ReceivedDebit leads to the creation of a
  * new object known as a DebitReversal.
  */

@@ -11,6 +11,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class FinancialAddressCreateParams extends ApiRequestParams {
+  /** Properties for creating a bank account FinancialAddress. */
+  @SerializedName("bank_account")
+  BankAccount bankAccount;
+
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -27,14 +31,27 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   @SerializedName("financial_account")
   String financialAccount;
 
-  /** <strong>Required.</strong> The type of FinancialAddress details to provision. */
+  /** Open Enum. The currency the FinancialAddress settles into the FinancialAccount. */
+  @SerializedName("settlement_currency")
+  String settlementCurrency;
+
+  /**
+   * <strong>Required.</strong> The type of FinancialAddress to create. Must agree with which branch
+   * of financial_address_type_properties is set.
+   */
   @SerializedName("type")
   Type type;
 
   private FinancialAddressCreateParams(
-      Map<String, Object> extraParams, String financialAccount, Type type) {
+      BankAccount bankAccount,
+      Map<String, Object> extraParams,
+      String financialAccount,
+      String settlementCurrency,
+      Type type) {
+    this.bankAccount = bankAccount;
     this.extraParams = extraParams;
     this.financialAccount = financialAccount;
+    this.settlementCurrency = settlementCurrency;
     this.type = type;
   }
 
@@ -43,15 +60,30 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private BankAccount bankAccount;
+
     private Map<String, Object> extraParams;
 
     private String financialAccount;
+
+    private String settlementCurrency;
 
     private Type type;
 
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAddressCreateParams build() {
-      return new FinancialAddressCreateParams(this.extraParams, this.financialAccount, this.type);
+      return new FinancialAddressCreateParams(
+          this.bankAccount,
+          this.extraParams,
+          this.financialAccount,
+          this.settlementCurrency,
+          this.type);
+    }
+
+    /** Properties for creating a bank account FinancialAddress. */
+    public Builder setBankAccount(FinancialAddressCreateParams.BankAccount bankAccount) {
+      this.bankAccount = bankAccount;
+      return this;
     }
 
     /**
@@ -89,19 +121,124 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The type of FinancialAddress details to provision. */
+    /** Open Enum. The currency the FinancialAddress settles into the FinancialAccount. */
+    public Builder setSettlementCurrency(String settlementCurrency) {
+      this.settlementCurrency = settlementCurrency;
+      return this;
+    }
+
+    /**
+     * <strong>Required.</strong> The type of FinancialAddress to create. Must agree with which
+     * branch of financial_address_type_properties is set.
+     */
     public Builder setType(FinancialAddressCreateParams.Type type) {
       this.type = type;
       return this;
     }
   }
 
-  public enum Type implements ApiRequestParams.EnumParam {
-    @SerializedName("gb_bank_account")
-    GB_BANK_ACCOUNT("gb_bank_account"),
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BankAccount {
+    /** The country for the bank account. Used to select the appropriate rails (e.g. for SEPA). */
+    @SerializedName("country")
+    String country;
 
-    @SerializedName("us_bank_account")
-    US_BANK_ACCOUNT("us_bank_account");
+    /** <strong>Required.</strong> The currency of the bank account to provision. */
+    @SerializedName("currency")
+    Currency currency;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private BankAccount(String country, Currency currency, Map<String, Object> extraParams) {
+      this.country = country;
+      this.currency = currency;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String country;
+
+      private Currency currency;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public FinancialAddressCreateParams.BankAccount build() {
+        return new FinancialAddressCreateParams.BankAccount(
+            this.country, this.currency, this.extraParams);
+      }
+
+      /** The country for the bank account. Used to select the appropriate rails (e.g. for SEPA). */
+      public Builder setCountry(String country) {
+        this.country = country;
+        return this;
+      }
+
+      /** <strong>Required.</strong> The currency of the bank account to provision. */
+      public Builder setCurrency(FinancialAddressCreateParams.BankAccount.Currency currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * FinancialAddressCreateParams.BankAccount#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link FinancialAddressCreateParams.BankAccount#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    public enum Currency implements ApiRequestParams.EnumParam {
+      @SerializedName("gbp")
+      GBP("gbp"),
+
+      @SerializedName("usd")
+      USD("usd");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Currency(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("bank_account")
+    BANK_ACCOUNT("bank_account");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

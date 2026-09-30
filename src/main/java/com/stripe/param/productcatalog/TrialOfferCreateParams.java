@@ -13,6 +13,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class TrialOfferCreateParams extends ApiRequestParams {
+  /** Whether the trial offer can be used for new subscriptions. Defaults to true. */
+  @SerializedName("active")
+  Boolean active;
+
   /** <strong>Required.</strong> Duration of one service period of the trial. */
   @SerializedName("duration")
   Duration duration;
@@ -34,9 +38,9 @@ public class TrialOfferCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** A brief, user-friendly name for the trial offer-for identification purposes. */
-  @SerializedName("name")
-  String name;
+  /** A brief description of the trial offer, hidden from customers. */
+  @SerializedName("nickname")
+  String nickname;
 
   /**
    * <strong>Required.</strong> Price configuration during the trial period (amount, billing scheme,
@@ -46,17 +50,19 @@ public class TrialOfferCreateParams extends ApiRequestParams {
   String price;
 
   private TrialOfferCreateParams(
+      Boolean active,
       Duration duration,
       EndBehavior endBehavior,
       List<String> expand,
       Map<String, Object> extraParams,
-      String name,
+      String nickname,
       String price) {
+    this.active = active;
     this.duration = duration;
     this.endBehavior = endBehavior;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.name = name;
+    this.nickname = nickname;
     this.price = price;
   }
 
@@ -65,6 +71,8 @@ public class TrialOfferCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Boolean active;
+
     private Duration duration;
 
     private EndBehavior endBehavior;
@@ -73,14 +81,26 @@ public class TrialOfferCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private String name;
+    private String nickname;
 
     private String price;
 
     /** Finalize and obtain parameter instance from this builder. */
     public TrialOfferCreateParams build() {
       return new TrialOfferCreateParams(
-          this.duration, this.endBehavior, this.expand, this.extraParams, this.name, this.price);
+          this.active,
+          this.duration,
+          this.endBehavior,
+          this.expand,
+          this.extraParams,
+          this.nickname,
+          this.price);
+    }
+
+    /** Whether the trial offer can be used for new subscriptions. Defaults to true. */
+    public Builder setActive(Boolean active) {
+      this.active = active;
+      return this;
     }
 
     /** <strong>Required.</strong> Duration of one service period of the trial. */
@@ -147,9 +167,9 @@ public class TrialOfferCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A brief, user-friendly name for the trial offer-for identification purposes. */
-    public Builder setName(String name) {
-      this.name = name;
+    /** A brief description of the trial offer, hidden from customers. */
+    public Builder setNickname(String nickname) {
+      this.nickname = nickname;
       return this;
     }
 

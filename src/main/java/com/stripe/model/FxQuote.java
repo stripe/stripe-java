@@ -41,6 +41,13 @@ public class FxQuote extends ApiResource implements HasId {
   String id;
 
   /**
+   * If the object exists in live mode, the value is {@code true}. If the object exists in test
+   * mode, the value is {@code false}.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
    * The duration that the quote is locked for, from creation time. The quote will be usable for the
    * duration specified.
    *

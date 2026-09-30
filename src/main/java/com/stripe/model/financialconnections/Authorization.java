@@ -94,18 +94,18 @@ public class Authorization extends ApiResource implements HasId {
     this.institution = new ExpandableField<Institution>(expandableObject.getId(), expandableObject);
   }
 
-  /** Retrieves the details of an Financial Connections {@code Authorization}. */
+  /** Retrieves the details of a Financial Connections {@code Authorization}. */
   public static Authorization retrieve(String authorization) throws StripeException {
     return retrieve(authorization, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the details of an Financial Connections {@code Authorization}. */
+  /** Retrieves the details of a Financial Connections {@code Authorization}. */
   public static Authorization retrieve(String authorization, RequestOptions options)
       throws StripeException {
     return retrieve(authorization, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the details of an Financial Connections {@code Authorization}. */
+  /** Retrieves the details of a Financial Connections {@code Authorization}. */
   public static Authorization retrieve(
       String authorization, Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -117,7 +117,7 @@ public class Authorization extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, Authorization.class);
   }
 
-  /** Retrieves the details of an Financial Connections {@code Authorization}. */
+  /** Retrieves the details of a Financial Connections {@code Authorization}. */
   public static Authorization retrieve(
       String authorization, AuthorizationRetrieveParams params, RequestOptions options)
       throws StripeException {
