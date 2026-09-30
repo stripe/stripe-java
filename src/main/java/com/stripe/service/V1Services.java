@@ -193,6 +193,10 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.PriceService(this.getResponseGetter());
   }
 
+  public com.stripe.service.ProductCatalogService productCatalog() {
+    return new com.stripe.service.ProductCatalogService(this.getResponseGetter());
+  }
+
   public com.stripe.service.ProductService products() {
     return new com.stripe.service.ProductService(this.getResponseGetter());
   }
@@ -275,6 +279,10 @@ public final class V1Services extends ApiService {
 
   public com.stripe.service.TestHelpersService testHelpers() {
     return new com.stripe.service.TestHelpersService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.ThreeDSecureService threeDSecure() {
+    return new com.stripe.service.ThreeDSecureService(this.getResponseGetter());
   }
 
   public com.stripe.service.TokenService tokens() {

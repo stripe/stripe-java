@@ -48,6 +48,14 @@ public class Hold extends StripeObject implements HasId {
   @SerializedName("currency")
   String currency;
 
+  /**
+   * The balance destination to which the reserved funds are sent.
+   *
+   * <p>One of {@code other}, {@code risk_reserved}, or {@code settlement_reserved}.
+   */
+  @SerializedName("destination")
+  String destination;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

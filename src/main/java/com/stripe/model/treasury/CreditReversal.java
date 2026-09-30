@@ -21,7 +21,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * You can reverse some <a href="https://api.stripe.com#received_credits">ReceivedCredits</a>
+ * You can reverse some <a href="https://docs.stripe.com/api#received_credits">ReceivedCredits</a>
  * depending on their network and source flow. Reversing a ReceivedCredit leads to the creation of a
  * new object known as a CreditReversal.
  */

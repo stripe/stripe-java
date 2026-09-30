@@ -25,8 +25,8 @@ import lombok.Setter;
  * Products describe the specific goods or services you offer to your customers. For example, you
  * might offer a Standard and Premium version of your goods or service; each version would be a
  * separate Product. They can be used in conjunction with <a
- * href="https://api.stripe.com#prices">Prices</a> to configure pricing in Payment Links, Checkout,
- * and Subscriptions.
+ * href="https://docs.stripe.com/api#prices">Prices</a> to configure pricing in Payment Links,
+ * Checkout, and Subscriptions.
  *
  * <p>Related guides: <a
  * href="https://docs.stripe.com/billing/subscriptions/set-up-subscription">Set up a
@@ -133,6 +133,13 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<TaxCode> taxCode;
+
+  /**
+   * Tax details for this product, including the <a href="https://stripe.com/tax/tax-codes">tax
+   * code</a> and an optional performance location.
+   */
+  @SerializedName("tax_details")
+  TaxDetails taxDetails;
 
   /**
    * The type of the product. The product is either of type {@code good}, which is eligible for use
@@ -510,11 +517,29 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
     BigDecimal width;
   }
 
+  /** Tax details contains information about the data that was used to calculate taxes. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxDetails extends StripeObject {
+    /**
+     * The ID of a tax location with type {@code performance}, representing where the performance
+     * takes place.
+     */
+    @SerializedName("performance_location")
+    String performanceLocation;
+
+    /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
+    @SerializedName("tax_code")
+    String taxCode;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(defaultPrice, responseGetter);
     trySetResponseGetter(packageDimensions, responseGetter);
     trySetResponseGetter(taxCode, responseGetter);
+    trySetResponseGetter(taxDetails, responseGetter);
   }
 }

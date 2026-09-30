@@ -7025,7 +7025,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
      * the value can only be set to {@code now} or {@code unchanged}.
      */
     @SerializedName("billing_cycle_anchor")
-    Object billingCycleAnchor;
+    BillingCycleAnchor billingCycleAnchor;
 
     /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
     @SerializedName("billing_mode")
@@ -7086,6 +7086,19 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     Object metadata;
 
     /**
+     * Previews the invoice that would be generated when pausing the subscription. Passing an empty
+     * hash won't preview pausing and instead returns the next invoice.
+     *
+     * <p>To receive a preview invoice, set {@code invoicing_behavior} to {@code invoice}. A preview
+     * isn't available if the {@code bill_for} options produce no billable amounts.
+     *
+     * <p>{@code pending_invoice_item} never has a preview available because pausing wouldn't
+     * generate an invoice, and paused subscriptions don't generate invoices either.
+     */
+    @SerializedName("pause")
+    Pause pause;
+
+    /**
      * Determines how to handle <a
      * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when the
      * billing cycle changes (e.g., when switching plans, resetting {@code
@@ -7127,7 +7140,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     Object trialEnd;
 
     private SubscriptionDetails(
-        Object billingCycleAnchor,
+        BillingCycleAnchor billingCycleAnchor,
         BillingMode billingMode,
         Object billingSchedules,
         Object cancelAt,
@@ -7137,6 +7150,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         List<InvoiceCreatePreviewParams.SubscriptionDetails.Item> items,
         Object metadata,
+        Pause pause,
         ProrationBehavior prorationBehavior,
         Long prorationDate,
         ResumeAt resumeAt,
@@ -7152,6 +7166,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.items = items;
       this.metadata = metadata;
+      this.pause = pause;
       this.prorationBehavior = prorationBehavior;
       this.prorationDate = prorationDate;
       this.resumeAt = resumeAt;
@@ -7164,7 +7179,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Object billingCycleAnchor;
+      private BillingCycleAnchor billingCycleAnchor;
 
       private BillingMode billingMode;
 
@@ -7183,6 +7198,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       private List<InvoiceCreatePreviewParams.SubscriptionDetails.Item> items;
 
       private Object metadata;
+
+      private Pause pause;
 
       private ProrationBehavior prorationBehavior;
 
@@ -7207,6 +7224,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             this.extraParams,
             this.items,
             this.metadata,
+            this.pause,
             this.prorationBehavior,
             this.prorationDate,
             this.resumeAt,
@@ -7223,18 +7241,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        */
       public Builder setBillingCycleAnchor(
           InvoiceCreatePreviewParams.SubscriptionDetails.BillingCycleAnchor billingCycleAnchor) {
-        this.billingCycleAnchor = billingCycleAnchor;
-        return this;
-      }
-
-      /**
-       * For new subscriptions, a future timestamp to anchor the subscription's <a
-       * href="https://docs.stripe.com/subscriptions/billing-cycle">billing cycle</a>. This is used
-       * to determine the date of the first full invoice, and, for plans with {@code month} or
-       * {@code year} intervals, the day of the month for subsequent invoices. For existing
-       * subscriptions, the value can only be set to {@code now} or {@code unchanged}.
-       */
-      public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
         return this;
       }
@@ -7501,6 +7507,21 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       /**
+       * Previews the invoice that would be generated when pausing the subscription. Passing an
+       * empty hash won't preview pausing and instead returns the next invoice.
+       *
+       * <p>To receive a preview invoice, set {@code invoicing_behavior} to {@code invoice}. A
+       * preview isn't available if the {@code bill_for} options produce no billable amounts.
+       *
+       * <p>{@code pending_invoice_item} never has a preview available because pausing wouldn't
+       * generate an invoice, and paused subscriptions don't generate invoices either.
+       */
+      public Builder setPause(InvoiceCreatePreviewParams.SubscriptionDetails.Pause pause) {
+        this.pause = pause;
+        return this;
+      }
+
+      /**
        * Determines how to handle <a
        * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when the
        * billing cycle changes (e.g., when switching plans, resetting {@code
@@ -7560,6 +7581,124 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       public Builder setTrialEnd(Long trialEnd) {
         this.trialEnd = trialEnd;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingCycleAnchor {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * A timestamp to use as the subscription's billing cycle anchor. Only valid when {@code type}
+       * is {@code timestamp}.
+       */
+      @SerializedName("timestamp")
+      Long timestamp;
+
+      /**
+       * <strong>Required.</strong> Determines how the subscription's billing cycle anchor behaves
+       * for the invoice preview.
+       */
+      @SerializedName("type")
+      Type type;
+
+      private BillingCycleAnchor(Map<String, Object> extraParams, Long timestamp, Type type) {
+        this.extraParams = extraParams;
+        this.timestamp = timestamp;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Long timestamp;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceCreatePreviewParams.SubscriptionDetails.BillingCycleAnchor build() {
+          return new InvoiceCreatePreviewParams.SubscriptionDetails.BillingCycleAnchor(
+              this.extraParams, this.timestamp, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * InvoiceCreatePreviewParams.SubscriptionDetails.BillingCycleAnchor#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * InvoiceCreatePreviewParams.SubscriptionDetails.BillingCycleAnchor#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * A timestamp to use as the subscription's billing cycle anchor. Only valid when {@code
+         * type} is {@code timestamp}.
+         */
+        public Builder setTimestamp(Long timestamp) {
+          this.timestamp = timestamp;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Determines how the subscription's billing cycle anchor behaves
+         * for the invoice preview.
+         */
+        public Builder setType(
+            InvoiceCreatePreviewParams.SubscriptionDetails.BillingCycleAnchor.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("now")
+        NOW("now"),
+
+        @SerializedName("timestamp")
+        TIMESTAMP("timestamp"),
+
+        @SerializedName("unchanged")
+        UNCHANGED("unchanged");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
 
@@ -8280,6 +8419,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @SerializedName("clear_usage")
       Boolean clearUsage;
 
+      /** The trial offer to apply to this subscription item. */
+      @SerializedName("current_trial")
+      CurrentTrial currentTrial;
+
       /** A flag that, if set to {@code true}, will delete the specified item. */
       @SerializedName("deleted")
       Boolean deleted;
@@ -8320,16 +8463,19 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       String plan;
 
       /**
-       * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-       * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
-       * quantity} parameter is provided.
+       * The ID of the price object. You can use either {@code price} or {@code price_data}, but not
+       * both, to set or change this item's price. If you're updating an existing item without
+       * changing its price, omit both. When changing a subscription item's price, {@code quantity}
+       * is set to 1 unless a {@code quantity} parameter is provided.
        */
       @SerializedName("price")
       String price;
 
       /**
        * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-       * inline. One of {@code price} or {@code price_data} is required.
+       * inline. You can use either {@code price} or {@code price_data}, but not both, to set or
+       * change this item's price. If you're updating an existing item without changing its price,
+       * omit both.
        */
       @SerializedName("price_data")
       PriceData priceData;
@@ -8351,6 +8497,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       private Item(
           Object billingThresholds,
           Boolean clearUsage,
+          CurrentTrial currentTrial,
           Boolean deleted,
           Object discounts,
           Map<String, Object> extraParams,
@@ -8363,6 +8510,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           Object taxRates) {
         this.billingThresholds = billingThresholds;
         this.clearUsage = clearUsage;
+        this.currentTrial = currentTrial;
         this.deleted = deleted;
         this.discounts = discounts;
         this.extraParams = extraParams;
@@ -8383,6 +8531,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         private Object billingThresholds;
 
         private Boolean clearUsage;
+
+        private CurrentTrial currentTrial;
 
         private Boolean deleted;
 
@@ -8409,6 +8559,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           return new InvoiceCreatePreviewParams.SubscriptionDetails.Item(
               this.billingThresholds,
               this.clearUsage,
+              this.currentTrial,
               this.deleted,
               this.discounts,
               this.extraParams,
@@ -8448,6 +8599,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
          */
         public Builder setClearUsage(Boolean clearUsage) {
           this.clearUsage = clearUsage;
+          return this;
+        }
+
+        /** The trial offer to apply to this subscription item. */
+        public Builder setCurrentTrial(
+            InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial currentTrial) {
+          this.currentTrial = currentTrial;
           return this;
         }
 
@@ -8604,9 +8762,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * The ID of the price object. One of {@code price} or {@code price_data} is required. When
-         * changing a subscription item's price, {@code quantity} is set to 1 unless a {@code
-         * quantity} parameter is provided.
+         * The ID of the price object. You can use either {@code price} or {@code price_data}, but
+         * not both, to set or change this item's price. If you're updating an existing item without
+         * changing its price, omit both. When changing a subscription item's price, {@code
+         * quantity} is set to 1 unless a {@code quantity} parameter is provided.
          */
         public Builder setPrice(String price) {
           this.price = price;
@@ -8615,7 +8774,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         /**
          * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-         * inline. One of {@code price} or {@code price_data} is required.
+         * inline. You can use either {@code price} or {@code price_data}, but not both, to set or
+         * change this item's price. If you're updating an existing item without changing its price,
+         * omit both.
          */
         public Builder setPriceData(
             InvoiceCreatePreviewParams.SubscriptionDetails.Item.PriceData priceData) {
@@ -8764,6 +8925,85 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
            */
           public Builder setUsageGte(Long usageGte) {
             this.usageGte = usageGte;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CurrentTrial {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> The ID of the trial offer to apply to the subscription item.
+         */
+        @SerializedName("trial_offer")
+        String trialOffer;
+
+        private CurrentTrial(Map<String, Object> extraParams, String trialOffer) {
+          this.extraParams = extraParams;
+          this.trialOffer = trialOffer;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String trialOffer;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial build() {
+            return new InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial(
+                this.extraParams, this.trialOffer);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The ID of the trial offer to apply to the subscription item.
+           */
+          public Builder setTrialOffer(String trialOffer) {
+            this.trialOffer = trialOffer;
             return this;
           }
         }
@@ -9223,18 +9463,439 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
     }
 
-    public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
-      @SerializedName("now")
-      NOW("now"),
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pause {
+      /** Controls what to bill for when pausing the subscription. */
+      @SerializedName("bill_for")
+      BillFor billFor;
 
-      @SerializedName("unchanged")
-      UNCHANGED("unchanged");
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
 
-      @Getter(onMethod_ = {@Override})
-      private final String value;
+      /**
+       * Determines how to handle debits and credits when pausing. Defaults to {@code
+       * pending_invoice_item}.
+       */
+      @SerializedName("invoicing_behavior")
+      InvoicingBehavior invoicingBehavior;
 
-      BillingCycleAnchor(String value) {
-        this.value = value;
+      /** The type of pause to apply. Defaults to {@code subscription}. */
+      @SerializedName("type")
+      Type type;
+
+      private Pause(
+          BillFor billFor,
+          Map<String, Object> extraParams,
+          InvoicingBehavior invoicingBehavior,
+          Type type) {
+        this.billFor = billFor;
+        this.extraParams = extraParams;
+        this.invoicingBehavior = invoicingBehavior;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private BillFor billFor;
+
+        private Map<String, Object> extraParams;
+
+        private InvoicingBehavior invoicingBehavior;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceCreatePreviewParams.SubscriptionDetails.Pause build() {
+          return new InvoiceCreatePreviewParams.SubscriptionDetails.Pause(
+              this.billFor, this.extraParams, this.invoicingBehavior, this.type);
+        }
+
+        /** Controls what to bill for when pausing the subscription. */
+        public Builder setBillFor(
+            InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor billFor) {
+          this.billFor = billFor;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.SubscriptionDetails.Pause#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.SubscriptionDetails.Pause#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Determines how to handle debits and credits when pausing. Defaults to {@code
+         * pending_invoice_item}.
+         */
+        public Builder setInvoicingBehavior(
+            InvoiceCreatePreviewParams.SubscriptionDetails.Pause.InvoicingBehavior
+                invoicingBehavior) {
+          this.invoicingBehavior = invoicingBehavior;
+          return this;
+        }
+
+        /** The type of pause to apply. Defaults to {@code subscription}. */
+        public Builder setType(InvoiceCreatePreviewParams.SubscriptionDetails.Pause.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillFor {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Controls when to bill for metered usage in the current period. Defaults to {@code { type:
+         * "now" }}.
+         */
+        @SerializedName("outstanding_usage_through")
+        OutstandingUsageThrough outstandingUsageThrough;
+
+        /**
+         * Controls when to credit for unused time on licensed items. Defaults to {@code { type:
+         * "now" }}.
+         */
+        @SerializedName("unused_time_from")
+        UnusedTimeFrom unusedTimeFrom;
+
+        private BillFor(
+            Map<String, Object> extraParams,
+            OutstandingUsageThrough outstandingUsageThrough,
+            UnusedTimeFrom unusedTimeFrom) {
+          this.extraParams = extraParams;
+          this.outstandingUsageThrough = outstandingUsageThrough;
+          this.unusedTimeFrom = unusedTimeFrom;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private OutstandingUsageThrough outstandingUsageThrough;
+
+          private UnusedTimeFrom unusedTimeFrom;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor build() {
+            return new InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor(
+                this.extraParams, this.outstandingUsageThrough, this.unusedTimeFrom);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Controls when to bill for metered usage in the current period. Defaults to {@code {
+           * type: "now" }}.
+           */
+          public Builder setOutstandingUsageThrough(
+              InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor.OutstandingUsageThrough
+                  outstandingUsageThrough) {
+            this.outstandingUsageThrough = outstandingUsageThrough;
+            return this;
+          }
+
+          /**
+           * Controls when to credit for unused time on licensed items. Defaults to {@code { type:
+           * "now" }}.
+           */
+          public Builder setUnusedTimeFrom(
+              InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor.UnusedTimeFrom
+                  unusedTimeFrom) {
+            this.unusedTimeFrom = unusedTimeFrom;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class OutstandingUsageThrough {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** <strong>Required.</strong> When to bill metered usage in the current period. */
+          @SerializedName("type")
+          Type type;
+
+          private OutstandingUsageThrough(Map<String, Object> extraParams, Type type) {
+            this.extraParams = extraParams;
+            this.type = type;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Type type;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor
+                    .OutstandingUsageThrough
+                build() {
+              return new InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor
+                  .OutstandingUsageThrough(this.extraParams, this.type);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor.OutstandingUsageThrough#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor.OutstandingUsageThrough#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** <strong>Required.</strong> When to bill metered usage in the current period. */
+            public Builder setType(
+                InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor.OutstandingUsageThrough
+                        .Type
+                    type) {
+              this.type = type;
+              return this;
+            }
+          }
+
+          public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("none")
+            NONE("none"),
+
+            @SerializedName("now")
+            NOW("now");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Type(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class UnusedTimeFrom {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** <strong>Required.</strong> When to credit for unused time. */
+          @SerializedName("type")
+          Type type;
+
+          private UnusedTimeFrom(Map<String, Object> extraParams, Type type) {
+            this.extraParams = extraParams;
+            this.type = type;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Type type;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor.UnusedTimeFrom
+                build() {
+              return new InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor
+                  .UnusedTimeFrom(this.extraParams, this.type);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor.UnusedTimeFrom#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor.UnusedTimeFrom#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** <strong>Required.</strong> When to credit for unused time. */
+            public Builder setType(
+                InvoiceCreatePreviewParams.SubscriptionDetails.Pause.BillFor.UnusedTimeFrom.Type
+                    type) {
+              this.type = type;
+              return this;
+            }
+          }
+
+          public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("item_current_period_start")
+            ITEM_CURRENT_PERIOD_START("item_current_period_start"),
+
+            @SerializedName("none")
+            NONE("none"),
+
+            @SerializedName("now")
+            NOW("now");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Type(String value) {
+              this.value = value;
+            }
+          }
+        }
+      }
+
+      public enum InvoicingBehavior implements ApiRequestParams.EnumParam {
+        @SerializedName("invoice")
+        INVOICE("invoice"),
+
+        @SerializedName("pending_invoice_item")
+        PENDING_INVOICE_ITEM("pending_invoice_item");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        InvoicingBehavior(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("subscription")
+        SUBSCRIPTION("subscription");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
 

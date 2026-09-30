@@ -81,8 +81,10 @@ public class BalanceTransactionListParams extends ApiRequestParams {
    * climate_order_purchase}, {@code climate_order_refund}, {@code connect_collection_transfer},
    * {@code contribution}, {@code inbound_transfer}, {@code inbound_transfer_reversal}, {@code
    * issuing_authorization_hold}, {@code issuing_authorization_release}, {@code issuing_dispute},
-   * {@code issuing_transaction}, {@code obligation_outbound}, {@code obligation_reversal_inbound},
-   * {@code payment}, {@code payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
+   * {@code issuing_dispute_provisional_credit}, {@code
+   * issuing_dispute_provisional_credit_reversal}, {@code issuing_transaction}, {@code
+   * obligation_outbound}, {@code obligation_reversal_inbound}, {@code payment}, {@code
+   * payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
    * payment_network_reserve_release}, {@code payment_refund}, {@code payment_reversal}, {@code
    * payment_unreconciled}, {@code payout}, {@code payout_cancel}, {@code payout_failure}, {@code
    * payout_minimum_balance_hold}, {@code payout_minimum_balance_release}, {@code refund}, {@code
@@ -285,17 +287,18 @@ public class BalanceTransactionListParams extends ApiRequestParams {
      * climate_order_purchase}, {@code climate_order_refund}, {@code connect_collection_transfer},
      * {@code contribution}, {@code inbound_transfer}, {@code inbound_transfer_reversal}, {@code
      * issuing_authorization_hold}, {@code issuing_authorization_release}, {@code issuing_dispute},
-     * {@code issuing_transaction}, {@code obligation_outbound}, {@code
-     * obligation_reversal_inbound}, {@code payment}, {@code payment_failure_refund}, {@code
-     * payment_network_reserve_hold}, {@code payment_network_reserve_release}, {@code
-     * payment_refund}, {@code payment_reversal}, {@code payment_unreconciled}, {@code payout},
-     * {@code payout_cancel}, {@code payout_failure}, {@code payout_minimum_balance_hold}, {@code
-     * payout_minimum_balance_release}, {@code refund}, {@code refund_failure}, {@code
-     * reserve_transaction}, {@code reserved_funds}, {@code reserve_hold}, {@code reserve_release},
-     * {@code stripe_fee}, {@code stripe_fx_fee}, {@code stripe_balance_payment_debit}, {@code
-     * stripe_balance_payment_debit_reversal}, {@code tax_fee}, {@code topup}, {@code
-     * topup_reversal}, {@code transfer}, {@code transfer_cancel}, {@code transfer_failure}, {@code
-     * transfer_refund}, or {@code fee_credit_funding}.
+     * {@code issuing_dispute_provisional_credit}, {@code
+     * issuing_dispute_provisional_credit_reversal}, {@code issuing_transaction}, {@code
+     * obligation_outbound}, {@code obligation_reversal_inbound}, {@code payment}, {@code
+     * payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
+     * payment_network_reserve_release}, {@code payment_refund}, {@code payment_reversal}, {@code
+     * payment_unreconciled}, {@code payout}, {@code payout_cancel}, {@code payout_failure}, {@code
+     * payout_minimum_balance_hold}, {@code payout_minimum_balance_release}, {@code refund}, {@code
+     * refund_failure}, {@code reserve_transaction}, {@code reserved_funds}, {@code reserve_hold},
+     * {@code reserve_release}, {@code stripe_fee}, {@code stripe_fx_fee}, {@code
+     * stripe_balance_payment_debit}, {@code stripe_balance_payment_debit_reversal}, {@code
+     * tax_fee}, {@code topup}, {@code topup_reversal}, {@code transfer}, {@code transfer_cancel},
+     * {@code transfer_failure}, {@code transfer_refund}, or {@code fee_credit_funding}.
      */
     public Builder setType(String type) {
       this.type = type;

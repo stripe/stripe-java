@@ -1246,7 +1246,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testAccountsRejectPost() throws StripeException {
     Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
 
-    AccountRejectParams params = AccountRejectParams.builder().setReason("fraud_other").build();
+    AccountRejectParams params =
+        AccountRejectParams.builder().setReason(AccountRejectParams.Reason.FRAUD_OTHER).build();
 
     Account account = resource.reject(params);
     assertNotNull(account);
@@ -1263,7 +1264,9 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.AccountRejectParams params =
-        com.stripe.param.AccountRejectParams.builder().setReason("fraud_other").build();
+        com.stripe.param.AccountRejectParams.builder()
+            .setReason(com.stripe.param.AccountRejectParams.Reason.FRAUD_OTHER)
+            .build();
 
     com.stripe.model.Account account = client.v1().accounts().reject("acct_xxxxxxxxxxxxx", params);
     assertNotNull(account);
@@ -1280,7 +1283,9 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.AccountRejectParams params =
-        com.stripe.param.AccountRejectParams.builder().setReason("fraud_other").build();
+        com.stripe.param.AccountRejectParams.builder()
+            .setReason(com.stripe.param.AccountRejectParams.Reason.FRAUD_OTHER)
+            .build();
 
     com.stripe.model.Account account = client.accounts().reject("acct_xxxxxxxxxxxxx", params);
     assertNotNull(account);
@@ -3208,7 +3213,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.Event.class,
-        "{\"object\":\"v2.core.event\",\"changes\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"reason\":{\"request\":{\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"},\"type\":\"request\"},\"type\":\"type\"}");
+        "{\"object\":\"v2.core.event\",\"changes\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"reason\":{\"request\":{\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"},\"type\":\"request\"},\"snapshot_event\":\"snapshot_event\",\"type\":\"type\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.Event event = client.v2().core().events().retrieve("ll_123");
@@ -6921,7 +6926,7 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.financialconnections.SessionCreateParams.Permission.BALANCES)
             .setFilters(
                 com.stripe.param.financialconnections.SessionCreateParams.Filters.builder()
-                    .addCountry("US")
+                    .setCountry("US")
                     .build())
             .build();
 
@@ -6955,7 +6960,7 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.financialconnections.SessionCreateParams.Permission.BALANCES)
             .setFilters(
                 com.stripe.param.financialconnections.SessionCreateParams.Filters.builder()
-                    .addCountry("US")
+                    .setCountry("US")
                     .build())
             .build();
 
@@ -6989,7 +6994,7 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.financialconnections.SessionCreateParams.Permission.BALANCES)
             .setFilters(
                 com.stripe.param.financialconnections.SessionCreateParams.Filters.builder()
-                    .addCountry("US")
+                    .setCountry("US")
                     .build())
             .build();
 
@@ -24908,9 +24913,6 @@ class GeneratedExamples extends BaseStripeTest {
                                             .AccountOnboarding.CollectionOptions.FutureRequirements
                                             .INCLUDE)
                                     .build())
-                            .addConfiguration(
-                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                    .AccountOnboarding.Configuration.MERCHANT)
                             .setRefreshUrl("refresh_url")
                             .setReturnUrl("return_url")
                             .build())
@@ -24928,9 +24930,6 @@ class GeneratedExamples extends BaseStripeTest {
                                             .AccountUpdate.CollectionOptions.FutureRequirements
                                             .INCLUDE)
                                     .build())
-                            .addConfiguration(
-                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                    .AccountUpdate.Configuration.MERCHANT)
                             .setRefreshUrl("refresh_url")
                             .setReturnUrl("return_url")
                             .build())

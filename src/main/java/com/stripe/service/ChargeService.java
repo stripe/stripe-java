@@ -63,37 +63,33 @@ public final class ChargeService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Charge>>() {}.getType());
   }
   /**
-   * This method is no longer recommended—use the <a
-   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
-   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
-   * request payment.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge create(ChargeCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
-   * This method is no longer recommended—use the <a
-   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
-   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
-   * request payment.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge create(RequestOptions options) throws StripeException {
     return create((ChargeCreateParams) null, options);
   }
   /**
-   * This method is no longer recommended—use the <a
-   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
-   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
-   * request payment.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge create() throws StripeException {
     return create((ChargeCreateParams) null, (RequestOptions) null);
   }
   /**
-   * This method is no longer recommended—use the <a
-   * href="https://stripe.com/docs/api/payment_intents">Payment Intents API</a> to initiate a new
-   * payment instead. Confirmation of the PaymentIntent creates the {@code Charge} object used to
-   * request payment.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge create(ChargeCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/charges";
@@ -216,57 +212,33 @@ public final class ChargeService extends ApiService {
     return this.request(request, new TypeToken<StripeSearchResult<Charge>>() {}.getType());
   }
   /**
-   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
-   * option set to false.
-   *
-   * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
-   * marked as refunded and capture attempts will fail.
-   *
-   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
-   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge capture(String charge, ChargeCaptureParams params) throws StripeException {
     return capture(charge, params, (RequestOptions) null);
   }
   /**
-   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
-   * option set to false.
-   *
-   * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
-   * marked as refunded and capture attempts will fail.
-   *
-   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
-   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge capture(String charge, RequestOptions options) throws StripeException {
     return capture(charge, (ChargeCaptureParams) null, options);
   }
   /**
-   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
-   * option set to false.
-   *
-   * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
-   * marked as refunded and capture attempts will fail.
-   *
-   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
-   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge capture(String charge) throws StripeException {
     return capture(charge, (ChargeCaptureParams) null, (RequestOptions) null);
   }
   /**
-   * Capture the payment of an existing, uncaptured charge that was created with the {@code capture}
-   * option set to false.
-   *
-   * <p>Uncaptured payments expire a set number of days after they are created (<a
-   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>), after which they are
-   * marked as refunded and capture attempts will fail.
-   *
-   * <p>Don’t use this method to capture a PaymentIntent-initiated charge. Use <a
-   * href="https://stripe.com/docs/api/payment_intents/capture">Capture a PaymentIntent</a>.
+   * This method is deprecated and will be removed soon. If your integration uses it, you need to
+   * update it to use a different payment flow, such as <a
+   * href="https://stripe.com/docs/payments/payment-intents">the Payment Intents API</a>.
    */
   public Charge capture(String charge, ChargeCaptureParams params, RequestOptions options)
       throws StripeException {

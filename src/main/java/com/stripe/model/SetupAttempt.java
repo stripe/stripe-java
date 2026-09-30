@@ -291,6 +291,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("bancontact")
     Bancontact bancontact;
 
+    @SerializedName("blik")
+    Blik blik;
+
     @SerializedName("boleto")
     Boleto boleto;
 
@@ -493,6 +496,19 @@ public class SetupAttempt extends ApiResource implements HasId {
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
+    }
+
+    /**
+     * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Blik extends StripeObject {
+      /** A unique and immutable identifier assigned by BLIK to every buyer. */
+      @SerializedName("buyer_id")
+      String buyerId;
     }
 
     /**

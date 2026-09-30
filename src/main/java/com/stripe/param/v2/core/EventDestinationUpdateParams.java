@@ -14,11 +14,16 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class EventDestinationUpdateParams extends ApiRequestParams {
-  /** An optional description of what the event destination is used for. */
+  /**
+   * An optional user-defined description of the destination's purpose; it does not control routing.
+   */
   @SerializedName("description")
   Object description;
 
-  /** The list of events to enable for this endpoint. */
+  /**
+   * The list of event types enabled for delivery to this destination. Event scopes are configured
+   * when the destination is created.
+   */
   @SerializedName("enabled_events")
   List<String> enabledEvents;
 
@@ -31,9 +36,7 @@ public class EventDestinationUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * Additional fields to include in the response. Currently supports {@code webhook_endpoint.url}.
-   */
+  /** Include the normally redacted {@code webhook_endpoint.url} in the response. */
   @SerializedName("include")
   List<EventDestinationUpdateParams.Include> include;
 
@@ -41,11 +44,14 @@ public class EventDestinationUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, Object> metadata;
 
-  /** Event destination name. */
+  /** A user-defined label for identifying the destination; it does not control routing. */
   @SerializedName("name")
   Object name;
 
-  /** Webhook endpoint configuration. */
+  /**
+   * New delivery target for the webhook endpoint. Live mode requires HTTPS; sandbox mode also
+   * supports HTTP.
+   */
   @SerializedName("webhook_endpoint")
   WebhookEndpoint webhookEndpoint;
 
@@ -97,13 +103,19 @@ public class EventDestinationUpdateParams extends ApiRequestParams {
           this.webhookEndpoint);
     }
 
-    /** An optional description of what the event destination is used for. */
+    /**
+     * An optional user-defined description of the destination's purpose; it does not control
+     * routing.
+     */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
     }
 
-    /** An optional description of what the event destination is used for. */
+    /**
+     * An optional user-defined description of the destination's purpose; it does not control
+     * routing.
+     */
     public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;
@@ -231,19 +243,22 @@ public class EventDestinationUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Event destination name. */
+    /** A user-defined label for identifying the destination; it does not control routing. */
     public Builder setName(String name) {
       this.name = name;
       return this;
     }
 
-    /** Event destination name. */
+    /** A user-defined label for identifying the destination; it does not control routing. */
     public Builder setName(EmptyParam name) {
       this.name = name;
       return this;
     }
 
-    /** Webhook endpoint configuration. */
+    /**
+     * New delivery target for the webhook endpoint. Live mode requires HTTPS; sandbox mode also
+     * supports HTTP.
+     */
     public Builder setWebhookEndpoint(
         EventDestinationUpdateParams.WebhookEndpoint webhookEndpoint) {
       this.webhookEndpoint = webhookEndpoint;
@@ -263,7 +278,10 @@ public class EventDestinationUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The URL of the webhook endpoint. */
+    /**
+     * <strong>Required.</strong> The URL where Stripe sends matching events. Live mode requires
+     * HTTPS; sandbox mode also supports HTTP.
+     */
     @SerializedName("url")
     Object url;
 
@@ -313,13 +331,19 @@ public class EventDestinationUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The URL of the webhook endpoint. */
+      /**
+       * <strong>Required.</strong> The URL where Stripe sends matching events. Live mode requires
+       * HTTPS; sandbox mode also supports HTTP.
+       */
       public Builder setUrl(String url) {
         this.url = url;
         return this;
       }
 
-      /** <strong>Required.</strong> The URL of the webhook endpoint. */
+      /**
+       * <strong>Required.</strong> The URL where Stripe sends matching events. Live mode requires
+       * HTTPS; sandbox mode also supports HTTP.
+       */
       public Builder setUrl(EmptyParam url) {
         this.url = url;
         return this;

@@ -876,6 +876,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("product_description")
     String productDescription;
 
+    /**
+     * A link to the business's publicly available terms related to the Specified Commercial
+     * Transaction Act. Only used for accounts in Japan.
+     */
+    @SerializedName("specified_commercial_transactions_act_url")
+    String specifiedCommercialTransactionsActUrl;
+
     /** A publicly available mailing address for sending support issues to. */
     @SerializedName("support_address")
     Address supportAddress;
@@ -1076,6 +1083,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("blik_payments")
     String blikPayments;
+
+    /**
+     * The status of the BLIK recurring payments capability of the account, or whether the account
+     * can accept recurring and subscription BLIK payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("blik_recurring_payments")
+    String blikRecurringPayments;
 
     /**
      * The status of the boleto payments capability of the account, or whether the account can
@@ -1365,6 +1381,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String paynowPayments;
 
     /**
+     * The status of the Paypay capability of the account, or whether the account can directly
+     * process Paypay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("paypay_payments")
+    String paypayPayments;
+
+    /**
      * The status of the PayTo capability of the account, or whether the account can directly
      * process PayTo charges.
      *
@@ -1444,6 +1469,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("sepa_debit_payments")
     String sepaDebitPayments;
+
+    /**
+     * The status of the SeQura capability of the account, or whether the account can directly
+     * process SeQura payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("sequra_payments")
+    String sequraPayments;
 
     /**
      * The status of the Sofort payments capability of the account, or whether the account can
@@ -1915,10 +1949,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @EqualsAndHashCode(callSuper = false)
       public static class Document extends StripeObject {
         /**
-         * The back of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code additional_verification}. Note that
-         * {@code additional_verification} files are <a
-         * href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
+         * The back of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}. Note that {@code additional_verification} files
+         * are <a href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
          */
         @SerializedName("back")
         @Getter(lombok.AccessLevel.NONE)
@@ -1942,10 +1976,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         String detailsCode;
 
         /**
-         * The front of a document returned by a <a href="https://api.stripe.com#create_file">file
-         * upload</a> with a {@code purpose} value of {@code additional_verification}. Note that
-         * {@code additional_verification} files are <a
-         * href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
+         * The front of a document returned by a <a
+         * href="https://docs.stripe.com/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}. Note that {@code additional_verification} files
+         * are <a href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
          */
         @SerializedName("front")
         @Getter(lombok.AccessLevel.NONE)
@@ -2203,8 +2237,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * The code for the type of error.
        *
        * <p>One of {@code external_request}, {@code information_missing}, {@code
-       * invalid_address_city_state_postal_code}, {@code invalid_address_highway_contract_box},
-       * {@code invalid_address_private_mailbox}, {@code invalid_business_profile_name}, {@code
+       * invalid_address_city_state_postal_code}, {@code invalid_address_cmra_address}, {@code
+       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+       * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
        * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted}, {@code
        * invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
        * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
@@ -2409,8 +2444,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * The code for the type of error.
        *
        * <p>One of {@code external_request}, {@code information_missing}, {@code
-       * invalid_address_city_state_postal_code}, {@code invalid_address_highway_contract_box},
-       * {@code invalid_address_private_mailbox}, {@code invalid_business_profile_name}, {@code
+       * invalid_address_city_state_postal_code}, {@code invalid_address_cmra_address}, {@code
+       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+       * invalid_address_registered_agent_address}, {@code invalid_business_profile_name}, {@code
        * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted}, {@code
        * invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
        * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
@@ -2517,6 +2553,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
     @SerializedName("payouts")
     Payouts payouts;
+
+    @SerializedName("paypay_payments")
+    PaypayPayments paypayPayments;
 
     @SerializedName("sepa_debit_payments")
     SepaDebitPayments sepaDebitPayments;
@@ -2952,6 +2991,96 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
          */
         @SerializedName("weekly_payout_days")
         List<String> weeklyPayoutDays;
+      }
+    }
+
+    /**
+     * For more details about PaypayPayments, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaypayPayments extends StripeObject {
+      /** Additional files that are required to support the onboarding process of your business. */
+      @SerializedName("additional_files")
+      List<String> additionalFiles;
+
+      /**
+       * The type of goods your business sells. Use {@code digital_content} if you sell digital
+       * content. Use {@code other} for all other types of goods or services.
+       *
+       * <p>One of {@code digital_content}, or {@code other}.
+       */
+      @SerializedName("goods_type")
+      String goodsType;
+
+      @SerializedName("site")
+      Site site;
+
+      /**
+       * For more details about Site, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Site extends StripeObject {
+        @SerializedName("accessible")
+        Accessible accessible;
+
+        @SerializedName("in_development")
+        InDevelopment inDevelopment;
+
+        @SerializedName("restricted")
+        Restricted restricted;
+
+        /**
+         * The status of your business's website.
+         *
+         * <p>One of {@code accessible}, {@code in_development}, or {@code restricted}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about Accessible, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Accessible extends StripeObject {}
+
+        /**
+         * For more details about InDevelopment, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class InDevelopment extends StripeObject {
+          /** Field to indicate that the website password has been provided. */
+          @SerializedName("password_provided")
+          Boolean passwordProvided;
+
+          /** The username needed to access your business's website. */
+          @SerializedName("username")
+          String username;
+        }
+
+        /**
+         * For more details about Restricted, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Restricted extends StripeObject {
+          /** File explaining the payment flow for your business. */
+          @SerializedName("payment_flow_file")
+          String paymentFlowFile;
+        }
       }
     }
 

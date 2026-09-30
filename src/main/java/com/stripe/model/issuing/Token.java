@@ -298,7 +298,7 @@ public class Token extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Mastercard extends StripeObject {
-      /** A unique reference ID from MasterCard to represent the card account number. */
+      /** A unique reference ID from Mastercard to represent the card account number. */
       @SerializedName("card_reference_id")
       String cardReferenceId;
 
@@ -306,13 +306,13 @@ public class Token extends ApiResource implements HasId {
       @SerializedName("token_reference_id")
       String tokenReferenceId;
 
-      /** The ID of the entity requesting tokenization, specific to MasterCard. */
+      /** The ID of the entity requesting tokenization, specific to Mastercard. */
       @SerializedName("token_requestor_id")
       String tokenRequestorId;
 
       /**
        * The name of the entity requesting tokenization, if known. This is directly provided from
-       * MasterCard.
+       * Mastercard.
        */
       @SerializedName("token_requestor_name")
       String tokenRequestorName;

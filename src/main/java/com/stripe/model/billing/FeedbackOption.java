@@ -21,7 +21,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A resource for the feedback options model (for custom cancellation reasons). */
+/**
+ * A feedback option is a reason you can present to customers when they cancel a subscription
+ * through the customer portal. Configure the set of options a customer can choose from on a <a
+ * href="https://stripe.com/api/customer_portal/configuration">portal configuration</a>.
+ *
+ * <p>Related guide: <a href="https://stripe.com/customer-management">Customer management</a>
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -161,12 +167,12 @@ public class FeedbackOption extends ApiResource implements HasId {
     return getResponseGetter().request(request, FeedbackOption.class);
   }
 
-  /** An API method for listing the feedback options model. */
+  /** Returns a list of your feedback options. */
   public static FeedbackOptionCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** An API method for listing the feedback options model. */
+  /** Returns a list of your feedback options. */
   public static FeedbackOptionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/billing/feedback_options";
@@ -175,13 +181,13 @@ public class FeedbackOption extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, FeedbackOptionCollection.class);
   }
 
-  /** An API method for listing the feedback options model. */
+  /** Returns a list of your feedback options. */
   public static FeedbackOptionCollection list(FeedbackOptionListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** An API method for listing the feedback options model. */
+  /** Returns a list of your feedback options. */
   public static FeedbackOptionCollection list(
       FeedbackOptionListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/billing/feedback_options";
@@ -196,17 +202,17 @@ public class FeedbackOption extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, FeedbackOptionCollection.class);
   }
 
-  /** Retrieves a feedback options object given an ID. */
+  /** Retrieves a feedback option object given an ID. */
   public static FeedbackOption retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a feedback options object given an ID. */
+  /** Retrieves a feedback option object given an ID. */
   public static FeedbackOption retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a feedback options object given an ID. */
+  /** Retrieves a feedback option object given an ID. */
   public static FeedbackOption retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/billing/feedback_options/%s", ApiResource.urlEncodeId(id));
@@ -215,7 +221,7 @@ public class FeedbackOption extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, FeedbackOption.class);
   }
 
-  /** Retrieves a feedback options object given an ID. */
+  /** Retrieves a feedback option object given an ID. */
   public static FeedbackOption retrieve(
       String id, FeedbackOptionRetrieveParams params, RequestOptions options)
       throws StripeException {
