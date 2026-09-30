@@ -23,6 +23,14 @@ public class PayoutMethod extends StripeObject implements HasId {
   @SerializedName("apple_pay")
   ApplePay applePay;
 
+  /**
+   * Whether the payout method was archived. Payout methods can be archived through the /archive
+   * API, and they will not be automatically archived by Stripe. Archived payout methods cannot be
+   * used for outbound money movement.
+   */
+  @SerializedName("archived")
+  Boolean archived;
+
   /** A set of available payout speeds for this payout method. */
   @SerializedName("available_payout_speeds")
   List<String> availablePayoutSpeeds;
@@ -154,15 +162,6 @@ public class PayoutMethod extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class BankAccount extends StripeObject {
     /**
-     * Whether this PayoutMethodBankAccount object was archived. PayoutMethodBankAccount objects can
-     * be archived through the /archive API, and they will not be automatically archived by Stripe.
-     * Archived PayoutMethodBankAccount objects cannot be used as payout methods and will not appear
-     * in the payout method list.
-     */
-    @SerializedName("archived")
-    Boolean archived;
-
-    /**
      * The type of bank account (checking or savings).
      *
      * <p>One of {@code checking}, {@code futsu}, {@code savings}, or {@code toza}.
@@ -215,15 +214,6 @@ public class PayoutMethod extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Card extends StripeObject {
-    /**
-     * Whether the PayoutMethodCard object was archived. PayoutMethodCard objects can be archived
-     * through the /archive API, and they will not be automatically archived by Stripe. Archived
-     * PayoutMethodCard objects cannot be used as payout methods and will not appear in the payout
-     * method list.
-     */
-    @SerializedName("archived")
-    Boolean archived;
-
     /** The month the card expires. */
     @SerializedName("exp_month")
     String expMonth;
@@ -256,14 +246,6 @@ public class PayoutMethod extends StripeObject implements HasId {
     /** Destination wallet address. */
     @SerializedName("address")
     String address;
-
-    /**
-     * Whether the crypto wallet was archived. Crypto wallets can be archived through the /archive
-     * API, and they will not be automatically archived by Stripe. Archived crypto wallets cannot be
-     * used as payout method and will not appear in the payout method list.
-     */
-    @SerializedName("archived")
-    Boolean archived;
 
     /** Optional field, required if network supports memos (only &quot;stellar&quot; currently). */
     @SerializedName("memo")
@@ -303,7 +285,8 @@ public class PayoutMethod extends StripeObject implements HasId {
      * href="https://docs.stripe.com/api/v2/money-management/outbound-setup-intents/create">{@code
      * POST /v2/money_management/outbound_setup_intents}</a>.
      *
-     * <p>One of {@code disabled}, {@code eligible}, {@code invalid}, or {@code requires_action}.
+     * <p>One of {@code disabled}, {@code eligible}, {@code ineligible}, {@code invalid}, or {@code
+     * requires_action}.
      */
     @SerializedName("payments")
     String payments;
@@ -314,7 +297,8 @@ public class PayoutMethod extends StripeObject implements HasId {
      * href="https://docs.stripe.com/api/v2/money-management/outbound-setup-intents/create">{@code
      * POST /v2/money_management/outbound_setup_intents}</a>.
      *
-     * <p>One of {@code disabled}, {@code eligible}, {@code invalid}, or {@code requires_action}.
+     * <p>One of {@code disabled}, {@code eligible}, {@code ineligible}, {@code invalid}, or {@code
+     * requires_action}.
      */
     @SerializedName("transfers")
     String transfers;

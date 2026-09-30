@@ -318,7 +318,10 @@ public class NetworkTokenCreateParams extends ApiRequestParams {
 
     public enum Origin implements ApiRequestParams.EnumParam {
       @SerializedName("card_on_file")
-      CARD_ON_FILE("card_on_file");
+      CARD_ON_FILE("card_on_file"),
+
+      @SerializedName("wallet")
+      WALLET("wallet");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

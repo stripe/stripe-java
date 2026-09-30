@@ -2417,14 +2417,11 @@ public class ContractCreateParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
-            /**
-             * The per-unit amount to be charged, represented as a decimal string in minor currency
-             * units.
-             */
+            /** The per-unit amount to be charged in minor currency units. */
             @SerializedName("unit_amount")
-            String unitAmount;
+            BigDecimal unitAmount;
 
-            private OverwritePrice(Map<String, Object> extraParams, String unitAmount) {
+            private OverwritePrice(Map<String, Object> extraParams, BigDecimal unitAmount) {
               this.extraParams = extraParams;
               this.unitAmount = unitAmount;
             }
@@ -2436,7 +2433,7 @@ public class ContractCreateParams extends ApiRequestParams {
             public static class Builder {
               private Map<String, Object> extraParams;
 
-              private String unitAmount;
+              private BigDecimal unitAmount;
 
               /** Finalize and obtain parameter instance from this builder. */
               public ContractCreateParams.PricingLine.Pricing.PriceDetails.PricingOverride
@@ -2476,11 +2473,8 @@ public class ContractCreateParams extends ApiRequestParams {
                 return this;
               }
 
-              /**
-               * The per-unit amount to be charged, represented as a decimal string in minor
-               * currency units.
-               */
-              public Builder setUnitAmount(String unitAmount) {
+              /** The per-unit amount to be charged in minor currency units. */
+              public Builder setUnitAmount(BigDecimal unitAmount) {
                 this.unitAmount = unitAmount;
                 return this;
               }
@@ -3228,16 +3222,16 @@ public class ContractCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> The multiply_pricing factor, represented as a decimal string.
-       * e.g. &quot;0.8&quot; for a 20% reduction.
+       * <strong>Required.</strong> The multiply_pricing factor. e.g. &quot;0.8&quot; for a 20%
+       * reduction.
        */
       @SerializedName("factor")
-      String factor;
+      BigDecimal factor;
 
       private MultiplyPricing(
           List<ContractCreateParams.PricingOverride.MultiplyPricing.Criterion> criteria,
           Map<String, Object> extraParams,
-          String factor) {
+          BigDecimal factor) {
         this.criteria = criteria;
         this.extraParams = extraParams;
         this.factor = factor;
@@ -3252,7 +3246,7 @@ public class ContractCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private String factor;
+        private BigDecimal factor;
 
         /** Finalize and obtain parameter instance from this builder. */
         public ContractCreateParams.PricingOverride.MultiplyPricing build() {
@@ -3319,10 +3313,10 @@ public class ContractCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The multiply_pricing factor, represented as a decimal string.
-         * e.g. &quot;0.8&quot; for a 20% reduction.
+         * <strong>Required.</strong> The multiply_pricing factor. e.g. &quot;0.8&quot; for a 20%
+         * reduction.
          */
-        public Builder setFactor(String factor) {
+        public Builder setFactor(BigDecimal factor) {
           this.factor = factor;
           return this;
         }

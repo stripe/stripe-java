@@ -46,22 +46,22 @@ public final class ScheduledQueryRunService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<ScheduledQueryRun>>() {}.getType());
   }
-  /** Retrieves the details of an scheduled query run. */
+  /** Retrieves the details of a scheduled query run. */
   public ScheduledQueryRun retrieve(
       String scheduledQueryRun, ScheduledQueryRunRetrieveParams params) throws StripeException {
     return retrieve(scheduledQueryRun, params, (RequestOptions) null);
   }
-  /** Retrieves the details of an scheduled query run. */
+  /** Retrieves the details of a scheduled query run. */
   public ScheduledQueryRun retrieve(String scheduledQueryRun, RequestOptions options)
       throws StripeException {
     return retrieve(scheduledQueryRun, (ScheduledQueryRunRetrieveParams) null, options);
   }
-  /** Retrieves the details of an scheduled query run. */
+  /** Retrieves the details of a scheduled query run. */
   public ScheduledQueryRun retrieve(String scheduledQueryRun) throws StripeException {
     return retrieve(
         scheduledQueryRun, (ScheduledQueryRunRetrieveParams) null, (RequestOptions) null);
   }
-  /** Retrieves the details of an scheduled query run. */
+  /** Retrieves the details of a scheduled query run. */
   public ScheduledQueryRun retrieve(
       String scheduledQueryRun, ScheduledQueryRunRetrieveParams params, RequestOptions options)
       throws StripeException {

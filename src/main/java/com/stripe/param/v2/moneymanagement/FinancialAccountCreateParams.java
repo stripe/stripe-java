@@ -266,6 +266,11 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     @SerializedName("crypto")
     Crypto crypto;
 
+    /** Array of eligibility objects, segmented by bank name and deposit insurance scheme. */
+    @SerializedName("deposit_insurance_eligibility")
+    List<FinancialAccountCreateParams.Storage.DepositInsuranceEligibility>
+        depositInsuranceEligibility;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -288,10 +293,13 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
 
     private Storage(
         Crypto crypto,
+        List<FinancialAccountCreateParams.Storage.DepositInsuranceEligibility>
+            depositInsuranceEligibility,
         Map<String, Object> extraParams,
         FundsUsageType fundsUsageType,
         List<String> holdsCurrencies) {
       this.crypto = crypto;
+      this.depositInsuranceEligibility = depositInsuranceEligibility;
       this.extraParams = extraParams;
       this.fundsUsageType = fundsUsageType;
       this.holdsCurrencies = holdsCurrencies;
@@ -304,6 +312,9 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     public static class Builder {
       private Crypto crypto;
 
+      private List<FinancialAccountCreateParams.Storage.DepositInsuranceEligibility>
+          depositInsuranceEligibility;
+
       private Map<String, Object> extraParams;
 
       private FundsUsageType fundsUsageType;
@@ -313,7 +324,11 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public FinancialAccountCreateParams.Storage build() {
         return new FinancialAccountCreateParams.Storage(
-            this.crypto, this.extraParams, this.fundsUsageType, this.holdsCurrencies);
+            this.crypto,
+            this.depositInsuranceEligibility,
+            this.extraParams,
+            this.fundsUsageType,
+            this.holdsCurrencies);
       }
 
       /**
@@ -323,6 +338,36 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
        */
       public Builder setCrypto(FinancialAccountCreateParams.Storage.Crypto crypto) {
         this.crypto = crypto;
+        return this;
+      }
+
+      /**
+       * Add an element to `depositInsuranceEligibility` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link FinancialAccountCreateParams.Storage#depositInsuranceEligibility} for the field
+       * documentation.
+       */
+      public Builder addDepositInsuranceEligibility(
+          FinancialAccountCreateParams.Storage.DepositInsuranceEligibility element) {
+        if (this.depositInsuranceEligibility == null) {
+          this.depositInsuranceEligibility = new ArrayList<>();
+        }
+        this.depositInsuranceEligibility.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `depositInsuranceEligibility` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link FinancialAccountCreateParams.Storage#depositInsuranceEligibility} for the field
+       * documentation.
+       */
+      public Builder addAllDepositInsuranceEligibility(
+          List<FinancialAccountCreateParams.Storage.DepositInsuranceEligibility> elements) {
+        if (this.depositInsuranceEligibility == null) {
+          this.depositInsuranceEligibility = new ArrayList<>();
+        }
+        this.depositInsuranceEligibility.addAll(elements);
         return this;
       }
 
@@ -534,6 +579,161 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         private final String value;
 
         CustodyModel(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DepositInsuranceEligibility {
+      /** <strong>Required.</strong> The bank where funds are stored. */
+      @SerializedName("bank_name")
+      BankName bankName;
+
+      /**
+       * <strong>Required.</strong> Currencies eligible for deposit insurance at this bank under
+       * this scheme.
+       */
+      @SerializedName("currencies")
+      List<String> currencies;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The deposit insurance scheme. */
+      @SerializedName("type")
+      Type type;
+
+      private DepositInsuranceEligibility(
+          BankName bankName, List<String> currencies, Map<String, Object> extraParams, Type type) {
+        this.bankName = bankName;
+        this.currencies = currencies;
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private BankName bankName;
+
+        private List<String> currencies;
+
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public FinancialAccountCreateParams.Storage.DepositInsuranceEligibility build() {
+          return new FinancialAccountCreateParams.Storage.DepositInsuranceEligibility(
+              this.bankName, this.currencies, this.extraParams, this.type);
+        }
+
+        /** <strong>Required.</strong> The bank where funds are stored. */
+        public Builder setBankName(
+            FinancialAccountCreateParams.Storage.DepositInsuranceEligibility.BankName bankName) {
+          this.bankName = bankName;
+          return this;
+        }
+
+        /**
+         * Add an element to `currencies` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * FinancialAccountCreateParams.Storage.DepositInsuranceEligibility#currencies} for the
+         * field documentation.
+         */
+        public Builder addCurrency(String element) {
+          if (this.currencies == null) {
+            this.currencies = new ArrayList<>();
+          }
+          this.currencies.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `currencies` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * FinancialAccountCreateParams.Storage.DepositInsuranceEligibility#currencies} for the
+         * field documentation.
+         */
+        public Builder addAllCurrency(List<String> elements) {
+          if (this.currencies == null) {
+            this.currencies = new ArrayList<>();
+          }
+          this.currencies.addAll(elements);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * FinancialAccountCreateParams.Storage.DepositInsuranceEligibility#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * FinancialAccountCreateParams.Storage.DepositInsuranceEligibility#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> The deposit insurance scheme. */
+        public Builder setType(
+            FinancialAccountCreateParams.Storage.DepositInsuranceEligibility.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum BankName implements ApiRequestParams.EnumParam {
+        @SerializedName("fifth_third")
+        FIFTH_THIRD("fifth_third");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        BankName(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("fdic")
+        FDIC("fdic"),
+
+        @SerializedName("fdic_passthrough")
+        FDIC_PASSTHROUGH("fdic_passthrough");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
           this.value = value;
         }
       }

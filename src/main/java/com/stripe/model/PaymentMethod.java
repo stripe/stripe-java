@@ -278,6 +278,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
+  @SerializedName("sequra")
+  Sequra sequra;
+
   /** ID of the shared payment granted token used in the creation of this PaymentMethod. */
   @SerializedName("shared_payment_granted_token")
   String sharedPaymentGrantedToken;
@@ -2931,6 +2934,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
+   * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Sequra extends StripeObject {}
+
+  /**
    * For more details about Shopeepay, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -3222,6 +3234,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(satispay, responseGetter);
     trySetResponseGetter(scalapay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
+    trySetResponseGetter(sequra, responseGetter);
     trySetResponseGetter(shopeepay, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(stripeBalance, responseGetter);

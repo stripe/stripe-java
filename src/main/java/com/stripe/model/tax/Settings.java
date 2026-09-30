@@ -51,7 +51,8 @@ public class Settings extends ApiResource {
   String object;
 
   /**
-   * The status of the Tax {@code Settings}.
+   * Whether these settings have the information Stripe Tax needs to calculate tax. It doesn't
+   * reflect whether your integration is ready to collect tax.
    *
    * <p>One of {@code active}, or {@code pending}.
    */
@@ -97,7 +98,8 @@ public class Settings extends ApiResource {
 
   /**
    * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
-   * but none can be removed once set.
+   * but none can be removed once set. Check the returned Tax {@code Settings} object and validate
+   * that its status is {@code active}.
    */
   public static Settings update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -105,7 +107,8 @@ public class Settings extends ApiResource {
 
   /**
    * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
-   * but none can be removed once set.
+   * but none can be removed once set. Check the returned Tax {@code Settings} object and validate
+   * that its status is {@code active}.
    */
   public static Settings update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -117,7 +120,8 @@ public class Settings extends ApiResource {
 
   /**
    * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
-   * but none can be removed once set.
+   * but none can be removed once set. Check the returned Tax {@code Settings} object and validate
+   * that its status is {@code active}.
    */
   public static Settings update(SettingsUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -125,7 +129,8 @@ public class Settings extends ApiResource {
 
   /**
    * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
-   * but none can be removed once set.
+   * but none can be removed once set. Check the returned Tax {@code Settings} object and validate
+   * that its status is {@code active}.
    */
   public static Settings update(SettingsUpdateParams params, RequestOptions options)
       throws StripeException {

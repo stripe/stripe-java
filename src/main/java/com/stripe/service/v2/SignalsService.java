@@ -9,7 +9,7 @@ public final class SignalsService extends ApiService {
     super(responseGetter);
   }
 
-  public com.stripe.service.v2.signals.AccountActivityService accountActivity() {
+  public com.stripe.service.v2.signals.AccountActivityService accountActivities() {
     return new com.stripe.service.v2.signals.AccountActivityService(this.getResponseGetter());
   }
 

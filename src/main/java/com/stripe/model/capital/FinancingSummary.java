@@ -12,6 +12,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.capital.FinancingSummaryRetrieveParams;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -130,9 +131,20 @@ public class FinancingSummary extends ApiResource {
     @SerializedName("disclaimer_variant")
     String disclaimerVariant;
 
+    /** The ways the connected account can pay toward its financing(s). */
+    @SerializedName("enabled_payment_types")
+    List<String> enabledPaymentTypes;
+
     /** Fixed fee amount, in minor units. For example, 100 USD is represented as 10000. */
     @SerializedName("fee_amount")
     Long feeAmount;
+
+    /**
+     * The overdue amount, in minor units. For example, 1,000 USD is represented as 100000. Defaults
+     * to null for legal cash advances.
+     */
+    @SerializedName("overdue_amount")
+    Long overdueAmount;
 
     /**
      * The amount the Connected account has paid toward the financing debt so far, in minor units.

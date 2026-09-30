@@ -2553,7 +2553,11 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Determines whether to generate an invoice for outstanding amounts when pausing. */
+        /**
+         * Determines whether to generate an invoice for outstanding amounts when pausing. When
+         * adding a pause schedule, defaults to {@code pending_invoice_item}. On updates, the
+         * existing value is preserved if not provided.
+         */
         @SerializedName("invoicing_behavior")
         InvoicingBehavior invoicingBehavior;
 
@@ -2628,7 +2632,11 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Determines whether to generate an invoice for outstanding amounts when pausing. */
+          /**
+           * Determines whether to generate an invoice for outstanding amounts when pausing. When
+           * adding a pause schedule, defaults to {@code pending_invoice_item}. On updates, the
+           * existing value is preserved if not provided.
+           */
           public Builder setInvoicingBehavior(
               SubscriptionScheduleUpdateParams.PauseSchedule.Pause.Settings.InvoicingBehavior
                   invoicingBehavior) {
@@ -2752,7 +2760,11 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
-            /** Determines whether to collect metered usage accrued up to the pause date. */
+            /**
+             * Determines whether to collect metered usage accrued up to the pause date. When adding
+             * a pause schedule, defaults to {@code pause_at}. On updates, the existing value is
+             * preserved if not provided.
+             */
             @SerializedName("type")
             Type type;
 
@@ -2808,7 +2820,11 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** Determines whether to collect metered usage accrued up to the pause date. */
+              /**
+               * Determines whether to collect metered usage accrued up to the pause date. When
+               * adding a pause schedule, defaults to {@code pause_at}. On updates, the existing
+               * value is preserved if not provided.
+               */
               public Builder setType(
                   SubscriptionScheduleUpdateParams.PauseSchedule.Pause.Settings.BillFor
                           .OutstandingUsageThrough.Type
@@ -2847,7 +2863,11 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
-            /** Determines which point in the billing period unused time is credited from. */
+            /**
+             * Determines which point in the billing period unused time is credited from. When
+             * adding a pause schedule, defaults to {@code pause_at}. On updates, the existing value
+             * is preserved if not provided.
+             */
             @SerializedName("type")
             Type type;
 
@@ -2903,7 +2923,11 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** Determines which point in the billing period unused time is credited from. */
+              /**
+               * Determines which point in the billing period unused time is credited from. When
+               * adding a pause schedule, defaults to {@code pause_at}. On updates, the existing
+               * value is preserved if not provided.
+               */
               public Builder setType(
                   SubscriptionScheduleUpdateParams.PauseSchedule.Pause.Settings.BillFor
                           .UnusedTimeFrom.Type
@@ -3310,7 +3334,11 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Settings {
-        /** Controls the billing cycle anchor when the subscription resumes. */
+        /**
+         * Controls the billing cycle anchor when the subscription resumes. When adding a pause
+         * schedule, defaults to {@code resume_at}. On updates, the existing value is preserved if
+         * not provided.
+         */
         @SerializedName("billing_cycle_anchor")
         BillingCycleAnchor billingCycleAnchor;
 
@@ -3326,14 +3354,16 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
         /**
          * Controls whether Stripe attempts payment on the resumption invoice and how payment
-         * affects the subscription's status. The default is {@code resume_on_payment_success}.
+         * affects the subscription's status. When adding a pause schedule, defaults to {@code
+         * resume_on_payment_success}. On updates, the existing value is preserved if not provided.
          */
         @SerializedName("payment_behavior")
         PaymentBehavior paymentBehavior;
 
         /**
-         * Determines how to handle prorations when the subscription resumes. The default is {@code
-         * create_prorations}.
+         * Determines how to handle prorations when the subscription resumes. When adding a pause
+         * schedule, defaults to {@code create_prorations}. On updates, the existing value is
+         * preserved if not provided.
          */
         @SerializedName("proration_behavior")
         ProrationBehavior prorationBehavior;
@@ -3371,7 +3401,11 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
                 this.prorationBehavior);
           }
 
-          /** Controls the billing cycle anchor when the subscription resumes. */
+          /**
+           * Controls the billing cycle anchor when the subscription resumes. When adding a pause
+           * schedule, defaults to {@code resume_at}. On updates, the existing value is preserved if
+           * not provided.
+           */
           public Builder setBillingCycleAnchor(
               SubscriptionScheduleUpdateParams.PauseSchedule.Resume.Settings.BillingCycleAnchor
                   billingCycleAnchor) {
@@ -3411,7 +3445,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
           /**
            * Controls whether Stripe attempts payment on the resumption invoice and how payment
-           * affects the subscription's status. The default is {@code resume_on_payment_success}.
+           * affects the subscription's status. When adding a pause schedule, defaults to {@code
+           * resume_on_payment_success}. On updates, the existing value is preserved if not
+           * provided.
            */
           public Builder setPaymentBehavior(
               SubscriptionScheduleUpdateParams.PauseSchedule.Resume.Settings.PaymentBehavior
@@ -3421,8 +3457,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Determines how to handle prorations when the subscription resumes. The default is
-           * {@code create_prorations}.
+           * Determines how to handle prorations when the subscription resumes. When adding a pause
+           * schedule, defaults to {@code create_prorations}. On updates, the existing value is
+           * preserved if not provided.
            */
           public Builder setProrationBehavior(
               SubscriptionScheduleUpdateParams.PauseSchedule.Resume.Settings.ProrationBehavior

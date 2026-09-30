@@ -7429,6 +7429,10 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("script_statement_descriptor")
       ScriptStatementDescriptor scriptStatementDescriptor;
 
+      /** Settings for SEPA Direct Debit payments. */
+      @SerializedName("sepa_debit_payments")
+      SepaDebitPayments sepaDebitPayments;
+
       /** Settings for Smart Disputes automatic response feature. */
       @SerializedName("smart_disputes")
       SmartDisputes smartDisputes;
@@ -7455,6 +7459,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           KonbiniPayments konbiniPayments,
           Object mcc,
           ScriptStatementDescriptor scriptStatementDescriptor,
+          SepaDebitPayments sepaDebitPayments,
           SmartDisputes smartDisputes,
           StatementDescriptor statementDescriptor,
           Support support) {
@@ -7468,6 +7473,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         this.konbiniPayments = konbiniPayments;
         this.mcc = mcc;
         this.scriptStatementDescriptor = scriptStatementDescriptor;
+        this.sepaDebitPayments = sepaDebitPayments;
         this.smartDisputes = smartDisputes;
         this.statementDescriptor = statementDescriptor;
         this.support = support;
@@ -7498,6 +7504,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private ScriptStatementDescriptor scriptStatementDescriptor;
 
+        private SepaDebitPayments sepaDebitPayments;
+
         private SmartDisputes smartDisputes;
 
         private StatementDescriptor statementDescriptor;
@@ -7517,6 +7525,7 @@ public class AccountUpdateParams extends ApiRequestParams {
               this.konbiniPayments,
               this.mcc,
               this.scriptStatementDescriptor,
+              this.sepaDebitPayments,
               this.smartDisputes,
               this.statementDescriptor,
               this.support);
@@ -7626,6 +7635,13 @@ public class AccountUpdateParams extends ApiRequestParams {
             AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor
                 scriptStatementDescriptor) {
           this.scriptStatementDescriptor = scriptStatementDescriptor;
+          return this;
+        }
+
+        /** Settings for SEPA Direct Debit payments. */
+        public Builder setSepaDebitPayments(
+            AccountUpdateParams.Configuration.Merchant.SepaDebitPayments sepaDebitPayments) {
+          this.sepaDebitPayments = sepaDebitPayments;
           return this;
         }
 
@@ -8065,6 +8081,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("samsung_pay_payments")
         SamsungPayPayments samsungPayPayments;
 
+        /** Allow the merchant to process Satispay payments. */
+        @SerializedName("satispay_payments")
+        SatispayPayments satispayPayments;
+
         /** Allow the merchant to process SEPA bank transfer payments. */
         @SerializedName("sepa_bank_transfer_payments")
         SepaBankTransferPayments sepaBankTransferPayments;
@@ -8072,6 +8092,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         /** Allow the merchant to process SEPA Direct Debit payments. */
         @SerializedName("sepa_debit_payments")
         SepaDebitPayments sepaDebitPayments;
+
+        /** Allow the merchant to process SeQura payments. */
+        @SerializedName("sequra_payments")
+        SequraPayments sequraPayments;
 
         /** Allow the merchant to process Sunbit payments. */
         @SerializedName("sunbit_payments")
@@ -8134,8 +8158,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             PromptpayPayments promptpayPayments,
             RevolutPayPayments revolutPayPayments,
             SamsungPayPayments samsungPayPayments,
+            SatispayPayments satispayPayments,
             SepaBankTransferPayments sepaBankTransferPayments,
             SepaDebitPayments sepaDebitPayments,
+            SequraPayments sequraPayments,
             SunbitPayments sunbitPayments,
             SwishPayments swishPayments,
             TwintPayments twintPayments,
@@ -8181,8 +8207,10 @@ public class AccountUpdateParams extends ApiRequestParams {
           this.promptpayPayments = promptpayPayments;
           this.revolutPayPayments = revolutPayPayments;
           this.samsungPayPayments = samsungPayPayments;
+          this.satispayPayments = satispayPayments;
           this.sepaBankTransferPayments = sepaBankTransferPayments;
           this.sepaDebitPayments = sepaDebitPayments;
+          this.sequraPayments = sequraPayments;
           this.sunbitPayments = sunbitPayments;
           this.swishPayments = swishPayments;
           this.twintPayments = twintPayments;
@@ -8275,9 +8303,13 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private SamsungPayPayments samsungPayPayments;
 
+          private SatispayPayments satispayPayments;
+
           private SepaBankTransferPayments sepaBankTransferPayments;
 
           private SepaDebitPayments sepaDebitPayments;
+
+          private SequraPayments sequraPayments;
 
           private SunbitPayments sunbitPayments;
 
@@ -8332,8 +8364,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                 this.promptpayPayments,
                 this.revolutPayPayments,
                 this.samsungPayPayments,
+                this.satispayPayments,
                 this.sepaBankTransferPayments,
                 this.sepaDebitPayments,
+                this.sequraPayments,
                 this.sunbitPayments,
                 this.swishPayments,
                 this.twintPayments,
@@ -8670,6 +8704,14 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
+          /** Allow the merchant to process Satispay payments. */
+          public Builder setSatispayPayments(
+              AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments
+                  satispayPayments) {
+            this.satispayPayments = satispayPayments;
+            return this;
+          }
+
           /** Allow the merchant to process SEPA bank transfer payments. */
           public Builder setSepaBankTransferPayments(
               AccountUpdateParams.Configuration.Merchant.Capabilities.SepaBankTransferPayments
@@ -8683,6 +8725,14 @@ public class AccountUpdateParams extends ApiRequestParams {
               AccountUpdateParams.Configuration.Merchant.Capabilities.SepaDebitPayments
                   sepaDebitPayments) {
             this.sepaDebitPayments = sepaDebitPayments;
+            return this;
+          }
+
+          /** Allow the merchant to process SeQura payments. */
+          public Builder setSequraPayments(
+              AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments
+                  sequraPayments) {
+            this.sequraPayments = sequraPayments;
             return this;
           }
 
@@ -18676,6 +18726,261 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         @Getter
         @EqualsAndHashCode(callSuper = false)
+        public static class SatispayPayments {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
+           * To request a new Capability for an account, pass true. There can be a delay before the
+           * requested Capability becomes active.
+           */
+          @SerializedName("requested")
+          Boolean requested;
+
+          private SatispayPayments(
+              Map<String, Object> extraParams, Protections protections, Boolean requested) {
+            this.extraParams = extraParams;
+            this.protections = protections;
+            this.requested = requested;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Protections protections;
+
+            private Boolean requested;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments
+                build() {
+              return new AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments(
+                  this.extraParams, this.protections, this.requested);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
+            public Builder setProtections(
+                AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments.Protections
+                    protections) {
+              this.protections = protections;
+              return this;
+            }
+
+            /**
+             * To request a new Capability for an account, pass true. There can be a delay before
+             * the requested Capability becomes active.
+             */
+            public Builder setRequested(Boolean requested) {
+              this.requested = requested;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            private Protections(Map<String, Object> extraParams, PspMigration pspMigration) {
+              this.extraParams = extraParams;
+              this.pspMigration = pspMigration;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private PspMigration pspMigration;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments
+                      .Protections
+                  build() {
+                return new AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments
+                    .Protections(this.extraParams, this.pspMigration);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments.Protections#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments.Protections#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+              public Builder setPspMigration(
+                  AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments
+                          .Protections.PspMigration
+                      pspMigration) {
+                this.pspMigration = pspMigration;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** <strong>Required.</strong> To request a protection, pass true. */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private PspMigration(Map<String, Object> extraParams, Boolean requested) {
+                this.extraParams = extraParams;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments
+                        .Protections.PspMigration
+                    build() {
+                  return new AccountUpdateParams.Configuration.Merchant.Capabilities
+                      .SatispayPayments.Protections.PspMigration(this.extraParams, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments.Protections.PspMigration#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountUpdateParams.Configuration.Merchant.Capabilities.SatispayPayments.Protections.PspMigration#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** <strong>Required.</strong> To request a protection, pass true. */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class SepaBankTransferPayments {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -19167,6 +19472,260 @@ public class AccountUpdateParams extends ApiRequestParams {
                  * first `put/putAll` call, and subsequent calls add additional key/value pairs to
                  * the original map. See {@link
                  * AccountUpdateParams.Configuration.Merchant.Capabilities.SepaDebitPayments.Protections.PspMigration#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** <strong>Required.</strong> To request a protection, pass true. */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SequraPayments {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
+          @SerializedName("protections")
+          Protections protections;
+
+          /**
+           * To request a new Capability for an account, pass true. There can be a delay before the
+           * requested Capability becomes active.
+           */
+          @SerializedName("requested")
+          Boolean requested;
+
+          private SequraPayments(
+              Map<String, Object> extraParams, Protections protections, Boolean requested) {
+            this.extraParams = extraParams;
+            this.protections = protections;
+            this.requested = requested;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Protections protections;
+
+            private Boolean requested;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments build() {
+              return new AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments(
+                  this.extraParams, this.protections, this.requested);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Protection types to request for this capability (e.g. &quot;psp_migration&quot;). */
+            public Builder setProtections(
+                AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments.Protections
+                    protections) {
+              this.protections = protections;
+              return this;
+            }
+
+            /**
+             * To request a new Capability for an account, pass true. There can be a delay before
+             * the requested Capability becomes active.
+             */
+            public Builder setRequested(Boolean requested) {
+              this.requested = requested;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Protections {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+            @SerializedName("psp_migration")
+            PspMigration pspMigration;
+
+            private Protections(Map<String, Object> extraParams, PspMigration pspMigration) {
+              this.extraParams = extraParams;
+              this.pspMigration = pspMigration;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private PspMigration pspMigration;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments
+                      .Protections
+                  build() {
+                return new AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments
+                    .Protections(this.extraParams, this.pspMigration);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments.Protections#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments.Protections#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+              public Builder setPspMigration(
+                  AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments.Protections
+                          .PspMigration
+                      pspMigration) {
+                this.pspMigration = pspMigration;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PspMigration {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** <strong>Required.</strong> To request a protection, pass true. */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private PspMigration(Map<String, Object> extraParams, Boolean requested) {
+                this.extraParams = extraParams;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments
+                        .Protections.PspMigration
+                    build() {
+                  return new AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments
+                      .Protections.PspMigration(this.extraParams, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments.Protections.PspMigration#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountUpdateParams.Configuration.Merchant.Capabilities.SequraPayments.Protections.PspMigration#extraParams}
                  * for the field documentation.
                  */
                 public Builder putAllExtraParam(Map<String, Object> map) {
@@ -21416,6 +21975,87 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
+      public static class SepaDebitPayments {
+        /** Creditor ID for SEPA Direct Debit payments. */
+        @SerializedName("creditor_id")
+        Object creditorId;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private SepaDebitPayments(Object creditorId, Map<String, Object> extraParams) {
+          this.creditorId = creditorId;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object creditorId;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountUpdateParams.Configuration.Merchant.SepaDebitPayments build() {
+            return new AccountUpdateParams.Configuration.Merchant.SepaDebitPayments(
+                this.creditorId, this.extraParams);
+          }
+
+          /** Creditor ID for SEPA Direct Debit payments. */
+          public Builder setCreditorId(String creditorId) {
+            this.creditorId = creditorId;
+            return this;
+          }
+
+          /** Creditor ID for SEPA Direct Debit payments. */
+          public Builder setCreditorId(EmptyParam creditorId) {
+            this.creditorId = creditorId;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountUpdateParams.Configuration.Merchant.SepaDebitPayments#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountUpdateParams.Configuration.Merchant.SepaDebitPayments#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class SmartDisputes {
         /** Settings for Smart Disputes auto_respond. */
         @SerializedName("auto_respond")
@@ -22686,6 +23326,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             @SerializedName("gbp")
             Gbp gbp;
 
+            /** Can receive business storage-type funds on Stripe in OUSD. */
+            @SerializedName("ousd")
+            Ousd ousd;
+
             /** Can receive business storage-type funds on Stripe in USD. */
             @SerializedName("usd")
             Usd usd;
@@ -22700,6 +23344,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                 Eur eur,
                 Map<String, Object> extraParams,
                 Gbp gbp,
+                Ousd ousd,
                 Usd usd,
                 Usdc usdc) {
               this.aud = aud;
@@ -22707,6 +23352,7 @@ public class AccountUpdateParams extends ApiRequestParams {
               this.eur = eur;
               this.extraParams = extraParams;
               this.gbp = gbp;
+              this.ousd = ousd;
               this.usd = usd;
               this.usdc = usdc;
             }
@@ -22726,6 +23372,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
               private Gbp gbp;
 
+              private Ousd ousd;
+
               private Usd usd;
 
               private Usdc usdc;
@@ -22736,7 +23384,14 @@ public class AccountUpdateParams extends ApiRequestParams {
                   build() {
                 return new AccountUpdateParams.Configuration.MoneyManager.Capabilities
                     .BusinessStorage.Inbound(
-                    this.aud, this.cad, this.eur, this.extraParams, this.gbp, this.usd, this.usdc);
+                    this.aud,
+                    this.cad,
+                    this.eur,
+                    this.extraParams,
+                    this.gbp,
+                    this.ousd,
+                    this.usd,
+                    this.usdc);
               }
 
               /** Can receive business storage-type funds on Stripe in AUD. */
@@ -22802,6 +23457,15 @@ public class AccountUpdateParams extends ApiRequestParams {
                           .Inbound.Gbp
                       gbp) {
                 this.gbp = gbp;
+                return this;
+              }
+
+              /** Can receive business storage-type funds on Stripe in OUSD. */
+              public Builder setOusd(
+                  AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage
+                          .Inbound.Ousd
+                      ousd) {
+                this.ousd = ousd;
                 return this;
               }
 
@@ -23882,6 +24546,270 @@ public class AccountUpdateParams extends ApiRequestParams {
 
             @Getter
             @EqualsAndHashCode(callSuper = false)
+            public static class Ousd {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * Protection types to request for this capability (e.g. &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * To request a new Capability for an account, pass true. There can be a delay before
+               * the requested Capability becomes active.
+               */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private Ousd(
+                  Map<String, Object> extraParams, Protections protections, Boolean requested) {
+                this.extraParams = extraParams;
+                this.protections = protections;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Protections protections;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage
+                        .Inbound.Ousd
+                    build() {
+                  return new AccountUpdateParams.Configuration.MoneyManager.Capabilities
+                      .BusinessStorage.Inbound.Ousd(
+                      this.extraParams, this.protections, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Ousd#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Ousd#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * Protection types to request for this capability (e.g. &quot;psp_migration&quot;).
+                 */
+                public Builder setProtections(
+                    AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage
+                            .Inbound.Ousd.Protections
+                        protections) {
+                  this.protections = protections;
+                  return this;
+                }
+
+                /**
+                 * To request a new Capability for an account, pass true. There can be a delay
+                 * before the requested Capability becomes active.
+                 */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections {
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                private Protections(Map<String, Object> extraParams, PspMigration pspMigration) {
+                  this.extraParams = extraParams;
+                  this.pspMigration = pspMigration;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Map<String, Object> extraParams;
+
+                  private PspMigration pspMigration;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage
+                          .Inbound.Ousd.Protections
+                      build() {
+                    return new AccountUpdateParams.Configuration.MoneyManager.Capabilities
+                        .BusinessStorage.Inbound.Ousd.Protections(
+                        this.extraParams, this.pspMigration);
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Ousd.Protections#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Ousd.Protections#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+                  public Builder setPspMigration(
+                      AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage
+                              .Inbound.Ousd.Protections.PspMigration
+                          pspMigration) {
+                    this.pspMigration = pspMigration;
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration {
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /** <strong>Required.</strong> To request a protection, pass true. */
+                  @SerializedName("requested")
+                  Boolean requested;
+
+                  private PspMigration(Map<String, Object> extraParams, Boolean requested) {
+                    this.extraParams = extraParams;
+                    this.requested = requested;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Map<String, Object> extraParams;
+
+                    private Boolean requested;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public AccountUpdateParams.Configuration.MoneyManager.Capabilities
+                            .BusinessStorage.Inbound.Ousd.Protections.PspMigration
+                        build() {
+                      return new AccountUpdateParams.Configuration.MoneyManager.Capabilities
+                          .BusinessStorage.Inbound.Ousd.Protections.PspMigration(
+                          this.extraParams, this.requested);
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Ousd.Protections.PspMigration#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage.Inbound.Ousd.Protections.PspMigration#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /** <strong>Required.</strong> To request a protection, pass true. */
+                    public Builder setRequested(Boolean requested) {
+                      this.requested = requested;
+                      return this;
+                    }
+                  }
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
             public static class Usd {
               /**
                * Map of extra parameters for custom features not available in this client library.
@@ -24438,6 +25366,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             @SerializedName("gbp")
             Gbp gbp;
 
+            /** Can send business storage-type funds on Stripe in OUSD. */
+            @SerializedName("ousd")
+            Ousd ousd;
+
             /** Can send business storage-type funds on Stripe in USD. */
             @SerializedName("usd")
             Usd usd;
@@ -24452,6 +25384,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                 Eur eur,
                 Map<String, Object> extraParams,
                 Gbp gbp,
+                Ousd ousd,
                 Usd usd,
                 Usdc usdc) {
               this.aud = aud;
@@ -24459,6 +25392,7 @@ public class AccountUpdateParams extends ApiRequestParams {
               this.eur = eur;
               this.extraParams = extraParams;
               this.gbp = gbp;
+              this.ousd = ousd;
               this.usd = usd;
               this.usdc = usdc;
             }
@@ -24478,6 +25412,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
               private Gbp gbp;
 
+              private Ousd ousd;
+
               private Usd usd;
 
               private Usdc usdc;
@@ -24488,7 +25424,14 @@ public class AccountUpdateParams extends ApiRequestParams {
                   build() {
                 return new AccountUpdateParams.Configuration.MoneyManager.Capabilities
                     .BusinessStorage.Outbound(
-                    this.aud, this.cad, this.eur, this.extraParams, this.gbp, this.usd, this.usdc);
+                    this.aud,
+                    this.cad,
+                    this.eur,
+                    this.extraParams,
+                    this.gbp,
+                    this.ousd,
+                    this.usd,
+                    this.usdc);
               }
 
               /** Can send business storage-type funds on Stripe in AUD. */
@@ -24554,6 +25497,15 @@ public class AccountUpdateParams extends ApiRequestParams {
                           .Outbound.Gbp
                       gbp) {
                 this.gbp = gbp;
+                return this;
+              }
+
+              /** Can send business storage-type funds on Stripe in OUSD. */
+              public Builder setOusd(
+                  AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage
+                          .Outbound.Ousd
+                      ousd) {
+                this.ousd = ousd;
                 return this;
               }
 
@@ -25612,6 +26564,270 @@ public class AccountUpdateParams extends ApiRequestParams {
                      * the first `put/putAll` call, and subsequent calls add additional key/value
                      * pairs to the original map. See {@link
                      * AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Gbp.Protections.PspMigration#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /** <strong>Required.</strong> To request a protection, pass true. */
+                    public Builder setRequested(Boolean requested) {
+                      this.requested = requested;
+                      return this;
+                    }
+                  }
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Ousd {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * Protection types to request for this capability (e.g. &quot;psp_migration&quot;).
+               */
+              @SerializedName("protections")
+              Protections protections;
+
+              /**
+               * To request a new Capability for an account, pass true. There can be a delay before
+               * the requested Capability becomes active.
+               */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private Ousd(
+                  Map<String, Object> extraParams, Protections protections, Boolean requested) {
+                this.extraParams = extraParams;
+                this.protections = protections;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Protections protections;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage
+                        .Outbound.Ousd
+                    build() {
+                  return new AccountUpdateParams.Configuration.MoneyManager.Capabilities
+                      .BusinessStorage.Outbound.Ousd(
+                      this.extraParams, this.protections, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Ousd#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Ousd#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * Protection types to request for this capability (e.g. &quot;psp_migration&quot;).
+                 */
+                public Builder setProtections(
+                    AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage
+                            .Outbound.Ousd.Protections
+                        protections) {
+                  this.protections = protections;
+                  return this;
+                }
+
+                /**
+                 * To request a new Capability for an account, pass true. There can be a delay
+                 * before the requested Capability becomes active.
+                 */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Protections {
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+                @SerializedName("psp_migration")
+                PspMigration pspMigration;
+
+                private Protections(Map<String, Object> extraParams, PspMigration pspMigration) {
+                  this.extraParams = extraParams;
+                  this.pspMigration = pspMigration;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Map<String, Object> extraParams;
+
+                  private PspMigration pspMigration;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage
+                          .Outbound.Ousd.Protections
+                      build() {
+                    return new AccountUpdateParams.Configuration.MoneyManager.Capabilities
+                        .BusinessStorage.Outbound.Ousd.Protections(
+                        this.extraParams, this.pspMigration);
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Ousd.Protections#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Ousd.Protections#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** <strong>Required.</strong> Parameter to request psp_migration protection. */
+                  public Builder setPspMigration(
+                      AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage
+                              .Outbound.Ousd.Protections.PspMigration
+                          pspMigration) {
+                    this.pspMigration = pspMigration;
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class PspMigration {
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /** <strong>Required.</strong> To request a protection, pass true. */
+                  @SerializedName("requested")
+                  Boolean requested;
+
+                  private PspMigration(Map<String, Object> extraParams, Boolean requested) {
+                    this.extraParams = extraParams;
+                    this.requested = requested;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Map<String, Object> extraParams;
+
+                    private Boolean requested;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public AccountUpdateParams.Configuration.MoneyManager.Capabilities
+                            .BusinessStorage.Outbound.Ousd.Protections.PspMigration
+                        build() {
+                      return new AccountUpdateParams.Configuration.MoneyManager.Capabilities
+                          .BusinessStorage.Outbound.Ousd.Protections.PspMigration(
+                          this.extraParams, this.requested);
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Ousd.Protections.PspMigration#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * AccountUpdateParams.Configuration.MoneyManager.Capabilities.BusinessStorage.Outbound.Ousd.Protections.PspMigration#extraParams}
                      * for the field documentation.
                      */
                     public Builder putAllExtraParam(Map<String, Object> map) {

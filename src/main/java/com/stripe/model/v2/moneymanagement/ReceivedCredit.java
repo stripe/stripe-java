@@ -255,7 +255,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
       /**
        * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
        *
-       * <p>Equal to {@code acss}.
+       * <p>One of {@code acss}, or {@code swift}.
        */
       @SerializedName("network")
       String network;
@@ -311,7 +311,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
       /**
        * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
        *
-       * <p>One of {@code chaps}, or {@code fps}.
+       * <p>One of {@code chaps}, {@code fps}, or {@code swift}.
        */
       @SerializedName("network")
       String network;
@@ -473,7 +473,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
         /**
          * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
          *
-         * <p>One of {@code ach}, {@code rtp}, or {@code us_domestic_wire}.
+         * <p>One of {@code ach}, {@code rtp}, {@code swift}, or {@code us_domestic_wire}.
          */
         @SerializedName("network")
         String network;
@@ -543,7 +543,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
         /**
          * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
          *
-         * <p>Equal to {@code acss}.
+         * <p>One of {@code acss}, or {@code swift}.
          */
         @SerializedName("network")
         String network;
@@ -580,7 +580,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
         /**
          * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
          *
-         * <p>Equal to {@code sepa_credit_transfer}.
+         * <p>One of {@code sepa_credit_transfer}, or {@code swift}.
          */
         @SerializedName("network")
         String network;
@@ -609,7 +609,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
         /**
          * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
          *
-         * <p>One of {@code chaps}, or {@code fps}.
+         * <p>One of {@code chaps}, {@code fps}, or {@code swift}.
          */
         @SerializedName("network")
         String network;
@@ -648,7 +648,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
       /**
        * The money transmission network used to send funds for this ReceivedCredit.
        *
-       * <p>Equal to {@code sepa_credit_transfer}.
+       * <p>One of {@code sepa_credit_transfer}, or {@code swift}.
        */
       @SerializedName("network")
       String network;
@@ -674,7 +674,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
       /**
        * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
        *
-       * <p>One of {@code ach}, {@code rtp}, or {@code us_domestic_wire}.
+       * <p>One of {@code ach}, {@code rtp}, {@code swift}, or {@code us_domestic_wire}.
        */
       @SerializedName("network")
       String network;

@@ -1637,10 +1637,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Card {
-      /** The card CVC. */
-      @SerializedName("cvc")
-      String cvc;
-
       /** <strong>Required.</strong> The card expiration month. */
       @SerializedName("exp_month")
       String expMonth;
@@ -1663,12 +1659,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       String number;
 
       private Card(
-          String cvc,
-          String expMonth,
-          String expYear,
-          Map<String, Object> extraParams,
-          String number) {
-        this.cvc = cvc;
+          String expMonth, String expYear, Map<String, Object> extraParams, String number) {
         this.expMonth = expMonth;
         this.expYear = expYear;
         this.extraParams = extraParams;
@@ -1680,8 +1671,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String cvc;
-
         private String expMonth;
 
         private String expYear;
@@ -1693,13 +1682,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public OffSessionPaymentCreateParams.PaymentMethodData.Card build() {
           return new OffSessionPaymentCreateParams.PaymentMethodData.Card(
-              this.cvc, this.expMonth, this.expYear, this.extraParams, this.number);
-        }
-
-        /** The card CVC. */
-        public Builder setCvc(String cvc) {
-          this.cvc = cvc;
-          return this;
+              this.expMonth, this.expYear, this.extraParams, this.number);
         }
 
         /** <strong>Required.</strong> The card expiration month. */

@@ -33,7 +33,8 @@ public class ResourceCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Whether the resource should use Stripe live-mode objects. When omitted, this resolves to true.
+   * Whether the resource should use Stripe live-mode objects. When omitted, this resolves to false
+   * for a sandbox target and true otherwise. Sandbox targets cannot create live-mode resources.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -178,7 +179,8 @@ public class ResourceCreateParams extends ApiRequestParams {
 
     /**
      * Whether the resource should use Stripe live-mode objects. When omitted, this resolves to
-     * true.
+     * false for a sandbox target and true otherwise. Sandbox targets cannot create live-mode
+     * resources.
      */
     public Builder setLivemode(Boolean livemode) {
       this.livemode = livemode;

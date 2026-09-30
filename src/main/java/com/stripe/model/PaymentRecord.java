@@ -4069,6 +4069,10 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("payment_reference")
       String paymentReference;
 
+      /** NACHA ACH return code for a failed US bank account payment. */
+      @SerializedName("return_code")
+      String returnCode;
+
       /** The routing number for the bank account. */
       @SerializedName("routing_number")
       String routingNumber;

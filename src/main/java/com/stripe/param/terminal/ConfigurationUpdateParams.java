@@ -596,7 +596,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   public static class Cellular {
     /**
      * <strong>Required.</strong> Determines whether to allow the reader to connect to a cellular
-     * network. Defaults to false.
+     * network.
      */
     @SerializedName("enabled")
     Boolean enabled;
@@ -631,7 +631,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Determines whether to allow the reader to connect to a cellular
-       * network. Defaults to false.
+       * network.
        */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
@@ -671,7 +671,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   public static class Offline {
     /**
      * <strong>Required.</strong> Determines whether to allow transactions to be collected while
-     * reader is offline. Defaults to false.
+     * reader is offline.
      */
     @SerializedName("enabled")
     Boolean enabled;
@@ -706,7 +706,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Determines whether to allow transactions to be collected while
-       * reader is offline. Defaults to false.
+       * reader is offline.
        */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;

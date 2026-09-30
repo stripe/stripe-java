@@ -235,7 +235,7 @@ public class PaymentAttemptRecordReportInformationalParams extends ApiRequestPar
     @SerializedName("customer")
     String customer;
 
-    /** The customer's phone number. */
+    /** The customer's email address. */
     @SerializedName("email")
     String email;
 
@@ -292,7 +292,7 @@ public class PaymentAttemptRecordReportInformationalParams extends ApiRequestPar
         return this;
       }
 
-      /** The customer's phone number. */
+      /** The customer's email address. */
       public Builder setEmail(String email) {
         this.email = email;
         return this;

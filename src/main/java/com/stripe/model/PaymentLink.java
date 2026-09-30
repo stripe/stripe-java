@@ -99,7 +99,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
 
   /**
    * Collect additional information from your customer using custom fields. Up to 3 fields are
-   * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
+   * supported. You can't set this parameter if {@code ui_mode} is {@code elements}.
    */
   @SerializedName("custom_fields")
   List<PaymentLink.CustomField> customFields;
@@ -1529,6 +1529,15 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class EndBehavior extends StripeObject {
+        /**
+         * Indicates how the subscription's billing cycle anchor is reset when a trial ends. If not
+         * set, the default is {@code now}.
+         *
+         * <p>One of {@code now}, or {@code unchanged}.
+         */
+        @SerializedName("billing_cycle_anchor")
+        String billingCycleAnchor;
+
         /**
          * Indicates how the subscription should change when the trial ends if the user did not
          * provide a payment method.

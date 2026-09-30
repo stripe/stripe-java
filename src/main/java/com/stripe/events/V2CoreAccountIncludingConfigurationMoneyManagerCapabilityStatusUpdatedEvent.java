@@ -23,9 +23,10 @@ public final class V2CoreAccountIncludingConfigurationMoneyManagerCapabilityStat
      * Open Enum. The capability which had its status updated.
      *
      * <p>One of {@code business_storage.inbound.cad}, {@code business_storage.inbound.eur}, {@code
-     * business_storage.inbound.gbp}, {@code business_storage.inbound.usd}, {@code
-     * business_storage.inbound.usdc}, {@code business_storage.outbound.cad}, {@code
-     * business_storage.outbound.eur}, {@code business_storage.outbound.gbp}, {@code
+     * business_storage.inbound.gbp}, {@code business_storage.inbound.ousd}, {@code
+     * business_storage.inbound.usd}, {@code business_storage.inbound.usdc}, {@code
+     * business_storage.outbound.cad}, {@code business_storage.outbound.eur}, {@code
+     * business_storage.outbound.gbp}, {@code business_storage.outbound.ousd}, {@code
      * business_storage.outbound.usd}, {@code business_storage.outbound.usdc}, {@code
      * consumer_storage.inbound.usd}, {@code consumer_storage.inbound.usdc}, {@code
      * consumer_storage.outbound.usd}, {@code consumer_storage.outbound.usdc}, {@code

@@ -20,16 +20,16 @@ public final class AccountSignalService extends ApiService {
   }
 
   /**
-   * Lists the latest AccountSignals for a given account or customer, filtered by signal type. Note
-   * that this endpoint returns only the latest signal for each requested signal type.
+   * Lists AccountSignals for a given account or customer. Signals more than 90 days old are
+   * omitted. Returns only the latest AccountSignal for each requested signal type.
    */
   public StripeCollection<AccountSignal> list(AccountSignalListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
   /**
-   * Lists the latest AccountSignals for a given account or customer, filtered by signal type. Note
-   * that this endpoint returns only the latest signal for each requested signal type.
+   * Lists AccountSignals for a given account or customer. Signals more than 90 days old are
+   * omitted. Returns only the latest AccountSignal for each requested signal type.
    */
   public StripeCollection<AccountSignal> list(
       AccountSignalListParams params, RequestOptions options) throws StripeException {
@@ -43,11 +43,17 @@ public final class AccountSignalService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<AccountSignal>>() {}.getType());
   }
-  /** Retrieves an AccountSignal by its ID. */
+  /**
+   * Retrieves an AccountSignal by its ID for up to 90 days after creation. Signals more than 90
+   * days old are inaccessible.
+   */
   public AccountSignal retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
-  /** Retrieves an AccountSignal by its ID. */
+  /**
+   * Retrieves an AccountSignal by its ID for up to 90 days after creation. Signals more than 90
+   * days old are inaccessible.
+   */
   public AccountSignal retrieve(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/signals/account_signals/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =

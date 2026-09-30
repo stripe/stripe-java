@@ -984,6 +984,29 @@ public final class EventNotificationClassLookup {
         "v2.core.vault.network_token.suspended",
         com.stripe.events.V2CoreVaultNetworkTokenSuspendedEventNotification.class);
     eventClassLookup.put(
+        "v2.data.query_run.created",
+        com.stripe.events.V2DataQueryRunCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.query_run.failed", com.stripe.events.V2DataQueryRunFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.query_run.succeeded",
+        com.stripe.events.V2DataQueryRunSucceededEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.query_run.updated",
+        com.stripe.events.V2DataQueryRunUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.report_run.created",
+        com.stripe.events.V2DataReportRunCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.report_run.failed",
+        com.stripe.events.V2DataReportRunFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.report_run.succeeded",
+        com.stripe.events.V2DataReportRunSucceededEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.report_run.updated",
+        com.stripe.events.V2DataReportRunUpdatedEventNotification.class);
+    eventClassLookup.put(
         "v2.data.reporting.query_run.created",
         com.stripe.events.V2DataReportingQueryRunCreatedEventNotification.class);
     eventClassLookup.put(
@@ -1051,6 +1074,9 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.money_management.debit_dispute.succeeded",
         com.stripe.events.V2MoneyManagementDebitDisputeSucceededEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.earned_credit.succeeded",
+        com.stripe.events.V2MoneyManagementEarnedCreditSucceededEventNotification.class);
     eventClassLookup.put(
         "v2.money_management.financial_account.created",
         com.stripe.events.V2MoneyManagementFinancialAccountCreatedEventNotification.class);

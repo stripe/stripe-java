@@ -38,16 +38,29 @@ public class InboundTransferCreateParams extends ApiRequestParams {
   @SerializedName("from")
   From from;
 
+  /**
+   * An optional statement descriptor surfaced on the payer's bank statement. Max 10 characters.
+   * When omitted, Stripe sends its default descriptor.
+   */
+  @SerializedName("statement_descriptor")
+  String statementDescriptor;
+
   /** <strong>Required.</strong> Object containing details about where the funds will land. */
   @SerializedName("to")
   To to;
 
   private InboundTransferCreateParams(
-      Amount amount, String description, Map<String, Object> extraParams, From from, To to) {
+      Amount amount,
+      String description,
+      Map<String, Object> extraParams,
+      From from,
+      String statementDescriptor,
+      To to) {
     this.amount = amount;
     this.description = description;
     this.extraParams = extraParams;
     this.from = from;
+    this.statementDescriptor = statementDescriptor;
     this.to = to;
   }
 
@@ -64,12 +77,19 @@ public class InboundTransferCreateParams extends ApiRequestParams {
 
     private From from;
 
+    private String statementDescriptor;
+
     private To to;
 
     /** Finalize and obtain parameter instance from this builder. */
     public InboundTransferCreateParams build() {
       return new InboundTransferCreateParams(
-          this.amount, this.description, this.extraParams, this.from, this.to);
+          this.amount,
+          this.description,
+          this.extraParams,
+          this.from,
+          this.statementDescriptor,
+          this.to);
     }
 
     /**
@@ -119,6 +139,15 @@ public class InboundTransferCreateParams extends ApiRequestParams {
      */
     public Builder setFrom(InboundTransferCreateParams.From from) {
       this.from = from;
+      return this;
+    }
+
+    /**
+     * An optional statement descriptor surfaced on the payer's bank statement. Max 10 characters.
+     * When omitted, Stripe sends its default descriptor.
+     */
+    public Builder setStatementDescriptor(String statementDescriptor) {
+      this.statementDescriptor = statementDescriptor;
       return this;
     }
 

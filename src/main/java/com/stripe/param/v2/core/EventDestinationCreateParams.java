@@ -13,33 +13,35 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class EventDestinationCreateParams extends ApiRequestParams {
-  /** Amazon EventBridge configuration. */
+  /** AWS account and region where Stripe creates the EventBridge partner event source. */
   @SerializedName("amazon_eventbridge")
   AmazonEventbridge amazonEventbridge;
 
-  /** Azure Event Grid configuration. */
+  /** Azure subscription, resource group, and region where Stripe creates the partner topic. */
   @SerializedName("azure_event_grid")
   AzureEventGrid azureEventGrid;
 
-  /** An optional description of what the event destination is used for. */
+  /** An optional user-defined description of the destination's purpose. */
   @SerializedName("description")
   String description;
 
-  /** <strong>Required.</strong> The list of events to enable for this endpoint. */
+  /**
+   * <strong>Required.</strong> The list of event types enabled for delivery to this destination.
+   */
   @SerializedName("enabled_events")
   List<String> enabledEvents;
 
-  /** <strong>Required.</strong> Payload type of events being subscribed to. */
+  /** <strong>Required.</strong> Whether to deliver as snapshot or thin events. */
   @SerializedName("event_payload")
   EventPayload eventPayload;
 
   /**
-   * Specifies which accounts' events route to this destination. {@code @self}: Receive events from
-   * the account that owns the event destination. {@code @accounts}: Receive events emitted from
-   * other accounts you manage which includes your v1 and v2 accounts.
-   * {@code @organization_members}: Receive events from accounts directly linked to the
-   * organization. {@code @organization_members/@accounts}: Receive events from all accounts
-   * connected to any platform accounts in the organization.
+   * The account or organization scopes that can supply events. Use this with {@code enabled_events}
+   * to define the subscription. {@code @self}: Receive events from the account that owns the event
+   * destination. {@code @accounts}: Receive events emitted from other accounts you manage,
+   * including your v1 and v2 accounts. {@code @organization_members}: Receive events from accounts
+   * directly linked to the organization. {@code @organization_members/@accounts}: Receive events
+   * from all accounts connected to any platform accounts in the organization.
    */
   @SerializedName("events_from")
   List<String> eventsFrom;
@@ -53,27 +55,39 @@ public class EventDestinationCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Additional fields to include in the response. */
+  /**
+   * Include normally redacted webhook fields in the create response. Public API clients must
+   * include {@code webhook_endpoint.signing_secret} to receive the signing secret.
+   */
   @SerializedName("include")
   List<EventDestinationCreateParams.Include> include;
 
-  /** Metadata. */
+  /** User-defined key/value data for the destination. */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** <strong>Required.</strong> Event destination name. */
+  /** <strong>Required.</strong> A user-defined label for identifying the destination. */
   @SerializedName("name")
   String name;
 
-  /** If using the snapshot event payload, the API version events are rendered as. */
+  /**
+   * For snapshot events only, the Stripe API version used to render event objects; do not provide
+   * this for thin events.
+   */
   @SerializedName("snapshot_api_version")
   String snapshotApiVersion;
 
-  /** <strong>Required.</strong> Event destination type. */
+  /**
+   * <strong>Required.</strong> The delivery transport. Chosen when the destination is created and
+   * cannot be changed by update.
+   */
   @SerializedName("type")
   Type type;
 
-  /** Webhook endpoint configuration. */
+  /**
+   * Delivery target for the webhook endpoint. Live mode requires HTTPS; sandbox mode also supports
+   * HTTP.
+   */
   @SerializedName("webhook_endpoint")
   WebhookEndpoint webhookEndpoint;
 
@@ -155,20 +169,20 @@ public class EventDestinationCreateParams extends ApiRequestParams {
           this.webhookEndpoint);
     }
 
-    /** Amazon EventBridge configuration. */
+    /** AWS account and region where Stripe creates the EventBridge partner event source. */
     public Builder setAmazonEventbridge(
         EventDestinationCreateParams.AmazonEventbridge amazonEventbridge) {
       this.amazonEventbridge = amazonEventbridge;
       return this;
     }
 
-    /** Azure Event Grid configuration. */
+    /** Azure subscription, resource group, and region where Stripe creates the partner topic. */
     public Builder setAzureEventGrid(EventDestinationCreateParams.AzureEventGrid azureEventGrid) {
       this.azureEventGrid = azureEventGrid;
       return this;
     }
 
-    /** An optional description of what the event destination is used for. */
+    /** An optional user-defined description of the destination's purpose. */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
@@ -200,7 +214,7 @@ public class EventDestinationCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> Payload type of events being subscribed to. */
+    /** <strong>Required.</strong> Whether to deliver as snapshot or thin events. */
     public Builder setEventPayload(EventDestinationCreateParams.EventPayload eventPayload) {
       this.eventPayload = eventPayload;
       return this;
@@ -310,25 +324,34 @@ public class EventDestinationCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> Event destination name. */
+    /** <strong>Required.</strong> A user-defined label for identifying the destination. */
     public Builder setName(String name) {
       this.name = name;
       return this;
     }
 
-    /** If using the snapshot event payload, the API version events are rendered as. */
+    /**
+     * For snapshot events only, the Stripe API version used to render event objects; do not provide
+     * this for thin events.
+     */
     public Builder setSnapshotApiVersion(String snapshotApiVersion) {
       this.snapshotApiVersion = snapshotApiVersion;
       return this;
     }
 
-    /** <strong>Required.</strong> Event destination type. */
+    /**
+     * <strong>Required.</strong> The delivery transport. Chosen when the destination is created and
+     * cannot be changed by update.
+     */
     public Builder setType(EventDestinationCreateParams.Type type) {
       this.type = type;
       return this;
     }
 
-    /** Webhook endpoint configuration. */
+    /**
+     * Delivery target for the webhook endpoint. Live mode requires HTTPS; sandbox mode also
+     * supports HTTP.
+     */
     public Builder setWebhookEndpoint(
         EventDestinationCreateParams.WebhookEndpoint webhookEndpoint) {
       this.webhookEndpoint = webhookEndpoint;
@@ -339,11 +362,13 @@ public class EventDestinationCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class AmazonEventbridge {
-    /** <strong>Required.</strong> The AWS account ID. */
+    /**
+     * <strong>Required.</strong> Your AWS account where Stripe creates the partner event source.
+     */
     @SerializedName("aws_account_id")
     String awsAccountId;
 
-    /** <strong>Required.</strong> The region of the AWS event source. */
+    /** <strong>Required.</strong> The AWS region where Stripe creates the partner event source. */
     @SerializedName("aws_region")
     String awsRegion;
 
@@ -380,13 +405,17 @@ public class EventDestinationCreateParams extends ApiRequestParams {
             this.awsAccountId, this.awsRegion, this.extraParams);
       }
 
-      /** <strong>Required.</strong> The AWS account ID. */
+      /**
+       * <strong>Required.</strong> Your AWS account where Stripe creates the partner event source.
+       */
       public Builder setAwsAccountId(String awsAccountId) {
         this.awsAccountId = awsAccountId;
         return this;
       }
 
-      /** <strong>Required.</strong> The region of the AWS event source. */
+      /**
+       * <strong>Required.</strong> The AWS region where Stripe creates the partner event source.
+       */
       public Builder setAwsRegion(String awsRegion) {
         this.awsRegion = awsRegion;
         return this;
@@ -424,15 +453,17 @@ public class EventDestinationCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class AzureEventGrid {
-    /** <strong>Required.</strong> The Azure region. */
+    /** <strong>Required.</strong> The Azure region where Stripe creates the partner topic. */
     @SerializedName("azure_region")
     String azureRegion;
 
-    /** <strong>Required.</strong> The name of the Azure resource group. */
+    /**
+     * <strong>Required.</strong> The Azure resource group where Stripe creates the partner topic.
+     */
     @SerializedName("azure_resource_group_name")
     String azureResourceGroupName;
 
-    /** <strong>Required.</strong> The Azure subscription ID. */
+    /** <strong>Required.</strong> The Azure subscription where Stripe creates the partner topic. */
     @SerializedName("azure_subscription_id")
     String azureSubscriptionId;
 
@@ -478,19 +509,23 @@ public class EventDestinationCreateParams extends ApiRequestParams {
             this.extraParams);
       }
 
-      /** <strong>Required.</strong> The Azure region. */
+      /** <strong>Required.</strong> The Azure region where Stripe creates the partner topic. */
       public Builder setAzureRegion(String azureRegion) {
         this.azureRegion = azureRegion;
         return this;
       }
 
-      /** <strong>Required.</strong> The name of the Azure resource group. */
+      /**
+       * <strong>Required.</strong> The Azure resource group where Stripe creates the partner topic.
+       */
       public Builder setAzureResourceGroupName(String azureResourceGroupName) {
         this.azureResourceGroupName = azureResourceGroupName;
         return this;
       }
 
-      /** <strong>Required.</strong> The Azure subscription ID. */
+      /**
+       * <strong>Required.</strong> The Azure subscription where Stripe creates the partner topic.
+       */
       public Builder setAzureSubscriptionId(String azureSubscriptionId) {
         this.azureSubscriptionId = azureSubscriptionId;
         return this;
@@ -537,7 +572,10 @@ public class EventDestinationCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The URL of the webhook endpoint. */
+    /**
+     * <strong>Required.</strong> The URL where Stripe sends matching events. Live mode requires
+     * HTTPS; sandbox mode also supports HTTP.
+     */
     @SerializedName("url")
     String url;
 
@@ -587,7 +625,10 @@ public class EventDestinationCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The URL of the webhook endpoint. */
+      /**
+       * <strong>Required.</strong> The URL where Stripe sends matching events. Live mode requires
+       * HTTPS; sandbox mode also supports HTTP.
+       */
       public Builder setUrl(String url) {
         this.url = url;
         return this;

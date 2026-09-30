@@ -1231,6 +1231,18 @@ public class StripeClient {
   }
 
   /**
+   * @deprecated StripeClient.threeDSecure() is deprecated, use StripeClient.v1().threeDSecure()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().threeDSecure(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.ThreeDSecureService threeDSecure() {
+    return new com.stripe.service.ThreeDSecureService(this.getResponseGetter());
+  }
+
+  /**
    * @deprecated StripeClient.tokens() is deprecated, use StripeClient.v1().tokens() instead. All
    *     functionality under it has been copied over to StripeClient.v1().tokens(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration

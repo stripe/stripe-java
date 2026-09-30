@@ -28,6 +28,10 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
   @SerializedName("effective_date")
   String effectiveDate;
 
+  /** Spain-specific exemption details. Optional when country is ES; must be absent otherwise. */
+  @SerializedName("es")
+  Es es;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -53,6 +57,7 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
       Ca ca,
       String country,
       String effectiveDate,
+      Es es,
       List<String> expand,
       String expirationDate,
       Map<String, Object> extraParams,
@@ -60,6 +65,7 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
     this.ca = ca;
     this.country = country;
     this.effectiveDate = effectiveDate;
+    this.es = es;
     this.expand = expand;
     this.expirationDate = expirationDate;
     this.extraParams = extraParams;
@@ -77,6 +83,8 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
 
     private String effectiveDate;
 
+    private Es es;
+
     private List<String> expand;
 
     private String expirationDate;
@@ -91,6 +99,7 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
           this.ca,
           this.country,
           this.effectiveDate,
+          this.es,
           this.expand,
           this.expirationDate,
           this.extraParams,
@@ -115,6 +124,12 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
      */
     public Builder setEffectiveDate(String effectiveDate) {
       this.effectiveDate = effectiveDate;
+      return this;
+    }
+
+    /** Spain-specific exemption details. Optional when country is ES; must be absent otherwise. */
+    public Builder setEs(CustomerTaxExemptionCreateParams.Es es) {
+      this.es = es;
       return this;
     }
 
@@ -286,6 +301,75 @@ public class CustomerTaxExemptionCreateParams extends ApiRequestParams {
 
       TaxType(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Es {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> Two-letter Spanish subdivision code (ISO 3166-2). */
+    @SerializedName("state")
+    String state;
+
+    private Es(Map<String, Object> extraParams, String state) {
+      this.extraParams = extraParams;
+      this.state = state;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String state;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CustomerTaxExemptionCreateParams.Es build() {
+        return new CustomerTaxExemptionCreateParams.Es(this.extraParams, this.state);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CustomerTaxExemptionCreateParams.Es#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CustomerTaxExemptionCreateParams.Es#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> Two-letter Spanish subdivision code (ISO 3166-2). */
+      public Builder setState(String state) {
+        this.state = state;
+        return this;
       }
     }
   }

@@ -50,9 +50,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   Object billingCadence;
 
   /**
-   * Either {@code now} or {@code unchanged}. Setting the value to {@code now} resets the
-   * subscription's billing cycle anchor to the current time (in UTC). For more information, see the
-   * billing cycle <a
+   * Controls how the subscription's billing cycle anchor changes. Set {@code type} to {@code now}
+   * to reset the billing cycle anchor to the current time (in UTC), or {@code unchanged} to
+   * preserve it. For more information, see the billing cycle <a
    * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
    */
   @SerializedName("billing_cycle_anchor")
@@ -281,7 +281,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * Indicates if a plan's {@code trial_period_days} should be applied to the subscription. Setting
    * {@code trial_end} per subscription is preferred, and this defaults to {@code false}. Setting
    * this flag to {@code true} together with {@code trial_end} is not allowed. See <a
-   * href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
+   * href="https://docs.stripe.com/billing/subscriptions/trials/free-trials">Using trial periods on
    * subscriptions</a> to learn more.
    */
   @SerializedName("trial_from_plan")
@@ -568,9 +568,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Either {@code now} or {@code unchanged}. Setting the value to {@code now} resets the
-     * subscription's billing cycle anchor to the current time (in UTC). For more information, see
-     * the billing cycle <a
+     * Controls how the subscription's billing cycle anchor changes. Set {@code type} to {@code now}
+     * to reset the billing cycle anchor to the current time (in UTC), or {@code unchanged} to
+     * preserve it. For more information, see the billing cycle <a
      * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
      */
     public Builder setBillingCycleAnchor(
@@ -1202,8 +1202,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * Indicates if a plan's {@code trial_period_days} should be applied to the subscription.
      * Setting {@code trial_end} per subscription is preferred, and this defaults to {@code false}.
      * Setting this flag to {@code true} together with {@code trial_end} is not allowed. See <a
-     * href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
-     * subscriptions</a> to learn more.
+     * href="https://docs.stripe.com/billing/subscriptions/trials/free-trials">Using trial periods
+     * on subscriptions</a> to learn more.
      */
     public Builder setTrialFromPlan(Boolean trialFromPlan) {
       this.trialFromPlan = trialFromPlan;
@@ -2636,6 +2636,122 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         Type(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingCycleAnchor {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * A Unix timestamp within the inclusive bounds of the subscription's current billing period.
+     * For subscriptions with multiple items, it must fall within the intersection of their current
+     * billing periods. Only valid when {@code type} is {@code timestamp}.
+     */
+    @SerializedName("timestamp")
+    Long timestamp;
+
+    /**
+     * <strong>Required.</strong> Determines how the billing cycle anchor changes when the
+     * subscription is updated.
+     */
+    @SerializedName("type")
+    Type type;
+
+    private BillingCycleAnchor(Map<String, Object> extraParams, Long timestamp, Type type) {
+      this.extraParams = extraParams;
+      this.timestamp = timestamp;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Long timestamp;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SubscriptionUpdateParams.BillingCycleAnchor build() {
+        return new SubscriptionUpdateParams.BillingCycleAnchor(
+            this.extraParams, this.timestamp, this.type);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionUpdateParams.BillingCycleAnchor#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionUpdateParams.BillingCycleAnchor#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * A Unix timestamp within the inclusive bounds of the subscription's current billing period.
+       * For subscriptions with multiple items, it must fall within the intersection of their
+       * current billing periods. Only valid when {@code type} is {@code timestamp}.
+       */
+      public Builder setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Determines how the billing cycle anchor changes when the
+       * subscription is updated.
+       */
+      public Builder setType(SubscriptionUpdateParams.BillingCycleAnchor.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("now")
+      NOW("now"),
+
+      @SerializedName("timestamp")
+      TIMESTAMP("timestamp"),
+
+      @SerializedName("unchanged")
+      UNCHANGED("unchanged");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
       }
     }
   }
@@ -8487,8 +8603,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
            * Date when the mandate expires and no further payments will be charged. If not provided,
            * the mandate will be set to be indefinite.
            */
-          @SerializedName("expires_after")
-          Long expiresAfter;
+          @SerializedName("expires_at")
+          Long expiresAt;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -8500,8 +8616,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          private MandateOptions(Long expiresAfter, Map<String, Object> extraParams) {
-            this.expiresAfter = expiresAfter;
+          private MandateOptions(Long expiresAt, Map<String, Object> extraParams) {
+            this.expiresAt = expiresAt;
             this.extraParams = extraParams;
           }
 
@@ -8510,7 +8626,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private Long expiresAfter;
+            private Long expiresAt;
 
             private Map<String, Object> extraParams;
 
@@ -8518,15 +8634,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik.MandateOptions
                 build() {
               return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Blik
-                  .MandateOptions(this.expiresAfter, this.extraParams);
+                  .MandateOptions(this.expiresAt, this.extraParams);
             }
 
             /**
              * Date when the mandate expires and no further payments will be charged. If not
              * provided, the mandate will be set to be indefinite.
              */
-            public Builder setExpiresAfter(Long expiresAfter) {
-              this.expiresAfter = expiresAfter;
+            public Builder setExpiresAt(Long expiresAt) {
+              this.expiresAt = expiresAt;
               return this;
             }
 
@@ -11505,8 +11621,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> Indicates how the subscription should change when the trial ends
-       * if the user did not provide a payment method.
+       * Indicates how the subscription should change when the trial ends if the user did not
+       * provide a payment method.
        */
       @SerializedName("missing_payment_method")
       MissingPaymentMethod missingPaymentMethod;
@@ -11577,8 +11693,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> Indicates how the subscription should change when the trial
-         * ends if the user did not provide a payment method.
+         * Indicates how the subscription should change when the trial ends if the user did not
+         * provide a payment method.
          */
         public Builder setMissingPaymentMethod(
             SubscriptionUpdateParams.TrialSettings.EndBehavior.MissingPaymentMethod
@@ -11620,21 +11736,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.value = value;
         }
       }
-    }
-  }
-
-  public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
-    @SerializedName("now")
-    NOW("now"),
-
-    @SerializedName("unchanged")
-    UNCHANGED("unchanged");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    BillingCycleAnchor(String value) {
-      this.value = value;
     }
   }
 

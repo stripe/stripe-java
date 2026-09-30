@@ -6406,6 +6406,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String network;
 
       /**
+       * Indicates whether Stripe may synchronously request a real-time card account update for this
+       * confirmation. {@code if_available} allows the update; {@code never} opts out. Defaults to
+       * {@code if_available} and is omitted from the response unless explicitly set on this
+       * confirmation. This does not affect batch Card Account Updater.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_card_account_update")
+      String requestCardAccountUpdate;
+
+      /**
        * Request ability to <a
        * href="https://docs.stripe.com/payments/decremental-authorization">decrement the
        * authorization</a> for this PaymentIntent.

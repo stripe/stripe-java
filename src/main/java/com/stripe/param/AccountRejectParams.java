@@ -34,17 +34,19 @@ public class AccountRejectParams extends ApiRequestParams {
   PayoutsAction payoutsAction;
 
   /**
-   * <strong>Required.</strong> The reason for rejecting the account. Can be {@code fraud}, {@code
-   * terms_of_service}, or {@code other}.
+   * <strong>Required.</strong> The reason for rejecting the account. Can be {@code
+   * fraud_payment_method_casher}, {@code fraud_payment_method_tester}, {@code
+   * fraud_no_intent_to_fulfill}, {@code fraud_other}, {@code credit}, {@code terms_of_service}, or
+   * {@code other}.
    */
   @SerializedName("reason")
-  String reason;
+  Reason reason;
 
   private AccountRejectParams(
       List<String> expand,
       Map<String, Object> extraParams,
       PayoutsAction payoutsAction,
-      String reason) {
+      Reason reason) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.payoutsAction = payoutsAction;
@@ -62,7 +64,7 @@ public class AccountRejectParams extends ApiRequestParams {
 
     private PayoutsAction payoutsAction;
 
-    private String reason;
+    private Reason reason;
 
     /** Finalize and obtain parameter instance from this builder. */
     public AccountRejectParams build() {
@@ -132,10 +134,12 @@ public class AccountRejectParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The reason for rejecting the account. Can be {@code fraud}, {@code
-     * terms_of_service}, or {@code other}.
+     * <strong>Required.</strong> The reason for rejecting the account. Can be {@code
+     * fraud_payment_method_casher}, {@code fraud_payment_method_tester}, {@code
+     * fraud_no_intent_to_fulfill}, {@code fraud_other}, {@code credit}, {@code terms_of_service},
+     * or {@code other}.
      */
-    public Builder setReason(String reason) {
+    public Builder setReason(AccountRejectParams.Reason reason) {
       this.reason = reason;
       return this;
     }
@@ -152,6 +156,36 @@ public class AccountRejectParams extends ApiRequestParams {
     private final String value;
 
     PayoutsAction(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Reason implements ApiRequestParams.EnumParam {
+    @SerializedName("credit")
+    CREDIT("credit"),
+
+    @SerializedName("fraud_no_intent_to_fulfill")
+    FRAUD_NO_INTENT_TO_FULFILL("fraud_no_intent_to_fulfill"),
+
+    @SerializedName("fraud_other")
+    FRAUD_OTHER("fraud_other"),
+
+    @SerializedName("fraud_payment_method_casher")
+    FRAUD_PAYMENT_METHOD_CASHER("fraud_payment_method_casher"),
+
+    @SerializedName("fraud_payment_method_tester")
+    FRAUD_PAYMENT_METHOD_TESTER("fraud_payment_method_tester"),
+
+    @SerializedName("other")
+    OTHER("other"),
+
+    @SerializedName("terms_of_service")
+    TERMS_OF_SERVICE("terms_of_service");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Reason(String value) {
       this.value = value;
     }
   }

@@ -474,9 +474,9 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     String currency;
 
     /**
-     * The type of wallet (standard or bridge_wallet).
+     * The type of crypto wallet.
      *
-     * <p>One of {@code bridge_wallet}, or {@code standard}.
+     * <p>One of {@code bridge_wallet}, {@code squads}, or {@code standard}.
      */
     @SerializedName("type")
     String type;

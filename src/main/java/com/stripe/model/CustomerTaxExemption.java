@@ -48,6 +48,9 @@ public class CustomerTaxExemption extends ApiResource implements HasId {
   @SerializedName("effective_date")
   String effectiveDate;
 
+  @SerializedName("es")
+  Es es;
+
   /** ISO 8601 date (YYYY-MM-DD) when the exemption expires. */
   @SerializedName("expiration_date")
   String expirationDate;
@@ -241,6 +244,21 @@ public class CustomerTaxExemption extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about Es, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Es extends StripeObject {
+    /**
+     * Two-letter Spanish subdivision code (ISO 3166-2). Absent for country-wide Spain exemptions.
+     */
+    @SerializedName("state")
+    String state;
+  }
+
+  /**
    * For more details about Us, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -257,6 +275,7 @@ public class CustomerTaxExemption extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(ca, responseGetter);
+    trySetResponseGetter(es, responseGetter);
     trySetResponseGetter(us, responseGetter);
   }
 }

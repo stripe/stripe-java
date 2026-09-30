@@ -24,7 +24,7 @@ public class SessionUpdateParams extends ApiRequestParams {
 
   /**
    * Information about the customer collected within the Checkout Session. Can only be set when
-   * updating {@code embedded} or {@code custom} sessions.
+   * updating {@code embedded_page} or {@code elements} sessions.
    */
   @SerializedName("collected_information")
   CollectedInformation collectedInformation;
@@ -182,7 +182,7 @@ public class SessionUpdateParams extends ApiRequestParams {
 
     /**
      * Information about the customer collected within the Checkout Session. Can only be set when
-     * updating {@code embedded} or {@code custom} sessions.
+     * updating {@code embedded_page} or {@code elements} sessions.
      */
     public Builder setCollectedInformation(
         SessionUpdateParams.CollectedInformation collectedInformation) {
