@@ -67,6 +67,10 @@ public final class MoneyManagementService extends ApiService {
     return new com.stripe.service.v2.moneymanagement.ReceivedDebitService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.moneymanagement.TestHelpersService testHelpers() {
+    return new com.stripe.service.v2.moneymanagement.TestHelpersService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.moneymanagement.TransactionEntryService transactionEntries() {
     return new com.stripe.service.v2.moneymanagement.TransactionEntryService(
         this.getResponseGetter());

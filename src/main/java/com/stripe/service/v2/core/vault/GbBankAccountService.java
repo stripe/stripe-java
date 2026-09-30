@@ -2,6 +2,11 @@
 package com.stripe.service.v2.core.vault;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.exception.BlockedByStripeException;
+import com.stripe.exception.CannotProceedException;
+import com.stripe.exception.ControlledByAlternateResourceException;
+import com.stripe.exception.InvalidVaultedCredentialException;
+import com.stripe.exception.QuotaExceededException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.StripeCollection;
 import com.stripe.model.v2.core.vault.GbBankAccount;
@@ -56,12 +61,15 @@ public final class GbBankAccountService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<GbBankAccount>>() {}.getType());
   }
   /** Create a GB bank account. */
-  public GbBankAccount create(GbBankAccountCreateParams params) throws StripeException {
+  public GbBankAccount create(GbBankAccountCreateParams params)
+      throws StripeException, BlockedByStripeException, CannotProceedException,
+          InvalidVaultedCredentialException, QuotaExceededException {
     return create(params, (RequestOptions) null);
   }
   /** Create a GB bank account. */
   public GbBankAccount create(GbBankAccountCreateParams params, RequestOptions options)
-      throws StripeException {
+      throws StripeException, BlockedByStripeException, CannotProceedException,
+          InvalidVaultedCredentialException, QuotaExceededException {
     String path = "/v2/core/vault/gb_bank_accounts";
     ApiRequest request =
         new ApiRequest(
@@ -114,14 +122,16 @@ public final class GbBankAccountService extends ApiService {
    * Archive a GBBankAccount object. Archived GBBankAccount objects cannot be used as outbound
    * destinations and will not appear in the outbound destination list.
    */
-  public GbBankAccount archive(String id) throws StripeException {
+  public GbBankAccount archive(String id)
+      throws StripeException, CannotProceedException, ControlledByAlternateResourceException {
     return archive(id, (RequestOptions) null);
   }
   /**
    * Archive a GBBankAccount object. Archived GBBankAccount objects cannot be used as outbound
    * destinations and will not appear in the outbound destination list.
    */
-  public GbBankAccount archive(String id, RequestOptions options) throws StripeException {
+  public GbBankAccount archive(String id, RequestOptions options)
+      throws StripeException, CannotProceedException, ControlledByAlternateResourceException {
     String path =
         String.format("/v2/core/vault/gb_bank_accounts/%s/archive", ApiResource.urlEncodeId(id));
     ApiRequest request =

@@ -38,8 +38,8 @@ import lombok.Setter;
  * Invoices are statements of amounts owed by a customer, and are either generated one-off, or
  * generated periodically from a subscription.
  *
- * <p>They contain <a href="https://api.stripe.com#invoiceitems">invoice items</a>, and proration
- * adjustments that may be caused by subscription upgrades/downgrades (if necessary).
+ * <p>They contain <a href="https://docs.stripe.com/api#invoiceitems">invoice items</a>, and
+ * proration adjustments that may be caused by subscription upgrades/downgrades (if necessary).
  *
  * <p>If your invoice is configured to be billed through automatic charges, Stripe automatically
  * finalizes your invoice and attempts payment. Note that finalizing the invoice, <a
@@ -514,8 +514,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   String receiptNumber;
 
   /**
-   * The rendering-related settings that control how the invoice is displayed on customer-facing
-   * surfaces such as PDF and Hosted Invoice Page.
+   * The rendering-related settings that control how invoices render in customer-facing interfaces
+   * such as the PDF or hosted invoice page.
    */
   @SerializedName("rendering")
   Rendering rendering;
@@ -550,6 +550,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   @SerializedName("status")
   String status;
+
+  @SerializedName("status_details")
+  StatusDetails statusDetails;
 
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
@@ -1859,8 +1862,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as {@code collection_method}, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, you can no
+   * longer change most of its details, including monetary values and {@code collection_method}. For
+   * most invoices, this also includes {@code description}.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -1874,8 +1878,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as {@code collection_method}, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, you can no
+   * longer change most of its details, including monetary values and {@code collection_method}. For
+   * most invoices, this also includes {@code description}.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -1892,8 +1897,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as {@code collection_method}, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, you can no
+   * longer change most of its details, including monetary values and {@code collection_method}. For
+   * most invoices, this also includes {@code description}.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -1906,8 +1912,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as {@code collection_method}, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, you can no
+   * longer change most of its details, including monetary values and {@code collection_method}. For
+   * most invoices, this also includes {@code description}.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -2673,7 +2680,82 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Billie extends StripeObject {}
+      public static class Billie extends StripeObject {
+        @SerializedName("company_details")
+        CompanyDetails companyDetails;
+
+        /** An identifier or reference that this payment corresponds to. */
+        @SerializedName("reference")
+        String reference;
+
+        /**
+         * For more details about CompanyDetails, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CompanyDetails extends StripeObject {
+          @SerializedName("registered_address")
+          RegisteredAddress registeredAddress;
+
+          /** Company or entity name. */
+          @SerializedName("registered_name")
+          String registeredName;
+
+          /** The official registration number for the given registration type. */
+          @SerializedName("registration_number")
+          String registrationNumber;
+
+          /**
+           * Type of registration the company or entity holds in their registered country.
+           *
+           * <p>One of {@code ch_ein}, {@code de_hrb}, {@code dk_cvr}, {@code es_cif}, {@code
+           * fi_tunnus}, {@code fr_siren}, {@code fr_siret}, {@code it_rea}, {@code nl_kvk}, {@code
+           * no_org_number}, {@code no_pno}, {@code se_org_number}, {@code se_pno}, or {@code
+           * uk_crn}.
+           */
+          @SerializedName("registration_type")
+          String registrationType;
+
+          /** VAT ID number. */
+          @SerializedName("vat")
+          String vat;
+
+          /**
+           * For more details about RegisteredAddress, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class RegisteredAddress extends StripeObject {
+            /** City, district, suburb, town, or village. */
+            @SerializedName("city")
+            String city;
+
+            /** Two-letter country code. */
+            @SerializedName("country")
+            String country;
+
+            /** Address line 1 (for example, street, PO Box, or company name). */
+            @SerializedName("line1")
+            String line1;
+
+            /** Address line 2 (for example, apartment, suite, unit, or building). */
+            @SerializedName("line2")
+            String line2;
+
+            /** ZIP or postal code. */
+            @SerializedName("postal_code")
+            String postalCode;
+
+            /** State, county, province, or region. */
+            @SerializedName("state")
+            String state;
+          }
+        }
+      }
 
       /**
        * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
@@ -3126,6 +3208,36 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * For more details about StatusDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusDetails extends StripeObject {
+    @SerializedName("uncollectible")
+    Uncollectible uncollectible;
+
+    /**
+     * For more details about Uncollectible, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Uncollectible extends StripeObject {
+      /**
+       * The reason why the invoice is uncollectible.
+       *
+       * <p>One of {@code max_payment_attempts}, {@code payment_not_received}, {@code
+       * subscription_canceled}, {@code subscription_paused}, or {@code user_forgiven}.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
+  }
+
+  /**
    * For more details about StatusTransitions, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -3465,6 +3577,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     trySetResponseGetter(rendering, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);
+    trySetResponseGetter(statusDetails, responseGetter);
     trySetResponseGetter(statusTransitions, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
     trySetResponseGetter(thresholdReason, responseGetter);

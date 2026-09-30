@@ -106,7 +106,7 @@ public final class PaymentIntentService extends ApiService {
    * client_secret} is in the query string.
    *
    * <p>If you retrieve a PaymentIntent with a publishable key, it only returns a subset of
-   * properties. Refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment
+   * properties. Refer to the <a href="https://stripe.com/api/payment_intents/object">payment
    * intent</a> object reference for more details.
    */
   public PaymentIntent retrieve(String intent, PaymentIntentRetrieveParams params)
@@ -120,7 +120,7 @@ public final class PaymentIntentService extends ApiService {
    * client_secret} is in the query string.
    *
    * <p>If you retrieve a PaymentIntent with a publishable key, it only returns a subset of
-   * properties. Refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment
+   * properties. Refer to the <a href="https://stripe.com/api/payment_intents/object">payment
    * intent</a> object reference for more details.
    */
   public PaymentIntent retrieve(String intent, RequestOptions options) throws StripeException {
@@ -133,7 +133,7 @@ public final class PaymentIntentService extends ApiService {
    * client_secret} is in the query string.
    *
    * <p>If you retrieve a PaymentIntent with a publishable key, it only returns a subset of
-   * properties. Refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment
+   * properties. Refer to the <a href="https://stripe.com/api/payment_intents/object">payment
    * intent</a> object reference for more details.
    */
   public PaymentIntent retrieve(String intent) throws StripeException {
@@ -146,7 +146,7 @@ public final class PaymentIntentService extends ApiService {
    * client_secret} is in the query string.
    *
    * <p>If you retrieve a PaymentIntent with a publishable key, it only returns a subset of
-   * properties. Refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment
+   * properties. Refer to the <a href="https://stripe.com/api/payment_intents/object">payment
    * intent</a> object reference for more details.
    */
   public PaymentIntent retrieve(

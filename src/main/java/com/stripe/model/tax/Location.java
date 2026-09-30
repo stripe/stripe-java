@@ -30,8 +30,8 @@ public class Location extends ApiResource implements HasId {
   /**
    * A descriptive text providing additional context about the tax location. This can include
    * information about the venue, types of events held, services available, or any relevant details
-   * for better identification (e.g., &quot;A spacious auditorium suitable for large concerts and
-   * events.&quot;).
+   * for better identification (for example, &quot;A spacious auditorium suitable for large concerts
+   * and events.&quot;).
    */
   @SerializedName("description")
   String description;
@@ -66,8 +66,8 @@ public class Location extends ApiResource implements HasId {
 
   /**
    * Create a tax location to use in calculating taxes for a service, ticket, or other type of
-   * product. The resulting object contains the id, address, name, description, and current
-   * operational status of the tax location.
+   * product. The resulting object contains the ID, address, type, and description of the tax
+   * location.
    */
   public static Location create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -75,8 +75,8 @@ public class Location extends ApiResource implements HasId {
 
   /**
    * Create a tax location to use in calculating taxes for a service, ticket, or other type of
-   * product. The resulting object contains the id, address, name, description, and current
-   * operational status of the tax location.
+   * product. The resulting object contains the ID, address, type, and description of the tax
+   * location.
    */
   public static Location create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -88,8 +88,8 @@ public class Location extends ApiResource implements HasId {
 
   /**
    * Create a tax location to use in calculating taxes for a service, ticket, or other type of
-   * product. The resulting object contains the id, address, name, description, and current
-   * operational status of the tax location.
+   * product. The resulting object contains the ID, address, type, and description of the tax
+   * location.
    */
   public static Location create(LocationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -97,8 +97,8 @@ public class Location extends ApiResource implements HasId {
 
   /**
    * Create a tax location to use in calculating taxes for a service, ticket, or other type of
-   * product. The resulting object contains the id, address, name, description, and current
-   * operational status of the tax location.
+   * product. The resulting object contains the ID, address, type, and description of the tax
+   * location.
    */
   public static Location create(LocationCreateParams params, RequestOptions options)
       throws StripeException {
@@ -118,8 +118,8 @@ public class Location extends ApiResource implements HasId {
    * Retrieve a list of all tax locations. Tax locations can represent the venues for services,
    * tickets, or other product types.
    *
-   * <p>The response includes detailed information for each tax location, such as its address, name,
-   * description, and current operational status.
+   * <p>The response includes detailed information for each tax location, such as its address, type,
+   * and description.
    *
    * <p>You can paginate through the list by using the {@code limit} parameter to control the number
    * of results returned in each request.
@@ -132,8 +132,8 @@ public class Location extends ApiResource implements HasId {
    * Retrieve a list of all tax locations. Tax locations can represent the venues for services,
    * tickets, or other product types.
    *
-   * <p>The response includes detailed information for each tax location, such as its address, name,
-   * description, and current operational status.
+   * <p>The response includes detailed information for each tax location, such as its address, type,
+   * and description.
    *
    * <p>You can paginate through the list by using the {@code limit} parameter to control the number
    * of results returned in each request.
@@ -150,8 +150,8 @@ public class Location extends ApiResource implements HasId {
    * Retrieve a list of all tax locations. Tax locations can represent the venues for services,
    * tickets, or other product types.
    *
-   * <p>The response includes detailed information for each tax location, such as its address, name,
-   * description, and current operational status.
+   * <p>The response includes detailed information for each tax location, such as its address, type,
+   * and description.
    *
    * <p>You can paginate through the list by using the {@code limit} parameter to control the number
    * of results returned in each request.
@@ -164,8 +164,8 @@ public class Location extends ApiResource implements HasId {
    * Retrieve a list of all tax locations. Tax locations can represent the venues for services,
    * tickets, or other product types.
    *
-   * <p>The response includes detailed information for each tax location, such as its address, name,
-   * description, and current operational status.
+   * <p>The response includes detailed information for each tax location, such as its address, type,
+   * and description.
    *
    * <p>You can paginate through the list by using the {@code limit} parameter to control the number
    * of results returned in each request.

@@ -13,7 +13,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class FeedbackOptionCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> */
+  /**
+   * <strong>Required.</strong> The text of the feedback option, which customers see when canceling.
+   * Maximum 100 characters.
+   */
   @SerializedName("description")
   String description;
 
@@ -53,7 +56,10 @@ public class FeedbackOptionCreateParams extends ApiRequestParams {
       return new FeedbackOptionCreateParams(this.description, this.expand, this.extraParams);
     }
 
-    /** <strong>Required.</strong> */
+    /**
+     * <strong>Required.</strong> The text of the feedback option, which customers see when
+     * canceling. Maximum 100 characters.
+     */
     public Builder setDescription(String description) {
       this.description = description;
       return this;

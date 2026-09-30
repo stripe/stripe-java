@@ -6,6 +6,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,6 +33,14 @@ public class AccountSignal extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
+  /** Data for the fraudulent merchant signal. Present only when type is fraudulent_merchant. */
+  @SerializedName("fraudulent_merchant")
+  FraudulentMerchant fraudulentMerchant;
+
+  /** Data for the fraudulent website signal. Present only when type is fraudulent_website. */
+  @SerializedName("fraudulent_website")
+  FraudulentWebsite fraudulentWebsite;
+
   /** Unique identifier for the account signal. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -56,7 +65,8 @@ public class AccountSignal extends StripeObject implements HasId {
   /**
    * The type of signal.
    *
-   * <p>One of {@code user_account_sharing}, or {@code user_multi_accounting}.
+   * <p>One of {@code fraudulent_merchant}, {@code fraudulent_website}, {@code
+   * user_account_sharing}, or {@code user_multi_accounting}.
    */
   @SerializedName("type")
   String type;
@@ -81,6 +91,99 @@ public class AccountSignal extends StripeObject implements HasId {
     /** The v1 customer ID of the account, for users not yet migrated to v2/accounts. */
     @SerializedName("customer")
     String customer;
+  }
+
+  /** Data for the fraudulent merchant signal. Present only when type is fraudulent_merchant. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FraudulentMerchant extends StripeObject {
+    /** Supplementary contextual data for the signal, including indicators. */
+    @SerializedName("additional_details")
+    AdditionalDetails additionalDetails;
+
+    /**
+     * The probability of the merchant being fraudulent. Can be between 0.00 and 100.00. Absent when
+     * risk level is unknown, or when the user is not on a product tier that includes numeric
+     * scores.
+     */
+    @SerializedName("probability")
+    BigDecimal probability;
+
+    /**
+     * Categorical assessment of the fraudulent merchant risk based on probability.
+     *
+     * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, or {@code unknown}.
+     */
+    @SerializedName("risk_level")
+    String riskLevel;
+
+    /** Supplementary contextual data for the signal, including indicators. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdditionalDetails extends StripeObject {
+      /**
+       * Array of objects representing individual factors that contributed to the calculated
+       * probability. Absent when risk level is unknown, or when the user is not on a product tier
+       * that includes indicators.
+       */
+      @SerializedName("indicators")
+      List<AccountSignal.FraudulentMerchant.AdditionalDetails.Indicator> indicators;
+
+      /**
+       * For more details about Indicator, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Indicator extends StripeObject {
+        /**
+         * A brief explanation of how this indicator contributed to the fraudulent merchant
+         * probability.
+         */
+        @SerializedName("explanation")
+        String explanation;
+
+        /**
+         * The effect this indicator had on the overall risk level.
+         *
+         * <p>One of {@code decrease}, {@code neutral}, {@code slight_increase}, or {@code
+         * strong_increase}.
+         */
+        @SerializedName("impact")
+        String impact;
+
+        /**
+         * The name of the specific indicator used in the risk assessment.
+         *
+         * <p>One of {@code bank_account}, {@code business_information_and_account_activity}, {@code
+         * disputes}, {@code failures}, {@code geolocation}, {@code other}, {@code
+         * other_related_accounts}, {@code other_transaction_activity}, or {@code owner_email}.
+         */
+        @SerializedName("indicator")
+        String indicator;
+      }
+    }
+  }
+
+  /** Data for the fraudulent website signal. Present only when type is fraudulent_website. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FraudulentWebsite extends StripeObject {
+    /** Human-readable details about the fraudulent website evaluation. */
+    @SerializedName("details")
+    String details;
+
+    /**
+     * Categorical assessment of the fraudulent website risk.
+     *
+     * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, or {@code unknown}.
+     */
+    @SerializedName("risk_level")
+    String riskLevel;
   }
 
   /** Data for the user account-sharing signal. Present only when type is user_account_sharing. */

@@ -3,6 +3,7 @@ package com.stripe.model.radar;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.PaymentMethod;
@@ -383,7 +384,8 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     /**
      * Indicates the outcome of the payment evaluation.
      *
-     * <p>One of {@code failed}, {@code merchant_blocked}, {@code rejected}, or {@code succeeded}.
+     * <p>One of {@code failed}, {@code merchant_blocked}, {@code rejected}, {@code rerouted}, or
+     * {@code succeeded}.
      */
     @SerializedName("type")
     String type;
@@ -547,12 +549,12 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class MoneyMovementDetails extends StripeObject {
-      /** Describes card money movement details for the payment evaluation. */
+      /** Describes card money movement details. */
       @SerializedName("card")
       Card card;
 
       /**
-       * Describes the type of money movement. Currently only {@code card} is supported.
+       * Describes the type of money movement.
        *
        * <p>Equal to {@code card}.
        */
@@ -617,7 +619,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
             new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
       }
 
-      /** Billing details attached to this payment evaluation. */
+      /** Billing details attached to the payment method. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -637,42 +639,6 @@ public class PaymentEvaluation extends ApiResource implements HasId {
         /** Billing phone number (including extension). */
         @SerializedName("phone")
         String phone;
-
-        /** Address data. */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class Address extends StripeObject {
-          /** City, district, suburb, town, or village. */
-          @SerializedName("city")
-          String city;
-
-          /**
-           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-           * 3166-1 alpha-2</a>).
-           */
-          @SerializedName("country")
-          String country;
-
-          /** Address line 1, such as the street, PO Box, or company name. */
-          @SerializedName("line1")
-          String line1;
-
-          /** Address line 2, such as the apartment, suite, unit, or building. */
-          @SerializedName("line2")
-          String line2;
-
-          /** ZIP or postal code. */
-          @SerializedName("postal_code")
-          String postalCode;
-
-          /**
-           * State, county, province, or region (<a
-           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
-           */
-          @SerializedName("state")
-          String state;
-        }
       }
     }
 
@@ -692,42 +658,6 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       /** Shipping phone number. */
       @SerializedName("phone")
       String phone;
-
-      /** Address data. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Address extends StripeObject {
-        /** City, district, suburb, town, or village. */
-        @SerializedName("city")
-        String city;
-
-        /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-         * 3166-1 alpha-2</a>).
-         */
-        @SerializedName("country")
-        String country;
-
-        /** Address line 1, such as the street, PO Box, or company name. */
-        @SerializedName("line1")
-        String line1;
-
-        /** Address line 2, such as the apartment, suite, unit, or building. */
-        @SerializedName("line2")
-        String line2;
-
-        /** ZIP or postal code. */
-        @SerializedName("postal_code")
-        String postalCode;
-
-        /**
-         * State, county, province, or region (<a
-         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
-         */
-        @SerializedName("state")
-        String state;
-      }
     }
   }
 
@@ -736,9 +666,74 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Signals extends StripeObject {
+    /** The likelihood that this {@code PaymentEvaluation} results in an early fraud warning. */
+    @SerializedName("early_fraud_warning")
+    EarlyFraudWarning earlyFraudWarning;
+
+    /**
+     * The likelihood that this {@code PaymentEvaluation} results in a dispute with reason code
+     * {@code fraudulent}.
+     */
+    @SerializedName("fraudulent_dispute")
+    FraudulentDispute fraudulentDispute;
+
     /** A payment evaluation signal with evaluated_at, risk_level, and score fields. */
     @SerializedName("fraudulent_payment")
     FraudulentPayment fraudulentPayment;
+
+    /** A payment evaluation signal with evaluated_at, risk_level, and score fields. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EarlyFraudWarning extends StripeObject {
+      /** The time when this signal was evaluated. */
+      @SerializedName("evaluated_at")
+      Long evaluatedAt;
+
+      /**
+       * Risk level of this signal, based on the score.
+       *
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+       * not_assessed}, or {@code unknown}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
+
+      /**
+       * Numeric score for this signal, returned with two decimal places. Possible values for
+       * evaluated payments are between 0 and 100, where higher scores indicate a higher likelihood
+       * of the signal being true.
+       */
+      @SerializedName("score")
+      BigDecimal score;
+    }
+
+    /** A payment evaluation signal with evaluated_at, risk_level, and score fields. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FraudulentDispute extends StripeObject {
+      /** The time when this signal was evaluated. */
+      @SerializedName("evaluated_at")
+      Long evaluatedAt;
+
+      /**
+       * Risk level of this signal, based on the score.
+       *
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+       * not_assessed}, or {@code unknown}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
+
+      /**
+       * Numeric score for this signal, returned with two decimal places. Possible values for
+       * evaluated payments are between 0 and 100, where higher scores indicate a higher likelihood
+       * of the signal being true.
+       */
+      @SerializedName("score")
+      BigDecimal score;
+    }
 
     /** A payment evaluation signal with evaluated_at, risk_level, and score fields. */
     @Getter
@@ -759,10 +754,9 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       String riskLevel;
 
       /**
-       * Score for this signal. Possible values for evaluated payments are between 0 and 100. The
-       * value is returned with two decimal places and higher scores indicate a higher likelihood of
-       * the signal being true. A score of -1 is returned when a model evaluation was not performed,
-       * such as requests from incomplete integrations.
+       * Numeric score for this signal, returned with two decimal places. Possible values for
+       * evaluated payments are between 0 and 100, where higher scores indicate a higher likelihood
+       * of the signal being true.
        */
       @SerializedName("score")
       BigDecimal score;

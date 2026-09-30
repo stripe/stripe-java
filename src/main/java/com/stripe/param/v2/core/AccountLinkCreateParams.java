@@ -3,9 +3,7 @@ package com.stripe.param.v2.core;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,7 +24,12 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> The use case of the AccountLink. */
+  /**
+   * <strong>Required.</strong> Specifies the Stripe-hosted flow for this Account Link. Set {@code
+   * type} and the matching options hash—for example, {@code account_onboarding}—to configure the
+   * flow, including which Account configurations to collect information for and any flow-specific
+   * collection or redirect options.
+   */
   @SerializedName("use_case")
   UseCase useCase;
 
@@ -85,7 +88,12 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The use case of the AccountLink. */
+    /**
+     * <strong>Required.</strong> Specifies the Stripe-hosted flow for this Account Link. Set {@code
+     * type} and the matching options hash—for example, {@code account_onboarding}—to configure the
+     * flow, including which Account configurations to collect information for and any flow-specific
+     * collection or redirect options.
+     */
     public Builder setUseCase(AccountLinkCreateParams.UseCase useCase) {
       this.useCase = useCase;
       return this;
@@ -212,14 +220,6 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       CollectionOptions collectionOptions;
 
       /**
-       * <strong>Required.</strong> Open Enum. A v2/core/account can be configured to enable certain
-       * functionality. The configuration param targets the v2/core/account_link to collect
-       * information for the specified v2/core/account configuration/s.
-       */
-      @SerializedName("configurations")
-      List<AccountLinkCreateParams.UseCase.AccountOnboarding.Configuration> configurations;
-
-      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -246,12 +246,10 @@ public class AccountLinkCreateParams extends ApiRequestParams {
 
       private AccountOnboarding(
           CollectionOptions collectionOptions,
-          List<AccountLinkCreateParams.UseCase.AccountOnboarding.Configuration> configurations,
           Map<String, Object> extraParams,
           String refreshUrl,
           String returnUrl) {
         this.collectionOptions = collectionOptions;
-        this.configurations = configurations;
         this.extraParams = extraParams;
         this.refreshUrl = refreshUrl;
         this.returnUrl = returnUrl;
@@ -264,9 +262,6 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       public static class Builder {
         private CollectionOptions collectionOptions;
 
-        private List<AccountLinkCreateParams.UseCase.AccountOnboarding.Configuration>
-            configurations;
-
         private Map<String, Object> extraParams;
 
         private String refreshUrl;
@@ -276,11 +271,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AccountLinkCreateParams.UseCase.AccountOnboarding build() {
           return new AccountLinkCreateParams.UseCase.AccountOnboarding(
-              this.collectionOptions,
-              this.configurations,
-              this.extraParams,
-              this.refreshUrl,
-              this.returnUrl);
+              this.collectionOptions, this.extraParams, this.refreshUrl, this.returnUrl);
         }
 
         /**
@@ -290,36 +281,6 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         public Builder setCollectionOptions(
             AccountLinkCreateParams.UseCase.AccountOnboarding.CollectionOptions collectionOptions) {
           this.collectionOptions = collectionOptions;
-          return this;
-        }
-
-        /**
-         * Add an element to `configurations` list. A list is initialized for the first `add/addAll`
-         * call, and subsequent calls adds additional elements to the original list. See {@link
-         * AccountLinkCreateParams.UseCase.AccountOnboarding#configurations} for the field
-         * documentation.
-         */
-        public Builder addConfiguration(
-            AccountLinkCreateParams.UseCase.AccountOnboarding.Configuration element) {
-          if (this.configurations == null) {
-            this.configurations = new ArrayList<>();
-          }
-          this.configurations.add(element);
-          return this;
-        }
-
-        /**
-         * Add all elements to `configurations` list. A list is initialized for the first
-         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-         * See {@link AccountLinkCreateParams.UseCase.AccountOnboarding#configurations} for the
-         * field documentation.
-         */
-        public Builder addAllConfiguration(
-            List<AccountLinkCreateParams.UseCase.AccountOnboarding.Configuration> elements) {
-          if (this.configurations == null) {
-            this.configurations = new ArrayList<>();
-          }
-          this.configurations.addAll(elements);
           return this;
         }
 
@@ -509,30 +470,6 @@ public class AccountLinkCreateParams extends ApiRequestParams {
           }
         }
       }
-
-      public enum Configuration implements ApiRequestParams.EnumParam {
-        @SerializedName("customer")
-        CUSTOMER("customer"),
-
-        @SerializedName("merchant")
-        MERCHANT("merchant"),
-
-        @SerializedName("money_manager")
-        MONEY_MANAGER("money_manager"),
-
-        @SerializedName("recipient")
-        RECIPIENT("recipient"),
-
-        @SerializedName("storer")
-        STORER("storer");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        Configuration(String value) {
-          this.value = value;
-        }
-      }
     }
 
     @Getter
@@ -544,14 +481,6 @@ public class AccountLinkCreateParams extends ApiRequestParams {
        */
       @SerializedName("collection_options")
       CollectionOptions collectionOptions;
-
-      /**
-       * <strong>Required.</strong> Open Enum. A v2/account can be configured to enable certain
-       * functionality. The configuration param targets the v2/account_link to collect information
-       * for the specified v2/account configuration/s.
-       */
-      @SerializedName("configurations")
-      List<AccountLinkCreateParams.UseCase.AccountUpdate.Configuration> configurations;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -580,12 +509,10 @@ public class AccountLinkCreateParams extends ApiRequestParams {
 
       private AccountUpdate(
           CollectionOptions collectionOptions,
-          List<AccountLinkCreateParams.UseCase.AccountUpdate.Configuration> configurations,
           Map<String, Object> extraParams,
           String refreshUrl,
           String returnUrl) {
         this.collectionOptions = collectionOptions;
-        this.configurations = configurations;
         this.extraParams = extraParams;
         this.refreshUrl = refreshUrl;
         this.returnUrl = returnUrl;
@@ -598,8 +525,6 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       public static class Builder {
         private CollectionOptions collectionOptions;
 
-        private List<AccountLinkCreateParams.UseCase.AccountUpdate.Configuration> configurations;
-
         private Map<String, Object> extraParams;
 
         private String refreshUrl;
@@ -609,11 +534,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AccountLinkCreateParams.UseCase.AccountUpdate build() {
           return new AccountLinkCreateParams.UseCase.AccountUpdate(
-              this.collectionOptions,
-              this.configurations,
-              this.extraParams,
-              this.refreshUrl,
-              this.returnUrl);
+              this.collectionOptions, this.extraParams, this.refreshUrl, this.returnUrl);
         }
 
         /**
@@ -623,36 +544,6 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         public Builder setCollectionOptions(
             AccountLinkCreateParams.UseCase.AccountUpdate.CollectionOptions collectionOptions) {
           this.collectionOptions = collectionOptions;
-          return this;
-        }
-
-        /**
-         * Add an element to `configurations` list. A list is initialized for the first `add/addAll`
-         * call, and subsequent calls adds additional elements to the original list. See {@link
-         * AccountLinkCreateParams.UseCase.AccountUpdate#configurations} for the field
-         * documentation.
-         */
-        public Builder addConfiguration(
-            AccountLinkCreateParams.UseCase.AccountUpdate.Configuration element) {
-          if (this.configurations == null) {
-            this.configurations = new ArrayList<>();
-          }
-          this.configurations.add(element);
-          return this;
-        }
-
-        /**
-         * Add all elements to `configurations` list. A list is initialized for the first
-         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-         * See {@link AccountLinkCreateParams.UseCase.AccountUpdate#configurations} for the field
-         * documentation.
-         */
-        public Builder addAllConfiguration(
-            List<AccountLinkCreateParams.UseCase.AccountUpdate.Configuration> elements) {
-          if (this.configurations == null) {
-            this.configurations = new ArrayList<>();
-          }
-          this.configurations.addAll(elements);
           return this;
         }
 
@@ -838,30 +729,6 @@ public class AccountLinkCreateParams extends ApiRequestParams {
           FutureRequirements(String value) {
             this.value = value;
           }
-        }
-      }
-
-      public enum Configuration implements ApiRequestParams.EnumParam {
-        @SerializedName("customer")
-        CUSTOMER("customer"),
-
-        @SerializedName("merchant")
-        MERCHANT("merchant"),
-
-        @SerializedName("money_manager")
-        MONEY_MANAGER("money_manager"),
-
-        @SerializedName("recipient")
-        RECIPIENT("recipient"),
-
-        @SerializedName("storer")
-        STORER("storer");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        Configuration(String value) {
-          this.value = value;
         }
       }
     }

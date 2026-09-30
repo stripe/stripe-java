@@ -196,8 +196,41 @@ public class FinancialAccount extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Storage extends StripeObject {
+    /** Array of eligibility objects, segmented by bank name and deposit insurance scheme. */
+    @SerializedName("deposit_insurance_eligibility")
+    List<FinancialAccount.Storage.DepositInsuranceEligibility> depositInsuranceEligibility;
+
     /** The currencies that this FinancialAccount can hold. */
     @SerializedName("holds_currencies")
     List<String> holdsCurrencies;
+
+    /**
+     * For more details about DepositInsuranceEligibility, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DepositInsuranceEligibility extends StripeObject {
+      /**
+       * The bank where funds are stored.
+       *
+       * <p>Equal to {@code fifth_third}.
+       */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** Currencies eligible for deposit insurance at this bank under this scheme. */
+      @SerializedName("currencies")
+      List<String> currencies;
+
+      /**
+       * The deposit insurance scheme.
+       *
+       * <p>One of {@code fdic}, or {@code fdic_passthrough}.
+       */
+      @SerializedName("type")
+      String type;
+    }
   }
 }

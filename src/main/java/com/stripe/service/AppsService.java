@@ -9,6 +9,10 @@ public final class AppsService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.apps.InstallService installs() {
+    return new com.stripe.service.apps.InstallService(this.getResponseGetter());
+  }
+
   public com.stripe.service.apps.SecretService secrets() {
     return new com.stripe.service.apps.SecretService(this.getResponseGetter());
   }

@@ -3,9 +3,7 @@ package com.stripe.param.v2.moneymanagement;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,22 +24,14 @@ public class FinancialAddressListParams extends ApiRequestParams {
   @SerializedName("financial_account")
   String financialAccount;
 
-  /** Open Enum. A list of fields to reveal in the FinancialAddresses returned. */
-  @SerializedName("include")
-  List<FinancialAddressListParams.Include> include;
-
   /** The page limit. */
   @SerializedName("limit")
   Long limit;
 
   private FinancialAddressListParams(
-      Map<String, Object> extraParams,
-      String financialAccount,
-      List<FinancialAddressListParams.Include> include,
-      Long limit) {
+      Map<String, Object> extraParams, String financialAccount, Long limit) {
     this.extraParams = extraParams;
     this.financialAccount = financialAccount;
-    this.include = include;
     this.limit = limit;
   }
 
@@ -54,14 +44,11 @@ public class FinancialAddressListParams extends ApiRequestParams {
 
     private String financialAccount;
 
-    private List<FinancialAddressListParams.Include> include;
-
     private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAddressListParams build() {
-      return new FinancialAddressListParams(
-          this.extraParams, this.financialAccount, this.include, this.limit);
+      return new FinancialAddressListParams(this.extraParams, this.financialAccount, this.limit);
     }
 
     /**
@@ -96,51 +83,10 @@ public class FinancialAddressListParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Add an element to `include` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * FinancialAddressListParams#include} for the field documentation.
-     */
-    public Builder addInclude(FinancialAddressListParams.Include element) {
-      if (this.include == null) {
-        this.include = new ArrayList<>();
-      }
-      this.include.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `include` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * FinancialAddressListParams#include} for the field documentation.
-     */
-    public Builder addAllInclude(List<FinancialAddressListParams.Include> elements) {
-      if (this.include == null) {
-        this.include = new ArrayList<>();
-      }
-      this.include.addAll(elements);
-      return this;
-    }
-
     /** The page limit. */
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
-    }
-  }
-
-  public enum Include implements ApiRequestParams.EnumParam {
-    @SerializedName("credentials.gb_bank_account.account_number")
-    CREDENTIALS__GB_BANK_ACCOUNT__ACCOUNT_NUMBER("credentials.gb_bank_account.account_number"),
-
-    @SerializedName("credentials.us_bank_account.account_number")
-    CREDENTIALS__US_BANK_ACCOUNT__ACCOUNT_NUMBER("credentials.us_bank_account.account_number");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Include(String value) {
-      this.value = value;
     }
   }
 }

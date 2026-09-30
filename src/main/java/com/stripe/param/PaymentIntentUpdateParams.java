@@ -66,7 +66,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
    * <p>Payment methods attached to other Customers cannot be used with this PaymentIntent.
    *
    * <p>If <a
-   * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
+   * href="https://docs.stripe.com/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
    * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
    * method attaches to the Customer after the PaymentIntent has been confirmed and any required
    * actions from the user are complete. If the payment method is {@code card_present} and isn't a
@@ -83,7 +83,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
    * <p>Payment methods attached to other Accounts cannot be used with this PaymentIntent.
    *
    * <p>If <a
-   * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
+   * href="https://docs.stripe.com/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
    * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
    * method attaches to the Account after the PaymentIntent has been confirmed and any required
    * actions from the user are complete. If the payment method is {@code card_present} and isn't a
@@ -505,7 +505,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * <p>Payment methods attached to other Customers cannot be used with this PaymentIntent.
      *
      * <p>If <a
-     * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
+     * href="https://docs.stripe.com/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
      * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
      * method attaches to the Customer after the PaymentIntent has been confirmed and any required
      * actions from the user are complete. If the payment method is {@code card_present} and isn't a
@@ -524,7 +524,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * <p>Payment methods attached to other Customers cannot be used with this PaymentIntent.
      *
      * <p>If <a
-     * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
+     * href="https://docs.stripe.com/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
      * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
      * method attaches to the Customer after the PaymentIntent has been confirmed and any required
      * actions from the user are complete. If the payment method is {@code card_present} and isn't a
@@ -544,7 +544,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * <p>Payment methods attached to other Accounts cannot be used with this PaymentIntent.
      *
      * <p>If <a
-     * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
+     * href="https://docs.stripe.com/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
      * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
      * method attaches to the Account after the PaymentIntent has been confirmed and any required
      * actions from the user are complete. If the payment method is {@code card_present} and isn't a
@@ -564,7 +564,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * <p>Payment methods attached to other Accounts cannot be used with this PaymentIntent.
      *
      * <p>If <a
-     * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
+     * href="https://docs.stripe.com/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
      * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
      * method attaches to the Account after the PaymentIntent has been confirmed and any required
      * actions from the user are complete. If the payment method is {@code card_present} and isn't a
@@ -14736,13 +14736,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     AllowRedisplay allowRedisplay;
 
     /**
-     * If this is a Alma PaymentMethod, this hash contains details about the Alma payment method.
+     * If this is an Alma PaymentMethod, this hash contains details about the Alma payment method.
      */
     @SerializedName("alma")
     Alma alma;
 
     /**
-     * If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
+     * If this is an AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
      * method.
      */
     @SerializedName("amazon_pay")
@@ -15094,6 +15094,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    /**
+     * If this is a SeQura PaymentMethod, this hash contains details about the SeQura payment
+     * method.
+     */
+    @SerializedName("sequra")
+    Sequra sequra;
+
     /** ID of the SharedPaymentGrantedToken used to confirm this PaymentIntent. */
     @SerializedName("shared_payment_granted_token")
     Object sharedPaymentGrantedToken;
@@ -15229,6 +15236,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Satispay satispay,
         Scalapay scalapay,
         SepaDebit sepaDebit,
+        Sequra sequra,
         Object sharedPaymentGrantedToken,
         Shopeepay shopeepay,
         Sofort sofort,
@@ -15297,6 +15305,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.satispay = satispay;
       this.scalapay = scalapay;
       this.sepaDebit = sepaDebit;
+      this.sequra = sequra;
       this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
       this.shopeepay = shopeepay;
       this.sofort = sofort;
@@ -15428,6 +15437,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private SepaDebit sepaDebit;
 
+      private Sequra sequra;
+
       private Object sharedPaymentGrantedToken;
 
       private Shopeepay shopeepay;
@@ -15511,6 +15522,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.satispay,
             this.scalapay,
             this.sepaDebit,
+            this.sequra,
             this.sharedPaymentGrantedToken,
             this.shopeepay,
             this.sofort,
@@ -15575,7 +15587,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a Alma PaymentMethod, this hash contains details about the Alma payment method.
+       * If this is an Alma PaymentMethod, this hash contains details about the Alma payment method.
        */
       public Builder setAlma(PaymentIntentUpdateParams.PaymentMethodData.Alma alma) {
         this.alma = alma;
@@ -15583,7 +15595,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay
+       * If this is an AmazonPay PaymentMethod, this hash contains details about the AmazonPay
        * payment method.
        */
       public Builder setAmazonPay(PaymentIntentUpdateParams.PaymentMethodData.AmazonPay amazonPay) {
@@ -16076,6 +16088,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setSepaDebit(PaymentIntentUpdateParams.PaymentMethodData.SepaDebit sepaDebit) {
         this.sepaDebit = sepaDebit;
+        return this;
+      }
+
+      /**
+       * If this is a SeQura PaymentMethod, this hash contains details about the SeQura payment
+       * method.
+       */
+      public Builder setSequra(PaymentIntentUpdateParams.PaymentMethodData.Sequra sequra) {
+        this.sequra = sequra;
         return this;
       }
 
@@ -20721,6 +20742,64 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Sequra {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Sequra(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodData.Sequra build() {
+          return new PaymentIntentUpdateParams.PaymentMethodData.Sequra(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Sequra#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Sequra#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Shopeepay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -21838,6 +21917,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
 
+      @SerializedName("sequra")
+      SEQURA("sequra"),
+
       @SerializedName("shopeepay")
       SHOPEEPAY("shopeepay"),
 
@@ -22258,6 +22340,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Object sepaDebit;
 
     /**
+     * If this is a {@code sequra} PaymentMethod, this sub-hash contains details about the SeQura
+     * payment method options.
+     */
+    @SerializedName("sequra")
+    Object sequra;
+
+    /**
      * If this is a {@code shopeepay} PaymentMethod, this sub-hash contains details about the
      * ShopeePay payment method options.
      */
@@ -22382,6 +22471,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Object satispay,
         Object scalapay,
         Object sepaDebit,
+        Object sequra,
         Object shopeepay,
         Object sofort,
         Object stripeBalance,
@@ -22446,6 +22536,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.satispay = satispay;
       this.scalapay = scalapay;
       this.sepaDebit = sepaDebit;
+      this.sequra = sequra;
       this.shopeepay = shopeepay;
       this.sofort = sofort;
       this.stripeBalance = stripeBalance;
@@ -22571,6 +22662,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Object sepaDebit;
 
+      private Object sequra;
+
       private Object shopeepay;
 
       private Object sofort;
@@ -22648,6 +22741,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.satispay,
             this.scalapay,
             this.sepaDebit,
+            this.sequra,
             this.shopeepay,
             this.sofort,
             this.stripeBalance,
@@ -23650,6 +23744,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setSepaDebit(EmptyParam sepaDebit) {
         this.sepaDebit = sepaDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code sequra} PaymentMethod, this sub-hash contains details about the SeQura
+       * payment method options.
+       */
+      public Builder setSequra(PaymentIntentUpdateParams.PaymentMethodOptions.Sequra sequra) {
+        this.sequra = sequra;
+        return this;
+      }
+
+      /**
+       * If this is a {@code sequra} PaymentMethod, this sub-hash contains details about the SeQura
+       * payment method options.
+       */
+      public Builder setSequra(EmptyParam sequra) {
+        this.sequra = sequra;
         return this;
       }
 
@@ -25961,6 +26073,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("capture_method")
       ApiRequestParams.EnumParam captureMethod;
 
+      /** Registration details about the buyer's organization. */
+      @SerializedName("company_details")
+      Object companyDetails;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -25970,9 +26086,19 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Billie(ApiRequestParams.EnumParam captureMethod, Map<String, Object> extraParams) {
+      /** An identifier or reference that this payment corresponds to. */
+      @SerializedName("reference")
+      Object reference;
+
+      private Billie(
+          ApiRequestParams.EnumParam captureMethod,
+          Object companyDetails,
+          Map<String, Object> extraParams,
+          Object reference) {
         this.captureMethod = captureMethod;
+        this.companyDetails = companyDetails;
         this.extraParams = extraParams;
+        this.reference = reference;
       }
 
       public static Builder builder() {
@@ -25982,12 +26108,16 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public static class Builder {
         private ApiRequestParams.EnumParam captureMethod;
 
+        private Object companyDetails;
+
         private Map<String, Object> extraParams;
+
+        private Object reference;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.Billie build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.Billie(
-              this.captureMethod, this.extraParams);
+              this.captureMethod, this.companyDetails, this.extraParams, this.reference);
         }
 
         /**
@@ -26021,6 +26151,19 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Registration details about the buyer's organization. */
+        public Builder setCompanyDetails(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails companyDetails) {
+          this.companyDetails = companyDetails;
+          return this;
+        }
+
+        /** Registration details about the buyer's organization. */
+        public Builder setCompanyDetails(EmptyParam companyDetails) {
+          this.companyDetails = companyDetails;
+          return this;
+        }
+
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
@@ -26047,6 +26190,433 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+
+        /** An identifier or reference that this payment corresponds to. */
+        public Builder setReference(String reference) {
+          this.reference = reference;
+          return this;
+        }
+
+        /** An identifier or reference that this payment corresponds to. */
+        public Builder setReference(EmptyParam reference) {
+          this.reference = reference;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CompanyDetails {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The address the company or entity is registered with. */
+        @SerializedName("registered_address")
+        Object registeredAddress;
+
+        /** Company or entity name. */
+        @SerializedName("registered_name")
+        Object registeredName;
+
+        /** The official registration number for the given registration type. */
+        @SerializedName("registration_number")
+        Object registrationNumber;
+
+        /** Type of registration the company or entity holds in their registered country. */
+        @SerializedName("registration_type")
+        ApiRequestParams.EnumParam registrationType;
+
+        /** VAT id number. */
+        @SerializedName("vat")
+        Object vat;
+
+        private CompanyDetails(
+            Map<String, Object> extraParams,
+            Object registeredAddress,
+            Object registeredName,
+            Object registrationNumber,
+            ApiRequestParams.EnumParam registrationType,
+            Object vat) {
+          this.extraParams = extraParams;
+          this.registeredAddress = registeredAddress;
+          this.registeredName = registeredName;
+          this.registrationNumber = registrationNumber;
+          this.registrationType = registrationType;
+          this.vat = vat;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object registeredAddress;
+
+          private Object registeredName;
+
+          private Object registrationNumber;
+
+          private ApiRequestParams.EnumParam registrationType;
+
+          private Object vat;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails build() {
+            return new PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails(
+                this.extraParams,
+                this.registeredAddress,
+                this.registeredName,
+                this.registrationNumber,
+                this.registrationType,
+                this.vat);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The address the company or entity is registered with. */
+          public Builder setRegisteredAddress(
+              PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails.RegisteredAddress
+                  registeredAddress) {
+            this.registeredAddress = registeredAddress;
+            return this;
+          }
+
+          /** The address the company or entity is registered with. */
+          public Builder setRegisteredAddress(EmptyParam registeredAddress) {
+            this.registeredAddress = registeredAddress;
+            return this;
+          }
+
+          /** Company or entity name. */
+          public Builder setRegisteredName(String registeredName) {
+            this.registeredName = registeredName;
+            return this;
+          }
+
+          /** Company or entity name. */
+          public Builder setRegisteredName(EmptyParam registeredName) {
+            this.registeredName = registeredName;
+            return this;
+          }
+
+          /** The official registration number for the given registration type. */
+          public Builder setRegistrationNumber(String registrationNumber) {
+            this.registrationNumber = registrationNumber;
+            return this;
+          }
+
+          /** The official registration number for the given registration type. */
+          public Builder setRegistrationNumber(EmptyParam registrationNumber) {
+            this.registrationNumber = registrationNumber;
+            return this;
+          }
+
+          /** Type of registration the company or entity holds in their registered country. */
+          public Builder setRegistrationType(
+              PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails.RegistrationType
+                  registrationType) {
+            this.registrationType = registrationType;
+            return this;
+          }
+
+          /** Type of registration the company or entity holds in their registered country. */
+          public Builder setRegistrationType(EmptyParam registrationType) {
+            this.registrationType = registrationType;
+            return this;
+          }
+
+          /** VAT id number. */
+          public Builder setVat(String vat) {
+            this.vat = vat;
+            return this;
+          }
+
+          /** VAT id number. */
+          public Builder setVat(EmptyParam vat) {
+            this.vat = vat;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class RegisteredAddress {
+          /** City, district, suburb, town, or village. */
+          @SerializedName("city")
+          Object city;
+
+          /** Two-letter country code. */
+          @SerializedName("country")
+          Object country;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Address line 1 (e.g., street, PO Box, or company name). */
+          @SerializedName("line1")
+          Object line1;
+
+          /** Address line 2 (e.g., apartment, suite, unit, or building). */
+          @SerializedName("line2")
+          Object line2;
+
+          /** ZIP or postal code. */
+          @SerializedName("postal_code")
+          Object postalCode;
+
+          /** State, county, province, or region. */
+          @SerializedName("state")
+          Object state;
+
+          private RegisteredAddress(
+              Object city,
+              Object country,
+              Map<String, Object> extraParams,
+              Object line1,
+              Object line2,
+              Object postalCode,
+              Object state) {
+            this.city = city;
+            this.country = country;
+            this.extraParams = extraParams;
+            this.line1 = line1;
+            this.line2 = line2;
+            this.postalCode = postalCode;
+            this.state = state;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Object city;
+
+            private Object country;
+
+            private Map<String, Object> extraParams;
+
+            private Object line1;
+
+            private Object line2;
+
+            private Object postalCode;
+
+            private Object state;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails
+                    .RegisteredAddress
+                build() {
+              return new PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails
+                  .RegisteredAddress(
+                  this.city,
+                  this.country,
+                  this.extraParams,
+                  this.line1,
+                  this.line2,
+                  this.postalCode,
+                  this.state);
+            }
+
+            /** City, district, suburb, town, or village. */
+            public Builder setCity(String city) {
+              this.city = city;
+              return this;
+            }
+
+            /** City, district, suburb, town, or village. */
+            public Builder setCity(EmptyParam city) {
+              this.city = city;
+              return this;
+            }
+
+            /** Two-letter country code. */
+            public Builder setCountry(String country) {
+              this.country = country;
+              return this;
+            }
+
+            /** Two-letter country code. */
+            public Builder setCountry(EmptyParam country) {
+              this.country = country;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails.RegisteredAddress#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentUpdateParams.PaymentMethodOptions.Billie.CompanyDetails.RegisteredAddress#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Address line 1 (e.g., street, PO Box, or company name). */
+            public Builder setLine1(String line1) {
+              this.line1 = line1;
+              return this;
+            }
+
+            /** Address line 1 (e.g., street, PO Box, or company name). */
+            public Builder setLine1(EmptyParam line1) {
+              this.line1 = line1;
+              return this;
+            }
+
+            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            public Builder setLine2(String line2) {
+              this.line2 = line2;
+              return this;
+            }
+
+            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            public Builder setLine2(EmptyParam line2) {
+              this.line2 = line2;
+              return this;
+            }
+
+            /** ZIP or postal code. */
+            public Builder setPostalCode(String postalCode) {
+              this.postalCode = postalCode;
+              return this;
+            }
+
+            /** ZIP or postal code. */
+            public Builder setPostalCode(EmptyParam postalCode) {
+              this.postalCode = postalCode;
+              return this;
+            }
+
+            /** State, county, province, or region. */
+            public Builder setState(String state) {
+              this.state = state;
+              return this;
+            }
+
+            /** State, county, province, or region. */
+            public Builder setState(EmptyParam state) {
+              this.state = state;
+              return this;
+            }
+          }
+        }
+
+        public enum RegistrationType implements ApiRequestParams.EnumParam {
+          @SerializedName("ch_ein")
+          CH_EIN("ch_ein"),
+
+          @SerializedName("de_hrb")
+          DE_HRB("de_hrb"),
+
+          @SerializedName("dk_cvr")
+          DK_CVR("dk_cvr"),
+
+          @SerializedName("es_cif")
+          ES_CIF("es_cif"),
+
+          @SerializedName("fi_tunnus")
+          FI_TUNNUS("fi_tunnus"),
+
+          @SerializedName("fr_siren")
+          FR_SIREN("fr_siren"),
+
+          @SerializedName("fr_siret")
+          FR_SIRET("fr_siret"),
+
+          @SerializedName("it_rea")
+          IT_REA("it_rea"),
+
+          @SerializedName("nl_kvk")
+          NL_KVK("nl_kvk"),
+
+          @SerializedName("no_org_number")
+          NO_ORG_NUMBER("no_org_number"),
+
+          @SerializedName("no_pno")
+          NO_PNO("no_pno"),
+
+          @SerializedName("se_org_number")
+          SE_ORG_NUMBER("se_org_number"),
+
+          @SerializedName("se_pno")
+          SE_PNO("se_pno"),
+
+          @SerializedName("uk_crn")
+          UK_CRN("uk_crn");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          RegistrationType(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -26140,6 +26710,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Details of the BLIK mandate. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -26169,9 +26743,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       private Blik(
           Object code,
           Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
           ApiRequestParams.EnumParam setupFutureUsage) {
         this.code = code;
         this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
       }
 
@@ -26184,12 +26760,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private MandateOptions mandateOptions;
+
         private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.Blik build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.Blik(
-              this.code, this.extraParams, this.setupFutureUsage);
+              this.code, this.extraParams, this.mandateOptions, this.setupFutureUsage);
         }
 
         /**
@@ -26235,6 +26813,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Details of the BLIK mandate. */
+        public Builder setMandateOptions(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
           return this;
         }
 
@@ -26298,9 +26883,87 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions {
+        /** Expiry date of the mandate. */
+        @SerializedName("expires_at")
+        Long expiresAt;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private MandateOptions(Long expiresAt, Map<String, Object> extraParams) {
+          this.expiresAt = expiresAt;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long expiresAt;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions build() {
+            return new PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions(
+                this.expiresAt, this.extraParams);
+          }
+
+          /** Expiry date of the mandate. */
+          public Builder setExpiresAt(Long expiresAt) {
+            this.expiresAt = expiresAt;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentMethodOptions.Blik.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
         @SerializedName("none")
-        NONE("none");
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -26625,6 +27288,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("require_cvc_recollection")
       Boolean requireCvcRecollection;
 
+      /** Set to indicate the future transaction type usage for the card being set up. */
+      @SerializedName("setup_credential_usage")
+      SetupCredentialUsage setupCredentialUsage;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -26679,6 +27346,23 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Object statementDetails;
 
       /**
+       * Use this parameter in scenarios where you collect card details and <a
+       * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
+       *
+       * <p>When making an off session payment with a previously saved card (that was saved with a
+       * SetupIntent or with a PaymentIntent with {@code setup_future_usage}), set this parameter to
+       * indicate the type of transaction.
+       *
+       * <p>You can set this parameter at any time before or during PaymentIntent confirmation, and
+       * confirm this PaymentIntent with {@code off_session=true}.
+       *
+       * <p>Note that this parameter is currently unsupported with the {@code setup_future_usage}
+       * parameter.
+       */
+      @SerializedName("stored_credential_usage")
+      StoredCredentialUsage storedCredentialUsage;
+
+      /**
        * If 3D Secure authentication was performed with a third-party provider, the authentication
        * details to use for this payment.
        */
@@ -26701,10 +27385,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           RequestPartialAuthorization requestPartialAuthorization,
           RequestThreeDSecure requestThreeDSecure,
           Boolean requireCvcRecollection,
+          SetupCredentialUsage setupCredentialUsage,
           ApiRequestParams.EnumParam setupFutureUsage,
           Object statementDescriptorSuffixKana,
           Object statementDescriptorSuffixKanji,
           Object statementDetails,
+          StoredCredentialUsage storedCredentialUsage,
           ThreeDSecure threeDSecure) {
         this.captureMethod = captureMethod;
         this.cvcToken = cvcToken;
@@ -26721,10 +27407,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         this.requestPartialAuthorization = requestPartialAuthorization;
         this.requestThreeDSecure = requestThreeDSecure;
         this.requireCvcRecollection = requireCvcRecollection;
+        this.setupCredentialUsage = setupCredentialUsage;
         this.setupFutureUsage = setupFutureUsage;
         this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
         this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
         this.statementDetails = statementDetails;
+        this.storedCredentialUsage = storedCredentialUsage;
         this.threeDSecure = threeDSecure;
       }
 
@@ -26763,6 +27451,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private Boolean requireCvcRecollection;
 
+        private SetupCredentialUsage setupCredentialUsage;
+
         private ApiRequestParams.EnumParam setupFutureUsage;
 
         private Object statementDescriptorSuffixKana;
@@ -26770,6 +27460,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         private Object statementDescriptorSuffixKanji;
 
         private Object statementDetails;
+
+        private StoredCredentialUsage storedCredentialUsage;
 
         private ThreeDSecure threeDSecure;
 
@@ -26791,10 +27483,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.requestPartialAuthorization,
               this.requestThreeDSecure,
               this.requireCvcRecollection,
+              this.setupCredentialUsage,
               this.setupFutureUsage,
               this.statementDescriptorSuffixKana,
               this.statementDescriptorSuffixKanji,
               this.statementDetails,
+              this.storedCredentialUsage,
               this.threeDSecure);
         }
 
@@ -27009,6 +27703,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Set to indicate the future transaction type usage for the card being set up. */
+        public Builder setSetupCredentialUsage(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Card.SetupCredentialUsage
+                setupCredentialUsage) {
+          this.setupCredentialUsage = setupCredentialUsage;
+          return this;
+        }
+
         /**
          * Indicates that you intend to make future payments with this PaymentIntent's payment
          * method.
@@ -27133,6 +27835,27 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
          */
         public Builder setStatementDetails(EmptyParam statementDetails) {
           this.statementDetails = statementDetails;
+          return this;
+        }
+
+        /**
+         * Use this parameter in scenarios where you collect card details and <a
+         * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
+         *
+         * <p>When making an off session payment with a previously saved card (that was saved with a
+         * SetupIntent or with a PaymentIntent with {@code setup_future_usage}), set this parameter
+         * to indicate the type of transaction.
+         *
+         * <p>You can set this parameter at any time before or during PaymentIntent confirmation,
+         * and confirm this PaymentIntent with {@code off_session=true}.
+         *
+         * <p>Note that this parameter is currently unsupported with the {@code setup_future_usage}
+         * parameter.
+         */
+        public Builder setStoredCredentialUsage(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Card.StoredCredentialUsage
+                storedCredentialUsage) {
+          this.storedCredentialUsage = storedCredentialUsage;
           return this;
         }
 
@@ -28836,6 +29559,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         }
       }
 
+      public enum SetupCredentialUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("installment")
+        INSTALLMENT("installment"),
+
+        @SerializedName("recurring")
+        RECURRING("recurring"),
+
+        @SerializedName("unscheduled")
+        UNSCHEDULED("unscheduled");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupCredentialUsage(String value) {
+          this.value = value;
+        }
+      }
+
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
         @SerializedName("none")
         NONE("none"),
@@ -28850,6 +29591,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         private final String value;
 
         SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum StoredCredentialUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("installment")
+        INSTALLMENT("installment"),
+
+        @SerializedName("recurring")
+        RECURRING("recurring"),
+
+        @SerializedName("unscheduled")
+        UNSCHEDULED("unscheduled");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        StoredCredentialUsage(String value) {
           this.value = value;
         }
       }
@@ -42464,19 +43223,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Paypay {
       /**
-       * Controls when the funds are captured from the customer's account.
-       *
-       * <p>If provided, this parameter overrides the behavior of the top-level <a
-       * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
-       * for this payment method type when finalizing the payment with this payment method type.
-       *
-       * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty value
-       * for this parameter unsets the stored value for this payment method type.
-       */
-      @SerializedName("capture_method")
-      ApiRequestParams.EnumParam captureMethod;
-
-      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -42485,8 +43231,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Paypay(ApiRequestParams.EnumParam captureMethod, Map<String, Object> extraParams) {
-        this.captureMethod = captureMethod;
+      private Paypay(Map<String, Object> extraParams) {
         this.extraParams = extraParams;
       }
 
@@ -42495,45 +43240,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private ApiRequestParams.EnumParam captureMethod;
-
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.Paypay build() {
-          return new PaymentIntentUpdateParams.PaymentMethodOptions.Paypay(
-              this.captureMethod, this.extraParams);
-        }
-
-        /**
-         * Controls when the funds are captured from the customer's account.
-         *
-         * <p>If provided, this parameter overrides the behavior of the top-level <a
-         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
-         * for this payment method type when finalizing the payment with this payment method type.
-         *
-         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
-         * value for this parameter unsets the stored value for this payment method type.
-         */
-        public Builder setCaptureMethod(
-            PaymentIntentUpdateParams.PaymentMethodOptions.Paypay.CaptureMethod captureMethod) {
-          this.captureMethod = captureMethod;
-          return this;
-        }
-
-        /**
-         * Controls when the funds are captured from the customer's account.
-         *
-         * <p>If provided, this parameter overrides the behavior of the top-level <a
-         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
-         * for this payment method type when finalizing the payment with this payment method type.
-         *
-         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
-         * value for this parameter unsets the stored value for this payment method type.
-         */
-        public Builder setCaptureMethod(EmptyParam captureMethod) {
-          this.captureMethod = captureMethod;
-          return this;
+          return new PaymentIntentUpdateParams.PaymentMethodOptions.Paypay(this.extraParams);
         }
 
         /**
@@ -42562,18 +43273,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
-        }
-      }
-
-      public enum CaptureMethod implements ApiRequestParams.EnumParam {
-        @SerializedName("manual")
-        MANUAL("manual");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        CaptureMethod(String value) {
-          this.value = value;
         }
       }
     }
@@ -44986,6 +45685,199 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         @SerializedName("on_session")
         ON_SESSION("on_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sequra {
+      /**
+       * Controls when the funds are captured from the customer's account.
+       *
+       * <p>If provided, this parameter overrides the behavior of the top-level <a
+       * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+       * for this payment method type when finalizing the payment with this payment method type.
+       *
+       * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty value
+       * for this parameter unsets the stored value for this payment method type.
+       */
+      @SerializedName("capture_method")
+      ApiRequestParams.EnumParam captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If you've already set {@code setup_future_usage} and you're performing a request using a
+       * publishable key, you can only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Sequra(
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private ApiRequestParams.EnumParam captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodOptions.Sequra build() {
+          return new PaymentIntentUpdateParams.PaymentMethodOptions.Sequra(
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Controls when the funds are captured from the customer's account.
+         *
+         * <p>If provided, this parameter overrides the behavior of the top-level <a
+         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+         * for this payment method type when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter unsets the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Sequra.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Controls when the funds are captured from the customer's account.
+         *
+         * <p>If provided, this parameter overrides the behavior of the top-level <a
+         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+         * for this payment method type when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter unsets the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(EmptyParam captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Sequra#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Sequra#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If you've already set {@code setup_future_usage} and you're performing a request using
+         * a publishable key, you can only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Sequra.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -48405,6 +49297,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName("card")
     CARD("card"),
 
+    @SerializedName("card_present")
+    CARD_PRESENT("card_present"),
+
     @SerializedName("cashapp")
     CASHAPP("cashapp"),
 
@@ -48464,6 +49359,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("ideal")
     IDEAL("ideal"),
+
+    @SerializedName("interac_present")
+    INTERAC_PRESENT("interac_present"),
 
     @SerializedName("kakao_pay")
     KAKAO_PAY("kakao_pay"),
@@ -48824,6 +49722,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),

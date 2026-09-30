@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** A Tax Transaction Line Item represents an individual item in a Tax Transaction. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

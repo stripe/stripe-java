@@ -102,6 +102,10 @@ public class AccountActivity extends StripeObject implements HasId {
       @SerializedName("defaults")
       Defaults defaults;
 
+      /** Identity data. */
+      @SerializedName("identity")
+      Identity identity;
+
       /** Default account settings. */
       @Getter
       @Setter
@@ -127,6 +131,26 @@ public class AccountActivity extends StripeObject implements HasId {
           /** Description of the account's product or service. */
           @SerializedName("product_description")
           String productDescription;
+        }
+      }
+
+      /** Identity data. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Identity extends StripeObject {
+        /** Business details for identity data. */
+        @SerializedName("business_details")
+        BusinessDetails businessDetails;
+
+        /** Business details for identity data. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BusinessDetails extends StripeObject {
+          /** Registered business name. */
+          @SerializedName("registered_name")
+          String registeredName;
         }
       }
     }

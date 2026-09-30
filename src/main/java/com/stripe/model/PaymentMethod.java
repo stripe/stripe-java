@@ -274,6 +274,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
+  @SerializedName("sequra")
+  Sequra sequra;
+
   /** ID of the shared payment granted token used in the creation of this PaymentMethod. */
   @SerializedName("shared_payment_granted_token")
   String sharedPaymentGrantedToken;
@@ -310,9 +313,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * multibanco}, {@code naver_pay}, {@code nz_bank_account}, {@code oxxo}, {@code p24}, {@code
    * pay_by_bank}, {@code payco}, {@code paynow}, {@code paypal}, {@code paypay}, {@code payto},
    * {@code pix}, {@code promptpay}, {@code qris}, {@code rechnung}, {@code revolut_pay}, {@code
-   * samsung_pay}, {@code satispay}, {@code scalapay}, {@code sepa_debit}, {@code shopeepay}, {@code
-   * sofort}, {@code stripe_balance}, {@code sunbit}, {@code swish}, {@code twint}, {@code upi},
-   * {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+   * samsung_pay}, {@code satispay}, {@code scalapay}, {@code sepa_debit}, {@code sequra}, {@code
+   * shopeepay}, {@code sofort}, {@code stripe_balance}, {@code sunbit}, {@code swish}, {@code
+   * twint}, {@code upi}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -2729,6 +2732,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
+   * For more details about Sequra, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Sequra extends StripeObject {}
+
+  /**
    * For more details about Shopeepay, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -3001,6 +3013,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(satispay, responseGetter);
     trySetResponseGetter(scalapay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
+    trySetResponseGetter(sequra, responseGetter);
     trySetResponseGetter(shopeepay, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(stripeBalance, responseGetter);
