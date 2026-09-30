@@ -51,12 +51,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   @SerializedName("allow_redisplay")
   AllowRedisplay allowRedisplay;
 
-  /** If this is a Alma PaymentMethod, this hash contains details about the Alma payment method. */
+  /** If this is an Alma PaymentMethod, this hash contains details about the Alma payment method. */
   @SerializedName("alma")
   Alma alma;
 
   /**
-   * If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
+   * If this is an AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
    * method.
    */
   @SerializedName("amazon_pay")
@@ -340,6 +340,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   Paypal paypal;
 
   /**
+   * If this is a {@code paypay} PaymentMethod, this hash contains details about the PayPay payment
+   * method.
+   */
+  @SerializedName("paypay")
+  Paypay paypay;
+
+  /**
    * If this is a {@code payto} PaymentMethod, this hash contains details about the PayTo payment
    * method.
    */
@@ -401,6 +408,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
    */
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
+
+  /**
+   * If this is a SeQura PaymentMethod, this hash contains details about the SeQura payment method.
+   */
+  @SerializedName("sequra")
+  Sequra sequra;
 
   /**
    * If this is a {@code sofort} PaymentMethod, this hash contains details about the SOFORT payment
@@ -512,6 +525,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       String paymentMethod,
       Paynow paynow,
       Paypal paypal,
+      Paypay paypay,
       Payto payto,
       Pix pix,
       Promptpay promptpay,
@@ -521,6 +535,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       Satispay satispay,
       Scalapay scalapay,
       SepaDebit sepaDebit,
+      Sequra sequra,
       Sofort sofort,
       Sunbit sunbit,
       Swish swish,
@@ -577,6 +592,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.paymentMethod = paymentMethod;
     this.paynow = paynow;
     this.paypal = paypal;
+    this.paypay = paypay;
     this.payto = payto;
     this.pix = pix;
     this.promptpay = promptpay;
@@ -586,6 +602,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.satispay = satispay;
     this.scalapay = scalapay;
     this.sepaDebit = sepaDebit;
+    this.sequra = sequra;
     this.sofort = sofort;
     this.sunbit = sunbit;
     this.swish = swish;
@@ -696,6 +713,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private Paypal paypal;
 
+    private Paypay paypay;
+
     private Payto payto;
 
     private Pix pix;
@@ -713,6 +732,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     private Scalapay scalapay;
 
     private SepaDebit sepaDebit;
+
+    private Sequra sequra;
 
     private Sofort sofort;
 
@@ -782,6 +803,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.paymentMethod,
           this.paynow,
           this.paypal,
+          this.paypay,
           this.payto,
           this.pix,
           this.promptpay,
@@ -791,6 +813,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.satispay,
           this.scalapay,
           this.sepaDebit,
+          this.sequra,
           this.sofort,
           this.sunbit,
           this.swish,
@@ -851,7 +874,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a Alma PaymentMethod, this hash contains details about the Alma payment method.
+     * If this is an Alma PaymentMethod, this hash contains details about the Alma payment method.
      */
     public Builder setAlma(PaymentMethodCreateParams.Alma alma) {
       this.alma = alma;
@@ -859,7 +882,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
+     * If this is an AmazonPay PaymentMethod, this hash contains details about the AmazonPay payment
      * method.
      */
     public Builder setAmazonPay(PaymentMethodCreateParams.AmazonPay amazonPay) {
@@ -1290,6 +1313,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
+     * If this is a {@code paypay} PaymentMethod, this hash contains details about the PayPay
+     * payment method.
+     */
+    public Builder setPaypay(PaymentMethodCreateParams.Paypay paypay) {
+      this.paypay = paypay;
+      return this;
+    }
+
+    /**
      * If this is a {@code payto} PaymentMethod, this hash contains details about the PayTo payment
      * method.
      */
@@ -1367,6 +1399,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      */
     public Builder setSepaDebit(PaymentMethodCreateParams.SepaDebit sepaDebit) {
       this.sepaDebit = sepaDebit;
+      return this;
+    }
+
+    /**
+     * If this is a SeQura PaymentMethod, this hash contains details about the SeQura payment
+     * method.
+     */
+    public Builder setSequra(PaymentMethodCreateParams.Sequra sequra) {
+      this.sequra = sequra;
       return this;
     }
 
@@ -4988,6 +5029,62 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class Paypay {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Paypay(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodCreateParams.Paypay build() {
+        return new PaymentMethodCreateParams.Paypay(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Paypay#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Paypay#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Payto {
     /** The account number for the bank account. */
     @SerializedName("account_number")
@@ -5560,6 +5657,62 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       /** <strong>Required.</strong> IBAN of the bank account. */
       public Builder setIban(String iban) {
         this.iban = iban;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Sequra {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Sequra(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodCreateParams.Sequra build() {
+        return new PaymentMethodCreateParams.Sequra(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Sequra#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Sequra#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }
@@ -6541,6 +6694,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName("paypal")
     PAYPAL("paypal"),
 
+    @SerializedName("paypay")
+    PAYPAY("paypay"),
+
     @SerializedName("payto")
     PAYTO("payto"),
 
@@ -6564,6 +6720,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("sofort")
     SOFORT("sofort"),

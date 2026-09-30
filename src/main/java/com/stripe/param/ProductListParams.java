@@ -48,8 +48,8 @@ public class ProductListParams extends ApiRequestParams {
 
   /**
    * Only return products with the given IDs. Cannot be used with <a
-   * href="https://api.stripe.com#list_products-starting_after">starting_after</a> or <a
-   * href="https://api.stripe.com#list_products-ending_before">ending_before</a>.
+   * href="https://docs.stripe.com/api#list_products-starting_after">starting_after</a> or <a
+   * href="https://docs.stripe.com/api#list_products-ending_before">ending_before</a>.
    */
   @SerializedName("ids")
   List<String> ids;

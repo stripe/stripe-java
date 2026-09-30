@@ -1104,8 +1104,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
             /**
              * A discount represents the actual application of a <a
-             * href="https://api.stripe.com#coupons">coupon</a> or <a
-             * href="https://api.stripe.com#promotion_codes">promotion code</a>. It contains
+             * href="https://docs.stripe.com/api#coupons">coupon</a> or <a
+             * href="https://docs.stripe.com/api#promotion_codes">promotion code</a>. It contains
              * information about when the discount began, when it will end, and what it is applied
              * to.
              *
@@ -1243,8 +1243,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
             /**
              * A discount represents the actual application of a <a
-             * href="https://api.stripe.com#coupons">coupon</a> or <a
-             * href="https://api.stripe.com#promotion_codes">promotion code</a>. It contains
+             * href="https://docs.stripe.com/api#coupons">coupon</a> or <a
+             * href="https://docs.stripe.com/api#promotion_codes">promotion code</a>. It contains
              * information about when the discount began, when it will end, and what it is applied
              * to.
              *
@@ -1585,9 +1585,9 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
         /**
          * A discount represents the actual application of a <a
-         * href="https://api.stripe.com#coupons">coupon</a> or <a
-         * href="https://api.stripe.com#promotion_codes">promotion code</a>. It contains information
-         * about when the discount began, when it will end, and what it is applied to.
+         * href="https://docs.stripe.com/api#coupons">coupon</a> or <a
+         * href="https://docs.stripe.com/api#promotion_codes">promotion code</a>. It contains
+         * information about when the discount began, when it will end, and what it is applied to.
          *
          * <p>Related guide: <a
          * href="https://docs.stripe.com/billing/subscriptions/discounts">Applying discounts to

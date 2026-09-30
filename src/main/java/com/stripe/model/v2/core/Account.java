@@ -376,7 +376,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -401,10 +402,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -628,6 +632,10 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("blik_payments")
         BlikPayments blikPayments;
 
+        /** Allow the merchant to process recurring BLIK payments. */
+        @SerializedName("blik_recurring_payments")
+        BlikRecurringPayments blikRecurringPayments;
+
         /** Allow the merchant to process Boleto payments. */
         @SerializedName("boleto_payments")
         BoletoPayments boletoPayments;
@@ -740,6 +748,10 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("samsung_pay_payments")
         SamsungPayPayments samsungPayPayments;
 
+        /** Allow the merchant to process Satispay payments. */
+        @SerializedName("satispay_payments")
+        SatispayPayments satispayPayments;
+
         /** Allow the merchant to process SEPA bank transfer payments. */
         @SerializedName("sepa_bank_transfer_payments")
         SepaBankTransferPayments sepaBankTransferPayments;
@@ -747,6 +759,10 @@ public class Account extends StripeObject implements HasId {
         /** Allow the merchant to process SEPA Direct Debit payments. */
         @SerializedName("sepa_debit_payments")
         SepaDebitPayments sepaDebitPayments;
+
+        /** Allow the merchant to process SeQura payments. */
+        @SerializedName("sequra_payments")
+        SequraPayments sequraPayments;
 
         /** Capabilities that enable the merchant to manage their Stripe Balance (/v1/balance). */
         @SerializedName("stripe_balance")
@@ -780,7 +796,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -805,10 +822,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -831,7 +851,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -856,10 +877,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -882,7 +906,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -907,10 +932,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -933,7 +961,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -958,10 +987,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -984,7 +1016,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1008,10 +1041,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1034,7 +1070,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1059,10 +1096,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1085,7 +1125,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1110,10 +1151,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1136,7 +1180,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1161,10 +1206,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1187,7 +1235,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1212,10 +1261,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1238,7 +1290,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1262,10 +1315,68 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
+        }
+
+        /** Allow the merchant to process recurring BLIK payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BlikRecurringPayments extends StripeObject {
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<Account.Configuration.Merchant.Capabilities.BlikRecurringPayments.StatusDetail>
+              statusDetails;
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1288,7 +1399,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1313,10 +1425,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1339,7 +1454,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1363,10 +1479,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1389,7 +1508,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1414,10 +1534,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1440,7 +1563,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1465,10 +1589,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1491,7 +1618,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1515,10 +1643,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1541,7 +1672,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1565,10 +1697,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1591,7 +1726,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1616,10 +1752,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1642,7 +1781,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1667,10 +1807,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1693,7 +1836,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1718,10 +1862,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1744,7 +1891,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1768,10 +1916,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1794,7 +1945,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1819,10 +1971,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1845,7 +2000,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1870,10 +2026,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1896,7 +2055,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1921,10 +2081,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1947,7 +2110,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -1972,10 +2136,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1998,7 +2165,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2023,10 +2191,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2049,7 +2220,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2073,10 +2245,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2099,7 +2274,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2124,10 +2300,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2150,7 +2329,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2175,10 +2355,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2201,7 +2384,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2226,10 +2410,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2252,7 +2439,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2277,10 +2465,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2303,7 +2494,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2327,10 +2519,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2353,7 +2548,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2377,10 +2573,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2403,7 +2602,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2428,10 +2628,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2454,7 +2657,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2479,10 +2683,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2505,7 +2712,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2530,10 +2738,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2556,7 +2767,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2581,10 +2793,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2607,7 +2822,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2632,10 +2848,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2658,7 +2877,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2683,10 +2903,68 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
+        }
+
+        /** Allow the merchant to process Satispay payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SatispayPayments extends StripeObject {
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<Account.Configuration.Merchant.Capabilities.SatispayPayments.StatusDetail>
+              statusDetails;
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2709,7 +2987,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2734,10 +3013,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2760,7 +3042,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2785,10 +3068,68 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
+        }
+
+        /** Allow the merchant to process SeQura payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SequraPayments extends StripeObject {
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<Account.Configuration.Merchant.Capabilities.SequraPayments.StatusDetail>
+              statusDetails;
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2820,8 +3161,8 @@ public class Account extends StripeObject implements HasId {
             /**
              * The status of the Capability.
              *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
+             * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+             * {@code unsupported}.
              */
             @SerializedName("status")
             String status;
@@ -2846,10 +3187,13 @@ public class Account extends StripeObject implements HasId {
                * Machine-readable code explaining the reason for the Capability to be in its current
                * status.
                *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
+               * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+               * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+               * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+               * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+               * requirements_past_due}, {@code requirements_pending_verification}, {@code
+               * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+               * {@code unsupported_entity_type}.
                */
               @SerializedName("code")
               String code;
@@ -2873,7 +3217,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2898,10 +3243,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2924,7 +3272,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -2949,10 +3298,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2975,7 +3327,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -3000,10 +3353,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -3026,7 +3382,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -3051,10 +3408,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -3077,7 +3437,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The status of the Capability.
            *
-           * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code unsupported}.
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
            */
           @SerializedName("status")
           String status;
@@ -3101,10 +3462,13 @@ public class Account extends StripeObject implements HasId {
              * Machine-readable code explaining the reason for the Capability to be in its current
              * status.
              *
-             * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-             * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, {@code unsupported_country}, or {@code
-             * unsupported_entity_type}.
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -3444,8 +3808,8 @@ public class Account extends StripeObject implements HasId {
             /**
              * The status of the Capability.
              *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
+             * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+             * {@code unsupported}.
              */
             @SerializedName("status")
             String status;
@@ -3470,10 +3834,13 @@ public class Account extends StripeObject implements HasId {
                * Machine-readable code explaining the reason for the Capability to be in its current
                * status.
                *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
+               * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+               * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+               * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+               * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+               * requirements_past_due}, {@code requirements_pending_verification}, {@code
+               * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+               * {@code unsupported_entity_type}.
                */
               @SerializedName("code")
               String code;
@@ -3498,8 +3865,8 @@ public class Account extends StripeObject implements HasId {
             /**
              * The status of the Capability.
              *
-             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
-             * unsupported}.
+             * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+             * {@code unsupported}.
              */
             @SerializedName("status")
             String status;
@@ -3526,10 +3893,13 @@ public class Account extends StripeObject implements HasId {
                * Machine-readable code explaining the reason for the Capability to be in its current
                * status.
                *
-               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
-               * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, {@code unsupported_country}, or {@code
-               * unsupported_entity_type}.
+               * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+               * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+               * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+               * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+               * requirements_past_due}, {@code requirements_pending_verification}, {@code
+               * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+               * {@code unsupported_entity_type}.
                */
               @SerializedName("code")
               String code;
@@ -3706,9 +4076,10 @@ public class Account extends StripeObject implements HasId {
          * Machine-readable code describing the error.
          *
          * <p>One of {@code invalid_address_city_state_postal_code}, {@code
-         * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
-         * invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted}, {@code
-         * invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
+         * invalid_address_cmra_address}, {@code invalid_address_highway_contract_box}, {@code
+         * invalid_address_private_mailbox}, {@code invalid_address_registered_agent_address},
+         * {@code invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted},
+         * {@code invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
          * invalid_dob_age_under_18}, {@code invalid_dob_age_under_minimum}, {@code
          * invalid_product_description_length}, {@code invalid_product_description_url_match},
          * {@code invalid_representative_country}, {@code
@@ -3803,20 +4174,21 @@ public class Account extends StripeObject implements HasId {
            * affirm_payments}, {@code afterpay_clearpay_payments}, {@code alma_payments}, {@code
            * amazon_pay_payments}, {@code automatic_indirect_tax}, {@code au_becs_debit_payments},
            * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.local},
-           * {@code bank_accounts.wire}, {@code blik_payments}, {@code boleto_payments}, {@code
-           * cards}, {@code card_payments}, {@code cartes_bancaires_payments}, {@code
-           * cashapp_payments}, {@code eps_payments}, {@code fpx_payments}, {@code
-           * gb_bank_transfer_payments}, {@code grabpay_payments}, {@code ideal_payments}, {@code
-           * jcb_payments}, {@code jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code
-           * klarna_payments}, {@code konbini_payments}, {@code kr_card_payments}, {@code
-           * link_payments}, {@code mobilepay_payments}, {@code multibanco_payments}, {@code
-           * mx_bank_transfer_payments}, {@code naver_pay_payments}, {@code oxxo_payments}, {@code
-           * p24_payments}, {@code payco_payments}, {@code paynow_payments}, {@code
-           * pay_by_bank_payments}, {@code promptpay_payments}, {@code revolut_pay_payments}, {@code
-           * samsung_pay_payments}, {@code sepa_bank_transfer_payments}, {@code
-           * sepa_debit_payments}, {@code stripe_balance.payouts}, {@code
-           * stripe_balance.stripe_transfers}, {@code swish_payments}, {@code twint_payments},
-           * {@code us_bank_transfer_payments}, or {@code zip_payments}.
+           * {@code bank_accounts.wire}, {@code blik_payments}, {@code blik_recurring_payments},
+           * {@code boleto_payments}, {@code cards}, {@code card_payments}, {@code
+           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code eps_payments}, {@code
+           * fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments}, {@code
+           * ideal_payments}, {@code jcb_payments}, {@code jp_bank_transfer_payments}, {@code
+           * kakao_pay_payments}, {@code klarna_payments}, {@code konbini_payments}, {@code
+           * kr_card_payments}, {@code link_payments}, {@code mobilepay_payments}, {@code
+           * multibanco_payments}, {@code mx_bank_transfer_payments}, {@code naver_pay_payments},
+           * {@code oxxo_payments}, {@code p24_payments}, {@code payco_payments}, {@code
+           * paynow_payments}, {@code pay_by_bank_payments}, {@code promptpay_payments}, {@code
+           * revolut_pay_payments}, {@code samsung_pay_payments}, {@code satispay_payments}, {@code
+           * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
+           * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
+           * swish_payments}, {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code
+           * zip_payments}.
            */
           @SerializedName("capability")
           String capability;
@@ -5712,9 +6084,10 @@ public class Account extends StripeObject implements HasId {
          * Machine-readable code describing the error.
          *
          * <p>One of {@code invalid_address_city_state_postal_code}, {@code
-         * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
-         * invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted}, {@code
-         * invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
+         * invalid_address_cmra_address}, {@code invalid_address_highway_contract_box}, {@code
+         * invalid_address_private_mailbox}, {@code invalid_address_registered_agent_address},
+         * {@code invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted},
+         * {@code invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
          * invalid_dob_age_under_18}, {@code invalid_dob_age_under_minimum}, {@code
          * invalid_product_description_length}, {@code invalid_product_description_url_match},
          * {@code invalid_representative_country}, {@code
@@ -5809,20 +6182,21 @@ public class Account extends StripeObject implements HasId {
            * affirm_payments}, {@code afterpay_clearpay_payments}, {@code alma_payments}, {@code
            * amazon_pay_payments}, {@code automatic_indirect_tax}, {@code au_becs_debit_payments},
            * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.local},
-           * {@code bank_accounts.wire}, {@code blik_payments}, {@code boleto_payments}, {@code
-           * cards}, {@code card_payments}, {@code cartes_bancaires_payments}, {@code
-           * cashapp_payments}, {@code eps_payments}, {@code fpx_payments}, {@code
-           * gb_bank_transfer_payments}, {@code grabpay_payments}, {@code ideal_payments}, {@code
-           * jcb_payments}, {@code jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code
-           * klarna_payments}, {@code konbini_payments}, {@code kr_card_payments}, {@code
-           * link_payments}, {@code mobilepay_payments}, {@code multibanco_payments}, {@code
-           * mx_bank_transfer_payments}, {@code naver_pay_payments}, {@code oxxo_payments}, {@code
-           * p24_payments}, {@code payco_payments}, {@code paynow_payments}, {@code
-           * pay_by_bank_payments}, {@code promptpay_payments}, {@code revolut_pay_payments}, {@code
-           * samsung_pay_payments}, {@code sepa_bank_transfer_payments}, {@code
-           * sepa_debit_payments}, {@code stripe_balance.payouts}, {@code
-           * stripe_balance.stripe_transfers}, {@code swish_payments}, {@code twint_payments},
-           * {@code us_bank_transfer_payments}, or {@code zip_payments}.
+           * {@code bank_accounts.wire}, {@code blik_payments}, {@code blik_recurring_payments},
+           * {@code boleto_payments}, {@code cards}, {@code card_payments}, {@code
+           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code eps_payments}, {@code
+           * fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments}, {@code
+           * ideal_payments}, {@code jcb_payments}, {@code jp_bank_transfer_payments}, {@code
+           * kakao_pay_payments}, {@code klarna_payments}, {@code konbini_payments}, {@code
+           * kr_card_payments}, {@code link_payments}, {@code mobilepay_payments}, {@code
+           * multibanco_payments}, {@code mx_bank_transfer_payments}, {@code naver_pay_payments},
+           * {@code oxxo_payments}, {@code p24_payments}, {@code payco_payments}, {@code
+           * paynow_payments}, {@code pay_by_bank_payments}, {@code promptpay_payments}, {@code
+           * revolut_pay_payments}, {@code samsung_pay_payments}, {@code satispay_payments}, {@code
+           * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
+           * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
+           * swish_payments}, {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code
+           * zip_payments}.
            */
           @SerializedName("capability")
           String capability;

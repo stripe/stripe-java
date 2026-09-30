@@ -418,6 +418,9 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
     @SerializedName("ach")
     ACH("ach"),
 
+    @SerializedName("rtp")
+    RTP("rtp"),
+
     @SerializedName("us_domestic_wire")
     US_DOMESTIC_WIRE("us_domestic_wire");
 

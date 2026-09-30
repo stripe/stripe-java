@@ -22,7 +22,7 @@ import lombok.Setter;
 
 /**
  * TransactionEntries represent individual units of money movements within a single <a
- * href="https://api.stripe.com#transactions">Transaction</a>.
+ * href="https://docs.stripe.com/api#transactions">Transaction</a>.
  */
 @Getter
 @Setter
@@ -232,15 +232,16 @@ public class TransactionEntry extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class FlowDetails extends StripeObject {
     /**
-     * You can reverse some <a href="https://api.stripe.com#received_credits">ReceivedCredits</a>
-     * depending on their network and source flow. Reversing a ReceivedCredit leads to the creation
-     * of a new object known as a CreditReversal.
+     * You can reverse some <a
+     * href="https://docs.stripe.com/api#received_credits">ReceivedCredits</a> depending on their
+     * network and source flow. Reversing a ReceivedCredit leads to the creation of a new object
+     * known as a CreditReversal.
      */
     @SerializedName("credit_reversal")
     CreditReversal creditReversal;
 
     /**
-     * You can reverse some <a href="https://api.stripe.com#received_debits">ReceivedDebits</a>
+     * You can reverse some <a href="https://docs.stripe.com/api#received_debits">ReceivedDebits</a>
      * depending on their network and source flow. Reversing a ReceivedDebit leads to the creation
      * of a new object known as a DebitReversal.
      */
@@ -250,8 +251,9 @@ public class TransactionEntry extends ApiResource implements HasId {
     /**
      * Use <a
      * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">InboundTransfers</a>
-     * to add funds to your <a href="https://api.stripe.com#financial_accounts">FinancialAccount</a>
-     * via a PaymentMethod that is owned by you. The funds will be transferred via an ACH debit.
+     * to add funds to your <a
+     * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a> via a
+     * PaymentMethod that is owned by you. The funds will be transferred via an ACH debit.
      *
      * <p>Related guide: <a
      * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">Moving
@@ -276,9 +278,9 @@ public class TransactionEntry extends ApiResource implements HasId {
      * Use <a
      * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments">OutboundPayments</a>
      * to send funds to another party's external bank account or <a
-     * href="https://api.stripe.com#financial_accounts">FinancialAccount</a>. To send money to an
-     * account belonging to the same user, use an <a
-     * href="https://api.stripe.com#outbound_transfers">OutboundTransfer</a>.
+     * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a>. To send money to
+     * an account belonging to the same user, use an <a
+     * href="https://docs.stripe.com/api#outbound_transfers">OutboundTransfer</a>.
      *
      * <p>Simulate OutboundPayment state changes with the {@code
      * /v1/test_helpers/treasury/outbound_payments} endpoints. These methods can only be called on
@@ -295,10 +297,10 @@ public class TransactionEntry extends ApiResource implements HasId {
      * Use <a
      * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-transfers">OutboundTransfers</a>
      * to transfer funds from a <a
-     * href="https://api.stripe.com#financial_accounts">FinancialAccount</a> to a PaymentMethod
+     * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a> to a PaymentMethod
      * belonging to the same entity. To send funds to a different party, use <a
-     * href="https://api.stripe.com#outbound_payments">OutboundPayments</a> instead. You can send
-     * funds over ACH rails or through a domestic wire transfer to a user's own external bank
+     * href="https://docs.stripe.com/api#outbound_payments">OutboundPayments</a> instead. You can
+     * send funds over ACH rails or through a domestic wire transfer to a user's own external bank
      * account.
      *
      * <p>Simulate OutboundTransfer state changes with the {@code
@@ -314,15 +316,15 @@ public class TransactionEntry extends ApiResource implements HasId {
 
     /**
      * ReceivedCredits represent funds sent to a <a
-     * href="https://api.stripe.com#financial_accounts">FinancialAccount</a> (for example, via ACH
-     * or wire). These money movements are not initiated from the FinancialAccount.
+     * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a> (for example, via
+     * ACH or wire). These money movements are not initiated from the FinancialAccount.
      */
     @SerializedName("received_credit")
     ReceivedCredit receivedCredit;
 
     /**
      * ReceivedDebits represent funds pulled from a <a
-     * href="https://api.stripe.com#financial_accounts">FinancialAccount</a>. These are not
+     * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a>. These are not
      * initiated from the FinancialAccount.
      */
     @SerializedName("received_debit")

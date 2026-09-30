@@ -226,6 +226,9 @@ public class Mandate extends ApiResource implements HasId {
     @SerializedName("bacs_debit")
     BacsDebit bacsDebit;
 
+    @SerializedName("blik")
+    Blik blik;
+
     @SerializedName("card")
     Card card;
 
@@ -386,13 +389,57 @@ public class Mandate extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Blik extends StripeObject {
+      /** Date at which the mandate expires. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * Type of the mandate.
+       *
+       * <p>Equal to {@code off_session}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
      * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject {}
+    public static class Card extends StripeObject {
+      @SerializedName("india")
+      India india;
+
+      /**
+       * For more details about India, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class India extends StripeObject {
+        /**
+         * The reason why the mandate has an {@code inactive} status. This field is only populated
+         * if the mandate is inactive.
+         *
+         * <p>One of {@code canceled}, {@code card_not_supported}, {@code currency_not_supported},
+         * {@code expired}, {@code issuer_not_supported}, {@code processing_error}, or {@code
+         * undetermined}.
+         */
+        @SerializedName("inactive_reason")
+        String inactiveReason;
+      }
+    }
 
     /**
      * For more details about Cashapp, please refer to the <a href="https://docs.stripe.com/api">API
