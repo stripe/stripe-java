@@ -12,40 +12,9 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class ReceivedCreditListParams extends ApiRequestParams {
-  /**
-   * Filter for objects created at the specified timestamp. Must be an RFC 3339 date &amp; time
-   * value, for example: 2022-09-18T13:22:00Z.
-   */
+  /** Hash of options for filtering on creation time. */
   @SerializedName("created")
-  Instant created;
-
-  /**
-   * Filter for objects created after the specified timestamp. Must be an RFC 3339 date &amp; time
-   * value, for example: 2022-09-18T13:22:00Z.
-   */
-  @SerializedName("created_gt")
-  Instant createdGt;
-
-  /**
-   * Filter for objects created on or after the specified timestamp. Must be an RFC 3339 date &amp;
-   * time value, for example: 2022-09-18T13:22:00Z.
-   */
-  @SerializedName("created_gte")
-  Instant createdGte;
-
-  /**
-   * Filter for objects created before the specified timestamp. Must be an RFC 3339 date &amp; time
-   * value, for example: 2022-09-18T13:22:00Z.
-   */
-  @SerializedName("created_lt")
-  Instant createdLt;
-
-  /**
-   * Filter for objects created on or before the specified timestamp. Must be an RFC 3339 date &amp;
-   * time value, for example: 2022-09-18T13:22:00Z.
-   */
-  @SerializedName("created_lte")
-  Instant createdLte;
+  Created created;
 
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -60,19 +29,8 @@ public class ReceivedCreditListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  private ReceivedCreditListParams(
-      Instant created,
-      Instant createdGt,
-      Instant createdGte,
-      Instant createdLt,
-      Instant createdLte,
-      Map<String, Object> extraParams,
-      Long limit) {
+  private ReceivedCreditListParams(Created created, Map<String, Object> extraParams, Long limit) {
     this.created = created;
-    this.createdGt = createdGt;
-    this.createdGte = createdGte;
-    this.createdLt = createdLt;
-    this.createdLte = createdLte;
     this.extraParams = extraParams;
     this.limit = limit;
   }
@@ -82,15 +40,7 @@ public class ReceivedCreditListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Instant created;
-
-    private Instant createdGt;
-
-    private Instant createdGte;
-
-    private Instant createdLt;
-
-    private Instant createdLte;
+    private Created created;
 
     private Map<String, Object> extraParams;
 
@@ -98,58 +48,12 @@ public class ReceivedCreditListParams extends ApiRequestParams {
 
     /** Finalize and obtain parameter instance from this builder. */
     public ReceivedCreditListParams build() {
-      return new ReceivedCreditListParams(
-          this.created,
-          this.createdGt,
-          this.createdGte,
-          this.createdLt,
-          this.createdLte,
-          this.extraParams,
-          this.limit);
+      return new ReceivedCreditListParams(this.created, this.extraParams, this.limit);
     }
 
-    /**
-     * Filter for objects created at the specified timestamp. Must be an RFC 3339 date &amp; time
-     * value, for example: 2022-09-18T13:22:00Z.
-     */
-    public Builder setCreated(Instant created) {
+    /** Hash of options for filtering on creation time. */
+    public Builder setCreated(ReceivedCreditListParams.Created created) {
       this.created = created;
-      return this;
-    }
-
-    /**
-     * Filter for objects created after the specified timestamp. Must be an RFC 3339 date &amp; time
-     * value, for example: 2022-09-18T13:22:00Z.
-     */
-    public Builder setCreatedGt(Instant createdGt) {
-      this.createdGt = createdGt;
-      return this;
-    }
-
-    /**
-     * Filter for objects created on or after the specified timestamp. Must be an RFC 3339 date
-     * &amp; time value, for example: 2022-09-18T13:22:00Z.
-     */
-    public Builder setCreatedGte(Instant createdGte) {
-      this.createdGte = createdGte;
-      return this;
-    }
-
-    /**
-     * Filter for objects created before the specified timestamp. Must be an RFC 3339 date &amp;
-     * time value, for example: 2022-09-18T13:22:00Z.
-     */
-    public Builder setCreatedLt(Instant createdLt) {
-      this.createdLt = createdLt;
-      return this;
-    }
-
-    /**
-     * Filter for objects created on or before the specified timestamp. Must be an RFC 3339 date
-     * &amp; time value, for example: 2022-09-18T13:22:00Z.
-     */
-    public Builder setCreatedLte(Instant createdLte) {
-      this.createdLte = createdLte;
       return this;
     }
 
@@ -183,6 +87,140 @@ public class ReceivedCreditListParams extends ApiRequestParams {
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Created {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Filter for objects created after the specified timestamp. Must be an RFC 3339 date &amp; time
+     * value, for example: 2022-09-18T13:22:00Z.
+     */
+    @SerializedName("gt")
+    Instant gt;
+
+    /**
+     * Filter for objects created on or after the specified timestamp. Must be an RFC 3339 date
+     * &amp; time value, for example: 2022-09-18T13:22:00Z.
+     */
+    @SerializedName("gte")
+    Instant gte;
+
+    /**
+     * Filter for objects created before the specified timestamp. Must be an RFC 3339 date &amp;
+     * time value, for example: 2022-09-18T13:22:00Z.
+     */
+    @SerializedName("lt")
+    Instant lt;
+
+    /**
+     * Filter for objects created on or before the specified timestamp. Must be an RFC 3339 date
+     * &amp; time value, for example: 2022-09-18T13:22:00Z.
+     */
+    @SerializedName("lte")
+    Instant lte;
+
+    private Created(
+        Map<String, Object> extraParams, Instant gt, Instant gte, Instant lt, Instant lte) {
+      this.extraParams = extraParams;
+      this.gt = gt;
+      this.gte = gte;
+      this.lt = lt;
+      this.lte = lte;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Instant gt;
+
+      private Instant gte;
+
+      private Instant lt;
+
+      private Instant lte;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ReceivedCreditListParams.Created build() {
+        return new ReceivedCreditListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ReceivedCreditListParams.Created#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ReceivedCreditListParams.Created#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Filter for objects created after the specified timestamp. Must be an RFC 3339 date &amp;
+       * time value, for example: 2022-09-18T13:22:00Z.
+       */
+      public Builder setGt(Instant gt) {
+        this.gt = gt;
+        return this;
+      }
+
+      /**
+       * Filter for objects created on or after the specified timestamp. Must be an RFC 3339 date
+       * &amp; time value, for example: 2022-09-18T13:22:00Z.
+       */
+      public Builder setGte(Instant gte) {
+        this.gte = gte;
+        return this;
+      }
+
+      /**
+       * Filter for objects created before the specified timestamp. Must be an RFC 3339 date &amp;
+       * time value, for example: 2022-09-18T13:22:00Z.
+       */
+      public Builder setLt(Instant lt) {
+        this.lt = lt;
+        return this;
+      }
+
+      /**
+       * Filter for objects created on or before the specified timestamp. Must be an RFC 3339 date
+       * &amp; time value, for example: 2022-09-18T13:22:00Z.
+       */
+      public Builder setLte(Instant lte) {
+        this.lte = lte;
+        return this;
+      }
     }
   }
 }

@@ -3,6 +3,7 @@ package com.stripe.service.v2.provisioning;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.provisioning.Resource;
+import com.stripe.model.v2.provisioning.ResourceAccessConfiguration;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -100,6 +101,31 @@ public final class ResourceService extends ApiService {
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, Resource.class);
+  }
+  /**
+   * Reveals the current provider-issued access configuration for a completed Resource. This is a
+   * read-only disclosure: it does not create, refresh, mint, or rotate credentials. Repeated calls
+   * are safe and do not require an idempotency key, but can return a newer configuration after a
+   * separate Rotate operation completes.
+   */
+  public ResourceAccessConfiguration revealAccessConfiguration(String id) throws StripeException {
+    return revealAccessConfiguration(id, (RequestOptions) null);
+  }
+  /**
+   * Reveals the current provider-issued access configuration for a completed Resource. This is a
+   * read-only disclosure: it does not create, refresh, mint, or rotate credentials. Repeated calls
+   * are safe and do not require an idempotency key, but can return a newer configuration after a
+   * separate Rotate operation completes.
+   */
+  public ResourceAccessConfiguration revealAccessConfiguration(String id, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v2/provisioning/resources/%s/reveal_access_configuration",
+            ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, ResourceAccessConfiguration.class);
   }
   /** Rotates a resource's credentials. */
   public Resource rotateCredentials(String id) throws StripeException {

@@ -349,6 +349,14 @@ import com.stripe.events.V2CoreVaultNetworkTokenAuthorizationRequirementsChanged
 import com.stripe.events.V2CoreVaultNetworkTokenDeactivatedEventNotification;
 import com.stripe.events.V2CoreVaultNetworkTokenDetailsUpdatedEventNotification;
 import com.stripe.events.V2CoreVaultNetworkTokenSuspendedEventNotification;
+import com.stripe.events.V2DataQueryRunCreatedEventNotification;
+import com.stripe.events.V2DataQueryRunFailedEventNotification;
+import com.stripe.events.V2DataQueryRunSucceededEventNotification;
+import com.stripe.events.V2DataQueryRunUpdatedEventNotification;
+import com.stripe.events.V2DataReportRunCreatedEventNotification;
+import com.stripe.events.V2DataReportRunFailedEventNotification;
+import com.stripe.events.V2DataReportRunSucceededEventNotification;
+import com.stripe.events.V2DataReportRunUpdatedEventNotification;
 import com.stripe.events.V2DataReportingQueryRunCreatedEventNotification;
 import com.stripe.events.V2DataReportingQueryRunFailedEventNotification;
 import com.stripe.events.V2DataReportingQueryRunSucceededEventNotification;
@@ -373,6 +381,7 @@ import com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementDebitDisputeFailedEventNotification;
 import com.stripe.events.V2MoneyManagementDebitDisputeSubmittedEventNotification;
 import com.stripe.events.V2MoneyManagementDebitDisputeSucceededEventNotification;
+import com.stripe.events.V2MoneyManagementEarnedCreditSucceededEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountStatementCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountStatementRestatedEventNotification;
@@ -2705,6 +2714,54 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV2DataQueryRunCreated(
+      EventNotificationCallback<V2DataQueryRunCreatedEventNotification> callback) {
+    this.register("v2.data.query_run.created", callback);
+    return self();
+  }
+
+  public T onV2DataQueryRunFailed(
+      EventNotificationCallback<V2DataQueryRunFailedEventNotification> callback) {
+    this.register("v2.data.query_run.failed", callback);
+    return self();
+  }
+
+  public T onV2DataQueryRunSucceeded(
+      EventNotificationCallback<V2DataQueryRunSucceededEventNotification> callback) {
+    this.register("v2.data.query_run.succeeded", callback);
+    return self();
+  }
+
+  public T onV2DataQueryRunUpdated(
+      EventNotificationCallback<V2DataQueryRunUpdatedEventNotification> callback) {
+    this.register("v2.data.query_run.updated", callback);
+    return self();
+  }
+
+  public T onV2DataReportRunCreated(
+      EventNotificationCallback<V2DataReportRunCreatedEventNotification> callback) {
+    this.register("v2.data.report_run.created", callback);
+    return self();
+  }
+
+  public T onV2DataReportRunFailed(
+      EventNotificationCallback<V2DataReportRunFailedEventNotification> callback) {
+    this.register("v2.data.report_run.failed", callback);
+    return self();
+  }
+
+  public T onV2DataReportRunSucceeded(
+      EventNotificationCallback<V2DataReportRunSucceededEventNotification> callback) {
+    this.register("v2.data.report_run.succeeded", callback);
+    return self();
+  }
+
+  public T onV2DataReportRunUpdated(
+      EventNotificationCallback<V2DataReportRunUpdatedEventNotification> callback) {
+    this.register("v2.data.report_run.updated", callback);
+    return self();
+  }
+
   public T onV2DataReportingQueryRunCreated(
       EventNotificationCallback<V2DataReportingQueryRunCreatedEventNotification> callback) {
     this.register("v2.data.reporting.query_run.created", callback);
@@ -2846,6 +2903,12 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV2MoneyManagementDebitDisputeSucceeded(
       EventNotificationCallback<V2MoneyManagementDebitDisputeSucceededEventNotification> callback) {
     this.register("v2.money_management.debit_dispute.succeeded", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementEarnedCreditSucceeded(
+      EventNotificationCallback<V2MoneyManagementEarnedCreditSucceededEventNotification> callback) {
+    this.register("v2.money_management.earned_credit.succeeded", callback);
     return self();
   }
 

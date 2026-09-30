@@ -83,4 +83,19 @@ public final class TransactionService extends ApiService {
             options);
     return this.request(request, Transaction.class);
   }
+  /** Creates a fresh hosted URL for a Transaction's regulatory receipt. */
+  public Transaction refreshRegulatoryReceipt(String id) throws StripeException {
+    return refreshRegulatoryReceipt(id, (RequestOptions) null);
+  }
+  /** Creates a fresh hosted URL for a Transaction's regulatory receipt. */
+  public Transaction refreshRegulatoryReceipt(String id, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v2/money_management/transactions/%s/refresh_regulatory_receipt",
+            ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, Transaction.class);
+  }
 }

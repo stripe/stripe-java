@@ -136,6 +136,10 @@ public class FinancialAddress extends StripeObject implements HasId {
       @SerializedName("bank_name")
       String bankName;
 
+      /** The SWIFT/BIC code. */
+      @SerializedName("bic")
+      String bic;
+
       /** The last four digits of the account number. */
       @SerializedName("last4")
       String last4;
@@ -210,6 +214,10 @@ public class FinancialAddress extends StripeObject implements HasId {
       @SerializedName("bank_name")
       String bankName;
 
+      /** The SWIFT/BIC code. */
+      @SerializedName("bic")
+      String bic;
+
       /** The institution number. */
       @SerializedName("institution_number")
       String institutionNumber;
@@ -236,6 +244,10 @@ public class FinancialAddress extends StripeObject implements HasId {
       @SerializedName("bank_name")
       String bankName;
 
+      /** The SWIFT/BIC code. */
+      @SerializedName("bic")
+      String bic;
+
       /** The country of the bank account. */
       @SerializedName("country")
       String country;
@@ -261,6 +273,14 @@ public class FinancialAddress extends StripeObject implements HasId {
       /** The full account number. */
       @SerializedName("account_number")
       String accountNumber;
+
+      /** The SWIFT/BIC code. */
+      @SerializedName("bic")
+      String bic;
+
+      /** The full IBAN. */
+      @SerializedName("iban")
+      String iban;
 
       /** The last four digits of the account number. */
       @SerializedName("last4")

@@ -93,7 +93,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
   /**
    * The rails used to send the funds.
    *
-   * <p>One of {@code ach}, {@code card}, {@code stripe}, or {@code us_domestic_wire}.
+   * <p>One of {@code ach}, {@code card}, {@code rtp}, {@code stripe}, or {@code us_domestic_wire}.
    */
   @SerializedName("network")
   String network;

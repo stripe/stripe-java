@@ -66,6 +66,12 @@ public class InboundTransfer extends StripeObject implements HasId {
   @SerializedName("receipt_url")
   String receiptUrl;
 
+  /**
+   * The statement descriptor surfaced on the payer's bank statement. Echoes the submitted value.
+   */
+  @SerializedName("statement_descriptor")
+  String statementDescriptor;
+
   /** A nested object containing information about the destination of the InboundTransfer. */
   @SerializedName("to")
   To to;
@@ -170,14 +176,6 @@ public class InboundTransfer extends StripeObject implements HasId {
     @Getter(onMethod_ = {@Override})
     @SerializedName("id")
     String id;
-
-    /**
-     * Open Enum. The Level of the HistoryEntry.
-     *
-     * <p>One of {@code canonical}, or {@code debug}.
-     */
-    @SerializedName("level")
-    String level;
 
     /**
      * Open Enum. The type of the HistoryEntry.

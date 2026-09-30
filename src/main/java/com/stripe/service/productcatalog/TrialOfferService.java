@@ -15,6 +15,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.productcatalog.TrialOfferCreateParams;
 import com.stripe.param.productcatalog.TrialOfferListParams;
 import com.stripe.param.productcatalog.TrialOfferRetrieveParams;
+import com.stripe.param.productcatalog.TrialOfferUpdateParams;
 
 public final class TrialOfferService extends ApiService {
   public TrialOfferService(StripeResponseGetter responseGetter) {
@@ -83,6 +84,43 @@ public final class TrialOfferService extends ApiService {
         new ApiRequest(
             BaseAddress.API,
             ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, TrialOffer.class);
+  }
+  /**
+   * Updates the specified trial offer by setting the values of the parameters passed. Any
+   * parameters not provided are left unchanged.
+   */
+  public TrialOffer update(String id, TrialOfferUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /**
+   * Updates the specified trial offer by setting the values of the parameters passed. Any
+   * parameters not provided are left unchanged.
+   */
+  public TrialOffer update(String id, RequestOptions options) throws StripeException {
+    return update(id, (TrialOfferUpdateParams) null, options);
+  }
+  /**
+   * Updates the specified trial offer by setting the values of the parameters passed. Any
+   * parameters not provided are left unchanged.
+   */
+  public TrialOffer update(String id) throws StripeException {
+    return update(id, (TrialOfferUpdateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Updates the specified trial offer by setting the values of the parameters passed. Any
+   * parameters not provided are left unchanged.
+   */
+  public TrialOffer update(String id, TrialOfferUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/product_catalog/trial_offers/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
             path,
             ApiRequestParams.paramsToMap(params),
             options);

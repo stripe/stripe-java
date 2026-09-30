@@ -61,14 +61,14 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
   /**
    * Collect additional information from your customer using custom fields. Up to 3 fields are
-   * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
+   * supported. You can't set this parameter if {@code ui_mode} is {@code elements}.
    */
   @SerializedName("custom_fields")
   Object customFields;
 
   /**
    * Display additional text for your customers using custom text. You can't set this parameter if
-   * {@code ui_mode} is {@code custom}.
+   * {@code ui_mode} is {@code elements}.
    */
   @SerializedName("custom_text")
   CustomText customText;
@@ -509,7 +509,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     /**
      * Collect additional information from your customer using custom fields. Up to 3 fields are
-     * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
+     * supported. You can't set this parameter if {@code ui_mode} is {@code elements}.
      */
     public Builder setCustomFields(EmptyParam customFields) {
       this.customFields = customFields;
@@ -518,7 +518,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     /**
      * Collect additional information from your customer using custom fields. Up to 3 fields are
-     * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
+     * supported. You can't set this parameter if {@code ui_mode} is {@code elements}.
      */
     public Builder setCustomFields(List<PaymentLinkUpdateParams.CustomField> customFields) {
       this.customFields = customFields;
@@ -527,7 +527,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     /**
      * Display additional text for your customers using custom text. You can't set this parameter if
-     * {@code ui_mode} is {@code custom}.
+     * {@code ui_mode} is {@code elements}.
      */
     public Builder setCustomText(PaymentLinkUpdateParams.CustomText customText) {
       this.customText = customText;
@@ -6781,6 +6781,13 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class EndBehavior {
         /**
+         * Indicates how the subscription's billing cycle anchor is reset when a trial ends.
+         * Defaults to {@code now}.
+         */
+        @SerializedName("billing_cycle_anchor")
+        BillingCycleAnchor billingCycleAnchor;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -6798,7 +6805,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         MissingPaymentMethod missingPaymentMethod;
 
         private EndBehavior(
-            Map<String, Object> extraParams, MissingPaymentMethod missingPaymentMethod) {
+            BillingCycleAnchor billingCycleAnchor,
+            Map<String, Object> extraParams,
+            MissingPaymentMethod missingPaymentMethod) {
+          this.billingCycleAnchor = billingCycleAnchor;
           this.extraParams = extraParams;
           this.missingPaymentMethod = missingPaymentMethod;
         }
@@ -6808,6 +6818,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private BillingCycleAnchor billingCycleAnchor;
+
           private Map<String, Object> extraParams;
 
           private MissingPaymentMethod missingPaymentMethod;
@@ -6815,7 +6827,18 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentLinkUpdateParams.SubscriptionData.TrialSettings.EndBehavior build() {
             return new PaymentLinkUpdateParams.SubscriptionData.TrialSettings.EndBehavior(
-                this.extraParams, this.missingPaymentMethod);
+                this.billingCycleAnchor, this.extraParams, this.missingPaymentMethod);
+          }
+
+          /**
+           * Indicates how the subscription's billing cycle anchor is reset when a trial ends.
+           * Defaults to {@code now}.
+           */
+          public Builder setBillingCycleAnchor(
+              PaymentLinkUpdateParams.SubscriptionData.TrialSettings.EndBehavior.BillingCycleAnchor
+                  billingCycleAnchor) {
+            this.billingCycleAnchor = billingCycleAnchor;
+            return this;
           }
 
           /**
@@ -6861,6 +6884,21 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           }
         }
 
+        public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
+          @SerializedName("now")
+          NOW("now"),
+
+          @SerializedName("unchanged")
+          UNCHANGED("unchanged");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          BillingCycleAnchor(String value) {
+            this.value = value;
+          }
+        }
+
         public enum MissingPaymentMethod implements ApiRequestParams.EnumParam {
           @SerializedName("cancel")
           CANCEL("cancel"),
@@ -6903,7 +6941,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     /**
      * Describes whether a tax ID is required during checkout. Defaults to {@code never}. You can't
-     * set this parameter if {@code ui_mode} is {@code custom}.
+     * set this parameter if {@code ui_mode} is {@code elements}.
      */
     @SerializedName("required")
     Required required;
@@ -6969,7 +7007,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       /**
        * Describes whether a tax ID is required during checkout. Defaults to {@code never}. You
-       * can't set this parameter if {@code ui_mode} is {@code custom}.
+       * can't set this parameter if {@code ui_mode} is {@code elements}.
        */
       public Builder setRequired(PaymentLinkUpdateParams.TaxIdCollection.Required required) {
         this.required = required;
@@ -7262,6 +7300,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sequra")
+    SEQURA("sequra"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),

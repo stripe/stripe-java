@@ -273,8 +273,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * charged for the first time. If set, trial_end will override the default trial period of the
    * plan the customer is being subscribed to. The special value {@code now} can be provided to end
    * the customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
-   * See <a href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
-   * subscriptions</a> to learn more.
+   * See <a href="https://docs.stripe.com/billing/subscriptions/trials/free-trials">Using trial
+   * periods on subscriptions</a> to learn more.
    */
   @SerializedName("trial_end")
   Object trialEnd;
@@ -283,7 +283,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * Indicates if a plan's {@code trial_period_days} should be applied to the subscription. Setting
    * {@code trial_end} per subscription is preferred, and this defaults to {@code false}. Setting
    * this flag to {@code true} together with {@code trial_end} is not allowed. See <a
-   * href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
+   * href="https://docs.stripe.com/billing/subscriptions/trials/free-trials">Using trial periods on
    * subscriptions</a> to learn more.
    */
   @SerializedName("trial_from_plan")
@@ -292,8 +292,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   /**
    * Integer representing the number of trial period days before the customer is charged for the
    * first time. This will always overwrite any trials that might apply via a subscribed plan. See
-   * <a href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
-   * subscriptions</a> to learn more.
+   * <a href="https://docs.stripe.com/billing/subscriptions/trials/free-trials">Using trial periods
+   * on subscriptions</a> to learn more.
    */
   @SerializedName("trial_period_days")
   Long trialPeriodDays;
@@ -1094,8 +1094,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * plan the customer is being subscribed to. The special value {@code now} can be provided to
      * end the customer's trial immediately. Can be at most two years from {@code
      * billing_cycle_anchor}. See <a
-     * href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
-     * subscriptions</a> to learn more.
+     * href="https://docs.stripe.com/billing/subscriptions/trials/free-trials">Using trial periods
+     * on subscriptions</a> to learn more.
      */
     public Builder setTrialEnd(SubscriptionCreateParams.TrialEnd trialEnd) {
       this.trialEnd = trialEnd;
@@ -1108,8 +1108,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * plan the customer is being subscribed to. The special value {@code now} can be provided to
      * end the customer's trial immediately. Can be at most two years from {@code
      * billing_cycle_anchor}. See <a
-     * href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
-     * subscriptions</a> to learn more.
+     * href="https://docs.stripe.com/billing/subscriptions/trials/free-trials">Using trial periods
+     * on subscriptions</a> to learn more.
      */
     public Builder setTrialEnd(Long trialEnd) {
       this.trialEnd = trialEnd;
@@ -1120,8 +1120,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * Indicates if a plan's {@code trial_period_days} should be applied to the subscription.
      * Setting {@code trial_end} per subscription is preferred, and this defaults to {@code false}.
      * Setting this flag to {@code true} together with {@code trial_end} is not allowed. See <a
-     * href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
-     * subscriptions</a> to learn more.
+     * href="https://docs.stripe.com/billing/subscriptions/trials/free-trials">Using trial periods
+     * on subscriptions</a> to learn more.
      */
     public Builder setTrialFromPlan(Boolean trialFromPlan) {
       this.trialFromPlan = trialFromPlan;
@@ -1131,8 +1131,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     /**
      * Integer representing the number of trial period days before the customer is charged for the
      * first time. This will always overwrite any trials that might apply via a subscribed plan. See
-     * <a href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
-     * subscriptions</a> to learn more.
+     * <a href="https://docs.stripe.com/billing/subscriptions/trials/free-trials">Using trial
+     * periods on subscriptions</a> to learn more.
      */
     public Builder setTrialPeriodDays(Long trialPeriodDays) {
       this.trialPeriodDays = trialPeriodDays;
@@ -8220,8 +8220,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
            * Date when the mandate expires and no further payments will be charged. If not provided,
            * the mandate will be set to be indefinite.
            */
-          @SerializedName("expires_after")
-          Long expiresAfter;
+          @SerializedName("expires_at")
+          Long expiresAt;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -8233,8 +8233,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          private MandateOptions(Long expiresAfter, Map<String, Object> extraParams) {
-            this.expiresAfter = expiresAfter;
+          private MandateOptions(Long expiresAt, Map<String, Object> extraParams) {
+            this.expiresAt = expiresAt;
             this.extraParams = extraParams;
           }
 
@@ -8243,7 +8243,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private Long expiresAfter;
+            private Long expiresAt;
 
             private Map<String, Object> extraParams;
 
@@ -8251,15 +8251,15 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Blik.MandateOptions
                 build() {
               return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Blik
-                  .MandateOptions(this.expiresAfter, this.extraParams);
+                  .MandateOptions(this.expiresAt, this.extraParams);
             }
 
             /**
              * Date when the mandate expires and no further payments will be charged. If not
              * provided, the mandate will be set to be indefinite.
              */
-            public Builder setExpiresAfter(Long expiresAfter) {
-              this.expiresAfter = expiresAfter;
+            public Builder setExpiresAt(Long expiresAt) {
+              this.expiresAt = expiresAt;
               return this;
             }
 
@@ -11161,8 +11161,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> Indicates how the subscription should change when the trial ends
-       * if the user did not provide a payment method.
+       * Indicates how the subscription should change when the trial ends if the user did not
+       * provide a payment method.
        */
       @SerializedName("missing_payment_method")
       MissingPaymentMethod missingPaymentMethod;
@@ -11233,8 +11233,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> Indicates how the subscription should change when the trial
-         * ends if the user did not provide a payment method.
+         * Indicates how the subscription should change when the trial ends if the user did not
+         * provide a payment method.
          */
         public Builder setMissingPaymentMethod(
             SubscriptionCreateParams.TrialSettings.EndBehavior.MissingPaymentMethod

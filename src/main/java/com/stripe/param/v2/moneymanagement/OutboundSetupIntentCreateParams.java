@@ -20,6 +20,10 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** An existing resource to use as the source for setting up outbound credentials. */
+  @SerializedName("from_resource")
+  FromResource fromResource;
+
   /**
    * If provided, the existing payout method resource to link to this setup intent. Any
    * payout_method_data provided is used to update information on this linked payout method
@@ -45,10 +49,12 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
 
   private OutboundSetupIntentCreateParams(
       Map<String, Object> extraParams,
+      FromResource fromResource,
       String payoutMethod,
       PayoutMethodData payoutMethodData,
       UsageIntent usageIntent) {
     this.extraParams = extraParams;
+    this.fromResource = fromResource;
     this.payoutMethod = payoutMethod;
     this.payoutMethodData = payoutMethodData;
     this.usageIntent = usageIntent;
@@ -61,6 +67,8 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
+    private FromResource fromResource;
+
     private String payoutMethod;
 
     private PayoutMethodData payoutMethodData;
@@ -70,7 +78,11 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public OutboundSetupIntentCreateParams build() {
       return new OutboundSetupIntentCreateParams(
-          this.extraParams, this.payoutMethod, this.payoutMethodData, this.usageIntent);
+          this.extraParams,
+          this.fromResource,
+          this.payoutMethod,
+          this.payoutMethodData,
+          this.usageIntent);
     }
 
     /**
@@ -96,6 +108,12 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** An existing resource to use as the source for setting up outbound credentials. */
+    public Builder setFromResource(OutboundSetupIntentCreateParams.FromResource fromResource) {
+      this.fromResource = fromResource;
       return this;
     }
 
@@ -127,6 +145,102 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
     public Builder setUsageIntent(OutboundSetupIntentCreateParams.UsageIntent usageIntent) {
       this.usageIntent = usageIntent;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FromResource {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The identifier of the source resource. */
+    @SerializedName("id")
+    String id;
+
+    /** <strong>Required.</strong> The type of the source resource. */
+    @SerializedName("type")
+    Type type;
+
+    private FromResource(Map<String, Object> extraParams, String id, Type type) {
+      this.extraParams = extraParams;
+      this.id = id;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String id;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public OutboundSetupIntentCreateParams.FromResource build() {
+        return new OutboundSetupIntentCreateParams.FromResource(
+            this.extraParams, this.id, this.type);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * OutboundSetupIntentCreateParams.FromResource#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link OutboundSetupIntentCreateParams.FromResource#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The identifier of the source resource. */
+      public Builder setId(String id) {
+        this.id = id;
+        return this;
+      }
+
+      /** <strong>Required.</strong> The type of the source resource. */
+      public Builder setType(OutboundSetupIntentCreateParams.FromResource.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("payment_method")
+      PAYMENT_METHOD("payment_method");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
+      }
     }
   }
 

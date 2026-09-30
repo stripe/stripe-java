@@ -567,6 +567,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("status")
   String status;
 
+  @SerializedName("status_details")
+  StatusDetails statusDetails;
+
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
@@ -2187,6 +2190,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     Boolean enabled;
 
     /**
+     * How {@code automatic_tax} was set ({@code explicit}, {@code managed_payments}, or {@code
+     * tax_integration_configuration}) and why it may have been disabled.
+     */
+    @SerializedName("enablement_details")
+    EnablementDetails enablementDetails;
+
+    /**
      * The account that's liable for tax. If set, the business address and tax registrations
      * required to perform the tax calculation are loaded from this account. The tax transaction is
      * returned in the report of the connected account.
@@ -2205,6 +2215,48 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
      */
     @SerializedName("status")
     String status;
+
+    /**
+     * For more details about EnablementDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EnablementDetails extends StripeObject {
+      /**
+       * Present when {@code source=tax_integration_configuration}, {@code
+       * automatic_tax[enabled]=false}, and a conflicting parameter is recorded.
+       */
+      @SerializedName("integration_configuration_disabled_reason")
+      IntegrationConfigurationDisabledReason integrationConfigurationDisabledReason;
+
+      /**
+       * How {@code automatic_tax} was set: {@code explicit}, {@code managed_payments}, or {@code
+       * tax_integration_configuration}.
+       *
+       * <p>One of {@code explicit}, {@code managed_payments}, or {@code
+       * tax_integration_configuration}.
+       */
+      @SerializedName("source")
+      String source;
+
+      /**
+       * For more details about IntegrationConfigurationDisabledReason, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class IntegrationConfigurationDisabledReason extends StripeObject {
+        /**
+         * The parameter that prevented {@code automatic_tax} from being enabled (for example {@code
+         * default_tax_rates}).
+         */
+        @SerializedName("conflicting_field")
+        String conflictingField;
+      }
+    }
 
     /**
      * For more details about Liability, please refer to the <a
@@ -3427,6 +3479,36 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * For more details about StatusDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusDetails extends StripeObject {
+    @SerializedName("uncollectible")
+    Uncollectible uncollectible;
+
+    /**
+     * For more details about Uncollectible, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Uncollectible extends StripeObject {
+      /**
+       * The reason why the invoice is uncollectible.
+       *
+       * <p>One of {@code max_payment_attempts}, {@code payment_not_received}, {@code
+       * subscription_canceled}, {@code subscription_paused}, or {@code user_forgiven}.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
+  }
+
+  /**
    * For more details about StatusTransitions, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -3769,6 +3851,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     trySetResponseGetter(rendering, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);
+    trySetResponseGetter(statusDetails, responseGetter);
     trySetResponseGetter(statusTransitions, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
     trySetResponseGetter(thresholdReason, responseGetter);

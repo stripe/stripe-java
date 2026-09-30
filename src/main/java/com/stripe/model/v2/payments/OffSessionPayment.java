@@ -483,13 +483,6 @@ public class OffSessionPayment extends StripeObject implements HasId {
      */
     @SerializedName("retry_strategy")
     String retryStrategy;
-
-    /**
-     * The timestamp when this payment is no longer eligible to be retried. When this timestamp is
-     * reached, the payment will be marked as failed.
-     */
-    @SerializedName("retry_until")
-    Instant retryUntil;
   }
 
   /**

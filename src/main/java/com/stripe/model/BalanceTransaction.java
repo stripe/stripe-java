@@ -133,9 +133,10 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * application_fee_refund}, {@code charge}, {@code climate_order_purchase}, {@code
    * climate_order_refund}, {@code connect_collection_transfer}, {@code contribution}, {@code
    * inbound_transfer}, {@code inbound_transfer_reversal}, {@code issuing_authorization_hold},
-   * {@code issuing_authorization_release}, {@code issuing_dispute}, {@code issuing_transaction},
-   * {@code obligation_outbound}, {@code obligation_reversal_inbound}, {@code payment}, {@code
-   * payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
+   * {@code issuing_authorization_release}, {@code issuing_dispute}, {@code
+   * issuing_dispute_provisional_credit}, {@code issuing_dispute_provisional_credit_reversal},
+   * {@code issuing_transaction}, {@code obligation_outbound}, {@code obligation_reversal_inbound},
+   * {@code payment}, {@code payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
    * payment_network_reserve_release}, {@code payment_refund}, {@code payment_reversal}, {@code
    * payment_unreconciled}, {@code payout}, {@code payout_cancel}, {@code payout_failure}, {@code
    * payout_minimum_balance_hold}, {@code payout_minimum_balance_release}, {@code refund}, {@code
@@ -153,9 +154,10 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * charge}, {@code climate_order_purchase}, {@code climate_order_refund}, {@code
    * connect_collection_transfer}, {@code contribution}, {@code fee_credit_funding}, {@code
    * inbound_transfer}, {@code inbound_transfer_reversal}, {@code issuing_authorization_hold},
-   * {@code issuing_authorization_release}, {@code issuing_dispute}, {@code issuing_transaction},
-   * {@code obligation_outbound}, {@code obligation_reversal_inbound}, {@code payment}, {@code
-   * payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
+   * {@code issuing_authorization_release}, {@code issuing_dispute}, {@code
+   * issuing_dispute_provisional_credit}, {@code issuing_dispute_provisional_credit_reversal},
+   * {@code issuing_transaction}, {@code obligation_outbound}, {@code obligation_reversal_inbound},
+   * {@code payment}, {@code payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
    * payment_network_reserve_release}, {@code payment_refund}, {@code payment_reversal}, {@code
    * payment_unreconciled}, {@code payout}, {@code payout_cancel}, {@code payout_failure}, {@code
    * payout_minimum_balance_hold}, {@code payout_minimum_balance_release}, {@code refund}, {@code

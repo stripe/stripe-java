@@ -46,28 +46,32 @@ public final class SettingsService extends ApiService {
   }
   /**
    * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
-   * but none can be removed once set.
+   * but none can be removed once set. Check the returned Tax {@code Settings} object and validate
+   * that its status is {@code active}.
    */
   public Settings update(SettingsUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
   /**
    * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
-   * but none can be removed once set.
+   * but none can be removed once set. Check the returned Tax {@code Settings} object and validate
+   * that its status is {@code active}.
    */
   public Settings update(RequestOptions options) throws StripeException {
     return update((SettingsUpdateParams) null, options);
   }
   /**
    * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
-   * but none can be removed once set.
+   * but none can be removed once set. Check the returned Tax {@code Settings} object and validate
+   * that its status is {@code active}.
    */
   public Settings update() throws StripeException {
     return update((SettingsUpdateParams) null, (RequestOptions) null);
   }
   /**
    * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
-   * but none can be removed once set.
+   * but none can be removed once set. Check the returned Tax {@code Settings} object and validate
+   * that its status is {@code active}.
    */
   public Settings update(SettingsUpdateParams params, RequestOptions options)
       throws StripeException {

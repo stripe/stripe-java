@@ -67,10 +67,6 @@ public class ReaderListParams extends ApiRequestParams {
   @SerializedName("status")
   Status status;
 
-  /** Filters readers by tamper state. */
-  @SerializedName("tamper_state")
-  TamperState tamperState;
-
   private ReaderListParams(
       DeviceType deviceType,
       String endingBefore,
@@ -80,8 +76,7 @@ public class ReaderListParams extends ApiRequestParams {
       String location,
       String serialNumber,
       String startingAfter,
-      Status status,
-      TamperState tamperState) {
+      Status status) {
     this.deviceType = deviceType;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -91,7 +86,6 @@ public class ReaderListParams extends ApiRequestParams {
     this.serialNumber = serialNumber;
     this.startingAfter = startingAfter;
     this.status = status;
-    this.tamperState = tamperState;
   }
 
   public static Builder builder() {
@@ -117,8 +111,6 @@ public class ReaderListParams extends ApiRequestParams {
 
     private Status status;
 
-    private TamperState tamperState;
-
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderListParams build() {
       return new ReaderListParams(
@@ -130,8 +122,7 @@ public class ReaderListParams extends ApiRequestParams {
           this.location,
           this.serialNumber,
           this.startingAfter,
-          this.status,
-          this.tamperState);
+          this.status);
     }
 
     /** Filters readers by device type. */
@@ -240,12 +231,6 @@ public class ReaderListParams extends ApiRequestParams {
       this.status = status;
       return this;
     }
-
-    /** Filters readers by tamper state. */
-    public Builder setTamperState(ReaderListParams.TamperState tamperState) {
-      this.tamperState = tamperState;
-      return this;
-    }
   }
 
   public enum DeviceType implements ApiRequestParams.EnumParam {
@@ -325,21 +310,6 @@ public class ReaderListParams extends ApiRequestParams {
     private final String value;
 
     Status(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum TamperState implements ApiRequestParams.EnumParam {
-    @SerializedName("secure")
-    SECURE("secure"),
-
-    @SerializedName("tampered")
-    TAMPERED("tampered");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    TamperState(String value) {
       this.value = value;
     }
   }

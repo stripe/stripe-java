@@ -16,6 +16,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.productcatalog.TrialOfferCreateParams;
 import com.stripe.param.productcatalog.TrialOfferListParams;
 import com.stripe.param.productcatalog.TrialOfferRetrieveParams;
+import com.stripe.param.productcatalog.TrialOfferUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,6 +33,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class TrialOffer extends ApiResource implements HasId {
+  /** Whether the trial offer is active. Set to false to archive the trial offer. */
+  @SerializedName("active")
+  Boolean active;
+
   @SerializedName("duration")
   Duration duration;
 
@@ -50,9 +55,9 @@ public class TrialOffer extends ApiResource implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** A brief, user-friendly name for the trial offer-for identification purposes. */
-  @SerializedName("name")
-  String name;
+  /** A brief description of the trial offer, hidden from customers. */
+  @SerializedName("nickname")
+  String nickname;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.
@@ -186,6 +191,54 @@ public class TrialOffer extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, TrialOffer.class);
+  }
+
+  /**
+   * Updates the specified trial offer by setting the values of the parameters passed. Any
+   * parameters not provided are left unchanged.
+   */
+  public TrialOffer update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified trial offer by setting the values of the parameters passed. Any
+   * parameters not provided are left unchanged.
+   */
+  public TrialOffer update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/product_catalog/trial_offers/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, TrialOffer.class);
+  }
+
+  /**
+   * Updates the specified trial offer by setting the values of the parameters passed. Any
+   * parameters not provided are left unchanged.
+   */
+  public TrialOffer update(TrialOfferUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified trial offer by setting the values of the parameters passed. Any
+   * parameters not provided are left unchanged.
+   */
+  public TrialOffer update(TrialOfferUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/product_catalog/trial_offers/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, TrialOffer.class);
   }
 
   /**

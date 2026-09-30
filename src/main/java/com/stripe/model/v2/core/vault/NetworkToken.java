@@ -56,6 +56,14 @@ public class NetworkToken extends StripeObject implements HasId {
   String object;
 
   /**
+   * The origin of the resource used to provision this network token.
+   *
+   * <p>One of {@code card_on_file}, or {@code wallet}.
+   */
+  @SerializedName("origin")
+  String origin;
+
+  /**
    * Closed Enum. The status of the network token.
    *
    * <p>One of {@code active}, {@code deactivated}, or {@code suspended}.

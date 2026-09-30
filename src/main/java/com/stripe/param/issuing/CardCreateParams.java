@@ -489,7 +489,7 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The type of wallet (standard or bridge_wallet). */
+    /** The type of crypto wallet. */
     @SerializedName("type")
     Type type;
 
@@ -567,7 +567,7 @@ public class CardCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The type of wallet (standard or bridge_wallet). */
+      /** The type of crypto wallet. */
       public Builder setType(CardCreateParams.CryptoWallet.Type type) {
         this.type = type;
         return this;
@@ -577,6 +577,9 @@ public class CardCreateParams extends ApiRequestParams {
     public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("bridge_wallet")
       BRIDGE_WALLET("bridge_wallet"),
+
+      @SerializedName("squads")
+      SQUADS("squads"),
 
       @SerializedName("standard")
       STANDARD("standard");

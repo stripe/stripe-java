@@ -2,9 +2,22 @@
 package com.stripe.model.apps;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import com.stripe.net.ApiRequest;
+import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiResource;
+import com.stripe.net.BaseAddress;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.apps.InstallCreateParams;
+import com.stripe.param.apps.InstallListParams;
+import com.stripe.param.apps.InstallRetrieveParams;
+import com.stripe.param.apps.InstallUninstallParams;
+import com.stripe.param.apps.InstallUpdateParams;
 import java.util.List;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +32,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Install extends StripeObject implements HasId {
+public class Install extends ApiResource implements HasId {
   /** The ID of the account that the app install belongs to. */
   @SerializedName("account")
   String account;
@@ -30,8 +43,9 @@ public class Install extends StripeObject implements HasId {
 
   /**
    * Whether the installer must authorize pending permissions, content security policy entries, or
-   * endpoints. For private apps, {@code approval_required} stays {@code false}. Install a new
-   * version from the Dashboard to grant its permissions.
+   * endpoints. For private apps, {@code approval_required} stays {@code false}; creating or
+   * reauthorizing the install through the API installs the newest completed upload and grants its
+   * permissions.
    */
   @SerializedName("approval_required")
   Boolean approvalRequired;
@@ -40,22 +54,15 @@ public class Install extends StripeObject implements HasId {
   @SerializedName("auth_code")
   String authCode;
 
-  @SerializedName("authorized_content_security_policy")
-  AuthorizedContentSecurityPolicy authorizedContentSecurityPolicy;
-
-  /** The endpoint URLs authorized by the installer. */
-  @SerializedName("authorized_endpoints")
-  List<String> authorizedEndpoints;
-
-  /** The permissions authorized by the installer. */
-  @SerializedName("authorized_permissions")
-  List<String> authorizedPermissions;
-
-  /** The distribution channel associated with the app install. */
+  /**
+   * The distribution channel associated with the app install.
+   *
+   * <p>One of {@code private_live}, {@code private_test}, {@code public}, {@code review}, or {@code
+   * testing}.
+   */
   @SerializedName("channel")
   String channel;
 
-  /** The content security policy entries authorized by the installer. */
   @SerializedName("content_security_policy_granted")
   ContentSecurityPolicyGranted contentSecurityPolicyGranted;
 
@@ -108,10 +115,6 @@ public class Install extends StripeObject implements HasId {
   @SerializedName("permissions_pending")
   List<String> permissionsPending;
 
-  /** The status of the app install. */
-  @SerializedName("state")
-  String state;
-
   /**
    * The status of the app install.
    *
@@ -122,21 +125,295 @@ public class Install extends StripeObject implements HasId {
   String status;
 
   /**
-   * For more details about AuthorizedContentSecurityPolicy, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * Creates an app install. An account installs its own private app with its own key; public and
+   * testing installs are made from the Dashboard. An app developer acting on a connected account
+   * through {@code Stripe-Account} installs or reinstalls its app there, and an embedding platform
+   * can do the same once the app’s developer approves its request to embed the app. For a private
+   * app, creating an install installs the newest completed upload; when that version is already
+   * installed with nothing pending, the existing install is returned.
    */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class AuthorizedContentSecurityPolicy extends StripeObject {
-    @SerializedName("connect_src")
-    List<String> connectSrc;
+  public static Install create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
 
-    @SerializedName("image_src")
-    List<String> imageSrc;
+  /**
+   * Creates an app install. An account installs its own private app with its own key; public and
+   * testing installs are made from the Dashboard. An app developer acting on a connected account
+   * through {@code Stripe-Account} installs or reinstalls its app there, and an embedding platform
+   * can do the same once the app’s developer approves its request to embed the app. For a private
+   * app, creating an install installs the newest completed upload; when that version is already
+   * installed with nothing pending, the existing install is returned.
+   */
+  public static Install create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/apps/installs";
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getGlobalResponseGetter().request(request, Install.class);
+  }
 
-    @SerializedName("purpose")
-    String purpose;
+  /**
+   * Creates an app install. An account installs its own private app with its own key; public and
+   * testing installs are made from the Dashboard. An app developer acting on a connected account
+   * through {@code Stripe-Account} installs or reinstalls its app there, and an embedding platform
+   * can do the same once the app’s developer approves its request to embed the app. For a private
+   * app, creating an install installs the newest completed upload; when that version is already
+   * installed with nothing pending, the existing install is returned.
+   */
+  public static Install create(InstallCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates an app install. An account installs its own private app with its own key; public and
+   * testing installs are made from the Dashboard. An app developer acting on a connected account
+   * through {@code Stripe-Account} installs or reinstalls its app there, and an embedding platform
+   * can do the same once the app’s developer approves its request to embed the app. For a private
+   * app, creating an install installs the newest completed upload; when that version is already
+   * installed with nothing pending, the existing install is returned.
+   */
+  public static Install create(InstallCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/apps/installs";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, Install.class);
+  }
+
+  /**
+   * Returns a list of app installs. An app developer filtering by its own app with its own key sees
+   * that app’s installs across the accounts that installed it. An app developer acting on a
+   * connected account through {@code Stripe-Account} and filtering by its app sees that account’s
+   * installs of the app, and an embedding platform acting on a connected account sees only the
+   * installs it created there. Other callers see the installs on their own account. A live key
+   * lists live installs and a test key lists test installs; the key of an app’s managed sandbox
+   * filtering by {@code app} lists that app’s installs across every sandbox.
+   */
+  public static InstallCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of app installs. An app developer filtering by its own app with its own key sees
+   * that app’s installs across the accounts that installed it. An app developer acting on a
+   * connected account through {@code Stripe-Account} and filtering by its app sees that account’s
+   * installs of the app, and an embedding platform acting on a connected account sees only the
+   * installs it created there. Other callers see the installs on their own account. A live key
+   * lists live installs and a test key lists test installs; the key of an app’s managed sandbox
+   * filtering by {@code app} lists that app’s installs across every sandbox.
+   */
+  public static InstallCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/apps/installs";
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, InstallCollection.class);
+  }
+
+  /**
+   * Returns a list of app installs. An app developer filtering by its own app with its own key sees
+   * that app’s installs across the accounts that installed it. An app developer acting on a
+   * connected account through {@code Stripe-Account} and filtering by its app sees that account’s
+   * installs of the app, and an embedding platform acting on a connected account sees only the
+   * installs it created there. Other callers see the installs on their own account. A live key
+   * lists live installs and a test key lists test installs; the key of an app’s managed sandbox
+   * filtering by {@code app} lists that app’s installs across every sandbox.
+   */
+  public static InstallCollection list(InstallListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of app installs. An app developer filtering by its own app with its own key sees
+   * that app’s installs across the accounts that installed it. An app developer acting on a
+   * connected account through {@code Stripe-Account} and filtering by its app sees that account’s
+   * installs of the app, and an embedding platform acting on a connected account sees only the
+   * installs it created there. Other callers see the installs on their own account. A live key
+   * lists live installs and a test key lists test installs; the key of an app’s managed sandbox
+   * filtering by {@code app} lists that app’s installs across every sandbox.
+   */
+  public static InstallCollection list(InstallListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/apps/installs";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, InstallCollection.class);
+  }
+
+  /**
+   * Retrieves an app install. The installing account, the app’s developer (with the keys of the
+   * account that owns the app or of the app’s managed sandbox), and the embedding platform that
+   * created the install can retrieve it.
+   */
+  public static Install retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieves an app install. The installing account, the app’s developer (with the keys of the
+   * account that owns the app or of the app’s managed sandbox), and the embedding platform that
+   * created the install can retrieve it.
+   */
+  public static Install retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /**
+   * Retrieves an app install. The installing account, the app’s developer (with the keys of the
+   * account that owns the app or of the app’s managed sandbox), and the embedding platform that
+   * created the install can retrieve it.
+   */
+  public static Install retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/apps/installs/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, Install.class);
+  }
+
+  /**
+   * Retrieves an app install. The installing account, the app’s developer (with the keys of the
+   * account that owns the app or of the app’s managed sandbox), and the embedding platform that
+   * created the install can retrieve it.
+   */
+  public static Install retrieve(String id, InstallRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v1/apps/installs/%s", ApiResource.urlEncodeId(id));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, Install.class);
+  }
+
+  /** Uninstalls an app from the account that installed it. */
+  public Install uninstall() throws StripeException {
+    return uninstall((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Uninstalls an app from the account that installed it. */
+  public Install uninstall(RequestOptions options) throws StripeException {
+    return uninstall((Map<String, Object>) null, options);
+  }
+
+  /** Uninstalls an app from the account that installed it. */
+  public Install uninstall(Map<String, Object> params) throws StripeException {
+    return uninstall(params, (RequestOptions) null);
+  }
+
+  /** Uninstalls an app from the account that installed it. */
+  public Install uninstall(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/apps/installs/%s/uninstall", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Install.class);
+  }
+
+  /** Uninstalls an app from the account that installed it. */
+  public Install uninstall(InstallUninstallParams params) throws StripeException {
+    return uninstall(params, (RequestOptions) null);
+  }
+
+  /** Uninstalls an app from the account that installed it. */
+  public Install uninstall(InstallUninstallParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/apps/installs/%s/uninstall", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Install.class);
+  }
+
+  /**
+   * Reauthorizes an app install. The installer grants the permissions, content security policy
+   * entries, and endpoints that the version being installed requests. An account reauthorizes its
+   * own installs on any channel with its own key, which grants all of that access, so only give
+   * {@code app_install_write} to keys that may approve an app’s access. App developers and
+   * embedding platforms reauthorize installs on connected accounts through {@code Stripe-Account}.
+   * An app developer can’t grant new access. An embedding platform can grant new access only once
+   * the app’s developer approves its request to embed the app. For private apps, the version being
+   * installed is the newest completed upload.
+   */
+  public Install update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Reauthorizes an app install. The installer grants the permissions, content security policy
+   * entries, and endpoints that the version being installed requests. An account reauthorizes its
+   * own installs on any channel with its own key, which grants all of that access, so only give
+   * {@code app_install_write} to keys that may approve an app’s access. App developers and
+   * embedding platforms reauthorize installs on connected accounts through {@code Stripe-Account}.
+   * An app developer can’t grant new access. An embedding platform can grant new access only once
+   * the app’s developer approves its request to embed the app. For private apps, the version being
+   * installed is the newest completed upload.
+   */
+  public Install update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/apps/installs/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Install.class);
+  }
+
+  /**
+   * Reauthorizes an app install. The installer grants the permissions, content security policy
+   * entries, and endpoints that the version being installed requests. An account reauthorizes its
+   * own installs on any channel with its own key, which grants all of that access, so only give
+   * {@code app_install_write} to keys that may approve an app’s access. App developers and
+   * embedding platforms reauthorize installs on connected accounts through {@code Stripe-Account}.
+   * An app developer can’t grant new access. An embedding platform can grant new access only once
+   * the app’s developer approves its request to embed the app. For private apps, the version being
+   * installed is the newest completed upload.
+   */
+  public Install update(InstallUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Reauthorizes an app install. The installer grants the permissions, content security policy
+   * entries, and endpoints that the version being installed requests. An account reauthorizes its
+   * own installs on any channel with its own key, which grants all of that access, so only give
+   * {@code app_install_write} to keys that may approve an app’s access. App developers and
+   * embedding platforms reauthorize installs on connected accounts through {@code Stripe-Account}.
+   * An app developer can’t grant new access. An embedding platform can grant new access only once
+   * the app’s developer approves its request to embed the app. For private apps, the version being
+   * installed is the newest completed upload.
+   */
+  public Install update(InstallUpdateParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v1/apps/installs/%s", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Install.class);
   }
 
   /**
@@ -171,5 +448,12 @@ public class Install extends StripeObject implements HasId {
     /** The URLs that the app can load images from. */
     @SerializedName("image_src")
     List<String> imageSrc;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(contentSecurityPolicyGranted, responseGetter);
+    trySetResponseGetter(contentSecurityPolicyPending, responseGetter);
   }
 }

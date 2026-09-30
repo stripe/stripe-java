@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.v2.testhelpers;
+package com.stripe.param.v2.moneymanagement.testhelpers;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -135,6 +135,9 @@ public class FinancialAddressCreditParams extends ApiRequestParams {
 
     @SerializedName("sepa_credit_transfer")
     SEPA_CREDIT_TRANSFER("sepa_credit_transfer"),
+
+    @SerializedName("swift")
+    SWIFT("swift"),
 
     @SerializedName("wire")
     WIRE("wire");

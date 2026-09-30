@@ -1898,6 +1898,17 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("capture_before")
       Long captureBefore;
 
+      /**
+       * If present, indicates that the Card Account Updater changed the card's credentials during
+       * this authorization. {@code number_changed} means the card number was updated (the
+       * expiration date may have changed as well); {@code expiry_changed} means only the expiration
+       * date was updated.
+       *
+       * <p>One of {@code expiry_changed}, or {@code number_changed}.
+       */
+      @SerializedName("card_account_update")
+      String cardAccountUpdate;
+
       /** Check results by Card networks on Card address and CVC at time of payment. */
       @SerializedName("checks")
       Checks checks;
