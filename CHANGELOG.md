@@ -7,6 +7,74 @@ Instead, edit a corresponding `.change.md` file and run `hark build`.
 
 > This changelog only covers the **public preview** releases. Each release builds on the most recent GA release; see those notes in [the GA changelog](https://github.com/stripe/stripe-java/blob/master/CHANGELOG.md).
 
+## <a id="34-1-0-beta-1"></a>34.1.0-beta.1 - 2026-09-30
+This release changes the pinned API version to `2026-09-30.preview`.
+
+* ⚠️ [#2279](https://github.com/stripe/stripe-java/pull/2279) Update generated code
+  * Add support for new resources `radar.BillingEvaluation`, `v2.moneymanagement.FinancialAddressCreditSimulation`, and `v2.moneymanagement.FinancialAddressGeneratedMicrodeposits`
+  * ⚠️ Remove support for resources `v2.FinancialAddressCreditSimulation` and `v2.FinancialAddressGeneratedMicrodeposits`
+  * Add support for `create` method on resource `radar.BillingEvaluation`
+  * Add support for `list` method on resource `reserve.Plan`
+  * Add support for `credit` method on resource `v2.moneymanagement.FinancialAddressCreditSimulation`
+  * Add support for `generate_microdeposits` method on resource `v2.moneymanagement.FinancialAddressGeneratedMicrodeposits`
+  * ⚠️ Remove support for `credit` method on resource `v2.FinancialAddressCreditSimulation`
+  * ⚠️ Remove support for `generate_microdeposits` method on resource `v2.FinancialAddressGeneratedMicrodeposits`
+  * Add support for `afterExpiration` on `billingportal.SessionCreateParams` and `billingportal.Session`
+  * Add support for `setupCredentialUsage` on `Charge.payment_method_details.card`, `PaymentIntent.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card`, `PaymentIntentUpdateParams.payment_method_options.card`, `SetupIntent.payment_method_options.card`, `SetupIntentConfirmParams.payment_method_options.card`, `SetupIntentCreateParams.payment_method_options.card`, and `SetupIntentUpdateParams.payment_method_options.card`
+  * Add support for `storedCredentialUsage` on `Charge.payment_method_details.card`, `PaymentAttemptRecord.payment_method_details.card`, `PaymentIntent.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card`, `PaymentIntentUpdateParams.payment_method_options.card`, and `PaymentRecord.payment_method_details.card`
+  * Add support for `expiresAt` on `Subscription.payment_settings.payment_method_options.blik.mandate_options`, `SubscriptionCreateParams.payment_settings.payment_method_options.blik.mandate_options`, `SubscriptionUpdateParams.payment_settings.payment_method_options.blik.mandate_options`, and `checkout.SessionCreateParams.payment_method_options.blik.mandate_options`
+  * ⚠️ Remove support for `expiresAfter` on `Subscription.payment_settings.payment_method_options.blik.mandate_options`, `SubscriptionCreateParams.payment_settings.payment_method_options.blik.mandate_options`, `SubscriptionUpdateParams.payment_settings.payment_method_options.blik.mandate_options`, and `checkout.SessionCreateParams.payment_method_options.blik.mandate_options`
+  * ⚠️ Remove support for value `on_session` from enum `checkout.SessionCreateParams.payment_method_options.blik.setupFutureUsage`
+  * Add support for `paymentIntentData` on `checkout.SessionUpdateParams`
+  * Add support for `appeal` on `Dispute.evidence` and `DisputeUpdateParams.evidence`
+  * Add support for `livemode` on `FxQuote`
+  * ⚠️ Remove support for `captureMethod` on `PaymentIntentConfirmParams.payment_method_options.paypay`, `PaymentIntentCreateParams.payment_method_options.paypay`, and `PaymentIntentUpdateParams.payment_method_options.paypay`
+  * Add support for `active` on `productcatalog.TrialOfferCreateParams`, `productcatalog.TrialOfferListParams`, and `productcatalog.TrialOffer`
+  * Add support for `nickname` on `productcatalog.TrialOfferCreateParams` and `productcatalog.TrialOffer`
+  * ⚠️ Remove support for `name` on `productcatalog.TrialOfferCreateParams` and `productcatalog.TrialOffer`
+  * Add support for `statusDetails` on `QuotePreviewInvoice`
+  * Add support for `companyDetails` and `reference` on `QuotePreviewInvoice.payment_settings.payment_method_options.billie`
+  * Add support for `pauseSchedules` on `QuotePreviewSubscriptionSchedule`
+  * Add support for `destination` on `reserve.Hold`, `reserve.Plan`, and `reserve.Release`
+  * Add support for `manualRelease` on `reserve.Plan`
+  * Add support for new value `igic` on enum `tax.RegistrationCreateParams.country_options.es.type`
+  * ⚠️ Remove support for `configurations` on `v2.core.AccountLink.use_case.account_onboarding`, `v2.core.AccountLink.use_case.account_update`, `v2.core.AccountLinkCreateParams.use_case.account_onboarding`, and `v2.core.AccountLinkCreateParams.use_case.account_update`
+  * Add support for `relatedObject` and `request` on `v2.iam.ActivityLog`
+  * Add support for `accountSecurity`, `authentication`, `scim`, `sso`, and `userProfile` on `v2.iam.ActivityLog.details`
+  * Add support for `depositInsuranceEligibility` on `v2.moneymanagement.FinancialAccount.storage` and `v2.moneymanagement.FinancialAccountCreateParams.storage`
+  * Add support for `bankAccount` on `v2.moneymanagement.FinancialAddressCreateParams` and `v2.moneymanagement.FinancialAddress`
+  * Add support for `type` on `v2.moneymanagement.FinancialAddress`
+  * ⚠️ Remove support for `credentials` and `currency` on `v2.moneymanagement.FinancialAddress`
+  * ⚠️ Remove support for `level` on `v2.moneymanagement.InboundTransfer.transfer_history[]`
+  * Add support for `networkFeeDetails` on `v2.moneymanagement.OutboundPaymentQuote.estimated_fees[]`
+  * Add support for `archived` on `v2.moneymanagement.PayoutMethod`
+  * ⚠️ Remove support for `archived` on `v2.moneymanagement.PayoutMethod.bank_account` and `v2.moneymanagement.PayoutMethod.card`
+  * Add support for `amountReceived` on `v2.moneymanagement.ReceivedCredit`
+  * Add support for `originatingBankAccount` on `v2.moneymanagement.ReceivedCredit.bank_transfer`
+  * ⚠️ Remove support for `originType` on `v2.moneymanagement.ReceivedCredit.bank_transfer`
+  * Add support for `identity` on `v2.signals.AccountActivity.account_details.data`, `v2.signals.AccountActivityCreateParams.account_details.data`, `v2.signals.AccountEvaluation.account_details.data`, and `v2.signals.AccountEvaluationCreateParams.account_details.data`
+  * Add support for `fraudulentWebsite` on `v2.signals.AccountEvaluation.evaluated_signals` and `v2.signals.AccountSignal`
+  * Add support for `fraudulentMerchant` on `v2.signals.AccountSignal`
+  * Add support for new values `fraudulent_merchant` and `fraudulent_website` on enum `v2.signals.AccountSignalListParams.type`
+  * Add support for new value `fraudulent_website` on enum `v2.signals.AccountEvaluationCreateParams.requestedSignals`
+  * ⚠️ Remove support for `createdGt`, `createdGte`, `createdLt`, and `createdLte` on `v2.moneymanagement.AdjustmentListParams`, `v2.moneymanagement.InboundTransferListParams`, `v2.moneymanagement.ReceivedCreditListParams`, `v2.moneymanagement.TransactionEntryListParams`, and `v2.moneymanagement.TransactionListParams`
+  * ⚠️ Change type of `v2.moneymanagement.AdjustmentListParams.created`, `v2.moneymanagement.InboundTransferListParams.created`, `v2.moneymanagement.ReceivedCreditListParams.created`, `v2.moneymanagement.TransactionEntryListParams.created`, and `v2.moneymanagement.TransactionListParams.created` from `DateTime` to `an object`
+  * Add support for new value `ineligible` on enum `v2.moneymanagement.PayoutMethodListParams.usage_status.payments`
+  * Add support for new value `ineligible` on enum `v2.moneymanagement.PayoutMethodListParams.usage_status.transfers`
+  * ⚠️ Remove support for `include` on `v2.moneymanagement.FinancialAddressListParams` and `v2.moneymanagement.FinancialAddressRetrieveParams`
+  * Add support for `settlementCurrency` on `v2.moneymanagement.FinancialAddressCreateParams`
+  * ⚠️ Add support for new value `bank_account` on enum `v2.moneymanagement.FinancialAddressCreateParams.type`
+  * ⚠️ Remove support for values `gb_bank_account` and `us_bank_account` from enum `v2.moneymanagement.FinancialAddressCreateParams.type`
+  * Add support for `include` on `v2.moneymanagement.FinancialAccountListParams` and `v2.moneymanagement.FinancialAccountRetrieveParams`
+  * Add support for new values `account_security`, `authentication`, `issuing`, `payout`, `scim`, `sso`, and `user_profile` on enum `v2.iam.ActivityLogListParams.actionGroups`
+  * Add support for new values `anomaly_detection_settings_updated`, `issuing_activated`, `issuing_balance_transfer_created`, `issuing_card_created`, `issuing_card_sensitive_details_viewed`, `issuing_card_updated`, `issuing_cardholder_created`, `issuing_cardholder_updated`, `issuing_dispute_created`, `issuing_dispute_submitted`, `issuing_dispute_updated`, `manual_payouts_disabled`, `manual_payouts_enabled`, `payout_destination_added`, `payout_destination_removed`, `payout_destination_updated`, `payout_schedule_edits_disabled`, `payout_schedule_edits_enabled`, `scim_group_deleted`, `scim_group_member_added`, `scim_group_member_removed`, `scim_group_roles_updated`, `scim_group_updated`, `sso_domain_verified`, `sso_settings_created`, `sso_settings_deleted`, `sso_settings_updated`, `two_step_authentication_mandate_disabled`, `two_step_authentication_mandate_enabled`, `user_auth_challenge_failed`, `user_email_changed`, `user_email_verified`, `user_express_phone_number_changed`, `user_google_account_connected`, `user_google_account_disconnected`, `user_passkey_added`, `user_passkey_removed`, `user_passkey_updated`, `user_passkey_upgraded`, `user_password_changed`, `user_password_initialized`, `user_password_reset_failed`, `user_password_reset_requested`, `user_password_reset_succeeded`, `user_two_step_authentication_backup_code_used`, `user_two_step_authentication_method_added`, `user_two_step_authentication_method_removed`, `user_two_step_authentication_method_reset`, `user_two_step_authentication_method_updated`, and `user_two_step_authentication_reset_requested` on enum `v2.iam.ActivityLogListParams.actions`
+  * Add support for `treasuryTransaction` on `EventsV2MoneyManagementTransactionUpdatedEvent`
+  * Add support for event notifications `V2SignalsAccountSignalFraudulentMerchantReadyEvent` and `V2SignalsAccountSignalFraudulentWebsiteReadyEvent` with related object `v2.signals.AccountSignal`
+  * Add support for error types `InvalidVaultedCredentialException`, `VerificationAttemptFailedException`, `VerificationExpiredException`, and `VerificationNotInitiatedException`
+  * ⚠️ Remove support for error type `ControlledByDashboardException`
+* [#2308](https://github.com/stripe/stripe-java/pull/2308) Update generated code
+  * Release specs are identical.
+
 ## <a id="33-5-0-beta-1"></a>33.5.0-beta.1 - 2026-08-26
 This release changes the pinned API version to `2026-08-26.preview`.
 
@@ -492,6 +560,7 @@ No changes in this release
 This release changes the pinned API version to `2025-05-28.preview`.
 
 * [#1995](https://github.com/stripe/stripe-java/pull/1995) Update generated code for beta
+
   ### Breaking changes
   * Remove support for deprecated previews
     * Remove support for resources `billing.MeterErrorReport`, `giftcards.Card`, `giftcards.Transaction`, and `privacy.RedactionJobRootObjects`
@@ -531,6 +600,7 @@ This release changes the pinned API version to `2025-05-28.preview`.
 This release changes the pinned API version to `2025-04-30.preview`.
 
 * [#1988](https://github.com/stripe/stripe-java/pull/1988) Update generated code for beta
+
   This release changes the pinned API version to `2025-04-30.preview`.
 
   * Add support for `billingMode` on `InvoiceCreatePreviewParams.schedule_details`, `InvoiceCreatePreviewParams.subscription_details`, `Quote.subscription_data`, `QuoteCreateParams.subscription_data`, `QuotePreviewSubscriptionSchedule`, `SubscriptionCreateParams`, `SubscriptionScheduleCreateParams`, `SubscriptionSchedule`, `Subscription`, and `checkout.SessionCreateParams.subscription_data`
@@ -572,6 +642,7 @@ This release changes the pinned API version to `2025-04-30.preview`.
 * [#1974](https://github.com/stripe/stripe-java/pull/1974) Handle external_account field
   - Changes `externalAccount` field in `ExternalAccountCreateParams` from a `String` to a union type.
 * [#1980](https://github.com/stripe/stripe-java/pull/1980) Update generated code for beta
+
   ### Breaking changes
   * Remove support for values `bank_accounts.local_uk`, `bank_accounts.wire_uk`, `cards_uk`, and `crypto_wallets_v2` from enum `EventsV2CoreAccountIncludingConfigurationRecipientCapabilityStatusUpdatedEvent.updatedCapability`
 
@@ -928,6 +999,7 @@ This release changes the pinned API version to `2024-09-30.acacia`.
 
 ## <a id="26-6-0-beta-1"></a>26.6.0-beta.1 - 2024-07-25
 * [#1834](https://github.com/stripe/stripe-java/pull/1834) Update generated code for beta
+
   ⚠️ `InvoicePayment.charge` and `InvoicePayment.paymentIntent` were removed in favor of `InvoicePayment.Payment`, which encapsulates both. The `Charge` and `PaymentIntent` fields are now found at `InvoicePayment.Payment.Charge` `InvoicePaymentPayment.paymentIntent`
 
   * Add support for new resources `Billing.AlertTriggered`, `Billing.Alert`, and `Tax.Association`
@@ -1098,6 +1170,7 @@ This release changes the pinned API version to `2024-04-10`.
 * [#1727](https://github.com/stripe/stripe-java/pull/1727) Trim event API version when matching
 * [#1728](https://github.com/stripe/stripe-java/pull/1728) Beta: Stripe.rawRequest -> StripeClient.rawRequest
 * [#1734](https://github.com/stripe/stripe-java/pull/1734) Update generated code for beta
+
   Release specs are identical.
 
 ## <a id="24-12-0-beta-1"></a>24.12.0-beta.1 - 2024-01-12
@@ -1209,6 +1282,7 @@ This release changes the pinned API version to `2023-10-16`.
 
 ## <a id="23-9-0-beta-1"></a>23.9.0-beta.1 - 2023-10-05
 * [#1666](https://github.com/stripe/stripe-java/pull/1666) Update generated code for beta
+
   Release specs are identical.
 * [#1661](https://github.com/stripe/stripe-java/pull/1661) Update generated code for beta
   * Add support for `mark_draft` and `mark_stale` methods on resource `Quote`
@@ -1254,6 +1328,7 @@ This release changes the pinned API version to `2023-10-16`.
 
 ## <a id="23-5-0-beta-1"></a>23.5.0-beta.1 - 2023-09-07
 * [#1648](https://github.com/stripe/stripe-java/pull/1648) Update generated code for beta
+
   Release specs are identical.
 * [#1644](https://github.com/stripe/stripe-java/pull/1644) Update generated code for beta
   * Remove support for `submit_card` test helper method on resource `Issuing.Card`

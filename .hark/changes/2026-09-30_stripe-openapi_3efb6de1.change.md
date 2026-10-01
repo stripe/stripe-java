@@ -3,6 +3,7 @@ title: Update generated code
 pr_url: https://github.com/stripe/stripe-java/pull/2279
 semver_level: major
 is_stripe_api_change: true
+released_in_version: 34.1.0-beta.1
 ---
 
 * Add support for new resources `radar.BillingEvaluation`, `v2.moneymanagement.FinancialAddressCreditSimulation`, and `v2.moneymanagement.FinancialAddressGeneratedMicrodeposits`
