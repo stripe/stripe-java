@@ -3,6 +3,7 @@ title: Update generated code
 pr_url: https://github.com/stripe/stripe-java/pull/2292
 semver_level: major
 is_stripe_api_change: true
+released_in_version: 34.0.0
 ---
 
 * Add support for new resources `apps.Install`, `productcatalog.TrialOffer`, `tax.Location`, and `threedsecure.Authentication`
