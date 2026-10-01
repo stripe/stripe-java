@@ -15,6 +15,7 @@ com.stripe.model.forwarding
 com.stripe.model.identity
 com.stripe.model.issuing
 com.stripe.model.oauth
+com.stripe.model.productcatalog
 com.stripe.model.radar
 com.stripe.model.reporting
 com.stripe.model.reserve
@@ -22,6 +23,7 @@ com.stripe.model.sigma
 com.stripe.model.tax
 com.stripe.model.terminal
 com.stripe.model.testhelpers
+com.stripe.model.threedsecure
 com.stripe.model.treasury
 com.stripe.model.v2
 com.stripe.model.v2.billing
@@ -40,12 +42,14 @@ com.stripe.param.financialconnections
 com.stripe.param.forwarding
 com.stripe.param.identity
 com.stripe.param.issuing
+com.stripe.param.productcatalog
 com.stripe.param.radar
 com.stripe.param.reporting
 com.stripe.param.sigma
 com.stripe.param.tax
 com.stripe.param.terminal
 com.stripe.param.testhelpers
+com.stripe.param.threedsecure
 com.stripe.param.treasury
 com.stripe.param.v2.billing
 com.stripe.param.v2.commerce.productcatalog
@@ -62,6 +66,7 @@ com.stripe.service.financialconnections
 com.stripe.service.forwarding
 com.stripe.service.identity
 com.stripe.service.issuing
+com.stripe.service.productcatalog
 com.stripe.service.radar
 com.stripe.service.reporting
 com.stripe.service.sigma
@@ -71,6 +76,7 @@ com.stripe.service.testhelpers
 com.stripe.service.testhelpers.issuing
 com.stripe.service.testhelpers.terminal
 com.stripe.service.testhelpers.treasury
+com.stripe.service.threedsecure
 com.stripe.service.treasury
 com.stripe.service.v2
 com.stripe.service.v2.billing
