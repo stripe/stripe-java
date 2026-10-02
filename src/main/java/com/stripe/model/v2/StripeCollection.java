@@ -60,6 +60,14 @@ public class StripeCollection<T extends StripeObjectInterface> extends StripeObj
 
   @Getter @Setter private transient RequestOptions requestOptions;
 
+  protected ApiResource.RequestMethod paginationMethod() {
+    return ApiResource.RequestMethod.GET;
+  }
+
+  protected HashMap<String, Object> paginationParams() {
+    return new HashMap<>();
+  }
+
   private static class Page<T> {
     List<T> data;
     String nextPageUrl;
@@ -94,9 +102,9 @@ public class StripeCollection<T extends StripeObjectInterface> extends StripeObj
           StripeCollection.this.responseGetter.request(
               new ApiRequest(
                   BaseAddress.API,
-                  ApiResource.RequestMethod.GET,
+                  StripeCollection.this.paginationMethod(),
                   nextPageUrl,
-                  new HashMap<>(),
+                  StripeCollection.this.paginationParams(),
                   this.options),
               StripeCollection.this.pageTypeToken);
       return new Page<T>(response.getData(), response.getNextPageUrl());
@@ -119,7 +127,7 @@ public class StripeCollection<T extends StripeObjectInterface> extends StripeObj
 
       @Override
       public T next() {
-        if (!currentDataIterator.hasNext() && this.nextPageUrl != null) {
+        while (!currentDataIterator.hasNext() && this.nextPageUrl != null) {
           try {
             Page<T> p = PagingIterable.this.getPage(this.nextPageUrl);
             this.currentDataIterator = p.data.iterator();

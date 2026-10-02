@@ -183,6 +183,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       ((com.stripe.model.v2.StripeCollection<?>) resource)
           .setRequestOptions(apiRequest.getOptions());
     }
+    if (resource instanceof com.stripe.model.v2.StripeSearchResult<?>) {
+      ((com.stripe.model.v2.StripeSearchResult<?>) resource)
+          .setRequestParams(
+              apiRequest.getParams() == null
+                  ? new java.util.HashMap<>()
+                  : new java.util.HashMap<>(apiRequest.getParams()));
+    }
 
     resource.setLastResponse(response);
 
