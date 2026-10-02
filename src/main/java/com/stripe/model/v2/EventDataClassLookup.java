@@ -240,6 +240,9 @@ public final class EventDataClassLookup {
         "v2.money_management.financial_address_generated_microdeposits",
         com.stripe.model.v2.moneymanagement.FinancialAddressGeneratedMicrodeposits.class);
     classLookup.put(
+        "v2.money_management.funding_session",
+        com.stripe.model.v2.moneymanagement.FundingSession.class);
+    classLookup.put(
         "v2.money_management.inbound_transfer",
         com.stripe.model.v2.moneymanagement.InboundTransfer.class);
     classLookup.put(

@@ -17242,8 +17242,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
           /**
            * A <a href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
-           * representing the local jurisdiction. Supported FIPS codes are: {@code 003} (Allegheny
-           * County) and {@code 60000} (Philadelphia City).
+           * representing the local jurisdiction.
            */
           @SerializedName("jurisdiction")
           String jurisdiction;
@@ -17310,8 +17309,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
             /**
              * A <a href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS
-             * code</a> representing the local jurisdiction. Supported FIPS codes are: {@code 003}
-             * (Allegheny County) and {@code 60000} (Philadelphia City).
+             * code</a> representing the local jurisdiction.
              */
             public Builder setJurisdiction(String jurisdiction) {
               this.jurisdiction = jurisdiction;
