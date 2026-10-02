@@ -499,6 +499,58 @@ public class StripeEventNotificationHandlerTest {
   }
 
   @Test
+  public void testConstructor_rejectsWhitespaceOnlySecrets() {
+    String[] blankSecrets = {" ", "\t", "\r", "\n", "\f", "\u000B", " \t\r\n\f\u000B"};
+
+    for (String blankSecret : blankSecrets) {
+      IllegalArgumentException exception =
+          assertThrows(
+              IllegalArgumentException.class,
+              () ->
+                  new StripeEventNotificationHandler(blankSecret, stripeClient, fallbackCallback));
+      assertEquals("webhookSecret must be a non-empty string", exception.getMessage());
+    }
+  }
+
+  @Test
+  public void testConstructor_preservesSecretWithSurroundingWhitespace()
+      throws NoSuchAlgorithmException, InvalidKeyException, SignatureVerificationException {
+    String secretWithWhitespace = " \twhsec_test_secret\r\n";
+    StripeEventNotificationHandler handler =
+        new StripeEventNotificationHandler(secretWithWhitespace, stripeClient, fallbackCallback);
+    Map<String, Object> options = new HashMap<>();
+    options.put("payload", v1BillingMeterPayload);
+    options.put("secret", secretWithWhitespace);
+
+    handler.handle(v1BillingMeterPayload, generateSigHeader(options));
+
+    verify(fallbackCallback, times(1))
+        .process(
+            org.mockito.ArgumentMatchers.any(),
+            org.mockito.ArgumentMatchers.any(),
+            org.mockito.ArgumentMatchers.any());
+  }
+
+  @Test
+  public void testConstructor_acceptsNonBreakingSpaceOnlySecret()
+      throws NoSuchAlgorithmException, InvalidKeyException, SignatureVerificationException {
+    String nonBreakingSpaceSecret = "\u00A0";
+    StripeEventNotificationHandler handler =
+        new StripeEventNotificationHandler(nonBreakingSpaceSecret, stripeClient, fallbackCallback);
+    Map<String, Object> options = new HashMap<>();
+    options.put("payload", v1BillingMeterPayload);
+    options.put("secret", nonBreakingSpaceSecret);
+
+    handler.handle(v1BillingMeterPayload, generateSigHeader(options));
+
+    verify(fallbackCallback, times(1))
+        .process(
+            org.mockito.ArgumentMatchers.any(),
+            org.mockito.ArgumentMatchers.any(),
+            org.mockito.ArgumentMatchers.any());
+  }
+
+  @Test
   public void testWithoutVerification_staticFactory() {
     // Test that StripeEventNotificationHandler.withoutVerification(...) returns the correct type.
     // Declared as the concrete type: the handlers are siblings, so this is deliberately NOT
