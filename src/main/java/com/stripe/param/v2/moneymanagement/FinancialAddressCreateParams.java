@@ -11,11 +11,14 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class FinancialAddressCreateParams extends ApiRequestParams {
+  /** The ID of the Account that owns this FinancialAddress. */
+  @SerializedName("account")
+  String account;
+
   /** Properties for creating a bank account FinancialAddress. */
   @SerializedName("bank_account")
   BankAccount bankAccount;
 
-  /** Properties for creating a crypto wallet FinancialAddress. */
   @SerializedName("crypto_wallet")
   CryptoWallet cryptoWallet;
 
@@ -35,7 +38,6 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   @SerializedName("financial_account")
   String financialAccount;
 
-  /** Open Enum. The currency the FinancialAddress settles into the FinancialAccount. */
   @SerializedName("settlement_currency")
   String settlementCurrency;
 
@@ -47,12 +49,14 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   Type type;
 
   private FinancialAddressCreateParams(
+      String account,
       BankAccount bankAccount,
       CryptoWallet cryptoWallet,
       Map<String, Object> extraParams,
       String financialAccount,
       String settlementCurrency,
       Type type) {
+    this.account = account;
     this.bankAccount = bankAccount;
     this.cryptoWallet = cryptoWallet;
     this.extraParams = extraParams;
@@ -66,6 +70,8 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String account;
+
     private BankAccount bankAccount;
 
     private CryptoWallet cryptoWallet;
@@ -81,6 +87,7 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAddressCreateParams build() {
       return new FinancialAddressCreateParams(
+          this.account,
           this.bankAccount,
           this.cryptoWallet,
           this.extraParams,
@@ -89,13 +96,18 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
           this.type);
     }
 
+    /** The ID of the Account that owns this FinancialAddress. */
+    public Builder setAccount(String account) {
+      this.account = account;
+      return this;
+    }
+
     /** Properties for creating a bank account FinancialAddress. */
     public Builder setBankAccount(FinancialAddressCreateParams.BankAccount bankAccount) {
       this.bankAccount = bankAccount;
       return this;
     }
 
-    /** Properties for creating a crypto wallet FinancialAddress. */
     public Builder setCryptoWallet(FinancialAddressCreateParams.CryptoWallet cryptoWallet) {
       this.cryptoWallet = cryptoWallet;
       return this;
@@ -136,7 +148,6 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Open Enum. The currency the FinancialAddress settles into the FinancialAccount. */
     public Builder setSettlementCurrency(String settlementCurrency) {
       this.settlementCurrency = settlementCurrency;
       return this;
@@ -236,8 +247,14 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
     }
 
     public enum Currency implements ApiRequestParams.EnumParam {
+      @SerializedName("brl")
+      BRL("brl"),
+
       @SerializedName("cad")
       CAD("cad"),
+
+      @SerializedName("cop")
+      COP("cop"),
 
       @SerializedName("eur")
       EUR("eur"),
@@ -338,6 +355,9 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
 
       @SerializedName("base")
       BASE("base"),
+
+      @SerializedName("bitcoin")
+      BITCOIN("bitcoin"),
 
       @SerializedName("ethereum")
       ETHEREUM("ethereum"),

@@ -366,7 +366,8 @@ public class CustomerCashBalanceTransaction extends StripeObject
         /**
          * The banking network used for this funding.
          *
-         * <p>One of {@code ach}, {@code domestic_wire_us}, or {@code swift}.
+         * <p>One of {@code ach}, {@code domestic_wire_us}, {@code fednow}, {@code rtp}, or {@code
+         * swift}.
          */
         @SerializedName("network")
         String network;

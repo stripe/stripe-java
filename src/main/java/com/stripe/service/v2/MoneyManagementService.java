@@ -36,6 +36,11 @@ public final class MoneyManagementService extends ApiService {
         this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.moneymanagement.FundingSessionService fundingSessions() {
+    return new com.stripe.service.v2.moneymanagement.FundingSessionService(
+        this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.moneymanagement.InboundTransferService inboundTransfers() {
     return new com.stripe.service.v2.moneymanagement.InboundTransferService(
         this.getResponseGetter());

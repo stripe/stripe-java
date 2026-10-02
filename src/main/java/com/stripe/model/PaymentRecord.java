@@ -2398,8 +2398,8 @@ public class PaymentRecord extends ApiResource implements HasId {
       /**
        * The token currency that the transaction was sent with.
        *
-       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, {@code usdsui},
-       * or {@code usdt}.
+       * <p>One of {@code ousd}, {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp},
+       * {@code usdsui}, or {@code usdt}.
        */
       @SerializedName("token_currency")
       String tokenCurrency;

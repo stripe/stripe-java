@@ -30608,6 +30608,48 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2MoneyManagementFundingSessionPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_sessions",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.FundingSession.class,
+        "{\"object\":\"v2.money_management.funding_session\",\"account\":\"account\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"financial_address_options\":{},\"financial_address_types\":[\"bank_account\"],\"id\":\"obj_123\",\"livemode\":true,\"return_url\":\"return_url\",\"url\":\"url\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.FundingSessionCreateParams params =
+        com.stripe.param.v2.moneymanagement.FundingSessionCreateParams.builder()
+            .setAccount("account")
+            .setFinancialAccount("financial_account")
+            .setFinancialAddressOptions(
+                com.stripe.param.v2.moneymanagement.FundingSessionCreateParams
+                    .FinancialAddressOptions.builder()
+                    .setCryptoWallet(
+                        com.stripe.param.v2.moneymanagement.FundingSessionCreateParams
+                            .FinancialAddressOptions.CryptoWallet.builder()
+                            .setSettlementCurrency("usd")
+                            .build())
+                    .build())
+            .addFinancialAddressType(
+                com.stripe.param.v2.moneymanagement.FundingSessionCreateParams.FinancialAddressType
+                    .BANK_ACCOUNT)
+            .setReturnUrl("return_url")
+            .build();
+
+    com.stripe.model.v2.moneymanagement.FundingSession fundingSession =
+        client.v2().moneyManagement().fundingSessions().create(params);
+    assertNotNull(fundingSession);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_sessions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testV2MoneyManagementInboundTransferGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,

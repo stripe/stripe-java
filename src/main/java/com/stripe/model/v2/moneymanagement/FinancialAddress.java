@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
+import java.util.List;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +19,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class FinancialAddress extends StripeObject implements HasId {
+  /** The ID of the Account that owns this FinancialAddress. */
+  @SerializedName("account")
+  String account;
+
   /** Bank account details for this FinancialAddress. */
   @SerializedName("bank_account")
   BankAccount bankAccount;
@@ -25,7 +31,6 @@ public class FinancialAddress extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** Crypto wallet details for this FinancialAddress. */
   @SerializedName("crypto_wallet")
   CryptoWallet cryptoWallet;
 
@@ -54,7 +59,6 @@ public class FinancialAddress extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** Open Enum. The currency the FinancialAddress settles into the FinancialAccount. */
   @SerializedName("settlement_currency")
   String settlementCurrency;
 
@@ -83,7 +87,6 @@ public class FinancialAddress extends StripeObject implements HasId {
     @SerializedName("aba")
     Aba aba;
 
-    /** CLABE bank account details (Mexico). */
     @SerializedName("clabe")
     Clabe clabe;
 
@@ -91,7 +94,6 @@ public class FinancialAddress extends StripeObject implements HasId {
     @SerializedName("country")
     String country;
 
-    /** CPA bank account details (Canada). */
     @SerializedName("cpa")
     Cpa cpa;
 
@@ -110,7 +112,8 @@ public class FinancialAddress extends StripeObject implements HasId {
     /**
      * Open Enum. The type of bank account details.
      *
-     * <p>One of {@code aba}, {@code clabe}, {@code cpa}, {@code iban}, or {@code sort_code}.
+     * <p>One of {@code aba}, {@code bre_b}, {@code clabe}, {@code cpa}, {@code iban}, {@code pix},
+     * or {@code sort_code}.
      */
     @SerializedName("type")
     String type;
@@ -183,50 +186,47 @@ public class FinancialAddress extends StripeObject implements HasId {
       }
     }
 
-    /** CLABE bank account details (Mexico). */
+    /**
+     * For more details about Clabe, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Clabe extends StripeObject {
-      /** The name of the account holder. */
       @SerializedName("account_holder_name")
       String accountHolderName;
 
-      /** The CLABE interbank code. */
       @SerializedName("clabe")
       String clabe;
     }
 
-    /** CPA bank account details (Canada). */
+    /**
+     * For more details about Cpa, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Cpa extends StripeObject {
-      /** The name of the account holder. */
       @SerializedName("account_holder_name")
       String accountHolderName;
 
-      /** The full account number. */
       @SerializedName("account_number")
       String accountNumber;
 
-      /** The name of the bank. */
       @SerializedName("bank_name")
       String bankName;
 
-      /** The SWIFT/BIC code. */
       @SerializedName("bic")
       String bic;
 
-      /** The institution number. */
       @SerializedName("institution_number")
       String institutionNumber;
 
-      /** The last four digits of the account number. */
       @SerializedName("last4")
       String last4;
 
-      /** The transit number. */
       @SerializedName("transit_number")
       String transitNumber;
     }
@@ -292,26 +292,38 @@ public class FinancialAddress extends StripeObject implements HasId {
     }
   }
 
-  /** Crypto wallet details for this FinancialAddress. */
+  /**
+   * For more details about CryptoWallet, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CryptoWallet extends StripeObject {
-    /** The blockchain wallet address. */
     @SerializedName("address")
     String address;
 
-    /** An optional memo or tag required by some networks to identify the recipient. */
     @SerializedName("memo")
     String memo;
 
-    /**
-     * Open Enum. The blockchain network of the crypto wallet.
-     *
-     * <p>One of {@code arbitrum}, {@code avalanche_c_chain}, {@code base}, {@code ethereum}, {@code
-     * optimism}, {@code polygon}, {@code solana}, {@code stellar}, or {@code tempo}.
-     */
     @SerializedName("network")
     String network;
+
+    /** A map of supported network names to their details, including supported token currencies. */
+    @SerializedName("supported_network_details")
+    Map<String, FinancialAddress.CryptoWallet.SupportedNetworkDetail> supportedNetworkDetails;
+
+    /**
+     * For more details about SupportedNetworkDetail, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SupportedNetworkDetail extends StripeObject {
+      /** The token currencies supported on this network. */
+      @SerializedName("supported_token_currencies")
+      List<String> supportedTokenCurrencies;
+    }
   }
 }

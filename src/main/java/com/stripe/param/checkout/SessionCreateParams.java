@@ -383,6 +383,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
 
+  /** A subset of parameters to configure the payment for this Checkout Session. */
+  @SerializedName("payment_settings")
+  PaymentSettings paymentSettings;
+
   /**
    * This property is used to set up permissions for various actions (for example, update) on the
    * CheckoutSession object. Can only be set when creating {@code embedded_page} or {@code elements}
@@ -529,6 +533,7 @@ public class SessionCreateParams extends ApiRequestParams {
       String paymentMethodConfiguration,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
+      PaymentSettings paymentSettings,
       Permissions permissions,
       PhoneNumberCollection phoneNumberCollection,
       RedirectOnCompletion redirectOnCompletion,
@@ -587,6 +592,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.paymentMethodConfiguration = paymentMethodConfiguration;
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
+    this.paymentSettings = paymentSettings;
     this.permissions = permissions;
     this.phoneNumberCollection = phoneNumberCollection;
     this.redirectOnCompletion = redirectOnCompletion;
@@ -696,6 +702,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private PaymentMethodOptions paymentMethodOptions;
 
+    private PaymentSettings paymentSettings;
+
     private Permissions permissions;
 
     private PhoneNumberCollection phoneNumberCollection;
@@ -771,6 +779,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.paymentMethodConfiguration,
           this.paymentMethodData,
           this.paymentMethodOptions,
+          this.paymentSettings,
           this.permissions,
           this.phoneNumberCollection,
           this.redirectOnCompletion,
@@ -1427,6 +1436,12 @@ public class SessionCreateParams extends ApiRequestParams {
     public Builder setPaymentMethodOptions(
         SessionCreateParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
+      return this;
+    }
+
+    /** A subset of parameters to configure the payment for this Checkout Session. */
+    public Builder setPaymentSettings(SessionCreateParams.PaymentSettings paymentSettings) {
+      this.paymentSettings = paymentSettings;
       return this;
     }
 
@@ -21702,6 +21717,615 @@ public class SessionCreateParams extends ApiRequestParams {
         SetupFutureUsage(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentSettings {
+    /** Configures an application fee transferred to the application owner's Stripe account. */
+    @SerializedName("application_fee_data")
+    ApplicationFeeData applicationFeeData;
+
+    /** Controls when the funds will be captured from the customer's account. */
+    @SerializedName("capture_method")
+    CaptureMethod captureMethod;
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    @SerializedName("description")
+    String description;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
+     * Indicates that you intend to <a
+     * href="https://docs.stripe.com/payments/payment-intents#future-usage">make future payments</a>
+     * with the payment method collected by this Checkout Session.
+     *
+     * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer that
+     * their payment details will be saved.
+     *
+     * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer that
+     * their payment details will be saved and used for future payments.
+     *
+     * <p>If a Customer has been provided or Checkout creates a new Customer, Checkout will attach
+     * the payment method to the Customer.
+     *
+     * <p>If Checkout does not create a Customer, the payment method is not attached to a Customer.
+     * To reuse the payment method, you can retrieve it from the Checkout Session's PaymentIntent.
+     *
+     * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
+     * dynamically optimize your payment flow and comply with regional legislation and network
+     * rules, such as SCA.
+     */
+    @SerializedName("setup_future_usage")
+    SetupFutureUsage setupFutureUsage;
+
+    /**
+     * Text that appears on the customer's statement as the statement descriptor for a non-card
+     * charge. This value overrides the account's default statement descriptor. For information
+     * about requirements, including the 22-character limit, see <a
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors">the Statement
+     * Descriptor docs</a>.
+     *
+     * <p>Setting this value for a card charge returns an error. For card charges, set the <a
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>
+     * instead.
+     */
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+
+    /** Configures automatic transfers to a connected account when payments succeed. */
+    @SerializedName("transfer_data")
+    TransferData transferData;
+
+    /** A string that identifies the initial payment as part of a group. */
+    @SerializedName("transfer_group")
+    String transferGroup;
+
+    private PaymentSettings(
+        ApplicationFeeData applicationFeeData,
+        CaptureMethod captureMethod,
+        String description,
+        Map<String, Object> extraParams,
+        Map<String, String> metadata,
+        SetupFutureUsage setupFutureUsage,
+        String statementDescriptor,
+        TransferData transferData,
+        String transferGroup) {
+      this.applicationFeeData = applicationFeeData;
+      this.captureMethod = captureMethod;
+      this.description = description;
+      this.extraParams = extraParams;
+      this.metadata = metadata;
+      this.setupFutureUsage = setupFutureUsage;
+      this.statementDescriptor = statementDescriptor;
+      this.transferData = transferData;
+      this.transferGroup = transferGroup;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private ApplicationFeeData applicationFeeData;
+
+      private CaptureMethod captureMethod;
+
+      private String description;
+
+      private Map<String, Object> extraParams;
+
+      private Map<String, String> metadata;
+
+      private SetupFutureUsage setupFutureUsage;
+
+      private String statementDescriptor;
+
+      private TransferData transferData;
+
+      private String transferGroup;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.PaymentSettings build() {
+        return new SessionCreateParams.PaymentSettings(
+            this.applicationFeeData,
+            this.captureMethod,
+            this.description,
+            this.extraParams,
+            this.metadata,
+            this.setupFutureUsage,
+            this.statementDescriptor,
+            this.transferData,
+            this.transferGroup);
+      }
+
+      /** Configures an application fee transferred to the application owner's Stripe account. */
+      public Builder setApplicationFeeData(
+          SessionCreateParams.PaymentSettings.ApplicationFeeData applicationFeeData) {
+        this.applicationFeeData = applicationFeeData;
+        return this;
+      }
+
+      /** Controls when the funds will be captured from the customer's account. */
+      public Builder setCaptureMethod(
+          SessionCreateParams.PaymentSettings.CaptureMethod captureMethod) {
+        this.captureMethod = captureMethod;
+        return this;
+      }
+
+      /** An arbitrary string attached to the object. Often useful for displaying to users. */
+      public Builder setDescription(String description) {
+        this.description = description;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.PaymentSettings#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.PaymentSettings#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.PaymentSettings#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.PaymentSettings#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
+        return this;
+      }
+
+      /**
+       * Indicates that you intend to <a
+       * href="https://docs.stripe.com/payments/payment-intents#future-usage">make future
+       * payments</a> with the payment method collected by this Checkout Session.
+       *
+       * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer
+       * that their payment details will be saved.
+       *
+       * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer
+       * that their payment details will be saved and used for future payments.
+       *
+       * <p>If a Customer has been provided or Checkout creates a new Customer, Checkout will attach
+       * the payment method to the Customer.
+       *
+       * <p>If Checkout does not create a Customer, the payment method is not attached to a
+       * Customer. To reuse the payment method, you can retrieve it from the Checkout Session's
+       * PaymentIntent.
+       *
+       * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as SCA.
+       */
+      public Builder setSetupFutureUsage(
+          SessionCreateParams.PaymentSettings.SetupFutureUsage setupFutureUsage) {
+        this.setupFutureUsage = setupFutureUsage;
+        return this;
+      }
+
+      /**
+       * Text that appears on the customer's statement as the statement descriptor for a non-card
+       * charge. This value overrides the account's default statement descriptor. For information
+       * about requirements, including the 22-character limit, see <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors">the Statement
+       * Descriptor docs</a>.
+       *
+       * <p>Setting this value for a card charge returns an error. For card charges, set the <a
+       * href="https://docs.stripe.com/get-started/account/statement-descriptors#dynamic">statement_descriptor_suffix</a>
+       * instead.
+       */
+      public Builder setStatementDescriptor(String statementDescriptor) {
+        this.statementDescriptor = statementDescriptor;
+        return this;
+      }
+
+      /** Configures automatic transfers to a connected account when payments succeed. */
+      public Builder setTransferData(
+          SessionCreateParams.PaymentSettings.TransferData transferData) {
+        this.transferData = transferData;
+        return this;
+      }
+
+      /** A string that identifies the initial payment as part of a group. */
+      public Builder setTransferGroup(String transferGroup) {
+        this.transferGroup = transferGroup;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ApplicationFeeData {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The amount of the application fee, in the currency's smallest unit, to apply to the initial
+       * payment and transfer to the application owner's Stripe account. The application fee is
+       * capped at the total amount captured.
+       */
+      @SerializedName("initial_amount")
+      Long initialAmount;
+
+      /**
+       * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+       * the percentage of each payment total that will be transferred to the application owner's
+       * Stripe account.
+       */
+      @SerializedName("percentage_decimal")
+      BigDecimal percentageDecimal;
+
+      private ApplicationFeeData(
+          Map<String, Object> extraParams, Long initialAmount, BigDecimal percentageDecimal) {
+        this.extraParams = extraParams;
+        this.initialAmount = initialAmount;
+        this.percentageDecimal = percentageDecimal;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Long initialAmount;
+
+        private BigDecimal percentageDecimal;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentSettings.ApplicationFeeData build() {
+          return new SessionCreateParams.PaymentSettings.ApplicationFeeData(
+              this.extraParams, this.initialAmount, this.percentageDecimal);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentSettings.ApplicationFeeData#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentSettings.ApplicationFeeData#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The amount of the application fee, in the currency's smallest unit, to apply to the
+         * initial payment and transfer to the application owner's Stripe account. The application
+         * fee is capped at the total amount captured.
+         */
+        public Builder setInitialAmount(Long initialAmount) {
+          this.initialAmount = initialAmount;
+          return this;
+        }
+
+        /**
+         * A non-negative decimal between 0 and 100, with at most two decimal places. This
+         * represents the percentage of each payment total that will be transferred to the
+         * application owner's Stripe account.
+         */
+        public Builder setPercentageDecimal(BigDecimal percentageDecimal) {
+          this.percentageDecimal = percentageDecimal;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TransferData {
+      /**
+       * <strong>Required.</strong> If specified, successful charges will be attributed to the
+       * destination account for tax reporting, and the funds from charges will be transferred to
+       * the destination account. The ID of the resulting transfer will be returned on the
+       * successful charge's {@code transfer} field.
+       */
+      @SerializedName("destination")
+      String destination;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Configures how much of each payment is transferred to the destination account. If omitted,
+       * the entire amount is transferred.
+       */
+      @SerializedName("transfer_amount")
+      TransferAmount transferAmount;
+
+      private TransferData(
+          String destination, Map<String, Object> extraParams, TransferAmount transferAmount) {
+        this.destination = destination;
+        this.extraParams = extraParams;
+        this.transferAmount = transferAmount;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String destination;
+
+        private Map<String, Object> extraParams;
+
+        private TransferAmount transferAmount;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentSettings.TransferData build() {
+          return new SessionCreateParams.PaymentSettings.TransferData(
+              this.destination, this.extraParams, this.transferAmount);
+        }
+
+        /**
+         * <strong>Required.</strong> If specified, successful charges will be attributed to the
+         * destination account for tax reporting, and the funds from charges will be transferred to
+         * the destination account. The ID of the resulting transfer will be returned on the
+         * successful charge's {@code transfer} field.
+         */
+        public Builder setDestination(String destination) {
+          this.destination = destination;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentSettings.TransferData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentSettings.TransferData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Configures how much of each payment is transferred to the destination account. If
+         * omitted, the entire amount is transferred.
+         */
+        public Builder setTransferAmount(
+            SessionCreateParams.PaymentSettings.TransferData.TransferAmount transferAmount) {
+          this.transferAmount = transferAmount;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class TransferAmount {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The amount, in the currency's smallest unit, that will be transferred to the destination
+         * account when the initial payment succeeds.
+         */
+        @SerializedName("initial_amount")
+        Long initialAmount;
+
+        /**
+         * A non-negative decimal between 0 and 100, with at most two decimal places. This
+         * represents the percentage of each payment total that will be transferred to the
+         * destination account.
+         */
+        @SerializedName("percentage_decimal")
+        BigDecimal percentageDecimal;
+
+        private TransferAmount(
+            Map<String, Object> extraParams, Long initialAmount, BigDecimal percentageDecimal) {
+          this.extraParams = extraParams;
+          this.initialAmount = initialAmount;
+          this.percentageDecimal = percentageDecimal;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Long initialAmount;
+
+          private BigDecimal percentageDecimal;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.PaymentSettings.TransferData.TransferAmount build() {
+            return new SessionCreateParams.PaymentSettings.TransferData.TransferAmount(
+                this.extraParams, this.initialAmount, this.percentageDecimal);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentSettings.TransferData.TransferAmount#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentSettings.TransferData.TransferAmount#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The amount, in the currency's smallest unit, that will be transferred to the
+           * destination account when the initial payment succeeds.
+           */
+          public Builder setInitialAmount(Long initialAmount) {
+            this.initialAmount = initialAmount;
+            return this;
+          }
+
+          /**
+           * A non-negative decimal between 0 and 100, with at most two decimal places. This
+           * represents the percentage of each payment total that will be transferred to the
+           * destination account.
+           */
+          public Builder setPercentageDecimal(BigDecimal percentageDecimal) {
+            this.percentageDecimal = percentageDecimal;
+            return this;
+          }
+        }
+      }
+    }
+
+    public enum CaptureMethod implements ApiRequestParams.EnumParam {
+      @SerializedName("automatic")
+      AUTOMATIC("automatic"),
+
+      @SerializedName("automatic_async")
+      AUTOMATIC_ASYNC("automatic_async"),
+
+      @SerializedName("manual")
+      MANUAL("manual");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      CaptureMethod(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+      @SerializedName("off_session")
+      OFF_SESSION("off_session"),
+
+      @SerializedName("on_session")
+      ON_SESSION("on_session");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      SetupFutureUsage(String value) {
+        this.value = value;
       }
     }
   }

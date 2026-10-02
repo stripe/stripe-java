@@ -6831,6 +6831,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("capture_method")
       String captureMethod;
 
+      /** Fleet prompting data for this payment. */
+      @SerializedName("fleet")
+      Fleet fleet;
+
       /**
        * Request ability to capture this payment beyond the standard <a
        * href="https://docs.stripe.com/terminal/features/extended-authorizations#authorization-validity">authorization
@@ -6945,6 +6949,53 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
          */
         @SerializedName("hours")
         Long hours;
+      }
+
+      /**
+       * For more details about Fleet, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Fleet extends StripeObject {
+        /** Fleet prompts and values collected for this transaction. */
+        @SerializedName("transaction_data")
+        List<PaymentIntent.PaymentMethodOptions.CardPresent.Fleet.TransactionDatum> transactionData;
+
+        /**
+         * For more details about TransactionDatum, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class TransactionDatum extends StripeObject {
+          /**
+           * The prompt that the Terminal SDK displays to collect this Fleet value.
+           *
+           * <p>One of {@code additional_fleet_data_1}, {@code additional_fleet_data_2}, {@code
+           * driver_id}, {@code employee_number}, {@code entered_data_alphanumeric}, {@code
+           * entered_data_numeric}, {@code generic_id}, {@code invoice_number}, {@code odometer},
+           * {@code postal_code}, {@code reefer_hours}, {@code replacement_car}, {@code
+           * trailer_number}, {@code trip_number}, {@code unit_number}, {@code vehicle_id}, {@code
+           * vehicle_tag}, or {@code work_order}.
+           */
+          @SerializedName("prompt")
+          String prompt;
+
+          /**
+           * Whether the collected value is printed on the receipt.
+           *
+           * <p>One of {@code omit}, or {@code print}.
+           */
+          @SerializedName("receipt_behavior")
+          String receiptBehavior;
+
+          /** The value collected for this Fleet prompt. */
+          @SerializedName("value")
+          String value;
+        }
       }
 
       /**
@@ -8263,6 +8314,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /** A reference to the merchant subscription this payment corresponds to. */
+      @SerializedName("subscription_reference")
+      String subscriptionReference;
     }
 
     /**
