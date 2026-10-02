@@ -18,10 +18,29 @@ public class StripeEventNotificationHandler
       StripeClient client,
       EventNotificationFallbackCallback fallbackCallback) {
     super(client, fallbackCallback);
-    if (webhookSecret == null || webhookSecret.isEmpty()) {
+    if (isBlankWebhookSecret(webhookSecret)) {
       throw new IllegalArgumentException("webhookSecret must be a non-empty string");
     }
     this.webhookSecret = webhookSecret;
+  }
+
+  private static boolean isBlankWebhookSecret(String secret) {
+    if (secret == null || secret.isEmpty()) {
+      return true;
+    }
+
+    for (int i = 0; i < secret.length(); i++) {
+      char character = secret.charAt(i);
+      if (character != ' '
+          && character != '\t'
+          && character != '\r'
+          && character != '\n'
+          && character != '\f'
+          && character != '\u000B') {
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
