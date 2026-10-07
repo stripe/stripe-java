@@ -16,6 +16,7 @@ public class StripeSearchResult<T extends StripeObjectInterface> extends StripeC
   Long totalCount;
 
   @Getter private transient Map<String, Object> requestParams = new HashMap<>();
+  private transient String requestLimit;
 
   public void setRequestParams(Map<String, Object> requestParams) {
     this.requestParams = copyMap(requestParams);
@@ -26,9 +27,27 @@ public class StripeSearchResult<T extends StripeObjectInterface> extends StripeC
     return ApiResource.RequestMethod.POST;
   }
 
+  public void setRequestPath(String requestPath) {
+    for (String parameter : requestPath.split("\\?", 2).length > 1
+        ? requestPath.split("\\?", 2)[1].split("&")
+        : new String[0]) {
+      if (parameter.startsWith("limit=")) {
+        this.requestLimit = parameter.substring("limit=".length());
+      }
+    }
+  }
+
   @Override
   protected HashMap<String, Object> paginationParams() {
     return new HashMap<>(this.requestParams);
+  }
+
+  @Override
+  protected String paginationPath(String path) {
+    if (this.requestLimit == null || path.matches(".*[?&]limit=.*")) {
+      return path;
+    }
+    return path + (path.contains("?") ? "&" : "?") + "limit=" + this.requestLimit;
   }
 
   private static Map<String, Object> copyMap(Map<String, Object> source) {
