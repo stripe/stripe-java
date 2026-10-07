@@ -79,18 +79,25 @@ public class StripeSearchResultTest extends BaseStripeTest {
 
     assertEquals(Arrays.asList("one", "two"), ids);
     assertEquals(2L, result.getTotalCount());
-    verifyRequest(BaseAddress.API, ApiResource.RequestMethod.POST, "/v2/widgets/search", params, null);
+    Map<String, Object> requestBody = new HashMap<>(params);
+    requestBody.remove("limit");
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/widgets/search?page=2",
-        params,
+        "/v2/widgets/search?limit=2",
+        requestBody,
+        null);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/widgets/search?page=2&limit=2",
+        requestBody,
         options);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/widgets/search?page=3",
-        params,
+        "/v2/widgets/search?page=3&limit=2",
+        requestBody,
         options);
     verifyNoMoreInteractions(networkSpy);
   }
