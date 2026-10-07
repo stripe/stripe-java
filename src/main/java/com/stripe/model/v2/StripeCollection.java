@@ -68,10 +68,6 @@ public class StripeCollection<T extends StripeObjectInterface> extends StripeObj
     return new HashMap<>();
   }
 
-  protected String paginationPath(String path) {
-    return path;
-  }
-
   private static class Page<T> {
     List<T> data;
     String nextPageUrl;
@@ -107,7 +103,7 @@ public class StripeCollection<T extends StripeObjectInterface> extends StripeObj
               new ApiRequest(
                   BaseAddress.API,
                   StripeCollection.this.paginationMethod(),
-                  StripeCollection.this.paginationPath(nextPageUrl),
+                  nextPageUrl,
                   StripeCollection.this.paginationParams(),
                   this.options),
               StripeCollection.this.pageTypeToken);

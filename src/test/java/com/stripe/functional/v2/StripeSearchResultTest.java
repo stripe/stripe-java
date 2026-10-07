@@ -53,8 +53,8 @@ public class StripeSearchResultTest extends BaseStripeTest {
   public void autoPagingReplaysOriginalPostBodyAcrossEmptyPages() throws Exception {
     List<String> pages =
         new ArrayList<>(Arrays.asList(
-            "{\"object\":\"v2.search_result\",\"data\":[{\"id\":\"one\"}],\"next_page_url\":\"/v2/widgets/search?page=2\",\"total_count\":2}",
-            "{\"object\":\"v2.search_result\",\"data\":[],\"next_page_url\":\"/v2/widgets/search?page=3\",\"total_count\":2}",
+            "{\"object\":\"v2.search_result\",\"data\":[{\"id\":\"one\"}],\"next_page_url\":\"/v2/widgets/search?page=2&limit=2\",\"total_count\":2}",
+            "{\"object\":\"v2.search_result\",\"data\":[],\"next_page_url\":\"/v2/widgets/search?page=3&limit=2\",\"total_count\":2}",
             "{\"object\":\"v2.search_result\",\"data\":[{\"id\":\"two\"}],\"next_page_url\":null,\"total_count\":2}"));
     Mockito.doAnswer(
             invocation ->
