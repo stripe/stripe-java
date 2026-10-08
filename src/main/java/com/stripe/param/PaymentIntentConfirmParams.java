@@ -117,10 +117,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   Object paymentDetails;
 
   /**
-   * ID of the payment method (a PaymentMethod, Card, or <a
-   * href="https://docs.stripe.com/payments/payment-methods/transitioning#compatibility">compatible
-   * Source</a> object) to attach to this PaymentIntent. If the payment method is attached to a
-   * Customer, it must match the <a
+   * The ID of a PaymentMethod to attach to this PaymentIntent. If the payment method is attached to
+   * a Customer, it must match the <a
    * href="https://docs.stripe.com/api#create_payment_intent-customer">customer</a> that is set on
    * this PaymentIntent.
    */
@@ -616,10 +614,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * ID of the payment method (a PaymentMethod, Card, or <a
-     * href="https://docs.stripe.com/payments/payment-methods/transitioning#compatibility">compatible
-     * Source</a> object) to attach to this PaymentIntent. If the payment method is attached to a
-     * Customer, it must match the <a
+     * The ID of a PaymentMethod to attach to this PaymentIntent. If the payment method is attached
+     * to a Customer, it must match the <a
      * href="https://docs.stripe.com/api#create_payment_intent-customer">customer</a> that is set on
      * this PaymentIntent.
      */
@@ -32446,6 +32442,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Fleet prompting data for this payment. */
+      @SerializedName("fleet")
+      Object fleet;
+
       /** Payment details for payment method specific funding transaction fields. */
       @SerializedName("payment_details")
       PaymentDetails paymentDetails;
@@ -32497,6 +32497,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           CaptureDelay captureDelay,
           CaptureMethod captureMethod,
           Map<String, Object> extraParams,
+          Object fleet,
           PaymentDetails paymentDetails,
           Boolean requestExtendedAuthorization,
           Boolean requestIncrementalAuthorizationSupport,
@@ -32508,6 +32509,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         this.captureDelay = captureDelay;
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
+        this.fleet = fleet;
         this.paymentDetails = paymentDetails;
         this.requestExtendedAuthorization = requestExtendedAuthorization;
         this.requestIncrementalAuthorizationSupport = requestIncrementalAuthorizationSupport;
@@ -32531,6 +32533,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Object fleet;
+
         private PaymentDetails paymentDetails;
 
         private Boolean requestExtendedAuthorization;
@@ -32551,6 +32555,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.captureDelay,
               this.captureMethod,
               this.extraParams,
+              this.fleet,
               this.paymentDetails,
               this.requestExtendedAuthorization,
               this.requestIncrementalAuthorizationSupport,
@@ -32636,6 +32641,19 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Fleet prompting data for this payment. */
+        public Builder setFleet(
+            PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet fleet) {
+          this.fleet = fleet;
+          return this;
+        }
+
+        /** Fleet prompting data for this payment. */
+        public Builder setFleet(EmptyParam fleet) {
+          this.fleet = fleet;
           return this;
         }
 
@@ -32985,6 +33003,345 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           public Builder setHours(Long hours) {
             this.hours = hours;
             return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Fleet {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Fleet prompts and values collected for this transaction. */
+        @SerializedName("transaction_data")
+        Object transactionData;
+
+        private Fleet(Map<String, Object> extraParams, Object transactionData) {
+          this.extraParams = extraParams;
+          this.transactionData = transactionData;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object transactionData;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet(
+                this.extraParams, this.transactionData);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `transactionData` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet#transactionData} for
+           * the field documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addTransactionData(
+              PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet.TransactionData
+                  element) {
+            if (this.transactionData == null || this.transactionData instanceof EmptyParam) {
+              this.transactionData =
+                  new ArrayList<
+                      PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet
+                          .TransactionData>();
+            }
+            ((List<
+                        PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet
+                            .TransactionData>)
+                    this.transactionData)
+                .add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `transactionData` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet#transactionData} for
+           * the field documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addAllTransactionData(
+              List<
+                      PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet
+                          .TransactionData>
+                  elements) {
+            if (this.transactionData == null || this.transactionData instanceof EmptyParam) {
+              this.transactionData =
+                  new ArrayList<
+                      PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet
+                          .TransactionData>();
+            }
+            ((List<
+                        PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet
+                            .TransactionData>)
+                    this.transactionData)
+                .addAll(elements);
+            return this;
+          }
+
+          /** Fleet prompts and values collected for this transaction. */
+          public Builder setTransactionData(EmptyParam transactionData) {
+            this.transactionData = transactionData;
+            return this;
+          }
+
+          /** Fleet prompts and values collected for this transaction. */
+          public Builder setTransactionData(
+              List<
+                      PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet
+                          .TransactionData>
+                  transactionData) {
+            this.transactionData = transactionData;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class TransactionData {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> The prompt that the Terminal SDK displays to collect this
+           * Fleet value.
+           */
+          @SerializedName("prompt")
+          Prompt prompt;
+
+          /** Whether the collected value is printed on the receipt. Defaults to {@code omit}. */
+          @SerializedName("receipt_behavior")
+          ReceiptBehavior receiptBehavior;
+
+          /** <strong>Required.</strong> The value collected for this Fleet prompt. */
+          @SerializedName("value")
+          Object value;
+
+          private TransactionData(
+              Map<String, Object> extraParams,
+              Prompt prompt,
+              ReceiptBehavior receiptBehavior,
+              Object value) {
+            this.extraParams = extraParams;
+            this.prompt = prompt;
+            this.receiptBehavior = receiptBehavior;
+            this.value = value;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Prompt prompt;
+
+            private ReceiptBehavior receiptBehavior;
+
+            private Object value;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet.TransactionData
+                build() {
+              return new PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet
+                  .TransactionData(this.extraParams, this.prompt, this.receiptBehavior, this.value);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet.TransactionData#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet.TransactionData#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The prompt that the Terminal SDK displays to collect this
+             * Fleet value.
+             */
+            public Builder setPrompt(
+                PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet.TransactionData
+                        .Prompt
+                    prompt) {
+              this.prompt = prompt;
+              return this;
+            }
+
+            /** Whether the collected value is printed on the receipt. Defaults to {@code omit}. */
+            public Builder setReceiptBehavior(
+                PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent.Fleet.TransactionData
+                        .ReceiptBehavior
+                    receiptBehavior) {
+              this.receiptBehavior = receiptBehavior;
+              return this;
+            }
+
+            /** <strong>Required.</strong> The value collected for this Fleet prompt. */
+            public Builder setValue(String value) {
+              this.value = value;
+              return this;
+            }
+
+            /** <strong>Required.</strong> The value collected for this Fleet prompt. */
+            public Builder setValue(EmptyParam value) {
+              this.value = value;
+              return this;
+            }
+          }
+
+          public enum Prompt implements ApiRequestParams.EnumParam {
+            @SerializedName("additional_fleet_data_1")
+            ADDITIONAL_FLEET_DATA_1("additional_fleet_data_1"),
+
+            @SerializedName("additional_fleet_data_2")
+            ADDITIONAL_FLEET_DATA_2("additional_fleet_data_2"),
+
+            @SerializedName("driver_id")
+            DRIVER_ID("driver_id"),
+
+            @SerializedName("employee_number")
+            EMPLOYEE_NUMBER("employee_number"),
+
+            @SerializedName("entered_data_alphanumeric")
+            ENTERED_DATA_ALPHANUMERIC("entered_data_alphanumeric"),
+
+            @SerializedName("entered_data_numeric")
+            ENTERED_DATA_NUMERIC("entered_data_numeric"),
+
+            @SerializedName("generic_id")
+            GENERIC_ID("generic_id"),
+
+            @SerializedName("invoice_number")
+            INVOICE_NUMBER("invoice_number"),
+
+            @SerializedName("odometer")
+            ODOMETER("odometer"),
+
+            @SerializedName("postal_code")
+            POSTAL_CODE("postal_code"),
+
+            @SerializedName("reefer_hours")
+            REEFER_HOURS("reefer_hours"),
+
+            @SerializedName("replacement_car")
+            REPLACEMENT_CAR("replacement_car"),
+
+            @SerializedName("trailer_number")
+            TRAILER_NUMBER("trailer_number"),
+
+            @SerializedName("trip_number")
+            TRIP_NUMBER("trip_number"),
+
+            @SerializedName("unit_number")
+            UNIT_NUMBER("unit_number"),
+
+            @SerializedName("vehicle_id")
+            VEHICLE_ID("vehicle_id"),
+
+            @SerializedName("vehicle_tag")
+            VEHICLE_TAG("vehicle_tag"),
+
+            @SerializedName("work_order")
+            WORK_ORDER("work_order");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Prompt(String value) {
+              this.value = value;
+            }
+          }
+
+          public enum ReceiptBehavior implements ApiRequestParams.EnumParam {
+            @SerializedName("omit")
+            OMIT("omit"),
+
+            @SerializedName("print")
+            PRINT("print");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            ReceiptBehavior(String value) {
+              this.value = value;
+            }
           }
         }
       }
@@ -46658,9 +47015,17 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       ApiRequestParams.EnumParam setupFutureUsage;
 
-      private Paypay(Map<String, Object> extraParams, ApiRequestParams.EnumParam setupFutureUsage) {
+      /** The merchant's subscription identifier for this off-session charge. */
+      @SerializedName("subscription_reference")
+      String subscriptionReference;
+
+      private Paypay(
+          Map<String, Object> extraParams,
+          ApiRequestParams.EnumParam setupFutureUsage,
+          String subscriptionReference) {
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
+        this.subscriptionReference = subscriptionReference;
       }
 
       public static Builder builder() {
@@ -46672,10 +47037,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private ApiRequestParams.EnumParam setupFutureUsage;
 
+        private String subscriptionReference;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentConfirmParams.PaymentMethodOptions.Paypay build() {
           return new PaymentIntentConfirmParams.PaymentMethodOptions.Paypay(
-              this.extraParams, this.setupFutureUsage);
+              this.extraParams, this.setupFutureUsage, this.subscriptionReference);
         }
 
         /**
@@ -46755,6 +47122,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /** The merchant's subscription identifier for this off-session charge. */
+        public Builder setSubscriptionReference(String subscriptionReference) {
+          this.subscriptionReference = subscriptionReference;
           return this;
         }
       }
@@ -47309,15 +47682,18 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       AmountIncludesIof amountIncludesIof;
 
       /**
-       * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
-       * Defaults to 86400 seconds.
+       * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60 and
+       * 1209600, inclusive). If neither expiration option is supplied, defaults to 14400 seconds (4
+       * hours). Mutually exclusive with {@code expires_at}.
        */
       @SerializedName("expires_after_seconds")
       Long expiresAfterSeconds;
 
       /**
-       * The timestamp at which the Pix expires (between 10 and 1209600 seconds in the future).
-       * Defaults to 1 day in the future.
+       * The absolute Unix timestamp at which the Pix expires, between 60 and 1209600 seconds from
+       * the current time. If neither expiration option is supplied, the Pix expires 14400 seconds
+       * (4 hours) after PaymentIntent confirmation. Mutually exclusive with {@code
+       * expires_after_seconds}.
        */
       @SerializedName("expires_at")
       Long expiresAt;
@@ -47412,8 +47788,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /**
-         * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
-         * Defaults to 86400 seconds.
+         * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60
+         * and 1209600, inclusive). If neither expiration option is supplied, defaults to 14400
+         * seconds (4 hours). Mutually exclusive with {@code expires_at}.
          */
         public Builder setExpiresAfterSeconds(Long expiresAfterSeconds) {
           this.expiresAfterSeconds = expiresAfterSeconds;
@@ -47421,8 +47798,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /**
-         * The timestamp at which the Pix expires (between 10 and 1209600 seconds in the future).
-         * Defaults to 1 day in the future.
+         * The absolute Unix timestamp at which the Pix expires, between 60 and 1209600 seconds from
+         * the current time. If neither expiration option is supplied, the Pix expires 14400 seconds
+         * (4 hours) after PaymentIntent confirmation. Mutually exclusive with {@code
+         * expires_after_seconds}.
          */
         public Builder setExpiresAt(Long expiresAt) {
           this.expiresAt = expiresAt;

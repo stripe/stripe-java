@@ -61,8 +61,11 @@ public final class PayoutMethodService extends ApiService {
     return this.request(request, PayoutMethod.class);
   }
   /**
-   * Archive a PayoutMethod object. Archived objects cannot be used as payout methods and will not
-   * appear in the payout method list.
+   * Archive a {@code PayoutMethod}. Archiving prevents the Payout Method from being used for
+   * outbound payments or transfers and omits it from normal list results. To restore list
+   * visibility, use the <a
+   * href="https://docs.stripe.com/api/v2/money-management/payout-methods/unarchive">unarchive
+   * endpoint</a>.
    */
   public PayoutMethod archive(String id)
       throws StripeException, CannotProceedException, InvalidPayoutMethodException,
@@ -70,8 +73,11 @@ public final class PayoutMethodService extends ApiService {
     return archive(id, (RequestOptions) null);
   }
   /**
-   * Archive a PayoutMethod object. Archived objects cannot be used as payout methods and will not
-   * appear in the payout method list.
+   * Archive a {@code PayoutMethod}. Archiving prevents the Payout Method from being used for
+   * outbound payments or transfers and omits it from normal list results. To restore list
+   * visibility, use the <a
+   * href="https://docs.stripe.com/api/v2/money-management/payout-methods/unarchive">unarchive
+   * endpoint</a>.
    */
   public PayoutMethod archive(String id, RequestOptions options)
       throws StripeException, CannotProceedException, InvalidPayoutMethodException,
@@ -84,19 +90,21 @@ public final class PayoutMethodService extends ApiService {
     return this.request(request, PayoutMethod.class);
   }
   /**
-   * Disable a PayoutMethod object. The payout method will not be available for use in outbound
-   * money movement. To re-enable the payout method, create an OutboundSetupIntent using <a
-   * href="https://docs.stripe.com/api/v2/money-management/outbound-setup-intents/create">{@code
-   * POST /v2/money_management/outbound_setup_intents}</a>.
+   * Disable a {@code PayoutMethod}. Disabling temporarily prevents the Payout Method from being
+   * used for outbound payments or transfers while keeping it in normal list results. To re-enable
+   * it, complete setup again by <a
+   * href="https://docs.stripe.com/api/v2/money-management/outbound-setup-intents/create">creating
+   * an Outbound Setup Intent</a>.
    */
   public PayoutMethod disable(String id) throws StripeException, CannotProceedException {
     return disable(id, (RequestOptions) null);
   }
   /**
-   * Disable a PayoutMethod object. The payout method will not be available for use in outbound
-   * money movement. To re-enable the payout method, create an OutboundSetupIntent using <a
-   * href="https://docs.stripe.com/api/v2/money-management/outbound-setup-intents/create">{@code
-   * POST /v2/money_management/outbound_setup_intents}</a>.
+   * Disable a {@code PayoutMethod}. Disabling temporarily prevents the Payout Method from being
+   * used for outbound payments or transfers while keeping it in normal list results. To re-enable
+   * it, complete setup again by <a
+   * href="https://docs.stripe.com/api/v2/money-management/outbound-setup-intents/create">creating
+   * an Outbound Setup Intent</a>.
    */
   public PayoutMethod disable(String id, RequestOptions options)
       throws StripeException, CannotProceedException {
@@ -107,12 +115,18 @@ public final class PayoutMethodService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, PayoutMethod.class);
   }
-  /** Unarchive an PayoutMethod object. */
+  /**
+   * Unarchive a {@code PayoutMethod}. Unarchiving restores the Payout Method to normal list results
+   * and clears only its archived state. It doesn't guarantee that the Payout Method can be used.
+   */
   public PayoutMethod unarchive(String id)
       throws StripeException, InvalidPayoutMethodException, ControlledByAlternateResourceException {
     return unarchive(id, (RequestOptions) null);
   }
-  /** Unarchive an PayoutMethod object. */
+  /**
+   * Unarchive a {@code PayoutMethod}. Unarchiving restores the Payout Method to normal list results
+   * and clears only its archived state. It doesn't guarantee that the Payout Method can be used.
+   */
   public PayoutMethod unarchive(String id, RequestOptions options)
       throws StripeException, InvalidPayoutMethodException, ControlledByAlternateResourceException {
     String path =

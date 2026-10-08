@@ -1528,12 +1528,61 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     Boolean enabled;
 
     /**
+     * How {@code automatic_tax} was set ({@code explicit}, {@code managed_payments}, or {@code
+     * tax_integration_configuration}) and why it may have been disabled.
+     */
+    @SerializedName("enablement_details")
+    EnablementDetails enablementDetails;
+
+    /**
      * The account that's liable for tax. If set, the business address and tax registrations
      * required to perform the tax calculation are loaded from this account. The tax transaction is
      * returned in the report of the connected account.
      */
     @SerializedName("liability")
     Liability liability;
+
+    /**
+     * For more details about EnablementDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EnablementDetails extends StripeObject {
+      /**
+       * Present when {@code source=tax_integration_configuration}, {@code
+       * automatic_tax[enabled]=false}, and a conflicting parameter is recorded.
+       */
+      @SerializedName("integration_configuration_disabled_reason")
+      IntegrationConfigurationDisabledReason integrationConfigurationDisabledReason;
+
+      /**
+       * How {@code automatic_tax} was set: {@code explicit}, {@code managed_payments}, or {@code
+       * tax_integration_configuration}.
+       *
+       * <p>One of {@code explicit}, {@code managed_payments}, or {@code
+       * tax_integration_configuration}.
+       */
+      @SerializedName("source")
+      String source;
+
+      /**
+       * For more details about IntegrationConfigurationDisabledReason, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class IntegrationConfigurationDisabledReason extends StripeObject {
+        /**
+         * The parameter that prevented {@code automatic_tax} from being enabled (for example {@code
+         * default_tax_rates}).
+         */
+        @SerializedName("conflicting_field")
+        String conflictingField;
+      }
+    }
 
     /**
      * For more details about Liability, please refer to the <a
@@ -2623,8 +2672,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @EqualsAndHashCode(callSuper = false)
       public static class Pix extends StripeObject {
         /**
-         * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
-         * Defaults to 86400 seconds.
+         * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60
+         * and 1209600, inclusive). If unspecified, defaults to 14400 seconds (4 hours).
          */
         @SerializedName("expires_after_seconds")
         Long expiresAfterSeconds;

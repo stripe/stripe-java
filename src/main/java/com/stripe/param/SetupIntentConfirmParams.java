@@ -48,10 +48,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
   @SerializedName("mandate_data")
   Object mandateData;
 
-  /**
-   * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
-   * SetupIntent.
-   */
+  /** The ID of a PaymentMethod to attach to this SetupIntent. */
   @SerializedName("payment_method")
   String paymentMethod;
 
@@ -257,10 +254,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
-     * SetupIntent.
-     */
+    /** The ID of a PaymentMethod to attach to this SetupIntent. */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
       return this;

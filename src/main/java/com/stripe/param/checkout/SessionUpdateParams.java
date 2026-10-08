@@ -2870,7 +2870,10 @@ public class SessionUpdateParams extends ApiRequestParams {
      * dynamically optimize your payment flow and comply with regional legislation and network
      * rules, such as SCA.
      *
-     * <p>Pass an empty string to remove a previously supplied configuration.
+     * <p>You must wrap any Checkout Session update that mutates {@code setup_future_usage} in <a
+     * href="https://stripe.com/js/custom_checkout/run_server_update">{@code runServerUpdate}</a>
+     * and await it before continuing with the payment. Pass an empty string to remove a previously
+     * supplied configuration.
      */
     @SerializedName("setup_future_usage")
     ApiRequestParams.EnumParam setupFutureUsage;
@@ -3084,7 +3087,10 @@ public class SessionUpdateParams extends ApiRequestParams {
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as SCA.
        *
-       * <p>Pass an empty string to remove a previously supplied configuration.
+       * <p>You must wrap any Checkout Session update that mutates {@code setup_future_usage} in <a
+       * href="https://stripe.com/js/custom_checkout/run_server_update">{@code runServerUpdate}</a>
+       * and await it before continuing with the payment. Pass an empty string to remove a
+       * previously supplied configuration.
        */
       public Builder setSetupFutureUsage(
           SessionUpdateParams.PaymentIntentData.SetupFutureUsage setupFutureUsage) {
@@ -3114,7 +3120,10 @@ public class SessionUpdateParams extends ApiRequestParams {
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as SCA.
        *
-       * <p>Pass an empty string to remove a previously supplied configuration.
+       * <p>You must wrap any Checkout Session update that mutates {@code setup_future_usage} in <a
+       * href="https://stripe.com/js/custom_checkout/run_server_update">{@code runServerUpdate}</a>
+       * and await it before continuing with the payment. Pass an empty string to remove a
+       * previously supplied configuration.
        */
       public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
         this.setupFutureUsage = setupFutureUsage;

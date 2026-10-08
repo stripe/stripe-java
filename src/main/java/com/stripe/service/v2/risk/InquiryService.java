@@ -25,6 +25,14 @@ public final class InquiryService extends ApiService {
     return list(params, (RequestOptions) null);
   }
   /** Lists risk inquiries for a connected account. */
+  public StripeCollection<Inquiry> list(RequestOptions options) throws StripeException {
+    return list((InquiryListParams) null, options);
+  }
+  /** Lists risk inquiries for a connected account. */
+  public StripeCollection<Inquiry> list() throws StripeException {
+    return list((InquiryListParams) null, (RequestOptions) null);
+  }
+  /** Lists risk inquiries for a connected account. */
   public StripeCollection<Inquiry> list(InquiryListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/risk/inquiries";

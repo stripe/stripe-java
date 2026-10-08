@@ -130,6 +130,13 @@ public class Authorization extends ApiResource
   Fleet fleet;
 
   /**
+   * Details about the flexible credential options for this authorization. This is only populated
+   * when enrolled to flex credentials
+   */
+  @SerializedName("flexible_credential")
+  FlexibleCredential flexibleCredential;
+
+  /**
    * Fraud challenges sent to the cardholder, if this authorization was declined for fraud risk
    * reasons.
    */
@@ -1355,6 +1362,54 @@ public class Authorization extends ApiResource
         @SerializedName("national_amount_decimal")
         BigDecimal nationalAmountDecimal;
       }
+    }
+  }
+
+  /**
+   * For more details about FlexibleCredential, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FlexibleCredential extends StripeObject {
+    /**
+     * The authorization identifier of a prior product eligibility inquiry that selected the
+     * credential for this authorization, if exists.
+     */
+    @SerializedName("product_eligibility_inquiry")
+    String productEligibilityInquiry;
+
+    /** Details about the eligible secondary credentials for this authorization. */
+    @SerializedName("secondary_credentials")
+    List<Authorization.FlexibleCredential.SecondaryCredential> secondaryCredentials;
+
+    /**
+     * The {@code key} of the selected secondary credential for this authorization. Null if the
+     * card's primary credential was selected.
+     */
+    @SerializedName("selected_secondary")
+    String selectedSecondary;
+
+    /**
+     * For more details about SecondaryCredential, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SecondaryCredential extends StripeObject {
+      /**
+       * The funding source that this credential can support.
+       *
+       * <p>Equal to {@code credit}.
+       */
+      @SerializedName("funding")
+      String funding;
+
+      /** Unique reference of this credential within this array. */
+      @SerializedName("key")
+      String key;
     }
   }
 
@@ -2991,6 +3046,7 @@ public class Authorization extends ApiResource
     trySetResponseGetter(cardholder, responseGetter);
     trySetResponseGetter(enrichedMerchantData, responseGetter);
     trySetResponseGetter(fleet, responseGetter);
+    trySetResponseGetter(flexibleCredential, responseGetter);
     trySetResponseGetter(fuel, responseGetter);
     trySetResponseGetter(healthcare, responseGetter);
     trySetResponseGetter(merchantData, responseGetter);

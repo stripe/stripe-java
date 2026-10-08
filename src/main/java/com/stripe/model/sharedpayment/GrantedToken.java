@@ -782,7 +782,7 @@ public class GrantedToken extends ApiResource implements HasId {
       /**
        * The interval at which the shared payment token's amount usage restrictions reset.
        *
-       * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+       * <p>One of {@code day}, {@code hour}, {@code month}, {@code week}, or {@code year}.
        */
       @SerializedName("interval")
       String interval;

@@ -17242,8 +17242,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
           /**
            * A <a href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
-           * representing the local jurisdiction. Supported FIPS codes are: {@code 003} (Allegheny
-           * County) and {@code 60000} (Philadelphia City).
+           * representing the local jurisdiction.
            */
           @SerializedName("jurisdiction")
           String jurisdiction;
@@ -17310,8 +17309,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
             /**
              * A <a href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS
-             * code</a> representing the local jurisdiction. Supported FIPS codes are: {@code 003}
-             * (Allegheny County) and {@code 60000} (Philadelphia City).
+             * code</a> representing the local jurisdiction.
              */
             public Builder setJurisdiction(String jurisdiction) {
               this.jurisdiction = jurisdiction;
@@ -17437,6 +17435,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         @SerializedName("attendance_tax")
         ATTENDANCE_TAX("attendance_tax"),
 
+        @SerializedName("digital_excise_tax")
+        DIGITAL_EXCISE_TAX("digital_excise_tax"),
+
         @SerializedName("entertainment_tax")
         ENTERTAINMENT_TAX("entertainment_tax"),
 
@@ -17477,7 +17478,10 @@ public class RegistrationCreateParams extends ApiRequestParams {
         STATE_SALES_TAX("state_sales_tax"),
 
         @SerializedName("tourism_tax")
-        TOURISM_TAX("tourism_tax");
+        TOURISM_TAX("tourism_tax"),
+
+        @SerializedName("utility_users_tax")
+        UTILITY_USERS_TAX("utility_users_tax");
 
         @Getter(onMethod_ = {@Override})
         private final String value;

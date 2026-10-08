@@ -33,7 +33,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
   @SerializedName("cadence")
   Cadence cadence;
 
-  /** Details about the capture configuration for the OffSessionPayment. */
+  /** Deprecated. Details about the capture configuration for the OffSessionPayment. */
   @SerializedName("capture")
   Capture capture;
 
@@ -284,7 +284,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Details about the capture configuration for the OffSessionPayment. */
+    /** Deprecated. Details about the capture configuration for the OffSessionPayment. */
     public Builder setCapture(OffSessionPaymentCreateParams.Capture capture) {
       this.capture = capture;
       return this;

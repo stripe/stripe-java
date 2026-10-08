@@ -305,10 +305,16 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
     @SerializedName("type")
     Type type;
 
-    private PaymentMethodDetails(Card card, Map<String, Object> extraParams, Type type) {
+    /** Details about the US bank account payment method. */
+    @SerializedName("us_bank_account")
+    UsBankAccount usBankAccount;
+
+    private PaymentMethodDetails(
+        Card card, Map<String, Object> extraParams, Type type, UsBankAccount usBankAccount) {
       this.card = card;
       this.extraParams = extraParams;
       this.type = type;
+      this.usBankAccount = usBankAccount;
     }
 
     public static Builder builder() {
@@ -322,10 +328,12 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
 
       private Type type;
 
+      private UsBankAccount usBankAccount;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails build() {
         return new PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails(
-            this.card, this.extraParams, this.type);
+            this.card, this.extraParams, this.type, this.usBankAccount);
       }
 
       /** Information about the card payment method used to make this payment. */
@@ -371,6 +379,14 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
       public Builder setType(
           PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.Type type) {
         this.type = type;
+        return this;
+      }
+
+      /** Details about the US bank account payment method. */
+      public Builder setUsBankAccount(
+          PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.UsBankAccount
+              usBankAccount) {
+        this.usBankAccount = usBankAccount;
         return this;
       }
     }
@@ -645,9 +661,87 @@ public class PaymentRecordReportPaymentAttemptFailedParams extends ApiRequestPar
       }
     }
 
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsBankAccount {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** NACHA ACH return code for a failed US bank account payment. */
+      @SerializedName("return_code")
+      String returnCode;
+
+      private UsBankAccount(Map<String, Object> extraParams, String returnCode) {
+        this.extraParams = extraParams;
+        this.returnCode = returnCode;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String returnCode;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.UsBankAccount
+            build() {
+          return new PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails
+              .UsBankAccount(this.extraParams, this.returnCode);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.UsBankAccount#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentRecordReportPaymentAttemptFailedParams.PaymentMethodDetails.UsBankAccount#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** NACHA ACH return code for a failed US bank account payment. */
+        public Builder setReturnCode(String returnCode) {
+          this.returnCode = returnCode;
+          return this;
+        }
+      }
+    }
+
     public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("card")
-      CARD("card");
+      CARD("card"),
+
+      @SerializedName("us_bank_account")
+      US_BANK_ACCOUNT("us_bank_account");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

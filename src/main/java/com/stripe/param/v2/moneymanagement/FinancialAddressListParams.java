@@ -11,6 +11,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class FinancialAddressListParams extends ApiRequestParams {
+  /** The ID of the Account that owns the FinancialAddresses. */
+  @SerializedName("account")
+  String account;
+
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -29,7 +33,8 @@ public class FinancialAddressListParams extends ApiRequestParams {
   Long limit;
 
   private FinancialAddressListParams(
-      Map<String, Object> extraParams, String financialAccount, Long limit) {
+      String account, Map<String, Object> extraParams, String financialAccount, Long limit) {
+    this.account = account;
     this.extraParams = extraParams;
     this.financialAccount = financialAccount;
     this.limit = limit;
@@ -40,6 +45,8 @@ public class FinancialAddressListParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String account;
+
     private Map<String, Object> extraParams;
 
     private String financialAccount;
@@ -48,7 +55,14 @@ public class FinancialAddressListParams extends ApiRequestParams {
 
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAddressListParams build() {
-      return new FinancialAddressListParams(this.extraParams, this.financialAccount, this.limit);
+      return new FinancialAddressListParams(
+          this.account, this.extraParams, this.financialAccount, this.limit);
+    }
+
+    /** The ID of the Account that owns the FinancialAddresses. */
+    public Builder setAccount(String account) {
+      this.account = account;
+      return this;
     }
 
     /**

@@ -97,7 +97,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    * no action required on your server.
    *
    * <p>When set to {@code manual}, you must approve the customer's attempt to pay by calling <a
-   * href="api/checkout/sessions/approve">approve</a> from your server.
+   * href="https://stripe.com/api/checkout/sessions/approve">approve</a> from your server.
    *
    * <p>One of {@code auto}, or {@code manual}.
    */
@@ -352,6 +352,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("object")
   String object;
 
+  /**
+   * The account on behalf of which to charge. See the <a
+   * href="https://support.stripe.com/questions/sending-invoices-on-behalf-of-connected-accounts">Connect
+   * documentation</a> for details.
+   */
+  @SerializedName("on_behalf_of")
+  String onBehalfOf;
+
   /** The optional items presented to the customer at checkout. */
   @SerializedName("optional_items")
   List<Session.OptionalItem> optionalItems;
@@ -422,6 +430,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /** The ID of the Payment Reservation for this Checkout Session. */
   @SerializedName("payment_reservation")
   String paymentReservation;
+
+  @SerializedName("payment_settings")
+  PaymentSettings paymentSettings;
 
   /**
    * The payment status of the Checkout Session, one of {@code paid}, {@code unpaid}, or {@code
@@ -5333,6 +5344,115 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /**
+   * For more details about PaymentSettings, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentSettings extends StripeObject {
+    /** Configures an application fee transferred to the application owner's Stripe account. */
+    @SerializedName("application_fee_data")
+    ApplicationFeeData applicationFeeData;
+
+    /** Controls when the funds will be captured from the customer's account. */
+    @SerializedName("capture_method")
+    String captureMethod;
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    @SerializedName("description")
+    String description;
+
+    /**
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
+     * Indicates that you intend to make future payments with the payment method collected by this
+     * Checkout Session.
+     *
+     * <p>One of {@code off_session}, or {@code on_session}.
+     */
+    @SerializedName("setup_future_usage")
+    String setupFutureUsage;
+
+    /**
+     * Text that appears on the customer's statement as the statement descriptor for a non-card
+     * charge. This value overrides the account's default statement descriptor.
+     */
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+
+    /** Configures automatic transfers to a connected account when payments succeed. */
+    @SerializedName("transfer_data")
+    TransferData transferData;
+
+    /** A string that identifies the initial payment as part of a group. */
+    @SerializedName("transfer_group")
+    String transferGroup;
+
+    /**
+     * For more details about ApplicationFeeData, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ApplicationFeeData extends StripeObject {
+      /**
+       * The application fee amount, in the currency's smallest unit, applied to the initial
+       * payment.
+       */
+      @SerializedName("initial_amount")
+      Long initialAmount;
+
+      /** The percentage of each payment collected as an application fee. */
+      @SerializedName("percentage_decimal")
+      BigDecimal percentageDecimal;
+    }
+
+    /**
+     * For more details about TransferData, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TransferData extends StripeObject {
+      /**
+       * The connected account that receives funds from payments created by this Checkout Session.
+       */
+      @SerializedName("destination")
+      String destination;
+
+      /** Configures the amount transferred to the destination account. */
+      @SerializedName("transfer_amount")
+      TransferAmount transferAmount;
+
+      /**
+       * For more details about TransferAmount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class TransferAmount extends StripeObject {
+        /** The amount, in the currency's smallest unit, transferred from the initial payment. */
+        @SerializedName("initial_amount")
+        Long initialAmount;
+
+        /** The percentage of each payment transferred to the destination account. */
+        @SerializedName("percentage_decimal")
+        BigDecimal percentageDecimal;
+      }
+    }
+  }
+
+  /**
    * For more details about Permissions, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -5871,6 +5991,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(paymentRecord, responseGetter);
+    trySetResponseGetter(paymentSettings, responseGetter);
     trySetResponseGetter(permissions, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
     trySetResponseGetter(presentmentDetails, responseGetter);

@@ -397,6 +397,11 @@ import com.stripe.events.V2MoneyManagementInboundTransferBankDebitProcessingEven
 import com.stripe.events.V2MoneyManagementInboundTransferBankDebitQueuedEventNotification;
 import com.stripe.events.V2MoneyManagementInboundTransferBankDebitReturnedEventNotification;
 import com.stripe.events.V2MoneyManagementInboundTransferBankDebitSucceededEventNotification;
+import com.stripe.events.V2MoneyManagementInboundTransferMandateActivatedEventNotification;
+import com.stripe.events.V2MoneyManagementInboundTransferMandateCreatedEventNotification;
+import com.stripe.events.V2MoneyManagementInboundTransferMandateExpiredEventNotification;
+import com.stripe.events.V2MoneyManagementInboundTransferMandateRefusedEventNotification;
+import com.stripe.events.V2MoneyManagementInboundTransferMandateRevokedEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundPaymentCanceledEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundPaymentCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundPaymentFailedEventNotification;
@@ -3017,6 +3022,41 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
       EventNotificationCallback<V2MoneyManagementInboundTransferBankDebitSucceededEventNotification>
           callback) {
     this.register("v2.money_management.inbound_transfer.bank_debit_succeeded", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementInboundTransferMandateActivated(
+      EventNotificationCallback<V2MoneyManagementInboundTransferMandateActivatedEventNotification>
+          callback) {
+    this.register("v2.money_management.inbound_transfer_mandate.activated", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementInboundTransferMandateCreated(
+      EventNotificationCallback<V2MoneyManagementInboundTransferMandateCreatedEventNotification>
+          callback) {
+    this.register("v2.money_management.inbound_transfer_mandate.created", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementInboundTransferMandateExpired(
+      EventNotificationCallback<V2MoneyManagementInboundTransferMandateExpiredEventNotification>
+          callback) {
+    this.register("v2.money_management.inbound_transfer_mandate.expired", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementInboundTransferMandateRefused(
+      EventNotificationCallback<V2MoneyManagementInboundTransferMandateRefusedEventNotification>
+          callback) {
+    this.register("v2.money_management.inbound_transfer_mandate.refused", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementInboundTransferMandateRevoked(
+      EventNotificationCallback<V2MoneyManagementInboundTransferMandateRevokedEventNotification>
+          callback) {
+    this.register("v2.money_management.inbound_transfer_mandate.revoked", callback);
     return self();
   }
 

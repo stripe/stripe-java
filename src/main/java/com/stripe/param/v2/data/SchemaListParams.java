@@ -30,7 +30,7 @@ public class SchemaListParams extends ApiRequestParams {
   @SerializedName("include")
   List<SchemaListParams.Include> include;
 
-  /** The maximum number of results per page. Defaults to 10. Maximum is 100. */
+  /** The maximum number of results per page. Defaults to 10. Maximum is 1,000. */
   @SerializedName("limit")
   Long limit;
 
@@ -130,7 +130,7 @@ public class SchemaListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The maximum number of results per page. Defaults to 10. Maximum is 100. */
+    /** The maximum number of results per page. Defaults to 10. Maximum is 1,000. */
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;

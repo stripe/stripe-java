@@ -818,11 +818,19 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
       @SerializedName("money_movement_type")
       MoneyMovementType moneyMovementType;
 
+      /** Describes US bank account money movement details. */
+      @SerializedName("us_bank_account")
+      UsBankAccount usBankAccount;
+
       private MoneyMovementDetails(
-          Card card, Map<String, Object> extraParams, MoneyMovementType moneyMovementType) {
+          Card card,
+          Map<String, Object> extraParams,
+          MoneyMovementType moneyMovementType,
+          UsBankAccount usBankAccount) {
         this.card = card;
         this.extraParams = extraParams;
         this.moneyMovementType = moneyMovementType;
+        this.usBankAccount = usBankAccount;
       }
 
       public static Builder builder() {
@@ -836,10 +844,12 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
 
         private MoneyMovementType moneyMovementType;
 
+        private UsBankAccount usBankAccount;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails build() {
           return new PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails(
-              this.card, this.extraParams, this.moneyMovementType);
+              this.card, this.extraParams, this.moneyMovementType, this.usBankAccount);
         }
 
         /** Describes card money movement details. */
@@ -884,6 +894,14 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
             PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.MoneyMovementType
                 moneyMovementType) {
           this.moneyMovementType = moneyMovementType;
+          return this;
+        }
+
+        /** Describes US bank account money movement details. */
+        public Builder setUsBankAccount(
+            PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.UsBankAccount
+                usBankAccount) {
+          this.usBankAccount = usBankAccount;
           return this;
         }
       }
@@ -1020,9 +1038,140 @@ public class PaymentEvaluationCreateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class UsBankAccount {
+        /** Describes the presence of the customer during the payment. */
+        @SerializedName("customer_presence")
+        CustomerPresence customerPresence;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Describes the type of US bank account payment. */
+        @SerializedName("payment_type")
+        PaymentType paymentType;
+
+        private UsBankAccount(
+            CustomerPresence customerPresence,
+            Map<String, Object> extraParams,
+            PaymentType paymentType) {
+          this.customerPresence = customerPresence;
+          this.extraParams = extraParams;
+          this.paymentType = paymentType;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private CustomerPresence customerPresence;
+
+          private Map<String, Object> extraParams;
+
+          private PaymentType paymentType;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.UsBankAccount
+              build() {
+            return new PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails
+                .UsBankAccount(this.customerPresence, this.extraParams, this.paymentType);
+          }
+
+          /** Describes the presence of the customer during the payment. */
+          public Builder setCustomerPresence(
+              PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.UsBankAccount
+                      .CustomerPresence
+                  customerPresence) {
+            this.customerPresence = customerPresence;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.UsBankAccount#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.UsBankAccount#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Describes the type of US bank account payment. */
+          public Builder setPaymentType(
+              PaymentEvaluationCreateParams.PaymentDetails.MoneyMovementDetails.UsBankAccount
+                      .PaymentType
+                  paymentType) {
+            this.paymentType = paymentType;
+            return this;
+          }
+        }
+
+        public enum CustomerPresence implements ApiRequestParams.EnumParam {
+          @SerializedName("off_session")
+          OFF_SESSION("off_session"),
+
+          @SerializedName("on_session")
+          ON_SESSION("on_session");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          CustomerPresence(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum PaymentType implements ApiRequestParams.EnumParam {
+          @SerializedName("one_off")
+          ONE_OFF("one_off"),
+
+          @SerializedName("recurring")
+          RECURRING("recurring");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PaymentType(String value) {
+            this.value = value;
+          }
+        }
+      }
+
       public enum MoneyMovementType implements ApiRequestParams.EnumParam {
         @SerializedName("card")
-        CARD("card");
+        CARD("card"),
+
+        @SerializedName("us_bank_account")
+        US_BANK_ACCOUNT("us_bank_account");
 
         @Getter(onMethod_ = {@Override})
         private final String value;

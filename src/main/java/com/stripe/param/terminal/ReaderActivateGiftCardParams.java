@@ -21,6 +21,10 @@ public class ReaderActivateGiftCardParams extends ApiRequestParams {
   @SerializedName("brand")
   Brand brand;
 
+  /** Enables cancel button on gift card operation screens. */
+  @SerializedName("enable_customer_cancellation")
+  Boolean enableCustomerCancellation;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -41,11 +45,13 @@ public class ReaderActivateGiftCardParams extends ApiRequestParams {
   private ReaderActivateGiftCardParams(
       Balance balance,
       Brand brand,
+      Boolean enableCustomerCancellation,
       List<String> expand,
       Map<String, Object> extraParams,
       String onBehalfOf) {
     this.balance = balance;
     this.brand = brand;
+    this.enableCustomerCancellation = enableCustomerCancellation;
     this.expand = expand;
     this.extraParams = extraParams;
     this.onBehalfOf = onBehalfOf;
@@ -60,6 +66,8 @@ public class ReaderActivateGiftCardParams extends ApiRequestParams {
 
     private Brand brand;
 
+    private Boolean enableCustomerCancellation;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -69,7 +77,12 @@ public class ReaderActivateGiftCardParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderActivateGiftCardParams build() {
       return new ReaderActivateGiftCardParams(
-          this.balance, this.brand, this.expand, this.extraParams, this.onBehalfOf);
+          this.balance,
+          this.brand,
+          this.enableCustomerCancellation,
+          this.expand,
+          this.extraParams,
+          this.onBehalfOf);
     }
 
     /** The initial balance to set on the gift card. */
@@ -81,6 +94,12 @@ public class ReaderActivateGiftCardParams extends ApiRequestParams {
     /** <strong>Required.</strong> The brand of the gift card. */
     public Builder setBrand(ReaderActivateGiftCardParams.Brand brand) {
       this.brand = brand;
+      return this;
+    }
+
+    /** Enables cancel button on gift card operation screens. */
+    public Builder setEnableCustomerCancellation(Boolean enableCustomerCancellation) {
+      this.enableCustomerCancellation = enableCustomerCancellation;
       return this;
     }
 

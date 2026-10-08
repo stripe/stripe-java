@@ -594,7 +594,10 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
       CRYPTO_WALLET("crypto_wallet"),
 
       @SerializedName("network_business_profile_wallet")
-      NETWORK_BUSINESS_PROFILE_WALLET("network_business_profile_wallet");
+      NETWORK_BUSINESS_PROFILE_WALLET("network_business_profile_wallet"),
+
+      @SerializedName("pix")
+      PIX("pix");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

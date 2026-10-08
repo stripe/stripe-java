@@ -106,7 +106,7 @@ public class FinancingSummary extends ApiResource {
 
     /**
      * The time at which the funds were paid out to the connected account's Stripe balance. Given in
-     * milliseconds since unix epoch.
+     * seconds since unix epoch.
      */
     @SerializedName("advance_paid_out_at")
     BigDecimal advancePaidOutAt;

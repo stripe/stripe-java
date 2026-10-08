@@ -466,6 +466,9 @@ public class GrantedTokenCreateParams extends ApiRequestParams {
         @SerializedName("day")
         DAY("day"),
 
+        @SerializedName("hour")
+        HOUR("hour"),
+
         @SerializedName("month")
         MONTH("month"),
 

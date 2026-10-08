@@ -19,6 +19,10 @@ public class IntegrationConfiguration extends StripeObject {
   @SerializedName("checkout_sessions")
   CheckoutSessions checkoutSessions;
 
+  /** Configuration for standalone Invoices automatic tax behavior. */
+  @SerializedName("invoices")
+  Invoices invoices;
+
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
@@ -42,6 +46,20 @@ public class IntegrationConfiguration extends StripeObject {
   public static class CheckoutSessions extends StripeObject {
     /**
      * Controls the default value of automatic_tax[enabled] on new Checkout Sessions.
+     *
+     * <p>One of {@code disabled}, or {@code enabled_when_possible}.
+     */
+    @SerializedName("automatic_tax_default_value")
+    String automaticTaxDefaultValue;
+  }
+
+  /** Configuration for standalone Invoices automatic tax behavior. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Invoices extends StripeObject {
+    /**
+     * Controls the default value of automatic_tax[enabled] on new standalone Invoices.
      *
      * <p>One of {@code disabled}, or {@code enabled_when_possible}.
      */

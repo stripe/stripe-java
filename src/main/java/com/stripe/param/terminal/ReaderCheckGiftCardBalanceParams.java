@@ -17,6 +17,10 @@ public class ReaderCheckGiftCardBalanceParams extends ApiRequestParams {
   @SerializedName("brand")
   Brand brand;
 
+  /** Enables cancel button on gift card operation screens. */
+  @SerializedName("enable_customer_cancellation")
+  Boolean enableCustomerCancellation;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -35,8 +39,13 @@ public class ReaderCheckGiftCardBalanceParams extends ApiRequestParams {
   String onBehalfOf;
 
   private ReaderCheckGiftCardBalanceParams(
-      Brand brand, List<String> expand, Map<String, Object> extraParams, String onBehalfOf) {
+      Brand brand,
+      Boolean enableCustomerCancellation,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      String onBehalfOf) {
     this.brand = brand;
+    this.enableCustomerCancellation = enableCustomerCancellation;
     this.expand = expand;
     this.extraParams = extraParams;
     this.onBehalfOf = onBehalfOf;
@@ -49,6 +58,8 @@ public class ReaderCheckGiftCardBalanceParams extends ApiRequestParams {
   public static class Builder {
     private Brand brand;
 
+    private Boolean enableCustomerCancellation;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -58,12 +69,22 @@ public class ReaderCheckGiftCardBalanceParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderCheckGiftCardBalanceParams build() {
       return new ReaderCheckGiftCardBalanceParams(
-          this.brand, this.expand, this.extraParams, this.onBehalfOf);
+          this.brand,
+          this.enableCustomerCancellation,
+          this.expand,
+          this.extraParams,
+          this.onBehalfOf);
     }
 
     /** <strong>Required.</strong> The brand of the gift card. */
     public Builder setBrand(ReaderCheckGiftCardBalanceParams.Brand brand) {
       this.brand = brand;
+      return this;
+    }
+
+    /** Enables cancel button on gift card operation screens. */
+    public Builder setEnableCustomerCancellation(Boolean enableCustomerCancellation) {
+      this.enableCustomerCancellation = enableCustomerCancellation;
       return this;
     }
 
