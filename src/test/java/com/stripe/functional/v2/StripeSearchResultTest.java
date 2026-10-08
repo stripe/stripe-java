@@ -35,8 +35,8 @@ public class StripeSearchResultTest extends BaseStripeTest {
       super(getter);
     }
 
-    StripeSearchResult<SearchableModel> search(
-        Map<String, Object> params, RequestOptions options) throws StripeException {
+    StripeSearchResult<SearchableModel> search(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
       return this.getResponseGetter()
           .request(
               new ApiRequest(
@@ -52,14 +52,14 @@ public class StripeSearchResultTest extends BaseStripeTest {
   @Test
   public void autoPagingReplaysOriginalPostBodyAcrossEmptyPages() throws Exception {
     List<String> pages =
-        new ArrayList<>(Arrays.asList(
-            "{\"object\":\"v2.search_result\",\"data\":[{\"id\":\"one\"}],\"next_page_url\":\"/v2/widgets/search?page=2&limit=2\",\"total_count\":2}",
-            "{\"object\":\"v2.search_result\",\"data\":[],\"next_page_url\":\"/v2/widgets/search?page=3&limit=2\",\"total_count\":2}",
-            "{\"object\":\"v2.search_result\",\"data\":[{\"id\":\"two\"}],\"next_page_url\":null,\"total_count\":2}"));
+        new ArrayList<>(
+            Arrays.asList(
+                "{\"object\":\"v2.search_result\",\"data\":[{\"id\":\"one\"}],\"next_page_url\":\"/v2/widgets/search?page=2&limit=2\",\"total_count\":2}",
+                "{\"object\":\"v2.search_result\",\"data\":[],\"next_page_url\":\"/v2/widgets/search?page=3&limit=2\",\"total_count\":2}",
+                "{\"object\":\"v2.search_result\",\"data\":[{\"id\":\"two\"}],\"next_page_url\":null,\"total_count\":2}"));
     Mockito.doAnswer(
             invocation ->
-                new StripeResponse(
-                    200, HttpHeaders.of(Collections.emptyMap()), pages.remove(0)))
+                new StripeResponse(200, HttpHeaders.of(Collections.emptyMap()), pages.remove(0)))
         .when(httpClientSpy)
         .request(Mockito.<StripeRequest>any());
 
