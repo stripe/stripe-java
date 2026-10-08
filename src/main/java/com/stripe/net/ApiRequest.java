@@ -50,10 +50,7 @@ public class ApiRequest extends BaseApiRequest {
       return path;
     }
     String separator = path.contains("?") ? "&" : "?";
-    return path
-        + separator
-        + "limit="
-        + String.valueOf(params.get("limit"));
+    return path + separator + "limit=" + String.valueOf(params.get("limit"));
   }
 
   private static Map<String, Object> v2SearchParams(
