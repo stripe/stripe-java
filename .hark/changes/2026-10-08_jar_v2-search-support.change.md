@@ -6,4 +6,4 @@ jira_tickets_closed:
 - DEVSDK-3316
 ---
 
-Adds `com.stripe.model.v2.StripeSearchResult<T>` and auto pagination support.
+Adds `com.stripe.model.v2.StripeSearchResult<T>` and support for auto pagination of search results.
