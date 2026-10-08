@@ -3,6 +3,7 @@ title: Update generated code
 pr_url: https://github.com/stripe/stripe-java/pull/2311
 semver_level: major
 is_stripe_api_change: true
+released_in_version: 34.1.0-alpha.2
 ---
 
 * Add support for new resources `radar.Rule`, `v2.moneymanagement.FundingSession`, and `v2.moneymanagement.InboundTransferMandate`
