@@ -1129,6 +1129,21 @@ public final class EventNotificationClassLookup {
         com.stripe.events.V2MoneyManagementInboundTransferBankDebitSucceededEventNotification
             .class);
     eventClassLookup.put(
+        "v2.money_management.inbound_transfer_mandate.activated",
+        com.stripe.events.V2MoneyManagementInboundTransferMandateActivatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.inbound_transfer_mandate.created",
+        com.stripe.events.V2MoneyManagementInboundTransferMandateCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.inbound_transfer_mandate.expired",
+        com.stripe.events.V2MoneyManagementInboundTransferMandateExpiredEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.inbound_transfer_mandate.refused",
+        com.stripe.events.V2MoneyManagementInboundTransferMandateRefusedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.inbound_transfer_mandate.revoked",
+        com.stripe.events.V2MoneyManagementInboundTransferMandateRevokedEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.outbound_payment.canceled",
         com.stripe.events.V2MoneyManagementOutboundPaymentCanceledEventNotification.class);
     eventClassLookup.put(

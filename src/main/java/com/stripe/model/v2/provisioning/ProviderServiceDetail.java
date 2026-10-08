@@ -131,9 +131,15 @@ public class ProviderServiceDetail extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AllowedUpdate extends StripeObject {
+    /**
+     * Whether the target service appears in upgrade flows, downgrade flows, or both.
+     *
+     * <p>One of {@code any}, {@code down}, or {@code up}.
+     */
     @SerializedName("direction")
     String direction;
 
+    /** Identifier of a service to which a resource can be updated. */
     @SerializedName("service")
     String service;
   }
@@ -146,23 +152,30 @@ public class ProviderServiceDetail extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Constraint extends StripeObject {
+    /** Limit on the number of active resources for the service. */
     @SerializedName("count")
     Count count;
 
+    /**
+     * Whether provisioning is blocked when an allowed-update target is active in the same scope.
+     */
     @SerializedName("mutual_exclusion_allowed_updates")
     Boolean mutualExclusionAllowedUpdates;
 
+    /**
+     * Kind of constraint represented by this entry.
+     *
+     * <p>One of {@code count}, or {@code mutual_exclusion_allowed_updates}.
+     */
     @SerializedName("type")
     String type;
 
-    /**
-     * For more details about Count, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Limit on the number of active resources for the service. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Count extends StripeObject {
+      /** Maximum number of active resources for the service within its scope. */
       @SerializedName("at_most")
       Long atMost;
     }
@@ -173,6 +186,7 @@ public class ProviderServiceDetail extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Pricing extends StripeObject {
+    /** Parent-service-dependent pricing details, set when {@code type} is {@code component}. */
     @SerializedName("component")
     Component component;
 
@@ -191,17 +205,20 @@ public class ProviderServiceDetail extends StripeObject implements HasId {
     @SerializedName("paid_pricing")
     List<ProviderServiceDetail.Pricing.PaidPricing> paidPricing;
 
+    /**
+     * Pricing model for the service: free, paid, or dependent on a parent service.
+     *
+     * <p>One of {@code component}, {@code free}, or {@code paid}.
+     */
     @SerializedName("type")
     String type;
 
-    /**
-     * For more details about Component, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Parent-service-dependent pricing details, set when {@code type} is {@code component}. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Component extends StripeObject {
+      /** Pricing options selected according to the resource's active parent services. */
       @SerializedName("options")
       List<ProviderServiceDetail.Pricing.Component.Option> options;
 
@@ -213,32 +230,44 @@ public class ProviderServiceDetail extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Option extends StripeObject {
+        /** Whether this option applies when no parent-service-specific option matches. */
         @SerializedName("is_default")
         Boolean isDefault;
 
+        /** Pricing details for this option, set when {@code type} is {@code paid}. */
         @SerializedName("paid")
         Paid paid;
 
+        /** Identifiers of active parent services for which this option applies. */
         @SerializedName("parent_services")
         List<String> parentServices;
 
+        /**
+         * Whether the component is free or paid when this option applies.
+         *
+         * <p>One of {@code free}, or {@code paid}.
+         */
         @SerializedName("type")
         String type;
 
-        /**
-         * For more details about Paid, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Pricing details for this option, set when {@code type} is {@code paid}. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Paid extends StripeObject {
+          /** Additional display information about the price. */
           @SerializedName("description")
           String description;
 
+          /** Provider-supplied pricing terms, set when {@code type} is {@code freeform}. */
           @SerializedName("freeform")
           String freeform;
 
+          /**
+           * Kind of pricing represented by this entry.
+           *
+           * <p>One of {@code free}, or {@code freeform}.
+           */
           @SerializedName("type")
           String type;
         }
@@ -254,12 +283,19 @@ public class ProviderServiceDetail extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paid extends StripeObject {
+      /** Additional display information about the price. */
       @SerializedName("description")
       String description;
 
+      /** Provider-supplied pricing terms, set when {@code type} is {@code freeform}. */
       @SerializedName("freeform")
       String freeform;
 
+      /**
+       * Kind of pricing represented by this entry.
+       *
+       * <p>One of {@code free}, or {@code freeform}.
+       */
       @SerializedName("type")
       String type;
     }
@@ -272,18 +308,27 @@ public class ProviderServiceDetail extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class PaidPricing extends StripeObject {
+      /** Service configuration values for which this pricing entry applies. */
       @SerializedName("configuration")
       Map<String, Object> configuration;
 
+      /** Additional display information about the price. */
       @SerializedName("description")
       String description;
 
+      /** Provider-supplied pricing terms, set when {@code type} is {@code freeform}. */
       @SerializedName("freeform")
       String freeform;
 
+      /** Whether this entry is the fallback when no configuration-specific entry matches. */
       @SerializedName("is_default")
       Boolean isDefault;
 
+      /**
+       * Kind of pricing represented by this entry.
+       *
+       * <p>One of {@code free}, or {@code freeform}.
+       */
       @SerializedName("type")
       String type;
     }

@@ -2398,8 +2398,8 @@ public class PaymentRecord extends ApiResource implements HasId {
       /**
        * The token currency that the transaction was sent with.
        *
-       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, {@code usdsui},
-       * or {@code usdt}.
+       * <p>One of {@code ousd}, {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp},
+       * {@code usdsui}, or {@code usdt}.
        */
       @SerializedName("token_currency")
       String tokenCurrency;
@@ -3966,9 +3966,23 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("fingerprint")
       String fingerprint;
 
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
       /** Payer bank reference number for the payment. */
       @SerializedName("payment_reference")
       String paymentReference;
+
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
 
       /** The last four digits of the Swish account phone number. */
       @SerializedName("verified_phone_last4")

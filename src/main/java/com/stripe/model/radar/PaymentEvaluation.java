@@ -18,6 +18,7 @@ import com.stripe.param.radar.PaymentEvaluationCreateParams;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -91,10 +92,14 @@ public class PaymentEvaluation extends ApiResource implements HasId {
    * Recommended action based on the score of the {@code fraudulent_payment} signal. Possible values
    * are {@code block}, {@code continue} and {@code request_three_d_secure}.
    *
-   * <p>One of {@code block}, or {@code continue}.
+   * <p>One of {@code block}, {@code continue}, {@code request_three_d_secure}, or {@code reroute}.
    */
   @SerializedName("recommended_action")
   String recommendedAction;
+
+  /** Details about Radar Rules associated with the payment evaluation. */
+  @SerializedName("rules")
+  Rules rules;
 
   /** Collection of signals for this payment evaluation. */
   @SerializedName("signals")
@@ -592,10 +597,14 @@ public class PaymentEvaluation extends ApiResource implements HasId {
       /**
        * Describes the type of money movement.
        *
-       * <p>Equal to {@code card}.
+       * <p>One of {@code card}, or {@code us_bank_account}.
        */
       @SerializedName("money_movement_type")
       String moneyMovementType;
+
+      /** Describes US bank account money movement details. */
+      @SerializedName("us_bank_account")
+      UsBankAccount usBankAccount;
 
       /** Money Movement card details attached to this payment. */
       @Getter
@@ -615,6 +624,28 @@ public class PaymentEvaluation extends ApiResource implements HasId {
          *
          * <p>One of {@code one_off}, {@code recurring}, {@code setup_one_off}, or {@code
          * setup_recurring}.
+         */
+        @SerializedName("payment_type")
+        String paymentType;
+      }
+
+      /** Money movement details for a US bank account payment. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class UsBankAccount extends StripeObject {
+        /**
+         * Describes the presence of the customer during the payment.
+         *
+         * <p>One of {@code off_session}, or {@code on_session}.
+         */
+        @SerializedName("customer_presence")
+        String customerPresence;
+
+        /**
+         * Describes the type of US bank account payment.
+         *
+         * <p>One of {@code one_off}, or {@code recurring}.
          */
         @SerializedName("payment_type")
         String paymentType;
@@ -723,11 +754,95 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     }
   }
 
+  /** Radar rules matched during the payment evaluation. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Rules extends StripeObject {
+    /**
+     * List of Radar rule tokens that matched during evaluation. Expandable to full rule objects.
+     */
+    @SerializedName("matched")
+    List<ExpandableField<Rule>> matched;
+
+    /**
+     * The Radar rule token selected as the decisive rule for this evaluation. Expandable to the
+     * full rule object.
+     */
+    @SerializedName("selected")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Rule> selected;
+
+    /** Get ID of expandable {@code selected} object. */
+    public String getSelected() {
+      return (this.selected != null) ? this.selected.getId() : null;
+    }
+
+    public void setSelected(String id) {
+      this.selected = ApiResource.setExpandableFieldId(id, this.selected);
+    }
+
+    /** Get expanded {@code selected}. */
+    public Rule getSelectedObject() {
+      return (this.selected != null) ? this.selected.getExpanded() : null;
+    }
+
+    public void setSelectedObject(Rule expandableObject) {
+      this.selected = new ExpandableField<Rule>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get IDs of expandable {@code matched} object list. */
+    public List<String> getMatched() {
+      return (this.matched != null)
+          ? this.matched.stream().map(x -> x.getId()).collect(Collectors.toList())
+          : null;
+    }
+
+    public void setMatched(List<String> ids) {
+      if (ids == null) {
+        this.matched = null;
+        return;
+      }
+      if (this.matched != null
+          && this.matched.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+        // noop if the ids are equal to what are already present
+        return;
+      }
+      this.matched =
+          (ids != null)
+              ? ids.stream()
+                  .map(id -> new ExpandableField<Rule>(id, null))
+                  .collect(Collectors.toList())
+              : null;
+    }
+
+    /** Get expanded {@code matched}. */
+    public List<Rule> getMatchedObjects() {
+      return (this.matched != null)
+          ? this.matched.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+          : null;
+    }
+
+    public void setMatchedObjects(List<Rule> objs) {
+      this.matched =
+          objs != null
+              ? objs.stream()
+                  .map(x -> new ExpandableField<Rule>(x.getId(), x))
+                  .collect(Collectors.toList())
+              : null;
+    }
+  }
+
   /** Collection of signals for this payment evaluation. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Signals extends StripeObject {
+    /** A payment evaluation signal with evaluated_at, risk_level, and score fields. */
+    @SerializedName("bank_initiated_return")
+    BankInitiatedReturn bankInitiatedReturn;
+
     /** The likelihood that this {@code PaymentEvaluation} results in an early fraud warning. */
     @SerializedName("early_fraud_warning")
     EarlyFraudWarning earlyFraudWarning;
@@ -742,6 +857,33 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     /** A payment evaluation signal with evaluated_at, risk_level, and score fields. */
     @SerializedName("fraudulent_payment")
     FraudulentPayment fraudulentPayment;
+
+    /** A payment evaluation signal with evaluated_at, risk_level, and score fields. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BankInitiatedReturn extends StripeObject {
+      /** The time when this signal was evaluated. */
+      @SerializedName("evaluated_at")
+      Long evaluatedAt;
+
+      /**
+       * Risk level of this signal, based on the score.
+       *
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+       * not_assessed}, or {@code unknown}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
+
+      /**
+       * Numeric score for this signal, returned with two decimal places. Possible values for
+       * evaluated payments are between 0 and 100, where higher scores indicate a higher likelihood
+       * of the signal being true.
+       */
+      @SerializedName("score")
+      BigDecimal score;
+    }
 
     /** A payment evaluation signal with evaluated_at, risk_level, and score fields. */
     @Getter
@@ -832,6 +974,7 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     trySetResponseGetter(customerDetails, responseGetter);
     trySetResponseGetter(outcome, responseGetter);
     trySetResponseGetter(paymentDetails, responseGetter);
+    trySetResponseGetter(rules, responseGetter);
     trySetResponseGetter(signals, responseGetter);
   }
 }

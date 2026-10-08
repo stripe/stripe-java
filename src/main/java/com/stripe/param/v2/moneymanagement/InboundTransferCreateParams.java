@@ -38,6 +38,10 @@ public class InboundTransferCreateParams extends ApiRequestParams {
   @SerializedName("from")
   From from;
 
+  /** Network-specific details for the InboundTransfer. */
+  @SerializedName("network_details")
+  NetworkDetails networkDetails;
+
   /**
    * An optional statement descriptor surfaced on the payer's bank statement. Max 10 characters.
    * When omitted, Stripe sends its default descriptor.
@@ -54,12 +58,14 @@ public class InboundTransferCreateParams extends ApiRequestParams {
       String description,
       Map<String, Object> extraParams,
       From from,
+      NetworkDetails networkDetails,
       String statementDescriptor,
       To to) {
     this.amount = amount;
     this.description = description;
     this.extraParams = extraParams;
     this.from = from;
+    this.networkDetails = networkDetails;
     this.statementDescriptor = statementDescriptor;
     this.to = to;
   }
@@ -77,6 +83,8 @@ public class InboundTransferCreateParams extends ApiRequestParams {
 
     private From from;
 
+    private NetworkDetails networkDetails;
+
     private String statementDescriptor;
 
     private To to;
@@ -88,6 +96,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
           this.description,
           this.extraParams,
           this.from,
+          this.networkDetails,
           this.statementDescriptor,
           this.to);
     }
@@ -139,6 +148,12 @@ public class InboundTransferCreateParams extends ApiRequestParams {
      */
     public Builder setFrom(InboundTransferCreateParams.From from) {
       this.from = from;
+      return this;
+    }
+
+    /** Network-specific details for the InboundTransfer. */
+    public Builder setNetworkDetails(InboundTransferCreateParams.NetworkDetails networkDetails) {
+      this.networkDetails = networkDetails;
       return this;
     }
 
@@ -243,6 +258,159 @@ public class InboundTransferCreateParams extends ApiRequestParams {
       public Builder setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NetworkDetails {
+    /**
+     * <strong>Required.</strong> ACH-specific network details. Only applied when the transfer
+     * routes over ACH.
+     */
+    @SerializedName("ach")
+    Ach ach;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private NetworkDetails(Ach ach, Map<String, Object> extraParams) {
+      this.ach = ach;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Ach ach;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public InboundTransferCreateParams.NetworkDetails build() {
+        return new InboundTransferCreateParams.NetworkDetails(this.ach, this.extraParams);
+      }
+
+      /**
+       * <strong>Required.</strong> ACH-specific network details. Only applied when the transfer
+       * routes over ACH.
+       */
+      public Builder setAch(InboundTransferCreateParams.NetworkDetails.Ach ach) {
+        this.ach = ach;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InboundTransferCreateParams.NetworkDetails#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InboundTransferCreateParams.NetworkDetails#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ach {
+      /**
+       * Optional freeform payment-related information written into the type-7 ACH addenda record of
+       * the NACHA submission. Max 80 characters.
+       */
+      @SerializedName("addenda")
+      String addenda;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Ach(String addenda, Map<String, Object> extraParams) {
+        this.addenda = addenda;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String addenda;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InboundTransferCreateParams.NetworkDetails.Ach build() {
+          return new InboundTransferCreateParams.NetworkDetails.Ach(this.addenda, this.extraParams);
+        }
+
+        /**
+         * Optional freeform payment-related information written into the type-7 ACH addenda record
+         * of the NACHA submission. Max 80 characters.
+         */
+        public Builder setAddenda(String addenda) {
+          this.addenda = addenda;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InboundTransferCreateParams.NetworkDetails.Ach#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InboundTransferCreateParams.NetworkDetails.Ach#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
       }
     }
   }

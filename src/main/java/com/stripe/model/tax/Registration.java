@@ -2956,15 +2956,18 @@ public class Registration extends ApiResource implements HasId {
       /**
        * Type of registration in the US.
        *
-       * <p>One of {@code admissions_tax}, {@code attendance_tax}, {@code entertainment_tax}, {@code
-       * gross_receipts_tax}, {@code home_rule_tax}, {@code hospitality_tax}, {@code
-       * local_amusement_tax}, {@code local_lease_tax}, {@code luxury_tax}, {@code
-       * mass_transit_parking_tax}, {@code parking_tax}, {@code resort_tax}, {@code
-       * state_communications_tax}, {@code state_retail_delivery_fee}, {@code state_sales_tax}, or
-       * {@code tourism_tax}.
+       * <p>One of {@code admissions_tax}, {@code attendance_tax}, {@code digital_excise_tax},
+       * {@code entertainment_tax}, {@code gross_receipts_tax}, {@code home_rule_tax}, {@code
+       * hospitality_tax}, {@code local_amusement_tax}, {@code local_lease_tax}, {@code luxury_tax},
+       * {@code mass_transit_parking_tax}, {@code parking_tax}, {@code resort_tax}, {@code
+       * state_communications_tax}, {@code state_retail_delivery_fee}, {@code state_sales_tax},
+       * {@code tourism_tax}, or {@code utility_users_tax}.
        */
       @SerializedName("type")
       String type;
+
+      @SerializedName("utility_users_tax")
+      UtilityUsersTax utilityUsersTax;
 
       /**
        * For more details about AdmissionsTax, please refer to the <a
@@ -3217,6 +3220,23 @@ public class Registration extends ApiResource implements HasId {
         /**
          * A <a
          * href="https://docs.stripe.com/tax/registering?type=tourism_tax#registration-types">jurisdiction
+         * code</a> representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+      }
+
+      /**
+       * For more details about UtilityUsersTax, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class UtilityUsersTax extends StripeObject {
+        /**
+         * A <a
+         * href="https://docs.stripe.com/tax/registering?type=utility_users_tax#registration-types">jurisdiction
          * code</a> representing the local jurisdiction.
          */
         @SerializedName("jurisdiction")

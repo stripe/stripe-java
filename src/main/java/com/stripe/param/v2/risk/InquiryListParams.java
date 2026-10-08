@@ -11,10 +11,6 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class InquiryListParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The account to list inquiries for. */
-  @SerializedName("account")
-  String account;
-
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -28,8 +24,7 @@ public class InquiryListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  private InquiryListParams(String account, Map<String, Object> extraParams, Long limit) {
-    this.account = account;
+  private InquiryListParams(Map<String, Object> extraParams, Long limit) {
     this.extraParams = extraParams;
     this.limit = limit;
   }
@@ -39,21 +34,13 @@ public class InquiryListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String account;
-
     private Map<String, Object> extraParams;
 
     private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public InquiryListParams build() {
-      return new InquiryListParams(this.account, this.extraParams, this.limit);
-    }
-
-    /** <strong>Required.</strong> The account to list inquiries for. */
-    public Builder setAccount(String account) {
-      this.account = account;
-      return this;
+      return new InquiryListParams(this.extraParams, this.limit);
     }
 
     /**

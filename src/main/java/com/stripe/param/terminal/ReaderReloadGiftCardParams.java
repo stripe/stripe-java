@@ -32,6 +32,10 @@ public class ReaderReloadGiftCardParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
+  /** Enables cancel button on gift card operation screens. */
+  @SerializedName("enable_customer_cancellation")
+  Boolean enableCustomerCancellation;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -53,12 +57,14 @@ public class ReaderReloadGiftCardParams extends ApiRequestParams {
       Long amount,
       Brand brand,
       String currency,
+      Boolean enableCustomerCancellation,
       List<String> expand,
       Map<String, Object> extraParams,
       String onBehalfOf) {
     this.amount = amount;
     this.brand = brand;
     this.currency = currency;
+    this.enableCustomerCancellation = enableCustomerCancellation;
     this.expand = expand;
     this.extraParams = extraParams;
     this.onBehalfOf = onBehalfOf;
@@ -75,6 +81,8 @@ public class ReaderReloadGiftCardParams extends ApiRequestParams {
 
     private String currency;
 
+    private Boolean enableCustomerCancellation;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -84,7 +92,13 @@ public class ReaderReloadGiftCardParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderReloadGiftCardParams build() {
       return new ReaderReloadGiftCardParams(
-          this.amount, this.brand, this.currency, this.expand, this.extraParams, this.onBehalfOf);
+          this.amount,
+          this.brand,
+          this.currency,
+          this.enableCustomerCancellation,
+          this.expand,
+          this.extraParams,
+          this.onBehalfOf);
     }
 
     /**
@@ -109,6 +123,12 @@ public class ReaderReloadGiftCardParams extends ApiRequestParams {
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
+      return this;
+    }
+
+    /** Enables cancel button on gift card operation screens. */
+    public Builder setEnableCustomerCancellation(Boolean enableCustomerCancellation) {
+      this.enableCustomerCancellation = enableCustomerCancellation;
       return this;
     }
 

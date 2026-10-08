@@ -88,20 +88,20 @@ public final class OffSessionPaymentService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, OffSessionPayment.class);
   }
-  /** Captures an OffSessionPayment that has previously been created. */
+  /** Deprecated. Captures an OffSessionPayment that has previously been created. */
   public OffSessionPayment capture(String id, OffSessionPaymentCaptureParams params)
       throws StripeException {
     return capture(id, params, (RequestOptions) null);
   }
-  /** Captures an OffSessionPayment that has previously been created. */
+  /** Deprecated. Captures an OffSessionPayment that has previously been created. */
   public OffSessionPayment capture(String id, RequestOptions options) throws StripeException {
     return capture(id, (OffSessionPaymentCaptureParams) null, options);
   }
-  /** Captures an OffSessionPayment that has previously been created. */
+  /** Deprecated. Captures an OffSessionPayment that has previously been created. */
   public OffSessionPayment capture(String id) throws StripeException {
     return capture(id, (OffSessionPaymentCaptureParams) null, (RequestOptions) null);
   }
-  /** Captures an OffSessionPayment that has previously been created. */
+  /** Deprecated. Captures an OffSessionPayment that has previously been created. */
   public OffSessionPayment capture(
       String id, OffSessionPaymentCaptureParams params, RequestOptions options)
       throws StripeException {

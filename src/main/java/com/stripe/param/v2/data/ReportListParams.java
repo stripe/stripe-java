@@ -22,11 +22,15 @@ public class ReportListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Any optional includes (see https://docs.stripe.com/api-includable-response-values). */
+  /**
+   * Any optional includes (see <a
+   * href="https://docs.stripe.com/api-includable-response-values">include-dependent response
+   * values</a>).
+   */
   @SerializedName("include")
   List<ReportListParams.Include> include;
 
-  /** The maximum number of results per page. Defaults to 10. Maximum is 100. */
+  /** The maximum number of results per page. Defaults to 10. Maximum is 1,000. */
   @SerializedName("limit")
   Long limit;
 
@@ -115,7 +119,7 @@ public class ReportListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The maximum number of results per page. Defaults to 10. Maximum is 100. */
+    /** The maximum number of results per page. Defaults to 10. Maximum is 1,000. */
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;

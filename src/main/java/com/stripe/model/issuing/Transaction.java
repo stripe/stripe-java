@@ -856,6 +856,14 @@ public class Transaction extends ApiResource
     @SerializedName("fuel")
     Fuel fuel;
 
+    /**
+     * Information about the list of fuel items that were purchased with this transaction. Typically
+     * this information is received from the merchant after the authorization has been approved and
+     * the fuel dispensed.
+     */
+    @SerializedName("fuels")
+    List<Transaction.PurchaseDetails.Fuels> fuels;
+
     /** Information about lodging that was purchased with this transaction. */
     @SerializedName("lodging")
     Lodging lodging;
@@ -1080,6 +1088,51 @@ public class Transaction extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Fuel extends StripeObject {
+      /**
+       * <a href="https://www.conexxus.org/conexxus-payment-system-product-codes">Conexxus Payment
+       * System Product Code</a> identifying the primary fuel product purchased.
+       */
+      @SerializedName("industry_product_code")
+      String industryProductCode;
+
+      /**
+       * The quantity of {@code unit}s of fuel that was dispensed, represented as a decimal string
+       * with at most 12 decimal places.
+       */
+      @SerializedName("quantity_decimal")
+      BigDecimal quantityDecimal;
+
+      /**
+       * The type of fuel that was purchased. One of {@code diesel}, {@code unleaded_plus}, {@code
+       * unleaded_regular}, {@code unleaded_super}, or {@code other}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /**
+       * The units for {@code quantity_decimal}. One of {@code charging_minute}, {@code
+       * imperial_gallon}, {@code kilogram}, {@code kilowatt_hour}, {@code liter}, {@code pound},
+       * {@code us_gallon}, or {@code other}.
+       */
+      @SerializedName("unit")
+      String unit;
+
+      /**
+       * The cost in cents per each unit of fuel, represented as a decimal string with at most 12
+       * decimal places.
+       */
+      @SerializedName("unit_cost_decimal")
+      BigDecimal unitCostDecimal;
+    }
+
+    /**
+     * For more details about Fuels, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Fuels extends StripeObject {
       /**
        * <a href="https://www.conexxus.org/conexxus-payment-system-product-codes">Conexxus Payment
        * System Product Code</a> identifying the primary fuel product purchased.

@@ -466,6 +466,10 @@ public class ReceivedCredit extends StripeObject implements HasId {
         @SerializedName("bank_name")
         String bankName;
 
+        /** The BIC/SWIFT code of the account that originated the transfer. */
+        @SerializedName("bic")
+        String bic;
+
         /** The last 4 digits of the account number that originated the transfer. */
         @SerializedName("last4")
         String last4;
@@ -601,6 +605,10 @@ public class ReceivedCredit extends StripeObject implements HasId {
         /** The bank name the transfer was received from. */
         @SerializedName("bank_name")
         String bankName;
+
+        /** The BIC/SWIFT code of the account that originated the transfer. */
+        @SerializedName("bic")
+        String bic;
 
         /** The last 4 digits of the account number that originated the transfer. */
         @SerializedName("last4")
@@ -742,9 +750,26 @@ public class ReceivedCredit extends StripeObject implements HasId {
     @SerializedName("financial_address")
     String financialAddress;
 
+    /** Hash containing details about the crypto wallet that originated this ReceivedCredit. */
+    @SerializedName("originating_crypto_wallet")
+    OriginatingCryptoWallet originatingCryptoWallet;
+
     /** Freeform string set by originator of the external ReceivedCredit. */
     @SerializedName("statement_descriptor")
     String statementDescriptor;
+
+    /**
+     * Open Enum. The currency of the crypto tokens received.
+     *
+     * <p>One of {@code btc}, {@code cash}, {@code eth}, {@code ousd}, {@code sol}, {@code usdc},
+     * {@code usdg}, {@code usdsui}, or {@code usdt}.
+     */
+    @SerializedName("token_currency")
+    String tokenCurrency;
+
+    /** Hash of the deposit transaction on-chain (incoming to Stripe). */
+    @SerializedName("transaction_hash")
+    String transactionHash;
 
     /**
      * Open Enum. The type of crypto wallet transfer that originated this ReceivedCredit.
@@ -770,8 +795,33 @@ public class ReceivedCredit extends StripeObject implements HasId {
       /**
        * The network the crypto was received from.
        *
-       * <p>One of {@code arbitrum}, {@code avalanche_c_chain}, {@code base}, {@code ethereum},
-       * {@code optimism}, {@code polygon}, {@code solana}, {@code stellar}, or {@code tempo}.
+       * <p>One of {@code arbitrum}, {@code avalanche_c_chain}, {@code base}, {@code bitcoin},
+       * {@code ethereum}, {@code optimism}, {@code polygon}, {@code solana}, {@code stellar}, or
+       * {@code tempo}.
+       */
+      @SerializedName("network")
+      String network;
+    }
+
+    /** Hash containing details about the crypto wallet that originated this ReceivedCredit. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class OriginatingCryptoWallet extends StripeObject {
+      /** The address of the wallet the crypto was received from. */
+      @SerializedName("address")
+      String address;
+
+      /** A memo also for identifying the recipient for memo-based blockchains (e.g., Stellar),. */
+      @SerializedName("memo")
+      String memo;
+
+      /**
+       * The network the crypto was received from.
+       *
+       * <p>One of {@code arbitrum}, {@code avalanche_c_chain}, {@code base}, {@code bitcoin},
+       * {@code ethereum}, {@code optimism}, {@code polygon}, {@code solana}, {@code stellar}, or
+       * {@code tempo}.
        */
       @SerializedName("network")
       String network;

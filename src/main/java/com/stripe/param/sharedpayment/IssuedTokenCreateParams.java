@@ -595,6 +595,9 @@ public class IssuedTokenCreateParams extends ApiRequestParams {
         @SerializedName("day")
         DAY("day"),
 
+        @SerializedName("hour")
+        HOUR("hour"),
+
         @SerializedName("month")
         MONTH("month"),
 

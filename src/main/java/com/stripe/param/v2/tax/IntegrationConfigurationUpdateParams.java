@@ -24,10 +24,15 @@ public class IntegrationConfigurationUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Configuration for standalone Invoices automatic tax behavior. */
+  @SerializedName("invoices")
+  Invoices invoices;
+
   private IntegrationConfigurationUpdateParams(
-      CheckoutSessions checkoutSessions, Map<String, Object> extraParams) {
+      CheckoutSessions checkoutSessions, Map<String, Object> extraParams, Invoices invoices) {
     this.checkoutSessions = checkoutSessions;
     this.extraParams = extraParams;
+    this.invoices = invoices;
   }
 
   public static Builder builder() {
@@ -39,9 +44,12 @@ public class IntegrationConfigurationUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Invoices invoices;
+
     /** Finalize and obtain parameter instance from this builder. */
     public IntegrationConfigurationUpdateParams build() {
-      return new IntegrationConfigurationUpdateParams(this.checkoutSessions, this.extraParams);
+      return new IntegrationConfigurationUpdateParams(
+          this.checkoutSessions, this.extraParams, this.invoices);
     }
 
     /** Configuration for Checkout Sessions automatic tax behavior. */
@@ -74,6 +82,12 @@ public class IntegrationConfigurationUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Configuration for standalone Invoices automatic tax behavior. */
+    public Builder setInvoices(IntegrationConfigurationUpdateParams.Invoices invoices) {
+      this.invoices = invoices;
       return this;
     }
   }
@@ -147,6 +161,101 @@ public class IntegrationConfigurationUpdateParams extends ApiRequestParams {
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link IntegrationConfigurationUpdateParams.CheckoutSessions#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    public enum AutomaticTaxDefaultValue implements ApiRequestParams.EnumParam {
+      @SerializedName("disabled")
+      DISABLED("disabled"),
+
+      @SerializedName("enabled_when_possible")
+      ENABLED_WHEN_POSSIBLE("enabled_when_possible");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AutomaticTaxDefaultValue(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Invoices {
+    /**
+     * <strong>Required.</strong> Controls the default value of automatic_tax[enabled] on new
+     * standalone Invoices.
+     */
+    @SerializedName("automatic_tax_default_value")
+    AutomaticTaxDefaultValue automaticTaxDefaultValue;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Invoices(
+        AutomaticTaxDefaultValue automaticTaxDefaultValue, Map<String, Object> extraParams) {
+      this.automaticTaxDefaultValue = automaticTaxDefaultValue;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private AutomaticTaxDefaultValue automaticTaxDefaultValue;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public IntegrationConfigurationUpdateParams.Invoices build() {
+        return new IntegrationConfigurationUpdateParams.Invoices(
+            this.automaticTaxDefaultValue, this.extraParams);
+      }
+
+      /**
+       * <strong>Required.</strong> Controls the default value of automatic_tax[enabled] on new
+       * standalone Invoices.
+       */
+      public Builder setAutomaticTaxDefaultValue(
+          IntegrationConfigurationUpdateParams.Invoices.AutomaticTaxDefaultValue
+              automaticTaxDefaultValue) {
+        this.automaticTaxDefaultValue = automaticTaxDefaultValue;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * IntegrationConfigurationUpdateParams.Invoices#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link IntegrationConfigurationUpdateParams.Invoices#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {

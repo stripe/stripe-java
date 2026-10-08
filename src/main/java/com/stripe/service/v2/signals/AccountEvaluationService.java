@@ -41,15 +41,15 @@ public final class AccountEvaluationService extends ApiService {
     return this.request(request, AccountEvaluation.class);
   }
   /**
-   * Retrieves an AccountEvaluation by its ID for up to 90 days after creation. Evaluations more
-   * than 90 days old are inaccessible.
+   * Retrieves an AccountEvaluation by its ID when its created timestamp is no more than 90 days
+   * old.
    */
   public AccountEvaluation retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
   /**
-   * Retrieves an AccountEvaluation by its ID for up to 90 days after creation. Evaluations more
-   * than 90 days old are inaccessible.
+   * Retrieves an AccountEvaluation by its ID when its created timestamp is no more than 90 days
+   * old.
    */
   public AccountEvaluation retrieve(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/signals/account_evaluations/%s", ApiResource.urlEncodeId(id));

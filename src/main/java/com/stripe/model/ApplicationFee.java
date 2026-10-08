@@ -16,6 +16,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * When you collect a transaction fee on top of a charge made for your user (using <a
+ * href="https://docs.stripe.com/connect">Connect</a>), an {@code Application Fee} object is created
+ * in your account. You can list, retrieve, and refund application fees.
+ *
+ * <p>Related guide: <a
+ * href="https://docs.stripe.com/connect/direct-charges#collect-fees">Collecting application
+ * fees</a>
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

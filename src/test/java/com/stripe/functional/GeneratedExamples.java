@@ -30608,6 +30608,48 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2MoneyManagementFundingSessionPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_sessions",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.FundingSession.class,
+        "{\"object\":\"v2.money_management.funding_session\",\"account\":\"account\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"financial_address_options\":{},\"financial_address_types\":[\"bank_account\"],\"id\":\"obj_123\",\"livemode\":true,\"return_url\":\"return_url\",\"url\":\"url\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.FundingSessionCreateParams params =
+        com.stripe.param.v2.moneymanagement.FundingSessionCreateParams.builder()
+            .setAccount("account")
+            .setFinancialAccount("financial_account")
+            .setFinancialAddressOptions(
+                com.stripe.param.v2.moneymanagement.FundingSessionCreateParams
+                    .FinancialAddressOptions.builder()
+                    .setCryptoWallet(
+                        com.stripe.param.v2.moneymanagement.FundingSessionCreateParams
+                            .FinancialAddressOptions.CryptoWallet.builder()
+                            .setSettlementCurrency("usd")
+                            .build())
+                    .build())
+            .addFinancialAddressType(
+                com.stripe.param.v2.moneymanagement.FundingSessionCreateParams.FinancialAddressType
+                    .BANK_ACCOUNT)
+            .setReturnUrl("return_url")
+            .build();
+
+    com.stripe.model.v2.moneymanagement.FundingSession fundingSession =
+        client.v2().moneyManagement().fundingSessions().create(params);
+    assertNotNull(fundingSession);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/funding_sessions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testV2MoneyManagementInboundTransferGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -30692,6 +30734,110 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         "/v2/money_management/inbound_transfers/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementInboundTransferMandateGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/inbound_transfer_mandates",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.moneymanagement.InboundTransferMandate>>() {}.getType(),
+        "{\"data\":[{\"object\":\"v2.money_management.inbound_transfer_mandate\",\"created\":\"1970-01-12T21:42:34.472Z\",\"credential\":\"credential\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"expired\",\"status_details\":{},\"status_transitions\":{},\"type\":\"nz_becs\",\"user_accepted_details\":{}}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.InboundTransferMandateListParams params =
+        com.stripe.param.v2.moneymanagement.InboundTransferMandateListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.moneymanagement.InboundTransferMandate>
+        stripeCollection = client.v2().moneyManagement().inboundTransferMandates().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/inbound_transfer_mandates",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementInboundTransferMandatePostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/inbound_transfer_mandates",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.InboundTransferMandate.class,
+        "{\"object\":\"v2.money_management.inbound_transfer_mandate\",\"created\":\"1970-01-12T21:42:34.472Z\",\"credential\":\"credential\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"expired\",\"status_details\":{},\"status_transitions\":{},\"type\":\"nz_becs\",\"user_accepted_details\":{}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.InboundTransferMandateCreateParams params =
+        com.stripe.param.v2.moneymanagement.InboundTransferMandateCreateParams.builder()
+            .setCredential("credential")
+            .setType(
+                com.stripe.param.v2.moneymanagement.InboundTransferMandateCreateParams.Type.NZ_BECS)
+            .build();
+
+    com.stripe.model.v2.moneymanagement.InboundTransferMandate inboundTransferMandate =
+        client.v2().moneyManagement().inboundTransferMandates().create(params);
+    assertNotNull(inboundTransferMandate);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/inbound_transfer_mandates",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementInboundTransferMandateGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/inbound_transfer_mandates/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.InboundTransferMandate.class,
+        "{\"object\":\"v2.money_management.inbound_transfer_mandate\",\"created\":\"1970-01-12T21:42:34.472Z\",\"credential\":\"credential\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"expired\",\"status_details\":{},\"status_transitions\":{},\"type\":\"nz_becs\",\"user_accepted_details\":{}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.InboundTransferMandate inboundTransferMandate =
+        client.v2().moneyManagement().inboundTransferMandates().retrieve("id_123");
+    assertNotNull(inboundTransferMandate);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/inbound_transfer_mandates/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementInboundTransferMandatePost2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/inbound_transfer_mandates/id_123/cancel",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.InboundTransferMandate.class,
+        "{\"object\":\"v2.money_management.inbound_transfer_mandate\",\"created\":\"1970-01-12T21:42:34.472Z\",\"credential\":\"credential\",\"id\":\"obj_123\",\"livemode\":true,\"status\":\"expired\",\"status_details\":{},\"status_transitions\":{},\"type\":\"nz_becs\",\"user_accepted_details\":{}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.InboundTransferMandate inboundTransferMandate =
+        client.v2().moneyManagement().inboundTransferMandates().cancel("id_123");
+    assertNotNull(inboundTransferMandate);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/inbound_transfer_mandates/id_123/cancel",
         null,
         null);
   }
@@ -33452,7 +33598,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.risk.InquiryListParams params =
-        com.stripe.param.v2.risk.InquiryListParams.builder().setAccount("account").build();
+        com.stripe.param.v2.risk.InquiryListParams.builder().build();
 
     com.stripe.model.v2.StripeCollection<com.stripe.model.v2.risk.Inquiry> stripeCollection =
         client.v2().risk().inquiries().list(params);
@@ -33847,7 +33993,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.tax.IntegrationConfiguration.class,
-        "{\"object\":\"v2.tax.integration_configuration\",\"checkout_sessions\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"livemode\":true}");
+        "{\"object\":\"v2.tax.integration_configuration\",\"checkout_sessions\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"invoices\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.tax.IntegrationConfiguration integrationConfiguration =
@@ -33870,7 +34016,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.tax.IntegrationConfiguration.class,
-        "{\"object\":\"v2.tax.integration_configuration\",\"checkout_sessions\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"livemode\":true}");
+        "{\"object\":\"v2.tax.integration_configuration\",\"checkout_sessions\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"invoices\":{\"automatic_tax_default_value\":\"enabled_when_possible\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.tax.IntegrationConfigurationUpdateParams params =

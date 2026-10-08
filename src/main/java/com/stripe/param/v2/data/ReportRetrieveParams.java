@@ -22,7 +22,11 @@ public class ReportRetrieveParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Any optional includes (see https://docs.stripe.com/api-includable-response-values). */
+  /**
+   * Any optional includes (see <a
+   * href="https://docs.stripe.com/api-includable-response-values">include-dependent response
+   * values</a>).
+   */
   @SerializedName("include")
   List<ReportRetrieveParams.Include> include;
 

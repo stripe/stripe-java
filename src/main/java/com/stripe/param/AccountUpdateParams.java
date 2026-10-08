@@ -16719,6 +16719,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Capital {
+      /** The payout destinations excluded from Capital financing payouts. */
+      @SerializedName("excluded_payout_destinations")
+      Object excludedPayoutDestinations;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -16740,9 +16744,11 @@ public class AccountUpdateParams extends ApiRequestParams {
       Map<String, List<String>> payoutDestinationSelector;
 
       private Capital(
+          Object excludedPayoutDestinations,
           Map<String, Object> extraParams,
           Map<String, String> payoutDestination,
           Map<String, List<String>> payoutDestinationSelector) {
+        this.excludedPayoutDestinations = excludedPayoutDestinations;
         this.extraParams = extraParams;
         this.payoutDestination = payoutDestination;
         this.payoutDestinationSelector = payoutDestinationSelector;
@@ -16753,6 +16759,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Object excludedPayoutDestinations;
+
         private Map<String, Object> extraParams;
 
         private Map<String, String> payoutDestination;
@@ -16762,7 +16770,54 @@ public class AccountUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AccountUpdateParams.Settings.Capital build() {
           return new AccountUpdateParams.Settings.Capital(
-              this.extraParams, this.payoutDestination, this.payoutDestinationSelector);
+              this.excludedPayoutDestinations,
+              this.extraParams,
+              this.payoutDestination,
+              this.payoutDestinationSelector);
+        }
+
+        /**
+         * Add an element to `excludedPayoutDestinations` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link AccountUpdateParams.Settings.Capital#excludedPayoutDestinations} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addExcludedPayoutDestination(String element) {
+          if (this.excludedPayoutDestinations == null
+              || this.excludedPayoutDestinations instanceof EmptyParam) {
+            this.excludedPayoutDestinations = new ArrayList<String>();
+          }
+          ((List<String>) this.excludedPayoutDestinations).add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `excludedPayoutDestinations` list. A list is initialized for the
+         * first `add/addAll` call, and subsequent calls adds additional elements to the original
+         * list. See {@link AccountUpdateParams.Settings.Capital#excludedPayoutDestinations} for the
+         * field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addAllExcludedPayoutDestination(List<String> elements) {
+          if (this.excludedPayoutDestinations == null
+              || this.excludedPayoutDestinations instanceof EmptyParam) {
+            this.excludedPayoutDestinations = new ArrayList<String>();
+          }
+          ((List<String>) this.excludedPayoutDestinations).addAll(elements);
+          return this;
+        }
+
+        /** The payout destinations excluded from Capital financing payouts. */
+        public Builder setExcludedPayoutDestinations(EmptyParam excludedPayoutDestinations) {
+          this.excludedPayoutDestinations = excludedPayoutDestinations;
+          return this;
+        }
+
+        /** The payout destinations excluded from Capital financing payouts. */
+        public Builder setExcludedPayoutDestinations(List<String> excludedPayoutDestinations) {
+          this.excludedPayoutDestinations = excludedPayoutDestinations;
+          return this;
         }
 
         /**

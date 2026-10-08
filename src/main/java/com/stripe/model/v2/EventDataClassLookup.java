@@ -240,8 +240,14 @@ public final class EventDataClassLookup {
         "v2.money_management.financial_address_generated_microdeposits",
         com.stripe.model.v2.moneymanagement.FinancialAddressGeneratedMicrodeposits.class);
     classLookup.put(
+        "v2.money_management.funding_session",
+        com.stripe.model.v2.moneymanagement.FundingSession.class);
+    classLookup.put(
         "v2.money_management.inbound_transfer",
         com.stripe.model.v2.moneymanagement.InboundTransfer.class);
+    classLookup.put(
+        "v2.money_management.inbound_transfer_mandate",
+        com.stripe.model.v2.moneymanagement.InboundTransferMandate.class);
     classLookup.put(
         "v2.money_management.outbound_payment",
         com.stripe.model.v2.moneymanagement.OutboundPayment.class);
@@ -1285,6 +1291,21 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.money_management.inbound_transfer.bank_debit_succeeded",
         com.stripe.events.V2MoneyManagementInboundTransferBankDebitSucceededEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.inbound_transfer_mandate.activated",
+        com.stripe.events.V2MoneyManagementInboundTransferMandateActivatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.inbound_transfer_mandate.created",
+        com.stripe.events.V2MoneyManagementInboundTransferMandateCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.inbound_transfer_mandate.expired",
+        com.stripe.events.V2MoneyManagementInboundTransferMandateExpiredEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.inbound_transfer_mandate.refused",
+        com.stripe.events.V2MoneyManagementInboundTransferMandateRefusedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.inbound_transfer_mandate.revoked",
+        com.stripe.events.V2MoneyManagementInboundTransferMandateRevokedEvent.class);
     eventClassLookup.put(
         "v2.money_management.outbound_payment.canceled",
         com.stripe.events.V2MoneyManagementOutboundPaymentCanceledEvent.class);

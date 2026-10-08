@@ -50,6 +50,10 @@ public class InboundTransfer extends StripeObject implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
+  /** Network-specific details for the InboundTransfer. Present only when supplied at creation. */
+  @SerializedName("network_details")
+  NetworkDetails networkDetails;
+
   /**
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
@@ -101,9 +105,13 @@ public class InboundTransfer extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class PaymentMethod extends StripeObject {
+      /** The Bacs Direct Debit PaymentMethod identifier. */
+      @SerializedName("bacs_debit")
+      String bacsDebit;
+
       /**
-       * The type of object this destination represents. For a us bank account, we expect
-       * us_bank_account.
+       * The type of PaymentMethod used to create the InboundTransfer. Clients should tolerate
+       * future values.
        */
       @SerializedName("type")
       String type;
@@ -111,6 +119,29 @@ public class InboundTransfer extends StripeObject implements HasId {
       /** The destination US bank account identifier. eg &quot;usba_***&quot;. */
       @SerializedName("us_bank_account")
       String usBankAccount;
+    }
+  }
+
+  /** Network-specific details for the InboundTransfer. Present only when supplied at creation. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NetworkDetails extends StripeObject {
+    /** ACH-specific network details. */
+    @SerializedName("ach")
+    Ach ach;
+
+    /** ACH-specific network details. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ach extends StripeObject {
+      /**
+       * Freeform payment-related information from the type-7 ACH addenda record. Echoes the
+       * submitted value.
+       */
+      @SerializedName("addenda")
+      String addenda;
     }
   }
 

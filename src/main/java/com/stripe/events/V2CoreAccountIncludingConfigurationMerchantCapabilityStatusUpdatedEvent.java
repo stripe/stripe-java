@@ -37,7 +37,7 @@ public final class V2CoreAccountIncludingConfigurationMerchantCapabilityStatusUp
      * promptpay_payments}, {@code revolut_pay_payments}, {@code samsung_pay_payments}, {@code
      * satispay_payments}, {@code sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
      * sequra_payments}, {@code sunbit_payments}, {@code swish_payments}, {@code twint_payments},
-     * {@code us_bank_transfer_payments}, or {@code zip_payments}.
+     * {@code us_bank_transfer_payments}, {@code vipps_payments}, or {@code zip_payments}.
      */
     @SerializedName("updated_capability")
     String updatedCapability;
