@@ -689,6 +689,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     Boleto boleto;
 
     /**
+     * If this is a {@code carecredit} PaymentMethod, this hash contains details about the
+     * CareCredit payment method.
+     */
+    @SerializedName("carecredit")
+    Carecredit carecredit;
+
+    /**
      * If this is a {@code cashapp} PaymentMethod, this hash contains details about the Cash App Pay
      * payment method.
      */
@@ -731,6 +738,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
      */
     @SerializedName("fpx")
     Fpx fpx;
+
+    /**
+     * If this is a {@code getflex} PaymentMethod, this hash contains details about the GetFlex
+     * payment method.
+     */
+    @SerializedName("getflex")
+    Getflex getflex;
 
     /**
      * If this is a {@code gift_card} PaymentMethod, this hash contains details about the gift card
@@ -992,6 +1006,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     @SerializedName("sequra")
     Sequra sequra;
 
+    /**
+     * If this is a {@code sezzle} PaymentMethod, this hash contains details about the Sezzle
+     * payment method.
+     */
+    @SerializedName("sezzle")
+    Sezzle sezzle;
+
     /** ID of the SharedPaymentGrantedToken used to confirm this PaymentIntent. */
     @SerializedName("shared_payment_granted_token")
     Object sharedPaymentGrantedToken;
@@ -1100,12 +1121,14 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Bizum bizum,
         Blik blik,
         Boleto boleto,
+        Carecredit carecredit,
         Cashapp cashapp,
         Crypto crypto,
         CustomerBalance customerBalance,
         Eps eps,
         Map<String, Object> extraParams,
         Fpx fpx,
+        Getflex getflex,
         GiftCard giftCard,
         Giropay giropay,
         Gopay gopay,
@@ -1143,6 +1166,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Scalapay scalapay,
         SepaDebit sepaDebit,
         Sequra sequra,
+        Sezzle sezzle,
         Object sharedPaymentGrantedToken,
         Shopeepay shopeepay,
         Sofort sofort,
@@ -1172,12 +1196,14 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.bizum = bizum;
       this.blik = blik;
       this.boleto = boleto;
+      this.carecredit = carecredit;
       this.cashapp = cashapp;
       this.crypto = crypto;
       this.customerBalance = customerBalance;
       this.eps = eps;
       this.extraParams = extraParams;
       this.fpx = fpx;
+      this.getflex = getflex;
       this.giftCard = giftCard;
       this.giropay = giropay;
       this.gopay = gopay;
@@ -1215,6 +1241,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.scalapay = scalapay;
       this.sepaDebit = sepaDebit;
       this.sequra = sequra;
+      this.sezzle = sezzle;
       this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
       this.shopeepay = shopeepay;
       this.sofort = sofort;
@@ -1266,6 +1293,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private Boleto boleto;
 
+      private Carecredit carecredit;
+
       private Cashapp cashapp;
 
       private Crypto crypto;
@@ -1277,6 +1306,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       private Fpx fpx;
+
+      private Getflex getflex;
 
       private GiftCard giftCard;
 
@@ -1352,6 +1383,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private Sequra sequra;
 
+      private Sezzle sezzle;
+
       private Object sharedPaymentGrantedToken;
 
       private Shopeepay shopeepay;
@@ -1398,12 +1431,14 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.bizum,
             this.blik,
             this.boleto,
+            this.carecredit,
             this.cashapp,
             this.crypto,
             this.customerBalance,
             this.eps,
             this.extraParams,
             this.fpx,
+            this.getflex,
             this.giftCard,
             this.giropay,
             this.gopay,
@@ -1441,6 +1476,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.scalapay,
             this.sepaDebit,
             this.sequra,
+            this.sezzle,
             this.sharedPaymentGrantedToken,
             this.shopeepay,
             this.sofort,
@@ -1599,6 +1635,16 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
+       * If this is a {@code carecredit} PaymentMethod, this hash contains details about the
+       * CareCredit payment method.
+       */
+      public Builder setCarecredit(
+          SetupIntentUpdateParams.PaymentMethodData.Carecredit carecredit) {
+        this.carecredit = carecredit;
+        return this;
+      }
+
+      /**
        * If this is a {@code cashapp} PaymentMethod, this hash contains details about the Cash App
        * Pay payment method.
        */
@@ -1668,6 +1714,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setFpx(SetupIntentUpdateParams.PaymentMethodData.Fpx fpx) {
         this.fpx = fpx;
+        return this;
+      }
+
+      /**
+       * If this is a {@code getflex} PaymentMethod, this hash contains details about the GetFlex
+       * payment method.
+       */
+      public Builder setGetflex(SetupIntentUpdateParams.PaymentMethodData.Getflex getflex) {
+        this.getflex = getflex;
         return this;
       }
 
@@ -2025,6 +2080,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setSequra(SetupIntentUpdateParams.PaymentMethodData.Sequra sequra) {
         this.sequra = sequra;
+        return this;
+      }
+
+      /**
+       * If this is a {@code sezzle} PaymentMethod, this hash contains details about the Sezzle
+       * payment method.
+       */
+      public Builder setSezzle(SetupIntentUpdateParams.PaymentMethodData.Sezzle sezzle) {
+        this.sezzle = sezzle;
         return this;
       }
 
@@ -3459,6 +3523,64 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Carecredit {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Carecredit(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Carecredit build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Carecredit(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Carecredit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Carecredit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Cashapp {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3976,6 +4098,64 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
         Bank(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Getflex {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Getflex(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Getflex build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Getflex(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Getflex#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Getflex#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
@@ -6821,6 +7001,64 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Sezzle {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Sezzle(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Sezzle build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Sezzle(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Sezzle#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Sezzle#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Shopeepay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7942,6 +8180,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("boleto")
       BOLETO("boleto"),
 
+      @SerializedName("carecredit")
+      CARECREDIT("carecredit"),
+
       @SerializedName("cashapp")
       CASHAPP("cashapp"),
 
@@ -7956,6 +8197,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("fpx")
       FPX("fpx"),
+
+      @SerializedName("getflex")
+      GETFLEX("getflex"),
 
       @SerializedName("gift_card")
       GIFT_CARD("gift_card"),
@@ -8058,6 +8302,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("sequra")
       SEQURA("sequra"),
+
+      @SerializedName("sezzle")
+      SEZZLE("sezzle"),
 
       @SerializedName("shopeepay")
       SHOPEEPAY("shopeepay"),
@@ -14360,6 +14607,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     @SerializedName("card_present")
     CARD_PRESENT("card_present"),
 
+    @SerializedName("carecredit")
+    CARECREDIT("carecredit"),
+
     @SerializedName("cashapp")
     CASHAPP("cashapp"),
 
@@ -14401,6 +14651,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("getbalance")
     GETBALANCE("getbalance"),
+
+    @SerializedName("getflex")
+    GETFLEX("getflex"),
 
     @SerializedName("gift_card")
     GIFT_CARD("gift_card"),
@@ -14549,6 +14802,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     @SerializedName("sequra")
     SEQURA("sequra"),
 
+    @SerializedName("sezzle")
+    SEZZLE("sezzle"),
+
     @SerializedName("shop_pay")
     SHOP_PAY("shop_pay"),
 
@@ -14657,6 +14913,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     @SerializedName("card")
     CARD("card"),
 
+    @SerializedName("carecredit")
+    CARECREDIT("carecredit"),
+
     @SerializedName("cashapp")
     CASHAPP("cashapp"),
 
@@ -14671,6 +14930,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("fpx")
     FPX("fpx"),
+
+    @SerializedName("getflex")
+    GETFLEX("getflex"),
 
     @SerializedName("gift_card")
     GIFT_CARD("gift_card"),
@@ -14770,6 +15032,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @SerializedName("sequra")
     SEQURA("sequra"),
+
+    @SerializedName("sezzle")
+    SEZZLE("sezzle"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),

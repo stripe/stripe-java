@@ -33,10 +33,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
   @SerializedName("cadence")
   Cadence cadence;
 
-  /** Deprecated. Details about the capture configuration for the OffSessionPayment. */
-  @SerializedName("capture")
-  Capture capture;
-
   /** <strong>Required.</strong> ID of the Customer to which this OffSessionPayment belongs. */
   @SerializedName("customer")
   String customer;
@@ -139,7 +135,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       AmountDetails amountDetails,
       Amount applicationFeeAmount,
       Cadence cadence,
-      Capture capture,
       String customer,
       String description,
       Map<String, Object> extraParams,
@@ -161,7 +156,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     this.amountDetails = amountDetails;
     this.applicationFeeAmount = applicationFeeAmount;
     this.cadence = cadence;
-    this.capture = capture;
     this.customer = customer;
     this.description = description;
     this.extraParams = extraParams;
@@ -193,8 +187,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     private Amount applicationFeeAmount;
 
     private Cadence cadence;
-
-    private Capture capture;
 
     private String customer;
 
@@ -237,7 +229,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
           this.amountDetails,
           this.applicationFeeAmount,
           this.cadence,
-          this.capture,
           this.customer,
           this.description,
           this.extraParams,
@@ -281,12 +272,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     /** <strong>Required.</strong> The frequency of the underlying payment. */
     public Builder setCadence(OffSessionPaymentCreateParams.Cadence cadence) {
       this.cadence = cadence;
-      return this;
-    }
-
-    /** Deprecated. Details about the capture configuration for the OffSessionPayment. */
-    public Builder setCapture(OffSessionPaymentCreateParams.Capture capture) {
-      this.capture = capture;
       return this;
     }
 
@@ -1060,91 +1045,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
           this.totalTaxAmount = totalTaxAmount;
           return this;
         }
-      }
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Capture {
-    /** <strong>Required.</strong> The method to use to capture the payment. */
-    @SerializedName("capture_method")
-    CaptureMethod captureMethod;
-
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    private Capture(CaptureMethod captureMethod, Map<String, Object> extraParams) {
-      this.captureMethod = captureMethod;
-      this.extraParams = extraParams;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private CaptureMethod captureMethod;
-
-      private Map<String, Object> extraParams;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public OffSessionPaymentCreateParams.Capture build() {
-        return new OffSessionPaymentCreateParams.Capture(this.captureMethod, this.extraParams);
-      }
-
-      /** <strong>Required.</strong> The method to use to capture the payment. */
-      public Builder setCaptureMethod(
-          OffSessionPaymentCreateParams.Capture.CaptureMethod captureMethod) {
-        this.captureMethod = captureMethod;
-        return this;
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * OffSessionPaymentCreateParams.Capture#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link OffSessionPaymentCreateParams.Capture#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-    }
-
-    public enum CaptureMethod implements ApiRequestParams.EnumParam {
-      @SerializedName("automatic")
-      AUTOMATIC("automatic"),
-
-      @SerializedName("manual")
-      MANUAL("manual");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      CaptureMethod(String value) {
-        this.value = value;
       }
     }
   }

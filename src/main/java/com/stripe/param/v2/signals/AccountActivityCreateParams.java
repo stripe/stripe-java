@@ -301,7 +301,7 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     @SerializedName("account")
     String account;
 
-    /** The v1 customer ID of the account, for users not yet migrated to v2/accounts. */
+    /** The v1 customer ID of the account, for users not yet migrated to v2 accounts. */
     @SerializedName("customer")
     String customer;
 
@@ -351,7 +351,7 @@ public class AccountActivityCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The v1 customer ID of the account, for users not yet migrated to v2/accounts. */
+      /** The v1 customer ID of the account, for users not yet migrated to v2 accounts. */
       public Builder setCustomer(String customer) {
         this.customer = customer;
         return this;
@@ -394,6 +394,10 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Data {
+      /** The account's contact email. */
+      @SerializedName("contact_email")
+      String contactEmail;
+
       /** Default account settings. */
       @SerializedName("defaults")
       Defaults defaults;
@@ -411,7 +415,12 @@ public class AccountActivityCreateParams extends ApiRequestParams {
       @SerializedName("identity")
       Identity identity;
 
-      private Data(Defaults defaults, Map<String, Object> extraParams, Identity identity) {
+      private Data(
+          String contactEmail,
+          Defaults defaults,
+          Map<String, Object> extraParams,
+          Identity identity) {
+        this.contactEmail = contactEmail;
         this.defaults = defaults;
         this.extraParams = extraParams;
         this.identity = identity;
@@ -422,6 +431,8 @@ public class AccountActivityCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private String contactEmail;
+
         private Defaults defaults;
 
         private Map<String, Object> extraParams;
@@ -431,7 +442,13 @@ public class AccountActivityCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AccountActivityCreateParams.AccountDetails.Data build() {
           return new AccountActivityCreateParams.AccountDetails.Data(
-              this.defaults, this.extraParams, this.identity);
+              this.contactEmail, this.defaults, this.extraParams, this.identity);
+        }
+
+        /** The account's contact email. */
+        public Builder setContactEmail(String contactEmail) {
+          this.contactEmail = contactEmail;
+          return this;
         }
 
         /** Default account settings. */

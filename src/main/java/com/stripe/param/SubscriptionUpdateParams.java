@@ -118,6 +118,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
    * or <a
    * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
+   * For subscriptions created by Checkout Sessions with Managed Payments enabled, you can't update
+   * this field directly through the API. Customers can update it through the Customer Portal.
    */
   @SerializedName("default_payment_method")
   Object defaultPaymentMethod;
@@ -726,6 +728,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
      * or <a
      * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
+     * For subscriptions created by Checkout Sessions with Managed Payments enabled, you can't
+     * update this field directly through the API. Customers can update it through the Customer
+     * Portal.
      */
     public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
       this.defaultPaymentMethod = defaultPaymentMethod;
@@ -739,6 +744,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
      * or <a
      * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
+     * For subscriptions created by Checkout Sessions with Managed Payments enabled, you can't
+     * update this field directly through the API. Customers can update it through the Customer
+     * Portal.
      */
     public Builder setDefaultPaymentMethod(EmptyParam defaultPaymentMethod) {
       this.defaultPaymentMethod = defaultPaymentMethod;

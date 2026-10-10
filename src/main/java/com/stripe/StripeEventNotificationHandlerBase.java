@@ -455,7 +455,6 @@ import com.stripe.events.V2PaymentsOffSessionPaymentCanceledEventNotification;
 import com.stripe.events.V2PaymentsOffSessionPaymentCreatedEventNotification;
 import com.stripe.events.V2PaymentsOffSessionPaymentFailedEventNotification;
 import com.stripe.events.V2PaymentsOffSessionPaymentPausedEventNotification;
-import com.stripe.events.V2PaymentsOffSessionPaymentRequiresCaptureEventNotification;
 import com.stripe.events.V2PaymentsOffSessionPaymentResumedEventNotification;
 import com.stripe.events.V2PaymentsOffSessionPaymentSucceededEventNotification;
 import com.stripe.events.V2PaymentsSettlementAllocationIntentCanceledEventNotification;
@@ -3411,13 +3410,6 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV2PaymentsOffSessionPaymentPaused(
       EventNotificationCallback<V2PaymentsOffSessionPaymentPausedEventNotification> callback) {
     this.register("v2.payments.off_session_payment.paused", callback);
-    return self();
-  }
-
-  public T onV2PaymentsOffSessionPaymentRequiresCapture(
-      EventNotificationCallback<V2PaymentsOffSessionPaymentRequiresCaptureEventNotification>
-          callback) {
-    this.register("v2.payments.off_session_payment.requires_capture", callback);
     return self();
   }
 

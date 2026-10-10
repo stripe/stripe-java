@@ -310,6 +310,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("card")
     CARD("card"),
 
+    @SerializedName("carecredit")
+    CARECREDIT("carecredit"),
+
     @SerializedName("cashapp")
     CASHAPP("cashapp"),
 
@@ -327,6 +330,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("fpx")
     FPX("fpx"),
+
+    @SerializedName("getflex")
+    GETFLEX("getflex"),
 
     @SerializedName("gift_card")
     GIFT_CARD("gift_card"),
@@ -429,6 +435,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("sequra")
     SEQURA("sequra"),
+
+    @SerializedName("sezzle")
+    SEZZLE("sezzle"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),

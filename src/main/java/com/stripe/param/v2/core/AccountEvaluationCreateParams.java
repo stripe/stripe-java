@@ -138,6 +138,10 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class AccountData {
+    /** The account's contact email. */
+    @SerializedName("contact_email")
+    String contactEmail;
+
     /** Default account settings. */
     @SerializedName("defaults")
     Defaults defaults;
@@ -155,7 +159,12 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
     @SerializedName("identity")
     Identity identity;
 
-    private AccountData(Defaults defaults, Map<String, Object> extraParams, Identity identity) {
+    private AccountData(
+        String contactEmail,
+        Defaults defaults,
+        Map<String, Object> extraParams,
+        Identity identity) {
+      this.contactEmail = contactEmail;
       this.defaults = defaults;
       this.extraParams = extraParams;
       this.identity = identity;
@@ -166,6 +175,8 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private String contactEmail;
+
       private Defaults defaults;
 
       private Map<String, Object> extraParams;
@@ -175,7 +186,13 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public AccountEvaluationCreateParams.AccountData build() {
         return new AccountEvaluationCreateParams.AccountData(
-            this.defaults, this.extraParams, this.identity);
+            this.contactEmail, this.defaults, this.extraParams, this.identity);
+      }
+
+      /** The account's contact email. */
+      public Builder setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
+        return this;
       }
 
       /** Default account settings. */

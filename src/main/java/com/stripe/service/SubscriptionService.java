@@ -36,8 +36,9 @@ public final class SubscriptionService extends ApiService {
    * subscription. After it’s canceled, the subscription is largely immutable. You can still update
    * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
-   * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * <p>Pending invoice items are included on a final invoice if you generate one. Otherwise, they
+   * remain pending and can be billed on another invoice for the customer. To prevent billing,
+   * manually <a href="https://stripe.com/api/invoiceitems/delete">delete</a> them. If you’ve set
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
@@ -58,8 +59,9 @@ public final class SubscriptionService extends ApiService {
    * subscription. After it’s canceled, the subscription is largely immutable. You can still update
    * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
-   * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * <p>Pending invoice items are included on a final invoice if you generate one. Otherwise, they
+   * remain pending and can be billed on another invoice for the customer. To prevent billing,
+   * manually <a href="https://stripe.com/api/invoiceitems/delete">delete</a> them. If you’ve set
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
@@ -80,8 +82,9 @@ public final class SubscriptionService extends ApiService {
    * subscription. After it’s canceled, the subscription is largely immutable. You can still update
    * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
-   * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * <p>Pending invoice items are included on a final invoice if you generate one. Otherwise, they
+   * remain pending and can be billed on another invoice for the customer. To prevent billing,
+   * manually <a href="https://stripe.com/api/invoiceitems/delete">delete</a> them. If you’ve set
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both
@@ -101,8 +104,9 @@ public final class SubscriptionService extends ApiService {
    * subscription. After it’s canceled, the subscription is largely immutable. You can still update
    * its <a href="https://stripe.com/metadata">metadata</a> and {@code cancellation_details}.
    *
-   * <p>Any pending invoice items that you’ve created are still charged at the end of the period,
-   * unless manually <a href="https://stripe.com/api/invoiceitems/delete">deleted</a>. If you’ve set
+   * <p>Pending invoice items are included on a final invoice if you generate one. Otherwise, they
+   * remain pending and can be billed on another invoice for the customer. To prevent billing,
+   * manually <a href="https://stripe.com/api/invoiceitems/delete">delete</a> them. If you’ve set
    * the subscription to cancel at the end of the period, any pending prorations are also left in
    * place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations are removed if {@code invoice_now} and {@code prorate} are both

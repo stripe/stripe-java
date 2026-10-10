@@ -1306,9 +1306,6 @@ public final class EventNotificationClassLookup {
         "v2.payments.off_session_payment.paused",
         com.stripe.events.V2PaymentsOffSessionPaymentPausedEventNotification.class);
     eventClassLookup.put(
-        "v2.payments.off_session_payment.requires_capture",
-        com.stripe.events.V2PaymentsOffSessionPaymentRequiresCaptureEventNotification.class);
-    eventClassLookup.put(
         "v2.payments.off_session_payment.resumed",
         com.stripe.events.V2PaymentsOffSessionPaymentResumedEventNotification.class);
     eventClassLookup.put(

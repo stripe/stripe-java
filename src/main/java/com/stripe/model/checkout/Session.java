@@ -393,7 +393,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    * Configure whether a Checkout Session should collect a payment method for sessions with mode
    * {@code payment}. Defaults to {@code always}.
    *
-   * <p>One of {@code always}, or {@code if_required}.
+   * <p>One of {@code always}, {@code auto}, or {@code if_required}.
    */
   @SerializedName("payment_method_collection")
   String paymentMethodCollection;
