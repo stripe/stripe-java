@@ -28,6 +28,13 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Card extends ApiResource
     implements MetadataStore<Card>, ExternalAccount, PaymentSource {
+  /**
+   * The account this card belongs to. Only applicable on Accounts (not customers or recipients)
+   * This property is only available when returned as an <a
+   * href="https://stripe.com/api/external_account_cards/object">External Account</a> where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-is_controller">controller.is_controller</a>
+   * is {@code true}.
+   */
   @SerializedName("account")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

@@ -863,8 +863,9 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @EqualsAndHashCode(callSuper = false)
   public static class ProrationDetails extends StripeObject {
     /**
-     * For a credit proration, links to the debit invoice line items or invoice item that the credit
-     * applies to.
+     * For a credit proration, links to the debit that the credit applies to. The reference is to an
+     * invoice item if the debit was pending when the credit was created, and to invoice line items
+     * if the debit was already invoiced.
      */
     @SerializedName("credited_items")
     CreditedItems creditedItems;

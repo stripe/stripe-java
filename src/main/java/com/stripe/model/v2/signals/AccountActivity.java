@@ -115,7 +115,7 @@ public class AccountActivity extends StripeObject implements HasId {
     @SerializedName("account")
     String account;
 
-    /** The v1 customer ID of the account, for users not yet migrated to v2/accounts. */
+    /** The v1 customer ID of the account, for users not yet migrated to v2 accounts. */
     @SerializedName("customer")
     String customer;
 
@@ -128,6 +128,10 @@ public class AccountActivity extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Data extends StripeObject {
+      /** The account's contact email. */
+      @SerializedName("contact_email")
+      String contactEmail;
+
       /** Default account settings. */
       @SerializedName("defaults")
       Defaults defaults;

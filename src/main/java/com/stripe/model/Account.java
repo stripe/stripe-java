@@ -2830,8 +2830,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("treasury")
     Treasury treasury;
 
-    @SerializedName("wechat_pay_payments")
-    WechatPayPayments wechatPayPayments;
+    @SerializedName("wechat_pay_mobile_web_payments")
+    WechatPayMobileWebPayments wechatPayMobileWebPayments;
 
     /**
      * For more details about BacsDebitPayments, please refer to the <a
@@ -3490,19 +3490,16 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     }
 
     /**
-     * For more details about WechatPayPayments, please refer to the <a
+     * For more details about WechatPayMobileWebPayments, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class WechatPayPayments extends StripeObject {
-      /**
-       * The domains of the user's mobile web checkout pages for WeChat Pay payments. At most 4
-       * domains are allowed.
-       */
-      @SerializedName("mobile_web_domains")
-      List<String> mobileWebDomains;
+    public static class WechatPayMobileWebPayments extends StripeObject {
+      /** The domains of the user's mobile web checkout pages for WeChat Pay payments. */
+      @SerializedName("domains")
+      List<String> domains;
     }
   }
 

@@ -57,6 +57,10 @@ public class AccountEvaluation extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AccountData extends StripeObject {
+    /** The account's contact email. */
+    @SerializedName("contact_email")
+    String contactEmail;
+
     /** Default account settings. */
     @SerializedName("defaults")
     Defaults defaults;

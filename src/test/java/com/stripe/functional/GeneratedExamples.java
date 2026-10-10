@@ -29004,29 +29004,6 @@ class GeneratedExamples extends BaseStripeTest {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/core/vault/gb_bank_accounts/id_123/acknowledge_confirmation_of_payee",
-        null,
-        null,
-        com.stripe.model.v2.core.vault.GbBankAccount.class,
-        "{\"object\":\"v2.core.vault.gb_bank_account\",\"archived\":true,\"bank_account_type\":\"toza\",\"bank_name\":\"bank_name\",\"confirmation_of_payee\":{\"result\":{\"created\":\"1970-01-12T21:42:34.472Z\",\"match_result\":\"unavailable\",\"matched\":{},\"message\":\"message\",\"provided\":{\"business_type\":\"personal\",\"name\":\"name\"}},\"status\":\"awaiting_acknowledgement\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"livemode\":true,\"restricted\":true,\"supported_currencies\":[\"supported_currencies\"]}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.model.v2.core.vault.GbBankAccount gbBankAccount =
-        client.v2().core().vault().gbBankAccounts().acknowledgeConfirmationOfPayee("id_123");
-    assertNotNull(gbBankAccount);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/vault/gb_bank_accounts/id_123/acknowledge_confirmation_of_payee",
-        null,
-        null);
-  }
-
-  @Test
-  public void testV2CoreVaultGbBankAccountPost3Services() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
         "/v2/core/vault/gb_bank_accounts/id_123/archive",
         null,
         null,
@@ -29042,33 +29019,6 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v2/core/vault/gb_bank_accounts/id_123/archive",
         null,
-        null);
-  }
-
-  @Test
-  public void testV2CoreVaultGbBankAccountPost4Services() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/vault/gb_bank_accounts/id_123/initiate_confirmation_of_payee",
-        null,
-        null,
-        com.stripe.model.v2.core.vault.GbBankAccount.class,
-        "{\"object\":\"v2.core.vault.gb_bank_account\",\"archived\":true,\"bank_account_type\":\"toza\",\"bank_name\":\"bank_name\",\"confirmation_of_payee\":{\"result\":{\"created\":\"1970-01-12T21:42:34.472Z\",\"match_result\":\"unavailable\",\"matched\":{},\"message\":\"message\",\"provided\":{\"business_type\":\"personal\",\"name\":\"name\"}},\"status\":\"awaiting_acknowledgement\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"livemode\":true,\"restricted\":true,\"supported_currencies\":[\"supported_currencies\"]}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.core.vault.GbBankAccountInitiateConfirmationOfPayeeParams params =
-        com.stripe.param.v2.core.vault.GbBankAccountInitiateConfirmationOfPayeeParams.builder()
-            .build();
-
-    com.stripe.model.v2.core.vault.GbBankAccount gbBankAccount =
-        client.v2().core().vault().gbBankAccounts().initiateConfirmationOfPayee("id_123", params);
-    assertNotNull(gbBankAccount);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/vault/gb_bank_accounts/id_123/initiate_confirmation_of_payee",
-        params.toMap(),
         null);
   }
 
@@ -32019,7 +31969,7 @@ class GeneratedExamples extends BaseStripeTest {
             .setAmount(new com.stripe.v2.Amount(96, "USD"))
             .setNetwork(
                 com.stripe.param.v2.moneymanagement.testhelpers.FinancialAddressCreditParams.Network
-                    .SWIFT)
+                    .ACH)
             .build();
 
     com.stripe.model.v2.moneymanagement.FinancialAddressCreditSimulation
@@ -32539,32 +32489,6 @@ class GeneratedExamples extends BaseStripeTest {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/payments/off_session_payments/id_123/capture",
-        null,
-        null,
-        com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"object\":\"v2.payments.off_session_payment\",\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"requires_capture\"}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.payments.OffSessionPaymentCaptureParams params =
-        com.stripe.param.v2.payments.OffSessionPaymentCaptureParams.builder().build();
-
-    com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
-        client.v2().payments().offSessionPayments().capture("id_123", params);
-    assertNotNull(offSessionPayment);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/payments/off_session_payments/id_123/capture",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testV2PaymentsOffSessionPaymentPost4Services() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
         "/v2/payments/off_session_payments/id_123/pause",
         null,
         null,
@@ -32584,7 +32508,7 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2PaymentsOffSessionPaymentPost5Services() throws StripeException {
+  public void testV2PaymentsOffSessionPaymentPost4Services() throws StripeException {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
@@ -33746,6 +33670,7 @@ class GeneratedExamples extends BaseStripeTest {
                     .setData(
                         com.stripe.param.v2.signals.AccountEvaluationCreateParams.AccountDetails
                             .Data.builder()
+                            .setContactEmail("contact_email")
                             .setDefaults(
                                 com.stripe.param.v2.signals.AccountEvaluationCreateParams
                                     .AccountDetails.Data.Defaults.builder()

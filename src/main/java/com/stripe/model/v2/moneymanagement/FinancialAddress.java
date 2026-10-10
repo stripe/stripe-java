@@ -87,6 +87,10 @@ public class FinancialAddress extends StripeObject implements HasId {
     @SerializedName("aba")
     Aba aba;
 
+    /** BRE-B bank account details (Colombia). */
+    @SerializedName("bre_b")
+    BreB breB;
+
     @SerializedName("clabe")
     Clabe clabe;
 
@@ -104,6 +108,14 @@ public class FinancialAddress extends StripeObject implements HasId {
     /** IBAN bank account details. */
     @SerializedName("iban")
     Iban iban;
+
+    /** NIP bank account details (Nigeria). */
+    @SerializedName("nip")
+    Nip nip;
+
+    /** Pix bank account details (Brazil). */
+    @SerializedName("pix")
+    Pix pix;
 
     /** Sort code bank account details (UK). */
     @SerializedName("sort_code")
@@ -186,6 +198,20 @@ public class FinancialAddress extends StripeObject implements HasId {
       }
     }
 
+    /** BRE-B bank account details (Colombia). */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BreB extends StripeObject {
+      /** The name of the account holder. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The BRE-B payment key. */
+      @SerializedName("bre_b_key")
+      String breBKey;
+    }
+
     /**
      * For more details about Clabe, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
@@ -259,6 +285,42 @@ public class FinancialAddress extends StripeObject implements HasId {
       /** The last four digits of the IBAN. */
       @SerializedName("last4")
       String last4;
+    }
+
+    /** NIP bank account details (Nigeria). */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Nip extends StripeObject {
+      /** The name of the account holder. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The NIP bank code. */
+      @SerializedName("bank_code")
+      String bankCode;
+
+      /** The name of the bank. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** The NUBAN account number. */
+      @SerializedName("nuban")
+      String nuban;
+    }
+
+    /** Pix bank account details (Brazil). */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pix extends StripeObject {
+      /** The name of the account holder. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The Pix BR code. */
+      @SerializedName("br_code")
+      String brCode;
     }
 
     /** Sort code bank account details (UK). */

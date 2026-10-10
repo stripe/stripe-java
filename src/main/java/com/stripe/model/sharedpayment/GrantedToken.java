@@ -805,16 +805,16 @@ public class GrantedToken extends ApiResource implements HasId {
     }
 
     /**
-     * Creates a new test SharedPaymentGrantedToken object. This endpoint is only available in test
-     * mode and allows sellers to create SharedPaymentGrantedTokens for testing their integration
+     * Creates a new test SharedPaymentGrantedToken object. This test helper allows sellers to
+     * create SharedPaymentGrantedTokens for testing their integration.
      */
     public static GrantedToken create(Map<String, Object> params) throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
     /**
-     * Creates a new test SharedPaymentGrantedToken object. This endpoint is only available in test
-     * mode and allows sellers to create SharedPaymentGrantedTokens for testing their integration
+     * Creates a new test SharedPaymentGrantedToken object. This test helper allows sellers to
+     * create SharedPaymentGrantedTokens for testing their integration.
      */
     public static GrantedToken create(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -825,16 +825,16 @@ public class GrantedToken extends ApiResource implements HasId {
     }
 
     /**
-     * Creates a new test SharedPaymentGrantedToken object. This endpoint is only available in test
-     * mode and allows sellers to create SharedPaymentGrantedTokens for testing their integration
+     * Creates a new test SharedPaymentGrantedToken object. This test helper allows sellers to
+     * create SharedPaymentGrantedTokens for testing their integration.
      */
     public static GrantedToken create(GrantedTokenCreateParams params) throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
     /**
-     * Creates a new test SharedPaymentGrantedToken object. This endpoint is only available in test
-     * mode and allows sellers to create SharedPaymentGrantedTokens for testing their integration
+     * Creates a new test SharedPaymentGrantedToken object. This test helper allows sellers to
+     * create SharedPaymentGrantedTokens for testing their integration.
      */
     public static GrantedToken create(GrantedTokenCreateParams params, RequestOptions options)
         throws StripeException {
@@ -851,32 +851,32 @@ public class GrantedToken extends ApiResource implements HasId {
     }
 
     /**
-     * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
-     * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
+     * Revokes a test SharedPaymentGrantedToken object. This test helper allows sellers to revoke
+     * SharedPaymentGrantedTokens for testing their integration.
      */
     public GrantedToken revoke() throws StripeException {
       return revoke((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
-     * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
+     * Revokes a test SharedPaymentGrantedToken object. This test helper allows sellers to revoke
+     * SharedPaymentGrantedTokens for testing their integration.
      */
     public GrantedToken revoke(RequestOptions options) throws StripeException {
       return revoke((Map<String, Object>) null, options);
     }
 
     /**
-     * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
-     * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
+     * Revokes a test SharedPaymentGrantedToken object. This test helper allows sellers to revoke
+     * SharedPaymentGrantedTokens for testing their integration.
      */
     public GrantedToken revoke(Map<String, Object> params) throws StripeException {
       return revoke(params, (RequestOptions) null);
     }
 
     /**
-     * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
-     * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
+     * Revokes a test SharedPaymentGrantedToken object. This test helper allows sellers to revoke
+     * SharedPaymentGrantedTokens for testing their integration.
      */
     public GrantedToken revoke(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -890,16 +890,16 @@ public class GrantedToken extends ApiResource implements HasId {
     }
 
     /**
-     * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
-     * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
+     * Revokes a test SharedPaymentGrantedToken object. This test helper allows sellers to revoke
+     * SharedPaymentGrantedTokens for testing their integration.
      */
     public GrantedToken revoke(GrantedTokenRevokeParams params) throws StripeException {
       return revoke(params, (RequestOptions) null);
     }
 
     /**
-     * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
-     * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
+     * Revokes a test SharedPaymentGrantedToken object. This test helper allows sellers to revoke
+     * SharedPaymentGrantedTokens for testing their integration.
      */
     public GrantedToken revoke(GrantedTokenRevokeParams params, RequestOptions options)
         throws StripeException {
