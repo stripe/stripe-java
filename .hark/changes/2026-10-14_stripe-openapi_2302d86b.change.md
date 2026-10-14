@@ -3,6 +3,7 @@ title: Update generated code
 pr_url: https://github.com/stripe/stripe-java/pull/2315
 semver_level: major
 is_stripe_api_change: true
+released_in_version: 34.1.0-alpha.3
 ---
 
 * ⚠️ Remove support for `capture` method on resource `v2.payments.OffSessionPayment`
