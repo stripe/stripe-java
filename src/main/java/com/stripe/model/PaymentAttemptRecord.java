@@ -843,6 +843,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @SerializedName("card_present")
     CardPresent cardPresent;
 
+    @SerializedName("carecredit")
+    Carecredit carecredit;
+
     @SerializedName("cashapp")
     Cashapp cashapp;
 
@@ -865,6 +868,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
 
     @SerializedName("fpx")
     Fpx fpx;
+
+    @SerializedName("getflex")
+    Getflex getflex;
 
     @SerializedName("gift_card")
     GiftCard giftCard;
@@ -957,6 +963,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @SerializedName("qris")
     Qris qris;
 
+    @SerializedName("rakuten_pay")
+    RakutenPay rakutenPay;
+
     @SerializedName("rechnung")
     Rechnung rechnung;
 
@@ -980,6 +989,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
 
     @SerializedName("sequra")
     Sequra sequra;
+
+    @SerializedName("sezzle")
+    Sezzle sezzle;
 
     @SerializedName("shopeepay")
     Shopeepay shopeepay;
@@ -2271,6 +2283,15 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Carecredit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Carecredit extends StripeObject {}
+
+    /**
      * For more details about Cashapp, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -2424,6 +2445,15 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @SerializedName("transaction_id")
       String transactionId;
     }
+
+    /**
+     * For more details about Getflex, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Getflex extends StripeObject {}
 
     /**
      * For more details about GiftCard, please refer to the <a
@@ -3511,6 +3541,15 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     public static class Qris extends StripeObject {}
 
     /**
+     * For more details about RakutenPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RakutenPay extends StripeObject {}
+
+    /**
      * For more details about Rechnung, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -3733,6 +3772,15 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @SerializedName("transaction_id")
       String transactionId;
     }
+
+    /**
+     * For more details about Sezzle, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sezzle extends StripeObject {}
 
     /**
      * For more details about Shopeepay, please refer to the <a

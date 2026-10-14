@@ -282,6 +282,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
     @SerializedName("card")
     CARD("card"),
 
+    @SerializedName("carecredit")
+    CARECREDIT("carecredit"),
+
     @SerializedName("cashapp")
     CASHAPP("cashapp"),
 
@@ -299,6 +302,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("fpx")
     FPX("fpx"),
+
+    @SerializedName("getflex")
+    GETFLEX("getflex"),
 
     @SerializedName("gift_card")
     GIFT_CARD("gift_card"),
@@ -381,6 +387,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
     @SerializedName("qris")
     QRIS("qris"),
 
+    @SerializedName("rakuten_pay")
+    RAKUTEN_PAY("rakuten_pay"),
+
     @SerializedName("rechnung")
     RECHNUNG("rechnung"),
 
@@ -401,6 +410,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("sequra")
     SEQURA("sequra"),
+
+    @SerializedName("sezzle")
+    SEZZLE("sezzle"),
 
     @SerializedName("shopeepay")
     SHOPEEPAY("shopeepay"),

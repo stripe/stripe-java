@@ -234,6 +234,9 @@ public class AccountSignalListParams extends ApiRequestParams {
     @SerializedName("user_account_sharing")
     USER_ACCOUNT_SHARING("user_account_sharing"),
 
+    @SerializedName("user_merchant_fit")
+    USER_MERCHANT_FIT("user_merchant_fit"),
+
     @SerializedName("user_multi_accounting")
     USER_MULTI_ACCOUNTING("user_multi_accounting");
 

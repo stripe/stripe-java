@@ -416,6 +416,13 @@ public class ReceivedCredit extends StripeObject implements HasId {
 
       /**
        * Hash containing the transaction bank details. Present if {@code type} field value is {@code
+       * bre_b}.
+       */
+      @SerializedName("bre_b")
+      BreB breB;
+
+      /**
+       * Hash containing the transaction bank details. Present if {@code type} field value is {@code
        * clabe}.
        */
       @SerializedName("clabe")
@@ -437,6 +444,20 @@ public class ReceivedCredit extends StripeObject implements HasId {
 
       /**
        * Hash containing the transaction bank details. Present if {@code type} field value is {@code
+       * nip}.
+       */
+      @SerializedName("nip")
+      Nip nip;
+
+      /**
+       * Hash containing the transaction bank details. Present if {@code type} field value is {@code
+       * pix}.
+       */
+      @SerializedName("pix")
+      Pix pix;
+
+      /**
+       * Hash containing the transaction bank details. Present if {@code type} field value is {@code
        * sort_code}.
        */
       @SerializedName("sort_code")
@@ -445,7 +466,8 @@ public class ReceivedCredit extends StripeObject implements HasId {
       /**
        * Open Enum. The type of bank transfer that originated this ReceivedCredit.
        *
-       * <p>One of {@code aba}, {@code clabe}, {@code cpa}, {@code iban}, or {@code sort_code}.
+       * <p>One of {@code aba}, {@code bre_b}, {@code clabe}, {@code cpa}, {@code iban}, {@code
+       * nip}, {@code pix}, or {@code sort_code}.
        */
       @SerializedName("type")
       String type;
@@ -485,6 +507,31 @@ public class ReceivedCredit extends StripeObject implements HasId {
         /** The routing number of the account that originated the transfer. */
         @SerializedName("routing_number")
         String routingNumber;
+      }
+
+      /**
+       * Hash containing the transaction bank details. Present if {@code type} field value is {@code
+       * bre_b}.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BreB extends StripeObject {
+        /** The name of the account holder that sent the payment. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The last 4 digits of the account number that originated the transfer. */
+        @SerializedName("last4")
+        String last4;
+
+        /**
+         * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
+         *
+         * <p>Equal to {@code bre_b}.
+         */
+        @SerializedName("network")
+        String network;
       }
 
       /**
@@ -585,6 +632,68 @@ public class ReceivedCredit extends StripeObject implements HasId {
          * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
          *
          * <p>One of {@code sepa_credit_transfer}, or {@code swift}.
+         */
+        @SerializedName("network")
+        String network;
+      }
+
+      /**
+       * Hash containing the transaction bank details. Present if {@code type} field value is {@code
+       * nip}.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Nip extends StripeObject {
+        /** The name of the account holder that sent the payment. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The Nigerian bank code of the bank that originated the transfer. */
+        @SerializedName("bank_code")
+        String bankCode;
+
+        /** The name of the bank that originated the transfer. */
+        @SerializedName("bank_name")
+        String bankName;
+
+        /** The last 4 digits of the account number that originated the transfer. */
+        @SerializedName("last4")
+        String last4;
+
+        /**
+         * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
+         *
+         * <p>Equal to {@code nip}.
+         */
+        @SerializedName("network")
+        String network;
+      }
+
+      /**
+       * Hash containing the transaction bank details. Present if {@code type} field value is {@code
+       * pix}.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Pix extends StripeObject {
+        /** The name of the account holder that sent the payment. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The bank name the transfer was received from. */
+        @SerializedName("bank_name")
+        String bankName;
+
+        /** The Pix BR code of the account that originated the transfer. */
+        @SerializedName("br_code")
+        String brCode;
+
+        /**
+         * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
+         *
+         * <p>Equal to {@code pix}.
          */
         @SerializedName("network")
         String network;

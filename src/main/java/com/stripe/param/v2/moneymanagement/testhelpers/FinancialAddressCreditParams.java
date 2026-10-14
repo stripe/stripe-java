@@ -124,11 +124,17 @@ public class FinancialAddressCreditParams extends ApiRequestParams {
     @SerializedName("acss")
     ACSS("acss"),
 
+    @SerializedName("bre_b")
+    BRE_B("bre_b"),
+
     @SerializedName("chaps")
     CHAPS("chaps"),
 
     @SerializedName("fps")
     FPS("fps"),
+
+    @SerializedName("pix")
+    PIX("pix"),
 
     @SerializedName("rtp")
     RTP("rtp"),

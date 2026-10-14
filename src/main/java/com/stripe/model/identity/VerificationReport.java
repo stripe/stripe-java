@@ -823,6 +823,9 @@ public class VerificationReport extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Signals extends StripeObject {
+    @SerializedName("fraudulent_document")
+    FraudulentDocument fraudulentDocument;
+
     @SerializedName("fraudulent_email")
     FraudulentEmail fraudulentEmail;
 
@@ -831,6 +834,62 @@ public class VerificationReport extends ApiResource implements HasId {
 
     @SerializedName("fraudulent_phone")
     FraudulentPhone fraudulentPhone;
+
+    /**
+     * For more details about FraudulentDocument, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FraudulentDocument extends StripeObject {
+      /**
+       * Array of objects representing individual factors that contributed to the calculated risk
+       * level.
+       */
+      @SerializedName("indicators")
+      List<VerificationReport.Signals.FraudulentDocument.Indicator> indicators;
+
+      /**
+       * Categorical assessment of the document risk.
+       *
+       * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, {@code
+       * not_assessed}, or {@code unknown}.
+       */
+      @SerializedName("risk_level")
+      String riskLevel;
+
+      /**
+       * For more details about Indicator, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Indicator extends StripeObject {
+        /** A brief explanation of how this indicator contributed to the risk level. */
+        @SerializedName("explanation")
+        String explanation;
+
+        /**
+         * The effect this indicator had on the overall risk level.
+         *
+         * <p>One of {@code decrease}, {@code neutral}, {@code slight_increase}, or {@code
+         * strong_increase}.
+         */
+        @SerializedName("impact")
+        String impact;
+
+        /**
+         * The name of the specific indicator used in the risk assessment.
+         *
+         * <p>One of {@code dob_mismatch}, {@code forged_document}, {@code name_mismatch}, {@code
+         * other}, or {@code static_document}.
+         */
+        @SerializedName("indicator")
+        String indicator;
+      }
+    }
 
     /**
      * For more details about FraudulentEmail, please refer to the <a

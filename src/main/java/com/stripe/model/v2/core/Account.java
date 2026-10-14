@@ -21647,7 +21647,7 @@ public class Account extends StripeObject implements HasId {
         /**
          * Purpose of additional address.
          *
-         * <p>Equal to {@code registered}.
+         * <p>One of {@code birthplace}, or {@code registered}.
          */
         @SerializedName("purpose")
         String purpose;
