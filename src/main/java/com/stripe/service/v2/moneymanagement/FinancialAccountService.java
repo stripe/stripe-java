@@ -26,20 +26,20 @@ public final class FinancialAccountService extends ApiService {
     super(responseGetter);
   }
 
-  /** Lists FinancialAccounts in this compartment. */
+  /** Lists FinancialAccounts in this account. */
   public StripeCollection<FinancialAccount> list(FinancialAccountListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** Lists FinancialAccounts in this compartment. */
+  /** Lists FinancialAccounts in this account. */
   public StripeCollection<FinancialAccount> list(RequestOptions options) throws StripeException {
     return list((FinancialAccountListParams) null, options);
   }
-  /** Lists FinancialAccounts in this compartment. */
+  /** Lists FinancialAccounts in this account. */
   public StripeCollection<FinancialAccount> list() throws StripeException {
     return list((FinancialAccountListParams) null, (RequestOptions) null);
   }
-  /** Lists FinancialAccounts in this compartment. */
+  /** Lists FinancialAccounts in this account. */
   public StripeCollection<FinancialAccount> list(
       FinancialAccountListParams params, RequestOptions options) throws StripeException {
     String path = "/v2/money_management/financial_accounts";

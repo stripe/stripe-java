@@ -16134,9 +16134,9 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("treasury")
     Treasury treasury;
 
-    /** Settings specific to the WeChat Pay payments method. */
-    @SerializedName("wechat_pay_payments")
-    WechatPayPayments wechatPayPayments;
+    /** Settings specific to WeChat Pay payments made through a mobile web browser. */
+    @SerializedName("wechat_pay_mobile_web_payments")
+    WechatPayMobileWebPayments wechatPayMobileWebPayments;
 
     private Settings(
         BacsDebitPayments bacsDebitPayments,
@@ -16154,7 +16154,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         SmartDisputes smartDisputes,
         TaxForms taxForms,
         Treasury treasury,
-        WechatPayPayments wechatPayPayments) {
+        WechatPayMobileWebPayments wechatPayMobileWebPayments) {
       this.bacsDebitPayments = bacsDebitPayments;
       this.bankBcaOnboarding = bankBcaOnboarding;
       this.branding = branding;
@@ -16170,7 +16170,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.smartDisputes = smartDisputes;
       this.taxForms = taxForms;
       this.treasury = treasury;
-      this.wechatPayPayments = wechatPayPayments;
+      this.wechatPayMobileWebPayments = wechatPayMobileWebPayments;
     }
 
     public static Builder builder() {
@@ -16208,7 +16208,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private Treasury treasury;
 
-      private WechatPayPayments wechatPayPayments;
+      private WechatPayMobileWebPayments wechatPayMobileWebPayments;
 
       /** Finalize and obtain parameter instance from this builder. */
       public AccountUpdateParams.Settings build() {
@@ -16228,7 +16228,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.smartDisputes,
             this.taxForms,
             this.treasury,
-            this.wechatPayPayments);
+            this.wechatPayMobileWebPayments);
       }
 
       /** Settings specific to Bacs Direct Debit payments. */
@@ -16347,10 +16347,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Settings specific to the WeChat Pay payments method. */
-      public Builder setWechatPayPayments(
-          AccountUpdateParams.Settings.WechatPayPayments wechatPayPayments) {
-        this.wechatPayPayments = wechatPayPayments;
+      /** Settings specific to WeChat Pay payments made through a mobile web browser. */
+      public Builder setWechatPayMobileWebPayments(
+          AccountUpdateParams.Settings.WechatPayMobileWebPayments wechatPayMobileWebPayments) {
+        this.wechatPayMobileWebPayments = wechatPayMobileWebPayments;
         return this;
       }
     }
@@ -19311,7 +19311,11 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
-    public static class WechatPayPayments {
+    public static class WechatPayMobileWebPayments {
+      /** The domains of the user's mobile web checkout pages for WeChat Pay payments. */
+      @SerializedName("domains")
+      Object domains;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -19321,16 +19325,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * The domains of the user's mobile web checkout pages for WeChat Pay payments. At most 4
-       * domains are allowed.
-       */
-      @SerializedName("mobile_web_domains")
-      Object mobileWebDomains;
-
-      private WechatPayPayments(Map<String, Object> extraParams, Object mobileWebDomains) {
+      private WechatPayMobileWebPayments(Object domains, Map<String, Object> extraParams) {
+        this.domains = domains;
         this.extraParams = extraParams;
-        this.mobileWebDomains = mobileWebDomains;
       }
 
       public static Builder builder() {
@@ -19338,21 +19335,63 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Object domains;
+
         private Map<String, Object> extraParams;
 
-        private Object mobileWebDomains;
-
         /** Finalize and obtain parameter instance from this builder. */
-        public AccountUpdateParams.Settings.WechatPayPayments build() {
-          return new AccountUpdateParams.Settings.WechatPayPayments(
-              this.extraParams, this.mobileWebDomains);
+        public AccountUpdateParams.Settings.WechatPayMobileWebPayments build() {
+          return new AccountUpdateParams.Settings.WechatPayMobileWebPayments(
+              this.domains, this.extraParams);
+        }
+
+        /**
+         * Add an element to `domains` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Settings.WechatPayMobileWebPayments#domains} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addDomain(String element) {
+          if (this.domains == null || this.domains instanceof EmptyParam) {
+            this.domains = new ArrayList<String>();
+          }
+          ((List<String>) this.domains).add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `domains` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Settings.WechatPayMobileWebPayments#domains} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addAllDomain(List<String> elements) {
+          if (this.domains == null || this.domains instanceof EmptyParam) {
+            this.domains = new ArrayList<String>();
+          }
+          ((List<String>) this.domains).addAll(elements);
+          return this;
+        }
+
+        /** The domains of the user's mobile web checkout pages for WeChat Pay payments. */
+        public Builder setDomains(EmptyParam domains) {
+          this.domains = domains;
+          return this;
+        }
+
+        /** The domains of the user's mobile web checkout pages for WeChat Pay payments. */
+        public Builder setDomains(List<String> domains) {
+          this.domains = domains;
+          return this;
         }
 
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link AccountUpdateParams.Settings.WechatPayPayments#extraParams} for the field
-         * documentation.
+         * map. See {@link AccountUpdateParams.Settings.WechatPayMobileWebPayments#extraParams} for
+         * the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -19365,62 +19404,14 @@ public class AccountUpdateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link AccountUpdateParams.Settings.WechatPayPayments#extraParams} for the field
-         * documentation.
+         * map. See {@link AccountUpdateParams.Settings.WechatPayMobileWebPayments#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
-          return this;
-        }
-
-        /**
-         * Add an element to `mobileWebDomains` list. A list is initialized for the first
-         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-         * See {@link AccountUpdateParams.Settings.WechatPayPayments#mobileWebDomains} for the field
-         * documentation.
-         */
-        @SuppressWarnings("unchecked")
-        public Builder addMobileWebDomain(String element) {
-          if (this.mobileWebDomains == null || this.mobileWebDomains instanceof EmptyParam) {
-            this.mobileWebDomains = new ArrayList<String>();
-          }
-          ((List<String>) this.mobileWebDomains).add(element);
-          return this;
-        }
-
-        /**
-         * Add all elements to `mobileWebDomains` list. A list is initialized for the first
-         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
-         * See {@link AccountUpdateParams.Settings.WechatPayPayments#mobileWebDomains} for the field
-         * documentation.
-         */
-        @SuppressWarnings("unchecked")
-        public Builder addAllMobileWebDomain(List<String> elements) {
-          if (this.mobileWebDomains == null || this.mobileWebDomains instanceof EmptyParam) {
-            this.mobileWebDomains = new ArrayList<String>();
-          }
-          ((List<String>) this.mobileWebDomains).addAll(elements);
-          return this;
-        }
-
-        /**
-         * The domains of the user's mobile web checkout pages for WeChat Pay payments. At most 4
-         * domains are allowed.
-         */
-        public Builder setMobileWebDomains(EmptyParam mobileWebDomains) {
-          this.mobileWebDomains = mobileWebDomains;
-          return this;
-        }
-
-        /**
-         * The domains of the user's mobile web checkout pages for WeChat Pay payments. At most 4
-         * domains are allowed.
-         */
-        public Builder setMobileWebDomains(List<String> mobileWebDomains) {
-          this.mobileWebDomains = mobileWebDomains;
           return this;
         }
       }

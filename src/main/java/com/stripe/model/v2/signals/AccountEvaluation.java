@@ -80,7 +80,7 @@ public class AccountEvaluation extends StripeObject implements HasId {
     @SerializedName("account")
     String account;
 
-    /** The v1 customer ID of the account, for users not yet migrated to v2/accounts. */
+    /** The v1 customer ID of the account, for users not yet migrated to v2 accounts. */
     @SerializedName("customer")
     String customer;
 
@@ -93,6 +93,10 @@ public class AccountEvaluation extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Data extends StripeObject {
+      /** The account's contact email. */
+      @SerializedName("contact_email")
+      String contactEmail;
+
       /** Default account settings. */
       @SerializedName("defaults")
       Defaults defaults;
@@ -164,6 +168,10 @@ public class AccountEvaluation extends StripeObject implements HasId {
     @SerializedName("user_account_sharing")
     UserAccountSharing userAccountSharing;
 
+    /** User-merchant fit result for the evaluation, when available. */
+    @SerializedName("user_merchant_fit")
+    UserMerchantFit userMerchantFit;
+
     /** User multi-accounting result for the evaluation, when available. */
     @SerializedName("user_multi_accounting")
     UserMultiAccounting userMultiAccounting;
@@ -218,6 +226,35 @@ public class AccountEvaluation extends StripeObject implements HasId {
       BigDecimal score;
 
       /** The account signal ID containing the full user account-sharing signal result. */
+      @SerializedName("signal")
+      String signal;
+    }
+
+    /** User-merchant fit result for the evaluation, when available. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UserMerchantFit extends StripeObject {
+      /** Timestamp at which the signal was evaluated. */
+      @SerializedName("evaluated_at")
+      Instant evaluatedAt;
+
+      /**
+       * Categorical assessment of the user-merchant fit.
+       *
+       * <p>One of {@code standard}, {@code strong}, {@code unknown}, or {@code very_strong}.
+       */
+      @SerializedName("fit_level")
+      String fitLevel;
+
+      /**
+       * The specific fit score for the user, between 0.00 and 100.00. Absent when fit_level is
+       * unknown.
+       */
+      @SerializedName("score")
+      BigDecimal score;
+
+      /** The account signal ID containing the full user-merchant fit signal result. */
       @SerializedName("signal")
       String signal;
     }

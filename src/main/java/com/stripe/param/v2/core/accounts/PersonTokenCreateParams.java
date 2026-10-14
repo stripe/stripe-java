@@ -654,6 +654,9 @@ public class PersonTokenCreateParams extends ApiRequestParams {
     }
 
     public enum Purpose implements ApiRequestParams.EnumParam {
+      @SerializedName("birthplace")
+      BIRTHPLACE("birthplace"),
+
       @SerializedName("registered")
       REGISTERED("registered");
 

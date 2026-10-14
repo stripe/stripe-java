@@ -79,8 +79,8 @@ public class AccountSignal extends StripeObject implements HasId {
    * The type of signal.
    *
    * <p>One of {@code fraudulent_merchant}, {@code fraudulent_website}, {@code
-   * merchant_delinquency}, {@code payment_delinquency_exposure}, {@code user_account_sharing}, or
-   * {@code user_multi_accounting}.
+   * merchant_delinquency}, {@code payment_delinquency_exposure}, {@code user_account_sharing},
+   * {@code user_merchant_fit}, or {@code user_multi_accounting}.
    */
   @SerializedName("type")
   String type;
@@ -88,6 +88,10 @@ public class AccountSignal extends StripeObject implements HasId {
   /** Data for the user account-sharing signal. Present only when type is user_account_sharing. */
   @SerializedName("user_account_sharing")
   UserAccountSharing userAccountSharing;
+
+  /** Data for the user-merchant fit signal. Present only when type is user_merchant_fit. */
+  @SerializedName("user_merchant_fit")
+  UserMerchantFit userMerchantFit;
 
   /** Data for the user multi-accounting signal. Present only when type is user_multi_accounting. */
   @SerializedName("user_multi_accounting")
@@ -358,6 +362,27 @@ public class AccountSignal extends StripeObject implements HasId {
      * The specific risk score for the account, between 0.00 and 100.00. Absent when risk level is
      * not_assessed or unknown, or when the user is not on a product tier that includes numeric
      * scores.
+     */
+    @SerializedName("score")
+    BigDecimal score;
+  }
+
+  /** Data for the user-merchant fit signal. Present only when type is user_merchant_fit. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class UserMerchantFit extends StripeObject {
+    /**
+     * Categorical assessment of the user-merchant fit.
+     *
+     * <p>One of {@code standard}, {@code strong}, {@code unknown}, or {@code very_strong}.
+     */
+    @SerializedName("fit_level")
+    String fitLevel;
+
+    /**
+     * The specific fit score for the user, between 0.00 and 100.00. Absent when fit_level is
+     * unknown.
      */
     @SerializedName("score")
     BigDecimal score;
