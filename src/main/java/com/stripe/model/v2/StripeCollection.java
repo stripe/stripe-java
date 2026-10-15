@@ -10,6 +10,7 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -119,7 +120,15 @@ public class StripeCollection<T extends StripeObjectInterface> extends StripeObj
 
       @Override
       public T next() {
-        if (!currentDataIterator.hasNext() && this.nextPageUrl != null) {
+        if (!this.hasNext()) {
+          throw new NoSuchElementException();
+        }
+        return this.currentDataIterator.next();
+      }
+
+      @Override
+      public boolean hasNext() {
+        while (!this.currentDataIterator.hasNext() && this.nextPageUrl != null) {
           try {
             Page<T> p = PagingIterable.this.getPage(this.nextPageUrl);
             this.currentDataIterator = p.data.iterator();
@@ -128,12 +137,7 @@ public class StripeCollection<T extends StripeObjectInterface> extends StripeObj
             throw new RuntimeException("Unable to paginate", e);
           }
         }
-        return this.currentDataIterator.next();
-      }
-
-      @Override
-      public boolean hasNext() {
-        return this.currentDataIterator.hasNext() || this.nextPageUrl != null;
+        return this.currentDataIterator.hasNext();
       }
     }
   }
