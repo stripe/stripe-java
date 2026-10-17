@@ -1056,13 +1056,13 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       this.resource = resource;
     }
 
-    /** Create an incoming testmode bank transfer. */
+    /** Create a test incoming bank transfer. */
     public CustomerCashBalanceTransaction fundCashBalance(Map<String, Object> params)
         throws StripeException {
       return fundCashBalance(params, (RequestOptions) null);
     }
 
-    /** Create an incoming testmode bank transfer. */
+    /** Create a test incoming bank transfer. */
     public CustomerCashBalanceTransaction fundCashBalance(
         Map<String, Object> params, RequestOptions options) throws StripeException {
       String path =
@@ -1074,13 +1074,13 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       return resource.getResponseGetter().request(request, CustomerCashBalanceTransaction.class);
     }
 
-    /** Create an incoming testmode bank transfer. */
+    /** Create a test incoming bank transfer. */
     public CustomerCashBalanceTransaction fundCashBalance(CustomerFundCashBalanceParams params)
         throws StripeException {
       return fundCashBalance(params, (RequestOptions) null);
     }
 
-    /** Create an incoming testmode bank transfer. */
+    /** Create a test incoming bank transfer. */
     public CustomerCashBalanceTransaction fundCashBalance(
         CustomerFundCashBalanceParams params, RequestOptions options) throws StripeException {
       String path =

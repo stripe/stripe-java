@@ -270,6 +270,8 @@ public final class EventDataClassLookup {
     classLookup.put("reserve.plan", com.stripe.model.reserve.Plan.class);
     classLookup.put("reserve.release", com.stripe.model.reserve.Release.class);
 
+    classLookup.put("risk.form", com.stripe.model.risk.Form.class);
+
     classLookup.put("scheduled_query_run", com.stripe.model.sigma.ScheduledQueryRun.class);
 
     classLookup.put(

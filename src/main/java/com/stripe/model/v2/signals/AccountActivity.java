@@ -47,9 +47,27 @@ public class AccountActivity extends StripeObject implements HasId {
   @SerializedName("account_suspended")
   AccountSuspended accountSuspended;
 
+  /**
+   * Details for the merchant's takeover confirmation. Present only when type is
+   * account_takeover_confirmation.
+   */
+  @SerializedName("account_takeover_confirmation")
+  AccountTakeoverConfirmation accountTakeoverConfirmation;
+
+  /**
+   * Details for the account holder's takeover report. Present only when type is
+   * account_takeover_report.
+   */
+  @SerializedName("account_takeover_report")
+  AccountTakeoverReport accountTakeoverReport;
+
   /** Timestamp at which the account activity was created. */
   @SerializedName("created")
   Instant created;
+
+  /** Details for the credential change. Present only when type is credential_change. */
+  @SerializedName("credential_change")
+  CredentialChange credentialChange;
 
   /** Unique identifier for the account activity. */
   @Getter(onMethod_ = {@Override})
@@ -74,6 +92,14 @@ public class AccountActivity extends StripeObject implements HasId {
   /** Additional information about the activity. */
   @SerializedName("metadata")
   Map<String, String> metadata;
+
+  /** Details for the MFA addition. Present only when type is mfa_addition. */
+  @SerializedName("mfa_addition")
+  MfaAddition mfaAddition;
+
+  /** Details for the MFA removal. Present only when type is mfa_removal. */
+  @SerializedName("mfa_removal")
+  MfaRemoval mfaRemoval;
 
   /**
    * String representing the object's type. Objects of the same type share the same value of the
@@ -100,8 +126,10 @@ public class AccountActivity extends StripeObject implements HasId {
    * The type of activity.
    *
    * <p>One of {@code account_restricted}, {@code account_reviewed}, {@code account_suspended},
-   * {@code login_attempt}, {@code login_decision}, {@code registration_attempt}, or {@code
-   * registration_decision}.
+   * {@code account_takeover_confirmation}, {@code account_takeover_mitigation}, {@code
+   * account_takeover_report}, {@code credential_change}, {@code login_attempt}, {@code
+   * login_decision}, {@code mfa_addition}, {@code mfa_removal}, {@code registration_attempt}, or
+   * {@code registration_decision}.
    */
   @SerializedName("type")
   String type;
@@ -244,6 +272,54 @@ public class AccountActivity extends StripeObject implements HasId {
     String reason;
   }
 
+  /**
+   * Details for the merchant's takeover confirmation. Present only when type is
+   * account_takeover_confirmation.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AccountTakeoverConfirmation extends StripeObject {
+    /**
+     * The type of credential involved in the confirmed takeover.
+     *
+     * <p>One of {@code api_key}, {@code login_password}, or {@code other}.
+     */
+    @SerializedName("credential_type")
+    String credentialType;
+  }
+
+  /**
+   * Details for the account holder's takeover report. Present only when type is
+   * account_takeover_report.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AccountTakeoverReport extends StripeObject {
+    /**
+     * The type of credential involved in the reported takeover.
+     *
+     * <p>One of {@code api_key}, {@code login_password}, or {@code other}.
+     */
+    @SerializedName("credential_type")
+    String credentialType;
+  }
+
+  /** Details for the credential change. Present only when type is credential_change. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CredentialChange extends StripeObject {
+    /**
+     * The type of credential that changed.
+     *
+     * <p>One of {@code api_key}, {@code login_password}, or {@code other}.
+     */
+    @SerializedName("credential_type")
+    String credentialType;
+  }
+
   /** Details for the login attempt. Present only when type is login_attempt. */
   @Getter
   @Setter
@@ -298,6 +374,36 @@ public class AccountActivity extends StripeObject implements HasId {
      */
     @SerializedName("status")
     String status;
+  }
+
+  /** Details for the MFA addition. Present only when type is mfa_addition. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MfaAddition extends StripeObject {
+    /**
+     * The authentication method added to the account.
+     *
+     * <p>One of {@code authenticator_app}, {@code email}, {@code hardware_key}, {@code other}, or
+     * {@code sms}.
+     */
+    @SerializedName("mfa_type")
+    String mfaType;
+  }
+
+  /** Details for the MFA removal. Present only when type is mfa_removal. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MfaRemoval extends StripeObject {
+    /**
+     * The authentication method removed from the account.
+     *
+     * <p>One of {@code authenticator_app}, {@code email}, {@code hardware_key}, {@code other}, or
+     * {@code sms}.
+     */
+    @SerializedName("mfa_type")
+    String mfaType;
   }
 
   /** Details for the registration attempt. Present only when type is registration_attempt. */

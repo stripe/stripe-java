@@ -1177,8 +1177,11 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
      * {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin}, {@code gn_nif}, {@code
      * mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code np_pan}, {@code tj_tin},
      * {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code aw_tin}, {@code az_tin}, {@code
-     * bd_bin}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin}, {@code cm_niu},
-     * {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, or {@code unknown}.
+     * bd_bin}, {@code au_acn}, {@code nz_bn}, {@code pt_nif}, {@code cz_dic}, {@code fr_siret},
+     * {@code fr_siren}, {@code fr_spi}, {@code sm_coe}, {@code tt_vat}, {@code tt_bir}, {@code
+     * mu_vat}, {@code mz_nuit}, {@code au_wpn}, {@code md_cf}, {@code is_kt}, {@code bj_ifu},
+     * {@code et_tin}, {@code kg_tin}, {@code la_tin}, {@code cm_niu}, {@code cv_nif}, {@code
+     * bf_ifu}, {@code ic_nif}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;

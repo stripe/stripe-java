@@ -324,6 +324,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("managed_payments")
   ManagedPayments managedPayments;
 
+  /** Advertising attribution information for this Checkout Session. */
+  @SerializedName("marketing_attributions")
+  List<Session.MarketingAttribution> marketingAttributions;
+
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -390,8 +394,8 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   ExpandableField<PaymentLink> paymentLink;
 
   /**
-   * Configure whether a Checkout Session should collect a payment method for sessions with mode
-   * {@code payment}. Defaults to {@code always}.
+   * Configure whether a Checkout Session should collect a payment method. Can only be set in {@code
+   * subscription} mode. Defaults to {@code always}.
    *
    * <p>One of {@code always}, {@code auto}, or {@code if_required}.
    */
@@ -1567,9 +1571,11 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * bb_tin}, {@code cd_nif}, {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin},
        * {@code gn_nif}, {@code mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code
        * np_pan}, {@code tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code aw_tin},
-       * {@code az_tin}, {@code bd_bin}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code
-       * la_tin}, {@code cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, or {@code
-       * unknown}.
+       * {@code az_tin}, {@code bd_bin}, {@code au_acn}, {@code nz_bn}, {@code pt_nif}, {@code
+       * cz_dic}, {@code fr_siret}, {@code fr_siren}, {@code fr_spi}, {@code sm_coe}, {@code
+       * tt_vat}, {@code tt_bir}, {@code mu_vat}, {@code mz_nuit}, {@code au_wpn}, {@code md_cf},
+       * {@code is_kt}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin}, {@code
+       * cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -2334,9 +2340,11 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * bb_tin}, {@code cd_nif}, {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin},
        * {@code gn_nif}, {@code mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code
        * np_pan}, {@code tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code aw_tin},
-       * {@code az_tin}, {@code bd_bin}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code
-       * la_tin}, {@code cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, or {@code
-       * unknown}.
+       * {@code az_tin}, {@code bd_bin}, {@code au_acn}, {@code nz_bn}, {@code pt_nif}, {@code
+       * cz_dic}, {@code fr_siret}, {@code fr_siren}, {@code fr_spi}, {@code sm_coe}, {@code
+       * tt_vat}, {@code tt_bir}, {@code mu_vat}, {@code mz_nuit}, {@code au_wpn}, {@code md_cf},
+       * {@code is_kt}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin}, {@code
+       * cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -2814,6 +2822,63 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
      */
     @SerializedName("enabled")
     Boolean enabled;
+  }
+
+  /**
+   * For more details about MarketingAttribution, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MarketingAttribution extends StripeObject {
+    @SerializedName("ad_conversion")
+    AdConversion adConversion;
+
+    /** The advertising platform's click identifier. */
+    @SerializedName("click_id")
+    String clickId;
+
+    /** The Unix timestamp when the advertising interaction occurred. */
+    @SerializedName("occurred_at")
+    Long occurredAt;
+
+    /** The advertising group ID from the {@code utm_adgroup} parameter. */
+    @SerializedName("utm_adgroup")
+    String utmAdgroup;
+
+    /** The advertising content identifier from the {@code utm_content} parameter. */
+    @SerializedName("utm_content")
+    String utmContent;
+
+    /** The advertising campaign ID from the {@code utm_id} parameter. */
+    @SerializedName("utm_id")
+    String utmId;
+
+    /** The marketing medium from the {@code utm_medium} parameter. */
+    @SerializedName("utm_medium")
+    String utmMedium;
+
+    /** The referral source from the {@code utm_source} parameter. */
+    @SerializedName("utm_source")
+    String utmSource;
+
+    /** The paid search term from the {@code utm_term} parameter. */
+    @SerializedName("utm_term")
+    String utmTerm;
+
+    /**
+     * For more details about AdConversion, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdConversion extends StripeObject {
+      /** Whether the customer consented to sending conversion data to an advertising platform. */
+      @SerializedName("consent_collected")
+      Boolean consentCollected;
+    }
   }
 
   /**
@@ -3600,6 +3665,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("installments")
       Installments installments;
 
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
        * beyond the standard authorization validity window</a> for this CheckoutSession.
@@ -3720,6 +3788,80 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         /** Indicates if installments are enabled. */
         @SerializedName("enabled")
         Boolean enabled;
+      }
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** Maximum or fixed amount for future payments, in the mandate's currency. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+         * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+         * amount charged can be up to the value passed for the {@code amount} param.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * A description of the mandate or subscription that is meant to be displayed to the
+         * customer.
+         */
+        @SerializedName("description")
+        String description;
+
+        /**
+         * End date of the mandate or subscription. If not provided, the mandate will be active
+         * until canceled. If provided, end date should be after start date.
+         */
+        @SerializedName("end_date")
+        Long endDate;
+
+        /**
+         * Specifies payment frequency. One of {@code day}, {@code week}, {@code month}, {@code
+         * year}, or {@code sporadic}.
+         */
+        @SerializedName("interval")
+        String interval;
+
+        /**
+         * The number of intervals between payments. For example, {@code interval=month} and {@code
+         * interval_count=3} indicates one payment every three months. Maximum of one year interval
+         * allowed (1 year, 12 months, or 52 weeks). This parameter is optional when {@code
+         * interval=sporadic}.
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        /** Unique identifier for the mandate or subscription. */
+        @SerializedName("reference")
+        String reference;
+
+        /**
+         * Start date of the mandate or subscription. Start date should not be lesser than
+         * yesterday.
+         */
+        @SerializedName("start_date")
+        Long startDate;
+
+        /** Specifies the type of mandates supported. Possible values are {@code india}. */
+        @SerializedName("supported_types")
+        List<String> supportedTypes;
       }
 
       /**

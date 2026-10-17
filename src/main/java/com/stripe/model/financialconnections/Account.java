@@ -122,7 +122,10 @@ public class Account extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The most recent information about the account's owners. */
+  /**
+   * The ID of the <a href="https://docs.stripe.com/api/financial_connections/ownership">Financial
+   * Connections Account Ownership</a> object associated with this account.
+   */
   @SerializedName("ownership")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

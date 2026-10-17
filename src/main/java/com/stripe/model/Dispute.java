@@ -433,6 +433,7 @@ public class Dispute extends ApiResource
     @SerializedName("access_activity_log")
     String accessActivityLog;
 
+    /** Appeal evidence submitted during the appeal stage. */
     @SerializedName("appeal")
     Appeal appeal;
 

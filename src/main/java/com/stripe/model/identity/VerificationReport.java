@@ -102,7 +102,7 @@ public class VerificationReport extends ApiResource implements HasId {
   /**
    * Type of report.
    *
-   * <p>One of {@code document}, {@code email}, {@code id_number}, or {@code verification_flow}.
+   * <p>One of {@code document}, {@code id_number}, or {@code verification_flow}.
    */
   @SerializedName("type")
   String type;
@@ -390,10 +390,6 @@ public class VerificationReport extends ApiResource implements HasId {
     @SerializedName("address_match_confidence")
     String addressMatchConfidence;
 
-    /** Additional email verification details. */
-    @SerializedName("details")
-    Details details;
-
     /** Two-letter country code of the email domain's country. */
     @SerializedName("domain_country")
     String domainCountry;
@@ -445,30 +441,6 @@ public class VerificationReport extends ApiResource implements HasId {
      */
     @SerializedName("status")
     String status;
-
-    /** Additional email verification details. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Details extends StripeObject {
-      /**
-       * Number of days from the time when the email domain was first observed to the time of
-       * verification.
-       */
-      @SerializedName("days_since_domain_creation")
-      BigDecimal daysSinceDomainCreation;
-
-      /**
-       * Number of days from the time when the email address was first observed to the time of
-       * verification.
-       */
-      @SerializedName("days_since_ownership_started")
-      BigDecimal daysSinceOwnershipStarted;
-
-      /** Two-letter ISO 3166-1 alpha-2 country code of the email domain's country. */
-      @SerializedName("domain_country")
-      String domainCountry;
-    }
 
     /**
      * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
