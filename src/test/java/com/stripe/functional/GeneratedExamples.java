@@ -28012,7 +28012,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.AccountEvaluation.class,
-        "{\"object\":\"v2.core.account_evaluation\",\"created\":\"1970-01-12T21:42:34.472Z\",\"evaluations_triggered\":[\"user_multi_accounting\"],\"id\":\"obj_123\",\"livemode\":true}");
+        "{\"object\":\"v2.core.account_evaluation\",\"created\":\"1970-01-12T21:42:34.472Z\",\"evaluations_triggered\":[\"user_account_sharing\"],\"id\":\"obj_123\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.AccountEvaluationCreateParams params =
@@ -33584,12 +33584,13 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.AccountActivity.class,
-        "{\"object\":\"v2.signals.account_activity\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"occurred_at\":\"1970-01-10T01:49:44.717Z\",\"type\":\"login_attempt\"}");
+        "{\"object\":\"v2.signals.account_activity\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"occurred_at\":\"1970-01-10T01:49:44.717Z\",\"type\":\"registration_decision\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.signals.AccountActivityCreateParams params =
         com.stripe.param.v2.signals.AccountActivityCreateParams.builder()
-            .setType(com.stripe.param.v2.signals.AccountActivityCreateParams.Type.LOGIN_ATTEMPT)
+            .setType(
+                com.stripe.param.v2.signals.AccountActivityCreateParams.Type.REGISTRATION_DECISION)
             .build();
 
     com.stripe.model.v2.signals.AccountActivity accountActivity =
@@ -33635,7 +33636,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.AccountActivity.class,
-        "{\"object\":\"v2.signals.account_activity\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"occurred_at\":\"1970-01-10T01:49:44.717Z\",\"type\":\"login_attempt\"}");
+        "{\"object\":\"v2.signals.account_activity\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"occurred_at\":\"1970-01-10T01:49:44.717Z\",\"type\":\"registration_decision\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.signals.AccountActivity accountActivity =
@@ -33658,7 +33659,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.AccountEvaluation.class,
-        "{\"object\":\"v2.signals.account_evaluation\",\"account_details\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"pending_signals\":[\"user_account_sharing\"],\"requested_signals\":[\"user_merchant_fit\"]}");
+        "{\"object\":\"v2.signals.account_evaluation\",\"account_details\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"pending_signals\":[\"user_account_sharing\"],\"requested_signals\":[\"fraudulent_website\"]}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.signals.AccountEvaluationCreateParams params =
@@ -33695,7 +33696,7 @@ class GeneratedExamples extends BaseStripeTest {
                     .build())
             .addRequestedSignal(
                 com.stripe.param.v2.signals.AccountEvaluationCreateParams.RequestedSignal
-                    .USER_MERCHANT_FIT)
+                    .FRAUDULENT_WEBSITE)
             .build();
 
     com.stripe.model.v2.signals.AccountEvaluation accountEvaluation =
@@ -33718,7 +33719,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.AccountEvaluation.class,
-        "{\"object\":\"v2.signals.account_evaluation\",\"account_details\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"pending_signals\":[\"user_account_sharing\"],\"requested_signals\":[\"user_merchant_fit\"]}");
+        "{\"object\":\"v2.signals.account_evaluation\",\"account_details\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"pending_signals\":[\"user_account_sharing\"],\"requested_signals\":[\"fraudulent_website\"]}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.signals.AccountEvaluation accountEvaluation =
@@ -33743,14 +33744,12 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.signals.AccountSignal>>() {}.getType(),
-        "{\"data\":[{\"object\":\"v2.signals.account_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"type\":\"payment_delinquency_exposure\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"object\":\"v2.signals.account_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"type\":\"account_takeover\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.signals.AccountSignalListParams params =
         com.stripe.param.v2.signals.AccountSignalListParams.builder()
-            .addType(
-                com.stripe.param.v2.signals.AccountSignalListParams.Type
-                    .PAYMENT_DELINQUENCY_EXPOSURE)
+            .addType(com.stripe.param.v2.signals.AccountSignalListParams.Type.ACCOUNT_TAKEOVER)
             .build();
 
     com.stripe.model.v2.StripeCollection<com.stripe.model.v2.signals.AccountSignal>
@@ -33773,7 +33772,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.signals.AccountSignal.class,
-        "{\"object\":\"v2.signals.account_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"type\":\"payment_delinquency_exposure\"}");
+        "{\"object\":\"v2.signals.account_signal\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"type\":\"account_takeover\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.signals.AccountSignal accountSignal =

@@ -219,6 +219,12 @@ public class AccountSignalListParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("account_takeover")
+    ACCOUNT_TAKEOVER("account_takeover"),
+
+    @SerializedName("customer_risk")
+    CUSTOMER_RISK("customer_risk"),
+
     @SerializedName("fraudulent_merchant")
     FRAUDULENT_MERCHANT("fraudulent_merchant"),
 

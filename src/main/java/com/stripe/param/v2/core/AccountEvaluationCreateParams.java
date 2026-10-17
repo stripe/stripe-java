@@ -561,6 +561,9 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
   }
 
   public enum Signal implements ApiRequestParams.EnumParam {
+    @SerializedName("account_takeover")
+    ACCOUNT_TAKEOVER("account_takeover"),
+
     @SerializedName("fraudulent_website")
     FRAUDULENT_WEBSITE("fraudulent_website"),
 
