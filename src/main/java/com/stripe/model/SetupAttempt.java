@@ -841,7 +841,8 @@ public class SetupAttempt extends ApiResource implements HasId {
       /**
        * Bank where the account is located.
        *
-       * <p>One of {@code bca}, {@code bni}, {@code bri}, {@code cimb}, or {@code permata}.
+       * <p>One of {@code bca}, {@code bni}, {@code bri}, {@code cimb}, {@code mandiri}, or {@code
+       * permata}.
        */
       @SerializedName("bank")
       String bank;

@@ -48,6 +48,14 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * Exchange rate from merchant amount to cardholder amount, expressed in minor units. Must be
+   * finite and positive for different currencies. Matching currencies ignore the supplied numeric
+   * rate and use 1.0. The supplied amount remains the merchant amount.
+   */
+  @SerializedName("merchant_amount_exchange_rate")
+  BigDecimal merchantAmountExchangeRate;
+
+  /**
    * Details about the seller (grocery store, e-commerce website, etc.) where the card authorization
    * happened.
    */
@@ -62,23 +70,35 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
   @SerializedName("purchase_details")
   PurchaseDetails purchaseDetails;
 
+  /**
+   * Synthetic settlement values for this purchase force capture. If omitted, defaults to the final
+   * signed transaction amount, transaction currency, and effective merchant-to-cardholder exchange
+   * rate. Supply all three fields to override. This does not create a settlement or change funding.
+   */
+  @SerializedName("settlement_details")
+  SettlementDetails settlementDetails;
+
   private TransactionCreateForceCaptureParams(
       Long amount,
       String card,
       String currency,
       List<String> expand,
       Map<String, Object> extraParams,
+      BigDecimal merchantAmountExchangeRate,
       MerchantData merchantData,
       NetworkData networkData,
-      PurchaseDetails purchaseDetails) {
+      PurchaseDetails purchaseDetails,
+      SettlementDetails settlementDetails) {
     this.amount = amount;
     this.card = card;
     this.currency = currency;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.merchantAmountExchangeRate = merchantAmountExchangeRate;
     this.merchantData = merchantData;
     this.networkData = networkData;
     this.purchaseDetails = purchaseDetails;
+    this.settlementDetails = settlementDetails;
   }
 
   public static Builder builder() {
@@ -96,11 +116,15 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private BigDecimal merchantAmountExchangeRate;
+
     private MerchantData merchantData;
 
     private NetworkData networkData;
 
     private PurchaseDetails purchaseDetails;
+
+    private SettlementDetails settlementDetails;
 
     /** Finalize and obtain parameter instance from this builder. */
     public TransactionCreateForceCaptureParams build() {
@@ -110,9 +134,11 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
           this.currency,
           this.expand,
           this.extraParams,
+          this.merchantAmountExchangeRate,
           this.merchantData,
           this.networkData,
-          this.purchaseDetails);
+          this.purchaseDetails,
+          this.settlementDetails);
     }
 
     /**
@@ -195,6 +221,16 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
     }
 
     /**
+     * Exchange rate from merchant amount to cardholder amount, expressed in minor units. Must be
+     * finite and positive for different currencies. Matching currencies ignore the supplied numeric
+     * rate and use 1.0. The supplied amount remains the merchant amount.
+     */
+    public Builder setMerchantAmountExchangeRate(BigDecimal merchantAmountExchangeRate) {
+      this.merchantAmountExchangeRate = merchantAmountExchangeRate;
+      return this;
+    }
+
+    /**
      * Details about the seller (grocery store, e-commerce website, etc.) where the card
      * authorization happened.
      */
@@ -213,6 +249,18 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
     public Builder setPurchaseDetails(
         TransactionCreateForceCaptureParams.PurchaseDetails purchaseDetails) {
       this.purchaseDetails = purchaseDetails;
+      return this;
+    }
+
+    /**
+     * Synthetic settlement values for this purchase force capture. If omitted, defaults to the
+     * final signed transaction amount, transaction currency, and effective merchant-to-cardholder
+     * exchange rate. Supply all three fields to override. This does not create a settlement or
+     * change funding.
+     */
+    public Builder setSettlementDetails(
+        TransactionCreateForceCaptureParams.SettlementDetails settlementDetails) {
+      this.settlementDetails = settlementDetails;
       return this;
     }
   }
@@ -1486,10 +1534,6 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
     @SerializedName("fuel")
     Fuel fuel;
 
-    /** Healthcare sub-amounts for IIAS-eligible transactions. */
-    @SerializedName("healthcare")
-    Healthcare healthcare;
-
     /** Information about lodging that was purchased with this transaction. */
     @SerializedName("lodging")
     Lodging lodging;
@@ -1507,7 +1551,6 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
         Fleet fleet,
         Flight flight,
         Fuel fuel,
-        Healthcare healthcare,
         Lodging lodging,
         List<TransactionCreateForceCaptureParams.PurchaseDetails.Receipt> receipt,
         String reference) {
@@ -1515,7 +1558,6 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
       this.fleet = fleet;
       this.flight = flight;
       this.fuel = fuel;
-      this.healthcare = healthcare;
       this.lodging = lodging;
       this.receipt = receipt;
       this.reference = reference;
@@ -1534,8 +1576,6 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
 
       private Fuel fuel;
 
-      private Healthcare healthcare;
-
       private Lodging lodging;
 
       private List<TransactionCreateForceCaptureParams.PurchaseDetails.Receipt> receipt;
@@ -1549,7 +1589,6 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
             this.fleet,
             this.flight,
             this.fuel,
-            this.healthcare,
             this.lodging,
             this.receipt,
             this.reference);
@@ -1598,13 +1637,6 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
       /** Information about fuel that was purchased with this transaction. */
       public Builder setFuel(TransactionCreateForceCaptureParams.PurchaseDetails.Fuel fuel) {
         this.fuel = fuel;
-        return this;
-      }
-
-      /** Healthcare sub-amounts for IIAS-eligible transactions. */
-      public Builder setHealthcare(
-          TransactionCreateForceCaptureParams.PurchaseDetails.Healthcare healthcare) {
-        this.healthcare = healthcare;
         return this;
       }
 
@@ -2900,252 +2932,6 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
-    public static class Healthcare {
-      /** Clinic and urgent care sub-amount for Visa only. */
-      @SerializedName("clinic_amount")
-      Long clinicAmount;
-
-      /**
-       * <strong>Required.</strong> Three-letter <a
-       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
-       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
-       */
-      @SerializedName("currency")
-      String currency;
-
-      /** Dental care sub-amount for Visa only. */
-      @SerializedName("dental_amount")
-      Long dentalAmount;
-
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** Prescription drug sub-amount. Null if the merchant did not send this amount. */
-      @SerializedName("prescription_amount")
-      Long prescriptionAmount;
-
-      /**
-       * The type of healthcare transaction. {@code medical} for FSA/HSA-eligible healthcare
-       * purchases; {@code transit_for_healthcare} for FSA/HSA-eligible transit for healthcare
-       * purchases.
-       */
-      @SerializedName("purchase_type")
-      PurchaseType purchaseType;
-
-      /** <strong>Required.</strong> Total FSA/HSA-eligible amount in the smallest currency unit. */
-      @SerializedName("total_qualified_amount")
-      Long totalQualifiedAmount;
-
-      /**
-       * <strong>Required.</strong> IIAS verification status from the merchant terminal. For Visa,
-       * this is always iias_verified.
-       */
-      @SerializedName("verification_status")
-      VerificationStatus verificationStatus;
-
-      /** Vision/optical sub-amount. Null if the merchant did not send this amount. */
-      @SerializedName("vision_amount")
-      Long visionAmount;
-
-      private Healthcare(
-          Long clinicAmount,
-          String currency,
-          Long dentalAmount,
-          Map<String, Object> extraParams,
-          Long prescriptionAmount,
-          PurchaseType purchaseType,
-          Long totalQualifiedAmount,
-          VerificationStatus verificationStatus,
-          Long visionAmount) {
-        this.clinicAmount = clinicAmount;
-        this.currency = currency;
-        this.dentalAmount = dentalAmount;
-        this.extraParams = extraParams;
-        this.prescriptionAmount = prescriptionAmount;
-        this.purchaseType = purchaseType;
-        this.totalQualifiedAmount = totalQualifiedAmount;
-        this.verificationStatus = verificationStatus;
-        this.visionAmount = visionAmount;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Long clinicAmount;
-
-        private String currency;
-
-        private Long dentalAmount;
-
-        private Map<String, Object> extraParams;
-
-        private Long prescriptionAmount;
-
-        private PurchaseType purchaseType;
-
-        private Long totalQualifiedAmount;
-
-        private VerificationStatus verificationStatus;
-
-        private Long visionAmount;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public TransactionCreateForceCaptureParams.PurchaseDetails.Healthcare build() {
-          return new TransactionCreateForceCaptureParams.PurchaseDetails.Healthcare(
-              this.clinicAmount,
-              this.currency,
-              this.dentalAmount,
-              this.extraParams,
-              this.prescriptionAmount,
-              this.purchaseType,
-              this.totalQualifiedAmount,
-              this.verificationStatus,
-              this.visionAmount);
-        }
-
-        /** Clinic and urgent care sub-amount for Visa only. */
-        public Builder setClinicAmount(Long clinicAmount) {
-          this.clinicAmount = clinicAmount;
-          return this;
-        }
-
-        /**
-         * <strong>Required.</strong> Three-letter <a
-         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
-         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
-         */
-        public Builder setCurrency(String currency) {
-          this.currency = currency;
-          return this;
-        }
-
-        /** Dental care sub-amount for Visa only. */
-        public Builder setDentalAmount(Long dentalAmount) {
-          this.dentalAmount = dentalAmount;
-          return this;
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link
-         * TransactionCreateForceCaptureParams.PurchaseDetails.Healthcare#extraParams} for the field
-         * documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link
-         * TransactionCreateForceCaptureParams.PurchaseDetails.Healthcare#extraParams} for the field
-         * documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** Prescription drug sub-amount. Null if the merchant did not send this amount. */
-        public Builder setPrescriptionAmount(Long prescriptionAmount) {
-          this.prescriptionAmount = prescriptionAmount;
-          return this;
-        }
-
-        /**
-         * The type of healthcare transaction. {@code medical} for FSA/HSA-eligible healthcare
-         * purchases; {@code transit_for_healthcare} for FSA/HSA-eligible transit for healthcare
-         * purchases.
-         */
-        public Builder setPurchaseType(
-            TransactionCreateForceCaptureParams.PurchaseDetails.Healthcare.PurchaseType
-                purchaseType) {
-          this.purchaseType = purchaseType;
-          return this;
-        }
-
-        /**
-         * <strong>Required.</strong> Total FSA/HSA-eligible amount in the smallest currency unit.
-         */
-        public Builder setTotalQualifiedAmount(Long totalQualifiedAmount) {
-          this.totalQualifiedAmount = totalQualifiedAmount;
-          return this;
-        }
-
-        /**
-         * <strong>Required.</strong> IIAS verification status from the merchant terminal. For Visa,
-         * this is always iias_verified.
-         */
-        public Builder setVerificationStatus(
-            TransactionCreateForceCaptureParams.PurchaseDetails.Healthcare.VerificationStatus
-                verificationStatus) {
-          this.verificationStatus = verificationStatus;
-          return this;
-        }
-
-        /** Vision/optical sub-amount. Null if the merchant did not send this amount. */
-        public Builder setVisionAmount(Long visionAmount) {
-          this.visionAmount = visionAmount;
-          return this;
-        }
-      }
-
-      public enum PurchaseType implements ApiRequestParams.EnumParam {
-        @SerializedName("medical")
-        MEDICAL("medical"),
-
-        @SerializedName("transit_for_healthcare")
-        TRANSIT_FOR_HEALTHCARE("transit_for_healthcare");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        PurchaseType(String value) {
-          this.value = value;
-        }
-      }
-
-      public enum VerificationStatus implements ApiRequestParams.EnumParam {
-        @SerializedName("iias_merchant_exempt")
-        IIAS_MERCHANT_EXEMPT("iias_merchant_exempt"),
-
-        @SerializedName("iias_merchant_not_certified")
-        IIAS_MERCHANT_NOT_CERTIFIED("iias_merchant_not_certified"),
-
-        @SerializedName("iias_verified")
-        IIAS_VERIFIED("iias_verified"),
-
-        @SerializedName("not_verified")
-        NOT_VERIFIED("not_verified");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        VerificationStatus(String value) {
-          this.value = value;
-        }
-      }
-    }
-
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Lodging {
       /** The time of checking into the lodging. */
       @SerializedName("check_in_at")
@@ -3334,6 +3120,123 @@ public class TransactionCreateForceCaptureParams extends ApiRequestParams {
           this.unitCost = unitCost;
           return this;
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SettlementDetails {
+    /**
+     * <strong>Required.</strong> Positive settlement amount magnitude in the smallest currency
+     * unit. Must match the converted merchant amount and, when settlement and cardholder currencies
+     * are the same, this capture's finalized transaction amount magnitude. The transaction type
+     * determines the output sign.
+     */
+    @SerializedName("amount")
+    Long amount;
+
+    /** <strong>Required.</strong> Settlement currency. */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * <strong>Required.</strong> Exchange rate from merchant amount to settlement amount, expressed
+     * in minor units. Must be finite and positive for different currencies. Matching currencies
+     * ignore the supplied numeric rate and use 1.0.
+     */
+    @SerializedName("exchange_rate")
+    BigDecimal exchangeRate;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private SettlementDetails(
+        Long amount, String currency, BigDecimal exchangeRate, Map<String, Object> extraParams) {
+      this.amount = amount;
+      this.currency = currency;
+      this.exchangeRate = exchangeRate;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long amount;
+
+      private String currency;
+
+      private BigDecimal exchangeRate;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public TransactionCreateForceCaptureParams.SettlementDetails build() {
+        return new TransactionCreateForceCaptureParams.SettlementDetails(
+            this.amount, this.currency, this.exchangeRate, this.extraParams);
+      }
+
+      /**
+       * <strong>Required.</strong> Positive settlement amount magnitude in the smallest currency
+       * unit. Must match the converted merchant amount and, when settlement and cardholder
+       * currencies are the same, this capture's finalized transaction amount magnitude. The
+       * transaction type determines the output sign.
+       */
+      public Builder setAmount(Long amount) {
+        this.amount = amount;
+        return this;
+      }
+
+      /** <strong>Required.</strong> Settlement currency. */
+      public Builder setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Exchange rate from merchant amount to settlement amount,
+       * expressed in minor units. Must be finite and positive for different currencies. Matching
+       * currencies ignore the supplied numeric rate and use 1.0.
+       */
+      public Builder setExchangeRate(BigDecimal exchangeRate) {
+        this.exchangeRate = exchangeRate;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * TransactionCreateForceCaptureParams.SettlementDetails#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link TransactionCreateForceCaptureParams.SettlementDetails#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }

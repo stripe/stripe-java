@@ -1047,6 +1047,17 @@ public class StripeClient {
   }
 
   /**
+   * @deprecated StripeClient.risk() is deprecated, use StripeClient.v1().risk() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().risk(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.RiskService risk() {
+    return new com.stripe.service.RiskService(this.getResponseGetter());
+  }
+
+  /**
    * @deprecated StripeClient.setupAttempts() is deprecated, use StripeClient.v1().setupAttempts()
    *     instead. All functionality under it has been copied over to
    *     StripeClient.v1().setupAttempts(). See <a

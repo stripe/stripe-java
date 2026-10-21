@@ -23,7 +23,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * ReceivedCredits represent funds sent to a <a
+ * Legacy ReceivedCredits are part of the v1 version of Treasury for platforms and do not support
+ * many of the features introduced in <a href="https://docs.stripe.com/treasury/connect">Treasury
+ * for platforms v2</a>. Use <a
+ * href="https://docs.stripe.com/api/v2/money-management/received-credits?api-version=preview">Received
+ * Credits</a> instead of building a new v1 integration.
+ *
+ * <p>ReceivedCredits represent funds sent to a <a
  * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a> (for example, via ACH
  * or wire). These money movements are not initiated from the FinancialAccount.
  */
@@ -390,7 +396,13 @@ public class ReceivedCredit extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class SourceFlowDetails extends StripeObject {
       /**
-       * You can reverse some <a
+       * Legacy CreditReversals are part of the v1 version of Treasury for platforms and do not
+       * support many of the features introduced in <a
+       * href="https://docs.stripe.com/treasury/connect">Treasury for platforms v2</a>. Use <a
+       * href="https://docs.stripe.com/api/v2/money-management/received-credits?api-version=preview">Received
+       * Credits</a> instead of building a new v1 integration.
+       *
+       * <p>You can reverse some <a
        * href="https://docs.stripe.com/api#received_credits">ReceivedCredits</a> depending on their
        * network and source flow. Reversing a ReceivedCredit leads to the creation of a new object
        * known as a CreditReversal.
@@ -399,7 +411,13 @@ public class ReceivedCredit extends ApiResource implements HasId {
       CreditReversal creditReversal;
 
       /**
-       * Use <a
+       * Legacy OutboundPayments are part of the v1 version of Treasury for platforms and do not
+       * support many of the features introduced in <a
+       * href="https://docs.stripe.com/treasury/connect">Treasury for platforms v2</a>. Use <a
+       * href="https://docs.stripe.com/api/v2/money-management/outbound-payments">Outbound
+       * Payments</a> instead of building a new v1 integration.
+       *
+       * <p>Use <a
        * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments">OutboundPayments</a>
        * to send funds to another party's external bank account or <a
        * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a>. To send money
@@ -418,7 +436,13 @@ public class ReceivedCredit extends ApiResource implements HasId {
       OutboundPayment outboundPayment;
 
       /**
-       * Use <a
+       * Legacy OutboundTransfers are part of the v1 version of Treasury for platforms and do not
+       * support many of the features introduced in <a
+       * href="https://docs.stripe.com/treasury/connect">Treasury for platforms v2</a>. Use <a
+       * href="https://docs.stripe.com/api/v2/money-management/outbound-transfers?api-version=preview">Outbound
+       * Transfers</a> instead of building a new v1 integration.
+       *
+       * <p>Use <a
        * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-transfers">OutboundTransfers</a>
        * to transfer funds from a <a
        * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a> to a

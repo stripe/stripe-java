@@ -25,11 +25,15 @@ public final class V2CoreAccountIncludingConfigurationMoneyManagerCapabilityStat
      * <p>One of {@code business_custodial_storage.inbound.ousd}, {@code
      * business_custodial_storage.inbound.usdc}, {@code business_custodial_storage.outbound.ousd},
      * {@code business_custodial_storage.outbound.usdc}, {@code business_storage.inbound.cad},
-     * {@code business_storage.inbound.eur}, {@code business_storage.inbound.gbp}, {@code
-     * business_storage.inbound.ousd}, {@code business_storage.inbound.usd}, {@code
+     * {@code business_storage.inbound.czk}, {@code business_storage.inbound.eur}, {@code
+     * business_storage.inbound.gbp}, {@code business_storage.inbound.nok}, {@code
+     * business_storage.inbound.ousd}, {@code business_storage.inbound.pln}, {@code
+     * business_storage.inbound.sek}, {@code business_storage.inbound.usd}, {@code
      * business_storage.inbound.usdc}, {@code business_storage.outbound.cad}, {@code
-     * business_storage.outbound.eur}, {@code business_storage.outbound.gbp}, {@code
-     * business_storage.outbound.ousd}, {@code business_storage.outbound.usd}, {@code
+     * business_storage.outbound.czk}, {@code business_storage.outbound.eur}, {@code
+     * business_storage.outbound.gbp}, {@code business_storage.outbound.nok}, {@code
+     * business_storage.outbound.ousd}, {@code business_storage.outbound.pln}, {@code
+     * business_storage.outbound.sek}, {@code business_storage.outbound.usd}, {@code
      * business_storage.outbound.usdc}, {@code consumer_storage.inbound.usd}, {@code
      * consumer_storage.inbound.usdc}, {@code consumer_storage.outbound.usd}, {@code
      * consumer_storage.outbound.usdc}, {@code inbound_transfers.bank_accounts}, {@code

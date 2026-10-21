@@ -93,6 +93,14 @@ public class AuthorizationCreateParams extends ApiRequestParams {
   Long merchantAmount;
 
   /**
+   * Exchange rate from merchant amount to cardholder amount, expressed in minor units. Must be
+   * finite and positive for different currencies. Matching currencies ignore the supplied numeric
+   * rate and use 1.0.
+   */
+  @SerializedName("merchant_amount_exchange_rate")
+  BigDecimal merchantAmountExchangeRate;
+
+  /**
    * The currency of the authorization. If not provided, defaults to the currency of the card.
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
    * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
@@ -118,6 +126,13 @@ public class AuthorizationCreateParams extends ApiRequestParams {
   /** Stripe’s assessment of the fraud risk for this authorization. */
   @SerializedName("risk_assessment")
   RiskAssessment riskAssessment;
+
+  /**
+   * The type of the authorization object, for example a payment authorization, an original credit
+   * authorization, or a refund authorization.
+   */
+  @SerializedName("type")
+  Type type;
 
   /**
    * Verifications that Stripe performed on information that the cardholder provided to the
@@ -147,11 +162,13 @@ public class AuthorizationCreateParams extends ApiRequestParams {
       Healthcare healthcare,
       Boolean isAmountControllable,
       Long merchantAmount,
+      BigDecimal merchantAmountExchangeRate,
       String merchantCurrency,
       MerchantData merchantData,
       NetworkData networkData,
       PosCondition posCondition,
       RiskAssessment riskAssessment,
+      Type type,
       VerificationData verificationData,
       Wallet wallet) {
     this.amount = amount;
@@ -167,11 +184,13 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     this.healthcare = healthcare;
     this.isAmountControllable = isAmountControllable;
     this.merchantAmount = merchantAmount;
+    this.merchantAmountExchangeRate = merchantAmountExchangeRate;
     this.merchantCurrency = merchantCurrency;
     this.merchantData = merchantData;
     this.networkData = networkData;
     this.posCondition = posCondition;
     this.riskAssessment = riskAssessment;
+    this.type = type;
     this.verificationData = verificationData;
     this.wallet = wallet;
   }
@@ -207,6 +226,8 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
     private Long merchantAmount;
 
+    private BigDecimal merchantAmountExchangeRate;
+
     private String merchantCurrency;
 
     private MerchantData merchantData;
@@ -216,6 +237,8 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     private PosCondition posCondition;
 
     private RiskAssessment riskAssessment;
+
+    private Type type;
 
     private VerificationData verificationData;
 
@@ -237,11 +260,13 @@ public class AuthorizationCreateParams extends ApiRequestParams {
           this.healthcare,
           this.isAmountControllable,
           this.merchantAmount,
+          this.merchantAmountExchangeRate,
           this.merchantCurrency,
           this.merchantData,
           this.networkData,
           this.posCondition,
           this.riskAssessment,
+          this.type,
           this.verificationData,
           this.wallet);
     }
@@ -391,6 +416,16 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Exchange rate from merchant amount to cardholder amount, expressed in minor units. Must be
+     * finite and positive for different currencies. Matching currencies ignore the supplied numeric
+     * rate and use 1.0.
+     */
+    public Builder setMerchantAmountExchangeRate(BigDecimal merchantAmountExchangeRate) {
+      this.merchantAmountExchangeRate = merchantAmountExchangeRate;
+      return this;
+    }
+
+    /**
      * The currency of the authorization. If not provided, defaults to the currency of the card.
      * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
      * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
@@ -425,6 +460,15 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     /** Stripe’s assessment of the fraud risk for this authorization. */
     public Builder setRiskAssessment(AuthorizationCreateParams.RiskAssessment riskAssessment) {
       this.riskAssessment = riskAssessment;
+      return this;
+    }
+
+    /**
+     * The type of the authorization object, for example a payment authorization, an original credit
+     * authorization, or a refund authorization.
+     */
+    public Builder setType(AuthorizationCreateParams.Type type) {
+      this.type = type;
       return this;
     }
 
@@ -3969,6 +4013,18 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     private final String value;
 
     PosCondition(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("payment")
+    PAYMENT("payment");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Type(String value) {
       this.value = value;
     }
   }

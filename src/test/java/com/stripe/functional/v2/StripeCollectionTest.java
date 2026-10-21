@@ -20,6 +20,7 @@ import com.stripe.net.StripeResponse;
 import com.stripe.net.StripeResponseGetter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -189,6 +190,44 @@ public class StripeCollectionTest extends BaseStripeTest {
         ApiResource.RequestMethod.GET,
         "/v2/pageable_models/page_2",
         nextPageParams,
+        null);
+    verifyNoMoreInteractions(networkSpy);
+  }
+
+  @Test
+  public void testAutoPagingIterableSkipsEmptyPages() throws Exception {
+    setUpMockPages("1,2", "", "3", "");
+
+    final Map<String, Object> params = new HashMap<>();
+    final RequestOptions requestOptions = RequestOptions.builder().build();
+    final StripeCollection<PageableModel> collection =
+        new PageableService(BaseStripeTest.networkSpy).list(params, requestOptions);
+
+    final List<String> ids = new ArrayList<>();
+    for (PageableModel model : collection.autoPagingIterable()) {
+      ids.add(model.getId());
+    }
+
+    assertEquals(Arrays.asList("1", "2", "3"), ids);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/pageable_models", params, null);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/pageable_models/page_1",
+        new HashMap<>(),
+        null);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/pageable_models/page_2",
+        new HashMap<>(),
+        null);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/pageable_models/page_3",
+        new HashMap<>(),
         null);
     verifyNoMoreInteractions(networkSpy);
   }

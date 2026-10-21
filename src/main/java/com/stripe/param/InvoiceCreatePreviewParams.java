@@ -2758,13 +2758,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @SerializedName("period")
     Period period;
 
-    /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
+    /** The ID of the price object. */
     @SerializedName("price")
     String price;
 
     /**
      * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-     * inline. One of {@code price} or {@code price_data} is required.
+     * inline.
      */
     @SerializedName("price_data")
     PriceData priceData;
@@ -3098,7 +3098,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
+      /** The ID of the price object. */
       public Builder setPrice(String price) {
         this.price = price;
         return this;
@@ -3106,7 +3106,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       /**
        * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-       * inline. One of {@code price} or {@code price_data} is required.
+       * inline.
        */
       public Builder setPriceData(InvoiceCreatePreviewParams.InvoiceItem.PriceData priceData) {
         this.priceData = priceData;

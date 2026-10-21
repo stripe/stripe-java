@@ -21,6 +21,9 @@ import lombok.Setter;
  * You can store multiple cards on a customer in order to charge the customer later. You can also
  * store multiple debit cards on a recipient in order to transfer to those cards later.
  *
+ * <p>This API is deprecated. Use the <a
+ * href="https://docs.stripe.com/api/payment_methods">PaymentMethods API</a> instead.
+ *
  * <p>Related guide: <a href="https://docs.stripe.com/sources/cards">Card payments with Sources</a>
  */
 @Getter

@@ -1361,6 +1361,9 @@ public final class EventNotificationClassLookup {
         "v2.signals.account_evaluation.complete",
         com.stripe.events.V2SignalsAccountEvaluationCompleteEventNotification.class);
     eventClassLookup.put(
+        "v2.signals.account_signal.customer_risk_ready",
+        com.stripe.events.V2SignalsAccountSignalCustomerRiskReadyEventNotification.class);
+    eventClassLookup.put(
         "v2.signals.account_signal.fraudulent_merchant_ready",
         com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEventNotification.class);
     eventClassLookup.put(

@@ -13,6 +13,10 @@ public final class DataService extends ApiService {
     return new com.stripe.service.v2.data.AnalyticsService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.data.OperationService operations() {
+    return new com.stripe.service.v2.data.OperationService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.data.QueryRunService queryRuns() {
     return new com.stripe.service.v2.data.QueryRunService(this.getResponseGetter());
   }
