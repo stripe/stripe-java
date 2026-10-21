@@ -3,6 +3,7 @@ title: Update generated code
 pr_url: https://github.com/stripe/stripe-java/pull/2317
 semver_level: major
 is_stripe_api_change: true
+released_in_version: 34.1.0-alpha.4
 ---
 
 * Add support for new resources `risk.Form` and `v2.data.SearchResultList`
