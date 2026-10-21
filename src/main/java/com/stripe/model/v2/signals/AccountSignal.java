@@ -31,9 +31,17 @@ public class AccountSignal extends StripeObject implements HasId {
   @SerializedName("account_evaluation")
   String accountEvaluation;
 
+  /** Data for the account takeover signal. Present only when type is account_takeover. */
+  @SerializedName("account_takeover")
+  AccountTakeover accountTakeover;
+
   /** Timestamp at which the signal was created. */
   @SerializedName("created")
   Instant created;
+
+  /** Data for the customer risk signal. Present only when type is customer_risk. */
+  @SerializedName("customer_risk")
+  CustomerRisk customerRisk;
 
   /** Data for the fraudulent merchant signal. Present only when type is fraudulent_merchant. */
   @SerializedName("fraudulent_merchant")
@@ -78,9 +86,9 @@ public class AccountSignal extends StripeObject implements HasId {
   /**
    * The type of signal.
    *
-   * <p>One of {@code fraudulent_merchant}, {@code fraudulent_website}, {@code
-   * merchant_delinquency}, {@code payment_delinquency_exposure}, {@code user_account_sharing},
-   * {@code user_merchant_fit}, or {@code user_multi_accounting}.
+   * <p>One of {@code account_takeover}, {@code customer_risk}, {@code fraudulent_merchant}, {@code
+   * fraudulent_website}, {@code merchant_delinquency}, {@code payment_delinquency_exposure}, {@code
+   * user_account_sharing}, {@code user_merchant_fit}, or {@code user_multi_accounting}.
    */
   @SerializedName("type")
   String type;
@@ -109,6 +117,34 @@ public class AccountSignal extends StripeObject implements HasId {
     /** The v1 customer ID of the account, for users not yet migrated to v2/accounts. */
     @SerializedName("customer")
     String customer;
+  }
+
+  /** Data for the account takeover signal. Present only when type is account_takeover. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AccountTakeover extends StripeObject {
+    /**
+     * Categorical assessment of the account takeover risk.
+     *
+     * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, or {@code unknown}.
+     */
+    @SerializedName("risk_level")
+    String riskLevel;
+  }
+
+  /** Data for the customer risk signal. Present only when type is customer_risk. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomerRisk extends StripeObject {
+    /**
+     * Categorical assessment of the customer's risk of fraudulent or abusive activity.
+     *
+     * <p>One of {@code elevated}, {@code highest}, {@code low}, {@code normal}, or {@code unknown}.
+     */
+    @SerializedName("risk_level")
+    String riskLevel;
   }
 
   /** Data for the fraudulent merchant signal. Present only when type is fraudulent_merchant. */

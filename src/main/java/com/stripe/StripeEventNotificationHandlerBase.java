@@ -473,6 +473,7 @@ import com.stripe.events.V2ReportingReportRunFailedEventNotification;
 import com.stripe.events.V2ReportingReportRunSucceededEventNotification;
 import com.stripe.events.V2ReportingReportRunUpdatedEventNotification;
 import com.stripe.events.V2SignalsAccountEvaluationCompleteEventNotification;
+import com.stripe.events.V2SignalsAccountSignalCustomerRiskReadyEventNotification;
 import com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEventNotification;
 import com.stripe.events.V2SignalsAccountSignalFraudulentWebsiteReadyEventNotification;
 import com.stripe.events.V2SignalsAccountSignalMerchantDelinquencyReadyEventNotification;
@@ -3530,6 +3531,13 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV2SignalsAccountEvaluationComplete(
       EventNotificationCallback<V2SignalsAccountEvaluationCompleteEventNotification> callback) {
     this.register("v2.signals.account_evaluation.complete", callback);
+    return self();
+  }
+
+  public T onV2SignalsAccountSignalCustomerRiskReady(
+      EventNotificationCallback<V2SignalsAccountSignalCustomerRiskReadyEventNotification>
+          callback) {
+    this.register("v2.signals.account_signal.customer_risk_ready", callback);
     return self();
   }
 

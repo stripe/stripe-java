@@ -60,7 +60,10 @@ public class AccountCreateParams extends ApiRequestParams {
   @SerializedName("company")
   Company company;
 
-  /** A hash of configuration describing the account controller's attributes. */
+  /**
+   * Configures the account's Dashboard access, loss liability, requirements collection, and Stripe
+   * fee responsibility.
+   */
   @SerializedName("controller")
   Controller controller;
 
@@ -360,7 +363,10 @@ public class AccountCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A hash of configuration describing the account controller's attributes. */
+    /**
+     * Configures the account's Dashboard access, loss liability, requirements collection, and
+     * Stripe fee responsibility.
+     */
     public Builder setController(AccountCreateParams.Controller controller) {
       this.controller = controller;
       return this;
@@ -11778,10 +11784,13 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * A value indicating the responsible payer of Stripe fees on this account. Defaults to {@code
+       * Controls who pays Stripe fees for direct charges and other pricing-control-eligible Stripe
+       * products. Setting {@code controller.losses.payments=application} requires {@code
+       * controller.fees.payer=application}. For destination charges and separate charges and
+       * transfers, Stripe bills the platform regardless of this setting. Defaults to {@code
        * account}. Learn more about <a
        * href="https://docs.stripe.com/connect/direct-charges-fee-payer-behavior">fee behavior on
-       * connected accounts</a>.
+       * connected accounts</a>, including application fees and pricing considerations.
        */
       @SerializedName("payer")
       Payer payer;
@@ -11834,10 +11843,13 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A value indicating the responsible payer of Stripe fees on this account. Defaults to
-         * {@code account}. Learn more about <a
+         * Controls who pays Stripe fees for direct charges and other pricing-control-eligible
+         * Stripe products. Setting {@code controller.losses.payments=application} requires {@code
+         * controller.fees.payer=application}. For destination charges and separate charges and
+         * transfers, Stripe bills the platform regardless of this setting. Defaults to {@code
+         * account}. Learn more about <a
          * href="https://docs.stripe.com/connect/direct-charges-fee-payer-behavior">fee behavior on
-         * connected accounts</a>.
+         * connected accounts</a>, including application fees and pricing considerations.
          */
         public Builder setPayer(AccountCreateParams.Controller.Fees.Payer payer) {
           this.payer = payer;
@@ -11874,8 +11886,11 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * A value indicating who is liable when this account can't pay back negative balances
-       * resulting from payments. Defaults to {@code stripe}.
+       * Controls who is responsible for payment-related negative balances on this account. The
+       * platform remains liable for negative balances on its own account. To use Stripe negative
+       * balance liability, your integration must meet <a
+       * href="https://docs.stripe.com/connect/risk-management/managed-risk">Managed Risk
+       * requirements</a>. Defaults to {@code stripe}.
        */
       @SerializedName("payments")
       Payments payments;
@@ -11928,8 +11943,11 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A value indicating who is liable when this account can't pay back negative balances
-         * resulting from payments. Defaults to {@code stripe}.
+         * Controls who is responsible for payment-related negative balances on this account. The
+         * platform remains liable for negative balances on its own account. To use Stripe negative
+         * balance liability, your integration must meet <a
+         * href="https://docs.stripe.com/connect/risk-management/managed-risk">Managed Risk
+         * requirements</a>. Defaults to {@code stripe}.
          */
         public Builder setPayments(AccountCreateParams.Controller.Losses.Payments payments) {
           this.payments = payments;

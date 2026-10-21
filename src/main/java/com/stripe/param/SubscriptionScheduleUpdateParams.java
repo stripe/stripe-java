@@ -65,9 +65,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   Object metadata;
 
   /**
-   * Configures the subscription's pause behavior and, optionally, its resume behavior. Only one
-   * entry is supported. Include a key to update an existing entry. Omit to leave an existing pause
-   * schedule unchanged, or pass &quot;&quot; to clear it.
+   * The subscription's pause behavior and optional resume behavior. You can provide one entry.
+   * Include its {@code key} to update an existing pause schedule. Omit {@code pause_schedules} to
+   * leave the existing schedule unchanged, or pass an empty string ({@code ""}) to clear it.
    */
   @SerializedName("pause_schedules")
   Object pauseSchedules;
@@ -367,9 +367,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Configures the subscription's pause behavior and, optionally, its resume behavior. Only one
-     * entry is supported. Include a key to update an existing entry. Omit to leave an existing
-     * pause schedule unchanged, or pass &quot;&quot; to clear it.
+     * The subscription's pause behavior and optional resume behavior. You can provide one entry.
+     * Include its {@code key} to update an existing pause schedule. Omit {@code pause_schedules} to
+     * leave the existing schedule unchanged, or pass an empty string ({@code ""}) to clear it.
      */
     public Builder setPauseSchedules(EmptyParam pauseSchedules) {
       this.pauseSchedules = pauseSchedules;
@@ -377,9 +377,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Configures the subscription's pause behavior and, optionally, its resume behavior. Only one
-     * entry is supported. Include a key to update an existing entry. Omit to leave an existing
-     * pause schedule unchanged, or pass &quot;&quot; to clear it.
+     * The subscription's pause behavior and optional resume behavior. You can provide one entry.
+     * Include its {@code key} to update an existing pause schedule. Omit {@code pause_schedules} to
+     * leave the existing schedule unchanged, or pass an empty string ({@code ""}) to clear it.
      */
     public Builder setPauseSchedules(
         List<SubscriptionScheduleUpdateParams.PauseSchedule> pauseSchedules) {

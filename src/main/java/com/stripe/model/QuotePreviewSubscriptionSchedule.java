@@ -19,6 +19,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A subscription schedule allows you to create and manage the lifecycle of a subscription by
+ * predefining expected changes. A quote preview subscription schedule shows the subscription
+ * schedule that would be created by accepting the quote.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

@@ -191,6 +191,7 @@ public final class EventDataClassLookup {
     classLookup.put("v2.data.report", com.stripe.model.v2.data.Report.class);
     classLookup.put("v2.data.report_run", com.stripe.model.v2.data.ReportRun.class);
     classLookup.put("v2.data.schema", com.stripe.model.v2.data.Schema.class);
+    classLookup.put("v2.data.search_result_list", com.stripe.model.v2.data.SearchResultList.class);
 
     classLookup.put(
         "v2.data.reporting.query_run", com.stripe.model.v2.data.reporting.QueryRun.class);
@@ -1518,6 +1519,9 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.signals.account_evaluation.complete",
         com.stripe.events.V2SignalsAccountEvaluationCompleteEvent.class);
+    eventClassLookup.put(
+        "v2.signals.account_signal.customer_risk_ready",
+        com.stripe.events.V2SignalsAccountSignalCustomerRiskReadyEvent.class);
     eventClassLookup.put(
         "v2.signals.account_signal.fraudulent_merchant_ready",
         com.stripe.events.V2SignalsAccountSignalFraudulentMerchantReadyEvent.class);

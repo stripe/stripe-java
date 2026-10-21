@@ -243,6 +243,13 @@ public class Authorization extends ApiResource
   String posCondition;
 
   /**
+   * Details about the authorization specific to product eligibility inquiries. This field is only
+   * populated for {@code product_eligibility_inquiry} type authorizations.
+   */
+  @SerializedName("product_eligibility_inquiry")
+  ProductEligibilityInquiry productEligibilityInquiry;
+
+  /**
    * Redaction status of this authorization. If the authorization is not redacted, this field will
    * be null.
    */
@@ -297,6 +304,14 @@ public class Authorization extends ApiResource
    */
   @SerializedName("treasury")
   Treasury treasury;
+
+  /**
+   * The type of the authorization, whether it is for a payment or another type.
+   *
+   * <p>One of {@code balance_inquiry}, {@code payment}, or {@code product_eligibility_inquiry}.
+   */
+  @SerializedName("type")
+  String type;
 
   @SerializedName("verification_data")
   VerificationData verificationData;
@@ -1964,6 +1979,29 @@ public class Authorization extends ApiResource
   }
 
   /**
+   * For more details about ProductEligibilityInquiry, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ProductEligibilityInquiry extends StripeObject {
+    /**
+     * The anticipated amount that merchants can send before a payment authorization, in the
+     * smallest currency unit.
+     */
+    @SerializedName("anticipated_amount")
+    Long anticipatedAmount;
+
+    /**
+     * The currency of the anticipated amount that merchants can send before a payment
+     * authorization.
+     */
+    @SerializedName("anticipated_currency")
+    String anticipatedCurrency;
+  }
+
+  /**
    * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -3052,6 +3090,7 @@ public class Authorization extends ApiResource
     trySetResponseGetter(merchantData, responseGetter);
     trySetResponseGetter(networkData, responseGetter);
     trySetResponseGetter(pendingRequest, responseGetter);
+    trySetResponseGetter(productEligibilityInquiry, responseGetter);
     trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(terminalData, responseGetter);
     trySetResponseGetter(token, responseGetter);

@@ -324,6 +324,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("managed_payments")
   ManagedPayments managedPayments;
 
+  /** Advertising attribution information for this Checkout Session. */
+  @SerializedName("marketing_attributions")
+  List<Session.MarketingAttribution> marketingAttributions;
+
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -390,8 +394,8 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   ExpandableField<PaymentLink> paymentLink;
 
   /**
-   * Configure whether a Checkout Session should collect a payment method for sessions with mode
-   * {@code payment}. Defaults to {@code always}.
+   * Configure whether a Checkout Session should collect a payment method. Can only be set in {@code
+   * subscription} mode. Defaults to {@code always}.
    *
    * <p>One of {@code always}, {@code auto}, or {@code if_required}.
    */
@@ -1567,9 +1571,11 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * bb_tin}, {@code cd_nif}, {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin},
        * {@code gn_nif}, {@code mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code
        * np_pan}, {@code tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code aw_tin},
-       * {@code az_tin}, {@code bd_bin}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code
-       * la_tin}, {@code cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, or {@code
-       * unknown}.
+       * {@code az_tin}, {@code bd_bin}, {@code au_acn}, {@code nz_bn}, {@code pt_nif}, {@code
+       * cz_dic}, {@code fr_siret}, {@code fr_siren}, {@code fr_spi}, {@code sm_coe}, {@code
+       * tt_vat}, {@code tt_bir}, {@code mu_vat}, {@code mz_nuit}, {@code au_wpn}, {@code md_cf},
+       * {@code is_kt}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin}, {@code
+       * cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -2334,9 +2340,11 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * bb_tin}, {@code cd_nif}, {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin},
        * {@code gn_nif}, {@code mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code
        * np_pan}, {@code tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code aw_tin},
-       * {@code az_tin}, {@code bd_bin}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code
-       * la_tin}, {@code cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, or {@code
-       * unknown}.
+       * {@code az_tin}, {@code bd_bin}, {@code au_acn}, {@code nz_bn}, {@code pt_nif}, {@code
+       * cz_dic}, {@code fr_siret}, {@code fr_siren}, {@code fr_spi}, {@code sm_coe}, {@code
+       * tt_vat}, {@code tt_bir}, {@code mu_vat}, {@code mz_nuit}, {@code au_wpn}, {@code md_cf},
+       * {@code is_kt}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin}, {@code
+       * cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -2598,16 +2606,368 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("key")
     String key;
 
+    @SerializedName("metronome_commit")
+    MetronomeCommit metronomeCommit;
+
     @SerializedName("subscription")
     com.stripe.model.checkout.Session.Item.Subscription subscription;
 
     /**
      * The type of the item.
      *
-     * <p>Equal to {@code subscription}.
+     * <p>One of {@code metronome_commit}, or {@code subscription}.
      */
     @SerializedName("type")
     String type;
+
+    /**
+     * For more details about MetronomeCommit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MetronomeCommit extends StripeObject {
+      /** The list of commits for this Metronome contract. */
+      @SerializedName("commits")
+      List<Session.Item.MetronomeCommit.Commit> commits;
+
+      /** The Metronome contract ID associated with this checkout item. */
+      @SerializedName("metronome_contract")
+      String metronomeContract;
+
+      /**
+       * The Metronome customer ID associated with this checkout item, resolved during validation.
+       */
+      @SerializedName("metronome_customer")
+      String metronomeCustomer;
+
+      @SerializedName("price_configuration")
+      PriceConfiguration priceConfiguration;
+
+      /**
+       * For more details about Commit, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Commit extends StripeObject {
+        /**
+         * Sets the balance amount and release schedule. Mutually exclusive with {@code
+         * commit_options}.
+         */
+        @SerializedName("access_schedule")
+        AccessSchedule accessSchedule;
+
+        /**
+         * Metronome product tags this commit can be drawn down against. Products must have all
+         * specified tags. If {@code applicable_metronome_products}, {@code
+         * applicable_metronome_product_tags}, and {@code specifiers} are all absent, the commit
+         * applies to all products. See Metronome's <a
+         * href="https://docs.metronome.com/api-reference/contracts/edit-a-contract#body-add-commits-items-applicable-product-tags">applicable_product_tags</a>.
+         */
+        @SerializedName("applicable_metronome_product_tags")
+        List<String> applicableMetronomeProductTags;
+
+        /**
+         * Metronome product IDs this commit can be drawn down against. If {@code
+         * applicable_metronome_products}, {@code applicable_metronome_product_tags}, and {@code
+         * specifiers} are all absent, the commit applies to all products. See Metronome's <a
+         * href="https://docs.metronome.com/api-reference/contracts/edit-a-contract#body-add-commits-items-applicable-product-ids">applicable_product_ids</a>.
+         */
+        @SerializedName("applicable_metronome_products")
+        List<String> applicableMetronomeProducts;
+
+        /**
+         * Customer selects the balance amount to purchase. Mutually exclusive with {@code
+         * access_schedule}.
+         */
+        @SerializedName("commit_options")
+        CommitOptions commitOptions;
+
+        /**
+         * The Metronome Custom Pricing Unit credit type ID for this commit. Null when the commit
+         * prices in fiat.
+         */
+        @SerializedName("credit_type_id")
+        String creditTypeId;
+
+        /**
+         * Key-value pairs forwarded to the Metronome commit's <a
+         * href="https://docs.metronome.com/api-reference/contracts/edit-a-contract#body-add-commits-items-custom-fields">custom_fields</a>.
+         */
+        @SerializedName("custom_fields")
+        Map<String, String> customFields;
+
+        /** Free-form description. Forwarded to the Metronome commit's description. */
+        @SerializedName("description")
+        String description;
+
+        /** The Metronome commit ID, populated after successful activation. */
+        @SerializedName("metronome_commit")
+        String metronomeCommit;
+
+        /** The Metronome product ID for this commit. */
+        @SerializedName("metronome_product")
+        String metronomeProduct;
+
+        /** Display name for the commit. Surfaced on the Metronome commit's name. */
+        @SerializedName("name")
+        String name;
+
+        /**
+         * Priority for applying the commit. Lower priority values apply first. Forwarded to
+         * Metronome as-is.
+         */
+        @SerializedName("priority")
+        BigDecimal priority;
+
+        /**
+         * Specifies which rates are used to draw down the commit. Accepts {@code commit_rate},
+         * {@code list_rate}, {@code COMMIT_RATE}, or {@code LIST_RATE}.
+         */
+        @SerializedName("rate_type")
+        String rateType;
+
+        /**
+         * Fraction of unused balance that rolls over on a Metronome contract transition. Must be
+         * between {@code 0} and {@code 1}. Forwarded to Metronome as-is.
+         */
+        @SerializedName("rollover_fraction")
+        BigDecimal rolloverFraction;
+
+        /**
+         * Usage filters that determine what draws down the commit. If {@code
+         * applicable_metronome_products}, {@code applicable_metronome_product_tags}, and {@code
+         * specifiers} are all absent, the commit applies to all products. See Metronome's <a
+         * href="https://docs.metronome.com/api-reference/contracts/edit-a-contract#body-add-commits-items-specifiers">specifiers</a>.
+         */
+        @SerializedName("specifiers")
+        List<Session.Item.MetronomeCommit.Commit.Specifier> specifiers;
+
+        /**
+         * Tax details for the Stripe product created for this commit. If provided, {@code tax_code}
+         * is required.
+         */
+        @SerializedName("tax_details")
+        TaxDetails taxDetails;
+
+        /**
+         * For more details about AccessSchedule, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AccessSchedule extends StripeObject {
+          /** The fixed price the buyer pays, in minor currency units. */
+          @SerializedName("price_amount")
+          Long priceAmount;
+
+          /** When and how many credits become available. */
+          @SerializedName("schedule_items")
+          List<Session.Item.MetronomeCommit.Commit.AccessSchedule.ScheduleItem> scheduleItems;
+
+          /**
+           * For more details about ScheduleItem, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class ScheduleItem extends StripeObject {
+            /** The access amount in credit_type_id units. */
+            @SerializedName("amount")
+            BigDecimal amount;
+
+            /**
+             * Hour-aligned RFC 3339 timestamp in UTC at which access to the balance amount ends
+             * (exclusive).
+             */
+            @SerializedName("ending_before")
+            String endingBefore;
+
+            /**
+             * Hour-aligned RFC 3339 timestamp in UTC at which access to the balance amount starts
+             * (inclusive).
+             */
+            @SerializedName("starting_at")
+            String startingAt;
+          }
+        }
+
+        /**
+         * For more details about CommitOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CommitOptions extends StripeObject {
+          /** Custom access amount configuration. */
+          @SerializedName("custom_amount")
+          CustomAmount customAmount;
+
+          /** Volume-based discount tiers. */
+          @SerializedName("discount_tiers")
+          List<Session.Item.MetronomeCommit.Commit.CommitOptions.DiscountTier> discountTiers;
+
+          /** When access for the purchased credits ends. */
+          @SerializedName("ending_before")
+          String endingBefore;
+
+          /** Access-amount presets for the buyer to choose from. */
+          @SerializedName("options")
+          List<Session.Item.MetronomeCommit.Commit.CommitOptions.Option> options;
+
+          /**
+           * The selected access amount. It matches an {@code options[].access_amount} for a preset
+           * selection, but may be a custom value when {@code custom_amount} is enabled. New
+           * sessions initialize it from the option marked {@code default_option}, or from the first
+           * option when none is marked. It is not necessarily the item's monetary price; use {@code
+           * amount_details} for display and totals.
+           */
+          @SerializedName("selected_access_amount")
+          Long selectedAccessAmount;
+
+          /** When access for the purchased credits starts. */
+          @SerializedName("starting_at")
+          String startingAt;
+
+          /**
+           * For more details about CustomAmount, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class CustomAmount extends StripeObject {
+            /** Whether custom amount input is enabled. */
+            @SerializedName("enabled")
+            Boolean enabled;
+
+            /**
+             * Maximum {@code access_amount} the customer can enter. {@code null} means the
+             * effective maximum is {@code 999999999999999}.
+             */
+            @SerializedName("maximum")
+            Long maximum;
+
+            /**
+             * Minimum {@code access_amount} the customer can enter. {@code null} means the
+             * effective minimum is {@code 1}.
+             */
+            @SerializedName("minimum")
+            Long minimum;
+          }
+
+          /**
+           * For more details about DiscountTier, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class DiscountTier extends StripeObject {
+            /** Percentage discount applied to the full access_amount. */
+            @SerializedName("discount_percentage")
+            Long discountPercentage;
+
+            /** Upper bound (inclusive) in credit_type_id units. Null means unbounded. */
+            @SerializedName("up_to")
+            Long upTo;
+          }
+
+          /**
+           * For more details about Option, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Option extends StripeObject {
+            /** The access amount for this option. */
+            @SerializedName("access_amount")
+            Long accessAmount;
+
+            /** Whether this option is pre-selected in the Checkout UI. */
+            @SerializedName("default_option")
+            Boolean defaultOption;
+          }
+        }
+
+        /**
+         * For more details about Specifier, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Specifier extends StripeObject {
+          /** Key-value pairs for presentation group filters. */
+          @SerializedName("presentation_group_values")
+          Map<String, String> presentationGroupValues;
+
+          /** Key-value pairs for pricing group filters. */
+          @SerializedName("pricing_group_values")
+          Map<String, String> pricingGroupValues;
+
+          /** Metronome product ID to scope this specifier to. */
+          @SerializedName("product_id")
+          String productId;
+
+          /**
+           * Metronome product tags to scope this specifier to. Products must have all specified
+           * tags.
+           */
+          @SerializedName("product_tags")
+          List<String> productTags;
+        }
+
+        /**
+         * For more details about TaxDetails, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class TaxDetails extends StripeObject {
+          /**
+           * Stripe <a href="https://docs.stripe.com/tax/tax-codes">tax code</a> for this commit
+           * (for example, {@code txcd_10103000}).
+           */
+          @SerializedName("tax_code")
+          String taxCode;
+        }
+      }
+
+      /**
+       * For more details about PriceConfiguration, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PriceConfiguration extends StripeObject {
+        /**
+         * The currency for this commit purchase, as an ISO 4217 lowercase string (for example,
+         * {@code usd}).
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * Specifies whether the price is considered inclusive or exclusive of taxes. When omitted
+         * and automatic tax is enabled, uses {@code tax_settings.defaults.tax_behavior}. If no
+         * default is set, the request returns an error.
+         *
+         * <p>One of {@code exclusive}, or {@code inclusive}.
+         */
+        @SerializedName("tax_behavior")
+        String taxBehavior;
+      }
+    }
 
     /**
      * For more details about Subscription, please refer to the <a
@@ -2814,6 +3174,63 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
      */
     @SerializedName("enabled")
     Boolean enabled;
+  }
+
+  /**
+   * For more details about MarketingAttribution, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MarketingAttribution extends StripeObject {
+    @SerializedName("ad_conversion")
+    AdConversion adConversion;
+
+    /** The advertising platform's click identifier. */
+    @SerializedName("click_id")
+    String clickId;
+
+    /** The Unix timestamp when the advertising interaction occurred. */
+    @SerializedName("occurred_at")
+    Long occurredAt;
+
+    /** The advertising group ID from the {@code utm_adgroup} parameter. */
+    @SerializedName("utm_adgroup")
+    String utmAdgroup;
+
+    /** The advertising content identifier from the {@code utm_content} parameter. */
+    @SerializedName("utm_content")
+    String utmContent;
+
+    /** The advertising campaign ID from the {@code utm_id} parameter. */
+    @SerializedName("utm_id")
+    String utmId;
+
+    /** The marketing medium from the {@code utm_medium} parameter. */
+    @SerializedName("utm_medium")
+    String utmMedium;
+
+    /** The referral source from the {@code utm_source} parameter. */
+    @SerializedName("utm_source")
+    String utmSource;
+
+    /** The paid search term from the {@code utm_term} parameter. */
+    @SerializedName("utm_term")
+    String utmTerm;
+
+    /**
+     * For more details about AdConversion, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdConversion extends StripeObject {
+      /** Whether the customer consented to sending conversion data to an advertising platform. */
+      @SerializedName("consent_collected")
+      Boolean consentCollected;
+    }
   }
 
   /**
@@ -3600,6 +4017,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("installments")
       Installments installments;
 
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
        * beyond the standard authorization validity window</a> for this CheckoutSession.
@@ -3720,6 +4140,80 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         /** Indicates if installments are enabled. */
         @SerializedName("enabled")
         Boolean enabled;
+      }
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** Maximum or fixed amount for future payments, in the mandate's currency. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+         * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+         * amount charged can be up to the value passed for the {@code amount} param.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * A description of the mandate or subscription that is meant to be displayed to the
+         * customer.
+         */
+        @SerializedName("description")
+        String description;
+
+        /**
+         * End date of the mandate or subscription. If not provided, the mandate will be active
+         * until canceled. If provided, end date should be after start date.
+         */
+        @SerializedName("end_date")
+        Long endDate;
+
+        /**
+         * Specifies payment frequency. One of {@code day}, {@code week}, {@code month}, {@code
+         * year}, or {@code sporadic}.
+         */
+        @SerializedName("interval")
+        String interval;
+
+        /**
+         * The number of intervals between payments. For example, {@code interval=month} and {@code
+         * interval_count=3} indicates one payment every three months. Maximum of one year interval
+         * allowed (1 year, 12 months, or 52 weeks). This parameter is optional when {@code
+         * interval=sporadic}.
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        /** Unique identifier for the mandate or subscription. */
+        @SerializedName("reference")
+        String reference;
+
+        /**
+         * Start date of the mandate or subscription. Start date should not be lesser than
+         * yesterday.
+         */
+        @SerializedName("start_date")
+        Long startDate;
+
+        /** Specifies the type of mandates supported. Possible values are {@code india}. */
+        @SerializedName("supported_types")
+        List<String> supportedTypes;
       }
 
       /**

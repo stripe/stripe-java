@@ -1660,7 +1660,10 @@ public class SessionUpdateParams extends ApiRequestParams {
 
     /**
      * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-     * inline. One of {@code price} or {@code price_data} is required when creating a new line item.
+     * inline, for <a
+     * href="https://docs.stripe.com/products-prices/how-products-and-prices-work#inline-pricing">dynamic
+     * pricing</a> when the amount isn't known ahead of time. One of {@code price} or {@code
+     * price_data} is required when creating a new line item.
      */
     @SerializedName("price_data")
     PriceData priceData;
@@ -1850,8 +1853,10 @@ public class SessionUpdateParams extends ApiRequestParams {
 
       /**
        * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-       * inline. One of {@code price} or {@code price_data} is required when creating a new line
-       * item.
+       * inline, for <a
+       * href="https://docs.stripe.com/products-prices/how-products-and-prices-work#inline-pricing">dynamic
+       * pricing</a> when the amount isn't known ahead of time. One of {@code price} or {@code
+       * price_data} is required when creating a new line item.
        */
       public Builder setPriceData(SessionUpdateParams.LineItem.PriceData priceData) {
         this.priceData = priceData;

@@ -285,6 +285,13 @@ public class SessionCreateParams extends ApiRequestParams {
   ManagedPayments managedPayments;
 
   /**
+   * Advertising attribution information for this Checkout Session. Only one attribution is
+   * supported.
+   */
+  @SerializedName("marketing_attributions")
+  List<SessionCreateParams.MarketingAttribution> marketingAttributions;
+
+  /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -522,6 +529,7 @@ public class SessionCreateParams extends ApiRequestParams {
       List<SessionCreateParams.LineItem> lineItems,
       Locale locale,
       ManagedPayments managedPayments,
+      List<SessionCreateParams.MarketingAttribution> marketingAttributions,
       Map<String, String> metadata,
       Mode mode,
       NameCollection nameCollection,
@@ -581,6 +589,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.lineItems = lineItems;
     this.locale = locale;
     this.managedPayments = managedPayments;
+    this.marketingAttributions = marketingAttributions;
     this.metadata = metadata;
     this.mode = mode;
     this.nameCollection = nameCollection;
@@ -680,6 +689,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private ManagedPayments managedPayments;
 
+    private List<SessionCreateParams.MarketingAttribution> marketingAttributions;
+
     private Map<String, String> metadata;
 
     private Mode mode;
@@ -768,6 +779,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.lineItems,
           this.locale,
           this.managedPayments,
+          this.marketingAttributions,
           this.metadata,
           this.mode,
           this.nameCollection,
@@ -1294,6 +1306,33 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setManagedPayments(SessionCreateParams.ManagedPayments managedPayments) {
       this.managedPayments = managedPayments;
+      return this;
+    }
+
+    /**
+     * Add an element to `marketingAttributions` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SessionCreateParams#marketingAttributions} for the field documentation.
+     */
+    public Builder addMarketingAttribution(SessionCreateParams.MarketingAttribution element) {
+      if (this.marketingAttributions == null) {
+        this.marketingAttributions = new ArrayList<>();
+      }
+      this.marketingAttributions.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `marketingAttributions` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SessionCreateParams#marketingAttributions} for the field documentation.
+     */
+    public Builder addAllMarketingAttribution(
+        List<SessionCreateParams.MarketingAttribution> elements) {
+      if (this.marketingAttributions == null) {
+        this.marketingAttributions = new ArrayList<>();
+      }
+      this.marketingAttributions.addAll(elements);
       return this;
     }
 
@@ -6095,6 +6134,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Configuration for the Metronome commit item. */
+    @SerializedName("metronome_commit")
+    MetronomeCommit metronomeCommit;
+
     /** Configuration for the subscription item. */
     @SerializedName("subscription")
     Subscription subscription;
@@ -6103,8 +6146,13 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("type")
     Type type;
 
-    private Item(Map<String, Object> extraParams, Subscription subscription, Type type) {
+    private Item(
+        Map<String, Object> extraParams,
+        MetronomeCommit metronomeCommit,
+        Subscription subscription,
+        Type type) {
       this.extraParams = extraParams;
+      this.metronomeCommit = metronomeCommit;
       this.subscription = subscription;
       this.type = type;
     }
@@ -6116,13 +6164,16 @@ public class SessionCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
+      private MetronomeCommit metronomeCommit;
+
       private Subscription subscription;
 
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.Item build() {
-        return new SessionCreateParams.Item(this.extraParams, this.subscription, this.type);
+        return new SessionCreateParams.Item(
+            this.extraParams, this.metronomeCommit, this.subscription, this.type);
       }
 
       /**
@@ -6151,6 +6202,12 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Configuration for the Metronome commit item. */
+      public Builder setMetronomeCommit(SessionCreateParams.Item.MetronomeCommit metronomeCommit) {
+        this.metronomeCommit = metronomeCommit;
+        return this;
+      }
+
       /** Configuration for the subscription item. */
       public Builder setSubscription(SessionCreateParams.Item.Subscription subscription) {
         this.subscription = subscription;
@@ -6161,6 +6218,1803 @@ public class SessionCreateParams extends ApiRequestParams {
       public Builder setType(SessionCreateParams.Item.Type type) {
         this.type = type;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MetronomeCommit {
+      /** <strong>Required.</strong> The list of commits to create for this Metronome contract. */
+      @SerializedName("commits")
+      List<SessionCreateParams.Item.MetronomeCommit.Commit> commits;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> The Metronome contract ID to associate with this checkout item.
+       */
+      @SerializedName("metronome_contract")
+      String metronomeContract;
+
+      /**
+       * <strong>Required.</strong> The currency and tax behavior configuration for this commit
+       * purchase.
+       */
+      @SerializedName("price_configuration")
+      PriceConfiguration priceConfiguration;
+
+      private MetronomeCommit(
+          List<SessionCreateParams.Item.MetronomeCommit.Commit> commits,
+          Map<String, Object> extraParams,
+          String metronomeContract,
+          PriceConfiguration priceConfiguration) {
+        this.commits = commits;
+        this.extraParams = extraParams;
+        this.metronomeContract = metronomeContract;
+        this.priceConfiguration = priceConfiguration;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private List<SessionCreateParams.Item.MetronomeCommit.Commit> commits;
+
+        private Map<String, Object> extraParams;
+
+        private String metronomeContract;
+
+        private PriceConfiguration priceConfiguration;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.Item.MetronomeCommit build() {
+          return new SessionCreateParams.Item.MetronomeCommit(
+              this.commits, this.extraParams, this.metronomeContract, this.priceConfiguration);
+        }
+
+        /**
+         * Add an element to `commits` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * SessionCreateParams.Item.MetronomeCommit#commits} for the field documentation.
+         */
+        public Builder addCommit(SessionCreateParams.Item.MetronomeCommit.Commit element) {
+          if (this.commits == null) {
+            this.commits = new ArrayList<>();
+          }
+          this.commits.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `commits` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SessionCreateParams.Item.MetronomeCommit#commits} for the field documentation.
+         */
+        public Builder addAllCommit(
+            List<SessionCreateParams.Item.MetronomeCommit.Commit> elements) {
+          if (this.commits == null) {
+            this.commits = new ArrayList<>();
+          }
+          this.commits.addAll(elements);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.Item.MetronomeCommit#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.Item.MetronomeCommit#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The Metronome contract ID to associate with this checkout
+         * item.
+         */
+        public Builder setMetronomeContract(String metronomeContract) {
+          this.metronomeContract = metronomeContract;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The currency and tax behavior configuration for this commit
+         * purchase.
+         */
+        public Builder setPriceConfiguration(
+            SessionCreateParams.Item.MetronomeCommit.PriceConfiguration priceConfiguration) {
+          this.priceConfiguration = priceConfiguration;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Commit {
+        /**
+         * Sets the balance amount and release schedule. Mutually exclusive with {@code
+         * commit_options}.
+         */
+        @SerializedName("access_schedule")
+        AccessSchedule accessSchedule;
+
+        /**
+         * Metronome product tags this commit can be drawn down against. A product matches if it has
+         * at least one of the specified tags. Mutually exclusive with {@code specifiers}. If {@code
+         * applicable_metronome_products}, {@code applicable_metronome_product_tags}, and {@code
+         * specifiers} are all omitted, the commit applies to all products. See Metronome's <a
+         * href="https://docs.metronome.com/api-reference/contracts/edit-a-contract#body-add-commits-items-applicable-product-tags">applicable_product_tags</a>.
+         */
+        @SerializedName("applicable_metronome_product_tags")
+        List<String> applicableMetronomeProductTags;
+
+        /**
+         * Metronome product IDs this commit can be drawn down against. Mutually exclusive with
+         * {@code specifiers}. If {@code applicable_metronome_products}, {@code
+         * applicable_metronome_product_tags}, and {@code specifiers} are all omitted, the commit
+         * applies to all products. See Metronome's <a
+         * href="https://docs.metronome.com/api-reference/contracts/edit-a-contract#body-add-commits-items-applicable-product-ids">applicable_product_ids</a>.
+         */
+        @SerializedName("applicable_metronome_products")
+        List<String> applicableMetronomeProducts;
+
+        /**
+         * Customer selects the balance amount to purchase. Mutually exclusive with {@code
+         * access_schedule}.
+         */
+        @SerializedName("commit_options")
+        CommitOptions commitOptions;
+
+        /**
+         * The Metronome Custom Pricing Unit credit type ID for this commit, whose access amounts
+         * are credit counts. Omit it to price in fiat, where access amounts are in the smallest
+         * unit of {@code price_configuration[currency]}. Fiat credit type IDs are not accepted.
+         */
+        @SerializedName("credit_type_id")
+        String creditTypeId;
+
+        /**
+         * Key-value pairs forwarded to the Metronome commit's <a
+         * href="https://docs.metronome.com/api-reference/contracts/edit-a-contract#body-add-commits-items-custom-fields">custom_fields</a>.
+         */
+        @SerializedName("custom_fields")
+        Map<String, String> customFields;
+
+        /** Free-form description. Forwarded to the Metronome commit's description. */
+        @SerializedName("description")
+        String description;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> The Metronome product ID for this commit. */
+        @SerializedName("metronome_product")
+        String metronomeProduct;
+
+        /**
+         * <strong>Required.</strong> Display name for the commit. Surfaced on the Metronome
+         * commit's name.
+         */
+        @SerializedName("name")
+        String name;
+
+        /**
+         * Priority for applying the commit. Lower priority values apply first. Forwarded to
+         * Metronome as-is.
+         */
+        @SerializedName("priority")
+        BigDecimal priority;
+
+        /**
+         * Specifies which rates are used to draw down the commit. Accepts {@code commit_rate},
+         * {@code list_rate}, {@code COMMIT_RATE}, or {@code LIST_RATE}.
+         */
+        @SerializedName("rate_type")
+        RateType rateType;
+
+        /**
+         * Fraction of unused balance that rolls over on a Metronome contract transition. Must be
+         * between {@code 0} and {@code 1}. Forwarded to Metronome as-is.
+         */
+        @SerializedName("rollover_fraction")
+        BigDecimal rolloverFraction;
+
+        /**
+         * Usage filters that determine what draws down the commit. If multiple specifiers are
+         * provided, a product only needs to match one. Mutually exclusive with {@code
+         * applicable_metronome_products} and {@code applicable_metronome_product_tags}. If {@code
+         * applicable_metronome_products}, {@code applicable_metronome_product_tags}, and {@code
+         * specifiers} are all omitted, the commit applies to all products. See Metronome's <a
+         * href="https://docs.metronome.com/api-reference/contracts/edit-a-contract#body-add-commits-items-specifiers">specifiers</a>.
+         */
+        @SerializedName("specifiers")
+        List<SessionCreateParams.Item.MetronomeCommit.Commit.Specifier> specifiers;
+
+        /**
+         * Tax details for this commit. If omitted, Stripe uses the tax code from the Stripe product
+         * linked to the Metronome commit product. If there is no linked Stripe product or the
+         * Stripe product has no tax code configured, the <a
+         * href="https://docs.stripe.com/api/tax/settings/object#tax_settings_object-defaults-tax_code">preset
+         * tax rate on your account</a> will be used. If provided, {@code tax_code} is required.
+         */
+        @SerializedName("tax_details")
+        TaxDetails taxDetails;
+
+        private Commit(
+            AccessSchedule accessSchedule,
+            List<String> applicableMetronomeProductTags,
+            List<String> applicableMetronomeProducts,
+            CommitOptions commitOptions,
+            String creditTypeId,
+            Map<String, String> customFields,
+            String description,
+            Map<String, Object> extraParams,
+            String metronomeProduct,
+            String name,
+            BigDecimal priority,
+            RateType rateType,
+            BigDecimal rolloverFraction,
+            List<SessionCreateParams.Item.MetronomeCommit.Commit.Specifier> specifiers,
+            TaxDetails taxDetails) {
+          this.accessSchedule = accessSchedule;
+          this.applicableMetronomeProductTags = applicableMetronomeProductTags;
+          this.applicableMetronomeProducts = applicableMetronomeProducts;
+          this.commitOptions = commitOptions;
+          this.creditTypeId = creditTypeId;
+          this.customFields = customFields;
+          this.description = description;
+          this.extraParams = extraParams;
+          this.metronomeProduct = metronomeProduct;
+          this.name = name;
+          this.priority = priority;
+          this.rateType = rateType;
+          this.rolloverFraction = rolloverFraction;
+          this.specifiers = specifiers;
+          this.taxDetails = taxDetails;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private AccessSchedule accessSchedule;
+
+          private List<String> applicableMetronomeProductTags;
+
+          private List<String> applicableMetronomeProducts;
+
+          private CommitOptions commitOptions;
+
+          private String creditTypeId;
+
+          private Map<String, String> customFields;
+
+          private String description;
+
+          private Map<String, Object> extraParams;
+
+          private String metronomeProduct;
+
+          private String name;
+
+          private BigDecimal priority;
+
+          private RateType rateType;
+
+          private BigDecimal rolloverFraction;
+
+          private List<SessionCreateParams.Item.MetronomeCommit.Commit.Specifier> specifiers;
+
+          private TaxDetails taxDetails;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.Item.MetronomeCommit.Commit build() {
+            return new SessionCreateParams.Item.MetronomeCommit.Commit(
+                this.accessSchedule,
+                this.applicableMetronomeProductTags,
+                this.applicableMetronomeProducts,
+                this.commitOptions,
+                this.creditTypeId,
+                this.customFields,
+                this.description,
+                this.extraParams,
+                this.metronomeProduct,
+                this.name,
+                this.priority,
+                this.rateType,
+                this.rolloverFraction,
+                this.specifiers,
+                this.taxDetails);
+          }
+
+          /**
+           * Sets the balance amount and release schedule. Mutually exclusive with {@code
+           * commit_options}.
+           */
+          public Builder setAccessSchedule(
+              SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule accessSchedule) {
+            this.accessSchedule = accessSchedule;
+            return this;
+          }
+
+          /**
+           * Add an element to `applicableMetronomeProductTags` list. A list is initialized for the
+           * first `add/addAll` call, and subsequent calls adds additional elements to the original
+           * list. See {@link
+           * SessionCreateParams.Item.MetronomeCommit.Commit#applicableMetronomeProductTags} for the
+           * field documentation.
+           */
+          public Builder addApplicableMetronomeProductTag(String element) {
+            if (this.applicableMetronomeProductTags == null) {
+              this.applicableMetronomeProductTags = new ArrayList<>();
+            }
+            this.applicableMetronomeProductTags.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `applicableMetronomeProductTags` list. A list is initialized for
+           * the first `add/addAll` call, and subsequent calls adds additional elements to the
+           * original list. See {@link
+           * SessionCreateParams.Item.MetronomeCommit.Commit#applicableMetronomeProductTags} for the
+           * field documentation.
+           */
+          public Builder addAllApplicableMetronomeProductTag(List<String> elements) {
+            if (this.applicableMetronomeProductTags == null) {
+              this.applicableMetronomeProductTags = new ArrayList<>();
+            }
+            this.applicableMetronomeProductTags.addAll(elements);
+            return this;
+          }
+
+          /**
+           * Add an element to `applicableMetronomeProducts` list. A list is initialized for the
+           * first `add/addAll` call, and subsequent calls adds additional elements to the original
+           * list. See {@link
+           * SessionCreateParams.Item.MetronomeCommit.Commit#applicableMetronomeProducts} for the
+           * field documentation.
+           */
+          public Builder addApplicableMetronomeProduct(String element) {
+            if (this.applicableMetronomeProducts == null) {
+              this.applicableMetronomeProducts = new ArrayList<>();
+            }
+            this.applicableMetronomeProducts.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `applicableMetronomeProducts` list. A list is initialized for the
+           * first `add/addAll` call, and subsequent calls adds additional elements to the original
+           * list. See {@link
+           * SessionCreateParams.Item.MetronomeCommit.Commit#applicableMetronomeProducts} for the
+           * field documentation.
+           */
+          public Builder addAllApplicableMetronomeProduct(List<String> elements) {
+            if (this.applicableMetronomeProducts == null) {
+              this.applicableMetronomeProducts = new ArrayList<>();
+            }
+            this.applicableMetronomeProducts.addAll(elements);
+            return this;
+          }
+
+          /**
+           * Customer selects the balance amount to purchase. Mutually exclusive with {@code
+           * access_schedule}.
+           */
+          public Builder setCommitOptions(
+              SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions commitOptions) {
+            this.commitOptions = commitOptions;
+            return this;
+          }
+
+          /**
+           * The Metronome Custom Pricing Unit credit type ID for this commit, whose access amounts
+           * are credit counts. Omit it to price in fiat, where access amounts are in the smallest
+           * unit of {@code price_configuration[currency]}. Fiat credit type IDs are not accepted.
+           */
+          public Builder setCreditTypeId(String creditTypeId) {
+            this.creditTypeId = creditTypeId;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `customFields` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.Item.MetronomeCommit.Commit#customFields} for the
+           * field documentation.
+           */
+          public Builder putCustomField(String key, String value) {
+            if (this.customFields == null) {
+              this.customFields = new HashMap<>();
+            }
+            this.customFields.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `customFields` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.Item.MetronomeCommit.Commit#customFields} for the
+           * field documentation.
+           */
+          public Builder putAllCustomField(Map<String, String> map) {
+            if (this.customFields == null) {
+              this.customFields = new HashMap<>();
+            }
+            this.customFields.putAll(map);
+            return this;
+          }
+
+          /** Free-form description. Forwarded to the Metronome commit's description. */
+          public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.Item.MetronomeCommit.Commit#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.Item.MetronomeCommit.Commit#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> The Metronome product ID for this commit. */
+          public Builder setMetronomeProduct(String metronomeProduct) {
+            this.metronomeProduct = metronomeProduct;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Display name for the commit. Surfaced on the Metronome
+           * commit's name.
+           */
+          public Builder setName(String name) {
+            this.name = name;
+            return this;
+          }
+
+          /**
+           * Priority for applying the commit. Lower priority values apply first. Forwarded to
+           * Metronome as-is.
+           */
+          public Builder setPriority(BigDecimal priority) {
+            this.priority = priority;
+            return this;
+          }
+
+          /**
+           * Specifies which rates are used to draw down the commit. Accepts {@code commit_rate},
+           * {@code list_rate}, {@code COMMIT_RATE}, or {@code LIST_RATE}.
+           */
+          public Builder setRateType(
+              SessionCreateParams.Item.MetronomeCommit.Commit.RateType rateType) {
+            this.rateType = rateType;
+            return this;
+          }
+
+          /**
+           * Fraction of unused balance that rolls over on a Metronome contract transition. Must be
+           * between {@code 0} and {@code 1}. Forwarded to Metronome as-is.
+           */
+          public Builder setRolloverFraction(BigDecimal rolloverFraction) {
+            this.rolloverFraction = rolloverFraction;
+            return this;
+          }
+
+          /**
+           * Add an element to `specifiers` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SessionCreateParams.Item.MetronomeCommit.Commit#specifiers} for the field
+           * documentation.
+           */
+          public Builder addSpecifier(
+              SessionCreateParams.Item.MetronomeCommit.Commit.Specifier element) {
+            if (this.specifiers == null) {
+              this.specifiers = new ArrayList<>();
+            }
+            this.specifiers.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `specifiers` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SessionCreateParams.Item.MetronomeCommit.Commit#specifiers} for the field
+           * documentation.
+           */
+          public Builder addAllSpecifier(
+              List<SessionCreateParams.Item.MetronomeCommit.Commit.Specifier> elements) {
+            if (this.specifiers == null) {
+              this.specifiers = new ArrayList<>();
+            }
+            this.specifiers.addAll(elements);
+            return this;
+          }
+
+          /**
+           * Tax details for this commit. If omitted, Stripe uses the tax code from the Stripe
+           * product linked to the Metronome commit product. If there is no linked Stripe product or
+           * the Stripe product has no tax code configured, the <a
+           * href="https://docs.stripe.com/api/tax/settings/object#tax_settings_object-defaults-tax_code">preset
+           * tax rate on your account</a> will be used. If provided, {@code tax_code} is required.
+           */
+          public Builder setTaxDetails(
+              SessionCreateParams.Item.MetronomeCommit.Commit.TaxDetails taxDetails) {
+            this.taxDetails = taxDetails;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AccessSchedule {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** <strong>Required.</strong> The fixed price the buyer pays, in minor currency units. */
+          @SerializedName("price_amount")
+          Long priceAmount;
+
+          /** <strong>Required.</strong> When and how many credits become available. */
+          @SerializedName("schedule_items")
+          List<SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule.ScheduleItem>
+              scheduleItems;
+
+          private AccessSchedule(
+              Map<String, Object> extraParams,
+              Long priceAmount,
+              List<SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule.ScheduleItem>
+                  scheduleItems) {
+            this.extraParams = extraParams;
+            this.priceAmount = priceAmount;
+            this.scheduleItems = scheduleItems;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Long priceAmount;
+
+            private List<
+                    SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule.ScheduleItem>
+                scheduleItems;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule build() {
+              return new SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule(
+                  this.extraParams, this.priceAmount, this.scheduleItems);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule#extraParams} for the
+             * field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule#extraParams} for the
+             * field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The fixed price the buyer pays, in minor currency units.
+             */
+            public Builder setPriceAmount(Long priceAmount) {
+              this.priceAmount = priceAmount;
+              return this;
+            }
+
+            /**
+             * Add an element to `scheduleItems` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule#scheduleItems} for the
+             * field documentation.
+             */
+            public Builder addScheduleItem(
+                SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule.ScheduleItem
+                    element) {
+              if (this.scheduleItems == null) {
+                this.scheduleItems = new ArrayList<>();
+              }
+              this.scheduleItems.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `scheduleItems` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule#scheduleItems} for the
+             * field documentation.
+             */
+            public Builder addAllScheduleItem(
+                List<SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule.ScheduleItem>
+                    elements) {
+              if (this.scheduleItems == null) {
+                this.scheduleItems = new ArrayList<>();
+              }
+              this.scheduleItems.addAll(elements);
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class ScheduleItem {
+            /** <strong>Required.</strong> The access amount in credit_type_id units. */
+            @SerializedName("amount")
+            BigDecimal amount;
+
+            /**
+             * <strong>Required.</strong> Hour-aligned RFC 3339 timestamp in UTC at which access to
+             * the balance amount ends (exclusive).
+             */
+            @SerializedName("ending_before")
+            String endingBefore;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> Hour-aligned RFC 3339 timestamp in UTC at which access to
+             * the balance amount starts (inclusive).
+             */
+            @SerializedName("starting_at")
+            String startingAt;
+
+            private ScheduleItem(
+                BigDecimal amount,
+                String endingBefore,
+                Map<String, Object> extraParams,
+                String startingAt) {
+              this.amount = amount;
+              this.endingBefore = endingBefore;
+              this.extraParams = extraParams;
+              this.startingAt = startingAt;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private BigDecimal amount;
+
+              private String endingBefore;
+
+              private Map<String, Object> extraParams;
+
+              private String startingAt;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule.ScheduleItem
+                  build() {
+                return new SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule
+                    .ScheduleItem(
+                    this.amount, this.endingBefore, this.extraParams, this.startingAt);
+              }
+
+              /** <strong>Required.</strong> The access amount in credit_type_id units. */
+              public Builder setAmount(BigDecimal amount) {
+                this.amount = amount;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> Hour-aligned RFC 3339 timestamp in UTC at which access
+               * to the balance amount ends (exclusive).
+               */
+              public Builder setEndingBefore(String endingBefore) {
+                this.endingBefore = endingBefore;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule.ScheduleItem#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SessionCreateParams.Item.MetronomeCommit.Commit.AccessSchedule.ScheduleItem#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> Hour-aligned RFC 3339 timestamp in UTC at which access
+               * to the balance amount starts (inclusive).
+               */
+              public Builder setStartingAt(String startingAt) {
+                this.startingAt = startingAt;
+                return this;
+              }
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CommitOptions {
+          /** Optionally let the buyer enter a custom access amount. */
+          @SerializedName("custom_amount")
+          CustomAmount customAmount;
+
+          /** Volume-based discount tiers. */
+          @SerializedName("discount_tiers")
+          List<SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.DiscountTier>
+              discountTiers;
+
+          /**
+           * <strong>Required.</strong> When access for the purchased credits ends. Hour-aligned UTC
+           * timestamp.
+           */
+          @SerializedName("ending_before")
+          String endingBefore;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** <strong>Required.</strong> Access-amount presets for the buyer to choose from. */
+          @SerializedName("options")
+          List<SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.Option> options;
+
+          /**
+           * <strong>Required.</strong> When access for the purchased credits starts. Hour-aligned
+           * UTC timestamp.
+           */
+          @SerializedName("starting_at")
+          String startingAt;
+
+          private CommitOptions(
+              CustomAmount customAmount,
+              List<SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.DiscountTier>
+                  discountTiers,
+              String endingBefore,
+              Map<String, Object> extraParams,
+              List<SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.Option> options,
+              String startingAt) {
+            this.customAmount = customAmount;
+            this.discountTiers = discountTiers;
+            this.endingBefore = endingBefore;
+            this.extraParams = extraParams;
+            this.options = options;
+            this.startingAt = startingAt;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private CustomAmount customAmount;
+
+            private List<SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.DiscountTier>
+                discountTiers;
+
+            private String endingBefore;
+
+            private Map<String, Object> extraParams;
+
+            private List<SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.Option>
+                options;
+
+            private String startingAt;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions build() {
+              return new SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions(
+                  this.customAmount,
+                  this.discountTiers,
+                  this.endingBefore,
+                  this.extraParams,
+                  this.options,
+                  this.startingAt);
+            }
+
+            /** Optionally let the buyer enter a custom access amount. */
+            public Builder setCustomAmount(
+                SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.CustomAmount
+                    customAmount) {
+              this.customAmount = customAmount;
+              return this;
+            }
+
+            /**
+             * Add an element to `discountTiers` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions#discountTiers} for the
+             * field documentation.
+             */
+            public Builder addDiscountTier(
+                SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.DiscountTier
+                    element) {
+              if (this.discountTiers == null) {
+                this.discountTiers = new ArrayList<>();
+              }
+              this.discountTiers.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `discountTiers` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions#discountTiers} for the
+             * field documentation.
+             */
+            public Builder addAllDiscountTier(
+                List<SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.DiscountTier>
+                    elements) {
+              if (this.discountTiers == null) {
+                this.discountTiers = new ArrayList<>();
+              }
+              this.discountTiers.addAll(elements);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> When access for the purchased credits ends. Hour-aligned
+             * UTC timestamp.
+             */
+            public Builder setEndingBefore(String endingBefore) {
+              this.endingBefore = endingBefore;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions#extraParams} for the
+             * field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions#extraParams} for the
+             * field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Add an element to `options` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions#options} for the field
+             * documentation.
+             */
+            public Builder addOption(
+                SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.Option element) {
+              if (this.options == null) {
+                this.options = new ArrayList<>();
+              }
+              this.options.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `options` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions#options} for the field
+             * documentation.
+             */
+            public Builder addAllOption(
+                List<SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.Option>
+                    elements) {
+              if (this.options == null) {
+                this.options = new ArrayList<>();
+              }
+              this.options.addAll(elements);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> When access for the purchased credits starts. Hour-aligned
+             * UTC timestamp.
+             */
+            public Builder setStartingAt(String startingAt) {
+              this.startingAt = startingAt;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class CustomAmount {
+            /**
+             * <strong>Required.</strong> Must be {@code true} when {@code custom_amount} is
+             * present. Omit {@code custom_amount} to disable custom amounts.
+             */
+            @SerializedName("enabled")
+            Boolean enabled;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * Maximum {@code access_amount} the customer can enter. Defaults to {@code
+             * 999999999999999} when omitted.
+             */
+            @SerializedName("maximum")
+            Long maximum;
+
+            /**
+             * Minimum {@code access_amount} the customer can enter. Defaults to {@code 1} when
+             * omitted.
+             */
+            @SerializedName("minimum")
+            Long minimum;
+
+            private CustomAmount(
+                Boolean enabled, Map<String, Object> extraParams, Long maximum, Long minimum) {
+              this.enabled = enabled;
+              this.extraParams = extraParams;
+              this.maximum = maximum;
+              this.minimum = minimum;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Boolean enabled;
+
+              private Map<String, Object> extraParams;
+
+              private Long maximum;
+
+              private Long minimum;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.CustomAmount
+                  build() {
+                return new SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions
+                    .CustomAmount(this.enabled, this.extraParams, this.maximum, this.minimum);
+              }
+
+              /**
+               * <strong>Required.</strong> Must be {@code true} when {@code custom_amount} is
+               * present. Omit {@code custom_amount} to disable custom amounts.
+               */
+              public Builder setEnabled(Boolean enabled) {
+                this.enabled = enabled;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.CustomAmount#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.CustomAmount#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * Maximum {@code access_amount} the customer can enter. Defaults to {@code
+               * 999999999999999} when omitted.
+               */
+              public Builder setMaximum(Long maximum) {
+                this.maximum = maximum;
+                return this;
+              }
+
+              /**
+               * Minimum {@code access_amount} the customer can enter. Defaults to {@code 1} when
+               * omitted.
+               */
+              public Builder setMinimum(Long minimum) {
+                this.minimum = minimum;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class DiscountTier {
+            /**
+             * <strong>Required.</strong> Percentage discount applied to the full access_amount when
+             * it falls in this tier.
+             */
+            @SerializedName("discount_percentage")
+            Long discountPercentage;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> Upper bound (inclusive) in credit_type_id units. Use
+             * {@code inf} to define an unbounded tier.
+             */
+            @SerializedName("up_to")
+            Object upTo;
+
+            private DiscountTier(
+                Long discountPercentage, Map<String, Object> extraParams, Object upTo) {
+              this.discountPercentage = discountPercentage;
+              this.extraParams = extraParams;
+              this.upTo = upTo;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Long discountPercentage;
+
+              private Map<String, Object> extraParams;
+
+              private Object upTo;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.DiscountTier
+                  build() {
+                return new SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions
+                    .DiscountTier(this.discountPercentage, this.extraParams, this.upTo);
+              }
+
+              /**
+               * <strong>Required.</strong> Percentage discount applied to the full access_amount
+               * when it falls in this tier.
+               */
+              public Builder setDiscountPercentage(Long discountPercentage) {
+                this.discountPercentage = discountPercentage;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.DiscountTier#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.DiscountTier#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> Upper bound (inclusive) in credit_type_id units. Use
+               * {@code inf} to define an unbounded tier.
+               */
+              public Builder setUpTo(Long upTo) {
+                this.upTo = upTo;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> Upper bound (inclusive) in credit_type_id units. Use
+               * {@code inf} to define an unbounded tier.
+               */
+              public Builder setUpTo(
+                  SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.DiscountTier.UpTo
+                      upTo) {
+                this.upTo = upTo;
+                return this;
+              }
+            }
+
+            public enum UpTo implements ApiRequestParams.EnumParam {
+              @SerializedName("inf")
+              INF("inf");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              UpTo(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Option {
+            /**
+             * <strong>Required.</strong> The access amount for this option, in credit_type_id
+             * units.
+             */
+            @SerializedName("access_amount")
+            Long accessAmount;
+
+            /**
+             * Whether this option is pre-selected in the Checkout UI. At most one option may be
+             * marked true.
+             */
+            @SerializedName("default_option")
+            Boolean defaultOption;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            private Option(
+                Long accessAmount, Boolean defaultOption, Map<String, Object> extraParams) {
+              this.accessAmount = accessAmount;
+              this.defaultOption = defaultOption;
+              this.extraParams = extraParams;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Long accessAmount;
+
+              private Boolean defaultOption;
+
+              private Map<String, Object> extraParams;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.Option build() {
+                return new SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.Option(
+                    this.accessAmount, this.defaultOption, this.extraParams);
+              }
+
+              /**
+               * <strong>Required.</strong> The access amount for this option, in credit_type_id
+               * units.
+               */
+              public Builder setAccessAmount(Long accessAmount) {
+                this.accessAmount = accessAmount;
+                return this;
+              }
+
+              /**
+               * Whether this option is pre-selected in the Checkout UI. At most one option may be
+               * marked true.
+               */
+              public Builder setDefaultOption(Boolean defaultOption) {
+                this.defaultOption = defaultOption;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.Option#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SessionCreateParams.Item.MetronomeCommit.Commit.CommitOptions.Option#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Specifier {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Key-value pairs for presentation group filters. */
+          @SerializedName("presentation_group_values")
+          Map<String, String> presentationGroupValues;
+
+          /** Key-value pairs for pricing group filters. */
+          @SerializedName("pricing_group_values")
+          Map<String, String> pricingGroupValues;
+
+          /** Metronome product ID to scope this specifier to. */
+          @SerializedName("product_id")
+          String productId;
+
+          /**
+           * Metronome product tags to scope this specifier to. A product matches this filter only
+           * if it has all specified tags.
+           */
+          @SerializedName("product_tags")
+          List<String> productTags;
+
+          private Specifier(
+              Map<String, Object> extraParams,
+              Map<String, String> presentationGroupValues,
+              Map<String, String> pricingGroupValues,
+              String productId,
+              List<String> productTags) {
+            this.extraParams = extraParams;
+            this.presentationGroupValues = presentationGroupValues;
+            this.pricingGroupValues = pricingGroupValues;
+            this.productId = productId;
+            this.productTags = productTags;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Map<String, String> presentationGroupValues;
+
+            private Map<String, String> pricingGroupValues;
+
+            private String productId;
+
+            private List<String> productTags;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SessionCreateParams.Item.MetronomeCommit.Commit.Specifier build() {
+              return new SessionCreateParams.Item.MetronomeCommit.Commit.Specifier(
+                  this.extraParams,
+                  this.presentationGroupValues,
+                  this.pricingGroupValues,
+                  this.productId,
+                  this.productTags);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.Specifier#extraParams} for the field
+             * documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.Specifier#extraParams} for the field
+             * documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `presentationGroupValues` map. A map is initialized for the
+             * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.Specifier#presentationGroupValues}
+             * for the field documentation.
+             */
+            public Builder putPresentationGroupValue(String key, String value) {
+              if (this.presentationGroupValues == null) {
+                this.presentationGroupValues = new HashMap<>();
+              }
+              this.presentationGroupValues.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `presentationGroupValues` map. A map is initialized
+             * for the first `put/putAll` call, and subsequent calls add additional key/value pairs
+             * to the original map. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.Specifier#presentationGroupValues}
+             * for the field documentation.
+             */
+            public Builder putAllPresentationGroupValue(Map<String, String> map) {
+              if (this.presentationGroupValues == null) {
+                this.presentationGroupValues = new HashMap<>();
+              }
+              this.presentationGroupValues.putAll(map);
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `pricingGroupValues` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.Specifier#pricingGroupValues} for the
+             * field documentation.
+             */
+            public Builder putPricingGroupValue(String key, String value) {
+              if (this.pricingGroupValues == null) {
+                this.pricingGroupValues = new HashMap<>();
+              }
+              this.pricingGroupValues.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `pricingGroupValues` map. A map is initialized for the
+             * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.Specifier#pricingGroupValues} for the
+             * field documentation.
+             */
+            public Builder putAllPricingGroupValue(Map<String, String> map) {
+              if (this.pricingGroupValues == null) {
+                this.pricingGroupValues = new HashMap<>();
+              }
+              this.pricingGroupValues.putAll(map);
+              return this;
+            }
+
+            /** Metronome product ID to scope this specifier to. */
+            public Builder setProductId(String productId) {
+              this.productId = productId;
+              return this;
+            }
+
+            /**
+             * Add an element to `productTags` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.Specifier#productTags} for the field
+             * documentation.
+             */
+            public Builder addProductTag(String element) {
+              if (this.productTags == null) {
+                this.productTags = new ArrayList<>();
+              }
+              this.productTags.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `productTags` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.Specifier#productTags} for the field
+             * documentation.
+             */
+            public Builder addAllProductTag(List<String> elements) {
+              if (this.productTags == null) {
+                this.productTags = new ArrayList<>();
+              }
+              this.productTags.addAll(elements);
+              return this;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class TaxDetails {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> Stripe <a href="https://docs.stripe.com/tax/tax-codes">tax
+           * code</a> for this commit (for example, {@code txcd_10103000}). If the linked Stripe
+           * Product has a tax code, this value must match it.
+           */
+          @SerializedName("tax_code")
+          String taxCode;
+
+          private TaxDetails(Map<String, Object> extraParams, String taxCode) {
+            this.extraParams = extraParams;
+            this.taxCode = taxCode;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private String taxCode;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SessionCreateParams.Item.MetronomeCommit.Commit.TaxDetails build() {
+              return new SessionCreateParams.Item.MetronomeCommit.Commit.TaxDetails(
+                  this.extraParams, this.taxCode);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.TaxDetails#extraParams} for the field
+             * documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.MetronomeCommit.Commit.TaxDetails#extraParams} for the field
+             * documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> Stripe <a href="https://docs.stripe.com/tax/tax-codes">tax
+             * code</a> for this commit (for example, {@code txcd_10103000}). If the linked Stripe
+             * Product has a tax code, this value must match it.
+             */
+            public Builder setTaxCode(String taxCode) {
+              this.taxCode = taxCode;
+              return this;
+            }
+          }
+        }
+
+        public enum RateType implements ApiRequestParams.EnumParam {
+          @SerializedName("commit_rate")
+          COMMIT_RATE("commit_rate"),
+
+          @SerializedName("list_rate")
+          LIST_RATE("list_rate");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          RateType(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PriceConfiguration {
+        /**
+         * <strong>Required.</strong> The currency for this commit purchase, as an ISO 4217
+         * lowercase string (for example, {@code usd}).
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Specifies whether the price is considered inclusive or exclusive of taxes. When omitted
+         * and automatic tax is enabled, uses {@code tax_settings.defaults.tax_behavior}. If no
+         * default is set, the request returns an error.
+         */
+        @SerializedName("tax_behavior")
+        TaxBehavior taxBehavior;
+
+        private PriceConfiguration(
+            String currency, Map<String, Object> extraParams, TaxBehavior taxBehavior) {
+          this.currency = currency;
+          this.extraParams = extraParams;
+          this.taxBehavior = taxBehavior;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String currency;
+
+          private Map<String, Object> extraParams;
+
+          private TaxBehavior taxBehavior;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.Item.MetronomeCommit.PriceConfiguration build() {
+            return new SessionCreateParams.Item.MetronomeCommit.PriceConfiguration(
+                this.currency, this.extraParams, this.taxBehavior);
+          }
+
+          /**
+           * <strong>Required.</strong> The currency for this commit purchase, as an ISO 4217
+           * lowercase string (for example, {@code usd}).
+           */
+          public Builder setCurrency(String currency) {
+            this.currency = currency;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.Item.MetronomeCommit.PriceConfiguration#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.Item.MetronomeCommit.PriceConfiguration#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Specifies whether the price is considered inclusive or exclusive of taxes. When omitted
+           * and automatic tax is enabled, uses {@code tax_settings.defaults.tax_behavior}. If no
+           * default is set, the request returns an error.
+           */
+          public Builder setTaxBehavior(
+              SessionCreateParams.Item.MetronomeCommit.PriceConfiguration.TaxBehavior taxBehavior) {
+            this.taxBehavior = taxBehavior;
+            return this;
+          }
+        }
+
+        public enum TaxBehavior implements ApiRequestParams.EnumParam {
+          @SerializedName("exclusive")
+          EXCLUSIVE("exclusive"),
+
+          @SerializedName("inclusive")
+          INCLUSIVE("inclusive");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          TaxBehavior(String value) {
+            this.value = value;
+          }
+        }
       }
     }
 
@@ -6814,6 +8668,13 @@ public class SessionCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class InnerItem {
+        /**
+         * When set, provides configuration for this item’s quantity to be adjusted by the customer
+         * during Checkout.
+         */
+        @SerializedName("adjustable_quantity")
+        AdjustableQuantity adjustableQuantity;
+
         /** The trial offer to apply to this subscription item. */
         @SerializedName("current_trial")
         CurrentTrial currentTrial;
@@ -6847,11 +8708,13 @@ public class SessionCreateParams extends ApiRequestParams {
         Long quantity;
 
         private InnerItem(
+            AdjustableQuantity adjustableQuantity,
             CurrentTrial currentTrial,
             Map<String, Object> extraParams,
             String price,
             PriceData priceData,
             Long quantity) {
+          this.adjustableQuantity = adjustableQuantity;
           this.currentTrial = currentTrial;
           this.extraParams = extraParams;
           this.price = price;
@@ -6864,6 +8727,8 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private AdjustableQuantity adjustableQuantity;
+
           private CurrentTrial currentTrial;
 
           private Map<String, Object> extraParams;
@@ -6877,7 +8742,23 @@ public class SessionCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public SessionCreateParams.Item.Subscription.InnerItem build() {
             return new SessionCreateParams.Item.Subscription.InnerItem(
-                this.currentTrial, this.extraParams, this.price, this.priceData, this.quantity);
+                this.adjustableQuantity,
+                this.currentTrial,
+                this.extraParams,
+                this.price,
+                this.priceData,
+                this.quantity);
+          }
+
+          /**
+           * When set, provides configuration for this item’s quantity to be adjusted by the
+           * customer during Checkout.
+           */
+          public Builder setAdjustableQuantity(
+              SessionCreateParams.Item.Subscription.InnerItem.AdjustableQuantity
+                  adjustableQuantity) {
+            this.adjustableQuantity = adjustableQuantity;
+            return this;
           }
 
           /** The trial offer to apply to this subscription item. */
@@ -6938,6 +8819,126 @@ public class SessionCreateParams extends ApiRequestParams {
           public Builder setQuantity(Long quantity) {
             this.quantity = quantity;
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AdjustableQuantity {
+          /**
+           * <strong>Required.</strong> Set to true if the quantity can be adjusted to any
+           * non-negative integer.
+           */
+          @SerializedName("enabled")
+          Boolean enabled;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * The maximum quantity the customer can purchase for the Checkout Session. By default
+           * this value is 99. You can specify a value up to 999999.
+           */
+          @SerializedName("maximum")
+          Long maximum;
+
+          /**
+           * The minimum quantity the customer must purchase for the Checkout Session. By default
+           * this value is 0.
+           */
+          @SerializedName("minimum")
+          Long minimum;
+
+          private AdjustableQuantity(
+              Boolean enabled, Map<String, Object> extraParams, Long maximum, Long minimum) {
+            this.enabled = enabled;
+            this.extraParams = extraParams;
+            this.maximum = maximum;
+            this.minimum = minimum;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Boolean enabled;
+
+            private Map<String, Object> extraParams;
+
+            private Long maximum;
+
+            private Long minimum;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SessionCreateParams.Item.Subscription.InnerItem.AdjustableQuantity build() {
+              return new SessionCreateParams.Item.Subscription.InnerItem.AdjustableQuantity(
+                  this.enabled, this.extraParams, this.maximum, this.minimum);
+            }
+
+            /**
+             * <strong>Required.</strong> Set to true if the quantity can be adjusted to any
+             * non-negative integer.
+             */
+            public Builder setEnabled(Boolean enabled) {
+              this.enabled = enabled;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.Subscription.InnerItem.AdjustableQuantity#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.Item.Subscription.InnerItem.AdjustableQuantity#extraParams} for
+             * the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * The maximum quantity the customer can purchase for the Checkout Session. By default
+             * this value is 99. You can specify a value up to 999999.
+             */
+            public Builder setMaximum(Long maximum) {
+              this.maximum = maximum;
+              return this;
+            }
+
+            /**
+             * The minimum quantity the customer must purchase for the Checkout Session. By default
+             * this value is 0.
+             */
+            public Builder setMinimum(Long minimum) {
+              this.minimum = minimum;
+              return this;
+            }
           }
         }
 
@@ -8117,6 +10118,9 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("metronome_commit")
+      METRONOME_COMMIT("metronome_commit"),
+
       @SerializedName("subscription")
       SUBSCRIPTION("subscription");
 
@@ -8167,7 +10171,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-     * inline. One of {@code price} or {@code price_data} is required.
+     * inline, for <a
+     * href="https://docs.stripe.com/products-prices/how-products-and-prices-work#inline-pricing">dynamic
+     * pricing</a> when the amount isn't known ahead of time. One of {@code price} or {@code
+     * price_data} is required when creating a new line item.
      */
     @SerializedName("price_data")
     PriceData priceData;
@@ -8308,7 +10315,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-       * inline. One of {@code price} or {@code price_data} is required.
+       * inline, for <a
+       * href="https://docs.stripe.com/products-prices/how-products-and-prices-work#inline-pricing">dynamic
+       * pricing</a> when the amount isn't known ahead of time. One of {@code price} or {@code
+       * price_data} is required when creating a new line item.
        */
       public Builder setPriceData(SessionCreateParams.LineItem.PriceData priceData) {
         this.priceData = priceData;
@@ -9249,6 +11259,285 @@ public class SessionCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MarketingAttribution {
+    /**
+     * <strong>Required.</strong> Information used when sending conversions to an advertising
+     * platform.
+     */
+    @SerializedName("ad_conversion")
+    AdConversion adConversion;
+
+    /** The advertising platform's click identifier. */
+    @SerializedName("click_id")
+    String clickId;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The Unix timestamp when the advertising interaction occurred. */
+    @SerializedName("occurred_at")
+    Long occurredAt;
+
+    /** The advertising group ID from the {@code utm_adgroup} parameter. */
+    @SerializedName("utm_adgroup")
+    String utmAdgroup;
+
+    /** The advertising content identifier from the {@code utm_content} parameter. */
+    @SerializedName("utm_content")
+    String utmContent;
+
+    /** The advertising campaign ID from the {@code utm_id} parameter. */
+    @SerializedName("utm_id")
+    String utmId;
+
+    /** The marketing medium from the {@code utm_medium} parameter. */
+    @SerializedName("utm_medium")
+    String utmMedium;
+
+    /** The referral source from the {@code utm_source} parameter. */
+    @SerializedName("utm_source")
+    String utmSource;
+
+    /** The paid search term from the {@code utm_term} parameter. */
+    @SerializedName("utm_term")
+    String utmTerm;
+
+    private MarketingAttribution(
+        AdConversion adConversion,
+        String clickId,
+        Map<String, Object> extraParams,
+        Long occurredAt,
+        String utmAdgroup,
+        String utmContent,
+        String utmId,
+        String utmMedium,
+        String utmSource,
+        String utmTerm) {
+      this.adConversion = adConversion;
+      this.clickId = clickId;
+      this.extraParams = extraParams;
+      this.occurredAt = occurredAt;
+      this.utmAdgroup = utmAdgroup;
+      this.utmContent = utmContent;
+      this.utmId = utmId;
+      this.utmMedium = utmMedium;
+      this.utmSource = utmSource;
+      this.utmTerm = utmTerm;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private AdConversion adConversion;
+
+      private String clickId;
+
+      private Map<String, Object> extraParams;
+
+      private Long occurredAt;
+
+      private String utmAdgroup;
+
+      private String utmContent;
+
+      private String utmId;
+
+      private String utmMedium;
+
+      private String utmSource;
+
+      private String utmTerm;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.MarketingAttribution build() {
+        return new SessionCreateParams.MarketingAttribution(
+            this.adConversion,
+            this.clickId,
+            this.extraParams,
+            this.occurredAt,
+            this.utmAdgroup,
+            this.utmContent,
+            this.utmId,
+            this.utmMedium,
+            this.utmSource,
+            this.utmTerm);
+      }
+
+      /**
+       * <strong>Required.</strong> Information used when sending conversions to an advertising
+       * platform.
+       */
+      public Builder setAdConversion(
+          SessionCreateParams.MarketingAttribution.AdConversion adConversion) {
+        this.adConversion = adConversion;
+        return this;
+      }
+
+      /** The advertising platform's click identifier. */
+      public Builder setClickId(String clickId) {
+        this.clickId = clickId;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.MarketingAttribution#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.MarketingAttribution#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The Unix timestamp when the advertising interaction occurred. */
+      public Builder setOccurredAt(Long occurredAt) {
+        this.occurredAt = occurredAt;
+        return this;
+      }
+
+      /** The advertising group ID from the {@code utm_adgroup} parameter. */
+      public Builder setUtmAdgroup(String utmAdgroup) {
+        this.utmAdgroup = utmAdgroup;
+        return this;
+      }
+
+      /** The advertising content identifier from the {@code utm_content} parameter. */
+      public Builder setUtmContent(String utmContent) {
+        this.utmContent = utmContent;
+        return this;
+      }
+
+      /** The advertising campaign ID from the {@code utm_id} parameter. */
+      public Builder setUtmId(String utmId) {
+        this.utmId = utmId;
+        return this;
+      }
+
+      /** The marketing medium from the {@code utm_medium} parameter. */
+      public Builder setUtmMedium(String utmMedium) {
+        this.utmMedium = utmMedium;
+        return this;
+      }
+
+      /** The referral source from the {@code utm_source} parameter. */
+      public Builder setUtmSource(String utmSource) {
+        this.utmSource = utmSource;
+        return this;
+      }
+
+      /** The paid search term from the {@code utm_term} parameter. */
+      public Builder setUtmTerm(String utmTerm) {
+        this.utmTerm = utmTerm;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdConversion {
+      /**
+       * <strong>Required.</strong> Whether the customer consented to sending conversion data to an
+       * advertising platform.
+       */
+      @SerializedName("consent_collected")
+      Boolean consentCollected;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AdConversion(Boolean consentCollected, Map<String, Object> extraParams) {
+        this.consentCollected = consentCollected;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean consentCollected;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.MarketingAttribution.AdConversion build() {
+          return new SessionCreateParams.MarketingAttribution.AdConversion(
+              this.consentCollected, this.extraParams);
+        }
+
+        /**
+         * <strong>Required.</strong> Whether the customer consented to sending conversion data to
+         * an advertising platform.
+         */
+        public Builder setConsentCollected(Boolean consentCollected) {
+          this.consentCollected = consentCollected;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.MarketingAttribution.AdConversion#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.MarketingAttribution.AdConversion#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
       }
     }
   }

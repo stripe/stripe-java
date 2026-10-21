@@ -45,6 +45,27 @@ public class AccountActivityCreateParams extends ApiRequestParams {
   AccountSuspended accountSuspended;
 
   /**
+   * Required when type is account_takeover_confirmation. Requires an existing customer or account
+   * with a customer configuration.
+   */
+  @SerializedName("account_takeover_confirmation")
+  AccountTakeoverConfirmation accountTakeoverConfirmation;
+
+  /**
+   * Required when type is account_takeover_report. Requires an existing customer or account with a
+   * customer configuration.
+   */
+  @SerializedName("account_takeover_report")
+  AccountTakeoverReport accountTakeoverReport;
+
+  /**
+   * Required when type is credential_change. Requires an existing customer or account with a
+   * customer configuration.
+   */
+  @SerializedName("credential_change")
+  CredentialChange credentialChange;
+
+  /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
    * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -64,6 +85,20 @@ public class AccountActivityCreateParams extends ApiRequestParams {
   /** Additional information about the activity. */
   @SerializedName("metadata")
   Map<String, String> metadata;
+
+  /**
+   * Required when type is mfa_addition. Requires an existing customer or account with a customer
+   * configuration.
+   */
+  @SerializedName("mfa_addition")
+  MfaAddition mfaAddition;
+
+  /**
+   * Required when type is mfa_removal. Requires an existing customer or account with a customer
+   * configuration.
+   */
+  @SerializedName("mfa_removal")
+  MfaRemoval mfaRemoval;
 
   /** Timestamp at which the activity occurred. Defaults to the created time if not provided. */
   @SerializedName("occurred_at")
@@ -87,10 +122,15 @@ public class AccountActivityCreateParams extends ApiRequestParams {
       AccountRestricted accountRestricted,
       AccountReviewed accountReviewed,
       AccountSuspended accountSuspended,
+      AccountTakeoverConfirmation accountTakeoverConfirmation,
+      AccountTakeoverReport accountTakeoverReport,
+      CredentialChange credentialChange,
       Map<String, Object> extraParams,
       LoginAttempt loginAttempt,
       LoginDecision loginDecision,
       Map<String, String> metadata,
+      MfaAddition mfaAddition,
+      MfaRemoval mfaRemoval,
       Instant occurredAt,
       RegistrationAttempt registrationAttempt,
       RegistrationDecision registrationDecision,
@@ -100,10 +140,15 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     this.accountRestricted = accountRestricted;
     this.accountReviewed = accountReviewed;
     this.accountSuspended = accountSuspended;
+    this.accountTakeoverConfirmation = accountTakeoverConfirmation;
+    this.accountTakeoverReport = accountTakeoverReport;
+    this.credentialChange = credentialChange;
     this.extraParams = extraParams;
     this.loginAttempt = loginAttempt;
     this.loginDecision = loginDecision;
     this.metadata = metadata;
+    this.mfaAddition = mfaAddition;
+    this.mfaRemoval = mfaRemoval;
     this.occurredAt = occurredAt;
     this.registrationAttempt = registrationAttempt;
     this.registrationDecision = registrationDecision;
@@ -125,6 +170,12 @@ public class AccountActivityCreateParams extends ApiRequestParams {
 
     private AccountSuspended accountSuspended;
 
+    private AccountTakeoverConfirmation accountTakeoverConfirmation;
+
+    private AccountTakeoverReport accountTakeoverReport;
+
+    private CredentialChange credentialChange;
+
     private Map<String, Object> extraParams;
 
     private LoginAttempt loginAttempt;
@@ -132,6 +183,10 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     private LoginDecision loginDecision;
 
     private Map<String, String> metadata;
+
+    private MfaAddition mfaAddition;
+
+    private MfaRemoval mfaRemoval;
 
     private Instant occurredAt;
 
@@ -149,10 +204,15 @@ public class AccountActivityCreateParams extends ApiRequestParams {
           this.accountRestricted,
           this.accountReviewed,
           this.accountSuspended,
+          this.accountTakeoverConfirmation,
+          this.accountTakeoverReport,
+          this.credentialChange,
           this.extraParams,
           this.loginAttempt,
           this.loginDecision,
           this.metadata,
+          this.mfaAddition,
+          this.mfaRemoval,
           this.occurredAt,
           this.registrationAttempt,
           this.registrationDecision,
@@ -200,6 +260,36 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     public Builder setAccountSuspended(
         AccountActivityCreateParams.AccountSuspended accountSuspended) {
       this.accountSuspended = accountSuspended;
+      return this;
+    }
+
+    /**
+     * Required when type is account_takeover_confirmation. Requires an existing customer or account
+     * with a customer configuration.
+     */
+    public Builder setAccountTakeoverConfirmation(
+        AccountActivityCreateParams.AccountTakeoverConfirmation accountTakeoverConfirmation) {
+      this.accountTakeoverConfirmation = accountTakeoverConfirmation;
+      return this;
+    }
+
+    /**
+     * Required when type is account_takeover_report. Requires an existing customer or account with
+     * a customer configuration.
+     */
+    public Builder setAccountTakeoverReport(
+        AccountActivityCreateParams.AccountTakeoverReport accountTakeoverReport) {
+      this.accountTakeoverReport = accountTakeoverReport;
+      return this;
+    }
+
+    /**
+     * Required when type is credential_change. Requires an existing customer or account with a
+     * customer configuration.
+     */
+    public Builder setCredentialChange(
+        AccountActivityCreateParams.CredentialChange credentialChange) {
+      this.credentialChange = credentialChange;
       return this;
     }
 
@@ -264,6 +354,24 @@ public class AccountActivityCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * Required when type is mfa_addition. Requires an existing customer or account with a customer
+     * configuration.
+     */
+    public Builder setMfaAddition(AccountActivityCreateParams.MfaAddition mfaAddition) {
+      this.mfaAddition = mfaAddition;
+      return this;
+    }
+
+    /**
+     * Required when type is mfa_removal. Requires an existing customer or account with a customer
+     * configuration.
+     */
+    public Builder setMfaRemoval(AccountActivityCreateParams.MfaRemoval mfaRemoval) {
+      this.mfaRemoval = mfaRemoval;
       return this;
     }
 
@@ -1083,6 +1191,278 @@ public class AccountActivityCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class AccountTakeoverConfirmation {
+    /** <strong>Required.</strong> The type of credential involved in the confirmed takeover. */
+    @SerializedName("credential_type")
+    CredentialType credentialType;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AccountTakeoverConfirmation(
+        CredentialType credentialType, Map<String, Object> extraParams) {
+      this.credentialType = credentialType;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private CredentialType credentialType;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountActivityCreateParams.AccountTakeoverConfirmation build() {
+        return new AccountActivityCreateParams.AccountTakeoverConfirmation(
+            this.credentialType, this.extraParams);
+      }
+
+      /** <strong>Required.</strong> The type of credential involved in the confirmed takeover. */
+      public Builder setCredentialType(
+          AccountActivityCreateParams.AccountTakeoverConfirmation.CredentialType credentialType) {
+        this.credentialType = credentialType;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountActivityCreateParams.AccountTakeoverConfirmation#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountActivityCreateParams.AccountTakeoverConfirmation#extraParams} for the
+       * field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    public enum CredentialType implements ApiRequestParams.EnumParam {
+      @SerializedName("api_key")
+      API_KEY("api_key"),
+
+      @SerializedName("login_password")
+      LOGIN_PASSWORD("login_password"),
+
+      @SerializedName("other")
+      OTHER("other");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      CredentialType(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AccountTakeoverReport {
+    /** <strong>Required.</strong> The type of credential involved in the reported takeover. */
+    @SerializedName("credential_type")
+    CredentialType credentialType;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AccountTakeoverReport(CredentialType credentialType, Map<String, Object> extraParams) {
+      this.credentialType = credentialType;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private CredentialType credentialType;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountActivityCreateParams.AccountTakeoverReport build() {
+        return new AccountActivityCreateParams.AccountTakeoverReport(
+            this.credentialType, this.extraParams);
+      }
+
+      /** <strong>Required.</strong> The type of credential involved in the reported takeover. */
+      public Builder setCredentialType(
+          AccountActivityCreateParams.AccountTakeoverReport.CredentialType credentialType) {
+        this.credentialType = credentialType;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountActivityCreateParams.AccountTakeoverReport#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountActivityCreateParams.AccountTakeoverReport#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    public enum CredentialType implements ApiRequestParams.EnumParam {
+      @SerializedName("api_key")
+      API_KEY("api_key"),
+
+      @SerializedName("login_password")
+      LOGIN_PASSWORD("login_password"),
+
+      @SerializedName("other")
+      OTHER("other");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      CredentialType(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CredentialChange {
+    /** <strong>Required.</strong> The type of credential that changed. */
+    @SerializedName("credential_type")
+    CredentialType credentialType;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private CredentialChange(CredentialType credentialType, Map<String, Object> extraParams) {
+      this.credentialType = credentialType;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private CredentialType credentialType;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountActivityCreateParams.CredentialChange build() {
+        return new AccountActivityCreateParams.CredentialChange(
+            this.credentialType, this.extraParams);
+      }
+
+      /** <strong>Required.</strong> The type of credential that changed. */
+      public Builder setCredentialType(
+          AccountActivityCreateParams.CredentialChange.CredentialType credentialType) {
+        this.credentialType = credentialType;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountActivityCreateParams.CredentialChange#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountActivityCreateParams.CredentialChange#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    public enum CredentialType implements ApiRequestParams.EnumParam {
+      @SerializedName("api_key")
+      API_KEY("api_key"),
+
+      @SerializedName("login_password")
+      LOGIN_PASSWORD("login_password"),
+
+      @SerializedName("other")
+      OTHER("other");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      CredentialType(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class LoginAttempt {
     /** <strong>Required.</strong> Client details captured for the attempt. */
     @SerializedName("client_details")
@@ -1422,6 +1802,193 @@ public class AccountActivityCreateParams extends ApiRequestParams {
       private final String value;
 
       Status(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MfaAddition {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The authentication method added to the account. */
+    @SerializedName("mfa_type")
+    MfaType mfaType;
+
+    private MfaAddition(Map<String, Object> extraParams, MfaType mfaType) {
+      this.extraParams = extraParams;
+      this.mfaType = mfaType;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private MfaType mfaType;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountActivityCreateParams.MfaAddition build() {
+        return new AccountActivityCreateParams.MfaAddition(this.extraParams, this.mfaType);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountActivityCreateParams.MfaAddition#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountActivityCreateParams.MfaAddition#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The authentication method added to the account. */
+      public Builder setMfaType(AccountActivityCreateParams.MfaAddition.MfaType mfaType) {
+        this.mfaType = mfaType;
+        return this;
+      }
+    }
+
+    public enum MfaType implements ApiRequestParams.EnumParam {
+      @SerializedName("authenticator_app")
+      AUTHENTICATOR_APP("authenticator_app"),
+
+      @SerializedName("email")
+      EMAIL("email"),
+
+      @SerializedName("hardware_key")
+      HARDWARE_KEY("hardware_key"),
+
+      @SerializedName("other")
+      OTHER("other"),
+
+      @SerializedName("sms")
+      SMS("sms");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      MfaType(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MfaRemoval {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The authentication method removed from the account. */
+    @SerializedName("mfa_type")
+    MfaType mfaType;
+
+    private MfaRemoval(Map<String, Object> extraParams, MfaType mfaType) {
+      this.extraParams = extraParams;
+      this.mfaType = mfaType;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private MfaType mfaType;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountActivityCreateParams.MfaRemoval build() {
+        return new AccountActivityCreateParams.MfaRemoval(this.extraParams, this.mfaType);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountActivityCreateParams.MfaRemoval#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountActivityCreateParams.MfaRemoval#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The authentication method removed from the account. */
+      public Builder setMfaType(AccountActivityCreateParams.MfaRemoval.MfaType mfaType) {
+        this.mfaType = mfaType;
+        return this;
+      }
+    }
+
+    public enum MfaType implements ApiRequestParams.EnumParam {
+      @SerializedName("authenticator_app")
+      AUTHENTICATOR_APP("authenticator_app"),
+
+      @SerializedName("email")
+      EMAIL("email"),
+
+      @SerializedName("hardware_key")
+      HARDWARE_KEY("hardware_key"),
+
+      @SerializedName("other")
+      OTHER("other"),
+
+      @SerializedName("sms")
+      SMS("sms");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      MfaType(String value) {
         this.value = value;
       }
     }
@@ -1787,11 +2354,29 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     @SerializedName("account_suspended")
     ACCOUNT_SUSPENDED("account_suspended"),
 
+    @SerializedName("account_takeover_confirmation")
+    ACCOUNT_TAKEOVER_CONFIRMATION("account_takeover_confirmation"),
+
+    @SerializedName("account_takeover_mitigation")
+    ACCOUNT_TAKEOVER_MITIGATION("account_takeover_mitigation"),
+
+    @SerializedName("account_takeover_report")
+    ACCOUNT_TAKEOVER_REPORT("account_takeover_report"),
+
+    @SerializedName("credential_change")
+    CREDENTIAL_CHANGE("credential_change"),
+
     @SerializedName("login_attempt")
     LOGIN_ATTEMPT("login_attempt"),
 
     @SerializedName("login_decision")
     LOGIN_DECISION("login_decision"),
+
+    @SerializedName("mfa_addition")
+    MFA_ADDITION("mfa_addition"),
+
+    @SerializedName("mfa_removal")
+    MFA_REMOVAL("mfa_removal"),
 
     @SerializedName("registration_attempt")
     REGISTRATION_ATTEMPT("registration_attempt"),

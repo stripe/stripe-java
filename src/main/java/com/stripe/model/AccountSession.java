@@ -154,6 +154,14 @@ public class AccountSession extends ApiResource {
     @SerializedName("bills")
     Bills bills;
 
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/business-profile-management/">Business
+     * profile management</a> embedded component.
+     */
+    @SerializedName("business_profile_management")
+    BusinessProfileManagement businessProfileManagement;
+
     @SerializedName("capital_financing")
     CapitalFinancing capitalFinancing;
 
@@ -267,25 +275,18 @@ public class AccountSession extends ApiResource {
     @SerializedName("recipients_list")
     RecipientsList recipientsList;
 
+    @SerializedName("reporting_chart")
+    ReportingChart reportingChart;
+
     @SerializedName("tax_registrations")
     TaxRegistrations taxRegistrations;
 
     @SerializedName("tax_settings")
     TaxSettings taxSettings;
 
-    /**
-     * Configuration for the <a
-     * href="https://stripe.com/connect/supported-embedded-components/terminal-hardware-orders/">Terminal
-     * hardware orders</a> embedded component.
-     */
     @SerializedName("terminal_hardware_orders")
     TerminalHardwareOrders terminalHardwareOrders;
 
-    /**
-     * Configuration for the <a
-     * href="https://stripe.com/connect/supported-embedded-components/terminal-hardware-shop/">Terminal
-     * hardware shop</a> embedded component.
-     */
     @SerializedName("terminal_hardware_shop")
     TerminalHardwareShop terminalHardwareShop;
 
@@ -539,6 +540,31 @@ public class AccountSession extends ApiResource {
         @SerializedName("send_money")
         Boolean sendMoney;
       }
+    }
+
+    /**
+     * For more details about BusinessProfileManagement, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BusinessProfileManagement extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
     }
 
     /**
@@ -1556,6 +1582,31 @@ public class AccountSession extends ApiResource {
         @SerializedName("send_money")
         Boolean sendMoney;
       }
+    }
+
+    /**
+     * For more details about ReportingChart, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ReportingChart extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
     }
 
     /**
