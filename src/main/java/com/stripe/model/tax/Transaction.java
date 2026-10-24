@@ -394,7 +394,8 @@ public class Transaction extends ApiResource implements HasId {
        * cz_dic}, {@code fr_siret}, {@code fr_siren}, {@code fr_spi}, {@code sm_coe}, {@code
        * tt_vat}, {@code tt_bir}, {@code mu_vat}, {@code mz_nuit}, {@code au_wpn}, {@code md_cf},
        * {@code is_kt}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin}, {@code
-       * cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, or {@code unknown}.
+       * cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, {@code gh_tin}, {@code bw_vat},
+       * {@code ci_vat}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -645,11 +646,12 @@ public class Transaction extends ApiResource implements HasId {
          *
          * <p>One of {@code admissions_tax}, {@code amusement_tax}, {@code attendance_tax}, {@code
          * communications_tax}, {@code digital_excise_tax}, {@code entertainment_tax}, {@code
-         * gross_receipts_tax}, {@code gst}, {@code hospitality_tax}, {@code hst}, {@code igst},
-         * {@code jct}, {@code lease_tax}, {@code luxury_tax}, {@code mass_transit_parking_tax},
-         * {@code parking_tax}, {@code pst}, {@code qst}, {@code recycling_fee}, {@code resort_tax},
-         * {@code retail_delivery_fee}, {@code rst}, {@code sales_tax}, {@code service_tax}, {@code
-         * tourism_tax}, {@code utility_users_tax}, or {@code vat}.
+         * get_fund}, {@code gross_receipts_tax}, {@code gst}, {@code hospitality_tax}, {@code hst},
+         * {@code igst}, {@code jct}, {@code lease_tax}, {@code luxury_tax}, {@code
+         * mass_transit_parking_tax}, {@code nhil}, {@code parking_tax}, {@code pst}, {@code qst},
+         * {@code recycling_fee}, {@code resort_tax}, {@code retail_delivery_fee}, {@code rst},
+         * {@code sales_tax}, {@code service_tax}, {@code tourism_tax}, {@code utility_users_tax},
+         * or {@code vat}.
          */
         @SerializedName("tax_type")
         String taxType;

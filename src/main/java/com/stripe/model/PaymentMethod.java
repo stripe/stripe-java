@@ -315,6 +315,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("tamara")
   Tamara tamara;
 
+  @SerializedName("toss_pay")
+  TossPay tossPay;
+
   @SerializedName("twint")
   Twint twint;
 
@@ -335,8 +338,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * qris}, {@code rakuten_pay}, {@code rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code
    * satispay}, {@code scalapay}, {@code sepa_debit}, {@code sequra}, {@code sezzle}, {@code
    * shopeepay}, {@code sofort}, {@code stripe_balance}, {@code sunbit}, {@code swish}, {@code
-   * tamara}, {@code twint}, {@code upi}, {@code us_bank_account}, {@code vipps}, {@code
-   * wechat_pay}, or {@code zip}.
+   * tamara}, {@code toss_pay}, {@code twint}, {@code upi}, {@code us_bank_account}, {@code vipps},
+   * {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -3054,6 +3057,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static class Tamara extends StripeObject {}
 
   /**
+   * For more details about TossPay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TossPay extends StripeObject {
+    /** The buyer identifier provided by NICE for this Toss Pay account, when available. */
+    @SerializedName("buyer_id")
+    String buyerId;
+  }
+
+  /**
    * For more details about Twint, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -3294,6 +3310,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(sunbit, responseGetter);
     trySetResponseGetter(swish, responseGetter);
     trySetResponseGetter(tamara, responseGetter);
+    trySetResponseGetter(tossPay, responseGetter);
     trySetResponseGetter(twint, responseGetter);
     trySetResponseGetter(upi, responseGetter);
     trySetResponseGetter(usBankAccount, responseGetter);

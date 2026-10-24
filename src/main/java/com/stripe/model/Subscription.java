@@ -361,11 +361,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * <p>A subscription that is currently in a trial period is {@code trialing} and moves to {@code
    * active} when the trial period is over.
    *
-   * <p>A subscription can only enter a {@code paused} status <a
+   * <p>A subscription can enter a {@code paused} status in several ways, including <a
    * href="https://docs.stripe.com/billing/subscriptions/trials/free-trials#create-free-trials-without-payment">when
-   * a trial ends without a payment method</a>. A {@code paused} subscription doesn't generate
-   * invoices and can be resumed after your customer adds their payment method. The {@code paused}
-   * status is different from <a
+   * a trial ends without a payment method</a> or when you pause it using the <a
+   * href="https://docs.stripe.com/api/subscriptions/pause">pause endpoint</a>. A {@code paused}
+   * subscription doesn't advance to a new billing period or generate invoices until it resumes. The
+   * {@code paused} status is different from <a
    * href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing collection</a>,
    * which still generates invoices and leaves the subscription's status unchanged.
    *
@@ -2731,7 +2732,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class SepaDebit extends StripeObject {}
+      public static class SepaDebit extends StripeObject {
+        /** Controls when the funds will be captured from the customer's account. */
+        @SerializedName("debit_behavior")
+        String debitBehavior;
+      }
 
       /**
        * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API

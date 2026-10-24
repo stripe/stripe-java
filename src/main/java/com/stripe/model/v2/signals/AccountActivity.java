@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -121,6 +122,13 @@ public class AccountActivity extends StripeObject implements HasId {
   /** Details for the registration decision. Present only when type is registration_decision. */
   @SerializedName("registration_decision")
   RegistrationDecision registrationDecision;
+
+  /**
+   * The AccountSignal that prompted this activity, when applicable. This historical reference may
+   * coexist with account_evaluation and remains present after the signal expires.
+   */
+  @SerializedName("triggering_signal")
+  String triggeringSignal;
 
   /**
    * The type of activity.
@@ -367,6 +375,10 @@ public class AccountActivity extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class LoginDecision extends StripeObject {
+    /** Multi-factor authentication challenges performed during the login process. */
+    @SerializedName("mfa_challenges")
+    List<AccountActivity.LoginDecision.MfaChallenge> mfaChallenges;
+
     /**
      * The action the merchant took following the evaluation.
      *
@@ -374,6 +386,32 @@ public class AccountActivity extends StripeObject implements HasId {
      */
     @SerializedName("status")
     String status;
+
+    /**
+     * For more details about MfaChallenge, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MfaChallenge extends StripeObject {
+      /**
+       * The authentication method used for the challenge.
+       *
+       * <p>One of {@code authenticator_app}, {@code email}, {@code hardware_key}, {@code other}, or
+       * {@code sms}.
+       */
+      @SerializedName("mfa_type")
+      String mfaType;
+
+      /**
+       * The outcome of the authentication challenge.
+       *
+       * <p>One of {@code failed}, {@code other}, or {@code succeeded}.
+       */
+      @SerializedName("status")
+      String status;
+    }
   }
 
   /** Details for the MFA addition. Present only when type is mfa_addition. */

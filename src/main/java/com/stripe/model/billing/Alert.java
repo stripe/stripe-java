@@ -529,6 +529,10 @@ public class Alert extends ApiResource implements HasId {
       @SerializedName("billing_cadence")
       String billingCadence;
 
+      /** Filter by billing group ID. */
+      @SerializedName("billing_group")
+      String billingGroup;
+
       /** Filter by pricing plan ID. */
       @SerializedName("pricing_plan")
       String pricingPlan;

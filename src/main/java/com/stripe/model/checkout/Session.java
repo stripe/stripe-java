@@ -104,6 +104,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("approval_method")
   String approvalMethod;
 
+  @SerializedName("automatic_pass_through_fee")
+  AutomaticPassThroughFee automaticPassThroughFee;
+
   @SerializedName("automatic_surcharge")
   AutomaticSurcharge automaticSurcharge;
 
@@ -1122,6 +1125,48 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /**
+   * For more details about AutomaticPassThroughFee, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AutomaticPassThroughFee extends StripeObject {
+    /**
+     * Whether the fee is calculated on the amount due before or after tax.
+     *
+     * <p>One of {@code total_after_tax}, or {@code total_before_tax}.
+     */
+    @SerializedName("calculation_basis")
+    String calculationBasis;
+
+    /** Indicates whether a pass-through fee is calculated and added to this session. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /** The provider that performed this session's latest pass-through fee calculation. */
+    @SerializedName("provider")
+    String provider;
+
+    /**
+     * The status of the most recent pass-through fee calculation for this session.
+     *
+     * <p>One of {@code complete}, {@code failed}, {@code not_applicable}, or {@code
+     * requires_input}.
+     */
+    @SerializedName("status")
+    String status;
+
+    /**
+     * The type of fee calculated for this session.
+     *
+     * <p>One of {@code convenience_fee}, or {@code service_fee}.
+     */
+    @SerializedName("type")
+    String type;
+  }
+
+  /**
    * For more details about AutomaticSurcharge, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1575,7 +1620,8 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * cz_dic}, {@code fr_siret}, {@code fr_siren}, {@code fr_spi}, {@code sm_coe}, {@code
        * tt_vat}, {@code tt_bir}, {@code mu_vat}, {@code mz_nuit}, {@code au_wpn}, {@code md_cf},
        * {@code is_kt}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin}, {@code
-       * cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, or {@code unknown}.
+       * cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, {@code gh_tin}, {@code bw_vat},
+       * {@code ci_vat}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -2344,7 +2390,8 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * cz_dic}, {@code fr_siret}, {@code fr_siren}, {@code fr_spi}, {@code sm_coe}, {@code
        * tt_vat}, {@code tt_bir}, {@code mu_vat}, {@code mz_nuit}, {@code au_wpn}, {@code md_cf},
        * {@code is_kt}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin}, {@code
-       * cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, or {@code unknown}.
+       * cm_niu}, {@code cv_nif}, {@code bf_ifu}, {@code ic_nif}, {@code gh_tin}, {@code bw_vat},
+       * {@code ci_vat}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -3051,6 +3098,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class InnerItem extends StripeObject {
+        /** The adjustable quantity settings for this subscription item. */
+        @SerializedName("adjustable_quantity")
+        AdjustableQuantity adjustableQuantity;
+
         /** The trial offer applied to this subscription item. */
         @SerializedName("current_trial")
         CurrentTrial currentTrial;
@@ -3081,6 +3132,27 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
         public void setPriceObject(Price expandableObject) {
           this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
+        }
+
+        /**
+         * For more details about AdjustableQuantity, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AdjustableQuantity extends StripeObject {
+          /** Whether the quantity is adjustable. */
+          @SerializedName("enabled")
+          Boolean enabled;
+
+          /** The maximum quantity the customer can purchase. */
+          @SerializedName("maximum")
+          Long maximum;
+
+          /** The minimum quantity the customer can purchase. */
+          @SerializedName("minimum")
+          Long minimum;
         }
 
         /**
@@ -3459,6 +3531,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
     @SerializedName("paypal")
     Paypal paypal;
+
+    @SerializedName("paypay")
+    Paypay paypay;
 
     @SerializedName("payto")
     Payto payto;
@@ -5074,6 +5149,19 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
 
     /**
+     * For more details about Paypay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypay extends StripeObject {
+      /** A reference to the merchant subscription this payment corresponds to. */
+      @SerializedName("subscription_reference")
+      String subscriptionReference;
+    }
+
+    /**
      * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -6464,6 +6552,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(adaptivePricing, responseGetter);
     trySetResponseGetter(afterExpiration, responseGetter);
+    trySetResponseGetter(automaticPassThroughFee, responseGetter);
     trySetResponseGetter(automaticSurcharge, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(brandingSettings, responseGetter);

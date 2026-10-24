@@ -17,7 +17,11 @@ public class AlertNotificationListParams extends ApiRequestParams {
   @SerializedName("action")
   Action action;
 
-  /** Filter results to only include notifications for the given billing cadence. */
+  /** Filter results to only include notifications for the given billing group. */
+  @SerializedName("billing_group")
+  String billingGroup;
+
+  /** Filter results to only include notifications for the given cadence. */
   @SerializedName("cadence")
   String cadence;
 
@@ -77,6 +81,7 @@ public class AlertNotificationListParams extends ApiRequestParams {
 
   private AlertNotificationListParams(
       Action action,
+      String billingGroup,
       String cadence,
       String customer,
       String endingBefore,
@@ -88,6 +93,7 @@ public class AlertNotificationListParams extends ApiRequestParams {
       String startingAfter,
       String subscription) {
     this.action = action;
+    this.billingGroup = billingGroup;
     this.cadence = cadence;
     this.customer = customer;
     this.endingBefore = endingBefore;
@@ -106,6 +112,8 @@ public class AlertNotificationListParams extends ApiRequestParams {
 
   public static class Builder {
     private Action action;
+
+    private String billingGroup;
 
     private String cadence;
 
@@ -131,6 +139,7 @@ public class AlertNotificationListParams extends ApiRequestParams {
     public AlertNotificationListParams build() {
       return new AlertNotificationListParams(
           this.action,
+          this.billingGroup,
           this.cadence,
           this.customer,
           this.endingBefore,
@@ -149,7 +158,13 @@ public class AlertNotificationListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Filter results to only include notifications for the given billing cadence. */
+    /** Filter results to only include notifications for the given billing group. */
+    public Builder setBillingGroup(String billingGroup) {
+      this.billingGroup = billingGroup;
+      return this;
+    }
+
+    /** Filter results to only include notifications for the given cadence. */
     public Builder setCadence(String cadence) {
       this.cadence = cadence;
       return this;

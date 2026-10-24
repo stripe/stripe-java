@@ -1826,6 +1826,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("phone")
     String phone;
 
+    @SerializedName("physical_address")
+    Address physicalAddress;
+
     @SerializedName("principal_place_of_business")
     Address principalPlaceOfBusiness;
 
