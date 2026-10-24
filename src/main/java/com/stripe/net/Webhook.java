@@ -204,7 +204,7 @@ public final class Webhook {
             "No signatures found with expected scheme", sigHeader);
       }
 
-      if (secret == null || secret.isEmpty()) {
+      if (isBlankWebhookSecret(secret)) {
         throw new SignatureVerificationException(
             "No webhook secret value was provided. It should start with `whsec_`", sigHeader);
       }
@@ -309,6 +309,25 @@ public final class Webhook {
       }
 
       return signatures;
+    }
+
+    private static boolean isBlankWebhookSecret(String secret) {
+      if (secret == null || secret.isEmpty()) {
+        return true;
+      }
+
+      for (int i = 0; i < secret.length(); i++) {
+        char character = secret.charAt(i);
+        if (character != ' '
+            && character != '\t'
+            && character != '\r'
+            && character != '\n'
+            && character != '\f'
+            && character != '\u000B') {
+          return false;
+        }
+      }
+      return true;
     }
 
     /**
