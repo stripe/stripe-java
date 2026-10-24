@@ -1395,6 +1395,10 @@ public class AlertCreateParams extends ApiRequestParams {
       @SerializedName("billing_cadence")
       String billingCadence;
 
+      /** Filter by billing group ID. */
+      @SerializedName("billing_group")
+      String billingGroup;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1415,11 +1419,13 @@ public class AlertCreateParams extends ApiRequestParams {
       private Filters(
           List<String> billableItems,
           String billingCadence,
+          String billingGroup,
           Map<String, Object> extraParams,
           String pricingPlan,
           String pricingPlanSubscription) {
         this.billableItems = billableItems;
         this.billingCadence = billingCadence;
+        this.billingGroup = billingGroup;
         this.extraParams = extraParams;
         this.pricingPlan = pricingPlan;
         this.pricingPlanSubscription = pricingPlanSubscription;
@@ -1434,6 +1440,8 @@ public class AlertCreateParams extends ApiRequestParams {
 
         private String billingCadence;
 
+        private String billingGroup;
+
         private Map<String, Object> extraParams;
 
         private String pricingPlan;
@@ -1445,6 +1453,7 @@ public class AlertCreateParams extends ApiRequestParams {
           return new AlertCreateParams.SpendThreshold.Filters(
               this.billableItems,
               this.billingCadence,
+              this.billingGroup,
               this.extraParams,
               this.pricingPlan,
               this.pricingPlanSubscription);
@@ -1480,6 +1489,12 @@ public class AlertCreateParams extends ApiRequestParams {
         /** Filter by billing cadence ID. */
         public Builder setBillingCadence(String billingCadence) {
           this.billingCadence = billingCadence;
+          return this;
+        }
+
+        /** Filter by billing group ID. */
+        public Builder setBillingGroup(String billingGroup) {
+          this.billingGroup = billingGroup;
           return this;
         }
 

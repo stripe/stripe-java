@@ -55,6 +55,13 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("approval_method")
   ApprovalMethod approvalMethod;
 
+  /**
+   * Settings for calculating and adding a pass-through fee (a convenience or service fee) to this
+   * session.
+   */
+  @SerializedName("automatic_pass_through_fee")
+  AutomaticPassThroughFee automaticPassThroughFee;
+
   /** Settings for automatic surcharge calculation for this session. */
   @SerializedName("automatic_surcharge")
   AutomaticSurcharge automaticSurcharge;
@@ -501,6 +508,7 @@ public class SessionCreateParams extends ApiRequestParams {
       Boolean allowPromotionCodes,
       List<SessionCreateParams.AllowedPaymentMethodType> allowedPaymentMethodTypes,
       ApprovalMethod approvalMethod,
+      AutomaticPassThroughFee automaticPassThroughFee,
       AutomaticSurcharge automaticSurcharge,
       AutomaticTax automaticTax,
       BillingAddressCollection billingAddressCollection,
@@ -561,6 +569,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.allowPromotionCodes = allowPromotionCodes;
     this.allowedPaymentMethodTypes = allowedPaymentMethodTypes;
     this.approvalMethod = approvalMethod;
+    this.automaticPassThroughFee = automaticPassThroughFee;
     this.automaticSurcharge = automaticSurcharge;
     this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
@@ -632,6 +641,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private List<SessionCreateParams.AllowedPaymentMethodType> allowedPaymentMethodTypes;
 
     private ApprovalMethod approvalMethod;
+
+    private AutomaticPassThroughFee automaticPassThroughFee;
 
     private AutomaticSurcharge automaticSurcharge;
 
@@ -751,6 +762,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.allowPromotionCodes,
           this.allowedPaymentMethodTypes,
           this.approvalMethod,
+          this.automaticPassThroughFee,
           this.automaticSurcharge,
           this.automaticTax,
           this.billingAddressCollection,
@@ -871,6 +883,16 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setApprovalMethod(SessionCreateParams.ApprovalMethod approvalMethod) {
       this.approvalMethod = approvalMethod;
+      return this;
+    }
+
+    /**
+     * Settings for calculating and adding a pass-through fee (a convenience or service fee) to this
+     * session.
+     */
+    public Builder setAutomaticPassThroughFee(
+        SessionCreateParams.AutomaticPassThroughFee automaticPassThroughFee) {
+      this.automaticPassThroughFee = automaticPassThroughFee;
       return this;
     }
 
@@ -1883,6 +1905,150 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AutomaticPassThroughFee {
+    /**
+     * Whether the fee is calculated on the amount due before or after tax. Required when {@code
+     * enabled} is {@code true}.
+     */
+    @SerializedName("calculation_basis")
+    CalculationBasis calculationBasis;
+
+    /**
+     * <strong>Required.</strong> Set to {@code true} to calculate a pass-through fee using the
+     * customer's payment method details and location.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The type of fee to calculate. Required when {@code enabled} is {@code true}. */
+    @SerializedName("type")
+    Type type;
+
+    private AutomaticPassThroughFee(
+        CalculationBasis calculationBasis,
+        Boolean enabled,
+        Map<String, Object> extraParams,
+        Type type) {
+      this.calculationBasis = calculationBasis;
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private CalculationBasis calculationBasis;
+
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.AutomaticPassThroughFee build() {
+        return new SessionCreateParams.AutomaticPassThroughFee(
+            this.calculationBasis, this.enabled, this.extraParams, this.type);
+      }
+
+      /**
+       * Whether the fee is calculated on the amount due before or after tax. Required when {@code
+       * enabled} is {@code true}.
+       */
+      public Builder setCalculationBasis(
+          SessionCreateParams.AutomaticPassThroughFee.CalculationBasis calculationBasis) {
+        this.calculationBasis = calculationBasis;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Set to {@code true} to calculate a pass-through fee using the
+       * customer's payment method details and location.
+       */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.AutomaticPassThroughFee#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.AutomaticPassThroughFee#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The type of fee to calculate. Required when {@code enabled} is {@code true}. */
+      public Builder setType(SessionCreateParams.AutomaticPassThroughFee.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    public enum CalculationBasis implements ApiRequestParams.EnumParam {
+      @SerializedName("total_after_tax")
+      TOTAL_AFTER_TAX("total_after_tax"),
+
+      @SerializedName("total_before_tax")
+      TOTAL_BEFORE_TAX("total_before_tax");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      CalculationBasis(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("convenience_fee")
+      CONVENIENCE_FEE("convenience_fee"),
+
+      @SerializedName("service_fee")
+      SERVICE_FEE("service_fee");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
       }
     }
   }
@@ -8675,7 +8841,12 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName("adjustable_quantity")
         AdjustableQuantity adjustableQuantity;
 
-        /** The trial offer to apply to this subscription item. */
+        /**
+         * The <a
+         * href="https://docs.stripe.com/api/product-catalog/trial-offer?api-version=2026-03-25.preview">Trial
+         * Offer</a> to apply to this subscription item. One of {@code price}, {@code price_data} or
+         * {@code current_trial} is required.
+         */
         @SerializedName("current_trial")
         CurrentTrial currentTrial;
 
@@ -8691,14 +8862,14 @@ public class SessionCreateParams extends ApiRequestParams {
 
         /**
          * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a>. One of {@code
-         * price} or {@code price_data} is required.
+         * price}, {@code price_data} or {@code current_trial} is required.
          */
         @SerializedName("price")
         String price;
 
         /**
          * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
-         * inline. One of {@code price} or {@code price_data} is required.
+         * inline. One of {@code price}, {@code price_data} or {@code current_trial} is required.
          */
         @SerializedName("price_data")
         PriceData priceData;
@@ -8761,7 +8932,12 @@ public class SessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The trial offer to apply to this subscription item. */
+          /**
+           * The <a
+           * href="https://docs.stripe.com/api/product-catalog/trial-offer?api-version=2026-03-25.preview">Trial
+           * Offer</a> to apply to this subscription item. One of {@code price}, {@code price_data}
+           * or {@code current_trial} is required.
+           */
           public Builder setCurrentTrial(
               SessionCreateParams.Item.Subscription.InnerItem.CurrentTrial currentTrial) {
             this.currentTrial = currentTrial;
@@ -8798,7 +8974,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
           /**
            * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a>. One of {@code
-           * price} or {@code price_data} is required.
+           * price}, {@code price_data} or {@code current_trial} is required.
            */
           public Builder setPrice(String price) {
             this.price = price;
@@ -8807,7 +8983,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
           /**
            * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a>
-           * object inline. One of {@code price} or {@code price_data} is required.
+           * object inline. One of {@code price}, {@code price_data} or {@code current_trial} is
+           * required.
            */
           public Builder setPriceData(
               SessionCreateParams.Item.Subscription.InnerItem.PriceData priceData) {
@@ -8956,7 +9133,9 @@ public class SessionCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * <strong>Required.</strong> The ID of the trial offer to apply to the subscription item.
+           * <strong>Required.</strong> The ID of the <a
+           * href="https://docs.stripe.com/api/product-catalog/trial-offer?api-version=2026-03-25.preview">Trial
+           * Offer</a>.
            */
           @SerializedName("trial_offer")
           String trialOffer;
@@ -9012,8 +9191,9 @@ public class SessionCreateParams extends ApiRequestParams {
             }
 
             /**
-             * <strong>Required.</strong> The ID of the trial offer to apply to the subscription
-             * item.
+             * <strong>Required.</strong> The ID of the <a
+             * href="https://docs.stripe.com/api/product-catalog/trial-offer?api-version=2026-03-25.preview">Trial
+             * Offer</a>.
              */
             public Builder setTrialOffer(String trialOffer) {
               this.trialOffer = trialOffer;
@@ -11266,10 +11446,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class MarketingAttribution {
-    /**
-     * <strong>Required.</strong> Information used when sending conversions to an advertising
-     * platform.
-     */
+    /** Information used when sending conversions to an advertising platform. */
     @SerializedName("ad_conversion")
     AdConversion adConversion;
 
@@ -11377,10 +11554,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.utmTerm);
       }
 
-      /**
-       * <strong>Required.</strong> Information used when sending conversions to an advertising
-       * platform.
-       */
+      /** Information used when sending conversions to an advertising platform. */
       public Builder setAdConversion(
           SessionCreateParams.MarketingAttribution.AdConversion adConversion) {
         this.adConversion = adConversion;
@@ -13145,6 +13319,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("paypal")
     Paypal paypal;
 
+    /** contains details about the PayPay payment method options. */
+    @SerializedName("paypay")
+    Paypay paypay;
+
     /** contains details about the PayTo payment method options. */
     @SerializedName("payto")
     Payto payto;
@@ -13244,6 +13422,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Payco payco,
         Paynow paynow,
         Paypal paypal,
+        Paypay paypay,
         Payto payto,
         Pix pix,
         RevolutPay revolutPay,
@@ -13297,6 +13476,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.payco = payco;
       this.paynow = paynow;
       this.paypal = paypal;
+      this.paypay = paypay;
       this.payto = payto;
       this.pix = pix;
       this.revolutPay = revolutPay;
@@ -13395,6 +13575,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Paypal paypal;
 
+      private Paypay paypay;
+
       private Payto payto;
 
       private Pix pix;
@@ -13466,6 +13648,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.payco,
             this.paynow,
             this.paypal,
+            this.paypay,
             this.payto,
             this.pix,
             this.revolutPay,
@@ -13738,6 +13921,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the PayPal payment method options. */
       public Builder setPaypal(SessionCreateParams.PaymentMethodOptions.Paypal paypal) {
         this.paypal = paypal;
+        return this;
+      }
+
+      /** contains details about the PayPay payment method options. */
+      public Builder setPaypay(SessionCreateParams.PaymentMethodOptions.Paypay paypay) {
+        this.paypay = paypay;
         return this;
       }
 
@@ -21258,6 +21447,78 @@ public class SessionCreateParams extends ApiRequestParams {
 
         SetupFutureUsage(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The merchant's subscription identifier for this off-session charge. */
+      @SerializedName("subscription_reference")
+      String subscriptionReference;
+
+      private Paypay(Map<String, Object> extraParams, String subscriptionReference) {
+        this.extraParams = extraParams;
+        this.subscriptionReference = subscriptionReference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String subscriptionReference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Paypay build() {
+          return new SessionCreateParams.PaymentMethodOptions.Paypay(
+              this.extraParams, this.subscriptionReference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Paypay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Paypay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The merchant's subscription identifier for this off-session charge. */
+        public Builder setSubscriptionReference(String subscriptionReference) {
+          this.subscriptionReference = subscriptionReference;
+          return this;
         }
       }
     }
@@ -29412,6 +29673,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("sofort")
     SOFORT("sofort"),
 
+    @SerializedName("stripe_balance")
+    STRIPE_BALANCE("stripe_balance"),
+
     @SerializedName("sunbit")
     SUNBIT("sunbit"),
 
@@ -29642,6 +29906,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("sofort")
     SOFORT("sofort"),
+
+    @SerializedName("stripe_balance")
+    STRIPE_BALANCE("stripe_balance"),
 
     @SerializedName("sunbit")
     SUNBIT("sunbit"),

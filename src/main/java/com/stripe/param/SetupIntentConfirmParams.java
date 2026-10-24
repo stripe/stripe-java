@@ -1161,6 +1161,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Tamara tamara;
 
     /**
+     * If this is a {@code toss_pay} PaymentMethod, this hash contains details about the Toss Pay
+     * payment method.
+     */
+    @SerializedName("toss_pay")
+    TossPay tossPay;
+
+    /**
      * If this is a TWINT PaymentMethod, this hash contains details about the TWINT payment method.
      */
     @SerializedName("twint")
@@ -1279,6 +1286,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         Sunbit sunbit,
         Swish swish,
         Tamara tamara,
+        TossPay tossPay,
         Twint twint,
         Type type,
         Upi upi,
@@ -1355,6 +1363,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.sunbit = sunbit;
       this.swish = swish;
       this.tamara = tamara;
+      this.tossPay = tossPay;
       this.twint = twint;
       this.type = type;
       this.upi = upi;
@@ -1507,6 +1516,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private Tamara tamara;
 
+      private TossPay tossPay;
+
       private Twint twint;
 
       private Type type;
@@ -1593,6 +1604,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.sunbit,
             this.swish,
             this.tamara,
+            this.tossPay,
             this.twint,
             this.type,
             this.upi,
@@ -2267,6 +2279,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setTamara(SetupIntentConfirmParams.PaymentMethodData.Tamara tamara) {
         this.tamara = tamara;
+        return this;
+      }
+
+      /**
+       * If this is a {@code toss_pay} PaymentMethod, this hash contains details about the Toss Pay
+       * payment method.
+       */
+      public Builder setTossPay(SetupIntentConfirmParams.PaymentMethodData.TossPay tossPay) {
+        this.tossPay = tossPay;
         return this;
       }
 
@@ -7464,6 +7485,64 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class TossPay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private TossPay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentConfirmParams.PaymentMethodData.TossPay build() {
+          return new SetupIntentConfirmParams.PaymentMethodData.TossPay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.TossPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.TossPay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Twint {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8288,6 +8367,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       @SerializedName("tamara")
       TAMARA("tamara"),
+
+      @SerializedName("toss_pay")
+      TOSS_PAY("toss_pay"),
 
       @SerializedName("twint")
       TWINT("twint"),
@@ -14592,6 +14674,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
     @SerializedName("test_pay")
     TEST_PAY("test_pay"),
+
+    @SerializedName("toss_pay")
+    TOSS_PAY("toss_pay"),
 
     @SerializedName("touch_n_go")
     TOUCH_N_GO("touch_n_go"),

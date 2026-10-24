@@ -1310,6 +1310,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("tamara")
     Tamara tamara;
 
+    @SerializedName("toss_pay")
+    TossPay tossPay;
+
     @SerializedName("twint")
     Twint twint;
 
@@ -2063,8 +2066,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
       /**
        * The payment_method_options.card.stored_credential_usage value that was passed for an off
-       * session, merchant-initiated transaction, one of {@code recurring}, {@code unscheduled},
-       * {@code on_session}, or {@code installment}.
+       * session, merchant-initiated transaction.
+       *
+       * <p>One of {@code installment}, {@code recurring}, or {@code unscheduled}.
        */
       @SerializedName("stored_credential_usage")
       String storedCredentialUsage;
@@ -4116,7 +4120,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Paypay extends StripeObject {}
+    public static class Paypay extends StripeObject {
+      /** ID of the multi-use Mandate created by, or used to make, this PayPay payment. */
+      @SerializedName("mandate")
+      String mandate;
+    }
 
     /**
      * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
@@ -4623,6 +4631,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** The Tamara transaction ID associated with this payment. */
       @SerializedName("transaction_id")
       String transactionId;
+    }
+
+    /**
+     * For more details about TossPay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TossPay extends StripeObject {
+      /** The buyer identifier provided by NICE for this Toss Pay account, when available. */
+      @SerializedName("buyer_id")
+      String buyerId;
     }
 
     /**

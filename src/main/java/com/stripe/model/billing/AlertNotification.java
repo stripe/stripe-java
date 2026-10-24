@@ -60,8 +60,15 @@ public class AlertNotification extends ApiResource implements HasId {
   String alertType;
 
   /**
-   * The billing cadence associated with this notification. Only present for spend threshold alerts
-   * grouped by billing cadence.
+   * The billing group associated with this notification. Only present for spend threshold alerts
+   * grouped by billing group.
+   */
+  @SerializedName("billing_group")
+  String billingGroup;
+
+  /**
+   * The cadence associated with this notification. Only present for spend threshold alerts grouped
+   * by cadence.
    */
   @SerializedName("cadence")
   String cadence;
@@ -87,8 +94,9 @@ public class AlertNotification extends ApiResource implements HasId {
   String id;
 
   /**
-   * If the object exists in live mode, the value is {@code true}. If the object exists in test
-   * mode, the value is {@code false}.
+   * The value is {@code true} for objects in live mode and {@code false} for objects in a sandbox.
+   * For accounts that still have access to legacy test mode, the value is also {@code false} for
+   * objects in that mode.
    */
   @SerializedName("livemode")
   Boolean livemode;

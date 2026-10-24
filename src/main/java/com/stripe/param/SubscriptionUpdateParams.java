@@ -10058,6 +10058,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class SepaDebit {
+        /** Controls when the funds will be captured from the customer's account. */
+        @SerializedName("debit_behavior")
+        Object debitBehavior;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -10068,7 +10072,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private SepaDebit(Map<String, Object> extraParams) {
+        private SepaDebit(Object debitBehavior, Map<String, Object> extraParams) {
+          this.debitBehavior = debitBehavior;
           this.extraParams = extraParams;
         }
 
@@ -10077,12 +10082,26 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Object debitBehavior;
+
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit build() {
             return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.SepaDebit(
-                this.extraParams);
+                this.debitBehavior, this.extraParams);
+          }
+
+          /** Controls when the funds will be captured from the customer's account. */
+          public Builder setDebitBehavior(String debitBehavior) {
+            this.debitBehavior = debitBehavior;
+            return this;
+          }
+
+          /** Controls when the funds will be captured from the customer's account. */
+          public Builder setDebitBehavior(EmptyParam debitBehavior) {
+            this.debitBehavior = debitBehavior;
+            return this;
           }
 
           /**

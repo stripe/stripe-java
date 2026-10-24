@@ -103,6 +103,10 @@ public class AlertTriggered extends StripeObject {
     @SerializedName("billing_cadence")
     String billingCadence;
 
+    /** The billing group ID, populated when type is {@code billing_group}. */
+    @SerializedName("billing_group")
+    String billingGroup;
+
     /**
      * The pricing plan subscription ID, populated when type is {@code pricing_plan_subscription}.
      */

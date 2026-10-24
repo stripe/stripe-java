@@ -4,7 +4,9 @@ package com.stripe.param.v2.signals;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -112,6 +114,14 @@ public class AccountActivityCreateParams extends ApiRequestParams {
   @SerializedName("registration_decision")
   RegistrationDecision registrationDecision;
 
+  /**
+   * An accessible AccountSignal that prompted this activity. The signal must be within its 90-day
+   * retrieval window and match the existing account or customer in account_details. Inline data is
+   * unsupported. May be supplied together with account_evaluation.
+   */
+  @SerializedName("triggering_signal")
+  String triggeringSignal;
+
   /** <strong>Required.</strong> The type of activity. */
   @SerializedName("type")
   Type type;
@@ -134,6 +144,7 @@ public class AccountActivityCreateParams extends ApiRequestParams {
       Instant occurredAt,
       RegistrationAttempt registrationAttempt,
       RegistrationDecision registrationDecision,
+      String triggeringSignal,
       Type type) {
     this.accountDetails = accountDetails;
     this.accountEvaluation = accountEvaluation;
@@ -152,6 +163,7 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     this.occurredAt = occurredAt;
     this.registrationAttempt = registrationAttempt;
     this.registrationDecision = registrationDecision;
+    this.triggeringSignal = triggeringSignal;
     this.type = type;
   }
 
@@ -194,6 +206,8 @@ public class AccountActivityCreateParams extends ApiRequestParams {
 
     private RegistrationDecision registrationDecision;
 
+    private String triggeringSignal;
+
     private Type type;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -216,6 +230,7 @@ public class AccountActivityCreateParams extends ApiRequestParams {
           this.occurredAt,
           this.registrationAttempt,
           this.registrationDecision,
+          this.triggeringSignal,
           this.type);
     }
 
@@ -392,6 +407,16 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     public Builder setRegistrationDecision(
         AccountActivityCreateParams.RegistrationDecision registrationDecision) {
       this.registrationDecision = registrationDecision;
+      return this;
+    }
+
+    /**
+     * An accessible AccountSignal that prompted this activity. The signal must be within its 90-day
+     * retrieval window and match the existing account or customer in account_details. Inline data
+     * is unsupported. May be supplied together with account_evaluation.
+     */
+    public Builder setTriggeringSignal(String triggeringSignal) {
+      this.triggeringSignal = triggeringSignal;
       return this;
     }
 
@@ -1731,12 +1756,20 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Multi-factor authentication challenges performed during the login process. */
+    @SerializedName("mfa_challenges")
+    List<AccountActivityCreateParams.LoginDecision.MfaChallenge> mfaChallenges;
+
     /** <strong>Required.</strong> The action the merchant took following the evaluation. */
     @SerializedName("status")
     Status status;
 
-    private LoginDecision(Map<String, Object> extraParams, Status status) {
+    private LoginDecision(
+        Map<String, Object> extraParams,
+        List<AccountActivityCreateParams.LoginDecision.MfaChallenge> mfaChallenges,
+        Status status) {
       this.extraParams = extraParams;
+      this.mfaChallenges = mfaChallenges;
       this.status = status;
     }
 
@@ -1747,11 +1780,14 @@ public class AccountActivityCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
+      private List<AccountActivityCreateParams.LoginDecision.MfaChallenge> mfaChallenges;
+
       private Status status;
 
       /** Finalize and obtain parameter instance from this builder. */
       public AccountActivityCreateParams.LoginDecision build() {
-        return new AccountActivityCreateParams.LoginDecision(this.extraParams, this.status);
+        return new AccountActivityCreateParams.LoginDecision(
+            this.extraParams, this.mfaChallenges, this.status);
       }
 
       /**
@@ -1781,10 +1817,167 @@ public class AccountActivityCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Add an element to `mfaChallenges` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * AccountActivityCreateParams.LoginDecision#mfaChallenges} for the field documentation.
+       */
+      public Builder addMfaChallenge(
+          AccountActivityCreateParams.LoginDecision.MfaChallenge element) {
+        if (this.mfaChallenges == null) {
+          this.mfaChallenges = new ArrayList<>();
+        }
+        this.mfaChallenges.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `mfaChallenges` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * AccountActivityCreateParams.LoginDecision#mfaChallenges} for the field documentation.
+       */
+      public Builder addAllMfaChallenge(
+          List<AccountActivityCreateParams.LoginDecision.MfaChallenge> elements) {
+        if (this.mfaChallenges == null) {
+          this.mfaChallenges = new ArrayList<>();
+        }
+        this.mfaChallenges.addAll(elements);
+        return this;
+      }
+
       /** <strong>Required.</strong> The action the merchant took following the evaluation. */
       public Builder setStatus(AccountActivityCreateParams.LoginDecision.Status status) {
         this.status = status;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MfaChallenge {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The authentication method used for the challenge. */
+      @SerializedName("mfa_type")
+      MfaType mfaType;
+
+      /** <strong>Required.</strong> The outcome of the authentication challenge. */
+      @SerializedName("status")
+      Status status;
+
+      private MfaChallenge(Map<String, Object> extraParams, MfaType mfaType, Status status) {
+        this.extraParams = extraParams;
+        this.mfaType = mfaType;
+        this.status = status;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private MfaType mfaType;
+
+        private Status status;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountActivityCreateParams.LoginDecision.MfaChallenge build() {
+          return new AccountActivityCreateParams.LoginDecision.MfaChallenge(
+              this.extraParams, this.mfaType, this.status);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountActivityCreateParams.LoginDecision.MfaChallenge#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountActivityCreateParams.LoginDecision.MfaChallenge#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> The authentication method used for the challenge. */
+        public Builder setMfaType(
+            AccountActivityCreateParams.LoginDecision.MfaChallenge.MfaType mfaType) {
+          this.mfaType = mfaType;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The outcome of the authentication challenge. */
+        public Builder setStatus(
+            AccountActivityCreateParams.LoginDecision.MfaChallenge.Status status) {
+          this.status = status;
+          return this;
+        }
+      }
+
+      public enum MfaType implements ApiRequestParams.EnumParam {
+        @SerializedName("authenticator_app")
+        AUTHENTICATOR_APP("authenticator_app"),
+
+        @SerializedName("email")
+        EMAIL("email"),
+
+        @SerializedName("hardware_key")
+        HARDWARE_KEY("hardware_key"),
+
+        @SerializedName("other")
+        OTHER("other"),
+
+        @SerializedName("sms")
+        SMS("sms");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        MfaType(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum Status implements ApiRequestParams.EnumParam {
+        @SerializedName("failed")
+        FAILED("failed"),
+
+        @SerializedName("other")
+        OTHER("other"),
+
+        @SerializedName("succeeded")
+        SUCCEEDED("succeeded");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Status(String value) {
+          this.value = value;
+        }
       }
     }
 

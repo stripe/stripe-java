@@ -9620,6 +9620,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class SepaDebit {
+        /** Controls when the funds will be captured from the customer's account. */
+        @SerializedName("debit_behavior")
+        String debitBehavior;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -9630,7 +9634,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private SepaDebit(Map<String, Object> extraParams) {
+        private SepaDebit(String debitBehavior, Map<String, Object> extraParams) {
+          this.debitBehavior = debitBehavior;
           this.extraParams = extraParams;
         }
 
@@ -9639,12 +9644,20 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private String debitBehavior;
+
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.SepaDebit build() {
             return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.SepaDebit(
-                this.extraParams);
+                this.debitBehavior, this.extraParams);
+          }
+
+          /** Controls when the funds will be captured from the customer's account. */
+          public Builder setDebitBehavior(String debitBehavior) {
+            this.debitBehavior = debitBehavior;
+            return this;
           }
 
           /**
