@@ -424,6 +424,7 @@ public class StripeClientTest extends BaseStripeTest {
 
   @Test
   public void eventFetchedRelatedObjectRetainsContext() throws StripeException {
+    Stripe.enableTelemetry = false;
     StripeResponseGetterOptions options =
         StripeClient.builder()
             .setApiKey(TEST_API_KEY)
