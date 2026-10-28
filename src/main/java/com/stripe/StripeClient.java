@@ -89,14 +89,28 @@ public class StripeClient {
     LiveStripeResponseGetter newResponseGetter =
         liveGetter.withNewOptions(
             options -> {
-              ClientStripeResponseGetterOptions existingOptions =
-                  (ClientStripeResponseGetterOptions) options;
+              if (options instanceof ClientStripeResponseGetterOptions) {
+                return ((ClientStripeResponseGetterOptions) options)
+                    .toBuilder()
+                    .stripeAccount(null)
+                    .stripeContext(contextString)
+                    .build();
+              }
 
-              return existingOptions
-                  .toBuilder()
-                  .stripeAccount(null)
-                  .stripeContext(contextString)
-                  .build();
+              return new ClientStripeResponseGetterOptions(
+                  options.getAuthenticator(),
+                  options.getClientId(),
+                  options.getConnectTimeout(),
+                  options.getReadTimeout(),
+                  options.getMaxNetworkRetries(),
+                  options.getConnectionProxy(),
+                  options.getProxyCredential(),
+                  options.getApiBase(),
+                  options.getFilesBase(),
+                  options.getConnectBase(),
+                  options.getMeterEventsBase(),
+                  null,
+                  contextString);
             });
 
     // Create and return a new StripeClient with the new response getter
