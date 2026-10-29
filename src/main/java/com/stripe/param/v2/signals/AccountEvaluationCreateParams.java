@@ -245,8 +245,9 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
       RegistrationAttempt registrationAttempt;
 
       /**
-       * <strong>Required.</strong> The type of activity. Must be registration_attempt or
-       * login_attempt.
+       * <strong>Required.</strong> The type of activity. Supports registration_attempt,
+       * login_attempt, mfa_addition, mfa_removal, credential_change, account_takeover_report,
+       * account_takeover_confirmation, or account_takeover_mitigation.
        */
       @SerializedName("type")
       Type type;
@@ -341,8 +342,9 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The type of activity. Must be registration_attempt or
-         * login_attempt.
+         * <strong>Required.</strong> The type of activity. Supports registration_attempt,
+         * login_attempt, mfa_addition, mfa_removal, credential_change, account_takeover_report,
+         * account_takeover_confirmation, or account_takeover_mitigation.
          */
         public Builder setType(
             AccountEvaluationCreateParams.AccountActivityDetails.Data.Type type) {
@@ -936,7 +938,7 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
     @SerializedName("account")
     String account;
 
-    /** The v1 customer ID of the account, for users not yet migrated to v2/accounts. */
+    /** The v1 customer ID of the account, for users not yet migrated to v2 accounts. */
     @SerializedName("customer")
     String customer;
 
@@ -986,7 +988,7 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The v1 customer ID of the account, for users not yet migrated to v2/accounts. */
+      /** The v1 customer ID of the account, for users not yet migrated to v2 accounts. */
       public Builder setCustomer(String customer) {
         this.customer = customer;
         return this;
@@ -1029,6 +1031,10 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Data {
+      /** The account's contact email. */
+      @SerializedName("contact_email")
+      String contactEmail;
+
       /** Default account settings. */
       @SerializedName("defaults")
       Defaults defaults;
@@ -1046,7 +1052,12 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
       @SerializedName("identity")
       Identity identity;
 
-      private Data(Defaults defaults, Map<String, Object> extraParams, Identity identity) {
+      private Data(
+          String contactEmail,
+          Defaults defaults,
+          Map<String, Object> extraParams,
+          Identity identity) {
+        this.contactEmail = contactEmail;
         this.defaults = defaults;
         this.extraParams = extraParams;
         this.identity = identity;
@@ -1057,6 +1068,8 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private String contactEmail;
+
         private Defaults defaults;
 
         private Map<String, Object> extraParams;
@@ -1066,7 +1079,13 @@ public class AccountEvaluationCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AccountEvaluationCreateParams.AccountDetails.Data build() {
           return new AccountEvaluationCreateParams.AccountDetails.Data(
-              this.defaults, this.extraParams, this.identity);
+              this.contactEmail, this.defaults, this.extraParams, this.identity);
+        }
+
+        /** The account's contact email. */
+        public Builder setContactEmail(String contactEmail) {
+          this.contactEmail = contactEmail;
+          return this;
         }
 
         /** Default account settings. */

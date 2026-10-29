@@ -173,14 +173,50 @@ public final class EventNotificationClassLookup {
         "v1.customer.discount.deleted",
         com.stripe.events.V1CustomerDiscountDeletedEventNotification.class);
     eventClassLookup.put(
+        "v1.customer.discount.source_changed",
+        com.stripe.events.V1CustomerDiscountSourceChangedEventNotification.class);
+    eventClassLookup.put(
         "v1.customer.discount.updated",
         com.stripe.events.V1CustomerDiscountUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v1.customer.subscription.active",
+        com.stripe.events.V1CustomerSubscriptionActiveEventNotification.class);
+    eventClassLookup.put(
+        "v1.customer.subscription.cancel_at_changed",
+        com.stripe.events.V1CustomerSubscriptionCancelAtChangedEventNotification.class);
     eventClassLookup.put(
         "v1.customer.subscription.created",
         com.stripe.events.V1CustomerSubscriptionCreatedEventNotification.class);
     eventClassLookup.put(
+        "v1.customer.subscription.default_payment_method_changed",
+        com.stripe.events.V1CustomerSubscriptionDefaultPaymentMethodChangedEventNotification.class);
+    eventClassLookup.put(
         "v1.customer.subscription.deleted",
         com.stripe.events.V1CustomerSubscriptionDeletedEventNotification.class);
+    eventClassLookup.put(
+        "v1.customer.subscription.incomplete",
+        com.stripe.events.V1CustomerSubscriptionIncompleteEventNotification.class);
+    eventClassLookup.put(
+        "v1.customer.subscription.incomplete_expired",
+        com.stripe.events.V1CustomerSubscriptionIncompleteExpiredEventNotification.class);
+    eventClassLookup.put(
+        "v1.customer.subscription.item_added",
+        com.stripe.events.V1CustomerSubscriptionItemAddedEventNotification.class);
+    eventClassLookup.put(
+        "v1.customer.subscription.item_price_changed",
+        com.stripe.events.V1CustomerSubscriptionItemPriceChangedEventNotification.class);
+    eventClassLookup.put(
+        "v1.customer.subscription.item_quantity_changed",
+        com.stripe.events.V1CustomerSubscriptionItemQuantityChangedEventNotification.class);
+    eventClassLookup.put(
+        "v1.customer.subscription.item_removed",
+        com.stripe.events.V1CustomerSubscriptionItemRemovedEventNotification.class);
+    eventClassLookup.put(
+        "v1.customer.subscription.item_tax_rates_changed",
+        com.stripe.events.V1CustomerSubscriptionItemTaxRatesChangedEventNotification.class);
+    eventClassLookup.put(
+        "v1.customer.subscription.past_due",
+        com.stripe.events.V1CustomerSubscriptionPastDueEventNotification.class);
     eventClassLookup.put(
         "v1.customer.subscription.paused",
         com.stripe.events.V1CustomerSubscriptionPausedEventNotification.class);
@@ -196,6 +232,12 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v1.customer.subscription.trial_will_end",
         com.stripe.events.V1CustomerSubscriptionTrialWillEndEventNotification.class);
+    eventClassLookup.put(
+        "v1.customer.subscription.trialing",
+        com.stripe.events.V1CustomerSubscriptionTrialingEventNotification.class);
+    eventClassLookup.put(
+        "v1.customer.subscription.unpaid",
+        com.stripe.events.V1CustomerSubscriptionUnpaidEventNotification.class);
     eventClassLookup.put(
         "v1.customer.subscription.updated",
         com.stripe.events.V1CustomerSubscriptionUpdatedEventNotification.class);
@@ -214,12 +256,27 @@ public final class EventNotificationClassLookup {
         "v1.customer_cash_balance_transaction.created",
         com.stripe.events.V1CustomerCashBalanceTransactionCreatedEventNotification.class);
     eventClassLookup.put(
+        "v1.entitlements.active_entitlement_summary.entitlement_added",
+        com.stripe.events.V1EntitlementsActiveEntitlementSummaryEntitlementAddedEventNotification
+            .class);
+    eventClassLookup.put(
+        "v1.entitlements.active_entitlement_summary.entitlement_removed",
+        com.stripe.events.V1EntitlementsActiveEntitlementSummaryEntitlementRemovedEventNotification
+            .class);
+    eventClassLookup.put(
         "v1.entitlements.active_entitlement_summary.updated",
         com.stripe.events.V1EntitlementsActiveEntitlementSummaryUpdatedEventNotification.class);
     eventClassLookup.put("v1.file.created", com.stripe.events.V1FileCreatedEventNotification.class);
     eventClassLookup.put(
         "v1.financial_connections.account.account_numbers_updated",
         com.stripe.events.V1FinancialConnectionsAccountAccountNumbersUpdatedEventNotification
+            .class);
+    eventClassLookup.put(
+        "v1.financial_connections.account.balance_refresh_failed",
+        com.stripe.events.V1FinancialConnectionsAccountBalanceRefreshFailedEventNotification.class);
+    eventClassLookup.put(
+        "v1.financial_connections.account.balance_refresh_succeeded",
+        com.stripe.events.V1FinancialConnectionsAccountBalanceRefreshSucceededEventNotification
             .class);
     eventClassLookup.put(
         "v1.financial_connections.account.created",
@@ -235,6 +292,22 @@ public final class EventNotificationClassLookup {
         com.stripe.events
             .V1FinancialConnectionsAccountExpectedDeactivationDateUpdatedEventNotification.class);
     eventClassLookup.put(
+        "v1.financial_connections.account.inferred_balances_refresh_failed",
+        com.stripe.events
+            .V1FinancialConnectionsAccountInferredBalancesRefreshFailedEventNotification.class);
+    eventClassLookup.put(
+        "v1.financial_connections.account.inferred_balances_refresh_succeeded",
+        com.stripe.events
+            .V1FinancialConnectionsAccountInferredBalancesRefreshSucceededEventNotification.class);
+    eventClassLookup.put(
+        "v1.financial_connections.account.ownership_refresh_failed",
+        com.stripe.events.V1FinancialConnectionsAccountOwnershipRefreshFailedEventNotification
+            .class);
+    eventClassLookup.put(
+        "v1.financial_connections.account.ownership_refresh_succeeded",
+        com.stripe.events.V1FinancialConnectionsAccountOwnershipRefreshSucceededEventNotification
+            .class);
+    eventClassLookup.put(
         "v1.financial_connections.account.reactivated",
         com.stripe.events.V1FinancialConnectionsAccountReactivatedEventNotification.class);
     eventClassLookup.put(
@@ -248,9 +321,25 @@ public final class EventNotificationClassLookup {
         com.stripe.events.V1FinancialConnectionsAccountRefreshedTransactionsEventNotification
             .class);
     eventClassLookup.put(
+        "v1.financial_connections.account.risk_intelligence_refresh_failed",
+        com.stripe.events
+            .V1FinancialConnectionsAccountRiskIntelligenceRefreshFailedEventNotification.class);
+    eventClassLookup.put(
+        "v1.financial_connections.account.risk_intelligence_refresh_succeeded",
+        com.stripe.events
+            .V1FinancialConnectionsAccountRiskIntelligenceRefreshSucceededEventNotification.class);
+    eventClassLookup.put(
         "v1.financial_connections.account.supported_payment_method_types_updated",
         com.stripe.events
             .V1FinancialConnectionsAccountSupportedPaymentMethodTypesUpdatedEventNotification
+            .class);
+    eventClassLookup.put(
+        "v1.financial_connections.account.transactions_refresh_failed",
+        com.stripe.events.V1FinancialConnectionsAccountTransactionsRefreshFailedEventNotification
+            .class);
+    eventClassLookup.put(
+        "v1.financial_connections.account.transactions_refresh_succeeded",
+        com.stripe.events.V1FinancialConnectionsAccountTransactionsRefreshSucceededEventNotification
             .class);
     eventClassLookup.put(
         "v1.financial_connections.account.upcoming_account_number_expiry",
@@ -282,10 +371,28 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v1.invoice.deleted", com.stripe.events.V1InvoiceDeletedEventNotification.class);
     eventClassLookup.put(
+        "v1.invoice.discount_added",
+        com.stripe.events.V1InvoiceDiscountAddedEventNotification.class);
+    eventClassLookup.put(
+        "v1.invoice.discount_removed",
+        com.stripe.events.V1InvoiceDiscountRemovedEventNotification.class);
+    eventClassLookup.put(
         "v1.invoice.finalization_failed",
         com.stripe.events.V1InvoiceFinalizationFailedEventNotification.class);
     eventClassLookup.put(
         "v1.invoice.finalized", com.stripe.events.V1InvoiceFinalizedEventNotification.class);
+    eventClassLookup.put(
+        "v1.invoice.line_item_added",
+        com.stripe.events.V1InvoiceLineItemAddedEventNotification.class);
+    eventClassLookup.put(
+        "v1.invoice.line_item_pricing_changed",
+        com.stripe.events.V1InvoiceLineItemPricingChangedEventNotification.class);
+    eventClassLookup.put(
+        "v1.invoice.line_item_quantity_changed",
+        com.stripe.events.V1InvoiceLineItemQuantityChangedEventNotification.class);
+    eventClassLookup.put(
+        "v1.invoice.line_item_removed",
+        com.stripe.events.V1InvoiceLineItemRemovedEventNotification.class);
     eventClassLookup.put(
         "v1.invoice.marked_uncollectible",
         com.stripe.events.V1InvoiceMarkedUncollectibleEventNotification.class);
@@ -316,11 +423,25 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v1.invoice.will_be_due", com.stripe.events.V1InvoiceWillBeDueEventNotification.class);
     eventClassLookup.put(
+        "v1.invoice_payment.canceled",
+        com.stripe.events.V1InvoicePaymentCanceledEventNotification.class);
+    eventClassLookup.put(
+        "v1.invoice_payment.open", com.stripe.events.V1InvoicePaymentOpenEventNotification.class);
+    eventClassLookup.put(
         "v1.invoice_payment.paid", com.stripe.events.V1InvoicePaymentPaidEventNotification.class);
+    eventClassLookup.put(
+        "v1.invoiceitem.amount_changed",
+        com.stripe.events.V1InvoiceitemAmountChangedEventNotification.class);
     eventClassLookup.put(
         "v1.invoiceitem.created", com.stripe.events.V1InvoiceitemCreatedEventNotification.class);
     eventClassLookup.put(
         "v1.invoiceitem.deleted", com.stripe.events.V1InvoiceitemDeletedEventNotification.class);
+    eventClassLookup.put(
+        "v1.invoiceitem.discount_added",
+        com.stripe.events.V1InvoiceitemDiscountAddedEventNotification.class);
+    eventClassLookup.put(
+        "v1.invoiceitem.discount_removed",
+        com.stripe.events.V1InvoiceitemDiscountRemovedEventNotification.class);
     eventClassLookup.put(
         "v1.issuing_authorization.created",
         com.stripe.events.V1IssuingAuthorizationCreatedEventNotification.class);
@@ -447,20 +568,43 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put("v1.plan.deleted", com.stripe.events.V1PlanDeletedEventNotification.class);
     eventClassLookup.put("v1.plan.updated", com.stripe.events.V1PlanUpdatedEventNotification.class);
     eventClassLookup.put(
+        "v1.price.activated", com.stripe.events.V1PriceActivatedEventNotification.class);
+    eventClassLookup.put(
         "v1.price.created", com.stripe.events.V1PriceCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v1.price.deactivated", com.stripe.events.V1PriceDeactivatedEventNotification.class);
     eventClassLookup.put(
         "v1.price.deleted", com.stripe.events.V1PriceDeletedEventNotification.class);
     eventClassLookup.put(
+        "v1.price.lookup_key_changed",
+        com.stripe.events.V1PriceLookupKeyChangedEventNotification.class);
+    eventClassLookup.put(
+        "v1.price.tax_behavior_changed",
+        com.stripe.events.V1PriceTaxBehaviorChangedEventNotification.class);
+    eventClassLookup.put(
         "v1.price.updated", com.stripe.events.V1PriceUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v1.product.activated", com.stripe.events.V1ProductActivatedEventNotification.class);
     eventClassLookup.put(
         "v1.product.created", com.stripe.events.V1ProductCreatedEventNotification.class);
     eventClassLookup.put(
+        "v1.product.deactivated", com.stripe.events.V1ProductDeactivatedEventNotification.class);
+    eventClassLookup.put(
+        "v1.product.default_price_changed",
+        com.stripe.events.V1ProductDefaultPriceChangedEventNotification.class);
+    eventClassLookup.put(
         "v1.product.deleted", com.stripe.events.V1ProductDeletedEventNotification.class);
+    eventClassLookup.put(
+        "v1.product.tax_code_changed",
+        com.stripe.events.V1ProductTaxCodeChangedEventNotification.class);
     eventClassLookup.put(
         "v1.product.updated", com.stripe.events.V1ProductUpdatedEventNotification.class);
     eventClassLookup.put(
         "v1.promotion_code.created",
         com.stripe.events.V1PromotionCodeCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v1.promotion_code.fully_redeemed",
+        com.stripe.events.V1PromotionCodeFullyRedeemedEventNotification.class);
     eventClassLookup.put(
         "v1.promotion_code.updated",
         com.stripe.events.V1PromotionCodeUpdatedEventNotification.class);
@@ -528,6 +672,21 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v1.subscription_schedule.expiring",
         com.stripe.events.V1SubscriptionScheduleExpiringEventNotification.class);
+    eventClassLookup.put(
+        "v1.subscription_schedule.phase_added",
+        com.stripe.events.V1SubscriptionSchedulePhaseAddedEventNotification.class);
+    eventClassLookup.put(
+        "v1.subscription_schedule.phase_default_tax_rates_changed",
+        com.stripe.events.V1SubscriptionSchedulePhaseDefaultTaxRatesChangedEventNotification.class);
+    eventClassLookup.put(
+        "v1.subscription_schedule.phase_end_date_changed",
+        com.stripe.events.V1SubscriptionSchedulePhaseEndDateChangedEventNotification.class);
+    eventClassLookup.put(
+        "v1.subscription_schedule.phase_removed",
+        com.stripe.events.V1SubscriptionSchedulePhaseRemovedEventNotification.class);
+    eventClassLookup.put(
+        "v1.subscription_schedule.phase_trial_end_changed",
+        com.stripe.events.V1SubscriptionSchedulePhaseTrialEndChangedEventNotification.class);
     eventClassLookup.put(
         "v1.subscription_schedule.released",
         com.stripe.events.V1SubscriptionScheduleReleasedEventNotification.class);
@@ -716,6 +875,29 @@ public final class EventNotificationClassLookup {
         "v2.core.health.event_generation_failure.resolved",
         com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEventNotification.class);
     eventClassLookup.put(
+        "v2.data.query_run.created",
+        com.stripe.events.V2DataQueryRunCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.query_run.failed", com.stripe.events.V2DataQueryRunFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.query_run.succeeded",
+        com.stripe.events.V2DataQueryRunSucceededEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.query_run.updated",
+        com.stripe.events.V2DataQueryRunUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.report_run.created",
+        com.stripe.events.V2DataReportRunCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.report_run.failed",
+        com.stripe.events.V2DataReportRunFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.report_run.succeeded",
+        com.stripe.events.V2DataReportRunSucceededEventNotification.class);
+    eventClassLookup.put(
+        "v2.data.report_run.updated",
+        com.stripe.events.V2DataReportRunUpdatedEventNotification.class);
+    eventClassLookup.put(
         "v2.data.reporting.query_run.created",
         com.stripe.events.V2DataReportingQueryRunCreatedEventNotification.class);
     eventClassLookup.put(
@@ -814,6 +996,27 @@ public final class EventNotificationClassLookup {
         "v2.money_management.outbound_transfer.updated",
         com.stripe.events.V2MoneyManagementOutboundTransferUpdatedEventNotification.class);
     eventClassLookup.put(
+        "v2.money_management.payout_intent.canceled",
+        com.stripe.events.V2MoneyManagementPayoutIntentCanceledEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.created",
+        com.stripe.events.V2MoneyManagementPayoutIntentCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.pending",
+        com.stripe.events.V2MoneyManagementPayoutIntentPendingEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.posted",
+        com.stripe.events.V2MoneyManagementPayoutIntentPostedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.processing",
+        com.stripe.events.V2MoneyManagementPayoutIntentProcessingEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.requires_action",
+        com.stripe.events.V2MoneyManagementPayoutIntentRequiresActionEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_intent.updated",
+        com.stripe.events.V2MoneyManagementPayoutIntentUpdatedEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.payout_method.created",
         com.stripe.events.V2MoneyManagementPayoutMethodCreatedEventNotification.class);
     eventClassLookup.put(
@@ -846,6 +1049,12 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.money_management.received_debit.updated",
         com.stripe.events.V2MoneyManagementReceivedDebitUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.recipient_verification.created",
+        com.stripe.events.V2MoneyManagementRecipientVerificationCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.money_management.recipient_verification.updated",
+        com.stripe.events.V2MoneyManagementRecipientVerificationUpdatedEventNotification.class);
     eventClassLookup.put(
         "v2.money_management.transaction.created",
         com.stripe.events.V2MoneyManagementTransactionCreatedEventNotification.class);

@@ -592,6 +592,14 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
   WechatPay wechatPay;
 
   /**
+   * Wero is a pan-European payment method that enables secure and instant money transfers between
+   * bank accounts. Learn more about the <a href="https://docs.stripe.com/payments/wero">Wero</a>
+   * payment method.
+   */
+  @SerializedName("wero")
+  Wero wero;
+
+  /**
    * Zip gives your customers a way to split purchases over a series of payments. Check this <a
    * href="https://docs.stripe.com/payments/zip">page</a> for more details like country
    * availability.
@@ -669,6 +677,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
       Upi upi,
       UsBankAccount usBankAccount,
       WechatPay wechatPay,
+      Wero wero,
       Zip zip) {
     this.acssDebit = acssDebit;
     this.active = active;
@@ -739,6 +748,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     this.upi = upi;
     this.usBankAccount = usBankAccount;
     this.wechatPay = wechatPay;
+    this.wero = wero;
     this.zip = zip;
   }
 
@@ -885,6 +895,8 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
 
     private WechatPay wechatPay;
 
+    private Wero wero;
+
     private Zip zip;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -959,6 +971,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
           this.upi,
           this.usBankAccount,
           this.wechatPay,
+          this.wero,
           this.zip);
     }
 
@@ -1728,6 +1741,16 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
      */
     public Builder setWechatPay(PaymentMethodConfigurationUpdateParams.WechatPay wechatPay) {
       this.wechatPay = wechatPay;
+      return this;
+    }
+
+    /**
+     * Wero is a pan-European payment method that enables secure and instant money transfers between
+     * bank accounts. Learn more about the <a href="https://docs.stripe.com/payments/wero">Wero</a>
+     * payment method.
+     */
+    public Builder setWero(PaymentMethodConfigurationUpdateParams.Wero wero) {
+      this.wero = wero;
       return this;
     }
 
@@ -12481,6 +12504,171 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
         public Builder setPreference(
             PaymentMethodConfigurationUpdateParams.WechatPay.DisplayPreference.Preference
                 preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Wero {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Wero(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationUpdateParams.Wero build() {
+        return new PaymentMethodConfigurationUpdateParams.Wero(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationUpdateParams.Wero.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationUpdateParams.Wero#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationUpdateParams.Wero#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationUpdateParams.Wero.DisplayPreference build() {
+          return new PaymentMethodConfigurationUpdateParams.Wero.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.Wero.DisplayPreference#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.Wero.DisplayPreference#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationUpdateParams.Wero.DisplayPreference.Preference preference) {
           this.preference = preference;
           return this;
         }

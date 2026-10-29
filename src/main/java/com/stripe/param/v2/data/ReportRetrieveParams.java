@@ -1,22 +1,18 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.v2.core.vault;
+package com.stripe.param.v2.data;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class GbBankAccountInitiateConfirmationOfPayeeParams extends ApiRequestParams {
-  /**
-   * The business type to be checked against. Legal entity information will be used if unspecified.
-   */
-  @SerializedName("business_type")
-  BusinessType businessType;
-
+public class ReportRetrieveParams extends ApiRequestParams {
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -27,17 +23,17 @@ public class GbBankAccountInitiateConfirmationOfPayeeParams extends ApiRequestPa
   Map<String, Object> extraParams;
 
   /**
-   * The name of the user to be checked against. Legal entity information will be used if
-   * unspecified.
+   * Any optional includes (see <a
+   * href="https://docs.stripe.com/api-includable-response-values">include-dependent response
+   * values</a>).
    */
-  @SerializedName("name")
-  String name;
+  @SerializedName("include")
+  List<ReportRetrieveParams.Include> include;
 
-  private GbBankAccountInitiateConfirmationOfPayeeParams(
-      BusinessType businessType, Map<String, Object> extraParams, String name) {
-    this.businessType = businessType;
+  private ReportRetrieveParams(
+      Map<String, Object> extraParams, List<ReportRetrieveParams.Include> include) {
     this.extraParams = extraParams;
-    this.name = name;
+    this.include = include;
   }
 
   public static Builder builder() {
@@ -45,32 +41,19 @@ public class GbBankAccountInitiateConfirmationOfPayeeParams extends ApiRequestPa
   }
 
   public static class Builder {
-    private BusinessType businessType;
-
     private Map<String, Object> extraParams;
 
-    private String name;
+    private List<ReportRetrieveParams.Include> include;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public GbBankAccountInitiateConfirmationOfPayeeParams build() {
-      return new GbBankAccountInitiateConfirmationOfPayeeParams(
-          this.businessType, this.extraParams, this.name);
-    }
-
-    /**
-     * The business type to be checked against. Legal entity information will be used if
-     * unspecified.
-     */
-    public Builder setBusinessType(
-        GbBankAccountInitiateConfirmationOfPayeeParams.BusinessType businessType) {
-      this.businessType = businessType;
-      return this;
+    public ReportRetrieveParams build() {
+      return new ReportRetrieveParams(this.extraParams, this.include);
     }
 
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * GbBankAccountInitiateConfirmationOfPayeeParams#extraParams} for the field documentation.
+     * ReportRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -83,8 +66,7 @@ public class GbBankAccountInitiateConfirmationOfPayeeParams extends ApiRequestPa
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link GbBankAccountInitiateConfirmationOfPayeeParams#extraParams} for the field
-     * documentation.
+     * See {@link ReportRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -95,26 +77,43 @@ public class GbBankAccountInitiateConfirmationOfPayeeParams extends ApiRequestPa
     }
 
     /**
-     * The name of the user to be checked against. Legal entity information will be used if
-     * unspecified.
+     * Add an element to `include` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ReportRetrieveParams#include} for the field documentation.
      */
-    public Builder setName(String name) {
-      this.name = name;
+    public Builder addInclude(ReportRetrieveParams.Include element) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `include` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * ReportRetrieveParams#include} for the field documentation.
+     */
+    public Builder addAllInclude(List<ReportRetrieveParams.Include> elements) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.addAll(elements);
       return this;
     }
   }
 
-  public enum BusinessType implements ApiRequestParams.EnumParam {
-    @SerializedName("business")
-    BUSINESS("business"),
+  public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("default_sql")
+    DEFAULT_SQL("default_sql"),
 
-    @SerializedName("personal")
-    PERSONAL("personal");
+    @SerializedName("parameters")
+    PARAMETERS("parameters");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
 
-    BusinessType(String value) {
+    Include(String value) {
       this.value = value;
     }
   }

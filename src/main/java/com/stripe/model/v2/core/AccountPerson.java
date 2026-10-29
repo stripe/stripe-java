@@ -358,8 +358,8 @@ public class AccountPerson extends StripeObject implements HasId {
     public static class CompanyAuthorization extends StripeObject {
       /**
        * One or more document IDs returned by a <a
-       * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-       * purpose value of {@code account_requirement}.
+       * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+       * {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -380,8 +380,8 @@ public class AccountPerson extends StripeObject implements HasId {
     public static class Passport extends StripeObject {
       /**
        * One or more document IDs returned by a <a
-       * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-       * purpose value of {@code account_requirement}.
+       * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+       * {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -401,8 +401,8 @@ public class AccountPerson extends StripeObject implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class PrimaryVerification extends StripeObject {
       /**
-       * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-       * for the front and back of the verification document.
+       * The <a href="https://docs.stripe.com/api/files/create">file upload</a> tokens for the front
+       * and back of the verification document.
        */
       @SerializedName("front_back")
       FrontBack frontBack;
@@ -416,27 +416,27 @@ public class AccountPerson extends StripeObject implements HasId {
       String type;
 
       /**
-       * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-       * for the front and back of the verification document.
+       * The <a href="https://docs.stripe.com/api/files/create">file upload</a> tokens for the front
+       * and back of the verification document.
        */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class FrontBack extends StripeObject {
         /**
-         * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-         * representing the back of the verification document. The purpose of the uploaded file
-         * should be 'identity_document'. The uploaded file needs to be a color image (smaller than
-         * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+         * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+         * the back of the verification document. The purpose of the uploaded file should be
+         * 'identity_document'. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
          */
         @SerializedName("back")
         String back;
 
         /**
-         * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-         * representing the front of the verification document. The purpose of the uploaded file
-         * should be 'identity_document'. The uploaded file needs to be a color image (smaller than
-         * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+         * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+         * the front of the verification document. The purpose of the uploaded file should be
+         * 'identity_document'. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
          */
         @SerializedName("front")
         String front;
@@ -452,8 +452,8 @@ public class AccountPerson extends StripeObject implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class SecondaryVerification extends StripeObject {
       /**
-       * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-       * for the front and back of the verification document.
+       * The <a href="https://docs.stripe.com/api/files/create">file upload</a> tokens for the front
+       * and back of the verification document.
        */
       @SerializedName("front_back")
       FrontBack frontBack;
@@ -467,27 +467,27 @@ public class AccountPerson extends StripeObject implements HasId {
       String type;
 
       /**
-       * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-       * for the front and back of the verification document.
+       * The <a href="https://docs.stripe.com/api/files/create">file upload</a> tokens for the front
+       * and back of the verification document.
        */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class FrontBack extends StripeObject {
         /**
-         * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-         * representing the back of the verification document. The purpose of the uploaded file
-         * should be 'identity_document'. The uploaded file needs to be a color image (smaller than
-         * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+         * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+         * the back of the verification document. The purpose of the uploaded file should be
+         * 'identity_document'. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
          */
         @SerializedName("back")
         String back;
 
         /**
-         * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-         * representing the front of the verification document. The purpose of the uploaded file
-         * should be 'identity_document'. The uploaded file needs to be a color image (smaller than
-         * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+         * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+         * the front of the verification document. The purpose of the uploaded file should be
+         * 'identity_document'. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
          */
         @SerializedName("front")
         String front;
@@ -504,8 +504,8 @@ public class AccountPerson extends StripeObject implements HasId {
     public static class Visa extends StripeObject {
       /**
        * One or more document IDs returned by a <a
-       * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-       * purpose value of {@code account_requirement}.
+       * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+       * {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;

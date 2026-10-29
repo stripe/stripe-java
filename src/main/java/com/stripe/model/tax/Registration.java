@@ -306,6 +306,9 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("bs")
     Bs bs;
 
+    @SerializedName("bw")
+    Bw bw;
+
     @SerializedName("by")
     By by;
 
@@ -317,6 +320,9 @@ public class Registration extends ApiResource implements HasId {
 
     @SerializedName("ch")
     Ch ch;
+
+    @SerializedName("ci")
+    Ci ci;
 
     @SerializedName("cl")
     Cl cl;
@@ -371,6 +377,9 @@ public class Registration extends ApiResource implements HasId {
 
     @SerializedName("ge")
     Ge ge;
+
+    @SerializedName("gh")
+    Gh gh;
 
     @SerializedName("gn")
     Gn gn;
@@ -449,6 +458,9 @@ public class Registration extends ApiResource implements HasId {
 
     @SerializedName("mt")
     Mt mt;
+
+    @SerializedName("mu")
+    Mu mu;
 
     @SerializedName("mx")
     Mx mx;
@@ -948,6 +960,23 @@ public class Registration extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Bw, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bw extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
      * For more details about By, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -1052,6 +1081,23 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+    }
+
+    /**
+     * For more details about Ci, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ci extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
     }
 
     /**
@@ -1552,6 +1598,23 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Ge extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Gh, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Gh extends StripeObject {
       /**
        * Type of registration in {@code country}.
        *
@@ -2201,6 +2264,23 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+    }
+
+    /**
+     * For more details about Mu, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Mu extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
     }
 
     /**
@@ -2953,14 +3033,18 @@ public class Registration extends ApiResource implements HasId {
       /**
        * Type of registration in the US.
        *
-       * <p>One of {@code admissions_tax}, {@code attendance_tax}, {@code entertainment_tax}, {@code
-       * gross_receipts_tax}, {@code hospitality_tax}, {@code local_amusement_tax}, {@code
-       * local_lease_tax}, {@code luxury_tax}, {@code mass_transit_parking_tax}, {@code
-       * parking_tax}, {@code resort_tax}, {@code state_communications_tax}, {@code
-       * state_retail_delivery_fee}, {@code state_sales_tax}, or {@code tourism_tax}.
+       * <p>One of {@code admissions_tax}, {@code attendance_tax}, {@code digital_excise_tax},
+       * {@code entertainment_tax}, {@code gross_receipts_tax}, {@code hospitality_tax}, {@code
+       * local_amusement_tax}, {@code local_lease_tax}, {@code luxury_tax}, {@code
+       * mass_transit_parking_tax}, {@code parking_tax}, {@code resort_tax}, {@code
+       * state_communications_tax}, {@code state_retail_delivery_fee}, {@code state_sales_tax},
+       * {@code tourism_tax}, or {@code utility_users_tax}.
        */
       @SerializedName("type")
       String type;
+
+      @SerializedName("utility_users_tax")
+      UtilityUsersTax utilityUsersTax;
 
       /**
        * For more details about AdmissionsTax, please refer to the <a
@@ -3196,6 +3280,23 @@ public class Registration extends ApiResource implements HasId {
         /**
          * A <a
          * href="https://docs.stripe.com/tax/registering?type=tourism_tax#registration-types">jurisdiction
+         * code</a> representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+      }
+
+      /**
+       * For more details about UtilityUsersTax, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class UtilityUsersTax extends StripeObject {
+        /**
+         * A <a
+         * href="https://docs.stripe.com/tax/registering?type=utility_users_tax#registration-types">jurisdiction
          * code</a> representing the local jurisdiction.
          */
         @SerializedName("jurisdiction")

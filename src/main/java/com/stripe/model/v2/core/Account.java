@@ -575,16 +575,16 @@ public class Account extends StripeObject implements HasId {
       @EqualsAndHashCode(callSuper = false)
       public static class Branding extends StripeObject {
         /**
-         * ID of a <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>:
-         * An icon for the merchant. Must be square and at least 128px x 128px.
+         * ID of a <a href="https://docs.stripe.com/api/files/create">file upload</a>: An icon for
+         * the merchant. Must be square and at least 128px x 128px.
          */
         @SerializedName("icon")
         String icon;
 
         /**
-         * ID of a <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>:
-         * A logo for the merchant that will be used in Checkout instead of the icon and without the
-         * merchant's name next to it if provided. Must be at least 128px x 128px.
+         * ID of a <a href="https://docs.stripe.com/api/files/create">file upload</a>: A logo for
+         * the merchant that will be used in Checkout instead of the icon and without the merchant's
+         * name next to it if provided. Must be at least 128px x 128px.
          */
         @SerializedName("logo")
         String logo;
@@ -5075,13 +5075,6 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("capabilities")
       Capabilities capabilities;
 
-      /**
-       * The payout method to be used as a default outbound destination. This will allow the
-       * PayoutMethod to be omitted on OutboundPayments made through the dashboard or APIs.
-       */
-      @SerializedName("default_outbound_destination")
-      DefaultOutboundDestination defaultOutboundDestination;
-
       /** Capabilities that have been requested on the Recipient Configuration. */
       @Getter
       @Setter
@@ -5095,6 +5088,10 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("cards")
         Cards cards;
 
+        /** Enables this Account to receive OutboundPayments to a linked crypto wallet. */
+        @SerializedName("crypto_wallets")
+        CryptoWallets cryptoWallets;
+
         /** Capabilities that enable the recipient to manage their Stripe Balance (/v1/balance). */
         @SerializedName("stripe_balance")
         StripeBalance stripeBalance;
@@ -5105,15 +5102,226 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class BankAccounts extends StripeObject {
           /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over ACH
+           * rails.
+           */
+          @SerializedName("ach")
+          Ach ach;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over Fedwire
+           * or CHIPS.
+           */
+          @SerializedName("fedwire")
+          Fedwire fedwire;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over FPS
+           * rails.
+           */
+          @SerializedName("fps")
+          Fps fps;
+
+          /**
            * Enables this Account to receive OutboundPayments to linked bank accounts over local
            * networks.
            */
           @SerializedName("local")
           Local local;
 
-          /** Enables this Account to receive OutboundPayments to linked bank accounts over wire. */
-          @SerializedName("wire")
-          Wire wire;
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over RTP
+           * rails.
+           */
+          @SerializedName("rtp")
+          Rtp rtp;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over SEPA
+           * rails.
+           */
+          @SerializedName("sepa")
+          Sepa sepa;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over SWIFT.
+           */
+          @SerializedName("swift")
+          Swift swift;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over ACH
+           * rails.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Ach extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+             * {@code unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Ach.StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+               * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+               * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+               * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+               * requirements_past_due}, {@code requirements_pending_verification}, {@code
+               * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+               * {@code unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over Fedwire
+           * or CHIPS.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Fedwire extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+             * {@code unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Fedwire.StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+               * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+               * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+               * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+               * requirements_past_due}, {@code requirements_pending_verification}, {@code
+               * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+               * {@code unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over FPS
+           * rails.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Fps extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+             * {@code unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Fps.StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+               * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+               * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+               * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+               * requirements_past_due}, {@code requirements_pending_verification}, {@code
+               * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+               * {@code unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
 
           /**
            * Enables this Account to receive OutboundPayments to linked bank accounts over local
@@ -5173,11 +5381,14 @@ public class Account extends StripeObject implements HasId {
             }
           }
 
-          /** Enables this Account to receive OutboundPayments to linked bank accounts over wire. */
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over RTP
+           * rails.
+           */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class Wire extends StripeObject {
+          public static class Rtp extends StripeObject {
             /**
              * The status of the Capability.
              *
@@ -5192,7 +5403,122 @@ public class Account extends StripeObject implements HasId {
              * status} is {@code active}.
              */
             @SerializedName("status_details")
-            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Wire.StatusDetail>
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Rtp.StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+               * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+               * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+               * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+               * requirements_past_due}, {@code requirements_pending_verification}, {@code
+               * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+               * {@code unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over SEPA
+           * rails.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Sepa extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+             * {@code unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Sepa.StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+               * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+               * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+               * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+               * requirements_past_due}, {@code requirements_pending_verification}, {@code
+               * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+               * {@code unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over SWIFT.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Swift extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+             * {@code unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Swift.StatusDetail>
                 statusDetails;
 
             /**
@@ -5249,6 +5575,61 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("status_details")
           List<Account.Configuration.Recipient.Capabilities.Cards.StatusDetail> statusDetails;
+
+          /**
+           * For more details about StatusDetail, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class StatusDetail extends StripeObject {
+            /**
+             * Machine-readable code explaining the reason for the Capability to be in its current
+             * status.
+             *
+             * <p>One of {@code determining_status}, {@code rejected_fraud}, {@code
+             * rejected_incomplete_verification}, {@code rejected_listed}, {@code rejected_other},
+             * {@code rejected_platform_fraud}, {@code rejected_platform_other}, {@code
+             * rejected_platform_terms_of_service}, {@code rejected_terms_of_service}, {@code
+             * requirements_past_due}, {@code requirements_pending_verification}, {@code
+             * restricted_other}, {@code unsupported_business}, {@code unsupported_country}, or
+             * {@code unsupported_entity_type}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /**
+             * Machine-readable code explaining how to make the Capability active.
+             *
+             * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+             */
+            @SerializedName("resolution")
+            String resolution;
+          }
+        }
+
+        /** Enables this Account to receive OutboundPayments to a linked crypto wallet. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CryptoWallets extends StripeObject {
+          /**
+           * The status of the Capability.
+           *
+           * <p>One of {@code active}, {@code pending}, {@code rejected}, {@code restricted}, or
+           * {@code unsupported}.
+           */
+          @SerializedName("status")
+          String status;
+
+          /**
+           * Additional details about the capability's status. This value is empty when {@code
+           * status} is {@code active}.
+           */
+          @SerializedName("status_details")
+          List<Account.Configuration.Recipient.Capabilities.CryptoWallets.StatusDetail>
+              statusDetails;
 
           /**
            * For more details about StatusDetail, please refer to the <a
@@ -5413,69 +5794,6 @@ public class Account extends StripeObject implements HasId {
           }
         }
       }
-
-      /**
-       * The payout method to be used as a default outbound destination. This will allow the
-       * PayoutMethod to be omitted on OutboundPayments made through the dashboard or APIs.
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class DefaultOutboundDestination extends StripeObject implements HasId {
-        /** The payout method ID of the default outbound destination. */
-        @Getter(onMethod_ = {@Override})
-        @SerializedName("id")
-        String id;
-
-        /**
-         * Closed Enum. The payout method type of the default outbound destination.
-         *
-         * <p>One of {@code ae_bank_account}, {@code ag_bank_account}, {@code al_bank_account},
-         * {@code am_bank_account}, {@code ao_bank_account}, {@code ar_bank_account}, {@code
-         * at_bank_account}, {@code au_bank_account}, {@code az_bank_account}, {@code
-         * ba_bank_account}, {@code bd_bank_account}, {@code be_bank_account}, {@code
-         * bg_bank_account}, {@code bh_bank_account}, {@code bj_bank_account}, {@code
-         * bn_bank_account}, {@code bo_bank_account}, {@code br_bank_account}, {@code
-         * bs_bank_account}, {@code bt_bank_account}, {@code bw_bank_account}, {@code card}, {@code
-         * ca_bank_account}, {@code ch_bank_account}, {@code ci_bank_account}, {@code
-         * cl_bank_account}, {@code cn_bank_account}, {@code co_bank_account}, {@code
-         * crypto_wallet}, {@code cr_bank_account}, {@code cy_bank_account}, {@code
-         * cz_bank_account}, {@code de_bank_account}, {@code dk_bank_account}, {@code
-         * do_bank_account}, {@code dz_bank_account}, {@code ec_bank_account}, {@code
-         * ee_bank_account}, {@code eg_bank_account}, {@code es_bank_account}, {@code
-         * et_bank_account}, {@code fi_bank_account}, {@code fr_bank_account}, {@code
-         * ga_bank_account}, {@code gb_bank_account}, {@code gh_bank_account}, {@code
-         * gi_bank_account}, {@code gm_bank_account}, {@code gr_bank_account}, {@code
-         * gt_bank_account}, {@code gy_bank_account}, {@code hk_bank_account}, {@code
-         * hn_bank_account}, {@code hr_bank_account}, {@code hu_bank_account}, {@code
-         * id_bank_account}, {@code ie_bank_account}, {@code il_bank_account}, {@code
-         * in_bank_account}, {@code is_bank_account}, {@code it_bank_account}, {@code
-         * jm_bank_account}, {@code jo_bank_account}, {@code jp_bank_account}, {@code
-         * ke_bank_account}, {@code kh_bank_account}, {@code kr_bank_account}, {@code
-         * kw_bank_account}, {@code kz_bank_account}, {@code la_bank_account}, {@code
-         * lc_bank_account}, {@code li_bank_account}, {@code lk_bank_account}, {@code
-         * lt_bank_account}, {@code lu_bank_account}, {@code lv_bank_account}, {@code
-         * ma_bank_account}, {@code mc_bank_account}, {@code md_bank_account}, {@code
-         * mg_bank_account}, {@code mk_bank_account}, {@code mn_bank_account}, {@code
-         * mo_bank_account}, {@code mt_bank_account}, {@code mu_bank_account}, {@code
-         * mx_bank_account}, {@code my_bank_account}, {@code mz_bank_account}, {@code
-         * na_bank_account}, {@code ne_bank_account}, {@code ng_bank_account}, {@code
-         * ni_bank_account}, {@code nl_bank_account}, {@code no_bank_account}, {@code
-         * nz_bank_account}, {@code om_bank_account}, {@code pa_bank_account}, {@code
-         * pe_bank_account}, {@code ph_bank_account}, {@code pk_bank_account}, {@code
-         * pl_bank_account}, {@code pt_bank_account}, {@code py_bank_account}, {@code
-         * qa_bank_account}, {@code ro_bank_account}, {@code rs_bank_account}, {@code
-         * rw_bank_account}, {@code sa_bank_account}, {@code se_bank_account}, {@code
-         * sg_bank_account}, {@code si_bank_account}, {@code sk_bank_account}, {@code
-         * sm_bank_account}, {@code sn_bank_account}, {@code sv_bank_account}, {@code
-         * th_bank_account}, {@code tn_bank_account}, {@code tr_bank_account}, {@code
-         * tt_bank_account}, {@code tw_bank_account}, {@code tz_bank_account}, {@code
-         * us_bank_account}, {@code uy_bank_account}, {@code uz_bank_account}, {@code
-         * vn_bank_account}, or {@code za_bank_account}.
-         */
-        @SerializedName("type")
-        String type;
-      }
     }
   }
 
@@ -5581,6 +5899,13 @@ public class Account extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class FutureRequirements extends StripeObject {
+    /**
+     * A list of alternative sets of requirements that can be provided in lieu of requirements in
+     * {@code entries}.
+     */
+    @SerializedName("alternatives")
+    List<Account.FutureRequirements.Alternative> alternatives;
+
     /** A list of requirements for the Account. */
     @SerializedName("entries")
     List<Account.FutureRequirements.Entry> entries;
@@ -5594,6 +5919,227 @@ public class Account extends StripeObject implements HasId {
     Summary summary;
 
     /**
+     * For more details about Alternative, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alternative extends StripeObject {
+      /**
+       * The alternative sets of requirements that can be provided. Providing every entry in any one
+       * of these options resolves all of the requirements in {@code original_entries}.
+       */
+      @SerializedName("options")
+      List<Account.FutureRequirements.Alternative.Option> options;
+
+      /**
+       * The requirements that can be satisfied either directly, or by providing every entry in any
+       * one of {@code options}.
+       */
+      @SerializedName("original_entries")
+      List<Account.FutureRequirements.Alternative.OriginalEntry> originalEntries;
+
+      /**
+       * For more details about Option, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Option extends StripeObject {
+        /** The requirements that must all be provided to satisfy this option. */
+        @SerializedName("entries")
+        List<Account.FutureRequirements.Alternative.Option.Entry> entries;
+
+        /**
+         * For more details about Entry, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Entry extends StripeObject {
+          /**
+           * Indicates whether the user or Stripe is currently responsible for taking action on the
+           * requirement. Value can be {@code user} or {@code stripe}.
+           *
+           * <p>One of {@code stripe}, or {@code user}.
+           */
+          @SerializedName("awaiting_action_from")
+          String awaitingActionFrom;
+
+          /** Machine-readable string describing the requirement. */
+          @SerializedName("description")
+          String description;
+
+          /**
+           * Descriptions of why the requirement must be collected, or why the collected information
+           * isn't satisfactory to Stripe.
+           */
+          @SerializedName("errors")
+          List<Account.FutureRequirements.Alternative.Option.Entry.Errors> errors;
+
+          /** A reference to the location of the requirement. */
+          @SerializedName("reference")
+          Reference reference;
+
+          /**
+           * For more details about Errors, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Errors extends StripeObject {
+            /**
+             * Machine-readable code describing the error.
+             *
+             * <p>One of {@code invalid_address_city_state_postal_code}, {@code
+             * invalid_address_cmra_address}, {@code invalid_address_highway_contract_box}, {@code
+             * invalid_address_private_mailbox}, {@code invalid_address_registered_agent_address},
+             * {@code invalid_business_profile_name}, {@code
+             * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted},
+             * {@code invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
+             * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
+             * invalid_product_description_url_match}, {@code invalid_representative_country},
+             * {@code invalid_statement_descriptor_business_mismatch}, {@code
+             * invalid_statement_descriptor_denylisted}, {@code
+             * invalid_statement_descriptor_length}, {@code
+             * invalid_statement_descriptor_prefix_denylisted}, {@code
+             * invalid_statement_descriptor_prefix_mismatch}, {@code invalid_street_address}, {@code
+             * invalid_tax_id}, {@code invalid_tax_id_format}, {@code invalid_tos_acceptance},
+             * {@code invalid_url_denylisted}, {@code invalid_url_format}, {@code
+             * invalid_url_website_business_information_mismatch}, {@code
+             * invalid_url_website_empty}, {@code invalid_url_website_inaccessible}, {@code
+             * invalid_url_website_inaccessible_geoblocked}, {@code
+             * invalid_url_website_inaccessible_password_protected}, {@code
+             * invalid_url_website_incomplete}, {@code
+             * invalid_url_website_incomplete_cancellation_policy}, {@code
+             * invalid_url_website_incomplete_customer_service_details}, {@code
+             * invalid_url_website_incomplete_legal_restrictions}, {@code
+             * invalid_url_website_incomplete_refund_policy}, {@code
+             * invalid_url_website_incomplete_return_policy}, {@code
+             * invalid_url_website_incomplete_terms_and_conditions}, {@code
+             * invalid_url_website_incomplete_under_construction}, {@code
+             * invalid_url_website_other}, {@code invalid_url_web_presence_detected}, {@code
+             * invalid_value_other}, {@code unresolvable_ip_address}, {@code
+             * unresolvable_postal_code}, {@code verification_directors_mismatch}, {@code
+             * verification_document_address_mismatch}, {@code
+             * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
+             * verification_document_country_not_supported}, {@code
+             * verification_document_directors_mismatch}, {@code
+             * verification_document_dob_mismatch}, {@code verification_document_duplicate_type},
+             * {@code verification_document_expired}, {@code verification_document_failed_copy},
+             * {@code verification_document_failed_greyscale}, {@code
+             * verification_document_failed_other}, {@code verification_document_failed_test_mode},
+             * {@code verification_document_fraudulent}, {@code
+             * verification_document_id_number_mismatch}, {@code
+             * verification_document_id_number_missing}, {@code verification_document_incomplete},
+             * {@code verification_document_invalid}, {@code
+             * verification_document_issue_or_expiry_date_missing}, {@code
+             * verification_document_manipulated}, {@code verification_document_missing_back},
+             * {@code verification_document_missing_front}, {@code
+             * verification_document_name_mismatch}, {@code verification_document_name_missing},
+             * {@code verification_document_nationality_mismatch}, {@code
+             * verification_document_not_readable}, {@code verification_document_not_signed}, {@code
+             * verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
+             * {@code verification_document_too_large}, {@code
+             * verification_document_type_not_supported}, {@code verification_extraneous_directors},
+             * {@code verification_failed_address_match}, {@code
+             * verification_failed_business_iec_number}, {@code verification_failed_document_match},
+             * {@code verification_failed_id_number_match}, {@code
+             * verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
+             * verification_failed_name_match}, {@code verification_failed_other}, {@code
+             * verification_failed_representative_authority}, {@code
+             * verification_failed_residential_address}, {@code verification_failed_tax_id_match},
+             * {@code verification_failed_tax_id_not_issued}, {@code
+             * verification_missing_directors}, {@code verification_missing_executives}, {@code
+             * verification_missing_owners}, {@code
+             * verification_requires_additional_memorandum_of_associations}, {@code
+             * verification_requires_additional_proof_of_registration}, {@code
+             * verification_selfie_document_missing_photo}, {@code
+             * verification_selfie_face_mismatch}, {@code verification_selfie_manipulated}, {@code
+             * verification_selfie_unverified_other}, {@code verification_supportability}, or {@code
+             * verification_token_stale}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /** Human-readable description of the error. */
+            @SerializedName("description")
+            String description;
+          }
+
+          /** A reference to the location of the requirement. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Reference extends StripeObject {
+            /** If {@code inquiry} is the type, the inquiry token. */
+            @SerializedName("inquiry")
+            String inquiry;
+
+            /** If {@code resource} is the type, the resource token. */
+            @SerializedName("resource")
+            String resource;
+
+            /**
+             * The type of the reference. If the type is &quot;inquiry&quot;, the inquiry token can
+             * be found in the &quot;inquiry&quot; field. Otherwise the type is an API resource, the
+             * token for which can be found in the &quot;resource&quot; field.
+             *
+             * <p>One of {@code inquiry}, {@code payment_method}, or {@code person}.
+             */
+            @SerializedName("type")
+            String type;
+          }
+        }
+      }
+
+      /**
+       * For more details about OriginalEntry, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class OriginalEntry extends StripeObject {
+        /** Machine-readable string describing the requirement. */
+        @SerializedName("description")
+        String description;
+
+        /** A reference to the location of the requirement. */
+        @SerializedName("reference")
+        Reference reference;
+
+        /** A reference to the location of the requirement. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Reference extends StripeObject {
+          /** If {@code inquiry} is the type, the inquiry token. */
+          @SerializedName("inquiry")
+          String inquiry;
+
+          /** If {@code resource} is the type, the resource token. */
+          @SerializedName("resource")
+          String resource;
+
+          /**
+           * The type of the reference. If the type is &quot;inquiry&quot;, the inquiry token can be
+           * found in the &quot;inquiry&quot; field. Otherwise the type is an API resource, the
+           * token for which can be found in the &quot;resource&quot; field.
+           *
+           * <p>One of {@code inquiry}, {@code payment_method}, or {@code person}.
+           */
+          @SerializedName("type")
+          String type;
+        }
+      }
+    }
+
+    /**
      * For more details about Entry, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -5602,7 +6148,7 @@ public class Account extends StripeObject implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Entry extends StripeObject {
       /**
-       * Indicates whether the platform or Stripe is currently responsible for taking action on the
+       * Indicates whether the user or Stripe is currently responsible for taking action on the
        * requirement. Value can be {@code user} or {@code stripe}.
        *
        * <p>One of {@code stripe}, or {@code user}.
@@ -5749,14 +6295,16 @@ public class Account extends StripeObject implements HasId {
            * <p>One of {@code ach_debit_payments}, {@code acss_debit_payments}, {@code
            * affirm_payments}, {@code afterpay_clearpay_payments}, {@code alma_payments}, {@code
            * amazon_pay_payments}, {@code automatic_indirect_tax}, {@code au_becs_debit_payments},
-           * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.local},
+           * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.ach},
+           * {@code bank_accounts.fedwire}, {@code bank_accounts.fps}, {@code bank_accounts.local},
+           * {@code bank_accounts.rtp}, {@code bank_accounts.sepa}, {@code bank_accounts.swift},
            * {@code bank_accounts.wire}, {@code blik_payments}, {@code blik_recurring_payments},
            * {@code boleto_payments}, {@code business_storage.inbound.eur}, {@code
            * business_storage.inbound.gbp}, {@code business_storage.inbound.usd}, {@code
            * business_storage.outbound.eur}, {@code business_storage.outbound.gbp}, {@code
            * business_storage.outbound.usd}, {@code cards}, {@code card_payments}, {@code
-           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code eps_payments}, {@code
-           * financial_addresses.bank_accounts}, {@code fpx_payments}, {@code
+           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code crypto_wallets}, {@code
+           * eps_payments}, {@code financial_addresses.bank_accounts}, {@code fpx_payments}, {@code
            * gb_bank_transfer_payments}, {@code grabpay_payments}, {@code holds_currencies.eur},
            * {@code holds_currencies.gbp}, {@code holds_currencies.usd}, {@code ideal_payments},
            * {@code inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
@@ -6103,11 +6651,7 @@ public class Account extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class TermsOfService extends StripeObject {
-        /**
-         * Details on the Account's acceptance of the <a
-         * href="https://docs.stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
-         * Agreement</a>.
-         */
+        /** Details on the Account's acceptance of the Stripe Services Agreement. */
         @SerializedName("account")
         InnerAccount account;
 
@@ -6115,11 +6659,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("money_manager")
         MoneyManager moneyManager;
 
-        /**
-         * Details on the Account's acceptance of the <a
-         * href="https://docs.stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
-         * Agreement</a>.
-         */
+        /** Details on the Account's acceptance of the Stripe Services Agreement. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -6285,7 +6825,8 @@ public class Account extends StripeObject implements HasId {
         /**
          * Purpose of additional address.
          *
-         * <p>One of {@code administrative}, or {@code principal_place_of_business}.
+         * <p>One of {@code administrative}, {@code physical}, or {@code
+         * principal_place_of_business}.
          */
         @SerializedName("purpose")
         String purpose;
@@ -6400,6 +6941,10 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("proof_of_address")
         ProofOfAddress proofOfAddress;
 
+        /** One or more documents that demonstrate proof of business presence. */
+        @SerializedName("proof_of_business_presence")
+        ProofOfBusinessPresence proofOfBusinessPresence;
+
         /**
          * One or more documents showing the company's proof of registration with the national
          * business registry.
@@ -6422,8 +6967,8 @@ public class Account extends StripeObject implements HasId {
         public static class BankAccountOwnershipVerification extends StripeObject {
           /**
            * One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -6444,8 +6989,8 @@ public class Account extends StripeObject implements HasId {
         public static class CompanyLicense extends StripeObject {
           /**
            * One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -6466,8 +7011,8 @@ public class Account extends StripeObject implements HasId {
         public static class CompanyMemorandumOfAssociation extends StripeObject {
           /**
            * One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -6491,8 +7036,8 @@ public class Account extends StripeObject implements HasId {
         public static class CompanyMinisterialDecree extends StripeObject {
           /**
            * One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -6516,8 +7061,8 @@ public class Account extends StripeObject implements HasId {
         public static class CompanyRegistrationVerification extends StripeObject {
           /**
            * One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -6538,8 +7083,8 @@ public class Account extends StripeObject implements HasId {
         public static class CompanyTaxIdVerification extends StripeObject {
           /**
            * One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -6559,8 +7104,8 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class PrimaryVerification extends StripeObject {
           /**
-           * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-           * tokens for the front and back of the verification document.
+           * The <a href="https://docs.stripe.com/api/files/create">file upload</a> tokens for the
+           * front and back of the verification document.
            */
           @SerializedName("front_back")
           FrontBack frontBack;
@@ -6574,29 +7119,27 @@ public class Account extends StripeObject implements HasId {
           String type;
 
           /**
-           * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-           * tokens for the front and back of the verification document.
+           * The <a href="https://docs.stripe.com/api/files/create">file upload</a> tokens for the
+           * front and back of the verification document.
            */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
           public static class FrontBack extends StripeObject {
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the back of the verification document. The purpose of the uploaded
-             * file should be 'identity_document'. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the back of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("back")
             String back;
 
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the front of the verification document. The purpose of the
-             * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-             * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10
-             * MB in size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the front of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("front")
             String front;
@@ -6610,8 +7153,30 @@ public class Account extends StripeObject implements HasId {
         public static class ProofOfAddress extends StripeObject {
           /**
            * One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
+           */
+          @SerializedName("files")
+          List<String> files;
+
+          /**
+           * The format of the document. Currently supports {@code files} only.
+           *
+           * <p>Equal to {@code files}.
+           */
+          @SerializedName("type")
+          String type;
+        }
+
+        /** One or more documents that demonstrate proof of business presence. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ProofOfBusinessPresence extends StripeObject {
+          /**
+           * One or more document IDs returned by a <a
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -6635,8 +7200,8 @@ public class Account extends StripeObject implements HasId {
         public static class ProofOfRegistration extends StripeObject {
           /**
            * One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -6671,8 +7236,8 @@ public class Account extends StripeObject implements HasId {
         public static class ProofOfUltimateBeneficialOwnership extends StripeObject {
           /**
            * One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -7242,8 +7807,8 @@ public class Account extends StripeObject implements HasId {
         public static class CompanyAuthorization extends StripeObject {
           /**
            * One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -7266,8 +7831,8 @@ public class Account extends StripeObject implements HasId {
         public static class Passport extends StripeObject {
           /**
            * One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -7289,8 +7854,8 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class PrimaryVerification extends StripeObject {
           /**
-           * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-           * tokens for the front and back of the verification document.
+           * The <a href="https://docs.stripe.com/api/files/create">file upload</a> tokens for the
+           * front and back of the verification document.
            */
           @SerializedName("front_back")
           FrontBack frontBack;
@@ -7304,29 +7869,27 @@ public class Account extends StripeObject implements HasId {
           String type;
 
           /**
-           * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-           * tokens for the front and back of the verification document.
+           * The <a href="https://docs.stripe.com/api/files/create">file upload</a> tokens for the
+           * front and back of the verification document.
            */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
           public static class FrontBack extends StripeObject {
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the back of the verification document. The purpose of the uploaded
-             * file should be 'identity_document'. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the back of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("back")
             String back;
 
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the front of the verification document. The purpose of the
-             * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-             * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10
-             * MB in size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the front of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("front")
             String front;
@@ -7342,8 +7905,8 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class SecondaryVerification extends StripeObject {
           /**
-           * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-           * tokens for the front and back of the verification document.
+           * The <a href="https://docs.stripe.com/api/files/create">file upload</a> tokens for the
+           * front and back of the verification document.
            */
           @SerializedName("front_back")
           FrontBack frontBack;
@@ -7357,29 +7920,27 @@ public class Account extends StripeObject implements HasId {
           String type;
 
           /**
-           * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-           * tokens for the front and back of the verification document.
+           * The <a href="https://docs.stripe.com/api/files/create">file upload</a> tokens for the
+           * front and back of the verification document.
            */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
           public static class FrontBack extends StripeObject {
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the back of the verification document. The purpose of the uploaded
-             * file should be 'identity_document'. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the back of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("back")
             String back;
 
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the front of the verification document. The purpose of the
-             * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-             * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10
-             * MB in size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the front of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("front")
             String front;
@@ -7396,8 +7957,8 @@ public class Account extends StripeObject implements HasId {
         public static class Visa extends StripeObject {
           /**
            * One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -7634,6 +8195,13 @@ public class Account extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Requirements extends StripeObject {
+    /**
+     * A list of alternative sets of requirements that can be provided in lieu of requirements in
+     * {@code entries}.
+     */
+    @SerializedName("alternatives")
+    List<Account.Requirements.Alternative> alternatives;
+
     /** A list of requirements for the Account. */
     @SerializedName("entries")
     List<Account.Requirements.Entry> entries;
@@ -7641,6 +8209,227 @@ public class Account extends StripeObject implements HasId {
     /** An object containing an overview of requirements for the Account. */
     @SerializedName("summary")
     Summary summary;
+
+    /**
+     * For more details about Alternative, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alternative extends StripeObject {
+      /**
+       * The alternative sets of requirements that can be provided. Providing every entry in any one
+       * of these options resolves all of the requirements in {@code original_entries}.
+       */
+      @SerializedName("options")
+      List<Account.Requirements.Alternative.Option> options;
+
+      /**
+       * The requirements that can be satisfied either directly, or by providing every entry in any
+       * one of {@code options}.
+       */
+      @SerializedName("original_entries")
+      List<Account.Requirements.Alternative.OriginalEntry> originalEntries;
+
+      /**
+       * For more details about Option, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Option extends StripeObject {
+        /** The requirements that must all be provided to satisfy this option. */
+        @SerializedName("entries")
+        List<Account.Requirements.Alternative.Option.Entry> entries;
+
+        /**
+         * For more details about Entry, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Entry extends StripeObject {
+          /**
+           * Indicates whether the user or Stripe is currently responsible for taking action on the
+           * requirement. Value can be {@code user} or {@code stripe}.
+           *
+           * <p>One of {@code stripe}, or {@code user}.
+           */
+          @SerializedName("awaiting_action_from")
+          String awaitingActionFrom;
+
+          /** Machine-readable string describing the requirement. */
+          @SerializedName("description")
+          String description;
+
+          /**
+           * Descriptions of why the requirement must be collected, or why the collected information
+           * isn't satisfactory to Stripe.
+           */
+          @SerializedName("errors")
+          List<Account.Requirements.Alternative.Option.Entry.Errors> errors;
+
+          /** A reference to the location of the requirement. */
+          @SerializedName("reference")
+          Reference reference;
+
+          /**
+           * For more details about Errors, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Errors extends StripeObject {
+            /**
+             * Machine-readable code describing the error.
+             *
+             * <p>One of {@code invalid_address_city_state_postal_code}, {@code
+             * invalid_address_cmra_address}, {@code invalid_address_highway_contract_box}, {@code
+             * invalid_address_private_mailbox}, {@code invalid_address_registered_agent_address},
+             * {@code invalid_business_profile_name}, {@code
+             * invalid_business_profile_name_denylisted}, {@code invalid_company_name_denylisted},
+             * {@code invalid_dob_age_over_maximum}, {@code invalid_dob_age_under_18}, {@code
+             * invalid_dob_age_under_minimum}, {@code invalid_product_description_length}, {@code
+             * invalid_product_description_url_match}, {@code invalid_representative_country},
+             * {@code invalid_statement_descriptor_business_mismatch}, {@code
+             * invalid_statement_descriptor_denylisted}, {@code
+             * invalid_statement_descriptor_length}, {@code
+             * invalid_statement_descriptor_prefix_denylisted}, {@code
+             * invalid_statement_descriptor_prefix_mismatch}, {@code invalid_street_address}, {@code
+             * invalid_tax_id}, {@code invalid_tax_id_format}, {@code invalid_tos_acceptance},
+             * {@code invalid_url_denylisted}, {@code invalid_url_format}, {@code
+             * invalid_url_website_business_information_mismatch}, {@code
+             * invalid_url_website_empty}, {@code invalid_url_website_inaccessible}, {@code
+             * invalid_url_website_inaccessible_geoblocked}, {@code
+             * invalid_url_website_inaccessible_password_protected}, {@code
+             * invalid_url_website_incomplete}, {@code
+             * invalid_url_website_incomplete_cancellation_policy}, {@code
+             * invalid_url_website_incomplete_customer_service_details}, {@code
+             * invalid_url_website_incomplete_legal_restrictions}, {@code
+             * invalid_url_website_incomplete_refund_policy}, {@code
+             * invalid_url_website_incomplete_return_policy}, {@code
+             * invalid_url_website_incomplete_terms_and_conditions}, {@code
+             * invalid_url_website_incomplete_under_construction}, {@code
+             * invalid_url_website_other}, {@code invalid_url_web_presence_detected}, {@code
+             * invalid_value_other}, {@code unresolvable_ip_address}, {@code
+             * unresolvable_postal_code}, {@code verification_directors_mismatch}, {@code
+             * verification_document_address_mismatch}, {@code
+             * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
+             * verification_document_country_not_supported}, {@code
+             * verification_document_directors_mismatch}, {@code
+             * verification_document_dob_mismatch}, {@code verification_document_duplicate_type},
+             * {@code verification_document_expired}, {@code verification_document_failed_copy},
+             * {@code verification_document_failed_greyscale}, {@code
+             * verification_document_failed_other}, {@code verification_document_failed_test_mode},
+             * {@code verification_document_fraudulent}, {@code
+             * verification_document_id_number_mismatch}, {@code
+             * verification_document_id_number_missing}, {@code verification_document_incomplete},
+             * {@code verification_document_invalid}, {@code
+             * verification_document_issue_or_expiry_date_missing}, {@code
+             * verification_document_manipulated}, {@code verification_document_missing_back},
+             * {@code verification_document_missing_front}, {@code
+             * verification_document_name_mismatch}, {@code verification_document_name_missing},
+             * {@code verification_document_nationality_mismatch}, {@code
+             * verification_document_not_readable}, {@code verification_document_not_signed}, {@code
+             * verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
+             * {@code verification_document_too_large}, {@code
+             * verification_document_type_not_supported}, {@code verification_extraneous_directors},
+             * {@code verification_failed_address_match}, {@code
+             * verification_failed_business_iec_number}, {@code verification_failed_document_match},
+             * {@code verification_failed_id_number_match}, {@code
+             * verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
+             * verification_failed_name_match}, {@code verification_failed_other}, {@code
+             * verification_failed_representative_authority}, {@code
+             * verification_failed_residential_address}, {@code verification_failed_tax_id_match},
+             * {@code verification_failed_tax_id_not_issued}, {@code
+             * verification_missing_directors}, {@code verification_missing_executives}, {@code
+             * verification_missing_owners}, {@code
+             * verification_requires_additional_memorandum_of_associations}, {@code
+             * verification_requires_additional_proof_of_registration}, {@code
+             * verification_selfie_document_missing_photo}, {@code
+             * verification_selfie_face_mismatch}, {@code verification_selfie_manipulated}, {@code
+             * verification_selfie_unverified_other}, {@code verification_supportability}, or {@code
+             * verification_token_stale}.
+             */
+            @SerializedName("code")
+            String code;
+
+            /** Human-readable description of the error. */
+            @SerializedName("description")
+            String description;
+          }
+
+          /** A reference to the location of the requirement. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Reference extends StripeObject {
+            /** If {@code inquiry} is the type, the inquiry token. */
+            @SerializedName("inquiry")
+            String inquiry;
+
+            /** If {@code resource} is the type, the resource token. */
+            @SerializedName("resource")
+            String resource;
+
+            /**
+             * The type of the reference. If the type is &quot;inquiry&quot;, the inquiry token can
+             * be found in the &quot;inquiry&quot; field. Otherwise the type is an API resource, the
+             * token for which can be found in the &quot;resource&quot; field.
+             *
+             * <p>One of {@code inquiry}, {@code payment_method}, or {@code person}.
+             */
+            @SerializedName("type")
+            String type;
+          }
+        }
+      }
+
+      /**
+       * For more details about OriginalEntry, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class OriginalEntry extends StripeObject {
+        /** Machine-readable string describing the requirement. */
+        @SerializedName("description")
+        String description;
+
+        /** A reference to the location of the requirement. */
+        @SerializedName("reference")
+        Reference reference;
+
+        /** A reference to the location of the requirement. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Reference extends StripeObject {
+          /** If {@code inquiry} is the type, the inquiry token. */
+          @SerializedName("inquiry")
+          String inquiry;
+
+          /** If {@code resource} is the type, the resource token. */
+          @SerializedName("resource")
+          String resource;
+
+          /**
+           * The type of the reference. If the type is &quot;inquiry&quot;, the inquiry token can be
+           * found in the &quot;inquiry&quot; field. Otherwise the type is an API resource, the
+           * token for which can be found in the &quot;resource&quot; field.
+           *
+           * <p>One of {@code inquiry}, {@code payment_method}, or {@code person}.
+           */
+          @SerializedName("type")
+          String type;
+        }
+      }
+    }
 
     /**
      * For more details about Entry, please refer to the <a href="https://docs.stripe.com/api">API
@@ -7651,7 +8440,7 @@ public class Account extends StripeObject implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Entry extends StripeObject {
       /**
-       * Indicates whether the platform or Stripe is currently responsible for taking action on the
+       * Indicates whether the user or Stripe is currently responsible for taking action on the
        * requirement. Value can be {@code user} or {@code stripe}.
        *
        * <p>One of {@code stripe}, or {@code user}.
@@ -7798,14 +8587,16 @@ public class Account extends StripeObject implements HasId {
            * <p>One of {@code ach_debit_payments}, {@code acss_debit_payments}, {@code
            * affirm_payments}, {@code afterpay_clearpay_payments}, {@code alma_payments}, {@code
            * amazon_pay_payments}, {@code automatic_indirect_tax}, {@code au_becs_debit_payments},
-           * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.local},
+           * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.ach},
+           * {@code bank_accounts.fedwire}, {@code bank_accounts.fps}, {@code bank_accounts.local},
+           * {@code bank_accounts.rtp}, {@code bank_accounts.sepa}, {@code bank_accounts.swift},
            * {@code bank_accounts.wire}, {@code blik_payments}, {@code blik_recurring_payments},
            * {@code boleto_payments}, {@code business_storage.inbound.eur}, {@code
            * business_storage.inbound.gbp}, {@code business_storage.inbound.usd}, {@code
            * business_storage.outbound.eur}, {@code business_storage.outbound.gbp}, {@code
            * business_storage.outbound.usd}, {@code cards}, {@code card_payments}, {@code
-           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code eps_payments}, {@code
-           * financial_addresses.bank_accounts}, {@code fpx_payments}, {@code
+           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code crypto_wallets}, {@code
+           * eps_payments}, {@code financial_addresses.bank_accounts}, {@code fpx_payments}, {@code
            * gb_bank_transfer_payments}, {@code grabpay_payments}, {@code holds_currencies.eur},
            * {@code holds_currencies.gbp}, {@code holds_currencies.usd}, {@code ideal_payments},
            * {@code inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code

@@ -783,7 +783,18 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AfterpayClearpay extends StripeObject {}
+    public static class AfterpayClearpay extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
 
     /**
      * For more details about Alipay, please refer to the <a href="https://docs.stripe.com/api">API
@@ -1045,7 +1056,18 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Klarna extends StripeObject {}
+    public static class Klarna extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
 
     /**
      * For more details about MbWay, please refer to the <a href="https://docs.stripe.com/api">API
@@ -1159,6 +1181,17 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
        */
       @SerializedName("network_decline_code")
       String networkDeclineCode;
+
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
     }
 
     /**

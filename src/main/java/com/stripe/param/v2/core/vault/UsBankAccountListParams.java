@@ -24,15 +24,12 @@ public class UsBankAccountListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /**
-   * Optionally filter by verification status. Mutually exclusive with {@code unverified}, {@code
-   * verified}, {@code awaiting_verification}, and {@code verification_failed}.
-   */
+  /** Closed Enum. Optionally filter by verification status. */
   @SerializedName("verification_status")
-  String verificationStatus;
+  VerificationStatus verificationStatus;
 
   private UsBankAccountListParams(
-      Map<String, Object> extraParams, Long limit, String verificationStatus) {
+      Map<String, Object> extraParams, Long limit, VerificationStatus verificationStatus) {
     this.extraParams = extraParams;
     this.limit = limit;
     this.verificationStatus = verificationStatus;
@@ -47,7 +44,7 @@ public class UsBankAccountListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private String verificationStatus;
+    private VerificationStatus verificationStatus;
 
     /** Finalize and obtain parameter instance from this builder. */
     public UsBankAccountListParams build() {
@@ -86,13 +83,32 @@ public class UsBankAccountListParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Optionally filter by verification status. Mutually exclusive with {@code unverified}, {@code
-     * verified}, {@code awaiting_verification}, and {@code verification_failed}.
-     */
-    public Builder setVerificationStatus(String verificationStatus) {
+    /** Closed Enum. Optionally filter by verification status. */
+    public Builder setVerificationStatus(
+        UsBankAccountListParams.VerificationStatus verificationStatus) {
       this.verificationStatus = verificationStatus;
       return this;
+    }
+  }
+
+  public enum VerificationStatus implements ApiRequestParams.EnumParam {
+    @SerializedName("awaiting_verification")
+    AWAITING_VERIFICATION("awaiting_verification"),
+
+    @SerializedName("unverified")
+    UNVERIFIED("unverified"),
+
+    @SerializedName("verification_failed")
+    VERIFICATION_FAILED("verification_failed"),
+
+    @SerializedName("verified")
+    VERIFIED("verified");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    VerificationStatus(String value) {
+      this.value = value;
     }
   }
 }

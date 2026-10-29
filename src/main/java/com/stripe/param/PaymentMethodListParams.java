@@ -454,6 +454,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("wechat_pay")
     WECHAT_PAY("wechat_pay"),
 
+    @SerializedName("wero")
+    WERO("wero"),
+
     @SerializedName("zip")
     ZIP("zip");
 

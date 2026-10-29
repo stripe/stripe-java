@@ -16873,27 +16873,30 @@ public class OrderUpdateParams extends ApiRequestParams {
       /**
        * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn},
        * {@code al_tin}, {@code am_tin}, {@code ao_tin}, {@code ar_cuit}, {@code au_abn}, {@code
-       * au_arn}, {@code aw_tin}, {@code az_tin}, {@code ba_tin}, {@code bb_tin}, {@code bd_bin},
-       * {@code bf_ifu}, {@code bg_uic}, {@code bh_vat}, {@code bj_ifu}, {@code bo_tin}, {@code
-       * br_cnpj}, {@code br_cpf}, {@code bs_tin}, {@code by_tin}, {@code ca_bn}, {@code
-       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
-       * {@code cd_nif}, {@code ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cm_niu}, {@code
-       * cn_tin}, {@code co_nit}, {@code cr_tin}, {@code cv_nif}, {@code de_stn}, {@code do_rcn},
-       * {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat}, {@code
-       * eu_vat}, {@code fo_vat}, {@code gb_vat}, {@code ge_vat}, {@code gi_tin}, {@code gn_nif},
-       * {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code ic_nif}, {@code id_npwp}, {@code
-       * il_vat}, {@code in_gst}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn},
-       * {@code jp_trn}, {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code
-       * kz_bin}, {@code la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat},
-       * {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc}, {@code
-       * my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec},
-       * {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code
-       * pl_nip}, {@code py_ruc}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp},
-       * {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code
-       * sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat},
-       * {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code
-       * uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or
-       * {@code zw_tin}
+       * au_acn}, {@code au_arn}, {@code au_wpn}, {@code aw_tin}, {@code az_tin}, {@code ba_tin},
+       * {@code bb_tin}, {@code bd_bin}, {@code bf_ifu}, {@code bg_uic}, {@code bh_vat}, {@code
+       * bj_ifu}, {@code bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code bs_tin}, {@code bw_vat},
+       * {@code by_tin}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb},
+       * {@code ca_pst_sk}, {@code ca_qst}, {@code cd_nif}, {@code ch_uid}, {@code ch_vat}, {@code
+       * ci_vat}, {@code cl_tin}, {@code cm_niu}, {@code cn_tin}, {@code co_nit}, {@code cr_tin},
+       * {@code cv_nif}, {@code cz_dic}, {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code
+       * eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat}, {@code eu_vat}, {@code
+       * fo_vat}, {@code fr_siren}, {@code fr_siret}, {@code fr_spi}, {@code gb_vat}, {@code
+       * ge_vat}, {@code gh_tin}, {@code gi_tin}, {@code gn_nif}, {@code hk_br}, {@code hr_oib},
+       * {@code hu_tin}, {@code ic_nif}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code
+       * is_kt}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code
+       * ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code kz_bin}, {@code la_tin},
+       * {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat}, {@code md_cf}, {@code
+       * md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mu_vat}, {@code mx_rfc},
+       * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code mz_nuit}, {@code ng_tin}, {@code
+       * no_vat}, {@code no_voec}, {@code np_pan}, {@code nz_bn}, {@code nz_gst}, {@code om_vat},
+       * {@code pe_ruc}, {@code ph_tin}, {@code pl_nip}, {@code pt_nif}, {@code py_ruc}, {@code
+       * ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst},
+       * {@code sg_uen}, {@code si_tin}, {@code sm_coe}, {@code sn_ninea}, {@code sr_fin}, {@code
+       * sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tt_bir}, {@code tt_vat},
+       * {@code tw_vat}, {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code
+       * uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat},
+       * {@code zm_tin}, or {@code zw_tin}
        */
       @SerializedName("type")
       Type type;
@@ -16955,27 +16958,30 @@ public class OrderUpdateParams extends ApiRequestParams {
         /**
          * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn},
          * {@code al_tin}, {@code am_tin}, {@code ao_tin}, {@code ar_cuit}, {@code au_abn}, {@code
-         * au_arn}, {@code aw_tin}, {@code az_tin}, {@code ba_tin}, {@code bb_tin}, {@code bd_bin},
-         * {@code bf_ifu}, {@code bg_uic}, {@code bh_vat}, {@code bj_ifu}, {@code bo_tin}, {@code
-         * br_cnpj}, {@code br_cpf}, {@code bs_tin}, {@code by_tin}, {@code ca_bn}, {@code
-         * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
-         * {@code cd_nif}, {@code ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cm_niu}, {@code
-         * cn_tin}, {@code co_nit}, {@code cr_tin}, {@code cv_nif}, {@code de_stn}, {@code do_rcn},
-         * {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat},
-         * {@code eu_vat}, {@code fo_vat}, {@code gb_vat}, {@code ge_vat}, {@code gi_tin}, {@code
-         * gn_nif}, {@code hk_br}, {@code hr_oib}, {@code hu_tin}, {@code ic_nif}, {@code id_npwp},
-         * {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code
-         * jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn},
-         * {@code kz_bin}, {@code la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code
-         * ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc},
-         * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code
-         * no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin},
-         * {@code pl_nip}, {@code py_ruc}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code
-         * ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code
-         * sn_ninea}, {@code sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code
-         * tr_tin}, {@code tw_vat}, {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein},
-         * {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code
-         * za_vat}, {@code zm_tin}, or {@code zw_tin}
+         * au_acn}, {@code au_arn}, {@code au_wpn}, {@code aw_tin}, {@code az_tin}, {@code ba_tin},
+         * {@code bb_tin}, {@code bd_bin}, {@code bf_ifu}, {@code bg_uic}, {@code bh_vat}, {@code
+         * bj_ifu}, {@code bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code bs_tin}, {@code bw_vat},
+         * {@code by_tin}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb},
+         * {@code ca_pst_sk}, {@code ca_qst}, {@code cd_nif}, {@code ch_uid}, {@code ch_vat}, {@code
+         * ci_vat}, {@code cl_tin}, {@code cm_niu}, {@code cn_tin}, {@code co_nit}, {@code cr_tin},
+         * {@code cv_nif}, {@code cz_dic}, {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code
+         * eg_tin}, {@code es_cif}, {@code et_tin}, {@code eu_oss_vat}, {@code eu_vat}, {@code
+         * fo_vat}, {@code fr_siren}, {@code fr_siret}, {@code fr_spi}, {@code gb_vat}, {@code
+         * ge_vat}, {@code gh_tin}, {@code gi_tin}, {@code gn_nif}, {@code hk_br}, {@code hr_oib},
+         * {@code hu_tin}, {@code ic_nif}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code
+         * is_kt}, {@code is_vat}, {@code it_cf}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn},
+         * {@code ke_pin}, {@code kg_tin}, {@code kh_tin}, {@code kr_brn}, {@code kz_bin}, {@code
+         * la_tin}, {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code ma_vat}, {@code md_cf},
+         * {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mu_vat}, {@code
+         * mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code mz_nuit}, {@code ng_tin},
+         * {@code no_vat}, {@code no_voec}, {@code np_pan}, {@code nz_bn}, {@code nz_gst}, {@code
+         * om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code pl_nip}, {@code pt_nif}, {@code py_ruc},
+         * {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code
+         * sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sm_coe}, {@code sn_ninea}, {@code
+         * sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tt_bir},
+         * {@code tt_vat}, {@code tw_vat}, {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code
+         * us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin},
+         * {@code za_vat}, {@code zm_tin}, or {@code zw_tin}
          */
         public Builder setType(OrderUpdateParams.TaxDetails.TaxId.Type type) {
           this.type = type;
@@ -17017,8 +17023,14 @@ public class OrderUpdateParams extends ApiRequestParams {
         @SerializedName("au_abn")
         AU_ABN("au_abn"),
 
+        @SerializedName("au_acn")
+        AU_ACN("au_acn"),
+
         @SerializedName("au_arn")
         AU_ARN("au_arn"),
+
+        @SerializedName("au_wpn")
+        AU_WPN("au_wpn"),
 
         @SerializedName("aw_tin")
         AW_TIN("aw_tin"),
@@ -17059,6 +17071,9 @@ public class OrderUpdateParams extends ApiRequestParams {
         @SerializedName("bs_tin")
         BS_TIN("bs_tin"),
 
+        @SerializedName("bw_vat")
+        BW_VAT("bw_vat"),
+
         @SerializedName("by_tin")
         BY_TIN("by_tin"),
 
@@ -17089,6 +17104,9 @@ public class OrderUpdateParams extends ApiRequestParams {
         @SerializedName("ch_vat")
         CH_VAT("ch_vat"),
 
+        @SerializedName("ci_vat")
+        CI_VAT("ci_vat"),
+
         @SerializedName("cl_tin")
         CL_TIN("cl_tin"),
 
@@ -17106,6 +17124,9 @@ public class OrderUpdateParams extends ApiRequestParams {
 
         @SerializedName("cv_nif")
         CV_NIF("cv_nif"),
+
+        @SerializedName("cz_dic")
+        CZ_DIC("cz_dic"),
 
         @SerializedName("de_stn")
         DE_STN("de_stn"),
@@ -17134,11 +17155,23 @@ public class OrderUpdateParams extends ApiRequestParams {
         @SerializedName("fo_vat")
         FO_VAT("fo_vat"),
 
+        @SerializedName("fr_siren")
+        FR_SIREN("fr_siren"),
+
+        @SerializedName("fr_siret")
+        FR_SIRET("fr_siret"),
+
+        @SerializedName("fr_spi")
+        FR_SPI("fr_spi"),
+
         @SerializedName("gb_vat")
         GB_VAT("gb_vat"),
 
         @SerializedName("ge_vat")
         GE_VAT("ge_vat"),
+
+        @SerializedName("gh_tin")
+        GH_TIN("gh_tin"),
 
         @SerializedName("gi_tin")
         GI_TIN("gi_tin"),
@@ -17166,6 +17199,9 @@ public class OrderUpdateParams extends ApiRequestParams {
 
         @SerializedName("in_gst")
         IN_GST("in_gst"),
+
+        @SerializedName("is_kt")
+        IS_KT("is_kt"),
 
         @SerializedName("is_vat")
         IS_VAT("is_vat"),
@@ -17212,6 +17248,9 @@ public class OrderUpdateParams extends ApiRequestParams {
         @SerializedName("ma_vat")
         MA_VAT("ma_vat"),
 
+        @SerializedName("md_cf")
+        MD_CF("md_cf"),
+
         @SerializedName("md_vat")
         MD_VAT("md_vat"),
 
@@ -17223,6 +17262,9 @@ public class OrderUpdateParams extends ApiRequestParams {
 
         @SerializedName("mr_nif")
         MR_NIF("mr_nif"),
+
+        @SerializedName("mu_vat")
+        MU_VAT("mu_vat"),
 
         @SerializedName("mx_rfc")
         MX_RFC("mx_rfc"),
@@ -17236,6 +17278,9 @@ public class OrderUpdateParams extends ApiRequestParams {
         @SerializedName("my_sst")
         MY_SST("my_sst"),
 
+        @SerializedName("mz_nuit")
+        MZ_NUIT("mz_nuit"),
+
         @SerializedName("ng_tin")
         NG_TIN("ng_tin"),
 
@@ -17247,6 +17292,9 @@ public class OrderUpdateParams extends ApiRequestParams {
 
         @SerializedName("np_pan")
         NP_PAN("np_pan"),
+
+        @SerializedName("nz_bn")
+        NZ_BN("nz_bn"),
 
         @SerializedName("nz_gst")
         NZ_GST("nz_gst"),
@@ -17262,6 +17310,9 @@ public class OrderUpdateParams extends ApiRequestParams {
 
         @SerializedName("pl_nip")
         PL_NIP("pl_nip"),
+
+        @SerializedName("pt_nif")
+        PT_NIF("pt_nif"),
 
         @SerializedName("py_ruc")
         PY_RUC("py_ruc"),
@@ -17290,6 +17341,9 @@ public class OrderUpdateParams extends ApiRequestParams {
         @SerializedName("si_tin")
         SI_TIN("si_tin"),
 
+        @SerializedName("sm_coe")
+        SM_COE("sm_coe"),
+
         @SerializedName("sn_ninea")
         SN_NINEA("sn_ninea"),
 
@@ -17307,6 +17361,12 @@ public class OrderUpdateParams extends ApiRequestParams {
 
         @SerializedName("tr_tin")
         TR_TIN("tr_tin"),
+
+        @SerializedName("tt_bir")
+        TT_BIR("tt_bir"),
+
+        @SerializedName("tt_vat")
+        TT_VAT("tt_vat"),
 
         @SerializedName("tw_vat")
         TW_VAT("tw_vat"),

@@ -19,15 +19,15 @@ public final class GrantedTokenService extends ApiService {
   }
 
   /**
-   * Creates a new test SharedPaymentGrantedToken object. This endpoint is only available in test
-   * mode and allows sellers to create SharedPaymentGrantedTokens for testing their integration
+   * Creates a new test SharedPaymentGrantedToken object. This test helper allows sellers to create
+   * SharedPaymentGrantedTokens for testing their integration.
    */
   public GrantedToken create(GrantedTokenCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
-   * Creates a new test SharedPaymentGrantedToken object. This endpoint is only available in test
-   * mode and allows sellers to create SharedPaymentGrantedTokens for testing their integration
+   * Creates a new test SharedPaymentGrantedToken object. This test helper allows sellers to create
+   * SharedPaymentGrantedTokens for testing their integration.
    */
   public GrantedToken create(GrantedTokenCreateParams params, RequestOptions options)
       throws StripeException {
@@ -42,32 +42,32 @@ public final class GrantedTokenService extends ApiService {
     return this.request(request, GrantedToken.class);
   }
   /**
-   * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
-   * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
+   * Revokes a test SharedPaymentGrantedToken object. This test helper allows sellers to revoke
+   * SharedPaymentGrantedTokens for testing their integration.
    */
   public GrantedToken revoke(String sharedPaymentGrantedToken, GrantedTokenRevokeParams params)
       throws StripeException {
     return revoke(sharedPaymentGrantedToken, params, (RequestOptions) null);
   }
   /**
-   * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
-   * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
+   * Revokes a test SharedPaymentGrantedToken object. This test helper allows sellers to revoke
+   * SharedPaymentGrantedTokens for testing their integration.
    */
   public GrantedToken revoke(String sharedPaymentGrantedToken, RequestOptions options)
       throws StripeException {
     return revoke(sharedPaymentGrantedToken, (GrantedTokenRevokeParams) null, options);
   }
   /**
-   * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
-   * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
+   * Revokes a test SharedPaymentGrantedToken object. This test helper allows sellers to revoke
+   * SharedPaymentGrantedTokens for testing their integration.
    */
   public GrantedToken revoke(String sharedPaymentGrantedToken) throws StripeException {
     return revoke(
         sharedPaymentGrantedToken, (GrantedTokenRevokeParams) null, (RequestOptions) null);
   }
   /**
-   * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
-   * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
+   * Revokes a test SharedPaymentGrantedToken object. This test helper allows sellers to revoke
+   * SharedPaymentGrantedTokens for testing their integration.
    */
   public GrantedToken revoke(
       String sharedPaymentGrantedToken, GrantedTokenRevokeParams params, RequestOptions options)

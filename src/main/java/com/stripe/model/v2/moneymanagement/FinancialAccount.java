@@ -13,35 +13,37 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A FinancialAccount represents a balance and can be used as the source or destination for the
- * money management ({@code /v2/money_management}) APIs.
+ * A FinancialAccount represents a balance and can be the source or destination of money movement.
  */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class FinancialAccount extends StripeObject implements HasId {
   /**
-   * Multi-currency balance of this FinancialAccount, split by availability state. Each balance is
-   * represented as a hash where the key is the three-letter ISO currency code, in lowercase, and
-   * the value is the amount for that currency.
+   * The FinancialAccount's balance, split into {@code available}, {@code inbound_pending}, and
+   * {@code outbound_pending} balances. Each balance is a hash keyed by lowercase currency codes,
+   * with an amount for each currency.
    */
   @SerializedName("balance")
   Balance balance;
 
   /**
-   * Open Enum. Two-letter country code that represents the country where the LegalEntity associated
-   * with the FinancialAccount is based in.
+   * Open Enum. The country where the LegalEntity associated with the FinancialAccount is based,
+   * represented as a two-letter country code.
    */
   @SerializedName("country")
   String country;
 
-  /** Time at which the object was created. */
+  /**
+   * Time at which the object was created. Represented as an RFC 3339 timestamp in UTC with
+   * millisecond precision, for example {@code 2022-09-18T13:22:18.123Z}.
+   */
   @SerializedName("created")
   Instant created;
 
   /**
-   * A descriptive name for the FinancialAccount, up to 50 characters long. This name will be used
-   * in the Stripe Dashboard and embedded components.
+   * A descriptive name for the FinancialAccount, up to 50 characters long. This name appears in the
+   * Stripe Dashboard and embedded components.
    */
   @SerializedName("display_name")
   String displayName;
@@ -58,7 +60,10 @@ public class FinancialAccount extends StripeObject implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** Metadata associated with the FinancialAccount. */
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
+   */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -72,8 +77,8 @@ public class FinancialAccount extends StripeObject implements HasId {
   String object;
 
   /**
-   * If this is a {@code other} FinancialAccount, this hash indicates what the actual type is.
-   * Upgrade your API version to see it reflected in {@code type}.
+   * If the FinancialAccount's {@code type} is {@code other}, this hash identifies its actual type.
+   * Upgrade your API version to see that type in {@code type}.
    */
   @SerializedName("other")
   Other other;
@@ -92,16 +97,15 @@ public class FinancialAccount extends StripeObject implements HasId {
   StatusDetails statusDetails;
 
   /**
-   * If this is a {@code storage} FinancialAccount, this hash includes details specific to {@code
-   * storage} FinancialAccounts.
+   * If the FinancialAccount's {@code type} is {@code storage}, this hash contains details specific
+   * to that type.
    */
   @SerializedName("storage")
   Storage storage;
 
   /**
-   * Type of the FinancialAccount. An additional hash is included on the FinancialAccount with a
-   * name matching this value. It contains additional information specific to the FinancialAccount
-   * type.
+   * Closed Enum. The type of the FinancialAccount. Details specific to the type appear in the
+   * matching hash. For example, a {@code storage} FinancialAccount includes a {@code storage} hash.
    *
    * <p>One of {@code other}, or {@code storage}.
    */
@@ -109,38 +113,41 @@ public class FinancialAccount extends StripeObject implements HasId {
   String type;
 
   /**
-   * Multi-currency balance of this FinancialAccount, split by availability state. Each balance is
-   * represented as a hash where the key is the three-letter ISO currency code, in lowercase, and
-   * the value is the amount for that currency.
+   * The FinancialAccount's balance, split into {@code available}, {@code inbound_pending}, and
+   * {@code outbound_pending} balances. Each balance is a hash keyed by lowercase currency codes,
+   * with an amount for each currency.
    */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Balance extends StripeObject {
-    /** Balance that can be used for money movement. */
+    /** Balance available for money movement. */
     @SerializedName("available")
     Map<String, Amount> available;
 
-    /** Balance of inbound funds that will later transition to the {@code available} balance. */
+    /**
+     * Balance of inbound funds that aren't yet available for money movement and will later move to
+     * the {@code available} balance.
+     */
     @SerializedName("inbound_pending")
     Map<String, Amount> inboundPending;
 
-    /** Balance of funds that are being used for a pending outbound money movement. */
+    /** Balance of funds being used for pending outbound money movements. */
     @SerializedName("outbound_pending")
     Map<String, Amount> outboundPending;
   }
 
   /**
-   * If this is a {@code other} FinancialAccount, this hash indicates what the actual type is.
-   * Upgrade your API version to see it reflected in {@code type}.
+   * If the FinancialAccount's {@code type} is {@code other}, this hash identifies its actual type.
+   * Upgrade your API version to see that type in {@code type}.
    */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Other extends StripeObject {
     /**
-     * The type of the FinancialAccount, represented as a string. Upgrade your API version to see
-     * the type reflected in {@code financial_account.type}.
+     * The FinancialAccount's actual type, represented as a string. Upgrade your API version to see
+     * this value in {@code financial_account.type}.
      */
     @SerializedName("type")
     String type;
@@ -151,37 +158,49 @@ public class FinancialAccount extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusDetails extends StripeObject {
-    /** Details related to the closed state of the FinancialAccount. */
+    /**
+     * Details about the FinancialAccount's closure. Only populated when {@code status} is {@code
+     * closed}.
+     */
     @SerializedName("closed")
     Closed closed;
 
-    /** Details related to the closed state of the FinancialAccount. */
+    /**
+     * Details about the FinancialAccount's closure. Only populated when {@code status} is {@code
+     * closed}.
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Closed extends StripeObject {
-      /** The forwarding settings for the closed FinancialAccount. */
+      /** When configured, the forwarding settings for the closed FinancialAccount. */
       @SerializedName("forwarding_settings")
       ForwardingSettings forwardingSettings;
 
       /**
-       * The reason the FinancialAccount was closed.
+       * Closed Enum. The reason the FinancialAccount was closed.
        *
        * <p>One of {@code account_closed}, {@code closed_by_platform}, or {@code other}.
        */
       @SerializedName("reason")
       String reason;
 
-      /** The forwarding settings for the closed FinancialAccount. */
+      /** When configured, the forwarding settings for the closed FinancialAccount. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class ForwardingSettings extends StripeObject {
-        /** The address to send forwarded payments to. */
+        /**
+         * ID of the FinancialAccount that supplies funds to cover negative balances during or after
+         * this FinancialAccount's closure.
+         */
         @SerializedName("payment_method")
         String paymentMethod;
 
-        /** The address to send forwarded payouts to. */
+        /**
+         * ID of the FinancialAccount that receives funds forwarded from this FinancialAccount when
+         * it closes.
+         */
         @SerializedName("payout_method")
         String payoutMethod;
       }
@@ -189,8 +208,8 @@ public class FinancialAccount extends StripeObject implements HasId {
   }
 
   /**
-   * If this is a {@code storage} FinancialAccount, this hash includes details specific to {@code
-   * storage} FinancialAccounts.
+   * If the FinancialAccount's {@code type} is {@code storage}, this hash contains details specific
+   * to that type.
    */
   @Getter
   @Setter

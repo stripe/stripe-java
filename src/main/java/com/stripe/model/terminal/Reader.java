@@ -67,10 +67,11 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
    *
    * <p>One of {@code bbpos_chipper2x}, {@code bbpos_wisepad3}, {@code bbpos_wisepos_e}, {@code
    * mobile_phone_reader}, {@code simulated_stripe_s700}, {@code simulated_stripe_s710}, {@code
-   * simulated_verifone_m425}, {@code simulated_verifone_p630}, {@code simulated_verifone_ux700},
-   * {@code simulated_verifone_v660p}, {@code simulated_wisepos_e}, {@code stripe_m2}, {@code
-   * stripe_s700}, {@code stripe_s710}, {@code verifone_P400}, {@code verifone_m425}, {@code
-   * verifone_p630}, {@code verifone_ux700}, or {@code verifone_v660p}.
+   * simulated_stripe_t600}, {@code simulated_verifone_m425}, {@code simulated_verifone_p630},
+   * {@code simulated_verifone_ux700}, {@code simulated_verifone_v660p}, {@code
+   * simulated_wisepos_e}, {@code stripe_m2}, {@code stripe_s700}, {@code stripe_s710}, {@code
+   * stripe_t600}, {@code verifone_P400}, {@code verifone_m425}, {@code verifone_p630}, {@code
+   * verifone_ux700}, or {@code verifone_v660p}.
    */
   @SerializedName("device_type")
   String deviceType;

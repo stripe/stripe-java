@@ -20,7 +20,10 @@ public class FinancialAccountCloseParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The addresses to forward any incoming transactions to. */
+  /**
+   * Settings that specify where to send positive balances and how to cover negative balances. You
+   * must provide these settings if the FinancialAccount has a non-zero balance.
+   */
   @SerializedName("forwarding_settings")
   ForwardingSettings forwardingSettings;
 
@@ -70,7 +73,10 @@ public class FinancialAccountCloseParams extends ApiRequestParams {
       return this;
     }
 
-    /** The addresses to forward any incoming transactions to. */
+    /**
+     * Settings that specify where to send positive balances and how to cover negative balances. You
+     * must provide these settings if the FinancialAccount has a non-zero balance.
+     */
     public Builder setForwardingSettings(
         FinancialAccountCloseParams.ForwardingSettings forwardingSettings) {
       this.forwardingSettings = forwardingSettings;
@@ -90,11 +96,17 @@ public class FinancialAccountCloseParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The address to send forwarded payments to. */
+    /**
+     * ID of the FinancialAccount that supplies funds to cover negative balances during or after
+     * this FinancialAccount's closure.
+     */
     @SerializedName("payment_method")
     String paymentMethod;
 
-    /** The address to send forwarded payouts to. */
+    /**
+     * ID of the FinancialAccount that receives funds forwarded from this FinancialAccount when it
+     * closes.
+     */
     @SerializedName("payout_method")
     String payoutMethod;
 
@@ -149,13 +161,19 @@ public class FinancialAccountCloseParams extends ApiRequestParams {
         return this;
       }
 
-      /** The address to send forwarded payments to. */
+      /**
+       * ID of the FinancialAccount that supplies funds to cover negative balances during or after
+       * this FinancialAccount's closure.
+       */
       public Builder setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
         return this;
       }
 
-      /** The address to send forwarded payouts to. */
+      /**
+       * ID of the FinancialAccount that receives funds forwarded from this FinancialAccount when it
+       * closes.
+       */
       public Builder setPayoutMethod(String payoutMethod) {
         this.payoutMethod = payoutMethod;
         return this;

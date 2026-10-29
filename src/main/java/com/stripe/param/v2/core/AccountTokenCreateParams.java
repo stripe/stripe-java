@@ -1579,6 +1579,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("administrative")
           ADMINISTRATIVE("administrative"),
 
+          @SerializedName("physical")
+          PHYSICAL("physical"),
+
           @SerializedName("principal_place_of_business")
           PRINCIPAL_PLACE_OF_BUSINESS("principal_place_of_business");
 
@@ -1913,6 +1916,10 @@ public class AccountTokenCreateParams extends ApiRequestParams {
         @SerializedName("proof_of_address")
         ProofOfAddress proofOfAddress;
 
+        /** One or more documents that demonstrate proof of business presence. */
+        @SerializedName("proof_of_business_presence")
+        ProofOfBusinessPresence proofOfBusinessPresence;
+
         /** One or more documents that demonstrate proof of ultimate beneficial ownership. */
         @SerializedName("proof_of_registration")
         ProofOfRegistration proofOfRegistration;
@@ -1931,6 +1938,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams,
             PrimaryVerification primaryVerification,
             ProofOfAddress proofOfAddress,
+            ProofOfBusinessPresence proofOfBusinessPresence,
             ProofOfRegistration proofOfRegistration,
             ProofOfUltimateBeneficialOwnership proofOfUltimateBeneficialOwnership) {
           this.bankAccountOwnershipVerification = bankAccountOwnershipVerification;
@@ -1942,6 +1950,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           this.extraParams = extraParams;
           this.primaryVerification = primaryVerification;
           this.proofOfAddress = proofOfAddress;
+          this.proofOfBusinessPresence = proofOfBusinessPresence;
           this.proofOfRegistration = proofOfRegistration;
           this.proofOfUltimateBeneficialOwnership = proofOfUltimateBeneficialOwnership;
         }
@@ -1969,6 +1978,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           private ProofOfAddress proofOfAddress;
 
+          private ProofOfBusinessPresence proofOfBusinessPresence;
+
           private ProofOfRegistration proofOfRegistration;
 
           private ProofOfUltimateBeneficialOwnership proofOfUltimateBeneficialOwnership;
@@ -1985,6 +1996,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
                 this.extraParams,
                 this.primaryVerification,
                 this.proofOfAddress,
+                this.proofOfBusinessPresence,
                 this.proofOfRegistration,
                 this.proofOfUltimateBeneficialOwnership);
           }
@@ -2096,6 +2108,14 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             return this;
           }
 
+          /** One or more documents that demonstrate proof of business presence. */
+          public Builder setProofOfBusinessPresence(
+              AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfBusinessPresence
+                  proofOfBusinessPresence) {
+            this.proofOfBusinessPresence = proofOfBusinessPresence;
+            return this;
+          }
+
           /** One or more documents that demonstrate proof of ultimate beneficial ownership. */
           public Builder setProofOfRegistration(
               AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfRegistration
@@ -2129,8 +2149,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -2267,8 +2287,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -2402,8 +2422,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -2540,8 +2560,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -2678,8 +2698,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -2816,8 +2836,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -2953,9 +2973,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * <strong>Required.</strong> The <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-           * referring to each side of the document.
+           * <strong>Required.</strong> The <a href="https://docs.stripe.com/api/files/create">file
+           * upload</a> tokens referring to each side of the document.
            */
           @SerializedName("front_back")
           FrontBack frontBack;
@@ -3024,8 +3043,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
             /**
              * <strong>Required.</strong> The <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-             * referring to each side of the document.
+             * href="https://docs.stripe.com/api/files/create">file upload</a> tokens referring to
+             * each side of the document.
              */
             public Builder setFrontBack(
                 AccountTokenCreateParams.Identity.BusinessDetails.Documents.PrimaryVerification
@@ -3051,11 +3070,10 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class FrontBack {
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the back of the verification document. The purpose of the uploaded
-             * file should be 'identity_document'. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the back of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("back")
             String back;
@@ -3071,11 +3089,10 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams;
 
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the front of the verification document. The purpose of the
-             * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-             * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10
-             * MB in size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the front of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("front")
             String front;
@@ -3106,11 +3123,11 @@ public class AccountTokenCreateParams extends ApiRequestParams {
               }
 
               /**
-               * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-               * token representing the back of the verification document. The purpose of the
-               * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-               * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than
-               * 10 MB in size.
+               * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+               * representing the back of the verification document. The purpose of the uploaded
+               * file should be 'identity_document'. The uploaded file needs to be a color image
+               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
+               * in size.
                */
               public Builder setBack(String back) {
                 this.back = back;
@@ -3148,11 +3165,11 @@ public class AccountTokenCreateParams extends ApiRequestParams {
               }
 
               /**
-               * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-               * token representing the front of the verification document. The purpose of the
-               * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-               * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than
-               * 10 MB in size.
+               * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+               * representing the front of the verification document. The purpose of the uploaded
+               * file should be 'identity_document'. The uploaded file needs to be a color image
+               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
+               * in size.
                */
               public Builder setFront(String front) {
                 this.front = front;
@@ -3189,8 +3206,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -3311,6 +3328,144 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
         @Getter
         @EqualsAndHashCode(callSuper = false)
+        public static class ProofOfBusinessPresence {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> One or more document IDs returned by a <a
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
+           */
+          @SerializedName("files")
+          List<String> files;
+
+          /**
+           * <strong>Required.</strong> The format of the document. Currently supports {@code files}
+           * only.
+           */
+          @SerializedName("type")
+          Type type;
+
+          private ProofOfBusinessPresence(
+              Map<String, Object> extraParams, List<String> files, Type type) {
+            this.extraParams = extraParams;
+            this.files = files;
+            this.type = type;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private List<String> files;
+
+            private Type type;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountTokenCreateParams.Identity.BusinessDetails.Documents
+                    .ProofOfBusinessPresence
+                build() {
+              return new AccountTokenCreateParams.Identity.BusinessDetails.Documents
+                  .ProofOfBusinessPresence(this.extraParams, this.files, this.type);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfBusinessPresence#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfBusinessPresence#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Add an element to `files` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfBusinessPresence#files}
+             * for the field documentation.
+             */
+            public Builder addFile(String element) {
+              if (this.files == null) {
+                this.files = new ArrayList<>();
+              }
+              this.files.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `files` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfBusinessPresence#files}
+             * for the field documentation.
+             */
+            public Builder addAllFile(List<String> elements) {
+              if (this.files == null) {
+                this.files = new ArrayList<>();
+              }
+              this.files.addAll(elements);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The format of the document. Currently supports {@code
+             * files} only.
+             */
+            public Builder setType(
+                AccountTokenCreateParams.Identity.BusinessDetails.Documents.ProofOfBusinessPresence
+                        .Type
+                    type) {
+              this.type = type;
+              return this;
+            }
+          }
+
+          public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("files")
+            FILES("files");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Type(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class ProofOfRegistration {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -3324,8 +3479,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -3553,8 +3708,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -6434,8 +6589,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -6570,8 +6725,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;
@@ -6702,9 +6857,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * <strong>Required.</strong> The <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-           * referring to each side of the document.
+           * <strong>Required.</strong> The <a href="https://docs.stripe.com/api/files/create">file
+           * upload</a> tokens referring to each side of the document.
            */
           @SerializedName("front_back")
           FrontBack frontBack;
@@ -6773,8 +6927,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
             /**
              * <strong>Required.</strong> The <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-             * referring to each side of the document.
+             * href="https://docs.stripe.com/api/files/create">file upload</a> tokens referring to
+             * each side of the document.
              */
             public Builder setFrontBack(
                 AccountTokenCreateParams.Identity.Individual.Documents.PrimaryVerification.FrontBack
@@ -6799,11 +6953,10 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class FrontBack {
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the back of the verification document. The purpose of the uploaded
-             * file should be 'identity_document'. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the back of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("back")
             String back;
@@ -6819,11 +6972,10 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams;
 
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the front of the verification document. The purpose of the
-             * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-             * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10
-             * MB in size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the front of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("front")
             String front;
@@ -6854,11 +7006,11 @@ public class AccountTokenCreateParams extends ApiRequestParams {
               }
 
               /**
-               * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-               * token representing the back of the verification document. The purpose of the
-               * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-               * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than
-               * 10 MB in size.
+               * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+               * representing the back of the verification document. The purpose of the uploaded
+               * file should be 'identity_document'. The uploaded file needs to be a color image
+               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
+               * in size.
                */
               public Builder setBack(String back) {
                 this.back = back;
@@ -6896,11 +7048,11 @@ public class AccountTokenCreateParams extends ApiRequestParams {
               }
 
               /**
-               * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-               * token representing the front of the verification document. The purpose of the
-               * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-               * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than
-               * 10 MB in size.
+               * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+               * representing the front of the verification document. The purpose of the uploaded
+               * file should be 'identity_document'. The uploaded file needs to be a color image
+               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
+               * in size.
                */
               public Builder setFront(String front) {
                 this.front = front;
@@ -6936,9 +7088,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * <strong>Required.</strong> The <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-           * referring to each side of the document.
+           * <strong>Required.</strong> The <a href="https://docs.stripe.com/api/files/create">file
+           * upload</a> tokens referring to each side of the document.
            */
           @SerializedName("front_back")
           FrontBack frontBack;
@@ -7007,8 +7158,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
             /**
              * <strong>Required.</strong> The <a
-             * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-             * referring to each side of the document.
+             * href="https://docs.stripe.com/api/files/create">file upload</a> tokens referring to
+             * each side of the document.
              */
             public Builder setFrontBack(
                 AccountTokenCreateParams.Identity.Individual.Documents.SecondaryVerification
@@ -7034,11 +7185,10 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class FrontBack {
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the back of the verification document. The purpose of the uploaded
-             * file should be 'identity_document'. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the back of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("back")
             String back;
@@ -7054,11 +7204,10 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams;
 
             /**
-             * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-             * token representing the front of the verification document. The purpose of the
-             * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-             * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10
-             * MB in size.
+             * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+             * representing the front of the verification document. The purpose of the uploaded file
+             * should be 'identity_document'. The uploaded file needs to be a color image (smaller
+             * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
              */
             @SerializedName("front")
             String front;
@@ -7089,11 +7238,11 @@ public class AccountTokenCreateParams extends ApiRequestParams {
               }
 
               /**
-               * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-               * token representing the back of the verification document. The purpose of the
-               * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-               * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than
-               * 10 MB in size.
+               * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+               * representing the back of the verification document. The purpose of the uploaded
+               * file should be 'identity_document'. The uploaded file needs to be a color image
+               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
+               * in size.
                */
               public Builder setBack(String back) {
                 this.back = back;
@@ -7131,11 +7280,11 @@ public class AccountTokenCreateParams extends ApiRequestParams {
               }
 
               /**
-               * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-               * token representing the front of the verification document. The purpose of the
-               * uploaded file should be 'identity_document'. The uploaded file needs to be a color
-               * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than
-               * 10 MB in size.
+               * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token
+               * representing the front of the verification document. The purpose of the uploaded
+               * file should be 'identity_document'. The uploaded file needs to be a color image
+               * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB
+               * in size.
                */
               public Builder setFront(String front) {
                 this.front = front;
@@ -7172,8 +7321,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> One or more document IDs returned by a <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-           * purpose value of {@code account_requirement}.
+           * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+           * {@code account_requirement}.
            */
           @SerializedName("files")
           List<String> files;

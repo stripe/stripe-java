@@ -4,7 +4,9 @@ package com.stripe.param.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.v2.Amount;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -44,6 +46,14 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /**
+   * The description that appears on the receiving end for an OutboundTransfer (for example, on a
+   * bank statement). Must be between 3 and 22 characters long for most destinations (500 for
+   * FinancialAccount destinations), and not contain profanity.
+   */
+  @SerializedName("statement_descriptor")
+  String statementDescriptor;
+
   /** <strong>Required.</strong> To which payout method to send the OutboundTransfer. */
   @SerializedName("to")
   To to;
@@ -55,6 +65,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       From from,
       Map<String, String> metadata,
+      String statementDescriptor,
       To to) {
     this.amount = amount;
     this.deliveryOptions = deliveryOptions;
@@ -62,6 +73,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.from = from;
     this.metadata = metadata;
+    this.statementDescriptor = statementDescriptor;
     this.to = to;
   }
 
@@ -82,6 +94,8 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private String statementDescriptor;
+
     private To to;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -93,6 +107,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
           this.extraParams,
           this.from,
           this.metadata,
+          this.statementDescriptor,
           this.to);
     }
 
@@ -172,6 +187,16 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * The description that appears on the receiving end for an OutboundTransfer (for example, on a
+     * bank statement). Must be between 3 and 22 characters long for most destinations (500 for
+     * FinancialAccount destinations), and not contain profanity.
+     */
+    public Builder setStatementDescriptor(String statementDescriptor) {
+      this.statementDescriptor = statementDescriptor;
       return this;
     }
 
@@ -383,10 +408,19 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
     @SerializedName("payout_method")
     String payoutMethod;
 
-    private To(String currency, Map<String, Object> extraParams, String payoutMethod) {
+    /** Payout method options for the OutboundTransfer. */
+    @SerializedName("payout_method_options")
+    PayoutMethodOptions payoutMethodOptions;
+
+    private To(
+        String currency,
+        Map<String, Object> extraParams,
+        String payoutMethod,
+        PayoutMethodOptions payoutMethodOptions) {
       this.currency = currency;
       this.extraParams = extraParams;
       this.payoutMethod = payoutMethod;
+      this.payoutMethodOptions = payoutMethodOptions;
     }
 
     public static Builder builder() {
@@ -400,10 +434,12 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
 
       private String payoutMethod;
 
+      private PayoutMethodOptions payoutMethodOptions;
+
       /** Finalize and obtain parameter instance from this builder. */
       public OutboundTransferCreateParams.To build() {
         return new OutboundTransferCreateParams.To(
-            this.currency, this.extraParams, this.payoutMethod);
+            this.currency, this.extraParams, this.payoutMethod, this.payoutMethodOptions);
       }
 
       /**
@@ -452,6 +488,380 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       public Builder setPayoutMethod(String payoutMethod) {
         this.payoutMethod = payoutMethod;
         return this;
+      }
+
+      /** Payout method options for the OutboundTransfer. */
+      public Builder setPayoutMethodOptions(
+          OutboundTransferCreateParams.To.PayoutMethodOptions payoutMethodOptions) {
+        this.payoutMethodOptions = payoutMethodOptions;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PayoutMethodOptions {
+      /** Options for bank account payout methods. */
+      @SerializedName("bank_account")
+      BankAccount bankAccount;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private PayoutMethodOptions(BankAccount bankAccount, Map<String, Object> extraParams) {
+        this.bankAccount = bankAccount;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private BankAccount bankAccount;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public OutboundTransferCreateParams.To.PayoutMethodOptions build() {
+          return new OutboundTransferCreateParams.To.PayoutMethodOptions(
+              this.bankAccount, this.extraParams);
+        }
+
+        /** Options for bank account payout methods. */
+        public Builder setBankAccount(
+            OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount bankAccount) {
+          this.bankAccount = bankAccount;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link OutboundTransferCreateParams.To.PayoutMethodOptions#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link OutboundTransferCreateParams.To.PayoutMethodOptions#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BankAccount {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Per-network configuration options. */
+        @SerializedName("preferred_network_options")
+        PreferredNetworkOptions preferredNetworkOptions;
+
+        /** <strong>Required.</strong> The preferred networks to use for this OutboundTransfer. */
+        @SerializedName("preferred_networks")
+        List<OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount.PreferredNetwork>
+            preferredNetworks;
+
+        private BankAccount(
+            Map<String, Object> extraParams,
+            PreferredNetworkOptions preferredNetworkOptions,
+            List<OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount.PreferredNetwork>
+                preferredNetworks) {
+          this.extraParams = extraParams;
+          this.preferredNetworkOptions = preferredNetworkOptions;
+          this.preferredNetworks = preferredNetworks;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PreferredNetworkOptions preferredNetworkOptions;
+
+          private List<
+                  OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount.PreferredNetwork>
+              preferredNetworks;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount build() {
+            return new OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount(
+                this.extraParams, this.preferredNetworkOptions, this.preferredNetworks);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Per-network configuration options. */
+          public Builder setPreferredNetworkOptions(
+              OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount
+                      .PreferredNetworkOptions
+                  preferredNetworkOptions) {
+            this.preferredNetworkOptions = preferredNetworkOptions;
+            return this;
+          }
+
+          /**
+           * Add an element to `preferredNetworks` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount#preferredNetworks} for
+           * the field documentation.
+           */
+          public Builder addPreferredNetwork(
+              OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount.PreferredNetwork
+                  element) {
+            if (this.preferredNetworks == null) {
+              this.preferredNetworks = new ArrayList<>();
+            }
+            this.preferredNetworks.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `preferredNetworks` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount#preferredNetworks} for
+           * the field documentation.
+           */
+          public Builder addAllPreferredNetwork(
+              List<OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount.PreferredNetwork>
+                  elements) {
+            if (this.preferredNetworks == null) {
+              this.preferredNetworks = new ArrayList<>();
+            }
+            this.preferredNetworks.addAll(elements);
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PreferredNetworkOptions {
+          /** ACH-specific network options. */
+          @SerializedName("ach")
+          Ach ach;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private PreferredNetworkOptions(Ach ach, Map<String, Object> extraParams) {
+            this.ach = ach;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Ach ach;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount
+                    .PreferredNetworkOptions
+                build() {
+              return new OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount
+                  .PreferredNetworkOptions(this.ach, this.extraParams);
+            }
+
+            /** ACH-specific network options. */
+            public Builder setAch(
+                OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount
+                        .PreferredNetworkOptions.Ach
+                    ach) {
+              this.ach = ach;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount.PreferredNetworkOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount.PreferredNetworkOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Ach {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            private Ach(Map<String, Object> extraParams) {
+              this.extraParams = extraParams;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount
+                      .PreferredNetworkOptions.Ach
+                  build() {
+                return new OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount
+                    .PreferredNetworkOptions.Ach(this.extraParams);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount.PreferredNetworkOptions.Ach#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * OutboundTransferCreateParams.To.PayoutMethodOptions.BankAccount.PreferredNetworkOptions.Ach#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+            }
+          }
+        }
+
+        public enum PreferredNetwork implements ApiRequestParams.EnumParam {
+          @SerializedName("ach")
+          ACH("ach"),
+
+          @SerializedName("fedwire")
+          FEDWIRE("fedwire"),
+
+          @SerializedName("fps")
+          FPS("fps"),
+
+          @SerializedName("sepa")
+          SEPA("sepa"),
+
+          @SerializedName("swift")
+          SWIFT("swift");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PreferredNetwork(String value) {
+            this.value = value;
+          }
+        }
       }
     }
   }

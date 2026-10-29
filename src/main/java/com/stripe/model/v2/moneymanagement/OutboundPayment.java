@@ -6,6 +6,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.v2.Amount;
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,7 +20,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class OutboundPayment extends StripeObject implements HasId {
-  /** The &quot;presentment amount&quot; for the OutboundPayment. */
+  /** The amount and currency requested for this OutboundPayment. */
   @SerializedName("amount")
   Amount amount;
 
@@ -90,6 +91,10 @@ public class OutboundPayment extends StripeObject implements HasId {
   @SerializedName("outbound_payment_quote")
   String outboundPaymentQuote;
 
+  /** The PayoutIntent ID that triggered this OutboundPayment. */
+  @SerializedName("payout_intent")
+  String payoutIntent;
+
   /**
    * The purpose of the OutboundPayment.
    *
@@ -111,20 +116,23 @@ public class OutboundPayment extends StripeObject implements HasId {
   RecipientNotification recipientNotification;
 
   /**
-   * The description that appears on the receiving end for an OutboundPayment (for example, bank
-   * statement for external bank transfer). It will default to {@code STRIPE} if not set on the
-   * account settings.
+   * The ID of the RecipientVerification for this OutboundPayment. Required where recipient-name
+   * verification is mandated before creating an OutboundPayment.
+   */
+  @SerializedName("recipient_verification")
+  String recipientVerification;
+
+  /**
+   * The description that appears on the receiving end of an OutboundPayment (for example, on a bank
+   * statement). Defaults to {@code STRIPE} if not configured in the account settings.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
-   * Closed Enum. Current status of the OutboundPayment: {@code processing}, {@code failed}, {@code
-   * posted}, {@code returned}, {@code canceled}. An OutboundPayment is {@code processing} if it has
-   * been created and is processing. The status changes to {@code posted} once the OutboundPayment
-   * has been &quot;confirmed&quot; and funds have left the account, or to {@code failed} or {@code
-   * canceled}. If an OutboundPayment fails to arrive at its payout method, its status will change
-   * to {@code returned}.
+   * Current status of the OutboundPayment. An OutboundPayment is {@code processing} after creation.
+   * It becomes {@code posted} when funds leave the account, {@code failed} if it cannot be sent,
+   * {@code canceled} if canceled before posting, or {@code returned} if the funds are returned.
    *
    * <p>One of {@code canceled}, {@code failed}, {@code posted}, {@code processing}, or {@code
    * returned}.
@@ -153,6 +161,10 @@ public class OutboundPayment extends StripeObject implements HasId {
    */
   @SerializedName("trace_id")
   TraceId traceId;
+
+  /** Information to track this OutboundPayment with the recipient bank. */
+  @SerializedName("tracking_details")
+  TrackingDetails trackingDetails;
 
   /** Delivery options to be used to send the OutboundPayment. */
   @Getter
@@ -189,8 +201,8 @@ public class OutboundPayment extends StripeObject implements HasId {
   public static class RecipientNotification extends StripeObject {
     /**
      * Closed Enum. Configuration option to enable or disable notifications to recipients. Do not
-     * send notifications when setting is NONE. Default to account setting when setting is
-     * CONFIGURED or not set.
+     * send notifications when {@code setting} is {@code none}. Use the account setting when {@code
+     * setting} is {@code configured} or omitted.
      *
      * <p>One of {@code configured}, or {@code none}.
      */
@@ -320,9 +332,69 @@ public class OutboundPayment extends StripeObject implements HasId {
     @SerializedName("payout_method")
     String payoutMethod;
 
+    /** Payout method options for the OutboundPayment. */
+    @SerializedName("payout_method_options")
+    PayoutMethodOptions payoutMethodOptions;
+
     /** To which account the OutboundPayment is sent. */
     @SerializedName("recipient")
     String recipient;
+
+    /** Payout method options for the OutboundPayment. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PayoutMethodOptions extends StripeObject {
+      /** Options for bank account payout methods. */
+      @SerializedName("bank_account")
+      BankAccount bankAccount;
+
+      /** Options for bank account payout methods. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BankAccount extends StripeObject {
+        /** Per-network configuration options. */
+        @SerializedName("preferred_network_options")
+        PreferredNetworkOptions preferredNetworkOptions;
+
+        /** The preferred networks to use for this OutboundPayment. */
+        @SerializedName("preferred_networks")
+        List<String> preferredNetworks;
+
+        /** Per-network configuration options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PreferredNetworkOptions extends StripeObject {
+          /** ACH-specific network options. */
+          @SerializedName("ach")
+          Ach ach;
+
+          /** ACH-specific network options. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Ach extends StripeObject {
+            /**
+             * Open Enum. ACH submission timing.
+             *
+             * <p>One of {@code next_day}, or {@code same_day}.
+             */
+            @SerializedName("submission")
+            String submission;
+
+            /**
+             * The transaction purpose for this ACH payment.
+             *
+             * <p>Equal to {@code payroll}.
+             */
+            @SerializedName("transaction_purpose")
+            String transactionPurpose;
+          }
+        }
+      }
+    }
   }
 
   /**
@@ -336,9 +408,9 @@ public class OutboundPayment extends StripeObject implements HasId {
     /**
      * Possible values are {@code pending}, {@code supported}, and {@code unsupported}. Initially
      * set to {@code pending}, it changes to {@code supported} when the recipient bank provides a
-     * trace ID, or {@code unsupported} if the recipient bank doesn't support it. Note that this
-     * status may not align with the OutboundPayment or OutboundTransfer status and can remain
-     * {@code pending} even after the payment or transfer is posted.
+     * trace ID, or {@code unsupported} if the recipient bank doesn't support it. This status may
+     * not align with the OutboundPayment or OutboundTransfer status and can remain {@code pending}
+     * even after the payment or transfer is posted.
      *
      * <p>One of {@code pending}, {@code supported}, or {@code unsupported}.
      */
@@ -348,5 +420,77 @@ public class OutboundPayment extends StripeObject implements HasId {
     /** The trace ID value if {@code trace_id.status} is {@code supported}, otherwise empty. */
     @SerializedName("value")
     String value;
+  }
+
+  /** Information to track this OutboundPayment with the recipient bank. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TrackingDetails extends StripeObject {
+    /** Bank account tracking details. */
+    @SerializedName("bank_account")
+    BankAccount bankAccount;
+
+    /** Card tracking details. */
+    @SerializedName("card")
+    Card card;
+
+    /** Crypto wallet tracking details. */
+    @SerializedName("crypto_wallet")
+    CryptoWallet cryptoWallet;
+
+    /**
+     * The status of the tracking details for this OutboundPayment.
+     *
+     * <p>One of {@code pending}, {@code supported}, or {@code unsupported}.
+     */
+    @SerializedName("status")
+    String status;
+
+    /**
+     * The type of tracking details for this OutboundPayment.
+     *
+     * <p>One of {@code bank_account}, {@code card}, or {@code crypto_wallet}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /** Bank account tracking details. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BankAccount extends StripeObject {
+      /**
+       * A unique identifier that can be used to track this OutboundPayment with the recipient bank.
+       * Banks might call this a “reference number” or something similar.
+       */
+      @SerializedName("trace_id")
+      String traceId;
+    }
+
+    /** Card tracking details. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      /**
+       * A unique identifier that can be used to track this OutboundPayment with the recipient card.
+       */
+      @SerializedName("retrieval_reference")
+      String retrievalReference;
+    }
+
+    /** Crypto wallet tracking details. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CryptoWallet extends StripeObject {
+      /**
+       * A unique identifier that can be used to track this OutboundPayment with the recipient
+       * crypto wallet.
+       */
+      @SerializedName("blockchain_transaction")
+      String blockchainTransaction;
+    }
   }
 }

@@ -48,6 +48,10 @@ public final class MoneyManagementService extends ApiService {
         this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.moneymanagement.PayoutIntentService payoutIntents() {
+    return new com.stripe.service.v2.moneymanagement.PayoutIntentService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.moneymanagement.PayoutMethodService payoutMethods() {
     return new com.stripe.service.v2.moneymanagement.PayoutMethodService(this.getResponseGetter());
   }
@@ -65,6 +69,12 @@ public final class MoneyManagementService extends ApiService {
 
   public com.stripe.service.v2.moneymanagement.ReceivedDebitService receivedDebits() {
     return new com.stripe.service.v2.moneymanagement.ReceivedDebitService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.moneymanagement.RecipientVerificationService
+      recipientVerifications() {
+    return new com.stripe.service.v2.moneymanagement.RecipientVerificationService(
+        this.getResponseGetter());
   }
 
   public com.stripe.service.v2.moneymanagement.TestHelpersService testHelpers() {

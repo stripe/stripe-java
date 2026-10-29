@@ -31,8 +31,8 @@ public class FinancialAccountListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * Filter for FinancialAccount {@code status}. By default, closed FinancialAccounts are not
-   * returned.
+   * Return FinancialAccounts whose {@code status} matches any of the provided values. If omitted,
+   * closed FinancialAccounts are not returned.
    */
   @SerializedName("statuses")
   List<FinancialAccountListParams.Status> statuses;

@@ -65,31 +65,57 @@ import com.stripe.events.V1CustomerCreatedEventNotification;
 import com.stripe.events.V1CustomerDeletedEventNotification;
 import com.stripe.events.V1CustomerDiscountCreatedEventNotification;
 import com.stripe.events.V1CustomerDiscountDeletedEventNotification;
+import com.stripe.events.V1CustomerDiscountSourceChangedEventNotification;
 import com.stripe.events.V1CustomerDiscountUpdatedEventNotification;
+import com.stripe.events.V1CustomerSubscriptionActiveEventNotification;
+import com.stripe.events.V1CustomerSubscriptionCancelAtChangedEventNotification;
 import com.stripe.events.V1CustomerSubscriptionCreatedEventNotification;
+import com.stripe.events.V1CustomerSubscriptionDefaultPaymentMethodChangedEventNotification;
 import com.stripe.events.V1CustomerSubscriptionDeletedEventNotification;
+import com.stripe.events.V1CustomerSubscriptionIncompleteEventNotification;
+import com.stripe.events.V1CustomerSubscriptionIncompleteExpiredEventNotification;
+import com.stripe.events.V1CustomerSubscriptionItemAddedEventNotification;
+import com.stripe.events.V1CustomerSubscriptionItemPriceChangedEventNotification;
+import com.stripe.events.V1CustomerSubscriptionItemQuantityChangedEventNotification;
+import com.stripe.events.V1CustomerSubscriptionItemRemovedEventNotification;
+import com.stripe.events.V1CustomerSubscriptionItemTaxRatesChangedEventNotification;
+import com.stripe.events.V1CustomerSubscriptionPastDueEventNotification;
 import com.stripe.events.V1CustomerSubscriptionPausedEventNotification;
 import com.stripe.events.V1CustomerSubscriptionPendingUpdateAppliedEventNotification;
 import com.stripe.events.V1CustomerSubscriptionPendingUpdateExpiredEventNotification;
 import com.stripe.events.V1CustomerSubscriptionResumedEventNotification;
 import com.stripe.events.V1CustomerSubscriptionTrialWillEndEventNotification;
+import com.stripe.events.V1CustomerSubscriptionTrialingEventNotification;
+import com.stripe.events.V1CustomerSubscriptionUnpaidEventNotification;
 import com.stripe.events.V1CustomerSubscriptionUpdatedEventNotification;
 import com.stripe.events.V1CustomerTaxIdCreatedEventNotification;
 import com.stripe.events.V1CustomerTaxIdDeletedEventNotification;
 import com.stripe.events.V1CustomerTaxIdUpdatedEventNotification;
 import com.stripe.events.V1CustomerUpdatedEventNotification;
+import com.stripe.events.V1EntitlementsActiveEntitlementSummaryEntitlementAddedEventNotification;
+import com.stripe.events.V1EntitlementsActiveEntitlementSummaryEntitlementRemovedEventNotification;
 import com.stripe.events.V1EntitlementsActiveEntitlementSummaryUpdatedEventNotification;
 import com.stripe.events.V1FileCreatedEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountAccountNumbersUpdatedEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountBalanceRefreshFailedEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountBalanceRefreshSucceededEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountCreatedEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountDeactivatedEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountDisconnectedEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountExpectedDeactivationDateUpdatedEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountInferredBalancesRefreshFailedEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountInferredBalancesRefreshSucceededEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountOwnershipRefreshFailedEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountOwnershipRefreshSucceededEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountReactivatedEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountRefreshedBalanceEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountRefreshedOwnershipEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountRefreshedTransactionsEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountRiskIntelligenceRefreshFailedEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountRiskIntelligenceRefreshSucceededEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountSupportedPaymentMethodTypesUpdatedEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountTransactionsRefreshFailedEventNotification;
+import com.stripe.events.V1FinancialConnectionsAccountTransactionsRefreshSucceededEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountUpcomingAccountNumberExpiryEventNotification;
 import com.stripe.events.V1FinancialConnectionsAccountUpcomingDeactivationEventNotification;
 import com.stripe.events.V1IdentityVerificationSessionCanceledEventNotification;
@@ -100,15 +126,23 @@ import com.stripe.events.V1IdentityVerificationSessionRequiresInputEventNotifica
 import com.stripe.events.V1IdentityVerificationSessionVerifiedEventNotification;
 import com.stripe.events.V1InvoiceCreatedEventNotification;
 import com.stripe.events.V1InvoiceDeletedEventNotification;
+import com.stripe.events.V1InvoiceDiscountAddedEventNotification;
+import com.stripe.events.V1InvoiceDiscountRemovedEventNotification;
 import com.stripe.events.V1InvoiceFinalizationFailedEventNotification;
 import com.stripe.events.V1InvoiceFinalizedEventNotification;
+import com.stripe.events.V1InvoiceLineItemAddedEventNotification;
+import com.stripe.events.V1InvoiceLineItemPricingChangedEventNotification;
+import com.stripe.events.V1InvoiceLineItemQuantityChangedEventNotification;
+import com.stripe.events.V1InvoiceLineItemRemovedEventNotification;
 import com.stripe.events.V1InvoiceMarkedUncollectibleEventNotification;
 import com.stripe.events.V1InvoiceOverdueEventNotification;
 import com.stripe.events.V1InvoiceOverpaidEventNotification;
 import com.stripe.events.V1InvoicePaidEventNotification;
 import com.stripe.events.V1InvoicePaymentActionRequiredEventNotification;
 import com.stripe.events.V1InvoicePaymentAttemptRequiredEventNotification;
+import com.stripe.events.V1InvoicePaymentCanceledEventNotification;
 import com.stripe.events.V1InvoicePaymentFailedEventNotification;
+import com.stripe.events.V1InvoicePaymentOpenEventNotification;
 import com.stripe.events.V1InvoicePaymentPaidEventNotification;
 import com.stripe.events.V1InvoicePaymentSucceededEventNotification;
 import com.stripe.events.V1InvoiceSentEventNotification;
@@ -116,8 +150,11 @@ import com.stripe.events.V1InvoiceUpcomingEventNotification;
 import com.stripe.events.V1InvoiceUpdatedEventNotification;
 import com.stripe.events.V1InvoiceVoidedEventNotification;
 import com.stripe.events.V1InvoiceWillBeDueEventNotification;
+import com.stripe.events.V1InvoiceitemAmountChangedEventNotification;
 import com.stripe.events.V1InvoiceitemCreatedEventNotification;
 import com.stripe.events.V1InvoiceitemDeletedEventNotification;
+import com.stripe.events.V1InvoiceitemDiscountAddedEventNotification;
+import com.stripe.events.V1InvoiceitemDiscountRemovedEventNotification;
 import com.stripe.events.V1IssuingAuthorizationCreatedEventNotification;
 import com.stripe.events.V1IssuingAuthorizationRequestEventNotification;
 import com.stripe.events.V1IssuingAuthorizationUpdatedEventNotification;
@@ -167,13 +204,22 @@ import com.stripe.events.V1PersonUpdatedEventNotification;
 import com.stripe.events.V1PlanCreatedEventNotification;
 import com.stripe.events.V1PlanDeletedEventNotification;
 import com.stripe.events.V1PlanUpdatedEventNotification;
+import com.stripe.events.V1PriceActivatedEventNotification;
 import com.stripe.events.V1PriceCreatedEventNotification;
+import com.stripe.events.V1PriceDeactivatedEventNotification;
 import com.stripe.events.V1PriceDeletedEventNotification;
+import com.stripe.events.V1PriceLookupKeyChangedEventNotification;
+import com.stripe.events.V1PriceTaxBehaviorChangedEventNotification;
 import com.stripe.events.V1PriceUpdatedEventNotification;
+import com.stripe.events.V1ProductActivatedEventNotification;
 import com.stripe.events.V1ProductCreatedEventNotification;
+import com.stripe.events.V1ProductDeactivatedEventNotification;
+import com.stripe.events.V1ProductDefaultPriceChangedEventNotification;
 import com.stripe.events.V1ProductDeletedEventNotification;
+import com.stripe.events.V1ProductTaxCodeChangedEventNotification;
 import com.stripe.events.V1ProductUpdatedEventNotification;
 import com.stripe.events.V1PromotionCodeCreatedEventNotification;
+import com.stripe.events.V1PromotionCodeFullyRedeemedEventNotification;
 import com.stripe.events.V1PromotionCodeUpdatedEventNotification;
 import com.stripe.events.V1QuoteAcceptedEventNotification;
 import com.stripe.events.V1QuoteCanceledEventNotification;
@@ -201,6 +247,11 @@ import com.stripe.events.V1SubscriptionScheduleCanceledEventNotification;
 import com.stripe.events.V1SubscriptionScheduleCompletedEventNotification;
 import com.stripe.events.V1SubscriptionScheduleCreatedEventNotification;
 import com.stripe.events.V1SubscriptionScheduleExpiringEventNotification;
+import com.stripe.events.V1SubscriptionSchedulePhaseAddedEventNotification;
+import com.stripe.events.V1SubscriptionSchedulePhaseDefaultTaxRatesChangedEventNotification;
+import com.stripe.events.V1SubscriptionSchedulePhaseEndDateChangedEventNotification;
+import com.stripe.events.V1SubscriptionSchedulePhaseRemovedEventNotification;
+import com.stripe.events.V1SubscriptionSchedulePhaseTrialEndChangedEventNotification;
 import com.stripe.events.V1SubscriptionScheduleReleasedEventNotification;
 import com.stripe.events.V1SubscriptionScheduleUpdatedEventNotification;
 import com.stripe.events.V1TaxRateCreatedEventNotification;
@@ -264,6 +315,14 @@ import com.stripe.events.V2CoreBatchJobValidatingEventNotification;
 import com.stripe.events.V2CoreBatchJobValidationFailedEventNotification;
 import com.stripe.events.V2CoreEventDestinationPingEventNotification;
 import com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEventNotification;
+import com.stripe.events.V2DataQueryRunCreatedEventNotification;
+import com.stripe.events.V2DataQueryRunFailedEventNotification;
+import com.stripe.events.V2DataQueryRunSucceededEventNotification;
+import com.stripe.events.V2DataQueryRunUpdatedEventNotification;
+import com.stripe.events.V2DataReportRunCreatedEventNotification;
+import com.stripe.events.V2DataReportRunFailedEventNotification;
+import com.stripe.events.V2DataReportRunSucceededEventNotification;
+import com.stripe.events.V2DataReportRunUpdatedEventNotification;
 import com.stripe.events.V2DataReportingQueryRunCreatedEventNotification;
 import com.stripe.events.V2DataReportingQueryRunFailedEventNotification;
 import com.stripe.events.V2DataReportingQueryRunSucceededEventNotification;
@@ -296,6 +355,13 @@ import com.stripe.events.V2MoneyManagementOutboundTransferPostedEventNotificatio
 import com.stripe.events.V2MoneyManagementOutboundTransferReturnedEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundTransferUnderReviewEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundTransferUpdatedEventNotification;
+import com.stripe.events.V2MoneyManagementPayoutIntentCanceledEventNotification;
+import com.stripe.events.V2MoneyManagementPayoutIntentCreatedEventNotification;
+import com.stripe.events.V2MoneyManagementPayoutIntentPendingEventNotification;
+import com.stripe.events.V2MoneyManagementPayoutIntentPostedEventNotification;
+import com.stripe.events.V2MoneyManagementPayoutIntentProcessingEventNotification;
+import com.stripe.events.V2MoneyManagementPayoutIntentRequiresActionEventNotification;
+import com.stripe.events.V2MoneyManagementPayoutIntentUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementPayoutMethodCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementPayoutMethodUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedCreditAvailableEventNotification;
@@ -307,6 +373,8 @@ import com.stripe.events.V2MoneyManagementReceivedDebitFailedEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedDebitPendingEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedDebitSucceededEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedDebitUpdatedEventNotification;
+import com.stripe.events.V2MoneyManagementRecipientVerificationCreatedEventNotification;
+import com.stripe.events.V2MoneyManagementRecipientVerificationUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementTransactionCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementTransactionUpdatedEventNotification;
 import com.stripe.events.V2OrchestratedCommerceAgreementConfirmedEventNotification;
@@ -785,9 +853,27 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV1CustomerDiscountSourceChanged(
+      EventNotificationCallback<V1CustomerDiscountSourceChangedEventNotification> callback) {
+    this.register("v1.customer.discount.source_changed", callback);
+    return self();
+  }
+
   public T onV1CustomerDiscountUpdated(
       EventNotificationCallback<V1CustomerDiscountUpdatedEventNotification> callback) {
     this.register("v1.customer.discount.updated", callback);
+    return self();
+  }
+
+  public T onV1CustomerSubscriptionActive(
+      EventNotificationCallback<V1CustomerSubscriptionActiveEventNotification> callback) {
+    this.register("v1.customer.subscription.active", callback);
+    return self();
+  }
+
+  public T onV1CustomerSubscriptionCancelAtChanged(
+      EventNotificationCallback<V1CustomerSubscriptionCancelAtChangedEventNotification> callback) {
+    this.register("v1.customer.subscription.cancel_at_changed", callback);
     return self();
   }
 
@@ -797,9 +883,67 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV1CustomerSubscriptionDefaultPaymentMethodChanged(
+      EventNotificationCallback<V1CustomerSubscriptionDefaultPaymentMethodChangedEventNotification>
+          callback) {
+    this.register("v1.customer.subscription.default_payment_method_changed", callback);
+    return self();
+  }
+
   public T onV1CustomerSubscriptionDeleted(
       EventNotificationCallback<V1CustomerSubscriptionDeletedEventNotification> callback) {
     this.register("v1.customer.subscription.deleted", callback);
+    return self();
+  }
+
+  public T onV1CustomerSubscriptionIncomplete(
+      EventNotificationCallback<V1CustomerSubscriptionIncompleteEventNotification> callback) {
+    this.register("v1.customer.subscription.incomplete", callback);
+    return self();
+  }
+
+  public T onV1CustomerSubscriptionIncompleteExpired(
+      EventNotificationCallback<V1CustomerSubscriptionIncompleteExpiredEventNotification>
+          callback) {
+    this.register("v1.customer.subscription.incomplete_expired", callback);
+    return self();
+  }
+
+  public T onV1CustomerSubscriptionItemAdded(
+      EventNotificationCallback<V1CustomerSubscriptionItemAddedEventNotification> callback) {
+    this.register("v1.customer.subscription.item_added", callback);
+    return self();
+  }
+
+  public T onV1CustomerSubscriptionItemPriceChanged(
+      EventNotificationCallback<V1CustomerSubscriptionItemPriceChangedEventNotification> callback) {
+    this.register("v1.customer.subscription.item_price_changed", callback);
+    return self();
+  }
+
+  public T onV1CustomerSubscriptionItemQuantityChanged(
+      EventNotificationCallback<V1CustomerSubscriptionItemQuantityChangedEventNotification>
+          callback) {
+    this.register("v1.customer.subscription.item_quantity_changed", callback);
+    return self();
+  }
+
+  public T onV1CustomerSubscriptionItemRemoved(
+      EventNotificationCallback<V1CustomerSubscriptionItemRemovedEventNotification> callback) {
+    this.register("v1.customer.subscription.item_removed", callback);
+    return self();
+  }
+
+  public T onV1CustomerSubscriptionItemTaxRatesChanged(
+      EventNotificationCallback<V1CustomerSubscriptionItemTaxRatesChangedEventNotification>
+          callback) {
+    this.register("v1.customer.subscription.item_tax_rates_changed", callback);
+    return self();
+  }
+
+  public T onV1CustomerSubscriptionPastDue(
+      EventNotificationCallback<V1CustomerSubscriptionPastDueEventNotification> callback) {
+    this.register("v1.customer.subscription.past_due", callback);
     return self();
   }
 
@@ -832,6 +976,18 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV1CustomerSubscriptionTrialWillEnd(
       EventNotificationCallback<V1CustomerSubscriptionTrialWillEndEventNotification> callback) {
     this.register("v1.customer.subscription.trial_will_end", callback);
+    return self();
+  }
+
+  public T onV1CustomerSubscriptionTrialing(
+      EventNotificationCallback<V1CustomerSubscriptionTrialingEventNotification> callback) {
+    this.register("v1.customer.subscription.trialing", callback);
+    return self();
+  }
+
+  public T onV1CustomerSubscriptionUnpaid(
+      EventNotificationCallback<V1CustomerSubscriptionUnpaidEventNotification> callback) {
+    this.register("v1.customer.subscription.unpaid", callback);
     return self();
   }
 
@@ -872,6 +1028,22 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV1EntitlementsActiveEntitlementSummaryEntitlementAdded(
+      EventNotificationCallback<
+              V1EntitlementsActiveEntitlementSummaryEntitlementAddedEventNotification>
+          callback) {
+    this.register("v1.entitlements.active_entitlement_summary.entitlement_added", callback);
+    return self();
+  }
+
+  public T onV1EntitlementsActiveEntitlementSummaryEntitlementRemoved(
+      EventNotificationCallback<
+              V1EntitlementsActiveEntitlementSummaryEntitlementRemovedEventNotification>
+          callback) {
+    this.register("v1.entitlements.active_entitlement_summary.entitlement_removed", callback);
+    return self();
+  }
+
   public T onV1EntitlementsActiveEntitlementSummaryUpdated(
       EventNotificationCallback<V1EntitlementsActiveEntitlementSummaryUpdatedEventNotification>
           callback) {
@@ -888,6 +1060,21 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
       EventNotificationCallback<V1FinancialConnectionsAccountAccountNumbersUpdatedEventNotification>
           callback) {
     this.register("v1.financial_connections.account.account_numbers_updated", callback);
+    return self();
+  }
+
+  public T onV1FinancialConnectionsAccountBalanceRefreshFailed(
+      EventNotificationCallback<V1FinancialConnectionsAccountBalanceRefreshFailedEventNotification>
+          callback) {
+    this.register("v1.financial_connections.account.balance_refresh_failed", callback);
+    return self();
+  }
+
+  public T onV1FinancialConnectionsAccountBalanceRefreshSucceeded(
+      EventNotificationCallback<
+              V1FinancialConnectionsAccountBalanceRefreshSucceededEventNotification>
+          callback) {
+    this.register("v1.financial_connections.account.balance_refresh_succeeded", callback);
     return self();
   }
 
@@ -919,6 +1106,38 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV1FinancialConnectionsAccountInferredBalancesRefreshFailed(
+      EventNotificationCallback<
+              V1FinancialConnectionsAccountInferredBalancesRefreshFailedEventNotification>
+          callback) {
+    this.register("v1.financial_connections.account.inferred_balances_refresh_failed", callback);
+    return self();
+  }
+
+  public T onV1FinancialConnectionsAccountInferredBalancesRefreshSucceeded(
+      EventNotificationCallback<
+              V1FinancialConnectionsAccountInferredBalancesRefreshSucceededEventNotification>
+          callback) {
+    this.register("v1.financial_connections.account.inferred_balances_refresh_succeeded", callback);
+    return self();
+  }
+
+  public T onV1FinancialConnectionsAccountOwnershipRefreshFailed(
+      EventNotificationCallback<
+              V1FinancialConnectionsAccountOwnershipRefreshFailedEventNotification>
+          callback) {
+    this.register("v1.financial_connections.account.ownership_refresh_failed", callback);
+    return self();
+  }
+
+  public T onV1FinancialConnectionsAccountOwnershipRefreshSucceeded(
+      EventNotificationCallback<
+              V1FinancialConnectionsAccountOwnershipRefreshSucceededEventNotification>
+          callback) {
+    this.register("v1.financial_connections.account.ownership_refresh_succeeded", callback);
+    return self();
+  }
+
   public T onV1FinancialConnectionsAccountReactivated(
       EventNotificationCallback<V1FinancialConnectionsAccountReactivatedEventNotification>
           callback) {
@@ -947,12 +1166,44 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV1FinancialConnectionsAccountRiskIntelligenceRefreshFailed(
+      EventNotificationCallback<
+              V1FinancialConnectionsAccountRiskIntelligenceRefreshFailedEventNotification>
+          callback) {
+    this.register("v1.financial_connections.account.risk_intelligence_refresh_failed", callback);
+    return self();
+  }
+
+  public T onV1FinancialConnectionsAccountRiskIntelligenceRefreshSucceeded(
+      EventNotificationCallback<
+              V1FinancialConnectionsAccountRiskIntelligenceRefreshSucceededEventNotification>
+          callback) {
+    this.register("v1.financial_connections.account.risk_intelligence_refresh_succeeded", callback);
+    return self();
+  }
+
   public T onV1FinancialConnectionsAccountSupportedPaymentMethodTypesUpdated(
       EventNotificationCallback<
               V1FinancialConnectionsAccountSupportedPaymentMethodTypesUpdatedEventNotification>
           callback) {
     this.register(
         "v1.financial_connections.account.supported_payment_method_types_updated", callback);
+    return self();
+  }
+
+  public T onV1FinancialConnectionsAccountTransactionsRefreshFailed(
+      EventNotificationCallback<
+              V1FinancialConnectionsAccountTransactionsRefreshFailedEventNotification>
+          callback) {
+    this.register("v1.financial_connections.account.transactions_refresh_failed", callback);
+    return self();
+  }
+
+  public T onV1FinancialConnectionsAccountTransactionsRefreshSucceeded(
+      EventNotificationCallback<
+              V1FinancialConnectionsAccountTransactionsRefreshSucceededEventNotification>
+          callback) {
+    this.register("v1.financial_connections.account.transactions_refresh_succeeded", callback);
     return self();
   }
 
@@ -1021,6 +1272,18 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV1InvoiceDiscountAdded(
+      EventNotificationCallback<V1InvoiceDiscountAddedEventNotification> callback) {
+    this.register("v1.invoice.discount_added", callback);
+    return self();
+  }
+
+  public T onV1InvoiceDiscountRemoved(
+      EventNotificationCallback<V1InvoiceDiscountRemovedEventNotification> callback) {
+    this.register("v1.invoice.discount_removed", callback);
+    return self();
+  }
+
   public T onV1InvoiceFinalizationFailed(
       EventNotificationCallback<V1InvoiceFinalizationFailedEventNotification> callback) {
     this.register("v1.invoice.finalization_failed", callback);
@@ -1030,6 +1293,30 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV1InvoiceFinalized(
       EventNotificationCallback<V1InvoiceFinalizedEventNotification> callback) {
     this.register("v1.invoice.finalized", callback);
+    return self();
+  }
+
+  public T onV1InvoiceLineItemAdded(
+      EventNotificationCallback<V1InvoiceLineItemAddedEventNotification> callback) {
+    this.register("v1.invoice.line_item_added", callback);
+    return self();
+  }
+
+  public T onV1InvoiceLineItemPricingChanged(
+      EventNotificationCallback<V1InvoiceLineItemPricingChangedEventNotification> callback) {
+    this.register("v1.invoice.line_item_pricing_changed", callback);
+    return self();
+  }
+
+  public T onV1InvoiceLineItemQuantityChanged(
+      EventNotificationCallback<V1InvoiceLineItemQuantityChangedEventNotification> callback) {
+    this.register("v1.invoice.line_item_quantity_changed", callback);
+    return self();
+  }
+
+  public T onV1InvoiceLineItemRemoved(
+      EventNotificationCallback<V1InvoiceLineItemRemovedEventNotification> callback) {
+    this.register("v1.invoice.line_item_removed", callback);
     return self();
   }
 
@@ -1108,9 +1395,27 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV1InvoicePaymentCanceled(
+      EventNotificationCallback<V1InvoicePaymentCanceledEventNotification> callback) {
+    this.register("v1.invoice_payment.canceled", callback);
+    return self();
+  }
+
+  public T onV1InvoicePaymentOpen(
+      EventNotificationCallback<V1InvoicePaymentOpenEventNotification> callback) {
+    this.register("v1.invoice_payment.open", callback);
+    return self();
+  }
+
   public T onV1InvoicePaymentPaid(
       EventNotificationCallback<V1InvoicePaymentPaidEventNotification> callback) {
     this.register("v1.invoice_payment.paid", callback);
+    return self();
+  }
+
+  public T onV1InvoiceitemAmountChanged(
+      EventNotificationCallback<V1InvoiceitemAmountChangedEventNotification> callback) {
+    this.register("v1.invoiceitem.amount_changed", callback);
     return self();
   }
 
@@ -1123,6 +1428,18 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV1InvoiceitemDeleted(
       EventNotificationCallback<V1InvoiceitemDeletedEventNotification> callback) {
     this.register("v1.invoiceitem.deleted", callback);
+    return self();
+  }
+
+  public T onV1InvoiceitemDiscountAdded(
+      EventNotificationCallback<V1InvoiceitemDiscountAddedEventNotification> callback) {
+    this.register("v1.invoiceitem.discount_added", callback);
+    return self();
+  }
+
+  public T onV1InvoiceitemDiscountRemoved(
+      EventNotificationCallback<V1InvoiceitemDiscountRemovedEventNotification> callback) {
+    this.register("v1.invoiceitem.discount_removed", callback);
     return self();
   }
 
@@ -1413,8 +1730,20 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV1PriceActivated(
+      EventNotificationCallback<V1PriceActivatedEventNotification> callback) {
+    this.register("v1.price.activated", callback);
+    return self();
+  }
+
   public T onV1PriceCreated(EventNotificationCallback<V1PriceCreatedEventNotification> callback) {
     this.register("v1.price.created", callback);
+    return self();
+  }
+
+  public T onV1PriceDeactivated(
+      EventNotificationCallback<V1PriceDeactivatedEventNotification> callback) {
+    this.register("v1.price.deactivated", callback);
     return self();
   }
 
@@ -1423,8 +1752,26 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV1PriceLookupKeyChanged(
+      EventNotificationCallback<V1PriceLookupKeyChangedEventNotification> callback) {
+    this.register("v1.price.lookup_key_changed", callback);
+    return self();
+  }
+
+  public T onV1PriceTaxBehaviorChanged(
+      EventNotificationCallback<V1PriceTaxBehaviorChangedEventNotification> callback) {
+    this.register("v1.price.tax_behavior_changed", callback);
+    return self();
+  }
+
   public T onV1PriceUpdated(EventNotificationCallback<V1PriceUpdatedEventNotification> callback) {
     this.register("v1.price.updated", callback);
+    return self();
+  }
+
+  public T onV1ProductActivated(
+      EventNotificationCallback<V1ProductActivatedEventNotification> callback) {
+    this.register("v1.product.activated", callback);
     return self();
   }
 
@@ -1434,9 +1781,27 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV1ProductDeactivated(
+      EventNotificationCallback<V1ProductDeactivatedEventNotification> callback) {
+    this.register("v1.product.deactivated", callback);
+    return self();
+  }
+
+  public T onV1ProductDefaultPriceChanged(
+      EventNotificationCallback<V1ProductDefaultPriceChangedEventNotification> callback) {
+    this.register("v1.product.default_price_changed", callback);
+    return self();
+  }
+
   public T onV1ProductDeleted(
       EventNotificationCallback<V1ProductDeletedEventNotification> callback) {
     this.register("v1.product.deleted", callback);
+    return self();
+  }
+
+  public T onV1ProductTaxCodeChanged(
+      EventNotificationCallback<V1ProductTaxCodeChangedEventNotification> callback) {
+    this.register("v1.product.tax_code_changed", callback);
     return self();
   }
 
@@ -1449,6 +1814,12 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV1PromotionCodeCreated(
       EventNotificationCallback<V1PromotionCodeCreatedEventNotification> callback) {
     this.register("v1.promotion_code.created", callback);
+    return self();
+  }
+
+  public T onV1PromotionCodeFullyRedeemed(
+      EventNotificationCallback<V1PromotionCodeFullyRedeemedEventNotification> callback) {
+    this.register("v1.promotion_code.fully_redeemed", callback);
     return self();
   }
 
@@ -1602,6 +1973,39 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV1SubscriptionScheduleExpiring(
       EventNotificationCallback<V1SubscriptionScheduleExpiringEventNotification> callback) {
     this.register("v1.subscription_schedule.expiring", callback);
+    return self();
+  }
+
+  public T onV1SubscriptionSchedulePhaseAdded(
+      EventNotificationCallback<V1SubscriptionSchedulePhaseAddedEventNotification> callback) {
+    this.register("v1.subscription_schedule.phase_added", callback);
+    return self();
+  }
+
+  public T onV1SubscriptionSchedulePhaseDefaultTaxRatesChanged(
+      EventNotificationCallback<V1SubscriptionSchedulePhaseDefaultTaxRatesChangedEventNotification>
+          callback) {
+    this.register("v1.subscription_schedule.phase_default_tax_rates_changed", callback);
+    return self();
+  }
+
+  public T onV1SubscriptionSchedulePhaseEndDateChanged(
+      EventNotificationCallback<V1SubscriptionSchedulePhaseEndDateChangedEventNotification>
+          callback) {
+    this.register("v1.subscription_schedule.phase_end_date_changed", callback);
+    return self();
+  }
+
+  public T onV1SubscriptionSchedulePhaseRemoved(
+      EventNotificationCallback<V1SubscriptionSchedulePhaseRemovedEventNotification> callback) {
+    this.register("v1.subscription_schedule.phase_removed", callback);
+    return self();
+  }
+
+  public T onV1SubscriptionSchedulePhaseTrialEndChanged(
+      EventNotificationCallback<V1SubscriptionSchedulePhaseTrialEndChangedEventNotification>
+          callback) {
+    this.register("v1.subscription_schedule.phase_trial_end_changed", callback);
     return self();
   }
 
@@ -2000,6 +2404,54 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV2DataQueryRunCreated(
+      EventNotificationCallback<V2DataQueryRunCreatedEventNotification> callback) {
+    this.register("v2.data.query_run.created", callback);
+    return self();
+  }
+
+  public T onV2DataQueryRunFailed(
+      EventNotificationCallback<V2DataQueryRunFailedEventNotification> callback) {
+    this.register("v2.data.query_run.failed", callback);
+    return self();
+  }
+
+  public T onV2DataQueryRunSucceeded(
+      EventNotificationCallback<V2DataQueryRunSucceededEventNotification> callback) {
+    this.register("v2.data.query_run.succeeded", callback);
+    return self();
+  }
+
+  public T onV2DataQueryRunUpdated(
+      EventNotificationCallback<V2DataQueryRunUpdatedEventNotification> callback) {
+    this.register("v2.data.query_run.updated", callback);
+    return self();
+  }
+
+  public T onV2DataReportRunCreated(
+      EventNotificationCallback<V2DataReportRunCreatedEventNotification> callback) {
+    this.register("v2.data.report_run.created", callback);
+    return self();
+  }
+
+  public T onV2DataReportRunFailed(
+      EventNotificationCallback<V2DataReportRunFailedEventNotification> callback) {
+    this.register("v2.data.report_run.failed", callback);
+    return self();
+  }
+
+  public T onV2DataReportRunSucceeded(
+      EventNotificationCallback<V2DataReportRunSucceededEventNotification> callback) {
+    this.register("v2.data.report_run.succeeded", callback);
+    return self();
+  }
+
+  public T onV2DataReportRunUpdated(
+      EventNotificationCallback<V2DataReportRunUpdatedEventNotification> callback) {
+    this.register("v2.data.report_run.updated", callback);
+    return self();
+  }
+
   public T onV2DataReportingQueryRunCreated(
       EventNotificationCallback<V2DataReportingQueryRunCreatedEventNotification> callback) {
     this.register("v2.data.reporting.query_run.created", callback);
@@ -2215,6 +2667,50 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
     return self();
   }
 
+  public T onV2MoneyManagementPayoutIntentCanceled(
+      EventNotificationCallback<V2MoneyManagementPayoutIntentCanceledEventNotification> callback) {
+    this.register("v2.money_management.payout_intent.canceled", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementPayoutIntentCreated(
+      EventNotificationCallback<V2MoneyManagementPayoutIntentCreatedEventNotification> callback) {
+    this.register("v2.money_management.payout_intent.created", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementPayoutIntentPending(
+      EventNotificationCallback<V2MoneyManagementPayoutIntentPendingEventNotification> callback) {
+    this.register("v2.money_management.payout_intent.pending", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementPayoutIntentPosted(
+      EventNotificationCallback<V2MoneyManagementPayoutIntentPostedEventNotification> callback) {
+    this.register("v2.money_management.payout_intent.posted", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementPayoutIntentProcessing(
+      EventNotificationCallback<V2MoneyManagementPayoutIntentProcessingEventNotification>
+          callback) {
+    this.register("v2.money_management.payout_intent.processing", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementPayoutIntentRequiresAction(
+      EventNotificationCallback<V2MoneyManagementPayoutIntentRequiresActionEventNotification>
+          callback) {
+    this.register("v2.money_management.payout_intent.requires_action", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementPayoutIntentUpdated(
+      EventNotificationCallback<V2MoneyManagementPayoutIntentUpdatedEventNotification> callback) {
+    this.register("v2.money_management.payout_intent.updated", callback);
+    return self();
+  }
+
   public T onV2MoneyManagementPayoutMethodCreated(
       EventNotificationCallback<V2MoneyManagementPayoutMethodCreatedEventNotification> callback) {
     this.register("v2.money_management.payout_method.created", callback);
@@ -2282,6 +2778,20 @@ abstract class StripeEventNotificationHandlerBase<T extends StripeEventNotificat
   public T onV2MoneyManagementReceivedDebitUpdated(
       EventNotificationCallback<V2MoneyManagementReceivedDebitUpdatedEventNotification> callback) {
     this.register("v2.money_management.received_debit.updated", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementRecipientVerificationCreated(
+      EventNotificationCallback<V2MoneyManagementRecipientVerificationCreatedEventNotification>
+          callback) {
+    this.register("v2.money_management.recipient_verification.created", callback);
+    return self();
+  }
+
+  public T onV2MoneyManagementRecipientVerificationUpdated(
+      EventNotificationCallback<V2MoneyManagementRecipientVerificationUpdatedEventNotification>
+          callback) {
+    this.register("v2.money_management.recipient_verification.updated", callback);
     return self();
   }
 

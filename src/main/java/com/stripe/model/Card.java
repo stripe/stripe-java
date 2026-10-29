@@ -9,6 +9,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.CardUpdateOnAccountParams;
 import com.stripe.param.CardUpdateOnCustomerParams;
 import java.util.List;
@@ -21,6 +22,9 @@ import lombok.Setter;
  * You can store multiple cards on a customer in order to charge the customer later. You can also
  * store multiple debit cards on a recipient in order to transfer to those cards later.
  *
+ * <p>This API is deprecated. Use the <a
+ * href="https://docs.stripe.com/api/payment_methods">PaymentMethods API</a> instead.
+ *
  * <p>Related guide: <a href="https://docs.stripe.com/sources/cards">Card payments with Sources</a>
  */
 @Getter
@@ -28,6 +32,13 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Card extends ApiResource
     implements MetadataStore<Card>, ExternalAccount, PaymentSource {
+  /**
+   * The account this card belongs to. Only applicable on Accounts (not customers or recipients)
+   * This property is only available when returned as an <a
+   * href="https://stripe.com/api/external_account_cards/object">External Account</a> where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-is_controller">controller.is_controller</a>
+   * is {@code true}.
+   */
   @SerializedName("account")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -548,5 +559,14 @@ public class Card extends ApiResource
      */
     @SerializedName("status")
     String status;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(account, responseGetter);
+    trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(networks, responseGetter);
+    trySetResponseGetter(redaction, responseGetter);
   }
 }

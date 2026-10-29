@@ -20,7 +20,7 @@ public class PersonListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The upper limit on the number of accounts returned by the List Account request. */
+  /** The maximum number of items returned by the list request. */
   @SerializedName("limit")
   Long limit;
 
@@ -69,7 +69,7 @@ public class PersonListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The upper limit on the number of accounts returned by the List Account request. */
+    /** The maximum number of items returned by the list request. */
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;

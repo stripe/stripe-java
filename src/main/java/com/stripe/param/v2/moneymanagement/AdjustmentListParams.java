@@ -12,11 +12,17 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class AdjustmentListParams extends ApiRequestParams {
-  /** Filter for Adjustments linked to a Flow. */
+  /**
+   * Filter for Adjustments linked to a specific flow object. This filter only supports filtering by
+   * the flow object's ID, such as {@code ibt_123} for an InboundTransfer.
+   */
   @SerializedName("adjusted_flow")
   String adjustedFlow;
 
-  /** Set of filters to query Adjustments within a range of {@code created} timestamps. */
+  /**
+   * Filter for Adjustments by their creation time using {@code gt}, {@code gte}, {@code lt}, or
+   * {@code lte}.
+   */
   @SerializedName("created")
   Created created;
 
@@ -60,13 +66,19 @@ public class AdjustmentListParams extends ApiRequestParams {
           this.adjustedFlow, this.created, this.extraParams, this.limit);
     }
 
-    /** Filter for Adjustments linked to a Flow. */
+    /**
+     * Filter for Adjustments linked to a specific flow object. This filter only supports filtering
+     * by the flow object's ID, such as {@code ibt_123} for an InboundTransfer.
+     */
     public Builder setAdjustedFlow(String adjustedFlow) {
       this.adjustedFlow = adjustedFlow;
       return this;
     }
 
-    /** Set of filters to query Adjustments within a range of {@code created} timestamps. */
+    /**
+     * Filter for Adjustments by their creation time using {@code gt}, {@code gte}, {@code lt}, or
+     * {@code lte}.
+     */
     public Builder setCreated(AdjustmentListParams.Created created) {
       this.created = created;
       return this;
@@ -118,29 +130,29 @@ public class AdjustmentListParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Filter for objects created after the specified timestamp. Must be an RFC 3339 date &amp; time
-     * value, for example: 2022-09-18T13:22:00Z.
+     * Filter for Adjustments created after the specified timestamp. The timestamp must be in RFC
+     * 3339 format, for example {@code 2022-09-18T13:22:00Z}.
      */
     @SerializedName("gt")
     Instant gt;
 
     /**
-     * Filter for objects created on or after the specified timestamp. Must be an RFC 3339 date
-     * &amp; time value, for example: 2022-09-18T13:22:00Z.
+     * Filter for Adjustments created on or after the specified timestamp. The timestamp must be in
+     * RFC 3339 format, for example {@code 2022-09-18T13:22:00Z}.
      */
     @SerializedName("gte")
     Instant gte;
 
     /**
-     * Filter for objects created before the specified timestamp. Must be an RFC 3339 date &amp;
-     * time value, for example: 2022-09-18T13:22:00Z.
+     * Filter for Adjustments created before the specified timestamp. The timestamp must be in RFC
+     * 3339 format, for example {@code 2022-09-18T13:22:00Z}.
      */
     @SerializedName("lt")
     Instant lt;
 
     /**
-     * Filter for objects created on or before the specified timestamp. Must be an RFC 3339 date
-     * &amp; time value, for example: 2022-09-18T13:22:00Z.
+     * Filter for Adjustments created on or before the specified timestamp. The timestamp must be in
+     * RFC 3339 format, for example {@code 2022-09-18T13:22:00Z}.
      */
     @SerializedName("lte")
     Instant lte;
@@ -202,8 +214,8 @@ public class AdjustmentListParams extends ApiRequestParams {
       }
 
       /**
-       * Filter for objects created after the specified timestamp. Must be an RFC 3339 date &amp;
-       * time value, for example: 2022-09-18T13:22:00Z.
+       * Filter for Adjustments created after the specified timestamp. The timestamp must be in RFC
+       * 3339 format, for example {@code 2022-09-18T13:22:00Z}.
        */
       public Builder setGt(Instant gt) {
         this.gt = gt;
@@ -211,8 +223,8 @@ public class AdjustmentListParams extends ApiRequestParams {
       }
 
       /**
-       * Filter for objects created on or after the specified timestamp. Must be an RFC 3339 date
-       * &amp; time value, for example: 2022-09-18T13:22:00Z.
+       * Filter for Adjustments created on or after the specified timestamp. The timestamp must be
+       * in RFC 3339 format, for example {@code 2022-09-18T13:22:00Z}.
        */
       public Builder setGte(Instant gte) {
         this.gte = gte;
@@ -220,8 +232,8 @@ public class AdjustmentListParams extends ApiRequestParams {
       }
 
       /**
-       * Filter for objects created before the specified timestamp. Must be an RFC 3339 date &amp;
-       * time value, for example: 2022-09-18T13:22:00Z.
+       * Filter for Adjustments created before the specified timestamp. The timestamp must be in RFC
+       * 3339 format, for example {@code 2022-09-18T13:22:00Z}.
        */
       public Builder setLt(Instant lt) {
         this.lt = lt;
@@ -229,8 +241,8 @@ public class AdjustmentListParams extends ApiRequestParams {
       }
 
       /**
-       * Filter for objects created on or before the specified timestamp. Must be an RFC 3339 date
-       * &amp; time value, for example: 2022-09-18T13:22:00Z.
+       * Filter for Adjustments created on or before the specified timestamp. The timestamp must be
+       * in RFC 3339 format, for example {@code 2022-09-18T13:22:00Z}.
        */
       public Builder setLte(Instant lte) {
         this.lte = lte;

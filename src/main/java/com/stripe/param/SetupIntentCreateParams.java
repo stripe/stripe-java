@@ -128,10 +128,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   @SerializedName("on_behalf_of")
   String onBehalfOf;
 
-  /**
-   * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
-   * SetupIntent.
-   */
+  /** The ID of a PaymentMethod to attach to this SetupIntent. */
   @SerializedName("payment_method")
   String paymentMethod;
 
@@ -578,10 +575,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
-     * SetupIntent.
-     */
+    /** The ID of a PaymentMethod to attach to this SetupIntent. */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
       return this;
@@ -1642,6 +1636,12 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     WechatPay wechatPay;
 
     /**
+     * If this is a Wero PaymentMethod, this hash contains details about the Wero payment method.
+     */
+    @SerializedName("wero")
+    Wero wero;
+
+    /**
      * If this is a {@code zip} PaymentMethod, this hash contains details about the Zip payment
      * method.
      */
@@ -1717,6 +1717,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         Upi upi,
         UsBankAccount usBankAccount,
         WechatPay wechatPay,
+        Wero wero,
         Zip zip) {
       this.acssDebit = acssDebit;
       this.affirm = affirm;
@@ -1786,6 +1787,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       this.upi = upi;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
+      this.wero = wero;
       this.zip = zip;
     }
 
@@ -1930,6 +1932,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
       private WechatPay wechatPay;
 
+      private Wero wero;
+
       private Zip zip;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -2003,6 +2007,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
             this.upi,
             this.usBankAccount,
             this.wechatPay,
+            this.wero,
             this.zip);
       }
 
@@ -2661,6 +2666,14 @@ public class SetupIntentCreateParams extends ApiRequestParams {
        */
       public Builder setWechatPay(SetupIntentCreateParams.PaymentMethodData.WechatPay wechatPay) {
         this.wechatPay = wechatPay;
+        return this;
+      }
+
+      /**
+       * If this is a Wero PaymentMethod, this hash contains details about the Wero payment method.
+       */
+      public Builder setWero(SetupIntentCreateParams.PaymentMethodData.Wero wero) {
+        this.wero = wero;
         return this;
       }
 
@@ -4651,6 +4664,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
         @SerializedName("cimb")
         CIMB("cimb"),
+
+        @SerializedName("mandiri")
+        MANDIRI("mandiri"),
 
         @SerializedName("permata")
         PERMATA("permata");
@@ -7730,6 +7746,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       @SerializedName("account_type")
       AccountType accountType;
 
+      /** An external token used to create a payment method. */
+      @SerializedName("external_token")
+      ExternalToken externalToken;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -7751,12 +7771,14 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           AccountHolderType accountHolderType,
           String accountNumber,
           AccountType accountType,
+          ExternalToken externalToken,
           Map<String, Object> extraParams,
           String financialConnectionsAccount,
           String routingNumber) {
         this.accountHolderType = accountHolderType;
         this.accountNumber = accountNumber;
         this.accountType = accountType;
+        this.externalToken = externalToken;
         this.extraParams = extraParams;
         this.financialConnectionsAccount = financialConnectionsAccount;
         this.routingNumber = routingNumber;
@@ -7773,6 +7795,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
         private AccountType accountType;
 
+        private ExternalToken externalToken;
+
         private Map<String, Object> extraParams;
 
         private String financialConnectionsAccount;
@@ -7785,6 +7809,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
               this.accountHolderType,
               this.accountNumber,
               this.accountType,
+              this.externalToken,
               this.extraParams,
               this.financialConnectionsAccount,
               this.routingNumber);
@@ -7808,6 +7833,13 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         public Builder setAccountType(
             SetupIntentCreateParams.PaymentMethodData.UsBankAccount.AccountType accountType) {
           this.accountType = accountType;
+          return this;
+        }
+
+        /** An external token used to create a payment method. */
+        public Builder setExternalToken(
+            SetupIntentCreateParams.PaymentMethodData.UsBankAccount.ExternalToken externalToken) {
+          this.externalToken = externalToken;
           return this;
         }
 
@@ -7849,6 +7881,108 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         public Builder setRoutingNumber(String routingNumber) {
           this.routingNumber = routingNumber;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ExternalToken {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The Plaid processor token to use for this bank account. */
+        @SerializedName("plaid_processor_token")
+        String plaidProcessorToken;
+
+        /** <strong>Required.</strong> The type of external token. */
+        @SerializedName("type")
+        Type type;
+
+        private ExternalToken(
+            Map<String, Object> extraParams, String plaidProcessorToken, Type type) {
+          this.extraParams = extraParams;
+          this.plaidProcessorToken = plaidProcessorToken;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String plaidProcessorToken;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SetupIntentCreateParams.PaymentMethodData.UsBankAccount.ExternalToken build() {
+            return new SetupIntentCreateParams.PaymentMethodData.UsBankAccount.ExternalToken(
+                this.extraParams, this.plaidProcessorToken, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentCreateParams.PaymentMethodData.UsBankAccount.ExternalToken#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentCreateParams.PaymentMethodData.UsBankAccount.ExternalToken#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The Plaid processor token to use for this bank account. */
+          public Builder setPlaidProcessorToken(String plaidProcessorToken) {
+            this.plaidProcessorToken = plaidProcessorToken;
+            return this;
+          }
+
+          /** <strong>Required.</strong> The type of external token. */
+          public Builder setType(
+              SetupIntentCreateParams.PaymentMethodData.UsBankAccount.ExternalToken.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("plaid_processor_token")
+          PLAID_PROCESSOR_TOKEN("plaid_processor_token");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -7930,6 +8064,64 @@ public class SetupIntentCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link SetupIntentCreateParams.PaymentMethodData.WechatPay#extraParams} for the
          * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Wero {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Wero(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentCreateParams.PaymentMethodData.Wero build() {
+          return new SetupIntentCreateParams.PaymentMethodData.Wero(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodData.Wero#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodData.Wero#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -8197,6 +8389,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
       @SerializedName("wechat_pay")
       WECHAT_PAY("wechat_pay"),
+
+      @SerializedName("wero")
+      WERO("wero"),
 
       @SerializedName("zip")
       ZIP("zip");
@@ -14328,6 +14523,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     @SerializedName("wechat_pay")
     WECHAT_PAY("wechat_pay"),
+
+    @SerializedName("wero")
+    WERO("wero"),
 
     @SerializedName("zip")
     ZIP("zip");
