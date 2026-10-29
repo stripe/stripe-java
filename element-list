@@ -29,6 +29,8 @@ com.stripe.model.v2
 com.stripe.model.v2.billing
 com.stripe.model.v2.commerce
 com.stripe.model.v2.core
+com.stripe.model.v2.core.vault
+com.stripe.model.v2.moneymanagement
 com.stripe.net
 com.stripe.param
 com.stripe.param.apps
@@ -55,6 +57,10 @@ com.stripe.param.v2.billing
 com.stripe.param.v2.commerce.productcatalog
 com.stripe.param.v2.core
 com.stripe.param.v2.core.accounts
+com.stripe.param.v2.core.vault
+com.stripe.param.v2.moneymanagement
+com.stripe.param.v2.moneymanagement.testhelpers
+com.stripe.param.v2.testhelpers
 com.stripe.service
 com.stripe.service.apps
 com.stripe.service.billing
@@ -84,5 +90,9 @@ com.stripe.service.v2.commerce
 com.stripe.service.v2.commerce.productcatalog
 com.stripe.service.v2.core
 com.stripe.service.v2.core.accounts
+com.stripe.service.v2.core.vault
+com.stripe.service.v2.moneymanagement
+com.stripe.service.v2.moneymanagement.testhelpers
+com.stripe.service.v2.testhelpers
 com.stripe.util
 com.stripe.v2
