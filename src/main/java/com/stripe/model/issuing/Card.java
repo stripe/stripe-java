@@ -536,6 +536,13 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("customs")
     Customs customs;
 
+    /**
+     * The time the card was reported as delivered. Null for undelivered or untracked shipments, or
+     * if Stripe has not recorded a delivery time.
+     */
+    @SerializedName("delivered_at")
+    Long deliveredAt;
+
     /** A unix timestamp representing a best estimate of when the card will be delivered. */
     @SerializedName("eta")
     Long eta;
@@ -568,6 +575,12 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      */
     @SerializedName("service")
     String service;
+
+    /**
+     * The time the card was reported as shipped. Null if Stripe has not recorded a shipment time.
+     */
+    @SerializedName("shipped_at")
+    Long shippedAt;
 
     /**
      * The delivery status of the card.

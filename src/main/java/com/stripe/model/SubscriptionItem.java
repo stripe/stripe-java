@@ -417,12 +417,15 @@ public class SubscriptionItem extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CurrentTrial extends StripeObject {
+    /** The time the current trial ends. */
     @SerializedName("end_date")
     Long endDate;
 
+    /** The time the current trial started. */
     @SerializedName("start_date")
     Long startDate;
 
+    /** The Trial Offer ID applied to the subscription item. */
     @SerializedName("trial_offer")
     String trialOffer;
   }

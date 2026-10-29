@@ -956,6 +956,9 @@ public class PaymentRecord extends ApiResource implements HasId {
     @SerializedName("wechat_pay")
     WechatPay wechatPay;
 
+    @SerializedName("wero")
+    Wero wero;
+
     @SerializedName("zip")
     Zip zip;
 
@@ -2192,8 +2195,8 @@ public class PaymentRecord extends ApiResource implements HasId {
       /**
        * The token currency that the transaction was sent with.
        *
-       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, {@code usdsui},
-       * or {@code usdt}.
+       * <p>One of {@code ousd}, {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp},
+       * {@code usdsui}, or {@code usdt}.
        */
       @SerializedName("token_currency")
       String tokenCurrency;
@@ -2360,7 +2363,8 @@ public class PaymentRecord extends ApiResource implements HasId {
       /**
        * Bank where the account is located.
        *
-       * <p>One of {@code bca}, {@code bni}, {@code bri}, {@code cimb}, or {@code permata}.
+       * <p>One of {@code bca}, {@code bni}, {@code bri}, {@code cimb}, {@code mandiri}, or {@code
+       * permata}.
        */
       @SerializedName("bank")
       String bank;
@@ -3836,6 +3840,15 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("transaction_id")
       String transactionId;
     }
+
+    /**
+     * For more details about Wero, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Wero extends StripeObject {}
 
     /**
      * For more details about Zip, please refer to the <a href="https://docs.stripe.com/api">API

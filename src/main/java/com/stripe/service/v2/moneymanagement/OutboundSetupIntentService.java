@@ -104,27 +104,27 @@ public final class OutboundSetupIntentService extends ApiService {
   }
   /** Update an OutboundSetupIntent object. */
   public OutboundSetupIntent update(String id, OutboundSetupIntentUpdateParams params)
-      throws StripeException, QuotaExceededException, BlockedByStripeException,
-          InvalidPayoutMethodException, ControlledByAlternateResourceException {
+      throws StripeException, BlockedByStripeException, InvalidPayoutMethodException,
+          ControlledByAlternateResourceException {
     return update(id, params, (RequestOptions) null);
   }
   /** Update an OutboundSetupIntent object. */
   public OutboundSetupIntent update(String id, RequestOptions options)
-      throws StripeException, QuotaExceededException, BlockedByStripeException,
-          InvalidPayoutMethodException, ControlledByAlternateResourceException {
+      throws StripeException, BlockedByStripeException, InvalidPayoutMethodException,
+          ControlledByAlternateResourceException {
     return update(id, (OutboundSetupIntentUpdateParams) null, options);
   }
   /** Update an OutboundSetupIntent object. */
   public OutboundSetupIntent update(String id)
-      throws StripeException, QuotaExceededException, BlockedByStripeException,
-          InvalidPayoutMethodException, ControlledByAlternateResourceException {
+      throws StripeException, BlockedByStripeException, InvalidPayoutMethodException,
+          ControlledByAlternateResourceException {
     return update(id, (OutboundSetupIntentUpdateParams) null, (RequestOptions) null);
   }
   /** Update an OutboundSetupIntent object. */
   public OutboundSetupIntent update(
       String id, OutboundSetupIntentUpdateParams params, RequestOptions options)
-      throws StripeException, QuotaExceededException, BlockedByStripeException,
-          InvalidPayoutMethodException, ControlledByAlternateResourceException {
+      throws StripeException, BlockedByStripeException, InvalidPayoutMethodException,
+          ControlledByAlternateResourceException {
     String path =
         String.format(
             "/v2/money_management/outbound_setup_intents/%s", ApiResource.urlEncodeId(id));

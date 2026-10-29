@@ -6,6 +6,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.v2.Amount;
 import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -284,6 +285,50 @@ public class OutboundTransfer extends StripeObject implements HasId {
     /** The payout method which the OutboundTransfer uses to send payout. */
     @SerializedName("payout_method")
     String payoutMethod;
+
+    /** Payout method options for the OutboundTransfer. */
+    @SerializedName("payout_method_options")
+    PayoutMethodOptions payoutMethodOptions;
+
+    /** Payout method options for the OutboundTransfer. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PayoutMethodOptions extends StripeObject {
+      /** Options for bank account payout methods. */
+      @SerializedName("bank_account")
+      BankAccount bankAccount;
+
+      /** Options for bank account payout methods. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BankAccount extends StripeObject {
+        /** Per-network configuration options. */
+        @SerializedName("preferred_network_options")
+        PreferredNetworkOptions preferredNetworkOptions;
+
+        /** The preferred networks to use for this OutboundTransfer. */
+        @SerializedName("preferred_networks")
+        List<String> preferredNetworks;
+
+        /** Per-network configuration options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PreferredNetworkOptions extends StripeObject {
+          /** ACH-specific network options. */
+          @SerializedName("ach")
+          Ach ach;
+
+          /** ACH-specific network options. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Ach extends StripeObject {}
+        }
+      }
+    }
   }
 
   /**
@@ -297,9 +342,9 @@ public class OutboundTransfer extends StripeObject implements HasId {
     /**
      * Possible values are {@code pending}, {@code supported}, and {@code unsupported}. Initially
      * set to {@code pending}, it changes to {@code supported} when the recipient bank provides a
-     * trace ID, or {@code unsupported} if the recipient bank doesn't support it. Note that this
-     * status may not align with the OutboundPayment or OutboundTransfer status and can remain
-     * {@code pending} even after the payment or transfer is posted.
+     * trace ID, or {@code unsupported} if the recipient bank doesn't support it. This status may
+     * not align with the OutboundPayment or OutboundTransfer status and can remain {@code pending}
+     * even after the payment or transfer is posted.
      *
      * <p>One of {@code pending}, {@code supported}, or {@code unsupported}.
      */

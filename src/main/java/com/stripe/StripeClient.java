@@ -89,14 +89,28 @@ public class StripeClient {
     LiveStripeResponseGetter newResponseGetter =
         liveGetter.withNewOptions(
             options -> {
-              ClientStripeResponseGetterOptions existingOptions =
-                  (ClientStripeResponseGetterOptions) options;
+              if (options instanceof ClientStripeResponseGetterOptions) {
+                return ((ClientStripeResponseGetterOptions) options)
+                    .toBuilder()
+                    .stripeAccount(null)
+                    .stripeContext(contextString)
+                    .build();
+              }
 
-              return existingOptions
-                  .toBuilder()
-                  .stripeAccount(null)
-                  .stripeContext(contextString)
-                  .build();
+              return new ClientStripeResponseGetterOptions(
+                  options.getAuthenticator(),
+                  options.getClientId(),
+                  options.getConnectTimeout(),
+                  options.getReadTimeout(),
+                  options.getMaxNetworkRetries(),
+                  options.getConnectionProxy(),
+                  options.getProxyCredential(),
+                  options.getApiBase(),
+                  options.getFilesBase(),
+                  options.getConnectBase(),
+                  options.getMeterEventsBase(),
+                  null,
+                  contextString);
             });
 
     // Create and return a new StripeClient with the new response getter
@@ -781,6 +795,18 @@ public class StripeClient {
   @Deprecated
   public com.stripe.service.PaymentMethodService paymentMethods() {
     return new com.stripe.service.PaymentMethodService(this.getResponseGetter());
+  }
+
+  /**
+   * @deprecated StripeClient.paymentPlans() is deprecated, use StripeClient.v1().paymentPlans()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().paymentPlans(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.PaymentPlanService paymentPlans() {
+    return new com.stripe.service.PaymentPlanService(this.getResponseGetter());
   }
 
   /**

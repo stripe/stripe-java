@@ -12,10 +12,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class InboundTransferCreateParams extends ApiRequestParams {
-  /**
-   * <strong>Required.</strong> The amount, in specified currency, by which the FinancialAccount
-   * balance will increase due to the InboundTransfer.
-   */
+  /** <strong>Required.</strong> The amount and currency to credit to the FinancialAccount. */
   @SerializedName("amount")
   Amount amount;
 
@@ -33,12 +30,16 @@ public class InboundTransferCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * <strong>Required.</strong> Object containing details about where the funds will originate from.
+   * <strong>Required.</strong> The verified bank account credential to debit for this
+   * InboundTransfer.
    */
   @SerializedName("from")
   From from;
 
-  /** <strong>Required.</strong> Object containing details about where the funds will land. */
+  /**
+   * <strong>Required.</strong> The FinancialAccount and currency to credit with the transferred
+   * funds.
+   */
   @SerializedName("to")
   To to;
 
@@ -72,10 +73,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
           this.amount, this.description, this.extraParams, this.from, this.to);
     }
 
-    /**
-     * <strong>Required.</strong> The amount, in specified currency, by which the FinancialAccount
-     * balance will increase due to the InboundTransfer.
-     */
+    /** <strong>Required.</strong> The amount and currency to credit to the FinancialAccount. */
     public Builder setAmount(Amount amount) {
       this.amount = amount;
       return this;
@@ -114,15 +112,18 @@ public class InboundTransferCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Object containing details about where the funds will originate
-     * from.
+     * <strong>Required.</strong> The verified bank account credential to debit for this
+     * InboundTransfer.
      */
     public Builder setFrom(InboundTransferCreateParams.From from) {
       this.from = from;
       return this;
     }
 
-    /** <strong>Required.</strong> Object containing details about where the funds will land. */
+    /**
+     * <strong>Required.</strong> The FinancialAccount and currency to credit with the transferred
+     * funds.
+     */
     public Builder setTo(InboundTransferCreateParams.To to) {
       this.to = to;
       return this;
@@ -148,7 +149,10 @@ public class InboundTransferCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> ID of the Payment Method using which IBT will be made. */
+    /**
+     * <strong>Required.</strong> ID of the verified bank account credential to debit for this
+     * InboundTransfer (for example, {@code usba_}), not a Payments API {@code pm_} PaymentMethod.
+     */
     @SerializedName("payment_method")
     String paymentMethod;
 
@@ -210,7 +214,10 @@ public class InboundTransferCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> ID of the Payment Method using which IBT will be made. */
+      /**
+       * <strong>Required.</strong> ID of the verified bank account credential to debit for this
+       * InboundTransfer (for example, {@code usba_}), not a Payments API {@code pm_} PaymentMethod.
+       */
       public Builder setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
         return this;
@@ -221,7 +228,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class To {
-    /** <strong>Required.</strong> The currency in which funds will land in. */
+    /** <strong>Required.</strong> The currency to credit to the FinancialAccount. */
     @SerializedName("currency")
     String currency;
 
@@ -234,7 +241,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The FinancialAccount that funds will land in. */
+    /** <strong>Required.</strong> The FinancialAccount that receives the funds. */
     @SerializedName("financial_account")
     String financialAccount;
 
@@ -261,7 +268,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
             this.currency, this.extraParams, this.financialAccount);
       }
 
-      /** <strong>Required.</strong> The currency in which funds will land in. */
+      /** <strong>Required.</strong> The currency to credit to the FinancialAccount. */
       public Builder setCurrency(String currency) {
         this.currency = currency;
         return this;
@@ -293,7 +300,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The FinancialAccount that funds will land in. */
+      /** <strong>Required.</strong> The FinancialAccount that receives the funds. */
       public Builder setFinancialAccount(String financialAccount) {
         this.financialAccount = financialAccount;
         return this;

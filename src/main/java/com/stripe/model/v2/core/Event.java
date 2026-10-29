@@ -74,7 +74,7 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
   @SerializedName("reason")
   Reason reason;
 
-  /** For interop events, this is the snapshot event ID. */
+  /** For thin events with a corresponding snapshot event, this is the snapshot event ID. */
   @SerializedName("snapshot_event")
   String snapshotEvent;
 
@@ -121,7 +121,7 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
     optsBuilder.setStripeRequestTrigger("event=" + id);
 
     if (context != null) {
-      optsBuilder.setStripeAccount(context);
+      optsBuilder.setStripeContext(context);
     }
 
     RequestOptions opts = optsBuilder.build();

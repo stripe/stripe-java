@@ -154,7 +154,7 @@ public abstract class EventNotification {
             null,
             getRequestOptions());
 
-    return (Event) client.deserialize(response.body(), ApiMode.V2);
+    return (Event) client.withStripeContext(context).deserialize(response.body(), ApiMode.V2);
   }
 
   /** Retrieves the object associated with the event. */
@@ -180,6 +180,8 @@ public abstract class EventNotification {
     StripeResponse response =
         client.rawRequest(RequestMethod.GET, relativeUrl, null, getRequestOptions());
 
-    return client.deserialize(response.body(), ApiMode.getMode(relativeUrl));
+    return client
+        .withStripeContext(context)
+        .deserialize(response.body(), ApiMode.getMode(relativeUrl));
   }
 }

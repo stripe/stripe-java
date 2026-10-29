@@ -106,11 +106,17 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
     NetworkFeeDetails networkFeeDetails;
 
     /**
+     * Tax charged for this fee, if applicable. Value expressed as a decimal string in major units.
+     */
+    @SerializedName("tax_amount")
+    TaxAmount taxAmount;
+
+    /**
      * The fee type.
      *
      * <p>One of {@code cross_border_payout_fee}, {@code foreign_exchange_fee}, {@code
-     * instant_payout_fee}, {@code network_fee}, {@code standard_payout_fee}, or {@code
-     * wire_payout_fee}.
+     * instant_payout_fee}, {@code network_fee}, {@code next_day_payout_fee}, {@code
+     * standard_payout_fee}, or {@code wire_payout_fee}.
      */
     @SerializedName("type")
     String type;
@@ -126,8 +132,8 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
       /**
        * The network associated with the fee.
        *
-       * <p>One of {@code ach}, {@code becs}, {@code eft}, {@code fedwire}, {@code fps}, {@code
-       * local}, {@code npp}, {@code rtp}, {@code sepa}, {@code sepa_instant}, or {@code swift}.
+       * <p>One of {@code ach}, {@code fedwire}, {@code fps}, {@code local}, {@code rtp}, {@code
+       * sepa}, or {@code swift}.
        */
       @SerializedName("network")
       String network;
@@ -159,6 +165,22 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
           String submission;
         }
       }
+    }
+
+    /**
+     * Tax charged for this fee, if applicable. Value expressed as a decimal string in major units.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TaxAmount extends StripeObject {
+      /** Currency code. */
+      @SerializedName("currency")
+      String currency;
+
+      /** Tax amount value represented as a decimal string in major units. */
+      @SerializedName("value_decimal")
+      String valueDecimal;
     }
   }
 
@@ -241,8 +263,68 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
     @SerializedName("payout_method")
     String payoutMethod;
 
+    /** Payout method options for the OutboundPaymentQuote. */
+    @SerializedName("payout_method_options")
+    PayoutMethodOptions payoutMethodOptions;
+
     /** To which account the OutboundPayment is sent. */
     @SerializedName("recipient")
     String recipient;
+
+    /** Payout method options for the OutboundPaymentQuote. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PayoutMethodOptions extends StripeObject {
+      /** Options for bank account payout methods. */
+      @SerializedName("bank_account")
+      BankAccount bankAccount;
+
+      /** Options for bank account payout methods. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BankAccount extends StripeObject {
+        /** Per-network configuration options. */
+        @SerializedName("preferred_network_options")
+        PreferredNetworkOptions preferredNetworkOptions;
+
+        /** The preferred networks to use for this OutboundPayment. */
+        @SerializedName("preferred_networks")
+        List<String> preferredNetworks;
+
+        /** Per-network configuration options. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class PreferredNetworkOptions extends StripeObject {
+          /** ACH-specific network options. */
+          @SerializedName("ach")
+          Ach ach;
+
+          /** ACH-specific network options. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Ach extends StripeObject {
+            /**
+             * Open Enum. ACH submission timing.
+             *
+             * <p>One of {@code next_day}, or {@code same_day}.
+             */
+            @SerializedName("submission")
+            String submission;
+
+            /**
+             * The transaction purpose for this ACH payment.
+             *
+             * <p>Equal to {@code payroll}.
+             */
+            @SerializedName("transaction_purpose")
+            String transactionPurpose;
+          }
+        }
+      }
+    }
   }
 }

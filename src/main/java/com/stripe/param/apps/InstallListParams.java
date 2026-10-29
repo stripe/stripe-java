@@ -14,8 +14,9 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class InstallListParams extends ApiRequestParams {
   /**
-   * Only return installs made by this account. Only useful to app developers and embedding
-   * platforms, whose lists span the accounts that installed their app.
+   * Only return installs made by this account. Only useful to an app developer filtering by its own
+   * app with its own key, whose list spans the accounts that installed the app; other lists only
+   * accept the authenticated account.
    */
   @SerializedName("account")
   String account;
@@ -81,7 +82,10 @@ public class InstallListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** Only return installs with the given status. */
+  /**
+   * Only return installs with the given status: {@code installed}, {@code installing}, {@code
+   * install_failed}, {@code uninstalling}, or {@code uninstall_failed}.
+   */
   @SerializedName("status")
   Status status;
 
@@ -159,8 +163,9 @@ public class InstallListParams extends ApiRequestParams {
     }
 
     /**
-     * Only return installs made by this account. Only useful to app developers and embedding
-     * platforms, whose lists span the accounts that installed their app.
+     * Only return installs made by this account. Only useful to an app developer filtering by its
+     * own app with its own key, whose list spans the accounts that installed the app; other lists
+     * only accept the authenticated account.
      */
     public Builder setAccount(String account) {
       this.account = account;
@@ -289,7 +294,10 @@ public class InstallListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return installs with the given status. */
+    /**
+     * Only return installs with the given status: {@code installed}, {@code installing}, {@code
+     * install_failed}, {@code uninstalling}, or {@code uninstall_failed}.
+     */
     public Builder setStatus(InstallListParams.Status status) {
       this.status = status;
       return this;

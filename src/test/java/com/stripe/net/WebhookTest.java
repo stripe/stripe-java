@@ -203,6 +203,42 @@ public class WebhookTest extends BaseStripeTest {
   }
 
   @Test
+  public void testWhitespaceOnlySecrets() throws NoSuchAlgorithmException, InvalidKeyException {
+    String[] blankSecrets = {" ", "\t", "\r", "\n", "\f", "\u000B", " \t\r\n\f\u000B"};
+
+    for (String blankSecret : blankSecrets) {
+      final String sigHeader = Webhook.Signature.generateSignatureHeader(payload, blankSecret);
+      Throwable exception =
+          assertThrows(
+              SignatureVerificationException.class,
+              () -> Webhook.Signature.verifyHeader(payload, sigHeader, blankSecret, 0, null));
+      assertEquals(
+          "No webhook secret value was provided. It should start with `whsec_`",
+          exception.getMessage());
+    }
+  }
+
+  @Test
+  public void testSecretWithSurroundingWhitespaceIsNotNormalized()
+      throws NoSuchAlgorithmException, InvalidKeyException, SignatureVerificationException {
+    final String secretWithWhitespace = " \twhsec_test_secret\r\n";
+    final String sigHeader =
+        Webhook.Signature.generateSignatureHeader(payload, secretWithWhitespace);
+
+    assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secretWithWhitespace, 0, null));
+  }
+
+  @Test
+  public void testNonBreakingSpaceOnlySecretIsNotBlank()
+      throws NoSuchAlgorithmException, InvalidKeyException, SignatureVerificationException {
+    final String nonBreakingSpaceSecret = "\u00A0";
+    final String sigHeader =
+        Webhook.Signature.generateSignatureHeader(payload, nonBreakingSpaceSecret);
+
+    assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, nonBreakingSpaceSecret, 0, null));
+  }
+
+  @Test
   public void testNoValidSignatureForPayload()
       throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
     final Map<String, Object> options = new HashMap<>();

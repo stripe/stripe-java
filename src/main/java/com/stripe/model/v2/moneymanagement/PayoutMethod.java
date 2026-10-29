@@ -43,6 +43,10 @@ public class PayoutMethod extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
+  /** The PayoutMethodCryptoWallet object details. */
+  @SerializedName("crypto_wallet")
+  CryptoWallet cryptoWallet;
+
   /** ID of the PayoutMethod object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -145,6 +149,13 @@ public class PayoutMethod extends StripeObject implements HasId {
     @SerializedName("financial_connections_account")
     String financialConnectionsAccount;
 
+    /**
+     * Uniquely identifies this particular bank account. You can use this attribute to check whether
+     * two recipients who've signed up with you are using the same bank account, for example.
+     */
+    @SerializedName("fingerprint")
+    String fingerprint;
+
     /** The last 4 digits of the account number. */
     @SerializedName("last4")
     String last4;
@@ -177,7 +188,7 @@ public class PayoutMethod extends StripeObject implements HasId {
 
     /**
      * Uniquely identifies this particular card number. You can use this attribute to check whether
-     * two recipients who’ve signed up with you are using the same card number, for example.
+     * two recipients who've signed up with you are using the same card number, for example.
      */
     @SerializedName("fingerprint")
     String fingerprint;
@@ -189,6 +200,29 @@ public class PayoutMethod extends StripeObject implements HasId {
     /** The list of currencies supported by this bank account. */
     @SerializedName("supported_currencies")
     List<String> supportedCurrencies;
+  }
+
+  /** The PayoutMethodCryptoWallet object details. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CryptoWallet extends StripeObject {
+    /** Destination wallet address. */
+    @SerializedName("address")
+    String address;
+
+    /** Optional field, required if network supports memos (only &quot;stellar&quot; currently). */
+    @SerializedName("memo")
+    String memo;
+
+    /**
+     * Which rail is being used to make an outbound money movement to this wallet.
+     *
+     * <p>One of {@code arbitrum}, {@code avalanche_c_chain}, {@code base}, {@code ethereum}, {@code
+     * optimism}, {@code polygon}, {@code solana}, {@code stellar}, or {@code tempo}.
+     */
+    @SerializedName("network")
+    String network;
   }
 
   /**

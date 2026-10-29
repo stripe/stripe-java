@@ -10,7 +10,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** ReceivedDebit resource. */
+/**
+ * Use ReceivedDebits API to retrieve information on when, where, and how funds are debited from
+ * your FinancialAccount.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

@@ -13,8 +13,8 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class FinancialAccountUpdateParams extends ApiRequestParams {
   /**
-   * A descriptive name for the FinancialAccount, up to 50 characters long. This name will be used
-   * in the Stripe Dashboard and embedded components.
+   * A descriptive name for the FinancialAccount, up to 50 characters long. This name appears in the
+   * Stripe Dashboard and embedded components.
    */
   @SerializedName("display_name")
   Object displayName;
@@ -28,7 +28,10 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Metadata associated with the FinancialAccount. */
+  /**
+   * Set of key-value pairs that you can attach to the FinancialAccount. Individual keys can be
+   * unset by posting null to them.
+   */
   @SerializedName("metadata")
   Map<String, Object> metadata;
 
@@ -56,8 +59,8 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A descriptive name for the FinancialAccount, up to 50 characters long. This name will be used
-     * in the Stripe Dashboard and embedded components.
+     * A descriptive name for the FinancialAccount, up to 50 characters long. This name appears in
+     * the Stripe Dashboard and embedded components.
      */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;
@@ -65,8 +68,8 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A descriptive name for the FinancialAccount, up to 50 characters long. This name will be used
-     * in the Stripe Dashboard and embedded components.
+     * A descriptive name for the FinancialAccount, up to 50 characters long. This name appears in
+     * the Stripe Dashboard and embedded components.
      */
     public Builder setDisplayName(EmptyParam displayName) {
       this.displayName = displayName;

@@ -2,6 +2,7 @@ package com.stripe;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -14,8 +15,10 @@ import com.stripe.events.UnknownEventNotification;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEvent;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification;
 import com.stripe.events.V1BillingMeterNoMeterFoundEventNotification;
+import com.stripe.events.V1ProductUpdatedEventNotification;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Product;
 import com.stripe.model.billing.Meter;
 import com.stripe.model.terminal.Reader;
 import com.stripe.model.v2.core.Event;
@@ -417,6 +420,60 @@ public class StripeClientTest extends BaseStripeTest {
     for (RawApiRequest v : requestCaptor.getAllValues()) {
       assertEquals("org_123", v.getOptions().getStripeContext());
     }
+  }
+
+  @Test
+  public void eventFetchedRelatedObjectRetainsContext() throws StripeException {
+    Stripe.enableTelemetry = false;
+    StripeResponseGetterOptions options =
+        StripeClient.builder()
+            .setApiKey(TEST_API_KEY)
+            .setApiBase(getStripeMockUrl())
+            .setStripeAccount("acct_platform")
+            .setStripeContext("ctx_platform")
+            .buildOptions();
+    networkSpy = Mockito.spy(new LiveStripeResponseGetter(options, httpClientSpy));
+    StripeClient client = new StripeClient(networkSpy);
+
+    Mockito.doAnswer(
+            invocation ->
+                new StripeResponse(
+                    200,
+                    HttpHeaders.of(Collections.emptyMap()),
+                    "{\"id\": \"prod_shared\", \"object\": \"product\"}"))
+        .when(networkSpy)
+        .rawRequest(Mockito.any());
+
+    EventNotification eventNotification =
+        EventNotification.fromJson(
+            "{"
+                + "\"id\":\"evt_123\","
+                + "\"object\":\"v2.core.event\","
+                + "\"type\":\"v1.product.updated\","
+                + "\"created\":\"2022-02-15T00:27:45.330Z\","
+                + "\"context\":\"acct_child\","
+                + "\"related_object\":{"
+                + "\"id\":\"prod_shared\","
+                + "\"type\":\"product\","
+                + "\"url\":\"/v1/products/prod_shared\"}}",
+            client);
+    V1ProductUpdatedEventNotification notification =
+        assertInstanceOf(V1ProductUpdatedEventNotification.class, eventNotification);
+
+    Product product = notification.fetchRelatedObject();
+    product.delete();
+
+    ArgumentCaptor<RawApiRequest> rawRequestCaptor = ArgumentCaptor.forClass(RawApiRequest.class);
+    Mockito.verify(networkSpy).rawRequest(rawRequestCaptor.capture());
+    assertEquals("acct_child", rawRequestCaptor.getValue().getOptions().getStripeContext());
+
+    verifyStripeRequest(
+        request -> {
+          assertEquals(RequestMethod.DELETE, request.method());
+          assertEquals("/v1/products/prod_shared", request.url().getPath());
+          assertEquals("acct_child", request.headers().firstValue("Stripe-Context").orElse(null));
+          assertFalse(request.headers().firstValue("Stripe-Account").isPresent());
+        });
   }
 
   @Test

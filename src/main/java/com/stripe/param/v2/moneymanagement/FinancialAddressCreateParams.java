@@ -31,10 +31,6 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   @SerializedName("financial_account")
   String financialAccount;
 
-  /** Open Enum. The currency the FinancialAddress settles into the FinancialAccount. */
-  @SerializedName("settlement_currency")
-  String settlementCurrency;
-
   /**
    * <strong>Required.</strong> The type of FinancialAddress to create. Must agree with which branch
    * of financial_address_type_properties is set.
@@ -46,12 +42,10 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
       BankAccount bankAccount,
       Map<String, Object> extraParams,
       String financialAccount,
-      String settlementCurrency,
       Type type) {
     this.bankAccount = bankAccount;
     this.extraParams = extraParams;
     this.financialAccount = financialAccount;
-    this.settlementCurrency = settlementCurrency;
     this.type = type;
   }
 
@@ -66,18 +60,12 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
 
     private String financialAccount;
 
-    private String settlementCurrency;
-
     private Type type;
 
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAddressCreateParams build() {
       return new FinancialAddressCreateParams(
-          this.bankAccount,
-          this.extraParams,
-          this.financialAccount,
-          this.settlementCurrency,
-          this.type);
+          this.bankAccount, this.extraParams, this.financialAccount, this.type);
     }
 
     /** Properties for creating a bank account FinancialAddress. */
@@ -121,12 +109,6 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Open Enum. The currency the FinancialAddress settles into the FinancialAccount. */
-    public Builder setSettlementCurrency(String settlementCurrency) {
-      this.settlementCurrency = settlementCurrency;
-      return this;
-    }
-
     /**
      * <strong>Required.</strong> The type of FinancialAddress to create. Must agree with which
      * branch of financial_address_type_properties is set.
@@ -144,7 +126,11 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
     @SerializedName("country")
     String country;
 
-    /** <strong>Required.</strong> The currency of the bank account to provision. */
+    /**
+     * <strong>Required.</strong> The currency of the bank account to provision. Available
+     * currencies depend on your account's enabled features and rollout access; {@code eur} requires
+     * the Financial Address Global Payouts EU preview.
+     */
     @SerializedName("currency")
     Currency currency;
 
@@ -186,7 +172,11 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The currency of the bank account to provision. */
+      /**
+       * <strong>Required.</strong> The currency of the bank account to provision. Available
+       * currencies depend on your account's enabled features and rollout access; {@code eur}
+       * requires the Financial Address Global Payouts EU preview.
+       */
       public Builder setCurrency(FinancialAddressCreateParams.BankAccount.Currency currency) {
         this.currency = currency;
         return this;
@@ -221,6 +211,9 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
     }
 
     public enum Currency implements ApiRequestParams.EnumParam {
+      @SerializedName("eur")
+      EUR("eur"),
+
       @SerializedName("gbp")
       GBP("gbp"),
 

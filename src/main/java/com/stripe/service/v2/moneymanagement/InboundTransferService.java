@@ -47,12 +47,20 @@ public final class InboundTransferService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<InboundTransfer>>() {}.getType());
   }
-  /** InboundTransfers APIs are used to create, retrieve or list InboundTransfers. */
+  /**
+   * Creates an InboundTransfer to pull funds from a bank account into a financial account.
+   * Per-transfer and rolling weekly limits vary by account and payment rail. See <a
+   * href="https://stripe.com/treasury/add-funds#transfer-limits">transfer limits</a>.
+   */
   public InboundTransfer create(InboundTransferCreateParams params)
       throws StripeException, BlockedByStripeException {
     return create(params, (RequestOptions) null);
   }
-  /** InboundTransfers APIs are used to create, retrieve or list InboundTransfers. */
+  /**
+   * Creates an InboundTransfer to pull funds from a bank account into a financial account.
+   * Per-transfer and rolling weekly limits vary by account and payment rail. See <a
+   * href="https://stripe.com/treasury/add-funds#transfer-limits">transfer limits</a>.
+   */
   public InboundTransfer create(InboundTransferCreateParams params, RequestOptions options)
       throws StripeException, BlockedByStripeException {
     String path = "/v2/money_management/inbound_transfers";

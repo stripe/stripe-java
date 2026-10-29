@@ -125,6 +125,9 @@ public abstract class StripeException extends Exception {
       case "cannot_proceed":
         return com.stripe.exception.CannotProceedException.parse(
             body, statusCode, requestId, responseGetter);
+      case "capability_not_enabled":
+        return com.stripe.exception.CapabilityNotEnabledException.parse(
+            body, statusCode, requestId, responseGetter);
       case "controlled_by_alternate_resource":
         return com.stripe.exception.ControlledByAlternateResourceException.parse(
             body, statusCode, requestId, responseGetter);
@@ -133,6 +136,9 @@ public abstract class StripeException extends Exception {
             body, statusCode, requestId, responseGetter);
       case "financial_account_not_open":
         return com.stripe.exception.FinancialAccountNotOpenException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "fx_quote_needs_refresh":
+        return com.stripe.exception.FxQuoteNeedsRefreshException.parse(
             body, statusCode, requestId, responseGetter);
       case "insufficient_funds":
         return com.stripe.exception.InsufficientFundsException.parse(

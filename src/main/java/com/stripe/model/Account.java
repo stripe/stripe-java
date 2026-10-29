@@ -1682,6 +1682,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String usBankTransferPayments;
 
     /**
+     * The status of the Wero capability of the account, or whether the account can directly process
+     * Wero payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("wero_payments")
+    String weroPayments;
+
+    /**
      * The status of the Zip capability of the account, or whether the account can directly process
      * Zip charges.
      *
@@ -1812,6 +1821,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /** The company's phone number (used for verification). */
     @SerializedName("phone")
     String phone;
+
+    @SerializedName("physical_address")
+    Address physicalAddress;
 
     @SerializedName("principal_place_of_business")
     Address principalPlaceOfBusiness;

@@ -294,14 +294,8 @@ public class GbBankAccountCreateParams extends ApiRequestParams {
     @SerializedName("checking")
     CHECKING("checking"),
 
-    @SerializedName("futsu")
-    FUTSU("futsu"),
-
     @SerializedName("savings")
-    SAVINGS("savings"),
-
-    @SerializedName("toza")
-    TOZA("toza");
+    SAVINGS("savings");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

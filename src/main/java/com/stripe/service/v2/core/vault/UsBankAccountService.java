@@ -217,7 +217,7 @@ public final class UsBankAccountService extends ApiService {
    * verify your US Bank Account.
    */
   public UsBankAccount sendMicrodeposits(String id)
-      throws StripeException, ControlledByAlternateResourceException {
+      throws StripeException, ControlledByAlternateResourceException, CannotProceedException {
     return sendMicrodeposits(id, (RequestOptions) null);
   }
   /**
@@ -226,10 +226,24 @@ public final class UsBankAccountService extends ApiService {
    * verify your US Bank Account.
    */
   public UsBankAccount sendMicrodeposits(String id, RequestOptions options)
-      throws StripeException, ControlledByAlternateResourceException {
+      throws StripeException, ControlledByAlternateResourceException, CannotProceedException {
     String path =
         String.format(
             "/v2/core/vault/us_bank_accounts/%s/send_microdeposits", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, UsBankAccount.class);
+  }
+  /** Unarchive a USBankAccount object. */
+  public UsBankAccount unarchive(String id)
+      throws StripeException, ControlledByAlternateResourceException {
+    return unarchive(id, (RequestOptions) null);
+  }
+  /** Unarchive a USBankAccount object. */
+  public UsBankAccount unarchive(String id, RequestOptions options)
+      throws StripeException, ControlledByAlternateResourceException {
+    String path =
+        String.format("/v2/core/vault/us_bank_accounts/%s/unarchive", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, UsBankAccount.class);

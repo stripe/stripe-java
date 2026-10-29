@@ -1330,6 +1330,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("wechat_pay")
     WechatPay wechatPay;
 
+    @SerializedName("wero")
+    Wero wero;
+
     @SerializedName("zip")
     Zip zip;
 
@@ -2030,8 +2033,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
       /**
        * The payment_method_options.card.stored_credential_usage value that was passed for an off
-       * session, merchant-initiated transaction, one of {@code recurring}, {@code unscheduled},
-       * {@code on_session}, or {@code installment}.
+       * session, merchant-initiated transaction.
+       *
+       * <p>One of {@code installment}, {@code recurring}, or {@code unscheduled}.
        */
       @SerializedName("stored_credential_usage")
       String storedCredentialUsage;
@@ -2862,8 +2866,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The token currency that the transaction was sent with.
        *
-       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, {@code usdsui},
-       * or {@code usdt}.
+       * <p>One of {@code ousd}, {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp},
+       * {@code usdsui}, or {@code usdt}.
        */
       @SerializedName("token_currency")
       String tokenCurrency;
@@ -3010,7 +3014,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * Bank where the account is located.
        *
-       * <p>One of {@code bca}, {@code bni}, {@code bri}, {@code cimb}, or {@code permata}.
+       * <p>One of {@code bca}, {@code bni}, {@code bri}, {@code cimb}, {@code mandiri}, or {@code
+       * permata}.
        */
       @SerializedName("bank")
       String bank;
@@ -4473,6 +4478,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("transaction_id")
       String transactionId;
     }
+
+    /**
+     * For more details about Wero, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Wero extends StripeObject {}
 
     /**
      * For more details about Zip, please refer to the <a href="https://docs.stripe.com/api">API
