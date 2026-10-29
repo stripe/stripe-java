@@ -28,7 +28,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Use <a
+ * Legacy OutboundTransfers are part of the v1 version of Treasury for platforms and do not support
+ * many of the features introduced in <a href="https://docs.stripe.com/treasury/connect">Treasury
+ * for platforms v2</a>. Use <a
+ * href="https://docs.stripe.com/api/v2/money-management/outbound-transfers?api-version=preview">Outbound
+ * Transfers</a> instead of building a new v1 integration.
+ *
+ * <p>Use <a
  * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-transfers">OutboundTransfers</a>
  * to transfer funds from a <a
  * href="https://docs.stripe.com/api#financial_accounts">FinancialAccount</a> to a PaymentMethod

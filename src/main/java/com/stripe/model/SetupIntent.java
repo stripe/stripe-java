@@ -1368,6 +1368,14 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       String requestThreeDSecure;
 
       /**
+       * Set to indicate the future transaction type usage for the card being set up.
+       *
+       * <p>One of {@code installment}, {@code recurring}, or {@code unscheduled}.
+       */
+      @SerializedName("setup_credential_usage")
+      String setupCredentialUsage;
+
+      /**
        * For more details about MandateOptions, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
        */

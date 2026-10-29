@@ -1,0 +1,253 @@
+// File generated from our OpenAPI spec
+package com.stripe.param.v2.moneymanagement;
+
+import com.google.gson.annotations.SerializedName;
+import com.stripe.net.ApiRequestParams;
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
+@Getter
+@EqualsAndHashCode(callSuper = false)
+public class AdjustmentListParams extends ApiRequestParams {
+  /**
+   * Filter for Adjustments linked to a specific flow object. This filter only supports filtering by
+   * the flow object's ID, such as {@code ibt_123} for an InboundTransfer.
+   */
+  @SerializedName("adjusted_flow")
+  String adjustedFlow;
+
+  /**
+   * Filter for Adjustments by their creation time using {@code gt}, {@code gte}, {@code lt}, or
+   * {@code lte}.
+   */
+  @SerializedName("created")
+  Created created;
+
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  /** The page limit. */
+  @SerializedName("limit")
+  Long limit;
+
+  private AdjustmentListParams(
+      String adjustedFlow, Created created, Map<String, Object> extraParams, Long limit) {
+    this.adjustedFlow = adjustedFlow;
+    this.created = created;
+    this.extraParams = extraParams;
+    this.limit = limit;
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  public static class Builder {
+    private String adjustedFlow;
+
+    private Created created;
+
+    private Map<String, Object> extraParams;
+
+    private Long limit;
+
+    /** Finalize and obtain parameter instance from this builder. */
+    public AdjustmentListParams build() {
+      return new AdjustmentListParams(
+          this.adjustedFlow, this.created, this.extraParams, this.limit);
+    }
+
+    /**
+     * Filter for Adjustments linked to a specific flow object. This filter only supports filtering
+     * by the flow object's ID, such as {@code ibt_123} for an InboundTransfer.
+     */
+    public Builder setAdjustedFlow(String adjustedFlow) {
+      this.adjustedFlow = adjustedFlow;
+      return this;
+    }
+
+    /**
+     * Filter for Adjustments by their creation time using {@code gt}, {@code gte}, {@code lt}, or
+     * {@code lte}.
+     */
+    public Builder setCreated(AdjustmentListParams.Created created) {
+      this.created = created;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * AdjustmentListParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link AdjustmentListParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** The page limit. */
+    public Builder setLimit(Long limit) {
+      this.limit = limit;
+      return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Created {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Filter for Adjustments created after the specified timestamp. The timestamp must be in RFC
+     * 3339 format, for example {@code 2022-09-18T13:22:00Z}.
+     */
+    @SerializedName("gt")
+    Instant gt;
+
+    /**
+     * Filter for Adjustments created on or after the specified timestamp. The timestamp must be in
+     * RFC 3339 format, for example {@code 2022-09-18T13:22:00Z}.
+     */
+    @SerializedName("gte")
+    Instant gte;
+
+    /**
+     * Filter for Adjustments created before the specified timestamp. The timestamp must be in RFC
+     * 3339 format, for example {@code 2022-09-18T13:22:00Z}.
+     */
+    @SerializedName("lt")
+    Instant lt;
+
+    /**
+     * Filter for Adjustments created on or before the specified timestamp. The timestamp must be in
+     * RFC 3339 format, for example {@code 2022-09-18T13:22:00Z}.
+     */
+    @SerializedName("lte")
+    Instant lte;
+
+    private Created(
+        Map<String, Object> extraParams, Instant gt, Instant gte, Instant lt, Instant lte) {
+      this.extraParams = extraParams;
+      this.gt = gt;
+      this.gte = gte;
+      this.lt = lt;
+      this.lte = lte;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Instant gt;
+
+      private Instant gte;
+
+      private Instant lt;
+
+      private Instant lte;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AdjustmentListParams.Created build() {
+        return new AdjustmentListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AdjustmentListParams.Created#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AdjustmentListParams.Created#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Filter for Adjustments created after the specified timestamp. The timestamp must be in RFC
+       * 3339 format, for example {@code 2022-09-18T13:22:00Z}.
+       */
+      public Builder setGt(Instant gt) {
+        this.gt = gt;
+        return this;
+      }
+
+      /**
+       * Filter for Adjustments created on or after the specified timestamp. The timestamp must be
+       * in RFC 3339 format, for example {@code 2022-09-18T13:22:00Z}.
+       */
+      public Builder setGte(Instant gte) {
+        this.gte = gte;
+        return this;
+      }
+
+      /**
+       * Filter for Adjustments created before the specified timestamp. The timestamp must be in RFC
+       * 3339 format, for example {@code 2022-09-18T13:22:00Z}.
+       */
+      public Builder setLt(Instant lt) {
+        this.lt = lt;
+        return this;
+      }
+
+      /**
+       * Filter for Adjustments created on or before the specified timestamp. The timestamp must be
+       * in RFC 3339 format, for example {@code 2022-09-18T13:22:00Z}.
+       */
+      public Builder setLte(Instant lte) {
+        this.lte = lte;
+        return this;
+      }
+    }
+  }
+}

@@ -3751,6 +3751,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       Boolean requireCvcRecollection;
 
       /**
+       * Set to indicate the future transaction type usage for the card being set up.
+       *
+       * <p>One of {@code installment}, {@code recurring}, or {@code unscheduled}.
+       */
+      @SerializedName("setup_credential_usage")
+      String setupCredentialUsage;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
@@ -3793,6 +3801,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("statement_descriptor_suffix_kanji")
       String statementDescriptorSuffixKanji;
+
+      /**
+       * Selected usage to indicate the transaction type of the off-session payment.
+       *
+       * <p>One of {@code installment}, {@code recurring}, or {@code unscheduled}.
+       */
+      @SerializedName("stored_credential_usage")
+      String storedCredentialUsage;
 
       /**
        * For more details about Installments, please refer to the <a
@@ -5098,11 +5114,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("amount_includes_iof")
       String amountIncludesIof;
 
-      /** The number of seconds (between 10 and 1209600) after which Pix payment will expire. */
+      /**
+       * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60 and
+       * 1209600, inclusive). If neither expiration option is supplied, defaults to 14400 seconds (4
+       * hours). Mutually exclusive with {@code expires_at}.
+       */
       @SerializedName("expires_after_seconds")
       Long expiresAfterSeconds;
 
-      /** The timestamp at which the Pix expires. */
+      /**
+       * The absolute Unix timestamp at which the Pix expires. When supplied as an input, it must be
+       * between 60 and 1209600 seconds from the current time at validation, inclusive. If neither
+       * expiration option is supplied, the Pix expires 14400 seconds (4 hours) after PaymentIntent
+       * confirmation. Mutually exclusive with {@code expires_after_seconds}.
+       */
       @SerializedName("expires_at")
       Long expiresAt;
 

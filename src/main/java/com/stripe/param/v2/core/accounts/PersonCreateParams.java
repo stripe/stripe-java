@@ -1409,8 +1409,8 @@ public class PersonCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> One or more document IDs returned by a <a
-       * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-       * purpose value of {@code account_requirement}.
+       * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+       * {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -1536,8 +1536,8 @@ public class PersonCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> One or more document IDs returned by a <a
-       * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-       * purpose value of {@code account_requirement}.
+       * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+       * {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;
@@ -1661,9 +1661,8 @@ public class PersonCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> The <a
-       * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-       * referring to each side of the document.
+       * <strong>Required.</strong> The <a href="https://docs.stripe.com/api/files/create">file
+       * upload</a> tokens referring to each side of the document.
        */
       @SerializedName("front_back")
       FrontBack frontBack;
@@ -1727,9 +1726,8 @@ public class PersonCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The <a
-         * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-         * referring to each side of the document.
+         * <strong>Required.</strong> The <a href="https://docs.stripe.com/api/files/create">file
+         * upload</a> tokens referring to each side of the document.
          */
         public Builder setFrontBack(
             PersonCreateParams.Documents.PrimaryVerification.FrontBack frontBack) {
@@ -1751,10 +1749,10 @@ public class PersonCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class FrontBack {
         /**
-         * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-         * representing the back of the verification document. The purpose of the uploaded file
-         * should be 'identity_document'. The uploaded file needs to be a color image (smaller than
-         * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+         * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+         * the back of the verification document. The purpose of the uploaded file should be
+         * 'identity_document'. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
          */
         @SerializedName("back")
         String back;
@@ -1770,11 +1768,11 @@ public class PersonCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * <strong>Required.</strong> A <a
-         * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-         * representing the front of the verification document. The purpose of the uploaded file
-         * should be 'identity_document'. The uploaded file needs to be a color image (smaller than
-         * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+         * <strong>Required.</strong> A <a href="https://docs.stripe.com/api/files/create">file
+         * upload</a> token representing the front of the verification document. The purpose of the
+         * uploaded file should be 'identity_document'. The uploaded file needs to be a color image
+         * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+         * size.
          */
         @SerializedName("front")
         String front;
@@ -1803,11 +1801,10 @@ public class PersonCreateParams extends ApiRequestParams {
           }
 
           /**
-           * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-           * token representing the back of the verification document. The purpose of the uploaded
-           * file should be 'identity_document'. The uploaded file needs to be a color image
-           * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-           * size.
+           * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+           * the back of the verification document. The purpose of the uploaded file should be
+           * 'identity_document'. The uploaded file needs to be a color image (smaller than 8,000px
+           * by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
            */
           public Builder setBack(String back) {
             this.back = back;
@@ -1843,11 +1840,11 @@ public class PersonCreateParams extends ApiRequestParams {
           }
 
           /**
-           * <strong>Required.</strong> A <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-           * representing the front of the verification document. The purpose of the uploaded file
-           * should be 'identity_document'. The uploaded file needs to be a color image (smaller
-           * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+           * <strong>Required.</strong> A <a href="https://docs.stripe.com/api/files/create">file
+           * upload</a> token representing the front of the verification document. The purpose of
+           * the uploaded file should be 'identity_document'. The uploaded file needs to be a color
+           * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10
+           * MB in size.
            */
           public Builder setFront(String front) {
             this.front = front;
@@ -1882,9 +1879,8 @@ public class PersonCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> The <a
-       * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-       * referring to each side of the document.
+       * <strong>Required.</strong> The <a href="https://docs.stripe.com/api/files/create">file
+       * upload</a> tokens referring to each side of the document.
        */
       @SerializedName("front_back")
       FrontBack frontBack;
@@ -1949,9 +1945,8 @@ public class PersonCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The <a
-         * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
-         * referring to each side of the document.
+         * <strong>Required.</strong> The <a href="https://docs.stripe.com/api/files/create">file
+         * upload</a> tokens referring to each side of the document.
          */
         public Builder setFrontBack(
             PersonCreateParams.Documents.SecondaryVerification.FrontBack frontBack) {
@@ -1973,10 +1968,10 @@ public class PersonCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class FrontBack {
         /**
-         * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-         * representing the back of the verification document. The purpose of the uploaded file
-         * should be 'identity_document'. The uploaded file needs to be a color image (smaller than
-         * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+         * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+         * the back of the verification document. The purpose of the uploaded file should be
+         * 'identity_document'. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
          */
         @SerializedName("back")
         String back;
@@ -1992,11 +1987,11 @@ public class PersonCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * <strong>Required.</strong> A <a
-         * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-         * representing the front of the verification document. The purpose of the uploaded file
-         * should be 'identity_document'. The uploaded file needs to be a color image (smaller than
-         * 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+         * <strong>Required.</strong> A <a href="https://docs.stripe.com/api/files/create">file
+         * upload</a> token representing the front of the verification document. The purpose of the
+         * uploaded file should be 'identity_document'. The uploaded file needs to be a color image
+         * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+         * size.
          */
         @SerializedName("front")
         String front;
@@ -2025,11 +2020,10 @@ public class PersonCreateParams extends ApiRequestParams {
           }
 
           /**
-           * A <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
-           * token representing the back of the verification document. The purpose of the uploaded
-           * file should be 'identity_document'. The uploaded file needs to be a color image
-           * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-           * size.
+           * A <a href="https://docs.stripe.com/api/files/create">file upload</a> token representing
+           * the back of the verification document. The purpose of the uploaded file should be
+           * 'identity_document'. The uploaded file needs to be a color image (smaller than 8,000px
+           * by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
            */
           public Builder setBack(String back) {
             this.back = back;
@@ -2067,11 +2061,11 @@ public class PersonCreateParams extends ApiRequestParams {
           }
 
           /**
-           * <strong>Required.</strong> A <a
-           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> token
-           * representing the front of the verification document. The purpose of the uploaded file
-           * should be 'identity_document'. The uploaded file needs to be a color image (smaller
-           * than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+           * <strong>Required.</strong> A <a href="https://docs.stripe.com/api/files/create">file
+           * upload</a> token representing the front of the verification document. The purpose of
+           * the uploaded file should be 'identity_document'. The uploaded file needs to be a color
+           * image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10
+           * MB in size.
            */
           public Builder setFront(String front) {
             this.front = front;
@@ -2107,8 +2101,8 @@ public class PersonCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> One or more document IDs returned by a <a
-       * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
-       * purpose value of {@code account_requirement}.
+       * href="https://docs.stripe.com/api/files/create">file upload</a> with a purpose value of
+       * {@code account_requirement}.
        */
       @SerializedName("files")
       List<String> files;

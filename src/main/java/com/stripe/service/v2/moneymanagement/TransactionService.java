@@ -1,0 +1,101 @@
+// File generated from our OpenAPI spec
+package com.stripe.service.v2.moneymanagement;
+
+import com.google.gson.reflect.TypeToken;
+import com.stripe.exception.StripeException;
+import com.stripe.model.v2.StripeCollection;
+import com.stripe.model.v2.moneymanagement.Transaction;
+import com.stripe.net.ApiRequest;
+import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiResource;
+import com.stripe.net.ApiService;
+import com.stripe.net.BaseAddress;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.v2.moneymanagement.TransactionListParams;
+import com.stripe.param.v2.moneymanagement.TransactionUpdateParams;
+
+public final class TransactionService extends ApiService {
+  public TransactionService(StripeResponseGetter responseGetter) {
+    super(responseGetter);
+  }
+
+  /** Returns a list of Transactions that match the provided filters. */
+  public StripeCollection<Transaction> list(TransactionListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Returns a list of Transactions that match the provided filters. */
+  public StripeCollection<Transaction> list(RequestOptions options) throws StripeException {
+    return list((TransactionListParams) null, options);
+  }
+  /** Returns a list of Transactions that match the provided filters. */
+  public StripeCollection<Transaction> list() throws StripeException {
+    return list((TransactionListParams) null, (RequestOptions) null);
+  }
+  /** Returns a list of Transactions that match the provided filters. */
+  public StripeCollection<Transaction> list(TransactionListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v2/money_management/transactions";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, new TypeToken<StripeCollection<Transaction>>() {}.getType());
+  }
+  /** Retrieves the details of a Transaction by ID. */
+  public Transaction retrieve(String id) throws StripeException {
+    return retrieve(id, (RequestOptions) null);
+  }
+  /** Retrieves the details of a Transaction by ID. */
+  public Transaction retrieve(String id, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v2/money_management/transactions/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+    return this.request(request, Transaction.class);
+  }
+  /** Updates an existing Transaction. You can update its description and metadata. */
+  public Transaction update(String id, TransactionUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /** Updates an existing Transaction. You can update its description and metadata. */
+  public Transaction update(String id, RequestOptions options) throws StripeException {
+    return update(id, (TransactionUpdateParams) null, options);
+  }
+  /** Updates an existing Transaction. You can update its description and metadata. */
+  public Transaction update(String id) throws StripeException {
+    return update(id, (TransactionUpdateParams) null, (RequestOptions) null);
+  }
+  /** Updates an existing Transaction. You can update its description and metadata. */
+  public Transaction update(String id, TransactionUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v2/money_management/transactions/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Transaction.class);
+  }
+  /** Creates a fresh hosted URL for a Transaction's regulatory receipt. */
+  public Transaction refreshRegulatoryReceipt(String id) throws StripeException {
+    return refreshRegulatoryReceipt(id, (RequestOptions) null);
+  }
+  /** Creates a fresh hosted URL for a Transaction's regulatory receipt. */
+  public Transaction refreshRegulatoryReceipt(String id, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v2/money_management/transactions/%s/refresh_regulatory_receipt",
+            ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, Transaction.class);
+  }
+}

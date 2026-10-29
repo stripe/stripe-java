@@ -186,11 +186,20 @@ public class AccountSession extends ApiResource {
     @SerializedName("payouts_list")
     PayoutsList payoutsList;
 
+    @SerializedName("reporting_chart")
+    ReportingChart reportingChart;
+
     @SerializedName("tax_registrations")
     TaxRegistrations taxRegistrations;
 
     @SerializedName("tax_settings")
     TaxSettings taxSettings;
+
+    @SerializedName("terminal_hardware_orders")
+    TerminalHardwareOrders terminalHardwareOrders;
+
+    @SerializedName("terminal_hardware_shop")
+    TerminalHardwareShop terminalHardwareShop;
 
     /**
      * For more details about AccountManagement, please refer to the <a
@@ -1065,6 +1074,31 @@ public class AccountSession extends ApiResource {
     }
 
     /**
+     * For more details about ReportingChart, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ReportingChart extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
+    }
+
+    /**
      * For more details about TaxRegistrations, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1097,6 +1131,56 @@ public class AccountSession extends ApiResource {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class TaxSettings extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
+    }
+
+    /**
+     * For more details about TerminalHardwareOrders, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TerminalHardwareOrders extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
+    }
+
+    /**
+     * For more details about TerminalHardwareShop, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TerminalHardwareShop extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;

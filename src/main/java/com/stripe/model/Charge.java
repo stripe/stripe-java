@@ -1980,6 +1980,23 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("regulated_status")
       String regulatedStatus;
 
+      /**
+       * The payment_method_options.card.setup_credential_usage value that was passed when
+       * setup_future_usage was present at confirmation, one of {@code recurring}, {@code
+       * unscheduled}, or {@code installment}.
+       */
+      @SerializedName("setup_credential_usage")
+      String setupCredentialUsage;
+
+      /**
+       * The payment_method_options.card.stored_credential_usage value that was passed for an off
+       * session, merchant-initiated transaction.
+       *
+       * <p>One of {@code installment}, {@code recurring}, or {@code unscheduled}.
+       */
+      @SerializedName("stored_credential_usage")
+      String storedCredentialUsage;
+
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;
@@ -2770,8 +2787,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The token currency that the transaction was sent with.
        *
-       * <p>One of {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp}, {@code usdsui},
-       * or {@code usdt}.
+       * <p>One of {@code ousd}, {@code phantom_cash}, {@code usdc}, {@code usdg}, {@code usdp},
+       * {@code usdsui}, or {@code usdt}.
        */
       @SerializedName("token_currency")
       String tokenCurrency;
