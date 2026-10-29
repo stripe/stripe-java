@@ -1,0 +1,378 @@
+// File generated from our OpenAPI spec
+package com.stripe.model.v2.moneymanagement;
+
+import com.google.gson.annotations.SerializedName;
+import com.stripe.model.HasId;
+import com.stripe.model.StripeObject;
+import com.stripe.v2.Amount;
+import java.time.Instant;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * Use ReceivedCredits API to retrieve information on when, where, and how funds are sent into your
+ * FinancialAccount.
+ */
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
+public class ReceivedCredit extends StripeObject implements HasId {
+  /** The amount and currency credited to the FinancialAccount. */
+  @SerializedName("amount")
+  Amount amount;
+
+  /**
+   * The amount and currency Stripe received from the external source, before any conversion or
+   * fees.
+   */
+  @SerializedName("amount_received")
+  Amount amountReceived;
+
+  /**
+   * This object stores details about the originating Stripe transaction that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code balance_transfer}.
+   */
+  @SerializedName("balance_transfer")
+  BalanceTransfer balanceTransfer;
+
+  /**
+   * This object stores details about the originating banking transaction that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code bank_transfer}.
+   */
+  @SerializedName("bank_transfer")
+  BankTransfer bankTransfer;
+
+  /**
+   * Time at which the ReceivedCredit was created. Represented as a RFC 3339 date &amp; time UTC
+   * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+   */
+  @SerializedName("created")
+  Instant created;
+
+  /** Freeform string set by originator of the ReceivedCredit. */
+  @SerializedName("description")
+  String description;
+
+  /** Financial Account ID on which funds for ReceivedCredit were received. */
+  @SerializedName("financial_account")
+  String financialAccount;
+
+  /** Unique identifier for the ReceivedCredit. */
+  @Getter(onMethod_ = {@Override})
+  @SerializedName("id")
+  String id;
+
+  /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
+   * String representing the object's type. Objects of the same type share the same value of the
+   * object field.
+   *
+   * <p>Equal to {@code v2.money_management.received_credit}.
+   */
+  @SerializedName("object")
+  String object;
+
+  /**
+   * Open Enum. The status of the ReceivedCredit.
+   *
+   * <p>One of {@code failed}, {@code pending}, {@code returned}, or {@code succeeded}.
+   */
+  @SerializedName("status")
+  String status;
+
+  /**
+   * This hash contains detailed information that elaborates on the specific status of the
+   * ReceivedCredit. e.g the reason behind a failure if the status is marked as {@code failed}.
+   */
+  @SerializedName("status_details")
+  StatusDetails statusDetails;
+
+  /** Hash containing timestamps of when the object transitioned to a particular status. */
+  @SerializedName("status_transitions")
+  StatusTransitions statusTransitions;
+
+  /**
+   * Open Enum. The type of flow that caused the ReceivedCredit.
+   *
+   * <p>One of {@code balance_transfer}, or {@code bank_transfer}.
+   */
+  @SerializedName("type")
+  String type;
+
+  /**
+   * This object stores details about the originating Stripe transaction that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code balance_transfer}.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BalanceTransfer extends StripeObject {
+    /** The ID of the account that owns the source object originated the ReceivedCredit. */
+    @SerializedName("from_account")
+    String fromAccount;
+
+    /** The ID of the outbound payment object that originated the ReceivedCredit. */
+    @SerializedName("outbound_payment")
+    String outboundPayment;
+
+    /** The ID of the outbound transfer object that originated the ReceivedCredit. */
+    @SerializedName("outbound_transfer")
+    String outboundTransfer;
+
+    /** The ID of the payout object that originated the ReceivedCredit. */
+    @SerializedName("payout")
+    String payout;
+
+    /** The ID of the v1 transfer object that originated the ReceivedCredit. */
+    @SerializedName("transfer")
+    String transfer;
+
+    /**
+     * Open Enum. The type of Stripe Money Movement that originated the ReceivedCredit.
+     *
+     * <p>One of {@code outbound_payment}, {@code outbound_transfer}, {@code payout}, or {@code
+     * transfer}.
+     */
+    @SerializedName("type")
+    String type;
+  }
+
+  /**
+   * This object stores details about the originating banking transaction that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code bank_transfer}.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BankTransfer extends StripeObject {
+    /** Financial Address on which funds for ReceivedCredit were received. */
+    @SerializedName("financial_address")
+    String financialAddress;
+
+    /**
+     * The money transmission network used to send funds for this ReceivedCredit.
+     *
+     * <p>One of {@code ach}, {@code chaps}, {@code fedwire}, {@code fps}, {@code rtp}, {@code
+     * sepa}, or {@code sepa_instant}.
+     */
+    @SerializedName("network")
+    String network;
+
+    /** Hash containing the originating bank account details and type for this bank transfer. */
+    @SerializedName("originating_bank_account")
+    OriginatingBankAccount originatingBankAccount;
+
+    /** Freeform string set by originator of the external ReceivedCredit. */
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+
+    /** Hash containing the originating bank account details and type for this bank transfer. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class OriginatingBankAccount extends StripeObject {
+      /**
+       * Hash containing the transaction bank details. Present if {@code type} field value is {@code
+       * aba}.
+       */
+      @SerializedName("aba")
+      Aba aba;
+
+      /**
+       * Hash containing the transaction bank details. Present if {@code type} field value is {@code
+       * iban}.
+       */
+      @SerializedName("iban")
+      Iban iban;
+
+      /**
+       * Hash containing the transaction bank details. Present if {@code type} field value is {@code
+       * sort_code}.
+       */
+      @SerializedName("sort_code")
+      SortCode sortCode;
+
+      /**
+       * Open Enum. The type of bank transfer that originated this ReceivedCredit.
+       *
+       * <p>One of {@code aba}, {@code iban}, or {@code sort_code}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /**
+       * Hash containing the transaction bank details. Present if {@code type} field value is {@code
+       * aba}.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Aba extends StripeObject {
+        /** The name of the account holder that sent the payment. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The bank name the transfer was received from. */
+        @SerializedName("bank_name")
+        String bankName;
+
+        /** The last 4 digits of the account number that originated the transfer. */
+        @SerializedName("last4")
+        String last4;
+
+        /** The routing number of the account that originated the transfer. */
+        @SerializedName("routing_number")
+        String routingNumber;
+      }
+
+      /**
+       * Hash containing the transaction bank details. Present if {@code type} field value is {@code
+       * iban}.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Iban extends StripeObject {
+        /** The account holder name of the bank account the transfer was received from. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The bank name the transfer was received from. */
+        @SerializedName("bank_name")
+        String bankName;
+
+        /** The BIC/SWIFT code of the account that originated the transfer. */
+        @SerializedName("bic")
+        String bic;
+
+        /** The origination country of the bank transfer. */
+        @SerializedName("country")
+        String country;
+
+        /** The IBAN that originated the transfer. */
+        @SerializedName("iban")
+        String iban;
+      }
+
+      /**
+       * Hash containing the transaction bank details. Present if {@code type} field value is {@code
+       * sort_code}.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SortCode extends StripeObject {
+        /** The account holder name of the bank account the transfer was received from. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The bank name the transfer was received from. */
+        @SerializedName("bank_name")
+        String bankName;
+
+        /** The last 4 digits of the account number that originated the transfer. */
+        @SerializedName("last4")
+        String last4;
+
+        /** The sort code of the account that originated the transfer. */
+        @SerializedName("sort_code")
+        String sortCode;
+      }
+    }
+  }
+
+  /**
+   * This hash contains detailed information that elaborates on the specific status of the
+   * ReceivedCredit. e.g the reason behind a failure if the status is marked as {@code failed}.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusDetails extends StripeObject {
+    /**
+     * Hash that provides additional information regarding the reason behind a {@code failed}
+     * ReceivedCredit status. It is only present when the ReceivedCredit status is {@code failed}.
+     */
+    @SerializedName("failed")
+    Failed failed;
+
+    /**
+     * Hash that provides additional information regarding the reason behind a {@code returned}
+     * ReceivedCredit status. It is only present when the ReceivedCredit status is {@code returned}.
+     */
+    @SerializedName("returned")
+    Returned returned;
+
+    /**
+     * Hash that provides additional information regarding the reason behind a {@code failed}
+     * ReceivedCredit status. It is only present when the ReceivedCredit status is {@code failed}.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Failed extends StripeObject {
+      /**
+       * Open Enum. The {@code failed} status reason.
+       *
+       * <p>One of {@code capability_inactive}, {@code currency_unsupported_on_financial_address},
+       * {@code financial_address_inactive}, or {@code stripe_rejected}.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
+
+    /**
+     * Hash that provides additional information regarding the reason behind a {@code returned}
+     * ReceivedCredit status. It is only present when the ReceivedCredit status is {@code returned}.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Returned extends StripeObject {
+      /**
+       * Open Enum. The {@code returned} status reason.
+       *
+       * <p>Equal to {@code originator_initiated_reversal}.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
+  }
+
+  /** Hash containing timestamps of when the object transitioned to a particular status. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusTransitions extends StripeObject {
+    /**
+     * Timestamp describing when the ReceivedCredit was marked as {@code failed}. Represented as a
+     * RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+     * 2022-09-18T13:22:18.123Z.
+     */
+    @SerializedName("failed_at")
+    Instant failedAt;
+
+    /**
+     * Timestamp describing when the ReceivedCredit changed status to {@code returned}. Represented
+     * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+     * 2022-09-18T13:22:18.123Z.
+     */
+    @SerializedName("returned_at")
+    Instant returnedAt;
+
+    /**
+     * Timestamp describing when the ReceivedCredit was marked as {@code succeeded}. Represented as
+     * a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+     * 2022-09-18T13:22:18.123Z.
+     */
+    @SerializedName("succeeded_at")
+    Instant succeededAt;
+  }
+}

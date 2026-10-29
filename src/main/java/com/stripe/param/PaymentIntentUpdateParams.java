@@ -133,10 +133,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   Object paymentDetails;
 
   /**
-   * ID of the payment method (a PaymentMethod, Card, or <a
-   * href="https://docs.stripe.com/payments/payment-methods/transitioning#compatibility">compatible
-   * Source</a> object) to attach to this PaymentIntent. To unset this field to null, pass in an
-   * empty string.
+   * The ID of a PaymentMethod to attach to this PaymentIntent. To unset this field to null, pass in
+   * an empty string.
    */
   @SerializedName("payment_method")
   Object paymentMethod;
@@ -744,10 +742,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of the payment method (a PaymentMethod, Card, or <a
-     * href="https://docs.stripe.com/payments/payment-methods/transitioning#compatibility">compatible
-     * Source</a> object) to attach to this PaymentIntent. To unset this field to null, pass in an
-     * empty string.
+     * The ID of a PaymentMethod to attach to this PaymentIntent. To unset this field to null, pass
+     * in an empty string.
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -755,10 +751,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of the payment method (a PaymentMethod, Card, or <a
-     * href="https://docs.stripe.com/payments/payment-methods/transitioning#compatibility">compatible
-     * Source</a> object) to attach to this PaymentIntent. To unset this field to null, pass in an
-     * empty string.
+     * The ID of a PaymentMethod to attach to this PaymentIntent. To unset this field to null, pass
+     * in an empty string.
      */
     public Builder setPaymentMethod(EmptyParam paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -14501,6 +14495,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("require_cvc_recollection")
       Boolean requireCvcRecollection;
 
+      /** Set to indicate the future transaction type usage for the card being set up. */
+      @SerializedName("setup_credential_usage")
+      SetupCredentialUsage setupCredentialUsage;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -14548,6 +14546,23 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Object statementDescriptorSuffixKanji;
 
       /**
+       * Use this parameter in scenarios where you collect card details and <a
+       * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
+       *
+       * <p>When making an off session payment with a previously saved card (that was saved with a
+       * SetupIntent or with a PaymentIntent with {@code setup_future_usage}), set this parameter to
+       * indicate the type of transaction.
+       *
+       * <p>You can set this parameter at any time before or during PaymentIntent confirmation, and
+       * confirm this PaymentIntent with {@code off_session=true}.
+       *
+       * <p>Note that this parameter is currently unsupported with the {@code setup_future_usage}
+       * parameter.
+       */
+      @SerializedName("stored_credential_usage")
+      StoredCredentialUsage storedCredentialUsage;
+
+      /**
        * If 3D Secure authentication was performed with a third-party provider, the authentication
        * details to use for this payment.
        */
@@ -14568,9 +14583,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           RequestOvercapture requestOvercapture,
           RequestThreeDSecure requestThreeDSecure,
           Boolean requireCvcRecollection,
+          SetupCredentialUsage setupCredentialUsage,
           ApiRequestParams.EnumParam setupFutureUsage,
           Object statementDescriptorSuffixKana,
           Object statementDescriptorSuffixKanji,
+          StoredCredentialUsage storedCredentialUsage,
           ThreeDSecure threeDSecure) {
         this.captureMethod = captureMethod;
         this.cvcToken = cvcToken;
@@ -14585,9 +14602,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         this.requestOvercapture = requestOvercapture;
         this.requestThreeDSecure = requestThreeDSecure;
         this.requireCvcRecollection = requireCvcRecollection;
+        this.setupCredentialUsage = setupCredentialUsage;
         this.setupFutureUsage = setupFutureUsage;
         this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
         this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
+        this.storedCredentialUsage = storedCredentialUsage;
         this.threeDSecure = threeDSecure;
       }
 
@@ -14622,11 +14641,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private Boolean requireCvcRecollection;
 
+        private SetupCredentialUsage setupCredentialUsage;
+
         private ApiRequestParams.EnumParam setupFutureUsage;
 
         private Object statementDescriptorSuffixKana;
 
         private Object statementDescriptorSuffixKanji;
+
+        private StoredCredentialUsage storedCredentialUsage;
 
         private ThreeDSecure threeDSecure;
 
@@ -14646,9 +14669,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.requestOvercapture,
               this.requestThreeDSecure,
               this.requireCvcRecollection,
+              this.setupCredentialUsage,
               this.setupFutureUsage,
               this.statementDescriptorSuffixKana,
               this.statementDescriptorSuffixKanji,
+              this.storedCredentialUsage,
               this.threeDSecure);
         }
 
@@ -14843,6 +14868,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Set to indicate the future transaction type usage for the card being set up. */
+        public Builder setSetupCredentialUsage(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Card.SetupCredentialUsage
+                setupCredentialUsage) {
+          this.setupCredentialUsage = setupCredentialUsage;
+          return this;
+        }
+
         /**
          * Indicates that you intend to make future payments with this PaymentIntent's payment
          * method.
@@ -14948,6 +14981,27 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         public Builder setStatementDescriptorSuffixKanji(
             EmptyParam statementDescriptorSuffixKanji) {
           this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
+          return this;
+        }
+
+        /**
+         * Use this parameter in scenarios where you collect card details and <a
+         * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
+         *
+         * <p>When making an off session payment with a previously saved card (that was saved with a
+         * SetupIntent or with a PaymentIntent with {@code setup_future_usage}), set this parameter
+         * to indicate the type of transaction.
+         *
+         * <p>You can set this parameter at any time before or during PaymentIntent confirmation,
+         * and confirm this PaymentIntent with {@code off_session=true}.
+         *
+         * <p>Note that this parameter is currently unsupported with the {@code setup_future_usage}
+         * parameter.
+         */
+        public Builder setStoredCredentialUsage(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Card.StoredCredentialUsage
+                storedCredentialUsage) {
+          this.storedCredentialUsage = storedCredentialUsage;
           return this;
         }
 
@@ -16316,6 +16370,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         }
       }
 
+      public enum SetupCredentialUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("installment")
+        INSTALLMENT("installment"),
+
+        @SerializedName("recurring")
+        RECURRING("recurring"),
+
+        @SerializedName("unscheduled")
+        UNSCHEDULED("unscheduled");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupCredentialUsage(String value) {
+          this.value = value;
+        }
+      }
+
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
         @SerializedName("none")
         NONE("none"),
@@ -16330,6 +16402,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         private final String value;
 
         SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum StoredCredentialUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("installment")
+        INSTALLMENT("installment"),
+
+        @SerializedName("recurring")
+        RECURRING("recurring"),
+
+        @SerializedName("unscheduled")
+        UNSCHEDULED("unscheduled");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        StoredCredentialUsage(String value) {
           this.value = value;
         }
       }
@@ -22557,15 +22647,18 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       AmountIncludesIof amountIncludesIof;
 
       /**
-       * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
-       * Defaults to 86400 seconds.
+       * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60 and
+       * 1209600, inclusive). If neither expiration option is supplied, defaults to 14400 seconds (4
+       * hours). Mutually exclusive with {@code expires_at}.
        */
       @SerializedName("expires_after_seconds")
       Long expiresAfterSeconds;
 
       /**
-       * The timestamp at which the Pix expires (between 10 and 1209600 seconds in the future).
-       * Defaults to 1 day in the future.
+       * The absolute Unix timestamp at which the Pix expires, between 60 and 1209600 seconds from
+       * the current time. If neither expiration option is supplied, the Pix expires 14400 seconds
+       * (4 hours) after PaymentIntent confirmation. Mutually exclusive with {@code
+       * expires_after_seconds}.
        */
       @SerializedName("expires_at")
       Long expiresAt;
@@ -22660,8 +22753,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
-         * Defaults to 86400 seconds.
+         * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60
+         * and 1209600, inclusive). If neither expiration option is supplied, defaults to 14400
+         * seconds (4 hours). Mutually exclusive with {@code expires_at}.
          */
         public Builder setExpiresAfterSeconds(Long expiresAfterSeconds) {
           this.expiresAfterSeconds = expiresAfterSeconds;
@@ -22669,8 +22763,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The timestamp at which the Pix expires (between 10 and 1209600 seconds in the future).
-         * Defaults to 1 day in the future.
+         * The absolute Unix timestamp at which the Pix expires, between 60 and 1209600 seconds from
+         * the current time. If neither expiration option is supplied, the Pix expires 14400 seconds
+         * (4 hours) after PaymentIntent confirmation. Mutually exclusive with {@code
+         * expires_after_seconds}.
          */
         public Builder setExpiresAt(Long expiresAt) {
           this.expiresAt = expiresAt;

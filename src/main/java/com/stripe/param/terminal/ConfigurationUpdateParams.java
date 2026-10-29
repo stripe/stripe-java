@@ -47,6 +47,10 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   @SerializedName("offline")
   Object offline;
 
+  /** Configurations for reader security settings. */
+  @SerializedName("reader_security")
+  Object readerSecurity;
+
   /** Reboot time settings for readers. that support customized reboot time configuration. */
   @SerializedName("reboot_window")
   Object rebootWindow;
@@ -58,6 +62,10 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   /** An object containing device type specific settings for Stripe S710 readers. */
   @SerializedName("stripe_s710")
   Object stripeS710;
+
+  /** An object containing device type specific settings for Stripe T600 readers. */
+  @SerializedName("stripe_t600")
+  Object stripeT600;
 
   /** Tipping configurations for readers that support on-reader tips. */
   @SerializedName("tipping")
@@ -95,9 +103,11 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Object name,
       Object offline,
+      Object readerSecurity,
       Object rebootWindow,
       Object stripeS700,
       Object stripeS710,
+      Object stripeT600,
       Object tipping,
       Object verifoneM425,
       Object verifoneP400,
@@ -112,9 +122,11 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.name = name;
     this.offline = offline;
+    this.readerSecurity = readerSecurity;
     this.rebootWindow = rebootWindow;
     this.stripeS700 = stripeS700;
     this.stripeS710 = stripeS710;
+    this.stripeT600 = stripeT600;
     this.tipping = tipping;
     this.verifoneM425 = verifoneM425;
     this.verifoneP400 = verifoneP400;
@@ -143,11 +155,15 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
     private Object offline;
 
+    private Object readerSecurity;
+
     private Object rebootWindow;
 
     private Object stripeS700;
 
     private Object stripeS710;
+
+    private Object stripeT600;
 
     private Object tipping;
 
@@ -173,9 +189,11 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.name,
           this.offline,
+          this.readerSecurity,
           this.rebootWindow,
           this.stripeS700,
           this.stripeS710,
+          this.stripeT600,
           this.tipping,
           this.verifoneM425,
           this.verifoneP400,
@@ -297,6 +315,18 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Configurations for reader security settings. */
+    public Builder setReaderSecurity(ConfigurationUpdateParams.ReaderSecurity readerSecurity) {
+      this.readerSecurity = readerSecurity;
+      return this;
+    }
+
+    /** Configurations for reader security settings. */
+    public Builder setReaderSecurity(EmptyParam readerSecurity) {
+      this.readerSecurity = readerSecurity;
+      return this;
+    }
+
     /** Reboot time settings for readers. that support customized reboot time configuration. */
     public Builder setRebootWindow(ConfigurationUpdateParams.RebootWindow rebootWindow) {
       this.rebootWindow = rebootWindow;
@@ -330,6 +360,18 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     /** An object containing device type specific settings for Stripe S710 readers. */
     public Builder setStripeS710(EmptyParam stripeS710) {
       this.stripeS710 = stripeS710;
+      return this;
+    }
+
+    /** An object containing device type specific settings for Stripe T600 readers. */
+    public Builder setStripeT600(ConfigurationUpdateParams.StripeT600 stripeT600) {
+      this.stripeT600 = stripeT600;
+      return this;
+    }
+
+    /** An object containing device type specific settings for Stripe T600 readers. */
+    public Builder setStripeT600(EmptyParam stripeT600) {
+      this.stripeT600 = stripeT600;
       return this;
     }
 
@@ -722,6 +764,83 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class ReaderSecurity {
+    /** Passcode used to access a reader's admin menu. */
+    @SerializedName("admin_menu_passcode")
+    Object adminMenuPasscode;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private ReaderSecurity(Object adminMenuPasscode, Map<String, Object> extraParams) {
+      this.adminMenuPasscode = adminMenuPasscode;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object adminMenuPasscode;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationUpdateParams.ReaderSecurity build() {
+        return new ConfigurationUpdateParams.ReaderSecurity(
+            this.adminMenuPasscode, this.extraParams);
+      }
+
+      /** Passcode used to access a reader's admin menu. */
+      public Builder setAdminMenuPasscode(String adminMenuPasscode) {
+        this.adminMenuPasscode = adminMenuPasscode;
+        return this;
+      }
+
+      /** Passcode used to access a reader's admin menu. */
+      public Builder setAdminMenuPasscode(EmptyParam adminMenuPasscode) {
+        this.adminMenuPasscode = adminMenuPasscode;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationUpdateParams.ReaderSecurity#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationUpdateParams.ReaderSecurity#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class RebootWindow {
     /**
      * <strong>Required.</strong> Integer between 0 to 23 that represents the end hour of the reboot
@@ -942,6 +1061,81 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link ConfigurationUpdateParams.StripeS710#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** A File ID representing an image you want to display on the reader. */
+      public Builder setSplashscreen(String splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+
+      /** A File ID representing an image you want to display on the reader. */
+      public Builder setSplashscreen(EmptyParam splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StripeT600 {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** A File ID representing an image you want to display on the reader. */
+    @SerializedName("splashscreen")
+    Object splashscreen;
+
+    private StripeT600(Map<String, Object> extraParams, Object splashscreen) {
+      this.extraParams = extraParams;
+      this.splashscreen = splashscreen;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object splashscreen;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationUpdateParams.StripeT600 build() {
+        return new ConfigurationUpdateParams.StripeT600(this.extraParams, this.splashscreen);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationUpdateParams.StripeT600#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationUpdateParams.StripeT600#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {

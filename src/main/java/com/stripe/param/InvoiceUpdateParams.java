@@ -4003,8 +4003,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         AmountIncludesIof amountIncludesIof;
 
         /**
-         * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
-         * Defaults to 86400 seconds.
+         * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60
+         * and 1209600, inclusive). If unspecified, defaults to 14400 seconds (4 hours).
          */
         @SerializedName("expires_after_seconds")
         Long expiresAfterSeconds;
@@ -4054,8 +4054,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
-           * Defaults to 86400 seconds.
+           * The number of seconds after PaymentIntent confirmation when the Pix expires (between 60
+           * and 1209600, inclusive). If unspecified, defaults to 14400 seconds (4 hours).
            */
           public Builder setExpiresAfterSeconds(Long expiresAfterSeconds) {
             this.expiresAfterSeconds = expiresAfterSeconds;
@@ -5033,6 +5033,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
+
+      @SerializedName("sequra")
+      SEQURA("sequra"),
 
       @SerializedName("sofort")
       SOFORT("sofort"),
